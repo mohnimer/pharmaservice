@@ -1,0 +1,5 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Arsenal', sans-serif; background: #fafaf8; color: #1a1a1a; -webkit-font-smoothing: antialiased; }
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; }
