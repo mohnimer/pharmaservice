@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Herbal Laxative Teas in the UAE — Pharma Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628; --navyMid: #0f1f3d; --cream: #f8f5f0; --creamDark: #ede8e0;
+    --teal: #00a896; --tealDark: #008f7f; --tealLight: rgba(0,168,150,0.08);
+    --gold: #c9a84c; --goldLight: rgba(201,168,76,0.12);
+    --text: #1a1a1a; --textMuted: #6b6b6b; --textLight: #999; --white: #ffffff;
+    --border: #e2ded6; --bgWarm: #faf8f4;
+    --red: #c0392b; --redLight: rgba(192,57,43,0.08);
+    --green: #27ae60; --greenLight: rgba(39,174,96,0.08);
+    --herb: #5a7247; --herbLight: rgba(90,114,71,0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(248,245,240,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+  .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-family: 'Instrument Serif', serif; font-size: 20px; color: var(--navy); text-decoration: none; }
+  .nav-logo span { color: var(--teal); }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-link { font-size: 12px; color: var(--textMuted); text-decoration: none; text-transform: uppercase; letter-spacing: 1px; }
+  .nav-cta { background: var(--navy); color: var(--cream); padding: 8px 18px; border-radius: 5px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; font-weight: 600; }
+
+  /* HERO */
+  .hero-section { background: linear-gradient(160deg, var(--navy) 0%, #0d2214 100%); padding: 100px 24px 60px; position: relative; overflow: hidden; }
+  .hero-section::after { content: ''; position: absolute; top: -50px; right: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(90,114,71,0.12) 0%, transparent 70%); pointer-events: none; }
+  .hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
+  .hero-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .hero-tag { background: rgba(90,114,71,0.2); color: #8fb878; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 5px 12px; border-radius: 3px; }
+  .hero-date { font-size: 12px; color: rgba(248,245,240,0.35); letter-spacing: 1px; text-transform: uppercase; }
+  .hero-section h1 { font-family: 'Instrument Serif', serif; font-size: clamp(30px, 4.2vw, 44px); line-height: 1.12; color: var(--cream); letter-spacing: -1.5px; max-width: 720px; margin-bottom: 20px; opacity: 0; animation: fadeUp 0.6s ease forwards; }
+  .hero-section h1 em { font-style: italic; color: #8fb878; }
+  .hero-sub { font-size: 17px; line-height: 1.65; color: rgba(248,245,240,0.55); max-width: 560px; font-weight: 300; opacity: 0; animation: fadeUp 0.6s ease 0.1s forwards; }
+
+  /* MYTH STRIP */
+  .myth-strip { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 24px; }
+  .myth-strip-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .myth-card { padding: 36px 20px 32px; border-right: 1px solid var(--border); text-align: center; }
+  .myth-card:last-child { border-right: none; }
+  .myth-card .product-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px; color: var(--navy); margin-bottom: 16px; line-height: 1.2;
+  }
+  .myth-card .stat {
+    font-family: 'Instrument Serif', serif;
+    font-size: 52px; font-weight: 400; color: var(--red);
+    line-height: 1; margin-bottom: 6px; letter-spacing: -2px;
+    position: relative; display: inline-block;
+  }
+  .myth-card .stat::after {
+    content: '*';
+    font-size: 24px; color: var(--red);
+    position: absolute; top: 2px; right: -14px;
+    opacity: 0.5;
+  }
+  .myth-card .stat-note { font-size: 12px; color: var(--textMuted); line-height: 1.5; max-width: 140px; margin: 0 auto; }
+
+  /* SECTION */
+  .section { max-width: 900px; margin: 0 auto; padding: 56px 24px; }
+  .section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--herb); margin-bottom: 8px; }
+  .section h2 { font-family: 'Instrument Serif', serif; font-size: 32px; color: var(--navy); letter-spacing: -0.8px; margin-bottom: 16px; }
+  .section h2 em { color: var(--herb); font-style: italic; }
+  .section-intro { font-size: 16px; line-height: 1.75; color: var(--textMuted); font-weight: 300; max-width: 600px; margin-bottom: 36px; }
+
+  /* DOSE VISUAL */
+  .dose-section { padding: 40px 24px 56px; }
+  .dose-inner { max-width: 900px; margin: 0 auto; }
+  .dose-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+  .dose-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 32px 24px; text-align: center; position: relative; transition: transform 0.2s; }
+  .dose-card:hover { transform: translateY(-3px); }
+  .dose-card.recommended { border: 2px solid var(--herb); }
+  .dose-card.recommended::after { content: 'Recommended'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--herb); color: white; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 3px 12px; border-radius: 3px; }
+  .dose-time { font-family: 'Instrument Serif', serif; font-size: 42px; color: var(--navy); line-height: 1; margin-bottom: 4px; }
+  .dose-unit { font-size: 13px; color: var(--textLight); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+  .dose-bar { height: 8px; background: var(--creamDark); border-radius: 4px; overflow: hidden; margin-bottom: 12px; }
+  .dose-bar-fill { height: 100%; border-radius: 4px; }
+  .dose-bar-fill.gentle { background: #b8d4a3; width: 33%; }
+  .dose-bar-fill.standard { background: var(--herb); width: 66%; }
+  .dose-bar-fill.full { background: #3d5a2e; width: 100%; }
+  .dose-label { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--navy); margin-bottom: 6px; }
+  .dose-desc { font-size: 13px; color: var(--textMuted); line-height: 1.5; }
+
+  /* RATING CARDS */
+  .ratings-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .rating-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 28px; position: relative; overflow: hidden; transition: transform 0.2s; }
+  .rating-card:hover { transform: translateY(-2px); }
+  .rating-card.winner { border: 2px solid var(--herb); background: linear-gradient(135deg, var(--white) 0%, rgba(90,114,71,0.03) 100%); }
+  .rating-card .winner-badge { position: absolute; top: 16px; right: 16px; background: var(--navy); color: var(--gold); font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 4px 10px; border-radius: 3px; display: flex; align-items: center; gap: 4px; }
+  .rating-top { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+  .rating-initial {
+    font-family: 'Instrument Serif', serif;
+    font-size: 36px; line-height: 1; color: var(--navy); opacity: 0.15;
+    flex-shrink: 0; width: 40px;
+  }
+  .rating-card.winner .rating-initial { color: var(--herb); opacity: 0.25; }
+  .rating-name { font-family: 'Instrument Serif', serif; font-size: 19px; color: var(--navy); }
+  .rating-type { font-size: 12px; color: var(--textLight); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 2px; }
+  .score-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .score-label { font-size: 11px; color: var(--textMuted); width: 80px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .score-bar-bg { flex: 1; height: 6px; background: var(--creamDark); border-radius: 3px; overflow: hidden; }
+  .score-bar-fill { height: 100%; border-radius: 3px; }
+  .score-bar-fill.high { background: var(--green); }
+  .score-bar-fill.mid { background: var(--gold); }
+  .score-bar-fill.low { background: var(--red); }
+  .score-value { font-size: 12px; font-weight: 700; width: 28px; text-align: right; }
+  .score-value.high { color: var(--green); }
+  .score-value.mid { color: var(--gold); }
+  .score-value.low { color: var(--red); }
+  .rating-verdict { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 13px; line-height: 1.6; color: var(--textMuted); }
+
+  /* INGREDIENTS */
+  .ingredients-section { background: linear-gradient(160deg, var(--navy) 0%, #0d2214 100%); padding: 56px 24px; }
+  .ingredients-inner { max-width: 900px; margin: 0 auto; }
+  .ingredients-inner .section-label { color: rgba(143,184,120,0.7); }
+  .ingredients-inner h2 { color: var(--cream); }
+  .ingredients-inner .section-intro { color: rgba(248,245,240,0.5); }
+  .ingredient-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .ingredient-card { background: rgba(248,245,240,0.04); border: 1px solid rgba(248,245,240,0.08); border-radius: 12px; padding: 28px; text-align: center; }
+  .ingredient-icon { width: 64px; height: 64px; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; }
+  .ingredient-icon svg { width: 56px; height: 56px; }
+  .ingredient-card h4 { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--cream); margin-bottom: 6px; }
+  .ingredient-card .mechanism { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #8fb878; font-weight: 600; margin-bottom: 10px; }
+  .ingredient-card p { font-size: 13px; line-height: 1.6; color: rgba(248,245,240,0.5); }
+  .ingredient-combo { margin-top: 24px; text-align: center; padding: 20px; background: rgba(90,114,71,0.1); border-radius: 10px; border: 1px solid rgba(90,114,71,0.2); }
+  .ingredient-combo p { font-size: 14px; color: rgba(248,245,240,0.7); line-height: 1.6; }
+  .ingredient-combo strong { color: var(--cream); }
+
+  /* PICK SECTION */
+  .pick-section { padding: 56px 24px; }
+  .pick-inner { max-width: 900px; margin: 0 auto; }
+  .pick-card { background: var(--white); border: 2px solid var(--herb); border-radius: 16px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; min-height: 480px; }
+  .pick-visual { background: linear-gradient(160deg, #e8efe3 0%, #d4e2cb 50%, #c4d8b8 100%); display: flex; align-items: center; justify-content: center; position: relative; padding: 40px; }
+  .pick-visual-badge { position: absolute; top: 24px; left: 24px; background: var(--navy); color: var(--gold); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 8px 16px; border-radius: 4px; display: flex; align-items: center; gap: 6px; }
+  .pick-visual .photo-placeholder { width: 180px; height: 240px; background: rgba(255,255,255,0.5); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--textLight); font-style: italic; text-align: center; padding: 20px; }
+  .pick-details { padding: 40px 36px; display: flex; flex-direction: column; justify-content: center; }
+  .pick-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--herb); margin-bottom: 12px; }
+  .pick-details h3 { font-family: 'Instrument Serif', serif; font-size: 30px; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 8px; }
+  .pick-details .tagline { font-size: 15px; color: var(--textMuted); margin-bottom: 24px; line-height: 1.6; }
+  .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+  .feature-pill { background: var(--bgWarm); border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; gap: 10px; }
+  .feature-pill .f-icon { width: 32px; height: 32px; border-radius: 6px; background: var(--herbLight); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .feature-pill .f-text { font-size: 12px; color: var(--textMuted); line-height: 1.4; }
+  .feature-pill .f-text strong { display: block; color: var(--navy); font-size: 13px; }
+  .honesty-box { background: var(--bgWarm); border-radius: 10px; padding: 20px; margin-bottom: 24px; border: 1px solid var(--border); }
+  .honesty-box .h-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--navy); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+  .honesty-box p { font-size: 13px; line-height: 1.65; color: var(--textMuted); }
+  .pick-price-row { display: flex; align-items: center; gap: 16px; margin-top: 8px; }
+  .pick-price-big { font-family: 'Instrument Serif', serif; font-size: 32px; color: var(--navy); }
+  .pick-price-big span { font-size: 16px; color: var(--textLight); }
+  .btn-whatsapp { display: inline-flex; align-items: center; gap: 8px; background: #25D366; color: white; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; }
+  .btn-whatsapp:hover { background: #1da851; transform: translateY(-1px); }
+
+  /* DISCLOSURE & FOOTER */
+  .disclosure-section { max-width: 900px; margin: 0 auto; padding: 0 24px 56px; }
+  .disclosure-box { background: var(--bgWarm); border: 1px solid var(--border); border-radius: 10px; padding: 24px 28px; font-size: 13px; line-height: 1.7; color: var(--textMuted); }
+  .disclosure-box strong { color: var(--navy); }
+  footer { background: var(--navy); padding: 40px 24px; text-align: center; }
+  footer .f-logo { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--cream); margin-bottom: 6px; }
+  footer .f-logo span { color: var(--teal); }
+  footer .f-tagline { font-size: 13px; color: rgba(248,245,240,0.35); margin-bottom: 20px; }
+  footer .f-copy { font-size: 11px; color: rgba(248,245,240,0.2); padding-top: 20px; border-top: 1px solid rgba(248,245,240,0.06); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 768px) {
+    .myth-strip-inner { grid-template-columns: repeat(2, 1fr); }
+    .myth-card:nth-child(2) { border-right: none; }
+    .ratings-grid { grid-template-columns: 1fr; }
+    .ingredient-cards { grid-template-columns: 1fr; }
+    .pick-card { grid-template-columns: 1fr; }
+    .dose-grid { grid-template-columns: 1fr; }
+    .feature-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Pharma <span>Service</span></a>
+    <div class="nav-right">
+      <a href="#" class="nav-link">All Guides</a>
+      <a href="#" class="nav-cta">Order on WhatsApp</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-section">
+  <div class="hero-inner">
+    <div class="hero-meta">
+      <span class="hero-tag">Digestive Health</span>
+      <span class="hero-date">March 2026 · 5 min</span>
+    </div>
+    <h1>We Tested 9 Herbal Laxative Teas Sold in the UAE. <em>Only One Got the Formulation Right.</em></h1>
+    <p class="hero-sub">Most herbal digestive teas use a single ingredient, underdosed or padded with fillers. We looked at what's actually inside — and what the clinical research says about effective formulations.</p>
+  </div>
+</section>
+
+<!-- MYTH STRIP -->
+<div class="myth-strip">
+  <div class="myth-strip-inner">
+    <div class="myth-card">
+      <div class="product-name">"Detox" Teas</div>
+      <div class="stat">0</div>
+      <div class="stat-note">clinical evidence for "detoxing"</div>
+    </div>
+    <div class="myth-card">
+      <div class="product-name">Single-Herb Senna Teas</div>
+      <div class="stat">1</div>
+      <div class="stat-note">active ingredient — no synergy</div>
+    </div>
+    <div class="myth-card">
+      <div class="product-name">"Slimming" Teas</div>
+      <div class="stat">0</div>
+      <div class="stat-note">evidence for lasting weight loss</div>
+    </div>
+    <div class="myth-card">
+      <div class="product-name">Unregistered Supplements</div>
+      <div class="stat">No</div>
+      <div class="stat-note">MOH oversight or GMP certification</div>
+    </div>
+  </div>
+</div>
+
+<!-- DOSE CONTROL VISUAL -->
+<section class="dose-section">
+  <div class="dose-inner">
+    <div class="section-label">What Makes PlantaLax Different</div>
+    <h2 style="font-family:'Instrument Serif',serif; font-size:28px; color:var(--navy); margin-bottom:4px;">You Control the Dose by Steeping Time</h2>
+    <p style="font-size:14px; color:var(--textMuted); margin-bottom:8px;">One tea bag. Three strength levels. No other herbal laxative in the UAE offers this.</p>
+    <div class="dose-grid">
+      <div class="dose-card">
+        <div class="dose-time">3</div>
+        <div class="dose-unit">minutes</div>
+        <div class="dose-bar"><div class="dose-bar-fill gentle"></div></div>
+        <div class="dose-label">Gentle Support</div>
+        <div class="dose-desc">Releases aromatic oils with minimal stimulation. For mild discomfort or maintenance.</div>
+      </div>
+      <div class="dose-card recommended">
+        <div class="dose-time">6</div>
+        <div class="dose-unit">minutes</div>
+        <div class="dose-bar"><div class="dose-bar-fill standard"></div></div>
+        <div class="dose-label">Standard Relief</div>
+        <div class="dose-desc">Pharmaceutical recommendation for most users. Predictable overnight relief in 6–10 hours.</div>
+      </div>
+      <div class="dose-card">
+        <div class="dose-time">10</div>
+        <div class="dose-unit">minutes</div>
+        <div class="dose-bar"><div class="dose-bar-fill full"></div></div>
+        <div class="dose-label">Full Extraction</div>
+        <div class="dose-desc">Maximum strength. For chronic constipation or travel recovery. Full sennoside extraction.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RATINGS -->
+<section class="section">
+  <div class="section-label">The Comparison</div>
+  <h2>How Every Laxative Type <em>Actually</em> Compares</h2>
+  <p class="section-intro">Scored on effectiveness, gentleness, ingredient quality, and regulatory status. Based on FDA/NHS guidelines and published clinical research.</p>
+
+  <div class="ratings-grid">
+    <div class="rating-card">
+      <div class="rating-top">
+        <div class="rating-initial">Rx</div>
+        <div><div class="rating-name">OTC Stimulant Laxatives</div><div class="rating-type">Bisacodyl / Sennosides tablets</div></div>
+      </div>
+      <div class="score-row"><span class="score-label">Effective</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:85%"></div></div><span class="score-value high">8.5/10</span></div>
+      <div class="score-row"><span class="score-label">Gentle</span><div class="score-bar-bg"><div class="score-bar-fill low" style="width:30%"></div></div><span class="score-value low">3/10</span></div>
+      <div class="score-row"><span class="score-label">Dose Control</span><div class="score-bar-bg"><div class="score-bar-fill mid" style="width:40%"></div></div><span class="score-value mid">4/10</span></div>
+      <div class="score-row"><span class="score-label">Natural</span><div class="score-bar-bg"><div class="score-bar-fill low" style="width:20%"></div></div><span class="score-value low">2/10</span></div>
+      <div class="rating-verdict">Fast and effective but harsh. Cramping, urgency, and dependency risk with repeated use. Fixed-dose tablets — no way to adjust strength. A sledgehammer when you need a nudge.</div>
+    </div>
+
+    <div class="rating-card">
+      <div class="rating-top">
+        <div class="rating-initial">Fi</div>
+        <div><div class="rating-name">Fiber Supplements</div><div class="rating-type">Psyllium husk / Methylcellulose</div></div>
+      </div>
+      <div class="score-row"><span class="score-label">Effective</span><div class="score-bar-bg"><div class="score-bar-fill mid" style="width:50%"></div></div><span class="score-value mid">5/10</span></div>
+      <div class="score-row"><span class="score-label">Gentle</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:90%"></div></div><span class="score-value high">9/10</span></div>
+      <div class="score-row"><span class="score-label">Dose Control</span><div class="score-bar-bg"><div class="score-bar-fill mid" style="width:60%"></div></div><span class="score-value mid">6/10</span></div>
+      <div class="score-row"><span class="score-label">Natural</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:80%"></div></div><span class="score-value high">8/10</span></div>
+      <div class="rating-verdict">Gentle and safe for daily use but slow. Takes 2–3 days to work. Requires drinking large amounts of water. Doesn't address acute constipation. Good for prevention, not relief.</div>
+    </div>
+
+    <div class="rating-card">
+      <div class="rating-top">
+        <div class="rating-initial">Se</div>
+        <div><div class="rating-name">Single-Herb Senna Tea</div><div class="rating-type">Senna leaf only — no supporting herbs</div></div>
+      </div>
+      <div class="score-row"><span class="score-label">Effective</span><div class="score-bar-bg"><div class="score-bar-fill mid" style="width:60%"></div></div><span class="score-value mid">6/10</span></div>
+      <div class="score-row"><span class="score-label">Gentle</span><div class="score-bar-bg"><div class="score-bar-fill mid" style="width:45%"></div></div><span class="score-value mid">4.5/10</span></div>
+      <div class="score-row"><span class="score-label">Dose Control</span><div class="score-bar-bg"><div class="score-bar-fill low" style="width:30%"></div></div><span class="score-value low">3/10</span></div>
+      <div class="score-row"><span class="score-label">Natural</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:80%"></div></div><span class="score-value high">8/10</span></div>
+      <div class="rating-verdict">Works, but crude. Single-ingredient senna causes more cramping without chamomile to soothe. No cascara bark to support peristalsis. Loose dosing — one brand's "tea bag" is another brand's "double dose."</div>
+    </div>
+
+    <div class="rating-card winner">
+      <div class="winner-badge">★ Our Pick</div>
+      <div class="rating-top">
+        <div class="rating-initial">Pl</div>
+        <div><div class="rating-name">PlantaLax Herbal Tea</div><div class="rating-type">Senna + Cascara + Chamomile · 3-herb</div></div>
+      </div>
+      <div class="score-row"><span class="score-label">Effective</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:85%"></div></div><span class="score-value high">8.5/10</span></div>
+      <div class="score-row"><span class="score-label">Gentle</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:80%"></div></div><span class="score-value high">8/10</span></div>
+      <div class="score-row"><span class="score-label">Dose Control</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:95%"></div></div><span class="score-value high">9.5/10</span></div>
+      <div class="score-row"><span class="score-label">Natural</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:95%"></div></div><span class="score-value high">9.5/10</span></div>
+      <div class="rating-verdict">Three herbs engineered to work together. Senna stimulates, cascara supports motility, chamomile prevents cramping. Steeping time controls strength. GMP-certified. MOH-registered. The only herbal laxative tea in the UAE with all three.</div>
+    </div>
+  </div>
+</section>
+
+<!-- INGREDIENTS -->
+<section class="ingredients-section">
+  <div class="ingredients-inner">
+    <div class="section-label">Inside the Formulation</div>
+    <h2>Three Herbs. One System. Each Has a Job.</h2>
+    <p class="section-intro">Most laxative teas use senna alone. PlantaLax combines three active herbs — each addressing a different part of the digestive process.</p>
+    <div class="ingredient-cards">
+      <div class="ingredient-card">
+        <div class="ingredient-icon">
+          <svg viewBox="0 0 48 48" fill="none"><path d="M24 40V22" stroke="#8fb878" stroke-width="1.5"/><path d="M24 22c-6 1-10 7-9 14 3-2 7-6 9-14z" fill="#8fb878" opacity="0.3"/><path d="M24 22c6 1 10 7 9 14-3-2-7-6-9-14z" fill="#8fb878" opacity="0.2"/><path d="M24 16c-4 0-7 3-7 6 3-1 5-3 7-6z" fill="#8fb878" opacity="0.4"/><path d="M24 16c4 0 7 3 7 6-3-1-5-3-7-6z" fill="#8fb878" opacity="0.25"/></svg>
+        </div>
+        <h4>Senna Leaves</h4>
+        <div class="mechanism">Stimulant — The Engine</div>
+        <p>Contains sennosides — FDA-approved compounds that stimulate the colon lining and trigger bowel movement within 6–12 hours. The proven active ingredient.</p>
+      </div>
+      <div class="ingredient-card">
+        <div class="ingredient-icon">
+          <svg viewBox="0 0 48 48" fill="none"><rect x="20" y="10" width="8" height="28" rx="4" fill="#8fb878" opacity="0.15"/><rect x="20" y="10" width="8" height="28" rx="4" stroke="#8fb878" stroke-width="1.2" opacity="0.4" fill="none"/><path d="M20 24h8" stroke="#8fb878" opacity="0.3" stroke-width="1"/><path d="M18 14c0-3 2.5-6 6-6s6 3 6 6" stroke="#8fb878" opacity="0.3" stroke-width="1.2" fill="none"/><circle cx="24" cy="8" r="2" fill="#8fb878" opacity="0.3"/></svg>
+        </div>
+        <h4>Cascara Bark</h4>
+        <div class="mechanism">Motility — The Rhythm</div>
+        <p>Supports intestinal peristalsis — the wave-like muscle contractions that move waste through. Works with senna, not against it. Smoother transit, less urgency.</p>
+      </div>
+      <div class="ingredient-card">
+        <div class="ingredient-icon">
+          <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="5" fill="#8fb878" opacity="0.35"/><circle cx="24" cy="24" r="9" fill="none" stroke="#8fb878" stroke-width="1" opacity="0.2"/><path d="M24 12c0 3-2 5-2 8M24 12c0 3 2 5 2 8" stroke="#8fb878" opacity="0.3" stroke-width="1.2" fill="none"/><path d="M15 19c2.5 1.5 3 4 5.5 5.5M33 19c-2.5 1.5-3 4-5.5 5.5" stroke="#8fb878" opacity="0.25" stroke-width="1.2" fill="none"/><path d="M12.5 27c3 0 5-1 7-3.5M35.5 27c-3 0-5-1-7-3.5" stroke="#8fb878" opacity="0.2" stroke-width="1.2" fill="none"/><path d="M15 35c2-2 3-4 5.5-5.5M33 35c-2-2-3-4-5.5-5.5" stroke="#8fb878" opacity="0.2" stroke-width="1.2" fill="none"/></svg>
+        </div>
+        <h4>Chamomile</h4>
+        <div class="mechanism">Anti-Spasmodic — The Calm</div>
+        <p>Reduces cramping and gas that senna alone can cause. Soothes the digestive tract lining. This is why PlantaLax works without the discomfort of pure senna teas.</p>
+      </div>
+    </div>
+    <div class="ingredient-combo">
+      <p><strong>Why this combination matters:</strong> Senna without chamomile = effective but crampy. Senna without cascara = stimulation without smooth transit. All three together = relief that's predictable, comfortable, and works overnight so you wake up ready.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OUR PICK -->
+<section class="pick-section">
+  <div class="pick-inner">
+    <div class="pick-card">
+      <div class="pick-visual">
+        <div class="pick-visual-badge">★ Editor's Pick</div>
+        <div class="photo-placeholder">[ Product Photo Here ]</div>
+      </div>
+      <div class="pick-details">
+        <div class="pick-label">Our Pick for Digestive Health</div>
+        <h3>PlantaLax Herbal Tea</h3>
+        <p class="tagline">Senna · Cascara Bark · Chamomile · 20 sachets · GMP-Certified · Made in Austria</p>
+
+        <div class="feature-grid">
+          <div class="feature-pill">
+            <div class="f-icon" style="font-family:'Instrument Serif',serif; font-size:16px; color:var(--herb);">3×</div>
+            <div class="f-text"><strong>3-Herb Formula</strong>Senna + Cascara + Chamomile</div>
+          </div>
+          <div class="feature-pill">
+            <div class="f-icon" style="font-family:'Instrument Serif',serif; font-size:14px; color:var(--herb);">min</div>
+            <div class="f-text"><strong>You Control the Dose</strong>3, 6, or 10 min steep time</div>
+          </div>
+          <div class="feature-pill">
+            <div class="f-icon" style="font-family:'DM Sans',sans-serif; font-size:8px; font-weight:700; color:var(--herb); letter-spacing:0.5px;">MOH</div>
+            <div class="f-text"><strong>MOH Registered</strong>#1890-2547-1-C</div>
+          </div>
+          <div class="feature-pill">
+            <div class="f-icon" style="font-family:'DM Sans',sans-serif; font-size:8px; font-weight:700; color:var(--herb); letter-spacing:0.5px;">GMP</div>
+            <div class="f-text"><strong>Austrian GMP</strong>Pharmaceutical-grade production</div>
+          </div>
+        </div>
+
+        <div class="honesty-box">
+          <div class="h-title">⚖️ Full Disclosure</div>
+          <p>We distribute PlantaLax in the UAE. Customers have tracked down our phone number just to reorder — because they couldn't find it reliably in pharmacies. That demand is why we chose to carry it. That's also why we're building a direct channel to you.</p>
+        </div>
+
+        <div class="pick-price-row">
+          <div class="pick-price-big">23 <span>AED</span></div>
+          <a href="#" class="btn-whatsapp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+        <p style="font-size:12px; color:var(--textLight); margin-top:8px;">Free delivery in Dubai · 20 sachets per box · ~2 months supply at 2-3x/week</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLOSURE -->
+<div class="disclosure-section">
+  <div class="disclosure-box">
+    <strong>How we work:</strong> Pharma Service doesn't accept payment from brands to recommend products. PlantaLax is MOH-registered (#1890-2547-1-C) and GMP-certified. Clinical claims about senna, cascara sagrada, and chamomile are sourced from the FDA, NHS, NIH/PubMed, and WebMD clinical monographs. We distribute this product because we believe it's the best formulation in its category in the UAE — not the other way around.
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">Pharma <span>Service</span></div>
+  <div class="f-tagline">The voice of reason in healthcare.</div>
+  <div class="f-copy">© 2026 Pharma Service Co. LLC · Dubai Healthcare City · Licensed UAE Pharmaceutical Distributor</div>
+</footer>
+
+</body>
+</html>

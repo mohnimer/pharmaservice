@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Underpads for Elderly Care in the UAE — Pharma Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628; --cream: #f8f5f0; --creamDark: #ede8e0;
+    --teal: #00a896; --gold: #c9a84c; --goldLight: rgba(201,168,76,0.08);
+    --text: #1a1a1a; --textMuted: #6b6b6b; --textLight: #999; --white: #ffffff;
+    --border: #e2ded6; --bgWarm: #faf8f4;
+    --red: #c0392b; --redLight: rgba(192,57,43,0.08);
+    --green: #27ae60; --greenLight: rgba(39,174,96,0.08);
+    --accent: #9b7b3a; --accentLight: rgba(155,123,58,0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(248,245,240,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+  .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-family: 'Instrument Serif', serif; font-size: 20px; color: var(--navy); text-decoration: none; }
+  .nav-logo span { color: var(--teal); }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-link { font-size: 12px; color: var(--textMuted); text-decoration: none; text-transform: uppercase; letter-spacing: 1px; }
+  .nav-cta { background: var(--navy); color: var(--cream); padding: 8px 18px; border-radius: 5px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; font-weight: 600; }
+
+  .hero-section { background: linear-gradient(160deg, var(--navy) 0%, #1a1508 100%); padding: 100px 24px 60px; position: relative; overflow: hidden; }
+  .hero-section::after { content: ''; position: absolute; top: -50px; right: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(155,123,58,0.08) 0%, transparent 70%); pointer-events: none; }
+  .hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
+  .hero-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .hero-tag { background: rgba(155,123,58,0.2); color: #d4b76a; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 5px 12px; border-radius: 3px; }
+  .hero-date { font-size: 12px; color: rgba(248,245,240,0.35); letter-spacing: 1px; text-transform: uppercase; }
+  .hero-section h1 { font-family: 'Instrument Serif', serif; font-size: clamp(30px, 4.2vw, 44px); line-height: 1.12; color: var(--cream); letter-spacing: -1.5px; max-width: 720px; margin-bottom: 20px; opacity: 0; animation: fadeUp 0.6s ease forwards; }
+  .hero-section h1 em { font-style: italic; color: #d4b76a; }
+  .hero-sub { font-size: 17px; line-height: 1.65; color: rgba(248,245,240,0.55); max-width: 560px; font-weight: 300; opacity: 0; animation: fadeUp 0.6s ease 0.1s forwards; }
+
+  .myth-strip { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 24px; }
+  .myth-strip-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .myth-card { padding: 36px 20px 32px; border-right: 1px solid var(--border); text-align: center; }
+  .myth-card:last-child { border-right: none; }
+  .myth-card .product-name { font-family: 'Instrument Serif', serif; font-size: 20px; color: var(--navy); margin-bottom: 16px; line-height: 1.2; }
+  .myth-card .stat { font-family: 'Instrument Serif', serif; font-size: 52px; font-weight: 400; color: var(--red); line-height: 1; margin-bottom: 6px; letter-spacing: -2px; position: relative; display: inline-block; }
+  .myth-card .stat::after { content: '*'; font-size: 24px; color: var(--red); position: absolute; top: 2px; right: -14px; opacity: 0.5; }
+  .myth-card .stat-note { font-size: 12px; color: var(--textMuted); line-height: 1.5; max-width: 140px; margin: 0 auto; }
+
+  /* BED COVERAGE VISUAL */
+  .coverage-section { padding: 56px 24px; }
+  .coverage-inner { max-width: 900px; margin: 0 auto; }
+  .section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--accent); margin-bottom: 8px; }
+  .coverage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 32px; }
+  .bed-diagram { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 32px; text-align: center; position: relative; }
+  .bed-diagram.winner { border: 2px solid var(--accent); }
+  .bed-diagram .bed-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; }
+  .bed-diagram .bed-label.bad { color: var(--red); }
+  .bed-diagram .bed-label.good { color: var(--green); }
+  .bed-outline { width: 100%; max-width: 240px; aspect-ratio: 1/1.6; border: 2px solid var(--creamDark); border-radius: 12px 12px 6px 6px; margin: 0 auto 20px; position: relative; background: var(--bgWarm); overflow: hidden; }
+  .bed-outline .pillow { width: 60%; height: 10%; background: var(--creamDark); border-radius: 4px; margin: 8% auto 0; }
+  .pad-overlay { position: absolute; border-radius: 4px; }
+  .pad-overlay.small { width: 50%; height: 45%; background: rgba(192,57,43,0.12); border: 2px dashed rgba(192,57,43,0.3); left: 25%; top: 30%; }
+  .pad-overlay.full { width: 85%; height: 85%; background: rgba(39,174,96,0.1); border: 2px solid rgba(39,174,96,0.3); left: 7.5%; top: 10%; }
+  .coverage-stat { font-family: 'Instrument Serif', serif; font-size: 48px; color: var(--navy); line-height: 1; margin-bottom: 4px; }
+  .coverage-stat.bad { color: var(--red); }
+  .coverage-stat.good { color: var(--green); }
+  .coverage-desc { font-size: 13px; color: var(--textMuted); line-height: 1.5; }
+  .bed-size-label { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); font-size: 10px; font-weight: 600; color: var(--textLight); letter-spacing: 1px; background: var(--white); padding: 2px 8px; border-radius: 3px; }
+
+  /* SECTION */
+  .section { max-width: 900px; margin: 0 auto; padding: 56px 24px; }
+  .section h2 { font-family: 'Instrument Serif', serif; font-size: 32px; color: var(--navy); letter-spacing: -0.8px; margin-bottom: 16px; }
+  .section h2 em { color: var(--accent); font-style: italic; }
+  .section-intro { font-size: 16px; line-height: 1.75; color: var(--textMuted); font-weight: 300; max-width: 600px; margin-bottom: 36px; }
+
+  /* COST COMPARISON */
+  .cost-section { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 36px; margin: 0 auto; max-width: 900px; }
+  .cost-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center; margin-top: 24px; }
+  .cost-card { text-align: center; padding: 24px; border-radius: 12px; }
+  .cost-card.old { background: var(--redLight); }
+  .cost-card.new { background: var(--greenLight); }
+  .cost-card .cost-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .cost-card.old .cost-label { color: var(--red); }
+  .cost-card.new .cost-label { color: var(--green); }
+  .cost-card .cost-size { font-family: 'Instrument Serif', serif; font-size: 24px; color: var(--navy); margin-bottom: 4px; }
+  .cost-card .cost-detail { font-size: 13px; color: var(--textMuted); line-height: 1.5; margin-bottom: 12px; }
+  .cost-card .cost-price { font-family: 'Instrument Serif', serif; font-size: 36px; color: var(--navy); }
+  .cost-card .cost-price span { font-size: 14px; color: var(--textLight); }
+  .cost-vs { font-family: 'Instrument Serif', serif; font-size: 24px; color: var(--creamDark); }
+  .cost-note { margin-top: 20px; font-size: 13px; color: var(--textMuted); text-align: center; line-height: 1.6; }
+  .cost-note strong { color: var(--navy); }
+
+  /* RATINGS */
+  .ratings-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .rating-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 28px; position: relative; overflow: hidden; transition: transform 0.2s; }
+  .rating-card:hover { transform: translateY(-2px); }
+  .rating-card.winner { border: 2px solid var(--accent); background: linear-gradient(135deg, var(--white) 0%, rgba(155,123,58,0.03) 100%); }
+  .rating-card .winner-badge { position: absolute; top: 16px; right: 16px; background: var(--navy); color: var(--gold); font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 4px 10px; border-radius: 3px; }
+  .rating-top { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+  .rating-initial { font-family: 'Instrument Serif', serif; font-size: 36px; line-height: 1; color: var(--navy); opacity: 0.15; flex-shrink: 0; width: 40px; }
+  .rating-card.winner .rating-initial { color: var(--accent); opacity: 0.25; }
+  .rating-name { font-family: 'Instrument Serif', serif; font-size: 19px; color: var(--navy); }
+  .rating-type { font-size: 12px; color: var(--textLight); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 2px; }
+  .score-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .score-label { font-size: 11px; color: var(--textMuted); width: 80px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .score-bar-bg { flex: 1; height: 6px; background: var(--creamDark); border-radius: 3px; overflow: hidden; }
+  .score-bar-fill { height: 100%; border-radius: 3px; }
+  .score-bar-fill.high { background: var(--green); }
+  .score-bar-fill.mid { background: var(--gold); }
+  .score-bar-fill.low { background: var(--red); }
+  .score-value { font-size: 12px; font-weight: 700; width: 28px; text-align: right; }
+  .score-value.high { color: var(--green); }
+  .score-value.mid { color: var(--gold); }
+  .score-value.low { color: var(--red); }
+  .rating-verdict { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 13px; line-height: 1.6; color: var(--textMuted); }
+
+  /* PICK */
+  .pick-section { padding: 56px 24px; }
+  .pick-inner { max-width: 900px; margin: 0 auto; }
+  .pick-card { background: var(--white); border: 2px solid var(--accent); border-radius: 16px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; min-height: 480px; }
+  .pick-visual { background: linear-gradient(160deg, #f0ead6 0%, #e6ddc4 50%, #ddd3b5 100%); display: flex; align-items: center; justify-content: center; position: relative; padding: 40px; }
+  .pick-visual-badge { position: absolute; top: 24px; left: 24px; background: var(--navy); color: var(--gold); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 8px 16px; border-radius: 4px; }
+  .pick-visual .photo-placeholder { width: 200px; height: 180px; background: rgba(255,255,255,0.5); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--textLight); font-style: italic; text-align: center; padding: 20px; }
+  .pick-details { padding: 40px 36px; display: flex; flex-direction: column; justify-content: center; }
+  .pick-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--accent); margin-bottom: 12px; }
+  .pick-details h3 { font-family: 'Instrument Serif', serif; font-size: 30px; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 8px; }
+  .pick-details .tagline { font-size: 15px; color: var(--textMuted); margin-bottom: 24px; line-height: 1.6; }
+  .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+  .feature-pill { background: var(--bgWarm); border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; gap: 10px; }
+  .feature-pill .f-icon { width: 32px; height: 32px; border-radius: 6px; background: var(--accentLight); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'DM Sans', sans-serif; font-size: 8px; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; }
+  .feature-pill .f-text { font-size: 12px; color: var(--textMuted); line-height: 1.4; }
+  .feature-pill .f-text strong { display: block; color: var(--navy); font-size: 13px; }
+  .honesty-box { background: var(--bgWarm); border-radius: 10px; padding: 20px; margin-bottom: 24px; border: 1px solid var(--border); }
+  .honesty-box .h-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--navy); margin-bottom: 8px; }
+  .honesty-box p { font-size: 13px; line-height: 1.65; color: var(--textMuted); }
+  .pick-price-row { display: flex; align-items: center; gap: 16px; margin-top: 8px; }
+  .pick-price-big { font-family: 'Instrument Serif', serif; font-size: 32px; color: var(--navy); }
+  .pick-price-big span { font-size: 16px; color: var(--textLight); }
+  .btn-whatsapp { display: inline-flex; align-items: center; gap: 8px; background: #25D366; color: white; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; }
+  .btn-whatsapp:hover { background: #1da851; transform: translateY(-1px); }
+
+  .disclosure-section { max-width: 900px; margin: 0 auto; padding: 0 24px 56px; }
+  .disclosure-box { background: var(--bgWarm); border: 1px solid var(--border); border-radius: 10px; padding: 24px 28px; font-size: 13px; line-height: 1.7; color: var(--textMuted); }
+  .disclosure-box strong { color: var(--navy); }
+  footer { background: var(--navy); padding: 40px 24px; text-align: center; }
+  footer .f-logo { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--cream); margin-bottom: 6px; }
+  footer .f-logo span { color: var(--teal); }
+  footer .f-tagline { font-size: 13px; color: rgba(248,245,240,0.35); margin-bottom: 20px; }
+  footer .f-copy { font-size: 11px; color: rgba(248,245,240,0.2); padding-top: 20px; border-top: 1px solid rgba(248,245,240,0.06); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 768px) {
+    .myth-strip-inner { grid-template-columns: repeat(2, 1fr); }
+    .myth-card:nth-child(2) { border-right: none; }
+    .ratings-grid { grid-template-columns: 1fr; }
+    .coverage-grid { grid-template-columns: 1fr; }
+    .pick-card { grid-template-columns: 1fr; }
+    .cost-grid { grid-template-columns: 1fr; gap: 12px; }
+    .cost-vs { display: none; }
+    .feature-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Pharma <span>Service</span></a>
+    <div class="nav-right">
+      <a href="#" class="nav-link">All Guides</a>
+      <a href="#" class="nav-cta">Order on WhatsApp</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero-section">
+  <div class="hero-inner">
+    <div class="hero-meta">
+      <span class="hero-tag">Elderly Care</span>
+      <span class="hero-date">March 2026 · 4 min</span>
+    </div>
+    <h1>If You're Caring for Someone Bedridden, Your Underpad <em>Leaves Half the Bed Exposed.</em></h1>
+    <p class="hero-sub">Every disposable underpad sold in the UAE is 60×90cm. We did the maths on a standard single bed — and the gap is bigger than you think. There's one product that solves it.</p>
+  </div>
+</section>
+
+<!-- MYTH STRIP -->
+<div class="myth-strip">
+  <div class="myth-strip-inner">
+    <div class="myth-card">
+      <div class="product-name">Standard 60×90 Underpads</div>
+      <div class="stat">56%</div>
+      <div class="stat-note">of the bed left unprotected</div>
+    </div>
+    <div class="myth-card">
+      <div class="product-name">Reusable Cloth Pads</div>
+      <div class="stat">Low</div>
+      <div class="stat-note">absorbency — bacteria risk after washing</div>
+    </div>
+    <div class="myth-card">
+      <div class="product-name">Mattress Protectors</div>
+      <div class="stat">0</div>
+      <div class="stat-note">absorbency — just waterproof barrier</div>
+    </div>
+    <div class="myth-card">
+      <div class="product-name">Towels / Bedsheets</div>
+      <div class="stat">No</div>
+      <div class="stat-note">waterproof backing — soaks through</div>
+    </div>
+  </div>
+</div>
+
+<!-- BED COVERAGE VISUAL -->
+<section class="coverage-section">
+  <div class="coverage-inner">
+    <div class="section-label">The Problem Nobody Shows You</div>
+    <h2 style="font-family:'Instrument Serif',serif; font-size:28px; color:var(--navy); margin-bottom:4px;">60×90cm vs 90×180cm on a Standard Bed</h2>
+    <p style="font-size:14px; color:var(--textMuted); margin-bottom:0;">A standard UAE single bed is approximately 90×190cm. Here's what each underpad actually covers.</p>
+    <div class="coverage-grid">
+      <div class="bed-diagram">
+        <div class="bed-label bad">Every Other Underpad in the UAE</div>
+        <div class="bed-outline">
+          <div class="pillow"></div>
+          <div class="pad-overlay small"></div>
+          <div class="bed-size-label">60 × 90 cm</div>
+        </div>
+        <div class="coverage-stat bad">44%</div>
+        <div class="coverage-desc">Less than half the bed covered. Lateral leakage guaranteed. Constant repositioning needed. The patient moves at night — the pad doesn't move with them.</div>
+      </div>
+      <div class="bed-diagram winner">
+        <div class="bed-label good">NIMED 90×180cm</div>
+        <div class="bed-outline">
+          <div class="pillow"></div>
+          <div class="pad-overlay full"></div>
+          <div class="bed-size-label">90 × 180 cm</div>
+        </div>
+        <div class="coverage-stat good">95%</div>
+        <div class="coverage-desc">Full bed coverage from shoulders to feet. No gaps. No lateral leakage. Patient can shift position without losing protection. One pad. One change. Done.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COST COMPARISON -->
+<div style="max-width:900px; margin:0 auto; padding:0 24px 56px;">
+  <div class="cost-section">
+    <div class="section-label">The Real Cost</div>
+    <h2 style="font-family:'Instrument Serif',serif; font-size:28px; color:var(--navy); margin-bottom:4px;">Two Small Pads or One Full Pad?</h2>
+    <p style="font-size:14px; color:var(--textMuted);">Some caregivers use two 60×90 pads to cover more area. Here's why that doesn't work — and what it actually costs.</p>
+    <div class="cost-grid">
+      <div class="cost-card old">
+        <div class="cost-label">2× Standard Pads</div>
+        <div class="cost-size">60×90cm × 2</div>
+        <div class="cost-detail">Gap in the middle. Pads shift and overlap. Double the repositioning. Still doesn't cover the full bed.</div>
+        <div class="cost-price">~5 <span>AED each = 10 AED</span></div>
+      </div>
+      <div class="cost-vs">vs</div>
+      <div class="cost-card new">
+        <div class="cost-label">1× NIMED Full-Bed</div>
+        <div class="cost-size">90×180cm × 1</div>
+        <div class="cost-detail">Single pad. Full coverage. No gaps. No shifting. Less waste. One change instead of two.</div>
+        <div class="cost-price">2.25 <span>AED per pad</span></div>
+      </div>
+    </div>
+    <div class="cost-note"><strong>The full-bed pad costs less than two small pads</strong> and eliminates the gap, the shifting, and the double handling. Your caregiver's time has value too.</div>
+  </div>
+</div>
+
+<!-- RATINGS -->
+<section class="section">
+  <div class="section-label">The Comparison</div>
+  <h2>Every Bed Protection Method, <em>Honestly Scored</em></h2>
+  <p class="section-intro">Rated on coverage, absorbency, hygiene, caregiver convenience, and cost per use.</p>
+
+  <div class="ratings-grid">
+    <div class="rating-card">
+      <div class="rating-top">
+        <div class="rating-initial">60</div>
+        <div><div class="rating-name">Standard 60×90 Underpads</div><div class="rating-type">Industry default · disposable</div></div>
+      </div>
+      <div class="score-row"><span class="score-label">Coverage</span><div class="score-bar-bg"><div class="score-bar-fill low" style="width:35%"></div></div><span class="score-value low">3.5/10</span></div>
+      <div class="score-row"><span class="score-label">Absorb</span><div class="score-bar-bg"><div class="score-bar-fill mid" style="width:60%"></div></div><span class="score-value mid">6/10</span></div>
+      <div class="score-row"><span class="score-label">Hygiene</span><div class="score-bar-bg"><div class="score-bar-fill mid" style="width:65%"></div></div><span class="score-value mid">6.5/10</span></div>
+      <div class="score-row"><span class="score-label">Ease</span><div class="score-bar-bg"><div class="score-bar-fill mid" style="width:50%"></div></div><span class="score-value mid">5/10</span></div>
+      <div class="rating-verdict">Widely available but fundamentally undersized. Requires constant repositioning. Lateral leakage means changing sheets anyway. The caregiving industry settled on this size decades ago and never improved.</div>
+    </div>
+
+    <div class="rating-card">
+      <div class="rating-top">
+        <div class="rating-initial">Re</div>
+        <div><div class="rating-name">Reusable Cloth Pads</div><div class="rating-type">Washable cotton / polyester</div></div>
+      </div>
+      <div class="score-row"><span class="score-label">Coverage</span><div class="score-bar-bg"><div class="score-bar-fill mid" style="width:50%"></div></div><span class="score-value mid">5/10</span></div>
+      <div class="score-row"><span class="score-label">Absorb</span><div class="score-bar-bg"><div class="score-bar-fill low" style="width:35%"></div></div><span class="score-value low">3.5/10</span></div>
+      <div class="score-row"><span class="score-label">Hygiene</span><div class="score-bar-bg"><div class="score-bar-fill low" style="width:30%"></div></div><span class="score-value low">3/10</span></div>
+      <div class="score-row"><span class="score-label">Ease</span><div class="score-bar-bg"><div class="score-bar-fill low" style="width:25%"></div></div><span class="score-value low">2.5/10</span></div>
+      <div class="rating-verdict">Eco-friendly but poor absorbency. Bacteria builds up in fabric over wash cycles. Hot water washing required after every use. Time and energy cost for caregivers is significant. Not suitable for heavy incontinence.</div>
+    </div>
+
+    <div class="rating-card">
+      <div class="rating-top">
+        <div class="rating-initial">Mp</div>
+        <div><div class="rating-name">Mattress Protectors</div><div class="rating-type">Waterproof fitted sheets</div></div>
+      </div>
+      <div class="score-row"><span class="score-label">Coverage</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:95%"></div></div><span class="score-value high">9.5/10</span></div>
+      <div class="score-row"><span class="score-label">Absorb</span><div class="score-bar-bg"><div class="score-bar-fill low" style="width:0%"></div></div><span class="score-value low">0/10</span></div>
+      <div class="score-row"><span class="score-label">Hygiene</span><div class="score-bar-bg"><div class="score-bar-fill mid" style="width:40%"></div></div><span class="score-value mid">4/10</span></div>
+      <div class="score-row"><span class="score-label">Ease</span><div class="score-bar-bg"><div class="score-bar-fill low" style="width:20%"></div></div><span class="score-value low">2/10</span></div>
+      <div class="rating-verdict">Protects the mattress but not the patient. Zero absorbency — moisture sits on the surface against the skin. The patient lies in wetness until someone changes the entire bed. Causes skin breakdown and discomfort.</div>
+    </div>
+
+    <div class="rating-card winner">
+      <div class="winner-badge">★ Our Pick</div>
+      <div class="rating-top">
+        <div class="rating-initial">90</div>
+        <div><div class="rating-name">NIMED Underpads 90×180</div><div class="rating-type">Full-bed · disposable · 20 per pack</div></div>
+      </div>
+      <div class="score-row"><span class="score-label">Coverage</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:95%"></div></div><span class="score-value high">9.5/10</span></div>
+      <div class="score-row"><span class="score-label">Absorb</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:80%"></div></div><span class="score-value high">8/10</span></div>
+      <div class="score-row"><span class="score-label">Hygiene</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:90%"></div></div><span class="score-value high">9/10</span></div>
+      <div class="score-row"><span class="score-label">Ease</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:90%"></div></div><span class="score-value high">9/10</span></div>
+      <div class="rating-verdict">The only 90×180cm disposable underpad in the UAE. Full bed coverage eliminates lateral leakage. Single-pad changes save caregiver time. 20 per pack. The product this market should have had from the start.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PICK -->
+<section class="pick-section">
+  <div class="pick-inner">
+    <div class="pick-card">
+      <div class="pick-visual">
+        <div class="pick-visual-badge">★ Only in UAE</div>
+        <div class="photo-placeholder">[ Product Photo Here ]</div>
+      </div>
+      <div class="pick-details">
+        <div class="pick-label">Our Pick for Elderly & Home Care</div>
+        <h3>NIMED Underpads 90×180cm</h3>
+        <p class="tagline">Full-Bed Coverage · 20 Per Pack · Disposable · The Only 90×180 in the UAE Market</p>
+        <div class="feature-grid">
+          <div class="feature-pill">
+            <div class="f-icon">90²</div>
+            <div class="f-text"><strong>Full-Bed Format</strong>90×180cm — covers 95% of standard bed</div>
+          </div>
+          <div class="feature-pill">
+            <div class="f-icon">20×</div>
+            <div class="f-text"><strong>20 Per Pack</strong>Bulk format for continuous care</div>
+          </div>
+          <div class="feature-pill">
+            <div class="f-icon">1st</div>
+            <div class="f-text"><strong>Only One in UAE</strong>No other brand offers this size</div>
+          </div>
+          <div class="feature-pill">
+            <div class="f-icon">H₂O</div>
+            <div class="f-text"><strong>Waterproof Backing</strong>Prevents lateral and base leakage</div>
+          </div>
+        </div>
+        <div class="honesty-box">
+          <div class="h-title">⚖️ Full Disclosure</div>
+          <p>We manufacture and distribute the NIMED underpad line. We created the 90×180 format because we couldn't find a full-bed underpad anywhere in the UAE — and neither could the nursing homes, home healthcare companies, and families who kept asking for one. If another brand starts making this size, we'll welcome the competition. Until then, we're the only option.</p>
+        </div>
+        <div class="pick-price-row">
+          <div class="pick-price-big">45 <span>AED / pack</span></div>
+          <a href="#" class="btn-whatsapp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+        <p style="font-size:12px; color:var(--textLight); margin-top:8px;">Free delivery in Dubai · Bulk pricing for nursing homes & home care companies</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="disclosure-section">
+  <div class="disclosure-box">
+    <strong>How we work:</strong> Pharma Service manufactures and distributes the NIMED underpad line. We developed the 90×180cm format specifically for the UAE market after identifying that no full-bed disposable underpad was available locally. Bed measurement calculations are based on standard UAE single bed dimensions (90×190cm). Coverage percentages are geometric calculations of pad area vs bed surface area.
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">Pharma <span>Service</span></div>
+  <div class="f-tagline">The voice of reason in healthcare.</div>
+  <div class="f-copy">© 2026 Pharma Service Co. LLC · Dubai Healthcare City · Licensed UAE Pharmaceutical Distributor</div>
+</footer>
+
+</body>
+</html>

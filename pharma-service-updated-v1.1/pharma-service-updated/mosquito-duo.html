@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mosquito Repellents in the UAE — Pharma Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navyMid: #0f1f3d;
+    --navyLight: #162a4a;
+    --cream: #f8f5f0;
+    --creamDark: #ede8e0;
+    --teal: #00a896;
+    --tealDark: #008f7f;
+    --tealLight: rgba(0,168,150,0.08);
+    --gold: #c9a84c;
+    --goldLight: rgba(201,168,76,0.12);
+    --text: #1a1a1a;
+    --textMuted: #6b6b6b;
+    --textLight: #999;
+    --white: #ffffff;
+    --border: #e2ded6;
+    --bgWarm: #faf8f4;
+    --red: #c0392b;
+    --redLight: rgba(192,57,43,0.08);
+    --green: #27ae60;
+    --greenLight: rgba(39,174,96,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(248,245,240,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 900px; margin: 0 auto; padding: 0 24px;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-family: 'Instrument Serif', serif; font-size: 20px; color: var(--navy); text-decoration: none; }
+  .nav-logo span { color: var(--teal); }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-link { font-size: 12px; color: var(--textMuted); text-decoration: none; text-transform: uppercase; letter-spacing: 1px; }
+  .nav-cta { background: var(--navy); color: var(--cream); padding: 8px 18px; border-radius: 5px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; font-weight: 600; }
+
+  /* HERO - FULL WIDTH DARK */
+  .hero-section {
+    background: var(--navy);
+    padding: 100px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-section::after {
+    content: '';
+    position: absolute;
+    top: 0; right: -100px; width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,168,150,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 900px; margin: 0 auto; position: relative; z-index: 2;
+  }
+  .hero-meta {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+  }
+  .hero-tag {
+    background: rgba(0,168,150,0.15); color: var(--teal);
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; padding: 5px 12px; border-radius: 3px;
+  }
+  .hero-date { font-size: 12px; color: rgba(248,245,240,0.35); letter-spacing: 1px; text-transform: uppercase; }
+  .hero-section h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(30px, 4.2vw, 44px);
+    line-height: 1.12; color: var(--cream); letter-spacing: -1.5px;
+    max-width: 720px; margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.6s ease forwards;
+  }
+  .hero-section h1 em { font-style: italic; color: var(--teal); }
+  .hero-sub {
+    font-size: 17px; line-height: 1.65; color: rgba(248,245,240,0.55);
+    max-width: 560px; font-weight: 300;
+    opacity: 0; animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+
+  /* MYTH BUSTER STRIP */
+  .myth-strip {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+  }
+  .myth-strip-inner {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .myth-card {
+    padding: 32px 20px 28px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+  .myth-card:last-child { border-right: none; }
+  .myth-icon-wrap {
+    width: 80px; height: 80px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 14px;
+  }
+  .myth-icon-wrap svg {
+    width: 64px; height: 64px;
+  }
+  .myth-card .product-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 17px; color: var(--navy); margin-bottom: 12px;
+  }
+  .myth-card .stat {
+    font-size: 30px; font-weight: 700; color: var(--navy);
+    line-height: 1; margin-bottom: 4px; letter-spacing: -0.5px;
+  }
+  .myth-card .stat-note {
+    font-size: 11px; color: var(--textLight); line-height: 1.4;
+  }
+
+  /* SECTION WRAPPER */
+  .section { max-width: 900px; margin: 0 auto; padding: 56px 24px; }
+  .section-sm { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+  .section-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2.5px; color: var(--teal); margin-bottom: 8px;
+  }
+  .section h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px; color: var(--navy); letter-spacing: -0.8px; margin-bottom: 16px;
+  }
+  .section h2 em { color: var(--teal); font-style: italic; }
+  .section-intro {
+    font-size: 16px; line-height: 1.75; color: var(--textMuted);
+    font-weight: 300; max-width: 600px; margin-bottom: 36px;
+  }
+
+  /* RATING CARDS */
+  .ratings-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+  }
+  .rating-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px; position: relative; overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .rating-card:hover { transform: translateY(-2px); }
+  .rating-card.winner {
+    border: 2px solid var(--teal);
+    background: linear-gradient(135deg, var(--white) 0%, rgba(0,168,150,0.03) 100%);
+  }
+  .rating-card .winner-badge {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--navy); color: var(--gold);
+    font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; padding: 4px 10px; border-radius: 3px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .rating-top {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 16px;
+  }
+  .rating-icon {
+    width: 48px; height: 48px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 22px;
+  }
+  .rating-icon.spray { background: var(--redLight); }
+  .rating-icon.cream { background: var(--greenLight); }
+  .rating-icon.candle { background: var(--goldLight); }
+  .rating-icon.band { background: var(--redLight); }
+  .rating-icon.duo { background: var(--tealLight); }
+  .rating-icon.deet { background: var(--greenLight); }
+
+  .rating-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 19px; color: var(--navy);
+  }
+  .rating-type {
+    font-size: 12px; color: var(--textLight); text-transform: uppercase; letter-spacing: 0.8px;
+  }
+
+  /* SCORE BAR */
+  .score-row {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+  }
+  .score-label {
+    font-size: 11px; color: var(--textMuted); width: 80px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .score-bar-bg {
+    flex: 1; height: 6px; background: var(--creamDark); border-radius: 3px; overflow: hidden;
+  }
+  .score-bar-fill {
+    height: 100%; border-radius: 3px; transition: width 1s ease;
+  }
+  .score-bar-fill.high { background: var(--green); }
+  .score-bar-fill.mid { background: var(--gold); }
+  .score-bar-fill.low { background: var(--red); }
+  .score-value {
+    font-size: 12px; font-weight: 700; width: 28px; text-align: right;
+  }
+  .score-value.high { color: var(--green); }
+  .score-value.mid { color: var(--gold); }
+  .score-value.low { color: var(--red); }
+
+  .rating-verdict {
+    margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
+    font-size: 13px; line-height: 1.6; color: var(--textMuted);
+  }
+
+  /* INGREDIENT VISUAL */
+  .ingredients-section {
+    background: var(--navy); padding: 56px 24px; margin-top: 20px;
+  }
+  .ingredients-inner {
+    max-width: 900px; margin: 0 auto;
+  }
+  .ingredients-inner .section-label { color: rgba(0,168,150,0.7); }
+  .ingredients-inner h2 { color: var(--cream); }
+  .ingredients-inner .section-intro { color: rgba(248,245,240,0.5); }
+
+  .ingredient-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .ingredient-card {
+    background: rgba(248,245,240,0.04);
+    border: 1px solid rgba(248,245,240,0.08);
+    border-radius: 12px; padding: 28px; text-align: center;
+  }
+  .ingredient-emoji { font-size: 36px; margin-bottom: 12px; }
+  .ingredient-card h4 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 18px; color: var(--cream); margin-bottom: 6px;
+  }
+  .ingredient-card .mechanism {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--teal); font-weight: 600; margin-bottom: 10px;
+  }
+  .ingredient-card p {
+    font-size: 13px; line-height: 1.6; color: rgba(248,245,240,0.5);
+  }
+  .ingredient-combo {
+    margin-top: 24px; text-align: center;
+    padding: 20px; background: rgba(0,168,150,0.08);
+    border-radius: 10px; border: 1px solid rgba(0,168,150,0.15);
+  }
+  .ingredient-combo p {
+    font-size: 14px; color: rgba(248,245,240,0.7); line-height: 1.6;
+  }
+  .ingredient-combo strong { color: var(--cream); }
+
+  /* OUR PICK - VISUAL */
+  .pick-section { padding: 56px 24px; }
+  .pick-inner { max-width: 900px; margin: 0 auto; }
+  .pick-card {
+    background: var(--white); border: 2px solid var(--teal);
+    border-radius: 16px; overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1fr; min-height: 480px;
+  }
+  .pick-visual {
+    background: linear-gradient(160deg, #e8f5f2 0%, #d1ece6 50%, #c4e4dc 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; padding: 40px;
+  }
+  .pick-visual-badge {
+    position: absolute; top: 24px; left: 24px;
+    background: var(--navy); color: var(--gold);
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; padding: 8px 16px; border-radius: 4px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .pick-visual .photo-placeholder {
+    width: 160px; height: 320px;
+    background: rgba(255,255,255,0.5); border-radius: 80px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: var(--textLight); font-style: italic;
+    text-align: center; padding: 20px;
+  }
+  .pick-details {
+    padding: 40px 36px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .pick-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2.5px; color: var(--teal); margin-bottom: 12px;
+  }
+  .pick-details h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 30px; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 8px;
+  }
+  .pick-details .tagline {
+    font-size: 15px; color: var(--textMuted); margin-bottom: 24px; line-height: 1.6;
+  }
+
+  /* FEATURE PILLS */
+  .feature-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px;
+  }
+  .feature-pill {
+    background: var(--bgWarm); border-radius: 8px; padding: 12px 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .feature-pill .f-icon {
+    width: 32px; height: 32px; border-radius: 6px;
+    background: var(--tealLight); display: flex; align-items: center;
+    justify-content: center; font-size: 14px; flex-shrink: 0;
+  }
+  .feature-pill .f-text {
+    font-size: 12px; color: var(--textMuted); line-height: 1.4;
+  }
+  .feature-pill .f-text strong {
+    display: block; color: var(--navy); font-size: 13px;
+  }
+
+  /* HONESTY BOX */
+  .honesty-box {
+    background: var(--bgWarm); border-radius: 10px; padding: 20px;
+    margin-bottom: 24px; border: 1px solid var(--border);
+  }
+  .honesty-box .h-title {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--navy); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .honesty-box p {
+    font-size: 13px; line-height: 1.65; color: var(--textMuted);
+  }
+
+  .pick-price-row {
+    display: flex; align-items: center; gap: 16px; margin-top: 8px;
+  }
+  .pick-price-big {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px; color: var(--navy);
+  }
+  .pick-price-big span { font-size: 16px; color: var(--textLight); }
+  .btn-whatsapp {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #25D366; color: white;
+    padding: 12px 28px; border-radius: 8px;
+    font-size: 14px; font-weight: 600;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-whatsapp:hover { background: #1da851; transform: translateY(-1px); }
+
+  /* SEASON VISUAL */
+  .season-section { padding: 40px 24px 56px; }
+  .season-inner { max-width: 900px; margin: 0 auto; }
+  .season-bar {
+    display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px;
+    margin-top: 24px;
+  }
+  .month-cell {
+    border-radius: 6px; padding: 14px 4px; text-align: center;
+    transition: transform 0.2s;
+  }
+  .month-cell:hover { transform: scale(1.05); }
+  .month-cell .m-name {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 6px;
+  }
+  .month-cell .m-level {
+    font-size: 18px; margin-bottom: 4px;
+  }
+  .month-cell .m-risk {
+    font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+  }
+  .month-cell.extreme { background: rgba(192,57,43,0.1); }
+  .month-cell.extreme .m-name { color: var(--red); }
+  .month-cell.extreme .m-risk { color: var(--red); }
+  .month-cell.high { background: rgba(201,168,76,0.12); }
+  .month-cell.high .m-name { color: #b8941f; }
+  .month-cell.high .m-risk { color: #b8941f; }
+  .month-cell.moderate { background: rgba(0,168,150,0.06); }
+  .month-cell.moderate .m-name { color: var(--teal); }
+  .month-cell.moderate .m-risk { color: var(--teal); }
+
+  .season-note {
+    margin-top: 16px; font-size: 14px; color: var(--textMuted);
+    line-height: 1.65; max-width: 600px;
+  }
+  .season-note strong { color: var(--navy); }
+
+  /* DISCLOSURE */
+  .disclosure-section {
+    max-width: 900px; margin: 0 auto; padding: 0 24px 56px;
+  }
+  .disclosure-box {
+    background: var(--bgWarm); border: 1px solid var(--border);
+    border-radius: 10px; padding: 24px 28px;
+    font-size: 13px; line-height: 1.7; color: var(--textMuted);
+  }
+  .disclosure-box strong { color: var(--navy); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy); padding: 40px 24px;
+    text-align: center;
+  }
+  footer .f-logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 18px; color: var(--cream); margin-bottom: 6px;
+  }
+  footer .f-logo span { color: var(--teal); }
+  footer .f-tagline {
+    font-size: 13px; color: rgba(248,245,240,0.35); margin-bottom: 20px;
+  }
+  footer .f-copy {
+    font-size: 11px; color: rgba(248,245,240,0.2);
+    padding-top: 20px; border-top: 1px solid rgba(248,245,240,0.06);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .myth-strip-inner { grid-template-columns: repeat(2, 1fr); }
+    .myth-card:nth-child(2) { border-right: none; }
+    .ratings-grid { grid-template-columns: 1fr; }
+    .ingredient-cards { grid-template-columns: 1fr; }
+    .pick-card { grid-template-columns: 1fr; }
+    .pick-visual { min-height: 280px; }
+    .season-bar { grid-template-columns: repeat(6, 1fr); }
+    .feature-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Pharma <span>Service</span></a>
+    <div class="nav-right">
+      <a href="#" class="nav-link">All Guides</a>
+      <a href="#" class="nav-cta">Order on WhatsApp</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-section">
+  <div class="hero-inner">
+    <div class="hero-meta">
+      <span class="hero-tag">Seasonal Guide</span>
+      <span class="hero-date">March 2026 · 4 min</span>
+    </div>
+    <h1>Every Mosquito Repellent in the UAE, <em>Ranked by What Actually Works</em></h1>
+    <p class="hero-sub">We looked at the science behind every type of repellent sold here. Candles, sprays, wristbands, creams — tested against peer-reviewed research. The results aren't what you'd expect.</p>
+  </div>
+</section>
+
+<!-- MYTH BUSTER STRIP -->
+<div class="myth-strip">
+  <div class="myth-strip-inner">
+    <div class="myth-card">
+      <div class="myth-icon-wrap">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Candle -->
+          <rect x="17" y="20" width="14" height="20" rx="2" fill="#c0392b" opacity="0.15"/>
+          <rect x="19" y="22" width="10" height="18" rx="1.5" fill="#c0392b" opacity="0.25"/>
+          <rect x="22.5" y="14" width="3" height="8" rx="1" fill="#c0392b" opacity="0.4"/>
+          <!-- Flame -->
+          <path d="M24 6c0 0 -3.5 3.5 -3.5 6.5c0 1.9 1.6 3.5 3.5 3.5s3.5-1.6 3.5-3.5c0-3-3.5-6.5-3.5-6.5z" fill="#c0392b" opacity="0.5"/>
+          <path d="M24 9c0 0 -1.8 2 -1.8 3.5c0 1 .8 1.8 1.8 1.8s1.8-.8 1.8-1.8c0-1.5-1.8-3.5-1.8-3.5z" fill="#c0392b" opacity="0.7"/>
+          <!-- Drip details -->
+          <path d="M19 28h10M19 32h10" stroke="#c0392b" opacity="0.15" stroke-width="0.8"/>
+          <!-- Base -->
+          <ellipse cx="24" cy="40" rx="9" ry="2" fill="#c0392b" opacity="0.1"/>
+        </svg>
+      </div>
+      <div class="product-name">Citronella Candles</div>
+      <div class="stat">0%</div>
+      <div class="stat-note">protection beyond arm's length</div>
+    </div>
+    <div class="myth-card">
+      <div class="myth-icon-wrap">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Wristband -->
+          <path d="M10 24c0-8 6-14 14-14s14 6 14 14" stroke="#c0392b" opacity="0.5" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M10 24c0 8 6 14 14 14s14-6 14-14" stroke="#c0392b" opacity="0.25" stroke-width="5" stroke-linecap="round" fill="none" stroke-dasharray="4 4"/>
+          <!-- Clasp -->
+          <rect x="8" y="21" width="6" height="6" rx="1.5" fill="#c0392b" opacity="0.4"/>
+          <rect x="34" y="21" width="6" height="6" rx="1.5" fill="#c0392b" opacity="0.4"/>
+          <!-- Pattern dots on band -->
+          <circle cx="20" cy="12.5" r="1" fill="#c0392b" opacity="0.3"/>
+          <circle cx="24" cy="11" r="1" fill="#c0392b" opacity="0.3"/>
+          <circle cx="28" cy="12.5" r="1" fill="#c0392b" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="product-name">Repellent Wristbands</div>
+      <div class="stat">18 sec</div>
+      <div class="stat-note">average protection time</div>
+    </div>
+    <div class="myth-card">
+      <div class="myth-icon-wrap">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Device body -->
+          <rect x="14" y="12" width="20" height="26" rx="4" fill="#c0392b" opacity="0.12"/>
+          <rect x="16" y="14" width="16" height="22" rx="3" fill="#c0392b" opacity="0.08" stroke="#c0392b" stroke-width="1" opacity="0.3"/>
+          <!-- Speaker grille -->
+          <circle cx="24" cy="23" r="6" fill="none" stroke="#c0392b" opacity="0.35" stroke-width="1.2"/>
+          <circle cx="24" cy="23" r="3.5" fill="none" stroke="#c0392b" opacity="0.25" stroke-width="1"/>
+          <circle cx="24" cy="23" r="1.2" fill="#c0392b" opacity="0.4"/>
+          <!-- Sound waves -->
+          <path d="M35 18c2 2 3 4.5 3 7s-1 5-3 7" stroke="#c0392b" opacity="0.2" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M38 15c3 3 4.5 6.5 4.5 10s-1.5 7-4.5 10" stroke="#c0392b" opacity="0.12" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <!-- LED dot -->
+          <circle cx="24" cy="33" r="1.2" fill="#c0392b" opacity="0.5"/>
+          <!-- Plug -->
+          <rect x="22" y="38" width="4" height="4" rx="1" fill="#c0392b" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="product-name">Ultrasonic Devices</div>
+      <div class="stat">Zero</div>
+      <div class="stat-note">measurable effect on mosquitoes</div>
+    </div>
+    <div class="myth-card">
+      <div class="myth-icon-wrap">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Pill capsule -->
+          <path d="M16 28l10-14c2.5-3.5 7.2-4.2 10.5-1.7s4.2 7.2 1.7 10.5l-10 14c-2.5 3.5-7.2 4.2-10.5 1.7S13.5 31.5 16 28z" fill="#c0392b" opacity="0.12"/>
+          <!-- Top half of capsule (darker) -->
+          <path d="M21 21l10-14c2.5-3.5 7.2-4.2 10.5-1.7s4.2 7.2 1.7 10.5l-5 7L21 21z" fill="#c0392b" opacity="0.3"/>
+          <!-- Capsule outline -->
+          <path d="M16 28l10-14c2.5-3.5 7.2-4.2 10.5-1.7s4.2 7.2 1.7 10.5l-10 14c-2.5 3.5-7.2 4.2-10.5 1.7S13.5 31.5 16 28z" stroke="#c0392b" stroke-width="1.2" opacity="0.4" fill="none"/>
+          <!-- Dividing line -->
+          <line x1="21" y1="21" x2="38.2" y2="23" stroke="#c0392b" stroke-width="1" opacity="0.3"/>
+          <!-- Small pills scattered -->
+          <circle cx="10" cy="36" r="2.5" fill="#c0392b" opacity="0.15"/>
+          <circle cx="14" cy="42" r="2" fill="#c0392b" opacity="0.1"/>
+        </svg>
+      </div>
+      <div class="product-name">Vitamin B1 Pills</div>
+      <div class="stat">None</div>
+      <div class="stat-note">no ingested compound repels</div>
+    </div>
+  </div>
+</div>
+
+<!-- SEASON VISUAL -->
+<section class="season-section">
+  <div class="season-inner">
+    <div class="section-label">When You Need Protection</div>
+    <h2 style="font-family:'Instrument Serif',serif; font-size:28px; color:var(--navy); margin-bottom:4px;">Dubai Mosquito Risk by Month</h2>
+    <p style="font-size:14px; color:var(--textMuted); margin-bottom:8px;">Spoiler: there is no mosquito-free month in the UAE.</p>
+    <div class="season-bar">
+      <div class="month-cell high"><div class="m-name">Jan</div><div class="m-level">🦟🦟</div><div class="m-risk">High</div></div>
+      <div class="month-cell high"><div class="m-name">Feb</div><div class="m-level">🦟🦟</div><div class="m-risk">High</div></div>
+      <div class="month-cell extreme"><div class="m-name">Mar</div><div class="m-level">🦟🦟🦟</div><div class="m-risk">V.High</div></div>
+      <div class="month-cell extreme"><div class="m-name">Apr</div><div class="m-level">🦟🦟🦟</div><div class="m-risk">V.High</div></div>
+      <div class="month-cell high"><div class="m-name">May</div><div class="m-level">🦟🦟</div><div class="m-risk">High</div></div>
+      <div class="month-cell moderate"><div class="m-name">Jun</div><div class="m-level">🦟</div><div class="m-risk">Mod</div></div>
+      <div class="month-cell moderate"><div class="m-name">Jul</div><div class="m-level">🦟</div><div class="m-risk">Mod</div></div>
+      <div class="month-cell moderate"><div class="m-name">Aug</div><div class="m-level">🦟</div><div class="m-risk">Mod</div></div>
+      <div class="month-cell high"><div class="m-name">Sep</div><div class="m-level">🦟🦟</div><div class="m-risk">High</div></div>
+      <div class="month-cell extreme"><div class="m-name">Oct</div><div class="m-level">🦟🦟🦟</div><div class="m-risk">V.High</div></div>
+      <div class="month-cell extreme"><div class="m-name">Nov</div><div class="m-level">🦟🦟🦟</div><div class="m-risk">V.High</div></div>
+      <div class="month-cell high"><div class="m-name">Dec</div><div class="m-level">🦟🦟</div><div class="m-risk">High</div></div>
+    </div>
+    <p class="season-note"><strong>Peak season is when you least expect it.</strong> Autumn and winter bring ideal breeding temperatures. After rain, mosquitoes can go from egg to biting adult in 7 days.</p>
+  </div>
+</section>
+
+<!-- RATINGS -->
+<section class="section">
+  <div class="section-label">The Comparison</div>
+  <h2>How Every Repellent Type <em>Actually</em> Performs</h2>
+  <p class="section-intro">Scored on protection time, safety profile, portability, and whether it treats bites too. Based on published research from CDC, EPA, and peer-reviewed journals.</p>
+
+  <div class="ratings-grid">
+    <!-- DEET -->
+    <div class="rating-card">
+      <div class="rating-top">
+        <div class="rating-icon deet">🧪</div>
+        <div>
+          <div class="rating-name">DEET Spray (25-30%)</div>
+          <div class="rating-type">Synthetic Chemical</div>
+        </div>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Protection</span>
+        <div class="score-bar-bg"><div class="score-bar-fill high" style="width:90%"></div></div>
+        <span class="score-value high">9/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Safety</span>
+        <div class="score-bar-bg"><div class="score-bar-fill mid" style="width:70%"></div></div>
+        <span class="score-value mid">7/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Portability</span>
+        <div class="score-bar-bg"><div class="score-bar-fill mid" style="width:50%"></div></div>
+        <span class="score-value mid">5/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">After-bite</span>
+        <div class="score-bar-bg"><div class="score-bar-fill low" style="width:0%"></div></div>
+        <span class="score-value low">0/10</span>
+      </div>
+      <div class="rating-verdict">The strongest option. Use for high-risk environments. Dissolves plastics, strong odour, age restrictions for children. Overkill for daily Dubai life.</div>
+    </div>
+
+    <!-- Citronella Spray -->
+    <div class="rating-card">
+      <div class="rating-top">
+        <div class="rating-icon spray">🌿</div>
+        <div>
+          <div class="rating-name">Citronella Spray</div>
+          <div class="rating-type">Plant-based — Single Ingredient</div>
+        </div>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Protection</span>
+        <div class="score-bar-bg"><div class="score-bar-fill low" style="width:25%"></div></div>
+        <span class="score-value low">2.5/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Safety</span>
+        <div class="score-bar-bg"><div class="score-bar-fill high" style="width:90%"></div></div>
+        <span class="score-value high">9/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Portability</span>
+        <div class="score-bar-bg"><div class="score-bar-fill mid" style="width:60%"></div></div>
+        <span class="score-value mid">6/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">After-bite</span>
+        <div class="score-bar-bg"><div class="score-bar-fill low" style="width:0%"></div></div>
+        <span class="score-value low">0/10</span>
+      </div>
+      <div class="rating-verdict">Safe but weak. Active compounds evaporate in 20 min to 2 hours. EPA recommends reapplying every hour. You'll be bitten before you remember to reapply.</div>
+    </div>
+
+    <!-- OLE/PMD -->
+    <div class="rating-card">
+      <div class="rating-top">
+        <div class="rating-icon cream">🌱</div>
+        <div>
+          <div class="rating-name">Oil of Lemon Eucalyptus</div>
+          <div class="rating-type">Plant-derived — PMD enriched</div>
+        </div>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Protection</span>
+        <div class="score-bar-bg"><div class="score-bar-fill high" style="width:80%"></div></div>
+        <span class="score-value high">8/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Safety</span>
+        <div class="score-bar-bg"><div class="score-bar-fill high" style="width:85%"></div></div>
+        <span class="score-value high">8.5/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Portability</span>
+        <div class="score-bar-bg"><div class="score-bar-fill mid" style="width:60%"></div></div>
+        <span class="score-value mid">6/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">After-bite</span>
+        <div class="score-bar-bg"><div class="score-bar-fill low" style="width:0%"></div></div>
+        <span class="score-value low">0/10</span>
+      </div>
+      <div class="rating-verdict">Only plant-based ingredient recommended by the CDC. Performs near DEET levels. Hard to find in UAE pharmacies. Not recommended for children under 3.</div>
+    </div>
+
+    <!-- MOSQUITO DUO — WINNER -->
+    <div class="rating-card winner">
+      <div class="winner-badge">★ Our Pick</div>
+      <div class="rating-top">
+        <div class="rating-icon duo">🇮🇹</div>
+        <div>
+          <div class="rating-name">NIMED Mosquito Duo</div>
+          <div class="rating-type">Eucalyptus + Citronella · 2-in-1</div>
+        </div>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Protection</span>
+        <div class="score-bar-bg"><div class="score-bar-fill high" style="width:70%"></div></div>
+        <span class="score-value high">7/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Safety</span>
+        <div class="score-bar-bg"><div class="score-bar-fill high" style="width:95%"></div></div>
+        <span class="score-value high">9.5/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Portability</span>
+        <div class="score-bar-bg"><div class="score-bar-fill high" style="width:95%"></div></div>
+        <span class="score-value high">9.5/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">After-bite</span>
+        <div class="score-bar-bg"><div class="score-bar-fill high" style="width:90%"></div></div>
+        <span class="score-value high">9/10</span>
+      </div>
+      <div class="rating-verdict">The only 2-in-1 in the UAE market. Cream lasts longer on skin than spray. Eucalyptus + citronella complement each other. Built-in balm for when you get bitten anyway. 40ml fits in a pocket.</div>
+    </div>
+  </div>
+</section>
+
+<!-- INGREDIENTS -->
+<section class="ingredients-section">
+  <div class="ingredients-inner">
+    <div class="section-label">Inside the Formulation</div>
+    <h2>Why Two Ingredients Beat One</h2>
+    <p class="section-intro">Most repellents use a single active. The Mosquito Duo combines two that work through different mechanisms.</p>
+    <div class="ingredient-cards">
+      <div class="ingredient-card">
+        <div class="ingredient-emoji">🌿</div>
+        <h4>Eucalyptus Oil</h4>
+        <div class="mechanism">Contact Barrier</div>
+        <p>Lower vapour pressure = stays on skin longer. Disrupts mosquito landing response on contact. The long-lasting layer.</p>
+      </div>
+      <div class="ingredient-card">
+        <div class="ingredient-emoji">🍋</div>
+        <h4>Citronella Oil</h4>
+        <div class="mechanism">Scent Deterrent</div>
+        <p>Immediate olfactory repellent — mosquitoes detect it and avoid the area. Fast-acting but fades quicker. The first line of defence.</p>
+      </div>
+      <div class="ingredient-card">
+        <div class="ingredient-emoji">💧</div>
+        <h4>Soothing Balm</h4>
+        <div class="mechanism">After-bite Treatment</div>
+        <p>Opposite end of the tube. Relieves itching and redness from existing bites. Because no repellent is 100% — and honesty matters.</p>
+      </div>
+    </div>
+    <div class="ingredient-combo">
+      <p><strong>Combined effect:</strong> Citronella keeps them away initially. Eucalyptus maintains the barrier as citronella fades. Cream base adheres to skin longer than spray formulations. When one still gets through — the balm is right there.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OUR PICK DETAIL -->
+<section class="pick-section">
+  <div class="pick-inner">
+    <div class="pick-card">
+      <div class="pick-visual">
+        <div class="pick-visual-badge">★ Editor's Pick</div>
+        <div class="photo-placeholder">[ Product Photo Here ]</div>
+      </div>
+      <div class="pick-details">
+        <div class="pick-label">Our Pick for Daily Use in the UAE</div>
+        <h3>NIMED Mosquito Duo</h3>
+        <p class="tagline">Before &amp; After Bite · Eucalyptus &amp; Citronella · 40ml · Made in Italy</p>
+
+        <div class="feature-grid">
+          <div class="feature-pill">
+            <div class="f-icon">🧴</div>
+            <div class="f-text"><strong>2-in-1 Format</strong>Repellent cream + after-bite balm</div>
+          </div>
+          <div class="feature-pill">
+            <div class="f-icon">🚫</div>
+            <div class="f-text"><strong>Zero DEET</strong>No synthetic chemicals</div>
+          </div>
+          <div class="feature-pill">
+            <div class="f-icon">🇮🇹</div>
+            <div class="f-text"><strong>Made in Italy</strong>Pharmaceutical production standards</div>
+          </div>
+          <div class="feature-pill">
+            <div class="f-icon">📐</div>
+            <div class="f-text"><strong>40ml Tube</strong>Fits in pocket or handbag</div>
+          </div>
+        </div>
+
+        <div class="honesty-box">
+          <div class="h-title">⚖️ Full Disclosure</div>
+          <p>We distribute this product. So you should be skeptical. Good — be skeptical. We chose to distribute it because we believe it's the best daily-use repellent for the UAE market. Not the other way around. Judge it on the evidence above.</p>
+        </div>
+
+        <div class="pick-price-row">
+          <div class="pick-price-big">21 <span>AED</span></div>
+          <a href="#" class="btn-whatsapp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+        <p style="font-size:12px; color:var(--textLight); margin-top:8px;">Free delivery in Dubai · Same-day dispatch</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLOSURE -->
+<div class="disclosure-section">
+  <div class="disclosure-box">
+    <strong>How we work:</strong> Pharma Service doesn't accept payment from brands to recommend products. We research globally, select what we believe is best, and then bring it to the UAE market. Scientific claims in this guide are sourced from the CDC, EPA, and peer-reviewed research published in the New England Journal of Medicine and Journal of Insect Science. Sources available on request.
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Pharma <span>Service</span></div>
+  <div class="f-tagline">The voice of reason in healthcare.</div>
+  <div class="f-copy">© 2026 Pharma Service Co. LLC · Dubai Healthcare City · Licensed UAE Pharmaceutical Distributor</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Denture Care Products in the UAE — Pharma Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628; --navyMid: #0f1f3d; --cream: #f8f5f0; --creamDark: #ede8e0;
+    --teal: #00a896; --tealDark: #008f7f; --tealLight: rgba(0,168,150,0.08);
+    --gold: #c9a84c; --goldLight: rgba(201,168,76,0.12);
+    --text: #1a1a1a; --textMuted: #6b6b6b; --textLight: #999; --white: #ffffff;
+    --border: #e2ded6; --bgWarm: #faf8f4;
+    --red: #c0392b; --redLight: rgba(192,57,43,0.08);
+    --green: #27ae60; --greenLight: rgba(39,174,96,0.08);
+    --accent: #4a7c9b; --accentLight: rgba(74,124,155,0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(248,245,240,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+  .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-family: 'Instrument Serif', serif; font-size: 20px; color: var(--navy); text-decoration: none; }
+  .nav-logo span { color: var(--teal); }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-link { font-size: 12px; color: var(--textMuted); text-decoration: none; text-transform: uppercase; letter-spacing: 1px; }
+  .nav-cta { background: var(--navy); color: var(--cream); padding: 8px 18px; border-radius: 5px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; font-weight: 600; }
+
+  .hero-section { background: linear-gradient(160deg, var(--navy) 0%, #0d1a2e 100%); padding: 100px 24px 60px; position: relative; overflow: hidden; }
+  .hero-section::after { content: ''; position: absolute; top: -50px; right: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(74,124,155,0.1) 0%, transparent 70%); pointer-events: none; }
+  .hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
+  .hero-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .hero-tag { background: rgba(74,124,155,0.2); color: #7ab3d4; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 5px 12px; border-radius: 3px; }
+  .hero-date { font-size: 12px; color: rgba(248,245,240,0.35); letter-spacing: 1px; text-transform: uppercase; }
+  .hero-section h1 { font-family: 'Instrument Serif', serif; font-size: clamp(30px, 4.2vw, 44px); line-height: 1.12; color: var(--cream); letter-spacing: -1.5px; max-width: 720px; margin-bottom: 20px; opacity: 0; animation: fadeUp 0.6s ease forwards; }
+  .hero-section h1 em { font-style: italic; color: #7ab3d4; }
+  .hero-sub { font-size: 17px; line-height: 1.65; color: rgba(248,245,240,0.55); max-width: 560px; font-weight: 300; opacity: 0; animation: fadeUp 0.6s ease 0.1s forwards; }
+
+  /* MYTH STRIP — TYPOGRAPHIC */
+  .myth-strip { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 24px; }
+  .myth-strip-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .myth-card { padding: 36px 20px 32px; border-right: 1px solid var(--border); text-align: center; }
+  .myth-card:last-child { border-right: none; }
+  .myth-card .product-name { font-family: 'Instrument Serif', serif; font-size: 20px; color: var(--navy); margin-bottom: 16px; line-height: 1.2; }
+  .myth-card .stat { font-family: 'Instrument Serif', serif; font-size: 52px; font-weight: 400; color: var(--red); line-height: 1; margin-bottom: 6px; letter-spacing: -2px; position: relative; display: inline-block; }
+  .myth-card .stat::after { content: '*'; font-size: 24px; color: var(--red); position: absolute; top: 2px; right: -14px; opacity: 0.5; }
+  .myth-card .stat-note { font-size: 12px; color: var(--textMuted); line-height: 1.5; max-width: 140px; margin: 0 auto; }
+
+  /* ZINC WARNING */
+  .warning-section { padding: 56px 24px; }
+  .warning-inner { max-width: 900px; margin: 0 auto; }
+  .warning-box { background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .warning-header { background: rgba(192,57,43,0.06); padding: 24px 32px; border-bottom: 1px solid rgba(192,57,43,0.1); display: flex; align-items: center; gap: 16px; }
+  .warning-header .w-number { font-family: 'Instrument Serif', serif; font-size: 48px; color: var(--red); line-height: 1; opacity: 0.3; }
+  .warning-header .w-text h3 { font-family: 'Instrument Serif', serif; font-size: 22px; color: var(--navy); margin-bottom: 4px; }
+  .warning-header .w-text p { font-size: 13px; color: var(--textMuted); }
+  .warning-body { padding: 32px; }
+  .warning-chain { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .chain-step { text-align: center; padding: 20px 16px; position: relative; }
+  .chain-step:not(:last-child)::after { content: '→'; position: absolute; right: -8px; top: 50%; transform: translateY(-50%); font-size: 20px; color: var(--creamDark); font-weight: 300; }
+  .chain-step .step-num { font-family: 'Instrument Serif', serif; font-size: 32px; color: var(--navy); opacity: 0.12; margin-bottom: 8px; }
+  .chain-step h4 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .chain-step p { font-size: 12px; color: var(--textMuted); line-height: 1.5; }
+  .warning-footer { padding: 20px 32px; background: var(--bgWarm); border-top: 1px solid var(--border); font-size: 13px; color: var(--textMuted); line-height: 1.6; }
+  .warning-footer strong { color: var(--navy); }
+
+  /* SECTION */
+  .section { max-width: 900px; margin: 0 auto; padding: 56px 24px; }
+  .section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--accent); margin-bottom: 8px; }
+  .section h2 { font-family: 'Instrument Serif', serif; font-size: 32px; color: var(--navy); letter-spacing: -0.8px; margin-bottom: 16px; }
+  .section h2 em { color: var(--accent); font-style: italic; }
+  .section-intro { font-size: 16px; line-height: 1.75; color: var(--textMuted); font-weight: 300; max-width: 600px; margin-bottom: 36px; }
+
+  /* RATING CARDS */
+  .ratings-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .rating-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 28px; position: relative; overflow: hidden; transition: transform 0.2s; }
+  .rating-card:hover { transform: translateY(-2px); }
+  .rating-card.winner { border: 2px solid var(--accent); background: linear-gradient(135deg, var(--white) 0%, rgba(74,124,155,0.03) 100%); }
+  .rating-card .winner-badge { position: absolute; top: 16px; right: 16px; background: var(--navy); color: var(--gold); font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 4px 10px; border-radius: 3px; display: flex; align-items: center; gap: 4px; }
+  .rating-top { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+  .rating-initial { font-family: 'Instrument Serif', serif; font-size: 36px; line-height: 1; color: var(--navy); opacity: 0.15; flex-shrink: 0; width: 40px; }
+  .rating-card.winner .rating-initial { color: var(--accent); opacity: 0.25; }
+  .rating-name { font-family: 'Instrument Serif', serif; font-size: 19px; color: var(--navy); }
+  .rating-type { font-size: 12px; color: var(--textLight); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 2px; }
+  .score-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .score-label { font-size: 11px; color: var(--textMuted); width: 80px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .score-bar-bg { flex: 1; height: 6px; background: var(--creamDark); border-radius: 3px; overflow: hidden; }
+  .score-bar-fill { height: 100%; border-radius: 3px; }
+  .score-bar-fill.high { background: var(--green); }
+  .score-bar-fill.mid { background: var(--gold); }
+  .score-bar-fill.low { background: var(--red); }
+  .score-value { font-size: 12px; font-weight: 700; width: 28px; text-align: right; }
+  .score-value.high { color: var(--green); }
+  .score-value.mid { color: var(--gold); }
+  .score-value.low { color: var(--red); }
+  .rating-verdict { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 13px; line-height: 1.6; color: var(--textMuted); }
+
+  /* INGREDIENTS */
+  .ingredients-section { background: linear-gradient(160deg, var(--navy) 0%, #0d1a2e 100%); padding: 56px 24px; }
+  .ingredients-inner { max-width: 900px; margin: 0 auto; }
+  .ingredients-inner .section-label { color: rgba(122,179,212,0.7); }
+  .ingredients-inner h2 { color: var(--cream); }
+  .ingredients-inner .section-intro { color: rgba(248,245,240,0.5); }
+  .ingredient-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .ingredient-card { background: rgba(248,245,240,0.04); border: 1px solid rgba(248,245,240,0.08); border-radius: 12px; padding: 28px; text-align: center; }
+  .ingredient-card h4 { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--cream); margin-bottom: 6px; }
+  .ingredient-card .mechanism { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #7ab3d4; font-weight: 600; margin-bottom: 10px; }
+  .ingredient-card .big-mark { font-family: 'Instrument Serif', serif; font-size: 48px; color: rgba(122,179,212,0.2); line-height: 1; margin-bottom: 12px; }
+  .ingredient-card p { font-size: 13px; line-height: 1.6; color: rgba(248,245,240,0.5); }
+  .ingredient-combo { margin-top: 24px; text-align: center; padding: 20px; background: rgba(74,124,155,0.1); border-radius: 10px; border: 1px solid rgba(74,124,155,0.2); }
+  .ingredient-combo p { font-size: 14px; color: rgba(248,245,240,0.7); line-height: 1.6; }
+  .ingredient-combo strong { color: var(--cream); }
+
+  /* PICK */
+  .pick-section { padding: 56px 24px; }
+  .pick-inner { max-width: 900px; margin: 0 auto; }
+  .pick-card { background: var(--white); border: 2px solid var(--accent); border-radius: 16px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; min-height: 480px; }
+  .pick-visual { background: linear-gradient(160deg, #e4ecf4 0%, #d0dcea 50%, #c2d2e2 100%); display: flex; align-items: center; justify-content: center; position: relative; padding: 40px; }
+  .pick-visual-badge { position: absolute; top: 24px; left: 24px; background: var(--navy); color: var(--gold); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 8px 16px; border-radius: 4px; }
+  .pick-visual .photo-placeholder { width: 180px; height: 200px; background: rgba(255,255,255,0.5); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--textLight); font-style: italic; text-align: center; padding: 20px; }
+  .pick-details { padding: 40px 36px; display: flex; flex-direction: column; justify-content: center; }
+  .pick-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--accent); margin-bottom: 12px; }
+  .pick-details h3 { font-family: 'Instrument Serif', serif; font-size: 30px; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 8px; }
+  .pick-details .tagline { font-size: 15px; color: var(--textMuted); margin-bottom: 24px; line-height: 1.6; }
+  .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+  .feature-pill { background: var(--bgWarm); border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; gap: 10px; }
+  .feature-pill .f-icon { width: 32px; height: 32px; border-radius: 6px; background: var(--accentLight); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'DM Sans', sans-serif; font-size: 8px; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; }
+  .feature-pill .f-text { font-size: 12px; color: var(--textMuted); line-height: 1.4; }
+  .feature-pill .f-text strong { display: block; color: var(--navy); font-size: 13px; }
+  .honesty-box { background: var(--bgWarm); border-radius: 10px; padding: 20px; margin-bottom: 24px; border: 1px solid var(--border); }
+  .honesty-box .h-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--navy); margin-bottom: 8px; }
+  .honesty-box p { font-size: 13px; line-height: 1.65; color: var(--textMuted); }
+  .pick-price-row { display: flex; align-items: center; gap: 16px; margin-top: 8px; }
+  .pick-price-big { font-family: 'Instrument Serif', serif; font-size: 32px; color: var(--navy); }
+  .pick-price-big span { font-size: 16px; color: var(--textLight); }
+  .btn-whatsapp { display: inline-flex; align-items: center; gap: 8px; background: #25D366; color: white; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; }
+  .btn-whatsapp:hover { background: #1da851; transform: translateY(-1px); }
+
+  .disclosure-section { max-width: 900px; margin: 0 auto; padding: 0 24px 56px; }
+  .disclosure-box { background: var(--bgWarm); border: 1px solid var(--border); border-radius: 10px; padding: 24px 28px; font-size: 13px; line-height: 1.7; color: var(--textMuted); }
+  .disclosure-box strong { color: var(--navy); }
+  footer { background: var(--navy); padding: 40px 24px; text-align: center; }
+  footer .f-logo { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--cream); margin-bottom: 6px; }
+  footer .f-logo span { color: var(--teal); }
+  footer .f-tagline { font-size: 13px; color: rgba(248,245,240,0.35); margin-bottom: 20px; }
+  footer .f-copy { font-size: 11px; color: rgba(248,245,240,0.2); padding-top: 20px; border-top: 1px solid rgba(248,245,240,0.06); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 768px) {
+    .myth-strip-inner { grid-template-columns: repeat(2, 1fr); }
+    .myth-card:nth-child(2) { border-right: none; }
+    .ratings-grid { grid-template-columns: 1fr; }
+    .ingredient-cards { grid-template-columns: 1fr; }
+    .pick-card { grid-template-columns: 1fr; }
+    .warning-chain { grid-template-columns: repeat(2, 1fr); }
+    .chain-step:nth-child(2)::after { display: none; }
+    .feature-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Pharma <span>Service</span></a>
+    <div class="nav-right">
+      <a href="#" class="nav-link">All Guides</a>
+      <a href="#" class="nav-cta">Order on WhatsApp</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero-section">
+  <div class="hero-inner">
+    <div class="hero-meta">
+      <span class="hero-tag">Dental Care</span>
+      <span class="hero-date">March 2026 · 5 min</span>
+    </div>
+    <h1>Your Denture Adhesive Probably Contains Zinc. <em>Here's Why That Matters After Years of Daily Use.</em></h1>
+    <p class="hero-sub">Most people never question what's in the product they put in their mouth every day. We looked at the clinical research on zinc-based denture adhesives — and what we found is serious enough that GlaxoSmithKline pulled their own products.</p>
+  </div>
+</section>
+
+<!-- MYTH STRIP -->
+<div class="myth-strip">
+  <div class="myth-strip-inner">
+    <div class="myth-card">
+      <div class="product-name">Zinc-Based Adhesives</div>
+      <div class="stat">Fatal</div>
+      <div class="stat-note">case documented from overuse — copper deficiency</div>
+    </div>
+    <div class="myth-card">
+      <div class="product-name">Basic Soaking Tablets</div>
+      <div class="stat">Low</div>
+      <div class="stat-note">pH too weak to eliminate bacteria properly</div>
+    </div>
+    <div class="myth-card">
+      <div class="product-name">Vinegar / DIY Methods</div>
+      <div class="stat">0</div>
+      <div class="stat-note">clinical validation as denture cleanser</div>
+    </div>
+    <div class="myth-card">
+      <div class="product-name">Generic Powders</div>
+      <div class="stat">Weak</div>
+      <div class="stat-note">adhesion — dislodge during eating</div>
+    </div>
+  </div>
+</div>
+
+<!-- ZINC WARNING -->
+<section class="warning-section">
+  <div class="warning-inner">
+    <div class="warning-box">
+      <div class="warning-header">
+        <div class="w-number">Zn</div>
+        <div class="w-text">
+          <h3>The Zinc Problem Nobody Talks About</h3>
+          <p>Published in the British Dental Journal, Neurology, and the American Journal of Medical Sciences</p>
+        </div>
+      </div>
+      <div class="warning-body">
+        <div class="warning-chain">
+          <div class="chain-step">
+            <div class="step-num">01</div>
+            <h4>Daily Use</h4>
+            <p>Zinc from adhesive is swallowed in small amounts every day with food and saliva</p>
+          </div>
+          <div class="chain-step">
+            <div class="step-num">02</div>
+            <h4>Zinc Builds Up</h4>
+            <p>Excess zinc accumulates in the body over months and years of daily use</p>
+          </div>
+          <div class="chain-step">
+            <div class="step-num">03</div>
+            <h4>Copper Drops</h4>
+            <p>Zinc and copper exist in equilibrium — as zinc rises, copper falls dangerously low</p>
+          </div>
+          <div class="chain-step">
+            <div class="step-num">04</div>
+            <h4>Nerve Damage</h4>
+            <p>Copper deficiency causes anaemia, numbness, difficulty walking — potentially irreversible</p>
+          </div>
+        </div>
+      </div>
+      <div class="warning-footer">
+        <strong>GlaxoSmithKline voluntarily stopped manufacturing</strong> their zinc-containing Super Poligrip products after increased adverse event reports. Their own guidance: switch to a zinc-free alternative. Multiple peer-reviewed studies have documented cases ranging from neurological damage to one fatal outcome.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RATINGS -->
+<section class="section">
+  <div class="section-label">The Comparison</div>
+  <h2>Every Denture Care Approach, <em>Honestly Evaluated</em></h2>
+  <p class="section-intro">Scored on cleaning effectiveness, adhesion, safety profile, and overall denture care. Based on clinical research and dental literature.</p>
+
+  <div class="ratings-grid">
+    <div class="rating-card">
+      <div class="rating-top">
+        <div class="rating-initial">Zn</div>
+        <div><div class="rating-name">Zinc-Based Adhesives</div><div class="rating-type">Poligrip / Fixodent (original)</div></div>
+      </div>
+      <div class="score-row"><span class="score-label">Adhesion</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:85%"></div></div><span class="score-value high">8.5/10</span></div>
+      <div class="score-row"><span class="score-label">Cleaning</span><div class="score-bar-bg"><div class="score-bar-fill low" style="width:0%"></div></div><span class="score-value low">0/10</span></div>
+      <div class="score-row"><span class="score-label">Safety</span><div class="score-bar-bg"><div class="score-bar-fill low" style="width:20%"></div></div><span class="score-value low">2/10</span></div>
+      <div class="score-row"><span class="score-label">Long-term</span><div class="score-bar-bg"><div class="score-bar-fill low" style="width:10%"></div></div><span class="score-value low">1/10</span></div>
+      <div class="rating-verdict">Strong adhesion but documented health risks from zinc accumulation. GSK pulled their zinc products. If you've been using one daily for years, check the ingredients. Adhesive only — no cleaning capability.</div>
+    </div>
+
+    <div class="rating-card">
+      <div class="rating-top">
+        <div class="rating-initial">Tb</div>
+        <div><div class="rating-name">Basic Soaking Tablets</div><div class="rating-type">Standard effervescent cleaners</div></div>
+      </div>
+      <div class="score-row"><span class="score-label">Adhesion</span><div class="score-bar-bg"><div class="score-bar-fill low" style="width:0%"></div></div><span class="score-value low">0/10</span></div>
+      <div class="score-row"><span class="score-label">Cleaning</span><div class="score-bar-bg"><div class="score-bar-fill mid" style="width:50%"></div></div><span class="score-value mid">5/10</span></div>
+      <div class="score-row"><span class="score-label">Safety</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:80%"></div></div><span class="score-value high">8/10</span></div>
+      <div class="score-row"><span class="score-label">Long-term</span><div class="score-bar-bg"><div class="score-bar-fill mid" style="width:50%"></div></div><span class="score-value mid">5/10</span></div>
+      <div class="rating-verdict">Safe but mediocre. Neutral or mildly alkaline pH doesn't eliminate all bacteria. Cleans surface stains but won't address biofilm buildup. No adhesion function — you still need a separate adhesive.</div>
+    </div>
+
+    <div class="rating-card">
+      <div class="rating-top">
+        <div class="rating-initial">Zf</div>
+        <div><div class="rating-name">Zinc-Free Adhesives</div><div class="rating-type">Poligrip Free / reformulated brands</div></div>
+      </div>
+      <div class="score-row"><span class="score-label">Adhesion</span><div class="score-bar-bg"><div class="score-bar-fill mid" style="width:65%"></div></div><span class="score-value mid">6.5/10</span></div>
+      <div class="score-row"><span class="score-label">Cleaning</span><div class="score-bar-bg"><div class="score-bar-fill low" style="width:0%"></div></div><span class="score-value low">0/10</span></div>
+      <div class="score-row"><span class="score-label">Safety</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:85%"></div></div><span class="score-value high">8.5/10</span></div>
+      <div class="score-row"><span class="score-label">Long-term</span><div class="score-bar-bg"><div class="score-bar-fill mid" style="width:70%"></div></div><span class="score-value mid">7/10</span></div>
+      <div class="rating-verdict">Safer than zinc-based but weaker hold. Adhesion often fails during eating. Still no cleaning function — requires a separate cleaning product. Better, but incomplete.</div>
+    </div>
+
+    <div class="rating-card winner">
+      <div class="winner-badge">★ Our Pick</div>
+      <div class="rating-top">
+        <div class="rating-initial">Fd</div>
+        <div><div class="rating-name">FittyDent Complete System</div><div class="rating-type">Zinc-free adhesive + pH-9 cleaning tablets</div></div>
+      </div>
+      <div class="score-row"><span class="score-label">Adhesion</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:85%"></div></div><span class="score-value high">8.5/10</span></div>
+      <div class="score-row"><span class="score-label">Cleaning</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:90%"></div></div><span class="score-value high">9/10</span></div>
+      <div class="score-row"><span class="score-label">Safety</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:95%"></div></div><span class="score-value high">9.5/10</span></div>
+      <div class="score-row"><span class="score-label">Long-term</span><div class="score-bar-bg"><div class="score-bar-fill high" style="width:90%"></div></div><span class="score-value high">9/10</span></div>
+      <div class="rating-verdict">The only system in the UAE that combines zinc-free waterproof adhesion with high-pH antibacterial cleaning in a single product line. Adhesive holds through meals. pH-9 tablets eliminate bacteria that neutral cleaners miss. Austrian-made.</div>
+    </div>
+  </div>
+</section>
+
+<!-- INGREDIENTS -->
+<section class="ingredients-section">
+  <div class="ingredients-inner">
+    <div class="section-label">Inside the System</div>
+    <h2>Three Products. One Complete Denture Care System.</h2>
+    <p class="section-intro">Most people use adhesive from one brand and cleaner from another — or skip cleaning entirely. FittyDent is designed as an integrated system.</p>
+    <div class="ingredient-cards">
+      <div class="ingredient-card">
+        <div class="big-mark">pH 9</div>
+        <h4>Cleaning Tablets</h4>
+        <div class="mechanism">Deep Antibacterial Clean</div>
+        <p>High-alkaline pH-9 formula. Standard cleaners are pH 6–7 which leaves bacteria alive. pH 9 creates a hostile environment for oral pathogens. 32 tablets per pack.</p>
+      </div>
+      <div class="ingredient-card">
+        <div class="big-mark">H₂O</div>
+        <h4>Waterproof Adhesive</h4>
+        <div class="mechanism">Zinc-Free · Holds Through Meals</div>
+        <p>Waterproof formulation that doesn't dissolve when you eat or drink. Zero zinc. Holds for a full day without reapplication. No metallic taste.</p>
+      </div>
+      <div class="ingredient-card">
+        <div class="big-mark">⌄</div>
+        <h4>Lower Denture Pads</h4>
+        <div class="mechanism">Cushion + Adhesion</div>
+        <p>Lower dentures are the hardest to keep stable. Soft pads provide both cushioning and adhesion for lower plates — where regular adhesive often fails.</p>
+      </div>
+    </div>
+    <div class="ingredient-combo">
+      <p><strong>The complete system:</strong> Clean with pH-9 tablets overnight. Apply waterproof adhesive in the morning. For lower dentures, add the pad for extra stability. No zinc in any product. One brand. Zero guesswork.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OUR PICK -->
+<section class="pick-section">
+  <div class="pick-inner">
+    <div class="pick-card">
+      <div class="pick-visual">
+        <div class="pick-visual-badge">★ Editor's Pick</div>
+        <div class="photo-placeholder">[ Product Photo Here ]</div>
+      </div>
+      <div class="pick-details">
+        <div class="pick-label">Our Pick for Denture Care</div>
+        <h3>FittyDent Cleaning Tablets</h3>
+        <p class="tagline">pH-9 Formula · 32 Tablets · Zinc-Free · Made in Austria</p>
+        <div class="feature-grid">
+          <div class="feature-pill">
+            <div class="f-icon">pH9</div>
+            <div class="f-text"><strong>High-Alkaline Clean</strong>Kills bacteria neutral cleaners miss</div>
+          </div>
+          <div class="feature-pill">
+            <div class="f-icon">0 Zn</div>
+            <div class="f-text"><strong>Zero Zinc</strong>No copper deficiency risk</div>
+          </div>
+          <div class="feature-pill">
+            <div class="f-icon">32×</div>
+            <div class="f-text"><strong>32 Tablets</strong>One month+ supply per pack</div>
+          </div>
+          <div class="feature-pill">
+            <div class="f-icon">AT</div>
+            <div class="f-text"><strong>Austrian Made</strong>Pharmaceutical-grade quality</div>
+          </div>
+        </div>
+        <div class="honesty-box">
+          <div class="h-title">⚖️ Full Disclosure</div>
+          <p>We distribute the FittyDent product line in the UAE. We chose it because it's the only zinc-free system that combines adhesion and cleaning — not because someone paid us to recommend it. The zinc-health research cited in this article is from peer-reviewed medical journals including the British Dental Journal, Neurology, and PubMed.</p>
+        </div>
+        <div class="pick-price-row">
+          <div class="pick-price-big">19 <span>AED</span></div>
+          <a href="#" class="btn-whatsapp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+        <p style="font-size:12px; color:var(--textLight); margin-top:8px;">Free delivery in Dubai · Full FittyDent range available</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="disclosure-section">
+  <div class="disclosure-box">
+    <strong>How we work:</strong> Pharma Service doesn't accept payment from brands to recommend products. FittyDent is manufactured in Austria to pharmaceutical standards. Clinical claims about zinc toxicity and copper deficiency are sourced from peer-reviewed research published in the British Dental Journal (2011), Neurology (2008), the American Journal of Medical Sciences (2010), and BMJ Case Reports (2015). GlaxoSmithKline's voluntary product withdrawal is a matter of public record. Sources available on request.
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">Pharma <span>Service</span></div>
+  <div class="f-tagline">The voice of reason in healthcare.</div>
+  <div class="f-copy">© 2026 Pharma Service Co. LLC · Dubai Healthcare City · Licensed UAE Pharmaceutical Distributor</div>
+</footer>
+
+</body>
+</html>

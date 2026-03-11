@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pharma Service — The Voice of Reason</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navyMid: #0f1f3d;
+    --navyLight: #162a4a;
+    --cream: #f8f5f0;
+    --creamDark: #ede8e0;
+    --teal: #00a896;
+    --tealDark: #008f7f;
+    --gold: #c9a84c;
+    --text: #1a1a1a;
+    --textMuted: #6b6b6b;
+    --textLight: #999;
+    --white: #ffffff;
+    --border: #e2ded6;
+    --bgWarm: #faf8f4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+
+  nav.scrolled {
+    background: rgba(248,245,240,0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    color: var(--navy);
+    letter-spacing: -0.5px;
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    color: var(--teal);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--textMuted);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--navy); }
+
+  .nav-links a.active { color: var(--navy); }
+
+  .nav-cta {
+    background: var(--navy) !important;
+    color: var(--cream) !important;
+    padding: 10px 24px !important;
+    border-radius: 6px;
+    font-size: 12px !important;
+    letter-spacing: 1px !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--navyMid) !important; }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 140px 40px 80px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--teal);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: var(--teal);
+  }
+
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(42px, 5.5vw, 72px);
+    line-height: 1.08;
+    color: var(--navy);
+    max-width: 800px;
+    letter-spacing: -2px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--textMuted);
+    max-width: 520px;
+    margin-top: 28px;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.3s forwards;
+  }
+
+  .btn-primary {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover { background: var(--navyLight); transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--navy);
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1.5px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--navy); }
+
+  /* ============ TICKER ============ */
+  .ticker-bar {
+    background: var(--navy);
+    padding: 14px 0;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+
+  .ticker-content {
+    display: flex;
+    animation: ticker 30s linear infinite;
+    white-space: nowrap;
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 40px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    color: rgba(248,245,240,0.6);
+    text-transform: uppercase;
+  }
+
+  .ticker-item .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+
+  .ticker-item strong {
+    color: var(--cream);
+    font-weight: 600;
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ============ EDITORIAL SECTION ============ */
+  .section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 36px;
+    color: var(--navy);
+    letter-spacing: -1px;
+  }
+
+  .section-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--textMuted);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+
+  .section-link:hover { color: var(--navy); }
+
+  /* ============ FEATURED EDITORIAL ============ */
+  .featured-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 32px;
+  }
+
+  .featured-main {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .featured-main:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(10,22,40,0.08);
+  }
+
+  .featured-img {
+    height: 320px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navyMid) 40%, var(--tealDark) 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 32px;
+  }
+
+  .featured-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,22,40,0.7) 0%, transparent 60%);
+  }
+
+  .featured-img .category-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 2;
+    background: var(--teal);
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 14px;
+    border-radius: 4px;
+  }
+
+  .featured-img .img-text {
+    position: relative;
+    z-index: 2;
+    font-family: 'Instrument Serif', serif;
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    font-style: italic;
+  }
+
+  .featured-body {
+    padding: 32px;
+  }
+
+  .featured-body .meta {
+    font-size: 12px;
+    color: var(--textLight);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .featured-body h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 28px;
+    line-height: 1.2;
+    color: var(--navy);
+    letter-spacing: -0.5px;
+    margin-bottom: 14px;
+  }
+
+  .featured-body p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--textMuted);
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .read-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: gap 0.2s;
+  }
+
+  .read-link:hover { gap: 12px; }
+
+  .read-link::after { content: '→'; }
+
+  /* Side articles */
+  .featured-side {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .side-article {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .side-article:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(10,22,40,0.06);
+  }
+
+  .side-article .category-badge-sm {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--teal);
+    background: rgba(0,168,150,0.08);
+    padding: 4px 10px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+    width: fit-content;
+  }
+
+  .side-article h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 21px;
+    line-height: 1.25;
+    color: var(--navy);
+    letter-spacing: -0.3px;
+    margin-bottom: 10px;
+  }
+
+  .side-article p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--textMuted);
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+
+  .side-article .meta {
+    font-size: 11px;
+    color: var(--textLight);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* ============ PRODUCT EDITORIAL CARDS ============ */
+  .product-editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .product-card {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(10,22,40,0.08);
+  }
+
+  .product-card-img {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card-img.underpad {
+    background: linear-gradient(160deg, #e8f4f2 0%, #d4ebe7 100%);
+  }
+
+  .product-card-img.plantalax {
+    background: linear-gradient(160deg, #f0ead6 0%, #e2d9be 100%);
+  }
+
+  .product-card-img.fittydent {
+    background: linear-gradient(160deg, #e4ecf4 0%, #d0dcea 100%);
+  }
+
+  .product-card-img .verdict {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: var(--navy);
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 14px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .product-card-img .verdict .star { font-size: 12px; }
+
+  .product-card-img .product-label {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--textMuted);
+    background: rgba(255,255,255,0.9);
+    padding: 4px 10px;
+    border-radius: 3px;
+  }
+
+  .product-card-body {
+    padding: 24px;
+  }
+
+  .product-card-body h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px;
+    color: var(--navy);
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+
+  .product-card-body .product-claim {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--textMuted);
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+
+  .product-card-body .product-why {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+    font-weight: 400;
+    padding: 16px;
+    background: var(--bgWarm);
+    border-radius: 8px;
+    border-left: 3px solid var(--teal);
+    margin-bottom: 16px;
+  }
+
+  .product-card-body .product-why strong {
+    color: var(--navy);
+    font-weight: 600;
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+  }
+
+  .product-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .product-price {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .product-price span {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--textLight);
+  }
+
+  .btn-order {
+    background: var(--teal);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-order:hover { background: var(--tealDark); transform: translateY(-1px); }
+
+  /* ============ TRUST BAR ============ */
+  .trust-bar {
+    background: var(--navy);
+    padding: 64px 40px;
+    margin-top: 40px;
+  }
+
+  .trust-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .trust-statement {
+    font-family: 'Instrument Serif', serif;
+    font-size: 28px;
+    color: var(--cream);
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+  }
+
+  .trust-statement em {
+    color: var(--teal);
+    font-style: italic;
+  }
+
+  .trust-stat {
+    text-align: center;
+  }
+
+  .trust-stat .number {
+    font-family: 'Instrument Serif', serif;
+    font-size: 42px;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .trust-stat .label {
+    font-size: 11px;
+    color: rgba(248,245,240,0.5);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+  }
+
+  /* ============ NEWSLETTER CTA ============ */
+  .newsletter-section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .newsletter-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .newsletter-box h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 36px;
+    color: var(--navy);
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+
+  .newsletter-box h2 em {
+    color: var(--teal);
+    font-style: italic;
+  }
+
+  .newsletter-box p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--textMuted);
+    font-weight: 300;
+  }
+
+  .newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .newsletter-form .whatsapp-input {
+    display: flex;
+    gap: 12px;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    padding: 16px 20px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+    background: var(--bgWarm);
+  }
+
+  .newsletter-form input:focus { border-color: var(--teal); }
+
+  .newsletter-form input::placeholder { color: var(--textLight); }
+
+  .newsletter-form button {
+    background: var(--teal);
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .newsletter-form button:hover { background: var(--tealDark); }
+
+  .newsletter-form .privacy-note {
+    font-size: 12px;
+    color: var(--textLight);
+    line-height: 1.5;
+  }
+
+  .whatsapp-icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--navy);
+    padding: 48px 40px 32px;
+    border-top: 1px solid rgba(248,245,240,0.08);
+  }
+
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .footer-brand {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .footer-brand span { color: var(--teal); }
+
+  .footer-tagline {
+    font-size: 13px;
+    color: rgba(248,245,240,0.4);
+    font-weight: 300;
+    max-width: 280px;
+    line-height: 1.5;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 48px;
+  }
+
+  .footer-col h4 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(248,245,240,0.3);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .footer-col a {
+    display: block;
+    font-size: 13px;
+    color: rgba(248,245,240,0.6);
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--cream); }
+
+  .footer-bottom {
+    max-width: 1280px;
+    margin: 32px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(248,245,240,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-bottom span {
+    font-size: 12px;
+    color: rgba(248,245,240,0.25);
+  }
+
+  .footer-license {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: rgba(248,245,240,0.25);
+  }
+
+  .footer-license .dot-green {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+
+  /* ============ ANIMATIONS ============ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+
+  .animate-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .featured-grid { grid-template-columns: 1fr; }
+    .product-editorial-grid { grid-template-columns: 1fr; }
+    .trust-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .newsletter-box { grid-template-columns: 1fr; padding: 40px; gap: 32px; }
+    .footer-inner { flex-direction: column; gap: 32px; }
+    .footer-links { gap: 32px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Pharma <span>Service</span></a>
+    <div class="nav-links">
+      <a href="#" class="active">Home</a>
+      <a href="#">Editorial Picks</a>
+      <a href="#">Latest News</a>
+      <a href="#">Resources</a>
+      <a href="#">Blog</a>
+      <a href="#">About</a>
+      <a href="#" class="nav-cta">Subscribe</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Trusted pharmaceutical expertise since 1984</div>
+  <h1><em>Value-driven</em> consumer health insights</h1>
+  <p class="hero-sub">Independent research, honest recommendations, direct delivery. We don't take money from brands to recommend them. We recommend what's best, you make the choice.</p>
+  <div class="hero-actions">
+    <a href="#" class="btn-primary">Read This Week's Guide</a>
+    <a href="#" class="btn-secondary">Browse All Products</a>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-content">
+    <span class="ticker-item"><span class="dot"></span> <strong>40 Years</strong> in UAE Pharmaceutical Distribution</span>
+    <span class="ticker-item"><span class="dot"></span> <strong>Licensed</strong> UAE Distribution &amp; MOH Import Authorization</span>
+    <span class="ticker-item"><span class="dot"></span> <strong>Next Day Delivery</strong> — direct to your door</span>
+    <span class="ticker-item"><span class="dot"></span> <strong>Independent</strong> — we don't take money from brands to recommend them</span>
+    <span class="ticker-item"><span class="dot"></span> <strong>40 Years</strong> in UAE Pharmaceutical Distribution</span>
+    <span class="ticker-item"><span class="dot"></span> <strong>Licensed</strong> UAE Distribution &amp; MOH Import Authorization</span>
+    <span class="ticker-item"><span class="dot"></span> <strong>Next Day Delivery</strong> — direct to your door</span>
+    <span class="ticker-item"><span class="dot"></span> <strong>Independent</strong> — we don't take money from brands to recommend them</span>
+  </div>
+</div>
+
+<!-- EDITORIAL SECTION -->
+<section class="section animate-in">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Latest from the Editors</div>
+      <h2 class="section-title">This week in consumer health in the UAE</h2>
+    </div>
+    <a href="#" class="section-link">View All Guides →</a>
+  </div>
+
+  <div class="featured-grid">
+    <!-- Main Feature -->
+    <div class="featured-main">
+      <div class="featured-img">
+        <span class="category-badge">Seasonal Guide</span>
+        <span class="img-text">Photography: studio product shot</span>
+      </div>
+      <div class="featured-body">
+        <div class="meta">March 2026 · 8 min read</div>
+        <h2>Wartime Essentials: What Your Medicine Cabinet Actually Needs Right Now</h2>
+        <p>We reviewed 40+ products across six categories to build the definitive home medical kit for the current situation. No panic buying. No guesswork. Just what a pharmaceutical professional would stock for their own family.</p>
+        <a href="#" class="read-link">Read the full guide</a>
+      </div>
+    </div>
+
+    <!-- Side Articles -->
+    <div class="featured-side">
+      <div class="side-article">
+        <div>
+          <span class="category-badge-sm">Digestive Health</span>
+          <h3>We Tested 9 Herbal Laxatives Sold in the UAE. Only One Got the Formulation Right.</h3>
+          <p>Most herbal digestive teas use fillers and underdosed active ingredients. Here's what we found when we looked at the actual formulations.</p>
+        </div>
+        <div class="meta">March 2026 · 5 min read</div>
+      </div>
+
+      <div class="side-article">
+        <div>
+          <span class="category-badge-sm">Elderly Care</span>
+          <h3>The Underpad Problem: Why 60×90 Isn't Enough and What to Use Instead</h3>
+          <p>If you're caring for a bedridden family member, the standard underpad size sold in the UAE leaves 40% of the bed exposed. There's a better option.</p>
+        </div>
+        <div class="meta">February 2026 · 4 min read</div>
+      </div>
+
+      <div class="side-article">
+        <div>
+          <span class="category-badge-sm">Dental Care</span>
+          <h3>Your Denture Adhesive Probably Contains Zinc. Here's Why That Matters.</h3>
+          <p>Long-term zinc exposure from denture adhesives has been linked to copper deficiency. We looked at every brand available in the UAE.</p>
+        </div>
+        <div class="meta">February 2026 · 6 min read</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT EDITORIAL CARDS -->
+<section class="section animate-in">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Our Picks</div>
+      <h2 class="section-title">Researched. Tested. Delivered.</h2>
+    </div>
+    <a href="#" class="section-link">View All Products →</a>
+  </div>
+
+  <div class="product-editorial-grid">
+    <!-- PlantaLax -->
+    <div class="product-card">
+      <div class="product-card-img plantalax">
+        <span class="product-label">Digestive Health</span>
+        <span class="verdict"><span class="star">★</span> Editor's Pick</span>
+      </div>
+      <div class="product-card-body">
+        <h3>PlantaLax Herbal Tea</h3>
+        <p class="product-claim">GMP-certified blend of Senna, Chamomile &amp; Cascara Bark. 20 bags per box.</p>
+        <div class="product-why">
+          <strong>Why we chose this</strong>
+          The only herbal digestive tea in the UAE with a legitimate GMP certification and properly dosed active ingredients. Three functional herbs that work together — not a single-note product padded with fillers. MOH Registered.
+        </div>
+        <div class="product-price-row">
+          <span class="product-price">23 AED <span>/ box</span></span>
+          <button class="btn-order">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- NIMED Underpads -->
+    <div class="product-card">
+      <div class="product-card-img underpad">
+        <span class="product-label">Elderly Care</span>
+        <span class="verdict"><span class="star">★</span> Only in UAE</span>
+      </div>
+      <div class="product-card-body">
+        <h3>NIMED Underpads 90×180cm</h3>
+        <p class="product-claim">Full-bed disposable underpad. 20 per pack. The only 90×180cm format available in the UAE market.</p>
+        <div class="product-why">
+          <strong>Why we chose this</strong>
+          Standard 60×90 underpads leave nearly half the bed exposed, leading to lateral leakage and constant repositioning. This is the only full-bed coverage option in the UAE. It shouldn't be this hard to find, but it is.
+        </div>
+        <div class="product-price-row">
+          <span class="product-price">45 AED <span>/ pack</span></span>
+          <button class="btn-order">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FittyDent -->
+    <div class="product-card">
+      <div class="product-card-img fittydent">
+        <span class="product-label">Dental Care</span>
+        <span class="verdict"><span class="star">★</span> Zinc-Free</span>
+      </div>
+      <div class="product-card-body">
+        <h3>FittyDent Cleaning Tablets</h3>
+        <p class="product-claim">pH-9 formula. 32 tablets per pack. Zinc-free denture adhesive &amp; cleaning system.</p>
+        <div class="product-why">
+          <strong>Why we chose this</strong>
+          Most denture adhesives on UAE shelves contain zinc, which poses real risks for daily long-term users. FittyDent is the only zinc-free system we found with a waterproof adhesive and a high-pH cleaning formula that actually eliminates bacteria.
+        </div>
+        <div class="product-price-row">
+          <span class="product-price">19 AED <span>/ pack</span></span>
+          <button class="btn-order">Order Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar animate-in">
+  <div class="trust-inner">
+    <div class="trust-statement">We don't take money from brands to recommend them. We recommend what's <em>best</em>, then we make it <em>available</em>.</div>
+    <div class="trust-stat">
+      <div class="number">1984</div>
+      <div class="label">Established</div>
+    </div>
+    <div class="trust-stat">
+      <div class="number">100%</div>
+      <div class="label">Independent</div>
+    </div>
+    <div class="trust-stat">
+      <div class="number">UAE</div>
+      <div class="label">Licensed Distributor</div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section animate-in">
+  <div class="newsletter-box">
+    <div>
+      <h2>One message a week</h2>
+      <p>What's in season, what works, what doesn't, and why. From a 40-year pharmaceutical distributor who doesn't get paid to recommend anything. Just better pharma service.</p>
+    </div>
+    <div class="newsletter-form">
+      <div class="whatsapp-input">
+        <input type="tel" placeholder="+971 — Your WhatsApp number" />
+        <button>Subscribe</button>
+      </div>
+      <div class="privacy-note">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Delivered via WhatsApp. No spam. Unsubscribe anytime.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Pharma <span>Service</span></div>
+      <p class="footer-tagline">The voice of reason in healthcare. Independent research, honest recommendations, direct delivery since 1984.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Editorial</h4>
+        <a href="#">Seasonal Prep</a>
+        <a href="#">Popular</a>
+        <a href="#">Native Products</a>
+        <a href="#">OTC Guide</a>
+      </div>
+      <div class="footer-col">
+        <h4>News</h4>
+        <a href="#">MOHAP & EDE Updates</a>
+        <a href="#">Dubai Health Authority</a>
+        <a href="#">Resources</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+        <a href="#">Wholesale</a>
+        <a href="#">Licensing Info</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Pharma Service Co. LLC. All rights reserved.</span>
+    <span class="footer-license"><span class="dot-green"></span> Licensed UAE Pharmaceutical Distributor · Dubai Healthcare City</span>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
