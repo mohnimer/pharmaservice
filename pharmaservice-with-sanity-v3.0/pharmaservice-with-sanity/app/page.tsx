@@ -313,7 +313,7 @@ export default function PharmaService() {
       {/* ============ NAVIGATION ============ */}
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
         <div className="nav-inner">
-          <a onClick={(e) => navigateTo('home', e)} className="logo">Pharma<span>Service</span></a>
+          <a href="#home" onClick={(e) => navigateTo('home', e)} className="logo">Pharma<span>Service</span></a>
           
           <button 
             className="mobile-menu-btn" 
@@ -328,12 +328,12 @@ export default function PharmaService() {
           </button>
 
           <div className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>
-            <a onClick={(e) => navigateTo('home', e)} className={`nav-link ${activeView === 'home' ? 'active' : ''}`}>Home</a>
-            <a onClick={(e) => navigateTo('editorial', e)} className={`nav-link ${activeView === 'editorial' ? 'active' : ''}`}>Editorial Picks</a>
-            <a onClick={(e) => navigateTo('news', e)} className={`nav-link ${activeView === 'news' ? 'active' : ''}`}>Latest News</a>
-            <a onClick={(e) => navigateTo('resources', e)} className={`nav-link ${activeView === 'resources' ? 'active' : ''}`}>Resources</a>
-            <a onClick={(e) => navigateTo('blog', e)} className={`nav-link ${activeView === 'blog' ? 'active' : ''}`}>Blog</a>
-            <a onClick={(e) => navigateTo('about', e)} className={`nav-link ${activeView === 'about' ? 'active' : ''}`}>About</a>
+            <a href="#home" onClick={(e) => navigateTo('home', e)} className={`nav-link ${activeView === 'home' ? 'active' : ''}`}>Home</a>
+            <a href="#editorial" onClick={(e) => navigateTo('editorial', e)} className={`nav-link ${activeView === 'editorial' ? 'active' : ''}`}>Editorial Picks</a>
+            <a href="#news" onClick={(e) => navigateTo('news', e)} className={`nav-link ${activeView === 'news' ? 'active' : ''}`}>Latest News</a>
+            <a href="#resources" onClick={(e) => navigateTo('resources', e)} className={`nav-link ${activeView === 'resources' ? 'active' : ''}`}>Resources</a>
+            <a href="#blog" onClick={(e) => navigateTo('blog', e)} className={`nav-link ${activeView === 'blog' ? 'active' : ''}`}>Blog</a>
+            <a href="#about" onClick={(e) => navigateTo('about', e)} className={`nav-link ${activeView === 'about' ? 'active' : ''}`}>About</a>
             <button onClick={() => window.open('https://wa.me/971500000000', '_blank')} className="btn-nav-sub">Subscribe</button>
           </div>
         </div>
@@ -349,21 +349,21 @@ export default function PharmaService() {
             <header className="hero">
               <div className="hero-top-label label-teal">Trusted Pharmaceutical Expertise Since 1984</div>
               <h1>Value-driven <em>consumer health</em><br />insights</h1>
-              <p>Independent research, honest recommendations, direct delivery. We don't take money from brands to recommend them. We recommend what's best, you make the choice.</p>
+              <p>Independent research, honest recommendations, direct delivery. We don&apos;t take money from brands to recommend them. We recommend what&apos;s best, you make the choice.</p>
               <div className="hero-actions">
-                <a onClick={(e) => navigateTo('editorial', e)} className="btn btn-dark">Read This Week's Guide</a>
-                <a onClick={(e) => navigateTo('shop', e)} className="btn btn-outline">Browse All Products</a>
+                <a href="#editorial" onClick={(e) => navigateTo('editorial', e)} className="btn btn-dark">Read This Week&apos;s Guide</a>
+                <a href="#shop" onClick={(e) => navigateTo('shop', e)} className="btn btn-outline">Browse All Products</a>
               </div>
             </header>
 
             <div className="ticker-wrap">
               <div className="ticker">
-                <div className="ticker-item"><span>UAE DISTRIBUTION & MOH IMPORT AUTHORIZATION</span></div>
+                <div className="ticker-item"><span>UAE DISTRIBUTION &amp; MOH IMPORT AUTHORIZATION</span></div>
                 <div className="ticker-item">NEXT DAY DELIVERY — DIRECT TO YOUR DOOR</div>
-                <div className="ticker-item"><span>INDEPENDENT</span> — WE DON'T TAKE MONEY FROM BRANDS TO RECOMMEND THEM</div>
-                <div className="ticker-item"><span>UAE DISTRIBUTION & MOH IMPORT AUTHORIZATION</span></div>
+                <div className="ticker-item"><span>INDEPENDENT</span> — WE DON&apos;T TAKE MONEY FROM BRANDS TO RECOMMEND THEM</div>
+                <div className="ticker-item"><span>UAE DISTRIBUTION &amp; MOH IMPORT AUTHORIZATION</span></div>
                 <div className="ticker-item">NEXT DAY DELIVERY — DIRECT TO YOUR DOOR</div>
-                <div className="ticker-item"><span>INDEPENDENT</span> — WE DON'T TAKE MONEY FROM BRANDS TO RECOMMEND THEM</div>
+                <div className="ticker-item"><span>INDEPENDENT</span> — WE DON&apos;T TAKE MONEY FROM BRANDS TO RECOMMEND THEM</div>
               </div>
             </div>
 
@@ -373,11 +373,11 @@ export default function PharmaService() {
                   <div className="label-teal" style={{ marginBottom: '8px' }}>Latest from the editors</div>
                   <h2>This week in consumer health in the UAE</h2>
                 </div>
-                <a onClick={(e) => navigateTo('editorial', e)} className="link-arrow">View all guides &rarr;</a>
+                <a href="#editorial" onClick={(e) => navigateTo('editorial', e)} className="link-arrow">View all guides &rarr;</a>
               </div>
 
               <div className="editorial-grid">
-                <a onClick={(e) => navigateTo('editorial', e)} className="card-feature">
+                <a href="#editorial" onClick={(e) => navigateTo('editorial', e)} className="card-feature">
                   <div className="card-feature-img">
                     <span className="badge">Seasonal Guide</span>
                     <span className="img-caption">Photography: studio product shot</span>
@@ -391,21 +391,21 @@ export default function PharmaService() {
                 </a>
 
                 <div className="side-articles">
-                  <a onClick={(e) => navigateTo('editorial', e)} className="card-side">
+                  <a href="#editorial" onClick={(e) => navigateTo('editorial', e)} className="card-side">
                     <span className="badge-outline">Digestive Health</span>
                     <h4>We Tested 9 Herbal Laxatives Sold in the UAE. Only One Got the Formulation Right.</h4>
-                    <p>Most herbal digestive teas use fillers and underdosed active ingredients. Here's what we found when we looked at the actual formulations.</p>
+                    <p>Most herbal digestive teas use fillers and underdosed active ingredients. Here&apos;s what we found when we looked at the actual formulations.</p>
                     <span className="meta-text" style={{ margin: 0 }}>March 2026 • 5 min read</span>
                   </a>
-                  <a onClick={(e) => navigateTo('editorial', e)} className="card-side">
+                  <a href="#editorial" onClick={(e) => navigateTo('editorial', e)} className="card-side">
                     <span className="badge-outline">Elderly Care</span>
-                    <h4>The Underpad Problem: Why 60×90 Isn't Enough and What to Use Instead</h4>
-                    <p>If you're caring for a bedridden family member, the standard underpad size sold in the UAE leaves 40% of the bed exposed. There's a better option.</p>
+                    <h4>The Underpad Problem: Why 60×90 Isn&apos;t Enough and What to Use Instead</h4>
+                    <p>If you&apos;re caring for a bedridden family member, the standard underpad size sold in the UAE leaves 40% of the bed exposed. There&apos;s a better option.</p>
                     <span className="meta-text" style={{ margin: 0 }}>February 2026 • 4 min read</span>
                   </a>
-                  <a onClick={(e) => navigateTo('editorial', e)} className="card-side">
+                  <a href="#editorial" onClick={(e) => navigateTo('editorial', e)} className="card-side">
                     <span className="badge-outline">Dental Care</span>
-                    <h4>Your Denture Adhesive Probably Contains Zinc. Here's Why That Matters.</h4>
+                    <h4>Your Denture Adhesive Probably Contains Zinc. Here&apos;s Why That Matters.</h4>
                     <p>Long-term zinc exposure from denture adhesives has been linked to copper deficiency. We looked at every brand available in the UAE.</p>
                     <span className="meta-text" style={{ margin: 0 }}>February 2026 • 6 min read</span>
                   </a>
@@ -419,20 +419,20 @@ export default function PharmaService() {
                   <div className="label-teal" style={{ marginBottom: '8px' }}>Our Picks</div>
                   <h2>Researched. Tested. Delivered.</h2>
                 </div>
-                <a onClick={(e) => navigateTo('shop', e)} className="link-arrow">View all products &rarr;</a>
+                <a href="#shop" onClick={(e) => navigateTo('shop', e)} className="link-arrow">View all products &rarr;</a>
               </div>
 
               <div className="products-grid">
                 <div className="product-card">
                   <div className="prod-head bg-beige">
-                    <div className="badge-dark">★ Editor's Pick</div>
+                    <div className="badge-dark">★ Editor&apos;s Pick</div>
                   </div>
                   <div className="prod-body">
                     <div style={{ marginBottom: '8px' }}>
                       <span className="badge-outline" style={{ color: 'var(--text-light)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 600 }}>Digestive Health</span>
                     </div>
                     <h3>PlantaLax Herbal Tea</h3>
-                    <p>GMP-certified blend of Senna, Chamomile & Cascara Bark. 20 bags per box.</p>
+                    <p>GMP-certified blend of Senna, Chamomile &amp; Cascara Bark. 20 bags per box.</p>
                     
                     <div className="why-box">
                       <h5>Why we chose this</h5>
@@ -459,7 +459,7 @@ export default function PharmaService() {
                     
                     <div className="why-box">
                       <h5>Why we chose this</h5>
-                      <p>Standard 60×90 underpads leave nearly half the bed exposed, leading to lateral leakage and constant repositioning. This is the only full-bed coverage option in the UAE. It shouldn't be this hard to find, but it is.</p>
+                      <p>Standard 60×90 underpads leave nearly half the bed exposed, leading to lateral leakage and constant repositioning. This is the only full-bed coverage option in the UAE. It shouldn&apos;t be this hard to find, but it is.</p>
                     </div>
                     
                     <div className="prod-footer">
@@ -478,7 +478,7 @@ export default function PharmaService() {
                       <span className="badge-outline" style={{ color: 'var(--text-light)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 600 }}>Dental Care</span>
                     </div>
                     <h3>FittyDent Cleaning Tablets</h3>
-                    <p>pH-9 formula. 32 tablets per pack. Zinc-free denture adhesive & cleaning system.</p>
+                    <p>pH-9 formula. 32 tablets per pack. Zinc-free denture adhesive &amp; cleaning system.</p>
                     
                     <div className="why-box">
                       <h5>Why we chose this</h5>
@@ -496,7 +496,7 @@ export default function PharmaService() {
 
             <div className="trust-banner">
               <div className="trust-inner">
-                <div className="trust-quote">We don't take money from brands to recommend them. We recommend what's <em>best</em>, then we make it <em>available</em>.</div>
+                <div className="trust-quote">We don&apos;t take money from brands to recommend them. We recommend what&apos;s <em>best</em>, then we make it <em>available</em>.</div>
                 <div className="trust-stat">
                   <h4>1984</h4>
                   <p>Established</p>
@@ -516,7 +516,7 @@ export default function PharmaService() {
               <div className="newsletter-box">
                 <div className="newsletter-text">
                   <h2>One message a week</h2>
-                  <p>What's in season, what works, what doesn't, and why. From a 40-year pharmaceutical distributor who doesn't get paid to recommend anything. Just better pharma service.</p>
+                  <p>What&apos;s in season, what works, what doesn&apos;t, and why. From a 40-year pharmaceutical distributor who doesn&apos;t get paid to recommend anything. Just better pharma service.</p>
                 </div>
                 <div className="newsletter-form">
                   <form onSubmit={(e) => { e.preventDefault(); alert('Subscribed via WhatsApp!'); }}>
@@ -541,13 +541,13 @@ export default function PharmaService() {
         {activeView === 'editorial' && (
           <div className="view-container">
             <header className="page-header">
-              <div className="label-teal" style={{ justifyContent: 'center' }}>Research & Insights</div>
+              <div className="label-teal" style={{ justifyContent: 'center' }}>Research &amp; Insights</div>
               <h1>Editorial Picks</h1>
               <p>Deep dives, formulation comparisons, and honest reviews. We do the thinking and absorb the complexity so you can make better decisions.</p>
             </header>
             <section className="section" style={{ paddingTop: 0 }}>
               <div className="editorial-grid">
-                <a className="card-feature">
+                <a href="#editorial" className="card-feature">
                   <div className="card-feature-img">
                     <span className="badge">Seasonal Guide</span>
                   </div>
@@ -559,17 +559,17 @@ export default function PharmaService() {
                   </div>
                 </a>
                 <div className="side-articles">
-                  <a className="card-side">
+                  <a href="#editorial" className="card-side">
                     <span className="badge-outline">Digestive Health</span>
                     <h4>We Tested 9 Herbal Laxatives Sold in the UAE.</h4>
                     <span className="meta-text" style={{ margin: 0 }}>March 2026 • 5 min read</span>
                   </a>
-                  <a className="card-side">
+                  <a href="#editorial" className="card-side">
                     <span className="badge-outline">Elderly Care</span>
-                    <h4>The Underpad Problem: Why 60×90 Isn't Enough</h4>
+                    <h4>The Underpad Problem: Why 60×90 Isn&apos;t Enough</h4>
                     <span className="meta-text" style={{ margin: 0 }}>February 2026 • 4 min read</span>
                   </a>
-                  <a className="card-side">
+                  <a href="#editorial" className="card-side">
                     <span className="badge-outline">Dental Care</span>
                     <h4>Your Denture Adhesive Probably Contains Zinc.</h4>
                     <span className="meta-text" style={{ margin: 0 }}>February 2026 • 6 min read</span>
@@ -586,7 +586,7 @@ export default function PharmaService() {
         {activeView === 'news' && (
           <div className="view-container">
             <header className="page-header">
-              <div className="label-teal" style={{ justifyContent: 'center' }}>Regulatory & Market Updates</div>
+              <div className="label-teal" style={{ justifyContent: 'center' }}>Regulatory &amp; Market Updates</div>
               <h1>Latest News</h1>
               <p>Curated updates from MOHAP, Dubai Health Authority, and global supply chain shifts affecting UAE consumers.</p>
             </header>
@@ -613,7 +613,7 @@ export default function PharmaService() {
         {activeView === 'resources' && (
           <div className="view-container">
             <header className="page-header">
-              <div className="label-teal" style={{ justifyContent: 'center' }}>Tools & Downloads</div>
+              <div className="label-teal" style={{ justifyContent: 'center' }}>Tools &amp; Downloads</div>
               <h1>Resources</h1>
               <p>Practical assets to help you navigate consumer healthcare.</p>
             </header>
@@ -655,7 +655,7 @@ export default function PharmaService() {
                 <div className="label-teal" style={{ marginBottom: '16px' }}>Volume 14 • March 2026</div>
                 <h3 style={{ fontSize: '32px', marginBottom: '24px' }}>The State of Consumer Health: Q1 2026</h3>
                 <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>Our quarterly synthesis of market shifts. Trust is thinning, pharmacy shelves are crowded, and the gap between clinical efficacy and marketing claims has never been wider.</p>
-                <a className="btn btn-dark">Read Full Report</a>
+                <a href="#blog" className="btn btn-dark">Read Full Report</a>
               </div>
             </section>
           </div>
@@ -667,35 +667,35 @@ export default function PharmaService() {
       <footer>
         <div className="footer-inner">
           <div>
-            <div className="footer-logo" onClick={(e) => navigateTo('home', e)} style={{ cursor: 'pointer' }}>
+            <a href="#home" className="footer-logo" onClick={(e) => navigateTo('home', e)} style={{ cursor: 'pointer', textDecoration: 'none' }}>
               Pharma<span>Service</span>
-            </div>
+            </a>
             <p className="footer-desc">The voice of reason in healthcare. Independent research, honest recommendations, direct delivery since 1984.</p>
           </div>
           <div className="footer-col">
             <h5>Editorial</h5>
             <ul>
-              <li><a onClick={(e) => navigateTo('editorial', e)}>Seasonal Prep</a></li>
-              <li><a onClick={(e) => navigateTo('editorial', e)}>Popular</a></li>
-              <li><a onClick={(e) => navigateTo('editorial', e)}>Native Products</a></li>
-              <li><a onClick={(e) => navigateTo('blog', e)}>OTC Guide</a></li>
+              <li><a href="#editorial" onClick={(e) => navigateTo('editorial', e)}>Seasonal Prep</a></li>
+              <li><a href="#editorial" onClick={(e) => navigateTo('editorial', e)}>Popular</a></li>
+              <li><a href="#editorial" onClick={(e) => navigateTo('editorial', e)}>Native Products</a></li>
+              <li><a href="#blog" onClick={(e) => navigateTo('blog', e)}>OTC Guide</a></li>
             </ul>
           </div>
           <div className="footer-col">
             <h5>News</h5>
             <ul>
-              <li><a onClick={(e) => navigateTo('news', e)}>MOHAP & EDE Updates</a></li>
-              <li><a onClick={(e) => navigateTo('news', e)}>Dubai Health Authority</a></li>
-              <li><a onClick={(e) => navigateTo('resources', e)}>Resources</a></li>
+              <li><a href="#news" onClick={(e) => navigateTo('news', e)}>MOHAP &amp; EDE Updates</a></li>
+              <li><a href="#news" onClick={(e) => navigateTo('news', e)}>Dubai Health Authority</a></li>
+              <li><a href="#resources" onClick={(e) => navigateTo('resources', e)}>Resources</a></li>
             </ul>
           </div>
           <div className="footer-col">
             <h5>Company</h5>
             <ul>
-              <li><a onClick={(e) => navigateTo('about', e)}>About Us</a></li>
-              <li><a onClick={(e) => navigateTo('about', e)}>Contact</a></li>
-              <li><a onClick={(e) => navigateTo('shop', e)}>Wholesale</a></li>
-              <li><a onClick={(e) => navigateTo('about', e)}>Licensing Info</a></li>
+              <li><a href="#about" onClick={(e) => navigateTo('about', e)}>About Us</a></li>
+              <li><a href="#about" onClick={(e) => navigateTo('about', e)}>Contact</a></li>
+              <li><a href="#shop" onClick={(e) => navigateTo('shop', e)}>Wholesale</a></li>
+              <li><a href="#about" onClick={(e) => navigateTo('about', e)}>Licensing Info</a></li>
             </ul>
           </div>
         </div>
