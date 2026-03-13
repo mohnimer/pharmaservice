@@ -15,7 +15,7 @@ export default function PharmaService() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // --- Next.js Friendly SPA Routing (Fixes 404s) ---
+  // --- Next.js Friendly SPA Routing ---
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '') || 'home';
@@ -36,18 +36,12 @@ export default function PharmaService() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  const navigateTo = (view, e) => {
-    if (e) e.preventDefault();
-    window.location.hash = view; // Triggers the hashchange event above
-    setMobileMenuOpen(false);
-  };
-
   // --- Dynamic Content (Ready for Sanity.io) ---
   const newsUpdates = [
-    { date: "March 15, 2026", title: "New MOHAP Guidelines on Over-The-Counter Zinc Supplements", agency: "MOHAP Update", link: "#" },
-    { date: "March 02, 2026", title: "DHA Introduces Stricter Labeling Requirements for Herbal Teas", agency: "DHA Notice", link: "#" },
-    { date: "February 18, 2026", title: "Supply Chain Advisory: Expected Shortages in Adult Incontinence Products", agency: "Market Intel", link: "#" },
-    { date: "January 30, 2026", title: "EDE Alert: Counterfeit Cosmetics Seized in Dubai Ports", agency: "EDE Alert", link: "#" }
+    { date: "March 15, 2026", title: "New MOHAP Guidelines on Over-The-Counter Zinc Supplements", agency: "MOHAP Update", link: "#news" },
+    { date: "March 02, 2026", title: "DHA Introduces Stricter Labeling Requirements for Herbal Teas", agency: "DHA Notice", link: "#news" },
+    { date: "February 18, 2026", title: "Supply Chain Advisory: Expected Shortages in Adult Incontinence Products", agency: "Market Intel", link: "#news" },
+    { date: "January 30, 2026", title: "EDE Alert: Counterfeit Cosmetics Seized in Dubai Ports", agency: "EDE Alert", link: "#news" }
   ];
 
   return (
@@ -139,6 +133,7 @@ export default function PharmaService() {
             font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
             padding: 14px 32px; border-radius: 6px; text-decoration: none;
             transition: background 0.2s; cursor: pointer; border: none;
+            display: inline-flex; align-items: center; justify-content: center;
         }
         .btn-nav-sub:hover { background-color: var(--teal); }
 
@@ -267,7 +262,7 @@ export default function PharmaService() {
         /* ============ FOOTER ============ */
         footer { background-color: var(--navy-dark); color: var(--white); padding: 64px 40px 32px; }
         .footer-inner { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 64px; }
-        .footer-logo { font-family: var(--font-serif); font-size: 24px; color: var(--white); margin-bottom: 16px; cursor: pointer; }
+        .footer-logo { font-family: var(--font-serif); font-size: 24px; color: var(--white); margin-bottom: 16px; cursor: pointer; text-decoration: none; display: inline-block;}
         .footer-logo span { color: var(--teal); font-style: italic; }
         .footer-desc { font-size: 12px; color: rgba(255,255,255,0.6); max-width: 250px; line-height: 1.6; }
         .footer-col h5 { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); margin-bottom: 24px; font-family: var(--font-sans);}
@@ -313,7 +308,7 @@ export default function PharmaService() {
       {/* ============ NAVIGATION ============ */}
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
         <div className="nav-inner">
-          <a href="#home" onClick={(e) => navigateTo('home', e)} className="logo">Pharma<span>Service</span></a>
+          <a href="#home" onClick={() => setMobileMenuOpen(false)} className="logo">Pharma<span>Service</span></a>
           
           <button 
             className="mobile-menu-btn" 
@@ -328,13 +323,13 @@ export default function PharmaService() {
           </button>
 
           <div className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>
-            <a href="#home" onClick={(e) => navigateTo('home', e)} className={`nav-link ${activeView === 'home' ? 'active' : ''}`}>Home</a>
-            <a href="#editorial" onClick={(e) => navigateTo('editorial', e)} className={`nav-link ${activeView === 'editorial' ? 'active' : ''}`}>Editorial Picks</a>
-            <a href="#news" onClick={(e) => navigateTo('news', e)} className={`nav-link ${activeView === 'news' ? 'active' : ''}`}>Latest News</a>
-            <a href="#resources" onClick={(e) => navigateTo('resources', e)} className={`nav-link ${activeView === 'resources' ? 'active' : ''}`}>Resources</a>
-            <a href="#blog" onClick={(e) => navigateTo('blog', e)} className={`nav-link ${activeView === 'blog' ? 'active' : ''}`}>Blog</a>
-            <a href="#about" onClick={(e) => navigateTo('about', e)} className={`nav-link ${activeView === 'about' ? 'active' : ''}`}>About</a>
-            <button onClick={() => window.open('https://wa.me/971500000000', '_blank')} className="btn-nav-sub">Subscribe</button>
+            <a href="#home" onClick={() => setMobileMenuOpen(false)} className={`nav-link ${activeView === 'home' ? 'active' : ''}`}>Home</a>
+            <a href="#editorial" onClick={() => setMobileMenuOpen(false)} className={`nav-link ${activeView === 'editorial' ? 'active' : ''}`}>Editorial Picks</a>
+            <a href="#news" onClick={() => setMobileMenuOpen(false)} className={`nav-link ${activeView === 'news' ? 'active' : ''}`}>Latest News</a>
+            <a href="#resources" onClick={() => setMobileMenuOpen(false)} className={`nav-link ${activeView === 'resources' ? 'active' : ''}`}>Resources</a>
+            <a href="#blog" onClick={() => setMobileMenuOpen(false)} className={`nav-link ${activeView === 'blog' ? 'active' : ''}`}>Blog</a>
+            <a href="#about" onClick={() => setMobileMenuOpen(false)} className={`nav-link ${activeView === 'about' ? 'active' : ''}`}>About</a>
+            <a href="https://wa.me/971500000000" target="_blank" rel="noopener noreferrer" className="btn-nav-sub">Subscribe</a>
           </div>
         </div>
       </nav>
@@ -351,8 +346,8 @@ export default function PharmaService() {
               <h1>Value-driven <em>consumer health</em><br />insights</h1>
               <p>Independent research, honest recommendations, direct delivery. We don&apos;t take money from brands to recommend them. We recommend what&apos;s best, you make the choice.</p>
               <div className="hero-actions">
-                <a href="#editorial" onClick={(e) => navigateTo('editorial', e)} className="btn btn-dark">Read This Week&apos;s Guide</a>
-                <a href="#shop" onClick={(e) => navigateTo('shop', e)} className="btn btn-outline">Browse All Products</a>
+                <a href="#editorial" className="btn btn-dark">Read This Week&apos;s Guide</a>
+                <a href="#shop" className="btn btn-outline">Browse All Products</a>
               </div>
             </header>
 
@@ -373,11 +368,11 @@ export default function PharmaService() {
                   <div className="label-teal" style={{ marginBottom: '8px' }}>Latest from the editors</div>
                   <h2>This week in consumer health in the UAE</h2>
                 </div>
-                <a href="#editorial" onClick={(e) => navigateTo('editorial', e)} className="link-arrow">View all guides &rarr;</a>
+                <a href="#editorial" className="link-arrow">View all guides →</a>
               </div>
 
               <div className="editorial-grid">
-                <a href="#editorial" onClick={(e) => navigateTo('editorial', e)} className="card-feature">
+                <a href="#editorial" className="card-feature">
                   <div className="card-feature-img">
                     <span className="badge">Seasonal Guide</span>
                     <span className="img-caption">Photography: studio product shot</span>
@@ -386,24 +381,24 @@ export default function PharmaService() {
                     <span className="meta-text">March 2026 • 8 min read</span>
                     <h3>Wartime Essentials: What Your Medicine Cabinet Actually Needs Right Now</h3>
                     <p>We reviewed 40+ products across six categories to build the definitive home medical kit for the current situation. No panic buying. No guesswork. Just what a pharmaceutical professional would stock for their own family.</p>
-                    <span className="link-arrow-teal label-teal">Read the full guide &rarr;</span>
+                    <span className="link-arrow-teal label-teal">Read the full guide →</span>
                   </div>
                 </a>
 
                 <div className="side-articles">
-                  <a href="#editorial" onClick={(e) => navigateTo('editorial', e)} className="card-side">
+                  <a href="#editorial" className="card-side">
                     <span className="badge-outline">Digestive Health</span>
                     <h4>We Tested 9 Herbal Laxatives Sold in the UAE. Only One Got the Formulation Right.</h4>
                     <p>Most herbal digestive teas use fillers and underdosed active ingredients. Here&apos;s what we found when we looked at the actual formulations.</p>
                     <span className="meta-text" style={{ margin: 0 }}>March 2026 • 5 min read</span>
                   </a>
-                  <a href="#editorial" onClick={(e) => navigateTo('editorial', e)} className="card-side">
+                  <a href="#editorial" className="card-side">
                     <span className="badge-outline">Elderly Care</span>
                     <h4>The Underpad Problem: Why 60×90 Isn&apos;t Enough and What to Use Instead</h4>
                     <p>If you&apos;re caring for a bedridden family member, the standard underpad size sold in the UAE leaves 40% of the bed exposed. There&apos;s a better option.</p>
                     <span className="meta-text" style={{ margin: 0 }}>February 2026 • 4 min read</span>
                   </a>
-                  <a href="#editorial" onClick={(e) => navigateTo('editorial', e)} className="card-side">
+                  <a href="#editorial" className="card-side">
                     <span className="badge-outline">Dental Care</span>
                     <h4>Your Denture Adhesive Probably Contains Zinc. Here&apos;s Why That Matters.</h4>
                     <p>Long-term zinc exposure from denture adhesives has been linked to copper deficiency. We looked at every brand available in the UAE.</p>
@@ -419,7 +414,7 @@ export default function PharmaService() {
                   <div className="label-teal" style={{ marginBottom: '8px' }}>Our Picks</div>
                   <h2>Researched. Tested. Delivered.</h2>
                 </div>
-                <a href="#shop" onClick={(e) => navigateTo('shop', e)} className="link-arrow">View all products &rarr;</a>
+                <a href="#shop" className="link-arrow">View all products →</a>
               </div>
 
               <div className="products-grid">
@@ -441,7 +436,7 @@ export default function PharmaService() {
                     
                     <div className="prod-footer">
                       <div className="price">23 AED <span>/ box</span></div>
-                      <button className="btn btn-teal">Order Now</button>
+                      <a href="https://wa.me/971500000000" target="_blank" rel="noopener noreferrer" className="btn btn-teal" style={{ textDecoration: 'none' }}>Order Now</a>
                     </div>
                   </div>
                 </div>
@@ -464,7 +459,7 @@ export default function PharmaService() {
                     
                     <div className="prod-footer">
                       <div className="price">45 AED <span>/ pack</span></div>
-                      <button className="btn btn-teal">Order Now</button>
+                      <a href="https://wa.me/971500000000" target="_blank" rel="noopener noreferrer" className="btn btn-teal" style={{ textDecoration: 'none' }}>Order Now</a>
                     </div>
                   </div>
                 </div>
@@ -487,7 +482,7 @@ export default function PharmaService() {
                     
                     <div className="prod-footer">
                       <div className="price">19 AED <span>/ pack</span></div>
-                      <button className="btn btn-teal">Order Now</button>
+                      <a href="https://wa.me/971500000000" target="_blank" rel="noopener noreferrer" className="btn btn-teal" style={{ textDecoration: 'none' }}>Order Now</a>
                     </div>
                   </div>
                 </div>
@@ -555,7 +550,7 @@ export default function PharmaService() {
                     <span className="meta-text">March 2026 • 8 min read</span>
                     <h3>Wartime Essentials: What Your Medicine Cabinet Actually Needs Right Now</h3>
                     <p>We reviewed 40+ products across six categories to build the definitive home medical kit.</p>
-                    <span className="link-arrow-teal label-teal">Read the full guide &rarr;</span>
+                    <span className="link-arrow-teal label-teal">Read the full guide →</span>
                   </div>
                 </a>
                 <div className="side-articles">
@@ -623,17 +618,17 @@ export default function PharmaService() {
                 <div className="resource-card">
                   <h3>The Family Medicine Cabinet Checklist</h3>
                   <p>A printable PDF guide detailing exactly what you need at home, categorized by age and necessity.</p>
-                  <span className="link-arrow">Download PDF &rarr;</span>
+                  <a href="#resources" className="link-arrow">Download PDF →</a>
                 </div>
                 <div className="resource-card">
                   <h3>Ingredient Glossary</h3>
                   <p>Our plain-english translation of complex pharmaceutical ingredients found in daily OTC products.</p>
-                  <span className="link-arrow">Browse Glossary &rarr;</span>
+                  <a href="#resources" className="link-arrow">Browse Glossary →</a>
                 </div>
                 <div className="resource-card">
                   <h3>Product Recall Database</h3>
                   <p>A maintained, searchable list of regional product recalls affecting consumer health goods in the UAE.</p>
-                  <span className="link-arrow">Search Database &rarr;</span>
+                  <a href="#resources" className="link-arrow">Search Database →</a>
                 </div>
               </div>
             </section>
@@ -667,7 +662,7 @@ export default function PharmaService() {
       <footer>
         <div className="footer-inner">
           <div>
-            <a href="#home" className="footer-logo" onClick={(e) => navigateTo('home', e)} style={{ cursor: 'pointer', textDecoration: 'none' }}>
+            <a href="#home" className="footer-logo" style={{ cursor: 'pointer', textDecoration: 'none' }}>
               Pharma<span>Service</span>
             </a>
             <p className="footer-desc">The voice of reason in healthcare. Independent research, honest recommendations, direct delivery since 1984.</p>
@@ -675,27 +670,27 @@ export default function PharmaService() {
           <div className="footer-col">
             <h5>Editorial</h5>
             <ul>
-              <li><a href="#editorial" onClick={(e) => navigateTo('editorial', e)}>Seasonal Prep</a></li>
-              <li><a href="#editorial" onClick={(e) => navigateTo('editorial', e)}>Popular</a></li>
-              <li><a href="#editorial" onClick={(e) => navigateTo('editorial', e)}>Native Products</a></li>
-              <li><a href="#blog" onClick={(e) => navigateTo('blog', e)}>OTC Guide</a></li>
+              <li><a href="#editorial">Seasonal Prep</a></li>
+              <li><a href="#editorial">Popular</a></li>
+              <li><a href="#editorial">Native Products</a></li>
+              <li><a href="#blog">OTC Guide</a></li>
             </ul>
           </div>
           <div className="footer-col">
             <h5>News</h5>
             <ul>
-              <li><a href="#news" onClick={(e) => navigateTo('news', e)}>MOHAP &amp; EDE Updates</a></li>
-              <li><a href="#news" onClick={(e) => navigateTo('news', e)}>Dubai Health Authority</a></li>
-              <li><a href="#resources" onClick={(e) => navigateTo('resources', e)}>Resources</a></li>
+              <li><a href="#news">MOHAP &amp; EDE Updates</a></li>
+              <li><a href="#news">Dubai Health Authority</a></li>
+              <li><a href="#resources">Resources</a></li>
             </ul>
           </div>
           <div className="footer-col">
             <h5>Company</h5>
             <ul>
-              <li><a href="#about" onClick={(e) => navigateTo('about', e)}>About Us</a></li>
-              <li><a href="#about" onClick={(e) => navigateTo('about', e)}>Contact</a></li>
-              <li><a href="#shop" onClick={(e) => navigateTo('shop', e)}>Wholesale</a></li>
-              <li><a href="#about" onClick={(e) => navigateTo('about', e)}>Licensing Info</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#about">Contact</a></li>
+              <li><a href="#shop">Wholesale</a></li>
+              <li><a href="#about">Licensing Info</a></li>
             </ul>
           </div>
         </div>
