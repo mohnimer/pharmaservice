@@ -371,3 +371,28 @@ body{font-family:"DM Sans",Arial,Helvetica,sans-serif;background:linear-gradient
 @media(prefers-reduced-motion:reduce){
   .animatedAccountLabel:after,.flowPulse,.flowRunner,.demoMachine,.demoCursor,.trackLine:after,.trackDot.active,.quoteActions .confirm,.deliveryTrack>span:after,.deliveryVan,.repeatLoop,.demoSubmit{animation:none!important}
 }
+
+
+/* =========================================================
+   V14 — simplified institutional hero + cleaner control cards
+   ========================================================= */
+.publicLanding .landingHero{padding-top:78px;padding-bottom:72px}
+.publicLanding .landingCopy{align-self:center}
+.publicLanding .institutionalHero{font-size:clamp(72px,8.1vw,124px);line-height:.84;letter-spacing:-.08em;margin:0 0 28px;font-weight:700;max-width:900px}
+.publicLanding .institutionalHero span,.publicLanding .institutionalHero em{display:block}
+.publicLanding .institutionalHero span{color:#050607}
+.publicLanding .institutionalHero em{font-style:normal;color:var(--teal)!important}
+.publicLanding .heroStatement{font-size:clamp(18px,1.6vw,23px);line-height:1.45;max-width:740px!important;color:#475351!important;font-weight:600;letter-spacing:-.018em}
+.publicLanding .landingActions{margin-top:34px}
+.operationalModules .moduleGrid article{padding-top:28px}
+.operationalModules .moduleGrid article>b{display:inline-grid;place-items:center;width:35px;height:35px;border:1px solid #b9d4d0;border-radius:50%;font-size:10px;letter-spacing:.06em;background:#f5fbfa}
+.operationalModules .moduleGrid h3{margin-top:28px}
+.moduleIcon{display:none!important}
+
+@media(max-width:900px){
+  .publicLanding .institutionalHero{font-size:clamp(62px,15vw,92px)}
+}
+@media(max-width:560px){
+  .publicLanding .institutionalHero{font-size:clamp(54px,16vw,76px);line-height:.88}
+  .publicLanding .heroStatement{font-size:18px}
+}
