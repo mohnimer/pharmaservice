@@ -24,7 +24,70 @@
   let authReady = false;
 
   let state = load();
-  let ui = { mobile:false, basket:false, modal:null, catalogueQuery:'', catalogueCat:'All categories', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All' };
+  let ui = { mobile:false, basket:false, modal:null, catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All categories', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All' };
+
+  const SCHOOL_SHOP_TEMPLATE = {
+    id:'school-clinic-standard-v1',
+    name:'Standard School Clinic',
+    version:'1.0',
+    categories:[
+      {id:'all',label:'All supplies',note:'Complete clinic master',icon:'all'},
+      {id:'wounds',label:'Cuts & wounds',note:'Dressings, bandages & wound care',icon:'wounds'},
+      {id:'sports',label:'Sports injuries',note:'Sprains, strains & cold therapy',icon:'sports'},
+      {id:'breathing',label:'Breathing & oxygen',note:'Nebulization, oxygen & respiratory',icon:'breathing'},
+      {id:'vitals',label:'Vitals & assessment',note:'Temperature, BP, SpO₂ & examination',icon:'vitals'},
+      {id:'screening',label:'Eyes, ears & screening',note:'Vision and diagnostic examination',icon:'screening'},
+      {id:'diabetes',label:'Diabetes',note:'Glucose testing & consumables',icon:'diabetes'},
+      {id:'medicines',label:'Medicines & symptoms',note:'Account-approved medicines only',icon:'medicines'},
+      {id:'allergy',label:'Allergy, skin & bites',note:'Allergy and bite-related care',icon:'allergy'},
+      {id:'patient-care',label:'Nausea & patient care',note:'Immediate comfort & student care',icon:'patient'},
+      {id:'infection',label:'Infection control',note:'PPE, hygiene & clinical waste',icon:'infection'},
+      {id:'procedures',label:'Procedures & consumables',note:'Everyday treatment-room supplies',icon:'procedures'},
+      {id:'emergency',label:'Emergency & response',note:'First response, transfer & oxygen',icon:'emergency'},
+      {id:'equipment',label:'Equipment & mobility',note:'Clinic furniture, assets & mobility',icon:'equipment'}
+    ]
+  };
+  window.PSC_SCHOOL_SHOP_TEMPLATE = SCHOOL_SHOP_TEMPLATE;
+
+  function schoolNeedIds(p){
+    const sku=p.pscSku||'', ids=[];
+    const add=(id)=>{ if(!ids.includes(id)) ids.push(id); };
+    if(/^PSC-WND-/.test(sku) || ['PSC-INF-001','PSC-FAK-001','PSC-DSP-011'].includes(sku)) add('wounds');
+    if(['PSC-WND-003','PSC-WND-004','PSC-WND-005','PSC-WND-014','PSC-EQP-004','PSC-EQP-006'].includes(sku)) add('sports');
+    if(/^PSC-RES-/.test(sku) || sku==='PSC-OXY-001' || ['PSC-DIA-001','PSC-DIA-011'].includes(sku)) add('breathing');
+    if(/^PSC-DIA-00[1-5]$/.test(sku) || ['PSC-DIA-008','PSC-DIA-009','PSC-DIA-010','PSC-DIA-011','PSC-EQP-003','PSC-BAS-003','PSC-BAS-004'].includes(sku)) add('vitals');
+    if(['PSC-DIA-006','PSC-DIA-007'].includes(sku)) add('screening');
+    if(/^PSC-DBT-/.test(sku)) add('diabetes');
+    if(/^PSC-MED-/.test(sku) || ['PSC-DSP-008','PSC-DSP-009'].includes(sku)) add('medicines');
+    if(['PSC-MED-003','PSC-HYG-001','PSC-HYG-002'].includes(sku)) add('allergy');
+    if(['PSC-DSP-001','PSC-DSP-008','PSC-DSP-009','PSC-DSP-010','PSC-BAS-001','PSC-BAS-002','PSC-EQP-001'].includes(sku)) add('patient-care');
+    if(/^PSC-PPE-/.test(sku) || /^PSC-WST-/.test(sku) || ['PSC-INF-001','PSC-DSP-007','PSC-BAS-002','PSC-BAS-005'].includes(sku)) add('infection');
+    if(/^PSC-DSP-00[2-9]$/.test(sku) || ['PSC-DSP-011','PSC-BAS-001','PSC-BAS-003','PSC-BAS-004','PSC-EQP-008','PSC-WST-001','PSC-WST-002'].includes(sku)) add('procedures');
+    if(['PSC-FAK-001','PSC-OXY-001','PSC-EQP-004','PSC-EQP-007','PSC-WST-004','PSC-RES-004','PSC-RES-005','PSC-RES-006'].includes(sku)) add('emergency');
+    if(/^PSC-EQP-/.test(sku) || sku==='PSC-DIA-009') add('equipment');
+    if(!ids.length) add('equipment');
+    return ids;
+  }
+  function schoolNeedMatches(p,id){ return id==='all' || schoolNeedIds(p).includes(id); }
+  function schoolNeedIcon(id){
+    const m={
+      all:'<svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg>',
+      wounds:'<svg viewBox="0 0 24 24"><path d="M8 5h8a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3z"/><path d="M12 8v8M8 12h8"/></svg>',
+      sports:'<svg viewBox="0 0 24 24"><path d="M13 2 5 13h6l-1 9 9-13h-6z"/></svg>',
+      breathing:'<svg viewBox="0 0 24 24"><path d="M12 4v7M11 11c-2-3-5-5-7-3-2 2-1 8 3 10 2 1 4 0 4-3M13 11c2-3 5-5 7-3 2 2 1 8-3 10-2 1-4 0-4-3"/></svg>',
+      vitals:'<svg viewBox="0 0 24 24"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg>',
+      screening:'<svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="2.5"/></svg>',
+      diabetes:'<svg viewBox="0 0 24 24"><path d="M12 3s6 6.2 6 11a6 6 0 0 1-12 0c0-4.8 6-11 6-11z"/></svg>',
+      medicines:'<svg viewBox="0 0 24 24"><path d="M8 5a4 4 0 0 1 5.7 0l5.3 5.3a4 4 0 0 1-5.7 5.7L8 10.7A4 4 0 0 1 8 5z"/><path d="m10.7 13.3 5.6-5.6"/></svg>',
+      allergy:'<svg viewBox="0 0 24 24"><path d="M19 4c-7 0-12 3-12 8 0 3 2 5 5 5 5 0 7-6 7-13z"/><path d="M5 20c2-5 5-8 10-11"/></svg>',
+      patient:'<svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M4 14h4M16 14h4"/></svg>',
+      infection:'<svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 5 3 8 7 10 4-2 7-5 7-10V6z"/><path d="m9 12 2 2 4-4"/></svg>',
+      procedures:'<svg viewBox="0 0 24 24"><path d="m14 5 5 5M13 6l5 5M4 20l6-6M8 16l-2-2 8-8 4 4-8 8z"/></svg>',
+      emergency:'<svg viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg>',
+      equipment:'<svg viewBox="0 0 24 24"><path d="M4 18V8h16v10M4 14h16M7 18v3M17 18v3M7 8V5h5v3"/></svg>'
+    };
+    return m[id]||m.all;
+  }
 
   function load(){
     try { const raw = localStorage.getItem(STORAGE); return raw ? {...seed,...JSON.parse(raw)} : JSON.parse(JSON.stringify(seed)); }
@@ -119,7 +182,7 @@
   function publicHeader(active='home'){
     return `<header class="publicHeader"><button class="publicLogo" data-go="home"><img src="${PSC_LOGO}" alt="Pharma Service"></button><nav class="publicNav">${publicNav.map(([r,l])=>`<button class="publicNavLink ${active===r?'active':''}" data-go="${r}">${l}</button>`).join('')}</nav><button class="button primary publicPortalBtn" data-go="login">Clinic Portal →</button></header>`;
   }
-  function publicFooter(){ return `<footer class="publicFooter"><div><img src="${PSC_LOGO}" alt="Pharma Service"><p>Institutional healthcare supply with one accountable Pharma Service relationship.</p></div><div><span>Dubai, United Arab Emirates</span><span>+971 4 337 7004</span><span>info@pharmaservice.ae</span></div></footer>`; }
+  function publicFooter(){ return `<footer class="publicFooter"><div><img src="${PSC_LOGO}" alt="Pharma Service"><p>Institutional healthcare supply with one accountable Pharma Service relationship.</p></div><div><span>Dubai, United Arab Emirates</span><a href="tel:+97143377004">+971 4 337 7004</a><a href="mailto:info@pharmaservice.ae">info@pharmaservice.ae</a></div></footer>`; }
   function publicPage(active,kicker,title,lead,body){ return `<main class="publicPage">${publicHeader(active)}<section class="publicPageHero"><span class="kicker">${kicker}</span><h1>${title}</h1><p>${lead}</p></section>${body}${publicFooter()}</main>`; }
 
   function landing(){
@@ -281,12 +344,26 @@
 
   function catalogue(){
     const q=ui.catalogueQuery.toLowerCase();
-    const filtered=products().filter(p=>`${p.name} ${p.brand} ${p.pscSku} ${p.supplierSku||''}`.toLowerCase().includes(q) && (ui.catalogueCat==='All categories'||p.category===ui.catalogueCat) && (ui.catalogueFilter==='All lines'||(ui.catalogueFilter==='School-approved'&&p.schoolApproved)||(ui.catalogueFilter==='Restricted / controlled'&&p.regulated)));
-    return shell(`<div class="pageHeader"><div><span class="eyebrow">SCHOOL CLINIC CATALOGUE</span><h1>Shop</h1><p>Add the products you need to your cart. PSC will review the order and send the quotation to your registered email address.</p></div></div>
+    const allProducts=products();
+    const filtered=allProducts.filter(p=>{
+      const needLabels=schoolNeedIds(p).map(id=>SCHOOL_SHOP_TEMPLATE.categories.find(c=>c.id===id)?.label||'').join(' ');
+      const hay=`${p.name} ${p.brand} ${p.pscSku} ${p.supplierSku||''} ${p.category||''} ${needLabels}`.toLowerCase();
+      return hay.includes(q)
+        && schoolNeedMatches(p,ui.catalogueNeed)
+        && (ui.catalogueCat==='All categories'||p.category===ui.catalogueCat)
+        && (ui.catalogueFilter==='All lines'||(ui.catalogueFilter==='School-approved'&&p.schoolApproved)||(ui.catalogueFilter==='Restricted / controlled'&&p.regulated));
+    });
+    const needCards=SCHOOL_SHOP_TEMPLATE.categories.map(c=>{
+      const count=c.id==='all'?allProducts.length:allProducts.filter(p=>schoolNeedMatches(p,c.id)).length;
+      return `<button class="clinicNeedCard ${ui.catalogueNeed===c.id?'active':''}" data-clinic-need="${c.id}" aria-pressed="${ui.catalogueNeed===c.id?'true':'false'}"><span class="clinicNeedIcon">${schoolNeedIcon(c.icon)}</span><span class="clinicNeedCopy"><b>${esc(c.label)}</b><small>${esc(c.note)}</small></span><span class="clinicNeedCount">${count}</span></button>`;
+    }).join('');
+    const selected=SCHOOL_SHOP_TEMPLATE.categories.find(c=>c.id===ui.catalogueNeed)||SCHOOL_SHOP_TEMPLATE.categories[0];
+    return shell(`<div class="pageHeader"><div><span class="eyebrow">SCHOOL CLINIC CATALOGUE</span><h1>Shop</h1><p>Find supplies the way a clinic works — by the situation, task or area of care. Add what you need and PSC will review the request before quotation.</p></div></div>
+      <section class="clinicNeedSection"><div class="clinicNeedHeading"><div><span class="eyebrow">SHOP BY CLINIC NEED</span><h2>What does the clinic need?</h2><p>Clinical navigation for school nurses and doctors. Products can appear in more than one area where that is useful.</p></div><span class="templateBadge">STANDARD SCHOOL TEMPLATE · V1</span></div><div class="clinicNeedRail">${needCards}</div></section>
       <div class="notice shopNotice"><strong>Ordering through Pharma Service.</strong> Your cart is submitted for review first. A quotation is then sent to your registered email before the order is confirmed. Medicines and regulated lines remain subject to the applicable licensed supply route and professional controls.</div>
       <section class="customRequestPanel"><div><span class="eyebrow">CAN'T FIND IT?</span><h2>Request something else.</h2><p>Describe the product, brand, size or requirement. PSC will review it as a customer-specific sourcing request.</p></div><div class="customRequestForm"><textarea id="customRequestText" class="textarea" placeholder="Example: paediatric nebulizer masks, compatible with our existing unit..."></textarea><div class="customRequestActions"><label>Qty <input id="customRequestQty" type="number" min="1" value="1"></label><button class="button dark" data-submit-custom>Send custom request →</button></div></div></section>
-      <div class="filterBar"><div class="searchInput"><span>⌕</span><input data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search product, brand, PSC SKU or supplier SKU…"></div><select data-cat-filter="category"><option>All categories</option>${D.categories.map(c=>`<option ${c===ui.catalogueCat?'selected':''}>${esc(c)}</option>`).join('')}</select><select data-cat-filter="approval"><option>All lines</option><option ${ui.catalogueFilter==='School-approved'?'selected':''}>School-approved</option><option ${ui.catalogueFilter==='Restricted / controlled'?'selected':''}>Restricted / controlled</option></select></div>
-      <div class="catalogueMeta"><div class="sectionLabel">${filtered.length} PRODUCTS · CURATED SCHOOL-CLINIC MASTER</div><span>Product imagery: PSC-owned catalogue visuals where available; supplier media remains feed-ready and permission-controlled.</span></div><div class="productGrid">${filtered.map(productCard).join('')}</div>`);
+      <div class="filterBar shopFilterBar"><div class="searchInput"><span>⌕</span><input data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search product, brand, PSC SKU or clinical need…"></div><select data-cat-filter="category" aria-label="Product type"><option>All categories</option>${D.categories.map(c=>`<option ${c===ui.catalogueCat?'selected':''}>${esc(c)}</option>`).join('')}</select><select data-cat-filter="approval"><option>All lines</option><option ${ui.catalogueFilter==='School-approved'?'selected':''}>School-approved</option><option ${ui.catalogueFilter==='Restricted / controlled'?'selected':''}>Restricted / controlled</option></select></div>
+      <div class="catalogueMeta clinicCatalogueMeta"><div><div class="sectionLabel">${filtered.length} PRODUCTS · ${esc(selected.label.toUpperCase())}</div><span>${esc(selected.note)} · Part of ${esc(SCHOOL_SHOP_TEMPLATE.name)}.</span></div><button class="textAction ${ui.catalogueNeed==='all'?'isHidden':''}" data-clinic-need="all">View all supplies →</button></div><div class="productGrid">${filtered.map(productCard).join('')}</div>`);
   }
 
   function productCard(p){
@@ -704,6 +781,7 @@
     document.querySelectorAll('[data-admin-request]').forEach(el=>el.addEventListener('click',()=>{ui.modal={type:'request',id:el.dataset.adminRequest,admin:true};render()}));
     document.querySelectorAll('[data-modal-close]').forEach(el=>el.addEventListener('click',()=>{ui.modal=null;render()}));
     const cq=document.querySelector('[data-cat-q]'); if(cq)cq.addEventListener('input',e=>{ui.catalogueQuery=e.target.value;render()});
+    document.querySelectorAll('[data-clinic-need]').forEach(el=>el.addEventListener('click',()=>{ui.catalogueNeed=el.dataset.clinicNeed||'all';render()}));
     document.querySelectorAll('[data-cat-filter]').forEach(el=>el.addEventListener('change',e=>{if(el.dataset.catFilter==='category')ui.catalogueCat=e.target.value;else ui.catalogueFilter=e.target.value;render()}));
     const pq=document.querySelector('[data-prod-q]'); if(pq)pq.addEventListener('input',e=>{ui.productQuery=e.target.value;render()});
     document.querySelectorAll('[data-prod-filter]').forEach(el=>el.addEventListener('change',e=>{if(el.dataset.prodFilter==='category')ui.productCat=e.target.value;else ui.evidence=e.target.value;render()}));

@@ -927,3 +927,302 @@ body{font-family:"DM Sans",Arial,Helvetica,sans-serif;background:linear-gradient
   .procurementStage{min-height:145px!important}
   .procurementStage p{margin-top:38px!important}
 }
+
+
+/* =========================================================
+   V23 — mobile-first public site polish
+   Desktop is intentionally unchanged.
+   ========================================================= */
+.publicFooter a{
+  color:inherit;
+  text-decoration:none;
+}
+.publicFooter a:hover{
+  color:#0b7f7d;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+
+@media(max-width:760px){
+  /* Keep sticky header predictable on iOS/Safari. */
+  .publicLanding,.publicPage{overflow:visible!important}
+  .publicHeader{
+    padding:12px 14px!important;
+    min-height:auto!important;
+    gap:10px 12px!important;
+    background:rgba(250,249,249,.96)!important;
+  }
+  .publicLogo img{width:150px!important;max-width:42vw!important}
+  .publicPortalBtn{
+    padding:10px 12px!important;
+    font-size:11px!important;
+    min-height:40px!important;
+    border-radius:12px!important;
+  }
+  .publicNav{
+    width:100%!important;
+    gap:2px!important;
+    padding:1px 0 2px!important;
+    scrollbar-width:none;
+  }
+  .publicNav::-webkit-scrollbar{display:none}
+  .publicNavLink{
+    padding:7px 9px!important;
+    font-size:11px!important;
+    border-radius:10px!important;
+  }
+
+  /* Homepage hero: preserve the two-line title without oversized mobile type. */
+  .landingPage{padding:0 16px!important}
+  .publicLanding .landingHero{
+    padding:38px 0 44px!important;
+    gap:30px!important;
+  }
+  .publicLanding .institutionalHero{
+    font-size:clamp(50px,14.6vw,62px)!important;
+    line-height:.86!important;
+    letter-spacing:-.07em!important;
+    margin-bottom:31px!important;
+    max-width:100%!important;
+  }
+  .publicLanding .institutionalHero:after{
+    width:48px!important;
+    margin-top:18px!important;
+  }
+  .publicLanding .heroStatement{
+    font-size:18px!important;
+    line-height:1.16!important;
+    max-width:340px!important;
+  }
+  .publicLanding .landingActions{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:9px!important;
+    margin-top:25px!important;
+  }
+  .publicLanding .landingActions .button{
+    min-height:50px!important;
+    width:100%!important;
+    border-radius:14px!important;
+  }
+
+  /* Approved clinic-account graphic, adapted rather than stacked into four huge rows. */
+  .procurementHeroCard{
+    width:100%!important;
+    max-width:none!important;
+    padding:18px 14px 17px!important;
+    border-radius:24px!important;
+  }
+  .procurementCardTop{
+    grid-template-columns:minmax(0,1fr) 76px!important;
+    gap:12px!important;
+    padding:1px 2px 0!important;
+  }
+  .procurementCardHeadline{
+    padding-top:4px!important;
+    font-size:18px!important;
+    line-height:1.03!important;
+    letter-spacing:-.04em!important;
+  }
+  .procurementCardHeadline strong{margin-top:4px!important}
+  .procurementQr{
+    width:76px!important;
+    height:76px!important;
+  }
+  .procurementFlowPanel{
+    margin-top:30px!important;
+    padding:9px!important;
+  }
+  .procurementStageGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+  }
+  .procurementStage{
+    min-height:132px!important;
+    border-radius:13px!important;
+    padding:13px 11px 12px!important;
+  }
+  .procurementStage h4{font-size:14px!important}
+  .procurementStage .stageNumber{
+    top:10px!important;
+    right:10px!important;
+    font-size:8px!important;
+  }
+  .procurementStage p{
+    margin-top:37px!important;
+    font-size:10px!important;
+    line-height:1.14!important;
+    max-width:100%!important;
+  }
+  .procurementBarcode{
+    height:58px!important;
+    margin:30px 6px 0!important;
+  }
+  .procurementFoot{
+    margin-top:13px!important;
+    font-size:10px!important;
+    line-height:1.15!important;
+    white-space:nowrap!important;
+  }
+
+  /* Tighten the mission / control sections for a phone-length page. */
+  .publicLanding .beliefSection{
+    padding:22px 0 38px!important;
+  }
+  .beliefRule{margin-bottom:25px!important}
+  .beliefGrid{
+    grid-template-columns:1fr!important;
+    gap:24px!important;
+  }
+  .beliefGrid h2{
+    font-size:32px!important;
+    line-height:1.02!important;
+  }
+  .beliefGrid p{
+    font-size:14px!important;
+    line-height:1.58!important;
+    margin-bottom:14px!important;
+  }
+  .beliefCloser{
+    padding:15px!important;
+    font-size:14px!important;
+  }
+  .beliefCloser b{font-size:15px!important}
+
+  .publicLanding .landingModules{
+    padding:34px 0 38px!important;
+  }
+  .sectionTitleRow{gap:12px!important}
+  .moduleGrid{margin-top:14px!important}
+  .operationalModules .moduleGrid article{
+    min-height:145px!important;
+    padding:20px!important;
+  }
+  .operationalModules .moduleGrid h3{
+    margin:18px 0 8px!important;
+    font-size:20px!important;
+  }
+  .operationalModules .moduleGrid p{
+    font-size:12.5px!important;
+    line-height:1.48!important;
+  }
+
+  /* The screenshot showed this block taking almost a full phone screen. */
+  .demoTeaser{
+    margin:36px 0 0!important;
+    border-radius:24px!important;
+    padding:25px 22px!important;
+    gap:21px!important;
+    min-height:0!important;
+  }
+  .demoTeaser:after{
+    width:190px!important;
+    height:190px!important;
+    right:-78px!important;
+    top:-82px!important;
+    border-width:39px!important;
+  }
+  .demoTeaser .kicker{font-size:10px!important}
+  .demoTeaser h2{
+    font-size:29px!important;
+    line-height:1.02!important;
+    margin:9px 0 12px!important;
+    max-width:300px!important;
+  }
+  .demoTeaser p{
+    font-size:14px!important;
+    line-height:1.5!important;
+    max-width:310px!important;
+  }
+  .demoTeaser .button{
+    width:100%!important;
+    min-height:52px!important;
+    justify-content:center!important;
+    border-radius:999px!important;
+    padding:12px 18px!important;
+  }
+
+  /* Compact, tap-friendly mobile footer. */
+  .publicFooter{
+    margin:34px auto 0!important;
+    padding:24px 4px 28px!important;
+    gap:18px!important;
+    align-items:flex-start!important;
+  }
+  .publicFooter img{width:148px!important}
+  .publicFooter p{
+    max-width:330px!important;
+    margin:14px 0 0!important;
+    font-size:13px!important;
+    line-height:1.5!important;
+  }
+  .publicFooter>div:last-child{
+    margin-top:3px!important;
+    gap:5px!important;
+    text-align:left!important;
+    font-size:13px!important;
+    line-height:1.35!important;
+  }
+  .publicFooter a{
+    display:block;
+    width:max-content;
+    text-decoration:underline;
+    text-decoration-thickness:1px;
+    text-underline-offset:3px;
+  }
+}
+
+@media(max-width:390px){
+  .publicLogo img{width:142px!important}
+  .publicPortalBtn{padding:9px 10px!important;font-size:10.5px!important}
+  .publicLanding .institutionalHero{font-size:50px!important}
+  .procurementCardHeadline{font-size:17px!important}
+  .procurementCardTop{grid-template-columns:minmax(0,1fr) 70px!important}
+  .procurementQr{width:70px!important;height:70px!important}
+  .procurementStage{min-height:128px!important}
+  .procurementStage p{font-size:9.5px!important}
+  .procurementFoot{font-size:9.4px!important}
+}
+
+
+/* =========================================================
+   V24 — Standard School Clinic shop template
+   ========================================================= */
+.clinicNeedSection{margin:8px 0 24px;padding:25px 0 4px;border-top:1px solid #e3e8e7}
+.clinicNeedHeading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:18px}
+.clinicNeedHeading h2{font-size:30px;line-height:1;letter-spacing:-.045em;margin:7px 0 8px;color:#111817}
+.clinicNeedHeading p{margin:0;max-width:700px;color:#6b7674;font-size:13px;line-height:1.5}
+.templateBadge{flex:0 0 auto;padding:8px 11px;border:1px solid #c9d9d6;border-radius:999px;background:#f5faf9;color:#167c78;font-size:9px;font-weight:900;letter-spacing:.09em;white-space:nowrap}
+.clinicNeedRail{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x proximity;padding:2px 1px 13px;scrollbar-width:thin;scrollbar-color:#c5d3d0 transparent}
+.clinicNeedCard{scroll-snap-align:start;flex:0 0 190px;min-height:128px;border:1px solid #dfe7e5;border-radius:18px;background:#fff;padding:15px 14px 13px;display:grid;grid-template-columns:38px 1fr auto;grid-template-rows:auto 1fr;gap:12px 10px;text-align:left;font-family:inherit;color:#17201f;cursor:pointer;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease,background .18s ease}
+.clinicNeedCard:hover{transform:translateY(-2px);border-color:#a9cbc6;box-shadow:0 10px 25px rgba(23,61,58,.06)}
+.clinicNeedCard.active{background:#0c1a1a;color:#fff;border-color:#0c1a1a;box-shadow:0 12px 28px rgba(5,30,29,.12)}
+.clinicNeedIcon{width:38px;height:38px;border-radius:12px;background:#ebf6f4;color:#128d87;display:grid;place-items:center;grid-row:1/3}
+.clinicNeedIcon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.clinicNeedCard.active .clinicNeedIcon{background:#16302f;color:#61ddd6}
+.clinicNeedCopy{min-width:0;align-self:center}
+.clinicNeedCopy b{display:block;font-size:13px;line-height:1.12;letter-spacing:-.015em}
+.clinicNeedCopy small{display:block;margin-top:6px;color:#7a8583;font-size:9.5px;line-height:1.35}
+.clinicNeedCard.active .clinicNeedCopy small{color:#b7c8c5}
+.clinicNeedCount{font-size:9px;font-weight:900;color:#8a9693;align-self:start}
+.clinicNeedCard.active .clinicNeedCount{color:#61ddd6}
+.shopFilterBar{margin-top:18px}
+.clinicCatalogueMeta{align-items:center}
+.clinicCatalogueMeta>div>span{display:block;margin-top:5px;color:#77817f;font-size:10px}
+.clinicCatalogueMeta .isHidden{visibility:hidden}
+@media(max-width:760px){
+  .clinicNeedSection{margin-top:0;padding-top:18px;margin-bottom:18px}
+  .clinicNeedHeading{align-items:flex-start;flex-direction:column;gap:12px;margin-bottom:14px}
+  .clinicNeedHeading h2{font-size:26px}
+  .clinicNeedHeading p{font-size:12px}
+  .templateBadge{font-size:8px;padding:7px 10px}
+  .clinicNeedRail{margin-right:-18px;padding-right:18px;gap:8px}
+  .clinicNeedCard{flex-basis:168px;min-height:116px;border-radius:16px;padding:13px 12px;grid-template-columns:34px 1fr auto;gap:10px 8px}
+  .clinicNeedIcon{width:34px;height:34px;border-radius:10px}
+  .clinicNeedIcon svg{width:19px;height:19px}
+  .clinicNeedCopy b{font-size:12px}.clinicNeedCopy small{font-size:9px}
+  .shopFilterBar{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
+  .shopFilterBar .searchInput{grid-column:1/-1!important}
+  .shopFilterBar select{min-width:0!important;width:100%!important}
+  .clinicCatalogueMeta{align-items:flex-start;gap:10px}
+}
