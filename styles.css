@@ -378,11 +378,11 @@ body{font-family:"DM Sans",Arial,Helvetica,sans-serif;background:linear-gradient
    ========================================================= */
 .publicLanding .landingHero{padding-top:78px;padding-bottom:72px}
 .publicLanding .landingCopy{align-self:center}
-.publicLanding .institutionalHero{font-size:clamp(62px,7.1vw,108px);line-height:.92;letter-spacing:-.07em;margin:0 0 42px;font-weight:700;max-width:940px;white-space:nowrap;position:relative}
-.publicLanding .institutionalHero:after{content:"";display:block;width:60px;height:1px;background:#969d9b;margin-top:24px}
-.publicLanding .institutionalHero span,.publicLanding .institutionalHero em{display:inline}
+.publicLanding .institutionalHero{font-size:clamp(68px,7.6vw,118px);line-height:.84;letter-spacing:-.075em;margin:0 0 42px;font-weight:700;max-width:760px;white-space:normal;position:relative}
+.publicLanding .institutionalHero:after{content:"";display:block;width:60px;height:1px;background:#969d9b;margin-top:25px}
+.publicLanding .institutionalHero span,.publicLanding .institutionalHero em{display:block}
 .publicLanding .institutionalHero span{color:#17191d}
-.publicLanding .institutionalHero em{font-style:italic;color:var(--teal)!important;font-weight:700}
+.publicLanding .institutionalHero em{font-style:normal;color:var(--teal)!important;font-weight:700}
 .publicLanding .heroStatement{font-size:clamp(20px,1.55vw,24px);line-height:1.08;max-width:700px!important;color:#15171b!important;font-weight:500;letter-spacing:-.03em;margin:0}
 .publicLanding .heroStatement>span,.publicLanding .heroStatement>strong{display:block}
 .publicLanding .heroStatement em{font-style:italic;font-weight:500}
@@ -414,18 +414,14 @@ body{font-family:"DM Sans",Arial,Helvetica,sans-serif;background:linear-gradient
 .moduleIcon{display:none!important}
 
 @media(max-width:900px){
-  .publicLanding .institutionalHero{font-size:clamp(62px,15vw,92px)}
-}
-@media(max-width:560px){
-  .publicLanding .institutionalHero{font-size:clamp(54px,16vw,76px);line-height:.88}
-  .publicLanding .heroStatement{font-size:18px}
+  .publicLanding .institutionalHero{font-size:clamp(62px,13vw,92px);max-width:680px}
 }
 
 @media(max-width:1050px){
   .procurementHeroCard{max-width:760px}
 }
 @media(max-width:650px){
-  .publicLanding .institutionalHero{font-size:clamp(50px,15vw,76px);line-height:.91;white-space:normal;margin-bottom:36px}
+  .publicLanding .institutionalHero{font-size:clamp(50px,15vw,76px);line-height:.86;white-space:normal;margin-bottom:36px;max-width:100%}
   .publicLanding .institutionalHero:after{margin-top:20px}
   .publicLanding .heroStatement{font-size:19px;line-height:1.13}
   .procurementHeroCard{padding:22px 18px;border-radius:24px}
