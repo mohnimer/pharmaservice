@@ -141,38 +141,29 @@
             <img class="procurementQr" src="./assets/pharmaservice-qr.png" alt="QR code to pharmaservice.ae">
           </div>
           <div class="procurementFlowPanel">
-            <div class="procurementFlowIntro procurementFlowIntroCentered">
-              <em>${esc(C.home?.cardSectionSub || 'Through a connected, and efficient workflow')}</em>
-            </div>
             <div class="procurementStageGrid">
               <article class="procurementStage">
                 <span class="stageNumber">01</span>
                 <h4>SHOP</h4>
-                <i class="stageRule"></i>
-                <p>Browse the Pharma Service institutional product master.</p>
+                <p>pharmaceuticals, medical disposables, and devices.</p>
               </article>
               <article class="procurementStage">
                 <span class="stageNumber">02</span>
                 <h4>QUOTE</h4>
-                <i class="stageRule"></i>
-                <p>PSC sources, reviews and sends the formal quotation.</p>
+                <p>wholesale prices, while ensuring alignment to regulatory guidelines.</p>
               </article>
               <article class="procurementStage">
                 <span class="stageNumber">03</span>
                 <h4>MANAGE</h4>
-                <i class="stageRule"></i>
-                <p>Confirm, cancel or follow the order from the account.</p>
+                <p>quotes, orders, invoices, and various historical reports.</p>
               </article>
               <article class="procurementStage">
                 <span class="stageNumber">04</span>
                 <h4>REPEAT</h4>
-                <i class="stageRule"></i>
-                <p>Repeat previously supplied items from the same account history.</p>
+                <p>easily repeat previously ordered items from the same account.</p>
               </article>
             </div>
-            <div class="procurementStatus"><i></i><em>${esc(C.home?.cardStatus || 'Keeping supply moving without losing control')}</em></div>
           </div>
-          <div class="procurementAccount">CLINIC ACCOUNT</div>
           <div class="procurementBarcode" aria-hidden="true"></div>
           <div class="procurementFoot">PHARMA SERVICE <i>•</i> INSTITUTIONAL SUPPLY</div>
         </div>
