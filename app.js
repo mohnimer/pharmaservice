@@ -2,6 +2,7 @@
   'use strict';
   const D = window.PSC_DATA;
   const C = window.PSC_COPY || {};
+  const PSC_LOGO = './assets/psc-logo-cropped.png';
   const $app = document.getElementById('app');
   const STORAGE = 'pscClinicPortalStateV12_1';
 
@@ -55,7 +56,7 @@
   function toast(msg){ const old=document.querySelector('.toast'); if(old)old.remove(); const d=document.createElement('div');d.className='toast';d.innerHTML=msg;$app.appendChild(d);setTimeout(()=>d.remove(),2800); }
 
   function brand(landing=false){ return landing
-    ? `<button class="brand brandButton ${landing?'landingBrand':''}" data-go="home" aria-label="Pharma Service home"><img class="brandImage brandImageLight" src="./assets/psc-logo-cropped.png" alt="Pharma Service"><span class="brandMeta"><b>INSTITUTIONAL HEALTHCARE SUPPLY</b><small>Dubai, United Arab Emirates · EST. 1984</small></span></button>`
+    ? `<button class="brand brandButton ${landing?'landingBrand':''}" data-go="home" aria-label="Pharma Service home"><img class="brandImage brandImageLight" src="${PSC_LOGO}" alt="Pharma Service"><span class="brandMeta"><b>INSTITUTIONAL HEALTHCARE SUPPLY</b><small>Dubai, United Arab Emirates · EST. 1984</small></span></button>`
     : `<div class="sidebarBrand sidebarBrandEmpty" aria-hidden="true"></div>`; }
   function statusPill(status){ const k=String(status).toLowerCase().replace(/\s+/g,'-'); return `<span class="statusPill status-${k}">${esc(status)}</span>`; }
   function badge(text,tone=''){ return `<span class="badge ${tone}">${esc(text)}</span>`; }
@@ -100,7 +101,7 @@
       <main class="mainArea v7MainArea v7bMainArea">
         <header class="topbar sleekTopbar v7Topbar v7bTopbar">
           <button class="iconBtn mobileMenu" data-mobile-open>☰</button>
-          <div class="topbarBrandSlot"><img src="./assets/psc-logo-cropped.png" alt="Pharma Service"></div>
+          <div class="topbarBrandSlot"><img src="${PSC_LOGO}" alt="Pharma Service"></div>
           <div class="topbarSearch"><span class="searchIcon">${icon('search')}</span><input placeholder="Search supplies, equipment, or requests..." aria-label="Search"></div>
           <div class="topbarActions topbarActionsV4">
             ${admin?'<button class="iconShell" aria-label="Notifications">'+icon('bell')+'</button><span class="userPill"><span class="avatarDot">MH</span><span><b>Mohamed</b><small>PSC admin</small></span></span>':`<button class="iconShell" aria-label="Notifications">${icon('bell')}</button><button class="campusPill"><span class="campusPillMain"><b>${esc(state.campus)}</b><small>School clinic</small></span></button><button class="button dark pillBasket" data-basket>Cart <b>${basketQty()}</b></button>`}
@@ -116,9 +117,9 @@
 
   const publicNav=[['home','Home'],['about','About Us'],['services','Services'],['careers','Careers'],['media','Media'],['contact','Contact']];
   function publicHeader(active='home'){
-    return `<header class="publicHeader"><button class="publicLogo" data-go="home"><img src="./assets/psc-logo-cropped.png" alt="Pharma Service"></button><nav class="publicNav">${publicNav.map(([r,l])=>`<button class="publicNavLink ${active===r?'active':''}" data-go="${r}">${l}</button>`).join('')}</nav><button class="button primary publicPortalBtn" data-go="login">Clinic Portal →</button></header>`;
+    return `<header class="publicHeader"><button class="publicLogo" data-go="home"><img src="${PSC_LOGO}" alt="Pharma Service"></button><nav class="publicNav">${publicNav.map(([r,l])=>`<button class="publicNavLink ${active===r?'active':''}" data-go="${r}">${l}</button>`).join('')}</nav><button class="button primary publicPortalBtn" data-go="login">Clinic Portal →</button></header>`;
   }
-  function publicFooter(){ return `<footer class="publicFooter"><div><img src="./assets/psc-logo-cropped.png" alt="Pharma Service"><p>Institutional healthcare supply with one accountable Pharma Service relationship.</p></div><div><span>Dubai, United Arab Emirates</span><span>+971 4 337 7004</span><span>info@pharmaservice.ae</span></div></footer>`; }
+  function publicFooter(){ return `<footer class="publicFooter"><div><img src="${PSC_LOGO}" alt="Pharma Service"><p>Institutional healthcare supply with one accountable Pharma Service relationship.</p></div><div><span>Dubai, United Arab Emirates</span><span>+971 4 337 7004</span><span>info@pharmaservice.ae</span></div></footer>`; }
   function publicPage(active,kicker,title,lead,body){ return `<main class="publicPage">${publicHeader(active)}<section class="publicPageHero"><span class="kicker">${kicker}</span><h1>${title}</h1><p>${lead}</p></section>${body}${publicFooter()}</main>`; }
 
   function landing(){
@@ -134,7 +135,7 @@
         <div class="procurementHeroCard" aria-label="Clinic procurement workflow">
           <div class="procurementCardTop">
             <div class="procurementCardHeadline">
-              <span>${esc(C.home?.cardLine1 || 'Clinic procurement for institutional accounts that need')}</span>
+              <span>${esc(C.home?.cardLine1 || 'Clinic Procurement catered to institutional accounts that need')}</span>
               <strong>${esc(C.home?.cardLine2 || 'one accountable supply relationship')}</strong>
             </div>
             <img class="procurementQr" src="./assets/pharmaservice-qr.png" alt="QR code to pharmaservice.ae">
@@ -191,7 +192,7 @@
 
   function contactPage(){ return publicPage('contact','CONTACT','Talk to Pharma Service.','For institutional supply, school-clinic enquiries and account setup, contact Pharma Service in Dubai.',`<section class="publicSection contactGrid"><div class="contactCard"><span>PHONE</span><b>+971 4 337 7004</b></div><div class="contactCard"><span>EMAIL</span><b>info@pharmaservice.ae</b></div><div class="contactCard"><span>LOCATION</span><b>Dubai, United Arab Emirates</b></div><div class="contactCard"><span>CLINIC PORTAL</span><button class="button primary" data-go="login">Open account access →</button></div></section>`); }
 
-  function loginPage(){ return `<main class="publicPage loginPublicPage">${publicHeader('')}<section class="loginWrap"><div class="loginIntro"><span class="kicker">CLINIC PORTAL ACCESS</span><h1>Institutional ordering,<br>through one secure account.</h1><p>Access your Pharma Service clinic portal to shop approved supplies, review quotations, track orders and repeat previously supplied items.</p><div class="loginSupport">Need access? <button data-go="contact">Contact Pharma Service</button> <span>·</span> <button data-go="demo">View guided demo</button></div></div><div class="loginCard"><img src="./assets/psc-logo-cropped.png" alt="Pharma Service"><span class="loginLabel">ACCOUNT ACCESS</span><h2>Clinic Portal</h2><label>Email</label><input class="input" id="mvpLoginEmail" type="email" autocomplete="email" placeholder="name@school.ae"><label>Password</label><input class="input" id="mvpLoginPassword" type="password" autocomplete="current-password" placeholder="••••••••"><button class="button primary full" data-mvp-login>Continue to Clinic Portal →</button><p class="loginNote">Your organization, school and campus access will be determined automatically by your account permissions after sign-in.</p></div></section>${publicFooter()}</main>`; }
+  function loginPage(){ return `<main class="publicPage loginPublicPage">${publicHeader('')}<section class="loginWrap"><div class="loginIntro"><span class="kicker">CLINIC PORTAL ACCESS</span><h1>Institutional ordering,<br>through one secure account.</h1><p>Access your Pharma Service clinic portal to shop approved supplies, review quotations, track orders and repeat previously supplied items.</p><div class="loginSupport">Need access? <button data-go="contact">Contact Pharma Service</button> <span>·</span> <button data-go="demo">View guided demo</button></div></div><div class="loginCard"><img src="${PSC_LOGO}" alt="Pharma Service"><span class="loginLabel">ACCOUNT ACCESS</span><h2>Clinic Portal</h2><label>Email</label><input class="input" id="mvpLoginEmail" type="email" autocomplete="email" placeholder="name@school.ae"><label>Password</label><input class="input" id="mvpLoginPassword" type="password" autocomplete="current-password" placeholder="••••••••"><button class="button primary full" data-mvp-login>Continue to Clinic Portal →</button><p class="loginNote">Your organization, school and campus access will be determined automatically by your account permissions after sign-in.</p></div></section>${publicFooter()}</main>`; }
 
   function portalDashboard(){
     const visible=customerVisibleRequests();
@@ -597,6 +598,34 @@
     await loadOrdersFromDatabase(); save(); render();
   }
 
+
+  let publicHeaderLastY = 0;
+  let publicHeaderRaf = 0;
+  function syncPublicHeader(){
+    const header = document.querySelector('.publicHeader');
+    const y = Math.max(0, window.scrollY || window.pageYOffset || 0);
+    if(!header){ publicHeaderLastY = y; return; }
+
+    if(y <= 18){
+      header.classList.remove('headerHidden','headerScrolled');
+      publicHeaderLastY = y;
+      return;
+    }
+
+    header.classList.add('headerScrolled');
+    const delta = y - publicHeaderLastY;
+    if(delta > 5) header.classList.add('headerHidden');
+    else if(delta < -5) header.classList.remove('headerHidden');
+    publicHeaderLastY = y;
+  }
+  function onPublicHeaderScroll(){
+    if(publicHeaderRaf) return;
+    publicHeaderRaf = requestAnimationFrame(()=>{
+      publicHeaderRaf = 0;
+      syncPublicHeader();
+    });
+  }
+
   function render(){
     const r=currentRoute();
     if(protectedRoute(r)){
@@ -628,7 +657,7 @@
       case 'admin/supplier-feed': html=adminFeed();break;
       default: html=landing();
     }
-    $app.innerHTML=html; bind();
+    $app.innerHTML=html; bind(); syncPublicHeader();
   }
 
   function bind(){
@@ -694,6 +723,7 @@
     const blob=new Blob([csv],{type:'text/csv'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='PSC_Product_Master_Demo.csv';a.click();URL.revokeObjectURL(url);toast('<strong>Exported.</strong> Product master CSV downloaded.');
   }
 
+  window.addEventListener('scroll',onPublicHeaderScroll,{passive:true});
   window.addEventListener('hashchange',render);
   if(!location.hash) location.hash='home';
   bootstrapAuth();

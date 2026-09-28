@@ -434,3 +434,92 @@ body{font-family:"DM Sans",Arial,Helvetica,sans-serif;background:linear-gradient
   .procurementStatus{font-size:16px}
   .procurementBarcode{height:55px;margin-left:4px;margin-right:4px}
 }
+
+
+/* =========================================================
+   V19 — approved hero-card proportions + official logo lock
+   ========================================================= */
+.publicLanding .landingHero{
+  grid-template-columns:minmax(0,.88fr) minmax(620px,1.12fr)!important;
+  gap:52px!important;
+  align-items:center!important;
+}
+.publicLanding .landingCopy{min-width:0}
+.procurementHeroCard{
+  width:100%;
+  max-width:none!important;
+  padding:30px 32px 26px!important;
+  border-radius:30px!important;
+}
+.procurementCardTop{
+  grid-template-columns:minmax(0,1fr) 118px!important;
+  gap:28px!important;
+}
+.procurementCardHeadline{
+  font-size:clamp(24px,1.75vw,30px)!important;
+  line-height:1.03!important;
+  letter-spacing:-.035em!important;
+  max-width:560px;
+}
+.procurementCardHeadline strong{
+  margin-top:6px!important;
+  font-weight:850!important;
+  white-space:normal;
+}
+.procurementQr{width:118px!important;height:118px!important}
+.procurementFlowPanel{
+  margin-top:28px!important;
+  padding:28px 28px 26px!important;
+  border-radius:19px!important;
+}
+.procurementFlowIntro b{font-size:15px!important}
+.procurementFlowIntro em{font-size:18px!important;margin-top:9px!important}
+.procurementSteps{
+  grid-template-columns:minmax(112px,1.05fr) auto minmax(100px,.9fr) auto minmax(100px,.9fr) auto minmax(136px,1.18fr)!important;
+  gap:9px!important;
+  margin-top:27px!important;
+}
+.procurementSteps span{
+  padding:12px 10px!important;
+  font-size:12px!important;
+  line-height:1.15!important;
+}
+.procurementStatus{margin-top:30px!important}
+.publicLogo img,.publicFooter img,.topbarBrandSlot img,.brandImage{
+  font-family:initial!important;
+  filter:none!important;
+}
+
+/* Public menu follows intent: reveal on scroll up, tuck away on scroll down. */
+.publicHeader{
+  position:sticky!important;
+  top:0!important;
+  z-index:1000!important;
+  transition:transform .26s ease,box-shadow .26s ease,background-color .26s ease!important;
+  will-change:transform;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+.publicHeader.headerHidden{transform:translateY(calc(-100% - 8px))!important}
+.publicHeader.headerScrolled{
+  box-shadow:0 10px 30px rgba(15,31,31,.07)!important;
+  background:rgba(250,249,249,.94)!important;
+}
+
+@media(max-width:1180px){
+  .publicLanding .landingHero{
+    grid-template-columns:1fr!important;
+    gap:42px!important;
+  }
+  .procurementHeroCard{
+    max-width:780px!important;
+    justify-self:start;
+  }
+}
+@media(max-width:720px){
+  .publicHeader.headerHidden{transform:translateY(calc(-100% - 6px))!important}
+  .procurementCardTop{grid-template-columns:minmax(0,1fr) 86px!important;gap:16px!important}
+  .procurementQr{width:86px!important;height:86px!important}
+  .procurementCardHeadline{font-size:22px!important}
+  .procurementSteps{grid-template-columns:1fr!important}
+}

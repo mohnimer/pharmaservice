@@ -12,7 +12,7 @@ window.PSC_COPY = {
     heroLine1Accent: "Wholesale pricing.",
     heroLine2: "More time for what matters",
 
-    cardLine1: "Clinic procurement for institutional accounts that need",
+    cardLine1: "Clinic Procurement catered to institutional accounts that need",
     cardLine2: "one accountable supply relationship",
     cardSectionTitle: "HOW IT WORKS",
     cardSectionSub: "Through a connected and efficient workflow",
