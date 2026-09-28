@@ -135,8 +135,8 @@
         <div class="procurementHeroCard" aria-label="Clinic procurement workflow">
           <div class="procurementCardTop">
             <div class="procurementCardHeadline">
-              <span>${esc(C.home?.cardLine1 || 'Clinic Procurement catered to institutional accounts that need')}</span>
-              <strong>${esc(C.home?.cardLine2 || 'one accountable supply relationship')}</strong>
+              <span>Clinic Procurement catered to<br>institutional accounts that need</span>
+              <strong>one accountable supply relationship</strong>
             </div>
             <img class="procurementQr" src="./assets/pharmaservice-qr.png" alt="QR code to pharmaservice.ae">
           </div>
@@ -145,22 +145,22 @@
               <article class="procurementStage">
                 <span class="stageNumber">01</span>
                 <h4>SHOP</h4>
-                <p>pharmaceuticals, medical disposables, and devices.</p>
+                <p>pharmaceuticals,<br>medical disposables,<br>and devices.</p>
               </article>
               <article class="procurementStage">
                 <span class="stageNumber">02</span>
                 <h4>QUOTE</h4>
-                <p>wholesale prices, while ensuring alignment to regulatory guidelines.</p>
+                <p>wholesale prices, while<br>ensuring alignment to<br>regulatory guidelines.</p>
               </article>
               <article class="procurementStage">
                 <span class="stageNumber">03</span>
                 <h4>MANAGE</h4>
-                <p>quotes, orders, invoices, and various historical reports.</p>
+                <p>orders, invoices, and<br>various historical reports.</p>
               </article>
               <article class="procurementStage">
                 <span class="stageNumber">04</span>
                 <h4>REPEAT</h4>
-                <p>easily repeat previously ordered items from the same account.</p>
+                <p>easily repeat previously<br>ordered items from the<br>same account.</p>
               </article>
             </div>
           </div>
