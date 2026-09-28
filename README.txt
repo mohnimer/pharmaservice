@@ -1,24 +1,24 @@
-PSC V25 — Institutional Catalogue
-=================================
+PSC V26 — Catalogue Routes + Visual Bridge
+===========================================
 
-Upload/replace:
+Replace:
 - app.js
 - styles.css
-- index.html
-- catalogue-v25.js  (NEW)
 
-Do not replace:
+Keep unchanged:
+- index.html
+- catalogue-v25.js
 - data.js
 - core60-regulatory.js
 - supabase.js
 - site-copy.js
 
-V25 changes:
-- 260 controlled catalogue lines from the institutional mapping.
-- Clinical Needs are the primary customer navigation.
-- Institution-neutral catalogue wording.
-- Large pastel icon-led need cards inspired by the supplied reference aesthetic.
-- DHA-mapped lines receive a small DHA Requirement chip.
-- Product detail drawers show exact DHA requirement wording, reference, status and applicability.
-- Existing verified/visual product records are reused where mapped.
-- Remaining catalogue lines are clearly marked specification-led and request-quote only.
+What V26 changes:
+1. #portal/catalogue is now a dedicated Clinical Needs landing page.
+2. Clicking a large Clinical Need card redirects to:
+   #portal/catalogue/<category>
+3. Category pages show only a subtle one-line horizontal Clinical Needs ribbon.
+4. Large Clinical Need cards no longer show raw product counts.
+5. Portal Home now uses the same warm, rounded visual language as the catalogue.
+6. Login and selected public-site surfaces are visually bridged to the new catalogue.
+7. Product catalogue, Supabase/auth, quoting and V25 DHA/product mapping remain intact.

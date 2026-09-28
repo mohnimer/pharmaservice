@@ -147,11 +147,11 @@
 
   function shell(content, admin=false){
     const route=currentRoute(), links=admin?adminNav:schoolNav;
-    return `<div class="appShell v4Shell v7Shell v7bShell">
+    return `<div class="appShell v4Shell v7Shell v7bShell v26Shell">
       <div class="mobileOverlay ${ui.mobile?'show':''}" data-mobile-close></div>
       <aside class="sidebar ${ui.mobile?'sidebarOpen':''}">
         <div class="sidebarTop">${brand()}<button class="iconBtn mobileClose" data-mobile-close>×</button></div>
-        <nav class="iconNav">${links.map(([href,label,ico])=>`<button class="navLink iconOnly ${route===href?'active':''}" data-go="${href}" aria-label="${label}"><span class="navIcon">${icon(ico)}</span><span class="navLabel">${label}</span></button>`).join('')}</nav>
+        <nav class="iconNav">${links.map(([href,label,ico])=>`<button class="navLink iconOnly ${(route===href || (href==='portal/catalogue' && route.startsWith('portal/catalogue/')))?'active':''}" data-go="${href}" aria-label="${label}"><span class="navIcon">${icon(ico)}</span><span class="navLabel">${label}</span></button>`).join('')}</nav>
         <div class="sidebarFooter compactFooter">
           ${admin?`<button class="navLink iconOnly" data-go="portal/dashboard" aria-label="Client portal"><span class="navIcon">${icon('overview')}</span><span class="navLabel">Client portal</span></button>`:(authContext?.isPscAdmin?`<button class="navLink iconOnly" data-go="admin/dashboard" aria-label="PSC admin"><span class="navIcon">${icon('admin')}</span><span class="navLabel">PSC admin</span></button>`:'')}
           <button class="navLink iconOnly" data-signout aria-label="Sign out"><span class="navIcon">${icon('logout')}</span><span class="navLabel">Sign out</span></button>
@@ -264,7 +264,7 @@
 
   function contactPage(){ return publicPage('contact','CONTACT','Talk to Pharma Service.','For institutional supply, school-clinic enquiries and account setup, contact Pharma Service in Dubai.',`<section class="publicSection contactGrid"><div class="contactCard"><span>PHONE</span><b>+971 4 337 7004</b></div><div class="contactCard"><span>EMAIL</span><b>info@pharmaservice.ae</b></div><div class="contactCard"><span>LOCATION</span><b>Dubai, United Arab Emirates</b></div><div class="contactCard"><span>CLINIC PORTAL</span><button class="button primary" data-go="login">Open account access →</button></div></section>`); }
 
-  function loginPage(){ return `<main class="publicPage loginPublicPage">${publicHeader('')}<section class="loginWrap"><div class="loginIntro"><span class="kicker">CLINIC PORTAL ACCESS</span><h1>Institutional ordering,<br>through one secure account.</h1><p>Access your Pharma Service clinic portal to shop approved supplies, review quotations, track orders and repeat previously supplied items.</p><div class="loginSupport">Need access? <button data-go="contact">Contact Pharma Service</button> <span>·</span> <button data-go="demo">View guided demo</button></div></div><div class="loginCard"><img src="${PSC_LOGO}" alt="Pharma Service"><span class="loginLabel">ACCOUNT ACCESS</span><h2>Clinic Portal</h2><label>Email</label><input class="input" id="mvpLoginEmail" type="email" autocomplete="email" placeholder="name@school.ae"><label>Password</label><input class="input" id="mvpLoginPassword" type="password" autocomplete="current-password" placeholder="••••••••"><button class="button primary full" data-mvp-login>Continue to Clinic Portal →</button><p class="loginNote">Your organization, school and campus access will be determined automatically by your account permissions after sign-in.</p></div></section>${publicFooter()}</main>`; }
+  function loginPage(){ return `<main class="publicPage loginPublicPage v26LoginPage">${publicHeader('')}<section class="loginWrap v26LoginWrap"><div class="loginIntro v26LoginIntro"><span class="kicker">CLINIC PORTAL ACCESS</span><h1>Institutional procurement,<br>connected.</h1><p>Shop the catalogue, review quotations, track orders and repeat previously supplied items through one secure Pharma Service account.</p><div class="v26LoginFlow"><span>Source</span><span>Quote</span><span>Supply</span><span>Repeat</span></div><div class="loginSupport">Need access? <button data-go="contact">Contact Pharma Service</button> <span>·</span> <button data-go="demo">View guided demo</button></div></div><div class="loginCard v26LoginCard"><img src="${PSC_LOGO}" alt="Pharma Service"><span class="loginLabel">ACCOUNT ACCESS</span><h2>Clinic Portal</h2><label>Email</label><input class="input" id="mvpLoginEmail" type="email" autocomplete="email" placeholder="name@organization.ae"><label>Password</label><input class="input" id="mvpLoginPassword" type="password" autocomplete="current-password" placeholder="••••••••"><button class="button primary full" data-mvp-login>Continue to Clinic Portal →</button><p class="loginNote">Your organization and account permissions are determined automatically after sign-in.</p></div></section>${publicFooter()}</main>`; }
 
   function portalDashboard(){
     const visible=customerVisibleRequests();
@@ -273,15 +273,45 @@
     const processing=visible.filter(r=>['Authorized','Procurement','Delivery'].includes(r.status)).length;
     const delivered=state.requests.filter(r=>r.campus===state.campus&&r.status==='Accepted');
     const deliveredSkus=new Set(delivered.flatMap(r=>r.lines.map(l=>l.sku)));
+    const quickNeeds=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.filter(c=>!['all'].includes(c.id)).slice(0,7);
     const resources=[
-      {tag:'CLINIC OPERATIONS',title:'Term-opening clinic readiness checklist',date:'Updated 27 Sep 2026'},
-      {tag:'SUPPLY PLANNING',title:'A simpler way to plan recurring clinic refills',date:'Updated 25 Sep 2026'},
-      {tag:'PSC UPDATE',title:'New school-clinic catalogue lines added this month',date:'Updated 23 Sep 2026'}
+      {tag:'PROCUREMENT',title:'Building a cleaner institutional replenishment cycle',date:'Updated 28 Sep 2026'},
+      {tag:'CATALOGUE',title:'Clinical-need navigation is now available',date:'Updated 28 Sep 2026'},
+      {tag:'ACCOUNT',title:'Keep quotations, orders and repeats in one supply history',date:'Updated 27 Sep 2026'}
     ];
-    return shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">${esc(state.campus).toUpperCase()}</span><h1>Home</h1><p>Shop, review quotations and repeat previous orders through one Pharma Service account.</p></div><button class="button primary" data-go="portal/catalogue">Shop clinic supplies →</button></div>
-      <div class="homeStats"><div><span>ACTIVE</span><b>${active.length}</b><small>Orders & requests</small></div><div><span>QUOTE READY</span><b>${awaiting}</b><small>Awaiting your decision</small></div><div><span>IN PROCESS</span><b>${processing}</b><small>${processing?tomorrowDelivery():'No deliveries due'}</small></div><div><span>REPLENISH</span><b>${deliveredSkus.size}</b><small>Previously delivered items</small></div></div>
-      <div class="customerHomeGrid"><section class="panel"><div class="panelHeader"><h2>Current activity</h2><button data-go="portal/requests">View all →</button></div><div class="homeActivity">${active.slice(0,4).map(r=>orderMiniRow(r)).join('')||'<div class="emptyState"><h3>No active orders</h3></div>'}</div></section><section class="customerActionPanel"><span class="eyebrow">QUICK REPEAT</span><h2>Need the same items again?</h2><p>Replenish from products already approved and delivered to your clinic.</p><button class="button dark" data-go="portal/replenish">Open Replenish →</button></section></div>
-      <section class="panel resourcePreview"><div class="panelHeader"><h2>Latest resources & updates</h2><button data-go="portal/insights">Open page →</button></div><div class="resourcePreviewGrid">${resources.map(x=>`<article><span>${x.tag}</span><h3>${x.title}</h3><small>${x.date}</small></article>`).join('')}</div></section>`);
+
+    return shell(`
+      <section class="v26HomeHero">
+        <div><span class="eyebrow">YOUR PHARMA SERVICE ACCOUNT</span><h1>What do you need today?</h1><p>Shop, repeat, review and request through one accountable institutional supply relationship.</p></div>
+        <div class="v26HomeStatus"><span>ACCOUNT</span><b>${esc(state.campus||'Institutional account')}</b><small>${active.length} active · ${awaiting} quote ready</small></div>
+      </section>
+
+      <section class="v26QuickActions">
+        <button class="v26ActionCard coral" data-go="portal/catalogue"><span class="v26ActionIcon">${icon('inventory')}</span><small>01</small><h2>Shop catalogue</h2><p>Browse by clinical need and find the right institutional products faster.</p><i>→</i></button>
+        <button class="v26ActionCard blue" data-go="portal/replenish"><span class="v26ActionIcon">${icon('repeat')}</span><small>02</small><h2>Repeat an order</h2><p>Restore previously supplied items from the same account history.</p><i>→</i></button>
+        <button class="v26ActionCard mint" data-go="portal/requests"><span class="v26ActionIcon">${icon('request')}</span><small>03</small><h2>Orders & quotations</h2><p>Follow requests, quotation decisions, delivery and completed orders.</p><i>→</i></button>
+        <button class="v26ActionCard sand" data-go="portal/catalogue/all"><span class="v26ActionIcon">${icon('search')}</span><small>04</small><h2>Find anything</h2><p>Search the full institutional catalogue or submit a sourcing request.</p><i>→</i></button>
+      </section>
+
+      <section class="v26NeedPreview">
+        <div class="v26SectionHead"><div><span class="eyebrow">CONTINUE BY CLINICAL NEED</span><h2>Start where the clinical work starts.</h2></div><button data-go="portal/catalogue">View all needs →</button></div>
+        <div class="v26NeedStrip">${quickNeeds.map(c=>`<button class="v26MiniNeed" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}"><span>${clinicalNeedIcon(c.icon)}</span><b>${esc(c.label)}</b></button>`).join('')}</div>
+      </section>
+
+      <div class="v26OperationsStrip">
+        <div><span>ACTIVE</span><b>${active.length}</b><small>Orders & requests</small></div>
+        <div><span>QUOTE READY</span><b>${awaiting}</b><small>Awaiting your decision</small></div>
+        <div><span>IN PROCESS</span><b>${processing}</b><small>${processing?tomorrowDelivery():'No deliveries due'}</small></div>
+        <div><span>REPLENISH</span><b>${deliveredSkus.size}</b><small>Previously delivered items</small></div>
+      </div>
+
+      <div class="customerHomeGrid v26HomeGrid">
+        <section class="panel v26ActivityPanel"><div class="panelHeader"><h2>Current activity</h2><button data-go="portal/requests">View all →</button></div><div class="homeActivity">${active.slice(0,4).map(r=>orderMiniRow(r)).join('')||'<div class="emptyState"><h3>No active orders</h3><p>New requests and quotations will appear here.</p></div>'}</div></section>
+        <section class="customerActionPanel v26RepeatPanel"><span class="eyebrow">QUICK REPEAT</span><h2>Need the same items again?</h2><p>Replenish from products already supplied to this account.</p><button class="button dark" data-go="portal/replenish">Open Replenish →</button></section>
+      </div>
+
+      <section class="panel resourcePreview v26Resources"><div class="panelHeader"><h2>Latest resources & updates</h2><button data-go="portal/insights">Open page →</button></div><div class="resourcePreviewGrid">${resources.map(x=>`<article><span>${x.tag}</span><h3>${x.title}</h3><small>${x.date}</small></article>`).join('')}</div></section>
+    `);
   }
 
   function orderMiniRow(r){
@@ -338,10 +368,14 @@
     return shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">PSC RESOURCES</span><h1>Reports & Insights</h1><p>A periodically updated space for useful clinic-supply resources, product updates and Pharma Service account information.</p></div></div><div class="resourceHero"><div><span class="eyebrow">LATEST</span><h2>Useful information — without another dashboard.</h2><p>This page is intentionally editorial. We will keep adding practical resources and updates that help school clinics purchase and manage supplies more consistently.</p></div><div class="resourceHeroMark">PSC<br><span>UPDATE</span></div></div><div class="resourceGrid">${resources.map((x,i)=>`<article class="resourceCard ${i===0?'featured':''}"><div class="resourceMeta"><span>${x.type}</span><small>${x.date}</small></div><h3>${x.title}</h3><p>${x.summary}</p><button class="resourceLink">${x.cta} →</button></article>`).join('')}</div>`);
   }
 
-  function catalogue(){
+  function catalogueProducts(){
+    return products().filter(p=>p.catalogueVisible!==false);
+  }
+
+  function catalogueFilterProducts(needId='all'){
     const q=ui.catalogueQuery.toLowerCase().trim();
-    const allProducts=products().filter(p=>p.catalogueVisible!==false);
     const types=(D.productTypes||[]).filter(Boolean);
+    const allProducts=catalogueProducts();
     const filtered=allProducts.filter(p=>{
       const needLabels=clinicalNeedIds(p).map(id=>clinicalNeedMeta(id).label).join(' ');
       const hay=`${p.catalogueDisplayName||p.name} ${p.name||''} ${p.brand||''} ${p.pscSku} ${p.supplierSku||''} ${p.productType||''} ${needLabels}`.toLowerCase();
@@ -351,38 +385,63 @@
         (ui.catalogueFilter==='Licensed / controlled'&&p.regulated) ||
         (ui.catalogueFilter==='Specification-led'&&p.institutionalProvisional);
       return hay.includes(q)
-        && clinicalNeedMatches(p,ui.catalogueNeed)
+        && clinicalNeedMatches(p,needId)
         && (ui.catalogueCat==='All product types'||p.productType===ui.catalogueCat)
         && lineMatch;
     });
+    return {allProducts,filtered,types};
+  }
 
-    const needCards=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.map(c=>{
-      const count=c.id==='all'?allProducts.length:allProducts.filter(p=>clinicalNeedMatches(p,c.id)).length;
-      return `<button class="clinicNeedCard ${ui.catalogueNeed===c.id?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-clinic-need="${c.id}" aria-pressed="${ui.catalogueNeed===c.id?'true':'false'}">
-        <span class="clinicNeedCount">${count}</span>
+  function clinicalNeedRibbon(activeId='all'){
+    const home=`<button class="needRibbonHome" data-go="portal/catalogue" aria-label="Catalogue home">${clinicalNeedIcon('all')}<span>Catalogue home</span></button>`;
+    const items=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.map(c=>`<button class="needRibbonChip ${activeId===c.id?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}" aria-current="${activeId===c.id?'page':'false'}"><span class="needRibbonIcon">${clinicalNeedIcon(c.icon)}</span><b>${esc(c.label)}</b></button>`).join('');
+    return `<nav class="needRibbon" aria-label="Clinical needs">${home}<div class="needRibbonTrack">${items}</div></nav>`;
+  }
+
+  function catalogue(){
+    const allProducts=catalogueProducts();
+    const dhaCount=allProducts.filter(p=>p.dhaMapped).length;
+    const needCards=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.map(c=>`<button class="clinicNeedCard" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}">
         <span class="clinicNeedIcon">${clinicalNeedIcon(c.icon)}</span>
         <span class="clinicNeedCopy"><b>${esc(c.label)}</b><small>${esc(c.note)}</small></span>
         <span class="clinicNeedArrow">↗</span>
-      </button>`;
-    }).join('');
-
-    const selected=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.find(c=>c.id===ui.catalogueNeed)||INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.at(-1);
-    const dhaCount=allProducts.filter(p=>p.dhaMapped).length;
+      </button>`).join('');
 
     return shell(`
-      <div class="pageHeader institutionalCatalogueHeader">
+      <div class="pageHeader institutionalCatalogueHeader v26CatalogueLandingHeader">
         <div><span class="eyebrow">INSTITUTIONAL CATALOGUE</span><h1>Browse by clinical need.</h1><p>Start with the situation, task or area of care. The catalogue keeps sourcing complexity behind the scenes while giving clinical teams a faster route to the right products.</p></div>
-        <div class="catalogueDepthPill"><b>${allProducts.length}</b><span>catalogue lines</span><small>${dhaCount} mapped DHA requirements</small></div>
+        <div class="catalogueDepthPill"><b>${allProducts.length}</b><span>catalogue lines</span><small>${dhaCount} lines mapped to DHA requirements</small></div>
       </div>
 
-      <section class="clinicNeedSection v25NeedJourney">
-        <div class="clinicNeedHeading"><div><span class="eyebrow">CLINICAL NEEDS</span><h2>Where do you want to start?</h2><p>Products can appear in more than one area where clinically useful. Choose a need, then refine by product type or requirement status.</p></div><span class="templateBadge">INSTITUTIONAL CATALOGUE · V25</span></div>
+      <section class="clinicNeedSection v25NeedJourney v26CatalogueLanding">
+        <div class="clinicNeedHeading"><div><span class="eyebrow">CLINICAL NEEDS</span><h2>Where do you want to start?</h2><p>Choose the clinical context first. Once inside, use the product and requirement filters to narrow the catalogue.</p></div></div>
         <div class="clinicNeedRail">${needCards}</div>
       </section>
 
-      <div class="notice shopNotice"><strong>One accountable supply relationship.</strong> Add products to a request and PSC will review specification, source, availability and commercial terms before quotation. Regulated lines remain subject to the applicable licensed supply route and professional controls.</div>
+      <section class="catalogueLandingShortcuts">
+        <button class="catalogueShortcut warm" data-go="portal/catalogue/all"><span>${clinicalNeedIcon('all')}</span><div><b>View all supplies</b><small>Browse the complete institutional catalogue</small></div><i>→</i></button>
+        <button class="catalogueShortcut blue" data-go="portal/replenish"><span>${icon('repeat')}</span><div><b>Repeat a previous order</b><small>Replenish from account history</small></div><i>→</i></button>
+        <button class="catalogueShortcut mint" data-go="portal/requests"><span>${icon('request')}</span><div><b>Orders & quotations</b><small>Review active and historical requests</small></div><i>→</i></button>
+      </section>
+    `);
+  }
 
-      <div class="filterBar shopFilterBar v25FilterBar">
+  function catalogueCategory(needId='all'){
+    const selected=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.find(c=>c.id===needId)||INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.find(c=>c.id==='all');
+    const {allProducts,filtered,types}=catalogueFilterProducts(selected.id);
+
+    return shell(`
+      <section class="categoryHero" style="--need-bg:${selected.bg};--need-ink:${selected.ink}">
+        <div class="categoryHeroIcon">${clinicalNeedIcon(selected.icon)}</div>
+        <div class="categoryHeroCopy"><span class="eyebrow">INSTITUTIONAL CATALOGUE</span><h1>${esc(selected.label)}</h1><p>${esc(selected.note)}</p></div>
+        <div class="categoryHeroCount"><b>${filtered.length}</b><span>products</span></div>
+      </section>
+
+      ${clinicalNeedRibbon(selected.id)}
+
+      <div class="notice shopNotice compactInstitutionalNotice"><strong>One accountable supply relationship.</strong> PSC reviews specification, source, availability and commercial terms before quotation. Regulated lines remain subject to the applicable licensed supply route and professional controls.</div>
+
+      <div class="filterBar shopFilterBar v25FilterBar v26FilterBar">
         <div class="searchInput"><span>⌕</span><input data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search product, brand, PSC SKU, supplier SKU or clinical need…"></div>
         <select data-cat-filter="category" aria-label="Product type"><option>All product types</option>${types.map(c=>`<option ${c===ui.catalogueCat?'selected':''}>${esc(c)}</option>`).join('')}</select>
         <select data-cat-filter="approval" aria-label="Catalogue status">
@@ -393,10 +452,17 @@
         </select>
       </div>
 
-      <div class="catalogueMeta clinicCatalogueMeta"><div><div class="sectionLabel">${filtered.length} PRODUCTS · ${esc(selected.label.toUpperCase())}</div><span>${esc(selected.note)}</span></div><button class="textAction ${ui.catalogueNeed==='all'?'isHidden':''}" data-clinic-need="all">View all supplies →</button></div>
+      <div class="catalogueMeta clinicCatalogueMeta v26CatalogueMeta">
+        <div><div class="sectionLabel">${filtered.length} PRODUCTS</div><span>${esc(selected.note)}</span></div>
+        <button class="textAction" data-go="portal/catalogue">Clinical needs ↑</button>
+      </div>
+
       <div class="productGrid v25ProductGrid">${filtered.map(productCard).join('')}</div>
 
-      <section class="customRequestPanel v25CustomRequest"><div><span class="eyebrow">CAN'T FIND IT?</span><h2>Request something else.</h2><p>Describe the product, brand, size or specification. PSC will review it as an account-specific sourcing request.</p></div><div class="customRequestForm"><textarea id="customRequestText" class="textarea" placeholder="Example: paediatric nebulizer masks compatible with our existing unit…"></textarea><div class="customRequestActions"><label>Qty <input id="customRequestQty" type="number" min="1" value="1"></label><button class="button dark" data-submit-custom>Send custom request →</button></div></div></section>
+      <section class="customRequestPanel v25CustomRequest v26CustomRequest">
+        <div><span class="eyebrow">CAN'T FIND IT?</span><h2>Request something else.</h2><p>Describe the product, brand, size or specification. PSC will review it as an account-specific sourcing request.</p></div>
+        <div class="customRequestForm"><textarea id="customRequestText" class="textarea" placeholder="Example: paediatric nebulizer masks compatible with our existing unit…"></textarea><div class="customRequestActions"><label>Qty <input id="customRequestQty" type="number" min="1" value="1"></label><button class="button dark" data-submit-custom>Send custom request →</button></div></div>
+      </section>
     `);
   }
 
@@ -778,7 +844,10 @@
       if(r.startsWith('admin/') && !authContext?.isPscAdmin){ location.hash='portal/dashboard'; return; }
     }
     let html;
-    switch(r){
+    if(r.startsWith('portal/catalogue/')){
+      const needId=r.split('/')[2]||'all';
+      html=catalogueCategory(needId);
+    } else switch(r){
       case 'home': html=landing();break;
       case 'about': html=aboutPage();break;
       case 'services': html=servicesPage();break;
