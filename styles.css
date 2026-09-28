@@ -523,3 +523,156 @@ body{font-family:"DM Sans",Arial,Helvetica,sans-serif;background:linear-gradient
   .procurementCardHeadline{font-size:22px!important}
   .procurementSteps{grid-template-columns:1fr!important}
 }
+
+
+/* =========================================================
+   V20 — final clinic-account hero card
+   ========================================================= */
+.procurementHeroCard{
+  background:#fff!important;
+  border:1.7px solid #111!important;
+  border-radius:30px!important;
+  padding:28px 28px 24px!important;
+  box-shadow:0 28px 70px rgba(0,0,0,.045)!important;
+}
+.procurementCardTop{
+  grid-template-columns:minmax(0,1fr) 118px!important;
+  gap:30px!important;
+  align-items:start!important;
+}
+.procurementCardHeadline{
+  font-size:clamp(23px,1.75vw,29px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.04em!important;
+  padding-top:7px!important;
+  max-width:560px!important;
+}
+.procurementCardHeadline span{
+  display:block!important;
+  font-weight:500!important;
+}
+.procurementCardHeadline strong{
+  display:block!important;
+  font-weight:850!important;
+  margin-top:4px!important;
+}
+.procurementQr{
+  width:118px!important;
+  height:118px!important;
+}
+.procurementFlowPanel{
+  background:#eef5f4!important;
+  border-radius:18px!important;
+  padding:0 0 17px!important;
+  margin-top:26px!important;
+  overflow:hidden!important;
+}
+.procurementFlowIntroCentered{
+  text-align:center!important;
+  padding:0 16px!important;
+  transform:translateY(-2px);
+}
+.procurementFlowIntroCentered em{
+  display:block!important;
+  margin:0!important;
+  font-size:clamp(18px,1.35vw,23px)!important;
+  line-height:1.15!important;
+  letter-spacing:-.035em!important;
+  color:#2b3031!important;
+  font-style:italic!important;
+  font-weight:500!important;
+}
+.procurementStageGrid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:9px!important;
+  padding:16px 10px 0!important;
+}
+.procurementStage{
+  position:relative!important;
+  min-height:190px!important;
+  border-radius:14px!important;
+  background:#101c1d!important;
+  color:#fff!important;
+  padding:17px 16px 18px!important;
+  box-shadow:none!important;
+}
+.procurementStage .stageNumber{
+  position:absolute!important;
+  right:12px!important;
+  top:11px!important;
+  color:#29c2ba!important;
+  font-size:9px!important;
+  font-weight:800!important;
+  letter-spacing:.02em!important;
+}
+.procurementStage h4{
+  margin:0!important;
+  padding:0!important;
+  color:#fff!important;
+  font-size:16px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:-.025em!important;
+}
+.procurementStage .stageRule{
+  display:block!important;
+  width:38px!important;
+  height:1px!important;
+  background:#aab5b4!important;
+  margin:48px 0 15px!important;
+  opacity:.9!important;
+}
+.procurementStage p{
+  margin:0!important;
+  color:#d9e1e0!important;
+  font-size:12.5px!important;
+  line-height:1.55!important;
+  letter-spacing:-.012em!important;
+}
+.procurementStatus{
+  margin:18px 14px 0!important;
+  padding:0!important;
+  gap:13px!important;
+  font-size:16px!important;
+}
+.procurementStatus i{
+  width:18px!important;
+  height:18px!important;
+}
+.procurementAccount{
+  margin-top:18px!important;
+  font-size:13px!important;
+}
+.procurementBarcode{
+  height:75px!important;
+  margin:15px 13px 0!important;
+}
+.procurementFoot{
+  margin-top:16px!important;
+  font-size:13px!important;
+}
+
+@media(max-width:720px){
+  .procurementStageGrid{
+    grid-template-columns:1fr 1fr!important;
+    gap:9px!important;
+  }
+  .procurementStage{
+    min-height:170px!important;
+  }
+  .procurementFlowIntroCentered em{
+    font-size:18px!important;
+  }
+}
+@media(max-width:480px){
+  .procurementStageGrid{
+    grid-template-columns:1fr!important;
+  }
+  .procurementStage{
+    min-height:145px!important;
+  }
+  .procurementStage .stageRule{
+    margin:34px 0 13px!important;
+  }
+}

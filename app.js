@@ -141,12 +141,34 @@
             <img class="procurementQr" src="./assets/pharmaservice-qr.png" alt="QR code to pharmaservice.ae">
           </div>
           <div class="procurementFlowPanel">
-            <div class="procurementFlowIntro">
-              <b>${esc(C.home?.cardSectionTitle || 'HOW IT WORKS')}</b>
-              <em>${esc(C.home?.cardSectionSub || 'Through a connected and efficient workflow')}</em>
+            <div class="procurementFlowIntro procurementFlowIntroCentered">
+              <em>${esc(C.home?.cardSectionSub || 'Through a connected, and efficient workflow')}</em>
             </div>
-            <div class="procurementSteps">
-              <span>REQUIREMENT</span><i>→</i><span>QUOTE</span><i>→</i><span>SUPPLY</span><i>→</i><span>RECORD / REPEAT</span>
+            <div class="procurementStageGrid">
+              <article class="procurementStage">
+                <span class="stageNumber">01</span>
+                <h4>SHOP</h4>
+                <i class="stageRule"></i>
+                <p>Browse the Pharma Service institutional product master.</p>
+              </article>
+              <article class="procurementStage">
+                <span class="stageNumber">02</span>
+                <h4>QUOTE</h4>
+                <i class="stageRule"></i>
+                <p>PSC sources, reviews and sends the formal quotation.</p>
+              </article>
+              <article class="procurementStage">
+                <span class="stageNumber">03</span>
+                <h4>MANAGE</h4>
+                <i class="stageRule"></i>
+                <p>Confirm, cancel or follow the order from the account.</p>
+              </article>
+              <article class="procurementStage">
+                <span class="stageNumber">04</span>
+                <h4>REPEAT</h4>
+                <i class="stageRule"></i>
+                <p>Repeat previously supplied items from the same account history.</p>
+              </article>
             </div>
             <div class="procurementStatus"><i></i><em>${esc(C.home?.cardStatus || 'Keeping supply moving without losing control')}</em></div>
           </div>
