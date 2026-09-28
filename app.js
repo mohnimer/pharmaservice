@@ -1,6 +1,7 @@
 (() => {
   'use strict';
   const D = window.PSC_DATA;
+  const C = window.PSC_COPY || {};
   const $app = document.getElementById('app');
   const STORAGE = 'pscClinicPortalStateV12_1';
 
@@ -126,14 +127,31 @@
       ${publicHeader('home')}
       <section class="landingHero">
         <div class="landingCopy">
-          <h1 class="institutionalHero"><span>Institutional</span><em>Supply.</em></h1>
-          <p class="lead heroStatement">Standardised supply. Reliable delivery. Keep the clinical team out of supply-chain complexity.</p>
+          <h1 class="institutionalHero"><span>${esc(C.home?.heroTitlePrefix || 'Institutional')}</span><em>${esc(C.home?.heroTitleAccent || 'Supply')}</em></h1>
+          <p class="lead heroStatement"><span>${esc(C.home?.heroLine1 || 'Easy procurement.')} <em>${esc(C.home?.heroLine1Accent || 'Wholesale pricing.')}</em></span><strong>${esc(C.home?.heroLine2 || 'More time for what matters')}</strong></p>
           <div class="landingActions"><button class="button primary large" data-go="login">Open Clinic Portal →</button><button class="button outline large demoCta" data-go="demo">Take guided demo <span class="playDot">▶</span></button></div>
         </div>
-        <div class="supplyLabel simpleAccountLabel animatedAccountLabel">
-          <div class="labelTop"><span>CLINIC PROCUREMENT PORTAL</span><b>One institutional account.<br>One accountable supply relationship.</b></div>
-          <div class="labelPortal"><span class="labelTiny">CONTROLLED FLOW</span><h3>Requirement → Quote → Supply → Record → Repeat</h3><div class="labelStats"><div><b>${approved}</b><span>Clinic lines</span></div><div><b>1</b><span>Account history</span></div><div><b>∞</b><span>Easy repeats</span></div></div><div class="labelStatus"><span class="flowPulse"></span><b>Keeping supply moving without losing control</b></div></div>
-          <div class="barcodeTitle">PHARMA SERVICE · INSTITUTIONAL SUPPLY</div><div class="barcode" aria-hidden="true"></div><div class="barcodeFoot"><b>PSC</b><span>—</span><b>SCHOOL CLINIC ACCOUNT</b></div>
+        <div class="procurementHeroCard" aria-label="Clinic procurement workflow">
+          <div class="procurementCardTop">
+            <div class="procurementCardHeadline">
+              <span>${esc(C.home?.cardLine1 || 'Clinic procurement for institutional accounts that need')}</span>
+              <strong>${esc(C.home?.cardLine2 || 'one accountable supply relationship')}</strong>
+            </div>
+            <img class="procurementQr" src="./assets/pharmaservice-qr.png" alt="QR code to pharmaservice.ae">
+          </div>
+          <div class="procurementFlowPanel">
+            <div class="procurementFlowIntro">
+              <b>${esc(C.home?.cardSectionTitle || 'HOW IT WORKS')}</b>
+              <em>${esc(C.home?.cardSectionSub || 'Through a connected and efficient workflow')}</em>
+            </div>
+            <div class="procurementSteps">
+              <span>REQUIREMENT</span><i>→</i><span>QUOTE</span><i>→</i><span>SUPPLY</span><i>→</i><span>RECORD / REPEAT</span>
+            </div>
+            <div class="procurementStatus"><i></i><em>${esc(C.home?.cardStatus || 'Keeping supply moving without losing control')}</em></div>
+          </div>
+          <div class="procurementAccount">CLINIC ACCOUNT</div>
+          <div class="procurementBarcode" aria-hidden="true"></div>
+          <div class="procurementFoot">PHARMA SERVICE <i>•</i> INSTITUTIONAL SUPPLY</div>
         </div>
       </section>
       <section class="beliefSection operationsBelief"><div class="beliefRule"></div><div class="beliefGrid"><div><span class="kicker">WHY THIS EXISTS</span><h2>Healthcare supply should run as reliably as the clinic itself.</h2></div><div><p>A school clinic depends on medicines, consumables and medical equipment being correct, available and properly documented. Pharma Service brings those moving parts into one controlled supply relationship.</p><p class="beliefStrong">Standardised products. Appropriate regulatory routes. Clear records. Consistent replenishment. One accountable supplier.</p><p>From the first requirement to the next repeat order, the objective is simple: keep the clinic supplied and ready without forcing the clinical team to manage the complexity behind it.</p><div class="beliefCloser">The clinic should manage healthcare.<br><b>It shouldn’t have to manage the healthcare supply chain.</b></div></div></div></section>
