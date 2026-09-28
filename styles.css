@@ -1574,3 +1574,37 @@ body{font-family:"DM Sans",Arial,Helvetica,sans-serif;background:linear-gradient
   .v26QuickActions{grid-template-columns:1fr 1fr}
   .v26ActionCard{min-height:166px}
 }
+
+
+/* =========================================================
+   V26.1 — Product card cleanup
+   ========================================================= */
+.v261ProductCard{
+  min-height:410px!important;
+}
+.v261ProductCard .productBadgeRow{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:6px;
+  min-height:24px;
+  margin-top:12px;
+}
+.v261ProductCard .productBrand{
+  margin-top:6px;
+}
+.v261ProductCard .productTitleButton h3{
+  margin-top:4px;
+}
+.v261ProductCard .productFlags{
+  margin-top:auto;
+}
+.v261ProductCard .specLedFlag{
+  display:none!important;
+}
+.v261ProductCard .sku{
+  display:none!important;
+}
+@media(max-width:620px){
+  .v261ProductCard{min-height:390px!important}
+}

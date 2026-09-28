@@ -473,17 +473,21 @@
     const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
     const fallback=p.fallbackAsset||'./assets/products/clinic-basics.jpg';
     const visual=p.imageUrl
-      ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} specifications"><img src="${esc(p.imageUrl)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(fallback)}'"><span class="imageSourceTag">${p.imageMatchStatus&&p.imageMatchStatus.startsWith('Exact')?'Product image':'Product visual'}</span></button>`
+      ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img src="${esc(p.imageUrl)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(fallback)}'"><span class="imageSourceTag">${p.imageMatchStatus&&p.imageMatchStatus.startsWith('Exact')?'Product image':'Product visual'}</span></button>`
       : `<button class="productVisual productNeedVisual productVisualButton" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)}"><span class="productNeedIcon">${clinicalNeedIcon(need.icon)}</span><small>${esc(need.label)}</small></button>`;
+
     const tags=clinicalNeedIds(p).slice(0,2).map(id=>`<span>${esc(clinicalNeedMeta(id).label)}</span>`).join('');
-    return `<article class="productCard v25ProductCard">
+    const hasRealBrand=p.brand && p.brand!=='Specification-led' && p.brand!=='Institutional range';
+    const hasPrice=p.contractPrice!==null && p.contractPrice!==undefined && p.contractPrice!=='' && Number.isFinite(Number(p.contractPrice)) && Number(p.contractPrice)>0;
+
+    return `<article class="productCard v25ProductCard v261ProductCard">
       ${visual}
-      <div class="productMetaTop"><span class="sku">${esc(p.pscSku)}</span><div class="productBadgeStack">${p.dhaMapped?'<span class="dhaRequirementBadge"><i>DHA</i><b>Requirement</b></span>':''}${p.regulated?'<span class="restricted">Licensed route</span>':''}</div></div>
-      <div class="productBrand">${esc(p.brand||'Institutional range')}</div>
+      <div class="productBadgeRow">${p.dhaMapped?'<span class="dhaRequirementBadge"><i>DHA</i><b>Requirement</b></span>':''}${p.regulated?'<span class="restricted">Licensed route</span>':''}</div>
+      ${hasRealBrand?`<div class="productBrand">${esc(p.brand)}</div>`:''}
       <button class="productTitleButton" data-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button>
       <p class="pack">${esc(pack)}</p>
-      <div class="productFlags">${tags}${p.institutionalProvisional?'<span class="specLedFlag">Specification-led</span>':''}</div>
-      <div class="productBottom"><div class="priceBlock">${Number.isFinite(Number(p.contractPrice))?`<small>ACCOUNT PRICE</small><b>${money(p.contractPrice)}</b>`:'<small>INSTITUTIONAL PRICE</small><b>Request quote</b>'}</div><div class="productCardActions"><button class="specLink" data-product-view="${p.pscSku}">Details</button><button class="squareAdd" data-add="${p.pscSku}" aria-label="Add to request">+</button></div></div>
+      <div class="productFlags">${tags}</div>
+      <div class="productBottom"><div class="priceBlock">${hasPrice?`<small>ACCOUNT PRICE</small><b>${money(p.contractPrice)}</b>`:'<small>INSTITUTIONAL PRICE</small><b>Request quote</b>'}</div><div class="productCardActions"><button class="specLink" data-product-view="${p.pscSku}">Details</button><button class="squareAdd" data-add="${p.pscSku}" aria-label="Add to request">+</button></div></div>
     </article>`;
   }
 
