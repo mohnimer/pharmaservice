@@ -118,6 +118,7 @@
   }
   function availableSchools(){ return (authContext?.schools||[]).filter(Boolean); }
   function canSwitchSchools(){ return !authContext?.isPscAdmin && availableSchools().length>1; }
+  function isDemoAccount(){ return authContext?.group?.slug==='psc-demo-group'; }
   function isCapitalProduct(p){ return !!p && ['Furniture & Mobility','Diagnostics & Monitoring','Emergency & Oxygen'].includes(p.category); }
   function product(sku){
     const base = D.products.find(p=>p.pscSku===sku) || (state.customProducts||{})[sku];
@@ -199,6 +200,7 @@
             <button class="button dark pillBasket" data-basket>Cart <b>${basketQty()}</b></button>`}
           </div>
         </header>
+        ${!admin&&isDemoAccount()?`<div class="demoAccountBanner"><b>DEMO ACCOUNT</b><span>Sample institutional data · Explore freely · Actions are simulated and reset on refresh.</span></div>`:''}
         <div class="contentWrap v7ContentWrap">${content}</div>
       </main>
       ${ui.basket?basketDrawer():''}
@@ -411,7 +413,7 @@
 
     return shell(`
       <section class="v26HomeHero">
-        <div><span class="eyebrow">YOUR PHARMA SERVICE ACCOUNT</span><h1>What do you need today?</h1><p>Shop, repeat, review and request through one accountable institutional supply relationship.</p></div>
+        <div><span class="eyebrow">${isDemoAccount()?'PHARMA SERVICE DEMO':'YOUR PHARMA SERVICE ACCOUNT'}</span><h1>${isDemoAccount()?'Explore the institutional workflow.':'What do you need today?'}</h1><p>${isDemoAccount()?'Browse the catalogue, switch sites, review sample quotations, repeat supplied items and simulate new requests.':'Shop, repeat, review and request through one accountable institutional supply relationship.'}</p></div>
         <div class="v26HomeStatus"><span>ACCOUNT</span><b>${esc(state.campus||'Institutional account')}</b><small>${active.length} active · ${awaiting} quote ready</small></div>
       </section>
 
@@ -773,6 +775,14 @@
     const text=(el?.value||'').trim();
     const qty=Math.max(1,Number(qtyEl?.value||1));
     if(!text){ toast('<strong>Add a description first.</strong>'); return; }
+
+    if(isDemoAccount()){
+      audit('Demo custom request',`${qty} × ${text}`);
+      toast('<strong>Demo request received.</strong><br>This action is simulated and has not been sent to PSC.');
+      if(el) el.value='';
+      return;
+    }
+
     try{
       await persistCustomRequest(text,qty);
       toast(`<strong>Custom request received.</strong><br>PSC will review it and contact ${esc(accountEmailLabel())}.`);
@@ -784,6 +794,28 @@
     if(!state.basket.length)return;
     const note=(document.getElementById('basketNote')||{}).value||'';
     const lines=JSON.parse(JSON.stringify(state.basket));
+
+    if(isDemoAccount()){
+      const orderNumber=`DEMO-SIM-${String(Date.now()).slice(-5)}`;
+      state.requests.unshift({
+        id:orderNumber,
+        groupName:state.groupName||'Demo Organisation',
+        campus:state.campus,
+        requester:'Demo account',
+        createdAt:new Date().toISOString(),
+        status:'Drafting',
+        quoteRef:'',
+        note:note||'Simulated demo request.',
+        lines,
+        quote:{lines:{}},
+        demoLocal:true
+      });
+      state.basket=[]; ui.basket=false;
+      save(); render();
+      toast(`<strong>Demo order created.</strong><br>${esc(orderNumber)} is a simulated request and will reset on refresh.`);
+      return;
+    }
+
     try{
       const orderNumber=await persistNewOrder(lines,note);
       state.basket=[]; ui.basket=false;
@@ -1013,7 +1045,20 @@
   }
 
   async function updateCustomerQuote(id,action){
-    const r=state.requests.find(x=>x.id===id); if(!r?.dbId) return;
+    const r=state.requests.find(x=>x.id===id); if(!r) return;
+
+    if(isDemoAccount()){
+      r.status=action==='confirm'?'Authorized':'Cancelled';
+      if(action==='cancel') r.cancelledAt=new Date().toISOString();
+      audit(action==='confirm'?'Demo quotation confirmed':'Demo quotation cancelled',id);
+      save(); render();
+      toast(action==='confirm'
+        ? '<strong>Demo quotation confirmed.</strong><br>The workflow has advanced locally for this browser.'
+        : '<strong>Demo quotation cancelled.</strong><br>The workflow change is simulated.');
+      return;
+    }
+
+    if(!r.dbId) return;
     const dbStatus=action==='confirm'?'confirmed':'cancelled';
     const update={status:dbStatus}; if(action==='cancel') update.cancelled_at=new Date().toISOString();
     const {error}=await sb.from('orders').update(update).eq('id',r.dbId); if(error) throw error;
