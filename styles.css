@@ -2563,3 +2563,178 @@ button[data-cancel-quote]:hover{
   .publicClinicalPreviewFoot .button{width:100%}
   .procurementCardHeadline{font-size:18px!important;line-height:1.05!important}
 }
+
+
+/* =========================================================
+   V27.5 — Contact prospect capture + category cleanup
+   ========================================================= */
+
+/* Public category cards: no decorative arrows */
+.publicClinicalCard i{
+  display:none!important;
+}
+.publicClinicalCard span,
+.publicClinicalCard small{
+  max-width:100%!important;
+}
+
+/* Contact prospect form */
+.prospectSection{
+  display:grid;
+  grid-template-columns:minmax(0,.75fr) minmax(520px,1.25fr);
+  gap:70px;
+  align-items:start;
+}
+.prospectIntro h2{
+  margin:10px 0 16px;
+  max-width:480px;
+  font-size:clamp(38px,4vw,62px);
+  line-height:.98;
+  letter-spacing:-.055em;
+}
+.prospectIntro p{
+  max-width:500px;
+  margin:0;
+  color:#66706d;
+  font-size:15px;
+  line-height:1.65;
+}
+
+.prospectForm{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+  padding:28px;
+  background:#fff;
+  border:1px solid #e4e5df;
+  border-radius:20px;
+}
+.prospectField{
+  display:grid;
+  gap:8px;
+}
+.prospectFieldWide{
+  grid-column:1/-1;
+}
+.prospectField label{
+  color:#303735;
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:.04em;
+}
+.prospectField input,
+.prospectField textarea{
+  width:100%;
+  box-sizing:border-box;
+  border:1px solid #dedfd9;
+  border-radius:14px;
+  background:#fbfbf8;
+  color:#171a19;
+  font:inherit;
+  font-size:13px;
+  line-height:1.45;
+  outline:none;
+  transition:border-color .16s ease,box-shadow .16s ease,background .16s ease;
+}
+.prospectField input{
+  min-height:48px;
+  padding:0 14px;
+}
+.prospectField textarea{
+  min-height:150px;
+  padding:14px;
+  resize:vertical;
+}
+.prospectField input::placeholder,
+.prospectField textarea::placeholder{
+  color:#a2a49f;
+}
+.prospectField input:focus,
+.prospectField textarea:focus{
+  background:#fff;
+  border-color:#8ecbc6;
+  box-shadow:0 0 0 3px rgba(39,169,159,.12);
+}
+.prospectHoneypot{
+  position:absolute!important;
+  left:-10000px!important;
+  width:1px!important;
+  height:1px!important;
+  overflow:hidden!important;
+}
+.prospectSubmitRow{
+  grid-column:1/-1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding-top:4px;
+}
+.prospectSubmitRow p{
+  margin:0;
+  max-width:410px;
+  color:#858984;
+  font-size:9px;
+  line-height:1.5;
+}
+.prospectSubmitRow .button{
+  min-width:150px;
+}
+.prospectSubmitRow .button:disabled{
+  opacity:.6;
+  cursor:wait;
+}
+
+.prospectContactGrid{
+  padding-top:12px!important;
+}
+
+@media(max-width:900px){
+  .prospectSection{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+}
+@media(max-width:620px){
+  .prospectSection{
+    padding:44px 22px!important;
+  }
+  .prospectIntro h2{
+    font-size:40px;
+  }
+  .prospectForm{
+    grid-template-columns:1fr;
+    gap:14px;
+    padding:18px;
+    border-radius:18px;
+  }
+  .prospectFieldWide{
+    grid-column:1;
+  }
+  .prospectSubmitRow{
+    grid-column:1;
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .prospectSubmitRow .button{
+    width:100%;
+  }
+}
+
+
+/* =========================================================
+   V27.6 — Hero workflow card background removal
+   ========================================================= */
+.procurementFlowPanel{
+  background:transparent!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+@media(max-width:720px){
+  .procurementFlowPanel{
+    background:transparent!important;
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+}

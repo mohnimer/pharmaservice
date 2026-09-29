@@ -274,37 +274,31 @@
           <button class="publicClinicalCard coral" data-go="portal/catalogue/wounds">
             <span>Cuts &amp; Wounds</span>
             <small>Dressings, antiseptics, gauze, closure and wound protection</small>
-            <i>↗</i>
           </button>
 
           <button class="publicClinicalCard blue" data-go="portal/catalogue/breathing">
             <span>Breathing &amp; Oxygen</span>
             <small>Nebulisation, oxygen delivery, airway and respiratory support</small>
-            <i>↗</i>
           </button>
 
           <button class="publicClinicalCard orange" data-go="portal/catalogue/vitals">
             <span>Vitals &amp; Assessment</span>
             <small>Blood pressure, temperature, oximetry and clinical assessment</small>
-            <i>↗</i>
           </button>
 
           <button class="publicClinicalCard mint" data-go="portal/catalogue/infection">
             <span>Infection Control &amp; PPE</span>
             <small>PPE, hand hygiene, disinfection and waste control</small>
-            <i>↗</i>
           </button>
 
           <button class="publicClinicalCard rose" data-go="portal/catalogue/emergency">
             <span>Emergency &amp; Response</span>
             <small>Resuscitation, first response and urgent-use products</small>
-            <i>↗</i>
           </button>
 
           <button class="publicClinicalCard sand" data-go="portal/catalogue/equipment">
             <span>Equipment &amp; Mobility</span>
             <small>Clinical furniture, mobility, storage and capital equipment</small>
-            <i>↗</i>
           </button>
         </div>
 
@@ -346,7 +340,58 @@
 
   function mediaPage(){ return publicPage('media','MEDIA','Updates, resources and institutional supply notes.','A public space for Pharma Service company updates and practical institutional healthcare-supply resources.',`<section class="publicSection publicMediaGrid"><article><span>SCHOOL CLINICS</span><h3>Building a cleaner replenishment process</h3><p>Why repeat ordering should get easier after the first completed supply cycle.</p></article><article><span>PRODUCT CONTROL</span><h3>Requirement-mapped specifications</h3><p>How PSC separates regulatory requirements from exact commercial product specifications.</p></article><article><span>PSC UPDATE</span><h3>Institutional Supply Portal</h3><p>The first MVP brings ordering, quotations and replenishment into one customer account.</p></article></section>`); }
 
-  function contactPage(){ return publicPage('contact','CONTACT','Talk to Pharma Service.','For institutional supply, school-clinic enquiries and account setup, contact Pharma Service in Dubai.',`<section class="publicSection contactGrid"><div class="contactCard"><span>PHONE</span><b>+971 4 337 7004</b></div><div class="contactCard"><span>EMAIL</span><b>info@pharmaservice.ae</b></div><div class="contactCard"><span>LOCATION</span><b>Dubai, United Arab Emirates</b></div><div class="contactCard"><span>CLINIC PORTAL</span><button class="button primary" data-go="login">Open account access →</button></div></section>`); }
+  function contactPage(){ return publicPage(
+    'contact',
+    'CONTACT',
+    'Talk to Pharma Service.',
+    'Tell us what your institution needs and we’ll follow up with the right next step.',
+    `<section class="publicSection prospectSection">
+      <div class="prospectIntro">
+        <span class="kicker">START A CONVERSATION</span>
+        <h2>Tell us about your requirement.</h2>
+        <p>Whether you need a single product, recurring supply, equipment, a clinic setup or a broader institutional requirement, give us a little context and we’ll follow up directly.</p>
+      </div>
+
+      <form class="prospectForm" data-public-enquiry novalidate>
+        <div class="prospectField prospectFieldWide">
+          <label for="prospectRequirement">Tell us about your requirement</label>
+          <textarea id="prospectRequirement" name="requirement" rows="6" maxlength="4000" placeholder="What are you looking for? Include products, quantities, sites, timing or anything else that would help us understand the requirement." required></textarea>
+        </div>
+
+        <div class="prospectField">
+          <label for="prospectName">Name</label>
+          <input id="prospectName" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Your name" required>
+        </div>
+
+        <div class="prospectField">
+          <label for="prospectPhone">Contact number</label>
+          <input id="prospectPhone" name="contact_number" type="tel" autocomplete="tel" maxlength="40" placeholder="+971" required>
+        </div>
+
+        <div class="prospectField prospectFieldWide">
+          <label for="prospectEmail">Contact email</label>
+          <input id="prospectEmail" name="contact_email" type="email" autocomplete="email" maxlength="254" placeholder="name@organization.ae" required>
+        </div>
+
+        <div class="prospectHoneypot" aria-hidden="true">
+          <label for="prospectWebsite">Website</label>
+          <input id="prospectWebsite" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="prospectSubmitRow">
+          <p>By submitting, you’re asking Pharma Service to contact you about this requirement.</p>
+          <button class="button primary semanticPrimary" type="submit" data-public-enquiry-submit>Send enquiry</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="publicSection contactGrid prospectContactGrid">
+      <div class="contactCard"><span>PHONE</span><b>+971 4 337 7004</b></div>
+      <div class="contactCard"><span>EMAIL</span><b>info@pharmaservice.ae</b></div>
+      <div class="contactCard"><span>LOCATION</span><b>Dubai, United Arab Emirates</b></div>
+      <div class="contactCard"><span>CLINIC PORTAL</span><button class="button primary" data-go="login">Open account access →</button></div>
+    </section>`
+  ); }
 
   function loginPage(){ return `<main class="publicPage loginPublicPage v26LoginPage">${publicHeader('')}<section class="loginWrap v26LoginWrap"><div class="loginIntro v26LoginIntro"><span class="kicker">CLINIC PORTAL ACCESS</span><h1>Institutional procurement,<br>connected.</h1><p>Shop the catalogue, review quotations, track orders and repeat previously supplied items through one secure Pharma Service account.</p><div class="v26LoginFlow"><span>Source</span><span>Quote</span><span>Supply</span><span>Repeat</span></div><div class="loginSupport">Need access? <button data-go="contact">Contact Pharma Service</button> <span>·</span> <button data-go="demo">View guided demo</button></div></div><div class="loginCard v26LoginCard"><img src="${PSC_LOGO}" alt="Pharma Service"><span class="loginLabel">ACCOUNT ACCESS</span><h2>Clinic Portal</h2><label>Email</label><input class="input" id="mvpLoginEmail" type="email" autocomplete="email" placeholder="name@organization.ae"><label>Password</label><input class="input" id="mvpLoginPassword" type="password" autocomplete="current-password" placeholder="••••••••"><button class="button primary full" data-mvp-login>Continue to Clinic Portal →</button><p class="loginNote">Your organization and account permissions are determined automatically after sign-in.</p></div></section>${publicFooter()}</main>`; }
 
@@ -1040,6 +1085,74 @@
     $app.innerHTML=html; bind(); syncPublicHeader();
   }
 
+
+  async function submitPublicEnquiry(event){
+    event.preventDefault();
+    const form=event.currentTarget;
+    const button=form.querySelector('[data-public-enquiry-submit]');
+    const requirement=form.querySelector('[name="requirement"]')?.value.trim()||'';
+    const name=form.querySelector('[name="name"]')?.value.trim()||'';
+    const contact_number=form.querySelector('[name="contact_number"]')?.value.trim()||'';
+    const contact_email=form.querySelector('[name="contact_email"]')?.value.trim()||'';
+    const website=form.querySelector('[name="website"]')?.value.trim()||'';
+
+    if(website) return;
+
+    if(name.length<2){
+      toast('<strong>Please add your name.</strong>');
+      form.querySelector('[name="name"]')?.focus();
+      return;
+    }
+    if(contact_number.length<5){
+      toast('<strong>Please add a contact number.</strong>');
+      form.querySelector('[name="contact_number"]')?.focus();
+      return;
+    }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact_email)){
+      toast('<strong>Please enter a valid email address.</strong>');
+      form.querySelector('[name="contact_email"]')?.focus();
+      return;
+    }
+    if(requirement.length<10){
+      toast('<strong>Please tell us a little more about the requirement.</strong>');
+      form.querySelector('[name="requirement"]')?.focus();
+      return;
+    }
+
+    if(!sb){
+      toast('<strong>Could not send the enquiry.</strong><br>Please email info@pharmaservice.ae.');
+      return;
+    }
+
+    const original=button?.textContent||'Send enquiry';
+    if(button){
+      button.disabled=true;
+      button.textContent='Sending…';
+    }
+
+    try{
+      const {error}=await sb.from('institutional_enquiries').insert({
+        name,
+        contact_number,
+        contact_email,
+        requirement,
+        source_page:'public_contact'
+      });
+      if(error) throw error;
+
+      form.reset();
+      toast('<strong>Thank you.</strong><br>Your enquiry has been received and Pharma Service will follow up.');
+    }catch(e){
+      console.error('Public enquiry submission failed:',e);
+      toast('<strong>Could not send the enquiry.</strong><br>Please email info@pharmaservice.ae.');
+    }finally{
+      if(button){
+        button.disabled=false;
+        button.textContent=original;
+      }
+    }
+  }
+
   function bind(){
     document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>go(el.dataset.go)));
     document.querySelectorAll('[data-tour-next]').forEach(el=>el.addEventListener('click',()=>{ui.tourStep=Math.min(5,(ui.tourStep||0)+1);render()}));
@@ -1058,6 +1171,7 @@
     document.querySelectorAll('[data-basket-remove]').forEach(el=>el.addEventListener('click',()=>{state.basket=state.basket.filter(x=>x.sku!==el.dataset.basketRemove);save();render()}));
     document.querySelectorAll('[data-submit-request]').forEach(el=>el.addEventListener('click',submitRequest));
     document.querySelectorAll('[data-submit-custom]').forEach(el=>el.addEventListener('click',submitCustomRequest));
+    document.querySelectorAll('[data-public-enquiry]').forEach(el=>el.addEventListener('submit',submitPublicEnquiry));
     document.querySelectorAll('[data-mvp-login]').forEach(el=>el.addEventListener('click',signIn));
     document.querySelectorAll('[data-signout]').forEach(el=>el.addEventListener('click',signOut));
     document.querySelectorAll('[data-template]').forEach(el=>el.addEventListener('click',()=>applyTemplate(el.dataset.template)));

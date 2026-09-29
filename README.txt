@@ -1,16 +1,12 @@
-PSC V27.4 — Homepage Clinical Category Preview
-===============================================
+PSC V27.6 — Hero Card Background Removal
+=========================================
 
 Replace:
-- app.js
 - styles.css
 
-Changes:
-1. Hero procurement card headline becomes:
-   "Consumer health products catered to institutions and organizations."
-2. Removes the entire old:
-   Standardised supply / Controlled sourcing / Recorded transactions / Easy replenishment section.
-3. Replaces it with a public preview of the Institutional Catalogue clinical-need navigation.
-4. Uses the same pastel category language as the portal without icons or decorative circles.
-5. Cards link directly into their catalogue category.
-6. Mobile becomes a clean 2-column preview grid.
+No app.js logic changed.
+
+Change:
+- Removes the pale grey/green panel behind the SHOP / QUOTE / MANAGE / REPEAT boxes.
+- The four dark boxes now sit directly on the white hero-card background.
+- Preserves spacing and mobile 2x2 layout.
