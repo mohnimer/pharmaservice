@@ -2254,3 +2254,172 @@ button[data-cancel-quote]:hover{
     padding:0 13px!important;
   }
 }
+
+
+/* =========================================================
+   V27.2 — Group account / campus switcher
+   ========================================================= */
+.accountSwitcherWrap{
+  position:relative;
+  min-width:0;
+}
+.accountSwitcherButton{
+  min-width:245px;
+  max-width:320px;
+  min-height:54px;
+  padding:8px 13px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  text-align:left!important;
+  background:#fff!important;
+  border:1px solid var(--psc-line)!important;
+  box-shadow:none!important;
+  cursor:default;
+}
+.accountSwitcherButton.switchable{
+  cursor:pointer;
+}
+.accountSwitcherButton.switchable:hover{
+  border-color:#c9cec8!important;
+  background:#fdfcf9!important;
+}
+.accountSwitcherButton .campusPillMain{
+  min-width:0;
+  display:grid;
+  gap:2px;
+}
+.accountSwitcherButton .campusPillMain b{
+  display:block;
+  max-width:260px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:11px;
+  line-height:1.15;
+  color:#171b1a;
+}
+.accountSwitcherButton .accountGroupName{
+  display:block;
+  font-size:7.5px!important;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  font-weight:850;
+  color:#7f847f!important;
+}
+.accountChevron{
+  flex:0 0 auto;
+  font-size:15px;
+  line-height:1;
+  color:#747a76;
+  transition:transform .15s ease;
+}
+.accountSwitcherButton[aria-expanded="true"] .accountChevron{
+  transform:rotate(180deg);
+}
+
+.accountSwitcherMenu{
+  position:absolute;
+  right:0;
+  top:calc(100% + 9px);
+  z-index:90;
+  width:360px;
+  max-width:min(88vw,360px);
+  background:#fff;
+  border:1px solid #e5e2db;
+  border-radius:18px;
+  box-shadow:0 20px 55px rgba(34,28,20,.14);
+  padding:10px;
+}
+.accountMenuHead{
+  padding:9px 10px 10px;
+  border-bottom:1px solid #eeeae3;
+  display:grid;
+  gap:3px;
+}
+.accountMenuHead span{
+  font-size:7.5px;
+  letter-spacing:.13em;
+  font-weight:900;
+  color:#96918a;
+}
+.accountMenuHead b{
+  font-size:13px;
+  color:#202321;
+}
+.accountMenuList{
+  display:grid;
+  gap:3px;
+  padding-top:7px;
+}
+.accountSchoolOption{
+  width:100%;
+  border:0;
+  background:transparent;
+  border-radius:12px;
+  padding:10px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  text-align:left;
+  font-family:inherit;
+  cursor:pointer;
+  color:#202321;
+}
+.accountSchoolOption:hover{
+  background:#f7f5f0;
+}
+.accountSchoolOption.active{
+  background:#eef8f6;
+}
+.accountSchoolOption>span{
+  min-width:0;
+  display:grid;
+  gap:3px;
+}
+.accountSchoolOption b{
+  font-size:11px;
+  line-height:1.2;
+}
+.accountSchoolOption small{
+  font-size:9px;
+  color:#777b77;
+}
+.accountSchoolOption em{
+  flex:0 0 auto;
+  font-style:normal;
+  font-size:8px;
+  font-weight:850;
+  color:var(--psc-teal-dark);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+/* At smaller widths, prioritize the active account over the global search. */
+@media(max-width:980px){
+  .accountSwitcherButton{
+    min-width:210px;
+    max-width:260px;
+  }
+}
+@media(max-width:720px){
+  .accountSwitcherWrap{
+    flex:1 1 auto;
+  }
+  .accountSwitcherButton{
+    width:100%;
+    min-width:0;
+    max-width:none;
+    min-height:48px;
+  }
+  .accountSwitcherButton .campusPillMain b{
+    max-width:210px;
+    font-size:10px;
+  }
+  .accountSwitcherMenu{
+    right:0;
+    width:min(360px,calc(100vw - 34px));
+  }
+}

@@ -1,25 +1,25 @@
-PSC V27 — Semantic Design System
-================================
+PSC V27.2 — AEG / Group Account Switcher
+=========================================
 
 Replace:
 - app.js
 - styles.css
 
-No data/auth/catalogue mapping files change.
+What it does:
+- Group admins such as Loai can switch between every active institution/campus in their Supabase account group.
+- Top-right account block now shows:
+  group name -> institution -> campus.
+- Clicking the account block opens a clean site switcher.
+- Switching site reloads only that site's orders, quotations, replenishment history and custom requests.
+- The institutional catalogue remains common across accounts.
+- The last selected site is remembered locally.
+- Each site keeps its own cart so items are not accidentally carried into another site's order.
+- Single-site users do not see a switcher.
+- PSC admin behavior is unchanged.
 
-Design language implemented site-wide:
-1. Pill shape = primary/commit action only.
-2. Rounded rectangle = secondary actions, navigation, filters, selectors and editing controls.
-3. Text-only = tertiary actions.
-4. Status/meta labels no longer compete with CTAs.
-5. Consistent radius tokens replace arbitrary corner-radius values.
-6. Primary action color is Pharma Service teal.
-7. Product-card "+" becomes a clear pill-shaped Add action.
-8. Inputs, filters, navigation, cards and media now use a defined semantic radius system.
-9. Focus states and hover states are standardized.
-10. Public website + customer portal share the same interaction grammar.
-
-Semantic tokens:
-- Primary action radius: 999px
-- Secondary/control radius: 14px
-- Surface/card radius: 20px
+Current AEG group in Supabase:
+- Far Eastern Private School — Halwan Campus
+- Far Eastern Private School — Shahba Campus
+- The New Filipino Private School — Main Campus
+- The New Filipino Private School — RAK Branch
+- Universal Philippine School — Al Ain Campus

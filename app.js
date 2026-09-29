@@ -9,6 +9,8 @@
   const seed = {
     groupName: '',
     campus: '',
+    activeSchoolId: '',
+    basketsBySchool: {},
     accountEmail: '',
     basket: [],
     customProducts: {},
@@ -24,7 +26,7 @@
   let authReady = false;
 
   let state = load();
-  let ui = { mobile:false, basket:false, modal:null, catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All' };
+  let ui = { mobile:false, basket:false, modal:null, accountMenu:false, catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All' };
 
   const INSTITUTIONAL_CATALOGUE_TEMPLATE = {
     id:'institutional-catalogue-v1',
@@ -89,7 +91,15 @@
     try { const raw = localStorage.getItem(STORAGE); return raw ? {...seed,...JSON.parse(raw)} : JSON.parse(JSON.stringify(seed)); }
     catch { return JSON.parse(JSON.stringify(seed)); }
   }
-  function save(){ try{ localStorage.setItem(STORAGE, JSON.stringify(state)); }catch{} }
+  function save(){
+    try{
+      if(state.activeSchoolId){
+        state.basketsBySchool=state.basketsBySchool||{};
+        state.basketsBySchool[state.activeSchoolId]=state.basket||[];
+      }
+      localStorage.setItem(STORAGE, JSON.stringify(state));
+    }catch{}
+  }
   function esc(v=''){ return String(v).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':'&quot;'}[c])); }
   function money(n){ return Number.isFinite(Number(n)) ? `AED ${Number(n).toFixed(2)}` : '—'; }
   function date(v){ try{return new Date(v).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})}catch{return v} }
@@ -102,6 +112,12 @@
   function isArchived(r){ return r.status==='Cancelled' && r.cancelledAt && ((Date.now()-new Date(r.cancelledAt).getTime())/(1000*60*60*24) >= 30); }
   function customerVisibleRequests(){ return state.requests.filter(r=>r.campus===state.campus && !isArchived(r)); }
   function accountEmailLabel(){ return state.accountEmail || 'your registered account email'; }
+  function schoolLabel(s){
+    if(!s) return 'Institutional account';
+    return [s.name,s.campus_name].filter(Boolean).join(' — ');
+  }
+  function availableSchools(){ return (authContext?.schools||[]).filter(Boolean); }
+  function canSwitchSchools(){ return !authContext?.isPscAdmin && availableSchools().length>1; }
   function isCapitalProduct(p){ return !!p && ['Furniture & Mobility','Diagnostics & Monitoring','Emergency & Oxygen'].includes(p.category); }
   function product(sku){
     const base = D.products.find(p=>p.pscSku===sku) || (state.customProducts||{})[sku];
@@ -163,7 +179,24 @@
           <div class="topbarBrandSlot"><img src="${PSC_LOGO}" alt="Pharma Service"></div>
           <div class="topbarSearch"><span class="searchIcon">${icon('search')}</span><input placeholder="Search supplies, equipment, or requests..." aria-label="Search"></div>
           <div class="topbarActions topbarActionsV4">
-            ${admin?'<button class="iconShell" aria-label="Notifications">'+icon('bell')+'</button><span class="userPill"><span class="avatarDot">MH</span><span><b>Mohamed</b><small>PSC admin</small></span></span>':`<button class="iconShell" aria-label="Notifications">${icon('bell')}</button><button class="campusPill"><span class="campusPillMain"><b>${esc(state.campus)}</b><small>Institutional account</small></span></button><button class="button dark pillBasket" data-basket>Cart <b>${basketQty()}</b></button>`}
+            ${admin?'<button class="iconShell" aria-label="Notifications">'+icon('bell')+'</button><span class="userPill"><span class="avatarDot">MH</span><span><b>Mohamed</b><small>PSC admin</small></span></span>':`<button class="iconShell" aria-label="Notifications">${icon('bell')}</button>
+            <div class="accountSwitcherWrap">
+              <button class="campusPill accountSwitcherButton ${canSwitchSchools()?'switchable':''}" ${canSwitchSchools()?'data-account-switcher':''} aria-expanded="${ui.accountMenu?'true':'false'}">
+                <span class="campusPillMain">
+                  <small class="accountGroupName">${esc(state.groupName||'Institutional account')}</small>
+                  <b>${esc(schoolLabel(authContext?.school)||state.campus)}</b>
+                </span>
+                ${canSwitchSchools()?'<span class="accountChevron">⌄</span>':''}
+              </button>
+              ${ui.accountMenu&&canSwitchSchools()?`<div class="accountSwitcherMenu">
+                <div class="accountMenuHead"><span>SWITCH ACCOUNT</span><b>${esc(state.groupName||'Account group')}</b></div>
+                <div class="accountMenuList">${availableSchools().map(sc=>`<button class="accountSchoolOption ${sc.id===authContext?.school?.id?'active':''}" data-school-select="${sc.id}">
+                  <span><b>${esc(sc.name)}</b><small>${esc(sc.campus_name||'Main account')}</small></span>
+                  ${sc.id===authContext?.school?.id?'<em>Current</em>':''}
+                </button>`).join('')}</div>
+              </div>`:''}
+            </div>
+            <button class="button dark pillBasket" data-basket>Cart <b>${basketQty()}</b></button>`}
           </div>
         </header>
         <div class="contentWrap v7ContentWrap">${content}</div>
@@ -438,7 +471,7 @@
 
       ${clinicalNeedRibbon(selected.id)}
 
-      <div class="notice shopNotice compactInstitutionalNotice"><strong>One accountable supply relationship.</strong> PSC reviews specification, source, availability and commercial terms before quotation. Regulated lines remain subject to the applicable licensed supply route and professional controls.</div>
+      <div class="notice shopNotice compactInstitutionalNotice"><strong>One accountable supply relationship.</strong> PSC reviews specification, availability and commercial terms before quotation. Regulated lines remain subject to the applicable licensed supply route and professional controls.</div>
 
       <div class="filterBar shopFilterBar v25FilterBar v26FilterBar">
         <div class="searchInput"><span>⌕</span><input data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search product, brand, PSC SKU, supplier SKU or clinical need…"></div>
@@ -459,7 +492,7 @@
       <div class="productGrid v25ProductGrid">${filtered.map(productCard).join('')}</div>
 
       <section class="customRequestPanel v25CustomRequest v26CustomRequest">
-        <div><span class="eyebrow">CAN'T FIND IT?</span><h2>Request something else.</h2><p>Describe the product, brand, size or specification. PSC will review it as an account-specific sourcing request.</p></div>
+        <div><span class="eyebrow">CAN'T FIND IT?</span><h2>Request something else.</h2><p>Describe the product, brand, size or specification. PSC will review it as an account-specific product request.</p></div>
         <div class="customRequestForm"><textarea id="customRequestText" class="textarea" placeholder="Example: paediatric nebulizer masks compatible with our existing unit…"></textarea><div class="customRequestActions"><label>Qty <input id="customRequestQty" type="number" min="1" value="1"></label><button class="button dark semanticPrimary" data-submit-custom>Send custom request →</button></div></div>
       </section>
     `);
@@ -615,21 +648,20 @@
     const needTags=needs.map(id=>`<span class="modalNeedChip" style="--chip-bg:${clinicalNeedMeta(id).bg};--chip-ink:${clinicalNeedMeta(id).ink}">${esc(clinicalNeedMeta(id).label)}</span>`).join('');
     const image=p.imageUrl
       ? `<img src="${esc(p.imageUrl)}" alt="${esc(displayName)}" onerror="this.onerror=null;this.src='${esc(fallback)}'">`
-      : `<div class="detailNeedVisual" style="--need-bg:${primary.bg};--need-ink:${primary.ink}"><span>${clinicalNeedIcon(primary.icon)}</span><b>${esc(primary.label)}</b></div>`;
+      : `<div class="detailNeedVisual" style="--need-bg:${primary.bg};--need-ink:${primary.ink}"><b>${esc(primary.label)}</b></div>`;
 
     return `<div class="productDetailModal">
-      <div class="modalHeader"><div><span class="eyebrow">${esc(primary.label)}</span><h2>${esc(displayName)}</h2><div class="smallMuted mono">${esc(p.pscSku)}${p.supplierSku?` · SUP ${esc(p.supplierSku)}`:''}</div></div><button class="iconBtn" data-modal-close>×</button></div>
+      <div class="modalHeader"><div><span class="eyebrow">${esc(primary.label)}</span><h2>${esc(displayName)}</h2><div class="smallMuted mono">${esc(p.pscSku)}</div></div><button class="iconBtn" data-modal-close>×</button></div>
       <div class="productDetailGrid">
-        <div class="detailImagePane">${image}<div class="detailImageMeta"><b>${esc(p.brand||'Institutional range')}</b><span>${esc(pack)}</span><small>${esc(p.catalogueEvidence||p.imageMatchStatus||p.evidenceStatus||'Current supplier evidence required before commitment.')}</small></div><div class="modalNeedChips">${needTags}</div></div>
+        <div class="detailImagePane">${image}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span></div><div class="modalNeedChips">${needTags}</div></div>
         <div class="detailContentPane">
-          ${mapped?`<div class="regulatoryHero mapped v25DhaHero"><div class="dhaModalBadge"><span>DHA</span><b>Mapped requirement</b></div><h3>${esc(p.dhaRequirement||'Mapped requirement')}</h3><p>${esc(p.dhaReference||'DHA requirement')} · ${esc(p.dhaStatus||'Status to verify')}</p></div>`:`<div class="regulatoryHero support"><span>INSTITUTIONAL CATALOGUE</span><h3>${esc(p.productType||'Institutional supply')}</h3><p>${esc(p.portalTreatment||'Specification and sourcing are reviewed before quotation.')}</p></div>`}
+          ${mapped?`<div class="regulatoryHero mapped v25DhaHero"><div class="dhaModalBadge"><span>DHA</span><b>Mapped requirement</b></div><h3>${esc(p.dhaRequirement||'Mapped requirement')}</h3><p>${esc(p.dhaReference||'DHA requirement')} · ${esc(p.dhaStatus||'Status to verify')}</p></div>`:`<div class="regulatoryHero support"><span>INSTITUTIONAL CATALOGUE</span><h3>${esc(p.productType||'Institutional supply')}</h3><p>Product specification is reviewed before quotation.</p></div>`}
           <div class="specBlocks">
             ${mapped?`<section><span class="specLabel">DHA REQUIREMENT</span><p>${esc(p.dhaRequirement)}</p></section><section><span class="specLabel">REFERENCE & STATUS</span><p><strong>${esc(p.dhaReference||'—')}</strong> · ${esc(p.dhaStatus||'Needs verification')}</p>${p.dhaCondition?`<small>${esc(p.dhaCondition)}</small>`:''}</section>`:''}
-            <section><span class="specLabel">PSC COMMERCIAL SPECIFICATION</span><p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification to be confirmed before quotation.')}</p></section>
-            <section><span class="specLabel">SOURCING & EVIDENCE</span><p><strong>${esc(p.institutionalProvisional?'Specification-led catalogue line':p.supplier||'Source to confirm')}</strong></p><small>${esc(p.catalogueEvidence||p.evidenceStatus||'Supplier evidence required before commitment.')}</small></section>
+            <section><span class="specLabel">PRODUCT SPECIFICATION</span><p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></section>
           </div>
           ${mapped?`<div class="mappingDisclosure"><b>Regulatory clarity</b><p>Mapped to the applicable DHA clinic requirement. This is not a DHA product endorsement or product approval. Exact model suitability remains subject to specification verification.</p></div>`:''}
-          ${p.regulated?'<div class="licensedNotice"><b>Licensed supply route</b><p>Availability and supply remain subject to the applicable UAE licensing, recipient authorization, product registration, storage, batch/expiry and professional controls.</p></div>':''}
+          ${p.regulated?'<div class="licensedNotice"><b>Licensed supply route</b><p>Availability and supply remain subject to applicable UAE licensing, recipient authorization, product registration, storage, batch/expiry and professional controls.</p></div>':''}
           <div class="detailActions"><button class="button light" data-modal-close>Close</button><button class="button primary" data-add="${p.pscSku}">Add to request</button></div>
         </div>
       </div>
@@ -680,26 +712,104 @@
     ]);
     if(profileError) console.warn('Profile lookup:',profileError.message);
     if(membershipError) throw membershipError;
+
     const isPscAdmin=!!profile?.is_psc_admin;
     const membership=(memberships||[])[0]||null;
-    let group=null, school=null;
+    let group=null, school=null, schools=[];
+
     if(membership?.group_id){
       const {data:g,error:e}=await sb.from('account_groups').select('id,name,slug').eq('id',membership.group_id).single();
-      if(e) throw e; group=g;
+      if(e) throw e;
+      group=g;
+
       if(membership.school_id){
-        const {data:sc,error:se}=await sb.from('schools').select('id,name,campus_name,group_id').eq('id',membership.school_id).single();
-        if(se) throw se; school=sc;
+        const {data:sc,error:se}=await sb.from('schools')
+          .select('id,name,campus_name,group_id,active')
+          .eq('id',membership.school_id)
+          .eq('active',true)
+          .single();
+        if(se) throw se;
+        schools=sc?[sc]:[];
       } else {
-        const {data:schools,error:se}=await sb.from('schools').select('id,name,campus_name,group_id').eq('group_id',membership.group_id).eq('active',true).order('name').limit(1);
-        if(se) throw se; school=(schools||[])[0]||null;
+        const {data:scs,error:se}=await sb.from('schools')
+          .select('id,name,campus_name,group_id,active')
+          .eq('group_id',membership.group_id)
+          .eq('active',true)
+          .order('name',{ascending:true})
+          .order('campus_name',{ascending:true});
+        if(se) throw se;
+        schools=scs||[];
       }
+
+      school=schools.find(sc=>sc.id===state.activeSchoolId)
+        || schools.find(sc=>schoolLabel(sc)===state.campus)
+        || schools[0]
+        || null;
     }
-    authContext={userId:uid,email:session.user.email||'',isPscAdmin,role:membership?.role|| (isPscAdmin?'psc_admin':''),group,school};
+
+    authContext={
+      userId:uid,
+      email:session.user.email||'',
+      fullName:profile?.full_name||'',
+      isPscAdmin,
+      role:membership?.role||(isPscAdmin?'psc_admin':''),
+      group,
+      school,
+      schools
+    };
+
     state.accountEmail=session.user.email||'';
     if(group) state.groupName=group.name;
-    if(school) state.campus=school.name;
+
+    if(school){
+      const previousId=state.activeSchoolId;
+      if(previousId && previousId!==school.id){
+        state.basketsBySchool=state.basketsBySchool||{};
+        state.basketsBySchool[previousId]=state.basket||[];
+      }
+      state.activeSchoolId=school.id;
+      state.campus=schoolLabel(school);
+      state.basketsBySchool=state.basketsBySchool||{};
+      if(state.basketsBySchool[school.id]) state.basket=state.basketsBySchool[school.id];
+      else state.basketsBySchool[school.id]=state.basket||[];
+    }
+
     await loadOrdersFromDatabase();
     save();
+  }
+
+  async function switchInstitutionAccount(schoolId){
+    if(!authContext || authContext.isPscAdmin) return;
+    const schools=availableSchools();
+    const next=schools.find(sc=>sc.id===schoolId);
+    if(!next || next.id===authContext?.school?.id){
+      ui.accountMenu=false;
+      render();
+      return;
+    }
+
+    state.basketsBySchool=state.basketsBySchool||{};
+    if(authContext?.school?.id){
+      state.basketsBySchool[authContext.school.id]=JSON.parse(JSON.stringify(state.basket||[]));
+    }
+
+    authContext.school=next;
+    state.activeSchoolId=next.id;
+    state.campus=schoolLabel(next);
+    state.basket=JSON.parse(JSON.stringify(state.basketsBySchool[next.id]||[]));
+    ui.accountMenu=false;
+    ui.basket=false;
+    ui.modal=null;
+
+    try{
+      await loadOrdersFromDatabase();
+      save();
+      render();
+      toast(`<strong>Account switched.</strong><br>${esc(schoolLabel(next))}`);
+    }catch(e){
+      console.error(e);
+      toast('<strong>Could not switch account.</strong><br>Please try again.');
+    }
   }
 
   async function loadOrdersFromDatabase(){
@@ -716,7 +826,7 @@
     const [{data:lines,error:lineError},{data:quotes,error:quoteError},{data:schools,error:schoolError},{data:groups,error:groupError}] = await Promise.all([
       sb.from('order_lines').select('*').in('order_id',ids),
       sb.from('quotes').select('*').in('order_id',ids),
-      authContext?.isPscAdmin ? sb.from('schools').select('id,name,group_id') : Promise.resolve({data:[authContext.school],error:null}),
+      authContext?.isPscAdmin ? sb.from('schools').select('id,name,campus_name,group_id') : Promise.resolve({data:[authContext.school],error:null}),
       authContext?.isPscAdmin ? sb.from('account_groups').select('id,name') : Promise.resolve({data:authContext.group?[authContext.group]:[],error:null})
     ]);
     if(lineError) throw lineError; if(quoteError) throw quoteError; if(schoolError) throw schoolError; if(groupError) throw groupError;
@@ -734,7 +844,7 @@
         dbId:o.id,
         id:o.order_number,
         groupName:gp.name||'',
-        campus:sc.name||state.campus||'Clinic',
+        campus:schoolLabel(sc)||state.campus||'Clinic',
         requester:'Clinic account',
         createdAt:o.created_at,
         deliveredAt:o.delivered_at,
@@ -887,6 +997,8 @@
     document.querySelectorAll('[data-mobile-open]').forEach(el=>el.addEventListener('click',()=>{ui.mobile=true;render()}));
     document.querySelectorAll('[data-mobile-close]').forEach(el=>el.addEventListener('click',()=>{ui.mobile=false;render()}));
     document.querySelectorAll('[data-campus]').forEach(el=>el.addEventListener('change',e=>{state.campus=e.target.value;save();render()}));
+    document.querySelectorAll('[data-account-switcher]').forEach(el=>el.addEventListener('click',()=>{ui.accountMenu=!ui.accountMenu;render()}));
+    document.querySelectorAll('[data-school-select]').forEach(el=>el.addEventListener('click',async()=>{await switchInstitutionAccount(el.dataset.schoolSelect)}));
     document.querySelectorAll('[data-basket]').forEach(el=>el.addEventListener('click',()=>{ui.basket=true;render()}));
     document.querySelectorAll('[data-close-basket]').forEach(el=>el.addEventListener('click',()=>{ui.basket=false;render()}));
     document.querySelectorAll('[data-product-view]').forEach(el=>el.addEventListener('click',()=>{ui.modal={type:'product',sku:el.dataset.productView};render()}));
