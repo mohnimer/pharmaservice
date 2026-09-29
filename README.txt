@@ -1,16 +1,25 @@
-PSC V26.1 — Product Card Cleanup
-=================================
+PSC V27 — Semantic Design System
+================================
 
 Replace:
 - app.js
 - styles.css
 
-Changes:
-- Removes product code from catalogue cards.
-- Removes the generic SPECIFICATION-LED label above product names.
-- Removes the yellow Specification-led tag.
-- Keeps genuine brand names where available.
-- Keeps useful Clinical Need tags.
-- Keeps DHA Requirement / Licensed Route badges.
-- Fixes empty/null prices displaying as AED 0.00; they now show Request quote.
-- Product codes remain available inside product detail views for controlled procurement use.
+No data/auth/catalogue mapping files change.
+
+Design language implemented site-wide:
+1. Pill shape = primary/commit action only.
+2. Rounded rectangle = secondary actions, navigation, filters, selectors and editing controls.
+3. Text-only = tertiary actions.
+4. Status/meta labels no longer compete with CTAs.
+5. Consistent radius tokens replace arbitrary corner-radius values.
+6. Primary action color is Pharma Service teal.
+7. Product-card "+" becomes a clear pill-shaped Add action.
+8. Inputs, filters, navigation, cards and media now use a defined semantic radius system.
+9. Focus states and hover states are standardized.
+10. Public website + customer portal share the same interaction grammar.
+
+Semantic tokens:
+- Primary action radius: 999px
+- Secondary/control radius: 14px
+- Surface/card radius: 20px

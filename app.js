@@ -229,7 +229,7 @@
       </section>
       <section class="beliefSection operationsBelief"><div class="beliefRule"></div><div class="beliefGrid"><div><span class="kicker">WHY THIS EXISTS</span><h2>Healthcare supply should run as reliably as the clinic itself.</h2></div><div><p>A school clinic depends on medicines, consumables and medical equipment being correct, available and properly documented. Pharma Service brings those moving parts into one controlled supply relationship.</p><p class="beliefStrong">Standardised products. Appropriate regulatory routes. Clear records. Consistent replenishment. One accountable supplier.</p><p>From the first requirement to the next repeat order, the objective is simple: keep the clinic supplied and ready without forcing the clinical team to manage the complexity behind it.</p><div class="beliefCloser">The clinic should manage healthcare.<br><b>It shouldn’t have to manage the healthcare supply chain.</b></div></div></div></section>
       <section class="landingModules operationalModules"><div class="sectionTitleRow"><span class="kicker">WHAT PHARMA SERVICE CONTROLS</span><button class="textAction" data-go="demo">See how it works →</button></div><div class="moduleGrid"><article><b>01</b><h3>Standardised supply</h3><p>One controlled product master with clear specifications and requirement mapping where applicable.</p></article><article><b>02</b><h3>Controlled sourcing</h3><p>PSC validates the product, supply route and current commercial evidence before commitment.</p></article><article><b>03</b><h3>Recorded transactions</h3><p>Orders, quotations, decisions and delivery history stay tied to the institutional account.</p></article><article><b>04</b><h3>Easy replenishment</h3><p>Previously delivered lines become simple repeat requests instead of starting from zero each time.</p></article></div></section>
-      <section class="demoTeaser"><div><span class="kicker">SEE HOW IT WORKS</span><h2>Take a guided tour of Pharma Service.</h2><p>See the institutional customer journey from product selection and quotation through order management, delivery and repeat purchasing.</p></div><button class="button dark large" data-go="demo">Take guided tour →</button></section>
+      <section class="demoTeaser"><div><span class="kicker">SEE HOW IT WORKS</span><h2>Take a guided tour of Pharma Service.</h2><p>See the institutional customer journey from product selection and quotation through order management, delivery and repeat purchasing.</p></div><button class="button dark large semanticPrimary" data-go="demo">Take guided tour →</button></section>
       ${publicFooter()}
     </main>`;
   }
@@ -295,7 +295,7 @@
 
       <section class="v26NeedPreview">
         <div class="v26SectionHead"><div><span class="eyebrow">CONTINUE BY CLINICAL NEED</span><h2>Start where the clinical work starts.</h2></div><button data-go="portal/catalogue">View all needs →</button></div>
-        <div class="v26NeedStrip">${quickNeeds.map(c=>`<button class="v26MiniNeed" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}"><span>${clinicalNeedIcon(c.icon)}</span><b>${esc(c.label)}</b></button>`).join('')}</div>
+        <div class="v26NeedStrip">${quickNeeds.map(c=>`<button class="v26MiniNeed" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}"><b>${esc(c.label)}</b></button>`).join('')}</div>
       </section>
 
       <div class="v26OperationsStrip">
@@ -393,8 +393,8 @@
   }
 
   function clinicalNeedRibbon(activeId='all'){
-    const home=`<button class="needRibbonHome" data-go="portal/catalogue" aria-label="Catalogue home">${clinicalNeedIcon('all')}<span>Catalogue home</span></button>`;
-    const items=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.map(c=>`<button class="needRibbonChip ${activeId===c.id?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}" aria-current="${activeId===c.id?'page':'false'}"><span class="needRibbonIcon">${clinicalNeedIcon(c.icon)}</span><b>${esc(c.label)}</b></button>`).join('');
+    const home=`<button class="needRibbonHome" data-go="portal/catalogue" aria-label="Catalogue home"><span>Catalogue home</span></button>`;
+    const items=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.map(c=>`<button class="needRibbonChip ${activeId===c.id?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}" aria-current="${activeId===c.id?'page':'false'}"><b>${esc(c.label)}</b></button>`).join('');
     return `<nav class="needRibbon" aria-label="Clinical needs">${home}<div class="needRibbonTrack">${items}</div></nav>`;
   }
 
@@ -432,7 +432,6 @@
 
     return shell(`
       <section class="categoryHero" style="--need-bg:${selected.bg};--need-ink:${selected.ink}">
-        <div class="categoryHeroIcon">${clinicalNeedIcon(selected.icon)}</div>
         <div class="categoryHeroCopy"><span class="eyebrow">INSTITUTIONAL CATALOGUE</span><h1>${esc(selected.label)}</h1><p>${esc(selected.note)}</p></div>
         <div class="categoryHeroCount"><b>${filtered.length}</b><span>products</span></div>
       </section>
@@ -461,7 +460,7 @@
 
       <section class="customRequestPanel v25CustomRequest v26CustomRequest">
         <div><span class="eyebrow">CAN'T FIND IT?</span><h2>Request something else.</h2><p>Describe the product, brand, size or specification. PSC will review it as an account-specific sourcing request.</p></div>
-        <div class="customRequestForm"><textarea id="customRequestText" class="textarea" placeholder="Example: paediatric nebulizer masks compatible with our existing unit…"></textarea><div class="customRequestActions"><label>Qty <input id="customRequestQty" type="number" min="1" value="1"></label><button class="button dark" data-submit-custom>Send custom request →</button></div></div>
+        <div class="customRequestForm"><textarea id="customRequestText" class="textarea" placeholder="Example: paediatric nebulizer masks compatible with our existing unit…"></textarea><div class="customRequestActions"><label>Qty <input id="customRequestQty" type="number" min="1" value="1"></label><button class="button dark semanticPrimary" data-submit-custom>Send custom request →</button></div></div>
       </section>
     `);
   }
@@ -474,20 +473,23 @@
     const fallback=p.fallbackAsset||'./assets/products/clinic-basics.jpg';
     const visual=p.imageUrl
       ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img src="${esc(p.imageUrl)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(fallback)}'"><span class="imageSourceTag">${p.imageMatchStatus&&p.imageMatchStatus.startsWith('Exact')?'Product image':'Product visual'}</span></button>`
-      : `<button class="productVisual productNeedVisual productVisualButton" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)}"><span class="productNeedIcon">${clinicalNeedIcon(need.icon)}</span><small>${esc(need.label)}</small></button>`;
+      : `<button class="productVisual productNeedVisual productVisualButton" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)}"><span class="productNeedText">${esc(need.label)}</span></button>`;
 
-    const tags=clinicalNeedIds(p).slice(0,2).map(id=>`<span>${esc(clinicalNeedMeta(id).label)}</span>`).join('');
+    const needText=clinicalNeedIds(p).slice(0,2).map(id=>esc(clinicalNeedMeta(id).label)).join(' · ');
     const hasRealBrand=p.brand && p.brand!=='Specification-led' && p.brand!=='Institutional range';
     const hasPrice=p.contractPrice!==null && p.contractPrice!==undefined && p.contractPrice!=='' && Number.isFinite(Number(p.contractPrice)) && Number(p.contractPrice)>0;
 
-    return `<article class="productCard v25ProductCard v261ProductCard">
+    return `<article class="productCard v25ProductCard v261ProductCard v262ProductCard">
       ${visual}
-      <div class="productBadgeRow">${p.dhaMapped?'<span class="dhaRequirementBadge"><i>DHA</i><b>Requirement</b></span>':''}${p.regulated?'<span class="restricted">Licensed route</span>':''}</div>
+      ${(p.dhaMapped||p.regulated)?`<div class="productStatusText">${p.dhaMapped?'<span>DHA requirement</span>':''}${p.regulated?'<span>Licensed route</span>':''}</div>`:''}
       ${hasRealBrand?`<div class="productBrand">${esc(p.brand)}</div>`:''}
       <button class="productTitleButton" data-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button>
       <p class="pack">${esc(pack)}</p>
-      <div class="productFlags">${tags}</div>
-      <div class="productBottom"><div class="priceBlock">${hasPrice?`<small>ACCOUNT PRICE</small><b>${money(p.contractPrice)}</b>`:'<small>INSTITUTIONAL PRICE</small><b>Request quote</b>'}</div><div class="productCardActions"><button class="specLink" data-product-view="${p.pscSku}">Details</button><button class="squareAdd" data-add="${p.pscSku}" aria-label="Add to request">+</button></div></div>
+      ${needText?`<div class="productNeedTags">${needText}</div>`:''}
+      <div class="productBottom">
+        <div class="priceBlock">${hasPrice?`<b>${money(p.contractPrice)}</b>`:'<b>Request quote</b>'}</div>
+        <div class="productCardActions"><button class="specLink" data-product-view="${p.pscSku}">Details</button><button class="squareAdd semanticPrimary" data-add="${p.pscSku}" aria-label="Add to request">Add</button></div>
+      </div>
     </article>`;
   }
 
@@ -505,7 +507,7 @@
       const visual=x.p.imageUrl?`<img src="${esc(x.p.imageUrl)}" alt="${esc(x.p.name)}">`:`<span>${esc(x.p.brand.slice(0,2).toUpperCase())}</span>`;
       const deliveredLabel=x.deliveredAt?date(x.deliveredAt):'Date to be confirmed';
       const actionLabel=capital?'Request another':`Replenish ${x.qty}`;
-      return `<article class="replenishCard"><div class="replenishVisual">${visual}</div><div class="replenishBody"><span class="sku">${x.p.pscSku}</span><h3>${esc(x.p.name)}</h3><p>${esc(x.p.pack)}</p><div class="replenishMeta"><div><span>LAST QTY</span><b>${x.qty}</b></div><div><span>LAST DELIVERED</span><b>${deliveredLabel}</b></div></div><button class="button ${capital?'dark':'primary'} full" data-replenish="${x.p.pscSku}|${x.qty}">${actionLabel} →</button></div></article>`;
+      return `<article class="replenishCard"><div class="replenishVisual">${visual}</div><div class="replenishBody"><span class="sku">${x.p.pscSku}</span><h3>${esc(x.p.name)}</h3><p>${esc(x.p.pack)}</p><div class="replenishMeta"><div><span>LAST QTY</span><b>${x.qty}</b></div><div><span>LAST DELIVERED</span><b>${deliveredLabel}</b></div></div><button class="button ${capital?'dark':'primary'} full semanticPrimary" data-replenish="${x.p.pscSku}|${x.qty}">${actionLabel} →</button></div></article>`;
     }).join('');
     const body=items.length?`<div class="replenishGrid">${cards}</div>`:'<div class="emptyState"><h3>No delivered items yet</h3><p>Products will appear here after their first completed order.</p></div>';
     return shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">PREVIOUSLY DELIVERED</span><h1>Replenish</h1><p>Repeat products already supplied to this clinic. Consumables can go straight to cart; capital equipment can be requested again for PSC review.</p></div><button class="button dark" data-basket>Open cart</button></div>${body}`);

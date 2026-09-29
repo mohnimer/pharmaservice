@@ -1608,3 +1608,649 @@ body{font-family:"DM Sans",Arial,Helvetica,sans-serif;background:linear-gradient
 @media(max-width:620px){
   .v261ProductCard{min-height:390px!important}
 }
+
+
+/* =========================================================
+   V26.2 — Clean minimal catalogue
+   Remove AI-looking pills, icon bubbles and decorative circles.
+   ========================================================= */
+
+/* Product cards */
+.v262ProductCard{
+  min-height:392px!important;
+  padding:13px 13px 14px!important;
+}
+.v262ProductCard .productBrand{
+  font-size:8px!important;
+  letter-spacing:.08em!important;
+  margin-top:8px!important;
+  color:#8c8a86!important;
+}
+.v262ProductCard .productTitleButton h3{
+  margin-top:3px!important;
+}
+.v262ProductCard .pack{
+  margin-bottom:8px!important;
+}
+.v262ProductCard .productStatusText{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:10px;
+  min-height:13px;
+}
+.v262ProductCard .productStatusText span{
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  border-radius:0!important;
+  font-size:8px!important;
+  line-height:1.2!important;
+  font-weight:800!important;
+  letter-spacing:.07em!important;
+  text-transform:uppercase!important;
+  color:#7b7770!important;
+}
+.v262ProductCard .productStatusText span+span:before{
+  content:"·";
+  margin-right:10px;
+  color:#a7a29a;
+}
+.v262ProductCard .productNeedTags{
+  margin-top:auto;
+  padding-top:12px;
+  font-size:9px;
+  line-height:1.35;
+  color:#74716b;
+  font-weight:650;
+}
+.v262ProductCard .productFlags,
+.v262ProductCard .productBadgeRow{
+  display:none!important;
+}
+.v262ProductCard .priceBlock small{
+  display:none!important;
+}
+.v262ProductCard .priceBlock b{
+  font-size:14px!important;
+  margin-top:0!important;
+}
+.v262ProductCard .productBottom{
+  margin-top:12px!important;
+}
+
+/* No icon bubble on specification-led / placeholder product visual */
+.productNeedVisual{
+  justify-content:flex-end!important;
+  align-items:flex-start!important;
+  padding:18px!important;
+  background:var(--need-bg)!important;
+}
+.productNeedVisual:before,
+.productNeedVisual:after{
+  display:none!important;
+}
+.productNeedText{
+  position:relative;
+  z-index:2;
+  font-size:11px!important;
+  font-weight:800!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+  color:var(--need-ink)!important;
+}
+.productNeedIcon{
+  display:none!important;
+}
+
+/* Category cards: no generated icon, no translucent circles */
+.clinicNeedCard:before,
+.clinicNeedCard:after{
+  display:none!important;
+}
+.clinicNeedIcon{
+  display:none!important;
+}
+.clinicNeedCopy{
+  left:18px!important;
+  right:42px!important;
+  bottom:18px!important;
+}
+.clinicNeedCopy b{
+  font-size:18px!important;
+}
+.clinicNeedArrow{
+  opacity:.52!important;
+}
+
+/* Category page: remove icon block and decorative ring */
+.categoryHero{
+  grid-template-columns:1fr auto!important;
+  min-height:150px!important;
+}
+.categoryHero:after{
+  display:none!important;
+}
+.categoryHeroIcon{
+  display:none!important;
+}
+
+/* Ribbon: text only. Active state uses a quiet underline / tint, not a pill bubble. */
+.needRibbon{
+  gap:6px!important;
+  padding:7px 10px!important;
+}
+.needRibbonHome{
+  background:transparent!important;
+  color:#3c4342!important;
+  border-radius:0!important;
+  padding:7px 8px!important;
+  border-right:1px solid #e7e3dc!important;
+}
+.needRibbonHome svg,
+.needRibbonIcon{
+  display:none!important;
+}
+.needRibbonChip{
+  border:0!important;
+  background:transparent!important;
+  border-radius:0!important;
+  padding:7px 8px!important;
+  color:#77746f!important;
+}
+.needRibbonChip:hover{
+  background:transparent!important;
+  color:#262927!important;
+}
+.needRibbonChip.active{
+  background:transparent!important;
+  color:#171918!important;
+  box-shadow:inset 0 -2px 0 var(--need-ink)!important;
+}
+.needRibbonChip b{
+  font-size:9px!important;
+}
+
+/* Dashboard clinical-need strip: text only */
+.v26MiniNeed{
+  border-radius:10px!important;
+  padding:10px 12px!important;
+}
+.v26MiniNeed span{
+  display:none!important;
+}
+.v26MiniNeed b{
+  font-size:9px!important;
+}
+
+/* Catalogue shortcut and dashboard action icons were decorative; remove them */
+.catalogueShortcut>span,
+.v26ActionIcon{
+  display:none!important;
+}
+.catalogueShortcut{
+  grid-template-columns:1fr auto!important;
+}
+.v26ActionCard{
+  padding-top:20px!important;
+}
+.v26ActionCard h2{
+  margin-top:46px!important;
+}
+
+/* Status badges across product cards should not look like bubbles */
+.v262ProductCard .dhaRequirementBadge,
+.v262ProductCard .restricted{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  padding:0!important;
+}
+
+/* Remove decorative transparent rings from the V26 catalogue/home graphics */
+.v26ActionCard:after,
+.v26LoginIntro:before,
+.v26CatalogueLanding:before,
+.v25NeedJourney:before{
+  display:none!important;
+}
+
+/* Keep color as layout/navigation, not decoration */
+.v25NeedJourney{
+  background:#fff7e3!important;
+}
+
+/* Mobile stays clean */
+@media(max-width:620px){
+  .v262ProductCard{min-height:375px!important}
+  .clinicNeedCopy b{font-size:14px!important}
+  .categoryHero{grid-template-columns:1fr!important}
+  .categoryHeroCount{grid-column:1!important}
+}
+
+
+/* =========================================================
+   V27 — Pharma Service Semantic Design System
+   Shape communicates hierarchy:
+   - Pill = commit / advance / primary action
+   - Rounded rectangle = navigate / filter / edit / secondary action
+   - Text = tertiary / low-friction navigation
+   ========================================================= */
+
+:root{
+  --psc-teal:#27a99f;
+  --psc-teal-dark:#16867f;
+  --psc-ink:#111817;
+  --psc-muted:#707873;
+  --psc-canvas:#faf8f2;
+  --psc-surface:#ffffff;
+  --psc-line:#e6e3dc;
+
+  --psc-radius-primary:999px;
+  --psc-radius-control:14px;
+  --psc-radius-surface:20px;
+
+  --psc-control-h:42px;
+  --psc-focus:0 0 0 3px rgba(39,169,159,.18);
+}
+
+/* ---------- Global interaction language ---------- */
+button,
+input,
+select,
+textarea{
+  font-family:inherit;
+}
+
+button{
+  -webkit-tap-highlight-color:transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible{
+  outline:0!important;
+  box-shadow:var(--psc-focus)!important;
+}
+
+/* Primary: the only family allowed to become a pill */
+.button.primary,
+.semanticPrimary,
+.publicPortalBtn,
+.pillBasket,
+.squareAdd,
+button[data-submit-request],
+button[data-submit-custom],
+button[data-mvp-login],
+button[data-confirm-quote],
+button[data-approve-quote],
+button[data-add],
+button[data-quick-add],
+button[data-replenish],
+.tourNav .button.primary,
+.publicCta .button.primary,
+.demoTeaser .button.dark,
+.demoSubmit,
+.quoteActions .confirm{
+  border-radius:var(--psc-radius-primary)!important;
+}
+
+/* Primary action appearance */
+.button.primary,
+.semanticPrimary,
+button[data-submit-request],
+button[data-submit-custom],
+button[data-mvp-login],
+button[data-confirm-quote],
+button[data-approve-quote],
+button[data-add],
+button[data-quick-add],
+button[data-replenish],
+.tourNav .button.primary,
+.publicCta .button.primary{
+  background:var(--psc-teal)!important;
+  border-color:var(--psc-teal)!important;
+  color:#fff!important;
+  box-shadow:none!important;
+}
+
+.button.primary:hover,
+.semanticPrimary:hover,
+button[data-submit-request]:hover,
+button[data-submit-custom]:hover,
+button[data-mvp-login]:hover,
+button[data-confirm-quote]:hover,
+button[data-approve-quote]:hover,
+button[data-add]:hover,
+button[data-quick-add]:hover,
+button[data-replenish]:hover{
+  background:var(--psc-teal-dark)!important;
+  border-color:var(--psc-teal-dark)!important;
+  transform:translateY(-1px);
+}
+
+/* Cart is also a high-priority action; use the same semantic treatment */
+.pillBasket{
+  background:var(--psc-teal)!important;
+  color:#fff!important;
+  border:1px solid var(--psc-teal)!important;
+  min-height:var(--psc-control-h);
+  padding:0 18px!important;
+}
+.pillBasket:hover{background:var(--psc-teal-dark)!important}
+
+/* Compact product CTA becomes a real pill action, not a mysterious square */
+.squareAdd{
+  width:auto!important;
+  min-width:64px!important;
+  height:38px!important;
+  padding:0 15px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  font-size:10px!important;
+  font-weight:850!important;
+  letter-spacing:.01em!important;
+}
+
+/* ---------- Secondary controls: one consistent rounded rectangle ---------- */
+.button:not(.primary):not(.semanticPrimary),
+.button.outline,
+.button.light,
+.button.dark:not(.semanticPrimary),
+.specLink,
+.publicNavLink,
+.demoStepButton,
+.templateChip,
+.needRibbonChip,
+.needRibbonHome,
+.filterBar select,
+.searchInput,
+.input,
+.textarea,
+.customRequestActions input,
+.adminCostInput,
+.fakeSelect,
+.iconBtn,
+.iconShell,
+.navLink,
+.campusPill,
+.userPill{
+  border-radius:var(--psc-radius-control)!important;
+}
+
+/* Secondary button behavior */
+.button.outline,
+.button.light,
+.specLink{
+  background:#fff!important;
+  color:#303735!important;
+  border:1px solid var(--psc-line)!important;
+  box-shadow:none!important;
+}
+.button.outline:hover,
+.button.light:hover,
+.specLink:hover{
+  border-color:#b9c2bd!important;
+  background:#fbfbf8!important;
+  color:#151918!important;
+}
+
+/* Dark secondary buttons remain strong but rectangular, not pill */
+.button.dark:not(.semanticPrimary){
+  border-radius:var(--psc-radius-control)!important;
+  background:#14201f!important;
+  color:#fff!important;
+}
+
+/* Tertiary actions are text, never pseudo-buttons */
+.textAction,
+.resourceLink,
+.panelHeader>button,
+.v26SectionHead>button{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  box-shadow:none!important;
+  color:#47605d!important;
+  text-decoration:none!important;
+}
+.textAction:hover,
+.resourceLink:hover,
+.panelHeader>button:hover,
+.v26SectionHead>button:hover{
+  color:#111817!important;
+  text-decoration:underline!important;
+  text-underline-offset:4px;
+}
+
+/* ---------- Inputs / filters / selectors ---------- */
+.searchInput,
+.topbarSearch,
+.input,
+.textarea,
+.filterBar select,
+.customRequestActions input,
+.adminCostInput,
+.fakeSelect{
+  border-radius:var(--psc-radius-control)!important;
+}
+.searchInput,
+.topbarSearch{
+  border:1px solid var(--psc-line)!important;
+}
+.filterBar{
+  border-radius:var(--psc-radius-surface)!important;
+}
+.filterBar select{
+  background:#f7f6f2!important;
+  border:1px solid transparent!important;
+}
+.filterBar select:hover{
+  border-color:#dedbd3!important;
+}
+
+/* ---------- Navigation ---------- */
+.publicNavLink{
+  border:1px solid transparent!important;
+  background:transparent!important;
+}
+.publicNavLink.active{
+  background:#fff!important;
+  border-color:var(--psc-line)!important;
+  box-shadow:none!important;
+}
+.publicNavLink:hover{
+  background:#f4f4f0!important;
+}
+
+.iconShell,
+.iconBtn{
+  border-radius:var(--psc-radius-control)!important;
+}
+.iconShell{
+  background:#fff!important;
+  border:1px solid var(--psc-line)!important;
+}
+
+/* Account identity is not a CTA: rectangle, not pill */
+.campusPill,
+.userPill{
+  border-radius:var(--psc-radius-control)!important;
+}
+
+/* Sidebar nav follows secondary-control geometry */
+.navLink{
+  border-radius:var(--psc-radius-control)!important;
+}
+
+/* ---------- Status / metadata must not compete with CTAs ---------- */
+.statusPill,
+.badge,
+.restricted,
+.dhaMapped,
+.dhaRequirementBadge,
+.templateBadge,
+.modalNeedChip{
+  border-radius:8px!important;
+}
+
+/* Product-card status stays mostly textual */
+.v262ProductCard .productStatusText span,
+.v262ProductCard .productNeedTags{
+  border-radius:0!important;
+}
+
+/* ---------- Surface system ---------- */
+.panel,
+.productCard,
+.customerOrderCard,
+.replenishCard,
+.resourceCard,
+.publicFeatureStack article,
+.simplePublicPanel,
+.contactCard,
+.serviceCards article,
+.publicMediaGrid article,
+.moduleGrid article,
+.customRequestPanel,
+.loginCard,
+.procurementHeroCard,
+.v26ActionCard,
+.v26NeedPreview,
+.v26OperationsStrip>div,
+.catalogueShortcut,
+.categoryHero,
+.v25NeedJourney,
+.v26HomeHero{
+  border-radius:var(--psc-radius-surface)!important;
+}
+
+/* Media / image containment: same secondary geometry */
+.productVisual,
+.detailImagePane,
+.detailImagePane>img,
+.detailNeedVisual,
+.replenishVisual,
+.demoMachine,
+.demoPack{
+  border-radius:var(--psc-radius-control)!important;
+}
+
+/* ---------- Clinical catalogue geometry ---------- */
+.clinicNeedCard{
+  border-radius:var(--psc-radius-surface)!important;
+}
+.needRibbon{
+  border-radius:var(--psc-radius-control)!important;
+}
+.needRibbonChip,
+.needRibbonHome{
+  border-radius:var(--psc-radius-control)!important;
+}
+
+/* ---------- Public site CTAs ---------- */
+.landingActions .button.primary,
+.publicPortalBtn{
+  border-radius:var(--psc-radius-primary)!important;
+}
+.landingActions .button.outline{
+  border-radius:var(--psc-radius-control)!important;
+}
+.playDot{
+  display:none!important;
+}
+
+/* ---------- Guided demo ---------- */
+.demoStepButton{
+  border-radius:var(--psc-radius-control)!important;
+}
+.quoteActions button:not(.confirm),
+.tourNav .button.outline{
+  border-radius:var(--psc-radius-control)!important;
+}
+.quoteActions .confirm{
+  border-radius:var(--psc-radius-primary)!important;
+  background:var(--psc-teal)!important;
+  color:#fff!important;
+}
+
+/* ---------- Destructive actions stay clearly secondary/danger ---------- */
+.quietDanger,
+button[data-cancel-quote]{
+  border-radius:var(--psc-radius-control)!important;
+  background:#fff!important;
+  color:#9d3e3e!important;
+  border:1px solid #ebd1d1!important;
+}
+.quietDanger:hover,
+button[data-cancel-quote]:hover{
+  background:#fff6f6!important;
+}
+
+/* ---------- Remove accidental radius noise ---------- */
+.productFlags span,
+.v26MiniNeed,
+.v26LoginFlow span{
+  border-radius:8px!important;
+}
+
+/* ---------- Micro-interaction consistency ---------- */
+.button,
+.specLink,
+.squareAdd,
+.publicNavLink,
+.needRibbonChip,
+.clinicNeedCard,
+.v26ActionCard,
+.catalogueShortcut,
+.productCard{
+  transition:
+    background-color .16s ease,
+    border-color .16s ease,
+    color .16s ease,
+    transform .16s ease,
+    box-shadow .16s ease!important;
+}
+
+/* No exaggerated hover animation */
+.productCard:hover,
+.clinicNeedCard:hover,
+.v26ActionCard:hover,
+.catalogueShortcut:hover{
+  transform:translateY(-2px)!important;
+}
+
+/* ---------- Mobile: preserve hierarchy, reduce shape noise ---------- */
+@media(max-width:720px){
+  :root{
+    --psc-radius-control:13px;
+    --psc-radius-surface:18px;
+  }
+
+  .button.primary,
+  .semanticPrimary,
+  .publicPortalBtn,
+  .pillBasket,
+  .squareAdd{
+    border-radius:var(--psc-radius-primary)!important;
+  }
+
+  .publicNavLink,
+  .needRibbonChip,
+  .filterBar select,
+  .searchInput,
+  .input,
+  .textarea{
+    border-radius:var(--psc-radius-control)!important;
+  }
+
+  .squareAdd{
+    min-width:58px!important;
+    padding:0 13px!important;
+  }
+}
