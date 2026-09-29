@@ -227,8 +227,7 @@
         <div class="procurementHeroCard" aria-label="Clinic procurement workflow">
           <div class="procurementCardTop">
             <div class="procurementCardHeadline">
-              <span>Clinic Procurement catered to<br>institutional accounts that need</span>
-              <strong>one accountable supply relationship</strong>
+              <span>Consumer health products catered to institutions and organizations.</span>
             </div>
             <img class="procurementQr" src="./assets/pharmaservice-qr.png" alt="QR code to pharmaservice.ae">
           </div>
@@ -260,8 +259,60 @@
           <div class="procurementFoot">PHARMA SERVICE <i>•</i> INSTITUTIONAL SUPPLY</div>
         </div>
       </section>
-      <section class="beliefSection operationsBelief"><div class="beliefRule"></div><div class="beliefGrid"><div><span class="kicker">WHY THIS EXISTS</span><h2>Healthcare supply should run as reliably as the clinic itself.</h2></div><div><p>A school clinic depends on medicines, consumables and medical equipment being correct, available and properly documented. Pharma Service brings those moving parts into one controlled supply relationship.</p><p class="beliefStrong">Standardised products. Appropriate regulatory routes. Clear records. Consistent replenishment. One accountable supplier.</p><p>From the first requirement to the next repeat order, the objective is simple: keep the clinic supplied and ready without forcing the clinical team to manage the complexity behind it.</p><div class="beliefCloser">The clinic should manage healthcare.<br><b>It shouldn’t have to manage the healthcare supply chain.</b></div></div></div></section>
-      <section class="landingModules operationalModules"><div class="sectionTitleRow"><span class="kicker">WHAT PHARMA SERVICE CONTROLS</span><button class="textAction" data-go="demo">See how it works →</button></div><div class="moduleGrid"><article><b>01</b><h3>Standardised supply</h3><p>One controlled product master with clear specifications and requirement mapping where applicable.</p></article><article><b>02</b><h3>Controlled sourcing</h3><p>PSC validates the product, supply route and current commercial evidence before commitment.</p></article><article><b>03</b><h3>Recorded transactions</h3><p>Orders, quotations, decisions and delivery history stay tied to the institutional account.</p></article><article><b>04</b><h3>Easy replenishment</h3><p>Previously delivered lines become simple repeat requests instead of starting from zero each time.</p></article></div></section>
+      <section class="beliefSection operationsBelief"><div class="beliefRule"></div><div class="beliefGrid"><div><span class="kicker">WHY THIS EXISTS</span><h2>Unlike individuals, institutions have structured, recurring and cost-sensitive healthcare needs.</h2></div><div><p>Pharma Service exists to make those needs easier to manage. This includes identifying what is required, sourcing each line intelligently, consolidating supply through one accountable partner, and staying ahead of replenishment, replacement and changing requirements.</p><p class="beliefStrong">Our mission is to help institutions spend better, stay reliably supplied, and make healthcare procurement simpler.</p></div></div></section>
+      <section class="publicClinicalPreview">
+        <div class="publicClinicalPreviewHead">
+          <div>
+            <span class="kicker">BROWSE BY CLINICAL NEED</span>
+            <h2>Find products the way healthcare teams actually think.</h2>
+            <p>Start with the clinical need, then move directly into the relevant medicines, consumables, devices and equipment.</p>
+          </div>
+          <button class="textAction" data-go="portal/catalogue">Explore catalogue →</button>
+        </div>
+
+        <div class="publicClinicalPreviewGrid">
+          <button class="publicClinicalCard coral" data-go="portal/catalogue/wounds">
+            <span>Cuts &amp; Wounds</span>
+            <small>Dressings, antiseptics, gauze, closure and wound protection</small>
+            <i>↗</i>
+          </button>
+
+          <button class="publicClinicalCard blue" data-go="portal/catalogue/breathing">
+            <span>Breathing &amp; Oxygen</span>
+            <small>Nebulisation, oxygen delivery, airway and respiratory support</small>
+            <i>↗</i>
+          </button>
+
+          <button class="publicClinicalCard orange" data-go="portal/catalogue/vitals">
+            <span>Vitals &amp; Assessment</span>
+            <small>Blood pressure, temperature, oximetry and clinical assessment</small>
+            <i>↗</i>
+          </button>
+
+          <button class="publicClinicalCard mint" data-go="portal/catalogue/infection">
+            <span>Infection Control &amp; PPE</span>
+            <small>PPE, hand hygiene, disinfection and waste control</small>
+            <i>↗</i>
+          </button>
+
+          <button class="publicClinicalCard rose" data-go="portal/catalogue/emergency">
+            <span>Emergency &amp; Response</span>
+            <small>Resuscitation, first response and urgent-use products</small>
+            <i>↗</i>
+          </button>
+
+          <button class="publicClinicalCard sand" data-go="portal/catalogue/equipment">
+            <span>Equipment &amp; Mobility</span>
+            <small>Clinical furniture, mobility, storage and capital equipment</small>
+            <i>↗</i>
+          </button>
+        </div>
+
+        <div class="publicClinicalPreviewFoot">
+          <span>Plus medicines &amp; symptoms, diabetes &amp; testing, procedures &amp; consumables, allergy &amp; skin, patient care, screening and more.</span>
+          <button class="button primary semanticPrimary" data-go="portal/catalogue">Open Institutional Catalogue →</button>
+        </div>
+      </section>
       <section class="demoTeaser"><div><span class="kicker">SEE HOW IT WORKS</span><h2>Take a guided tour of Pharma Service.</h2><p>See the institutional customer journey from product selection and quotation through order management, delivery and repeat purchasing.</p></div><button class="button dark large semanticPrimary" data-go="demo">Take guided tour →</button></section>
       ${publicFooter()}
     </main>`;

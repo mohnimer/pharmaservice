@@ -1,25 +1,16 @@
-PSC V27.2 — AEG / Group Account Switcher
-=========================================
+PSC V27.4 — Homepage Clinical Category Preview
+===============================================
 
 Replace:
 - app.js
 - styles.css
 
-What it does:
-- Group admins such as Loai can switch between every active institution/campus in their Supabase account group.
-- Top-right account block now shows:
-  group name -> institution -> campus.
-- Clicking the account block opens a clean site switcher.
-- Switching site reloads only that site's orders, quotations, replenishment history and custom requests.
-- The institutional catalogue remains common across accounts.
-- The last selected site is remembered locally.
-- Each site keeps its own cart so items are not accidentally carried into another site's order.
-- Single-site users do not see a switcher.
-- PSC admin behavior is unchanged.
-
-Current AEG group in Supabase:
-- Far Eastern Private School — Halwan Campus
-- Far Eastern Private School — Shahba Campus
-- The New Filipino Private School — Main Campus
-- The New Filipino Private School — RAK Branch
-- Universal Philippine School — Al Ain Campus
+Changes:
+1. Hero procurement card headline becomes:
+   "Consumer health products catered to institutions and organizations."
+2. Removes the entire old:
+   Standardised supply / Controlled sourcing / Recorded transactions / Easy replenishment section.
+3. Replaces it with a public preview of the Institutional Catalogue clinical-need navigation.
+4. Uses the same pastel category language as the portal without icons or decorative circles.
+5. Cards link directly into their catalogue category.
+6. Mobile becomes a clean 2-column preview grid.
