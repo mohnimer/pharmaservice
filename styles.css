@@ -4956,3 +4956,593 @@ button[data-cancel-quote]:hover{
 @media(max-width:350px){
   .workshopCategoryGrid{grid-template-columns:1fr}
 }
+
+/* =========================================================
+   V37.5 — Our Model: experienced, human institutional supply
+   This page deliberately avoids startup/process-dashboard styling.
+   ========================================================= */
+
+main.publicPage:has(.modelHumanIntro) .publicPageHero{
+  padding-top:78px!important;
+  padding-bottom:62px!important;
+}
+main.publicPage:has(.modelHumanIntro) .publicPageHero h1{
+  max-width:900px!important;
+  font-size:clamp(48px,5.8vw,82px)!important;
+  line-height:.98!important;
+  letter-spacing:-.055em!important;
+}
+main.publicPage:has(.modelHumanIntro) .publicPageHero p{
+  max-width:880px!important;
+  font-size:18px!important;
+  line-height:1.7!important;
+  color:#5d5b56!important;
+}
+
+.modelHumanIntro{
+  display:grid;
+  grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr);
+  gap:clamp(40px,7vw,96px);
+  align-items:start;
+  padding-top:78px!important;
+  padding-bottom:78px!important;
+}
+.modelHumanLead{max-width:790px}
+.modelHumanLead h2,
+.modelHumanSectionHead h2,
+.modelContinuityCopy h2,
+.modelSchoolSection h2,
+.modelRegulatedPlain h2{
+  margin:0;
+  color:#121313;
+  font-size:clamp(31px,3.7vw,50px);
+  line-height:1.04;
+  letter-spacing:-.045em;
+}
+.modelHumanLead p,
+.modelHumanSectionHead p,
+.modelContinuityCopy p,
+.modelSchoolSection p,
+.modelRegulatedPlain p{
+  color:#635f58;
+  font-size:16px;
+  line-height:1.75;
+}
+.modelHumanLead p{max-width:760px;margin:22px 0 0}
+.modelHumanAside{
+  border-top:2px solid #28a99f;
+  padding:22px 0 0;
+  margin-top:6px;
+}
+.modelHumanAside strong{font-size:23px;line-height:1.22;letter-spacing:-.025em;color:#171716;display:block}
+.modelHumanAside p{margin:12px 0 0;color:#777169;font-size:14px;line-height:1.6}
+
+.modelRealitySection{
+  border-top:1px solid #ddd9d0;
+  padding-top:72px!important;
+  padding-bottom:74px!important;
+}
+.modelHumanSectionHead{max-width:800px;margin-bottom:36px}
+.modelHumanSectionHead.narrow{max-width:690px}
+.modelHumanSectionHead p{margin:16px 0 0;max-width:760px}
+.modelRealityList{border-top:1px solid #d9d5cd}
+.modelRealityList article{
+  display:grid;
+  grid-template-columns:minmax(280px,.85fr) minmax(0,1.15fr);
+  gap:clamp(28px,5vw,74px);
+  padding:28px 0;
+  border-bottom:1px solid #d9d5cd;
+}
+.modelRealityList h3{margin:0;font-size:22px;line-height:1.18;letter-spacing:-.025em;color:#151515}
+.modelRealityList p{margin:0;color:#6a655e;font-size:14.5px;line-height:1.7;max-width:700px}
+
+.modelWorkSection{
+  background:#f4efe5;
+  max-width:none!important;
+  padding-left:max(6%,calc((100vw - 1320px)/2 + 6%))!important;
+  padding-right:max(6%,calc((100vw - 1320px)/2 + 6%))!important;
+  padding-top:78px!important;
+  padding-bottom:78px!important;
+}
+.modelWorkRows{max-width:1020px;border-top:1px solid #cbc3b7}
+.modelWorkRows article{
+  display:grid;
+  grid-template-columns:42px 1fr;
+  gap:22px;
+  padding:25px 0 27px;
+  border-bottom:1px solid #cbc3b7;
+}
+.modelWorkRows article>span{
+  width:32px;height:32px;border:1px solid #aca397;border-radius:50%;
+  display:grid;place-items:center;font-size:12px;font-weight:700;color:#625d55;margin-top:2px
+}
+.modelWorkRows h3{margin:0 0 7px;font-size:19px;line-height:1.25;letter-spacing:-.018em;color:#171614}
+.modelWorkRows p{margin:0;max-width:820px;color:#696259;font-size:14px;line-height:1.68}
+
+.modelContinuitySection{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(340px,.78fr);
+  gap:clamp(50px,8vw,110px);
+  align-items:start;
+  padding-top:82px!important;
+  padding-bottom:82px!important;
+}
+.modelContinuityCopy{max-width:690px}
+.modelContinuityCopy p{margin:20px 0 0}
+.modelContinuityExamples{border-top:1px solid #d9d5cd}
+.modelContinuityExamples>div{padding:22px 0;border-bottom:1px solid #d9d5cd}
+.modelContinuityExamples strong{font-size:15px;color:#171716}
+.modelContinuityExamples p{margin:7px 0 0;color:#706a62;font-size:13.5px;line-height:1.58}
+
+.modelCareSection{padding-top:72px!important;padding-bottom:80px!important;border-top:1px solid #ddd9d0}
+.modelCareRows{border-top:1px solid #d9d5cd;margin-top:34px}
+.modelCareRows article{
+  display:grid;grid-template-columns:230px 1fr;gap:38px;
+  padding:24px 0;border-bottom:1px solid #d9d5cd;align-items:start
+}
+.modelCareRows h3{margin:0;font-size:18px;letter-spacing:-.02em;color:#151515}
+.modelCareRows p{margin:0;color:#68635c;font-size:14px;line-height:1.7;max-width:760px}
+
+.modelSchoolSection{
+  background:#eaf6f4;
+  border:1px solid #d2e8e4;
+  border-radius:26px;
+  padding:46px 48px!important;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:40px;
+  align-items:end;
+  margin-top:22px!important;
+  margin-bottom:28px!important;
+}
+.modelSchoolSection>div{max-width:760px}
+.modelSchoolSection h2{font-size:clamp(30px,3.3vw,44px)}
+.modelSchoolSection p{margin:17px 0 0}
+.modelSchoolSection .button{white-space:nowrap}
+
+.modelRegulatedPlain{
+  margin-top:22px!important;
+  margin-bottom:40px!important;
+  background:#161717;
+  color:#fff;
+  border-radius:26px;
+  padding:44px 48px!important;
+}
+.modelRegulatedPlain h2{color:#fff;max-width:840px;font-size:clamp(30px,3.5vw,46px)}
+.modelRegulatedPlain p{color:#d5d4d0;max-width:900px;margin:18px 0 0}
+
+.modelHumanCta{margin-bottom:72px!important}
+.modelHumanCta>div:first-child{max-width:700px}
+.modelHumanCta p{margin:10px 0 0;color:#59635f;line-height:1.6;font-size:14px}
+.modelHumanCta h2{margin-bottom:0!important}
+
+@media(max-width:900px){
+  .modelHumanIntro,.modelContinuitySection,.modelSchoolSection{grid-template-columns:1fr}
+  .modelHumanAside{max-width:520px}
+  .modelSchoolSection{align-items:start}
+  .modelSchoolSection .button{width:max-content}
+  .modelRealityList article{grid-template-columns:1fr;gap:10px}
+}
+
+@media(max-width:720px){
+  main.publicPage:has(.modelHumanIntro) .publicPageHero{padding-top:52px!important;padding-bottom:40px!important}
+  main.publicPage:has(.modelHumanIntro) .publicPageHero h1{font-size:44px!important;line-height:1!important}
+  main.publicPage:has(.modelHumanIntro) .publicPageHero p{font-size:16px!important}
+  .modelHumanIntro,.modelRealitySection,.modelContinuitySection,.modelCareSection{padding-top:48px!important;padding-bottom:48px!important}
+  .modelHumanLead h2,.modelHumanSectionHead h2,.modelContinuityCopy h2,.modelSchoolSection h2,.modelRegulatedPlain h2{font-size:31px}
+  .modelRealityList h3{font-size:19px}
+  .modelWorkSection{padding:50px 22px!important}
+  .modelWorkRows article{grid-template-columns:34px 1fr;gap:14px}
+  .modelWorkRows article>span{width:28px;height:28px}
+  .modelCareRows article{grid-template-columns:1fr;gap:7px}
+  .modelSchoolSection,.modelRegulatedPlain{margin-left:18px!important;margin-right:18px!important;padding:30px 26px!important}
+  .modelSchoolSection .button{width:100%}
+  .modelHumanCta{margin-bottom:48px!important}
+}
+
+/* =========================================================
+   V37.5.1 — Workshop editorial guide cards + grounded Our Model
+   Keep this block LAST.
+   ========================================================= */
+
+/* ---------- Workshop guide cards ---------- */
+.workshopGuideDeck{
+  max-width:1500px;
+  margin:0 auto;
+  padding:34px clamp(28px,5vw,80px) 68px;
+  display:grid;
+  grid-template-columns:minmax(220px,270px) minmax(0,1fr);
+  gap:26px;
+  align-items:start;
+}
+.workshopGuideDeckIntro{
+  padding:6px 8px 0 0;
+  position:sticky;
+  top:118px;
+}
+.workshopGuideDeckIntro h2{
+  margin:0;
+  max-width:245px;
+  font-size:clamp(30px,3vw,44px);
+  line-height:1.02;
+  letter-spacing:-.05em;
+  color:#171918;
+}
+.workshopGuideDeckIntro p{
+  margin:18px 0 0;
+  max-width:230px;
+  font-size:13.5px;
+  line-height:1.65;
+  color:#6d6a64;
+}
+.workshopGuideDeckScroll{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+.workshopGuideCard{
+  min-width:0;
+  border:1px solid #dedbd3;
+  border-radius:24px!important;
+  overflow:hidden;
+  background:#f6f6f4!important;
+  box-shadow:none!important;
+}
+.workshopGuideCard>button{
+  width:100%;
+  height:100%;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:#171918;
+  text-align:left;
+  display:grid;
+  grid-template-rows:minmax(220px,auto) 170px;
+}
+.workshopGuideCardCopy{
+  padding:21px 21px 22px;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  background:#f5f5f3;
+}
+.workshopGuideCardMeta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:22px;
+}
+.workshopGuideCardMeta b{
+  display:inline-flex;
+  align-items:center;
+  min-height:24px;
+  padding:5px 9px;
+  border-radius:999px;
+  background:#e7e7e4;
+  color:#4e514f;
+  font-size:10px;
+  font-weight:700;
+  line-height:1;
+  letter-spacing:0;
+}
+.workshopGuideCardMeta small{
+  font-size:10px;
+  color:#7b7d79;
+  white-space:nowrap;
+}
+.workshopGuideCard h3{
+  margin:0;
+  max-width:95%;
+  font-size:clamp(23px,2vw,31px);
+  line-height:.98;
+  letter-spacing:-.05em;
+  color:#151716;
+}
+.workshopGuideCard p{
+  margin:14px 0 0;
+  max-width:94%;
+  color:#626761;
+  font-size:12.5px;
+  line-height:1.52;
+}
+.workshopGuideCardVisual{
+  display:grid;
+  place-items:center;
+  min-height:170px;
+  position:relative;
+  overflow:hidden;
+  background:color-mix(in srgb,var(--ws-accent) 66%,#fff)!important;
+  border-top:1px solid rgba(20,24,23,.08);
+}
+.workshopGuideCardVisual:before,
+.workshopGuideCardVisual:after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  background:rgba(255,255,255,.34);
+}
+.workshopGuideCardVisual:before{width:118px;height:118px;right:-26px;bottom:-34px}
+.workshopGuideCardVisual:after{width:54px;height:54px;left:20px;top:20px;background:rgba(255,255,255,.22)}
+.workshopGuideCardVisual i{
+  width:76px;
+  height:76px;
+  display:grid;
+  place-items:center;
+  color:#27302e;
+  position:relative;
+  z-index:1;
+  font-style:normal;
+}
+.workshopGuideCardVisual svg{
+  width:68px;
+  height:68px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.25;
+}
+.workshopGuideCard:hover{transform:translateY(-3px)!important;border-color:#c9c5bc!important}
+.workshopGuideCard:hover .workshopGuideCardVisual i{transform:scale(1.04)}
+.workshopGuideCardVisual i{transition:transform .18s ease}
+
+/* The home teaser uses the same card language rather than a separate blog treatment. */
+.homeWorkshopCards{
+  max-width:1500px!important;
+  grid-template-columns:minmax(220px,270px) minmax(0,1fr)!important;
+  gap:26px!important;
+  align-items:start!important;
+}
+.homeWorkshopCardGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+.homeWorkshopCards .homeWorkshopIntro{
+  padding-top:4px;
+}
+.homeWorkshopCards .homeWorkshopIntro h2{
+  font-size:clamp(31px,3vw,43px)!important;
+  line-height:1.02!important;
+}
+.homeWorkshopCards .workshopGuideCard>button{grid-template-rows:minmax(210px,auto) 155px}
+.homeWorkshopCards .workshopGuideCardVisual{min-height:155px}
+
+/* ---------- Our Model: calm, experienced and plain-spoken ---------- */
+main.publicPage:has(.modelQuietIntro) .publicPageHero{
+  max-width:1320px!important;
+  padding:70px 6% 58px!important;
+  border-bottom:1px solid #ddd8cf;
+}
+main.publicPage:has(.modelQuietIntro) .publicPageHero .kicker{display:none!important}
+main.publicPage:has(.modelQuietIntro) .publicPageHero h1{
+  max-width:850px!important;
+  margin:0 0 22px!important;
+  font-size:clamp(42px,4.8vw,66px)!important;
+  line-height:1.01!important;
+  letter-spacing:-.05em!important;
+}
+main.publicPage:has(.modelQuietIntro) .publicPageHero p{
+  max-width:870px!important;
+  margin:0!important;
+  font-size:17px!important;
+  line-height:1.72!important;
+  color:#5f5b54!important;
+}
+.modelQuietIntro{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(250px,.55fr);
+  gap:clamp(44px,7vw,96px);
+  padding-top:70px!important;
+  padding-bottom:72px!important;
+}
+.modelQuietLead{max-width:790px}
+.modelQuietLead h2,
+.modelQuietHead h2,
+.modelQuietAftercare h2,
+.modelQuietSchool h2,
+.modelQuietRegulated h2{
+  margin:0;
+  font-size:clamp(29px,3vw,42px);
+  line-height:1.08;
+  letter-spacing:-.042em;
+  color:#171716;
+}
+.modelQuietLead p,
+.modelQuietHead p,
+.modelQuietAftercare p,
+.modelQuietSchool p,
+.modelQuietRegulated p{
+  color:#68635b;
+  font-size:15.5px;
+  line-height:1.76;
+}
+.modelQuietLead p{margin:18px 0 0}
+.modelQuietAside{
+  border-left:1px solid #b8b2a9;
+  padding:4px 0 4px 28px;
+  align-self:center;
+}
+.modelQuietAside p{margin:0;color:#5c5852;font-size:15px;line-height:1.65}
+.modelQuietAside strong{color:#171716;font-size:18px;line-height:1.35}
+
+.modelQuietExamples,
+.modelQuietCategories{
+  border-top:1px solid #ded9d0;
+  padding-top:64px!important;
+  padding-bottom:70px!important;
+}
+.modelQuietHead{max-width:760px;margin-bottom:30px}
+.modelQuietHead p{margin:12px 0 0;max-width:720px}
+.modelQuietExampleRows,
+.modelQuietCommercialRows{
+  border-top:1px solid #d9d4cb;
+}
+.modelQuietExampleRows article,
+.modelQuietCommercialRows article{
+  display:grid;
+  grid-template-columns:minmax(220px,.62fr) minmax(0,1.38fr);
+  gap:clamp(28px,5vw,76px);
+  padding:24px 0;
+  border-bottom:1px solid #d9d4cb;
+}
+.modelQuietExampleRows h3,
+.modelQuietCommercialRows h3{
+  margin:0;
+  font-size:18px;
+  line-height:1.25;
+  letter-spacing:-.02em;
+  color:#1a1a19;
+}
+.modelQuietExampleRows p,
+.modelQuietCommercialRows p{
+  margin:0;
+  max-width:720px;
+  color:#6a655d;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.modelQuietCommercial{
+  max-width:none!important;
+  background:#f4efe5;
+  padding:68px max(6%,calc((100vw - 1320px)/2 + 6%)) 72px!important;
+}
+.modelQuietCommercial .modelQuietHead{max-width:700px}
+.modelQuietCommercialRows{max-width:1080px;border-color:#cbc4b8}
+.modelQuietCommercialRows article{border-color:#cbc4b8}
+
+.modelQuietCategoryGrid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:10px;
+}
+.modelQuietCategoryGrid article{
+  min-height:180px;
+  padding:22px 20px;
+  border:1px solid #dedbd3;
+  border-radius:20px;
+  background:#fbfaf7;
+}
+.modelQuietCategoryGrid article:nth-child(1){background:#e8f3f2}
+.modelQuietCategoryGrid article:nth-child(2){background:#f3ecdf}
+.modelQuietCategoryGrid article:nth-child(3){background:#eef0f7}
+.modelQuietCategoryGrid article:nth-child(4){background:#e9f0e4}
+.modelQuietCategoryGrid article:nth-child(5){background:#f2e9e7}
+.modelQuietCategoryGrid h3{margin:0;font-size:18px;letter-spacing:-.025em;color:#171716}
+.modelQuietCategoryGrid p{margin:13px 0 0;font-size:13px;line-height:1.6;color:#625e58}
+
+.modelQuietAftercare{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(320px,.72fr);
+  gap:clamp(48px,8vw,106px);
+  align-items:start;
+  padding-top:72px!important;
+  padding-bottom:74px!important;
+}
+.modelQuietAftercare>div:first-child{max-width:700px}
+.modelQuietAftercare p{margin:17px 0 0}
+.modelQuietAftercareList{border-top:1px solid #d9d4cb}
+.modelQuietAftercareList>div{padding:19px 0;border-bottom:1px solid #d9d4cb}
+.modelQuietAftercareList strong{display:block;color:#1a1a19;font-size:14px}
+.modelQuietAftercareList span{display:block;margin-top:6px;color:#716b63;font-size:13px;line-height:1.55}
+
+.modelQuietSchool{
+  background:#eaf5f3;
+  border:1px solid #d4e7e3;
+  border-radius:24px;
+  padding:40px 42px!important;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:36px;
+  align-items:end;
+  margin-top:12px!important;
+  margin-bottom:26px!important;
+}
+.modelQuietSchool>div{max-width:760px}
+.modelQuietSchool p{margin:15px 0 0}
+.modelQuietSchool .button{white-space:nowrap}
+
+.modelQuietRegulated{
+  margin-top:24px!important;
+  margin-bottom:40px!important;
+  padding:42px 44px!important;
+  background:#171817;
+  color:#fff;
+  border-radius:24px;
+}
+.modelQuietRegulated h2{color:#fff;font-size:clamp(28px,2.8vw,39px);max-width:760px}
+.modelQuietRegulated p{color:#d1d0cb;max-width:900px;margin:16px 0 0}
+.modelQuietCta{margin-bottom:68px!important}
+.modelQuietCta>div:first-child{max-width:720px}
+.modelQuietCta p{margin:10px 0 0;color:#59615d;font-size:14px;line-height:1.65}
+
+@media(max-width:1180px){
+  .workshopGuideDeckScroll,.homeWorkshopCardGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .modelQuietCategoryGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:900px){
+  .workshopGuideDeck,.homeWorkshopCards{grid-template-columns:1fr!important}
+  .workshopGuideDeckIntro{position:static;padding:0;max-width:620px}
+  .workshopGuideDeckIntro h2,.workshopGuideDeckIntro p{max-width:none}
+  .modelQuietIntro,.modelQuietAftercare,.modelQuietSchool{grid-template-columns:1fr}
+  .modelQuietAside{max-width:560px}
+  .modelQuietSchool .button{width:max-content}
+}
+@media(max-width:720px){
+  .workshopGuideDeck{padding:24px 18px 48px}
+  .workshopGuideDeckScroll,.homeWorkshopCardGrid{grid-template-columns:1fr}
+  .workshopGuideCard>button{grid-template-rows:auto 148px}
+  .workshopGuideCardCopy{min-height:220px}
+  .workshopGuideCardVisual{min-height:148px}
+  .workshopGuideCard h3{font-size:27px}
+  main.publicPage:has(.modelQuietIntro) .publicPageHero{padding:48px 22px 40px!important}
+  main.publicPage:has(.modelQuietIntro) .publicPageHero h1{font-size:40px!important}
+  main.publicPage:has(.modelQuietIntro) .publicPageHero p{font-size:15.5px!important}
+  .modelQuietIntro,.modelQuietExamples,.modelQuietCategories,.modelQuietAftercare{padding-top:46px!important;padding-bottom:48px!important}
+  .modelQuietLead h2,.modelQuietHead h2,.modelQuietAftercare h2,.modelQuietSchool h2,.modelQuietRegulated h2{font-size:30px}
+  .modelQuietAside{border-left:0;border-top:1px solid #b8b2a9;padding:18px 0 0}
+  .modelQuietExampleRows article,.modelQuietCommercialRows article{grid-template-columns:1fr;gap:8px}
+  .modelQuietCommercial{padding:50px 22px!important}
+  .modelQuietCategoryGrid{grid-template-columns:1fr}
+  .modelQuietCategoryGrid article{min-height:0}
+  .modelQuietSchool,.modelQuietRegulated{margin-left:18px!important;margin-right:18px!important;padding:28px 24px!important}
+  .modelQuietSchool .button{width:100%}
+  .modelQuietCta{margin-bottom:48px!important}
+}
+
+/* =========================================================
+   V37.5.2 — Canva hero lock
+   Exact supplied Canva/PDF hero artwork, rendered as-is.
+   Keep this block LAST.
+   ========================================================= */
+.publicLanding .canvaHeroExact{
+  width:100%;
+  margin:0;
+  padding:0;
+  background:#f8f8f8;
+  overflow:hidden;
+  line-height:0;
+}
+.publicLanding .canvaHeroExact img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  object-position:center;
+}
+@media(max-width:720px){
+  .publicLanding .canvaHeroExact{
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+  }
+  .publicLanding .canvaHeroExact::-webkit-scrollbar{display:none}
+  .publicLanding .canvaHeroExact img{
+    width:760px;
+    max-width:none;
+    height:auto;
+    aspect-ratio:16/9;
+    object-fit:contain;
+  }
+}

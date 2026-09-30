@@ -136,3 +136,28 @@ V37.5 — WORKSHOP CATEGORY NAVIGATION + VISUAL CLEANUP
 - Applies PSC pastel category colors while retaining the technical grid-paper backdrop.
 - Keeps guide content in the editorial index rather than turning The Workshop into a generic stock-photo blog grid.
 - Search, category filtering, article routes, catalogue links, demo safety and data-write boundaries are unchanged.
+
+V37.5 — Our Model human rewrite
+- Rewrites the Our Model page away from startup/SaaS language and toward practical institutional healthcare supply.
+- Centers the page on product fit, exact specifications, compatibility, category-specific sourcing, regulated routes, repeat supply, expiry, warranty and useful transaction records.
+- Replaces generic audience/process grids with a more editorial, human page structure and concrete product examples.
+- Keeps the existing catalogue, Workshop, portal, demo and order/quote behavior unchanged.
+
+V37.5.1 — WORKSHOP GUIDE CARDS + OUR MODEL REWRITE
+--------------------------------------------------
+This cosmetic/copy release sits on top of V37.5.
+
+Workshop:
+- Replaces the oversized featured-story/list presentation with reusable split editorial guide cards.
+- Cards use a quiet text panel over a category-colour technical illustration panel; no stock photography or AI-style imagery is required.
+- Keeps category navigation, search, filtering, article routes, Save/Print/Share, catalogue links and content storage unchanged.
+- Applies the same card language to the homepage Workshop teaser for consistency.
+
+Our Model:
+- Completely rewrites the page in a quieter, more experienced institutional-supply voice.
+- Removes startup/SaaS-style process language and oversized shouting typography.
+- Leads with practical product/specification examples: cuff size, meter/strip compatibility, sterile status, pack conversion, AED consumables, expiry and regulated routes.
+- Describes sourcing, comparison, verification and transaction records in plain language rather than presenting them as a software workflow.
+- Retains the careful regulatory boundary: regulated lines stay subject to the applicable UAE route and controls.
+
+No database schema, quote/order workflow, portal access, demo isolation or catalogue publication logic changed in this release.

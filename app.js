@@ -679,46 +679,8 @@
     const approved=products().filter(p=>p.schoolApproved).length;
     return `<main class="landingPage publicLanding">
       ${publicHeader('home')}
-      <section class="landingHero">
-        <div class="landingCopy">
-          <h1 class="institutionalHero"><span>${esc(C.home?.heroTitlePrefix || 'Institutional')}</span><em>${esc(C.home?.heroTitleAccent || 'Supply')}</em></h1>
-          <p class="lead heroStatement"><span>${esc(C.home?.heroLine1 || 'Easy procurement.')} <em>${esc(C.home?.heroLine1Accent || 'Institutional pricing.')}</em></span><strong>${esc(C.home?.heroLine2 || 'More time for what matters')}</strong></p>
-          <div class="landingActions"><button class="button primary large" data-go="login">Open Clinic Portal</button><button class="button outline large demoCta" data-go="demo">Take guided demo <span class="playDot">▶</span></button></div>
-        </div>
-        <div class="procurementHeroCard" aria-label="Clinic procurement workflow">
-          <div class="procurementCardTop">
-            <div class="procurementCardHeadline">
-              <span>Consumer health products catered to institutions and organizations.</span>
-            </div>
-            <img class="procurementQr" src="/assets/pharmaservice-qr.png" alt="QR code to pharmaservice.ae">
-          </div>
-          <div class="procurementFlowPanel">
-            <div class="procurementStageGrid">
-              <article class="procurementStage">
-                <span class="stageNumber">01</span>
-                <h4>SHOP</h4>
-                <p>pharmaceuticals,<br>medical disposables,<br>and devices.</p>
-              </article>
-              <article class="procurementStage">
-                <span class="stageNumber">02</span>
-                <h4>QUOTE</h4>
-                <p>institutional pricing,<br>with supply-route and<br>requirement checks.</p>
-              </article>
-              <article class="procurementStage">
-                <span class="stageNumber">03</span>
-                <h4>MANAGE</h4>
-                <p>orders, invoices, and<br>various historical reports.</p>
-              </article>
-              <article class="procurementStage">
-                <span class="stageNumber">04</span>
-                <h4>REPEAT</h4>
-                <p>easily repeat previously<br>ordered items from the<br>same account.</p>
-              </article>
-            </div>
-          </div>
-          <div class="procurementBarcode" aria-hidden="true"></div>
-          <div class="procurementFoot">PHARMA SERVICE <i>•</i> INSTITUTIONAL SUPPLY</div>
-        </div>
+      <section class="canvaHeroExact" aria-label="Institutional Supply - more time for what matters">
+        <img src="/assets/institutional-hero-canva.webp" alt="Institutional Supply. More time for what matters. For schools, nurseries, and educational institutions. Shop pharmaceuticals, medical disposables and devices; quote with institutional pricing and regulatory alignment; manage orders, invoices and historical reports; repeat previously ordered items from the same account." fetchpriority="high" decoding="async">
       </section>
       <section class="beliefSection operationsBelief"><div class="beliefRule"></div><div class="beliefGrid"><div><span class="kicker">WHY THIS EXISTS</span><h2>Unlike individuals, institutions have structured, recurring and cost-sensitive healthcare needs.</h2></div><div><p>Pharma Service exists to make those needs easier to manage. This includes identifying what is required, sourcing each line intelligently, consolidating supply through one accountable partner, and staying ahead of replenishment, replacement and changing requirements.</p><p class="beliefStrong">Our mission is to help institutions spend better, stay reliably supplied, and make healthcare procurement simpler.</p></div></div></section>
       <section class="publicProofSection">
@@ -810,31 +772,67 @@
 
   function ourModelPage(){ return publicPage(
     'our-model',
-    'OUR MODEL',
-    'One relationship. The right source for every line.',
-    'Who we serve, what we supply and how Pharma Service turns fragmented healthcare requirements into one controlled institutional supply relationship.',
-    `<section class="publicSection modelSection" id="model-who"><div class="modelSectionHead"><span class="kicker">WHO WE SERVE</span><h2>Institutions with healthcare responsibilities.</h2><p>Built for organizations that need repeatable purchasing, clear specifications and accountable follow-through — not a consumer checkout experience.</p></div><div class="publicAudienceGrid">
-      <article><span>SCHOOLS & EDUCATION</span><h3>School clinics and campus health rooms</h3><p>Opening equipment, recurring clinic consumables, medicines through the appropriate route, replenishment and replacement planning.</p></article>
-      <article><span>MULTI-SITE GROUPS</span><h3>Groups managing more than one location</h3><p>One commercial relationship with site-level ordering, delivery history and account-specific requirements.</p></article>
-      <article><span>WORKPLACE & INSTITUTIONAL HEALTH</span><h3>Organizations operating first-aid or healthcare facilities</h3><p>Requirement-led equipment, consumables and recurring supply where the receiving route is appropriate.</p></article>
-      <article><span>HEALTHCARE BUYERS</span><h3>Professional procurement teams</h3><p>Comparable specifications, quotation control and consolidated sourcing across suitable suppliers.</p></article>
-    </div>${schoolWorkshopStrip()}</section>
-    <section class="publicSection modelSection modelSectionAlt" id="model-what"><div class="modelSectionHead"><span class="kicker">WHAT MOVES THROUGH THE MODEL</span><h2>Opening baskets, recurring baskets and specialist lines.</h2><p>The offer is organized around how institutions actually buy: capital items that establish the facility, recurring items that keep it ready, and regulated or specialist lines that require the correct route.</p></div><div class="supplyBasketGrid">
-      <article class="supplyBasketCard capital"><span>OPENING / CAPITAL BASKET</span><h2>Set up the facility.</h2><p>Clinical furniture, diagnostics, monitoring, emergency equipment, mobility, oxygen-related equipment and other setup requirements.</p><b>Purchased episodically · specification and warranty matter.</b></article>
-      <article class="supplyBasketCard recurring"><span>RECURRING BASKET</span><h2>Keep it supplied.</h2><p>Dressings, PPE, disposables, testing consumables, respiratory items, hygiene products, medicines where permitted, and expiry-driven replacements.</p><b>Repeated demand · pack, expiry, stock and replenishment matter.</b></article>
-    </div><div class="publicCategoryCloud modelCategoryCloud"><span>WOUND CARE</span><span>INFECTION CONTROL & PPE</span><span>DIAGNOSTICS</span><span>RESPIRATORY</span><span>DIABETES & TESTING</span><span>EMERGENCY RESPONSE</span><span>FURNITURE & MOBILITY</span><span>STUDENT CARE</span><span>PROCEDURE CONSUMABLES</span><span>MEDICINES — APPROPRIATE LICENSED ROUTE</span></div></section>
-    <section class="publicSection modelSection" id="model-how"><div class="modelSectionHead"><span class="kicker">HOW IT WORKS</span><h2>Source per line. Sell one solution.</h2><p>Pharma Service keeps the institutional customer-facing process simple while controlling specification, sourcing, commercial evidence and fulfilment behind it.</p></div><div class="publicWorkflowGrid">
-      <article><b>01</b><h3>Capture</h3><p>Account, site, need, quantities, deadline and decision path.</p></article>
-      <article><b>02</b><h3>Normalize</h3><p>Translate the requirement into controlled specifications and comparable lines.</p></article>
-      <article><b>03</b><h3>Source</h3><p>Request comparable supply evidence from suitable category suppliers.</p></article>
-      <article><b>04</b><h3>Compare</h3><p>Specification, model, cost, VAT, stock, delivery, warranty and terms.</p></article>
-      <article><b>05</b><h3>Quote</h3><p>One clean institutional quotation with the relevant commercial terms.</p></article>
-      <article><b>06</b><h3>Authorize</h3><p>The order moves only after the customer's required approval or PO route.</p></article>
-      <article><b>07</b><h3>Deliver & document</h3><p>Receive, inspect, deliver and retain the transaction record.</p></article>
-      <article><b>08</b><h3>Repeat intelligently</h3><p>Use the completed supply history to make replenishment and replacement easier.</p></article>
-    </div></section>
-    <section class="publicSection controlCallout"><span class="kicker">REGULATED LINES</span><h2>Commercial convenience does not replace authorization.</h2><p>Medicines, oxygen, specialist services and other regulated products remain subject to the applicable UAE licensing, recipient, storage, batch/expiry and professional controls.</p></section>
-    <section class="publicCta"><div><span class="kicker">NEXT STEP</span><h2>Bring us the requirement. We will structure the supply.</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="catalogue">Browse catalogue</button><button class="button primary large" data-go="contact">Request supply</button></div></section>`
+    'Our model',
+    'Supplying a clinic is mostly about getting the small things right.',
+    'We supply healthcare products to institutions. The job is not complicated for the sake of being complicated — it just needs a more careful eye than ordinary retail. The exact product, the right pack, the compatible accessory, the expiry and the correct supply route all matter.',
+    `<section class="publicSection modelQuietIntro">
+      <div class="modelQuietLead">
+        <h2>We start with the list you actually have.</h2>
+        <p>Sometimes it is beautifully specified. Sometimes it says “gauze 10 × 10 — 5 boxes.” Both are fine as a starting point.</p>
+        <p>Our job is to work out what the clinic really needs before we turn that line into a quotation. Sterile or non-sterile? Which material? How many pieces are actually in the pack? Does the device need a particular cuff, strip, mask, regulator or accessory? Is there an expiry issue we should care about?</p>
+        <p>The point is not to slow the order down. It is to avoid sending the wrong thing quickly.</p>
+      </div>
+      <aside class="modelQuietAside"><p><strong>A list tells us what to look for.</strong><br>The specification tells us what to buy.</p></aside>
+    </section>
+
+    <section class="publicSection modelQuietExamples">
+      <div class="modelQuietHead"><h2>A few examples of the details we mean.</h2><p>They are not dramatic. They are just the things that make a product useful once it reaches the clinic.</p></div>
+      <div class="modelQuietExampleRows">
+        <article><h3>Blood-pressure monitors</h3><p>A good monitor with the wrong cuff size is still the wrong setup for the people using it.</p></article>
+        <article><h3>Glucose meters</h3><p>The meter, strips and control solution have to belong together. “Compatible enough” is not a specification.</p></article>
+        <article><h3>Gauze and dressings</h3><p>Size is only part of the description. Sterility, material, ply and pack conversion can change what is actually being supplied.</p></article>
+        <article><h3>AEDs and emergency equipment</h3><p>The main device is only part of readiness. Pads, battery status, accessories, expiry and service support matter too.</p></article>
+      </div>
+    </section>
+
+    <section class="publicSection modelQuietCommercial">
+      <div class="modelQuietHead"><h2>Then we do the commercial work properly.</h2><p>Once the requirement is clear, the rest is fairly practical.</p></div>
+      <div class="modelQuietCommercialRows">
+        <article><h3>We source the line where it belongs.</h3><p>Furniture, diagnostics, disposables, emergency equipment, oxygen and medicines do not all belong to the same supplier or the same route. We use category-appropriate sources rather than forcing the whole basket through one channel.</p></article>
+        <article><h3>We compare like with like.</h3><p>Brand and price matter, but so do model, pack, stock, lead time, VAT treatment, warranty, delivery and the conditions attached to the offer. A cheaper non-matching line is not a saving.</p></article>
+        <article><h3>We check before we promise.</h3><p>Availability changes. Supplier quotations expire. Regulated products have their own controls. We would rather verify the point that matters than make a confident promise we cannot support.</p></article>
+        <article><h3>We keep enough of the record to make the next order easier.</h3><p>Quotation, delivery, model, serial or warranty information, and batch or expiry where relevant. The second order should not need everyone to remember what happened the first time.</p></article>
+      </div>
+    </section>
+
+    <section class="publicSection modelQuietCategories">
+      <div class="modelQuietHead"><h2>Different categories need a different eye.</h2><p>This is the part of institutional supply that is easy to miss if everything is treated like normal retail.</p></div>
+      <div class="modelQuietCategoryGrid">
+        <article><h3>Diagnostics</h3><p>Exact model, intended use, accuracy information and compatible consumables.</p></article>
+        <article><h3>Consumables</h3><p>Material, size, sterile status, pack conversion and expiry.</p></article>
+        <article><h3>Emergency equipment</h3><p>Model, accessories, consumables, service scope and readiness after handover.</p></article>
+        <article><h3>Oxygen</h3><p>Medical-grade supply, cylinder and regulator compatibility, handling and the appropriate qualified route.</p></article>
+        <article><h3>Medicines</h3><p>The correct licensed procurement route, permitted recipient and traceability. Convenience does not replace those controls.</p></article>
+      </div>
+    </section>
+
+    <section class="publicSection modelQuietAftercare">
+      <div><h2>The first delivery is not the whole job.</h2><p>An examination couch may be bought once. Gloves, dressings, swabs and test strips come back. AED pads expire. Batteries age. Equipment needs compatible consumables. Warranties and serials become useful only when someone can find them later.</p><p>That is why we think about replenishment, expiry, replacement and records from the beginning — especially for multi-site institutions and school clinics.</p></div>
+      <div class="modelQuietAftercareList"><div><strong>Opening items</strong><span>Furniture, diagnostics, monitoring, emergency equipment and setup.</span></div><div><strong>Recurring items</strong><span>Dressings, PPE, testing consumables, respiratory items, hygiene and permitted medicines.</span></div><div><strong>Easy to forget</strong><span>Accessories, expiry, replacements, warranty and handover records.</span></div></div>
+    </section>
+
+    <section class="publicSection modelQuietSchool">
+      <div><h2>School clinics bring all of this together.</h2><p>They have capital equipment, day-to-day consumables, emergency readiness, medicines through the appropriate route, expiry, replenishment and records — all in a small clinical environment that needs to stay ready.</p><p>We would rather become familiar with how the clinic actually runs than simply keep sending boxes at it.</p></div>
+      <button class="button outline large" data-go="catalogue">Browse the institutional catalogue</button>
+    </section>
+    ${schoolWorkshopStrip()}
+
+    <section class="publicSection modelQuietRegulated">
+      <h2>Some lines simply need a different route.</h2>
+      <p>Medicines, oxygen, specialist services and other regulated products remain subject to the applicable UAE licensing, recipient, storage, batch/expiry and professional controls. If a line needs a specialist or licensed route, we treat it that way.</p>
+    </section>
+
+    <section class="publicCta modelQuietCta"><div><h2>Send us the list you have.</h2><p>If something is vague, we will tighten it. If something needs a different route, we will tell you. Then we can quote the requirement on a basis that actually makes sense.</p></div><div class="publicCtaActions"><button class="button outline large" data-go="catalogue">Browse catalogue</button><button class="button primary large" data-go="contact">Send a requirement</button></div></section>`
   ); }
 
   function whoWeSupplyPage(){ return publicPage(
@@ -925,6 +923,20 @@
       <i>${count} ${count===1?'guide':'guides'}</i>
     </button>`;
   }
+  function workshopGuideCard(g){
+    const meta=workshopCategoryMeta(g.category);
+    return `<article class="workshopGuideCard ${meta.tone}">
+      <button data-go="workshop/${esc(g.slug)}" aria-label="Open ${esc(g.title)}">
+        <span class="workshopGuideCardCopy">
+          <span class="workshopGuideCardMeta"><b>${esc(g.category)}</b><small>${esc(g.read_time)} read</small></span>
+          <h3>${esc(g.title)}</h3>
+          <p>${esc(g.excerpt)}</p>
+        </span>
+        <span class="workshopGuideCardVisual" aria-hidden="true"><i>${icon(meta.icon)}</i></span>
+      </button>
+    </article>`;
+  }
+
   function workshopIndexRow(g,i=0){
     const tone=workshopCategoryMeta(g.category).tone;
     return `<article class="workshopIndexRow ${tone}">
@@ -946,8 +958,6 @@
   }
   function workshopLandingPage(){
     const filtered=workshopFiltered();
-    const lead=(ui.workshopCategory==='All'&&!ui.workshopQuery?WORKSHOP.find(g=>g.slug==='oxygen-cylinder-is-not-an-oxygen-system'):filtered[0])||WORKSHOP[0];
-    const rest=filtered.filter(g=>!lead||g.slug!==lead.slug);
     const categories=WORKSHOP_CATEGORIES.filter(c=>c!=='All');
     const resultLabel=ui.workshopCategory==='All'?'All guides':ui.workshopCategory;
     return `<main class="publicPage workshopPage">${publicHeader('workshop')}
@@ -958,22 +968,22 @@
         </div>
       </section>
       <section class="workshopCategorySection">
-        <div class="workshopCategoryHead"><div><h2>Browse the bench.</h2><p>Choose the kind of problem you are trying to solve.</p></div><button class="${ui.workshopCategory==='All'?'active':''}" data-workshop-category="All">View all guides</button></div>
+        <div class="workshopCategoryHead"><div><h2>Start with what you need to figure out.</h2><p>The categories are here to get you to the useful bit quickly.</p></div><button class="${ui.workshopCategory==='All'?'active':''}" data-workshop-category="All">View all guides</button></div>
         <div class="workshopCategoryGrid">${categories.map(workshopCategoryCard).join('')}</div>
       </section>
       <section class="workshopTools">
         <div class="workshopSearch"><span>${icon('search')}</span><input data-workshop-q value="${esc(ui.workshopQuery)}" placeholder="Search product, question or clinic check…" aria-label="Search The Workshop"></div>
         <div class="workshopResultContext"><span>${esc(resultLabel)}</span><b>${filtered.length} ${filtered.length===1?'guide':'guides'}</b>${(ui.workshopCategory!=='All'||ui.workshopQuery)?'<button data-workshop-clear>Reset</button>':''}</div>
       </section>
-      ${filtered.length?`${lead?`<section class="workshopLead ${workshopCategoryMeta(lead.category).tone}">
-        <div class="workshopLeadLabel"><span>${esc(workshopFormatLabel(lead.format))}</span><b>${esc(lead.category)}</b></div>
-        <button class="workshopLeadTitle" data-go="workshop/${esc(lead.slug)}"><h2>${esc(lead.title)}</h2><p>${esc(lead.subtitle)}</p></button>
-        <div class="workshopLeadFacts"><b>${esc(lead.read_time)} read</b><small>Reviewed ${esc(lead.last_reviewed)}</small></div>
-      </section>`:''}<section class="workshopIndex"><div class="workshopIndexHead"><span>More from The Workshop</span><b>${rest.length} more</b></div>${rest.map((g,i)=>workshopIndexRow(g,i+(lead?1:0))).join('')}</section>`:`<section class="workshopEmpty"><h2>Nothing on the bench for that search yet.</h2><p>Try a product name, category or broader term.</p><button class="button outline" data-workshop-clear>Clear search</button></section>`}
-      <section class="workshopPrinciple"><div><h2>PSC sells the product.<br>The Workshop explains the product.<br>The portal remembers the product.</h2></div><p>Education sits beside the catalogue, not inside a sales pitch. The point is to make specifications, compatibility, readiness and replenishment easier to understand before the next order.</p></section>
+      ${filtered.length?`<section class="workshopGuideDeck">
+        <div class="workshopGuideDeckIntro"><h2>${ui.workshopCategory==='All'&&!ui.workshopQuery?'Useful things to know before the next order.':esc(resultLabel)}</h2><p>${ui.workshopCategory==='All'&&!ui.workshopQuery?'Short, practical guides about the products, checks and specifications that tend to matter in real clinics.':'Guides matching the category or search you selected.'}</p></div>
+        <div class="workshopGuideDeckScroll">${filtered.map(workshopGuideCard).join('')}</div>
+      </section>`:`<section class="workshopEmpty"><h2>Nothing on the bench for that search yet.</h2><p>Try a product name, category or broader term.</p><button class="button outline" data-workshop-clear>Clear search</button></section>`}
+      <section class="workshopPrinciple"><div><h2>Useful product knowledge belongs next to the product.</h2></div><p>The Workshop is there to make specifications, compatibility, readiness and replenishment easier to understand before the next order — not to turn education into a sales pitch.</p></section>
       ${publicFooter()}
     </main>`;
   }
+
   function workshopSectionHtml(section){
     if(section.comparison) return `<section class="workshopArticleSection"><h2>${esc(section.title)}</h2><div class="workshopComparison">${section.comparison.map(x=>`<article><span>${esc(x.label)}</span><p>${esc(x.text)}</p></article>`).join('')}</div></section>`;
     if(section.spec_example){ const x=section.spec_example; return `<section class="workshopArticleSection workshopSpecLesson"><h2>${esc(section.title)}</h2><div class="badSpec"><span>VAGUE RFQ</span><strong>${esc(x.bad)}</strong></div><div class="missingSpec"><span>WHAT'S MISSING?</span>${x.missing.map(v=>`<b>${esc(v)}</b>`).join('')}</div><div class="goodSpec"><span>ORDER IT LIKE THIS</span><p>${esc(x.good)}</p></div></section>`; }
@@ -1008,7 +1018,7 @@
   function workshopTeaser(){
     const slugs=['which-glove-should-i-actually-wear','oxygen-cylinder-is-not-an-oxygen-system','aed-has-expiring-parts-too'];
     const items=slugs.map(workshopGuideBySlug).filter(Boolean);
-    return `<section class="homeWorkshop"><div class="homeWorkshopIntro"><span class="kicker">THE WORKSHOP</span><h2>Know what you're working with.</h2><p>Practical guides to the products, equipment and small details that keep clinics ready.</p><button class="button outline" data-go="workshop">Enter The Workshop</button></div><div class="homeWorkshopIndex">${items.map((g,i)=>`<button data-go="workshop/${g.slug}"><span>${String(i+1).padStart(2,'0')} · ${esc(workshopFormatLabel(g.format))}</span><h3>${esc(g.title)}</h3><small>${esc(g.read_time)}</small></button>`).join('')}</div></section>`;
+    return `<section class="homeWorkshop homeWorkshopCards"><div class="homeWorkshopIntro"><span class="kicker">THE WORKSHOP</span><h2>Know what you're working with.</h2><p>Practical guides to the products, equipment and small details that keep clinics ready.</p><button class="button outline" data-go="workshop">Enter The Workshop</button></div><div class="homeWorkshopCardGrid">${items.map(workshopGuideCard).join('')}</div></section>`;
   }
   function schoolWorkshopStrip(){
     const slugs=['ten-minute-school-clinic-stock-expiry-walk','aed-has-expiring-parts-too','oxygen-cylinder-is-not-an-oxygen-system'];
@@ -2096,10 +2106,10 @@
   function syncRouteMeta(route){
     const publicMeta={
       home:['Pharma Service | Institutional Healthcare Supply UAE','Institutional healthcare supply for schools and organizations in the UAE: controlled specifications, sourcing, quotation, delivery and replenishment.','/'],
-      'our-model':['Our Model | Pharma Service','Who Pharma Service serves, what moves through the institutional supply model, and how requirements become controlled supply.','/our-model.html'],
-      'who-we-supply':['Our Model | Pharma Service','Who Pharma Service serves, what moves through the institutional supply model, and how requirements become controlled supply.','/our-model.html'],
-      'what-we-supply':['Our Model | Pharma Service','Who Pharma Service serves, what moves through the institutional supply model, and how requirements become controlled supply.','/our-model.html'],
-      'how-it-works':['Our Model | Pharma Service','Who Pharma Service serves, what moves through the institutional supply model, and how requirements become controlled supply.','/our-model.html'],
+      'our-model':['Our Model | Pharma Service','How Pharma Service handles institutional healthcare supply: careful specifications, category-appropriate sourcing, regulated routes and repeat account service.','/our-model.html'],
+      'who-we-supply':['Our Model | Pharma Service','How Pharma Service handles institutional healthcare supply: careful specifications, category-appropriate sourcing, regulated routes and repeat account service.','/our-model.html'],
+      'what-we-supply':['Our Model | Pharma Service','How Pharma Service handles institutional healthcare supply: careful specifications, category-appropriate sourcing, regulated routes and repeat account service.','/our-model.html'],
+      'how-it-works':['Our Model | Pharma Service','How Pharma Service handles institutional healthcare supply: careful specifications, category-appropriate sourcing, regulated routes and repeat account service.','/our-model.html'],
       catalogue:['Institutional Healthcare Catalogue | Pharma Service','Browse the public read-only Pharma Service institutional healthcare catalogue by clinical need.','/catalogue.html'],
       contact:['Request Institutional Supply | Pharma Service','Send Pharma Service an institutional healthcare requirement or RFQ for sourcing and quotation.','/contact.html'],
       about:['About Pharma Service','Dubai healthcare supply business developing a controlled institutional supply service for schools and organizations.','/about.html'],
