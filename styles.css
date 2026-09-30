@@ -4275,3 +4275,152 @@ button[data-cancel-quote]:hover{
   .v37Shell .actionCard{padding:11px!important}.v37Shell .actionCard .actionIcon{width:28px!important;height:28px!important}.v37Shell .actionCard b{font-size:12px!important}.v37Shell .actionCard span{font-size:9px!important}
   .procurementStageGrid{grid-template-columns:1fr!important}.publicCatalogueVisual{height:220px!important}
 }
+
+/* =========================================================
+   V37.1 — Public cosmetic polish
+   Calm CTAs, stronger contrast, and more breathing room.
+   Keep this block LAST so it is the public-site authority.
+   ========================================================= */
+
+/* Fix dark callout hierarchy: no dark-on-dark headline. */
+.controlCallout h2{
+  color:#fff!important;
+  max-width:980px;
+}
+.controlCallout .kicker{color:#8fbab7!important}
+.controlCallout p{color:#dedbd4!important}
+
+/* Public CTA typography: no accidental wrapping or cramped labels. */
+.publicLanding .button,
+.publicPage .button{
+  white-space:nowrap;
+  line-height:1.05;
+  letter-spacing:-.01em;
+}
+.publicLanding .button.large,
+.publicPage .button.large{
+  min-height:52px;
+  padding:0 25px!important;
+  font-size:13.5px;
+}
+.publicPortalBtn{
+  min-height:48px;
+  padding:0 22px!important;
+  font-size:13px;
+}
+.publicCtaActions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.publicCta>.button,
+.publicCtaActions>.button,
+.publicClinicalPreviewFoot>.button,
+.demoTeaser>.button{
+  flex:0 0 auto;
+}
+
+/* Give the primary conversion blocks a little more air. */
+.publicCta{
+  padding-top:54px!important;
+  padding-bottom:54px!important;
+  gap:42px!important;
+}
+.publicClinicalPreviewFoot{
+  margin-top:26px;
+  padding-top:24px;
+  gap:34px;
+}
+.demoTeaser{
+  padding:48px 52px!important;
+  gap:48px!important;
+}
+.demoTeaser .button{min-width:168px}
+
+/* Audience cards: editorial rather than cramped dashboard cards. */
+.publicAudienceGrid{gap:18px}
+.publicAudienceGrid article{
+  padding:32px 34px;
+  min-height:245px;
+}
+.publicAudienceGrid article>span{line-height:1.35}
+.publicAudienceGrid h3{
+  margin-top:20px;
+  margin-bottom:12px;
+  line-height:1.14;
+  letter-spacing:-.035em;
+}
+.publicAudienceGrid p{line-height:1.65}
+
+/* Desktop public header — logo, navigation and portal action get distinct space. */
+@media(min-width:1101px){
+  .v37PublicHeader{
+    max-width:1560px!important;
+    padding:27px clamp(28px,4.4vw,68px)!important;
+    grid-template-columns:minmax(205px,230px) minmax(0,1fr) auto!important;
+    gap:clamp(24px,2.5vw,42px)!important;
+  }
+  .v37PublicHeader .publicLogo img{
+    width:218px!important;
+    max-width:100%!important;
+  }
+  .v37PublicHeader .publicNav{
+    justify-content:center!important;
+    flex-wrap:nowrap!important;
+    gap:clamp(5px,.7vw,13px)!important;
+    min-width:0;
+  }
+  .v37PublicHeader .publicNavLink{
+    padding:12px 9px!important;
+    font-size:14px!important;
+    white-space:nowrap!important;
+  }
+}
+
+/* Mid-size header keeps the second row readable rather than miniaturising it. */
+@media(min-width:901px) and (max-width:1100px){
+  .v37PublicHeader{
+    padding:22px 28px!important;
+    gap:18px 24px!important;
+  }
+  .v37PublicHeader .publicLogo img{width:198px!important}
+  .v37PublicHeader .publicNav{
+    gap:6px 12px!important;
+  }
+  .v37PublicHeader .publicNavLink{
+    font-size:12.5px!important;
+    padding:10px 11px!important;
+  }
+  .v37PublicHeader .publicPortalBtn{min-height:44px!important}
+}
+
+/* Mobile keeps full-width CTAs but never lets labels split awkwardly. */
+@media(max-width:720px){
+  .publicLanding .button,
+  .publicPage .button{
+    white-space:normal;
+    text-align:center;
+    line-height:1.2;
+  }
+  .publicLanding .button.large,
+  .publicPage .button.large{
+    min-height:52px;
+    padding:13px 18px!important;
+  }
+  .publicCta{
+    gap:20px!important;
+    padding-top:28px!important;
+    padding-bottom:28px!important;
+  }
+  .publicAudienceGrid article{
+    padding:26px!important;
+    min-height:0;
+  }
+  .demoTeaser{
+    padding:30px 26px!important;
+    gap:24px!important;
+  }
+  .demoTeaser .button{min-width:0;width:100%!important}
+}
+

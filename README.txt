@@ -1,3 +1,16 @@
+PSC V37.1 — PUBLIC COSMETIC POLISH
+=================================
+
+This patch keeps V37 functionality intact and refines the public-facing visual system.
+
+Changes:
+- Fixed the regulated-lines dark callout headline contrast.
+- Removed decorative arrow glyphs from public CTAs.
+- Prevented awkward CTA label wrapping and improved button spacing.
+- Gave the public header/logo/navigation more breathing room on desktop and tablet.
+- Increased spacing and typography refinement in audience cards and conversion blocks.
+- Included the static entry/SEO pages in this release overlay.
+
 PSC V37 — Responsive Stabilization + Public Conversion + Customer Account Record
 ===============================================================================
 Baseline: PSC V36 Product Master v2.2
