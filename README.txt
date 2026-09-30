@@ -1,17 +1,14 @@
-PSC V30 — Clean Cards + Unified Icon System
-===========================================
+PSC V31 — Flat Header + Corrected Portal Icons
+===============================================
 
 Replace:
 - app.js
 - styles.css
 
 Changes:
-- Category name removed from colour image placeholders; placeholder is colour only.
-- DHA requirement / licensed-route label moved above the image area.
-- Clinical-need metadata remains below the product information.
-- Portal and PSC admin icons replaced with one clean geometric outline family based on the supplied reference.
-- Sidebar active icon now uses a teal outlined rounded square on the dark rail.
-- Home/dashboard, document/edit, boxes, checklist, repeat, analytics, home and logout icons follow the reference language.
-- Search, notification and mobile menu controls use the same line weight and geometry.
-- Admin dashboard unicode pictograms replaced with matching SVG line icons.
-- No Supabase/database changes required.
+- Portal/admin icon family redrawn with lighter single-stroke SVGs to avoid the deformed/bold look.
+- Sidebar icons aligned more closely to the supplied reference.
+- Top header capsule/tablet treatment removed site-wide across portal views.
+- Logo no longer sits inside a rounded grey/white tablet in the portal header.
+- Top bar flattened and simplified while keeping search / actions functional.
+- Product-card change from V30 remains intact (DHA requirement above image; placeholder colour only).

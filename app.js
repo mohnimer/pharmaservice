@@ -529,33 +529,33 @@
   function badge(text,tone=''){ return `<span class="badge ${tone}">${esc(text)}</span>`; }
   function icon(name){
     const map={
-      dashboard:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="18" rx="1.5"/><rect x="14" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="15" width="7" height="6" rx="1.5"/></svg>`,
-      overview:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="18" rx="1.5"/><rect x="14" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="15" width="7" height="6" rx="1.5"/></svg>`,
-      home:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 10.5 12 3.5l8.5 7V21h-6v-6h-5v6h-6z"/></svg>`,
-      edit:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8"/><path d="M14 3h4l3 3v4"/><path d="m12.5 18.5 1-4 5.8-5.8a1.7 1.7 0 0 1 2.4 2.4l-5.8 5.8z"/></svg>`,
-      request:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8"/><path d="M14 3h4l3 3v4"/><path d="m12.5 18.5 1-4 5.8-5.8a1.7 1.7 0 0 1 2.4 2.4l-5.8 5.8z"/></svg>`,
-      boxes:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 4 4-2 4 2-4 2zM8 4v5l4 2 4-2V4"/><path d="m3 12 4-2 4 2-4 2zM3 12v5l4 2 4-2v-5"/><path d="m13 12 4-2 4 2-4 2zM13 12v5l4 2 4-2v-5"/></svg>`,
-      inventory:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 4 4-2 4 2-4 2zM8 4v5l4 2 4-2V4"/><path d="m3 12 4-2 4 2-4 2zM3 12v5l4 2 4-2v-5"/><path d="m13 12 4-2 4 2-4 2zM13 12v5l4 2 4-2v-5"/></svg>`,
-      products:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 4 4-2 4 2-4 2zM8 4v5l4 2 4-2V4"/><path d="m3 12 4-2 4 2-4 2zM3 12v5l4 2 4-2v-5"/><path d="m13 12 4-2 4 2-4 2zM13 12v5l4 2 4-2v-5"/></svg>`,
-      checklist:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 5.5 1.5 1.5 2.5-3"/><path d="M10 6h10"/><path d="m3.5 12 1.5 1.5 2.5-3"/><path d="M10 12.5h10"/><circle cx="5" cy="19" r="1.7"/><path d="M10 19h10"/></svg>`,
-      queue:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 5.5 1.5 1.5 2.5-3"/><path d="M10 6h10"/><path d="m3.5 12 1.5 1.5 2.5-3"/><path d="M10 12.5h10"/><circle cx="5" cy="19" r="1.7"/><path d="M10 19h10"/></svg>`,
-      resource:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 5.5 1.5 1.5 2.5-3"/><path d="M10 6h10"/><path d="m3.5 12 1.5 1.5 2.5-3"/><path d="M10 12.5h10"/><circle cx="5" cy="19" r="1.7"/><path d="M10 19h10"/></svg>`,
-      repeat:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 7H8a4 4 0 0 0-4 4v1"/><path d="m16 4 3 3-3 3"/><path d="M5 17h11a4 4 0 0 0 4-4v-1"/><path d="m8 20-3-3 3-3"/></svg>`,
-      rules:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 7H8a4 4 0 0 0-4 4v1"/><path d="m16 4 3 3-3 3"/><path d="M5 17h11a4 4 0 0 0 4-4v-1"/><path d="m8 20-3-3 3-3"/></svg>`,
-      reports:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="15" width="4" height="6" rx="1"/><rect x="10" y="10" width="4" height="11" rx="1"/><rect x="17" y="4" width="4" height="17" rx="1"/></svg>`,
-      feed:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="15" width="4" height="6" rx="1"/><rect x="10" y="10" width="4" height="11" rx="1"/><rect x="17" y="4" width="4" height="17" rx="1"/></svg>`,
-      assets:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8"/><path d="M14 3h4l3 3v4"/><path d="m12.5 18.5 1-4 5.8-5.8a1.7 1.7 0 0 1 2.4 2.4l-5.8 5.8z"/></svg>`,
-      admin:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="18" rx="1.5"/><rect x="14" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="15" width="7" height="6" rx="1.5"/></svg>`,
-      clinics:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V8h16v12"/><path d="M9 8V4h6v4"/><path d="M9 13h6M12 10v6"/><path d="M8 20v-3h8v3"/></svg>`,
-      approved:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5 10 16l8-9"/><path d="M4 4h16v16H4z"/></svg>`,
-      stock:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v9M12 17v.01"/><path d="M3.5 20h17L12 3z"/></svg>`,
-      search:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>`,
-      bell:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/></svg>`,
-      logout:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5"/><path d="M13 8l4 4-4 4M8 12h9"/></svg>`,
-      menu:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>`,
-      close:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>`,
-      settings:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/></svg>`,
-      help:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.7 2.7 0 1 1 4.4 2.1c-.9.7-1.9 1.2-1.9 2.9M12 18h.01"/></svg>`
+      dashboard:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="6" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/></svg>`,
+      overview:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="6" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/></svg>`,
+      home:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5"/><path d="M6.5 9.5V20h4.5v-5h2v5h4.5V9.5"/></svg>`,
+      edit:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7"/><path d="M14 4h5v5"/><path d="m10 14 7.5-7.5a1.8 1.8 0 1 1 2.5 2.5L12.5 16.5 9 17z"/></svg>`,
+      request:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7"/><path d="M14 4h5v5"/><path d="m10 14 7.5-7.5a1.8 1.8 0 1 1 2.5 2.5L12.5 16.5 9 17z"/></svg>`,
+      boxes:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 7 5.5 12 8l5-2.5Z"/><path d="M7 5.5V11l5 2.5V8"/><path d="M17 5.5V11l-5 2.5"/><path d="M5 12.5 2.5 14 5 15.5 7.5 14Z"/><path d="M5 15.5V20l2.5-1.5V14"/><path d="M19 12.5 16.5 14 19 15.5 21.5 14Z"/><path d="M19 15.5V20l2.5-1.5V14"/></svg>`,
+      inventory:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 7 5.5 12 8l5-2.5Z"/><path d="M7 5.5V11l5 2.5V8"/><path d="M17 5.5V11l-5 2.5"/><path d="M5 12.5 2.5 14 5 15.5 7.5 14Z"/><path d="M5 15.5V20l2.5-1.5V14"/><path d="M19 12.5 16.5 14 19 15.5 21.5 14Z"/><path d="M19 15.5V20l2.5-1.5V14"/></svg>`,
+      products:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 7 5.5 12 8l5-2.5Z"/><path d="M7 5.5V11l5 2.5V8"/><path d="M17 5.5V11l-5 2.5"/><path d="M5 12.5 2.5 14 5 15.5 7.5 14Z"/><path d="M5 15.5V20l2.5-1.5V14"/><path d="M19 12.5 16.5 14 19 15.5 21.5 14Z"/><path d="M19 15.5V20l2.5-1.5V14"/></svg>`,
+      checklist:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 6 1.8 1.8L8.8 4.8"/><path d="M11 6h9"/><path d="m4 12 1.8 1.8 3-3"/><path d="M11 12h9"/><circle cx="5.8" cy="18" r="1.6"/><path d="M11 18h9"/></svg>`,
+      queue:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 6 1.8 1.8L8.8 4.8"/><path d="M11 6h9"/><path d="m4 12 1.8 1.8 3-3"/><path d="M11 12h9"/><circle cx="5.8" cy="18" r="1.6"/><path d="M11 18h9"/></svg>`,
+      resource:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 6 1.8 1.8L8.8 4.8"/><path d="M11 6h9"/><path d="m4 12 1.8 1.8 3-3"/><path d="M11 12h9"/><circle cx="5.8" cy="18" r="1.6"/><path d="M11 18h9"/></svg>`,
+      repeat:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7H7a4 4 0 0 0-4 4"/><path d="m17 7-2.5-2.5"/><path d="M17 7l-2.5 2.5"/><path d="M7 17h10a4 4 0 0 0 4-4"/><path d="m7 17 2.5 2.5"/><path d="M7 17l2.5-2.5"/></svg>`,
+      rules:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7H7a4 4 0 0 0-4 4"/><path d="m17 7-2.5-2.5"/><path d="M17 7l-2.5 2.5"/><path d="M7 17h10a4 4 0 0 0 4-4"/><path d="m7 17 2.5 2.5"/><path d="M7 17l2.5-2.5"/></svg>`,
+      reports:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V12"/><path d="M12 20V8"/><path d="M19 20V4"/><path d="M3 20h18"/></svg>`,
+      feed:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V12"/><path d="M12 20V8"/><path d="M19 20V4"/><path d="M3 20h18"/></svg>`,
+      assets:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7"/><path d="M14 4h5v5"/><path d="m10 14 7.5-7.5a1.8 1.8 0 1 1 2.5 2.5L12.5 16.5 9 17z"/></svg>`,
+      admin:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="6" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/></svg>`,
+      clinics:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V8h16v12"/><path d="M9 8V4h6v4"/><path d="M12 10v6"/><path d="M9 13h6"/></svg>`,
+      approved:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 12.5 3.2 3.2L18 7"/></svg>`,
+      stock:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v8"/><path d="M12 16v.1"/><path d="M4 20h16L12 4Z"/></svg>`,
+      search:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.8"/><path d="m15 15 4.5 4.5"/></svg>`,
+      bell:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16v-4.2a6 6 0 1 1 12 0V16"/><path d="M4 17h16"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>`,
+      logout:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5"/><path d="M14 8l5 4-5 4"/><path d="M9 12h10"/></svg>`,
+      menu:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>`,
+      close:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"/><path d="M18 6 6 18"/></svg>`,
+      settings:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v2.2"/><path d="M12 19.3v2.2"/><path d="m4.9 4.9 1.6 1.6"/><path d="m17.5 17.5 1.6 1.6"/><path d="M2.5 12h2.2"/><path d="M19.3 12h2.2"/><path d="m4.9 19.1 1.6-1.6"/><path d="m17.5 6.5 1.6-1.6"/></svg>`,
+      help:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.8 9.1a2.5 2.5 0 1 1 3.9 2c-.9.6-1.7 1.2-1.7 2.5"/><path d="M12 17.6h.01"/></svg>`
     };
     return map[name]||'';
   }
@@ -578,7 +578,7 @@
       <main class="mainArea v7MainArea v7bMainArea">
         <header class="topbar sleekTopbar v7Topbar v7bTopbar">
           <button class="iconBtn mobileMenu" data-mobile-open aria-label="Open menu">${icon('menu')}</button>
-          <div class="topbarBrandSlot"><img src="${PSC_LOGO}" alt="Pharma Service"></div>
+          <div class="topbarBrandSlot plainLogo"><img src="${PSC_LOGO}" alt="Pharma Service"></div>
           <div class="topbarSearch"><span class="searchIcon">${icon('search')}</span><input placeholder="Search supplies, equipment, or requests..." aria-label="Search"></div>
           <div class="topbarActions topbarActionsV4">
             ${admin?'<button class="iconShell" aria-label="Notifications">'+icon('bell')+'</button><span class="userPill"><span class="avatarDot">MH</span><span><b>Mohamed</b><small>PSC admin</small></span></span>':`<button class="iconShell" aria-label="Notifications">${icon('bell')}</button>
