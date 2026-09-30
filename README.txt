@@ -1,14 +1,29 @@
-PSC V31 — Flat Header + Corrected Portal Icons
-===============================================
+PSC V32 — Canva Product Cards + Header Fix
+==========================================
 
 Replace:
 - app.js
 - styles.css
 
-Changes:
-- Portal/admin icon family redrawn with lighter single-stroke SVGs to avoid the deformed/bold look.
-- Sidebar icons aligned more closely to the supplied reference.
-- Top header capsule/tablet treatment removed site-wide across portal views.
-- Logo no longer sits inside a rounded grey/white tablet in the portal header.
-- Top bar flattened and simplified while keeping search / actions functional.
-- Product-card change from V30 remains intact (DHA requirement above image; placeholder colour only).
+Product card rebuild:
+- Rebuilt to closely follow Mohamed's Canva reference.
+- Uniform card heights and aligned image/body/action regions.
+- DHA REQUIREMENT / LICENSED ROUTE sits above the image.
+- Missing-image placeholder contains colour only.
+- Product cards show:
+  product title -> pack -> primary clinical need.
+- Brand/source/internal SKU clutter removed from the card face.
+- Details is the secondary rounded-rectangle action.
+- Request is the black pill primary action and adds the item to the request/cart.
+- Real product images remain object-fit contain on white.
+- Legacy price/request-quote row removed from these cards.
+
+Header fix:
+- Solid warm-white background retained behind the portal header.
+- Logo is plain, with no tablet/capsule around it.
+- Search remains centred.
+- Account / notification / cart stay aligned on the right.
+- Header is sticky, non-overlapping, and above the clinical-needs scroller.
+- Responsive mobile layout keeps logo/search/actions separated cleanly.
+
+No Supabase/database migration is required.

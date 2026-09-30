@@ -576,7 +576,7 @@
         </div>
       </aside>
       <main class="mainArea v7MainArea v7bMainArea">
-        <header class="topbar sleekTopbar v7Topbar v7bTopbar">
+        <header class="topbar sleekTopbar v7Topbar v7bTopbar portalHeaderBar">
           <button class="iconBtn mobileMenu" data-mobile-open aria-label="Open menu">${icon('menu')}</button>
           <div class="topbarBrandSlot plainLogo"><img src="${PSC_LOGO}" alt="Pharma Service"></div>
           <div class="topbarSearch"><span class="searchIcon">${icon('search')}</span><input placeholder="Search supplies, equipment, or requests..." aria-label="Search"></div>
@@ -1037,23 +1037,22 @@
     const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
     const fallback=p.fallbackAsset||'./assets/products/clinic-basics.jpg';
     const visual=p.imageUrl
-      ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img src="${esc(p.imageUrl)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(fallback)}'"><span class="imageSourceTag">${p.imageMatchStatus&&p.imageMatchStatus.startsWith('Exact')?'Product image':'Product visual'}</span></button>`
+      ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img src="${esc(p.imageUrl)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(fallback)}'"></button>`
       : `<button class="productVisual productNeedVisual productVisualButton" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)}"></button>`;
 
-    const needText=clinicalNeedIds(p).slice(0,2).map(id=>esc(clinicalNeedMeta(id).label)).join(' · ');
-    const hasRealBrand=p.brand && p.brand!=='Specification-led' && p.brand!=='Institutional range';
-    const hasPrice=p.contractPrice!==null && p.contractPrice!==undefined && p.contractPrice!=='' && Number.isFinite(Number(p.contractPrice)) && Number(p.contractPrice)>0;
-
-    return `<article class="productCard v25ProductCard v261ProductCard v262ProductCard">
-      ${(p.dhaMapped||p.regulated)?`<div class="productStatusText productStatusTop">${p.dhaMapped?'<span>DHA requirement</span>':''}${p.regulated?'<span>Licensed route</span>':''}</div>`:''}
+    const primaryNeed=esc(need.label);
+    const status=p.dhaMapped?'DHA REQUIREMENT':(p.regulated?'LICENSED ROUTE':'');
+    return `<article class="productCard v25ProductCard v261ProductCard v262ProductCard canvaProductCard">
+      <div class="canvaCardStatus ${status?'':'empty'}">${status}</div>
       ${visual}
-      ${hasRealBrand?`<div class="productBrand">${esc(p.brand)}</div>`:''}
-      <button class="productTitleButton" data-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button>
-      <p class="pack">${esc(pack)}</p>
-      ${needText?`<div class="productNeedTags">${needText}</div>`:''}
-      <div class="productBottom">
-        <div class="priceBlock">${hasPrice?`<b>${money(p.contractPrice)}</b>`:'<b>Request quote</b>'}</div>
-        <div class="productCardActions"><button class="specLink" data-product-view="${p.pscSku}">Details</button><button class="squareAdd semanticPrimary" data-add="${p.pscSku}" aria-label="Add to request">Add</button></div>
+      <div class="canvaCardBody">
+        <button class="productTitleButton" data-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button>
+        <p class="pack">${esc(pack)}</p>
+        <div class="productNeedTags">${primaryNeed}</div>
+      </div>
+      <div class="canvaCardActions">
+        <button class="canvaDetails" data-product-view="${p.pscSku}">Details</button>
+        <button class="canvaRequest" data-add="${p.pscSku}" aria-label="Request ${esc(displayName)}">Request</button>
       </div>
     </article>`;
   }

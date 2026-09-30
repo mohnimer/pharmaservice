@@ -3244,3 +3244,473 @@ button[data-cancel-quote]:hover{
   .topbarBrandSlot img{height:34px!important}
   .topbarSearch{order:3;width:100%;max-width:none!important}
 }
+
+
+/* =========================================================
+   V32 — Canva product cards + corrected solid portal header
+   ========================================================= */
+
+/* ---------- PORTAL HEADER ---------- */
+.mainArea.v7bMainArea,
+.v7bMainArea{
+  padding-top:0!important;
+}
+
+.portalHeaderBar,
+.sleekTopbar.portalHeaderBar,
+.v26Shell .portalHeaderBar,
+.v7Topbar.portalHeaderBar,
+.v7bTopbar.portalHeaderBar{
+  position:sticky!important;
+  top:0!important;
+  z-index:120!important;
+  display:grid!important;
+  grid-template-columns:220px minmax(280px,1fr) auto!important;
+  align-items:center!important;
+  column-gap:20px!important;
+  width:100%!important;
+  height:84px!important;
+  min-height:84px!important;
+  margin:0!important;
+  padding:0 18px!important;
+  background:#fbfaf7!important;
+  border:0!important;
+  border-bottom:1px solid #e5e0d8!important;
+  border-radius:0!important;
+  box-shadow:0 5px 18px rgba(40,31,19,.045)!important;
+  backdrop-filter:none!important;
+  overflow:visible!important;
+}
+
+.portalHeaderBar .topbarBrandSlot,
+.portalHeaderBar .topbarBrandSlot.plainLogo{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  width:220px!important;
+  min-width:220px!important;
+  max-width:220px!important;
+  height:56px!important;
+  padding:0!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+
+.portalHeaderBar .topbarBrandSlot img{
+  display:block!important;
+  width:205px!important;
+  max-width:205px!important;
+  height:auto!important;
+  max-height:52px!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+}
+
+.portalHeaderBar .topbarSearch{
+  justify-self:center!important;
+  width:min(100%,560px)!important;
+  max-width:560px!important;
+  min-height:52px!important;
+  padding:0 18px!important;
+  background:#f7f6f2!important;
+  border:1px solid #e4e0d8!important;
+  border-radius:18px!important;
+  box-shadow:none!important;
+}
+
+.portalHeaderBar .topbarSearch input{
+  font-size:14px!important;
+}
+
+.portalHeaderBar .topbarActions{
+  justify-self:end!important;
+  min-width:0!important;
+  gap:10px!important;
+}
+
+.portalHeaderBar .iconShell{
+  flex:0 0 46px!important;
+  width:46px!important;
+  height:46px!important;
+  border-radius:14px!important;
+}
+
+.portalHeaderBar .userPill,
+.portalHeaderBar .campusPill,
+.portalHeaderBar .accountSwitcherButton{
+  min-height:52px!important;
+}
+
+.portalHeaderBar .pillBasket{
+  min-height:52px!important;
+  padding:0 18px!important;
+}
+
+/* Ensure catalogue/category navigation begins BELOW the header */
+.portalHeaderBar + .demoAccountBanner + .contentWrap,
+.portalHeaderBar + .contentWrap{
+  position:relative!important;
+  z-index:1!important;
+}
+
+.needRibbon{
+  position:relative!important;
+  z-index:2!important;
+  margin-top:10px!important;
+  background:#fff!important;
+  border:1px solid #e5e0d8!important;
+  box-shadow:none!important;
+}
+
+/* ---------- CANVA-STYLE PRODUCT CARD ---------- */
+.productGrid.v25ProductGrid{
+  align-items:stretch!important;
+}
+
+.canvaProductCard,
+.v262ProductCard.canvaProductCard{
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:column!important;
+  height:100%!important;
+  min-height:535px!important;
+  padding:12px!important;
+  overflow:hidden!important;
+  background:#fff!important;
+  border:1px solid #dcd8d1!important;
+  border-radius:25px!important;
+  box-shadow:none!important;
+}
+
+.canvaProductCard:hover{
+  transform:none!important;
+  box-shadow:0 8px 22px rgba(36,29,20,.055)!important;
+}
+
+/* Fixed status rail: every card reserves the same height so images align */
+.canvaCardStatus{
+  flex:0 0 24px!important;
+  min-height:24px!important;
+  display:flex!important;
+  align-items:center!important;
+  padding:0 4px!important;
+  margin:0!important;
+  color:#777168!important;
+  font-size:10px!important;
+  line-height:1!important;
+  font-weight:800!important;
+  letter-spacing:.06em!important;
+  text-transform:uppercase!important;
+}
+.canvaCardStatus.empty{
+  visibility:hidden!important;
+}
+
+/* Image block */
+.canvaProductCard .productVisual{
+  flex:0 0 auto!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:1.16 / 1!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:21px!important;
+  overflow:hidden!important;
+  background:#f4f2ee!important;
+}
+
+.canvaProductCard .productVisual:before,
+.canvaProductCard .productVisual:after{
+  display:none!important;
+}
+
+.canvaProductCard .productPhoto{
+  background:#fff!important;
+}
+
+.canvaProductCard .productPhoto img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  padding:0!important;
+  margin:0!important;
+  object-fit:contain!important;
+  background:#fff!important;
+}
+
+.canvaProductCard .productNeedVisual{
+  background:var(--need-bg)!important;
+}
+
+.canvaProductCard .imageSourceTag,
+.canvaProductCard .productNeedText,
+.canvaProductCard .productBrand{
+  display:none!important;
+}
+
+/* Body uses fixed rhythm so every CTA lands at the same height */
+.canvaCardBody{
+  display:grid!important;
+  grid-template-rows:54px 22px 32px!important;
+  align-content:start!important;
+  gap:2px!important;
+  padding:15px 5px 8px!important;
+}
+
+.canvaProductCard .productTitleButton{
+  display:block!important;
+  width:100%!important;
+  height:54px!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  background:transparent!important;
+  text-align:left!important;
+  cursor:pointer!important;
+}
+
+.canvaProductCard .productTitleButton h3{
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+  overflow:hidden!important;
+  margin:0!important;
+  color:#222!important;
+  font-size:18px!important;
+  line-height:1.12!important;
+  font-weight:750!important;
+  letter-spacing:-.035em!important;
+}
+
+.canvaProductCard .pack{
+  align-self:start!important;
+  margin:0!important;
+  color:#73706b!important;
+  font-size:12px!important;
+  line-height:1.35!important;
+}
+
+.canvaProductCard .productNeedTags{
+  align-self:end!important;
+  margin:0!important;
+  padding:8px 0 0!important;
+  border:0!important;
+  color:#4d4b47!important;
+  font-size:12px!important;
+  line-height:1.25!important;
+  font-weight:650!important;
+}
+
+/* Exact interaction hierarchy from the Canva reference:
+   rounded rectangle = secondary, pill = primary */
+.canvaCardActions{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:8px!important;
+  margin-top:auto!important;
+  padding:12px 5px 4px!important;
+  border-top:0!important;
+}
+
+.canvaDetails,
+.canvaRequest{
+  width:100%!important;
+  min-height:46px!important;
+  padding:0 18px!important;
+  font-family:inherit!important;
+  font-size:15px!important;
+  font-weight:750!important;
+  cursor:pointer!important;
+}
+
+.canvaDetails{
+  background:#fff!important;
+  color:#262626!important;
+  border:1px solid #aaa59d!important;
+  border-radius:14px!important;
+}
+
+.canvaRequest{
+  background:#050505!important;
+  color:#fff!important;
+  border:1px solid #050505!important;
+  border-radius:999px!important;
+}
+
+.canvaDetails:hover{
+  background:#f7f5f1!important;
+  border-color:#6d6962!important;
+}
+
+.canvaRequest:hover{
+  background:#242424!important;
+}
+
+/* Kill legacy bottom/card controls on this new card only */
+.canvaProductCard .productBottom,
+.canvaProductCard .priceBlock,
+.canvaProductCard .productCardActions,
+.canvaProductCard .specLink,
+.canvaProductCard .squareAdd,
+.canvaProductCard .productStatusText{
+  display:none!important;
+}
+
+/* 4-up desktop cards, matching the proportions in the reference */
+@media(min-width:1180px){
+  .productGrid.v25ProductGrid{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:18px!important;
+  }
+}
+
+@media(max-width:1179px) and (min-width:721px){
+  .productGrid.v25ProductGrid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:15px!important;
+  }
+}
+
+/* Responsive header + cards */
+@media(max-width:1080px){
+  .portalHeaderBar,
+  .sleekTopbar.portalHeaderBar,
+  .v26Shell .portalHeaderBar,
+  .v7Topbar.portalHeaderBar,
+  .v7bTopbar.portalHeaderBar{
+    grid-template-columns:185px minmax(220px,1fr) auto!important;
+    column-gap:12px!important;
+    padding:0 12px!important;
+  }
+  .portalHeaderBar .topbarBrandSlot,
+  .portalHeaderBar .topbarBrandSlot.plainLogo{
+    width:185px!important;
+    min-width:185px!important;
+    max-width:185px!important;
+  }
+  .portalHeaderBar .topbarBrandSlot img{
+    width:175px!important;
+    max-width:175px!important;
+  }
+}
+
+@media(max-width:900px){
+  .portalHeaderBar,
+  .sleekTopbar.portalHeaderBar,
+  .v26Shell .portalHeaderBar,
+  .v7Topbar.portalHeaderBar,
+  .v7bTopbar.portalHeaderBar{
+    display:grid!important;
+    grid-template-columns:auto 1fr auto!important;
+    height:auto!important;
+    min-height:72px!important;
+    row-gap:10px!important;
+    padding:10px 12px 12px!important;
+  }
+
+  .portalHeaderBar .mobileMenu{
+    grid-column:1!important;
+    grid-row:1!important;
+  }
+
+  .portalHeaderBar .topbarBrandSlot{
+    grid-column:2!important;
+    grid-row:1!important;
+    width:auto!important;
+    min-width:0!important;
+    max-width:none!important;
+    justify-content:center!important;
+  }
+
+  .portalHeaderBar .topbarBrandSlot img{
+    width:160px!important;
+    max-width:160px!important;
+  }
+
+  .portalHeaderBar .topbarActions{
+    grid-column:3!important;
+    grid-row:1!important;
+  }
+
+  .portalHeaderBar .topbarSearch{
+    grid-column:1 / -1!important;
+    grid-row:2!important;
+    width:100%!important;
+    max-width:none!important;
+  }
+
+  .canvaProductCard{
+    min-height:510px!important;
+  }
+}
+
+@media(max-width:720px){
+  .productGrid.v25ProductGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+  }
+
+  .canvaProductCard,
+  .v262ProductCard.canvaProductCard{
+    min-height:430px!important;
+    padding:9px!important;
+    border-radius:20px!important;
+  }
+
+  .canvaCardStatus{
+    min-height:20px!important;
+    flex-basis:20px!important;
+    font-size:8px!important;
+  }
+
+  .canvaProductCard .productVisual{
+    border-radius:17px!important;
+    aspect-ratio:1.08 / 1!important;
+  }
+
+  .canvaCardBody{
+    grid-template-rows:46px 18px 28px!important;
+    padding:11px 3px 6px!important;
+  }
+
+  .canvaProductCard .productTitleButton,
+  .canvaProductCard .productTitleButton h3{
+    height:46px!important;
+  }
+
+  .canvaProductCard .productTitleButton h3{
+    font-size:15px!important;
+  }
+
+  .canvaProductCard .pack,
+  .canvaProductCard .productNeedTags{
+    font-size:10px!important;
+  }
+
+  .canvaDetails,
+  .canvaRequest{
+    min-height:42px!important;
+    font-size:13px!important;
+  }
+}
+
+@media(max-width:480px){
+  .productGrid.v25ProductGrid{
+    grid-template-columns:1fr!important;
+    gap:14px!important;
+  }
+
+  .canvaProductCard,
+  .v262ProductCard.canvaProductCard{
+    min-height:520px!important;
+  }
+
+  .canvaProductCard .productVisual{
+    aspect-ratio:1.22 / 1!important;
+  }
+}
