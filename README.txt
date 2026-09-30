@@ -1,29 +1,27 @@
-PSC V32 — Canva Product Cards + Header Fix
-==========================================
+PSC V33 — Exact Canva Cards + DHA Icon
+======================================
 
-Replace:
+Replace / upload:
 - app.js
 - styles.css
+- assets/dha-requirement.png
 
-Product card rebuild:
-- Rebuilt to closely follow Mohamed's Canva reference.
-- Uniform card heights and aligned image/body/action regions.
-- DHA REQUIREMENT / LICENSED ROUTE sits above the image.
-- Missing-image placeholder contains colour only.
-- Product cards show:
-  product title -> pack -> primary clinical need.
-- Brand/source/internal SKU clutter removed from the card face.
-- Details is the secondary rounded-rectangle action.
-- Request is the black pill primary action and adds the item to the request/cart.
-- Real product images remain object-fit contain on white.
-- Legacy price/request-quote row removed from these cards.
+This version intentionally changes ONLY the product-card/product-detail presentation from V32.
 
-Header fix:
-- Solid warm-white background retained behind the portal header.
-- Logo is plain, with no tablet/capsule around it.
-- Search remains centred.
-- Account / notification / cart stay aligned on the right.
-- Header is sticky, non-overlapping, and above the clinical-needs scroller.
-- Responsive mobile layout keeps logo/search/actions separated cleanly.
+Exact changes:
+- Removed textual "DHA REQUIREMENT" label from product cards.
+- The exact user-supplied DHA PNG is used AS-IS on every DHA-mapped product.
+- DHA icon appears top-right over the product image / colour placeholder.
+- Same DHA icon also appears in the mapped product detail view.
+- Every desktop product card is locked to the same height and internal dimensions.
+- Image area is the same size on every card.
+- Product title uses the same font size/weight and max two lines on every card.
+- Pack and primary clinical need use fixed rows.
+- Details is the outlined secondary button.
+- Request is BLACK on every card.
+- Product detail Request button is also BLACK.
+- No teal request button remains in the card/product-detail treatment.
+- No database/Supabase changes required.
 
-No Supabase/database migration is required.
+Important:
+Upload the included dha-requirement.png into the repo's assets folder so this exact supplied image is displayed.

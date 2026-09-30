@@ -3,6 +3,7 @@
   const D = window.PSC_DATA;
   const C = window.PSC_COPY || {};
   const PSC_LOGO = './assets/psc-logo-cropped.png';
+  const DHA_ICON = './assets/dha-requirement.png';
   const $app = document.getElementById('app');
   const STORAGE = 'pscClinicPortalStateV12_1';
 
@@ -1036,21 +1037,19 @@
     const displayName=p.catalogueDisplayName||p.name;
     const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
     const fallback=p.fallbackAsset||'./assets/products/clinic-basics.jpg';
+    const dhaMark=p.dhaMapped?`<img class="dhaRequirementIcon cardDhaIcon" src="${DHA_ICON}" alt="DHA requirement">`:'';
     const visual=p.imageUrl
-      ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img src="${esc(p.imageUrl)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(fallback)}'"></button>`
-      : `<button class="productVisual productNeedVisual productVisualButton" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)}"></button>`;
+      ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img class="productMainImage" src="${esc(p.imageUrl)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(fallback)}'">${dhaMark}</button>`
+      : `<button class="productVisual productNeedVisual productVisualButton" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)}">${dhaMark}</button>`;
 
-    const primaryNeed=esc(need.label);
-    const status=p.dhaMapped?'DHA REQUIREMENT':(p.regulated?'LICENSED ROUTE':'');
-    return `<article class="productCard v25ProductCard v261ProductCard v262ProductCard canvaProductCard">
-      <div class="canvaCardStatus ${status?'':'empty'}">${status}</div>
+    return `<article class="productCard v25ProductCard v261ProductCard v262ProductCard canvaProductCard exactCanvaCard">
       ${visual}
-      <div class="canvaCardBody">
+      <div class="canvaCardBody exactCanvaBody">
         <button class="productTitleButton" data-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button>
         <p class="pack">${esc(pack)}</p>
-        <div class="productNeedTags">${primaryNeed}</div>
+        <div class="productNeedTags">${esc(need.label)}</div>
       </div>
-      <div class="canvaCardActions">
+      <div class="canvaCardActions exactCanvaActions">
         <button class="canvaDetails" data-product-view="${p.pscSku}">Details</button>
         <button class="canvaRequest" data-add="${p.pscSku}" aria-label="Request ${esc(displayName)}">Request</button>
       </div>
@@ -1350,9 +1349,10 @@
     const primary=clinicalNeedMeta(needs[0]||'all');
     const fallback=p.fallbackAsset||'./assets/products/clinic-basics.jpg';
     const needTags=needs.map(id=>`<span class="modalNeedChip" style="--chip-bg:${clinicalNeedMeta(id).bg};--chip-ink:${clinicalNeedMeta(id).ink}">${esc(clinicalNeedMeta(id).label)}</span>`).join('');
+    const detailDhaMark=mapped?`<img class="dhaRequirementIcon detailDhaIcon" src="${DHA_ICON}" alt="DHA requirement">`:'';
     const image=p.imageUrl
-      ? `<img src="${esc(p.imageUrl)}" alt="${esc(displayName)}" onerror="this.onerror=null;this.src='${esc(fallback)}'">`
-      : `<div class="detailNeedVisual" style="--need-bg:${primary.bg};--need-ink:${primary.ink}"><b>${esc(primary.label)}</b></div>`;
+      ? `<div class="detailProductImageWrap"><img src="${esc(p.imageUrl)}" alt="${esc(displayName)}" onerror="this.onerror=null;this.src='${esc(fallback)}'">${detailDhaMark}</div>`
+      : `<div class="detailProductImageWrap"><div class="detailNeedVisual" style="--need-bg:${primary.bg};--need-ink:${primary.ink}"></div>${detailDhaMark}</div>`;
 
     return `<div class="productDetailModal">
       <div class="modalHeader"><div><span class="eyebrow">${esc(primary.label)}</span><h2>${esc(displayName)}</h2><div class="smallMuted mono">${esc(p.pscSku)}</div></div><button class="iconBtn" data-modal-close>×</button></div>
@@ -1366,7 +1366,7 @@
           </div>
           ${mapped?`<div class="mappingDisclosure"><b>Regulatory clarity</b><p>Mapped to the applicable DHA clinic requirement. This is not a DHA product endorsement or product approval. Exact model suitability remains subject to specification verification.</p></div>`:''}
           ${p.regulated?'<div class="licensedNotice"><b>Licensed supply route</b><p>Availability and supply remain subject to applicable UAE licensing, recipient authorization, product registration, storage, batch/expiry and professional controls.</p></div>':''}
-          <div class="detailActions"><button class="button light" data-modal-close>Close</button><button class="button primary" data-add="${p.pscSku}">Add to request</button></div>
+          <div class="detailActions productPageActions"><button class="button light productCloseAction" data-modal-close>Close</button><button class="button primary productRequestAction" data-add="${p.pscSku}">Request</button></div>
         </div>
       </div>
     </div>`;
