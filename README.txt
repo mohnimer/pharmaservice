@@ -31,3 +31,12 @@ V35
 - Public website header background now uses exactly the same #fbf8f1 page colour as the section beneath it.
 - Sticky/scrolled header keeps the same colour.
 - Removed the visual white header block; retained only a subtle bottom divider.
+
+
+V36 — Institutional Product Master v2.2
+---------------------------------------
+- Supabase institutional master is now the 260-line Product Master v2.2 uploaded by PSC.
+- Only INST-0001 through INST-0260 remain active customer listings.
+- Legacy PSC-* records are archived/inactive for transaction history and no longer appear as listings.
+- Admin Product Master and MASTER metrics now show active products only (260), not archived records.
+- Institutional storefront publishes exactly 260 master lines; wholesale remains draft/hidden until curated.
