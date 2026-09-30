@@ -26,7 +26,17 @@
   let authReady = false;
 
   let state = load();
-  let ui = { mobile:false, basket:false, modal:null, accountMenu:false, catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All' };
+  let ui = { mobile:false, basket:false, modal:null, accountMenu:false, catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All', cmsChannel:'institutional', cmsSearch:'', wholesaleQuery:'', wholesaleCat:'All' };
+
+  const cms = {
+    loaded:false,
+    loading:false,
+    products:[],
+    settings:[],
+    media:[],
+    storefronts:[],
+    publicRows:{institutional:[],wholesale:[]}
+  };
 
   const INSTITUTIONAL_CATALOGUE_TEMPLATE = {
     id:'institutional-catalogue-v1',
@@ -119,6 +129,387 @@
   function availableSchools(){ return (authContext?.schools||[]).filter(Boolean); }
   function canSwitchSchools(){ return !authContext?.isPscAdmin && availableSchools().length>1; }
   function isDemoAccount(){ return authContext?.group?.slug==='psc-demo-group'; }
+
+  function storefrontConfig(channel){
+    return cms.storefronts.find(x=>x.channel===channel) || null;
+  }
+
+  function cleanNullable(v){
+    const s=String(v??'').trim();
+    return s===''?null:s;
+  }
+
+  function cleanNumber(v){
+    const s=String(v??'').trim();
+    if(s==='') return null;
+    const n=Number(s);
+    return Number.isFinite(n)?n:null;
+  }
+
+  function cleanBrand(v){
+    const s=String(v||'').trim();
+    return ['Specification-led','Institutional range'].includes(s)?null:(s||null);
+  }
+
+  function localCatalogueSeedRows(){
+    const seen=new Set();
+    const rows=[];
+    (D.products||[]).forEach(p=>{
+      const sku=p.pscSku;
+      if(!sku || seen.has(sku)) return;
+      seen.add(sku);
+      const reg=p.dhaMapped
+        ? [p.dhaReference,p.dhaRequirement,p.dhaCondition].filter(Boolean).join(' · ')
+        : (p.regulatoryMapping||null);
+      rows.push({
+        psc_sku:sku,
+        name:p.name||p.catalogueDisplayName||sku,
+        brand:cleanBrand(p.brand),
+        pack:p.cataloguePack||p.pack||null,
+        category:p.productType||p.category||null,
+        image_url:p.imageUrl||null,
+        commercial_specification:p.pscOfferedSpecification||p.spec||null,
+        requirement_status:p.dhaStatus||p.requirementStatus||null,
+        regulatory_mapping:reg,
+        regulated:!!p.regulated,
+        dha_mapped:!!p.dhaMapped,
+        dha_reference:p.dhaReference||null,
+        dha_requirement:p.dhaRequirement||null,
+        dha_condition:p.dhaCondition||null,
+        active:true,
+        catalogue_parent_id:p.catalogueParentId||null,
+        clinical_needs:Array.isArray(p.clinicalNeeds)?p.clinicalNeeds:[],
+        product_type:p.productType||p.category||null,
+        short_description:null,
+        long_description:null,
+        supplier_name:p.institutionalProvisional?null:cleanNullable(p.supplier),
+        supplier_sku:cleanNullable(p.supplierSku),
+        buy_cost:null, // Static catalogue carries planning numbers, never verified supplier acquisition cost.
+        landed_cost:null,
+        vat_status:cleanNullable(p.taxStatus),
+        stock_status:cleanNullable(p.stock),
+        lead_time:cleanNullable(p.leadTime),
+        evidence_status:cleanNullable(p.catalogueEvidence||p.evidenceStatus),
+        internal_notes:p.institutionalProvisional?'Migrated catalogue planning line. Independently verify actual supplier cost, model/spec, VAT, stock, lead time and regulatory route.':null
+      });
+    });
+    return rows;
+  }
+
+  async function ensureCmsProductSeed(){
+    if(!sb || !authContext?.isPscAdmin) return;
+    const allLocal=localCatalogueSeedRows();
+    if(!allLocal.length) return;
+
+    const {data:existing,error:lookupError}=await sb.from('products').select('psc_sku').range(0,1999);
+    if(lookupError) throw lookupError;
+    const known=new Set((existing||[]).map(x=>x.psc_sku));
+    const missing=allLocal.filter(x=>!known.has(x.psc_sku));
+
+    // Ignore duplicate IDs if two admin sessions perform the first import concurrently.
+    for(let i=0;i<missing.length;i+=60){
+      const {error}=await sb.from('products').upsert(missing.slice(i,i+60),{
+        onConflict:'psc_sku',ignoreDuplicates:true
+      });
+      if(error) throw error;
+    }
+  }
+
+  async function loadPublicStorefronts(){
+    if(!sb) return;
+    const [{data:storefronts,error:sfError},{data:institutional,error:iError},{data:wholesale,error:wError}] = await Promise.all([
+      sb.from('storefronts').select('channel,display_name,headline,subheadline,active,catalogue_initialized').order('channel'),
+      sb.from('published_storefront_catalogue').select('*').eq('channel','institutional').order('display_order').order('name'),
+      sb.from('published_storefront_catalogue').select('*').eq('channel','wholesale').order('display_order').order('name')
+    ]);
+    if(sfError) console.warn('Storefront copy:',sfError.message);
+    if(iError) console.warn('Institutional storefront:',iError.message);
+    if(wError) console.warn('Wholesale storefront:',wError.message);
+
+    if(storefronts) cms.storefronts=storefronts;
+    cms.publicRows.institutional=institutional||[];
+    cms.publicRows.wholesale=wholesale||[];
+    applyInstitutionalCmsOverlay();
+  }
+
+  function applyInstitutionalCmsOverlay(){
+    const sf=storefrontConfig('institutional');
+    // Until the full institutional migration succeeds, the existing 260-line static master remains in place.
+    if(!sf?.catalogue_initialized) return;
+    const rows=cms.publicRows.institutional||[];
+    const byCatalogueId=new Map((D.products||[]).filter(p=>p.catalogueTransactionId).map(p=>[p.catalogueTransactionId,p]));
+    const bySku=new Map((D.products||[]).map(p=>[p.pscSku,p]));
+    const preferredIds=new Set(rows.filter(r=>r.psc_sku.startsWith('INST-')).map(r=>r.psc_sku));
+
+    (D.products||[]).forEach(p=>{ p.catalogueVisible=false; });
+    // Prefer the authoritative institutional line over an old PSC wholesale/master alias.
+    const ordered=[...rows].sort((a,b)=>Number(b.psc_sku.startsWith('INST-'))-Number(a.psc_sku.startsWith('INST-')));
+    ordered.forEach(r=>{
+      let item=byCatalogueId.get(r.psc_sku)||bySku.get(r.psc_sku);
+      if(item?.catalogueTransactionId!==r.psc_sku && item?.catalogueTransactionId && preferredIds.has(item.catalogueTransactionId)) return;
+      if(!item){
+        item={pscSku:r.psc_sku,name:r.name||r.psc_sku,category:r.category||'Institutional Supplies',pack:r.pack||'',brand:r.brand||'',institutionalProvisional:false};
+        D.products.push(item);
+        bySku.set(item.pscSku,item);
+      }
+      item.catalogueVisible=true;
+      item.storefrontDbId=r.product_id;
+      item.catalogueDisplayName=r.name||item.name;
+      item.brand=r.brand||'';
+      item.cataloguePack=r.pack||item.pack||'';
+      item.productType=r.product_type||r.category||item.productType||'Institutional Supplies';
+      item.clinicalNeeds=Array.isArray(r.clinical_needs)?r.clinical_needs:[];
+      item.imageUrl=r.image_url||null;
+      item.pscOfferedSpecification=r.commercial_specification||'';
+      item.storefrontMedia=Array.isArray(r.media_urls)?r.media_urls:[];
+      item.storefrontShortDescription=r.short_description||'';
+      item.storefrontLongDescription=r.long_description||'';
+      item.storefrontPriceMode=r.price_display_mode||'request_quote';
+      item.storefrontMoq=r.moq;
+      item.regulated=!!r.regulated;
+      item.dhaMapped=!!r.dha_mapped;
+      item.dhaReference=r.dha_reference||'';
+      item.dhaRequirement=r.dha_requirement||'';
+      item.dhaCondition=r.dha_condition||'';
+      item.dhaStatus=r.requirement_status||'';
+      item.contractPrice=(r.price_display_mode==='show_price' && r.display_price!==null) ? Number(r.display_price):null;
+    });
+  }
+
+  async function loadAdminCms(){
+    if(!sb || !authContext?.isPscAdmin) return;
+    cms.loading=true;
+    try{
+      await ensureCmsProductSeed();
+      const [{data:products,error:pError},{data:settings,error:sError},{data:media,error:mError},{data:storefronts,error:sfError}] = await Promise.all([
+        sb.from('products').select('*').order('psc_sku'),
+        sb.from('storefront_product_settings').select('*').order('display_order'),
+        sb.from('product_media').select('*').order('display_order'),
+        sb.from('storefronts').select('*').order('channel')
+      ]);
+      if(pError) throw pError;
+      if(sError) throw sError;
+      if(mError) throw mError;
+      if(sfError) throw sfError;
+      cms.products=products||[];
+      cms.settings=settings||[];
+      cms.media=media||[];
+      cms.storefronts=storefronts||[];
+      cms.loaded=true;
+      await loadPublicStorefronts();
+    } finally {
+      cms.loading=false;
+    }
+  }
+
+  function cmsSetting(productId,channel=ui.cmsChannel){
+    return cms.settings.find(x=>x.product_id===productId && x.channel===channel) || null;
+  }
+
+  function cmsProduct(productId){
+    return cms.products.find(x=>x.id===productId) || null;
+  }
+
+  function cmsProductMedia(productId){
+    return cms.media.filter(x=>x.product_id===productId);
+  }
+
+  function cmsStatusText(productId,channel){
+    const s=cmsSetting(productId,channel);
+    if(!s) return 'Not configured';
+    if(s.status!=='published') return s.draft_data?'Draft saved':'Draft';
+    if(s.draft_data) return s.visible?'Published · draft saved':'Hidden · draft saved';
+    return s.visible?'Published':'Hidden';
+  }
+
+  function safeFileName(name){
+    return String(name||'image').toLowerCase().replace(/[^a-z0-9._-]+/g,'-').replace(/^-+|-+$/g,'')||'image';
+  }
+
+  async function uploadCmsImage(productId,file){
+    if(!sb || !authContext?.isPscAdmin || !file) return;
+    if(!/^image\//.test(file.type)){ toast('<strong>Image files only.</strong>'); return; }
+    if(file.size>10*1024*1024){ toast('<strong>Image too large.</strong><br>Maximum 10 MB.'); return; }
+
+    const ext=(file.name.split('.').pop()||'jpg').toLowerCase();
+    if(!['jpg','jpeg','png','webp','gif'].includes(ext)){ toast('<strong>Unsupported image type.</strong>'); return; }
+    const path=`${productId}/${Date.now()}-${safeFileName(file.name.replace(/\.[^.]+$/,''))}.${ext}`;
+    const {error:uploadError}=await sb.storage.from('product-media').upload(path,file,{cacheControl:'3600',upsert:false});
+    if(uploadError) throw uploadError;
+    const {data:urlData}=sb.storage.from('product-media').getPublicUrl(path);
+    const publicUrl=urlData?.publicUrl;
+    if(!publicUrl) throw new Error('Could not resolve image URL.');
+
+    const existing=cmsProductMedia(productId);
+    const isPrimary=existing.length===0;
+    const {error:mediaError}=await sb.from('product_media').insert({
+      product_id:productId,
+      object_path:path,
+      public_url:publicUrl,
+      alt_text:file.name,
+      is_primary:isPrimary,
+      display_order:existing.length*10,
+      published:false,
+      published_institutional:false,
+      published_wholesale:false,
+      created_by:session?.user?.id||null
+    });
+    if(mediaError) throw mediaError;
+
+    // Upload and primary selection are staged. A channel-specific Publish exposes them.
+    await loadAdminCms();
+    render();
+    toast('<strong>Image uploaded.</strong>');
+  }
+
+  async function setCmsPrimaryImage(productId,mediaId){
+    const media=cms.media.find(x=>x.id===mediaId && x.product_id===productId);
+    if(!media) return;
+    const {error:e1}=await sb.from('product_media').update({is_primary:false}).eq('product_id',productId);
+    if(e1) throw e1;
+    const {error:e2}=await sb.from('product_media').update({is_primary:true}).eq('id',mediaId);
+    if(e2) throw e2;
+    await loadAdminCms(); render();
+    toast('<strong>Primary image staged.</strong><br>Publish the storefront to make it live.');
+  }
+
+  async function deleteCmsImage(productId,mediaId){
+    const media=cms.media.find(x=>x.id===mediaId && x.product_id===productId);
+    if(!media) return;
+    const remaining=cmsProductMedia(productId).filter(x=>x.id!==mediaId);
+    const nextPrimary=remaining.find(x=>x.is_primary)||remaining[0]||null;
+
+    // Update published channel snapshots before removing the underlying object to avoid broken cards.
+    const affected=cms.settings.filter(x=>x.product_id===productId && x.primary_image_url===media.public_url);
+    for(const setting of affected){
+      const {error:e}=await sb.from('storefront_product_settings').update({
+        primary_image_url:nextPrimary?.public_url||null,
+        updated_at:new Date().toISOString()
+      }).eq('id',setting.id);
+      if(e) throw e;
+    }
+    const {error:rowError}=await sb.from('product_media').delete().eq('id',mediaId);
+    if(rowError) throw rowError;
+    if(media.is_primary && nextPrimary){
+      const {error:e}=await sb.from('product_media').update({is_primary:true}).eq('id',nextPrimary.id);
+      if(e) throw e;
+    }
+    const {error:productError}=await sb.from('products').update({
+      image_url:nextPrimary?.public_url||null,updated_at:new Date().toISOString()
+    }).eq('id',productId);
+    if(productError) throw productError;
+    const {error:storageError}=await sb.storage.from('product-media').remove([media.object_path]);
+    if(storageError) console.warn('Orphaned storage object:',storageError.message);
+
+    await loadAdminCms(); render();
+    toast('<strong>Image removed.</strong>');
+  }
+
+  async function saveCmsProduct(productId,publish=false){
+    const p=cmsProduct(productId);
+    if(!p || !authContext?.isPscAdmin) return;
+    const channel=ui.cmsChannel;
+    const setting=cmsSetting(productId,channel);
+    const productPayload={
+      name:(document.getElementById('cmsName')?.value||p.name).trim(),
+      brand:cleanNullable(document.getElementById('cmsBrand')?.value),
+      pack:cleanNullable(document.getElementById('cmsPack')?.value),
+      category:cleanNullable(document.getElementById('cmsMasterCategory')?.value),
+      product_type:cleanNullable(document.getElementById('cmsProductType')?.value),
+      clinical_needs:Array.from(document.querySelectorAll('[data-cms-need]:checked')).map(el=>el.value),
+      commercial_specification:cleanNullable(document.getElementById('cmsSpec')?.value),
+      supplier_name:cleanNullable(document.getElementById('cmsSupplier')?.value),
+      supplier_sku:cleanNullable(document.getElementById('cmsSupplierSku')?.value),
+      buy_cost:cleanNumber(document.getElementById('cmsBuyCost')?.value),
+      landed_cost:cleanNumber(document.getElementById('cmsLandedCost')?.value),
+      vat_status:cleanNullable(document.getElementById('cmsVat')?.value),
+      stock_status:cleanNullable(document.getElementById('cmsStock')?.value),
+      lead_time:cleanNullable(document.getElementById('cmsLead')?.value),
+      evidence_status:cleanNullable(document.getElementById('cmsEvidence')?.value),
+      internal_notes:cleanNullable(document.getElementById('cmsInternalNotes')?.value),
+      active:publish ? !!document.getElementById('cmsActive')?.checked : p.active,
+      updated_at:new Date().toISOString()
+    };
+    if(!productPayload.name) throw new Error('Product name is required.');
+
+    const draft={
+      display_name:cleanNullable(document.getElementById('cmsDisplayName')?.value)||productPayload.name,
+      short_description:cleanNullable(document.getElementById('cmsShort')?.value),
+      long_description:cleanNullable(document.getElementById('cmsLong')?.value),
+      category:cleanNullable(document.getElementById('cmsChannelCategory')?.value)||productPayload.category,
+      pack_label:cleanNullable(document.getElementById('cmsPackLabel')?.value)||productPayload.pack,
+      price_display_mode:document.getElementById('cmsPriceMode')?.value||'request_quote',
+      display_price:cleanNumber(document.getElementById('cmsDisplayPrice')?.value),
+      moq:cleanNumber(document.getElementById('cmsMoq')?.value),
+      visible:!!document.getElementById('cmsVisible')?.checked,
+      featured:!!document.getElementById('cmsFeatured')?.checked,
+      display_order:Math.round(cleanNumber(document.getElementById('cmsOrder')?.value)??1000),
+      clinical_needs:productPayload.clinical_needs
+    };
+    if(draft.price_display_mode==='show_price' && !(draft.display_price>0))
+      throw new Error('A positive display price is required before publishing a visible price.');
+
+    // Core procurement records are editable now; public fields stay frozen in channel snapshots until Publish.
+    const {error:pError}=await sb.from('products').update(productPayload).eq('id',productId);
+    if(pError) throw pError;
+
+    const meta={updated_at:new Date().toISOString(),updated_by:session?.user?.id||null};
+    if(!publish){
+      const {error:e}=await sb.from('storefront_product_settings').upsert({
+        product_id:productId,channel,draft_data:draft,...meta
+      },{onConflict:'product_id,channel'});
+      if(e) throw e;
+      await loadAdminCms();render();
+      toast('<strong>Draft saved.</strong><br>Published storefront presentation was not changed.');
+      return;
+    }
+
+    const primary=cmsProductMedia(productId).find(x=>x.is_primary)||null;
+    const primaryUrl=primary?.public_url || p.image_url || null;
+    const payload={
+      ...meta,
+      ...Object.fromEntries(Object.entries(draft).filter(([key])=>key!=='clinical_needs')),
+      product_id:productId,channel,
+      status:'published',
+      brand_display:productPayload.brand,
+      specification_display:productPayload.commercial_specification,
+      product_type_display:productPayload.product_type,
+      clinical_needs_display:productPayload.clinical_needs,
+      regulated_display:!!p.regulated,
+      requirement_status_display:p.requirement_status||null,
+      regulatory_mapping_display:p.regulatory_mapping||null,
+      primary_image_url:primaryUrl,
+      draft_data:null
+    };
+    const {error:sError}=await sb.from('storefront_product_settings').upsert(payload,{onConflict:'product_id,channel'});
+    if(sError) throw sError;
+
+    if(primary){
+      const {error:pe}=await sb.from('products').update({image_url:primaryUrl}).eq('id',productId);
+      if(pe) throw pe;
+    }
+    // New gallery images become visible only in the channel explicitly published by PSC.
+    const mediaPublish={published:true,[`published_${channel}`]:true};
+    const {error:mediaError}=await sb.from('product_media').update(mediaPublish).eq('product_id',productId);
+    if(mediaError) throw mediaError;
+
+    await loadAdminCms();render();
+    toast('<strong>Published.</strong><br>The selected storefront is now updated.');
+  }
+
+  async function saveStorefrontConfig(channel){
+    const payload={
+      headline:(document.getElementById('cmsStorefrontHeadline')?.value||'').trim(),
+      subheadline:cleanNullable(document.getElementById('cmsStorefrontSubheadline')?.value),
+      active:!!document.getElementById('cmsStorefrontActive')?.checked,
+      updated_at:new Date().toISOString(),
+      updated_by:session?.user?.id||null
+    };
+    const {error}=await sb.from('storefronts').update(payload).eq('channel',channel);
+    if(error) throw error;
+    await loadAdminCms(); render();
+    toast('<strong>Storefront updated.</strong>');
+  }
   function isCapitalProduct(p){ return !!p && ['Furniture & Mobility','Diagnostics & Monitoring','Emergency & Oxygen'].includes(p.category); }
   function product(sku){
     const base = D.products.find(p=>p.pscSku===sku) || (state.customProducts||{})[sku];
@@ -160,7 +551,7 @@
   }; return map[name]||''; }
 
   const schoolNav=[['portal/dashboard','Home','overview'],['portal/catalogue','Shop','inventory'],['portal/requests','Orders & Requests','request'],['portal/replenish','Replenish','repeat'],['portal/insights','Resources & Updates','resource']];
-  const adminNav=[['admin/dashboard','Deal Desk','admin'],['admin/products','Product Master','products'],['admin/requests','Request Queue','queue'],['admin/fulfilment','Fulfilment Rules','rules'],['admin/supplier-feed','Supplier Feed','feed']];
+  const adminNav=[['admin/dashboard','Deal Desk','admin'],['admin/storefront','Storefront','assets'],['admin/products','Product Master','products'],['admin/requests','Request Queue','queue'],['admin/fulfilment','Fulfilment Rules','rules'],['admin/supplier-feed','Supplier Feed','feed']];
 
   function shell(content, admin=false){
     const route=currentRoute(), links=admin?adminNav:schoolNav;
@@ -395,6 +786,38 @@
     </section>`
   ); }
 
+  function wholesalePage(){
+    const sf=storefrontConfig('wholesale')||{};
+    const rows=cms.publicRows.wholesale||[];
+    const cats=['All',...Array.from(new Set(rows.map(x=>x.category).filter(Boolean))).sort()];
+    const q=(ui.wholesaleQuery||'').toLowerCase().trim();
+    const filtered=rows.filter(r=>{
+      const hay=`${r.name||''} ${r.brand||''} ${r.psc_sku||''} ${r.category||''}`.toLowerCase();
+      return hay.includes(q) && (ui.wholesaleCat==='All'||r.category===ui.wholesaleCat);
+    });
+
+    return `<main class="publicPage wholesalePublicPage">
+      ${publicHeader('')}
+      <section class="publicPageHero wholesaleHero">
+        <span class="kicker">PHARMA SERVICE · WHOLESALE</span>
+        <h1>${esc(sf.headline||'Consumer health products for professional buyers.')}</h1>
+        <p>${esc(sf.subheadline||'Browse medicines, consumables, devices and equipment, then request trade pricing from Pharma Service.')}</p>
+      </section>
+      <section class="publicSection wholesaleStorefront">
+        <div class="filterBar wholesaleFilter"><div class="searchInput"><span>⌕</span><input data-wholesale-q value="${esc(ui.wholesaleQuery)}" placeholder="Search product, brand or category…"></div><select data-wholesale-cat>${cats.map(c=>`<option ${ui.wholesaleCat===c?'selected':''}>${esc(c)}</option>`).join('')}</select></div>
+        ${filtered.length?`<div class="wholesaleGrid">${filtered.map(r=>`<article class="wholesaleCard">
+          <div class="wholesaleImage">${r.image_url?`<img src="${esc(r.image_url)}" alt="${esc(r.name)}">`:'<span>PRODUCT</span>'}</div>
+          ${r.brand?`<small>${esc(r.brand)}</small>`:''}
+          <h3>${esc(r.name)}</h3>
+          <p>${esc(r.short_description||r.pack||'')}</p>
+          <div class="wholesaleMeta">${r.pack?`<span>${esc(r.pack)}</span>`:''}${r.moq?`<span>MOQ ${esc(r.moq)}</span>`:''}</div>
+          <div class="wholesaleAction">${r.price_display_mode==='show_price'&&r.display_price!==null?`<b>${money(r.display_price)}</b>`:`<b>${r.price_display_mode==='contact'?'Contact PSC':'Request quote'}</b>`}<button class="button primary" data-go="contact">Enquire</button></div>
+        </article>`).join('')}</div>`:`<div class="emptyState wholesaleEmpty"><h3>Wholesale catalogue is being prepared.</h3><p>Contact Pharma Service for trade pricing and product availability.</p><button class="button primary" data-go="contact">Contact Pharma Service</button></div>`}
+      </section>
+      ${publicFooter()}
+    </main>`;
+  }
+
   function loginPage(){ return `<main class="publicPage loginPublicPage v26LoginPage">${publicHeader('')}<section class="loginWrap v26LoginWrap"><div class="loginIntro v26LoginIntro"><span class="kicker">CLINIC PORTAL ACCESS</span><h1>Institutional procurement,<br>connected.</h1><p>Shop the catalogue, review quotations, track orders and repeat previously supplied items through one secure Pharma Service account.</p><div class="v26LoginFlow"><span>Source</span><span>Quote</span><span>Supply</span><span>Repeat</span></div><div class="loginSupport">Need access? <button data-go="contact">Contact Pharma Service</button> <span>·</span> <button data-go="demo">View guided demo</button></div></div><div class="loginCard v26LoginCard"><img src="${PSC_LOGO}" alt="Pharma Service"><span class="loginLabel">ACCOUNT ACCESS</span><h2>Clinic Portal</h2><label>Email</label><input class="input" id="mvpLoginEmail" type="email" autocomplete="email" placeholder="name@organization.ae"><label>Password</label><input class="input" id="mvpLoginPassword" type="password" autocomplete="current-password" placeholder="••••••••"><button class="button primary full" data-mvp-login>Continue to Clinic Portal →</button><p class="loginNote">Your organization and account permissions are determined automatically after sign-in.</p></div></section>${publicFooter()}</main>`; }
 
   function portalDashboard(){
@@ -538,9 +961,10 @@
         <span class="clinicNeedArrow">↗</span>
       </button>`).join('');
 
+    const sf=storefrontConfig('institutional');
     return shell(`
       <div class="pageHeader institutionalCatalogueHeader v26CatalogueLandingHeader">
-        <div><span class="eyebrow">INSTITUTIONAL CATALOGUE</span><h1>Browse by clinical need.</h1><p>Start with the situation, task or area of care. The catalogue keeps sourcing complexity behind the scenes while giving clinical teams a faster route to the right products.</p></div>
+        <div><span class="eyebrow">INSTITUTIONAL CATALOGUE</span><h1>${esc(sf?.headline||'Browse by clinical need.')}</h1><p>${esc(sf?.subheadline||'Start with the situation, task or area of care. The catalogue keeps sourcing complexity behind the scenes while giving clinical teams a faster route to the right products.')}</p></div>
         <div class="catalogueDepthPill"><b>${allProducts.length}</b><span>catalogue lines</span><small>${dhaCount} lines mapped to DHA requirements</small></div>
       </div>
 
@@ -714,13 +1138,186 @@
     const open=state.requests.filter(r=>!['Accepted','Cancelled'].includes(r.status)).length;
     const activeQuotes=state.requests.filter(r=>['Sent','Authorized','Procurement','Delivery'].includes(r.status));
     const qvals=activeQuotes.map(calcQuote);const quoted=qvals.reduce((s,q)=>s+(q.hasSell?q.subtotal:0),0);const gp=qvals.reduce((s,q)=>s+(q.gp||0),0);const gm=quoted?gp/quoted*100:0;
-    return shell(`<div class="pageHeader"><div><span class="eyebrow">PSC DEAL DESK</span><h1>Institutional supply control</h1><p>One desk for requests, quote economics, supplier evidence, release gates and fulfilment. Demo figures are illustrative unless backed by an identified evidence source.</p></div></div><div class="adminStatRow"><div class="adminStat"><span>OPEN REQUESTS</span><b>${open}</b></div><div class="adminStat"><span>QUOTED EX VAT</span><b>${money(quoted)}</b></div><div class="adminStat"><span>AUTHORIZED</span><b>${state.requests.filter(r=>r.status==='Authorized').length}</b></div><div class="adminStat"><span>EST. TRUE GP</span><b>${money(gp)}</b></div><div class="adminStat"><span>EST. GM</span><b>${gm.toFixed(1)}%</b></div><div class="adminStat"><span>PRODUCT MASTER</span><b>${D.products.length}</b></div></div><div class="actionGrid"><button class="actionCard" data-go="admin/requests"><div class="actionIcon">☷</div><div><b>Request queue</b><span>Convert needs into controlled quotes</span></div></button><button class="actionCard" data-go="admin/products"><div class="actionIcon">✚</div><div><b>Product master</b><span>Evidence, price and approvals</span></div></button><button class="actionCard" data-go="admin/fulfilment"><div class="actionIcon">⇄</div><div><b>Fulfilment rules</b><span>Route by site and source</span></div></button><button class="actionCard" data-go="admin/supplier-feed"><div class="actionIcon">⌁</div><div><b>Supplier feed</b><span>Acorus / Med7 data ingestion</span></div></button></div><div class="twoCol"><section class="panel"><div class="panelHeader"><h2>Requests needing attention</h2><button data-go="admin/requests">Open queue →</button></div><div class="tableWrap"><table class="dataTable"><thead><tr><th>REQUEST</th><th>ACCOUNT / SITE</th><th>LINES</th><th>STATUS</th><th>NEXT ACTION</th></tr></thead><tbody>${state.requests.filter(r=>r.status!=='Accepted').map(r=>`<tr class="clickable" data-admin-request="${r.id}"><td><b class="mono">${r.id}</b></td><td>${esc(r.groupName||state.groupName||'Institutional account')}<div class="sub">${esc(r.campus)}</div></td><td>${r.lines.length}</td><td>${statusPill(r.status)}</td><td>${r.status==='Drafting'?'Validate stock + price':r.status==='Sent'?'Resolve school decision':'Check procurement release'}</td></tr>`).join('')}</tbody></table></div></section><div style="display:grid;gap:14px"><div class="marginBox"><h3>Deal economics · active quoted demo</h3><div class="marginGrid"><div><span>DIRECT COST</span><b>${money(qvals.reduce((s,q)=>s+(q.costComplete?q.cost:0),0))}</b></div><div><span>SELL</span><b>${money(quoted)}</b></div><div><span>TRUE GM</span><b>${gm.toFixed(1)}%</b></div><div><span>FOC</span><b>AED 0</b></div><div><span>DELIVERY</span><b>Per quote</b></div><div><span>TARGET</span><b>20%</b></div></div></div><section class="panel"><div class="panelHeader"><h2>Release gate</h2></div><div class="gateList"><div class="gate ok"><span>Exact specification mapped</span><i></i></div><div class="gate warn"><span>Supplier stock current</span><i></i></div><div class="gate warn"><span>VAT / tax evidence by line</span><i></i></div><div class="gate ok"><span>Margin incl. direct costs</span><i></i></div><div class="gate block"><span>Customer funding / PO</span><i></i></div><div class="gate warn"><span>Regulated route validated</span><i></i></div></div></section></div></div><div class="notice" style="margin-top:18px"><strong>Control:</strong> a supplier PO is not released merely because a customer approved a quote. Funding, current supplier evidence, tax treatment, regulated route and delivery must pass the release gate.</div>`,true);
+    return shell(`<div class="pageHeader"><div><span class="eyebrow">PSC DEAL DESK</span><h1>Institutional supply control</h1><p>One desk for requests, quote economics, supplier evidence, release gates and fulfilment. Demo figures are illustrative unless backed by an identified evidence source.</p></div></div><div class="adminStatRow"><div class="adminStat"><span>OPEN REQUESTS</span><b>${open}</b></div><div class="adminStat"><span>QUOTED EX VAT</span><b>${money(quoted)}</b></div><div class="adminStat"><span>AUTHORIZED</span><b>${state.requests.filter(r=>r.status==='Authorized').length}</b></div><div class="adminStat"><span>EST. TRUE GP</span><b>${money(gp)}</b></div><div class="adminStat"><span>EST. GM</span><b>${gm.toFixed(1)}%</b></div><div class="adminStat"><span>PRODUCT MASTER</span><b>${cms.products.length||D.products.length}</b></div></div><div class="actionGrid"><button class="actionCard" data-go="admin/requests"><div class="actionIcon">☷</div><div><b>Request queue</b><span>Convert needs into controlled quotes</span></div></button><button class="actionCard" data-go="admin/storefront"><div class="actionIcon">▣</div><div><b>Storefront manager</b><span>Institutional + wholesale publishing</span></div></button><button class="actionCard" data-go="admin/products"><div class="actionIcon">✚</div><div><b>Product master</b><span>Product, media and commercial control</span></div></button><button class="actionCard" data-go="admin/fulfilment"><div class="actionIcon">⇄</div><div><b>Fulfilment rules</b><span>Route by site and source</span></div></button><button class="actionCard" data-go="admin/supplier-feed"><div class="actionIcon">⌁</div><div><b>Supplier feed</b><span>Acorus / Med7 data ingestion</span></div></button></div><div class="twoCol"><section class="panel"><div class="panelHeader"><h2>Requests needing attention</h2><button data-go="admin/requests">Open queue →</button></div><div class="tableWrap"><table class="dataTable"><thead><tr><th>REQUEST</th><th>ACCOUNT / SITE</th><th>LINES</th><th>STATUS</th><th>NEXT ACTION</th></tr></thead><tbody>${state.requests.filter(r=>r.status!=='Accepted').map(r=>`<tr class="clickable" data-admin-request="${r.id}"><td><b class="mono">${r.id}</b></td><td>${esc(r.groupName||state.groupName||'Institutional account')}<div class="sub">${esc(r.campus)}</div></td><td>${r.lines.length}</td><td>${statusPill(r.status)}</td><td>${r.status==='Drafting'?'Validate stock + price':r.status==='Sent'?'Resolve school decision':'Check procurement release'}</td></tr>`).join('')}</tbody></table></div></section><div style="display:grid;gap:14px"><div class="marginBox"><h3>Deal economics · active quoted demo</h3><div class="marginGrid"><div><span>DIRECT COST</span><b>${money(qvals.reduce((s,q)=>s+(q.costComplete?q.cost:0),0))}</b></div><div><span>SELL</span><b>${money(quoted)}</b></div><div><span>TRUE GM</span><b>${gm.toFixed(1)}%</b></div><div><span>FOC</span><b>AED 0</b></div><div><span>DELIVERY</span><b>Per quote</b></div><div><span>TARGET</span><b>20%</b></div></div></div><section class="panel"><div class="panelHeader"><h2>Release gate</h2></div><div class="gateList"><div class="gate ok"><span>Exact specification mapped</span><i></i></div><div class="gate warn"><span>Supplier stock current</span><i></i></div><div class="gate warn"><span>VAT / tax evidence by line</span><i></i></div><div class="gate ok"><span>Margin incl. direct costs</span><i></i></div><div class="gate block"><span>Customer funding / PO</span><i></i></div><div class="gate warn"><span>Regulated route validated</span><i></i></div></div></section></div></div><div class="notice" style="margin-top:18px"><strong>Control:</strong> a supplier PO is not released merely because a customer approved a quote. Funding, current supplier evidence, tax treatment, regulated route and delivery must pass the release gate.</div>`,true);
+  }
+
+  function adminStorefront(){
+    if(!cms.loaded){
+      return shell(`<div class="pageHeader"><div><span class="eyebrow">STOREFRONT</span><h1>Storefront manager</h1><p>Loading the controlled product master and publishing state…</p></div></div><section class="panel"><div class="emptyState"><h3>Loading storefront data</h3><p>The first admin load may also initialise the current institutional catalogue in Supabase.</p></div></section>`,true);
+    }
+    const channel=ui.cmsChannel;
+    const sf=storefrontConfig(channel)||{};
+    const channelSettings=cms.settings.filter(x=>x.channel===channel);
+    const published=channelSettings.filter(x=>x.status==='published'&&x.visible).length;
+    const drafts=channelSettings.filter(x=>x.status==='draft').length;
+    const featured=channelSettings.filter(x=>x.featured&&x.status==='published'&&x.visible).length;
+    const preview=(cms.publicRows[channel]||[]).slice(0,8);
+
+    return shell(`
+      <div class="pageHeader cmsPageHeader">
+        <div><span class="eyebrow">PSC STOREFRONT CONTROL</span><h1>Storefront manager</h1><p>One controlled product master, two customer-facing presentations. Institutional and wholesale can use different copy, categories, visibility and commercial display without duplicating the SKU.</p></div>
+        <button class="button light" data-go="${channel==='institutional'?'portal/catalogue':'wholesale'}">${channel==='institutional'?'Open institutional catalogue':'Open wholesale storefront'} →</button>
+      </div>
+
+      <div class="cmsChannelTabs">
+        <button class="${channel==='institutional'?'active':''}" data-cms-channel="institutional">Institutional</button>
+        <button class="${channel==='wholesale'?'active':''}" data-cms-channel="wholesale">Wholesale</button>
+      </div>
+
+      <div class="cmsStorefrontGrid">
+        <section class="panel cmsStorefrontForm">
+          <div class="panelHeader"><div><span class="eyebrow">${channel.toUpperCase()}</span><h2>${esc(sf.display_name||channel)}</h2></div></div>
+          <label class="fieldLabel">Headline</label>
+          <input class="input" id="cmsStorefrontHeadline" value="${esc(sf.headline||'')}">
+          <label class="fieldLabel">Supporting copy</label>
+          <textarea class="textarea cmsTextareaSmall" id="cmsStorefrontSubheadline">${esc(sf.subheadline||'')}</textarea>
+          <label class="cmsToggleRow"><input type="checkbox" id="cmsStorefrontActive" ${sf.active!==false?'checked':''}><span><b>Storefront active</b><small>Turn the entire channel on or off.</small></span></label>
+          <div class="cmsFormActions"><button class="button primary" data-save-storefront="${channel}">Save storefront</button></div>
+        </section>
+
+        <section class="cmsMetricStack">
+          <div class="cmsMetric"><span>PUBLISHED</span><b>${published}</b><small>visible products</small></div>
+          <div class="cmsMetric"><span>DRAFT</span><b>${drafts}</b><small>products awaiting publish</small></div>
+          <div class="cmsMetric"><span>FEATURED</span><b>${featured}</b><small>published featured lines</small></div>
+          <div class="cmsMetric"><span>MASTER</span><b>${cms.products.length}</b><small>controlled products</small></div>
+        </section>
+      </div>
+
+      <section class="panel cmsPreviewPanel">
+        <div class="panelHeader"><div><span class="eyebrow">LIVE PREVIEW</span><h2>${esc(sf.display_name||'Storefront')}</h2></div><button data-go="admin/products">Manage products →</button></div>
+        ${preview.length?`<div class="cmsPreviewGrid">${preview.map(r=>`<article><div class="cmsPreviewImage">${r.image_url?`<img src="${esc(r.image_url)}" alt="">`:'<span>NO IMAGE</span>'}</div><small>${esc(r.brand||r.category||'')}</small><b>${esc(r.name)}</b><p>${esc(r.short_description||r.pack||'')}</p></article>`).join('')}</div>`:`<div class="emptyState"><h3>No published products yet</h3><p>${channel==='wholesale'?'Open Product Master, switch to Wholesale and publish the lines you want trade customers to see.':'The institutional catalogue will appear here after the current master is initialised.'}</p></div>`}
+      </section>
+    `,true);
   }
 
   function adminProducts(){
-    const q=ui.productQuery.toLowerCase();
-    const rows=products().filter(p=>`${p.pscSku} ${p.name} ${p.brand}`.toLowerCase().includes(q)&&(ui.productCat==='All'||p.category===ui.productCat)&&(ui.evidence==='All'||p.evidenceStatus===ui.evidence));
-    return shell(`<div class="pageHeader"><div><span class="eyebrow">CONTROLLED SKU REGISTER</span><h1>Product master</h1><p>Retail benchmarks, supplier costs and institutional prices are deliberately separate. Public Med7 references never populate acquisition cost.</p></div><button class="button light" data-export-products>Export CSV</button></div><div class="filterBar"><div class="searchInput"><span>⌕</span><input data-prod-q value="${esc(ui.productQuery)}" placeholder="Search PSC SKU, product or brand…"></div><select data-prod-filter="category"><option>All</option>${D.categories.map(c=>`<option ${c===ui.productCat?'selected':''}>${esc(c)}</option>`).join('')}</select><select data-prod-filter="evidence"><option>All</option><option ${ui.evidence==='Public benchmark'?'selected':''}>Public benchmark</option><option ${ui.evidence==='PSC project evidence'?'selected':''}>PSC project evidence</option><option ${ui.evidence==='Needs supplier feed'?'selected':''}>Needs supplier feed</option></select></div><section class="panel"><div class="tableWrap"><table class="dataTable"><thead><tr><th>PRODUCT</th><th>CATEGORY</th><th>SUPPLIER</th><th>SUPPLIER COST</th><th>PUBLIC BENCHMARK</th><th>ACCOUNT PRICE</th><th>EVIDENCE</th><th>FLAGS</th></tr></thead><tbody>${rows.map(p=>`<tr><td><div class="adminProductTitle"><div class="miniGlyph">${esc(p.brand.slice(0,2).toUpperCase())}</div><div><b>${esc(p.name)}</b><div class="sub mono">${p.pscSku}${p.supplierSku?` · SUP ${p.supplierSku}`:''}</div></div></div></td><td>${esc(p.category)}</td><td>${esc(p.supplier)}<div class="sourceNote">${esc(p.source)}</div></td><td><input class="adminCostInput ${Number.isFinite(Number(p.supplierCost))?'':'missing'}" type="number" step="0.01" placeholder="Missing" value="${Number.isFinite(Number(p.supplierCost))?p.supplierCost:''}" data-product-field="${p.pscSku}|supplierCost"><div class="sub">Must be verified before live use</div></td><td>${p.retailBenchmark?money(p.retailBenchmark):'—'}<div class="sub">Orientation only</div></td><td><input class="adminCostInput" type="number" step="0.01" placeholder="Quote" value="${Number.isFinite(Number(p.contractPrice))?p.contractPrice:''}" data-product-field="${p.pscSku}|contractPrice"></td><td>${badge(p.evidenceStatus,p.evidenceStatus==='Public benchmark'?'orange':p.evidenceStatus==='PSC project evidence'?'green':'')}<div class="sub">${p.lastVerified}</div></td><td><div style="display:flex;gap:4px;flex-wrap:wrap">${p.schoolApproved?badge('School list','green'):''}${p.regulated?badge('Controlled','red'):''}${badge(p.requirementStatus)}</div></td></tr>`).join('')}</tbody></table></div></section><div class="footerNote">Editing supplier cost or account price in this prototype creates a local audit entry. It does not convert a public benchmark or planning input into commercial evidence.</div>`,true);
+    if(!cms.loaded){
+      return shell(`<div class="pageHeader"><div><span class="eyebrow">CONTROLLED PRODUCT MASTER</span><h1>Product master</h1><p>Loading the database-backed catalogue…</p></div></div><section class="panel"><div class="emptyState"><h3>Preparing the master</h3><p>PSC is moving the live catalogue from static code into the controlled database.</p></div></section>`,true);
+    }
+    const q=(ui.cmsSearch||'').toLowerCase().trim();
+    const rows=cms.products.filter(p=>`${p.psc_sku} ${p.name||''} ${p.brand||''} ${p.category||''} ${p.supplier_name||''}`.toLowerCase().includes(q));
+    return shell(`
+      <div class="pageHeader cmsPageHeader">
+        <div><span class="eyebrow">CONTROLLED PRODUCT MASTER</span><h1>Products & media</h1><p>Edit the controlled SKU once, then publish a separate Institutional or Wholesale presentation. Supplier, cost, evidence and internal notes remain restricted to PSC admin.</p></div>
+        <button class="button light" data-go="admin/storefront">Storefront manager →</button>
+      </div>
+
+      <div class="filterBar cmsMasterFilter"><div class="searchInput"><span>⌕</span><input data-cms-search value="${esc(ui.cmsSearch)}" placeholder="Search product, PSC SKU, brand, supplier or category…"></div><div class="cmsMasterCount">${rows.length} / ${cms.products.length}</div></div>
+
+      <section class="panel cmsProductMasterPanel">
+        <div class="tableWrap"><table class="dataTable cmsMasterTable">
+          <thead><tr><th>PRODUCT</th><th>SUPPLY</th><th>INSTITUTIONAL</th><th>WHOLESALE</th><th>MEDIA</th><th></th></tr></thead>
+          <tbody>${rows.map(p=>{
+            const i=cmsSetting(p.id,'institutional'),w=cmsSetting(p.id,'wholesale'),media=cmsProductMedia(p.id);
+            return `<tr>
+              <td><div class="cmsMasterProduct"><div class="cmsMasterThumb">${p.image_url?`<img src="${esc(p.image_url)}" alt="">`:'<span>—</span>'}</div><div><b>${esc(p.name)}</b><small>${esc(p.psc_sku)}${p.brand?` · ${esc(p.brand)}`:''}</small><em>${esc(p.category||p.product_type||'Uncategorised')}</em></div></div></td>
+              <td><b>${esc(p.supplier_name||'Not set')}</b><small>${p.buy_cost!==null?`Buy ${money(p.buy_cost)}`:'Buy cost missing'}${p.stock_status?` · ${esc(p.stock_status)}`:''}</small></td>
+              <td><span class="cmsState ${i?.status==='published'&&i?.visible?'live':'draft'}">${esc(cmsStatusText(p.id,'institutional'))}</span><small>${esc(i?.category||p.category||'')}</small></td>
+              <td><span class="cmsState ${w?.status==='published'&&w?.visible?'live':'draft'}">${esc(cmsStatusText(p.id,'wholesale'))}</span><small>${esc(w?.category||p.category||'')}</small></td>
+              <td>${media.length}<small>${media.some(x=>x.is_primary)?'Primary set':'No primary'}</small></td>
+              <td><button class="button light" data-go="admin/products/${p.id}">Edit</button></td>
+            </tr>`;
+          }).join('')}</tbody>
+        </table></div>
+      </section>
+    `,true);
+  }
+
+  function adminProductEditor(productId){
+    const p=cmsProduct(productId);
+    if(!p) return shell(`<div class="pageHeader"><div><span class="eyebrow">PRODUCT MASTER</span><h1>Product not found</h1></div></div>`,true);
+    const channel=ui.cmsChannel;
+    const s=cmsSetting(productId,channel)||{};
+    const d=s.draft_data||{};
+    const cv=(key,fallback)=>d[key]!==undefined?d[key]:fallback;
+    const selectedNeeds=Array.isArray(cv('clinical_needs',p.clinical_needs))?cv('clinical_needs',p.clinical_needs):[];
+    const media=cmsProductMedia(productId);
+    const previewPrice=cv('display_price',s.display_price);
+    const gm=(p.landed_cost!==null && previewPrice!==null && Number(previewPrice)>0)
+      ? ((Number(previewPrice)-Number(p.landed_cost))/Number(previewPrice)*100)
+      : null;
+
+    return shell(`
+      <div class="pageHeader cmsPageHeader">
+        <div><button class="cmsBack" data-go="admin/products">← Product master</button><span class="eyebrow">${esc(p.psc_sku)}</span><h1>${esc(p.name)}</h1><p>Core product information is shared. Storefront presentation is channel-specific.</p></div>
+        <div class="cmsEditorStatus"><span>${p.active?'ACTIVE':'INACTIVE'}</span><b>${media.length} image${media.length===1?'':'s'}</b></div>
+      </div>
+
+      <div class="cmsChannelTabs">
+        <button class="${channel==='institutional'?'active':''}" data-cms-channel="institutional">Institutional storefront</button>
+        <button class="${channel==='wholesale'?'active':''}" data-cms-channel="wholesale">Wholesale storefront</button>
+      </div>
+
+      <div class="cmsEditorLayout">
+        <div class="cmsEditorMain">
+          <section class="panel cmsFormSection">
+            <div class="panelHeader"><div><span class="eyebrow">PRODUCT MASTER</span><h2>Core product</h2></div></div>
+            <div class="cmsFieldGrid">
+              <label><span>Product name</span><input class="input" id="cmsName" value="${esc(p.name||'')}"></label>
+              <label><span>Brand</span><input class="input" id="cmsBrand" value="${esc(p.brand||'')}" placeholder="Brand / manufacturer"></label>
+              <label><span>Pack / unit</span><input class="input" id="cmsPack" value="${esc(p.pack||'')}"></label>
+              <label><span>Master category</span><input class="input" id="cmsMasterCategory" value="${esc(p.category||'')}"></label>
+              <label><span>Product type</span><input class="input" id="cmsProductType" value="${esc(p.product_type||'')}"></label>
+              <div class="wide cmsClinicalNeeds"><span>Clinical navigation (institutional)</span><div class="cmsNeedOptions">${INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.filter(c=>c.id!=='all').map(c=>`<label><input type="checkbox" data-cms-need value="${c.id}" ${selectedNeeds.includes(c.id)?'checked':''}><b>${esc(c.label)}</b></label>`).join('')}</div></div>
+              <label class="cmsCheckboxLabel"><input type="checkbox" id="cmsActive" ${p.active?'checked':''}><span>Active product</span></label>
+              <label class="wide"><span>Commercial specification</span><textarea class="textarea" id="cmsSpec">${esc(p.commercial_specification||'')}</textarea></label>
+            </div>
+          </section>
+
+          <section class="panel cmsFormSection">
+            <div class="panelHeader"><div><span class="eyebrow">INTERNAL ONLY</span><h2>Supply & commercial evidence</h2></div><span class="cmsPrivateLabel">PSC ADMIN</span></div>
+            <div class="cmsFieldGrid">
+              <label><span>Supplier</span><input class="input" id="cmsSupplier" value="${esc(p.supplier_name||'')}"></label>
+              <label><span>Supplier SKU</span><input class="input" id="cmsSupplierSku" value="${esc(p.supplier_sku||'')}"></label>
+              <label><span>Buy cost</span><input class="input" id="cmsBuyCost" type="number" step="0.01" value="${p.buy_cost??''}"></label>
+              <label><span>Landed cost</span><input class="input" id="cmsLandedCost" type="number" step="0.01" value="${p.landed_cost??''}"></label>
+              <label><span>VAT status</span><input class="input" id="cmsVat" value="${esc(p.vat_status||'')}"></label>
+              <label><span>Stock status</span><input class="input" id="cmsStock" value="${esc(p.stock_status||'')}"></label>
+              <label><span>Lead time</span><input class="input" id="cmsLead" value="${esc(p.lead_time||'')}"></label>
+              <label><span>Evidence status</span><input class="input" id="cmsEvidence" value="${esc(p.evidence_status||'')}"></label>
+              <label class="wide"><span>Internal notes</span><textarea class="textarea" id="cmsInternalNotes">${esc(p.internal_notes||'')}</textarea></label>
+            </div>
+          </section>
+
+          <section class="panel cmsFormSection">
+            <div class="panelHeader"><div><span class="eyebrow">${channel.toUpperCase()}</span><h2>Storefront presentation${s.draft_data?' · Unpublished changes':''}</h2></div><span class="cmsState ${s.status==='published'&&s.visible?'live':'draft'}">${esc(cmsStatusText(productId,channel))}</span></div>
+            <div class="cmsFieldGrid">
+              <label><span>Display name</span><input class="input" id="cmsDisplayName" value="${esc(cv('display_name',s.display_name)||'')}" placeholder="${esc(p.name)}"></label>
+              <label><span>Storefront category</span><input class="input" id="cmsChannelCategory" value="${esc(cv('category',s.category)||p.category||'')}"></label>
+              <label><span>Pack label</span><input class="input" id="cmsPackLabel" value="${esc(cv('pack_label',s.pack_label)||'')}" placeholder="${esc(p.pack||'')}"></label>
+              <label><span>Display order</span><input class="input" id="cmsOrder" type="number" value="${cv('display_order',s.display_order)??1000}"></label>
+              <label><span>Price display</span><select class="input" id="cmsPriceMode"><option value="request_quote" ${cv('price_display_mode',s.price_display_mode)==='request_quote'?'selected':''}>Request quote</option><option value="show_price" ${cv('price_display_mode',s.price_display_mode)==='show_price'?'selected':''}>Show price</option><option value="contact" ${cv('price_display_mode',s.price_display_mode)==='contact'?'selected':''}>Contact PSC</option></select></label>
+              <label><span>Display price</span><input class="input" id="cmsDisplayPrice" type="number" step="0.01" value="${cv('display_price',s.display_price)??''}"></label>
+              <label><span>MOQ</span><input class="input" id="cmsMoq" type="number" step="1" value="${cv('moq',s.moq)??''}"></label>
+              <div class="cmsToggleGroup">
+                <label class="cmsToggleRow"><input type="checkbox" id="cmsVisible" ${cv('visible',s.visible)!==false?'checked':''}><span><b>Visible</b><small>Show when published</small></span></label>
+                <label class="cmsToggleRow"><input type="checkbox" id="cmsFeatured" ${cv('featured',s.featured)?'checked':''}><span><b>Featured</b><small>Prioritise in merchandising</small></span></label>
+              </div>
+              <label class="wide"><span>Short description</span><textarea class="textarea cmsTextareaSmall" id="cmsShort">${esc(cv('short_description',s.short_description)||p.short_description||'')}</textarea></label>
+              <label class="wide"><span>Long description</span><textarea class="textarea" id="cmsLong">${esc(cv('long_description',s.long_description)||p.long_description||'')}</textarea></label>
+            </div>
+            ${gm!==null?`<div class="cmsMarginPreview"><span>CHANNEL GM USING DISPLAY PRICE / LANDED COST</span><b class="${gm<20?'dangerText':'successText'}">${gm.toFixed(1)}%</b><small>Planning indicator only. Release still requires current direct-cost evidence.</small></div>`:''}
+          </section>
+        </div>
+
+        <aside class="cmsEditorSide">
+          <section class="panel cmsMediaPanel">
+            <div class="panelHeader"><div><span class="eyebrow">MEDIA</span><h2>Product images</h2></div></div>
+            <label class="cmsUploadDrop"><input type="file" accept="image/jpeg,image/png,image/webp,image/gif" data-cms-image-upload="${p.id}"><b>Upload image</b><small>JPG, PNG, WebP or GIF · max 10 MB · publish to go live</small></label>
+            <div class="cmsMediaGrid">${media.length?media.map(m=>`<article class="${m.is_primary?'primary':''}"><img src="${esc(m.public_url)}" alt="${esc(m.alt_text||'Product image')}"><div><span>${m.is_primary?'PRIMARY':'GALLERY'}</span><div><button data-cms-primary="${p.id}|${m.id}">Set primary</button><button class="danger" data-cms-delete-media="${p.id}|${m.id}">Remove</button></div></div></article>`).join(''):'<div class="cmsNoMedia">No uploaded media yet.</div>'}</div>
+          </section>
+
+          <section class="panel cmsPublishPanel">
+            <span class="eyebrow">PUBLISH</span>
+            <h2>${channel==='institutional'?'Institutional':'Wholesale'} storefront</h2>
+            <p>Save Draft preserves the currently published channel. Publish applies this channel's presentation and approved images to the customer storefront.</p>
+            <button class="button light full" data-cms-save="${p.id}">Save draft</button>
+            <button class="button primary full" data-cms-publish="${p.id}">Publish to ${channel}</button>
+            <button class="textAction" data-go="${channel==='institutional'?'portal/catalogue':'wholesale'}">Open storefront preview →</button>
+          </section>
+        </aside>
+      </div>
+    `,true);
   }
 
   function adminRequests(){
@@ -751,7 +1348,7 @@
     return `<div class="productDetailModal">
       <div class="modalHeader"><div><span class="eyebrow">${esc(primary.label)}</span><h2>${esc(displayName)}</h2><div class="smallMuted mono">${esc(p.pscSku)}</div></div><button class="iconBtn" data-modal-close>×</button></div>
       <div class="productDetailGrid">
-        <div class="detailImagePane">${image}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span></div><div class="modalNeedChips">${needTags}</div></div>
+        <div class="detailImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).map(m=>`<img src="${esc(m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span></div><div class="modalNeedChips">${needTags}</div></div>
         <div class="detailContentPane">
           ${mapped?`<div class="regulatoryHero mapped v25DhaHero"><div class="dhaModalBadge"><span>DHA</span><b>Mapped requirement</b></div><h3>${esc(p.dhaRequirement||'Mapped requirement')}</h3><p>${esc(p.dhaReference||'DHA requirement')} · ${esc(p.dhaStatus||'Status to verify')}</p></div>`:`<div class="regulatoryHero support"><span>INSTITUTIONAL CATALOGUE</span><h3>${esc(p.productType||'Institutional supply')}</h3><p>Product specification is reviewed before quotation.</p></div>`}
           <div class="specBlocks">
@@ -903,6 +1500,8 @@
     }
 
     await loadOrdersFromDatabase();
+    if(isPscAdmin) await loadAdminCms();
+    else await loadPublicStorefronts();
     save();
   }
 
@@ -1010,6 +1609,7 @@
 
   async function bootstrapAuth(){
     if(!sb){ authReady=true; render(); return; }
+    try{ await loadPublicStorefronts(); }catch(e){ console.warn('Public storefront load:',e); }
     const {data,error}=await sb.auth.getSession();
     if(error) console.warn(error.message);
     session=data?.session||null;
@@ -1104,10 +1704,13 @@
     if(r.startsWith('portal/catalogue/')){
       const needId=r.split('/')[2]||'all';
       html=catalogueCategory(needId);
+    } else if(r.startsWith('admin/products/')){
+      html=adminProductEditor(r.split('/')[2]);
     } else switch(r){
       case 'home': html=landing();break;
       case 'about': html=aboutPage();break;
       case 'services': html=servicesPage();break;
+      case 'wholesale': html=wholesalePage();break;
       case 'max': location.hash='services'; return;
       case 'demo': html=publicDemoPage();break;
       case 'careers': html=careersPage();break;
@@ -1121,6 +1724,7 @@
       case 'portal/insights': html=insightsPage();break;
       case 'portal/archive': html=archivePage();break;
       case 'admin/dashboard': html=adminDashboard();break;
+      case 'admin/storefront': html=adminStorefront();break;
       case 'admin/products': html=adminProducts();break;
       case 'admin/requests': html=adminRequests();break;
       case 'admin/fulfilment': html=adminFulfilment();break;
@@ -1246,6 +1850,18 @@
     document.querySelectorAll('[data-quote-ref]').forEach(el=>el.addEventListener('change',e=>{const r=state.requests.find(x=>x.id===el.dataset.quoteRef);r.quoteRef=e.target.value;audit('Quote reference updated',r.id);save()}));
     document.querySelectorAll('[data-approve-quote]').forEach(el=>el.addEventListener('click',()=>{const r=state.requests.find(x=>x.id===el.dataset.approveQuote);r.status='Authorized';audit('Quotation confirmed by demo account user',r.id);save();render();toast(`<strong>Quotation confirmed.</strong><br>${tomorrowDelivery()}.`)}));
     document.querySelectorAll('[data-export-products]').forEach(el=>el.addEventListener('click',exportProducts));
+
+    document.querySelectorAll('[data-cms-channel]').forEach(el=>el.addEventListener('click',()=>{ui.cmsChannel=el.dataset.cmsChannel;render()}));
+    const cmsSearch=document.querySelector('[data-cms-search]'); if(cmsSearch)cmsSearch.addEventListener('input',e=>{ui.cmsSearch=e.target.value;render()});
+    document.querySelectorAll('[data-save-storefront]').forEach(el=>el.addEventListener('click',async()=>{try{await saveStorefrontConfig(el.dataset.saveStorefront)}catch(e){console.error(e);toast('<strong>Could not save storefront.</strong>')}}));
+    document.querySelectorAll('[data-cms-save]').forEach(el=>el.addEventListener('click',async()=>{try{await saveCmsProduct(el.dataset.cmsSave,false)}catch(e){console.error(e);toast('<strong>Could not save product.</strong>')}}));
+    document.querySelectorAll('[data-cms-publish]').forEach(el=>el.addEventListener('click',async()=>{try{await saveCmsProduct(el.dataset.cmsPublish,true)}catch(e){console.error(e);toast('<strong>Could not publish product.</strong>')}}));
+    document.querySelectorAll('[data-cms-image-upload]').forEach(el=>el.addEventListener('change',async e=>{try{const file=e.target.files?.[0];if(file)await uploadCmsImage(el.dataset.cmsImageUpload,file)}catch(err){console.error(err);toast('<strong>Image upload failed.</strong>')}}));
+    document.querySelectorAll('[data-cms-primary]').forEach(el=>el.addEventListener('click',async()=>{try{const[p,m]=el.dataset.cmsPrimary.split('|');await setCmsPrimaryImage(p,m)}catch(err){console.error(err);toast('<strong>Could not update image.</strong>')}}));
+    document.querySelectorAll('[data-cms-delete-media]').forEach(el=>el.addEventListener('click',async()=>{try{const[p,m]=el.dataset.cmsDeleteMedia.split('|');await deleteCmsImage(p,m)}catch(err){console.error(err);toast('<strong>Could not remove image.</strong>')}}));
+
+    const wq=document.querySelector('[data-wholesale-q]'); if(wq)wq.addEventListener('input',e=>{ui.wholesaleQuery=e.target.value;render()});
+    document.querySelectorAll('[data-wholesale-cat]').forEach(el=>el.addEventListener('change',e=>{ui.wholesaleCat=e.target.value;render()}));
   }
 
   function applyTemplate(name){
