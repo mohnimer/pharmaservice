@@ -112,3 +112,17 @@ IMPORTANT
 - The public catalogue intentionally does not expose internal supplier cost or account pricing.
 - This V37 release focuses on the exact requested public/mobile/customer improvements;
   the deeper Deal Desk persistence/release-gate work remains a separate next phase.
+
+
+V37.4 — THE WORKSHOP + HERO BACKDROP
+------------------------------------
+- Adds the user-supplied clinical interior as the actual homepage hero backdrop behind the existing hero content.
+- Adds The Workshop as a first-class public navigation destination.
+- Adds central workshop-data.js content model with 10 launch guides.
+- Adds filter/search, reusable editorial index rows, reusable guide template, Save/Print/Share, print styling, empty state and direct route stubs.
+- Adds From The Workshop links to matching public catalogue cards and portal product detail modals.
+- Adds Related clinic supplies at the bottom of guides, after education.
+- Adds a restrained homepage Workshop index and a school-clinic Workshop strip inside Our Model.
+- No Workshop interaction writes to Supabase. Save uses localStorage only; Print and Share are client-side.
+- Workshop content is intentionally static/local in V37.4. Edit /workshop-data.js to add or change guides; a CMS is deferred.
+- Medical copy is conservative editorial draft content and is labelled for professional review before external publication.

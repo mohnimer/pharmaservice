@@ -2,8 +2,11 @@
   'use strict';
   const D = window.PSC_DATA;
   const C = window.PSC_COPY || {};
-  const PSC_LOGO = './assets/psc-logo-cropped.png';
-  const DHA_ICON = './assets/dha-requirement.png';
+  const PSC_LOGO = '/assets/psc-logo-cropped.png';
+  const DHA_ICON = '/assets/dha-requirement.png';
+  const WORKSHOP = Array.isArray(window.PSC_WORKSHOP) ? window.PSC_WORKSHOP : [];
+  const WORKSHOP_CATEGORIES = ['All','Product Basics',"What's the Difference?",'Clinic Checks','Equipment Readiness','Stock & Expiry','School Clinic','Ordering & Specifications'];
+  const WORKSHOP_SAVE_KEY = 'pscWorkshopSavedV1';
   const $app = document.getElementById('app');
   const STORAGE = 'pscClinicPortalStateV12_1';
 
@@ -27,7 +30,7 @@
   let authReady = false;
 
   let state = load();
-  let ui = { mobile:false, publicMenu:false, basket:false, modal:null, accountMenu:false, globalSearch:'', catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All', cmsChannel:'institutional', cmsSearch:'', wholesaleQuery:'', wholesaleCat:'All', tourStep:0 };
+  let ui = { mobile:false, publicMenu:false, basket:false, modal:null, accountMenu:false, globalSearch:'', catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All', cmsChannel:'institutional', cmsSearch:'', wholesaleQuery:'', wholesaleCat:'All', workshopQuery:'', workshopCategory:'All', tourStep:0 };
 
   const cms = {
     loaded:false,
@@ -531,8 +534,25 @@
     return raw;
   }
   function products(){ return D.products.map(p=>product(p.pscSku)); }
-  function currentRoute(){ return (location.hash || '#home').slice(1); }
-  function go(route){ location.hash = route; ui.mobile=false; ui.publicMenu=false; ui.modal=null; window.scrollTo({top:0,behavior:'instant'}); render(); }
+  function currentRoute(){
+    if(location.hash) return location.hash.slice(1);
+    const path=location.pathname.replace(/\/+$/,'');
+    if(path==='/workshop') return 'workshop';
+    if(path.startsWith('/workshop/')) return `workshop/${decodeURIComponent(path.split('/')[2]||'')}`;
+    return 'home';
+  }
+  function go(route){
+    ui.mobile=false; ui.publicMenu=false; ui.modal=null;
+    if(route==='workshop' || route.startsWith('workshop/')){
+      const target=route==='workshop'?'/workshop':`/workshop/${encodeURIComponent(route.split('/')[1]||'')}`;
+      history.pushState({pscRoute:route},'',target);
+      window.scrollTo({top:0,behavior:'instant'}); render();
+      return;
+    }
+    const target=`/#${route}`;
+    if(location.pathname!=='/' || !location.hash){ location.href=target; return; }
+    location.hash=route; window.scrollTo({top:0,behavior:'instant'}); render();
+  }
   function audit(action, detail){ state.audit.unshift({at:new Date().toISOString(),actor:'Demo user',action,detail}); state.audit=state.audit.slice(0,50); save(); }
   function toast(msg){ const old=document.querySelector('.toast'); if(old)old.remove(); const d=document.createElement('div');d.className='toast';d.innerHTML=msg;$app.appendChild(d);setTimeout(()=>d.remove(),2800); }
 
@@ -639,8 +659,9 @@
 
   const publicNav=[
     ['our-model','Our Model'],
-    ['catalogue','Institutional Catalogue'],
-    ['contact','Contact / Request Supply']
+    ['catalogue','Catalogue'],
+    ['workshop','The Workshop'],
+    ['contact','Contact']
   ];
   function publicHeader(active='home'){
     return `<header class="publicHeader v37PublicHeader">
@@ -669,7 +690,7 @@
             <div class="procurementCardHeadline">
               <span>Consumer health products catered to institutions and organizations.</span>
             </div>
-            <img class="procurementQr" src="./assets/pharmaservice-qr.png" alt="QR code to pharmaservice.ae">
+            <img class="procurementQr" src="/assets/pharmaservice-qr.png" alt="QR code to pharmaservice.ae">
           </div>
           <div class="procurementFlowPanel">
             <div class="procurementStageGrid">
@@ -756,6 +777,7 @@
           <button class="button primary semanticPrimary" data-go="catalogue">Open Institutional Catalogue</button>
         </div>
       </section>
+      ${workshopTeaser()}
       <section class="demoTeaser"><div><span class="kicker">SEE HOW IT WORKS</span><h2>Take a guided tour of Pharma Service.</h2><p>See the institutional customer journey from product selection and quotation through order management, delivery and repeat purchasing.</p></div><button class="button dark large semanticPrimary" data-go="demo">Take guided tour</button></section>
       ${publicFooter()}
     </main>`;
@@ -796,7 +818,7 @@
       <article><span>MULTI-SITE GROUPS</span><h3>Groups managing more than one location</h3><p>One commercial relationship with site-level ordering, delivery history and account-specific requirements.</p></article>
       <article><span>WORKPLACE & INSTITUTIONAL HEALTH</span><h3>Organizations operating first-aid or healthcare facilities</h3><p>Requirement-led equipment, consumables and recurring supply where the receiving route is appropriate.</p></article>
       <article><span>HEALTHCARE BUYERS</span><h3>Professional procurement teams</h3><p>Comparable specifications, quotation control and consolidated sourcing across suitable suppliers.</p></article>
-    </div></section>
+    </div>${schoolWorkshopStrip()}</section>
     <section class="publicSection modelSection modelSectionAlt" id="model-what"><div class="modelSectionHead"><span class="kicker">WHAT MOVES THROUGH THE MODEL</span><h2>Opening baskets, recurring baskets and specialist lines.</h2><p>The offer is organized around how institutions actually buy: capital items that establish the facility, recurring items that keep it ready, and regulated or specialist lines that require the correct route.</p></div><div class="supplyBasketGrid">
       <article class="supplyBasketCard capital"><span>OPENING / CAPITAL BASKET</span><h2>Set up the facility.</h2><p>Clinical furniture, diagnostics, monitoring, emergency equipment, mobility, oxygen-related equipment and other setup requirements.</p><b>Purchased episodically · specification and warranty matter.</b></article>
       <article class="supplyBasketCard recurring"><span>RECURRING BASKET</span><h2>Keep it supplied.</h2><p>Dressings, PPE, disposables, testing consumables, respiratory items, hygiene products, medicines where permitted, and expiry-driven replacements.</p><b>Repeated demand · pack, expiry, stock and replenishment matter.</b></article>
@@ -860,14 +882,110 @@
     <section class="publicSection controlCallout"><span class="kicker">REGULATED LINES</span><h2>Commercial convenience does not replace authorization.</h2><p>Medicines, oxygen, specialist services and other regulated products remain subject to the applicable UAE licensing, recipient, storage, batch/expiry and professional controls.</p></section>`
   ); }
 
+  function workshopGuideBySlug(slug){ return WORKSHOP.find(g=>g.slug===slug && g.status==='published') || null; }
+  function workshopSaved(){ try{return new Set(JSON.parse(localStorage.getItem(WORKSHOP_SAVE_KEY)||'[]'))}catch{return new Set()} }
+  function workshopProductMatches(g,p){
+    if(!g||!p)return false;
+    const sku=String(p.pscSku||'');
+    if((g.related_product_ids||[]).includes(sku))return true;
+    const hay=[p.name,p.catalogueDisplayName,p.pscOfferedSpecification,p.spec].filter(Boolean).join(' ').toLowerCase();
+    return (g.product_match_terms||[]).some(t=>hay.includes(String(t).toLowerCase()));
+  }
+  function workshopForProduct(p,limit=2){ return WORKSHOP.filter(g=>g.status==='published'&&workshopProductMatches(g,p)).slice(0,limit); }
+  function workshopRelatedProducts(g,limit=4){ return products().filter(p=>workshopProductMatches(g,p)).slice(0,limit); }
+  function workshopFormatCode(format){
+    return ({'ON THE BENCH':'BENCH',"WHAT'S THE DIFFERENCE?":'COMPARE','CHECK THIS':'CHECK','WHY DOES THIS MATTER?':'WHY',"DON'T ORDER IT LIKE THIS":'SPEC'})[format]||'GUIDE';
+  }
+  function workshopIndexRow(g,i=0){
+    return `<article class="workshopIndexRow">
+      <div class="workshopIndexNo">${String(i+1).padStart(2,'0')}</div>
+      <div class="workshopIndexMeta"><span>${esc(g.format)}</span><small>${esc(g.category)}</small></div>
+      <button class="workshopIndexTitle" data-go="workshop/${esc(g.slug)}"><h2>${esc(g.title)}</h2><p>${esc(g.excerpt)}</p></button>
+      <div class="workshopIndexRead"><span>${esc(g.read_time)}</span><small>${esc(g.last_reviewed)}</small></div>
+    </article>`;
+  }
+  function workshopFiltered(){
+    const q=(ui.workshopQuery||'').trim().toLowerCase();
+    return WORKSHOP.filter(g=>{
+      if(g.status!=='published')return false;
+      if(ui.workshopCategory!=='All' && g.category!==ui.workshopCategory)return false;
+      if(!q)return true;
+      const hay=[g.title,g.subtitle,g.excerpt,g.category,g.format,...(g.tags||[])].join(' ').toLowerCase();
+      return hay.includes(q);
+    });
+  }
+  function workshopLandingPage(){
+    const filtered=workshopFiltered();
+    const lead=(ui.workshopCategory==='All'&&!ui.workshopQuery?WORKSHOP.find(g=>g.slug==='oxygen-cylinder-is-not-an-oxygen-system'):filtered[0])||WORKSHOP[0];
+    const rest=filtered.filter(g=>!lead||g.slug!==lead.slug);
+    return `<main class="publicPage workshopPage">${publicHeader('workshop')}
+      <section class="workshopHero">
+        <div class="workshopHeroRule"><span>PSC / PRODUCT INTELLIGENCE</span><i></i><b>ISSUE 01</b></div>
+        <div class="workshopHeroGrid"><div><span class="kicker">THE WORKSHOP</span><h1>Practical product intelligence for people who run clinics.</h1></div><div class="workshopHeroCopy"><p>The small details that make medical products safer to choose, easier to use and simpler to manage.</p><small>No catalogue jargon. No filler. Just useful product knowledge.</small></div></div>
+      </section>
+      <section class="workshopTools">
+        <div class="workshopSearch"><span>${icon('search')}</span><input data-workshop-q value="${esc(ui.workshopQuery)}" placeholder="Search product, question or clinic check…" aria-label="Search The Workshop"></div>
+        <div class="workshopFilters">${WORKSHOP_CATEGORIES.map(c=>`<button class="${ui.workshopCategory===c?'active':''}" data-workshop-category="${esc(c)}">${esc(c)}</button>`).join('')}</div>
+      </section>
+      ${filtered.length?`${lead?`<section class="workshopLead">
+        <div class="workshopLeadLabel"><span>${esc(lead.format)}</span><b>${workshopFormatCode(lead.format)} / 01</b></div>
+        <button class="workshopLeadTitle" data-go="workshop/${esc(lead.slug)}"><h2>${esc(lead.title)}</h2><p>${esc(lead.subtitle)}</p></button>
+        <div class="workshopLeadFacts"><span>${esc(lead.category)}</span><b>${esc(lead.read_time)}</b><small>Reviewed ${esc(lead.last_reviewed)}</small></div>
+      </section>`:''}<section class="workshopIndex"><div class="workshopIndexHead"><span>GUIDE INDEX</span><b>${filtered.length} / 10</b></div>${rest.map((g,i)=>workshopIndexRow(g,i+(lead?1:0))).join('')}</section>`:`<section class="workshopEmpty"><span>NO MATCH</span><h2>Nothing on the bench for that search yet.</h2><p>Try a product name, category or broader term.</p><button class="button outline" data-workshop-clear>Clear search</button></section>`}
+      <section class="workshopPrinciple"><div><span>THE MODEL</span><h2>PSC sells the product.<br>The Workshop explains the product.<br>The portal remembers the product.</h2></div><p>Education sits beside the catalogue, not inside a sales pitch. The point is to make specifications, compatibility, readiness and replenishment easier to understand before the next order.</p></section>
+      ${publicFooter()}
+    </main>`;
+  }
+  function workshopSectionHtml(section){
+    if(section.comparison) return `<section class="workshopArticleSection"><h2>${esc(section.title)}</h2><div class="workshopComparison">${section.comparison.map(x=>`<article><span>${esc(x.label)}</span><p>${esc(x.text)}</p></article>`).join('')}</div></section>`;
+    if(section.spec_example){ const x=section.spec_example; return `<section class="workshopArticleSection workshopSpecLesson"><h2>${esc(section.title)}</h2><div class="badSpec"><span>VAGUE RFQ</span><strong>${esc(x.bad)}</strong></div><div class="missingSpec"><span>WHAT'S MISSING?</span>${x.missing.map(v=>`<b>${esc(v)}</b>`).join('')}</div><div class="goodSpec"><span>ORDER IT LIKE THIS</span><p>${esc(x.good)}</p></div></section>`; }
+    if(section.checklist) return `<section class="workshopArticleSection workshopChecklist"><h2>${esc(section.title)}</h2><ol>${section.checklist.map((v,i)=>`<li><span>${String(i+1).padStart(2,'0')}</span><p>${esc(v)}</p></li>`).join('')}</ol></section>`;
+    if(section.bullets) return `<section class="workshopArticleSection"><h2>${esc(section.title)}</h2><ul class="workshopBullets">${section.bullets.map(v=>`<li>${esc(v)}</li>`).join('')}</ul></section>`;
+    return `<section class="workshopArticleSection"><h2>${esc(section.title)}</h2><p>${esc(section.text||'')}</p></section>`;
+  }
+  function workshopGuidePage(slug){
+    const g=workshopGuideBySlug(slug);
+    if(!g)return `<main class="publicPage workshopPage">${publicHeader('workshop')}<section class="workshopNotFound"><span>THE WORKSHOP</span><h1>Guide not found.</h1><p>The guide may have moved or is not published.</p><button class="button primary" data-go="workshop">Back to The Workshop</button></section>${publicFooter()}</main>`;
+    const saved=workshopSaved().has(g.slug);
+    const related=workshopRelatedProducts(g,4);
+    return `<main class="publicPage workshopPage workshopArticlePage">${publicHeader('workshop')}
+      <article class="workshopArticle ${g.format==='CHECK THIS'?'workshopPrintCheck':''}">
+        <header class="workshopArticleHeader">
+          <div class="workshopArticleTopline"><button data-go="workshop">THE WORKSHOP</button><i></i><span>${esc(g.category)}</span><b>${esc(g.format)}</b></div>
+          <h1>${esc(g.title)}</h1><p class="workshopDeck">${esc(g.subtitle)}</p>
+          <div class="workshopArticleMeta"><span>${esc(g.read_time)} read</span><span>Last reviewed ${esc(g.last_reviewed)}</span><span>${esc(g.author_or_review_status)}</span></div>
+          <div class="workshopArticleActions"><button data-workshop-save="${esc(g.slug)}" aria-pressed="${saved?'true':'false'}">${saved?'Saved':'Save'}</button><button data-workshop-print>Print</button><button data-workshop-share="${esc(g.slug)}">Share</button></div>
+        </header>
+        <div class="workshopArticleBody">${(g.body_sections||[]).map(workshopSectionHtml).join('')}</div>
+        <section class="workshopSignature">
+          <article><span>USE IT RIGHT</span><p>${esc(g.use_it_right)}</p></article>
+          <article><span>CHECK YOUR STOCK</span><p>${esc(g.check_your_stock)}</p></article>
+          <article><span>WHEN ORDERING</span><p>${esc(g.when_ordering)}</p></article>
+        </section>
+        ${related.length?`<section class="workshopRelated"><div class="workshopRelatedHead"><span>RELATED CLINIC SUPPLIES</span><p>Relevant catalogue lines are shown after the product guidance — education first, commerce second.</p></div><div class="workshopRelatedList">${related.map(p=>{const n=clinicalNeedMeta(clinicalNeedIds(p)[0]||'all');return `<button data-go="catalogue/${n.id}"><span>${esc(p.pscSku||'PSC')}</span><b>${esc(p.catalogueDisplayName||p.name)}</b><small>${esc(p.cataloguePack||p.pack||'Pack to confirm')}</small></button>`}).join('')}</div></section>`:''}
+        <footer class="workshopMedicalNote">Workshop guides provide general product and supply information. Clinical decisions should follow the product instructions, institutional procedures and applicable professional or regulatory requirements.</footer>
+      </article>${publicFooter()}
+    </main>`;
+  }
+  function workshopTeaser(){
+    const slugs=['which-glove-should-i-actually-wear','oxygen-cylinder-is-not-an-oxygen-system','aed-has-expiring-parts-too'];
+    const items=slugs.map(workshopGuideBySlug).filter(Boolean);
+    return `<section class="homeWorkshop"><div class="homeWorkshopIntro"><span class="kicker">THE WORKSHOP</span><h2>Know what you're working with.</h2><p>Practical guides to the products, equipment and small details that keep clinics ready.</p><button class="button outline" data-go="workshop">Enter The Workshop</button></div><div class="homeWorkshopIndex">${items.map((g,i)=>`<button data-go="workshop/${g.slug}"><span>${String(i+1).padStart(2,'0')} · ${esc(g.format)}</span><h3>${esc(g.title)}</h3><small>${esc(g.read_time)}</small></button>`).join('')}</div></section>`;
+  }
+  function schoolWorkshopStrip(){
+    const slugs=['ten-minute-school-clinic-stock-expiry-walk','aed-has-expiring-parts-too','oxygen-cylinder-is-not-an-oxygen-system'];
+    return `<section class="schoolWorkshopStrip"><div><span class="kicker">USEFUL IN YOUR CLINIC</span><h2>The Workshop</h2></div><div>${slugs.map(slug=>{const g=workshopGuideBySlug(slug);return g?`<button data-go="workshop/${g.slug}"><span>${esc(g.format)}</span><b>${esc(g.title)}</b></button>`:''}).join('')}</div></section>`;
+  }
+
   function publicCatalogueCard(p){
     const need=clinicalNeedMeta(clinicalNeedIds(p)[0]||'all');
     const displayName=p.catalogueDisplayName||p.name;
     const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
     const imageUrl=productDisplayImageUrl(p);
+    const workshop=workshopForProduct(p,1)[0];
     return `<article class="publicCatalogueCard">
       <div class="publicCatalogueVisual" style="--need-bg:${need.bg};--need-ink:${need.ink}">${imageUrl?`<img src="${esc(imageUrl)}" alt="${esc(displayName)}" loading="lazy">`:`<span>${esc(need.label)}</span>`}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</div>
-      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><h3>${esc(displayName)}</h3><p>${esc(pack)}</p>${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}</div>
+      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><h3>${esc(displayName)}</h3><p>${esc(pack)}</p>${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
       <button class="button outline full" data-go="contact">Request institutional quote</button>
     </article>`;
   }
@@ -1204,7 +1322,7 @@
     const need=clinicalNeedMeta(needId);
     const displayName=p.catalogueDisplayName||p.name;
     const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
-    const fallback=p.fallbackAsset||'./assets/products/clinic-basics.jpg';
+    const fallback=p.fallbackAsset||'/assets/products/clinic-basics.jpg';
     const dhaMark=p.dhaMapped?`<img class="dhaRequirementIcon cardDhaIcon" src="${DHA_ICON}" alt="DHA requirement">`:'';
     const displayImage=productDisplayImageUrl(p);
     const visual=displayImage
@@ -1575,7 +1693,7 @@
     const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
     const needs=clinicalNeedIds(p);
     const primary=clinicalNeedMeta(needs[0]||'all');
-    const fallback=p.fallbackAsset||'./assets/products/clinic-basics.jpg';
+    const fallback=p.fallbackAsset||'/assets/products/clinic-basics.jpg';
     const needTags=needs.map(id=>`<span class="modalNeedChip" style="--chip-bg:${clinicalNeedMeta(id).bg};--chip-ink:${clinicalNeedMeta(id).ink}">${esc(clinicalNeedMeta(id).label)}</span>`).join('');
     const detailDhaMark=mapped?`<img class="dhaRequirementIcon detailDhaIcon" src="${DHA_ICON}" alt="DHA requirement">`:'';
     const displayImage=productDisplayImageUrl(p);
@@ -1595,6 +1713,7 @@
           </div>
           ${mapped?`<div class="mappingDisclosure"><b>Regulatory clarity</b><p>Mapped to the applicable DHA clinic requirement. This is not a DHA product endorsement or product approval. Exact model suitability remains subject to specification verification.</p></div>`:''}
           ${p.regulated?'<div class="licensedNotice"><b>Licensed supply route</b><p>Availability and supply remain subject to applicable UAE licensing, recipient authorization, product registration, storage, batch/expiry and professional controls.</p></div>':''}
+          ${workshopForProduct(p,1).map(g=>`<button class="productWorkshopModule" data-go="workshop/${esc(g.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(g.title)}</b></button>`).join('')}
           <div class="detailActions productPageActions"><button class="button light productCloseAction" data-modal-close>Close</button><button class="button primary productRequestAction" data-add="${p.pscSku}">Request</button></div>
         </div>
       </div>
@@ -1947,10 +2066,14 @@
       contact:['Request Institutional Supply | Pharma Service','Send Pharma Service an institutional healthcare requirement or RFQ for sourcing and quotation.','/contact.html'],
       about:['About Pharma Service','Dubai healthcare supply business developing a controlled institutional supply service for schools and organizations.','/about.html'],
       careers:['Careers | Pharma Service','Career information from Pharma Service.','/careers.html'],
-      media:['Media & Resources | Pharma Service','Pharma Service company updates and institutional healthcare supply resources.','/media.html']
+      media:['Media & Resources | Pharma Service','Pharma Service company updates and institutional healthcare supply resources.','/media.html'],
+      workshop:['The Workshop | Pharma Service','Practical product intelligence for people who run clinics: specifications, compatibility, readiness, stock and ordering details.','/workshop']
     };
-    const baseRoute=route.startsWith('catalogue/')?'catalogue':route;
-    const item=publicMeta[baseRoute];
+    const workshopSlug=route.startsWith('workshop/')?route.split('/')[1]:null;
+    const workshopGuide=workshopSlug?workshopGuideBySlug(workshopSlug):null;
+    const baseRoute=route.startsWith('catalogue/')?'catalogue':route.startsWith('workshop/')?'workshop':route;
+    let item=publicMeta[baseRoute];
+    if(workshopGuide)item=[`${workshopGuide.title} | The Workshop`,workshopGuide.excerpt,`/workshop/${workshopGuide.slug}`];
     if(!item) return;
     document.title=item[0];
     let description=document.querySelector('meta[name="description"]');
@@ -1977,6 +2100,9 @@
     } else if(r.startsWith('catalogue/')){
       const needId=r.split('/')[1]||'all';
       html=publicCataloguePage(needId);
+    } else if(r.startsWith('workshop/')){
+      const slug=r.split('/')[1]||'';
+      html=workshopGuidePage(slug);
     } else if(r.startsWith('admin/products/')){
       html=adminProductEditor(r.split('/')[2]);
     } else switch(r){
@@ -1988,6 +2114,7 @@
       case 'what-we-supply': html=ourModelPage();break;
       case 'how-it-works': html=ourModelPage();break;
       case 'catalogue': html=publicCataloguePage('all');break;
+      case 'workshop': html=workshopLandingPage();break;
       case 'wholesale': html=wholesalePage();break;
       case 'max': location.hash='services'; return;
       case 'demo': html=publicDemoPage();break;
@@ -2083,6 +2210,12 @@
 
   function bind(){
     document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>go(el.dataset.go)));
+    const wSearch=document.querySelector('[data-workshop-q]'); if(wSearch)wSearch.addEventListener('input',e=>{ui.workshopQuery=e.target.value;const pos=e.target.selectionStart||ui.workshopQuery.length;render();requestAnimationFrame(()=>{const n=document.querySelector('[data-workshop-q]');if(n){n.focus();try{n.setSelectionRange(pos,pos)}catch{}}});});
+    document.querySelectorAll('[data-workshop-category]').forEach(el=>el.addEventListener('click',()=>{ui.workshopCategory=el.dataset.workshopCategory;render()}));
+    document.querySelectorAll('[data-workshop-clear]').forEach(el=>el.addEventListener('click',()=>{ui.workshopQuery='';ui.workshopCategory='All';render()}));
+    document.querySelectorAll('[data-workshop-save]').forEach(el=>el.addEventListener('click',()=>{const slug=el.dataset.workshopSave;const saved=workshopSaved();saved.has(slug)?saved.delete(slug):saved.add(slug);localStorage.setItem(WORKSHOP_SAVE_KEY,JSON.stringify([...saved]));render()}));
+    document.querySelectorAll('[data-workshop-print]').forEach(el=>el.addEventListener('click',()=>window.print()));
+    document.querySelectorAll('[data-workshop-share]').forEach(el=>el.addEventListener('click',async()=>{const g=workshopGuideBySlug(el.dataset.workshopShare);if(!g)return;const url=`https://pharmaservice.ae/workshop/${g.slug}`;try{if(navigator.share)await navigator.share({title:g.title,text:g.excerpt,url});else if(navigator.clipboard){await navigator.clipboard.writeText(url);toast('<strong>Link copied.</strong>');}else toast(`<strong>Share link</strong><br>${esc(url)}`);}catch(e){if(e?.name!=='AbortError')console.warn(e);}}));
     document.querySelectorAll('[data-public-menu]').forEach(el=>el.addEventListener('click',()=>{ui.publicMenu=!ui.publicMenu;render()}));
     document.querySelectorAll('[data-global-search]').forEach(el=>{
       el.addEventListener('input',e=>{ui.globalSearch=e.target.value;});
@@ -2169,6 +2302,7 @@
 
   window.addEventListener('scroll',onPublicHeaderScroll,{passive:true});
   window.addEventListener('hashchange',render);
-  if(!location.hash) location.hash='home';
+  window.addEventListener('popstate',render);
+  if(!location.hash && !location.pathname.startsWith('/workshop')) location.hash='home';
   bootstrapAuth();
 })();
