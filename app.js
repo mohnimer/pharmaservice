@@ -638,9 +638,7 @@
 
 
   const publicNav=[
-    ['who-we-supply','Who We Supply'],
-    ['what-we-supply','What We Supply'],
-    ['how-it-works','How It Works'],
+    ['our-model','Our Model'],
     ['catalogue','Institutional Catalogue'],
     ['contact','Contact / Request Supply']
   ];
@@ -787,6 +785,35 @@
 
   function servicesPage(){ return publicPage('services','SERVICES','Clinic procurement, made easier.','Pharma Service makes it easy for institutional customers to shop, request quotations, manage orders, repeat previous purchases and optimize procurement costs across pharmaceuticals, medical disposables and medical equipment.',`<section class="publicSection twoPublicCols"><div><span class="kicker">PROCUREMENT COST CONTROL</span><h2>Buy through the right supply channel, not the retail shelf.</h2><p>Pharma Service sources through suitable wholesale and specialist suppliers, then consolidates the commercial process for the institutional customer. The objective is straightforward: optimize procurement costs across pharmaceuticals, medical disposables and medical equipment without pushing sourcing complexity onto the clinic team.</p></div><div class="publicFeatureStack"><article><b>Shop & request</b><p>Browse controlled institutional lines or submit a custom sourcing request.</p></article><article><b>Quote & manage</b><p>Receive the formal quotation, confirm the order and keep the transaction history attached to the account.</p></article><article><b>Repeat efficiently</b><p>Reorder previously supplied items without restarting the procurement process from zero.</p></article></div></section><section class="publicSection procurementFlow"><article><b>SHOP</b><span>01</span><p>Browse the Pharma Service institutional product master.</p></article><article><b>QUOTE</b><span>02</span><p>PSC sources, reviews and sends the formal quotation.</p></article><article><b>MANAGE</b><span>03</span><p>Confirm, cancel or follow the order from the account.</p></article><article><b>REPEAT</b><span>04</span><p>Repeat previously supplied items from the same account history.</p></article></section><section class="publicCta"><div><span class="kicker">SEE IT WORK</span><h2>Take a guided tour of Pharma Service.</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="demo">Take guided tour</button><button class="button primary large" data-go="login">Open Clinic Portal</button></div></section>`); }
 
+
+  function ourModelPage(){ return publicPage(
+    'our-model',
+    'OUR MODEL',
+    'One relationship. The right source for every line.',
+    'Who we serve, what we supply and how Pharma Service turns fragmented healthcare requirements into one controlled institutional supply relationship.',
+    `<section class="publicSection modelSection" id="model-who"><div class="modelSectionHead"><span class="kicker">WHO WE SERVE</span><h2>Institutions with healthcare responsibilities.</h2><p>Built for organizations that need repeatable purchasing, clear specifications and accountable follow-through — not a consumer checkout experience.</p></div><div class="publicAudienceGrid">
+      <article><span>SCHOOLS & EDUCATION</span><h3>School clinics and campus health rooms</h3><p>Opening equipment, recurring clinic consumables, medicines through the appropriate route, replenishment and replacement planning.</p></article>
+      <article><span>MULTI-SITE GROUPS</span><h3>Groups managing more than one location</h3><p>One commercial relationship with site-level ordering, delivery history and account-specific requirements.</p></article>
+      <article><span>WORKPLACE & INSTITUTIONAL HEALTH</span><h3>Organizations operating first-aid or healthcare facilities</h3><p>Requirement-led equipment, consumables and recurring supply where the receiving route is appropriate.</p></article>
+      <article><span>HEALTHCARE BUYERS</span><h3>Professional procurement teams</h3><p>Comparable specifications, quotation control and consolidated sourcing across suitable suppliers.</p></article>
+    </div></section>
+    <section class="publicSection modelSection modelSectionAlt" id="model-what"><div class="modelSectionHead"><span class="kicker">WHAT MOVES THROUGH THE MODEL</span><h2>Opening baskets, recurring baskets and specialist lines.</h2><p>The offer is organized around how institutions actually buy: capital items that establish the facility, recurring items that keep it ready, and regulated or specialist lines that require the correct route.</p></div><div class="supplyBasketGrid">
+      <article class="supplyBasketCard capital"><span>OPENING / CAPITAL BASKET</span><h2>Set up the facility.</h2><p>Clinical furniture, diagnostics, monitoring, emergency equipment, mobility, oxygen-related equipment and other setup requirements.</p><b>Purchased episodically · specification and warranty matter.</b></article>
+      <article class="supplyBasketCard recurring"><span>RECURRING BASKET</span><h2>Keep it supplied.</h2><p>Dressings, PPE, disposables, testing consumables, respiratory items, hygiene products, medicines where permitted, and expiry-driven replacements.</p><b>Repeated demand · pack, expiry, stock and replenishment matter.</b></article>
+    </div><div class="publicCategoryCloud modelCategoryCloud"><span>WOUND CARE</span><span>INFECTION CONTROL & PPE</span><span>DIAGNOSTICS</span><span>RESPIRATORY</span><span>DIABETES & TESTING</span><span>EMERGENCY RESPONSE</span><span>FURNITURE & MOBILITY</span><span>STUDENT CARE</span><span>PROCEDURE CONSUMABLES</span><span>MEDICINES — APPROPRIATE LICENSED ROUTE</span></div></section>
+    <section class="publicSection modelSection" id="model-how"><div class="modelSectionHead"><span class="kicker">HOW IT WORKS</span><h2>Source per line. Sell one solution.</h2><p>Pharma Service keeps the institutional customer-facing process simple while controlling specification, sourcing, commercial evidence and fulfilment behind it.</p></div><div class="publicWorkflowGrid">
+      <article><b>01</b><h3>Capture</h3><p>Account, site, need, quantities, deadline and decision path.</p></article>
+      <article><b>02</b><h3>Normalize</h3><p>Translate the requirement into controlled specifications and comparable lines.</p></article>
+      <article><b>03</b><h3>Source</h3><p>Request comparable supply evidence from suitable category suppliers.</p></article>
+      <article><b>04</b><h3>Compare</h3><p>Specification, model, cost, VAT, stock, delivery, warranty and terms.</p></article>
+      <article><b>05</b><h3>Quote</h3><p>One clean institutional quotation with the relevant commercial terms.</p></article>
+      <article><b>06</b><h3>Authorize</h3><p>The order moves only after the customer's required approval or PO route.</p></article>
+      <article><b>07</b><h3>Deliver & document</h3><p>Receive, inspect, deliver and retain the transaction record.</p></article>
+      <article><b>08</b><h3>Repeat intelligently</h3><p>Use the completed supply history to make replenishment and replacement easier.</p></article>
+    </div></section>
+    <section class="publicSection controlCallout"><span class="kicker">REGULATED LINES</span><h2>Commercial convenience does not replace authorization.</h2><p>Medicines, oxygen, specialist services and other regulated products remain subject to the applicable UAE licensing, recipient, storage, batch/expiry and professional controls.</p></section>
+    <section class="publicCta"><div><span class="kicker">NEXT STEP</span><h2>Bring us the requirement. We will structure the supply.</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="catalogue">Browse catalogue</button><button class="button primary large" data-go="contact">Request supply</button></div></section>`
+  ); }
 
   function whoWeSupplyPage(){ return publicPage(
     'who-we-supply',
@@ -1912,9 +1939,10 @@
   function syncRouteMeta(route){
     const publicMeta={
       home:['Pharma Service | Institutional Healthcare Supply UAE','Institutional healthcare supply for schools and organizations in the UAE: controlled specifications, sourcing, quotation, delivery and replenishment.','/'],
-      'who-we-supply':['Who We Supply | Pharma Service','Institutional healthcare supply designed for schools, multi-site groups, workplace health facilities and professional procurement teams.','/who-we-supply.html'],
-      'what-we-supply':['What We Supply | Pharma Service','Opening equipment, recurring clinic consumables, diagnostics, emergency products and appropriate regulated supply routes.','/what-we-supply.html'],
-      'how-it-works':['How Institutional Supply Works | Pharma Service','See how Pharma Service captures requirements, normalizes specifications, sources per line, quotes, delivers and supports repeat supply.','/how-it-works.html'],
+      'our-model':['Our Model | Pharma Service','Who Pharma Service serves, what moves through the institutional supply model, and how requirements become controlled supply.','/our-model.html'],
+      'who-we-supply':['Our Model | Pharma Service','Who Pharma Service serves, what moves through the institutional supply model, and how requirements become controlled supply.','/our-model.html'],
+      'what-we-supply':['Our Model | Pharma Service','Who Pharma Service serves, what moves through the institutional supply model, and how requirements become controlled supply.','/our-model.html'],
+      'how-it-works':['Our Model | Pharma Service','Who Pharma Service serves, what moves through the institutional supply model, and how requirements become controlled supply.','/our-model.html'],
       catalogue:['Institutional Healthcare Catalogue | Pharma Service','Browse the public read-only Pharma Service institutional healthcare catalogue by clinical need.','/catalogue.html'],
       contact:['Request Institutional Supply | Pharma Service','Send Pharma Service an institutional healthcare requirement or RFQ for sourcing and quotation.','/contact.html'],
       about:['About Pharma Service','Dubai healthcare supply business developing a controlled institutional supply service for schools and organizations.','/about.html'],
@@ -1955,9 +1983,10 @@
       case 'home': html=landing();break;
       case 'about': html=aboutPage();break;
       case 'services': html=servicesPage();break;
-      case 'who-we-supply': html=whoWeSupplyPage();break;
-      case 'what-we-supply': html=whatWeSupplyPage();break;
-      case 'how-it-works': html=howItWorksPage();break;
+      case 'our-model': html=ourModelPage();break;
+      case 'who-we-supply': html=ourModelPage();break;
+      case 'what-we-supply': html=ourModelPage();break;
+      case 'how-it-works': html=ourModelPage();break;
       case 'catalogue': html=publicCataloguePage('all');break;
       case 'wholesale': html=wholesalePage();break;
       case 'max': location.hash='services'; return;

@@ -4424,3 +4424,88 @@ button[data-cancel-quote]:hover{
   .demoTeaser .button{min-width:0;width:100%!important}
 }
 
+
+/* =========================================================
+   V37.2 — Public hierarchy + breathing room polish
+   Consolidate Who / What / How into one Our Model page.
+   Keep this block LAST.
+   ========================================================= */
+
+/* Full-width desktop header: logo belongs to the left edge of the composition,
+   while the smaller navigation cluster breathes on the right. */
+@media(min-width:1101px){
+  .v37PublicHeader{
+    width:100%!important;
+    max-width:none!important;
+    grid-template-columns:auto minmax(0,1fr) auto!important;
+    padding:28px clamp(34px,3.2vw,64px)!important;
+    gap:clamp(34px,3.2vw,62px)!important;
+  }
+  .v37PublicHeader .publicLogo{
+    justify-self:start!important;
+  }
+  .v37PublicHeader .publicLogo img{
+    width:224px!important;
+  }
+  .v37PublicHeader .publicNav{
+    justify-content:flex-end!important;
+    gap:clamp(14px,1.25vw,24px)!important;
+  }
+  .v37PublicHeader .publicNavLink{
+    padding:12px 8px!important;
+    font-size:14px!important;
+  }
+  .v37PublicHeader .publicPortalBtn{
+    margin-left:2px!important;
+    min-width:132px!important;
+  }
+}
+
+/* A composed editorial page rather than three shallow pages. */
+.modelSection{padding-top:72px!important;padding-bottom:72px!important}
+.modelSectionAlt{background:rgba(255,255,255,.46)!important;border-top:1px solid rgba(56,51,44,.09);border-bottom:1px solid rgba(56,51,44,.09)}
+.modelSectionHead{max-width:840px;margin-bottom:34px}
+.modelSectionHead h2{font-size:clamp(32px,4.2vw,56px);line-height:1.02;letter-spacing:-.045em;margin:10px 0 14px}
+.modelSectionHead p{max-width:760px;font-size:16px;line-height:1.68;color:#686259;margin:0}
+.modelCategoryCloud{margin-top:26px;padding-left:0!important;padding-right:0!important;padding-bottom:0!important}
+
+/* Login should feel like a deliberate account gateway, not a form jammed into a card. */
+@media(min-width:901px){
+  .v26LoginWrap{
+    max-width:1380px!important;
+    grid-template-columns:minmax(0,1.12fr) minmax(440px,.72fr)!important;
+    gap:clamp(72px,7vw,132px)!important;
+    padding-left:clamp(42px,5vw,86px)!important;
+    padding-right:clamp(42px,5vw,86px)!important;
+  }
+  .v26LoginCard{
+    padding:40px 42px 38px!important;
+  }
+  .v26LoginCard .input{
+    min-height:56px!important;
+    padding-left:16px!important;
+    padding-right:16px!important;
+  }
+  .v26LoginCard button[data-mvp-login]{
+    min-height:54px!important;
+    padding:0 24px!important;
+    font-size:16px!important;
+    margin-top:4px!important;
+  }
+  .v26LoginCard .loginNote{
+    margin-top:18px!important;
+    line-height:1.6!important;
+  }
+}
+
+@media(max-width:900px){
+  .modelSection{padding-top:50px!important;padding-bottom:50px!important}
+  .modelSectionHead{margin-bottom:24px}
+  .modelSectionHead h2{font-size:38px}
+}
+
+@media(max-width:620px){
+  .v26LoginCard{padding:28px 24px!important}
+  .v26LoginCard button[data-mvp-login]{font-size:15px!important;min-height:52px!important}
+  .modelSectionHead h2{font-size:32px}
+}

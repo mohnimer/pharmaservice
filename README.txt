@@ -1,3 +1,14 @@
+PSC V37.2 — PUBLIC HIERARCHY + BREATHING ROOM
+===============================================
+
+Changes from V37.1:
+- Consolidates Who We Supply, What We Supply and How It Works into one buyer-facing page: Our Model.
+- Simplifies primary navigation to Our Model, Institutional Catalogue and Contact / Request Supply.
+- Moves the desktop logo closer to the left edge and gives the header materially more breathing room.
+- Rebalances the login gateway with a wider form column, more card padding, calmer field/button sizing and more whitespace.
+- Adds our-model.html and redirects the three retired SEO entry pages to it.
+- Updates sitemap/canonical routing for the consolidated page.
+
 PSC V37.1 — PUBLIC COSMETIC POLISH
 =================================
 
