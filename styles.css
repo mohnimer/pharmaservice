@@ -1353,7 +1353,7 @@ body{font-family:"DM Sans",Arial,Helvetica,sans-serif;background:linear-gradient
   .clinicNeedRail{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;margin:0!important;padding:0!important}
   .clinicNeedCard{min-height:154px!important;border-radius:20px!important;padding:14px!important}
   .clinicNeedCount{left:14px!important;top:13px!important}
-  .clinicNeedIcon{right:13px!important;top:12px!important;width:42px!important;height:42px!important;border-radius:14px!important}
+  .clinicNeedIcon{right:13px!important;top:12px!important;width:42px!important;height:38px!important;border-radius:14px!important}
   .clinicNeedIcon svg{width:22px!important;height:22px!important}
   .clinicNeedCopy{left:14px!important;right:34px!important;bottom:14px!important}
   .clinicNeedCopy b{font-size:15px!important}
@@ -3829,11 +3829,11 @@ button[data-cancel-quote]:hover{
   -webkit-line-clamp:2!important;
   overflow:hidden!important;
   width:100%!important;
-  height:42px!important;
+  height:38px!important;
   margin:0!important;
   color:#303030!important;
-  font-size:17px!important;
-  line-height:1.18!important;
+  font-size:15px!important;
+  line-height:1.12!important;
   font-weight:700!important;
   letter-spacing:-.025em!important;
 }
@@ -4049,12 +4049,12 @@ button[data-cancel-quote]:hover{
 
   .exactCanvaCard .productTitleButton,
   .exactCanvaCard .productTitleButton h3{
-    height:44px!important;
+    height:40px!important;
   }
 
   .exactCanvaCard .productTitleButton h3{
-    font-size:14px!important;
-    line-height:1.16!important;
+    font-size:13px!important;
+    line-height:1.14!important;
   }
 
   .exactCanvaCard .pack,
@@ -4100,12 +4100,18 @@ button[data-cancel-quote]:hover{
   }
 
   .exactCanvaBody{
-    flex-basis:112px!important;
-    grid-template-rows:50px 22px 30px!important;
+    flex-basis:108px!important;
+    grid-template-rows:46px 22px 28px!important;
+  }
+
+  .exactCanvaCard .productTitleButton,
+  .exactCanvaCard .productTitleButton h3{
+    height:46px!important;
   }
 
   .exactCanvaCard .productTitleButton h3{
-    font-size:17px!important;
+    font-size:14px!important;
+    line-height:1.14!important;
   }
 
   .exactCanvaCard .pack,

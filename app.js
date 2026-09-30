@@ -517,6 +517,14 @@
     if(!base) return null;
     return {...base,...(state.productOverrides[sku]||{})};
   }
+  function productDisplayImageUrl(p){
+    const raw=(p?.imageUrl||'').trim();
+    if(!raw) return null;
+    const lower=raw.toLowerCase();
+    const looksLikeStandaloneDhaAsset = lower.includes('dha-requirement') || lower.endsWith('/pharmaservice.png') || lower.endsWith('pharmaservice.png');
+    if(p?.dhaMapped && looksLikeStandaloneDhaAsset) return null;
+    return raw;
+  }
   function products(){ return D.products.map(p=>product(p.pscSku)); }
   function currentRoute(){ return (location.hash || '#home').slice(1); }
   function go(route){ location.hash = route; ui.mobile=false; ui.modal=null; window.scrollTo({top:0,behavior:'instant'}); render(); }
@@ -1038,8 +1046,9 @@
     const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
     const fallback=p.fallbackAsset||'./assets/products/clinic-basics.jpg';
     const dhaMark=p.dhaMapped?`<img class="dhaRequirementIcon cardDhaIcon" src="${DHA_ICON}" alt="DHA requirement">`:'';
-    const visual=p.imageUrl
-      ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img class="productMainImage" src="${esc(p.imageUrl)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(fallback)}'">${dhaMark}</button>`
+    const displayImage=productDisplayImageUrl(p);
+    const visual=displayImage
+      ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img class="productMainImage" src="${esc(displayImage)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(fallback)}'">${dhaMark}</button>`
       : `<button class="productVisual productNeedVisual productVisualButton" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)}">${dhaMark}</button>`;
 
     return `<article class="productCard v25ProductCard v261ProductCard v262ProductCard canvaProductCard exactCanvaCard">
@@ -1067,7 +1076,7 @@
     const items=[...map.values()].map(x=>({...x,p:product(x.sku)})).filter(x=>x.p);
     const cards=items.map(x=>{
       const capital=isCapitalProduct(x.p);
-      const visual=x.p.imageUrl?`<img src="${esc(x.p.imageUrl)}" alt="${esc(x.p.name)}">`:`<span>${esc(x.p.brand.slice(0,2).toUpperCase())}</span>`;
+      const replenImage=productDisplayImageUrl(x.p); const visual=replenImage?`<img src="${esc(replenImage)}" alt="${esc(x.p.name)}">`:`<span>${esc(x.p.brand.slice(0,2).toUpperCase())}</span>`;
       const deliveredLabel=x.deliveredAt?date(x.deliveredAt):'Date to be confirmed';
       const actionLabel=capital?'Request another':`Replenish ${x.qty}`;
       return `<article class="replenishCard"><div class="replenishVisual">${visual}</div><div class="replenishBody"><span class="sku">${x.p.pscSku}</span><h3>${esc(x.p.name)}</h3><p>${esc(x.p.pack)}</p><div class="replenishMeta"><div><span>LAST QTY</span><b>${x.qty}</b></div><div><span>LAST DELIVERED</span><b>${deliveredLabel}</b></div></div><button class="button ${capital?'dark':'primary'} full semanticPrimary" data-replenish="${x.p.pscSku}|${x.qty}">${actionLabel} →</button></div></article>`;
@@ -1350,8 +1359,9 @@
     const fallback=p.fallbackAsset||'./assets/products/clinic-basics.jpg';
     const needTags=needs.map(id=>`<span class="modalNeedChip" style="--chip-bg:${clinicalNeedMeta(id).bg};--chip-ink:${clinicalNeedMeta(id).ink}">${esc(clinicalNeedMeta(id).label)}</span>`).join('');
     const detailDhaMark=mapped?`<img class="dhaRequirementIcon detailDhaIcon" src="${DHA_ICON}" alt="DHA requirement">`:'';
-    const image=p.imageUrl
-      ? `<div class="detailProductImageWrap"><img src="${esc(p.imageUrl)}" alt="${esc(displayName)}" onerror="this.onerror=null;this.src='${esc(fallback)}'">${detailDhaMark}</div>`
+    const displayImage=productDisplayImageUrl(p);
+    const image=displayImage
+      ? `<div class="detailProductImageWrap"><img src="${esc(displayImage)}" alt="${esc(displayName)}" onerror="this.onerror=null;this.src='${esc(fallback)}'">${detailDhaMark}</div>`
       : `<div class="detailProductImageWrap"><div class="detailNeedVisual" style="--need-bg:${primary.bg};--need-ink:${primary.ink}"></div>${detailDhaMark}</div>`;
 
     return `<div class="productDetailModal">
