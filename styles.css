@@ -4509,3 +4509,80 @@ button[data-cancel-quote]:hover{
   .v26LoginCard button[data-mvp-login]{font-size:15px!important;min-height:52px!important}
   .modelSectionHead h2{font-size:32px}
 }
+
+/* =========================================================
+   V37.3 — CTA consistency + text-fit cleanup
+   Keep this block LAST.
+   ========================================================= */
+
+/* Public CTA button groups should feel like one system.
+   Equal geometry, cleaner proportions, no accidental width mismatch. */
+.publicCtaActions{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(220px,260px))!important;
+  gap:12px!important;
+  align-items:stretch!important;
+}
+.publicCtaActions>.button,
+.publicCta>.button{
+  min-height:56px!important;
+  padding:0 22px!important;
+  border-radius:18px!important;
+  font-size:13px!important;
+  line-height:1.15!important;
+  text-align:center!important;
+}
+.publicCtaActions>.button{
+  width:100%!important;
+}
+
+/* Public catalogue / quote buttons: keep copy under control on card grids. */
+.productCard .button.full,
+.productCard .specLink,
+.publicSection .button.full{
+  min-height:46px!important;
+  padding:0 14px!important;
+  font-size:11.5px!important;
+  line-height:1.15!important;
+  letter-spacing:-.01em!important;
+  text-align:center!important;
+}
+.productCard .button.full{
+  white-space:normal!important;
+  text-wrap:balance!important;
+}
+
+/* Login CTA was visually oversized for the card width. */
+.v26LoginCard button[data-mvp-login]{
+  font-size:14.5px!important;
+  line-height:1.15!important;
+}
+
+/* Basic safety pass: prevent overlarge button labels in public sections. */
+.publicLanding .button,
+.publicPage .button,
+.publicSection .button,
+.publicFooter .button{
+  overflow-wrap:anywhere;
+}
+
+@media(max-width:720px){
+  .publicCtaActions{
+    grid-template-columns:1fr!important;
+    width:100%!important;
+    max-width:100%!important;
+  }
+  .publicCtaActions>.button,
+  .publicCta>.button{
+    width:100%!important;
+    min-height:54px!important;
+    font-size:12.5px!important;
+    padding:0 18px!important;
+  }
+  .productCard .button.full,
+  .publicSection .button.full{
+    min-height:44px!important;
+    font-size:11px!important;
+    padding:0 12px!important;
+  }
+}
