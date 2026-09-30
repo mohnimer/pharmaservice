@@ -896,10 +896,40 @@
   function workshopFormatCode(format){
     return ({'ON THE BENCH':'BENCH',"WHAT'S THE DIFFERENCE?":'COMPARE','CHECK THIS':'CHECK','WHY DOES THIS MATTER?':'WHY',"DON'T ORDER IT LIKE THIS":'SPEC'})[format]||'GUIDE';
   }
+  function workshopFormatLabel(format){
+    return ({
+      'ON THE BENCH':'On the bench',
+      "WHAT'S THE DIFFERENCE?":"What's the difference?",
+      'CHECK THIS':'Check this',
+      'WHY DOES THIS MATTER?':'Why does this matter?',
+      "DON'T ORDER IT LIKE THIS":"Don't order it like this"
+    })[format]||'Guide';
+  }
+  function workshopCategoryMeta(category){
+    return ({
+      'Product Basics':{tone:'wsTone1',icon:'products',desc:'What the product is, how it differs and the details that matter.'},
+      "What's the Difference?":{tone:'wsTone2',icon:'repeat',desc:'Clear comparisons when two options look almost the same.'},
+      'Clinic Checks':{tone:'wsTone3',icon:'checklist',desc:'Fast checks for a clinic that needs to stay ready.'},
+      'Equipment Readiness':{tone:'wsTone4',icon:'assets',desc:'Setup, compatibility, maintenance and replacement.'},
+      'Stock & Expiry':{tone:'wsTone5',icon:'inventory',desc:'What to inspect before stock becomes a problem.'},
+      'School Clinic':{tone:'wsTone6',icon:'home',desc:'Practical guidance for school and student health rooms.'},
+      'Ordering & Specifications':{tone:'wsTone7',icon:'edit',desc:'Turn vague requests into controlled specifications.'}
+    })[category]||{tone:'wsTone1',icon:'resource',desc:'Practical product guidance for institutional clinics.'};
+  }
+  function workshopCategoryCard(category){
+    const m=workshopCategoryMeta(category);
+    const count=WORKSHOP.filter(g=>g.status==='published'&&g.category===category).length;
+    return `<button class="workshopCategoryCard ${m.tone} ${ui.workshopCategory===category?'active':''}" data-workshop-category="${esc(category)}">
+      <span class="workshopCategoryVisual" aria-hidden="true">${icon(m.icon)}</span>
+      <span class="workshopCategoryCopy"><b>${esc(category)}</b><small>${esc(m.desc)}</small></span>
+      <i>${count} ${count===1?'guide':'guides'}</i>
+    </button>`;
+  }
   function workshopIndexRow(g,i=0){
-    return `<article class="workshopIndexRow">
+    const tone=workshopCategoryMeta(g.category).tone;
+    return `<article class="workshopIndexRow ${tone}">
       <div class="workshopIndexNo">${String(i+1).padStart(2,'0')}</div>
-      <div class="workshopIndexMeta"><span>${esc(g.format)}</span><small>${esc(g.category)}</small></div>
+      <div class="workshopIndexMeta"><span>${esc(workshopFormatLabel(g.format))}</span><small>${esc(g.category)}</small></div>
       <button class="workshopIndexTitle" data-go="workshop/${esc(g.slug)}"><h2>${esc(g.title)}</h2><p>${esc(g.excerpt)}</p></button>
       <div class="workshopIndexRead"><span>${esc(g.read_time)}</span><small>${esc(g.last_reviewed)}</small></div>
     </article>`;
@@ -918,21 +948,29 @@
     const filtered=workshopFiltered();
     const lead=(ui.workshopCategory==='All'&&!ui.workshopQuery?WORKSHOP.find(g=>g.slug==='oxygen-cylinder-is-not-an-oxygen-system'):filtered[0])||WORKSHOP[0];
     const rest=filtered.filter(g=>!lead||g.slug!==lead.slug);
+    const categories=WORKSHOP_CATEGORIES.filter(c=>c!=='All');
+    const resultLabel=ui.workshopCategory==='All'?'All guides':ui.workshopCategory;
     return `<main class="publicPage workshopPage">${publicHeader('workshop')}
       <section class="workshopHero">
-        <div class="workshopHeroRule"><span>PSC / PRODUCT INTELLIGENCE</span><i></i><b>ISSUE 01</b></div>
-        <div class="workshopHeroGrid"><div><span class="kicker">THE WORKSHOP</span><h1>Practical product intelligence for people who run clinics.</h1></div><div class="workshopHeroCopy"><p>The small details that make medical products safer to choose, easier to use and simpler to manage.</p><small>No catalogue jargon. No filler. Just useful product knowledge.</small></div></div>
+        <div class="workshopHeroGrid">
+          <div><h1>The Workshop</h1><h2>Practical product intelligence for people who run clinics.</h2></div>
+          <div class="workshopHeroCopy"><p>The small details that make medical products safer to choose, easier to use and simpler to manage.</p></div>
+        </div>
+      </section>
+      <section class="workshopCategorySection">
+        <div class="workshopCategoryHead"><div><h2>Browse the bench.</h2><p>Choose the kind of problem you are trying to solve.</p></div><button class="${ui.workshopCategory==='All'?'active':''}" data-workshop-category="All">View all guides</button></div>
+        <div class="workshopCategoryGrid">${categories.map(workshopCategoryCard).join('')}</div>
       </section>
       <section class="workshopTools">
         <div class="workshopSearch"><span>${icon('search')}</span><input data-workshop-q value="${esc(ui.workshopQuery)}" placeholder="Search product, question or clinic check…" aria-label="Search The Workshop"></div>
-        <div class="workshopFilters">${WORKSHOP_CATEGORIES.map(c=>`<button class="${ui.workshopCategory===c?'active':''}" data-workshop-category="${esc(c)}">${esc(c)}</button>`).join('')}</div>
+        <div class="workshopResultContext"><span>${esc(resultLabel)}</span><b>${filtered.length} ${filtered.length===1?'guide':'guides'}</b>${(ui.workshopCategory!=='All'||ui.workshopQuery)?'<button data-workshop-clear>Reset</button>':''}</div>
       </section>
-      ${filtered.length?`${lead?`<section class="workshopLead">
-        <div class="workshopLeadLabel"><span>${esc(lead.format)}</span><b>${workshopFormatCode(lead.format)} / 01</b></div>
+      ${filtered.length?`${lead?`<section class="workshopLead ${workshopCategoryMeta(lead.category).tone}">
+        <div class="workshopLeadLabel"><span>${esc(workshopFormatLabel(lead.format))}</span><b>${esc(lead.category)}</b></div>
         <button class="workshopLeadTitle" data-go="workshop/${esc(lead.slug)}"><h2>${esc(lead.title)}</h2><p>${esc(lead.subtitle)}</p></button>
-        <div class="workshopLeadFacts"><span>${esc(lead.category)}</span><b>${esc(lead.read_time)}</b><small>Reviewed ${esc(lead.last_reviewed)}</small></div>
-      </section>`:''}<section class="workshopIndex"><div class="workshopIndexHead"><span>GUIDE INDEX</span><b>${filtered.length} / 10</b></div>${rest.map((g,i)=>workshopIndexRow(g,i+(lead?1:0))).join('')}</section>`:`<section class="workshopEmpty"><span>NO MATCH</span><h2>Nothing on the bench for that search yet.</h2><p>Try a product name, category or broader term.</p><button class="button outline" data-workshop-clear>Clear search</button></section>`}
-      <section class="workshopPrinciple"><div><span>THE MODEL</span><h2>PSC sells the product.<br>The Workshop explains the product.<br>The portal remembers the product.</h2></div><p>Education sits beside the catalogue, not inside a sales pitch. The point is to make specifications, compatibility, readiness and replenishment easier to understand before the next order.</p></section>
+        <div class="workshopLeadFacts"><b>${esc(lead.read_time)} read</b><small>Reviewed ${esc(lead.last_reviewed)}</small></div>
+      </section>`:''}<section class="workshopIndex"><div class="workshopIndexHead"><span>More from The Workshop</span><b>${rest.length} more</b></div>${rest.map((g,i)=>workshopIndexRow(g,i+(lead?1:0))).join('')}</section>`:`<section class="workshopEmpty"><h2>Nothing on the bench for that search yet.</h2><p>Try a product name, category or broader term.</p><button class="button outline" data-workshop-clear>Clear search</button></section>`}
+      <section class="workshopPrinciple"><div><h2>PSC sells the product.<br>The Workshop explains the product.<br>The portal remembers the product.</h2></div><p>Education sits beside the catalogue, not inside a sales pitch. The point is to make specifications, compatibility, readiness and replenishment easier to understand before the next order.</p></section>
       ${publicFooter()}
     </main>`;
   }
@@ -951,7 +989,7 @@
     return `<main class="publicPage workshopPage workshopArticlePage">${publicHeader('workshop')}
       <article class="workshopArticle ${g.format==='CHECK THIS'?'workshopPrintCheck':''}">
         <header class="workshopArticleHeader">
-          <div class="workshopArticleTopline"><button data-go="workshop">THE WORKSHOP</button><i></i><span>${esc(g.category)}</span><b>${esc(g.format)}</b></div>
+          <div class="workshopArticleTopline"><button data-go="workshop">THE WORKSHOP</button><i></i><span>${esc(g.category)}</span><b>${esc(workshopFormatLabel(g.format))}</b></div>
           <h1>${esc(g.title)}</h1><p class="workshopDeck">${esc(g.subtitle)}</p>
           <div class="workshopArticleMeta"><span>${esc(g.read_time)} read</span><span>Last reviewed ${esc(g.last_reviewed)}</span><span>${esc(g.author_or_review_status)}</span></div>
           <div class="workshopArticleActions"><button data-workshop-save="${esc(g.slug)}" aria-pressed="${saved?'true':'false'}">${saved?'Saved':'Save'}</button><button data-workshop-print>Print</button><button data-workshop-share="${esc(g.slug)}">Share</button></div>
@@ -970,11 +1008,11 @@
   function workshopTeaser(){
     const slugs=['which-glove-should-i-actually-wear','oxygen-cylinder-is-not-an-oxygen-system','aed-has-expiring-parts-too'];
     const items=slugs.map(workshopGuideBySlug).filter(Boolean);
-    return `<section class="homeWorkshop"><div class="homeWorkshopIntro"><span class="kicker">THE WORKSHOP</span><h2>Know what you're working with.</h2><p>Practical guides to the products, equipment and small details that keep clinics ready.</p><button class="button outline" data-go="workshop">Enter The Workshop</button></div><div class="homeWorkshopIndex">${items.map((g,i)=>`<button data-go="workshop/${g.slug}"><span>${String(i+1).padStart(2,'0')} · ${esc(g.format)}</span><h3>${esc(g.title)}</h3><small>${esc(g.read_time)}</small></button>`).join('')}</div></section>`;
+    return `<section class="homeWorkshop"><div class="homeWorkshopIntro"><span class="kicker">THE WORKSHOP</span><h2>Know what you're working with.</h2><p>Practical guides to the products, equipment and small details that keep clinics ready.</p><button class="button outline" data-go="workshop">Enter The Workshop</button></div><div class="homeWorkshopIndex">${items.map((g,i)=>`<button data-go="workshop/${g.slug}"><span>${String(i+1).padStart(2,'0')} · ${esc(workshopFormatLabel(g.format))}</span><h3>${esc(g.title)}</h3><small>${esc(g.read_time)}</small></button>`).join('')}</div></section>`;
   }
   function schoolWorkshopStrip(){
     const slugs=['ten-minute-school-clinic-stock-expiry-walk','aed-has-expiring-parts-too','oxygen-cylinder-is-not-an-oxygen-system'];
-    return `<section class="schoolWorkshopStrip"><div><span class="kicker">USEFUL IN YOUR CLINIC</span><h2>The Workshop</h2></div><div>${slugs.map(slug=>{const g=workshopGuideBySlug(slug);return g?`<button data-go="workshop/${g.slug}"><span>${esc(g.format)}</span><b>${esc(g.title)}</b></button>`:''}).join('')}</div></section>`;
+    return `<section class="schoolWorkshopStrip"><div><span class="kicker">USEFUL IN YOUR CLINIC</span><h2>The Workshop</h2></div><div>${slugs.map(slug=>{const g=workshopGuideBySlug(slug);return g?`<button data-go="workshop/${g.slug}"><span>${esc(workshopFormatLabel(g.format))}</span><b>${esc(g.title)}</b></button>`:''}).join('')}</div></section>`;
   }
 
   function publicCatalogueCard(p){

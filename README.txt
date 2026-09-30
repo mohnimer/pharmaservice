@@ -126,3 +126,13 @@ V37.4 — THE WORKSHOP + HERO BACKDROP
 - No Workshop interaction writes to Supabase. Save uses localStorage only; Print and Share are client-side.
 - Workshop content is intentionally static/local in V37.4. Edit /workshop-data.js to add or change guides; a CMS is deferred.
 - Medical copy is conservative editorial draft content and is labelled for professional review before external publication.
+
+V37.5 — WORKSHOP CATEGORY NAVIGATION + VISUAL CLEANUP
+-----------------------------------------------------
+- Replaces Workshop filter pills with seven prominent editorial category cards directly beneath the hero.
+- Uses small in-system line icons instead of large/AI-looking category imagery.
+- Removes decorative Workshop micro-slogans / issue labels / post-it-style copy from the landing composition.
+- Reduces Workshop hero and featured-guide headline scale; headline remains editorial without relying on oversized type.
+- Applies PSC pastel category colors while retaining the technical grid-paper backdrop.
+- Keeps guide content in the editorial index rather than turning The Workshop into a generic stock-photo blog grid.
+- Search, category filtering, article routes, catalogue links, demo safety and data-write boundaries are unchanged.

@@ -4650,3 +4650,309 @@ button[data-cancel-quote]:hover{
 @media print{
   body{background:#fff!important}.workshopArticlePage .publicHeader,.workshopArticlePage .publicFooter,.workshopArticleActions,.workshopRelated{display:none!important}.workshopArticle{max-width:none;padding:0!important}.workshopArticleHeader{padding:0 0 20px}.workshopArticleHeader h1{font-size:42pt;margin:20px 0 12px}.workshopArticleBody{max-width:none;padding:0}.workshopArticleSection{break-inside:avoid;padding:18px 0}.workshopSignature{break-inside:avoid;margin-top:25px}.workshopMedicalNote{margin-top:25px}.workshopPrintCheck .workshopArticleHeader h1{font-size:34pt}.workshopPrintCheck .workshopArticleSection{padding:12px 0}.workshopPrintCheck .workshopChecklist li{padding:8px 0}.workshopPrintCheck .workshopSignature article{padding:12px 0;font-size:9pt}
 }
+
+/* =========================================================
+   V37.5 — Workshop visual system
+   Prominent category navigation, smaller technical visuals,
+   no decorative post-it/slogan microcopy.
+   Keep this block LAST.
+   ========================================================= */
+
+.workshopPage{
+  --ws-paper:#fbf8f1;
+  --ws-ink:#141716;
+  --ws-line:#d8d2c7;
+  --ws-faint:#ece7dc;
+  --ws-teal:#20a79e;
+}
+
+/* Hero: title + useful promise, no tiny decorative slogans. */
+.workshopHero{
+  padding:64px clamp(28px,5vw,80px) 52px!important;
+  background-image:
+    linear-gradient(rgba(17,20,20,.042) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(17,20,20,.042) 1px,transparent 1px)!important;
+  background-size:26px 26px!important;
+}
+.workshopHeroRule{display:none!important}
+.workshopHeroGrid{
+  grid-template-columns:minmax(0,1.15fr) minmax(300px,.62fr)!important;
+  gap:clamp(44px,6vw,92px)!important;
+  align-items:end!important;
+  margin-top:0!important;
+}
+.workshopHeroGrid h1{
+  font-size:clamp(58px,6.3vw,88px)!important;
+  line-height:.92!important;
+  letter-spacing:-.065em!important;
+  margin:0!important;
+}
+.workshopHeroGrid h2{
+  font-size:clamp(25px,2.35vw,38px);
+  line-height:1.05;
+  letter-spacing:-.045em;
+  margin:18px 0 0;
+  max-width:760px;
+}
+.workshopHeroCopy{padding:0 0 5px!important}
+.workshopHeroCopy p{
+  font-size:17px!important;
+  line-height:1.6!important;
+  color:#505956!important;
+  max-width:480px;
+}
+.workshopHeroCopy small{display:none!important}
+
+/* Category cards are the navigation, not tiny pills. */
+.workshopCategorySection{
+  max-width:1500px;
+  margin:0 auto;
+  padding:34px clamp(28px,5vw,80px) 38px;
+  border-bottom:1px solid var(--ws-line);
+}
+.workshopCategoryHead{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:24px;
+  margin-bottom:20px;
+}
+.workshopCategoryHead h2{
+  margin:0;
+  font-size:28px;
+  letter-spacing:-.045em;
+}
+.workshopCategoryHead p{
+  margin:6px 0 0;
+  color:#696d69;
+  font-size:13px;
+}
+.workshopCategoryHead>button{
+  border:1px solid #a9a399;
+  background:transparent;
+  border-radius:999px;
+  padding:9px 14px;
+  font-size:11px;
+  font-weight:800;
+  color:#353a38;
+}
+.workshopCategoryHead>button.active{
+  background:#14201e;
+  color:#fff;
+  border-color:#14201e;
+}
+.workshopCategoryGrid{
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:10px;
+}
+.workshopCategoryCard{
+  min-width:0;
+  min-height:220px;
+  border:1px solid rgba(22,26,25,.12);
+  border-radius:4px;
+  padding:18px 16px 15px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  text-align:left;
+  color:#151817;
+  position:relative;
+  overflow:hidden;
+  box-shadow:none;
+}
+.workshopCategoryCard:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(20,24,23,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(20,24,23,.04) 1px,transparent 1px);
+  background-size:18px 18px;
+  opacity:.5;
+  pointer-events:none;
+}
+.workshopCategoryCard>*{position:relative;z-index:1}
+.workshopCategoryVisual{
+  width:48px;
+  height:48px;
+  display:grid;
+  place-items:center;
+  margin:0 0 24px auto;
+  border:1px solid rgba(15,21,20,.22);
+  border-radius:50%;
+  background:rgba(255,255,255,.28);
+}
+.workshopCategoryVisual svg{
+  width:23px;
+  height:23px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.35;
+}
+.workshopCategoryCopy{display:block;margin-top:auto}
+.workshopCategoryCopy b{
+  display:block;
+  font-size:18px;
+  line-height:1.02;
+  letter-spacing:-.045em;
+}
+.workshopCategoryCopy small{
+  display:block;
+  margin-top:10px;
+  font-size:11px;
+  line-height:1.45;
+  color:#565c59;
+}
+.workshopCategoryCard>i{
+  margin-top:12px;
+  font-style:normal;
+  font-size:10px;
+  color:#686c69;
+}
+.workshopCategoryCard:hover{
+  transform:translateY(-2px);
+  border-color:rgba(15,21,20,.28);
+}
+.workshopCategoryCard.active{
+  outline:2px solid #17201f;
+  outline-offset:-2px;
+}
+.wsTone1{--ws-accent:#bfe8e7;background:#dff3f2!important}
+.wsTone2{--ws-accent:#f0bbc5;background:#f8dfe4!important}
+.wsTone3{--ws-accent:#efd99d;background:#fbf0cf!important}
+.wsTone4{--ws-accent:#b9dff1;background:#dceefa!important}
+.wsTone5{--ws-accent:#c4dfbc;background:#e4f0df!important}
+.wsTone6{--ws-accent:#c9c8ee;background:#e7e7f8!important}
+.wsTone7{--ws-accent:#efb5bf;background:#f7dce1!important}
+
+/* Search becomes a clean utility row below the category navigation. */
+.workshopTools{
+  padding:18px clamp(28px,5vw,80px)!important;
+  grid-template-columns:minmax(280px,600px) 1fr!important;
+  gap:28px!important;
+}
+.workshopFilters{display:none!important}
+.workshopResultContext{
+  justify-self:end;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#606663;
+  font-size:11px;
+}
+.workshopResultContext b{color:#171b1a}
+.workshopResultContext button{
+  border:0;
+  border-bottom:1px solid #77716a;
+  padding:2px 0;
+  background:transparent;
+  font-size:11px;
+  font-weight:800;
+}
+
+/* Featured story: editorial, but not jumbo. */
+.workshopLead{
+  grid-template-columns:150px minmax(0,1fr) 150px!important;
+  gap:30px!important;
+  padding-top:48px!important;
+  padding-bottom:52px!important;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--ws-accent) 18%,transparent),transparent 42%)!important;
+}
+.workshopLeadLabel span{
+  font-size:11px!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  color:#2a5f5b!important;
+}
+.workshopLeadLabel b{
+  font-size:10px!important;
+  color:#6a6f6b!important;
+  font-weight:600!important;
+}
+.workshopLeadTitle h2{
+  font-size:clamp(38px,4.5vw,62px)!important;
+  line-height:.96!important;
+  letter-spacing:-.055em!important;
+}
+.workshopLeadTitle p{margin-top:18px!important}
+.workshopLeadFacts b{font-size:12px!important}
+
+.workshopIndexHead{
+  font-size:12px!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  padding-top:24px!important;
+}
+.workshopIndexRow{
+  position:relative;
+  background:transparent!important;
+}
+.workshopIndexRow:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:28px;
+  width:3px;
+  height:48px;
+  background:var(--ws-accent,#d7d2ca);
+}
+.workshopIndexMeta span{
+  font-size:10px!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  color:#32645f!important;
+}
+.workshopIndexTitle h2{
+  font-size:clamp(25px,2.5vw,38px)!important;
+  line-height:1!important;
+}
+
+/* Remove decorative micro-label behaviour on Workshop landing. */
+.workshopPrinciple span{display:none!important}
+.workshopPrinciple{margin-top:20px!important}
+.workshopEmpty>span{display:none!important}
+
+/* Article format/category labels are informational, not shouty slogans. */
+.workshopArticleTopline{
+  font-size:10px!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+}
+.workshopArticleTopline button{letter-spacing:0!important;text-transform:none!important}
+
+@media(max-width:1180px){
+  .workshopCategoryGrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .workshopCategoryCard{min-height:196px}
+}
+@media(max-width:820px){
+  .workshopHeroGrid{grid-template-columns:1fr!important;gap:26px!important}
+  .workshopHeroGrid h1{font-size:60px!important}
+  .workshopCategoryHead{align-items:flex-start;flex-direction:column}
+  .workshopCategoryGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .workshopCategoryCard{min-height:180px;padding:15px}
+  .workshopCategoryVisual{width:42px;height:42px;margin-bottom:18px}
+  .workshopCategoryVisual svg{width:20px;height:20px}
+  .workshopCategoryCopy b{font-size:17px}
+  .workshopTools{grid-template-columns:1fr!important}
+  .workshopResultContext{justify-self:start}
+  .workshopLead{grid-template-columns:1fr!important}
+  .workshopLeadLabel,.workshopLeadFacts{border:0!important;padding:0!important}
+  .workshopLeadFacts{display:flex!important;gap:14px!important;margin-top:0!important}
+}
+@media(max-width:430px){
+  .workshopHero{padding:40px 18px 34px!important}
+  .workshopHeroGrid h1{font-size:50px!important}
+  .workshopHeroGrid h2{font-size:26px}
+  .workshopCategorySection{padding:26px 16px 28px}
+  .workshopCategoryGrid{grid-template-columns:1fr 1fr}
+  .workshopCategoryCard{min-height:172px;padding:14px 13px}
+  .workshopCategoryCopy b{font-size:16px}
+  .workshopCategoryCopy small{font-size:10.5px}
+  .workshopCategoryCard>i{font-size:9px}
+  .workshopTools{padding:15px 18px!important}
+  .workshopLeadTitle h2{font-size:38px!important}
+}
+@media(max-width:350px){
+  .workshopCategoryGrid{grid-template-columns:1fr}
+}
