@@ -9,7 +9,7 @@ window.PSC_COPY = {
     heroTitlePrefix: "Institutional",
     heroTitleAccent: "Supply",
     heroLine1: "Easy procurement.",
-    heroLine1Accent: "Wholesale pricing.",
+    heroLine1Accent: "Institutional pricing.",
     heroLine2: "More time for what matters",
 
     cardLine1: "Clinic Procurement catered to institutional accounts that need",

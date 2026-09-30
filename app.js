@@ -27,7 +27,7 @@
   let authReady = false;
 
   let state = load();
-  let ui = { mobile:false, basket:false, modal:null, accountMenu:false, catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All', cmsChannel:'institutional', cmsSearch:'', wholesaleQuery:'', wholesaleCat:'All' };
+  let ui = { mobile:false, publicMenu:false, basket:false, modal:null, accountMenu:false, globalSearch:'', catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All', cmsChannel:'institutional', cmsSearch:'', wholesaleQuery:'', wholesaleCat:'All', tourStep:0 };
 
   const cms = {
     loaded:false,
@@ -118,7 +118,12 @@
     return ({Drafting:'Under Review',Sent:'Quote Sent',Authorized:'Confirmed',Procurement:'Under Process',Delivery:'Under Process',Accepted:'Delivered',Cancelled:'Cancelled'})[status] || status;
   }
   function customerStatusPill(status){ const label=friendlyStatus(status); const k=label.toLowerCase().replace(/\s+/g,'-'); return `<span class="statusPill status-${k}">${esc(label)}</span>`; }
-  function tomorrowDelivery(){ const d=new Date(); d.setDate(d.getDate()+1); const day=d.toLocaleDateString('en-GB',{weekday:'long'}); const ds=d.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'numeric'}); return `Will be delivered on ${day} ${ds}`; }
+  function expectedDeliveryLabel(r){
+    if(r?.expectedDeliveryDate) return `Expected delivery · ${date(r.expectedDeliveryDate)}`;
+    if(r?.status==='Delivery') return 'Out for delivery · timing confirmed by PSC';
+    if(['Authorized','Procurement'].includes(r?.status)) return 'Delivery timing will be confirmed by PSC';
+    return '';
+  }
   function addDaysLabel(v,days){ const d=new Date(v); d.setDate(d.getDate()+days); return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}); }
   function isArchived(r){ return r.status==='Cancelled' && r.cancelledAt && ((Date.now()-new Date(r.cancelledAt).getTime())/(1000*60*60*24) >= 30); }
   function customerVisibleRequests(){ return state.requests.filter(r=>r.campus===state.campus && !isArchived(r)); }
@@ -527,12 +532,12 @@
   }
   function products(){ return D.products.map(p=>product(p.pscSku)); }
   function currentRoute(){ return (location.hash || '#home').slice(1); }
-  function go(route){ location.hash = route; ui.mobile=false; ui.modal=null; window.scrollTo({top:0,behavior:'instant'}); render(); }
+  function go(route){ location.hash = route; ui.mobile=false; ui.publicMenu=false; ui.modal=null; window.scrollTo({top:0,behavior:'instant'}); render(); }
   function audit(action, detail){ state.audit.unshift({at:new Date().toISOString(),actor:'Demo user',action,detail}); state.audit=state.audit.slice(0,50); save(); }
   function toast(msg){ const old=document.querySelector('.toast'); if(old)old.remove(); const d=document.createElement('div');d.className='toast';d.innerHTML=msg;$app.appendChild(d);setTimeout(()=>d.remove(),2800); }
 
   function brand(landing=false){ return landing
-    ? `<button class="brand brandButton ${landing?'landingBrand':''}" data-go="home" aria-label="Pharma Service home"><img class="brandImage brandImageLight" src="${PSC_LOGO}" alt="Pharma Service"><span class="brandMeta"><b>INSTITUTIONAL HEALTHCARE SUPPLY</b><small>Dubai, United Arab Emirates · EST. 1984</small></span></button>`
+    ? `<button class="brand brandButton ${landing?'landingBrand':''}" data-go="home" aria-label="Pharma Service home"><img class="brandImage brandImageLight" src="${PSC_LOGO}" alt="Pharma Service"><span class="brandMeta"><b>INSTITUTIONAL HEALTHCARE SUPPLY</b><small>Dubai, United Arab Emirates</small></span></button>`
     : `<div class="sidebarBrand sidebarBrandEmpty" aria-hidden="true"></div>`; }
   function statusPill(status){ const k=String(status).toLowerCase().replace(/\s+/g,'-'); return `<span class="statusPill status-${k}">${esc(status)}</span>`; }
   function badge(text,tone=''){ return `<span class="badge ${tone}">${esc(text)}</span>`; }
@@ -569,12 +574,23 @@
     return map[name]||'';
   }
 
-  const schoolNav=[['portal/dashboard','Home','dashboard'],['portal/catalogue','Shop','boxes'],['portal/requests','Orders & Requests','edit'],['portal/replenish','Replenish','repeat'],['portal/insights','Resources & Updates','checklist']];
+  const schoolNav=[
+    ['portal/dashboard','Home','dashboard'],
+    ['portal/catalogue','Shop','boxes'],
+    ['portal/requests','Orders & Requests','edit'],
+    ['portal/replenish','Replenish','repeat'],
+    ['portal/documents','Documents','resource'],
+    ['portal/stock','Stock & expiry','stock'],
+    ['portal/assets','Clinic assets','assets']
+  ];
   const adminNav=[['admin/dashboard','Deal Desk','dashboard'],['admin/storefront','Storefront','edit'],['admin/products','Product Master','boxes'],['admin/requests','Request Queue','checklist'],['admin/fulfilment','Fulfilment Rules','repeat'],['admin/supplier-feed','Supplier Feed','reports']];
 
   function shell(content, admin=false){
-    const route=currentRoute(), links=admin?adminNav:schoolNav;
-    return `<div class="appShell v4Shell v7Shell v7bShell v26Shell">
+    const route=currentRoute();
+    const liveCustomerNav=schoolNav.filter(([href])=>isDemoAccount() || !['portal/stock','portal/assets'].includes(href));
+    const links=admin?adminNav:liveCustomerNav;
+    const searchValue=esc(ui.globalSearch||'');
+    return `<div class="appShell v4Shell v7Shell v7bShell v26Shell v37Shell ${admin?'adminShell':'customerShell'}">
       <div class="mobileOverlay ${ui.mobile?'show':''}" data-mobile-close></div>
       <aside class="sidebar ${ui.mobile?'sidebarOpen':''}">
         <div class="sidebarTop">${brand()}<button class="iconBtn mobileClose" data-mobile-close aria-label="Close menu">${icon('close')}</button></div>
@@ -588,11 +604,12 @@
         <header class="topbar sleekTopbar v7Topbar v7bTopbar portalHeaderBar">
           <button class="iconBtn mobileMenu" data-mobile-open aria-label="Open menu">${icon('menu')}</button>
           <div class="topbarBrandSlot plainLogo"><img src="${PSC_LOGO}" alt="Pharma Service"></div>
-          <div class="topbarSearch"><span class="searchIcon">${icon('search')}</span><input placeholder="Search supplies, equipment, or requests..." aria-label="Search"></div>
+          ${!admin?`<div class="topbarSearch"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search institutional catalogue…" aria-label="Search institutional catalogue"></div>`:'<div class="topbarAdminTitle"><span>PSC</span><b>Deal Desk</b></div>'}
           <div class="topbarActions topbarActionsV4">
-            ${admin?'<button class="iconShell" aria-label="Notifications">'+icon('bell')+'</button><span class="userPill"><span class="avatarDot">MH</span><span><b>Mohamed</b><small>PSC admin</small></span></span>':`<button class="iconShell" aria-label="Notifications">${icon('bell')}</button>
+            ${admin?`<span class="userPill compactUser"><span class="avatarDot">MH</span><span><b>Mohamed</b><small>PSC admin</small></span></span>`:`
             <div class="accountSwitcherWrap">
               <button class="campusPill accountSwitcherButton ${canSwitchSchools()?'switchable':''}" ${canSwitchSchools()?'data-account-switcher':''} aria-expanded="${ui.accountMenu?'true':'false'}">
+                <span class="mobileAccountDot" aria-hidden="true">${esc((state.groupName||'A').slice(0,2).toUpperCase())}</span>
                 <span class="campusPillMain">
                   <small class="accountGroupName">${esc(state.groupName||'Institutional account')}</small>
                   <b>${esc(schoolLabel(authContext?.school)||state.campus)}</b>
@@ -610,6 +627,7 @@
             <button class="button dark pillBasket" data-basket>Cart <b>${basketQty()}</b></button>`}
           </div>
         </header>
+        ${!admin?`<div class="mobileSearchRow"><div class="mobileSearchInput"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search catalogue…" aria-label="Search institutional catalogue"></div><button class="mobileCartButton" data-basket>Cart <b>${basketQty()}</b></button></div>`:''}
         ${!admin&&isDemoAccount()?`<div class="demoAccountBanner"><b>DEMO ACCOUNT</b><span>Sample institutional data · Explore freely · Actions are simulated and reset on refresh.</span></div>`:''}
         <div class="contentWrap v7ContentWrap">${content}</div>
       </main>
@@ -619,12 +637,24 @@
   }
 
 
-  const publicNav=[['home','Home'],['about','About Us'],['services','Services'],['careers','Careers'],['media','Media'],['contact','Contact']];
+  const publicNav=[
+    ['who-we-supply','Who We Supply'],
+    ['what-we-supply','What We Supply'],
+    ['how-it-works','How It Works'],
+    ['catalogue','Institutional Catalogue'],
+    ['contact','Contact / Request Supply']
+  ];
   function publicHeader(active='home'){
-    return `<header class="publicHeader"><button class="publicLogo" data-go="home"><img src="${PSC_LOGO}" alt="Pharma Service"></button><nav class="publicNav">${publicNav.map(([r,l])=>`<button class="publicNavLink ${active===r?'active':''}" data-go="${r}">${l}</button>`).join('')}</nav><button class="button primary publicPortalBtn" data-go="login">Clinic Portal →</button></header>`;
+    return `<header class="publicHeader v37PublicHeader">
+      <button class="publicLogo" data-go="home" aria-label="Pharma Service home"><img src="${PSC_LOGO}" alt="Pharma Service"></button>
+      <button class="publicMenuButton" data-public-menu aria-label="Open website menu" aria-expanded="${ui.publicMenu?'true':'false'}">${ui.publicMenu?icon('close'):icon('menu')}</button>
+      <nav class="publicNav ${ui.publicMenu?'open':''}">${publicNav.map(([r,l])=>`<button class="publicNavLink ${active===r?'active':''}" data-go="${r}">${l}</button>`).join('')}</nav>
+      <button class="button primary publicPortalBtn" data-go="login">Clinic Portal →</button>
+    </header>`;
   }
-  function publicFooter(){ return `<footer class="publicFooter"><div><img src="${PSC_LOGO}" alt="Pharma Service"><p>Institutional healthcare supply with one accountable Pharma Service relationship.</p></div><div><span>Dubai, United Arab Emirates</span><a href="tel:+97143377004">+971 4 337 7004</a><a href="mailto:info@pharmaservice.ae">info@pharmaservice.ae</a></div></footer>`; }
+  function publicFooter(){ return `<footer class="publicFooter v37PublicFooter"><div><img src="${PSC_LOGO}" alt="Pharma Service"><p>Institutional healthcare supply with one accountable Pharma Service relationship.</p></div><div class="publicFooterLinks"><button data-go="about">About</button><button data-go="careers">Careers</button><button data-go="media">Media & resources</button></div><div><span>Dubai, United Arab Emirates</span><a href="tel:+97143377004">+971 4 337 7004</a><a href="mailto:info@pharmaservice.ae">info@pharmaservice.ae</a></div></footer>`; }
   function publicPage(active,kicker,title,lead,body){ return `<main class="publicPage">${publicHeader(active)}<section class="publicPageHero"><span class="kicker">${kicker}</span><h1>${title}</h1><p>${lead}</p></section>${body}${publicFooter()}</main>`; }
+
 
   function landing(){
     const approved=products().filter(p=>p.schoolApproved).length;
@@ -633,7 +663,7 @@
       <section class="landingHero">
         <div class="landingCopy">
           <h1 class="institutionalHero"><span>${esc(C.home?.heroTitlePrefix || 'Institutional')}</span><em>${esc(C.home?.heroTitleAccent || 'Supply')}</em></h1>
-          <p class="lead heroStatement"><span>${esc(C.home?.heroLine1 || 'Easy procurement.')} <em>${esc(C.home?.heroLine1Accent || 'Wholesale pricing.')}</em></span><strong>${esc(C.home?.heroLine2 || 'More time for what matters')}</strong></p>
+          <p class="lead heroStatement"><span>${esc(C.home?.heroLine1 || 'Easy procurement.')} <em>${esc(C.home?.heroLine1Accent || 'Institutional pricing.')}</em></span><strong>${esc(C.home?.heroLine2 || 'More time for what matters')}</strong></p>
           <div class="landingActions"><button class="button primary large" data-go="login">Open Clinic Portal →</button><button class="button outline large demoCta" data-go="demo">Take guided demo <span class="playDot">▶</span></button></div>
         </div>
         <div class="procurementHeroCard" aria-label="Clinic procurement workflow">
@@ -653,7 +683,7 @@
               <article class="procurementStage">
                 <span class="stageNumber">02</span>
                 <h4>QUOTE</h4>
-                <p>wholesale prices, while<br>ensuring alignment to<br>regulatory guidelines.</p>
+                <p>institutional pricing,<br>with supply-route and<br>requirement checks.</p>
               </article>
               <article class="procurementStage">
                 <span class="stageNumber">03</span>
@@ -672,6 +702,15 @@
         </div>
       </section>
       <section class="beliefSection operationsBelief"><div class="beliefRule"></div><div class="beliefGrid"><div><span class="kicker">WHY THIS EXISTS</span><h2>Unlike individuals, institutions have structured, recurring and cost-sensitive healthcare needs.</h2></div><div><p>Pharma Service exists to make those needs easier to manage. This includes identifying what is required, sourcing each line intelligently, consolidating supply through one accountable partner, and staying ahead of replenishment, replacement and changing requirements.</p><p class="beliefStrong">Our mission is to help institutions spend better, stay reliably supplied, and make healthcare procurement simpler.</p></div></div></section>
+      <section class="publicProofSection">
+        <div class="publicProofHead"><span class="kicker">HOW WE CONTROL THE WORK</span><h2>Procurement discipline before marketing promises.</h2><p>Pharma Service is building the institutional service around documented requirements, comparable sourcing, clear commercial evidence and accountable follow-through.</p></div>
+        <div class="publicProofGrid">
+          <article><span>01</span><b>Requirement-led specification</b><p>We separate the institution's requirement from the exact commercial product offered.</p></article>
+          <article><span>02</span><b>Source per line</b><p>Products can come from different suitable suppliers while the customer keeps one commercial relationship.</p></article>
+          <article><span>03</span><b>Licensed-route discipline</b><p>Regulated products and specialist services remain subject to the appropriate UAE supply route and professional controls.</p></article>
+          <article><span>04</span><b>Account history</b><p>Quotations, decisions, deliveries and repeat requirements stay tied to the institutional account.</p></article>
+        </div>
+      </section>
       <section class="publicClinicalPreview">
         <div class="publicClinicalPreviewHead">
           <div>
@@ -679,36 +718,36 @@
             <h2>Find products the way healthcare teams actually think.</h2>
             <p>Start with the clinical need, then move directly into the relevant medicines, consumables, devices and equipment.</p>
           </div>
-          <button class="textAction" data-go="portal/catalogue">Explore catalogue →</button>
+          <button class="textAction" data-go="catalogue">Explore catalogue →</button>
         </div>
 
         <div class="publicClinicalPreviewGrid">
-          <button class="publicClinicalCard coral" data-go="portal/catalogue/wounds">
+          <button class="publicClinicalCard coral" data-go="catalogue/wounds">
             <span>Cuts &amp; Wounds</span>
             <small>Dressings, antiseptics, gauze, closure and wound protection</small>
           </button>
 
-          <button class="publicClinicalCard blue" data-go="portal/catalogue/breathing">
+          <button class="publicClinicalCard blue" data-go="catalogue/breathing">
             <span>Breathing &amp; Oxygen</span>
             <small>Nebulisation, oxygen delivery, airway and respiratory support</small>
           </button>
 
-          <button class="publicClinicalCard orange" data-go="portal/catalogue/vitals">
+          <button class="publicClinicalCard orange" data-go="catalogue/vitals">
             <span>Vitals &amp; Assessment</span>
             <small>Blood pressure, temperature, oximetry and clinical assessment</small>
           </button>
 
-          <button class="publicClinicalCard mint" data-go="portal/catalogue/infection">
+          <button class="publicClinicalCard mint" data-go="catalogue/infection">
             <span>Infection Control &amp; PPE</span>
             <small>PPE, hand hygiene, disinfection and waste control</small>
           </button>
 
-          <button class="publicClinicalCard rose" data-go="portal/catalogue/emergency">
+          <button class="publicClinicalCard rose" data-go="catalogue/emergency">
             <span>Emergency &amp; Response</span>
             <small>Resuscitation, first response and urgent-use products</small>
           </button>
 
-          <button class="publicClinicalCard sand" data-go="portal/catalogue/equipment">
+          <button class="publicClinicalCard sand" data-go="catalogue/equipment">
             <span>Equipment &amp; Mobility</span>
             <small>Clinical furniture, mobility, storage and capital equipment</small>
           </button>
@@ -716,7 +755,7 @@
 
         <div class="publicClinicalPreviewFoot">
           <span>Plus medicines &amp; symptoms, diabetes &amp; testing, procedures &amp; consumables, allergy &amp; skin, patient care, screening and more.</span>
-          <button class="button primary semanticPrimary" data-go="portal/catalogue">Open Institutional Catalogue →</button>
+          <button class="button primary semanticPrimary" data-go="catalogue">Open Institutional Catalogue →</button>
         </div>
       </section>
       <section class="demoTeaser"><div><span class="kicker">SEE HOW IT WORKS</span><h2>Take a guided tour of Pharma Service.</h2><p>See the institutional customer journey from product selection and quotation through order management, delivery and repeat purchasing.</p></div><button class="button dark large semanticPrimary" data-go="demo">Take guided tour →</button></section>
@@ -726,7 +765,7 @@
 
   function publicDemoPage(){
     const steps=[
-      {n:'01',label:'APPROVED SUPPLY',title:'Start with the right product.',text:'The clinic browses a curated institutional catalogue instead of searching through thousands of consumer listings.',outcome:'Clear products, packs and specifications built around the clinic environment.',visual:'shop'},
+      {n:'01',label:'CURATED SUPPLY',title:'Start with the right product.',text:'The clinic browses a curated institutional catalogue instead of searching through thousands of consumer listings.',outcome:'Clear products, packs and specifications built around the clinic environment.',visual:'shop'},
       {n:'02',label:'BUILD THE REQUEST',title:'Order what the clinic actually needs.',text:'Approved lines go into one basket. If something is missing, the clinic can submit a custom sourcing request without leaving the portal.',outcome:'One request reaches Pharma Service with the school, user, lines and quantities already attached.',visual:'request'},
       {n:'03',label:'PSC CONTROL',title:'We validate before we quote.',text:'PSC checks the exact product, source, current commercial evidence, applicable supply route and delivery before issuing the quotation.',outcome:'The customer gets simplicity. PSC keeps control of the complexity behind it.',visual:'control'},
       {n:'04',label:'QUOTE & DELIVERY',title:'A clear decision and a visible next step.',text:'The quotation is sent to the registered account. The school confirms or cancels it, then follows the order through processing and delivery.',outcome:'No WhatsApp archaeology. The commercial history remains attached to the account.',visual:'delivery'},
@@ -734,10 +773,10 @@
     ];
     const i=Math.max(0,Math.min(steps.length-1,ui.tourStep||0)),st=steps[i];
     const visual={
-      shop:`<div class="demoMachine shopMachine"><div class="demoMachineBar"><span></span><span></span><span></span><b>Approved Clinic Supply</b></div><div class="demoProductGrid"><article><div class="demoPack">GAUZE</div><span>Sterile Gauze</span><small>Requirement mapped</small><button>+</button></article><article><div class="demoPack diag">BP</div><span>BP Monitor</span><small>Exact spec shown</small><button>+</button></article><article><div class="demoPack saline">NaCl</div><span>Sterile Saline</span><small>Clinic consumable</small><button>+</button></article></div><div class="demoCursor cursorOne"></div></div>`,
+      shop:`<div class="demoMachine shopMachine"><div class="demoMachineBar"><span></span><span></span><span></span><b>Curated Clinic Supply</b></div><div class="demoProductGrid"><article><div class="demoPack">GAUZE</div><span>Sterile Gauze</span><small>Requirement mapped</small><button>+</button></article><article><div class="demoPack diag">BP</div><span>BP Monitor</span><small>Exact spec shown</small><button>+</button></article><article><div class="demoPack saline">NaCl</div><span>Sterile Saline</span><small>Clinic consumable</small><button>+</button></article></div><div class="demoCursor cursorOne"></div></div>`,
       request:`<div class="demoMachine requestMachine"><div class="demoMachineBar"><span></span><span></span><span></span><b>Supply Request</b></div><div class="requestDemoLines"><div><i>01</i><span><b>Sterile Gauze</b><small>100 swabs</small></span><strong>6</strong></div><div><i>02</i><span><b>Sterile Saline</b><small>2.5 ml</small></span><strong>10</strong></div><div class="customDemo"><span>Can’t find it?</span><b>Paediatric nebulizer masks…</b><em>Custom request</em></div></div><button class="demoSubmit">Place order for review <span>→</span></button></div>`,
       control:`<div class="demoMachine controlMachine"><div class="demoMachineBar"><span></span><span></span><span></span><b>PSC Review</b></div><div class="controlTrack"><span class="trackLine"></span><div class="trackDot done">✓<small>SPEC</small></div><div class="trackDot done">✓<small>SOURCE</small></div><div class="trackDot active">●<small>ROUTE</small></div><div class="trackDot">4<small>QUOTE</small></div></div><div class="controlCards"><article><span>PRODUCT</span><b>Exact specification</b><small>Matched to controlled line</small></article><article><span>SUPPLY</span><b>Current evidence</b><small>Price / stock checked</small></article><article><span>ROUTE</span><b>Appropriate channel</b><small>Validated before commitment</small></article></div></div>`,
-      delivery:`<div class="demoMachine deliveryMachine"><div class="demoMachineBar"><span></span><span></span><span></span><b>Order & Quotation</b></div><div class="quoteDemo"><div><span>PSC-Q-2026-1042</span><b>Quotation ready</b><small>Sent to registered account email</small></div><div class="quoteActions"><button>Cancel</button><button class="confirm">Confirm quote</button></div></div><div class="deliveryTrack"><div class="deliveryVan">▰</div><span></span><div class="deliveryPin">✓</div></div><div class="deliveryPromiseDemo"><small>NEXT</small><b>Will be delivered tomorrow</b></div></div>`,
+      delivery:`<div class="demoMachine deliveryMachine"><div class="demoMachineBar"><span></span><span></span><span></span><b>Order & Quotation</b></div><div class="quoteDemo"><div><span>PSC-Q-2026-1042</span><b>Quotation ready</b><small>Sent to registered account email</small></div><div class="quoteActions"><button>Cancel</button><button class="confirm">Confirm quote</button></div></div><div class="deliveryTrack"><div class="deliveryVan">▰</div><span></span><div class="deliveryPin">✓</div></div><div class="deliveryPromiseDemo"><small>NEXT</small><b>Delivery timing confirmed by PSC</b></div></div>`,
       repeat:`<div class="demoMachine repeatMachine"><div class="demoMachineBar"><span></span><span></span><span></span><b>Replenish</b></div><div class="repeatCards"><article><div class="repeatThumb">GAUZE</div><div><span>Previously delivered</span><b>Sterile Gauze</b><small>Last qty · 6</small></div><button>Replenish 6 →</button></article><article><div class="repeatThumb saline">NaCl</div><div><span>Previously delivered</span><b>Sterile Saline</b><small>Last qty · 10</small></div><button>Replenish 10 →</button></article></div><div class="repeatLoop">↻ <span>Order history becomes the next order shortcut.</span></div></div>`
     }[st.visual];
     return `<main class="publicPage publicDemoPage">${publicHeader('')}<section class="demoPublicHero"><div><span class="kicker">GUIDED DEMONSTRATION</span><h1>See the supply relationship<br>work from end to end.</h1><p>See how Pharma Service takes an institutional customer from product selection and quotation through order management, delivery and repeat purchasing — while keeping the sourcing complexity behind the scenes.</p></div><div class="demoHeroFlow"><div><b>01</b><span>SELECT</span></div><i></i><div><b>02</b><span>REQUEST</span></div><i></i><div><b>03</b><span>CONTROL</span></div><i></i><div><b>04</b><span>DELIVER</span></div><i></i><div><b>05</b><span>REPEAT</span></div><span class="flowRunner"></span></div></section><section class="publicDemoBody"><div class="publicDemoStepper">${steps.map((x,j)=>`<button class="demoStepButton ${j===i?'active':j<i?'done':''}" data-tour-jump="${j}"><span>${x.n}</span><b>${x.label}</b></button>`).join('')}</div><div class="publicDemoStage"><div class="publicDemoCopy"><span class="kicker">${st.label}</span><h2>${st.title}</h2><p>${st.text}</p><div class="demoOutcome"><span>WHAT THIS ACHIEVES</span><b>${st.outcome}</b></div><div class="tourNav"><button class="button outline" data-tour-prev ${i===0?'disabled':''}>← Previous</button>${i<steps.length-1?'<button class="button primary" data-tour-next>Next →</button>':'<button class="button primary" data-go="login">Open Clinic Portal →</button>'}</div></div><div class="publicDemoVisual">${visual}</div></div><div class="demoDisclosure"><b>Demonstration scope</b><span>The animation illustrates the live customer workflow and planned presentation layer. Actual products, prices, availability, regulatory route and delivery dates remain account- and transaction-specific.</span></div></section>${publicFooter()}</main>`;
@@ -748,52 +787,144 @@
 
   function servicesPage(){ return publicPage('services','SERVICES','Clinic procurement, made easier.','Pharma Service makes it easy for institutional customers to shop, request quotations, manage orders, repeat previous purchases and optimize procurement costs across pharmaceuticals, medical disposables and medical equipment.',`<section class="publicSection twoPublicCols"><div><span class="kicker">PROCUREMENT COST CONTROL</span><h2>Buy through the right supply channel, not the retail shelf.</h2><p>Pharma Service sources through suitable wholesale and specialist suppliers, then consolidates the commercial process for the institutional customer. The objective is straightforward: optimize procurement costs across pharmaceuticals, medical disposables and medical equipment without pushing sourcing complexity onto the clinic team.</p></div><div class="publicFeatureStack"><article><b>Shop & request</b><p>Browse controlled institutional lines or submit a custom sourcing request.</p></article><article><b>Quote & manage</b><p>Receive the formal quotation, confirm the order and keep the transaction history attached to the account.</p></article><article><b>Repeat efficiently</b><p>Reorder previously supplied items without restarting the procurement process from zero.</p></article></div></section><section class="publicSection procurementFlow"><article><b>SHOP</b><span>01</span><p>Browse the Pharma Service institutional product master.</p></article><article><b>QUOTE</b><span>02</span><p>PSC sources, reviews and sends the formal quotation.</p></article><article><b>MANAGE</b><span>03</span><p>Confirm, cancel or follow the order from the account.</p></article><article><b>REPEAT</b><span>04</span><p>Repeat previously supplied items from the same account history.</p></article></section><section class="publicCta"><div><span class="kicker">SEE IT WORK</span><h2>Take a guided tour of Pharma Service.</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="demo">Take guided tour</button><button class="button primary large" data-go="login">Open Clinic Portal →</button></div></section>`); }
 
+
+  function whoWeSupplyPage(){ return publicPage(
+    'who-we-supply',
+    'WHO WE SUPPLY',
+    'Built for institutions with healthcare responsibilities.',
+    'Pharma Service is designed for organizations that need repeatable purchasing, clear specifications and accountable follow-through — not a consumer checkout experience.',
+    `<section class="publicSection publicAudienceGrid">
+      <article><span>SCHOOLS & EDUCATION</span><h3>School clinics and campus health rooms</h3><p>Opening equipment, recurring clinic consumables, medicines through the appropriate route, replenishment and replacement planning.</p></article>
+      <article><span>MULTI-SITE GROUPS</span><h3>Groups managing more than one location</h3><p>One commercial relationship with site-level ordering, delivery history and account-specific requirements.</p></article>
+      <article><span>WORKPLACE & INSTITUTIONAL HEALTH</span><h3>Organizations operating first-aid or healthcare facilities</h3><p>Requirement-led equipment, consumables and recurring supply where the receiving route is appropriate.</p></article>
+      <article><span>HEALTHCARE BUYERS</span><h3>Professional procurement teams</h3><p>Comparable specifications, quotation control and consolidated sourcing across suitable suppliers.</p></article>
+    </section>
+    <section class="publicCta"><div><span class="kicker">YOUR REQUIREMENT</span><h2>Tell us what the institution needs, not what shelf to shop.</h2></div><button class="button primary large" data-go="contact">Request supply →</button></section>`
+  ); }
+
+  function whatWeSupplyPage(){ return publicPage(
+    'what-we-supply',
+    'WHAT WE SUPPLY',
+    'Opening baskets, recurring baskets and specialist lines.',
+    'The offer is organized around how institutions actually buy: capital items that establish the facility, recurring items that keep it ready, and regulated or specialist lines that require the correct route.',
+    `<section class="publicSection supplyBasketGrid">
+      <article class="supplyBasketCard capital"><span>OPENING / CAPITAL BASKET</span><h2>Set up the facility.</h2><p>Clinical furniture, diagnostics, monitoring, emergency equipment, mobility, oxygen-related equipment and other setup requirements.</p><b>Purchased episodically · specification and warranty matter.</b></article>
+      <article class="supplyBasketCard recurring"><span>RECURRING BASKET</span><h2>Keep it supplied.</h2><p>Dressings, PPE, disposables, testing consumables, respiratory items, hygiene products, medicines where permitted, and expiry-driven replacements.</p><b>Repeated demand · pack, expiry, stock and replenishment matter.</b></article>
+    </section>
+    <section class="publicSection publicCategoryCloud"><span>WOUND CARE</span><span>INFECTION CONTROL & PPE</span><span>DIAGNOSTICS</span><span>RESPIRATORY</span><span>DIABETES & TESTING</span><span>EMERGENCY RESPONSE</span><span>FURNITURE & MOBILITY</span><span>STUDENT CARE</span><span>PROCEDURE CONSUMABLES</span><span>MEDICINES — APPROPRIATE LICENSED ROUTE</span></section>
+    <section class="publicCta"><div><span class="kicker">BROWSE</span><h2>See the institutional product master without logging in.</h2></div><button class="button primary large" data-go="catalogue">Open catalogue →</button></section>`
+  ); }
+
+  function howItWorksPage(){ return publicPage(
+    'how-it-works',
+    'HOW IT WORKS',
+    'Source per line. Sell one solution.',
+    'Pharma Service keeps the institutional customer-facing process simple while controlling specification, sourcing, commercial evidence and fulfilment behind it.',
+    `<section class="publicSection publicWorkflowGrid">
+      <article><b>01</b><h3>Capture</h3><p>Account, site, need, quantities, deadline and decision path.</p></article>
+      <article><b>02</b><h3>Normalize</h3><p>Translate the requirement into controlled specifications and comparable lines.</p></article>
+      <article><b>03</b><h3>Source</h3><p>Request comparable supply evidence from suitable category suppliers.</p></article>
+      <article><b>04</b><h3>Compare</h3><p>Specification, model, cost, VAT, stock, delivery, warranty and terms.</p></article>
+      <article><b>05</b><h3>Quote</h3><p>One clean institutional quotation with the relevant commercial terms.</p></article>
+      <article><b>06</b><h3>Authorize</h3><p>The order moves only after the customer's required approval or PO route.</p></article>
+      <article><b>07</b><h3>Deliver & document</h3><p>Receive, inspect, deliver and retain the transaction record.</p></article>
+      <article><b>08</b><h3>Repeat intelligently</h3><p>Use the completed supply history to make replenishment and replacement easier.</p></article>
+    </section>
+    <section class="publicSection controlCallout"><span class="kicker">REGULATED LINES</span><h2>Commercial convenience does not replace authorization.</h2><p>Medicines, oxygen, specialist services and other regulated products remain subject to the applicable UAE licensing, recipient, storage, batch/expiry and professional controls.</p></section>`
+  ); }
+
+  function publicCatalogueCard(p){
+    const need=clinicalNeedMeta(clinicalNeedIds(p)[0]||'all');
+    const displayName=p.catalogueDisplayName||p.name;
+    const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
+    const imageUrl=productDisplayImageUrl(p);
+    return `<article class="publicCatalogueCard">
+      <div class="publicCatalogueVisual" style="--need-bg:${need.bg};--need-ink:${need.ink}">${imageUrl?`<img src="${esc(imageUrl)}" alt="${esc(displayName)}" loading="lazy">`:`<span>${esc(need.label)}</span>`}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</div>
+      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><h3>${esc(displayName)}</h3><p>${esc(pack)}</p>${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}</div>
+      <button class="button outline full" data-go="contact">Request institutional quote →</button>
+    </article>`;
+  }
+
+  function publicCataloguePage(needId='all'){
+    const meta=clinicalNeedMeta(needId);
+    const {filtered,types}=catalogueFilterProducts(needId);
+    const categories=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories;
+    return `<main class="publicPage publicCataloguePage">${publicHeader('catalogue')}
+      <section class="publicPageHero cataloguePublicHero"><span class="kicker">INSTITUTIONAL CATALOGUE</span><h1>${needId==='all'?'Browse the controlled product master.':esc(meta.label)}</h1><p>Read-only public catalogue. Product availability, exact commercial specification, pricing and regulated supply route are confirmed for the account and transaction before commitment.</p></section>
+      <section class="publicSection publicCatalogueControls">
+        <div class="publicNeedRibbon">${categories.map(c=>`<button class="${c.id===needId?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="catalogue/${c.id}">${esc(c.label)}</button>`).join('')}</div>
+        <div class="filterBar"><div class="searchInput"><span>${icon('search')}</span><input data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search product, pack or specification…"></div><select data-cat-filter="category"><option>All product types</option>${types.map(t=>`<option ${ui.catalogueCat===t?'selected':''}>${esc(t)}</option>`).join('')}</select></div>
+      </section>
+      <section class="publicSection publicCatalogueResults"><div class="publicCatalogueCount"><b>${filtered.length}</b><span>published institutional lines</span></div>${filtered.length?`<div class="publicCatalogueGrid">${filtered.map(publicCatalogueCard).join('')}</div>`:'<div class="emptyState"><h3>No matching published lines</h3><p>Try another clinical need or send the requirement to Pharma Service.</p><button class="button primary" data-go="contact">Request sourcing →</button></div>'}</section>
+      <section class="publicCta"><div><span class="kicker">ACCOUNT PRICING</span><h2>Need a quotation or customer-specific product list?</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="contact">Request supply</button><button class="button primary large" data-go="login">Open Clinic Portal →</button></div></section>
+      ${publicFooter()}
+    </main>`;
+  }
+
   function careersPage(){ return publicPage('careers','CAREERS','Build practical healthcare supply with us.','We are interested in people who value accuracy, follow-through and institutional customer service.',`<section class="publicSection simplePublicPanel"><h2>Current opportunities</h2><p>Roles will be posted here as the institutional-supply business expands. For now, career enquiries can be directed through the Contact page.</p><button class="button outline" data-go="contact">Contact Pharma Service →</button></section>`); }
 
   function mediaPage(){ return publicPage('media','MEDIA','Updates, resources and institutional supply notes.','A public space for Pharma Service company updates and practical institutional healthcare-supply resources.',`<section class="publicSection publicMediaGrid"><article><span>SCHOOL CLINICS</span><h3>Building a cleaner replenishment process</h3><p>Why repeat ordering should get easier after the first completed supply cycle.</p></article><article><span>PRODUCT CONTROL</span><h3>Requirement-mapped specifications</h3><p>How PSC separates regulatory requirements from exact commercial product specifications.</p></article><article><span>PSC UPDATE</span><h3>Institutional Supply Portal</h3><p>The first MVP brings ordering, quotations and replenishment into one customer account.</p></article></section>`); }
 
   function contactPage(){ return publicPage(
     'contact',
-    'CONTACT',
-    'Talk to Pharma Service.',
-    'Tell us what your institution needs and we’ll follow up with the right next step.',
+    'CONTACT / REQUEST SUPPLY',
+    'Tell Pharma Service what the institution needs.',
+    'A better first enquiry gives us enough information to qualify the requirement, prepare comparable sourcing and come back with the right next step.',
     `<section class="publicSection prospectSection">
       <div class="prospectIntro">
-        <span class="kicker">START A CONVERSATION</span>
-        <h2>Tell us about your requirement.</h2>
-        <p>Whether you need a single product, recurring supply, equipment, a clinic setup or a broader institutional requirement, give us a little context and we’ll follow up directly.</p>
+        <span class="kicker">CAPTURE THE REQUIREMENT</span>
+        <h2>Start with the institution, sites and timing.</h2>
+        <p>Use this for a single product, a recurring supply list, capital equipment, clinic setup or a broader RFQ. You can also attach the customer list or RFQ file.</p>
       </div>
 
-      <form class="prospectForm" data-public-enquiry novalidate>
-        <div class="prospectField prospectFieldWide">
-          <label for="prospectRequirement">Tell us about your requirement</label>
-          <textarea id="prospectRequirement" name="requirement" rows="6" maxlength="4000" placeholder="What are you looking for? Include products, quantities, sites, timing or anything else that would help us understand the requirement." required></textarea>
+      <form class="prospectForm v37ProspectForm" data-public-enquiry novalidate>
+        <div class="prospectField">
+          <label for="prospectOrganization">Organization</label>
+          <input id="prospectOrganization" name="organization" type="text" maxlength="180" placeholder="School group, clinic or company" required>
         </div>
-
+        <div class="prospectField">
+          <label for="prospectInstitutionType">Institution type</label>
+          <select id="prospectInstitutionType" name="institution_type" required><option value="">Select</option><option>School / education</option><option>Healthcare facility</option><option>Corporate / workplace health</option><option>Government / public institution</option><option>Hospitality / other institution</option><option>Other</option></select>
+        </div>
+        <div class="prospectField">
+          <label for="prospectSites">Number of sites <span>optional</span></label>
+          <input id="prospectSites" name="site_count" type="number" min="1" max="10000" placeholder="e.g. 4">
+        </div>
+        <div class="prospectField">
+          <label for="prospectEmirate">Emirate</label>
+          <select id="prospectEmirate" name="emirate"><option value="">Select</option><option>Dubai</option><option>Abu Dhabi</option><option>Sharjah</option><option>Ajman</option><option>Ras Al Khaimah</option><option>Fujairah</option><option>Umm Al Quwain</option><option>Multiple Emirates</option></select>
+        </div>
+        <div class="prospectField">
+          <label for="prospectRequirementType">Requirement type</label>
+          <select id="prospectRequirementType" name="requirement_type"><option value="">Select</option><option>Recurring consumables</option><option>Clinic opening / capital equipment</option><option>Medicines / regulated products</option><option>Equipment replacement</option><option>Full RFQ / tender list</option><option>Single product</option><option>Other</option></select>
+        </div>
+        <div class="prospectField">
+          <label for="prospectRequiredBy">Required by <span>optional</span></label>
+          <input id="prospectRequiredBy" name="required_by" type="date">
+        </div>
+        <div class="prospectField prospectFieldWide">
+          <label for="prospectRequirement">Requirement</label>
+          <textarea id="prospectRequirement" name="requirement" rows="6" maxlength="4000" placeholder="Products, quantities, current specification, delivery timing, account requirements or anything else we should know." required></textarea>
+        </div>
         <div class="prospectField">
           <label for="prospectName">Name</label>
           <input id="prospectName" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Your name" required>
         </div>
-
         <div class="prospectField">
           <label for="prospectPhone">Contact number</label>
           <input id="prospectPhone" name="contact_number" type="tel" autocomplete="tel" maxlength="40" placeholder="+971" required>
         </div>
-
         <div class="prospectField prospectFieldWide">
           <label for="prospectEmail">Contact email</label>
           <input id="prospectEmail" name="contact_email" type="email" autocomplete="email" maxlength="254" placeholder="name@organization.ae" required>
         </div>
-
-        <div class="prospectHoneypot" aria-hidden="true">
-          <label for="prospectWebsite">Website</label>
-          <input id="prospectWebsite" name="website" type="text" tabindex="-1" autocomplete="off">
+        <div class="prospectField prospectFieldWide rfqUploadField">
+          <label for="prospectRfq">Attach RFQ or product list <span>optional · PDF, Word, Excel or CSV · max 10 MB</span></label>
+          <input id="prospectRfq" name="rfq_file" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,application/pdf,text/csv,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
         </div>
 
-        <div class="prospectSubmitRow">
-          <p>By submitting, you’re asking Pharma Service to contact you about this requirement.</p>
-          <button class="button primary semanticPrimary" type="submit" data-public-enquiry-submit>Send enquiry</button>
-        </div>
+        <div class="prospectHoneypot" aria-hidden="true"><label for="prospectWebsite">Website</label><input id="prospectWebsite" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <div class="prospectSubmitRow"><p>By submitting, you’re asking Pharma Service to contact you about this institutional requirement.</p><button class="button primary semanticPrimary" type="submit" data-public-enquiry-submit>Send enquiry</button></div>
       </form>
     </section>
 
@@ -804,6 +935,7 @@
       <div class="contactCard"><span>CLINIC PORTAL</span><button class="button primary" data-go="login">Open account access →</button></div>
     </section>`
   ); }
+
 
   function wholesalePage(){
     const sf=storefrontConfig('wholesale')||{};
@@ -874,7 +1006,7 @@
       <div class="v26OperationsStrip">
         <div><span>ACTIVE</span><b>${active.length}</b><small>Orders & requests</small></div>
         <div><span>QUOTE READY</span><b>${awaiting}</b><small>Awaiting your decision</small></div>
-        <div><span>IN PROCESS</span><b>${processing}</b><small>${processing?tomorrowDelivery():'No deliveries due'}</small></div>
+        <div><span>IN PROCESS</span><b>${processing}</b><small>${processing?'Open order for delivery timing':'No deliveries due'}</small></div>
         <div><span>REPLENISH</span><b>${deliveredSkus.size}</b><small>Previously delivered items</small></div>
       </div>
 
@@ -889,7 +1021,7 @@
 
   function orderMiniRow(r){
     const p=r.lines[0]?product(r.lines[0].sku):null;
-    return `<button class="homeActivityRow" data-request-view="${r.id}"><div><b>${esc(r.quoteRef||r.id)}</b><span>${p?esc(p.name):r.lines.length+' lines'}${r.lines.length>1?` +${r.lines.length-1} more`:''}</span></div><div>${customerStatusPill(r.status)}${['Authorized','Procurement','Delivery'].includes(r.status)?`<small>${tomorrowDelivery()}</small>`:''}</div></button>`;
+    return `<button class="homeActivityRow" data-request-view="${r.id}"><div><b>${esc(r.quoteRef||r.id)}</b><span>${p?esc(p.name):r.lines.length+' lines'}${r.lines.length>1?` +${r.lines.length-1} more`:''}</span></div><div>${customerStatusPill(r.status)}${['Authorized','Procurement','Delivery'].includes(r.status)?`<small>${esc(expectedDeliveryLabel(r))}</small>`:''}</div></button>`;
   }
 
   function schoolClinicsPage(){
@@ -931,15 +1063,16 @@
 
   function insightsPage(){
     const resources=[
-      {type:'Clinic Operations',date:'27 Sep 2026',title:'Term-opening clinic readiness checklist',summary:'A simple review of what to confirm before students return: approved supply list, emergency essentials, equipment checks and current contact routes.',cta:'Read resource'},
-      {type:'Replenishment',date:'25 Sep 2026',title:'How to keep recurring clinic orders simple',summary:'Use the same approved lines, repeat known quantities and change only what is different. The portal keeps the order history in one place.',cta:'Read article'},
-      {type:'Product Update',date:'23 Sep 2026',title:'New school-clinic catalogue additions',summary:'Recently added diagnostic, wound-care and respiratory lines are being added to the curated PSC school-clinic catalogue as supplier evidence is confirmed.',cta:'View update'},
-      {type:'PSC Update',date:'20 Sep 2026',title:'What happens after you place an order',summary:'PSC reviews the basket, validates the supply route and sends the quotation to the registered clinic email before the order moves forward.',cta:'How it works'},
-      {type:'Equipment',date:'18 Sep 2026',title:'Clinic equipment: what to keep on record',summary:'Keep purchase, model, serial and warranty details available for the equipment you rely on. PSC can help keep the supply history organized.',cta:'Read resource'},
-      {type:'Supply Planning',date:'15 Sep 2026',title:'Build one approved clinic list and repeat from it',summary:'A consistent approved list reduces rework, simplifies quotation and makes recurring supply more predictable for both the school and PSC.',cta:'Read article'}
+      {type:'Clinic Operations',title:'Stock & expiry register',summary:'Review usable on-hand quantity, expiry dates and replenishment candidates for this clinic.',cta:'Open register',go:'portal/stock'},
+      {type:'Replenishment',title:'Repeat previously supplied items',summary:'Use delivered account history to build the next request without starting from zero.',cta:'Open Replenish',go:'portal/replenish'},
+      {type:'Product Master',title:'Browse the institutional catalogue',summary:'Find products by clinical need, pack and specification, then add them to the current request.',cta:'Open catalogue',go:'portal/catalogue'},
+      {type:'Account Record',title:'Order and quotation history',summary:'Keep current requests, quotation decisions, delivery states and completed orders attached to the account.',cta:'Open orders',go:'portal/requests'},
+      {type:'Equipment',title:'Clinic asset records',summary:'Keep model, serial, warranty and service prompts visible for supplied capital equipment.',cta:'Open assets',go:'portal/assets'},
+      {type:'Documents',title:'Commercial documents',summary:'Open quotations, approvals, invoices, delivery notes and other order records in one place.',cta:'Open documents',go:'portal/documents'}
     ];
-    return shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">PSC RESOURCES</span><h1>Reports & Insights</h1><p>A periodically updated space for useful clinic-supply resources, product updates and Pharma Service account information.</p></div></div><div class="resourceHero"><div><span class="eyebrow">LATEST</span><h2>Useful information — without another dashboard.</h2><p>This page is intentionally editorial. We will keep adding practical resources and updates that help school clinics purchase and manage supplies more consistently.</p></div><div class="resourceHeroMark">PSC<br><span>UPDATE</span></div></div><div class="resourceGrid">${resources.map((x,i)=>`<article class="resourceCard ${i===0?'featured':''}"><div class="resourceMeta"><span>${x.type}</span><small>${x.date}</small></div><h3>${x.title}</h3><p>${x.summary}</p><button class="resourceLink">${x.cta} →</button></article>`).join('')}</div>`);
+    return shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">ACCOUNT TOOLS</span><h1>Resources & account tools</h1><p>Every card below now opens a working account module rather than a placeholder article.</p></div></div><div class="resourceGrid">${resources.map((x,i)=>`<article class="resourceCard ${i===0?'featured':''}"><div class="resourceMeta"><span>${x.type}</span></div><h3>${x.title}</h3><p>${x.summary}</p><button class="resourceLink" data-go="${x.go}">${x.cta} →</button></article>`).join('')}</div>`);
   }
+
 
   function catalogueProducts(){
     return products().filter(p=>p.catalogueVisible!==false);
@@ -1085,6 +1218,64 @@
     return shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">PREVIOUSLY DELIVERED</span><h1>Replenish</h1><p>Repeat products already supplied to this clinic. Consumables can go straight to cart; capital equipment can be requested again for PSC review.</p></div><button class="button dark" data-basket>Open cart</button></div>${body}`);
   }
 
+
+  function documentTypeLabel(type){
+    return ({quotation:'Quotation',customer_po:'Customer PO',approval:'Approval',invoice:'Invoice',delivery_note:'Delivery note',acceptance:'Acceptance',warranty:'Warranty / serial record',service_report:'Service report',other:'Other document'})[type]||'Document';
+  }
+
+  function orderDocumentsSection(r,admin=false){
+    const docs=r.documents||[];
+    const options=admin
+      ? [['quotation','Quotation'],['customer_po','Customer PO'],['approval','Approval'],['invoice','Invoice'],['delivery_note','Delivery note'],['acceptance','Acceptance'],['warranty','Warranty / serial record'],['service_report','Service report'],['other','Other document']]
+      : [['customer_po','Customer PO'],['approval','Approval'],['acceptance','Acceptance'],['other','Other document']];
+    return `<section class="orderDocumentsPanel">
+      <div class="orderDocumentsHead"><div><span class="eyebrow">COMMERCIAL RECORD</span><h3>Documents</h3></div><span>${docs.length} file${docs.length===1?'':'s'}</span></div>
+      <div class="orderDocumentList">${docs.length?docs.map(d=>`<button class="orderDocumentRow" data-document-open="${esc(d.object_path)}"><span class="documentIcon">▤</span><span><b>${esc(d.title||documentTypeLabel(d.document_type))}</b><small>${esc(d.file_name||'Document')} · ${date(d.created_at)}</small></span><em>Open →</em></button>`).join(''):'<div class="orderDocumentEmpty">No documents attached to this order yet.</div>'}</div>
+      ${r.dbId?`<div class="orderDocumentUpload"><select data-document-type="${r.id}">${options.map(([v,l])=>`<option value="${v}">${l}</option>`).join('')}</select><label class="button outline documentUploadButton">Attach document<input type="file" hidden data-document-upload="${r.id}" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.webp,application/pdf,image/jpeg,image/png,image/webp,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></label></div>`:`<div class="orderDocumentEmpty">Documents become available on live account orders.</div>`}
+    </section>`;
+  }
+
+  function documentsPage(){
+    const rows=customerVisibleRequests().flatMap(r=>(r.documents||[]).map(d=>({r,d}))).sort((a,b)=>new Date(b.d.created_at)-new Date(a.d.created_at));
+    return shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">ACCOUNT RECORD</span><h1>Documents</h1><p>Quotations, customer approvals, invoices, delivery notes, acceptance records and equipment documents tied to this account.</p></div></div>
+      <section class="panel documentsIndexPanel">${rows.length?`<div class="documentsIndex">${rows.map(({r,d})=>`<button class="documentIndexRow" data-document-open="${esc(d.object_path)}"><span><small>${documentTypeLabel(d.document_type)}</small><b>${esc(d.title||d.file_name||'Document')}</b><em>${esc(r.id)} · ${date(d.created_at)}</em></span><strong>Open →</strong></button>`).join('')}</div>`:'<div class="emptyState"><h3>No account documents yet</h3><p>Documents will appear here as they are attached to live orders. Open an order to upload a PO, approval or acceptance record.</p></div>'}</section>`);
+  }
+
+  async function openOrderDocument(path){
+    if(!sb || !path) return;
+    const preview=window.open('about:blank','_blank');
+    try{
+      const {data,error}=await sb.storage.from('order-documents').createSignedUrl(path,60);
+      if(error) throw error;
+      if(data?.signedUrl){
+        if(preview){ preview.opener=null; preview.location=data.signedUrl; }
+        else window.location.href=data.signedUrl;
+      }
+    }catch(e){ if(preview) preview.close(); console.error(e); toast('<strong>Could not open document.</strong>'); }
+  }
+
+  async function uploadOrderDocument(requestId,file){
+    const r=state.requests.find(x=>x.id===requestId);
+    if(!r || !r.dbId || !file) return;
+    if(isDemoAccount()){ toast('<strong>Demo account.</strong><br>Document uploads are disabled in the sandbox.'); return; }
+    if(file.size>15*1024*1024){ toast('<strong>File too large.</strong><br>Maximum 15 MB.'); return; }
+    const type=document.querySelector(`[data-document-type="${CSS.escape(requestId)}"]`)?.value||'other';
+    const allowedCustomer=['customer_po','approval','acceptance','other'];
+    const allowedAdmin=['quotation','customer_po','approval','invoice','delivery_note','acceptance','warranty','service_report','other'];
+    const allowed=authContext?.isPscAdmin?allowedAdmin:allowedCustomer;
+    if(!allowed.includes(type)){ toast('<strong>Document type is not permitted.</strong>'); return; }
+    const objectPath=`${r.dbId}/${Date.now()}-${safeFileName(file.name)}`;
+    try{
+      const {error:uploadError}=await sb.storage.from('order-documents').upload(objectPath,file,{cacheControl:'3600',upsert:false});
+      if(uploadError) throw uploadError;
+      const {error:metaError}=await sb.from('order_documents').insert({order_id:r.dbId,document_type:type,title:documentTypeLabel(type),file_name:file.name,object_path:objectPath,mime_type:file.type||null,file_size:file.size,created_by:session?.user?.id||null});
+      if(metaError) throw metaError;
+      await loadOrdersFromDatabase();
+      render();
+      toast('<strong>Document attached.</strong>');
+    }catch(e){ console.error(e); toast(`<strong>Could not attach document.</strong><br>${esc(e?.message||'Please try again.')}`); }
+  }
+
   const workflow=['Drafting','Sent','Authorized','Procurement','Delivery','Accepted','Cancelled'];
   function requestsPage(){
     const visible=customerVisibleRequests();
@@ -1099,7 +1290,7 @@
   }
   function customerOrderCard(r){
     const q=calcQuote(r), label=friendlyStatus(r.status), p=r.lines[0]?product(r.lines[0].sku):null, extra=Math.max(0,r.lines.length-1);
-    const delivery=['Authorized','Procurement','Delivery'].includes(r.status)?tomorrowDelivery():'';
+    const delivery=['Authorized','Procurement','Delivery'].includes(r.status)?expectedDeliveryLabel(r):'';
     const archiveDate=r.status==='Cancelled'&&r.cancelledAt?addDaysLabel(r.cancelledAt,30):'';
     return `<article class="customerOrderCard statusCard-${r.status.toLowerCase()}"><div class="orderCardHead"><div><span class="eyebrow">${esc(r.quoteRef||'ORDER UNDER REVIEW')}</span><h3 class="mono">${r.id}</h3><p>${date(r.createdAt)} · ${r.lines.length} lines</p></div>${customerStatusPill(r.status)}</div><div class="orderCardProduct"><div><b>${p?`${r.lines[0].qty} × ${esc(p.name)}`:'Order items'}</b>${extra?`<span>+ ${extra} more line${extra>1?'s':''}</span>`:''}</div>${q.hasSell&&r.quoteRef?`<strong>${money(q.total)}</strong>`:''}</div>${r.status==='Drafting'?`<div class="orderMessage">Under review. Your quotation will be sent to <strong>${esc(accountEmailLabel())}</strong>.</div>`:''}${r.status==='Sent'?`<div class="orderMessage quoteReady">Quotation sent to <strong>${esc(accountEmailLabel())}</strong>. Confirm or cancel below.</div>`:''}${delivery?`<div class="deliveryPromise"><span>TRACK</span><b>${delivery}</b></div>`:''}${r.status==='Accepted'?`<div class="orderMessage deliveredMsg">Delivered ${date(r.deliveredAt||r.createdAt)}. These items are now available on Replenish.</div>`:''}${r.status==='Cancelled'?`<div class="orderMessage cancelledMsg">Cancelled. This will move to Archive after ${archiveDate}.</div>`:''}<div class="orderCardActions"><button class="button light small" data-request-view="${r.id}">View</button>${r.status==='Sent'?`<button class="button primary small" data-confirm-quote="${r.id}">Confirm quote</button><button class="button quietDanger small" data-cancel-quote="${r.id}">Cancel</button>`:''}${['Authorized','Procurement','Delivery'].includes(r.status)?`<button class="button dark small" data-request-view="${r.id}">Track</button>`:''}${r.status==='Accepted'?`<button class="button dark small" data-reorder-order="${r.id}">Replenish order</button>`:''}</div></article>`;
   }
@@ -1131,7 +1322,7 @@
     const quote=calcQuote(r);
     const canApprove=r.status==='Sent' && quote.taxResolved && quote.hasSell;
     return `<div><div class="modalHeader"><div><span class="eyebrow">${admin?'PSC REQUEST CONTROL':'REQUEST / QUOTATION'}</span><h2 class="mono">${r.id}</h2><div class="smallMuted">${esc(r.groupName||state.groupName||'Institutional account')} · ${esc(r.campus)} · ${date(r.createdAt)}</div></div><button class="iconBtn" data-modal-close>×</button></div>
-      ${admin?adminQuoteBuilder(r,quote):schoolQuote(r,quote,canApprove)}</div>`;
+      ${admin?adminQuoteBuilder(r,quote):schoolQuote(r,quote,canApprove)}${orderDocumentsSection(r,admin)}</div>`;
   }
 
   function calcQuote(r){
@@ -1142,8 +1333,8 @@
   }
 
   function schoolQuote(r,q,canApprove){
-    const delivery=['Authorized','Procurement','Delivery'].includes(r.status)?tomorrowDelivery():'';
-    return `<div class="schoolQuoteBox"><div class="quoteCustomerTop"><div><span class="eyebrow">${r.quoteRef||'ORDER UNDER REVIEW'}</span><h3>${friendlyStatus(r.status)}</h3></div>${customerStatusPill(r.status)}</div>${r.status==='Drafting'?`<div class="quoteStatePanel"><b>PSC is reviewing this order.</b><p>Your formal quotation will be sent to ${esc(accountEmailLabel())}.</p></div>`:''}${r.quoteRef?`<div class="tableWrap"><table class="dataTable"><thead><tr><th>ITEM</th><th>PACK</th><th>QTY</th><th>UNIT EX VAT</th><th>LINE EX VAT</th><th>VAT</th></tr></thead><tbody>${q.rows.map(x=>`<tr><td><b>${esc(x.p?.name||x.l.sku)}</b><div class="sub mono">${x.l.sku}</div></td><td>${esc(x.p?.pack||'')}</td><td>${x.l.qty}</td><td>${x.sell!==null?money(x.sell):'Pending'}</td><td>${x.sell!==null?money(x.sell*x.l.qty):'Pending'}</td><td>${x.vatRate===null?'Review':x.vatRate+'%'}</td></tr>`).join('')}</tbody></table></div><div class="quoteSummary"><div><span>SUBTOTAL EX VAT</span><b>${q.hasSell?money(q.subtotal):'Pending'}</b></div><div><span>VAT</span><b>${q.taxResolved?money(q.vat):'Review'}</b></div><div><span>TOTAL</span><b>${q.hasSell&&q.taxResolved?money(q.total):'Pending'}</b></div><div><span>VALIDITY</span><b>${esc(r.quote?.validity||'Pending')}</b></div></div>`:''}${r.status==='Sent'?`<div class="modalQuoteActions"><button class="button primary" data-confirm-quote="${r.id}">Confirm quotation</button><button class="button quietDanger" data-cancel-quote="${r.id}">Cancel quotation</button></div>`:''}${delivery?`<div class="deliveryPromise large"><span>TRACK ORDER</span><b>${delivery}</b><small>Delivery date is shown as the next calendar day for this prototype.</small></div>`:''}${r.status==='Accepted'?`<div class="quoteStatePanel delivered"><b>Delivered.</b><p>This order is now part of your purchase history and its items can be repeated from Replenish.</p></div>`:''}${r.status==='Cancelled'?`<div class="quoteStatePanel cancelled"><b>Cancelled.</b><p>${isArchived(r)?'This quotation is now in Archive.':`It will move to Archive on ${addDaysLabel(r.cancelledAt||r.createdAt,30)}.`}</p></div>`:''}</div>`;
+    const delivery=['Authorized','Procurement','Delivery'].includes(r.status)?expectedDeliveryLabel(r):'';
+    return `<div class="schoolQuoteBox"><div class="quoteCustomerTop"><div><span class="eyebrow">${r.quoteRef||'ORDER UNDER REVIEW'}</span><h3>${friendlyStatus(r.status)}</h3></div>${customerStatusPill(r.status)}</div>${r.status==='Drafting'?`<div class="quoteStatePanel"><b>PSC is reviewing this order.</b><p>Your formal quotation will be sent to ${esc(accountEmailLabel())}.</p></div>`:''}${r.quoteRef?`<div class="tableWrap"><table class="dataTable"><thead><tr><th>ITEM</th><th>PACK</th><th>QTY</th><th>UNIT EX VAT</th><th>LINE EX VAT</th><th>VAT</th></tr></thead><tbody>${q.rows.map(x=>`<tr><td><b>${esc(x.p?.name||x.l.sku)}</b><div class="sub mono">${x.l.sku}</div></td><td>${esc(x.p?.pack||'')}</td><td>${x.l.qty}</td><td>${x.sell!==null?money(x.sell):'Pending'}</td><td>${x.sell!==null?money(x.sell*x.l.qty):'Pending'}</td><td>${x.vatRate===null?'Review':x.vatRate+'%'}</td></tr>`).join('')}</tbody></table></div><div class="quoteSummary"><div><span>SUBTOTAL EX VAT</span><b>${q.hasSell?money(q.subtotal):'Pending'}</b></div><div><span>VAT</span><b>${q.taxResolved?money(q.vat):'Review'}</b></div><div><span>TOTAL</span><b>${q.hasSell&&q.taxResolved?money(q.total):'Pending'}</b></div><div><span>VALIDITY</span><b>${esc(r.quote?.validity||'Pending')}</b></div></div>`:''}${r.status==='Sent'?`<div class="modalQuoteActions"><button class="button primary" data-confirm-quote="${r.id}">Confirm quotation</button><button class="button quietDanger" data-cancel-quote="${r.id}">Cancel quotation</button></div>`:''}${delivery?`<div class="deliveryPromise large"><span>TRACK ORDER</span><b>${delivery}</b><small>Delivery timing is shown only when PSC has recorded it for this order.</small></div>`:''}${r.status==='Accepted'?`<div class="quoteStatePanel delivered"><b>Delivered.</b><p>This order is now part of your purchase history and its items can be repeated from Replenish.</p></div>`:''}${r.status==='Cancelled'?`<div class="quoteStatePanel cancelled"><b>Cancelled.</b><p>${isArchived(r)?'This quotation is now in Archive.':`It will move to Archive on ${addDaysLabel(r.cancelledAt||r.createdAt,30)}.`}</p></div>`:''}</div>`;
   }
 
   function adminQuoteBuilder(r,q){
@@ -1570,16 +1761,18 @@
     if(error) throw error;
     const ids=(orders||[]).map(o=>o.id);
     if(!ids.length){ state.requests=[]; return; }
-    const [{data:lines,error:lineError},{data:quotes,error:quoteError},{data:schools,error:schoolError},{data:groups,error:groupError}] = await Promise.all([
+    const [{data:lines,error:lineError},{data:quotes,error:quoteError},{data:documents,error:documentError},{data:schools,error:schoolError},{data:groups,error:groupError}] = await Promise.all([
       sb.from('order_lines').select('*').in('order_id',ids),
       sb.from('quotes').select('*').in('order_id',ids),
+      sb.from('order_documents').select('*').in('order_id',ids).order('created_at',{ascending:false}),
       authContext?.isPscAdmin ? sb.from('schools').select('id,name,campus_name,group_id') : Promise.resolve({data:[authContext.school],error:null}),
       authContext?.isPscAdmin ? sb.from('account_groups').select('id,name') : Promise.resolve({data:authContext.group?[authContext.group]:[],error:null})
     ]);
-    if(lineError) throw lineError; if(quoteError) throw quoteError; if(schoolError) throw schoolError; if(groupError) throw groupError;
+    if(lineError) throw lineError; if(quoteError) throw quoteError; if(documentError) throw documentError; if(schoolError) throw schoolError; if(groupError) throw groupError;
     const schoolMap=Object.fromEntries((schools||[]).filter(Boolean).map(x=>[x.id,x]));
     const groupMap=Object.fromEntries((groups||[]).filter(Boolean).map(x=>[x.id,x]));
     const quoteMap=Object.fromEntries((quotes||[]).map(q=>[q.order_id,q]));
+    const docsByOrder=(documents||[]).reduce((acc,d)=>{ (acc[d.order_id]||(acc[d.order_id]=[])).push(d); return acc; },{});
     state.requests=(orders||[]).map(o=>{
       const sc=schoolMap[o.school_id]||authContext?.school||{};
       const gp=groupMap[o.group_id]||authContext?.group||{};
@@ -1596,6 +1789,8 @@
         createdAt:o.created_at,
         deliveredAt:o.delivered_at,
         cancelledAt:o.cancelled_at,
+        expectedDeliveryDate:o.expected_delivery_date||null,
+        documents:docsByOrder[o.id]||[],
         status:DB_TO_UI_STATUS[o.status]||o.status,
         quoteRef:o.quote_ref||q?.quote_number||'',
         note:o.note||'',
@@ -1713,6 +1908,33 @@
     });
   }
 
+
+  function syncRouteMeta(route){
+    const publicMeta={
+      home:['Pharma Service | Institutional Healthcare Supply UAE','Institutional healthcare supply for schools and organizations in the UAE: controlled specifications, sourcing, quotation, delivery and replenishment.','/'],
+      'who-we-supply':['Who We Supply | Pharma Service','Institutional healthcare supply designed for schools, multi-site groups, workplace health facilities and professional procurement teams.','/who-we-supply.html'],
+      'what-we-supply':['What We Supply | Pharma Service','Opening equipment, recurring clinic consumables, diagnostics, emergency products and appropriate regulated supply routes.','/what-we-supply.html'],
+      'how-it-works':['How Institutional Supply Works | Pharma Service','See how Pharma Service captures requirements, normalizes specifications, sources per line, quotes, delivers and supports repeat supply.','/how-it-works.html'],
+      catalogue:['Institutional Healthcare Catalogue | Pharma Service','Browse the public read-only Pharma Service institutional healthcare catalogue by clinical need.','/catalogue.html'],
+      contact:['Request Institutional Supply | Pharma Service','Send Pharma Service an institutional healthcare requirement or RFQ for sourcing and quotation.','/contact.html'],
+      about:['About Pharma Service','Dubai healthcare supply business developing a controlled institutional supply service for schools and organizations.','/about.html'],
+      careers:['Careers | Pharma Service','Career information from Pharma Service.','/careers.html'],
+      media:['Media & Resources | Pharma Service','Pharma Service company updates and institutional healthcare supply resources.','/media.html']
+    };
+    const baseRoute=route.startsWith('catalogue/')?'catalogue':route;
+    const item=publicMeta[baseRoute];
+    if(!item) return;
+    document.title=item[0];
+    let description=document.querySelector('meta[name="description"]');
+    if(!description){ description=document.createElement('meta'); description.name='description'; document.head.appendChild(description); }
+    description.content=item[1];
+    let canonical=document.querySelector('link[rel="canonical"]');
+    if(!canonical){ canonical=document.createElement('link'); canonical.rel='canonical'; document.head.appendChild(canonical); }
+    canonical.href=`https://pharmaservice.ae${item[2]}`;
+    const og={ 'og:title':item[0], 'og:description':item[1], 'og:url':canonical.href, 'og:type':'website' };
+    Object.entries(og).forEach(([property,content])=>{ let el=document.querySelector(`meta[property="${property}"]`); if(!el){el=document.createElement('meta');el.setAttribute('property',property);document.head.appendChild(el);} el.content=content; });
+  }
+
   function render(){
     const r=currentRoute();
     if(protectedRoute(r)){
@@ -1724,12 +1946,19 @@
     if(r.startsWith('portal/catalogue/')){
       const needId=r.split('/')[2]||'all';
       html=catalogueCategory(needId);
+    } else if(r.startsWith('catalogue/')){
+      const needId=r.split('/')[1]||'all';
+      html=publicCataloguePage(needId);
     } else if(r.startsWith('admin/products/')){
       html=adminProductEditor(r.split('/')[2]);
     } else switch(r){
       case 'home': html=landing();break;
       case 'about': html=aboutPage();break;
       case 'services': html=servicesPage();break;
+      case 'who-we-supply': html=whoWeSupplyPage();break;
+      case 'what-we-supply': html=whatWeSupplyPage();break;
+      case 'how-it-works': html=howItWorksPage();break;
+      case 'catalogue': html=publicCataloguePage('all');break;
       case 'wholesale': html=wholesalePage();break;
       case 'max': location.hash='services'; return;
       case 'demo': html=publicDemoPage();break;
@@ -1741,6 +1970,9 @@
       case 'portal/catalogue': html=catalogue();break;
       case 'portal/requests': html=requestsPage();break;
       case 'portal/replenish': html=replenishPage();break;
+      case 'portal/documents': html=documentsPage();break;
+      case 'portal/stock': html=isDemoAccount()?stockPage():shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">ACCOUNT MODULE</span><h1>Stock & expiry</h1><p>This module is not enabled for this live account yet. PSC will only activate it when the account has real stock and expiry records to display.</p></div></div><section class="panel"><div class="emptyState"><h3>No simulated stock on a live account.</h3><p>Use Orders, Replenish and Documents for current live account activity.</p><button class="button primary" data-go="portal/dashboard">Back to Home</button></div></section>`);break;
+      case 'portal/assets': html=isDemoAccount()?assetsPage():shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">ACCOUNT MODULE</span><h1>Clinic assets</h1><p>This module is not enabled for this live account yet. PSC will only activate it when verified model, serial, warranty and service records have been loaded.</p></div></div><section class="panel"><div class="emptyState"><h3>No simulated assets on a live account.</h3><p>Verified asset records will appear here after onboarding.</p><button class="button primary" data-go="portal/dashboard">Back to Home</button></div></section>`);break;
       case 'portal/insights': html=insightsPage();break;
       case 'portal/archive': html=archivePage();break;
       case 'admin/dashboard': html=adminDashboard();break;
@@ -1751,7 +1983,7 @@
       case 'admin/supplier-feed': html=adminFeed();break;
       default: html=landing();
     }
-    $app.innerHTML=html; bind(); syncPublicHeader();
+    $app.innerHTML=html; syncRouteMeta(r); bind(); syncPublicHeader();
   }
 
 
@@ -1759,71 +1991,74 @@
     event.preventDefault();
     const form=event.currentTarget;
     const button=form.querySelector('[data-public-enquiry-submit]');
-    const requirement=form.querySelector('[name="requirement"]')?.value.trim()||'';
-    const name=form.querySelector('[name="name"]')?.value.trim()||'';
-    const contact_number=form.querySelector('[name="contact_number"]')?.value.trim()||'';
-    const contact_email=form.querySelector('[name="contact_email"]')?.value.trim()||'';
-    const website=form.querySelector('[name="website"]')?.value.trim()||'';
+    const field=n=>(form.querySelector(`[name="${n}"]`)?.value||'').trim();
+    const requirement=field('requirement');
+    const name=field('name');
+    const contact_number=field('contact_number');
+    const contact_email=field('contact_email');
+    const organization=field('organization');
+    const institution_type=field('institution_type');
+    const emirate=field('emirate')||null;
+    const requirement_type=field('requirement_type')||null;
+    const required_by=field('required_by')||null;
+    const siteRaw=field('site_count');
+    const site_count=siteRaw?Number(siteRaw):null;
+    const website=field('website');
+    const rfqFile=form.querySelector('[name="rfq_file"]')?.files?.[0]||null;
 
     if(website) return;
-
-    if(name.length<2){
-      toast('<strong>Please add your name.</strong>');
-      form.querySelector('[name="name"]')?.focus();
-      return;
-    }
-    if(contact_number.length<5){
-      toast('<strong>Please add a contact number.</strong>');
-      form.querySelector('[name="contact_number"]')?.focus();
-      return;
-    }
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact_email)){
-      toast('<strong>Please enter a valid email address.</strong>');
-      form.querySelector('[name="contact_email"]')?.focus();
-      return;
-    }
-    if(requirement.length<10){
-      toast('<strong>Please tell us a little more about the requirement.</strong>');
-      form.querySelector('[name="requirement"]')?.focus();
-      return;
-    }
-
-    if(!sb){
-      toast('<strong>Could not send the enquiry.</strong><br>Please email info@pharmaservice.ae.');
-      return;
-    }
+    if(organization.length<2){ toast('<strong>Please add the organization.</strong>'); form.querySelector('[name="organization"]')?.focus(); return; }
+    if(institution_type.length<2){ toast('<strong>Please select the institution type.</strong>'); form.querySelector('[name="institution_type"]')?.focus(); return; }
+    if(name.length<2){ toast('<strong>Please add your name.</strong>'); form.querySelector('[name="name"]')?.focus(); return; }
+    if(contact_number.length<5){ toast('<strong>Please add a contact number.</strong>'); form.querySelector('[name="contact_number"]')?.focus(); return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact_email)){ toast('<strong>Please enter a valid email address.</strong>'); form.querySelector('[name="contact_email"]')?.focus(); return; }
+    if(requirement.length<10){ toast('<strong>Please tell us a little more about the requirement.</strong>'); form.querySelector('[name="requirement"]')?.focus(); return; }
+    if(site_count!==null && (!Number.isInteger(site_count) || site_count<1 || site_count>10000)){ toast('<strong>Please check the number of sites.</strong>'); return; }
+    if(rfqFile && rfqFile.size>10*1024*1024){ toast('<strong>Attachment too large.</strong><br>Maximum file size is 10 MB.'); return; }
+    if(!sb){ toast('<strong>Could not send the enquiry.</strong><br>Please email info@pharmaservice.ae.'); return; }
 
     const original=button?.textContent||'Send enquiry';
-    if(button){
-      button.disabled=true;
-      button.textContent='Sending…';
-    }
+    if(button){ button.disabled=true; button.textContent='Sending…'; }
 
+    let rfq_object_path=null;
+    let rfq_file_name=null;
     try{
+      if(rfqFile){
+        const allowed=['application/pdf','text/csv','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+        if(!allowed.includes(rfqFile.type)){ throw new Error('Unsupported RFQ attachment type.'); }
+        const token=(crypto?.randomUUID?.()||`${Date.now()}-${Math.random().toString(36).slice(2)}`);
+        rfq_object_path=`public/${token}-${safeFileName(rfqFile.name)}`;
+        const {error:uploadError}=await sb.storage.from('institutional-enquiries').upload(rfq_object_path,rfqFile,{cacheControl:'3600',upsert:false});
+        if(uploadError) throw uploadError;
+        rfq_file_name=rfqFile.name;
+      }
+
       const {error}=await sb.from('institutional_enquiries').insert({
-        name,
-        contact_number,
-        contact_email,
-        requirement,
-        source_page:'public_contact'
+        name, contact_number, contact_email, organization, institution_type,
+        site_count, emirate, requirement_type, required_by, requirement,
+        rfq_object_path, rfq_file_name,
+        source_page:'public_contact_v37'
       });
       if(error) throw error;
 
       form.reset();
-      toast('<strong>Thank you.</strong><br>Your enquiry has been received and Pharma Service will follow up.');
+      toast('<strong>Thank you.</strong><br>Your institutional requirement has been received.');
     }catch(e){
       console.error('Public enquiry submission failed:',e);
-      toast('<strong>Could not send the enquiry.</strong><br>Please email info@pharmaservice.ae.');
+      toast(`<strong>Could not send the enquiry.</strong><br>${esc(e?.message||'Please email info@pharmaservice.ae.')}`);
     }finally{
-      if(button){
-        button.disabled=false;
-        button.textContent=original;
-      }
+      if(button){ button.disabled=false; button.textContent=original; }
     }
   }
 
+
   function bind(){
     document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>go(el.dataset.go)));
+    document.querySelectorAll('[data-public-menu]').forEach(el=>el.addEventListener('click',()=>{ui.publicMenu=!ui.publicMenu;render()}));
+    document.querySelectorAll('[data-global-search]').forEach(el=>{
+      el.addEventListener('input',e=>{ui.globalSearch=e.target.value;});
+      el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();ui.catalogueQuery=e.target.value.trim();go('portal/catalogue/all');}});
+    });
     document.querySelectorAll('[data-tour-next]').forEach(el=>el.addEventListener('click',()=>{ui.tourStep=Math.min(5,(ui.tourStep||0)+1);render()}));
     document.querySelectorAll('[data-tour-prev]').forEach(el=>el.addEventListener('click',()=>{ui.tourStep=Math.max(0,(ui.tourStep||0)-1);render()}));
     document.querySelectorAll('[data-tour-jump]').forEach(el=>el.addEventListener('click',()=>{ui.tourStep=Number(el.dataset.tourJump)||0;render()}));
@@ -1849,12 +2084,14 @@
 
     document.querySelectorAll('[data-replenish]').forEach(el=>el.addEventListener('click',()=>{const [sku,q]=el.dataset.replenish.split('|');addBasket(sku,Math.max(1,Number(q)||1));toast('<strong>Added to cart.</strong><br>Previous delivered quantity restored.')}));
     document.querySelectorAll('[data-reorder-order]').forEach(el=>el.addEventListener('click',()=>reorderRequest(el.dataset.reorderOrder)));
-    document.querySelectorAll('[data-confirm-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.confirmQuote,'confirm');toast(`<strong>Quotation confirmed.</strong><br>${tomorrowDelivery()}.`)}catch(e){console.error(e);toast('<strong>Could not confirm quotation.</strong>')}}));
+    document.querySelectorAll('[data-confirm-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.confirmQuote,'confirm');toast('<strong>Quotation confirmed.</strong><br>PSC will confirm the fulfilment and delivery timing for this order.')}catch(e){console.error(e);toast('<strong>Could not confirm quotation.</strong>')}}));
     document.querySelectorAll('[data-cancel-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.cancelQuote,'cancel');toast('<strong>Quotation cancelled.</strong><br>It will remain visible for 30 days before moving to Archive.')}catch(e){console.error(e);toast('<strong>Could not cancel quotation.</strong>')}}));
     document.querySelectorAll('[data-reorder-last]').forEach(el=>el.addEventListener('click',()=>{const r=state.requests.find(x=>x.campus===state.campus);if(r)reorderRequest(r.id)}));
     document.querySelectorAll('[data-request-view]').forEach(el=>el.addEventListener('click',()=>{ui.modal={type:'request',id:el.dataset.requestView,admin:false};render()}));
     document.querySelectorAll('[data-admin-request]').forEach(el=>el.addEventListener('click',()=>{ui.modal={type:'request',id:el.dataset.adminRequest,admin:true};render()}));
     document.querySelectorAll('[data-modal-close]').forEach(el=>el.addEventListener('click',()=>{ui.modal=null;render()}));
+    document.querySelectorAll('[data-document-open]').forEach(el=>el.addEventListener('click',()=>openOrderDocument(el.dataset.documentOpen)));
+    document.querySelectorAll('[data-document-upload]').forEach(el=>el.addEventListener('change',async e=>{const file=e.target.files?.[0];if(file)await uploadOrderDocument(el.dataset.documentUpload,file);}));
     const cq=document.querySelector('[data-cat-q]'); if(cq)cq.addEventListener('input',e=>{ui.catalogueQuery=e.target.value;render()});
     document.querySelectorAll('[data-clinic-need]').forEach(el=>el.addEventListener('click',()=>{ui.catalogueNeed=el.dataset.clinicNeed||'all';render()}));
     document.querySelectorAll('[data-cat-filter]').forEach(el=>el.addEventListener('change',e=>{if(el.dataset.catFilter==='category')ui.catalogueCat=e.target.value;else ui.catalogueFilter=e.target.value;render()}));
@@ -1868,7 +2105,7 @@
     document.querySelectorAll('[data-quote-meta]').forEach(el=>el.addEventListener('change',e=>{const[id,field]=el.dataset.quoteMeta.split('|');const r=state.requests.find(x=>x.id===id);r.quote=r.quote||{lines:{}};r.quote[field]=e.target.value;audit('Quote terms updated',`${id} ${field}`);save()}));
     document.querySelectorAll('[data-request-status]').forEach(el=>el.addEventListener('change',e=>{const r=state.requests.find(x=>x.id===el.dataset.requestStatus);r.status=e.target.value;if(r.status==='Sent'&&!r.quoteRef)r.quoteRef=`PSC-Q-${new Date().getFullYear()}-${String(state.requests.indexOf(r)+1001).padStart(4,'0')}`;audit('Request status changed',`${r.id} → ${r.status}`);save();render()}));
     document.querySelectorAll('[data-quote-ref]').forEach(el=>el.addEventListener('change',e=>{const r=state.requests.find(x=>x.id===el.dataset.quoteRef);r.quoteRef=e.target.value;audit('Quote reference updated',r.id);save()}));
-    document.querySelectorAll('[data-approve-quote]').forEach(el=>el.addEventListener('click',()=>{const r=state.requests.find(x=>x.id===el.dataset.approveQuote);r.status='Authorized';audit('Quotation confirmed by demo account user',r.id);save();render();toast(`<strong>Quotation confirmed.</strong><br>${tomorrowDelivery()}.`)}));
+    document.querySelectorAll('[data-approve-quote]').forEach(el=>el.addEventListener('click',()=>{const r=state.requests.find(x=>x.id===el.dataset.approveQuote);r.status='Authorized';audit('Quotation confirmed by demo account user',r.id);save();render();toast('<strong>Quotation confirmed.</strong><br>PSC will confirm the fulfilment and delivery timing for this order.')}));
     document.querySelectorAll('[data-export-products]').forEach(el=>el.addEventListener('click',exportProducts));
 
     document.querySelectorAll('[data-cms-channel]').forEach(el=>el.addEventListener('click',()=>{ui.cmsChannel=el.dataset.cmsChannel;render()}));

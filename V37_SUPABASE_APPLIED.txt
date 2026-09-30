@@ -1,0 +1,23 @@
+PSC V37 — Supabase status
+=========================
+Applied to the connected PSC Supabase project on 30 September 2026:
+
+1. v37_conversion_documents_and_enquiry_fields
+   - Added institutional enquiry qualification fields.
+   - Added private order_documents record layer.
+   - Added private order-documents storage bucket.
+   - Added customer/admin RLS for order document metadata and storage.
+
+2. v37_harden_public_enquiry_capture
+   - Added validation constraints for the new enquiry fields.
+
+3. v37_public_rfq_attachment_capture
+   - Added rfq_object_path / rfq_file_name.
+   - Added private institutional-enquiries storage bucket (10 MB; PDF/Word/Excel/CSV).
+   - Added public upload-only and PSC-admin read/delete policies.
+
+4. v37_backward_compatible_enquiry_policy
+   - Kept the live V36 enquiry form working during rollout by allowing the new fields to be null.
+   - V37 UI itself requires organization and institution type before submission.
+
+The V37 front-end expects these changes to exist before its Documents/RFQ features are used.
