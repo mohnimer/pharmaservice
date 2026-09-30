@@ -4134,3 +4134,23 @@ button[data-cancel-quote]:hover{
     font-size:15px!important;
   }
 }
+
+
+/* =========================================================
+   V35 — Public header uses the exact public page background
+   ========================================================= */
+.publicLanding,
+.publicPage{
+  background:#fbf8f1!important;
+}
+
+.publicHeader,
+.publicHeader.headerScrolled{
+  background:#fbf8f1!important;
+}
+
+/* Keep the separation subtle without creating a different header block */
+.publicHeader{
+  border-bottom:1px solid rgba(56,51,44,.12)!important;
+  box-shadow:none!important;
+}

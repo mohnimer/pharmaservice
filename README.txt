@@ -25,3 +25,9 @@ Exact changes:
 
 Important:
 Upload the included dha-requirement.png into the repo's assets folder so this exact supplied image is displayed.
+
+V35
+---
+- Public website header background now uses exactly the same #fbf8f1 page colour as the section beneath it.
+- Sticky/scrolled header keeps the same colour.
+- Removed the visual white header block; retained only a subtle bottom divider.
