@@ -1165,7 +1165,7 @@
             <input id="startRfq" name="rfq_file" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,application/pdf,text/csv,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
           </div>
           <div class="prospectHoneypot" aria-hidden="true"><label for="startWebsite">Website</label><input id="startWebsite" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-          <div class="prospectSubmitRow"><p>We will use this to come back to you about the institutional requirement.</p><button class="button primary semanticPrimary" type="submit" data-public-enquiry-submit>Send to Pharma Service</button></div>
+          <div class="prospectSubmitRow"><p>We will use this to come back to you about the institutional requirement.</p><button class="button primary semanticPrimary" type="submit" data-public-enquiry-submit>Send request</button></div>
         </form>
       </section>
       ${publicFooter()}

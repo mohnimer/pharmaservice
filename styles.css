@@ -6734,3 +6734,42 @@ main.publicPage:has(.modelQuietIntro) .publicPageHero p{
   .publicLanding .pscHeroBarcode{width:74%!important;height:48px!important;margin:24px auto 10px!important}
   .publicLanding .pscHeroBoardLabel{font-size:9.5px!important;white-space:normal!important}
 }
+
+/* =========================================================
+   V37.5.11 — Start-page submit CTA cleanup
+   No oversized pill treatment on the institutional enquiry form.
+   ========================================================= */
+.startProspectForm .prospectSubmitRow{
+  align-items:center!important;
+  gap:22px!important;
+}
+.startProspectForm .prospectSubmitRow button[data-public-enquiry-submit]{
+  width:auto!important;
+  min-width:142px!important;
+  min-height:46px!important;
+  padding:0 20px!important;
+  border-radius:12px!important;
+  background:#0c1d1b!important;
+  color:#fff!important;
+  border:1px solid #0c1d1b!important;
+  font-size:12.5px!important;
+  font-weight:750!important;
+  line-height:1!important;
+  letter-spacing:0!important;
+  box-shadow:none!important;
+  flex:0 0 auto!important;
+}
+.startProspectForm .prospectSubmitRow button[data-public-enquiry-submit]:hover{
+  background:#16302d!important;
+  border-color:#16302d!important;
+  transform:none!important;
+}
+@media(max-width:720px){
+  .startProspectForm .prospectSubmitRow{
+    align-items:flex-start!important;
+  }
+  .startProspectForm .prospectSubmitRow button[data-public-enquiry-submit]{
+    width:100%!important;
+    min-height:46px!important;
+  }
+}
