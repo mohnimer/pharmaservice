@@ -687,10 +687,10 @@
         </div>
         <div class="pscHeroProcess" aria-label="The institutional way">
           <div class="pscHeroBoardStages">
-            <article><small>01</small><h2>SHOP</h2><p>pharmaceuticals,<br>medical disposables,<br>and devices.</p></article>
-            <article><small>02</small><h2>QUOTE</h2><p>wholesale prices, while<br>ensuring alignment to<br>regulatory guidelines.</p></article>
-            <article><small>03</small><h2>MANAGE</h2><p>orders, invoices, and<br>various historical reports.</p></article>
-            <article><small>04</small><h2>REPEAT</h2><p>easily repeat previously<br>ordered items from the<br>same account.</p></article>
+            <article><small>01</small><h2>SHOP</h2><p>pharmaceuticals, medical disposables, and devices.</p></article>
+            <article><small>02</small><h2>QUOTE</h2><p>wholesale prices, while ensuring alignment to regulatory guidelines.</p></article>
+            <article><small>03</small><h2>MANAGE</h2><p>orders, invoices, and various historical reports.</p></article>
+            <article><small>04</small><h2>REPEAT</h2><p>easily repeat previously ordered items from the same account.</p></article>
           </div>
           <div class="pscHeroBarcode" aria-hidden="true"></div>
           <b class="pscHeroBoardLabel">PS–I–001 · THE INSTITUTIONAL WAY</b>
