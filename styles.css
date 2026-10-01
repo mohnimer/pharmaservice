@@ -5802,3 +5802,217 @@ main.publicPage:has(.modelQuietIntro) .publicPageHero p{
   }
   .publicLanding .homePortalTeaser .button{width:100%!important}
 }
+
+/* =========================================================
+   V37.5.4 — Web-native Institutional hero
+   Keeps the supplied Canva composition, but makes it behave
+   like the rest of the website rather than a flat poster image.
+   Keep this block LAST.
+   ========================================================= */
+
+.publicLanding .pscInstitutionalHero{
+  --hero-paper:#fbfaf7;
+  --hero-ink:#242625;
+  --hero-teal:#24a8a1;
+  --hero-kraft:#b98d5a;
+  width:100%;
+  min-height:clamp(560px,65vw,760px);
+  padding:clamp(58px,7vw,108px) clamp(34px,5.5vw,96px) clamp(50px,6vw,86px);
+  display:grid;
+  grid-template-columns:minmax(380px,.82fr) minmax(560px,1.18fr);
+  align-items:center;
+  gap:clamp(50px,6vw,110px);
+  position:relative;
+  overflow:hidden;
+  background-color:var(--hero-paper);
+  background-image:
+    linear-gradient(rgba(22,28,27,.042) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(22,28,27,.042) 1px,transparent 1px);
+  background-size:30px 30px;
+  border-bottom:1px solid #d9d4cc;
+}
+.publicLanding .pscInstitutionalHero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 83% 16%,rgba(37,170,162,.08),transparent 30%),
+    linear-gradient(90deg,rgba(255,255,255,.56),transparent 44%);
+}
+.publicLanding .pscHeroLeft,
+.publicLanding .pscHeroBoard{position:relative;z-index:1}
+.publicLanding .pscHeroLeft{align-self:stretch;display:flex;flex-direction:column;justify-content:center;max-width:590px}
+.publicLanding .pscHeroLeft h1{
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  width:max-content;
+  max-width:100%;
+  font-size:clamp(66px,7.1vw,116px);
+  line-height:.79;
+  letter-spacing:-.072em;
+  font-weight:700;
+  color:var(--hero-ink);
+}
+.publicLanding .pscHeroLeft h1 span,
+.publicLanding .pscHeroLeft h1 strong{display:block;font-weight:700}
+.publicLanding .pscHeroLeft h1 strong{
+  color:var(--hero-teal);
+  margin-left:clamp(50px,6vw,104px);
+  font-weight:600;
+}
+.publicLanding .pscHeroTagline{
+  margin:clamp(42px,5vw,68px) 0 0 clamp(58px,7vw,116px);
+  width:max-content;
+  max-width:calc(100% - 58px);
+}
+.publicLanding .pscHeroTagline i{
+  display:block;
+  width:68px;
+  height:2px;
+  margin:0 auto 19px;
+  background:var(--hero-teal);
+  opacity:.62;
+}
+.publicLanding .pscHeroTagline p{
+  margin:0;
+  font-size:clamp(23px,2vw,34px);
+  letter-spacing:-.055em;
+  line-height:1;
+  font-weight:400;
+  white-space:nowrap;
+}
+.publicLanding .pscHeroAudience{
+  margin:auto 0 0;
+  padding-top:52px;
+  color:#626663;
+  font-size:12px;
+  line-height:1.45;
+}
+
+.publicLanding .pscHeroBoard{
+  width:min(100%,690px);
+  justify-self:end;
+  aspect-ratio:1.42/1;
+  border:1px solid #2c2925;
+  border-radius:19px;
+  padding:clamp(26px,2.6vw,38px) clamp(25px,2.4vw,34px) clamp(24px,2.6vw,36px);
+  background-color:var(--hero-kraft);
+  background-image:
+    radial-gradient(circle at 15% 20%,rgba(255,255,255,.09) 0 1px,transparent 1.5px),
+    radial-gradient(circle at 70% 55%,rgba(40,28,18,.10) 0 1px,transparent 1.4px),
+    linear-gradient(125deg,rgba(255,255,255,.06),rgba(69,40,18,.05));
+  background-size:13px 13px,17px 17px,100% 100%;
+  box-shadow:0 24px 70px rgba(43,34,26,.09);
+  transform:rotate(.15deg);
+  display:flex;
+  flex-direction:column;
+}
+.publicLanding .pscHeroBoardStages{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+}
+.publicLanding .pscHeroBoardStages article{
+  position:relative;
+  min-height:166px;
+  padding:18px 12px 14px;
+  border-radius:14px;
+  background:#071615;
+  color:#fff;
+}
+.publicLanding .pscHeroBoardStages small{
+  position:absolute;
+  top:11px;
+  right:10px;
+  font-size:7px;
+  line-height:1;
+  font-weight:800;
+  color:#42c7bf;
+}
+.publicLanding .pscHeroBoardStages h2{
+  margin:0 0 48px;
+  font-size:14px;
+  letter-spacing:-.035em;
+  line-height:1;
+  color:#f6f6f2;
+}
+.publicLanding .pscHeroBoardStages p{
+  margin:0;
+  font-size:8.7px;
+  line-height:1.42;
+  color:#e5e6e2;
+}
+.publicLanding .pscHeroBarcode{
+  width:58%;
+  height:62px;
+  margin:clamp(38px,4vw,58px) auto 14px;
+  background:repeating-linear-gradient(
+    90deg,
+    #0b0a09 0 2px,
+    transparent 2px 5px,
+    #0b0a09 5px 7px,
+    transparent 7px 10px,
+    #0b0a09 10px 14px,
+    transparent 14px 16px,
+    #0b0a09 16px 18px,
+    transparent 18px 22px
+  );
+}
+.publicLanding .pscHeroBoardLabel{
+  display:block;
+  margin-top:auto;
+  text-align:center;
+  font-size:13px;
+  letter-spacing:-.02em;
+  font-weight:800;
+  color:#13110f;
+}
+
+/* The next section should feel connected to the hero, not like a new website. */
+.publicLanding .homeEditorialIntro{margin-top:0!important}
+
+@media(max-width:1120px){
+  .publicLanding .pscInstitutionalHero{
+    min-height:auto;
+    grid-template-columns:minmax(310px,.75fr) minmax(470px,1.25fr);
+    gap:42px;
+    padding-left:34px;
+    padding-right:34px;
+  }
+  .publicLanding .pscHeroBoardStages article{min-height:148px}
+  .publicLanding .pscHeroBoardStages h2{margin-bottom:38px;font-size:12.5px}
+  .publicLanding .pscHeroBoardStages p{font-size:7.8px}
+}
+
+@media(max-width:860px){
+  .publicLanding .pscInstitutionalHero{
+    grid-template-columns:1fr;
+    gap:50px;
+    padding:58px 24px 46px;
+  }
+  .publicLanding .pscHeroLeft{max-width:none}
+  .publicLanding .pscHeroLeft h1{font-size:clamp(64px,16vw,102px)}
+  .publicLanding .pscHeroLeft h1 strong{margin-left:clamp(36px,10vw,88px)}
+  .publicLanding .pscHeroTagline{margin-left:clamp(36px,10vw,88px);margin-top:40px}
+  .publicLanding .pscHeroAudience{margin-top:44px;padding-top:0}
+  .publicLanding .pscHeroBoard{justify-self:center;width:min(100%,650px);transform:none}
+}
+
+@media(max-width:560px){
+  .publicLanding .pscInstitutionalHero{padding:44px 18px 34px;gap:38px;background-size:24px 24px}
+  .publicLanding .pscHeroLeft h1{font-size:clamp(57px,18vw,78px);line-height:.82}
+  .publicLanding .pscHeroLeft h1 strong{margin-left:28px}
+  .publicLanding .pscHeroTagline{margin:30px 0 0 28px;max-width:calc(100% - 28px)}
+  .publicLanding .pscHeroTagline i{width:48px;margin-bottom:14px}
+  .publicLanding .pscHeroTagline p{font-size:20px;white-space:normal}
+  .publicLanding .pscHeroAudience{font-size:11px;margin-top:36px}
+  .publicLanding .pscHeroBoard{aspect-ratio:auto;padding:18px 16px 20px;border-radius:16px}
+  .publicLanding .pscHeroBoardStages{grid-template-columns:1fr 1fr;gap:7px}
+  .publicLanding .pscHeroBoardStages article{min-height:128px;padding:15px 11px 12px}
+  .publicLanding .pscHeroBoardStages h2{font-size:12px;margin-bottom:28px}
+  .publicLanding .pscHeroBoardStages p{font-size:8px}
+  .publicLanding .pscHeroBarcode{height:44px;width:72%;margin:28px auto 12px}
+  .publicLanding .pscHeroBoardLabel{font-size:10px}
+}

@@ -679,8 +679,22 @@
     const approved=products().filter(p=>p.schoolApproved).length;
     return `<main class="landingPage publicLanding">
       ${publicHeader('home')}
-      <section class="canvaHeroExact" aria-label="Institutional Supply - more time for what matters">
-        <img src="/assets/institutional-hero-canva.webp" alt="Institutional Supply. More time for what matters. For schools, nurseries, and educational institutions. Shop pharmaceuticals, medical disposables and devices; quote with institutional pricing and regulatory alignment; manage orders, invoices and historical reports; repeat previously ordered items from the same account." fetchpriority="high" decoding="async">
+      <section class="pscInstitutionalHero" aria-label="Institutional Supply - more time for what matters">
+        <div class="pscHeroLeft">
+          <h1><span>Institutional</span><strong>Supply</strong></h1>
+          <div class="pscHeroTagline"><i aria-hidden="true"></i><p>more time for what matters</p></div>
+          <p class="pscHeroAudience">For schools, nurseries, and educational institutions.</p>
+        </div>
+        <div class="pscHeroBoard" aria-label="The institutional way">
+          <div class="pscHeroBoardStages">
+            <article><small>01</small><h2>SHOP</h2><p>pharmaceuticals,<br>medical disposables,<br>and devices.</p></article>
+            <article><small>02</small><h2>QUOTE</h2><p>institutional prices, with<br>careful specification and<br>regulatory alignment.</p></article>
+            <article><small>03</small><h2>MANAGE</h2><p>orders, invoices, and<br>useful account history.</p></article>
+            <article><small>04</small><h2>REPEAT</h2><p>repeat previously supplied<br>items from the same<br>account.</p></article>
+          </div>
+          <div class="pscHeroBarcode" aria-hidden="true"></div>
+          <b class="pscHeroBoardLabel">PS–I–001 · THE INSTITUTIONAL WAY</b>
+        </div>
       </section>
       <section class="homeEditorialIntro">
         <div class="homeEditorialLead">
