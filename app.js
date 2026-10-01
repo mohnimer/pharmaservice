@@ -682,22 +682,29 @@
       <section class="canvaHeroExact" aria-label="Institutional Supply - more time for what matters">
         <img src="/assets/institutional-hero-canva.webp" alt="Institutional Supply. More time for what matters. For schools, nurseries, and educational institutions. Shop pharmaceuticals, medical disposables and devices; quote with institutional pricing and regulatory alignment; manage orders, invoices and historical reports; repeat previously ordered items from the same account." fetchpriority="high" decoding="async">
       </section>
-      <section class="beliefSection operationsBelief"><div class="beliefRule"></div><div class="beliefGrid"><div><span class="kicker">WHY THIS EXISTS</span><h2>Unlike individuals, institutions have structured, recurring and cost-sensitive healthcare needs.</h2></div><div><p>Pharma Service exists to make those needs easier to manage. This includes identifying what is required, sourcing each line intelligently, consolidating supply through one accountable partner, and staying ahead of replenishment, replacement and changing requirements.</p><p class="beliefStrong">Our mission is to help institutions spend better, stay reliably supplied, and make healthcare procurement simpler.</p></div></div></section>
-      <section class="publicProofSection">
-        <div class="publicProofHead"><span class="kicker">HOW WE CONTROL THE WORK</span><h2>Procurement discipline before marketing promises.</h2><p>Pharma Service is building the institutional service around documented requirements, comparable sourcing, clear commercial evidence and accountable follow-through.</p></div>
-        <div class="publicProofGrid">
-          <article><span>01</span><b>Requirement-led specification</b><p>We separate the institution's requirement from the exact commercial product offered.</p></article>
-          <article><span>02</span><b>Source per line</b><p>Products can come from different suitable suppliers while the customer keeps one commercial relationship.</p></article>
-          <article><span>03</span><b>Licensed-route discipline</b><p>Regulated products and specialist services remain subject to the appropriate UAE supply route and professional controls.</p></article>
-          <article><span>04</span><b>Account history</b><p>Quotations, decisions, deliveries and repeat requirements stay tied to the institutional account.</p></article>
+      <section class="homeEditorialIntro">
+        <div class="homeEditorialLead">
+          <span class="kicker">INSTITUTIONAL SUPPLY</span>
+          <h2>Good supply is mostly a details job.</h2>
         </div>
+        <div class="homeEditorialCopy">
+          <p>A clinic can ask for something perfectly ordinary — gauze, gloves, a BP monitor, test strips — and still end up with the wrong product if the specification is loose.</p>
+          <p>That is the part we pay attention to: the exact model, size, sterile status, compatible consumable, pack, expiry, accessories and supply route that make the item right for the institution using it.</p>
+          <p class="homeEditorialStrong">The aim is simple: get the right thing there, keep the record straight, and make the next order easier.</p>
+        </div>
+      </section>
+      <section class="homeDetailLedger" aria-label="What Pharma Service checks">
+        <article><span>Consumables</span><b>Material · size · sterile status · pack · expiry</b><p>Two boxes with the same short description can still be very different products.</p></article>
+        <article><span>Diagnostics</span><b>Exact model · intended use · compatible consumables</b><p>A meter, cuff or strip only helps if the pieces belong together.</p></article>
+        <article><span>Emergency equipment</span><b>Model · accessories · consumables · service</b><p>The equipment is only part of the system that has to stay ready.</p></article>
+        <article><span>Regulated lines</span><b>Product · recipient · storage · appropriate route</b><p>Medicines, oxygen and specialist items need the right licensed and professional controls.</p></article>
       </section>
       <section class="publicClinicalPreview">
         <div class="publicClinicalPreviewHead">
           <div>
             <span class="kicker">BROWSE BY CLINICAL NEED</span>
-            <h2>Find products the way healthcare teams actually think.</h2>
-            <p>Start with the clinical need, then move directly into the relevant medicines, consumables, devices and equipment.</p>
+            <h2>Start with what the clinic needs.</h2>
+            <p>You do not need to know how we file the catalogue. Pick the job in front of you and work from there.</p>
           </div>
           <button class="textAction" data-go="catalogue">Explore catalogue</button>
         </div>
@@ -740,7 +747,7 @@
         </div>
       </section>
       ${workshopTeaser()}
-      <section class="demoTeaser"><div><span class="kicker">SEE HOW IT WORKS</span><h2>Take a guided tour of Pharma Service.</h2><p>See the institutional customer journey from product selection and quotation through order management, delivery and repeat purchasing.</p></div><button class="button dark large semanticPrimary" data-go="demo">Take guided tour</button></section>
+      <section class="demoTeaser homePortalTeaser"><div><span class="kicker">THE ACCOUNT SIDE</span><h2>Want to see what happens after you find the product?</h2><p>The guided tour shows the practical bit: building a request, receiving the quotation, following the order and coming back to the same history when it is time to replenish.</p></div><button class="button outline large semanticPrimary" data-go="demo">View the guided tour</button></section>
       ${publicFooter()}
     </main>`;
   }
