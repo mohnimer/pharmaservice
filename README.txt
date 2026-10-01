@@ -1,3 +1,13 @@
+V37.6 — Fluid catalogue / request interaction pass
+
+- Product detail now opens in-place with app-like sheet behavior on mobile.
+- Persistent Add to request / View request actions keep the user in context.
+- Supply Request replaces retail-style cart language in the active customer flow.
+- Related products can be explored without losing catalogue position.
+- Public catalogue gains the same immediate product inspection pattern.
+- Search/filter rerenders preserve position and search focus.
+- No payment/checkout mechanics and no Supabase write-path changes.
+
 PSC V37.2 — PUBLIC HIERARCHY + BREATHING ROOM
 ===============================================
 

@@ -30,7 +30,7 @@
   let authReady = false;
 
   let state = load();
-  let ui = { mobile:false, publicMenu:false, basket:false, modal:null, accountMenu:false, globalSearch:'', catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All', cmsChannel:'institutional', cmsSearch:'', wholesaleQuery:'', wholesaleCat:'All', workshopQuery:'', workshopCategory:'All', tourStep:0 };
+  let ui = { mobile:false, publicMenu:false, basket:false, modal:null, accountMenu:false, globalSearch:'', catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All', cmsChannel:'institutional', cmsSearch:'', wholesaleQuery:'', wholesaleCat:'All', workshopQuery:'', workshopCategory:'All', tourStep:0, overlayScroll:0 };
 
   const cms = {
     loaded:false,
@@ -554,6 +554,47 @@
     if(location.pathname!=='/' || !location.hash){ location.href=target; return; }
     location.hash=route; window.scrollTo({top:0,behavior:'instant'}); render();
   }
+  function renderUi({preserveScroll=true,focusSelector=null,cursor=null,transition=true}={}){
+    const y=window.scrollY;
+    const draw=()=>{
+      render();
+      requestAnimationFrame(()=>{
+        if(preserveScroll) window.scrollTo({top:y,behavior:'instant'});
+        if(focusSelector){
+          const target=document.querySelector(focusSelector);
+          if(target){ target.focus({preventScroll:true}); if(Number.isInteger(cursor)&&target.setSelectionRange) target.setSelectionRange(cursor,cursor); }
+        }
+      });
+    };
+    if(transition && !focusSelector && document.startViewTransition){
+      try{ document.startViewTransition(draw); return; }catch{}
+    }
+    draw();
+  }
+  function openProductOverlay(sku,publicMode=false){
+    ui.overlayScroll=window.scrollY;
+    ui.modal={type:publicMode?'public-product':'product',sku};
+    renderUi({preserveScroll:true});
+  }
+  function closeModalOverlay(){
+    const y=Number.isFinite(ui.overlayScroll)?ui.overlayScroll:window.scrollY;
+    ui.modal=null;
+    render();
+    requestAnimationFrame(()=>window.scrollTo({top:y,behavior:'instant'}));
+  }
+  function openBasketOverlay(){
+    ui.overlayScroll=window.scrollY;
+    ui.modal=null;
+    ui.basket=true;
+    renderUi({preserveScroll:true});
+  }
+  function closeBasketOverlay(){
+    const y=Number.isFinite(ui.overlayScroll)?ui.overlayScroll:window.scrollY;
+    ui.basket=false;
+    render();
+    requestAnimationFrame(()=>window.scrollTo({top:y,behavior:'instant'}));
+  }
+
   function audit(action, detail){ state.audit.unshift({at:new Date().toISOString(),actor:'Demo user',action,detail}); state.audit=state.audit.slice(0,50); save(); }
   function toast(msg){ const old=document.querySelector('.toast'); if(old)old.remove(); const d=document.createElement('div');d.className='toast';d.innerHTML=msg;$app.appendChild(d);setTimeout(()=>d.remove(),2800); }
 
@@ -645,10 +686,10 @@
                 </button>`).join('')}</div>
               </div>`:''}
             </div>
-            <button class="button dark pillBasket" data-basket>Cart <b>${basketQty()}</b></button>`}
+            <button class="button dark pillBasket" data-basket>Request <b>${basketQty()}</b></button>`}
           </div>
         </header>
-        ${!admin?`<div class="mobileSearchRow"><div class="mobileSearchInput"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search catalogue…" aria-label="Search institutional catalogue"></div><button class="mobileCartButton" data-basket>Cart <b>${basketQty()}</b></button></div>`:''}
+        ${!admin?`<div class="mobileSearchRow"><div class="mobileSearchInput"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search catalogue…" aria-label="Search institutional catalogue"></div><button class="mobileCartButton" data-basket>Request <b>${basketQty()}</b></button></div>`:''}
         ${!admin&&isDemoAccount()?`<div class="demoAccountBanner"><b>DEMO ACCOUNT</b><span>Sample institutional data · Explore freely · Actions are simulated and reset on refresh.</span></div>`:''}
         <div class="contentWrap v7ContentWrap">${content}</div>
       </main>
@@ -1073,8 +1114,8 @@
     const imageUrl=productDisplayImageUrl(p);
     const workshop=workshopForProduct(p,1)[0];
     return `<article class="publicCatalogueCard">
-      <div class="publicCatalogueVisual" style="--need-bg:${need.bg};--need-ink:${need.ink}">${imageUrl?`<img src="${esc(imageUrl)}" alt="${esc(displayName)}" loading="lazy">`:`<span>${esc(need.label)}</span>`}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</div>
-      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><h3>${esc(displayName)}</h3><p>${esc(pack)}</p>${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
+      <button class="publicCatalogueVisual publicProductView" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-public-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details">${imageUrl?`<img src="${esc(imageUrl)}" alt="${esc(displayName)}" loading="lazy">`:`<span>${esc(need.label)}</span>`}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>
+      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(pack)}</p>${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
       <button class="button outline full" data-go="contact">Request institutional quote</button>
     </article>`;
   }
@@ -1522,7 +1563,7 @@
       return `<article class="replenishCard"><div class="replenishVisual">${visual}</div><div class="replenishBody"><span class="sku">${x.p.pscSku}</span><h3>${esc(x.p.name)}</h3><p>${esc(x.p.pack)}</p><div class="replenishMeta"><div><span>LAST QTY</span><b>${x.qty}</b></div><div><span>LAST DELIVERED</span><b>${deliveredLabel}</b></div></div><button class="button ${capital?'dark':'primary'} full semanticPrimary" data-replenish="${x.p.pscSku}|${x.qty}">${actionLabel} →</button></div></article>`;
     }).join('');
     const body=items.length?`<div class="replenishGrid">${cards}</div>`:'<div class="emptyState"><h3>No delivered items yet</h3><p>Products will appear here after their first completed order.</p></div>';
-    return shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">PREVIOUSLY DELIVERED</span><h1>Replenish</h1><p>Repeat products already supplied to this clinic. Consumables can go straight to cart; capital equipment can be requested again for PSC review.</p></div><button class="button dark" data-basket>Open cart</button></div>${body}`);
+    return shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">PREVIOUSLY DELIVERED</span><h1>Replenish</h1><p>Repeat products already supplied to this clinic. Consumables can go straight to the request; capital equipment can be requested again for PSC review.</p></div><button class="button dark" data-basket>Open request</button></div>${body}`);
   }
 
 
@@ -1616,13 +1657,14 @@
   }
 
   function basketQty(){ return state.basket.reduce((a,b)=>a+b.qty,0); }
-  function addBasket(sku,qty=1){ const f=state.basket.find(x=>x.sku===sku); if(f)f.qty+=qty; else state.basket.push({sku,qty}); save(); render(); toast(`<strong>Added</strong> to Supply Request`); }
+  function addBasket(sku,qty=1){ const f=state.basket.find(x=>x.sku===sku); if(f)f.qty+=qty; else state.basket.push({sku,qty}); save(); renderUi({preserveScroll:true,transition:false}); toast(`<strong>Added</strong> to Supply Request`); }
   function reorderRequest(id){ const r=state.requests.find(x=>x.id===id); if(!r)return; r.lines.forEach(l=>{const f=state.basket.find(x=>x.sku===l.sku);if(f)f.qty+=l.qty;else state.basket.push({...l})});save();render();toast(`<strong>${r.lines.length} lines</strong> added to Supply Request`); }
   function basketDrawer(){
     const lines=state.basket.map(l=>({l,p:product(l.sku)})).filter(x=>x.p);
-    const indicative=lines.reduce((s,x)=>s+(x.p.contractPrice||0)*x.l.qty,0);
-    return `<div class="drawerBackdrop" data-close-basket><aside class="drawer" onclick="event.stopPropagation()"><div class="drawerHeader"><div><span class="eyebrow">PHARMA SERVICE</span><h2>Your Cart</h2></div><button class="iconBtn" data-close-basket>×</button></div><div class="drawerBody">${lines.length?lines.map(({l,p})=>`<div class="basketLine"><div class="productGlyph small">${esc(p.brand.slice(0,2).toUpperCase())}</div><div class="basketInfo"><b>${esc(p.name)}</b><span>${esc(p.pack)} · ${p.pscSku}</span><small>${p.contractPrice?money(p.contractPrice)+' indicative account price':'Price confirmed in quotation'}</small></div><div class="qty"><button data-basket-delta="${p.pscSku}|-1">−</button><span>${l.qty}</span><button data-basket-delta="${p.pscSku}|1">+</button></div><button class="removeLink" data-basket-remove="${p.pscSku}">Remove</button></div>`).join(''):`<div class="emptyState"><div style="font-size:30px">▣</div><h3>Your cart is empty</h3><p>Add school-clinic items from Shop or Replenish.</p></div>`}</div>${lines.length?`<div class="drawerFooter"><label class="fieldLabel">Order note <span>optional</span></label><textarea class="textarea" id="basketNote" placeholder="Delivery timing or clinic note…"></textarea><div class="totals"><span>Indicative priced lines</span><b>${money(indicative)}</b></div><div class="checkoutPromise"><span>AFTER YOU PLACE THE ORDER</span><p>PSC reviews the order and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. The order only moves forward after the quotation is confirmed.</p></div><button class="button primary full" data-submit-request>Place order</button></div>`:''}</aside></div>`;
+    const indicative=lines.reduce((sum,x)=>sum+(x.p.contractPrice||0)*x.l.qty,0);
+    return `<div class="drawerBackdrop requestDrawerBackdrop" data-close-basket><aside class="drawer requestDrawer" onclick="event.stopPropagation()"><div class="drawerHandle" aria-hidden="true"></div><div class="drawerHeader"><div><span class="eyebrow">PHARMA SERVICE</span><h2>Supply Request</h2><small>${lines.length?`${lines.length} line${lines.length===1?'':'s'} · ${basketQty()} item${basketQty()===1?'':'s'}`:'Build a request while you browse'}</small></div><button class="iconBtn" data-close-basket aria-label="Close request">×</button></div><div class="drawerBody">${lines.length?lines.map(({l,p})=>{const imageUrl=productDisplayImageUrl(p);return `<div class="basketLine requestLine">${imageUrl?`<div class="requestLineImage"><img src="${esc(imageUrl)}" alt=""></div>`:`<div class="productGlyph small">${esc((p.brand||'PS').slice(0,2).toUpperCase())}</div>`}<div class="basketInfo"><b>${esc(p.catalogueDisplayName||p.name)}</b><span>${esc(p.cataloguePack||p.pack||'Pack to confirm')} · ${p.pscSku}</span><small>${p.contractPrice?money(p.contractPrice)+' indicative account price':'Price confirmed in quotation'}</small></div><div class="qty"><button data-basket-delta="${p.pscSku}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-basket-delta="${p.pscSku}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-basket-remove="${p.pscSku}">Remove</button></div>`}).join(''):`<div class="emptyState requestEmpty"><h3>Your request is empty</h3><p>Browse the catalogue and add the products you want PSC to quote.</p><button class="button dark" data-go="portal/catalogue">Browse catalogue</button></div>`}</div>${lines.length?`<div class="drawerFooter requestDrawerFooter"><label class="fieldLabel">Request note <span>optional</span></label><textarea class="textarea" id="basketNote" placeholder="Delivery timing, preferred brand, clinic note…"></textarea><div class="totals"><span>Indicative priced lines</span><b>${money(indicative)}</b></div><div class="checkoutPromise requestNextStep"><span>WHAT HAPPENS NEXT</span><p>PSC reviews the request and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. Nothing is procured until the required customer approval is in place.</p></div><button class="button primary full submitRequestButton" data-submit-request>Submit request</button></div>`:''}</aside></div>`;
   }
+
 
   function requestModal(id, admin=false){
     const r=state.requests.find(x=>x.id===id); if(!r)return '';
@@ -1848,6 +1890,32 @@
     return shell(`<div class="pageHeader"><div><span class="eyebrow">ACORUS / MED7 INTEGRATION</span><h1>Supplier feed</h1><p>The production portal should ingest a B2B supplier master rather than scrape a retail storefront. CSV, SFTP or API can all map into the same controlled PSC product master.</p></div></div><div class="feedDiagram"><div class="feedNode"><div style="font-size:23px;color:#ff5a1f">▤</div><h3>Acorus / Med7 source</h3><p>Supplier SKU, barcode, brand, pack, B2B cost, stock, batch/expiry, VAT evidence, product authorization, image/media permission.</p></div><div class="feedArrow">→</div><div class="feedNode"><div style="font-size:23px;color:#ff5a1f">▦</div><h3>PSC product master</h3><p>Map supplier records to PSC SKU, school-approved status, requirement status, backup source, margin rules and evidence date.</p></div><div class="feedArrow">→</div><div class="feedNode"><div style="font-size:23px;color:#ff5a1f">⌁</div><h3>School portal</h3><p>Expose only approved customer-facing fields. Never show internal supplier cost or routing logic to the clinic.</p></div></div><div class="twoCol"><section class="panel"><div class="panelHeader"><h2>Required feed fields</h2></div><div class="codeBlock">supplier_sku<br>barcode<br>brand<br>product_name<br>pack_size<br>category<br>b2b_unit_cost<br>vat_status_or_evidence<br>stock_qty_or_status<br>lead_time<br>batch_tracking_required<br>expiry_tracking_required<br>regulated_flag<br>registration_reference<br>image_url_or_asset_id<br>media_usage_permission<br>last_updated_at</div></section><section class="panel"><div class="panelHeader"><h2>Ingestion controls</h2></div><div class="gateList"><div class="gate ok"><span>Supplier SKU uniqueness</span><i></i></div><div class="gate ok"><span>Public benchmark kept separate</span><i></i></div><div class="gate warn"><span>Tax evidence expiry alert</span><i></i></div><div class="gate warn"><span>Product image permission</span><i></i></div><div class="gate block"><span>No silent substitute mapping</span><i></i></div><div class="gate ok"><span>Audit every manual cost change</span><i></i></div></div></section></div><div class="notice" style="margin-top:18px"><strong>Recommended commercial ask to Acorus:</strong> B2B price file + product master + live/periodic stock feed + permitted product media + agreed fulfilment rules. Once supplied, this page becomes the connector rather than a manual upload screen.</div>`,true);
   }
 
+  function relatedProductsFor(p,limit=6){
+    if(!p) return [];
+    const needSet=new Set(clinicalNeedIds(p));
+    return catalogueProducts()
+      .filter(x=>x.pscSku!==p.pscSku)
+      .map(x=>{
+        let score=0;
+        if(x.productType&&p.productType&&x.productType===p.productType) score+=4;
+        if(x.category&&p.category&&x.category===p.category) score+=3;
+        clinicalNeedIds(x).forEach(id=>{ if(needSet.has(id)) score+=2; });
+        return {x,score};
+      })
+      .filter(r=>r.score>0)
+      .sort((a,b)=>b.score-a.score)
+      .slice(0,limit)
+      .map(r=>r.x);
+  }
+
+  function relatedProductRailCard(p,publicMode=false){
+    const need=clinicalNeedMeta(clinicalNeedIds(p)[0]||'all');
+    const displayName=p.catalogueDisplayName||p.name;
+    const imageUrl=productDisplayImageUrl(p);
+    const attr=publicMode?'data-public-product-view':'data-product-view';
+    return `<button class="relatedProductMini" ${attr}="${p.pscSku}"><span class="relatedProductVisual" style="--need-bg:${need.bg};--need-ink:${need.ink}">${imageUrl?`<img src="${esc(imageUrl)}" alt="" loading="lazy">`:`<i>${esc((p.brand||need.label||'PS').slice(0,2).toUpperCase())}</i>`}</span><span class="relatedProductCopy"><small>${esc(need.label)}</small><b>${esc(displayName)}</b><em>${esc(p.cataloguePack||p.pack||'Pack to confirm')}</em></span></button>`;
+  }
+
   function productModal(sku){
     const p=product(sku); if(!p)return '';
     const mapped=!!p.dhaMapped;
@@ -1862,27 +1930,61 @@
     const image=displayImage
       ? `<div class="detailProductImageWrap"><img src="${esc(displayImage)}" alt="${esc(displayName)}" onerror="this.onerror=null;this.src='${esc(fallback)}'">${detailDhaMark}</div>`
       : `<div class="detailProductImageWrap"><div class="detailNeedVisual" style="--need-bg:${primary.bg};--need-ink:${primary.ink}"></div>${detailDhaMark}</div>`;
+    const workshop=workshopForProduct(p,1)[0];
+    const related=relatedProductsFor(p,6);
+    const inRequest=state.basket.find(x=>x.sku===p.pscSku)?.qty||0;
 
-    return `<div class="productDetailModal">
-      <div class="modalHeader"><div><span class="eyebrow">${esc(primary.label)}</span><h2>${esc(displayName)}</h2><div class="smallMuted mono">${esc(p.pscSku)}</div></div><button class="iconBtn" data-modal-close>×</button></div>
-      <div class="productDetailGrid">
-        <div class="detailImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).map(m=>`<img src="${esc(m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span></div><div class="modalNeedChips">${needTags}</div></div>
-        <div class="detailContentPane">
-          ${mapped?`<div class="regulatoryHero mapped v25DhaHero"><div class="dhaModalBadge"><span>DHA</span><b>Mapped requirement</b></div><h3>${esc(p.dhaRequirement||'Mapped requirement')}</h3><p>${esc(p.dhaReference||'DHA requirement')} · ${esc(p.dhaStatus||'Status to verify')}</p></div>`:`<div class="regulatoryHero support"><span>INSTITUTIONAL CATALOGUE</span><h3>${esc(p.productType||'Institutional supply')}</h3><p>Product specification is reviewed before quotation.</p></div>`}
-          <div class="specBlocks">
-            ${mapped?`<section><span class="specLabel">DHA REQUIREMENT</span><p>${esc(p.dhaRequirement)}</p></section><section><span class="specLabel">REFERENCE & STATUS</span><p><strong>${esc(p.dhaReference||'—')}</strong> · ${esc(p.dhaStatus||'Needs verification')}</p>${p.dhaCondition?`<small>${esc(p.dhaCondition)}</small>`:''}</section>`:''}
-            <section><span class="specLabel">PRODUCT SPECIFICATION</span><p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></section>
+    return `<div class="productDetailModal fluidProductDetail">
+      <div class="modalHeader fluidProductHeader"><button class="productBackButton" data-modal-close aria-label="Back to catalogue">←</button><div><span class="eyebrow">${esc(primary.label)}</span><h2>${esc(displayName)}</h2><div class="smallMuted mono">${esc(p.pscSku)}</div></div><span class="productRequestCount">${inRequest?`${inRequest} in request`:''}</span></div>
+      <div class="productDetailGrid fluidProductGrid">
+        <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).map(m=>`<img src="${esc(m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span></div><div class="modalNeedChips">${needTags}</div></div>
+        <div class="detailContentPane fluidDetailContent">
+          <div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to DHA clinic requirement</b></div>`:''}</div>
+          <div class="productDisclosureList">
+            <details open><summary><span>Specification</span><i>+</i></summary><div><p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
+            ${mapped?`<details><summary><span>Requirement mapping</span><i>+</i></summary><div><p><strong>${esc(p.dhaRequirement||'Mapped requirement')}</strong></p><p>${esc(p.dhaReference||'DHA requirement')} · ${esc(p.dhaStatus||'Status to verify')}</p>${p.dhaCondition?`<small>${esc(p.dhaCondition)}</small>`:''}<p class="disclosureFinePrint">Mapped to the applicable DHA clinic requirement. This is not a DHA product endorsement or product approval.</p></div></details>`:''}
+            <details><summary><span>Supply & compatibility</span><i>+</i></summary><div><p>${p.regulated?'Availability and supply remain subject to applicable UAE licensing, recipient authorization, product registration, storage, batch/expiry and professional controls.':'PSC confirms the exact specification, current availability and commercial terms before quotation.'}</p></div></details>
+            ${workshop?`<details><summary><span>From The Workshop</span><i>+</i></summary><div><button class="productWorkshopInline" data-go="workshop/${esc(workshop.slug)}"><small>${esc(workshopFormatLabel(workshop.format))}</small><b>${esc(workshop.title)}</b></button></div></details>`:''}
           </div>
-          ${mapped?`<div class="mappingDisclosure"><b>Regulatory clarity</b><p>Mapped to the applicable DHA clinic requirement. This is not a DHA product endorsement or product approval. Exact model suitability remains subject to specification verification.</p></div>`:''}
-          ${p.regulated?'<div class="licensedNotice"><b>Licensed supply route</b><p>Availability and supply remain subject to applicable UAE licensing, recipient authorization, product registration, storage, batch/expiry and professional controls.</p></div>':''}
-          ${workshopForProduct(p,1).map(g=>`<button class="productWorkshopModule" data-go="workshop/${esc(g.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(g.title)}</b></button>`).join('')}
-          <div class="detailActions productPageActions"><button class="button light productCloseAction" data-modal-close>Close</button><button class="button primary productRequestAction" data-add="${p.pscSku}">Request</button></div>
         </div>
       </div>
+      ${related.length?`<section class="productRelatedSection"><div class="productRelatedHead"><span>Related clinic supplies</span><small>Same clinical area or product family</small></div><div class="productRelatedRail">${related.map(x=>relatedProductRailCard(x,false)).join('')}</div></section>`:''}
+      <div class="productStickyBar"><button class="button light requestViewButton" data-basket>View request <b>${basketQty()}</b></button><button class="button primary requestAddButton" data-add="${p.pscSku}">${inRequest?'Add another':'Add to request'}</button></div>
     </div>`;
   }
 
-  function modalHtml(meta){ const body=meta.type==='request'?requestModal(meta.id,!!meta.admin):meta.type==='product'?productModal(meta.sku):''; return `<div class="modalBackdrop" data-modal-close><div class="modal ${meta.type==='product'?'productModalShell':''}" onclick="event.stopPropagation()">${body}</div></div>`; }
+  function publicProductModal(sku){
+    const p=product(sku); if(!p)return '';
+    const displayName=p.catalogueDisplayName||p.name;
+    const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
+    const needs=clinicalNeedIds(p);
+    const primary=clinicalNeedMeta(needs[0]||'all');
+    const imageUrl=productDisplayImageUrl(p);
+    const fallback=p.fallbackAsset||'/assets/products/clinic-basics.jpg';
+    const workshop=workshopForProduct(p,1)[0];
+    const related=relatedProductsFor(p,5);
+    return `<div class="productDetailModal fluidProductDetail publicProductSheet">
+      <div class="modalHeader fluidProductHeader"><button class="productBackButton" data-modal-close aria-label="Back to catalogue">←</button><div><span class="eyebrow">${esc(primary.label)}</span><h2>${esc(displayName)}</h2><div class="smallMuted mono">${esc(p.pscSku)}</div></div></div>
+      <div class="productDetailGrid fluidProductGrid">
+        <div class="detailImagePane fluidImagePane">${imageUrl?`<div class="detailProductImageWrap"><img src="${esc(imageUrl)}" alt="${esc(displayName)}" onerror="this.onerror=null;this.src='${esc(fallback)}'"></div>`:`<div class="detailProductImageWrap"><div class="detailNeedVisual" style="--need-bg:${primary.bg};--need-ink:${primary.ink}"></div></div>`}<div class="detailImageMeta"><b>${esc(displayName)}</b><span>${esc(pack)}</span></div></div>
+        <div class="detailContentPane fluidDetailContent">
+          <div class="productDisclosureList publicProductDisclosure">
+            <details open><summary><span>Product specification</span><i>+</i></summary><div><p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
+            ${p.dhaMapped?`<details><summary><span>Requirement mapping</span><i>+</i></summary><div><p>Mapped to the applicable DHA clinic requirement. Exact model suitability remains subject to specification verification.</p></div></details>`:''}
+            <details><summary><span>Availability & quotation</span><i>+</i></summary><div><p>Availability, current commercial terms and any regulated supply route are confirmed for the account and transaction before commitment.</p></div></details>
+            ${workshop?`<details><summary><span>From The Workshop</span><i>+</i></summary><div><button class="productWorkshopInline" data-go="workshop/${esc(workshop.slug)}"><small>${esc(workshopFormatLabel(workshop.format))}</small><b>${esc(workshop.title)}</b></button></div></details>`:''}
+          </div>
+        </div>
+      </div>
+      ${related.length?`<section class="productRelatedSection"><div class="productRelatedHead"><span>Related clinic supplies</span><small>Browse without losing your place</small></div><div class="productRelatedRail">${related.map(x=>relatedProductRailCard(x,true)).join('')}</div></section>`:''}
+      <div class="productStickyBar publicProductSticky"><button class="button light" data-modal-close>Continue browsing</button><button class="button primary" data-go="contact">Request quotation</button></div>
+    </div>`;
+  }
+
+  function modalHtml(meta){
+    const body=meta.type==='request'?requestModal(meta.id,!!meta.admin):meta.type==='product'?productModal(meta.sku):meta.type==='public-product'?publicProductModal(meta.sku):'';
+    return `<div class="modalBackdrop fluidOverlay" data-modal-close><div class="modal ${['product','public-product'].includes(meta.type)?'productModalShell fluidProductShell':''}" onclick="event.stopPropagation()">${body}</div></div>`;
+  }
 
 
   async function submitCustomRequest(){
@@ -2303,7 +2405,7 @@
       case 'admin/supplier-feed': html=adminFeed();break;
       default: html=landing();
     }
-    $app.innerHTML=html; syncRouteMeta(r); bind(); syncPublicHeader();
+    $app.innerHTML=html + (ui.modal?.type==='public-product'?modalHtml(ui.modal):''); syncRouteMeta(r); bind(); syncPublicHeader();
   }
 
 
@@ -2394,12 +2496,13 @@
     document.querySelectorAll('[data-campus]').forEach(el=>el.addEventListener('change',e=>{state.campus=e.target.value;save();render()}));
     document.querySelectorAll('[data-account-switcher]').forEach(el=>el.addEventListener('click',()=>{ui.accountMenu=!ui.accountMenu;render()}));
     document.querySelectorAll('[data-school-select]').forEach(el=>el.addEventListener('click',async()=>{await switchInstitutionAccount(el.dataset.schoolSelect)}));
-    document.querySelectorAll('[data-basket]').forEach(el=>el.addEventListener('click',()=>{ui.basket=true;render()}));
-    document.querySelectorAll('[data-close-basket]').forEach(el=>el.addEventListener('click',()=>{ui.basket=false;render()}));
-    document.querySelectorAll('[data-product-view]').forEach(el=>el.addEventListener('click',()=>{ui.modal={type:'product',sku:el.dataset.productView};render()}));
+    document.querySelectorAll('[data-basket]').forEach(el=>el.addEventListener('click',openBasketOverlay));
+    document.querySelectorAll('[data-close-basket]').forEach(el=>el.addEventListener('click',closeBasketOverlay));
+    document.querySelectorAll('[data-product-view]').forEach(el=>el.addEventListener('click',()=>openProductOverlay(el.dataset.productView,false)));
+    document.querySelectorAll('[data-public-product-view]').forEach(el=>el.addEventListener('click',()=>openProductOverlay(el.dataset.publicProductView,true)));
     document.querySelectorAll('[data-add]').forEach(el=>el.addEventListener('click',()=>addBasket(el.dataset.add,1)));
-    document.querySelectorAll('[data-basket-delta]').forEach(el=>el.addEventListener('click',()=>{const [sku,d]=el.dataset.basketDelta.split('|');const line=state.basket.find(x=>x.sku===sku);if(!line)return;line.qty+=Number(d);if(line.qty<=0)state.basket=state.basket.filter(x=>x.sku!==sku);save();render()}));
-    document.querySelectorAll('[data-basket-remove]').forEach(el=>el.addEventListener('click',()=>{state.basket=state.basket.filter(x=>x.sku!==el.dataset.basketRemove);save();render()}));
+    document.querySelectorAll('[data-basket-delta]').forEach(el=>el.addEventListener('click',()=>{const [sku,d]=el.dataset.basketDelta.split('|');const line=state.basket.find(x=>x.sku===sku);if(!line)return;line.qty+=Number(d);if(line.qty<=0)state.basket=state.basket.filter(x=>x.sku!==sku);save();renderUi({preserveScroll:true,transition:false})}));
+    document.querySelectorAll('[data-basket-remove]').forEach(el=>el.addEventListener('click',()=>{state.basket=state.basket.filter(x=>x.sku!==el.dataset.basketRemove);save();renderUi({preserveScroll:true,transition:false})}));
     document.querySelectorAll('[data-submit-request]').forEach(el=>el.addEventListener('click',submitRequest));
     document.querySelectorAll('[data-submit-custom]').forEach(el=>el.addEventListener('click',submitCustomRequest));
     document.querySelectorAll('[data-public-enquiry]').forEach(el=>el.addEventListener('submit',submitPublicEnquiry));
@@ -2409,19 +2512,19 @@
     document.querySelectorAll('[data-quick-add]').forEach(el=>el.addEventListener('click',()=>{const sku=el.dataset.quickAdd;const input=document.querySelector(`[data-quick-qty="${sku}"]`);addBasket(sku,Math.max(1,Number(input.value||1)))}));
     document.querySelectorAll('[data-request-reorder]').forEach(el=>el.addEventListener('click',()=>reorderRequest(el.dataset.requestReorder)));
 
-    document.querySelectorAll('[data-replenish]').forEach(el=>el.addEventListener('click',()=>{const [sku,q]=el.dataset.replenish.split('|');addBasket(sku,Math.max(1,Number(q)||1));toast('<strong>Added to cart.</strong><br>Previous delivered quantity restored.')}));
+    document.querySelectorAll('[data-replenish]').forEach(el=>el.addEventListener('click',()=>{const [sku,q]=el.dataset.replenish.split('|');addBasket(sku,Math.max(1,Number(q)||1));toast('<strong>Added to request.</strong><br>Previous delivered quantity restored.')}));
     document.querySelectorAll('[data-reorder-order]').forEach(el=>el.addEventListener('click',()=>reorderRequest(el.dataset.reorderOrder)));
     document.querySelectorAll('[data-confirm-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.confirmQuote,'confirm');toast('<strong>Quotation confirmed.</strong><br>PSC will confirm the fulfilment and delivery timing for this order.')}catch(e){console.error(e);toast('<strong>Could not confirm quotation.</strong>')}}));
     document.querySelectorAll('[data-cancel-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.cancelQuote,'cancel');toast('<strong>Quotation cancelled.</strong><br>It will remain visible for 30 days before moving to Archive.')}catch(e){console.error(e);toast('<strong>Could not cancel quotation.</strong>')}}));
     document.querySelectorAll('[data-reorder-last]').forEach(el=>el.addEventListener('click',()=>{const r=state.requests.find(x=>x.campus===state.campus);if(r)reorderRequest(r.id)}));
     document.querySelectorAll('[data-request-view]').forEach(el=>el.addEventListener('click',()=>{ui.modal={type:'request',id:el.dataset.requestView,admin:false};render()}));
     document.querySelectorAll('[data-admin-request]').forEach(el=>el.addEventListener('click',()=>{ui.modal={type:'request',id:el.dataset.adminRequest,admin:true};render()}));
-    document.querySelectorAll('[data-modal-close]').forEach(el=>el.addEventListener('click',()=>{ui.modal=null;render()}));
+    document.querySelectorAll('[data-modal-close]').forEach(el=>el.addEventListener('click',closeModalOverlay));
     document.querySelectorAll('[data-document-open]').forEach(el=>el.addEventListener('click',()=>openOrderDocument(el.dataset.documentOpen)));
     document.querySelectorAll('[data-document-upload]').forEach(el=>el.addEventListener('change',async e=>{const file=e.target.files?.[0];if(file)await uploadOrderDocument(el.dataset.documentUpload,file);}));
-    const cq=document.querySelector('[data-cat-q]'); if(cq)cq.addEventListener('input',e=>{ui.catalogueQuery=e.target.value;render()});
+    const cq=document.querySelector('[data-cat-q]'); if(cq)cq.addEventListener('input',e=>{ui.catalogueQuery=e.target.value;renderUi({preserveScroll:true,focusSelector:'[data-cat-q]',cursor:e.target.selectionStart,transition:false})});
     document.querySelectorAll('[data-clinic-need]').forEach(el=>el.addEventListener('click',()=>{ui.catalogueNeed=el.dataset.clinicNeed||'all';render()}));
-    document.querySelectorAll('[data-cat-filter]').forEach(el=>el.addEventListener('change',e=>{if(el.dataset.catFilter==='category')ui.catalogueCat=e.target.value;else ui.catalogueFilter=e.target.value;render()}));
+    document.querySelectorAll('[data-cat-filter]').forEach(el=>el.addEventListener('change',e=>{if(el.dataset.catFilter==='category')ui.catalogueCat=e.target.value;else ui.catalogueFilter=e.target.value;renderUi({preserveScroll:true,transition:false})}));
     const pq=document.querySelector('[data-prod-q]'); if(pq)pq.addEventListener('input',e=>{ui.productQuery=e.target.value;render()});
     document.querySelectorAll('[data-prod-filter]').forEach(el=>el.addEventListener('change',e=>{if(el.dataset.prodFilter==='category')ui.productCat=e.target.value;else ui.evidence=e.target.value;render()}));
     document.querySelectorAll('[data-stock-count]').forEach(el=>el.addEventListener('change',e=>{const i=Number(el.dataset.stockCount);state.stock[i].onHand=Number(e.target.value);state.stock[i].status=state.stock[i].onHand<=state.stock[i].reorderAt?'Reorder candidate':state.stock[i].status==='Reorder candidate'?'Good':state.stock[i].status;save();render()}));
