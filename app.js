@@ -685,12 +685,12 @@
           <div class="pscHeroTagline"><i aria-hidden="true"></i><p>more time for what matters</p></div>
           <p class="pscHeroAudience">For schools, nurseries, and educational institutions.</p>
         </div>
-        <div class="pscHeroBoard" aria-label="The institutional way">
+        <div class="pscHeroProcess" aria-label="The institutional way">
           <div class="pscHeroBoardStages">
             <article><small>01</small><h2>SHOP</h2><p>pharmaceuticals,<br>medical disposables,<br>and devices.</p></article>
-            <article><small>02</small><h2>QUOTE</h2><p>institutional prices, with<br>careful specification and<br>regulatory alignment.</p></article>
-            <article><small>03</small><h2>MANAGE</h2><p>orders, invoices, and<br>useful account history.</p></article>
-            <article><small>04</small><h2>REPEAT</h2><p>repeat previously supplied<br>items from the same<br>account.</p></article>
+            <article><small>02</small><h2>QUOTE</h2><p>wholesale prices, while<br>ensuring alignment to<br>regulatory guidelines.</p></article>
+            <article><small>03</small><h2>MANAGE</h2><p>orders, invoices, and<br>various historical reports.</p></article>
+            <article><small>04</small><h2>REPEAT</h2><p>easily repeat previously<br>ordered items from the<br>same account.</p></article>
           </div>
           <div class="pscHeroBarcode" aria-hidden="true"></div>
           <b class="pscHeroBoardLabel">PS–I–001 · THE INSTITUTIONAL WAY</b>
