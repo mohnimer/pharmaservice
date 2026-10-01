@@ -6586,3 +6586,151 @@ main.publicPage:has(.modelQuietIntro) .publicPageHero p{
   .v37PublicHeader .publicLogo img{height:50px!important;max-width:78px!important;max-height:50px!important}
   .loginCard img,.v26LoginCard img{height:82px!important;max-width:124px!important}
 }
+
+
+/* =========================================================
+   V37.5.10 — Simplified hero + correctly scaled master logo
+   Reference direction: open editorial composition, 2x2 process
+   cards, no process copy inside cards. Keep this block LAST.
+   ========================================================= */
+
+/* --- Master logo scaling: cropped transparent artwork, not stretched. --- */
+@media(min-width:1101px){
+  .v37PublicHeader{
+    min-height:148px!important;
+    padding-top:10px!important;
+    padding-bottom:10px!important;
+  }
+  .publicHeader .publicLogo,.v37PublicHeader .publicLogo{
+    min-width:220px!important;
+    width:220px!important;
+    height:128px!important;
+  }
+  .publicHeader .publicLogo img,.v37PublicHeader .publicLogo img{
+    width:auto!important;
+    height:122px!important;
+    max-width:205px!important;
+    max-height:122px!important;
+  }
+}
+@media(min-width:721px) and (max-width:1100px){
+  .publicHeader,.v37PublicHeader{min-height:124px!important}
+  .publicHeader .publicLogo,.v37PublicHeader .publicLogo{min-width:178px!important;width:178px!important;height:108px!important}
+  .publicHeader .publicLogo img,.v37PublicHeader .publicLogo img{height:102px!important;max-width:165px!important;max-height:102px!important}
+}
+@media(max-width:720px){
+  .v37PublicHeader{height:80px!important;min-height:80px!important}
+  .publicHeader .publicLogo,.v37PublicHeader .publicLogo{min-width:112px!important;width:112px!important;height:70px!important}
+  .publicHeader .publicLogo img,.v37PublicHeader .publicLogo img{height:66px!important;max-width:108px!important;max-height:66px!important}
+}
+.portalHeaderBar{min-height:84px!important}
+.portalHeaderBar .topbarBrandSlot,.portalHeaderBar .topbarBrandSlot.plainLogo{width:128px!important;min-width:128px!important;max-width:128px!important;height:76px!important}
+.portalHeaderBar .topbarBrandSlot img,.topbarBrandSlot img{height:70px!important;max-width:114px!important;max-height:70px!important}
+.loginCard img,.v26LoginCard img{height:126px!important;max-width:190px!important;max-height:126px!important}
+.publicFooter img,.v37PublicFooter img{height:108px!important;max-width:168px!important;max-height:108px!important}
+.brandImage,.brandImageLight{height:82px!important;max-width:128px!important}
+
+/* --- Homepage hero: open, simple, and deliberately asymmetrical. --- */
+.publicLanding .pscInstitutionalHero{
+  min-height:620px!important;
+  padding:72px clamp(34px,3.2vw,64px) 58px!important;
+  grid-template-columns:minmax(0,1.08fr) minmax(360px,.72fr)!important;
+  gap:clamp(70px,7vw,130px)!important;
+  align-items:center!important;
+  overflow:visible!important;
+  background-color:#fbfaf7!important;
+  background-image:
+    linear-gradient(rgba(22,28,27,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(22,28,27,.025) 1px,transparent 1px)!important;
+  background-size:34px 34px!important;
+}
+.publicLanding .pscInstitutionalHero:before{display:none!important}
+.publicLanding .pscHeroLeft{
+  width:100%!important;
+  max-width:720px!important;
+  align-self:center!important;
+  justify-content:center!important;
+}
+.publicLanding .pscHeroLeft h1{
+  margin:0!important;
+  width:100%!important;
+  font-size:clamp(76px,6.6vw,108px)!important;
+  line-height:.82!important;
+  letter-spacing:-.068em!important;
+}
+.publicLanding .pscHeroLeft h1 span,.publicLanding .pscHeroLeft h1 strong{margin:0!important;text-align:left!important}
+.publicLanding .pscHeroLeft h1 strong{color:#20a5a4!important;font-weight:600!important}
+.publicLanding .pscHeroOffer{margin-top:52px!important;max-width:610px!important}
+.publicLanding .pscHeroOffer i{display:block;width:74px;height:2px;background:#20a5a4;opacity:.58;margin:0 0 28px}
+.publicLanding .pscHeroOffer p{margin:0!important;display:grid!important;gap:9px!important}
+.publicLanding .pscHeroOffer b{font-size:clamp(18px,1.55vw,26px)!important;line-height:1.18!important;letter-spacing:-.035em!important;color:#242625!important}
+.publicLanding .pscHeroOffer span{font-size:clamp(17px,1.45vw,24px)!important;line-height:1.22!important;letter-spacing:-.035em!important;color:#242625!important;font-weight:400!important}
+.publicLanding .pscHeroAudience{margin:34px 0 0!important;padding:0!important;font-size:12px!important;color:#606562!important}
+
+.publicLanding .pscHeroProcess{
+  width:min(100%,410px)!important;
+  max-width:410px!important;
+  justify-self:center!important;
+  align-self:center!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+}
+.publicLanding .pscHeroBoardStages{
+  width:100%!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:16px!important;
+}
+.publicLanding .pscHeroBoardStages article{
+  aspect-ratio:1/1!important;
+  min-height:0!important;
+  height:auto!important;
+  padding:17px 15px 14px!important;
+  border-radius:15px!important;
+  background:#071615!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  justify-content:space-between!important;
+  overflow:hidden!important;
+}
+.publicLanding .pscHeroBoardStages small{top:11px!important;right:11px!important;font-size:7px!important;color:#31c4be!important}
+.publicLanding .pscHeroStageIcon{width:76px!important;height:76px!important;margin:12px auto 0!important;display:grid!important;place-items:center!important;color:#f5f7f5!important}
+.publicLanding .pscHeroStageIcon svg{width:100%!important;height:100%!important;fill:none!important;stroke:currentColor!important;stroke-width:2!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+.publicLanding .pscHeroBoardStages h2{margin:0!important;padding:0!important;font-size:15px!important;line-height:1!important;text-align:right!important;letter-spacing:-.02em!important;color:#f8faf7!important;font-weight:800!important}
+.publicLanding .pscHeroBoardStages p{display:none!important}
+.publicLanding .pscHeroBarcode{width:76%!important;max-width:310px!important;height:64px!important;margin:30px auto 12px!important}
+.publicLanding .pscHeroBoardLabel{font-size:12px!important;line-height:1.1!important;white-space:nowrap!important;text-align:center!important}
+
+@media(min-width:901px) and (max-width:1180px){
+  .publicLanding .pscInstitutionalHero{grid-template-columns:minmax(0,1fr) minmax(330px,.72fr)!important;gap:44px!important;padding-left:28px!important;padding-right:28px!important}
+  .publicLanding .pscHeroLeft h1{font-size:clamp(66px,6.4vw,82px)!important}
+  .publicLanding .pscHeroOffer{margin-top:40px!important}
+  .publicLanding .pscHeroOffer b{font-size:18px!important}.publicLanding .pscHeroOffer span{font-size:17px!important}
+  .publicLanding .pscHeroProcess{max-width:350px!important}
+  .publicLanding .pscHeroBoardStages{gap:12px!important}
+  .publicLanding .pscHeroStageIcon{width:64px!important;height:64px!important}
+  .publicLanding .pscHeroBoardStages h2{font-size:13px!important}
+  .publicLanding .pscHeroBarcode{height:54px!important;margin-top:26px!important}
+}
+@media(max-width:900px){
+  .publicLanding .pscInstitutionalHero{min-height:auto!important;grid-template-columns:1fr!important;gap:48px!important;padding:54px 24px 42px!important}
+  .publicLanding .pscHeroLeft{max-width:none!important}
+  .publicLanding .pscHeroLeft h1{font-size:clamp(64px,14vw,92px)!important}
+  .publicLanding .pscHeroOffer{margin-top:38px!important}.publicLanding .pscHeroAudience{margin-top:28px!important}
+  .publicLanding .pscHeroProcess{max-width:430px!important;justify-self:start!important}
+}
+@media(max-width:620px){
+  .publicLanding .pscInstitutionalHero{padding:42px 18px 34px!important;gap:38px!important;background-size:26px 26px!important}
+  .publicLanding .pscHeroLeft h1{font-size:clamp(56px,16vw,74px)!important}
+  .publicLanding .pscHeroOffer{margin-top:30px!important}.publicLanding .pscHeroOffer i{width:52px!important;margin-bottom:18px!important}
+  .publicLanding .pscHeroOffer b{font-size:16px!important}.publicLanding .pscHeroOffer span{font-size:15px!important}
+  .publicLanding .pscHeroAudience{font-size:10.5px!important;margin-top:24px!important}
+  .publicLanding .pscHeroProcess{width:100%!important;max-width:360px!important}
+  .publicLanding .pscHeroBoardStages{gap:10px!important}
+  .publicLanding .pscHeroBoardStages article{padding:13px 11px 11px!important;border-radius:13px!important}
+  .publicLanding .pscHeroStageIcon{width:58px!important;height:58px!important;margin-top:9px!important}
+  .publicLanding .pscHeroBoardStages h2{font-size:12px!important}
+  .publicLanding .pscHeroBarcode{width:74%!important;height:48px!important;margin:24px auto 10px!important}
+  .publicLanding .pscHeroBoardLabel{font-size:9.5px!important;white-space:normal!important}
+}

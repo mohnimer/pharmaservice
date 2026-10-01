@@ -680,18 +680,37 @@
     const approved=products().filter(p=>p.schoolApproved).length;
     return `<main class="landingPage publicLanding">
       ${publicHeader('home')}
-      <section class="pscInstitutionalHero" aria-label="Institutional Supply - more time for what matters">
+      <section class="pscInstitutionalHero" aria-label="Institutional Supply">
         <div class="pscHeroLeft">
           <h1><span>Institutional</span><strong>Supply</strong></h1>
-          <div class="pscHeroTagline"><i aria-hidden="true"></i><p>more time for what matters</p></div>
+          <div class="pscHeroOffer">
+            <i aria-hidden="true"></i>
+            <p><b>Opening supply · Replenishment · Replacement</b><span>Equipment · Consumables · Pharmaceuticals</span></p>
+          </div>
           <p class="pscHeroAudience">For schools, nurseries, and educational institutions.</p>
         </div>
         <div class="pscHeroProcess" aria-label="The institutional way">
           <div class="pscHeroBoardStages">
-            <article><small>01</small><h2>SHOP</h2><p>pharmaceuticals, medical disposables, and devices.</p></article>
-            <article><small>02</small><h2>QUOTE</h2><p>wholesale prices, while ensuring alignment to regulatory guidelines.</p></article>
-            <article><small>03</small><h2>MANAGE</h2><p>orders, invoices, and various historical reports.</p></article>
-            <article><small>04</small><h2>REPEAT</h2><p>easily repeat previously ordered items from the same account.</p></article>
+            <article>
+              <small>01</small>
+              <div class="pscHeroStageIcon" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="25" cy="24" r="15"/><path d="M10 24h30M25 9c5 5 7.5 10 7.5 15S30 34 25 39M25 9c-5 5-7.5 10-7.5 15S20 34 25 39"/><path d="M39 28h11l4 15H34l-2-9h17"/><circle cx="38" cy="48" r="2.5"/><circle cx="51" cy="48" r="2.5"/></svg></div>
+              <h2>SHOP</h2>
+            </article>
+            <article>
+              <small>02</small>
+              <div class="pscHeroStageIcon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M18 10h28v26H18z"/><path d="M23 17h10M23 23h16M23 29h12"/><circle cx="46" cy="18" r="10"/><path d="m42 18 3 3 6-7"/><path d="M15 38l9-6 8 5 8-5 10 7-7 11H22z"/><path d="M24 42l8 6 8-6"/></svg></div>
+              <h2>QUOTE</h2>
+            </article>
+            <article>
+              <small>03</small>
+              <div class="pscHeroStageIcon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M16 11h28v39H16z"/><path d="M22 18h16M22 24h16"/><path d="M23 42v-9M30 42V28M37 42V23"/><circle cx="24" cy="32" r="10"/><path d="m31 39 8 8"/></svg></div>
+              <h2>MANAGE</h2>
+            </article>
+            <article>
+              <small>04</small>
+              <div class="pscHeroStageIcon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M16 24a19 19 0 0 1 30-8l5 5"/><path d="M51 12v9h-9"/><path d="M48 40a19 19 0 0 1-30 8l-5-5"/><path d="M13 52v-9h9"/></svg></div>
+              <h2>REPEAT</h2>
+            </article>
           </div>
           <div class="pscHeroBarcode" aria-hidden="true"></div>
           <b class="pscHeroBoardLabel">PS–I–001 · THE INSTITUTIONAL WAY</b>
