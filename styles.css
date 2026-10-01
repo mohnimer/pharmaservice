@@ -6195,3 +6195,44 @@ main.publicPage:has(.modelQuietIntro) .publicPageHero p{
   .publicLanding .pscHeroBarcode{width:72%!important;height:46px!important;margin:28px auto 12px!important}
   .publicLanding .pscHeroBoardLabel{font-size:10px!important}
 }
+
+/* =========================================================
+   V37.5.6 — Hero alignment correction
+   Align the hero's left edge to the Pharma Service logo/header
+   rather than centring the title inside an oversized hero inset.
+   Keep this block LAST.
+   ========================================================= */
+
+@media(min-width:1181px){
+  .publicLanding .pscInstitutionalHero{
+    padding-left:clamp(34px,3.2vw,64px)!important;
+    padding-right:clamp(34px,3.2vw,64px)!important;
+    grid-template-columns:minmax(500px,.92fr) minmax(650px,1.08fr)!important;
+    gap:clamp(54px,4.2vw,78px)!important;
+  }
+  .publicLanding .pscHeroLeft{
+    justify-self:start!important;
+    width:100%!important;
+    max-width:650px!important;
+  }
+  .publicLanding .pscHeroLeft h1,
+  .publicLanding .pscHeroTagline,
+  .publicLanding .pscHeroAudience{
+    margin-left:0!important;
+    text-align:left!important;
+  }
+  .publicLanding .pscHeroLeft h1{
+    font-size:clamp(70px,6.65vw,108px)!important;
+  }
+  .publicLanding .pscHeroProcess{
+    justify-self:end!important;
+    max-width:760px!important;
+  }
+}
+
+@media(min-width:901px) and (max-width:1180px){
+  .publicLanding .pscInstitutionalHero{
+    padding-left:28px!important;
+    padding-right:28px!important;
+  }
+}
