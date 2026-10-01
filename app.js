@@ -2,7 +2,7 @@
   'use strict';
   const D = window.PSC_DATA;
   const C = window.PSC_COPY || {};
-  const PSC_LOGO = '/assets/psc-logo-cropped.png';
+  const PSC_LOGO = '/assets/psc-logo-current.png';
   const DHA_ICON = '/assets/dha-requirement.png';
   const WORKSHOP = Array.isArray(window.PSC_WORKSHOP) ? window.PSC_WORKSHOP : [];
   const WORKSHOP_CATEGORIES = ['All','Product Basics',"What's the Difference?",'Clinic Checks','Equipment Readiness','Stock & Expiry','School Clinic','Ordering & Specifications'];
@@ -537,14 +537,15 @@
   function currentRoute(){
     if(location.hash) return location.hash.slice(1);
     const path=location.pathname.replace(/\/+$/,'');
+    if(path==='/start') return 'start';
     if(path==='/workshop') return 'workshop';
     if(path.startsWith('/workshop/')) return `workshop/${decodeURIComponent(path.split('/')[2]||'')}`;
     return 'home';
   }
   function go(route){
     ui.mobile=false; ui.publicMenu=false; ui.modal=null;
-    if(route==='workshop' || route.startsWith('workshop/')){
-      const target=route==='workshop'?'/workshop':`/workshop/${encodeURIComponent(route.split('/')[1]||'')}`;
+    if(route==='start' || route==='workshop' || route.startsWith('workshop/')){
+      const target=route==='start'?'/start':route==='workshop'?'/workshop':`/workshop/${encodeURIComponent(route.split('/')[1]||'')}`;
       history.pushState({pscRoute:route},'',target);
       window.scrollTo({top:0,behavior:'instant'}); render();
       return;
@@ -1078,6 +1079,79 @@
   function careersPage(){ return publicPage('careers','CAREERS','Build practical healthcare supply with us.','We are interested in people who value accuracy, follow-through and institutional customer service.',`<section class="publicSection simplePublicPanel"><h2>Current opportunities</h2><p>Roles will be posted here as the institutional-supply business expands. For now, career enquiries can be directed through the Contact page.</p><button class="button outline" data-go="contact">Contact Pharma Service</button></section>`); }
 
   function mediaPage(){ return publicPage('media','MEDIA','Updates, resources and institutional supply notes.','A public space for Pharma Service company updates and practical institutional healthcare-supply resources.',`<section class="publicSection publicMediaGrid"><article><span>SCHOOL CLINICS</span><h3>Building a cleaner replenishment process</h3><p>Why repeat ordering should get easier after the first completed supply cycle.</p></article><article><span>PRODUCT CONTROL</span><h3>Requirement-mapped specifications</h3><p>How PSC separates regulatory requirements from exact commercial product specifications.</p></article><article><span>PSC UPDATE</span><h3>Institutional Supply Portal</h3><p>The first MVP brings ordering, quotations and replenishment into one customer account.</p></article></section>`); }
+
+  function startPage(){
+    return `<main class="publicPage startPage">
+      ${publicHeader('')}
+      <section class="startHero">
+        <div class="startHeroCopy">
+          <span class="kicker">PHARMA SERVICE · INSTITUTIONAL SUPPLY</span>
+          <h1>Start with what you have.</h1>
+          <p>Looking for something specific? Browse the catalogue. Already have an RFQ or product list? Send it over. If you just want to understand how Pharma Service works, that is here too.</p>
+          <div class="startScope"><b>Opening supply · Replenishment · Replacement</b><span>Equipment · Consumables · Pharmaceuticals</span></div>
+          <div class="startCredential"><span>Pharma Service Co. L.L.C.</span><span>Dubai, United Arab Emirates</span><span>MOHAP Drug Store Reg. #1505</span></div>
+        </div>
+        <div class="startChoices" aria-label="Choose how to start">
+          <article class="startChoice startChoiceCatalogue">
+            <span>01</span><h2>Browse the catalogue</h2><p>See the institutional range by clinical need and product category.</p><button class="button light" data-go="catalogue">Browse catalogue</button>
+          </article>
+          <article class="startChoice startChoiceSend">
+            <span>02</span><h2>Send us what you have</h2><p>RFQ, Excel sheet, PDF or a written list. We can clarify the missing details before quoting.</p><button class="button primary" data-start-scroll="send">Send your list</button>
+          </article>
+          <article class="startChoice startChoiceModel">
+            <span>03</span><h2>See how we work</h2><p>A quick look at how we handle specifications, sourcing, regulated lines and repeat supply.</p><button class="button dark" data-go="our-model">Our model</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="startWorkshopStrip">
+        <div><span class="kicker">THE WORKSHOP</span><h2>Not sure what the product actually needs to be?</h2><p>Practical guides to products, compatibility, readiness, expiry and ordering details.</p></div>
+        <button class="button outline" data-go="workshop">Open The Workshop</button>
+      </section>
+
+      <section class="startSendSection" id="start-send">
+        <div class="startSendIntro">
+          <span class="kicker">HAVE A LIST?</span>
+          <h2>Send us what you have.</h2>
+          <p>It does not need to be perfectly specified. Send the requirement as it stands and we will clarify what matters before we quote it.</p>
+          <div class="startSendAside"><b>No list yet?</b><button class="textAction" data-go="catalogue">Browse the catalogue</button></div>
+        </div>
+        <form class="prospectForm startProspectForm" data-public-enquiry data-source-page="business_card_start_v37_5_8" novalidate>
+          <div class="prospectField">
+            <label for="startOrganization">Organization</label>
+            <input id="startOrganization" name="organization" type="text" maxlength="180" placeholder="School group, clinic or company" required>
+          </div>
+          <div class="prospectField">
+            <label for="startInstitutionType">Institution type</label>
+            <select id="startInstitutionType" name="institution_type" required><option value="">Select</option><option>School / education</option><option>Healthcare facility</option><option>Corporate / workplace health</option><option>Government / public institution</option><option>Hospitality / other institution</option><option>Other</option></select>
+          </div>
+          <div class="prospectField">
+            <label for="startName">Name</label>
+            <input id="startName" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Your name" required>
+          </div>
+          <div class="prospectField">
+            <label for="startPhone">Contact number</label>
+            <input id="startPhone" name="contact_number" type="tel" autocomplete="tel" maxlength="40" placeholder="+971" required>
+          </div>
+          <div class="prospectField prospectFieldWide">
+            <label for="startEmail">Contact email</label>
+            <input id="startEmail" name="contact_email" type="email" autocomplete="email" maxlength="254" placeholder="name@organization.ae" required>
+          </div>
+          <div class="prospectField prospectFieldWide">
+            <label for="startRequirement">What do you need?</label>
+            <textarea id="startRequirement" name="requirement" rows="5" maxlength="4000" placeholder="Paste the list, describe the item, quantities or anything else you already know." required></textarea>
+          </div>
+          <div class="prospectField prospectFieldWide rfqUploadField">
+            <label for="startRfq">Attach a list or RFQ <span>optional · PDF, Word, Excel or CSV · max 10 MB</span></label>
+            <input id="startRfq" name="rfq_file" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,application/pdf,text/csv,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+          </div>
+          <div class="prospectHoneypot" aria-hidden="true"><label for="startWebsite">Website</label><input id="startWebsite" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+          <div class="prospectSubmitRow"><p>We will use this to come back to you about the institutional requirement.</p><button class="button primary semanticPrimary" type="submit" data-public-enquiry-submit>Send to Pharma Service</button></div>
+        </form>
+      </section>
+      ${publicFooter()}
+    </main>`;
+  }
 
   function contactPage(){ return publicPage(
     'contact',
@@ -2133,6 +2207,7 @@
       'how-it-works':['Our Model | Pharma Service','How Pharma Service handles institutional healthcare supply: careful specifications, category-appropriate sourcing, regulated routes and repeat account service.','/our-model.html'],
       catalogue:['Institutional Healthcare Catalogue | Pharma Service','Browse the public read-only Pharma Service institutional healthcare catalogue by clinical need.','/catalogue.html'],
       contact:['Request Institutional Supply | Pharma Service','Send Pharma Service an institutional healthcare requirement or RFQ for sourcing and quotation.','/contact.html'],
+      start:['Start Here | Pharma Service','Browse the Pharma Service institutional catalogue, send an RFQ or product list, or see how our institutional supply model works.','/start'],
       about:['About Pharma Service','Dubai healthcare supply business developing a controlled institutional supply service for schools and organizations.','/about.html'],
       careers:['Careers | Pharma Service','Career information from Pharma Service.','/careers.html'],
       media:['Media & Resources | Pharma Service','Pharma Service company updates and institutional healthcare supply resources.','/media.html'],
@@ -2176,6 +2251,7 @@
       html=adminProductEditor(r.split('/')[2]);
     } else switch(r){
       case 'home': html=landing();break;
+      case 'start': html=startPage();break;
       case 'about': html=aboutPage();break;
       case 'services': html=servicesPage();break;
       case 'our-model': html=ourModelPage();break;
@@ -2262,7 +2338,7 @@
         name, contact_number, contact_email, organization, institution_type,
         site_count, emirate, requirement_type, required_by, requirement,
         rfq_object_path, rfq_file_name,
-        source_page:'public_contact_v37'
+        source_page:form.dataset.sourcePage||'public_contact_v37'
       });
       if(error) throw error;
 
@@ -2279,6 +2355,7 @@
 
   function bind(){
     document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>go(el.dataset.go)));
+    document.querySelectorAll('[data-start-scroll]').forEach(el=>el.addEventListener('click',()=>document.getElementById('start-send')?.scrollIntoView({behavior:'smooth',block:'start'})));
     const wSearch=document.querySelector('[data-workshop-q]'); if(wSearch)wSearch.addEventListener('input',e=>{ui.workshopQuery=e.target.value;const pos=e.target.selectionStart||ui.workshopQuery.length;render();requestAnimationFrame(()=>{const n=document.querySelector('[data-workshop-q]');if(n){n.focus();try{n.setSelectionRange(pos,pos)}catch{}}});});
     document.querySelectorAll('[data-workshop-category]').forEach(el=>el.addEventListener('click',()=>{ui.workshopCategory=el.dataset.workshopCategory;render()}));
     document.querySelectorAll('[data-workshop-clear]').forEach(el=>el.addEventListener('click',()=>{ui.workshopQuery='';ui.workshopCategory='All';render()}));

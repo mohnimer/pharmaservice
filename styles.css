@@ -6400,3 +6400,189 @@ main.publicPage:has(.modelQuietIntro) .publicPageHero p{
   .publicLanding .pscHeroBarcode{width:68%!important;height:42px!important;margin:26px auto 10px!important}
   .publicLanding .pscHeroBoardLabel{font-size:9.5px!important;white-space:normal!important;text-align:center!important}
 }
+
+/* =========================================================
+   V37.5.8 — Business-card /start landing page
+   ========================================================= */
+.startPage{background:#faf8f2;color:#141717}
+.startHero{
+  max-width:1460px;
+  margin:0 auto;
+  padding:clamp(56px,7vw,108px) clamp(30px,5vw,76px) clamp(46px,6vw,84px);
+  display:grid;
+  grid-template-columns:minmax(0,.92fr) minmax(540px,1.08fr);
+  gap:clamp(46px,6vw,96px);
+  align-items:start;
+  background-image:linear-gradient(rgba(21,123,121,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(21,123,121,.055) 1px,transparent 1px);
+  background-size:32px 32px;
+  border-bottom:1px solid rgba(23,23,23,.08);
+}
+.startHeroCopy{max-width:650px;padding-top:14px}
+.startHeroCopy h1{font-size:clamp(58px,6.2vw,94px);line-height:.91;letter-spacing:-.065em;margin:18px 0 24px;max-width:620px}
+.startHeroCopy>p{font-size:18px;line-height:1.65;color:#535b5a;max-width:610px;margin:0}
+.startScope{margin-top:38px;padding-top:22px;border-top:1px solid rgba(20,23,23,.18);display:grid;gap:7px}
+.startScope b{font-size:14px}.startScope span{font-size:13px;color:#666e6d}
+.startCredential{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:30px;color:#6e7574;font-size:11px}
+.startCredential span+span:before{content:'·';margin-right:18px;color:#a4aaa8}
+.startChoices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-self:center}
+.startChoice{min-height:330px;border:1px solid rgba(15,25,25,.11);border-radius:24px;padding:24px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.startChoice>span{font-size:10px;font-weight:800;color:#65706d;letter-spacing:.12em}
+.startChoice h2{font-size:27px;line-height:1.04;letter-spacing:-.045em;margin:34px 0 12px}
+.startChoice p{font-size:13px;line-height:1.55;color:#596360;margin:0 0 24px}
+.startChoice .button{margin-top:auto;width:100%;min-height:48px;border-radius:15px;font-size:12px}
+.startChoiceCatalogue{background:#dcefeb}
+.startChoiceSend{background:#f2d8dd}
+.startChoiceModel{background:#e7e6c8}
+.startChoiceModel .button.dark{background:#0b1d1b;color:#fff}
+.startWorkshopStrip{max-width:1320px;margin:54px auto 0;padding:30px 34px;border:1px solid rgba(17,26,25,.12);border-radius:24px;display:flex;align-items:center;justify-content:space-between;gap:30px;background:#fff}
+.startWorkshopStrip h2{font-size:30px;letter-spacing:-.04em;margin:7px 0 8px}
+.startWorkshopStrip p{margin:0;color:#697270;line-height:1.55}
+.startWorkshopStrip .button{flex:0 0 auto;min-height:48px;border-radius:15px;padding:0 22px}
+.startSendSection{max-width:1320px;margin:20px auto 70px;padding:60px clamp(30px,5vw,72px);background:#0c1d1b;color:#fff;border-radius:28px;display:grid;grid-template-columns:minmax(260px,.72fr) minmax(0,1.28fr);gap:clamp(48px,6vw,88px);align-items:start}
+.startSendIntro .kicker{color:#6ed4cd}
+.startSendIntro h2{font-size:clamp(38px,4.5vw,62px);line-height:.98;letter-spacing:-.055em;margin:14px 0 18px}
+.startSendIntro>p{color:#c3cfcc;font-size:15px;line-height:1.65;margin:0;max-width:430px}
+.startSendAside{margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14);display:flex;align-items:center;gap:12px;font-size:12px}
+.startSendAside .textAction{color:#7ad7d0}
+.startProspectForm{background:#fff;color:#171b1b;border-radius:22px;padding:24px;border:0;box-shadow:none}
+.startProspectForm .prospectSubmitRow{margin-top:2px}
+.startProspectForm .prospectSubmitRow p{max-width:420px}
+
+@media(max-width:1120px){
+  .startHero{grid-template-columns:1fr;padding-top:64px}
+  .startHeroCopy{max-width:760px}
+  .startChoices{width:100%}
+  .startChoice{min-height:270px}
+  .startSendSection{margin-left:24px;margin-right:24px}
+  .startWorkshopStrip{margin-left:24px;margin-right:24px}
+}
+@media(max-width:760px){
+  .startHero{padding:42px 20px 36px;gap:32px;background-size:26px 26px}
+  .startHeroCopy h1{font-size:54px;margin-top:12px}
+  .startHeroCopy>p{font-size:15px}
+  .startCredential{display:grid;gap:5px;margin-top:22px}.startCredential span+span:before{display:none}
+  .startChoices{grid-template-columns:1fr;gap:10px}
+  .startChoice{min-height:0;padding:22px;border-radius:20px}
+  .startChoice h2{font-size:25px;margin:20px 0 9px}
+  .startChoice p{margin-bottom:20px}
+  .startWorkshopStrip{margin:24px 18px 0;padding:24px;display:grid}
+  .startWorkshopStrip h2{font-size:26px}.startWorkshopStrip .button{width:100%}
+  .startSendSection{margin:14px 18px 48px;padding:30px 20px;border-radius:22px;grid-template-columns:1fr;gap:28px}
+  .startSendIntro h2{font-size:42px}
+  .startProspectForm{padding:18px}
+}
+
+/* =========================================================
+   V37.5.9 — Current Pharma Service logo rollout
+   Supplied transparent mark replaces the legacy wordmark site-wide.
+   Keep this block LAST.
+   ========================================================= */
+
+/* Public website header: same left anchor, new mark sized by height so
+   the more vertical artwork remains intact and never stretches. */
+.publicHeader .publicLogo,
+.v37PublicHeader .publicLogo{
+  min-width:112px!important;
+  height:78px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  overflow:visible!important;
+}
+.publicHeader .publicLogo img,
+.v37PublicHeader .publicLogo img{
+  width:auto!important;
+  height:70px!important;
+  max-width:112px!important;
+  max-height:70px!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+}
+
+/* Portal header: retain the existing header grid/slot; only replace the art. */
+.portalHeaderBar .topbarBrandSlot,
+.portalHeaderBar .topbarBrandSlot.plainLogo{
+  width:112px!important;
+  min-width:112px!important;
+  max-width:112px!important;
+  height:64px!important;
+  justify-content:flex-start!important;
+}
+.portalHeaderBar .topbarBrandSlot img,
+.topbarBrandSlot img{
+  width:auto!important;
+  height:58px!important;
+  max-width:92px!important;
+  max-height:58px!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+}
+
+/* Any older in-app brand image using the same master logo. */
+.brandImage,
+.brandImageLight{
+  width:auto!important;
+  height:64px!important;
+  max-width:102px!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+}
+
+/* Login/account card. */
+.loginCard img,
+.v26LoginCard img{
+  width:auto!important;
+  height:94px!important;
+  max-width:142px!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+}
+
+/* Public footer. */
+.publicFooter img,
+.v37PublicFooter img{
+  width:auto!important;
+  height:82px!important;
+  max-width:124px!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+}
+
+@media(max-width:900px){
+  .publicHeader .publicLogo,
+  .v37PublicHeader .publicLogo{
+    min-width:86px!important;
+    height:62px!important;
+  }
+  .publicHeader .publicLogo img,
+  .v37PublicHeader .publicLogo img{
+    height:56px!important;
+    max-width:88px!important;
+    max-height:56px!important;
+  }
+  .portalHeaderBar .topbarBrandSlot,
+  .portalHeaderBar .topbarBrandSlot.plainLogo{
+    width:auto!important;
+    min-width:0!important;
+    max-width:none!important;
+    height:50px!important;
+    justify-content:center!important;
+  }
+  .portalHeaderBar .topbarBrandSlot img,
+  .topbarBrandSlot img{
+    height:46px!important;
+    max-width:74px!important;
+    max-height:46px!important;
+    object-position:center!important;
+  }
+  .publicFooter img,
+  .v37PublicFooter img{height:72px!important;max-width:110px!important}
+}
+
+@media(max-width:620px){
+  .publicHeader .publicLogo,
+  .v37PublicHeader .publicLogo{min-width:76px!important;height:56px!important}
+  .publicHeader .publicLogo img,
+  .v37PublicHeader .publicLogo img{height:50px!important;max-width:78px!important;max-height:50px!important}
+  .loginCard img,.v26LoginCard img{height:82px!important;max-width:124px!important}
+}
