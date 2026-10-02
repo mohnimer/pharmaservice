@@ -958,32 +958,38 @@
         </div>
 
         <div class="publicClinicalPreviewGrid">
-          <button class="publicClinicalCard coral" data-go="catalogue/wounds">
+          <button class="publicClinicalCard coral illustrated" data-go="catalogue/wounds">
+            <img class="publicClinicalCardArt" src="/assets/category-wounds.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
             <span>Cuts &amp; Wounds</span>
             <small>Dressings, antiseptics, gauze, closure and wound protection</small>
           </button>
 
-          <button class="publicClinicalCard blue" data-go="catalogue/breathing">
+          <button class="publicClinicalCard blue illustrated" data-go="catalogue/breathing">
+            <img class="publicClinicalCardArt" src="/assets/category-breathing.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
             <span>Breathing &amp; Oxygen</span>
             <small>Nebulisation, oxygen delivery, airway and respiratory support</small>
           </button>
 
-          <button class="publicClinicalCard orange" data-go="catalogue/vitals">
+          <button class="publicClinicalCard orange illustrated" data-go="catalogue/vitals">
+            <img class="publicClinicalCardArt" src="/assets/category-vitals.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
             <span>Vitals &amp; Assessment</span>
             <small>Blood pressure, temperature, oximetry and clinical assessment</small>
           </button>
 
-          <button class="publicClinicalCard mint" data-go="catalogue/infection">
+          <button class="publicClinicalCard mint illustrated" data-go="catalogue/infection">
+            <img class="publicClinicalCardArt" src="/assets/category-infection.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
             <span>Infection Control &amp; PPE</span>
             <small>PPE, hand hygiene, disinfection and waste control</small>
           </button>
 
-          <button class="publicClinicalCard rose" data-go="catalogue/emergency">
+          <button class="publicClinicalCard rose illustrated" data-go="catalogue/emergency">
+            <img class="publicClinicalCardArt" src="/assets/category-emergency.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
             <span>Emergency &amp; Response</span>
             <small>Resuscitation, first response and urgent-use products</small>
           </button>
 
-          <button class="publicClinicalCard sand" data-go="catalogue/equipment">
+          <button class="publicClinicalCard sand illustrated" data-go="catalogue/equipment">
+            <img class="publicClinicalCardArt" src="/assets/category-equipment.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
             <span>Equipment &amp; Mobility</span>
             <small>Clinical furniture, mobility, storage and capital equipment</small>
           </button>

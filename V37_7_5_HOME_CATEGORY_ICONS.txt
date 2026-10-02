@@ -1,0 +1,6 @@
+PSC V37.7.5
+- Fixes the homepage clinical-category cards specifically.
+- Adds the six supplied illustrations to Cuts & Wounds, Breathing & Oxygen, Vitals & Assessment, Infection Control & PPE, Emergency & Response, and Equipment & Mobility.
+- Illustrations are intentionally small and sit in the upper-right with generous negative space.
+- Text remains left/bottom aligned and is capped so it does not collide with the artwork.
+- Existing portal catalogue category icon treatment remains intact.
