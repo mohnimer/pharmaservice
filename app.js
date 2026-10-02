@@ -960,31 +960,37 @@
 
         <div class="publicClinicalPreviewGrid">
           <button class="publicClinicalCard coral" data-go="catalogue/wounds">
+            <img class="publicClinicalArt" src="/assets/category-wounds.webp" alt="" aria-hidden="true">
             <span>Cuts &amp; Wounds</span>
             <small>Dressings, antiseptics, gauze, closure and wound protection</small>
           </button>
 
           <button class="publicClinicalCard blue" data-go="catalogue/breathing">
+            <img class="publicClinicalArt" src="/assets/category-breathing.webp" alt="" aria-hidden="true">
             <span>Breathing &amp; Oxygen</span>
             <small>Nebulisation, oxygen delivery, airway and respiratory support</small>
           </button>
 
           <button class="publicClinicalCard orange" data-go="catalogue/vitals">
+            <img class="publicClinicalArt" src="/assets/category-vitals.webp" alt="" aria-hidden="true">
             <span>Vitals &amp; Assessment</span>
             <small>Blood pressure, temperature, oximetry and clinical assessment</small>
           </button>
 
           <button class="publicClinicalCard mint" data-go="catalogue/infection">
+            <img class="publicClinicalArt" src="/assets/category-infection.webp" alt="" aria-hidden="true">
             <span>Infection Control &amp; PPE</span>
             <small>PPE, hand hygiene, disinfection and waste control</small>
           </button>
 
           <button class="publicClinicalCard rose" data-go="catalogue/emergency">
+            <img class="publicClinicalArt" src="/assets/category-emergency.webp" alt="" aria-hidden="true">
             <span>Emergency &amp; Response</span>
             <small>Resuscitation, first response and urgent-use products</small>
           </button>
 
           <button class="publicClinicalCard sand" data-go="catalogue/equipment">
+            <img class="publicClinicalArt" src="/assets/category-equipment.webp" alt="" aria-hidden="true">
             <span>Equipment &amp; Mobility</span>
             <small>Clinical furniture, mobility, storage and capital equipment</small>
           </button>
