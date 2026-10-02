@@ -1,3 +1,14 @@
+V37.7 — PSC Mail Desk
+
+- Adds PSC-admin Mail Desk at /#admin/mail.
+- Sender identity locked to info@pharmaservice.ae.
+- Workshop/Clinic Check/Supply Note composer with live email preview.
+- Controlled contacts, audience filters, manual approval, send history and unsubscribe.
+- Adds Supabase mail tables + RLS and Microsoft Graph Edge Function implementation.
+- Workshop guides expose Create email to PSC admins.
+- No tracking pixels; no fabricated open/click analytics.
+- Microsoft Graph secrets must be configured once before live sending.
+
 V37.6 — Fluid catalogue / request interaction pass
 
 - Product detail now opens in-place with app-like sheet behavior on mobile.

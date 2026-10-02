@@ -6976,3 +6976,47 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
   .fluidOverlay,.fluidProductShell,.requestDrawer,.productDisclosureList details>div{animation:none!important}
   .fluidImagePane .detailProductImageWrap img{transition:none!important}
 }
+
+/* =========================================================
+   V37.7 — PSC Mail Desk
+   Internal outreach from info@pharmaservice.ae.
+   Editorial content first; controlled audience and send history.
+   ========================================================= */
+.mailDeskHeader{align-items:flex-end!important}
+.mailDeskHeader p{max-width:760px!important}
+.mailIdentityCard{display:flex;align-items:center;gap:12px;border:1px solid #d9dfdd;background:#fff;border-radius:18px;padding:13px 16px;min-width:270px}
+.mailIdentityCard>span{width:38px;height:38px;border-radius:12px;background:#e8f7f5;color:#0b8985;display:grid;place-items:center;flex:0 0 38px}
+.mailIdentityCard svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.mailIdentityCard div{display:grid;gap:3px}.mailIdentityCard small{font-size:8px;letter-spacing:.12em;font-weight:900;color:#85908d}.mailIdentityCard b{font-size:12px;color:#15211f}
+.mailTabs{display:flex;gap:6px;padding:5px;width:max-content;max-width:100%;overflow:auto;background:#eef2f1;border-radius:14px;margin-bottom:18px}
+.mailTabs button{border:0;background:transparent;padding:10px 16px;border-radius:10px;font:inherit;font-size:11px;font-weight:800;color:#67716f;cursor:pointer;white-space:nowrap}
+.mailTabs button.active{background:#fff;color:#16211f;box-shadow:0 1px 2px rgba(16,28,26,.07)}
+.mailComposeGrid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(360px,.76fr);gap:18px;align-items:start}
+.mailComposer{padding:24px!important}
+.mailSectionHead{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:20px}.mailSectionHead h2{margin:5px 0 0;font-size:27px;letter-spacing:-.045em}.mailSenderBadge{font-size:8px;letter-spacing:.09em;font-weight:900;color:#1a706b;background:#e9f7f5;border:1px solid #cde9e5;padding:8px 10px;border-radius:999px;white-space:nowrap}
+.mailTemplateRow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:20px}
+.mailTemplateCard{border:1px solid #dde3e1;background:#fafbfa;border-radius:16px;padding:14px;text-align:left;display:grid;gap:7px;min-height:112px;cursor:pointer;color:#17211f}
+.mailTemplateCard:hover{border-color:#b8d4d0}.mailTemplateCard.active{background:#e9f7f5;border-color:#62bcb5}
+.mailTemplateCard small{font-size:8px;font-weight:900;color:#1a8f88}.mailTemplateCard b{font-size:13px}.mailTemplateCard span{font-size:10px;line-height:1.4;color:#697370}
+.mailFull{width:100%!important}.mailComposer>.fieldLabel,.mailAddContact .fieldLabel{display:block;margin:14px 0 7px!important}
+.mailAudienceHead{display:flex;justify-content:space-between;gap:16px;align-items:end;border-top:1px solid #e4e8e7;margin-top:22px;padding-top:20px}.mailAudienceHead h3{margin:4px 0 0;font-size:18px;letter-spacing:-.03em}.mailAudienceHead .textAction{font-size:10px}
+.mailAudienceFilters{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px;margin:12px 0}
+.mailContactPicker{max-height:310px;overflow:auto;border:1px solid #e1e6e4;border-radius:15px;background:#fff}
+.mailContactPick{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:11px;align-items:center;padding:11px 12px;border-bottom:1px solid #eef1f0;cursor:pointer}.mailContactPick:last-child{border-bottom:0}.mailContactPick:hover{background:#f8faf9}.mailContactPick.disabled{opacity:.55;cursor:not-allowed}
+.mailContactPick input{accent-color:#1aa49d}.mailContactPick span{display:grid;gap:3px;min-width:0}.mailContactPick b{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mailContactPick small{font-size:9px;color:#78827f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mailContactPick em{font-size:8px;font-style:normal;font-weight:800;color:#71807c;background:#f0f3f2;padding:5px 7px;border-radius:999px;white-space:nowrap}
+.mailComposerActions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}.mailComposerActions .button{min-height:44px;border-radius:12px!important;font-size:11px!important}.mailComposerActions button[disabled]{opacity:.42;cursor:not-allowed}
+.mailBackendNotice{margin-top:14px;border:1px solid #ead6a7;background:#fff8e7;border-radius:13px;padding:12px 13px;display:grid;gap:4px}.mailBackendNotice b{font-size:10px}.mailBackendNotice span{font-size:9px;line-height:1.45;color:#806f4d}
+.mailPreviewPane{position:sticky;top:92px}.mailPreviewLabel{display:flex;align-items:center;justify-content:space-between;padding:0 4px 9px}.mailPreviewLabel span{font-size:9px;font-weight:900;letter-spacing:.11em;color:#4b5754}.mailPreviewLabel small{font-size:8px;color:#8a9391}
+.mailPreviewChrome{border:1px solid #dbe1df;border-radius:20px;overflow:hidden;background:#f2f4f3;box-shadow:0 14px 40px rgba(18,31,28,.07)}
+.mailPreviewTop,.mailPreviewSubject{display:grid;grid-template-columns:52px 1fr;gap:9px;padding:9px 13px;border-bottom:1px solid #e0e5e3;background:#fff}.mailPreviewTop span,.mailPreviewSubject span{font-size:9px;color:#89918f}.mailPreviewTop b,.mailPreviewSubject b{font-size:10px;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mailEmailCanvas{background:#fbfaf5;padding:34px 30px 28px;min-height:520px}.mailEmailBrand{display:flex;align-items:center;justify-content:space-between;gap:18px}.mailEmailBrand img{width:auto;height:62px;max-width:105px;object-fit:contain}.mailEmailBrand span{font-size:9px;font-weight:900;letter-spacing:.11em;color:#14978f}.mailEmailRule{height:1px;background:#d9d4cb;margin:20px 0 26px}.mailEmailCanvas>small{font-size:8px;text-transform:uppercase;letter-spacing:.09em;color:#838a87;font-weight:800}.mailEmailCanvas h2{font-size:34px;line-height:.98;letter-spacing:-.055em;margin:10px 0 17px;max-width:500px}.mailEmailCanvas>p{font-size:13px;line-height:1.65;color:#59615f;margin:0 0 18px}.mailEmailCanvas blockquote{border-left:2px solid #20a8a0;padding-left:12px;margin:0 0 22px;color:#4f5956;font-size:11px;line-height:1.5}.mailEmailCta{display:inline-block;text-decoration:none;background:#10211f;color:#fff!important;border-radius:11px;padding:13px 17px;font-size:10px;font-weight:800;margin-top:4px}.mailEmailFooter{border-top:1px solid #d9d4cb;margin-top:34px;padding-top:18px;display:grid;gap:5px}.mailEmailFooter b{font-size:10px}.mailEmailFooter span{font-size:8.5px;color:#717a77}.mailEmailFooter small{font-size:7.5px;color:#949b98;margin-top:7px}
+.mailContactsLayout{display:grid;grid-template-columns:340px minmax(0,1fr);gap:18px;align-items:start}.mailAddContact{position:sticky;top:92px;padding:22px!important}.mailAddContact h2{font-size:23px;letter-spacing:-.04em;margin:5px 0 6px}.mailAddContact form>.button{margin-top:16px;border-radius:12px!important}.mailSettingRows{display:grid;margin-top:18px;border-top:1px solid #e4e8e7}.mailSettingRows>div{display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-bottom:1px solid #e4e8e7}.mailSettingRows span{font-size:10px;color:#77827f}.mailSettingRows b{font-size:11px;text-align:right}
+
+@media(max-width:1100px){.mailComposeGrid{grid-template-columns:1fr}.mailPreviewPane{position:static}.mailContactsLayout{grid-template-columns:1fr}.mailAddContact{position:static}.mailIdentityCard{min-width:230px}.mailEmailCanvas{min-height:430px}}
+@media(max-width:760px){.mailDeskHeader{align-items:flex-start!important}.mailDeskHeader .mailIdentityCard{width:100%}.mailTemplateRow{grid-template-columns:1fr}.mailTemplateCard{min-height:0}.mailAudienceFilters{grid-template-columns:1fr}.mailComposerActions{display:grid;grid-template-columns:1fr}.mailComposerActions .button{width:100%}.mailSectionHead{display:grid}.mailSenderBadge{width:max-content}.mailContactPick{grid-template-columns:auto minmax(0,1fr)}.mailContactPick em{grid-column:2;width:max-content}.mailEmailCanvas{padding:26px 20px;min-height:0}.mailEmailCanvas h2{font-size:30px}.mailEmailBrand img{height:54px}.mailTabs{width:100%}.mailTabs button{flex:1}.mailContactsLayout .twoCol{grid-template-columns:1fr!important}}
+
+/* V37.7 public unsubscribe page */
+.unsubscribePage{background:#faf8f2;min-height:100vh}.unsubscribeCard{max-width:720px;margin:70px auto;padding:56px;border:1px solid #dfe3df;border-radius:26px;background:#fff}.unsubscribeCard h1{font-size:48px;letter-spacing:-.055em;margin:10px 0 18px}.unsubscribeCard [data-unsubscribe-state]{font-size:16px;line-height:1.6;color:#4f5956}.unsubscribeDone{padding:18px 20px;background:#e9f7f5;border:1px solid #c9e7e3;border-radius:16px}.unsubscribeDone b{font-size:18px;color:#116d68}.unsubscribeDone p{margin:6px 0 0}.unsubscribeFine{font-size:11px!important;color:#818a87!important;border-top:1px solid #e5e8e6;padding-top:18px;margin-top:24px!important}.unsubscribeCard .button{margin-top:22px;border-radius:12px!important}
+@media(max-width:760px){.unsubscribeCard{margin:28px 18px;padding:34px 24px}.unsubscribeCard h1{font-size:39px}}
+.mailInlineSelect{max-width:160px;border:1px solid #dce2e0;background:#fff;border-radius:9px;padding:7px 8px;font:inherit;font-size:9px;color:#273330}
+.workshopArticleActions .workshopMailAction{background:#10211f!important;color:#fff!important;border-color:#10211f!important}

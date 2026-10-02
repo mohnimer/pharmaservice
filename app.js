@@ -30,7 +30,7 @@
   let authReady = false;
 
   let state = load();
-  let ui = { mobile:false, publicMenu:false, basket:false, modal:null, accountMenu:false, globalSearch:'', catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All', cmsChannel:'institutional', cmsSearch:'', wholesaleQuery:'', wholesaleCat:'All', workshopQuery:'', workshopCategory:'All', tourStep:0, overlayScroll:0 };
+  let ui = { mobile:false, publicMenu:false, basket:false, modal:null, accountMenu:false, globalSearch:'', catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All', cmsChannel:'institutional', cmsSearch:'', wholesaleQuery:'', wholesaleCat:'All', workshopQuery:'', workshopCategory:'All', tourStep:0, overlayScroll:0, mailTab:'compose', mailSearch:'', mailRole:'All', mailInstitution:'All', mailTemplate:'workshop', mailGuideSlug:'aed-has-expiring-parts-too', mailSelectedContacts:[], mailDraftSubject:'', mailDraftIntro:'', mailDraftCta:'Read the guide' };
 
   const cms = {
     loaded:false,
@@ -40,6 +40,17 @@
     media:[],
     storefronts:[],
     publicRows:{institutional:[],wholesale:[]}
+  };
+
+  const mailDesk = {
+    loaded:false,
+    loading:false,
+    backendReady:false,
+    contacts:[],
+    campaigns:[],
+    recipients:[],
+    senderName:'Pharma Service',
+    senderEmail:'info@pharmaservice.ae'
   };
 
   const INSTITUTIONAL_CATALOGUE_TEMPLATE = {
@@ -309,6 +320,176 @@
     } finally {
       cms.loading=false;
     }
+  }
+
+  async function loadAdminMail(){
+    if(!sb || !authContext?.isPscAdmin) return;
+    mailDesk.loading=true;
+    try{
+      const [{data:contacts,error:cError},{data:campaigns,error:caError},{data:recipients,error:rError}] = await Promise.all([
+        sb.from('mail_contacts').select('*').order('organization').order('email'),
+        sb.from('mail_campaigns').select('*').order('created_at',{ascending:false}).limit(100),
+        sb.from('mail_campaign_recipients').select('*').order('created_at',{ascending:false}).limit(1000)
+      ]);
+      if(cError || caError || rError){
+        const err=cError||caError||rError;
+        console.warn('Mail Desk schema not ready:',err?.message||err);
+        mailDesk.backendReady=false;
+        mailDesk.contacts=[]; mailDesk.campaigns=[]; mailDesk.recipients=[];
+      } else {
+        mailDesk.contacts=contacts||[];
+        mailDesk.campaigns=campaigns||[];
+        mailDesk.recipients=recipients||[];
+        mailDesk.backendReady=true;
+      }
+      mailDesk.loaded=true;
+    } catch(e){
+      console.warn('Mail Desk load failed:',e);
+      mailDesk.backendReady=false;
+      mailDesk.loaded=true;
+    } finally { mailDesk.loading=false; }
+  }
+
+  function mailPublishedGuides(){ return WORKSHOP.filter(g=>g.status==='published'); }
+  function mailGuide(){ return mailPublishedGuides().find(g=>g.slug===ui.mailGuideSlug) || mailPublishedGuides()[0] || null; }
+  function mailRoleOptions(){ return ['All','Nurse / clinic lead','Procurement','Operations / administration','Finance','Management / owner','Other']; }
+  function mailInstitutionOptions(){ return ['All','School / education','Healthcare facility','Corporate / workplace health','Government / public institution','Hospitality / other institution','Other']; }
+  function mailEligibleContact(c){ return c.status==='active' && c.marketing_basis && c.marketing_basis!=='not_set'; }
+  function mailFilteredContacts(){
+    const q=(ui.mailSearch||'').trim().toLowerCase();
+    return mailDesk.contacts.filter(c=>{
+      if(ui.mailRole!=='All' && c.role!==ui.mailRole) return false;
+      if(ui.mailInstitution!=='All' && c.institution_type!==ui.mailInstitution) return false;
+      if(q && ![c.first_name,c.last_name,c.email,c.organization,c.role,c.institution_type,(c.tags||[]).join(' ')].join(' ').toLowerCase().includes(q)) return false;
+      return true;
+    });
+  }
+  function mailSelectedEligibleContacts(){
+    const ids=new Set(ui.mailSelectedContacts||[]);
+    return mailDesk.contacts.filter(c=>ids.has(c.id)&&mailEligibleContact(c));
+  }
+  function mailCampaignSubject(){
+    const g=mailGuide();
+    if((ui.mailDraftSubject||'').trim()) return ui.mailDraftSubject.trim();
+    if(ui.mailTemplate==='workshop' && g) return g.title;
+    if(ui.mailTemplate==='clinic-check' && g) return `Clinic check: ${g.title}`;
+    if(ui.mailTemplate==='supply-note') return 'A quick supply note from Pharma Service';
+    return g?.title||'From Pharma Service';
+  }
+  function mailCampaignIntro(){
+    const g=mailGuide();
+    if((ui.mailDraftIntro||'').trim()) return ui.mailDraftIntro.trim();
+    if(ui.mailTemplate==='clinic-check') return g?.excerpt||'A practical check worth adding to the clinic routine.';
+    if(ui.mailTemplate==='supply-note') return 'A short note from Pharma Service on the products, replacements and small supply details worth keeping visible.';
+    return g?.excerpt||'Practical product intelligence from The Workshop.';
+  }
+  function mailCampaignCta(){ return (ui.mailDraftCta||'').trim() || (ui.mailTemplate==='supply-note'?'Browse the institutional catalogue':'Read the guide'); }
+  function mailCampaignUrl(){
+    const g=mailGuide();
+    if(ui.mailTemplate==='supply-note') return 'https://pharmaservice.ae/catalogue.html';
+    return g?`https://pharmaservice.ae/workshop/${g.slug}`:'https://pharmaservice.ae/workshop';
+  }
+  function mailCampaignSnapshot(){
+    const g=mailGuide();
+    return {template:ui.mailTemplate,workshop_slug:g?.slug||null,workshop_title:g?.title||null,subject:mailCampaignSubject(),intro:mailCampaignIntro(),cta_label:mailCampaignCta(),cta_url:mailCampaignUrl()};
+  }
+  function mailStatusPill(status){ const tone=({sent:'ok',sending:'warn',draft:'',failed:'danger',partial:'warn'})[status]||''; return badge(String(status||'draft').replace('_',' '),tone); }
+  function mailAudienceSummary(){
+    const chosen=mailSelectedEligibleContacts();
+    if(chosen.length) return `${chosen.length} selected contact${chosen.length===1?'':'s'}`;
+    const filtered=mailFilteredContacts().filter(mailEligibleContact);
+    return filtered.length?`${filtered.length} eligible contact${filtered.length===1?'':'s'} in current filter`:'No eligible contacts selected';
+  }
+  function mailPreview(){
+    const g=mailGuide(); const snap=mailCampaignSnapshot();
+    const kicker=ui.mailTemplate==='supply-note'?'INSTITUTIONAL SUPPLY':'THE WORKSHOP';
+    const meta=g&&ui.mailTemplate!=='supply-note'?`${esc(g.category)} · ${esc(g.read_time||'')}`:'Pharma Service Co. L.L.C.';
+    return `<div class="mailPreviewChrome"><div class="mailPreviewTop"><span>From</span><b>Pharma Service &lt;${esc(mailDesk.senderEmail)}&gt;</b></div><div class="mailPreviewSubject"><span>Subject</span><b>${esc(snap.subject)}</b></div><div class="mailEmailCanvas"><div class="mailEmailBrand"><img src="${PSC_LOGO}" alt="Pharma Service"><span>${kicker}</span></div><div class="mailEmailRule"></div><small>${meta}</small><h2>${esc(g?.title||snap.subject)}</h2><p>${esc(snap.intro)}</p>${g?.subtitle&&ui.mailTemplate!=='supply-note'?`<blockquote>${esc(g.subtitle)}</blockquote>`:''}<a href="${esc(snap.cta_url)}" class="mailEmailCta">${esc(snap.cta_label)}</a><div class="mailEmailFooter"><b>Pharma Service Co. L.L.C.</b><span>Institutional healthcare supply · Dubai, UAE</span><span>Sent from ${esc(mailDesk.senderEmail)}</span><small>Recipients can opt out of future PSC marketing emails at any time.</small></div></div></div>`;
+  }
+
+  function adminMailCompose(){
+    const guides=mailPublishedGuides(); const contacts=mailFilteredContacts(); const selected=new Set(ui.mailSelectedContacts||[]);
+    const guideSelect=guides.map(g=>`<option value="${esc(g.slug)}" ${g.slug===mailGuide()?.slug?'selected':''}>${esc(g.title)}</option>`).join('');
+    const contactRows=contacts.map(c=>`<label class="mailContactPick ${!mailEligibleContact(c)?'disabled':''}"><input type="checkbox" data-mail-contact-select="${c.id}" ${selected.has(c.id)?'checked':''} ${!mailEligibleContact(c)?'disabled':''}><span><b>${esc([c.first_name,c.last_name].filter(Boolean).join(' ')||c.email)}</b><small>${esc(c.organization||'No organization')} · ${esc(c.role||'Role not set')}</small></span><em>${mailEligibleContact(c)?'Eligible':c.status==='unsubscribed'?'Opted out':'Basis required'}</em></label>`).join('');
+    return `<div class="mailComposeGrid"><section class="panel mailComposer"><div class="mailSectionHead"><div><span class="eyebrow">COMPOSE</span><h2>Turn PSC content into a useful email.</h2></div><span class="mailSenderBadge">FROM · ${esc(mailDesk.senderEmail)}</span></div>
+      <div class="mailTemplateRow"><button class="mailTemplateCard ${ui.mailTemplate==='workshop'?'active':''}" data-mail-template="workshop"><small>01</small><b>Workshop note</b><span>One useful guide, one reason to read it.</span></button><button class="mailTemplateCard ${ui.mailTemplate==='clinic-check'?'active':''}" data-mail-template="clinic-check"><small>02</small><b>Clinic check</b><span>Fast readiness or stock check.</span></button><button class="mailTemplateCard ${ui.mailTemplate==='supply-note'?'active':''}" data-mail-template="supply-note"><small>03</small><b>Supply note</b><span>Replenishment, replacement or catalogue update.</span></button></div>
+      ${ui.mailTemplate!=='supply-note'?`<label class="fieldLabel">Workshop guide</label><select class="input mailFull" data-mail-guide>${guideSelect}</select>`:''}
+      <label class="fieldLabel">Subject</label><input class="input mailFull" data-mail-subject value="${esc(mailCampaignSubject())}" maxlength="160">
+      <label class="fieldLabel">Opening note</label><textarea class="textarea mailFull" data-mail-intro rows="4" maxlength="1200">${esc(mailCampaignIntro())}</textarea>
+      <label class="fieldLabel">CTA label</label><input class="input mailFull" data-mail-cta value="${esc(mailCampaignCta())}" maxlength="80">
+      <div class="mailAudienceHead"><div><span class="eyebrow">AUDIENCE</span><h3>${esc(mailAudienceSummary())}</h3></div><button class="textAction" data-mail-select-filtered>Select eligible shown</button></div>
+      <div class="mailAudienceFilters"><input class="input" placeholder="Search contacts…" value="${esc(ui.mailSearch)}" data-mail-search><select class="input" data-mail-role>${mailRoleOptions().map(x=>`<option ${x===ui.mailRole?'selected':''}>${esc(x)}</option>`).join('')}</select><select class="input" data-mail-institution>${mailInstitutionOptions().map(x=>`<option ${x===ui.mailInstitution?'selected':''}>${esc(x)}</option>`).join('')}</select></div>
+      <div class="mailContactPicker">${contactRows||`<div class="emptyState"><h3>No contacts yet.</h3><p>Add controlled business contacts under Contacts before sending.</p></div>`}</div>
+      <div class="mailComposerActions"><button class="button light" data-mail-save-draft ${!mailDesk.backendReady?'disabled':''}>Save draft</button><button class="button outline" data-mail-test ${!mailDesk.backendReady?'disabled':''}>Send test to info@</button><button class="button dark" data-mail-send ${!mailDesk.backendReady||!mailSelectedEligibleContacts().length?'disabled':''}>Approve & send</button></div>
+      ${!mailDesk.backendReady?`<div class="mailBackendNotice"><b>Mail data layer not deployed yet.</b><span>The interface is ready. Apply the included V37.7 migration and deploy the mail Edge Functions before live sending.</span></div>`:''}
+    </section><aside class="mailPreviewPane"><div class="mailPreviewLabel"><span>EMAIL PREVIEW</span><small>Responsive HTML · no tracking pixels</small></div>${mailPreview()}</aside></div>`;
+  }
+
+  function adminMailContacts(){
+    const rows=mailDesk.contacts.map(c=>`<tr><td><b>${esc([c.first_name,c.last_name].filter(Boolean).join(' ')||'—')}</b><div class="sub">${esc(c.email)}</div></td><td>${esc(c.organization||'—')}</td><td>${esc(c.role||'—')}</td><td>${esc(c.institution_type||'—')}</td><td><select class="mailInlineSelect" data-mail-contact-status="${c.id}"><option value="active" ${c.status==='active'?'selected':''}>Active</option><option value="paused" ${c.status==='paused'?'selected':''}>Paused</option><option value="unsubscribed" ${c.status==='unsubscribed'?'selected':''}>Unsubscribed</option><option value="bounced" ${c.status==='bounced'?'selected':''}>Bounced</option></select></td><td><select class="mailInlineSelect" data-mail-contact-basis="${c.id}"><option value="not_set" ${c.marketing_basis==='not_set'?'selected':''}>Not reviewed</option><option value="existing_customer" ${c.marketing_basis==='existing_customer'?'selected':''}>Existing customer</option><option value="requested_updates" ${c.marketing_basis==='requested_updates'?'selected':''}>Requested updates</option><option value="manual_permission" ${c.marketing_basis==='manual_permission'?'selected':''}>Permission recorded</option><option value="legitimate_interest_reviewed" ${c.marketing_basis==='legitimate_interest_reviewed'?'selected':''}>Legitimate interest reviewed</option></select></td></tr>`).join('');
+    return `<div class="mailContactsLayout"><section class="panel mailAddContact"><span class="eyebrow">ADD CONTACT</span><h2>Business contact record</h2><p class="smallMuted">A contact only becomes send-eligible when its email status is active and the marketing basis has been reviewed.</p><form data-mail-contact-form><div class="twoCol"><div><label class="fieldLabel">First name</label><input class="input mailFull" name="first_name"></div><div><label class="fieldLabel">Last name</label><input class="input mailFull" name="last_name"></div></div><label class="fieldLabel">Email</label><input class="input mailFull" type="email" name="email" required><label class="fieldLabel">Organization</label><input class="input mailFull" name="organization"><div class="twoCol"><div><label class="fieldLabel">Role</label><select class="input mailFull" name="role">${mailRoleOptions().filter(x=>x!=='All').map(x=>`<option>${esc(x)}</option>`).join('')}</select></div><div><label class="fieldLabel">Institution type</label><select class="input mailFull" name="institution_type">${mailInstitutionOptions().filter(x=>x!=='All').map(x=>`<option>${esc(x)}</option>`).join('')}</select></div></div><label class="fieldLabel">Marketing basis</label><select class="input mailFull" name="marketing_basis"><option value="not_set">Not reviewed — cannot send</option><option value="existing_customer">Existing customer relationship</option><option value="requested_updates">Requested updates</option><option value="manual_permission">Explicit permission recorded</option><option value="legitimate_interest_reviewed">Legitimate interest reviewed</option></select><label class="fieldLabel">Source / note</label><input class="input mailFull" name="source_note" placeholder="Visit, referral, customer account, event…"><button class="button dark full" type="submit" ${!mailDesk.backendReady?'disabled':''}>Add contact</button></form></section><section class="panel"><div class="panelHeader"><div><h2>Contacts</h2><p>${mailDesk.contacts.length} controlled contact${mailDesk.contacts.length===1?'':'s'}</p></div></div><div class="tableWrap"><table class="dataTable"><thead><tr><th>CONTACT</th><th>ORGANIZATION</th><th>ROLE</th><th>TYPE</th><th>STATUS</th><th>BASIS</th></tr></thead><tbody>${rows||'<tr><td colspan="6">No contacts added yet.</td></tr>'}</tbody></table></div></section></div>`;
+  }
+
+  function adminMailHistory(){
+    const rows=mailDesk.campaigns.map(c=>{const rs=mailDesk.recipients.filter(r=>r.campaign_id===c.id);const sent=rs.filter(r=>r.status==='sent').length;const failed=rs.filter(r=>r.status==='failed').length;return `<tr><td><b>${esc(c.subject)}</b><div class="sub">${esc(c.template||'campaign')}</div></td><td>${date(c.created_at)}</td><td>${mailStatusPill(c.status)}</td><td>${rs.length}</td><td>${sent}</td><td>${failed}</td></tr>`}).join('');
+    return `<section class="panel"><div class="panelHeader"><div><h2>Send history</h2><p>Delivery history only. Opens and clicks are deliberately not fabricated.</p></div></div><div class="tableWrap"><table class="dataTable"><thead><tr><th>CAMPAIGN</th><th>CREATED</th><th>STATUS</th><th>RECIPIENTS</th><th>SENT</th><th>FAILED</th></tr></thead><tbody>${rows||'<tr><td colspan="6">No campaigns sent yet.</td></tr>'}</tbody></table></div></section>`;
+  }
+
+  function adminMailSettings(){
+    return `<div class="twoCol"><section class="panel"><span class="eyebrow">SENDER IDENTITY</span><h2>Pharma Service</h2><div class="mailSettingRows"><div><span>From</span><b>${esc(mailDesk.senderEmail)}</b></div><div><span>Reply-to</span><b>${esc(mailDesk.senderEmail)}</b></div><div><span>Display name</span><b>${esc(mailDesk.senderName)}</b></div><div><span>Delivery</span><b>Microsoft Graph via PSC Edge Function</b></div></div></section><section class="panel"><span class="eyebrow">CONTROL</span><h2>Human approval first.</h2><p class="smallMuted">Mail Desk does not auto-send marketing. A PSC admin chooses content, recipients and explicitly approves each send. Contacts marked unsubscribed, paused or without a reviewed marketing basis are excluded.</p><div class="gateList" style="margin-top:18px"><div class="gate ${mailDesk.backendReady?'ok':'warn'}"><span>Mail database tables</span><i></i></div><div class="gate warn"><span>Microsoft Graph secrets verified only at send time</span><i></i></div><div class="gate ok"><span>Sender locked to info@pharmaservice.ae</span><i></i></div><div class="gate ok"><span>No tracking pixels in V37.7</span><i></i></div></div></section></div>`;
+  }
+
+  function adminMail(){
+    const tabs=[['compose','Compose'],['contacts','Contacts'],['history','History'],['settings','Settings']];
+    const body=ui.mailTab==='contacts'?adminMailContacts():ui.mailTab==='history'?adminMailHistory():ui.mailTab==='settings'?adminMailSettings():adminMailCompose();
+    return shell(`<div class="pageHeader mailDeskHeader"><div><span class="eyebrow">PSC MAIL DESK</span><h1>Useful emails, from the same system.</h1><p>Turn Workshop guides and institutional supply updates into controlled outreach from <b>${esc(mailDesk.senderEmail)}</b>.</p></div><div class="mailIdentityCard"><span>${icon('mail')}</span><div><small>SENDING MAILBOX</small><b>${esc(mailDesk.senderEmail)}</b></div></div></div><div class="mailTabs">${tabs.map(([id,label])=>`<button class="${ui.mailTab===id?'active':''}" data-mail-tab="${id}">${label}</button>`).join('')}</div>${body}`,true);
+  }
+
+  async function addMailContact(form){
+    if(!sb||!authContext?.isPscAdmin||!mailDesk.backendReady) return;
+    const fd=new FormData(form); const email=String(fd.get('email')||'').trim().toLowerCase();
+    if(!/^\\S+@\\S+\\.\\S+$/.test(email)){toast('<strong>Check the email address.</strong>');return;}
+    const payload={first_name:cleanNullable(fd.get('first_name')),last_name:cleanNullable(fd.get('last_name')),email,organization:cleanNullable(fd.get('organization')),role:cleanNullable(fd.get('role')),institution_type:cleanNullable(fd.get('institution_type')),marketing_basis:String(fd.get('marketing_basis')||'not_set'),source_note:cleanNullable(fd.get('source_note')),status:'active',created_by:session?.user?.id||null};
+    const {error}=await sb.from('mail_contacts').insert(payload); if(error){console.error(error);toast(`<strong>Could not add contact.</strong><br>${esc(error.message)}`);return;}
+    await loadAdminMail(); render(); toast('<strong>Contact added.</strong>');
+  }
+
+  async function updateMailContactField(id,field,value){
+    if(!sb||!authContext?.isPscAdmin||!mailDesk.backendReady) return;
+    if(!['status','marketing_basis'].includes(field)) return;
+    const payload={[field]:value};
+    if(field==='status'&&value==='unsubscribed') payload.unsubscribed_at=new Date().toISOString();
+    if(field==='status'&&value!=='unsubscribed') payload.unsubscribed_at=null;
+    const {error}=await sb.from('mail_contacts').update(payload).eq('id',id);
+    if(error){console.error(error);toast(`<strong>Could not update contact.</strong><br>${esc(error.message)}`);return;}
+    await loadAdminMail(); render(); toast('<strong>Contact updated.</strong>');
+  }
+
+  async function saveMailCampaign(status='draft',testMode=false){
+    if(!sb||!authContext?.isPscAdmin||!mailDesk.backendReady) return;
+    const snap=mailCampaignSnapshot();
+    const contacts=mailSelectedEligibleContacts();
+    if(status!=='draft'&&!testMode&&!contacts.length){toast('<strong>Select at least one eligible contact.</strong>');return;}
+    const payload={template:snap.template,workshop_slug:snap.workshop_slug,workshop_title:snap.workshop_title,subject:snap.subject,preview_text:snap.intro.slice(0,240),intro:snap.intro,cta_label:snap.cta_label,cta_url:snap.cta_url,sender_name:mailDesk.senderName,sender_email:mailDesk.senderEmail,status:'draft',created_by:session?.user?.id||null};
+    const {data:campaign,error}=await sb.from('mail_campaigns').insert(payload).select('*').single();
+    if(error){console.error(error);toast(`<strong>Could not save campaign.</strong><br>${esc(error.message)}`);return;}
+    if(contacts.length){
+      const recipients=contacts.map(c=>({campaign_id:campaign.id,contact_id:c.id,email_snapshot:c.email,name_snapshot:[c.first_name,c.last_name].filter(Boolean).join(' ')||null,organization_snapshot:c.organization||null,status:'queued'}));
+      const {error:rError}=await sb.from('mail_campaign_recipients').insert(recipients); if(rError){console.error(rError);toast(`<strong>Campaign saved, but recipients failed.</strong><br>${esc(rError.message)}`);return;}
+    }
+    if(status==='draft'){ await loadAdminMail(); render(); toast('<strong>Draft saved.</strong>'); return; }
+    const button=document.querySelector(testMode?'[data-mail-test]':'[data-mail-send]'); const original=button?.textContent||''; if(button){button.disabled=true;button.textContent=testMode?'Sending test…':'Sending…';}
+    try{
+      const {data,error:invokeError}=await sb.functions.invoke('send-mail-campaign',{body:{campaign_id:campaign.id,test_mode:testMode,test_to:testMode?mailDesk.senderEmail:null}});
+      if(invokeError) throw invokeError;
+      if(data?.error) throw new Error(data.error);
+      await loadAdminMail(); render();
+      toast(testMode?'<strong>Test email sent.</strong><br>Check info@pharmaservice.ae.':'<strong>Campaign sent.</strong><br>Delivery results are recorded in Mail Desk.');
+    } catch(e){
+      console.error('Mail send failed',e);
+      await loadAdminMail(); render();
+      toast(`<strong>Mail was not sent.</strong><br>${esc(e?.message||'Check the Graph/Edge Function connection.')}`);
+    } finally { if(button){button.disabled=false;button.textContent=original;} }
   }
 
   function cmsSetting(productId,channel=ui.cmsChannel){
@@ -631,6 +812,7 @@
       menu:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>`,
       close:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"/><path d="M18 6 6 18"/></svg>`,
       settings:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v2.2"/><path d="M12 19.3v2.2"/><path d="m4.9 4.9 1.6 1.6"/><path d="m17.5 17.5 1.6 1.6"/><path d="M2.5 12h2.2"/><path d="M19.3 12h2.2"/><path d="m4.9 19.1 1.6-1.6"/><path d="m17.5 6.5 1.6-1.6"/></svg>`,
+      mail:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>`,
       help:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.8 9.1a2.5 2.5 0 1 1 3.9 2c-.9.6-1.7 1.2-1.7 2.5"/><path d="M12 17.6h.01"/></svg>`
     };
     return map[name]||'';
@@ -645,7 +827,7 @@
     ['portal/stock','Stock & expiry','stock'],
     ['portal/assets','Clinic assets','assets']
   ];
-  const adminNav=[['admin/dashboard','Deal Desk','dashboard'],['admin/storefront','Storefront','edit'],['admin/products','Product Master','boxes'],['admin/requests','Request Queue','checklist'],['admin/fulfilment','Fulfilment Rules','repeat'],['admin/supplier-feed','Supplier Feed','reports']];
+  const adminNav=[['admin/dashboard','Deal Desk','dashboard'],['admin/mail','Mail','mail'],['admin/storefront','Storefront','edit'],['admin/products','Product Master','boxes'],['admin/requests','Request Queue','checklist'],['admin/fulfilment','Fulfilment Rules','repeat'],['admin/supplier-feed','Supplier Feed','reports']];
 
   function shell(content, admin=false){
     const route=currentRoute();
@@ -666,7 +848,7 @@
         <header class="topbar sleekTopbar v7Topbar v7bTopbar portalHeaderBar">
           <button class="iconBtn mobileMenu" data-mobile-open aria-label="Open menu">${icon('menu')}</button>
           <div class="topbarBrandSlot plainLogo"><img src="${PSC_LOGO}" alt="Pharma Service"></div>
-          ${!admin?`<div class="topbarSearch"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search institutional catalogue…" aria-label="Search institutional catalogue"></div>`:'<div class="topbarAdminTitle"><span>PSC</span><b>Deal Desk</b></div>'}
+          ${!admin?`<div class="topbarSearch"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search institutional catalogue…" aria-label="Search institutional catalogue"></div>`:`<div class="topbarAdminTitle"><span>PSC</span><b>${route==='admin/mail'?'Mail Desk':'Deal Desk'}</b></div>`}
           <div class="topbarActions topbarActionsV4">
             ${admin?`<span class="userPill compactUser"><span class="avatarDot">MH</span><span><b>Mohamed</b><small>PSC admin</small></span></span>`:`
             <div class="accountSwitcherWrap">
@@ -1084,7 +1266,7 @@
           <div class="workshopArticleTopline"><button data-go="workshop">THE WORKSHOP</button><i></i><span>${esc(g.category)}</span><b>${esc(workshopFormatLabel(g.format))}</b></div>
           <h1>${esc(g.title)}</h1><p class="workshopDeck">${esc(g.subtitle)}</p>
           <div class="workshopArticleMeta"><span>${esc(g.read_time)} read</span><span>Last reviewed ${esc(g.last_reviewed)}</span><span>${esc(g.author_or_review_status)}</span></div>
-          <div class="workshopArticleActions"><button data-workshop-save="${esc(g.slug)}" aria-pressed="${saved?'true':'false'}">${saved?'Saved':'Save'}</button><button data-workshop-print>Print</button><button data-workshop-share="${esc(g.slug)}">Share</button></div>
+          <div class="workshopArticleActions"><button data-workshop-save="${esc(g.slug)}" aria-pressed="${saved?'true':'false'}">${saved?'Saved':'Save'}</button><button data-workshop-print>Print</button><button data-workshop-share="${esc(g.slug)}">Share</button>${authContext?.isPscAdmin?`<button class="workshopMailAction" data-mail-from-guide="${esc(g.slug)}">Create email</button>`:''}</div>
         </header>
         <div class="workshopArticleBody">${(g.body_sections||[]).map(workshopSectionHtml).join('')}</div>
         <section class="workshopSignature">
@@ -1139,6 +1321,22 @@
   function careersPage(){ return publicPage('careers','CAREERS','Build practical healthcare supply with us.','We are interested in people who value accuracy, follow-through and institutional customer service.',`<section class="publicSection simplePublicPanel"><h2>Current opportunities</h2><p>Roles will be posted here as the institutional-supply business expands. For now, career enquiries can be directed through the Contact page.</p><button class="button outline" data-go="contact">Contact Pharma Service</button></section>`); }
 
   function mediaPage(){ return publicPage('media','MEDIA','Updates, resources and institutional supply notes.','A public space for Pharma Service company updates and practical institutional healthcare-supply resources.',`<section class="publicSection publicMediaGrid"><article><span>SCHOOL CLINICS</span><h3>Building a cleaner replenishment process</h3><p>Why repeat ordering should get easier after the first completed supply cycle.</p></article><article><span>PRODUCT CONTROL</span><h3>Requirement-mapped specifications</h3><p>How PSC separates regulatory requirements from exact commercial product specifications.</p></article><article><span>PSC UPDATE</span><h3>Institutional Supply Portal</h3><p>The first MVP brings ordering, quotations and replenishment into one customer account.</p></article></section>`); }
+
+  function unsubscribePage(){
+    const token=new URLSearchParams(location.search).get('token')||'';
+    return `<main class="publicPage unsubscribePage">${publicHeader('')}<section class="unsubscribeCard"><span class="kicker">PHARMA SERVICE MAIL</span><h1>Email preferences</h1><div data-unsubscribe-state>${token?'<p>Updating your email preference…</p>':'<p>This unsubscribe link is missing its contact token.</p>'}</div><p class="unsubscribeFine">This only stops PSC marketing/outreach emails. It does not affect transactional messages about active quotations, orders, deliveries, invoices or service matters.</p><button class="button light" data-go="home">Back to Pharma Service</button></section>${publicFooter()}</main>`;
+  }
+
+  async function processMailUnsubscribe(){
+    const host=document.querySelector('[data-unsubscribe-state]'); if(!host) return;
+    const token=new URLSearchParams(location.search).get('token')||'';
+    if(!token){host.innerHTML='<p>This unsubscribe link is incomplete. Please email info@pharmaservice.ae if you want us to update your preferences.</p>';return;}
+    if(!sb){host.innerHTML='<p>We could not update this preference automatically. Please email info@pharmaservice.ae and we will update it.</p>';return;}
+    try{
+      const {data,error}=await sb.functions.invoke('mail-unsubscribe',{body:{token}}); if(error)throw error; if(data?.error)throw new Error(data.error);
+      host.innerHTML='<div class="unsubscribeDone"><b>You are unsubscribed.</b><p>PSC will no longer send marketing/outreach emails to this contact record.</p></div>';
+    }catch(e){console.error(e);host.innerHTML='<p>We could not update this preference automatically. Please email <b>info@pharmaservice.ae</b> and we will update it.</p>';}
+  }
 
   function startPage(){
     return `<main class="publicPage startPage">
@@ -1695,7 +1893,7 @@
     const open=state.requests.filter(r=>!['Accepted','Cancelled'].includes(r.status)).length;
     const activeQuotes=state.requests.filter(r=>['Sent','Authorized','Procurement','Delivery'].includes(r.status));
     const qvals=activeQuotes.map(calcQuote);const quoted=qvals.reduce((s,q)=>s+(q.hasSell?q.subtotal:0),0);const gp=qvals.reduce((s,q)=>s+(q.gp||0),0);const gm=quoted?gp/quoted*100:0;
-    return shell(`<div class="pageHeader"><div><span class="eyebrow">PSC DEAL DESK</span><h1>Institutional supply control</h1><p>One desk for requests, quote economics, supplier evidence, release gates and fulfilment. Demo figures are illustrative unless backed by an identified evidence source.</p></div></div><div class="adminStatRow"><div class="adminStat"><span>OPEN REQUESTS</span><b>${open}</b></div><div class="adminStat"><span>QUOTED EX VAT</span><b>${money(quoted)}</b></div><div class="adminStat"><span>AUTHORIZED</span><b>${state.requests.filter(r=>r.status==='Authorized').length}</b></div><div class="adminStat"><span>EST. TRUE GP</span><b>${money(gp)}</b></div><div class="adminStat"><span>EST. GM</span><b>${gm.toFixed(1)}%</b></div><div class="adminStat"><span>PRODUCT MASTER</span><b>${cms.products.filter(p=>p.active).length||D.products.length}</b></div></div><div class="actionGrid"><button class="actionCard" data-go="admin/requests"><div class="actionIcon">${icon('checklist')}</div><div><b>Request queue</b><span>Convert needs into controlled quotes</span></div></button><button class="actionCard" data-go="admin/storefront"><div class="actionIcon">${icon('edit')}</div><div><b>Storefront manager</b><span>Institutional + wholesale publishing</span></div></button><button class="actionCard" data-go="admin/products"><div class="actionIcon">${icon('boxes')}</div><div><b>Product master</b><span>Product, media and commercial control</span></div></button><button class="actionCard" data-go="admin/fulfilment"><div class="actionIcon">${icon('repeat')}</div><div><b>Fulfilment rules</b><span>Route by site and source</span></div></button><button class="actionCard" data-go="admin/supplier-feed"><div class="actionIcon">${icon('reports')}</div><div><b>Supplier feed</b><span>Acorus / Med7 data ingestion</span></div></button></div><div class="twoCol"><section class="panel"><div class="panelHeader"><h2>Requests needing attention</h2><button data-go="admin/requests">Open queue →</button></div><div class="tableWrap"><table class="dataTable"><thead><tr><th>REQUEST</th><th>ACCOUNT / SITE</th><th>LINES</th><th>STATUS</th><th>NEXT ACTION</th></tr></thead><tbody>${state.requests.filter(r=>r.status!=='Accepted').map(r=>`<tr class="clickable" data-admin-request="${r.id}"><td><b class="mono">${r.id}</b></td><td>${esc(r.groupName||state.groupName||'Institutional account')}<div class="sub">${esc(r.campus)}</div></td><td>${r.lines.length}</td><td>${statusPill(r.status)}</td><td>${r.status==='Drafting'?'Validate stock + price':r.status==='Sent'?'Resolve school decision':'Check procurement release'}</td></tr>`).join('')}</tbody></table></div></section><div style="display:grid;gap:14px"><div class="marginBox"><h3>Deal economics · active quoted demo</h3><div class="marginGrid"><div><span>DIRECT COST</span><b>${money(qvals.reduce((s,q)=>s+(q.costComplete?q.cost:0),0))}</b></div><div><span>SELL</span><b>${money(quoted)}</b></div><div><span>TRUE GM</span><b>${gm.toFixed(1)}%</b></div><div><span>FOC</span><b>AED 0</b></div><div><span>DELIVERY</span><b>Per quote</b></div><div><span>TARGET</span><b>20%</b></div></div></div><section class="panel"><div class="panelHeader"><h2>Release gate</h2></div><div class="gateList"><div class="gate ok"><span>Exact specification mapped</span><i></i></div><div class="gate warn"><span>Supplier stock current</span><i></i></div><div class="gate warn"><span>VAT / tax evidence by line</span><i></i></div><div class="gate ok"><span>Margin incl. direct costs</span><i></i></div><div class="gate block"><span>Customer funding / PO</span><i></i></div><div class="gate warn"><span>Regulated route validated</span><i></i></div></div></section></div></div><div class="notice" style="margin-top:18px"><strong>Control:</strong> a supplier PO is not released merely because a customer approved a quote. Funding, current supplier evidence, tax treatment, regulated route and delivery must pass the release gate.</div>`,true);
+    return shell(`<div class="pageHeader"><div><span class="eyebrow">PSC DEAL DESK</span><h1>Institutional supply control</h1><p>One desk for requests, quote economics, supplier evidence, release gates and fulfilment. Demo figures are illustrative unless backed by an identified evidence source.</p></div></div><div class="adminStatRow"><div class="adminStat"><span>OPEN REQUESTS</span><b>${open}</b></div><div class="adminStat"><span>QUOTED EX VAT</span><b>${money(quoted)}</b></div><div class="adminStat"><span>AUTHORIZED</span><b>${state.requests.filter(r=>r.status==='Authorized').length}</b></div><div class="adminStat"><span>EST. TRUE GP</span><b>${money(gp)}</b></div><div class="adminStat"><span>EST. GM</span><b>${gm.toFixed(1)}%</b></div><div class="adminStat"><span>PRODUCT MASTER</span><b>${cms.products.filter(p=>p.active).length||D.products.length}</b></div></div><div class="actionGrid"><button class="actionCard" data-go="admin/requests"><div class="actionIcon">${icon('checklist')}</div><div><b>Request queue</b><span>Convert needs into controlled quotes</span></div></button><button class="actionCard" data-go="admin/mail"><div class="actionIcon">${icon('mail')}</div><div><b>Mail Desk</b><span>Workshop + account outreach from info@pharmaservice.ae</span></div></button><button class="actionCard" data-go="admin/storefront"><div class="actionIcon">${icon('edit')}</div><div><b>Storefront manager</b><span>Institutional + wholesale publishing</span></div></button><button class="actionCard" data-go="admin/products"><div class="actionIcon">${icon('boxes')}</div><div><b>Product master</b><span>Product, media and commercial control</span></div></button><button class="actionCard" data-go="admin/fulfilment"><div class="actionIcon">${icon('repeat')}</div><div><b>Fulfilment rules</b><span>Route by site and source</span></div></button><button class="actionCard" data-go="admin/supplier-feed"><div class="actionIcon">${icon('reports')}</div><div><b>Supplier feed</b><span>Acorus / Med7 data ingestion</span></div></button></div><div class="twoCol"><section class="panel"><div class="panelHeader"><h2>Requests needing attention</h2><button data-go="admin/requests">Open queue →</button></div><div class="tableWrap"><table class="dataTable"><thead><tr><th>REQUEST</th><th>ACCOUNT / SITE</th><th>LINES</th><th>STATUS</th><th>NEXT ACTION</th></tr></thead><tbody>${state.requests.filter(r=>r.status!=='Accepted').map(r=>`<tr class="clickable" data-admin-request="${r.id}"><td><b class="mono">${r.id}</b></td><td>${esc(r.groupName||state.groupName||'Institutional account')}<div class="sub">${esc(r.campus)}</div></td><td>${r.lines.length}</td><td>${statusPill(r.status)}</td><td>${r.status==='Drafting'?'Validate stock + price':r.status==='Sent'?'Resolve school decision':'Check procurement release'}</td></tr>`).join('')}</tbody></table></div></section><div style="display:grid;gap:14px"><div class="marginBox"><h3>Deal economics · active quoted demo</h3><div class="marginGrid"><div><span>DIRECT COST</span><b>${money(qvals.reduce((s,q)=>s+(q.costComplete?q.cost:0),0))}</b></div><div><span>SELL</span><b>${money(quoted)}</b></div><div><span>TRUE GM</span><b>${gm.toFixed(1)}%</b></div><div><span>FOC</span><b>AED 0</b></div><div><span>DELIVERY</span><b>Per quote</b></div><div><span>TARGET</span><b>20%</b></div></div></div><section class="panel"><div class="panelHeader"><h2>Release gate</h2></div><div class="gateList"><div class="gate ok"><span>Exact specification mapped</span><i></i></div><div class="gate warn"><span>Supplier stock current</span><i></i></div><div class="gate warn"><span>VAT / tax evidence by line</span><i></i></div><div class="gate ok"><span>Margin incl. direct costs</span><i></i></div><div class="gate block"><span>Customer funding / PO</span><i></i></div><div class="gate warn"><span>Regulated route validated</span><i></i></div></div></section></div></div><div class="notice" style="margin-top:18px"><strong>Control:</strong> a supplier PO is not released merely because a customer approved a quote. Funding, current supplier evidence, tax treatment, regulated route and delivery must pass the release gate.</div>`,true);
   }
 
   function adminStorefront(){
@@ -2121,7 +2319,7 @@
     }
 
     await loadOrdersFromDatabase();
-    if(isPscAdmin) await loadAdminCms();
+    if(isPscAdmin){ await loadAdminCms(); await loadAdminMail(); }
     else await loadPublicStorefronts();
     save();
   }
@@ -2373,6 +2571,7 @@
     } else switch(r){
       case 'home': html=landing();break;
       case 'start': html=startPage();break;
+      case 'unsubscribe': html=unsubscribePage();break;
       case 'about': html=aboutPage();break;
       case 'services': html=servicesPage();break;
       case 'our-model': html=ourModelPage();break;
@@ -2398,6 +2597,7 @@
       case 'portal/insights': html=insightsPage();break;
       case 'portal/archive': html=archivePage();break;
       case 'admin/dashboard': html=adminDashboard();break;
+      case 'admin/mail': html=adminMail();break;
       case 'admin/storefront': html=adminStorefront();break;
       case 'admin/products': html=adminProducts();break;
       case 'admin/requests': html=adminRequests();break;
@@ -2477,12 +2677,14 @@
   function bind(){
     document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>go(el.dataset.go)));
     document.querySelectorAll('[data-start-scroll]').forEach(el=>el.addEventListener('click',()=>document.getElementById('start-send')?.scrollIntoView({behavior:'smooth',block:'start'})));
+    if(document.querySelector('[data-unsubscribe-state]')) processMailUnsubscribe();
     const wSearch=document.querySelector('[data-workshop-q]'); if(wSearch)wSearch.addEventListener('input',e=>{ui.workshopQuery=e.target.value;const pos=e.target.selectionStart||ui.workshopQuery.length;render();requestAnimationFrame(()=>{const n=document.querySelector('[data-workshop-q]');if(n){n.focus();try{n.setSelectionRange(pos,pos)}catch{}}});});
     document.querySelectorAll('[data-workshop-category]').forEach(el=>el.addEventListener('click',()=>{ui.workshopCategory=el.dataset.workshopCategory;render()}));
     document.querySelectorAll('[data-workshop-clear]').forEach(el=>el.addEventListener('click',()=>{ui.workshopQuery='';ui.workshopCategory='All';render()}));
     document.querySelectorAll('[data-workshop-save]').forEach(el=>el.addEventListener('click',()=>{const slug=el.dataset.workshopSave;const saved=workshopSaved();saved.has(slug)?saved.delete(slug):saved.add(slug);localStorage.setItem(WORKSHOP_SAVE_KEY,JSON.stringify([...saved]));render()}));
     document.querySelectorAll('[data-workshop-print]').forEach(el=>el.addEventListener('click',()=>window.print()));
     document.querySelectorAll('[data-workshop-share]').forEach(el=>el.addEventListener('click',async()=>{const g=workshopGuideBySlug(el.dataset.workshopShare);if(!g)return;const url=`https://pharmaservice.ae/workshop/${g.slug}`;try{if(navigator.share)await navigator.share({title:g.title,text:g.excerpt,url});else if(navigator.clipboard){await navigator.clipboard.writeText(url);toast('<strong>Link copied.</strong>');}else toast(`<strong>Share link</strong><br>${esc(url)}`);}catch(e){if(e?.name!=='AbortError')console.warn(e);}}));
+    document.querySelectorAll('[data-mail-from-guide]').forEach(el=>el.addEventListener('click',()=>{ui.mailGuideSlug=el.dataset.mailFromGuide;ui.mailTemplate=workshopGuideBySlug(ui.mailGuideSlug)?.format==='CHECK THIS'?'clinic-check':'workshop';ui.mailDraftSubject='';ui.mailDraftIntro='';ui.mailDraftCta='Read the guide';ui.mailTab='compose';go('admin/mail')}));
     document.querySelectorAll('[data-public-menu]').forEach(el=>el.addEventListener('click',()=>{ui.publicMenu=!ui.publicMenu;render()}));
     document.querySelectorAll('[data-global-search]').forEach(el=>{
       el.addEventListener('input',e=>{ui.globalSearch=e.target.value;});
@@ -2505,6 +2707,23 @@
     document.querySelectorAll('[data-basket-remove]').forEach(el=>el.addEventListener('click',()=>{state.basket=state.basket.filter(x=>x.sku!==el.dataset.basketRemove);save();renderUi({preserveScroll:true,transition:false})}));
     document.querySelectorAll('[data-submit-request]').forEach(el=>el.addEventListener('click',submitRequest));
     document.querySelectorAll('[data-submit-custom]').forEach(el=>el.addEventListener('click',submitCustomRequest));
+    document.querySelectorAll('[data-mail-tab]').forEach(el=>el.addEventListener('click',()=>{ui.mailTab=el.dataset.mailTab;render()}));
+    document.querySelectorAll('[data-mail-template]').forEach(el=>el.addEventListener('click',()=>{ui.mailTemplate=el.dataset.mailTemplate;ui.mailDraftSubject='';ui.mailDraftIntro='';ui.mailDraftCta=ui.mailTemplate==='supply-note'?'Browse catalogue':'Read the guide';render()}));
+    document.querySelectorAll('[data-mail-guide]').forEach(el=>el.addEventListener('change',e=>{ui.mailGuideSlug=e.target.value;ui.mailDraftSubject='';ui.mailDraftIntro='';render()}));
+    document.querySelectorAll('[data-mail-subject]').forEach(el=>el.addEventListener('input',e=>{ui.mailDraftSubject=e.target.value;const preview=document.querySelector('.mailPreviewPane');if(preview)preview.innerHTML=`<div class="mailPreviewLabel"><span>EMAIL PREVIEW</span><small>Responsive HTML · no tracking pixels</small></div>${mailPreview()}`;}));
+    document.querySelectorAll('[data-mail-intro]').forEach(el=>el.addEventListener('input',e=>{ui.mailDraftIntro=e.target.value;const preview=document.querySelector('.mailPreviewPane');if(preview)preview.innerHTML=`<div class="mailPreviewLabel"><span>EMAIL PREVIEW</span><small>Responsive HTML · no tracking pixels</small></div>${mailPreview()}`;}));
+    document.querySelectorAll('[data-mail-cta]').forEach(el=>el.addEventListener('input',e=>{ui.mailDraftCta=e.target.value;const preview=document.querySelector('.mailPreviewPane');if(preview)preview.innerHTML=`<div class="mailPreviewLabel"><span>EMAIL PREVIEW</span><small>Responsive HTML · no tracking pixels</small></div>${mailPreview()}`;}));
+    document.querySelectorAll('[data-mail-search]').forEach(el=>el.addEventListener('input',e=>{ui.mailSearch=e.target.value;renderUi({preserveScroll:true,focusSelector:'[data-mail-search]',cursor:e.target.selectionStart,transition:false})}));
+    document.querySelectorAll('[data-mail-role]').forEach(el=>el.addEventListener('change',e=>{ui.mailRole=e.target.value;render()}));
+    document.querySelectorAll('[data-mail-institution]').forEach(el=>el.addEventListener('change',e=>{ui.mailInstitution=e.target.value;render()}));
+    document.querySelectorAll('[data-mail-contact-select]').forEach(el=>el.addEventListener('change',()=>{const set=new Set(ui.mailSelectedContacts||[]);el.checked?set.add(el.dataset.mailContactSelect):set.delete(el.dataset.mailContactSelect);ui.mailSelectedContacts=[...set];const h=document.querySelector('.mailAudienceHead h3');if(h)h.textContent=mailAudienceSummary();const send=document.querySelector('[data-mail-send]');if(send)send.disabled=!mailDesk.backendReady||!mailSelectedEligibleContacts().length;}));
+    document.querySelectorAll('[data-mail-select-filtered]').forEach(el=>el.addEventListener('click',()=>{const set=new Set(ui.mailSelectedContacts||[]);mailFilteredContacts().filter(mailEligibleContact).forEach(c=>set.add(c.id));ui.mailSelectedContacts=[...set];render()}));
+    document.querySelectorAll('[data-mail-contact-form]').forEach(el=>el.addEventListener('submit',e=>{e.preventDefault();addMailContact(el)}));
+    document.querySelectorAll('[data-mail-contact-status]').forEach(el=>el.addEventListener('change',()=>updateMailContactField(el.dataset.mailContactStatus,'status',el.value)));
+    document.querySelectorAll('[data-mail-contact-basis]').forEach(el=>el.addEventListener('change',()=>updateMailContactField(el.dataset.mailContactBasis,'marketing_basis',el.value)));
+    document.querySelectorAll('[data-mail-save-draft]').forEach(el=>el.addEventListener('click',()=>saveMailCampaign('draft',false)));
+    document.querySelectorAll('[data-mail-test]').forEach(el=>el.addEventListener('click',()=>saveMailCampaign('send',true)));
+    document.querySelectorAll('[data-mail-send]').forEach(el=>el.addEventListener('click',()=>{if(confirm(`Send this email to ${mailSelectedEligibleContacts().length} eligible contact${mailSelectedEligibleContacts().length===1?'':'s'} from info@pharmaservice.ae?`))saveMailCampaign('send',false)}));
     document.querySelectorAll('[data-public-enquiry]').forEach(el=>el.addEventListener('submit',submitPublicEnquiry));
     document.querySelectorAll('[data-mvp-login]').forEach(el=>el.addEventListener('click',signIn));
     document.querySelectorAll('[data-signout]').forEach(el=>el.addEventListener('click',signOut));
