@@ -7077,3 +7077,70 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
   .publicLanding .pscHeroIllustrationWrap{gap:10px!important}
   .publicLanding .pscHeroIllustrationWrap .pscHeroBoardLabel{font-size:9.5px!important;white-space:normal!important}
 }
+
+
+/* V37.7.4 — category illustration placement */
+.clinicNeedCardIllustrated{
+  min-height:214px!important;
+  padding:20px 20px 18px!important;
+}
+.clinicNeedCardIllustrated .clinicNeedIcon{
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:flex-end!important;
+  position:absolute!important;
+  right:14px!important;
+  bottom:10px!important;
+  top:auto!important;
+  width:116px!important;
+  height:116px!important;
+  background:transparent!important;
+  border-radius:0!important;
+  overflow:visible!important;
+  box-shadow:none!important;
+}
+.clinicNeedCardIllustrated .clinicNeedIcon img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+}
+.clinicNeedCardIllustrated .clinicNeedIcon svg{
+  width:28px!important;
+  height:28px!important;
+}
+.clinicNeedCardIllustrated .clinicNeedCopy{
+  left:20px!important;
+  right:138px!important;
+  bottom:20px!important;
+}
+.clinicNeedCardIllustrated .clinicNeedCopy b{
+  font-size:18px!important;
+  line-height:1.03!important;
+}
+.clinicNeedCardIllustrated .clinicNeedCopy small{
+  margin-top:10px!important;
+  font-size:10.5px!important;
+  line-height:1.45!important;
+  opacity:.78!important;
+}
+.clinicNeedCardIllustrated .clinicNeedArrow{
+  display:none!important;
+}
+@media(max-width:1180px){
+  .clinicNeedCardIllustrated{min-height:196px!important}
+  .clinicNeedCardIllustrated .clinicNeedIcon{width:100px!important;height:100px!important;right:12px!important;bottom:10px!important}
+  .clinicNeedCardIllustrated .clinicNeedCopy{right:122px!important}
+}
+@media(max-width:820px){
+  .clinicNeedCardIllustrated{min-height:174px!important;padding:16px!important}
+  .clinicNeedCardIllustrated .clinicNeedIcon{width:80px!important;height:80px!important;right:10px!important;bottom:10px!important}
+  .clinicNeedCardIllustrated .clinicNeedCopy{left:16px!important;right:96px!important;bottom:16px!important}
+  .clinicNeedCardIllustrated .clinicNeedCopy b{font-size:15px!important}
+  .clinicNeedCardIllustrated .clinicNeedCopy small{font-size:9px!important;line-height:1.35!important;margin-top:8px!important}
+}
+@media(max-width:560px){
+  .clinicNeedCardIllustrated{min-height:164px!important}
+  .clinicNeedCardIllustrated .clinicNeedIcon{width:70px!important;height:70px!important}
+  .clinicNeedCardIllustrated .clinicNeedCopy{right:84px!important}
+}

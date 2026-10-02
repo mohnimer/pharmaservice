@@ -111,6 +111,17 @@
     };
     return m[id]||m.all;
   }
+  function clinicalNeedIllustration(id){
+    const m={
+      wounds:'/assets/category-wounds.webp',
+      breathing:'/assets/category-breathing.webp',
+      vitals:'/assets/category-vitals.webp',
+      infection:'/assets/category-infection.webp',
+      emergency:'/assets/category-emergency.webp',
+      equipment:'/assets/category-equipment.webp'
+    };
+    return m[id] ? `<img src="${m[id]}" alt="" loading="lazy" decoding="async">` : clinicalNeedIcon(id);
+  }
 
   function load(){
     try { const raw = localStorage.getItem(STORAGE); return raw ? {...seed,...JSON.parse(raw)} : JSON.parse(JSON.stringify(seed)); }
@@ -914,7 +925,7 @@
         </div>
         <div class="pscHeroProcess pscHeroIllustrationShell" aria-label="The institutional way">
           <figure class="pscHeroIllustrationWrap">
-            <img class="pscHeroIllustration" src="/assets/psc-home-hero-supply-book.png" alt="Pharma Service institutional supply illustration showing documents, medical products, delivery, replenishment and first-aid supplies">
+            <img class="pscHeroIllustration" src="/assets/psc-home-hero-supply-book.webp" alt="Pharma Service institutional supply illustration showing documents, medical products, delivery, replenishment and first-aid supplies">
             <figcaption class="pscHeroBoardLabel">PS–I–001 · THE INSTITUTIONAL WAY</figcaption>
           </figure>
         </div>
@@ -1633,10 +1644,10 @@
   function catalogue(){
     const allProducts=catalogueProducts();
     const dhaCount=allProducts.filter(p=>p.dhaMapped).length;
-    const needCards=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.map(c=>`<button class="clinicNeedCard" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}">
-        <span class="clinicNeedIcon">${clinicalNeedIcon(c.icon)}</span>
+    const needCards=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.map(c=>`<button class="clinicNeedCard clinicNeedCardIllustrated" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}">
+        <span class="clinicNeedIcon" aria-hidden="true">${clinicalNeedIllustration(c.id)}</span>
         <span class="clinicNeedCopy"><b>${esc(c.label)}</b><small>${esc(c.note)}</small></span>
-        <span class="clinicNeedArrow">↗</span>
+        <span class="clinicNeedArrow" aria-hidden="true">↗</span>
       </button>`).join('');
 
     const sf=storefrontConfig('institutional');
