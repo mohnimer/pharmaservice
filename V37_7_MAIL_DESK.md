@@ -53,7 +53,7 @@ Included Supabase Edge Functions:
 - rechecks recipient eligibility server-side;
 - is hard-locked to `info@pharmaservice.ae`;
 - obtains a Microsoft Graph app-only token;
-- sends through Microsoft Graph;
+- sends through the Google Workspace Gmail API;
 - saves messages to the mailbox Sent Items;
 - records sent/failed recipient outcomes in Supabase;
 - includes an unsubscribe link;
@@ -67,12 +67,12 @@ The website code, database model and Edge Function are included, but Microsoft c
 
 Before live sends, deploy the migration/functions and configure these Supabase Edge Function secrets:
 
-- `MS_GRAPH_TENANT_ID`
-- `MS_GRAPH_CLIENT_ID`
-- `MS_GRAPH_CLIENT_SECRET`
+- `GOOGLE_OAUTH_CLIENT_ID`
+- `GOOGLE_OAUTH_CLIENT_SECRET`
+- `GOOGLE_OAUTH_REFRESH_TOKEN`
 - `PSC_MAIL_SENDER=info@pharmaservice.ae`
 
-The Microsoft Entra application needs the appropriate Graph mail-sending permission and tenant-admin consent. Restrict the application/mailbox scope so it cannot unnecessarily send from other PSC mailboxes.
+Enable the Gmail API for the Google Cloud project and authorize the OAuth client as the `info@pharmaservice.ae` Google Workspace mailbox. Keep the OAuth refresh token only in Supabase Edge Function secrets.
 
 ## Safety / regression boundary
 

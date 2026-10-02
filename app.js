@@ -421,7 +421,7 @@
       <div class="mailAudienceFilters"><input class="input" placeholder="Search contacts…" value="${esc(ui.mailSearch)}" data-mail-search><select class="input" data-mail-role>${mailRoleOptions().map(x=>`<option ${x===ui.mailRole?'selected':''}>${esc(x)}</option>`).join('')}</select><select class="input" data-mail-institution>${mailInstitutionOptions().map(x=>`<option ${x===ui.mailInstitution?'selected':''}>${esc(x)}</option>`).join('')}</select></div>
       <div class="mailContactPicker">${contactRows||`<div class="emptyState"><h3>No contacts yet.</h3><p>Add controlled business contacts under Contacts before sending.</p></div>`}</div>
       <div class="mailComposerActions"><button class="button light" data-mail-save-draft ${!mailDesk.backendReady?'disabled':''}>Save draft</button><button class="button outline" data-mail-test ${!mailDesk.backendReady?'disabled':''}>Send test to info@</button><button class="button dark" data-mail-send ${!mailDesk.backendReady||!mailSelectedEligibleContacts().length?'disabled':''}>Approve & send</button></div>
-      ${!mailDesk.backendReady?`<div class="mailBackendNotice"><b>Mail data layer not deployed yet.</b><span>The interface is ready. Apply the included V37.7 migration and deploy the mail Edge Functions before live sending.</span></div>`:''}
+      ${!mailDesk.backendReady?`<div class="mailBackendNotice"><b>Mail data layer not deployed yet.</b><span>The interface is ready. Apply the included V37.7.1 migration and deploy the mail Edge Functions before live sending.</span></div>`:''}
     </section><aside class="mailPreviewPane"><div class="mailPreviewLabel"><span>EMAIL PREVIEW</span><small>Responsive HTML · no tracking pixels</small></div>${mailPreview()}</aside></div>`;
   }
 
@@ -436,7 +436,7 @@
   }
 
   function adminMailSettings(){
-    return `<div class="twoCol"><section class="panel"><span class="eyebrow">SENDER IDENTITY</span><h2>Pharma Service</h2><div class="mailSettingRows"><div><span>From</span><b>${esc(mailDesk.senderEmail)}</b></div><div><span>Reply-to</span><b>${esc(mailDesk.senderEmail)}</b></div><div><span>Display name</span><b>${esc(mailDesk.senderName)}</b></div><div><span>Delivery</span><b>Microsoft Graph via PSC Edge Function</b></div></div></section><section class="panel"><span class="eyebrow">CONTROL</span><h2>Human approval first.</h2><p class="smallMuted">Mail Desk does not auto-send marketing. A PSC admin chooses content, recipients and explicitly approves each send. Contacts marked unsubscribed, paused or without a reviewed marketing basis are excluded.</p><div class="gateList" style="margin-top:18px"><div class="gate ${mailDesk.backendReady?'ok':'warn'}"><span>Mail database tables</span><i></i></div><div class="gate warn"><span>Microsoft Graph secrets verified only at send time</span><i></i></div><div class="gate ok"><span>Sender locked to info@pharmaservice.ae</span><i></i></div><div class="gate ok"><span>No tracking pixels in V37.7</span><i></i></div></div></section></div>`;
+    return `<div class="twoCol"><section class="panel"><span class="eyebrow">SENDER IDENTITY</span><h2>Pharma Service</h2><div class="mailSettingRows"><div><span>From</span><b>${esc(mailDesk.senderEmail)}</b></div><div><span>Reply-to</span><b>${esc(mailDesk.senderEmail)}</b></div><div><span>Display name</span><b>${esc(mailDesk.senderName)}</b></div><div><span>Delivery</span><b>Google Workspace Gmail API via delegated PSC service account</b></div></div></section><section class="panel"><span class="eyebrow">CONTROL</span><h2>Human approval first.</h2><p class="smallMuted">Mail Desk does not auto-send marketing. A PSC admin chooses content, recipients and explicitly approves each send. Contacts marked unsubscribed, paused or without a reviewed marketing basis are excluded.</p><div class="gateList" style="margin-top:18px"><div class="gate ${mailDesk.backendReady?'ok':'warn'}"><span>Mail database tables</span><i></i></div><div class="gate warn"><span>Google delegated service-account connection verified at send time</span><i></i></div><div class="gate ok"><span>Sender locked to info@pharmaservice.ae</span><i></i></div><div class="gate ok"><span>No tracking pixels in V37.7</span><i></i></div></div></section></div>`;
   }
 
   function adminMail(){
@@ -488,7 +488,7 @@
     } catch(e){
       console.error('Mail send failed',e);
       await loadAdminMail(); render();
-      toast(`<strong>Mail was not sent.</strong><br>${esc(e?.message||'Check the Graph/Edge Function connection.')}`);
+      toast(`<strong>Mail was not sent.</strong><br>${esc(e?.message||'Check the Google service-account / Edge Function connection.')}`);
     } finally { if(button){button.disabled=false;button.textContent=original;} }
   }
 
@@ -912,31 +912,11 @@
           </div>
           <p class="pscHeroAudience">For schools, nurseries, and educational institutions.</p>
         </div>
-        <div class="pscHeroProcess" aria-label="The institutional way">
-          <div class="pscHeroBoardStages">
-            <article>
-              <small>01</small>
-              <div class="pscHeroStageIcon" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="25" cy="24" r="15"/><path d="M10 24h30M25 9c5 5 7.5 10 7.5 15S30 34 25 39M25 9c-5 5-7.5 10-7.5 15S20 34 25 39"/><path d="M39 28h11l4 15H34l-2-9h17"/><circle cx="38" cy="48" r="2.5"/><circle cx="51" cy="48" r="2.5"/></svg></div>
-              <h2>SHOP</h2>
-            </article>
-            <article>
-              <small>02</small>
-              <div class="pscHeroStageIcon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M18 10h28v26H18z"/><path d="M23 17h10M23 23h16M23 29h12"/><circle cx="46" cy="18" r="10"/><path d="m42 18 3 3 6-7"/><path d="M15 38l9-6 8 5 8-5 10 7-7 11H22z"/><path d="M24 42l8 6 8-6"/></svg></div>
-              <h2>QUOTE</h2>
-            </article>
-            <article>
-              <small>03</small>
-              <div class="pscHeroStageIcon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M16 11h28v39H16z"/><path d="M22 18h16M22 24h16"/><path d="M23 42v-9M30 42V28M37 42V23"/><circle cx="24" cy="32" r="10"/><path d="m31 39 8 8"/></svg></div>
-              <h2>MANAGE</h2>
-            </article>
-            <article>
-              <small>04</small>
-              <div class="pscHeroStageIcon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M16 24a19 19 0 0 1 30-8l5 5"/><path d="M51 12v9h-9"/><path d="M48 40a19 19 0 0 1-30 8l-5-5"/><path d="M13 52v-9h9"/></svg></div>
-              <h2>REPEAT</h2>
-            </article>
-          </div>
-          <div class="pscHeroBarcode" aria-hidden="true"></div>
-          <b class="pscHeroBoardLabel">PS–I–001 · THE INSTITUTIONAL WAY</b>
+        <div class="pscHeroProcess pscHeroIllustrationShell" aria-label="The institutional way">
+          <figure class="pscHeroIllustrationWrap">
+            <img class="pscHeroIllustration" src="/assets/psc-home-hero-supply-book.png" alt="Pharma Service institutional supply illustration showing documents, medical products, delivery, replenishment and first-aid supplies">
+            <figcaption class="pscHeroBoardLabel">PS–I–001 · THE INSTITUTIONAL WAY</figcaption>
+          </figure>
         </div>
       </section>
       <section class="homeEditorialIntro">

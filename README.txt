@@ -1,3 +1,17 @@
+V37.7.2 — Gmail service-account simplification
+
+- Replaces the V37.7.1 refresh-token flow with a Google Workspace domain-wide delegated service account.
+- Mail Desk impersonates only info@pharmaservice.ae and requests gmail.send only.
+- Required secrets are now GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY and PSC_MAIL_SENDER.
+- No recurring Google login or OAuth refresh token is required after the one-time Workspace Admin authorization.
+
+V37.7.1 — Mail Desk Gmail correction
+
+- PSC Mail Desk now sends through the Google Workspace Gmail API, not Microsoft Graph.
+- Sender remains hard-locked to info@pharmaservice.ae.
+- Google OAuth credentials remain server-side in Supabase Edge Function secrets.
+- No Mail Desk UI/data-model regression; no catalogue/order/portal write-path changes.
+
 V37.7 — PSC Mail Desk
 
 - Adds PSC-admin Mail Desk at /#admin/mail.

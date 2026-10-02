@@ -92,3 +92,7 @@ $$;
 drop trigger if exists mail_contacts_set_updated_at on public.mail_contacts;
 create trigger mail_contacts_set_updated_at before update on public.mail_contacts
 for each row execute function public.psc_set_updated_at();
+
+-- V37.7.1 Gmail delivery audit reference.
+alter table if exists public.mail_campaign_recipients
+  add column if not exists provider_message_id text;
