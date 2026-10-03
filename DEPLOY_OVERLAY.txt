@@ -1,0 +1,42 @@
+PSC V37.7.5 PRODUCT IMAGE RELEASE — DEPLOYMENT
+===============================================
+
+TARGET
+------
+Overlay this package onto the CURRENT `mohnimer/pharmaservice` main repository.
+
+DO NOT treat this ZIP as a standalone replacement repository.
+Do not delete files on main that are absent from this package.
+
+PRESERVE FROM CURRENT MAIN
+--------------------------
+- data.js
+- core60-regulatory.js
+- catalogue-v25.js
+- supabase.js
+- existing legacy / fallback product assets
+- package/configuration/backend files not included here
+
+THIS RELEASE REPLACES / ADDS
+----------------------------
+- /app.js
+- /assets/app.js
+- /assets/category-breathing.webp
+- /assets/category-emergency.webp
+- /assets/category-equipment.webp
+- /assets/category-infection.webp
+- /assets/category-vitals.webp
+- /assets/category-wounds.webp
+- /assets/pharmaservice_home_hero.webp
+- /assets/psc-home-hero-supply-book.png
+- /assets/psc-home-hero-supply-book.webp
+- /assets/products/inst-0001.webp through inst-0260.webp
+- /assets/products/manifest.json
+
+QA
+--
+Read V37_7_5_RELEASE_QA.md before deployment.
+
+IMPORTANT
+---------
+The catalogue images are representative presentation assets unless exact supplier / model evidence has been verified. Commercial specification and live supplier/regulatory evidence remain controlling.
