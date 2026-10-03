@@ -7579,3 +7579,69 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
   .portalWorkshopPreview{padding:22px 18px}
   .v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedIcon{width:68px!important;height:68px!important}
 }
+
+/* =========================================================
+   V38.6 — PRODUCT CARD IMAGE VISIBILITY HOTFIX
+   The DHA marker was inheriting the generic product-photo img
+   rule (100% width/height), covering the actual product image.
+   Keep it as a small transparent corner badge instead.
+   ========================================================= */
+.exactCanvaCard .productPhoto > img.dhaRequirementIcon.cardDhaIcon,
+.canvaProductCard .productPhoto > img.dhaRequirementIcon.cardDhaIcon{
+  position:absolute!important;
+  z-index:8!important;
+  top:14px!important;
+  right:14px!important;
+  left:auto!important;
+  bottom:auto!important;
+  width:42px!important;
+  height:42px!important;
+  min-width:42px!important;
+  min-height:42px!important;
+  max-width:42px!important;
+  max-height:42px!important;
+  padding:0!important;
+  margin:0!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  transform:none!important;
+  pointer-events:none!important;
+}
+
+.productVisualButton:hover > img.dhaRequirementIcon.cardDhaIcon,
+.productVisualButton:focus > img.dhaRequirementIcon.cardDhaIcon{
+  transform:none!important;
+}
+
+@media(max-width:720px){
+  .exactCanvaCard .productPhoto > img.dhaRequirementIcon.cardDhaIcon,
+  .canvaProductCard .productPhoto > img.dhaRequirementIcon.cardDhaIcon{
+    top:10px!important;
+    right:10px!important;
+    width:34px!important;
+    height:34px!important;
+    min-width:34px!important;
+    min-height:34px!important;
+    max-width:34px!important;
+    max-height:34px!important;
+  }
+}
+
+
+/* =========================================================
+   V38.7 — deployment/cache + transparent clinical icon correction
+   ========================================================= */
+/* The catalogue uses the one persistent header search. Do not create a second search control. */
+.v26CatalogueLandingHeader{align-items:flex-end!important}
+/* User-supplied PNG artwork is already transparent; never place a white tile behind it. */
+.v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedIcon,
+.v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedIcon img{
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  outline:0!important;
+}
