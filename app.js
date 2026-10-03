@@ -730,9 +730,10 @@
     }
     return '';
   }
+  const PRODUCT_ASSET_RELEASE='3776';
   function productDisplayImageUrl(p){
     const sku=institutionalImageSku(p);
-    if(sku) return `/assets/products/${sku.toLowerCase()}.webp`;
+    if(sku) return `/assets/products/${sku.toLowerCase()}.webp?v=${PRODUCT_ASSET_RELEASE}`;
     const raw=(p?.imageUrl||'').trim();
     if(!raw) return null;
     const lower=raw.toLowerCase();
@@ -742,7 +743,7 @@
   }
   function controlledProductImageUrl(p){
     const sku=institutionalImageSku(p);
-    if(sku) return `/assets/products/${sku.toLowerCase()}.webp`;
+    if(sku) return `/assets/products/${sku.toLowerCase()}.webp?v=${PRODUCT_ASSET_RELEASE}`;
     return (p?.image_url||p?.imageUrl||'').trim() || null;
   }
   function products(){ return D.products.map(p=>product(p.pscSku)); }

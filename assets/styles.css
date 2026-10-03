@@ -6820,12 +6820,16 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
   overflow:auto;
   overscroll-behavior:contain;
   scrollbar-width:thin;
+  position:relative;
+}
+.productDetailModal.fluidProductDetail{
+  padding:0!important;
 }
 .fluidProductHeader{
   position:sticky;
   top:0;
   z-index:8;
-  background:rgba(255,255,255,.94);
+  background:#fff!important;
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
   padding:20px 22px 16px!important;
