@@ -460,7 +460,7 @@
   async function addMailContact(form){
     if(!sb||!authContext?.isPscAdmin||!mailDesk.backendReady) return;
     const fd=new FormData(form); const email=String(fd.get('email')||'').trim().toLowerCase();
-    if(!/^\\S+@\\S+\\.\\S+$/.test(email)){toast('<strong>Check the email address.</strong>');return;}
+    if(!/^\S+@\S+\.\S+$/.test(email)){toast('<strong>Check the email address.</strong>');return;}
     const payload={first_name:cleanNullable(fd.get('first_name')),last_name:cleanNullable(fd.get('last_name')),email,organization:cleanNullable(fd.get('organization')),role:cleanNullable(fd.get('role')),institution_type:cleanNullable(fd.get('institution_type')),marketing_basis:String(fd.get('marketing_basis')||'not_set'),source_note:cleanNullable(fd.get('source_note')),status:'active',created_by:session?.user?.id||null};
     const {error}=await sb.from('mail_contacts').insert(payload); if(error){console.error(error);toast(`<strong>Could not add contact.</strong><br>${esc(error.message)}`);return;}
     await loadAdminMail(); render(); toast('<strong>Contact added.</strong>');
@@ -718,13 +718,32 @@
     if(!base) return null;
     return {...base,...(state.productOverrides[sku]||{})};
   }
+  function institutionalImageSku(p){
+    const direct=String(p?.catalogueTransactionId||p?.catalogue_transaction_id||'').trim().toUpperCase();
+    if(/^INST-\d{4}$/.test(direct)) return direct;
+    const commercialSku=String(p?.pscSku||p?.psc_sku||'').trim().toUpperCase();
+    if(/^INST-\d{4}$/.test(commercialSku)) return commercialSku;
+    if(commercialSku){
+      const mapped=D.products.find(x=>String(x?.pscSku||'').trim().toUpperCase()===commercialSku);
+      const mappedId=String(mapped?.catalogueTransactionId||'').trim().toUpperCase();
+      if(/^INST-\d{4}$/.test(mappedId)) return mappedId;
+    }
+    return '';
+  }
   function productDisplayImageUrl(p){
+    const sku=institutionalImageSku(p);
+    if(sku) return `/assets/products/${sku.toLowerCase()}.webp`;
     const raw=(p?.imageUrl||'').trim();
     if(!raw) return null;
     const lower=raw.toLowerCase();
     const looksLikeStandaloneDhaAsset = lower.includes('dha-requirement') || lower.endsWith('/pharmaservice.png') || lower.endsWith('pharmaservice.png');
     if(p?.dhaMapped && looksLikeStandaloneDhaAsset) return null;
     return raw;
+  }
+  function controlledProductImageUrl(p){
+    const sku=institutionalImageSku(p);
+    if(sku) return `/assets/products/${sku.toLowerCase()}.webp`;
+    return (p?.image_url||p?.imageUrl||'').trim() || null;
   }
   function products(){ return D.products.map(p=>product(p.pscSku)); }
   function currentRoute(){
@@ -1938,7 +1957,7 @@
 
       <section class="panel cmsPreviewPanel">
         <div class="panelHeader"><div><span class="eyebrow">LIVE PREVIEW</span><h2>${esc(sf.display_name||'Storefront')}</h2></div><button data-go="admin/products">Manage products →</button></div>
-        ${preview.length?`<div class="cmsPreviewGrid">${preview.map(r=>`<article><div class="cmsPreviewImage">${r.image_url?`<img src="${esc(r.image_url)}" alt="">`:'<span>NO IMAGE</span>'}</div><small>${esc(r.brand||r.category||'')}</small><b>${esc(r.name)}</b><p>${esc(r.short_description||r.pack||'')}</p></article>`).join('')}</div>`:`<div class="emptyState"><h3>No published products yet</h3><p>${channel==='wholesale'?'Open Product Master, switch to Wholesale and publish the lines you want trade customers to see.':'The institutional catalogue will appear here after the current master is initialised.'}</p></div>`}
+        ${preview.length?`<div class="cmsPreviewGrid">${preview.map(r=>`<article><div class="cmsPreviewImage">${controlledProductImageUrl(r)?`<img src="${esc(controlledProductImageUrl(r))}" alt="">`:'<span>NO IMAGE</span>'}</div><small>${esc(r.brand||r.category||'')}</small><b>${esc(r.name)}</b><p>${esc(r.short_description||r.pack||'')}</p></article>`).join('')}</div>`:`<div class="emptyState"><h3>No published products yet</h3><p>${channel==='wholesale'?'Open Product Master, switch to Wholesale and publish the lines you want trade customers to see.':'The institutional catalogue will appear here after the current master is initialised.'}</p></div>`}
       </section>
     `,true);
   }
@@ -1964,7 +1983,7 @@
           <tbody>${rows.map(p=>{
             const i=cmsSetting(p.id,'institutional'),w=cmsSetting(p.id,'wholesale'),media=cmsProductMedia(p.id);
             return `<tr>
-              <td><div class="cmsMasterProduct"><div class="cmsMasterThumb">${p.image_url?`<img src="${esc(p.image_url)}" alt="">`:'<span>—</span>'}</div><div><b>${esc(p.name)}</b><small>${esc(p.psc_sku)}${p.brand?` · ${esc(p.brand)}`:''}</small><em>${esc(p.category||p.product_type||'Uncategorised')}</em></div></div></td>
+              <td><div class="cmsMasterProduct"><div class="cmsMasterThumb">${controlledProductImageUrl(p)?`<img src="${esc(controlledProductImageUrl(p))}" alt="">`:'<span>—</span>'}</div><div><b>${esc(p.name)}</b><small>${esc(p.psc_sku)}${p.brand?` · ${esc(p.brand)}`:''}</small><em>${esc(p.category||p.product_type||'Uncategorised')}</em></div></div></td>
               <td><b>${esc(p.supplier_name||'Not set')}</b><small>${p.buy_cost!==null?`Buy ${money(p.buy_cost)}`:'Buy cost missing'}${p.stock_status?` · ${esc(p.stock_status)}`:''}</small></td>
               <td><span class="cmsState ${i?.status==='published'&&i?.visible?'live':'draft'}">${esc(cmsStatusText(p.id,'institutional'))}</span><small>${esc(i?.category||p.category||'')}</small></td>
               <td><span class="cmsState ${w?.status==='published'&&w?.visible?'live':'draft'}">${esc(cmsStatusText(p.id,'wholesale'))}</span><small>${esc(w?.category||p.category||'')}</small></td>
