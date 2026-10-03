@@ -842,36 +842,6 @@
   function statusPill(status){ const k=String(status).toLowerCase().replace(/\s+/g,'-'); return `<span class="statusPill status-${k}">${esc(status)}</span>`; }
   function badge(text,tone=''){ return `<span class="badge ${tone}">${esc(text)}</span>`; }
   function icon(name){
-    const collage={
-      dashboard:'categories',
-      overview:'categories',
-      home:'categories',
-      edit:'quotes',
-      request:'my-requests',
-      boxes:'clinic-supplies',
-      inventory:'shop',
-      products:'clinic-supplies',
-      checklist:'my-requests',
-      queue:'my-requests',
-      resource:'resources',
-      repeat:'returns',
-      rules:'returns',
-      reports:'reports',
-      feed:'reports',
-      assets:'mobility-equipment',
-      admin:'settings',
-      clinics:'clinic-setup',
-      approved:'regulatory',
-      stock:'orders',
-      search:'search',
-      bell:'notifications',
-      logout:'logout',
-      menu:'categories',
-      settings:'settings',
-      mail:'messages',
-      help:'help'
-    };
-    if(collage[name]) return `<img class="pscCollageIcon pscCollageIcon-${collage[name]}" src="/assets/ui-icons/${collage[name]}.webp?v=3800" alt="" aria-hidden="true">`;
     const map={
       dashboard:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="6" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/></svg>`,
       overview:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="6" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/></svg>`,
@@ -905,6 +875,29 @@
     return map[name]||'';
   }
 
+  function portalSidebarIcon(href, fallbackIcon){
+    const map={
+      'portal/dashboard':'my-account',
+      'portal/catalogue':'shop',
+      'portal/requests':'my-requests',
+      'portal/replenish':'orders',
+      'portal/documents':'downloads',
+      'portal/stock':'clinic-supplies',
+      'portal/assets':'mobility-equipment'
+    };
+    const key=map[href];
+    return key
+      ? `<img class="portalSideIcon" src="/assets/ui-icons/${key}.webp?v=3810" alt="" aria-hidden="true">`
+      : icon(fallbackIcon);
+  }
+  function portalUtilityIcon(name){
+    const map={logout:'logout'};
+    const key=map[name];
+    return key
+      ? `<img class="portalSideIcon" src="/assets/ui-icons/${key}.webp?v=3810" alt="" aria-hidden="true">`
+      : icon(name);
+  }
+
   const schoolNav=[
     ['portal/dashboard','Home','dashboard'],
     ['portal/catalogue','Shop','boxes'],
@@ -921,14 +914,14 @@
     const liveCustomerNav=schoolNav.filter(([href])=>isDemoAccount() || !['portal/stock','portal/assets'].includes(href));
     const links=admin?adminNav:liveCustomerNav;
     const searchValue=esc(ui.globalSearch||'');
-    return `<div class="appShell v4Shell v7Shell v7bShell v26Shell v37Shell v38Shell ${admin?'adminShell':'customerShell'}">
+    return `<div class="appShell v4Shell v7Shell v7bShell v26Shell v37Shell v38Shell v381Shell ${admin?'adminShell':'customerShell'}">
       <div class="mobileOverlay ${ui.mobile?'show':''}" data-mobile-close></div>
       <aside class="sidebar ${ui.mobile?'sidebarOpen':''}">
         <div class="sidebarTop">${brand()}<button class="iconBtn mobileClose" data-mobile-close aria-label="Close menu">${icon('close')}</button></div>
-        <nav class="iconNav">${links.map(([href,label,ico])=>`<button class="navLink iconOnly ${(route===href || (href==='portal/catalogue' && route.startsWith('portal/catalogue/')))?'active':''}" data-go="${href}" aria-label="${label}"><span class="navIcon">${icon(ico)}</span><span class="navLabel">${label}</span></button>`).join('')}</nav>
+        <nav class="iconNav">${links.map(([href,label,ico])=>`<button class="navLink iconOnly ${(route===href || (href==='portal/catalogue' && route.startsWith('portal/catalogue/')))?'active':''}" data-go="${href}" aria-label="${label}"><span class="navIcon">${admin?icon(ico):portalSidebarIcon(href,ico)}</span><span class="navLabel">${label}</span></button>`).join('')}</nav>
         <div class="sidebarFooter compactFooter">
           ${admin?`<button class="navLink iconOnly" data-go="portal/dashboard" aria-label="Client portal"><span class="navIcon">${icon('home')}</span><span class="navLabel">Client portal</span></button>`:(authContext?.isPscAdmin?`<button class="navLink iconOnly" data-go="admin/dashboard" aria-label="PSC admin"><span class="navIcon">${icon('home')}</span><span class="navLabel">PSC admin</span></button>`:'')}
-          <button class="navLink iconOnly" data-signout aria-label="Sign out"><span class="navIcon">${icon('logout')}</span><span class="navLabel">Sign out</span></button>
+          <button class="navLink iconOnly" data-signout aria-label="Sign out"><span class="navIcon">${admin?icon('logout'):portalUtilityIcon('logout')}</span><span class="navLabel">Sign out</span></button>
         </div>
       </aside>
       <main class="mainArea v7MainArea v7bMainArea">
@@ -978,7 +971,7 @@
     return `<header class="publicHeader v37PublicHeader">
       <button class="publicLogo" data-go="home" aria-label="Pharma Service home"><img src="${PSC_LOGO}" alt="Pharma Service"></button>
       <button class="publicMenuButton" data-public-menu aria-label="Open website menu" aria-expanded="${ui.publicMenu?'true':'false'}">${ui.publicMenu?icon('close'):icon('menu')}</button>
-      <nav class="publicNav ${ui.publicMenu?'open':''}">${publicNav.map(([r,l])=>`<button class="publicNavLink ${active===r?'active':''}" data-go="${r}">${l}</button>`).join('')}</nav>
+      <nav class="publicNav ${ui.publicMenu?'open':''}">${publicNav.map(([r,l])=>`<button class="publicNavLink ${active===r?'active':''}" data-go="${r}">${l}</button>`).join('')}<button class="publicNavLink mobileClinicPortalLink" data-go="login"><span>Clinic Portal</span><b>→</b></button></nav>
       <button class="button primary publicPortalBtn" data-go="login">Clinic Portal</button>
     </header>`;
   }

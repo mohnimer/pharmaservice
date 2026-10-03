@@ -7192,13 +7192,15 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
 
 
 /* =========================================================
-   V38 — Straight white portal rail + supplied collage icons
-   User-supplied icon artwork is used wherever the existing
-   portal/admin icon system has a semantic match.
+   V38.1 — PORTAL-ONLY PINTEREST SIDEBAR CORRECTION
+   Supplied collage artwork belongs ONLY in the customer portal
+   side navigation where its meaning is explicit.
+   Public website, Workshop, content cards, search, actions,
+   category tiles and admin UI keep their proper original icons.
    KEEP THIS BLOCK LAST.
    ========================================================= */
 
-.pscCollageIcon{
+.portalSideIcon{
   display:block!important;
   width:100%!important;
   height:100%!important;
@@ -7209,23 +7211,13 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
   -webkit-user-drag:none!important;
 }
 
-/* Site-wide contexts using icon() */
-.navIcon .pscCollageIcon{width:43px!important;height:43px!important}
-.actionIcon .pscCollageIcon,
-.v26ActionIcon .pscCollageIcon{width:52px!important;height:52px!important}
-.searchIcon .pscCollageIcon{width:25px!important;height:25px!important}
-.iconBtn .pscCollageIcon,
-.mobileMenu .pscCollageIcon{width:28px!important;height:28px!important}
-.mailIdentityCard .pscCollageIcon{width:38px!important;height:38px!important}
-.catalogueShortcut>span .pscCollageIcon{width:44px!important;height:44px!important}
-
-/* Desktop: one continuous, straight white rail — no floating black pill. */
+/* Customer portal only. Admin is intentionally excluded. */
 @media(min-width:901px){
-  .v38Shell{
+  .v381Shell.customerShell{
     grid-template-columns:96px minmax(0,1fr)!important;
     background:#f8f5ef!important;
   }
-  .v38Shell .sidebar{
+  .v381Shell.customerShell .sidebar{
     position:sticky!important;
     top:0!important;
     left:auto!important;
@@ -7243,27 +7235,31 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
     box-shadow:none!important;
     overflow:visible!important;
   }
-  .v38Shell .sidebarTop{
+  .v381Shell.customerShell .sidebarTop{
     min-height:22px!important;
     margin:0 0 12px!important;
     justify-content:center!important;
   }
-  .v38Shell .sidebarBrandEmpty{height:0!important;min-height:0!important}
-  .v38Shell .iconNav,
-  .v38Shell .compactFooter{
+  .v381Shell.customerShell .sidebarBrandEmpty{
+    width:100%!important;
+    height:0!important;
+    min-height:0!important;
+  }
+  .v381Shell.customerShell .iconNav,
+  .v381Shell.customerShell .compactFooter{
     width:100%!important;
     display:flex!important;
     flex-direction:column!important;
     align-items:center!important;
     gap:8px!important;
   }
-  .v38Shell .iconNav{margin-top:2px!important}
-  .v38Shell .sidebarFooter.compactFooter{
+  .v381Shell.customerShell .iconNav{margin-top:2px!important}
+  .v381Shell.customerShell .sidebarFooter.compactFooter{
     margin-top:auto!important;
     padding-top:14px!important;
     border-top:1px solid #ebe7df!important;
   }
-  .v38Shell .navLink.iconOnly{
+  .v381Shell.customerShell .navLink.iconOnly{
     position:relative!important;
     width:64px!important;
     height:64px!important;
@@ -7279,26 +7275,26 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
     box-shadow:none!important;
     transform:none!important;
   }
-  .v38Shell .navLink.iconOnly:hover{
+  .v381Shell.customerShell .navLink.iconOnly:hover{
     background:#faf8f4!important;
     border-color:#ebe5dc!important;
     transform:none!important;
     box-shadow:none!important;
   }
-  .v38Shell .navLink.iconOnly.active{
+  .v381Shell.customerShell .navLink.iconOnly.active{
     background:#f4f1ea!important;
     border-color:#dfd8cc!important;
     color:#181818!important;
     box-shadow:inset 3px 0 0 #0f9fa1!important;
   }
-  .v38Shell .navLink.iconOnly.active .navIcon{color:inherit!important}
-  .v38Shell .navIcon{
-    width:46px!important;
-    height:46px!important;
+  .v381Shell.customerShell .navLink.iconOnly.active .navIcon{color:inherit!important}
+  .v381Shell.customerShell .navIcon{
+    width:48px!important;
+    height:48px!important;
     display:grid!important;
     place-items:center!important;
   }
-  .v38Shell .navLabel{
+  .v381Shell.customerShell .navLabel{
     position:absolute!important;
     left:72px!important;
     top:50%!important;
@@ -7318,7 +7314,7 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
     box-shadow:0 12px 30px rgba(33,28,20,.12)!important;
     transition:.14s ease!important;
   }
-  .v38Shell .navLabel:before{
+  .v381Shell.customerShell .navLabel:before{
     content:""!important;
     position:absolute!important;
     left:-5px!important;
@@ -7330,17 +7326,17 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
     border-left:1px solid #e4dfd6!important;
     border-bottom:1px solid #e4dfd6!important;
   }
-  .v38Shell .navLink.iconOnly:hover .navLabel,
-  .v38Shell .navLink.iconOnly:focus-visible .navLabel{
+  .v381Shell.customerShell .navLink.iconOnly:hover .navLabel,
+  .v381Shell.customerShell .navLink.iconOnly:focus-visible .navLabel{
     opacity:1!important;
     visibility:visible!important;
     transform:translateY(-50%) translateX(0)!important;
   }
 }
 
-/* Mobile/tablet: same white system, labels visible in a clean drawer. */
+/* Customer portal mobile drawer: same white language, labels visible. */
 @media(max-width:900px){
-  .v38Shell .sidebar{
+  .v381Shell.customerShell .sidebar{
     position:fixed!important;
     z-index:130!important;
     left:0!important;
@@ -7361,20 +7357,20 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
     transition:transform .22s ease!important;
     overflow-y:auto!important;
   }
-  .v38Shell .sidebar.sidebarOpen{transform:translateX(0)!important}
-  .v38Shell .sidebarTop{
+  .v381Shell.customerShell .sidebar.sidebarOpen{transform:translateX(0)!important}
+  .v381Shell.customerShell .sidebarTop{
     min-height:52px!important;
     display:flex!important;
     justify-content:flex-end!important;
     margin-bottom:8px!important;
   }
-  .v38Shell .iconNav{
+  .v381Shell.customerShell .iconNav{
     display:grid!important;
     grid-template-columns:1fr!important;
     gap:5px!important;
     width:100%!important;
   }
-  .v38Shell .navLink.iconOnly{
+  .v381Shell.customerShell .navLink.iconOnly{
     width:100%!important;
     min-height:58px!important;
     height:auto!important;
@@ -7390,15 +7386,18 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
     color:#20201f!important;
     box-shadow:none!important;
   }
-  .v38Shell .navLink.iconOnly:hover{background:#faf8f4!important;border-color:#ebe5dc!important}
-  .v38Shell .navLink.iconOnly.active{
+  .v381Shell.customerShell .navLink.iconOnly:hover{
+    background:#faf8f4!important;
+    border-color:#ebe5dc!important;
+  }
+  .v381Shell.customerShell .navLink.iconOnly.active{
     background:#f4f1ea!important;
     border-color:#dfd8cc!important;
     color:#181818!important;
     box-shadow:inset 3px 0 0 #0f9fa1!important;
   }
-  .v38Shell .navIcon{width:42px!important;height:42px!important}
-  .v38Shell .navLink .navLabel{
+  .v381Shell.customerShell .navIcon{width:42px!important;height:42px!important}
+  .v381Shell.customerShell .navLink .navLabel{
     display:block!important;
     opacity:1!important;
     visibility:visible!important;
@@ -7415,8 +7414,8 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
     font-weight:800!important;
     white-space:normal!important;
   }
-  .v38Shell .navLabel:before{display:none!important}
-  .v38Shell .sidebarFooter.compactFooter{
+  .v381Shell.customerShell .navLabel:before{display:none!important}
+  .v381Shell.customerShell .sidebarFooter.compactFooter{
     position:static!important;
     margin-top:18px!important;
     padding-top:12px!important;
@@ -7425,12 +7424,44 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
   }
 }
 
-/* Keep collage artwork crisp and free of old SVG assumptions. */
-.v38Shell .navIcon img,
-.v38Shell .actionIcon img,
-.v38Shell .v26ActionIcon img,
-.v38Shell .searchIcon img,
-.v38Shell .iconBtn img{
-  stroke:none!important;
-  fill:none!important;
+
+/* =========================================================
+   V38.2 — MOBILE PUBLIC MENU: DIRECT CLINIC PORTAL ACCESS
+   Keep the desktop header CTA unchanged; expose the same
+   destination inside the mobile dropdown where users expect it.
+   KEEP THIS BLOCK LAST.
+   ========================================================= */
+
+.mobileClinicPortalLink{
+  display:none!important;
+}
+
+@media(max-width:820px){
+  .v37PublicHeader .publicNav .mobileClinicPortalLink{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:12px!important;
+    margin-top:5px!important;
+    padding:13px 14px!important;
+    background:#20aaa2!important;
+    border:1px solid #169891!important;
+    color:#fff!important;
+    font-weight:850!important;
+    box-shadow:none!important;
+  }
+  .v37PublicHeader .publicNav .mobileClinicPortalLink:hover,
+  .v37PublicHeader .publicNav .mobileClinicPortalLink:focus-visible{
+    background:#178f89!important;
+    color:#fff!important;
+  }
+  .v37PublicHeader .publicNav .mobileClinicPortalLink span{
+    font:inherit!important;
+    color:inherit!important;
+  }
+  .v37PublicHeader .publicNav .mobileClinicPortalLink b{
+    font-size:17px!important;
+    line-height:1!important;
+    color:#fff!important;
+  }
 }
