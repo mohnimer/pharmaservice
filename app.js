@@ -114,12 +114,20 @@
 
   function clinicalNeedIllustration(id){
     const m={
-      wounds:'/assets/category-wounds.webp',
-      breathing:'/assets/category-breathing.webp',
-      vitals:'/assets/category-vitals.webp',
-      infection:'/assets/category-infection.webp',
-      emergency:'/assets/category-emergency.webp',
-      equipment:'/assets/category-equipment.webp'
+      wounds:'/assets/category-wounds.webp?v=3777',
+      sports:'/assets/category-sports.webp?v=3777',
+      breathing:'/assets/category-breathing.webp?v=3777',
+      vitals:'/assets/category-vitals.webp?v=3777',
+      screening:'/assets/category-screening.webp?v=3777',
+      diabetes:'/assets/category-diabetes.webp?v=3777',
+      medicines:'/assets/category-medicines.webp?v=3777',
+      allergy:'/assets/category-allergy.webp?v=3777',
+      patient:'/assets/category-patient-care.webp?v=3777',
+      'patient-care':'/assets/category-patient-care.webp?v=3777',
+      infection:'/assets/category-infection.webp?v=3777',
+      procedures:'/assets/category-procedures.webp?v=3777',
+      emergency:'/assets/category-emergency.webp?v=3777',
+      equipment:'/assets/category-equipment.webp?v=3777'
     };
     return m[id] ? `<img src="${m[id]}" alt="" loading="lazy" decoding="async">` : clinicalNeedIcon(id);
   }
@@ -730,7 +738,24 @@
     }
     return '';
   }
-  const PRODUCT_ASSET_RELEASE='3776';
+  const PRODUCT_ASSET_RELEASE='3777';
+  function legacyProductImageUrl(p){
+    const raw=(p?.imageUrl||p?.image_url||'').trim();
+    if(raw){
+      const lower=raw.toLowerCase();
+      const genericBrandAsset =
+        lower.includes('dha-requirement') ||
+        lower.endsWith('/pharmaservice.png') ||
+        lower.endsWith('pharmaservice.png') ||
+        lower.endsWith('/psc-logo.png') ||
+        lower.endsWith('/psc-logo-current.png') ||
+        lower.endsWith('/clinic-basics.jpg');
+      if(!genericBrandAsset) return raw;
+    }
+    const fallback=(p?.fallbackAsset||'').trim();
+    if(fallback && !fallback.toLowerCase().endsWith('/clinic-basics.jpg')) return fallback;
+    return '/assets/products/clinic-basics.jpg';
+  }
   function productDisplayImageUrl(p){
     const sku=institutionalImageSku(p);
     if(sku) return `/assets/products/${sku.toLowerCase()}.webp?v=${PRODUCT_ASSET_RELEASE}`;
@@ -817,6 +842,36 @@
   function statusPill(status){ const k=String(status).toLowerCase().replace(/\s+/g,'-'); return `<span class="statusPill status-${k}">${esc(status)}</span>`; }
   function badge(text,tone=''){ return `<span class="badge ${tone}">${esc(text)}</span>`; }
   function icon(name){
+    const collage={
+      dashboard:'categories',
+      overview:'categories',
+      home:'categories',
+      edit:'quotes',
+      request:'my-requests',
+      boxes:'clinic-supplies',
+      inventory:'shop',
+      products:'clinic-supplies',
+      checklist:'my-requests',
+      queue:'my-requests',
+      resource:'resources',
+      repeat:'returns',
+      rules:'returns',
+      reports:'reports',
+      feed:'reports',
+      assets:'mobility-equipment',
+      admin:'settings',
+      clinics:'clinic-setup',
+      approved:'regulatory',
+      stock:'orders',
+      search:'search',
+      bell:'notifications',
+      logout:'logout',
+      menu:'categories',
+      settings:'settings',
+      mail:'messages',
+      help:'help'
+    };
+    if(collage[name]) return `<img class="pscCollageIcon pscCollageIcon-${collage[name]}" src="/assets/ui-icons/${collage[name]}.webp?v=3800" alt="" aria-hidden="true">`;
     const map={
       dashboard:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="6" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/></svg>`,
       overview:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="6" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/></svg>`,
@@ -866,7 +921,7 @@
     const liveCustomerNav=schoolNav.filter(([href])=>isDemoAccount() || !['portal/stock','portal/assets'].includes(href));
     const links=admin?adminNav:liveCustomerNav;
     const searchValue=esc(ui.globalSearch||'');
-    return `<div class="appShell v4Shell v7Shell v7bShell v26Shell v37Shell ${admin?'adminShell':'customerShell'}">
+    return `<div class="appShell v4Shell v7Shell v7bShell v26Shell v37Shell v38Shell ${admin?'adminShell':'customerShell'}">
       <div class="mobileOverlay ${ui.mobile?'show':''}" data-mobile-close></div>
       <aside class="sidebar ${ui.mobile?'sidebarOpen':''}">
         <div class="sidebarTop">${brand()}<button class="iconBtn mobileClose" data-mobile-close aria-label="Close menu">${icon('close')}</button></div>
@@ -980,37 +1035,37 @@
 
         <div class="publicClinicalPreviewGrid">
           <button class="publicClinicalCard coral" data-go="catalogue/wounds">
-            <img class="publicClinicalArt" src="/assets/category-wounds.webp" alt="" aria-hidden="true">
+            <img class="publicClinicalArt" src="/assets/category-wounds.webp?v=3777" alt="" aria-hidden="true">
             <span>Cuts &amp; Wounds</span>
             <small>Dressings, antiseptics, gauze, closure and wound protection</small>
           </button>
 
           <button class="publicClinicalCard blue" data-go="catalogue/breathing">
-            <img class="publicClinicalArt" src="/assets/category-breathing.webp" alt="" aria-hidden="true">
+            <img class="publicClinicalArt" src="/assets/category-breathing.webp?v=3777" alt="" aria-hidden="true">
             <span>Breathing &amp; Oxygen</span>
             <small>Nebulisation, oxygen delivery, airway and respiratory support</small>
           </button>
 
           <button class="publicClinicalCard orange" data-go="catalogue/vitals">
-            <img class="publicClinicalArt" src="/assets/category-vitals.webp" alt="" aria-hidden="true">
+            <img class="publicClinicalArt" src="/assets/category-vitals.webp?v=3777" alt="" aria-hidden="true">
             <span>Vitals &amp; Assessment</span>
             <small>Blood pressure, temperature, oximetry and clinical assessment</small>
           </button>
 
           <button class="publicClinicalCard mint" data-go="catalogue/infection">
-            <img class="publicClinicalArt" src="/assets/category-infection.webp" alt="" aria-hidden="true">
+            <img class="publicClinicalArt" src="/assets/category-infection.webp?v=3777" alt="" aria-hidden="true">
             <span>Infection Control &amp; PPE</span>
             <small>PPE, hand hygiene, disinfection and waste control</small>
           </button>
 
           <button class="publicClinicalCard rose" data-go="catalogue/emergency">
-            <img class="publicClinicalArt" src="/assets/category-emergency.webp" alt="" aria-hidden="true">
+            <img class="publicClinicalArt" src="/assets/category-emergency.webp?v=3777" alt="" aria-hidden="true">
             <span>Emergency &amp; Response</span>
             <small>Resuscitation, first response and urgent-use products</small>
           </button>
 
           <button class="publicClinicalCard sand" data-go="catalogue/equipment">
-            <img class="publicClinicalArt" src="/assets/category-equipment.webp" alt="" aria-hidden="true">
+            <img class="publicClinicalArt" src="/assets/category-equipment.webp?v=3777" alt="" aria-hidden="true">
             <span>Equipment &amp; Mobility</span>
             <small>Clinical furniture, mobility, storage and capital equipment</small>
           </button>
@@ -1314,7 +1369,7 @@
     const imageUrl=productDisplayImageUrl(p);
     const workshop=workshopForProduct(p,1)[0];
     return `<article class="publicCatalogueCard">
-      <button class="publicCatalogueVisual publicProductView" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-public-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details">${imageUrl?`<img src="${esc(imageUrl)}" alt="${esc(displayName)}" loading="lazy">`:`<span>${esc(need.label)}</span>`}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>
+      <button class="publicCatalogueVisual publicProductView" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-public-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details">${imageUrl?`<img src="${esc(imageUrl)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'">`:`<span>${esc(need.label)}</span>`}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>
       <div class="publicCatalogueBody"><small>${esc(need.label)}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(pack)}</p>${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
       <button class="button outline full" data-go="contact">Request institutional quote</button>
     </article>`;
@@ -1741,7 +1796,7 @@
     const need=clinicalNeedMeta(needId);
     const displayName=p.catalogueDisplayName||p.name;
     const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
-    const fallback=p.fallbackAsset||'/assets/products/clinic-basics.jpg';
+    const fallback=legacyProductImageUrl(p);
     const dhaMark=p.dhaMapped?`<img class="dhaRequirementIcon cardDhaIcon" src="${DHA_ICON}" alt="DHA requirement">`:'';
     const displayImage=productDisplayImageUrl(p);
     const visual=displayImage
@@ -1878,7 +1933,7 @@
   function basketDrawer(){
     const lines=state.basket.map(l=>({l,p:product(l.sku)})).filter(x=>x.p);
     const indicative=lines.reduce((sum,x)=>sum+(x.p.contractPrice||0)*x.l.qty,0);
-    return `<div class="drawerBackdrop requestDrawerBackdrop" data-close-basket><aside class="drawer requestDrawer" onclick="event.stopPropagation()"><div class="drawerHandle" aria-hidden="true"></div><div class="drawerHeader"><div><span class="eyebrow">PHARMA SERVICE</span><h2>Supply Request</h2><small>${lines.length?`${lines.length} line${lines.length===1?'':'s'} · ${basketQty()} item${basketQty()===1?'':'s'}`:'Build a request while you browse'}</small></div><button class="iconBtn" data-close-basket aria-label="Close request">×</button></div><div class="drawerBody">${lines.length?lines.map(({l,p})=>{const imageUrl=productDisplayImageUrl(p);return `<div class="basketLine requestLine">${imageUrl?`<div class="requestLineImage"><img src="${esc(imageUrl)}" alt=""></div>`:`<div class="productGlyph small">${esc((p.brand||'PS').slice(0,2).toUpperCase())}</div>`}<div class="basketInfo"><b>${esc(p.catalogueDisplayName||p.name)}</b><span>${esc(p.cataloguePack||p.pack||'Pack to confirm')} · ${p.pscSku}</span><small>${p.contractPrice?money(p.contractPrice)+' indicative account price':'Price confirmed in quotation'}</small></div><div class="qty"><button data-basket-delta="${p.pscSku}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-basket-delta="${p.pscSku}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-basket-remove="${p.pscSku}">Remove</button></div>`}).join(''):`<div class="emptyState requestEmpty"><h3>Your request is empty</h3><p>Browse the catalogue and add the products you want PSC to quote.</p><button class="button dark" data-go="portal/catalogue">Browse catalogue</button></div>`}</div>${lines.length?`<div class="drawerFooter requestDrawerFooter"><label class="fieldLabel">Request note <span>optional</span></label><textarea class="textarea" id="basketNote" placeholder="Delivery timing, preferred brand, clinic note…"></textarea><div class="totals"><span>Indicative priced lines</span><b>${money(indicative)}</b></div><div class="checkoutPromise requestNextStep"><span>WHAT HAPPENS NEXT</span><p>PSC reviews the request and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. Nothing is procured until the required customer approval is in place.</p></div><button class="button primary full submitRequestButton" data-submit-request>Submit request</button></div>`:''}</aside></div>`;
+    return `<div class="drawerBackdrop requestDrawerBackdrop" data-close-basket><aside class="drawer requestDrawer" onclick="event.stopPropagation()"><div class="drawerHandle" aria-hidden="true"></div><div class="drawerHeader"><div><span class="eyebrow">PHARMA SERVICE</span><h2>Supply Request</h2><small>${lines.length?`${lines.length} line${lines.length===1?'':'s'} · ${basketQty()} item${basketQty()===1?'':'s'}`:'Build a request while you browse'}</small></div><button class="iconBtn" data-close-basket aria-label="Close request">×</button></div><div class="drawerBody">${lines.length?lines.map(({l,p})=>{const imageUrl=productDisplayImageUrl(p);return `<div class="basketLine requestLine">${imageUrl?`<div class="requestLineImage"><img src="${esc(imageUrl)}" alt="" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'"></div>`:`<div class="productGlyph small">${esc((p.brand||'PS').slice(0,2).toUpperCase())}</div>`}<div class="basketInfo"><b>${esc(p.catalogueDisplayName||p.name)}</b><span>${esc(p.cataloguePack||p.pack||'Pack to confirm')} · ${p.pscSku}</span><small>${p.contractPrice?money(p.contractPrice)+' indicative account price':'Price confirmed in quotation'}</small></div><div class="qty"><button data-basket-delta="${p.pscSku}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-basket-delta="${p.pscSku}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-basket-remove="${p.pscSku}">Remove</button></div>`}).join(''):`<div class="emptyState requestEmpty"><h3>Your request is empty</h3><p>Browse the catalogue and add the products you want PSC to quote.</p><button class="button dark" data-go="portal/catalogue">Browse catalogue</button></div>`}</div>${lines.length?`<div class="drawerFooter requestDrawerFooter"><label class="fieldLabel">Request note <span>optional</span></label><textarea class="textarea" id="basketNote" placeholder="Delivery timing, preferred brand, clinic note…"></textarea><div class="totals"><span>Indicative priced lines</span><b>${money(indicative)}</b></div><div class="checkoutPromise requestNextStep"><span>WHAT HAPPENS NEXT</span><p>PSC reviews the request and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. Nothing is procured until the required customer approval is in place.</p></div><button class="button primary full submitRequestButton" data-submit-request>Submit request</button></div>`:''}</aside></div>`;
   }
 
 
@@ -2129,7 +2184,7 @@
     const displayName=p.catalogueDisplayName||p.name;
     const imageUrl=productDisplayImageUrl(p);
     const attr=publicMode?'data-public-product-view':'data-product-view';
-    return `<button class="relatedProductMini" ${attr}="${p.pscSku}"><span class="relatedProductVisual" style="--need-bg:${need.bg};--need-ink:${need.ink}">${imageUrl?`<img src="${esc(imageUrl)}" alt="" loading="lazy">`:`<i>${esc((p.brand||need.label||'PS').slice(0,2).toUpperCase())}</i>`}</span><span class="relatedProductCopy"><small>${esc(need.label)}</small><b>${esc(displayName)}</b><em>${esc(p.cataloguePack||p.pack||'Pack to confirm')}</em></span></button>`;
+    return `<button class="relatedProductMini" ${attr}="${p.pscSku}"><span class="relatedProductVisual" style="--need-bg:${need.bg};--need-ink:${need.ink}">${imageUrl?`<img src="${esc(imageUrl)}" alt="" loading="lazy" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'">`:`<i>${esc((p.brand||need.label||'PS').slice(0,2).toUpperCase())}</i>`}</span><span class="relatedProductCopy"><small>${esc(need.label)}</small><b>${esc(displayName)}</b><em>${esc(p.cataloguePack||p.pack||'Pack to confirm')}</em></span></button>`;
   }
 
   function productModal(sku){
@@ -2139,7 +2194,7 @@
     const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
     const needs=clinicalNeedIds(p);
     const primary=clinicalNeedMeta(needs[0]||'all');
-    const fallback=p.fallbackAsset||'/assets/products/clinic-basics.jpg';
+    const fallback=legacyProductImageUrl(p);
     const needTags=needs.map(id=>`<span class="modalNeedChip" style="--chip-bg:${clinicalNeedMeta(id).bg};--chip-ink:${clinicalNeedMeta(id).ink}">${esc(clinicalNeedMeta(id).label)}</span>`).join('');
     const detailDhaMark=mapped?`<img class="dhaRequirementIcon detailDhaIcon" src="${DHA_ICON}" alt="DHA requirement">`:'';
     const displayImage=productDisplayImageUrl(p);
@@ -2176,7 +2231,7 @@
     const needs=clinicalNeedIds(p);
     const primary=clinicalNeedMeta(needs[0]||'all');
     const imageUrl=productDisplayImageUrl(p);
-    const fallback=p.fallbackAsset||'/assets/products/clinic-basics.jpg';
+    const fallback=legacyProductImageUrl(p);
     const workshop=workshopForProduct(p,1)[0];
     const related=relatedProductsFor(p,5);
     return `<div class="productDetailModal fluidProductDetail publicProductSheet">
