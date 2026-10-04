@@ -1,15 +1,14 @@
-/* V39.17 — compact family selector beneath each clinical category. */
+/* V39.18 — compact white family selectors with the same DHA mark used on line-item cards. */
 .pscFamilyReadLayer{width:min(1320px,88%);margin:12px auto 28px;padding:22px 0 10px;border-top:1px solid rgba(29,38,36,.12);border-bottom:1px solid rgba(29,38,36,.09)}
 .pscFamilyReadHead{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:14px}
-.pscFamilyReadHead .eyebrow{display:block;margin-bottom:5px}
-.pscFamilyReadHead p{margin:0;color:#6b655d;font-size:12px;line-height:1.45}
+.pscFamilyReadHead .eyebrow{display:block;margin-bottom:5px}.pscFamilyReadHead p{margin:0;color:#6b655d;font-size:12px;line-height:1.45}
 .pscFamilyReadCount{display:flex;align-items:baseline;gap:7px;white-space:nowrap}.pscFamilyReadCount b{font-size:20px;letter-spacing:-.04em}.pscFamilyReadCount span{font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:#746e66}
 .pscFamilySelectorRail{display:flex;gap:9px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:thin;scroll-snap-type:x proximity}
-.pscFamilySelector{scroll-snap-align:start;flex:0 0 auto;width:210px;min-height:72px;padding:11px 36px 11px 13px;position:relative;display:flex;align-items:center;border:1px solid color-mix(in srgb,var(--family-ink) 13%,#d8d3ca);border-radius:17px;background:color-mix(in srgb,var(--family-bg) 26%,#fff);color:#25231f;text-align:left;font:inherit;cursor:pointer;transition:transform .16s ease,border-color .16s ease,background .16s ease}
-.pscFamilySelector:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--family-ink) 28%,#cfc9bf);background:color-mix(in srgb,var(--family-bg) 40%,#fff)}
+.pscFamilySelector{scroll-snap-align:start;flex:0 0 auto;width:214px;min-height:76px;padding:12px 42px 12px 14px;position:relative;display:flex;align-items:center;border:1px solid #ded9d1;border-radius:17px;background:#fff;color:#25231f;text-align:left;font:inherit;cursor:pointer;box-shadow:0 1px 0 rgba(20,25,24,.02);transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.pscFamilySelector:before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 4px 4px 0;background:var(--family-accent,#178e88);opacity:.55}
+.pscFamilySelector:hover{transform:translateY(-1px);border-color:#bbb5ac;box-shadow:0 8px 20px rgba(38,34,27,.06)}
 .pscFamilySelectorCopy{min-width:0;display:block}.pscFamilySelectorCopy b{display:block;font-size:12px;line-height:1.16;letter-spacing:-.018em;font-weight:850}.pscFamilySelectorCopy small{display:-webkit-box;margin-top:4px;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;font-size:9.5px;line-height:1.25;color:#746f68}
-.pscFamilySelector>i{position:absolute;right:31px;top:10px;padding:2px 4px;border-radius:5px;background:rgba(13,136,130,.09);color:#087f79;font-size:7px;font-style:normal;font-weight:900;letter-spacing:.07em}
-.pscFamilySelectorArrow{position:absolute;right:12px;bottom:11px;font-size:14px;font-weight:800;color:color-mix(in srgb,var(--family-ink) 72%,#45413a)}
-.pscFamilySelector[hidden]{display:none!important}.pscFamilyReadEmpty{padding:5px 0 10px;color:#69665f;font-size:12px}
-@media(max-width:850px){.pscFamilyReadLayer{width:calc(100% - 44px)}.pscFamilyReadHead{align-items:flex-start}.pscFamilySelector{width:188px}}
-@media(max-width:560px){.pscFamilyReadLayer{width:calc(100% - 32px);padding-top:17px;margin-bottom:22px}.pscFamilyReadHead{gap:12px}.pscFamilyReadHead p{font-size:11px}.pscFamilySelector{width:170px;min-height:68px;padding-left:12px}.pscFamilySelectorCopy b{font-size:11.5px}}
+.pscFamilySelectorDha{position:absolute;right:11px;top:9px;width:26px;height:26px;object-fit:contain;background:transparent!important}
+.pscFamilySelectorArrow{position:absolute;right:13px;bottom:9px;font-size:14px;font-weight:800;color:#3f4643}.pscFamilySelector[hidden]{display:none!important}.pscFamilyReadEmpty{padding:5px 0 10px;color:#69665f;font-size:12px}
+@media(max-width:850px){.pscFamilyReadLayer{width:calc(100% - 44px)}.pscFamilyReadHead{align-items:flex-start}.pscFamilySelector{width:190px}}
+@media(max-width:560px){.pscFamilyReadLayer{width:calc(100% - 32px);padding-top:17px;margin-bottom:22px}.pscFamilyReadHead{gap:12px}.pscFamilyReadHead p{font-size:11px}.pscFamilySelector{width:174px;min-height:70px;padding-left:12px}.pscFamilySelectorCopy b{font-size:11.5px}.pscFamilySelectorDha{width:23px;height:23px}}
