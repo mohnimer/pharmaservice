@@ -11,7 +11,31 @@
   const ASSET_RELEASE='3777';
   function familyCatalogueProducts(f){
     const rows=Array.isArray(window.PSC_DATA?.products)?window.PSC_DATA.products:[];
-    return rows.filter(p=>String(p?.catalogueParentId||'')===String(f?.family_id||'') && p?.catalogueVisible!==false);
+    // Family previews may use a controlled child line even when that child is intentionally hidden
+    // from the flat product grid. The family itself remains the customer-facing catalogue entity.
+    return rows.filter(p=>String(p?.catalogueParentId||'')===String(f?.family_id||''));
+  }
+  function catalogueProductForSku(sku){
+    const rows=Array.isArray(window.PSC_DATA?.products)?window.PSC_DATA.products:[];
+    return rows.find(p=>String(p?.pscSku||'')===String(sku||''))||null;
+  }
+  function familyIdForSku(sku){ return String(catalogueProductForSku(sku)?.catalogueParentId||'').trim(); }
+  function isMedicineFamilyScaffold(p){
+    if(!p?.catalogueParentId) return false;
+    const tx=String(p?.catalogueTransactionId||p?.pscSku||'').trim();
+    const m=tx.match(/^INST-(\d{4})$/);
+    if(!m) return false;
+    const n=Number(m[1]);
+    return n>=207 && n<=260;
+  }
+  function hideMedicineFamilyScaffolds(){
+    document.querySelectorAll('[data-product-view],[data-public-product-view]').forEach(el=>{
+      const sku=el.dataset.productView||el.dataset.publicProductView||'';
+      const product=catalogueProductForSku(sku);
+      if(!isMedicineFamilyScaffold(product)) return;
+      const card=el.closest('article.publicCatalogueCard,article.productCard,.publicCatalogueCard,.productCard');
+      if(card) card.hidden=true;
+    });
   }
   function familyProductImage(p){
     const tx=String(p?.catalogueTransactionId||p?.pscSku||'').trim().toLowerCase();
@@ -21,7 +45,7 @@
   }
   function familyPreview(f){
     const rows=familyCatalogueProducts(f), primary=rows[0]||null, image=familyProductImage(primary);
-    return {image,title:String(primary?.catalogueDisplayName||primary?.name||f?.family_name||'Catalogue family'),pack:String(primary?.cataloguePack||primary?.pack||f?.order_pack_basis||'Pack / unit to confirm'),gallery:rows.slice(0,5).map(x=>({url:familyProductImage(x),alt:String(x?.catalogueDisplayName||x?.name||f?.family_name||'Catalogue preview')}))};
+    return {image,title:String(f?.family_name||primary?.catalogueDisplayName||primary?.name||'Catalogue family'),pack:String(f?.order_pack_basis||primary?.cataloguePack||primary?.pack||'Pack / unit to confirm'),gallery:rows.slice(0,5).map(x=>({url:familyProductImage(x),alt:String(x?.catalogueDisplayName||x?.name||f?.family_name||'Catalogue preview')}))};
   }
   function fallbackFamily(id){
     const rows=window.PSC_FAMILY_CATALOGUE_V39?.families||[], r=rows.find(x=>x.familyId===id); if(!r) return null;
@@ -185,8 +209,32 @@
     const other=root.querySelector('[data-family-other-brand]');if(other)other.addEventListener('input',e=>{state.otherBrand=e.target.value;e.target.classList.remove('invalid');const summary=root.querySelector('.pscFamilySelectionSummary b');if(summary)summary.textContent=preferenceSummary();});
     root.querySelector('[data-family-quote]')?.addEventListener('click',goToQuote);
   }
-  document.addEventListener('click',e=>{const trigger=e.target.closest?.('[data-psc-family-open]');if(trigger){e.preventDefault();open(trigger.dataset.pscFamilyOpen||'');}},true);
+  window.PSC_OPEN_FAMILY_DETAIL=open;
+  window.addEventListener('psc:open-family',e=>open(e.detail?.familyId||''));
+  document.addEventListener('click',e=>{
+    const familyTrigger=e.target.closest?.('[data-psc-family-open]');
+    if(familyTrigger){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      open(familyTrigger.dataset.pscFamilyOpen||'');
+      return;
+    }
+    if(e.target.closest?.('[data-psc-family-detail-root]')) return;
+    const productTrigger=e.target.closest?.('[data-product-view],[data-public-product-view],[data-add]');
+    if(!productTrigger) return;
+    const sku=productTrigger.dataset.productView||productTrigger.dataset.publicProductView||productTrigger.dataset.add||'';
+    const familyId=familyIdForSku(sku);
+    if(!familyId) return;
+    // A product already attached to a family must enter through the family page.
+    // This prevents generic presentation scaffolds such as "Cetirizine — Tablet presentation"
+    // from bypassing the brand/SKU preference controls.
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    open(familyId);
+  },true);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.open)close();});
-  window.addEventListener('hashchange',()=>setTimeout(prefillContact,50));
-  new MutationObserver(()=>prefillContact()).observe(document.getElementById('app')||document.body,{childList:true,subtree:true});
+  window.addEventListener('hashchange',()=>setTimeout(()=>{prefillContact();hideMedicineFamilyScaffolds();},50));
+  const observer=new MutationObserver(()=>{prefillContact();hideMedicineFamilyScaffolds();});
+  observer.observe(document.getElementById('app')||document.body,{childList:true,subtree:true});
+  setTimeout(hideMedicineFamilyScaffolds,0);
 })();
