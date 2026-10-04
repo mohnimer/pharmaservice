@@ -7,6 +7,29 @@
   const upper=v=>String(v||'').trim().toUpperCase();
   const aed=v=>`AED ${Number(v).toLocaleString('en-AE',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
 
+  const ASSET_RELEASE='3777';
+  function familyCatalogueProducts(f){
+    const rows=Array.isArray(window.PSC_DATA?.products)?window.PSC_DATA.products:[];
+    return rows.filter(p=>String(p?.catalogueParentId||'')===String(f?.family_id||'') && p?.catalogueVisible!==false);
+  }
+  function familyProductImage(p){
+    const tx=String(p?.catalogueTransactionId||p?.pscSku||'').trim().toLowerCase();
+    if(/^inst-\d{4}$/.test(tx)) return `/assets/products/${tx}.webp?v=${ASSET_RELEASE}`;
+    const raw=String(p?.imageUrl||p?.image_url||'').trim();
+    return raw || '/assets/products/clinic-basics.jpg';
+  }
+  function familyPreview(f){
+    const rows=familyCatalogueProducts(f);
+    const primary=rows[0]||null;
+    const image=familyProductImage(primary);
+    return {
+      image,
+      title:String(primary?.catalogueDisplayName||primary?.name||f?.family_name||'Catalogue family'),
+      pack:String(primary?.cataloguePack||primary?.pack||f?.order_pack_basis||'Pack / unit to confirm'),
+      gallery:rows.slice(0,5).map(x=>({url:familyProductImage(x),alt:String(x?.catalogueDisplayName||x?.name||f?.family_name||'Catalogue preview')}))
+    };
+  }
+
   function fallbackFamily(id){
     const rows=window.PSC_FAMILY_CATALOGUE_V39?.families||[];
     const r=rows.find(x=>x.familyId===id);
@@ -192,36 +215,60 @@
     const f=state.family||fallbackFamily(state.familyId);if(!f) return '';
     const presentations=(Array.isArray(f.presentations)?f.presentations:[]).filter(Boolean);
     const portalMode=location.hash.startsWith('#portal/catalogue');
-    const copy=kindCopy(f),kind=familyKind(f),fixed=String(f.website_price_treatment||'').toLowerCase().includes('fixed');
-    const dha=isDhaMapped(f);
-    const compatibilityNote=kind==='compatibility'?`<aside class="pscFamilyCompatibilityNote"><b>Compatibility comes first.</b><span>PSC will confirm the relevant device, dispenser, holder, waste route or other fit requirement before supply.</span></aside>`:'';
-    const supplyNote=kind==='medicine'?`<aside class="pscFamilyDetailNote"><b>No silent substitution.</b><span>Once a specific brand or product is agreed, PSC will not substitute it without customer approval.</span></aside>`:kind==='equipment'?`<aside class="pscFamilyDetailNote"><b>Exact model is confirmed in the quotation.</b><span>Accessories, warranty, installation and compatibility are controlled before procurement.</span></aside>`:kind==='specialist'?`<aside class="pscFamilyDetailNote"><b>Scope before commitment.</b><span>PSC confirms the responsible specialist route, deliverables, timing and commercial scope before acceptance.</span></aside>`:`<aside class="pscFamilyDetailNote"><b>Specification before substitution.</b><span>PSC sources against the controlled family specification; any material brand, pack or compatibility change is confirmed before commitment.</span></aside>`;
-    return `<div class="pscFamilyDetailBackdrop" data-family-detail-close>
-      <section class="pscFamilyDetail pscFamilyDetail--${kind}" role="dialog" aria-modal="true" aria-labelledby="pscFamilyTitle" onclick="event.stopPropagation()">
-        <button class="pscFamilyDetailClose" type="button" data-family-detail-close aria-label="Close">×</button>
-        <header class="pscFamilyDetailHeader">
-          <div><span class="kicker">${esc(copy.kicker)} · ${esc(f.family_id)}</span><h1 id="pscFamilyTitle">${esc(f.family_name)}</h1>${f.common_brands_line?`<p class="pscFamilyDetailBrands">${esc(f.common_brands_line)}</p>`:''}<p class="pscFamilyDetailRole">${esc(copy.role)}</p>${dha?'<span class="pscFamilyDhaBadge">DHA requirement</span>':''}</div>
-          <div class="pscFamilyDetailStatus"><b>${fixed?'Catalogue price treatment':'Institutional pricing'}</b><span>${esc(priceLabel(f))}</span><small>${esc(familyAvailabilityLabel(f))}</small></div>
-        </header>
+    const copy=kindCopy(f),kind=familyKind(f),dha=isDhaMapped(f),preview=familyPreview(f);
+    const selected=selectedOption();
+    const selectedText=selected?optionLabel(selected,f):(kind==='medicine'?'No preference':'PSC to select against specification');
+    const configurationNeeded=presentations.length||selectorAllowed(f);
+    const regulatory=`${dha?`<details><summary><span>Requirement mapping</span><i>+</i></summary><div><p><strong>Mapped to DHA Standards for Clinics in Educational and Academic Settings V4.1</strong></p>${f.exact_controlled_wording?`<p>${esc(f.exact_controlled_wording)}</p>`:''}<p>${esc(f.requirement_reference||'DHA requirement')} · ${esc(f.dha_status||'Status to verify')}</p>${/conditional|required alternative/i.test(String(f.dha_status||''))?'<small>The source classification is preserved; conditional or alternative wording is not converted into an automatic mandatory purchase line.</small>':''}<p class="disclosureFinePrint">Requirement mapping only. This is not a DHA product endorsement or product approval.</p></div></details>`:''}`;
+    const compatibility=kind==='compatibility'?'<p><strong>Compatibility comes first.</strong> PSC confirms the relevant device, dispenser, holder, waste route or other fit requirement before supply.</p>':'';
+    const supplyCopy=kind==='medicine'
+      ? 'Licensed supply route, product registration, storage, batch/expiry and recipient authorization are confirmed before commitment. Once a specific brand or product is agreed, PSC does not silently substitute it.'
+      : kind==='equipment'
+        ? 'Exact model, included accessories, warranty, installation and compatibility are confirmed in the quotation before procurement.'
+        : kind==='specialist'
+          ? 'PSC confirms the responsible specialist route, deliverables, timing and commercial scope before acceptance.'
+          : 'PSC sources against the controlled family specification. Any material brand, pack or compatibility change is confirmed before commitment.';
 
-        <div class="pscFamilyDetailBody">
-          <section class="pscFamilyDetailBlock pscFamilySpecBlock">
-            <span class="pscFamilyDetailLabel">Controlled specification</span>
-            <p class="pscFamilySpecText">${esc(f.commercial_specification||'Exact institutional specification confirmed before quotation.')}</p>
-            <div class="pscFamilySpecMeta"><span><small>ORDER / PACK BASIS</small><b>${esc(f.order_pack_basis||'To confirm')}</b></span><span><small>SUPPLY ROUTE</small><b>${esc(f.portal_treatment||'Institutional quotation')}</b></span></div>
-          </section>
+    return `<div class="modalBackdrop fluidOverlay pscFamilyDetailBackdrop" data-family-detail-close>
+      <div class="modal productModalShell fluidProductShell pscFamilyModalShell" onclick="event.stopPropagation()">
+        <section class="productDetailModal fluidProductDetail publicProductSheet pscFamilyProductSheet" role="dialog" aria-modal="true" aria-labelledby="pscFamilyTitle">
+          <div class="modalHeader fluidProductHeader">
+            <button class="productBackButton" type="button" data-family-detail-close aria-label="Back to catalogue">←</button>
+            <div><span class="eyebrow">${esc(copy.kicker)}</span><h2 id="pscFamilyTitle">${esc(f.family_name)}</h2><div class="smallMuted mono">${esc(f.family_id)}</div></div>
+            ${dha?'<span class="pscFamilyHeaderBadge">DHA requirement</span>':''}
+          </div>
 
-          ${regulatoryBlock(f)}
-          ${availabilityBlock(f)}
-          ${presentations.length?`<section class="pscFamilyDetailBlock"><span class="pscFamilyDetailLabel">Available presentations</span><div class="pscPresentationChips">${presentations.map(x=>`<button type="button" class="${state.presentation===x?'active':''}" data-family-presentation="${esc(x)}">${esc(presentationLabel(f,x))}</button>`).join('')}</div></section>`:''}
+          <div class="productDetailGrid fluidProductGrid">
+            <div class="detailImagePane fluidImagePane">
+              <div class="detailProductImageWrap pscFamilyPreview"><img src="${esc(preview.image)}" alt="${esc(preview.title)}" onerror="this.onerror=null;this.src='/assets/products/clinic-basics.jpg'"></div>
+              ${preview.gallery.length>1?`<div class="productGalleryStrip">${preview.gallery.map(x=>`<img src="${esc(x.url)}" alt="${esc(x.alt)}" loading="lazy" onerror="this.style.display='none'">`).join('')}</div>`:''}
+              <div class="detailImageMeta"><b>${esc(preview.title)}</b><span>${esc(preview.pack)}</span>${f.common_brands_line?`<small>${esc(f.common_brands_line)}</small>`:'<small>Representative catalogue preview. Exact brand/model is controlled at selection or quotation.</small>'}</div>
+            </div>
 
-          ${preferenceBlock(f)}
-          ${compatibilityNote}
-          ${supplyNote}
-        </div>
+            <div class="detailContentPane fluidDetailContent">
+              <div class="productQuickFacts">
+                <div><span>PACK / UNIT</span><b>${esc(f.order_pack_basis||'To confirm')}</b></div>
+                <div><span>SUPPLY BASIS</span><b>${esc(kind==='medicine'?'Licensed route':kind==='specialist'?'Scope confirmed at quotation':'Confirmed at quotation')}</b></div>
+                <div><span>PRICING</span><b>${esc(priceLabel(f))}</b></div>
+                <div><span>AVAILABILITY</span><b>${esc(familyAvailabilityLabel(f))}</b></div>
+                ${dha?`<div><span>REQUIREMENT</span><b>${esc(f.dha_status||'DHA mapped')}</b></div>`:''}
+              </div>
 
-        <footer class="pscFamilyDetailFooter"><div><small>${esc(copy.footer)}</small><b>${esc(familyAvailabilityLabel(f))}</b></div><div><button type="button" class="button light" data-family-detail-close>Continue browsing</button><button type="button" class="button primary" data-family-quote>${portalMode?'Add to request':'Request quote'}</button></div></footer>
-      </section>
+              <div class="productDisclosureList pscFamilyDisclosureList">
+                <details open><summary><span>Product specification</span><i>+</i></summary><div><p>${esc(f.commercial_specification||'Exact institutional specification confirmed before quotation.')}</p><small>Order / pack basis: ${esc(f.order_pack_basis||'To confirm')}</small></div></details>
+
+                ${configurationNeeded?`<details open><summary><span>${kind==='medicine'?'Presentation & brand preference':'Product preference'}</span><i>+</i></summary><div class="pscFamilyConfiguration">${presentations.length?`<div class="pscFamilyInlineSection"><span class="pscFamilyDetailLabel">${kind==='medicine'?'Available presentations':'Presentation / format'}</span><div class="pscPresentationChips">${presentations.map(x=>`<button type="button" class="${state.presentation===x?'active':''}" data-family-presentation="${esc(x)}">${esc(presentationLabel(f,x))}</button>`).join('')}</div></div>`:''}${preferenceBlock(f)}<p class="pscFamilySelectionSummary"><span>CURRENT SELECTION</span><b>${esc(selectedText)}</b></p></div></details>`:''}
+
+                ${regulatory}
+                <details><summary><span>Availability & quotation</span><i>+</i></summary><div><p><strong>${esc(familyAvailabilityLabel(f))}</strong></p><p>Live stock language is shown only against dated, unexpired evidence. Otherwise PSC reconfirms availability when the quotation is prepared.</p>${state.availability?.verified_at?`<small>Evidence verified ${esc(fmtEvidenceDate(state.availability.verified_at))}${state.availability?.valid_until?` · valid through ${esc(fmtEvidenceDate(state.availability.valid_until))}`:''}</small>`:''}</div></details>
+                <details><summary><span>Supply & compatibility</span><i>+</i></summary><div>${compatibility}<p>${esc(supplyCopy)}</p></div></details>
+              </div>
+            </div>
+          </div>
+
+          <div class="productStickyBar publicProductSticky pscFamilyStickyBar"><button type="button" class="button light" data-family-detail-close>Continue browsing</button><button type="button" class="button primary" data-family-quote>${portalMode?'Add to request':'Request quotation'}</button></div>
+        </section>
+      </div>
     </div>`;
   }
 
