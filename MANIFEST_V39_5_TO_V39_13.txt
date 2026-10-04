@@ -1,0 +1,22 @@
+PSC V39.5–V39.13 cumulative manifest
+
+Final root file -> newest source release in the sequence
+--------------------------------------------------------
+index.html                         -> V39.13
+app.js                            -> V39.12
+catalogue-family-v39.js           -> V39.5
+family-layer-v39.js               -> V39.12
+family-layer-v39.css              -> V39.11
+family-detail-v39.js              -> V39.12
+family-detail-v39.css             -> V39.12
+family-options-v39.css            -> V39.12
+grid-fix-v39.css                  -> V39.13
+V39_8_TASK5_STRUCTURED_REQUEST.sql -> V39.8
+V39_9_TASK6_OPTION_CONTROL.sql     -> V39.9
+V39_9_TASK6_BRAND_OPTIONS_SEED.sql -> V39.9
+V39_10_TASK7_CONTROLLED_PRICING.sql -> V39.10
+V39_12_TASK9_REGULATORY_AVAILABILITY.sql -> V39.12
+
+Base dependency
+---------------
+This is a cumulative patch for V39.5 through V39.13 and therefore assumes the site already has the pre-V39.5 baseline, including styles.css/assets from the V39.4 state.

@@ -1,0 +1,60 @@
+/* V39.6 Task 3 — Cetirizine family detail prototype. */
+.pscFamilyReadCardReady{font:inherit;text-align:left;color:inherit;cursor:pointer;width:100%;appearance:none;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.pscFamilyReadCardReady:hover{transform:translateY(-2px);box-shadow:0 18px 36px rgba(23,31,29,.08);border-color:color-mix(in srgb,var(--family-bg) 38%,rgba(30,34,32,.18))}
+.pscFamilyReadCardReady:focus-visible{outline:3px solid color-mix(in srgb,var(--family-bg) 70%,#111);outline-offset:3px}
+.pscFamilyCommonBrand{display:block;margin:-2px 0 8px;font-size:12px;line-height:1.35;color:#69645d;font-style:italic}
+html.pscFamilyDetailOpen,html.pscFamilyDetailOpen body{overflow:hidden}
+.pscFamilyDetailBackdrop{position:fixed;inset:0;z-index:9999;background:rgba(15,23,22,.58);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:28px}
+.pscFamilyDetail{position:relative;width:min(980px,100%);max-height:min(820px,calc(100vh - 56px));overflow:auto;background:#fbf8f1;border:1px solid rgba(28,36,34,.16);border-radius:30px;box-shadow:0 42px 110px rgba(8,14,13,.28)}
+.pscFamilyDetailClose{position:absolute;right:22px;top:18px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(23,30,28,.14);background:rgba(255,255,255,.7);font-size:25px;line-height:1;cursor:pointer;z-index:2}
+.pscFamilyDetailHeader{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:44px;padding:48px 54px 34px;border-bottom:1px solid rgba(27,35,33,.12);background-image:linear-gradient(rgba(45,57,55,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(45,57,55,.045) 1px,transparent 1px);background-size:28px 28px}
+.pscFamilyDetailHeader h1{margin:9px 0 6px;font-size:clamp(48px,6vw,76px);line-height:.95;letter-spacing:-.06em}
+.pscFamilyDetailBrands{margin:0;color:#62605a;font-size:16px;font-style:italic}.pscFamilyDetailRole{margin:18px 0 0;font-size:13px;font-weight:800;letter-spacing:.03em;color:#173d70}
+.pscFamilyDetailStatus{align-self:end;padding:20px;border:1px solid rgba(27,35,33,.1);border-radius:20px;background:rgba(255,255,255,.65)}
+.pscFamilyDetailStatus b,.pscFamilyDetailStatus span,.pscFamilyDetailStatus small{display:block}.pscFamilyDetailStatus b{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#68655e}.pscFamilyDetailStatus span{margin:6px 0 10px;font-size:22px;font-weight:850;letter-spacing:-.035em}.pscFamilyDetailStatus small{font-size:11px;line-height:1.4;color:#6d6961}
+.pscFamilyDetailBody{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:30px 54px 36px}.pscFamilyDetailBlock{padding:24px;border:1px solid rgba(28,36,34,.11);border-radius:22px;background:#fffdf8}.pscFamilyDetailLabel{display:block;margin-bottom:16px;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#65625c}
+.pscPresentationChips{display:flex;flex-wrap:wrap;gap:9px}.pscPresentationChips button{border:1px solid rgba(29,37,35,.14);border-radius:999px;background:#f6f2ea;padding:10px 14px;font:inherit;font-size:12px;font-weight:800;cursor:pointer}.pscPresentationChips button.active{background:#173d70;color:white;border-color:#173d70}
+.pscBrandChoice{display:flex;gap:12px;align-items:flex-start;padding:13px 14px;margin:0 0 8px;border:1px solid rgba(29,37,35,.1);border-radius:16px;background:#faf8f2;cursor:pointer}.pscBrandChoice.active{border-color:#0f9fa1;background:#edf8f6}.pscBrandChoice input{margin-top:3px;accent-color:#0f9fa1}.pscBrandChoice span,.pscBrandChoice b,.pscBrandChoice small{display:block}.pscBrandChoice b{font-size:13px}.pscBrandChoice small{margin-top:3px;font-size:11px;line-height:1.4;color:#6c6861}
+.pscOtherBrandInput{width:100%;box-sizing:border-box;margin-top:8px;border:1px solid rgba(29,37,35,.18);border-radius:14px;background:white;padding:12px 14px;font:inherit;font-size:13px}
+.pscFamilyDetailNote{grid-column:1/-1;display:flex;gap:12px;align-items:center;padding:15px 18px;border-radius:16px;background:#e7f3f1;color:#173d3b}.pscFamilyDetailNote b{font-size:12px;white-space:nowrap}.pscFamilyDetailNote span{font-size:12px;line-height:1.45}
+.pscFamilyDetailFooter{position:sticky;bottom:0;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:22px 54px;border-top:1px solid rgba(27,35,33,.12);background:rgba(251,248,241,.96);backdrop-filter:blur(16px)}.pscFamilyDetailFooter small,.pscFamilyDetailFooter b{display:block}.pscFamilyDetailFooter small{font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:#68645e}.pscFamilyDetailFooter b{margin-top:4px;font-size:13px}.pscFamilyDetailFooter>div:last-child{display:flex;gap:9px}
+@media(max-width:760px){.pscFamilyDetailBackdrop{padding:0;align-items:stretch}.pscFamilyDetail{max-height:none;height:100%;border-radius:0}.pscFamilyDetailHeader{grid-template-columns:1fr;padding:62px 22px 26px;gap:18px}.pscFamilyDetailHeader h1{font-size:52px}.pscFamilyDetailStatus{align-self:auto}.pscFamilyDetailBody{grid-template-columns:1fr;padding:20px 22px 28px}.pscFamilyDetailNote{align-items:flex-start;flex-direction:column}.pscFamilyDetailFooter{padding:16px 22px;align-items:stretch;flex-direction:column}.pscFamilyDetailFooter>div:last-child{display:grid;grid-template-columns:1fr 1fr}.pscFamilyDetailFooter .button{width:100%}}
+
+
+/* V39.7 Task 4 — approval-gated brand selector states. */
+.pscBrandChoiceOption{background:#f6faf9}
+.pscBrandGateNote{margin:4px 0 10px;padding:11px 13px;border:1px dashed rgba(29,37,35,.16);border-radius:14px;background:#f7f4ed;color:#6b675f;font-size:11px;line-height:1.45}
+.pscOtherBrandInput.invalid{border-color:#b64b43;box-shadow:0 0 0 3px rgba(182,75,67,.10)}
+
+
+/* V39.8 Task 5 — structured request validation. */
+.pscPresentationChips.invalid{padding:8px;border:1px solid #b64b43;border-radius:16px;box-shadow:0 0 0 3px rgba(182,75,67,.08)}
+
+/* V39.11 Task 8 — shared detail patterns across all controlled catalogue families. */
+.pscFamilyDetail{--psc-family-accent:#0f9fa1}
+.pscFamilyDetail--medicine{--psc-family-accent:#173d70}
+.pscFamilyDetail--equipment{--psc-family-accent:#6b4a2f}
+.pscFamilyDetail--specialist{--psc-family-accent:#5b4778}
+.pscFamilyDetail--compatibility{--psc-family-accent:#0f7773}
+.pscFamilyDetailRole{color:var(--psc-family-accent)!important}
+.pscFamilyDhaBadge{display:inline-flex;margin-top:13px;padding:7px 10px;border:1px solid rgba(28,36,34,.13);border-radius:999px;background:#f7f4ed;font-size:9px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#55524c}
+.pscFamilySpecBlock{grid-column:1/-1}
+.pscFamilySpecText{margin:0;font-size:15px;line-height:1.55;color:#403e39;max-width:820px}
+.pscFamilySpecMeta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid rgba(29,37,35,.09)}
+.pscFamilySpecMeta span{display:block;min-width:0}.pscFamilySpecMeta small,.pscFamilySpecMeta b{display:block}.pscFamilySpecMeta small{font-size:9px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#767168}.pscFamilySpecMeta b{margin-top:5px;font-size:12px;line-height:1.4;color:#262c2a}
+.pscFamilyPreferenceBlock{align-self:start}
+.pscFamilyCompatibilityNote{grid-column:1/-1;display:flex;gap:12px;align-items:center;padding:15px 18px;border:1px solid rgba(15,119,115,.14);border-radius:16px;background:#edf8f6;color:#174b48}.pscFamilyCompatibilityNote b{font-size:12px;white-space:nowrap}.pscFamilyCompatibilityNote span{font-size:12px;line-height:1.45}
+.pscFamilyDetail--equipment .pscFamilyDetailStatus{background:#f7f0e7}.pscFamilyDetail--specialist .pscFamilyDetailStatus{background:#f2eef7}.pscFamilyDetail--compatibility .pscFamilyDetailStatus{background:#edf8f6}
+.pscFamilyDetailStatus span{color:var(--psc-family-accent)}
+.pscBrandChoice.active{border-color:var(--psc-family-accent);background:color-mix(in srgb,var(--psc-family-accent) 8%,#fff)}
+.pscBrandChoice input{accent-color:var(--psc-family-accent)}
+@media(max-width:760px){.pscFamilySpecMeta{grid-template-columns:1fr}.pscFamilyCompatibilityNote{align-items:flex-start;flex-direction:column}}
+
+/* V39.12 Task 9 — regulatory mapping + evidence-gated availability. */
+.pscFamilyRegulatoryPanel{grid-column:1/-1;padding:22px;border:1px solid rgba(23,61,112,.14);border-radius:20px;background:#f3f6fb}
+.pscFamilyRegulatoryHead{display:flex;gap:14px;align-items:flex-start}.pscFamilyRegulatoryHead .pscFamilyDhaBadge{margin:0;flex:0 0 auto}.pscFamilyRegulatoryHead b,.pscFamilyRegulatoryHead small{display:block}.pscFamilyRegulatoryHead b{font-size:14px;line-height:1.4;color:#18365f}.pscFamilyRegulatoryHead small{margin-top:5px;font-size:11px;line-height:1.45;color:#66645f}
+.pscFamilyRegulatoryGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:17px}.pscFamilyRegulatoryGrid>div{padding:12px 14px;border:1px solid rgba(23,61,112,.09);border-radius:14px;background:rgba(255,255,255,.72)}.pscFamilyRegulatoryGrid span,.pscFamilyRegulatoryGrid b{display:block}.pscFamilyRegulatoryGrid span,.pscFamilyRequirementWording>span{font-size:9px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#6e716f}.pscFamilyRegulatoryGrid b{margin-top:4px;font-size:12px;line-height:1.4}
+.pscFamilyRequirementWording{margin-top:10px;padding:14px 16px;border-left:3px solid #173d70;background:#fff}.pscFamilyRequirementWording p{margin:6px 0 0;font-size:14px;line-height:1.55;color:#343b39}.pscFamilyRegulatoryControl{margin:12px 0 0;font-size:11px;line-height:1.5;color:#67655f}
+.pscFamilyAvailabilityPanel{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.72fr);gap:24px;align-items:center;padding:18px 20px;border:1px solid rgba(29,37,35,.11);border-radius:18px;background:#f8f5ee}.pscFamilyAvailabilityPanel .pscFamilyDetailLabel{margin-bottom:7px}.pscFamilyAvailabilityPanel b,.pscFamilyAvailabilityPanel small{display:block}.pscFamilyAvailabilityPanel b{font-size:17px;letter-spacing:-.02em}.pscFamilyAvailabilityPanel small{margin-top:5px;font-size:10px;color:#68655f}.pscFamilyAvailabilityPanel p{margin:0;font-size:11px;line-height:1.5;color:#68655f}
+.pscFamilyAvailabilityPanel.in-stock{background:#edf8f4;border-color:rgba(26,113,86,.18)}.pscFamilyAvailabilityPanel.in-stock b{color:#17684f}.pscFamilyAvailabilityPanel.limited{background:#fff8e8;border-color:rgba(176,118,17,.18)}.pscFamilyAvailabilityPanel.limited b{color:#91610d}.pscFamilyAvailabilityPanel.out-of-stock{background:#fff1ef;border-color:rgba(164,66,55,.16)}.pscFamilyAvailabilityPanel.out-of-stock b{color:#9c4439}
+@media(max-width:760px){.pscFamilyRegulatoryHead{flex-direction:column}.pscFamilyRegulatoryGrid{grid-template-columns:1fr}.pscFamilyAvailabilityPanel{grid-template-columns:1fr;gap:10px}}

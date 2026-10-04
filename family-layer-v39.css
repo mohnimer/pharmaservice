@@ -1,0 +1,25 @@
+/* V39.5 Task 2 — read-only Supabase family catalogue layer. No order workflow changes. */
+.pscFamilyReadLayer{width:min(1320px,88%);margin:30px auto 34px;padding:24px 0 4px;border-top:1px solid rgba(29,38,36,.14);border-bottom:1px solid rgba(29,38,36,.12)}
+.publicCatalogueFamilyLayer.pscFamilyReadLayer{margin-top:18px}
+.pscFamilyReadHead{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:30px;align-items:end;margin-bottom:18px}
+.pscFamilyReadHead h2{margin:5px 0 8px;font-size:clamp(28px,2.6vw,42px);line-height:1;letter-spacing:-.045em}
+.pscFamilyReadHead p{max-width:760px;margin:0;color:#64615a;font-size:14px;line-height:1.55}
+.pscFamilyReadCount{display:flex;align-items:baseline;gap:8px;white-space:nowrap}.pscFamilyReadCount b{font-size:31px;letter-spacing:-.05em}.pscFamilyReadCount span{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#6b6a64}
+.pscFamilyReadGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding-bottom:22px}
+.pscFamilyReadCard{position:relative;min-height:164px;padding:18px;border:1px solid rgba(30,34,32,.11);border-radius:20px;background:color-mix(in srgb,var(--family-bg) 16%,#fffdf8);overflow:hidden}
+.pscFamilyReadCard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--family-bg)}
+.pscFamilyReadTop{display:flex;justify-content:space-between;gap:10px;align-items:center}.pscFamilyReadTop span{font-size:10px;font-weight:900;letter-spacing:.11em;text-transform:uppercase;color:var(--family-ink)}.pscFamilyReadTop b{font-size:9px;color:#77736b;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.pscFamilyReadCard h3{margin:22px 0 9px;font-size:20px;line-height:1.05;letter-spacing:-.035em}.pscFamilyReadCard p{margin:0;min-height:38px;font-size:12px;line-height:1.45;color:#6b675f}
+.pscFamilyReadFoot{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:17px;padding-top:12px;border-top:1px solid rgba(30,34,32,.09)}.pscFamilyReadFoot span{font-size:11px;font-weight:850}.pscFamilyReadFoot small{font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#0f7773}
+.pscFamilyReadCard[hidden]{display:none!important}.pscFamilyReadEmpty{padding:0 0 24px;color:#69665f;font-size:14px}
+@media(max-width:1120px){.pscFamilyReadGrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:850px){.pscFamilyReadLayer{width:calc(100% - 44px)}.pscFamilyReadHead{grid-template-columns:1fr;gap:12px}.pscFamilyReadGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.pscFamilyReadCount{justify-self:start}}
+@media(max-width:560px){.pscFamilyReadLayer{width:calc(100% - 32px)}.pscFamilyReadGrid{grid-template-columns:1fr}.pscFamilyReadCard{min-height:0}}
+
+/* V39.10 — released family price treatment */
+.pscFamilyLivePrice{color:#0f7773!important;font-weight:900!important}
+
+/* V39.11 Task 8 — every controlled family opens the shared detail experience. */
+.pscFamilyReadFoot{position:relative;flex-wrap:wrap}
+.pscFamilyReadFoot i{margin-left:auto;font-style:normal;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#605c55}
+.pscFamilyReadFoot small{flex:0 0 100%;margin-top:5px}
