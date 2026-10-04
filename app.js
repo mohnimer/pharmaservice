@@ -1103,7 +1103,7 @@
 
   function ourModelPage(){ return publicPage(
     'our-model',
-    'Our model',
+    'OUR MODEL',
     'Supplying a clinic is mostly about getting the small things right.',
     'We supply healthcare products to institutions. The job is not complicated for the sake of being complicated — it just needs a more careful eye than ordinary retail. The exact product, the right pack, the compatible accessory, the expiry and the correct supply route all matter.',
     `<section class="publicSection modelQuietIntro">
@@ -1113,37 +1113,52 @@
         <p>Our job is to work out what the clinic really needs before we turn that line into a quotation. Sterile or non-sterile? Which material? How many pieces are actually in the pack? Does the device need a particular cuff, strip, mask, regulator or accessory? Is there an expiry issue we should care about?</p>
         <p>The point is not to slow the order down. It is to avoid sending the wrong thing quickly.</p>
       </div>
-      <aside class="modelQuietAside"><p><strong>A list tells us what to look for.</strong><br>The specification tells us what to buy.</p></aside>
+      <aside class="modelQuietAside modelQuietVisualBoard">
+        <p><strong>A list tells us what to look for.</strong><br>The specification tells us what to buy.</p>
+        <div class="modelQuietMiniFlow">
+          <article><span>01</span><b>Capture</b><small>List, site and quantities</small></article>
+          <article><span>02</span><b>Specify</b><small>Exact product and route</small></article>
+          <article><span>03</span><b>Source</b><small>Right supplier per line</small></article>
+          <article><span>04</span><b>Record</b><small>Quote, delivery and repeat history</small></article>
+        </div>
+      </aside>
+    </section>
+
+    <section class="publicSection modelSignalStrip">
+      <article><span>SPECIFICATION FIRST</span><b>Exact product, exact pack, exact compatibility.</b></article>
+      <article><span>SOURCE PER LINE</span><b>We do not force diagnostics, PPE, furniture and medicines through one supplier.</b></article>
+      <article><span>REGULATED ROUTES</span><b>Licensed, expiry-sensitive and specialist lines follow the correct channel.</b></article>
+      <article><span>ACCOUNT MEMORY</span><b>The second order should be easier because the first one was recorded properly.</b></article>
     </section>
 
     <section class="publicSection modelQuietExamples">
       <div class="modelQuietHead"><h2>A few examples of the details we mean.</h2><p>They are not dramatic. They are just the things that make a product useful once it reaches the clinic.</p></div>
       <div class="modelQuietExampleRows">
-        <article><h3>Blood-pressure monitors</h3><p>A good monitor with the wrong cuff size is still the wrong setup for the people using it.</p></article>
-        <article><h3>Glucose meters</h3><p>The meter, strips and control solution have to belong together. “Compatible enough” is not a specification.</p></article>
-        <article><h3>Gauze and dressings</h3><p>Size is only part of the description. Sterility, material, ply and pack conversion can change what is actually being supplied.</p></article>
-        <article><h3>AEDs and emergency equipment</h3><p>The main device is only part of readiness. Pads, battery status, accessories, expiry and service support matter too.</p></article>
+        <article><div><span class="modelQuietSectionTag">MONITORING</span><h3>Blood-pressure monitors</h3></div><p>A good monitor with the wrong cuff size is still the wrong setup for the people using it.</p></article>
+        <article><div><span class="modelQuietSectionTag">TESTING</span><h3>Glucose meters</h3></div><p>The meter, strips and control solution have to belong together. “Compatible enough” is not a specification.</p></article>
+        <article><div><span class="modelQuietSectionTag">WOUND CARE</span><h3>Gauze and dressings</h3></div><p>Size is only part of the description. Sterility, material, ply and pack conversion can change what is actually being supplied.</p></article>
+        <article><div><span class="modelQuietSectionTag">EMERGENCY</span><h3>AEDs and emergency equipment</h3></div><p>The main device is only part of readiness. Pads, battery status, accessories, expiry and service support matter too.</p></article>
       </div>
     </section>
 
     <section class="publicSection modelQuietCommercial">
-      <div class="modelQuietHead"><h2>Then we do the commercial work properly.</h2><p>Once the requirement is clear, the rest is fairly practical.</p></div>
+      <div class="modelQuietHead"><h2>Then we do the commercial work properly.</h2><p>Once the requirement is clear, the rest is fairly practical — but it still needs discipline.</p></div>
       <div class="modelQuietCommercialRows">
-        <article><h3>We source the line where it belongs.</h3><p>Furniture, diagnostics, disposables, emergency equipment, oxygen and medicines do not all belong to the same supplier or the same route. We use category-appropriate sources rather than forcing the whole basket through one channel.</p></article>
-        <article><h3>We compare like with like.</h3><p>Brand and price matter, but so do model, pack, stock, lead time, VAT treatment, warranty, delivery and the conditions attached to the offer. A cheaper non-matching line is not a saving.</p></article>
-        <article><h3>We check before we promise.</h3><p>Availability changes. Supplier quotations expire. Regulated products have their own controls. We would rather verify the point that matters than make a confident promise we cannot support.</p></article>
-        <article><h3>We keep enough of the record to make the next order easier.</h3><p>Quotation, delivery, model, serial or warranty information, and batch or expiry where relevant. The second order should not need everyone to remember what happened the first time.</p></article>
+        <article><div><span class="modelQuietNumber">01</span><h3>We source the line where it belongs.</h3></div><p>Furniture, diagnostics, disposables, emergency equipment, oxygen and medicines do not all belong to the same supplier or the same route. We use category-appropriate sources rather than forcing the whole basket through one channel.</p></article>
+        <article><div><span class="modelQuietNumber">02</span><h3>We compare like with like.</h3></div><p>Brand and price matter, but so do model, pack, stock, lead time, VAT treatment, warranty, delivery and the conditions attached to the offer. A cheaper non-matching line is not a saving.</p></article>
+        <article><div><span class="modelQuietNumber">03</span><h3>We check before we promise.</h3></div><p>Availability changes. Supplier quotations expire. Regulated products have their own controls. We would rather verify the point that matters than make a confident promise we cannot support.</p></article>
+        <article><div><span class="modelQuietNumber">04</span><h3>We keep enough of the record to make the next order easier.</h3></div><p>Quotation, delivery, model, serial or warranty information, and batch or expiry where relevant. The second order should not need everyone to remember what happened the first time.</p></article>
       </div>
     </section>
 
     <section class="publicSection modelQuietCategories">
       <div class="modelQuietHead"><h2>Different categories need a different eye.</h2><p>This is the part of institutional supply that is easy to miss if everything is treated like normal retail.</p></div>
       <div class="modelQuietCategoryGrid">
-        <article><h3>Diagnostics</h3><p>Exact model, intended use, accuracy information and compatible consumables.</p></article>
-        <article><h3>Consumables</h3><p>Material, size, sterile status, pack conversion and expiry.</p></article>
-        <article><h3>Emergency equipment</h3><p>Model, accessories, consumables, service scope and readiness after handover.</p></article>
-        <article><h3>Oxygen</h3><p>Medical-grade supply, cylinder and regulator compatibility, handling and the appropriate qualified route.</p></article>
-        <article><h3>Medicines</h3><p>The correct licensed procurement route, permitted recipient and traceability. Convenience does not replace those controls.</p></article>
+        <article><div class="modelQuietCategoryHead"><img src="/assets/ui-icons/diagnostics.webp" alt="Diagnostics icon"><span>CAPITAL + CONSUMABLES</span></div><h3>Diagnostics</h3><p>Exact model, intended use, accuracy information and compatible consumables.</p></article>
+        <article><div class="modelQuietCategoryHead"><img src="/assets/ui-icons/clinic-supplies.webp" alt="Consumables icon"><span>DAY-TO-DAY READINESS</span></div><h3>Consumables</h3><p>Material, size, sterile status, pack conversion and expiry.</p></article>
+        <article><div class="modelQuietCategoryHead"><img src="/assets/ui-icons/first-aid.webp" alt="Emergency equipment icon"><span>READINESS</span></div><h3>Emergency equipment</h3><p>Model, accessories, consumables, service scope and readiness after handover.</p></article>
+        <article><div class="modelQuietCategoryHead"><img src="/assets/ui-icons/respiratory.webp" alt="Oxygen icon"><span>QUALIFIED ROUTE</span></div><h3>Oxygen</h3><p>Medical-grade supply, cylinder and regulator compatibility, handling and the appropriate qualified route.</p></article>
+        <article><div class="modelQuietCategoryHead"><img src="/assets/ui-icons/medicines.webp" alt="Medicines icon"><span>LICENSED LINES</span></div><h3>Medicines</h3><p>The correct licensed procurement route, permitted recipient and traceability. Convenience does not replace those controls.</p></article>
       </div>
     </section>
 
@@ -1153,8 +1168,9 @@
     </section>
 
     <section class="publicSection modelQuietSchool">
-      <div><h2>School clinics bring all of this together.</h2><p>They have capital equipment, day-to-day consumables, emergency readiness, medicines through the appropriate route, expiry, replenishment and records — all in a small clinical environment that needs to stay ready.</p><p>We would rather become familiar with how the clinic actually runs than simply keep sending boxes at it.</p></div>
-      <button class="button outline large" data-go="catalogue">Browse the institutional catalogue</button>
+      <div class="modelQuietSchoolCopy"><h2>School clinics bring all of this together.</h2><p>They have capital equipment, day-to-day consumables, emergency readiness, medicines through the appropriate route, expiry, replenishment and records — all in a small clinical environment that needs to stay ready.</p><p>We would rather become familiar with how the clinic actually runs than simply keep sending boxes at it.</p></div>
+      <div class="modelQuietSchoolVisual"><article><span>OPENING BASKET</span><b>Furniture, diagnostics and emergency setup</b></article><article><span>RECURRING BASKET</span><b>Gloves, dressings, strips, PPE and refills</b></article><article><span>ACCOUNTABILITY</span><b>Records, replenishment and replacement memory</b></article></div>
+      <div class="modelQuietSchoolAction"><button class="button outline large" data-go="catalogue">Browse the institutional catalogue</button></div>
     </section>
     ${schoolWorkshopStrip()}
 
@@ -1165,6 +1181,7 @@
 
     <section class="publicCta modelQuietCta"><div><h2>Send us the list you have.</h2><p>If something is vague, we will tighten it. If something needs a different route, we will tell you. Then we can quote the requirement on a basis that actually makes sense.</p></div><div class="publicCtaActions"><button class="button outline large" data-go="catalogue">Browse catalogue</button><button class="button primary large" data-go="contact">Send a requirement</button></div></section>`
   ); }
+
 
   function whoWeSupplyPage(){ return publicPage(
     'who-we-supply',
