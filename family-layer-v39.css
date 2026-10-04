@@ -1,21 +1,15 @@
-/* V39.16 — families sit beneath clinical categories and visually belong to them. */
-.pscFamilyReadLayer{width:min(1320px,88%);margin:16px auto 44px;padding:34px 0 8px;border-top:1px solid rgba(29,38,36,.12)}
-.pscFamilyReadHead{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:end;margin-bottom:22px}
-.pscFamilyReadHead h2{margin:5px 0 8px;font-size:clamp(28px,2.5vw,40px);line-height:1;letter-spacing:-.045em}
-.pscFamilyReadHead p{max-width:720px;margin:0;color:#68625a;font-size:14px;line-height:1.55}
-.pscFamilyReadCount{display:flex;align-items:baseline;gap:8px;white-space:nowrap}.pscFamilyReadCount b{font-size:31px;letter-spacing:-.05em}.pscFamilyReadCount span{font-size:10px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:#716b63}
-.pscFamilyReadGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding-bottom:20px}
-.pscFamilyReadCard{position:relative;min-height:250px;padding:20px;border:0;border-radius:26px;background:var(--family-bg);color:var(--family-ink);overflow:hidden;text-align:left;font:inherit;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(22,22,20,.06);transition:transform .18s ease,box-shadow .18s ease}
-.pscFamilyReadCard:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(35,30,20,.10)}
-.pscFamilyCardArt{position:absolute;right:13px;top:12px;width:112px;height:112px;display:grid;place-items:center;pointer-events:none}
-.pscFamilyCardArt img{display:block;width:100%;height:100%;object-fit:contain;background:transparent!important;border:0!important;filter:drop-shadow(0 8px 12px rgba(0,0,0,.04))}
-.pscFamilyCardType{display:block;position:relative;z-index:1;font-size:9px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;opacity:.72}
-.pscFamilyCardTitle{display:block;position:relative;z-index:1;max-width:76%;margin-top:105px;font-size:21px;line-height:1.03;letter-spacing:-.04em;font-weight:850}
-.pscFamilyCardSub{display:block;position:relative;z-index:1;margin-top:8px;max-width:92%;font-size:11px;line-height:1.35;opacity:.76}
-.pscFamilyCardFoot{position:absolute;z-index:1;left:20px;right:20px;bottom:19px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:11px;border-top:1px solid color-mix(in srgb,var(--family-ink) 16%,transparent)}
-.pscFamilyCardFoot b,.pscFamilyCardFoot i{font-size:10px;font-weight:900;font-style:normal}.pscFamilyCardFoot i{letter-spacing:.05em;text-transform:uppercase;opacity:.75}.pscFamilyLivePrice{color:inherit!important}
-.pscFamilyDhaMini{position:absolute;left:20px;bottom:48px;font-size:8px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;opacity:.72}
-.pscFamilyReadCard[hidden]{display:none!important}.pscFamilyReadEmpty{padding:0 0 24px;color:#69665f;font-size:14px}
-@media(max-width:1120px){.pscFamilyReadGrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:850px){.pscFamilyReadLayer{width:calc(100% - 44px)}.pscFamilyReadHead{grid-template-columns:1fr;gap:12px}.pscFamilyReadGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.pscFamilyReadCount{justify-self:start}.pscFamilyReadCard{min-height:225px}}
-@media(max-width:560px){.pscFamilyReadLayer{width:calc(100% - 32px)}.pscFamilyReadGrid{grid-template-columns:1fr}.pscFamilyReadCard{min-height:215px}.pscFamilyCardTitle{margin-top:92px;font-size:20px}}
+/* V39.17 — compact family selector beneath each clinical category. */
+.pscFamilyReadLayer{width:min(1320px,88%);margin:12px auto 28px;padding:22px 0 10px;border-top:1px solid rgba(29,38,36,.12);border-bottom:1px solid rgba(29,38,36,.09)}
+.pscFamilyReadHead{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:14px}
+.pscFamilyReadHead .eyebrow{display:block;margin-bottom:5px}
+.pscFamilyReadHead p{margin:0;color:#6b655d;font-size:12px;line-height:1.45}
+.pscFamilyReadCount{display:flex;align-items:baseline;gap:7px;white-space:nowrap}.pscFamilyReadCount b{font-size:20px;letter-spacing:-.04em}.pscFamilyReadCount span{font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:#746e66}
+.pscFamilySelectorRail{display:flex;gap:9px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:thin;scroll-snap-type:x proximity}
+.pscFamilySelector{scroll-snap-align:start;flex:0 0 auto;width:210px;min-height:72px;padding:11px 36px 11px 13px;position:relative;display:flex;align-items:center;border:1px solid color-mix(in srgb,var(--family-ink) 13%,#d8d3ca);border-radius:17px;background:color-mix(in srgb,var(--family-bg) 26%,#fff);color:#25231f;text-align:left;font:inherit;cursor:pointer;transition:transform .16s ease,border-color .16s ease,background .16s ease}
+.pscFamilySelector:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--family-ink) 28%,#cfc9bf);background:color-mix(in srgb,var(--family-bg) 40%,#fff)}
+.pscFamilySelectorCopy{min-width:0;display:block}.pscFamilySelectorCopy b{display:block;font-size:12px;line-height:1.16;letter-spacing:-.018em;font-weight:850}.pscFamilySelectorCopy small{display:-webkit-box;margin-top:4px;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;font-size:9.5px;line-height:1.25;color:#746f68}
+.pscFamilySelector>i{position:absolute;right:31px;top:10px;padding:2px 4px;border-radius:5px;background:rgba(13,136,130,.09);color:#087f79;font-size:7px;font-style:normal;font-weight:900;letter-spacing:.07em}
+.pscFamilySelectorArrow{position:absolute;right:12px;bottom:11px;font-size:14px;font-weight:800;color:color-mix(in srgb,var(--family-ink) 72%,#45413a)}
+.pscFamilySelector[hidden]{display:none!important}.pscFamilyReadEmpty{padding:5px 0 10px;color:#69665f;font-size:12px}
+@media(max-width:850px){.pscFamilyReadLayer{width:calc(100% - 44px)}.pscFamilyReadHead{align-items:flex-start}.pscFamilySelector{width:188px}}
+@media(max-width:560px){.pscFamilyReadLayer{width:calc(100% - 32px);padding-top:17px;margin-bottom:22px}.pscFamilyReadHead{gap:12px}.pscFamilyReadHead p{font-size:11px}.pscFamilySelector{width:170px;min-height:68px;padding-left:12px}.pscFamilySelectorCopy b{font-size:11.5px}}

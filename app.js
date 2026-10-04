@@ -1405,64 +1405,97 @@
 
 
   function ourModelPage(){
-    return `<main class="publicPage model16Page">
+    return `<main class="publicPage model17Page">
       ${publicHeader('our-model')}
-      <section class="model16Hero">
-        <div class="model16HeroCopy">
+
+      <section class="model17Hero">
+        <div class="model17HeroCopy">
           <span class="kicker">OUR MODEL</span>
-          <h1>Different lines need different sourcing.<br>You should not have to manage all of it.</h1>
-          <p>Pharma Service takes an institutional requirement apart line by line, then brings the commercial result back together through one accountable supply relationship.</p>
-          <div class="model16Principle"><b>Source per line.</b><span>Sell one solution.</span></div>
+          <h1>The Institutional Way</h1>
+          <p>We source the right products, bring them into one quotation, coordinate the order and stay accountable through delivery.</p>
+          <div class="model17Principle">Source per line. Sell one solution.</div>
         </div>
-        <div class="model16HeroArt" aria-hidden="true">
-          <img src="/assets/model-icons/understand.png" alt="">
-          <img src="/assets/model-icons/source.png" alt="">
-          <img src="/assets/model-icons/deliver-repeat.png" alt="">
-        </div>
-      </section>
-
-      <section class="model16Process publicSection">
-        <div class="model16SectionHead"><span class="kicker">THE WORK</span><h2>Four things have to be right.</h2><p>Not every order needs a complicated process. Every order does need enough control to know what is being bought, from where, on what terms and what was actually supplied.</p></div>
-        <div class="model16ProcessGrid">
-          <article><span>01</span><h3>Define the line.</h3><p>Exact product, pack, size, model, compatibility or other specification that matters.</p></article>
-          <article><span>02</span><h3>Source where it belongs.</h3><p>Equipment, consumables, medicines and specialist services do not all belong to the same supplier or route.</p></article>
-          <article><span>03</span><h3>Quote what we can support.</h3><p>Current cost, availability, VAT, lead time and supply conditions are checked before commitment.</p></article>
-          <article><span>04</span><h3>Keep the record.</h3><p>What was quoted, approved and delivered should make the next replenishment or replacement easier.</p></article>
+        <div class="model17HeroVisual" aria-hidden="true">
+          <div class="model17PaperCard cardA"><img src="/assets/model-icons/understand.png" alt=""><span>REQUIREMENT</span></div>
+          <div class="model17PaperCard cardB"><img src="/assets/model-icons/source.png" alt=""><span>SOURCING</span></div>
+          <div class="model17PaperCard cardC"><img src="/assets/model-icons/deliver-repeat.png" alt=""><span>ONE SUPPLY</span></div>
         </div>
       </section>
 
-      <section class="model16Basket publicSection">
-        <div class="model16BasketCard opening"><div><span>OPENING / CAPITAL</span><h2>Items that establish the clinic.</h2><p>Furniture, diagnostics, monitoring, emergency equipment and other setup lines. Specification, accessories, warranty and handover tend to matter most.</p></div><img src="/assets/model-icons/opening.png" alt="" aria-hidden="true"></div>
-        <div class="model16BasketCard recurring"><div><span>RECURRING</span><h2>Items the clinic keeps using.</h2><p>Dressings, PPE, testing consumables, respiratory items, hygiene products and permitted medicines. Pack, expiry, availability and replenishment matter more over time.</p></div><img src="/assets/model-icons/recurring.png" alt="" aria-hidden="true"></div>
+      <section class="model17Promise publicSection">
+        <div>
+          <span class="kicker">ONE COMMERCIAL RELATIONSHIP</span>
+          <h2>That complexity is ours to manage — not yours.</h2>
+        </div>
+        <p>You receive one commercial point of contact and one coordinated supply.</p>
       </section>
 
-      <section class="model16Category publicSection">
-        <div class="model16SectionHead"><span class="kicker">CATEGORY DISCIPLINE</span><h2>We do not treat the whole basket as one product category.</h2></div>
-        <div class="model16CategoryGrid">
-          <article><img src="/assets/model-icons/diagnostics.png" alt=""><div><b>Diagnostics & equipment</b><p>Exact model, intended use, accessories, compatibility, warranty and service.</p></div></article>
-          <article><img src="/assets/model-icons/consumables.png" alt=""><div><b>Consumables</b><p>Material, size, sterile status, pack conversion, batch and expiry where relevant.</p></div></article>
-          <article><img src="/assets/model-icons/emergency.png" alt=""><div><b>Emergency & oxygen</b><p>Complete setup, compatible parts and the appropriate qualified supply route.</p></div></article>
-          <article><img src="/assets/model-icons/medicines.png" alt=""><div><b>Medicines</b><p>Correct licensed route, approved recipient and the required storage, batch and expiry controls.</p></div></article>
+      <section class="model17Rhythm publicSection">
+        <article class="model17RhythmCard setup">
+          <div>
+            <span>OPENING / CAPITAL</span>
+            <h2>Set up the clinic.</h2>
+            <p>Beds, furniture, diagnostics, emergency equipment and the other items needed to get a clinic ready.</p>
+          </div>
+          <img src="/assets/model-icons/opening.png" alt="" aria-hidden="true">
+        </article>
+        <article class="model17RhythmCard running">
+          <div>
+            <span>RECURRING SUPPLY</span>
+            <h2>Keep it running.</h2>
+            <p>Consumables, dressings, gloves, testing supplies, respiratory products, medicines and the things that need replacing again and again.</p>
+          </div>
+          <img src="/assets/model-icons/recurring.png" alt="" aria-hidden="true">
+        </article>
+      </section>
+
+      <section class="model17Source publicSection">
+        <div class="model17SourceIntro">
+          <span class="kicker">HOW THE CATALOGUE WORKS</span>
+          <h2>The right source for the right product.</h2>
+          <p>Different products need different expertise. We source each part of the requirement through the route that makes sense, then bring it together for you.</p>
+        </div>
+
+        <div class="model17SupplyFlow" aria-label="Example of the catalogue hierarchy from category to product family to exact line item">
+          <article class="model17FlowCard category">
+            <div class="model17FlowLabel">01 · CLINICAL CATEGORY</div>
+            <img src="/assets/clinical-icons/vitals.png" alt="">
+            <h3>Vitals &amp; Assessment</h3>
+            <p>Start with the clinical need.</p>
+          </article>
+          <div class="model17Arrow" aria-hidden="true"><span>→</span><small>OPEN FAMILY</small></div>
+          <article class="model17FlowCard family">
+            <div class="model17FlowLabel">02 · PRODUCT FAMILY</div>
+            <img src="/assets/products/inst-0019.webp" alt="Portable pulse oximeter">
+            <h3>Portable Pulse Oximeter</h3>
+            <p>Define what the institution needs.</p>
+          </article>
+          <div class="model17Arrow" aria-hidden="true"><span>→</span><small>CONFIRM LINE</small></div>
+          <article class="model17FlowCard line">
+            <div class="model17FlowLabel">03 · LINE ITEM</div>
+            <div class="model17LineThumb"><img src="/assets/products/inst-0019.webp" alt=""></div>
+            <h3>Pulse — Fingertip Pulse Oximeter A2</h3>
+            <p>Exact product, pack and commercial terms are confirmed before quotation.</p>
+            <b>1 unit · Request quote</b>
+          </article>
         </div>
       </section>
 
-      <section class="model16Boundaries publicSection">
-        <div class="model16SectionHead"><span class="kicker">WHERE WE DRAW THE LINE</span><h2>A useful supply partner should also know what not to assume.</h2></div>
-        <div class="model16BoundaryRows">
-          <div><b>Availability is not a promise until it is checked.</b><span>Supplier stock and quotations change. We confirm them at the point they matter.</span></div>
-          <div><b>A cheaper mismatch is not a saving.</b><span>Model, pack, accessories and compatibility come before headline price.</span></div>
-          <div><b>Conditional requirements stay conditional.</b><span>A regulatory mapping does not automatically create a purchase line for every site.</span></div>
-          <div><b>Approved products are not silently substituted.</b><span>If a quoted brand or model changes, the alternative should be made clear before supply.</span></div>
+      <section class="model17BottomCta">
+        <div>
+          <span>READY WHEN YOU ARE</span>
+          <h2>Send us the requirement.<br>We’ll work out how to supply it.</h2>
+        </div>
+        <div class="model17BottomActions">
+          <button class="button primary large" data-go="start">Send a requirement</button>
+          <button class="button outline large" data-go="catalogue">Browse catalogue</button>
         </div>
       </section>
 
-      <section class="model16School publicSection">
-        <div><span class="kicker">FIRST DEVELOPED VERTICAL</span><h2>School clinics are where this model comes together.</h2><p>A small clinic can contain one-off equipment, recurring consumables, emergency readiness, expiry-driven items and medicines through the appropriate route. That mix is exactly why the supply record matters.</p></div>
-        <div class="model16SchoolActions"><button class="button primary large" data-go="catalogue">Browse catalogue</button><button class="button outline large" data-go="start">Send a requirement</button></div>
-      </section>
       ${publicFooter()}
     </main>`;
   }
+
 
   function whoWeSupplyPage(){ return publicPage(
     'who-we-supply',

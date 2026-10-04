@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const VERSION = 'v39.16-family-hierarchy';
+  const VERSION = 'v39.17-family-selector';
   const familyState = { rows: [], approvedOptions: [], fixedPrices: [], availability: [], loaded: false, source: 'none' };
   const NEED_MAP = {
     'Cuts, Wounds & Burns': 'wounds',
@@ -150,30 +150,35 @@
     return null;
   }
 
-  function familyCard(row){
+  function familySubtitle(row){
+    const brands=String(row.common_brands_line||'').replace(/^Common brands:\s*/i,'').trim();
+    if(brands) return brands;
+    if(Array.isArray(row.presentations) && row.presentations.length) return row.presentations.join(' · ');
+    if(row.order_pack_basis) return row.order_pack_basis;
+    return safeAvailabilityLabel(row);
+  }
+
+  function familySelector(row){
     const need=needIdFor(row), [bg,ink]=NEED_STYLE[need]||NEED_STYLE.all;
-    const type=isMedicine(row)?'Medicine family':'Product family';
-    const publishedPrice=familyPrice(row);
-    const priceLabel=safePriceLabel(row);
-    const art=NEED_ART[need]||'';
-    const sub=row.order_pack_basis || row.common_brands_line || safeAvailabilityLabel(row);
-    return `<button type="button" class="pscFamilyReadCard pscFamilyReadCardReady" style="--family-bg:${bg};--family-ink:${ink}" data-psc-family-card data-psc-family-open="${esc(row.family_id)}" data-search="${esc(familySearch(row))}">
-      <span class="pscFamilyCardArt" aria-hidden="true">${art?`<img src="${art}" alt="" loading="lazy" decoding="async">`:''}</span>
-      <span class="pscFamilyCardType">${esc(type)}</span>
-      <span class="pscFamilyCardTitle">${esc(row.family_name)}</span>
-      ${sub?`<span class="pscFamilyCardSub">${esc(sub)}</span>`:''}
-      <span class="pscFamilyCardFoot"><b class="${publishedPrice?'pscFamilyLivePrice':''}">${esc(priceLabel)}</b><i>Open family →</i></span>
-      ${neutralRequirement(row)?'<small class="pscFamilyDhaMini">DHA requirement</small>':''}
+    const sub=familySubtitle(row);
+    return `<button type="button" class="pscFamilySelector" style="--family-bg:${bg};--family-ink:${ink}" data-psc-family-card data-psc-family-open="${esc(row.family_id)}" data-search="${esc(familySearch(row))}" title="Open ${esc(row.family_name)}">
+      <span class="pscFamilySelectorCopy"><b>${esc(row.family_name)}</b>${sub?`<small>${esc(sub)}</small>`:''}</span>
+      ${neutralRequirement(row)?'<i aria-label="DHA requirement">DHA</i>':''}
+      <span class="pscFamilySelectorArrow" aria-hidden="true">→</span>
     </button>`;
   }
 
   function familyLayer(need){
-    const rows=familyState.rows.filter(r=>need==='all'||needIdFor(r)===need);
+    const rows=familyState.rows
+      .filter(r=>need==='all'||needIdFor(r)===need)
+      .sort((a,b)=>familySubtitle(a).localeCompare(familySubtitle(b),undefined,{sensitivity:'base'}) || String(a.family_name||'').localeCompare(String(b.family_name||''),undefined,{sensitivity:'base'}));
     if(!rows.length) return '';
-    const first=rows[0];
     return `<section class="pscFamilyReadLayer" data-psc-family-layer data-version="${VERSION}">
-      <div class="pscFamilyReadHead"><div><span class="eyebrow">PRODUCT FAMILIES</span><h2>${esc(first?.clinical_need||'Controlled product families')}</h2><p>Choose the family first. Exact brand, model or presentation is handled inside the family where it matters.</p></div><div class="pscFamilyReadCount"><b data-psc-family-count>${rows.length}</b><span>families</span></div></div>
-      <div class="pscFamilyReadGrid">${rows.map(familyCard).join('')}</div>
+      <div class="pscFamilyReadHead">
+        <div><span class="eyebrow">PRODUCT FAMILIES</span><p>Choose a family, or keep scrolling to browse the published products in this category.</p></div>
+        <div class="pscFamilyReadCount"><b data-psc-family-count>${rows.length}</b><span>families</span></div>
+      </div>
+      <div class="pscFamilySelectorRail" role="navigation" aria-label="Product families">${rows.map(familySelector).join('')}</div>
       <div class="pscFamilyReadEmpty" data-psc-family-empty hidden>No product families match that search.</div>
     </section>`;
   }

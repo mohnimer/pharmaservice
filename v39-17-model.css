@@ -1,0 +1,58 @@
+/* =========================================================
+   V39.17 — Our Model: The Institutional Way
+   Deliberately self-contained so no other public page shifts.
+   ========================================================= */
+.model17Page{background:#fbf8f1;color:#111}
+.model17Page .kicker{letter-spacing:.12em}
+
+.model17Hero{width:min(1320px,88%);margin:0 auto;padding:82px 0 72px;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(360px,.62fr);gap:74px;align-items:center}
+.model17HeroCopy h1{margin:11px 0 22px;font-size:clamp(64px,7.4vw,112px);line-height:.86;letter-spacing:-.072em;max-width:920px}
+.model17HeroCopy>p{margin:0;max-width:760px;font-size:21px;line-height:1.52;color:#56534d}
+.model17Principle{display:inline-flex;margin-top:32px;padding:12px 16px;border-radius:999px;background:#10201f;color:#fff;font-size:13px;font-weight:900;letter-spacing:.02em}
+
+.model17HeroVisual{position:relative;height:410px;border-radius:38px;background:#e5f2ef;border:1px solid rgba(20,55,51,.08);overflow:hidden}
+.model17HeroVisual:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 16%,rgba(255,255,255,.72),transparent 31%),linear-gradient(145deg,rgba(255,255,255,.18),transparent 58%)}
+.model17PaperCard{position:absolute;width:190px;height:206px;padding:20px;border-radius:24px;background:#fbf8f1;border:1px solid rgba(25,35,33,.08);box-shadow:0 18px 38px rgba(28,41,38,.09);display:flex;flex-direction:column;justify-content:space-between}
+.model17PaperCard img{width:118px;height:118px;object-fit:contain;align-self:center;background:transparent!important}
+.model17PaperCard span{font-size:10px;font-weight:900;letter-spacing:.14em;color:#3d5551}
+.model17PaperCard.cardA{left:28px;top:34px;transform:rotate(-7deg)}
+.model17PaperCard.cardB{right:27px;top:56px;transform:rotate(6deg)}
+.model17PaperCard.cardC{left:112px;bottom:17px;transform:rotate(-1.5deg)}
+
+.model17Promise{padding-top:64px!important;padding-bottom:62px!important;border-top:1px solid #d8d2c8;display:grid!important;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr)!important;gap:72px!important;align-items:end!important}
+.model17Promise h2{margin:7px 0 0;font-size:clamp(46px,5vw,76px);line-height:.93;letter-spacing:-.06em;max-width:900px}
+.model17Promise>p{margin:0 0 7px;font-size:21px;line-height:1.5;color:#5b5750;max-width:470px}
+
+.model17Rhythm{display:grid!important;grid-template-columns:1fr 1fr!important;gap:18px!important;padding-top:10px!important;padding-bottom:74px!important}
+.model17RhythmCard{min-height:340px;padding:34px;border-radius:32px;border:1px solid rgba(35,35,31,.06);display:grid;grid-template-columns:minmax(0,1fr) 160px;gap:28px;align-items:end;overflow:hidden}
+.model17RhythmCard.setup{background:#f3e5d7}.model17RhythmCard.running{background:#dff1ed}
+.model17RhythmCard span{font-size:10px;font-weight:900;letter-spacing:.13em;color:#4f5754}.model17RhythmCard h2{margin:10px 0 14px;font-size:clamp(40px,4.1vw,62px);line-height:.93;letter-spacing:-.057em}.model17RhythmCard p{margin:0;max-width:600px;font-size:15px;line-height:1.62;color:#5f5b54}.model17RhythmCard img{width:158px;height:158px;object-fit:contain;background:transparent!important;filter:drop-shadow(0 15px 19px rgba(20,18,15,.06))}
+
+.model17Source{max-width:none!important;width:100%!important;padding-top:72px!important;padding-bottom:82px!important;padding-left:max(6%,calc((100vw - 1320px)/2 + 6%))!important;padding-right:max(6%,calc((100vw - 1320px)/2 + 6%))!important;background:#f1eee7}
+.model17SourceIntro{max-width:880px;margin-bottom:40px}.model17SourceIntro h2{margin:7px 0 13px;font-size:clamp(46px,5vw,76px);line-height:.93;letter-spacing:-.06em}.model17SourceIntro p{margin:0;max-width:760px;font-size:17px;line-height:1.6;color:#5d5952}
+.model17SupplyFlow{display:grid;grid-template-columns:minmax(220px,1fr) 82px minmax(220px,1fr) 82px minmax(250px,1.08fr);gap:14px;align-items:stretch;max-width:1260px}
+.model17FlowCard{min-height:340px;border-radius:28px;padding:23px;background:#fbf8f1;border:1px solid rgba(30,31,27,.09);display:flex;flex-direction:column;position:relative;overflow:hidden}
+.model17FlowCard.category{background:#ffb07d}.model17FlowCard.family{background:#e4f0f8}.model17FlowCard.line{background:#fff}
+.model17FlowLabel{font-size:9px;font-weight:900;letter-spacing:.13em;color:#4f5552;margin-bottom:18px}
+.model17FlowCard>img{height:126px;width:126px;object-fit:contain;align-self:flex-end;background:transparent!important;margin:2px 0 30px}
+.model17FlowCard.family>img{width:150px;height:150px;object-fit:contain;mix-blend-mode:multiply}
+.model17LineThumb{width:118px;height:118px;margin:3px 0 21px auto;border-radius:22px;background:#f3f1eb;display:grid;place-items:center;overflow:hidden}.model17LineThumb img{width:104px;height:104px;object-fit:contain;mix-blend-mode:multiply}
+.model17FlowCard h3{margin:auto 0 8px;font-size:25px;line-height:1.02;letter-spacing:-.045em}.model17FlowCard p{margin:0;color:#625e57;font-size:12px;line-height:1.52}.model17FlowCard.line b{margin-top:18px;padding-top:16px;border-top:1px solid #ddd8cf;font-size:11px;letter-spacing:.01em}
+.model17Arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#52635f}.model17Arrow span{font-size:34px;line-height:1}.model17Arrow small{font-size:8px;font-weight:900;letter-spacing:.11em;text-align:center}
+
+.model17BottomCta{background:#111918;color:#fff;padding:74px max(6%,calc((100vw - 1320px)/2 + 6%));display:grid;grid-template-columns:minmax(0,1fr) auto;gap:60px;align-items:end}
+.model17BottomCta>div>span{display:block;margin-bottom:10px;font-size:10px;font-weight:900;letter-spacing:.14em;color:#68d1ca}.model17BottomCta h2{margin:0;color:#fff;font-size:clamp(46px,5.5vw,82px);line-height:.91;letter-spacing:-.06em;max-width:940px}.model17BottomActions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.model17BottomCta .button.outline{color:#fff;border-color:rgba(255,255,255,.32);background:transparent}.model17BottomCta .button.outline:hover{background:rgba(255,255,255,.07)}
+
+@media(max-width:1080px){
+  .model17Hero{grid-template-columns:1fr;gap:42px}.model17HeroVisual{max-width:680px;width:100%;height:340px}
+  .model17Promise{grid-template-columns:1fr!important;gap:20px!important}.model17Promise>p{max-width:720px}
+  .model17SupplyFlow{grid-template-columns:1fr 62px 1fr}.model17FlowCard.line{grid-column:1/-1;max-width:520px;width:100%;justify-self:center}.model17Arrow:nth-of-type(2){display:none}
+  .model17BottomCta{grid-template-columns:1fr}.model17BottomActions{justify-content:flex-start}
+}
+@media(max-width:760px){
+  .model17Hero{width:calc(100% - 40px);padding:52px 0 46px}.model17HeroCopy h1{font-size:56px}.model17HeroCopy>p{font-size:17px}.model17HeroVisual{height:280px}.model17PaperCard{width:145px;height:160px;padding:15px}.model17PaperCard img{width:86px;height:86px}.model17PaperCard.cardA{left:18px;top:24px}.model17PaperCard.cardB{right:18px;top:41px}.model17PaperCard.cardC{left:86px;bottom:10px}
+  .model17Promise,.model17Rhythm{padding-left:22px!important;padding-right:22px!important}.model17Promise h2,.model17SourceIntro h2{font-size:43px}.model17Promise>p{font-size:17px}
+  .model17Rhythm{grid-template-columns:1fr!important}.model17RhythmCard{grid-template-columns:1fr 92px;min-height:255px;padding:24px}.model17RhythmCard img{width:92px;height:92px}.model17RhythmCard h2{font-size:39px}
+  .model17Source{padding-left:22px!important;padding-right:22px!important}.model17SupplyFlow{grid-template-columns:1fr;gap:14px}.model17Arrow{height:44px}.model17Arrow span{transform:rotate(90deg)}.model17Arrow small{display:none}.model17Arrow:nth-of-type(2){display:flex}.model17FlowCard.line{grid-column:auto;max-width:none}.model17FlowCard{min-height:290px}
+  .model17BottomCta{padding:54px 22px}.model17BottomCta h2{font-size:48px}.model17BottomActions{width:100%}.model17BottomActions .button{flex:1 1 180px}
+}
