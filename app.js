@@ -114,21 +114,21 @@
 
   function clinicalNeedIllustration(id){
     const m={
-      wounds:'/assets/clinical-icons/wounds.png?v=387',
-      sports:'/assets/clinical-icons/sports.png?v=387',
-      breathing:'/assets/clinical-icons/breathing.png?v=387',
-      vitals:'/assets/clinical-icons/vitals.png?v=387',
-      screening:'/assets/clinical-icons/screening.png?v=387',
-      diabetes:'/assets/clinical-icons/diabetes.png?v=387',
-      medicines:'/assets/clinical-icons/medicines.png?v=387',
-      allergy:'/assets/clinical-icons/allergy.png?v=387',
-      patient:'/assets/clinical-icons/patient-care.png?v=387',
-      'patient-care':'/assets/clinical-icons/patient-care.png?v=387',
-      infection:'/assets/clinical-icons/infection.png?v=387',
-      procedures:'/assets/clinical-icons/procedures.png?v=387',
-      emergency:'/assets/clinical-icons/emergency.png?v=387',
-      equipment:'/assets/clinical-icons/equipment.png?v=387',
-      all:'/assets/clinical-icons/all.png?v=387'
+      wounds:'/assets/clinical-icons/wounds.png?v=394',
+      sports:'/assets/clinical-icons/sports.png?v=394',
+      breathing:'/assets/clinical-icons/breathing.png?v=394',
+      vitals:'/assets/clinical-icons/vitals.png?v=394',
+      screening:'/assets/clinical-icons/screening.png?v=394',
+      diabetes:'/assets/clinical-icons/diabetes.png?v=394',
+      medicines:'/assets/clinical-icons/medicines.png?v=394',
+      allergy:'/assets/clinical-icons/allergy.png?v=394',
+      patient:'/assets/clinical-icons/patient-care.png?v=394',
+      'patient-care':'/assets/clinical-icons/patient-care.png?v=394',
+      infection:'/assets/clinical-icons/infection.png?v=394',
+      procedures:'/assets/clinical-icons/procedures.png?v=394',
+      emergency:'/assets/clinical-icons/emergency.png?v=394',
+      equipment:'/assets/clinical-icons/equipment.png?v=394',
+      all:'/assets/clinical-icons/all.png?v=394'
     };
     return m[id] ? `<img src="${m[id]}" alt="" loading="lazy" decoding="async">` : clinicalNeedIcon(id);
   }
@@ -1029,37 +1029,37 @@
 
         <div class="publicClinicalPreviewGrid">
           <button class="publicClinicalCard coral" data-go="catalogue/wounds">
-            <img class="publicClinicalArt" src="/assets/category-wounds.webp?v=3777" alt="" aria-hidden="true">
+            <img class="publicClinicalArt" src="/assets/clinical-icons/wounds.png?v=394" alt="" aria-hidden="true">
             <span>Cuts &amp; Wounds</span>
             <small>Dressings, antiseptics, gauze, closure and wound protection</small>
           </button>
 
           <button class="publicClinicalCard blue" data-go="catalogue/breathing">
-            <img class="publicClinicalArt" src="/assets/category-breathing.webp?v=3777" alt="" aria-hidden="true">
+            <img class="publicClinicalArt" src="/assets/clinical-icons/breathing.png?v=394" alt="" aria-hidden="true">
             <span>Breathing &amp; Oxygen</span>
             <small>Nebulisation, oxygen delivery, airway and respiratory support</small>
           </button>
 
           <button class="publicClinicalCard orange" data-go="catalogue/vitals">
-            <img class="publicClinicalArt" src="/assets/category-vitals.webp?v=3777" alt="" aria-hidden="true">
+            <img class="publicClinicalArt" src="/assets/clinical-icons/vitals.png?v=394" alt="" aria-hidden="true">
             <span>Vitals &amp; Assessment</span>
             <small>Blood pressure, temperature, oximetry and clinical assessment</small>
           </button>
 
           <button class="publicClinicalCard mint" data-go="catalogue/infection">
-            <img class="publicClinicalArt" src="/assets/category-infection.webp?v=3777" alt="" aria-hidden="true">
+            <img class="publicClinicalArt" src="/assets/clinical-icons/infection.png?v=394" alt="" aria-hidden="true">
             <span>Infection Control &amp; PPE</span>
             <small>PPE, hand hygiene, disinfection and waste control</small>
           </button>
 
           <button class="publicClinicalCard rose" data-go="catalogue/emergency">
-            <img class="publicClinicalArt" src="/assets/category-emergency.webp?v=3777" alt="" aria-hidden="true">
+            <img class="publicClinicalArt" src="/assets/clinical-icons/emergency.png?v=394" alt="" aria-hidden="true">
             <span>Emergency &amp; Response</span>
             <small>Resuscitation, first response and urgent-use products</small>
           </button>
 
           <button class="publicClinicalCard sand" data-go="catalogue/equipment">
-            <img class="publicClinicalArt" src="/assets/category-equipment.webp?v=3777" alt="" aria-hidden="true">
+            <img class="publicClinicalArt" src="/assets/clinical-icons/equipment.png?v=394" alt="" aria-hidden="true">
             <span>Equipment &amp; Mobility</span>
             <small>Clinical furniture, mobility, storage and capital equipment</small>
           </button>
@@ -1109,29 +1109,29 @@
     `<section class="publicSection modelV2FlowSection">
       <div class="modelV2FlowIntro"><span class="kicker">HOW IT WORKS</span><h2>Four moves. No procurement maze.</h2></div>
       <div class="modelV2Flow">
-        <article><img src="/assets/ui-icons/search.webp" alt="Understand"><span>01</span><h3>Understand</h3><p>What does the clinic actually need?</p></article>
-        <article><img src="/assets/ui-icons/checklist.webp" alt="Match"><span>02</span><h3>Match</h3><p>Exact product, pack and specification.</p></article>
-        <article><img src="/assets/ui-icons/shop.webp" alt="Source"><span>03</span><h3>Source</h3><p>Best suitable supplier for that line.</p></article>
-        <article><img src="/assets/ui-icons/delivery.webp" alt="Deliver"><span>04</span><h3>Deliver + repeat</h3><p>One quote, one record, easier reorders.</p></article>
+        <article><img src="/assets/model-icons/understand.png?v=394" alt="Understand"><span>01</span><h3>Understand</h3><p>What does the clinic actually need?</p></article>
+        <article><img src="/assets/model-icons/match.png?v=394" alt="Match"><span>02</span><h3>Match</h3><p>Exact product, pack and specification.</p></article>
+        <article><img src="/assets/model-icons/source.png?v=394" alt="Source"><span>03</span><h3>Source</h3><p>Best suitable supplier for that line.</p></article>
+        <article><img src="/assets/model-icons/deliver-repeat.png?v=394" alt="Deliver"><span>04</span><h3>Deliver + repeat</h3><p>One quote, one record, easier reorders.</p></article>
       </div>
     </section>
 
     <section class="publicSection modelV2CategorySection">
       <div class="modelV2SectionHead"><span class="kicker">CATEGORY LOGIC</span><h2>Different products need different checks.</h2></div>
       <div class="modelV2CategoryGrid">
-        <article><img src="/assets/ui-icons/diagnostics.webp" alt="Diagnostics"><h3>Diagnostics</h3><small>Model + compatible consumables</small></article>
-        <article><img src="/assets/ui-icons/clinic-supplies.webp" alt="Consumables"><h3>Consumables</h3><small>Size + sterile status + pack</small></article>
-        <article><img src="/assets/ui-icons/first-aid.webp" alt="Emergency"><h3>Emergency</h3><small>Device + accessories + readiness</small></article>
-        <article><img src="/assets/ui-icons/respiratory.webp" alt="Oxygen"><h3>Oxygen</h3><small>Compatibility + qualified route</small></article>
-        <article><img src="/assets/ui-icons/medicines.webp" alt="Medicines"><h3>Medicines</h3><small>Licensed route + traceability</small></article>
+        <article><img src="/assets/model-icons/diagnostics.png?v=394" alt="Diagnostics"><h3>Diagnostics</h3><small>Model + compatible consumables</small></article>
+        <article><img src="/assets/model-icons/consumables.png?v=394" alt="Consumables"><h3>Consumables</h3><small>Size + sterile status + pack</small></article>
+        <article><img src="/assets/model-icons/emergency.png?v=394" alt="Emergency"><h3>Emergency</h3><small>Device + accessories + readiness</small></article>
+        <article><img src="/assets/model-icons/oxygen.png?v=394" alt="Oxygen"><h3>Oxygen</h3><small>Compatibility + qualified route</small></article>
+        <article><img src="/assets/model-icons/medicines.png?v=394" alt="Medicines"><h3>Medicines</h3><small>Licensed route + traceability</small></article>
       </div>
     </section>
 
     <section class="publicSection modelV2BasketSection">
       <div class="modelV2SectionHead compact"><span class="kicker">WHAT WE MANAGE</span><h2>Opening basket. Recurring basket.</h2></div>
       <div class="modelV2BasketGrid">
-        <article class="opening"><div class="modelV2BasketIcon"><img src="/assets/ui-icons/clinic-setup.webp" alt="Opening basket"></div><div><span>OPENING / CAPITAL</span><h3>Set the clinic up.</h3><p>Furniture · diagnostics · monitoring · emergency equipment</p></div></article>
-        <article class="recurring"><div class="modelV2BasketIcon"><img src="/assets/ui-icons/returns.webp" alt="Recurring basket"></div><div><span>RECURRING</span><h3>Keep the clinic ready.</h3><p>Dressings · PPE · testing · respiratory · refills</p></div></article>
+        <article class="opening"><div class="modelV2BasketIcon"><img src="/assets/model-icons/opening.png?v=394" alt="Opening basket"></div><div><span>OPENING / CAPITAL</span><h3>Set the clinic up.</h3><p>Furniture · diagnostics · monitoring · emergency equipment</p></div></article>
+        <article class="recurring"><div class="modelV2BasketIcon"><img src="/assets/model-icons/recurring.png?v=394" alt="Recurring basket"></div><div><span>RECURRING</span><h3>Keep the clinic ready.</h3><p>Dressings · PPE · testing · respiratory · refills</p></div></article>
       </div>
     </section>
 

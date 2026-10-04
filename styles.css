@@ -7921,3 +7921,120 @@ main.publicPage:has(.modelV2FlowSection) .publicPageHero p{max-width:720px!impor
 @media(max-width:720px){
   .workshopArticleHeroImage{margin:12px 0 22px;border-radius:18px}
 }
+
+/* =========================================================
+   V39.4 — visual QA cleanup + one site-wide grid system
+   ========================================================= */
+:root{
+  --psc-site-paper:#fbf8f1;
+  --psc-site-grid:rgba(45,57,55,.055);
+}
+
+/* The same quiet technical grid now carries the whole public site. */
+.publicLanding,
+.publicPage{
+  background-color:var(--psc-site-paper)!important;
+  background-image:
+    linear-gradient(var(--psc-site-grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--psc-site-grid) 1px,transparent 1px)!important;
+  background-size:28px 28px!important;
+}
+.publicHeader,
+.publicHeader.headerScrolled{
+  background-color:rgba(251,248,241,.97)!important;
+  background-image:
+    linear-gradient(var(--psc-site-grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--psc-site-grid) 1px,transparent 1px)!important;
+  background-size:28px 28px!important;
+}
+
+/* Carry the same grid into the portal/admin canvas without touching cards. */
+.v26Shell .mainArea,
+.mainArea.v7MainArea,
+.mainArea.v7bMainArea{
+  background-color:#f8f5ef!important;
+  background-image:
+    radial-gradient(circle at 97% 3%,rgba(255,232,182,.20),transparent 280px),
+    linear-gradient(var(--psc-site-grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--psc-site-grid) 1px,transparent 1px),
+    linear-gradient(180deg,#fbfaf7 0%,#f7f4ee 100%)!important;
+  background-size:auto,28px 28px,28px 28px,auto!important;
+}
+
+/* Our Model — only exact transparent crops from the supplied master artwork. */
+.modelV2Flow article>img,
+.modelV2CategoryGrid img,
+.modelV2BasketIcon img{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+}
+.modelV2BasketIcon{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+}
+.modelV2BasketIcon img{
+  width:100px!important;
+  height:100px!important;
+  filter:drop-shadow(0 12px 18px rgba(20,18,15,.07));
+}
+
+/* Dark account band had inherited dark text in the step pills. */
+.modelV2AccountSteps span{
+  color:#f7fbfa!important;
+  border-color:rgba(255,255,255,.30)!important;
+  background:rgba(255,255,255,.025)!important;
+}
+.modelV2AccountSteps i{color:#61d3cc!important}
+
+/* Workshop strip must stay on the same page grid, never wider than it. */
+.schoolWorkshopStrip{
+  width:min(1320px,88%)!important;
+  max-width:1320px!important;
+  margin:28px auto 0!important;
+  box-sizing:border-box!important;
+  min-width:0!important;
+}
+.schoolWorkshopStrip>div,
+.schoolWorkshopStrip button{min-width:0!important}
+.schoolWorkshopStrip button b{
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+
+/* Homepage clinical cards: source art is transparent; never manufacture a tile behind it. */
+.publicLanding .publicClinicalCard .publicClinicalArt{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+@media(max-width:900px){
+  .schoolWorkshopStrip{width:calc(100% - 44px)!important}
+}
+@media(max-width:720px){
+  .modelV2BasketIcon img{width:76px!important;height:76px!important}
+  .schoolWorkshopStrip{width:calc(100% - 36px)!important;margin-top:20px!important}
+}
+
+/* Grid continuity across public hero canvases while preserving each section's own colour treatment. */
+.publicPageHero,
+.workshopHero{
+  position:relative;
+  isolation:isolate;
+}
+.publicPageHero::before,
+.workshopHero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(var(--psc-site-grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--psc-site-grid) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+.publicPageHero>* ,
+.workshopHero>*{position:relative;z-index:1}
