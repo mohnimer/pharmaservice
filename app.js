@@ -123,17 +123,17 @@
   function clinicalNeedIllustration(id){
     const m={
       wounds:'/assets/category-wounds.webp?v=3777',
-      sports:'/assets/category-sports.webp?v=3777',
+      sports:'/assets/category-sports.png?v=3915',
       breathing:'/assets/category-breathing.webp?v=3777',
       vitals:'/assets/category-vitals.webp?v=3777',
-      screening:'/assets/category-screening.webp?v=3777',
-      diabetes:'/assets/category-diabetes.webp?v=3777',
-      medicines:'/assets/category-medicines.webp?v=3777',
-      allergy:'/assets/category-allergy.webp?v=3777',
-      patient:'/assets/category-patient-care.webp?v=3777',
-      'patient-care':'/assets/category-patient-care.webp?v=3777',
-      infection:'/assets/category-infection.webp?v=3777',
-      procedures:'/assets/category-procedures.webp?v=3777',
+      screening:'/assets/category-screening.png?v=3915',
+      diabetes:'/assets/category-diabetes.png?v=3915',
+      medicines:'/assets/category-medicines.png?v=3915',
+      allergy:'/assets/category-allergy.png?v=3915',
+      patient:'/assets/category-patient-care.png?v=3915',
+      'patient-care':'/assets/category-patient-care.png?v=3915',
+      infection:'/assets/category-infection.png?v=3915',
+      procedures:'/assets/category-procedures.png?v=3915',
       emergency:'/assets/category-emergency.webp?v=3777',
       equipment:'/assets/category-equipment.webp?v=3777'
     };
@@ -1350,7 +1350,7 @@
           </button>
 
           <button class="publicClinicalCard mint" data-go="catalogue/infection">
-            <img class="publicClinicalArt" src="/assets/category-infection.webp?v=3777" alt="" aria-hidden="true">
+            <img class="publicClinicalArt" src="/assets/category-infection.png?v=3915" alt="" aria-hidden="true">
             <span>Infection Control &amp; PPE</span>
             <small>PPE, hand hygiene, disinfection and waste control</small>
           </button>
