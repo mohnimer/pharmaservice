@@ -72,7 +72,7 @@
     if(f?.order_pack_basis) return String(f.order_pack_basis);
     return 'Exact variant confirmed in quotation';
   }
-  function presentationLabel(f,x){ if(f?.family_id==='PSC-IS-073') return ({'Tablets':'10 mg tablets','Drops':'Oral drops','Oral solution':'Oral solution'})[x]||x; return x; }
+  function presentationLabel(f,x){ return x; }
   function priceLabel(f){
     if(!String(f?.website_price_treatment||'').toLowerCase().includes('fixed')) return 'Request quote';
     const vals=(state.prices||[]).map(x=>Number(x.public_sell_price_ex_vat)).filter(Number.isFinite).sort((a,b)=>a-b);
