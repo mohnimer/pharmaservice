@@ -1404,70 +1404,65 @@
   function servicesPage(){ return publicPage('services','SERVICES','Clinic procurement, made easier.','Pharma Service makes it easy for institutional customers to shop, request quotations, manage orders, repeat previous purchases and optimize procurement costs across pharmaceuticals, medical disposables and medical equipment.',`<section class="publicSection twoPublicCols"><div><span class="kicker">PROCUREMENT COST CONTROL</span><h2>Buy through the right supply channel, not the retail shelf.</h2><p>Pharma Service sources through suitable wholesale and specialist suppliers, then consolidates the commercial process for the institutional customer. The objective is straightforward: optimize procurement costs across pharmaceuticals, medical disposables and medical equipment without pushing sourcing complexity onto the clinic team.</p></div><div class="publicFeatureStack"><article><b>Shop & request</b><p>Browse controlled institutional lines or submit a custom sourcing request.</p></article><article><b>Quote & manage</b><p>Receive the formal quotation, confirm the order and keep the transaction history attached to the account.</p></article><article><b>Repeat efficiently</b><p>Reorder previously supplied items without restarting the procurement process from zero.</p></article></div></section><section class="publicSection procurementFlow"><article><b>SHOP</b><span>01</span><p>Browse the Pharma Service institutional product master.</p></article><article><b>QUOTE</b><span>02</span><p>PSC sources, reviews and sends the formal quotation.</p></article><article><b>MANAGE</b><span>03</span><p>Confirm, cancel or follow the order from the account.</p></article><article><b>REPEAT</b><span>04</span><p>Repeat previously supplied items from the same account history.</p></article></section><section class="publicCta"><div><span class="kicker">SEE IT WORK</span><h2>Take a guided tour of Pharma Service.</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="demo">Take guided tour</button><button class="button primary large" data-go="login">Open Clinic Portal</button></div></section>`); }
 
 
-  function ourModelPage(){ return publicPage(
-    'our-model',
-    'Our model',
-    'Supplying a clinic is mostly about getting the small things right.',
-    'We supply healthcare products to institutions. The job is not complicated for the sake of being complicated — it just needs a more careful eye than ordinary retail. The exact product, the right pack, the compatible accessory, the expiry and the correct supply route all matter.',
-    `<section class="publicSection modelQuietIntro">
-      <div class="modelQuietLead">
-        <h2>We start with the list you actually have.</h2>
-        <p>Sometimes it is beautifully specified. Sometimes it says “gauze 10 × 10 — 5 boxes.” Both are fine as a starting point.</p>
-        <p>Our job is to work out what the clinic really needs before we turn that line into a quotation. Sterile or non-sterile? Which material? How many pieces are actually in the pack? Does the device need a particular cuff, strip, mask, regulator or accessory? Is there an expiry issue we should care about?</p>
-        <p>The point is not to slow the order down. It is to avoid sending the wrong thing quickly.</p>
-      </div>
-      <aside class="modelQuietAside"><p><strong>A list tells us what to look for.</strong><br>The specification tells us what to buy.</p></aside>
-    </section>
+  function ourModelPage(){
+    return `<main class="publicPage model16Page">
+      ${publicHeader('our-model')}
+      <section class="model16Hero">
+        <div class="model16HeroCopy">
+          <span class="kicker">OUR MODEL</span>
+          <h1>Different lines need different sourcing.<br>You should not have to manage all of it.</h1>
+          <p>Pharma Service takes an institutional requirement apart line by line, then brings the commercial result back together through one accountable supply relationship.</p>
+          <div class="model16Principle"><b>Source per line.</b><span>Sell one solution.</span></div>
+        </div>
+        <div class="model16HeroArt" aria-hidden="true">
+          <img src="/assets/model-icons/understand.png" alt="">
+          <img src="/assets/model-icons/source.png" alt="">
+          <img src="/assets/model-icons/deliver-repeat.png" alt="">
+        </div>
+      </section>
 
-    <section class="publicSection modelQuietExamples">
-      <div class="modelQuietHead"><h2>A few examples of the details we mean.</h2><p>They are not dramatic. They are just the things that make a product useful once it reaches the clinic.</p></div>
-      <div class="modelQuietExampleRows">
-        <article><h3>Blood-pressure monitors</h3><p>A good monitor with the wrong cuff size is still the wrong setup for the people using it.</p></article>
-        <article><h3>Glucose meters</h3><p>The meter, strips and control solution have to belong together. “Compatible enough” is not a specification.</p></article>
-        <article><h3>Gauze and dressings</h3><p>Size is only part of the description. Sterility, material, ply and pack conversion can change what is actually being supplied.</p></article>
-        <article><h3>AEDs and emergency equipment</h3><p>The main device is only part of readiness. Pads, battery status, accessories, expiry and service support matter too.</p></article>
-      </div>
-    </section>
+      <section class="model16Process publicSection">
+        <div class="model16SectionHead"><span class="kicker">THE WORK</span><h2>Four things have to be right.</h2><p>Not every order needs a complicated process. Every order does need enough control to know what is being bought, from where, on what terms and what was actually supplied.</p></div>
+        <div class="model16ProcessGrid">
+          <article><span>01</span><h3>Define the line.</h3><p>Exact product, pack, size, model, compatibility or other specification that matters.</p></article>
+          <article><span>02</span><h3>Source where it belongs.</h3><p>Equipment, consumables, medicines and specialist services do not all belong to the same supplier or route.</p></article>
+          <article><span>03</span><h3>Quote what we can support.</h3><p>Current cost, availability, VAT, lead time and supply conditions are checked before commitment.</p></article>
+          <article><span>04</span><h3>Keep the record.</h3><p>What was quoted, approved and delivered should make the next replenishment or replacement easier.</p></article>
+        </div>
+      </section>
 
-    <section class="publicSection modelQuietCommercial">
-      <div class="modelQuietHead"><h2>Then we do the commercial work properly.</h2><p>Once the requirement is clear, the rest is fairly practical.</p></div>
-      <div class="modelQuietCommercialRows">
-        <article><h3>We source the line where it belongs.</h3><p>Furniture, diagnostics, disposables, emergency equipment, oxygen and medicines do not all belong to the same supplier or the same route. We use category-appropriate sources rather than forcing the whole basket through one channel.</p></article>
-        <article><h3>We compare like with like.</h3><p>Brand and price matter, but so do model, pack, stock, lead time, VAT treatment, warranty, delivery and the conditions attached to the offer. A cheaper non-matching line is not a saving.</p></article>
-        <article><h3>We check before we promise.</h3><p>Availability changes. Supplier quotations expire. Regulated products have their own controls. We would rather verify the point that matters than make a confident promise we cannot support.</p></article>
-        <article><h3>We keep enough of the record to make the next order easier.</h3><p>Quotation, delivery, model, serial or warranty information, and batch or expiry where relevant. The second order should not need everyone to remember what happened the first time.</p></article>
-      </div>
-    </section>
+      <section class="model16Basket publicSection">
+        <div class="model16BasketCard opening"><div><span>OPENING / CAPITAL</span><h2>Items that establish the clinic.</h2><p>Furniture, diagnostics, monitoring, emergency equipment and other setup lines. Specification, accessories, warranty and handover tend to matter most.</p></div><img src="/assets/model-icons/opening.png" alt="" aria-hidden="true"></div>
+        <div class="model16BasketCard recurring"><div><span>RECURRING</span><h2>Items the clinic keeps using.</h2><p>Dressings, PPE, testing consumables, respiratory items, hygiene products and permitted medicines. Pack, expiry, availability and replenishment matter more over time.</p></div><img src="/assets/model-icons/recurring.png" alt="" aria-hidden="true"></div>
+      </section>
 
-    <section class="publicSection modelQuietCategories">
-      <div class="modelQuietHead"><h2>Different categories need a different eye.</h2><p>This is the part of institutional supply that is easy to miss if everything is treated like normal retail.</p></div>
-      <div class="modelQuietCategoryGrid">
-        <article><h3>Diagnostics</h3><p>Exact model, intended use, accuracy information and compatible consumables.</p></article>
-        <article><h3>Consumables</h3><p>Material, size, sterile status, pack conversion and expiry.</p></article>
-        <article><h3>Emergency equipment</h3><p>Model, accessories, consumables, service scope and readiness after handover.</p></article>
-        <article><h3>Oxygen</h3><p>Medical-grade supply, cylinder and regulator compatibility, handling and the appropriate qualified route.</p></article>
-        <article><h3>Medicines</h3><p>The correct licensed procurement route, permitted recipient and traceability. Convenience does not replace those controls.</p></article>
-      </div>
-    </section>
+      <section class="model16Category publicSection">
+        <div class="model16SectionHead"><span class="kicker">CATEGORY DISCIPLINE</span><h2>We do not treat the whole basket as one product category.</h2></div>
+        <div class="model16CategoryGrid">
+          <article><img src="/assets/model-icons/diagnostics.png" alt=""><div><b>Diagnostics & equipment</b><p>Exact model, intended use, accessories, compatibility, warranty and service.</p></div></article>
+          <article><img src="/assets/model-icons/consumables.png" alt=""><div><b>Consumables</b><p>Material, size, sterile status, pack conversion, batch and expiry where relevant.</p></div></article>
+          <article><img src="/assets/model-icons/emergency.png" alt=""><div><b>Emergency & oxygen</b><p>Complete setup, compatible parts and the appropriate qualified supply route.</p></div></article>
+          <article><img src="/assets/model-icons/medicines.png" alt=""><div><b>Medicines</b><p>Correct licensed route, approved recipient and the required storage, batch and expiry controls.</p></div></article>
+        </div>
+      </section>
 
-    <section class="publicSection modelQuietAftercare">
-      <div><h2>The first delivery is not the whole job.</h2><p>An examination couch may be bought once. Gloves, dressings, swabs and test strips come back. AED pads expire. Batteries age. Equipment needs compatible consumables. Warranties and serials become useful only when someone can find them later.</p><p>That is why we think about replenishment, expiry, replacement and records from the beginning — especially for multi-site institutions and school clinics.</p></div>
-      <div class="modelQuietAftercareList"><div><strong>Opening items</strong><span>Furniture, diagnostics, monitoring, emergency equipment and setup.</span></div><div><strong>Recurring items</strong><span>Dressings, PPE, testing consumables, respiratory items, hygiene and permitted medicines.</span></div><div><strong>Easy to forget</strong><span>Accessories, expiry, replacements, warranty and handover records.</span></div></div>
-    </section>
+      <section class="model16Boundaries publicSection">
+        <div class="model16SectionHead"><span class="kicker">WHERE WE DRAW THE LINE</span><h2>A useful supply partner should also know what not to assume.</h2></div>
+        <div class="model16BoundaryRows">
+          <div><b>Availability is not a promise until it is checked.</b><span>Supplier stock and quotations change. We confirm them at the point they matter.</span></div>
+          <div><b>A cheaper mismatch is not a saving.</b><span>Model, pack, accessories and compatibility come before headline price.</span></div>
+          <div><b>Conditional requirements stay conditional.</b><span>A regulatory mapping does not automatically create a purchase line for every site.</span></div>
+          <div><b>Approved products are not silently substituted.</b><span>If a quoted brand or model changes, the alternative should be made clear before supply.</span></div>
+        </div>
+      </section>
 
-    <section class="publicSection modelQuietSchool">
-      <div><h2>School clinics bring all of this together.</h2><p>They have capital equipment, day-to-day consumables, emergency readiness, medicines through the appropriate route, expiry, replenishment and records — all in a small clinical environment that needs to stay ready.</p><p>We would rather become familiar with how the clinic actually runs than simply keep sending boxes at it.</p></div>
-      <button class="button outline large" data-go="catalogue">Browse the institutional catalogue</button>
-    </section>
-    ${schoolWorkshopStrip()}
-
-    <section class="publicSection modelQuietRegulated">
-      <h2>Some lines simply need a different route.</h2>
-      <p>Medicines, oxygen, specialist services and other regulated products remain subject to the applicable UAE licensing, recipient, storage, batch/expiry and professional controls. If a line needs a specialist or licensed route, we treat it that way.</p>
-    </section>
-
-    <section class="publicCta modelQuietCta"><div><h2>Send us the list you have.</h2><p>If something is vague, we will tighten it. If something needs a different route, we will tell you. Then we can quote the requirement on a basis that actually makes sense.</p></div><div class="publicCtaActions"><button class="button outline large" data-go="catalogue">Browse catalogue</button><button class="button primary large" data-go="contact">Send a requirement</button></div></section>`
-  ); }
+      <section class="model16School publicSection">
+        <div><span class="kicker">FIRST DEVELOPED VERTICAL</span><h2>School clinics are where this model comes together.</h2><p>A small clinic can contain one-off equipment, recurring consumables, emergency readiness, expiry-driven items and medicines through the appropriate route. That mix is exactly why the supply record matters.</p></div>
+        <div class="model16SchoolActions"><button class="button primary large" data-go="catalogue">Browse catalogue</button><button class="button outline large" data-go="start">Send a requirement</button></div>
+      </section>
+      ${publicFooter()}
+    </main>`;
+  }
 
   function whoWeSupplyPage(){ return publicPage(
     'who-we-supply',
@@ -1675,15 +1670,25 @@
   function publicCataloguePage(needId='all'){
     const meta=clinicalNeedMeta(needId);
     const {filtered,types}=catalogueFilterProducts(needId);
-    const categories=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories;
-    return `<main class="publicPage publicCataloguePage">${publicHeader('catalogue')}
-      <section class="publicPageHero cataloguePublicHero"><span class="kicker">INSTITUTIONAL CATALOGUE</span><h1>${needId==='all'?'Browse the controlled product master.':esc(meta.label)}</h1><p>Read-only public catalogue. Product availability, exact commercial specification, pricing and regulated supply route are confirmed for the account and transaction before commitment.</p></section>
-      <section class="publicSection publicCatalogueControls">
-        <div class="publicNeedRibbon">${categories.map(c=>`<button class="${c.id===needId?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="catalogue/${c.id}">${esc(c.label)}</button>`).join('')}</div>
-        <div class="filterBar"><div class="searchInput"><span>${icon('search')}</span><input data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search product, pack or specification…"></div><select data-cat-filter="category"><option>All product types</option>${types.map(t=>`<option ${ui.catalogueCat===t?'selected':''}>${esc(t)}</option>`).join('')}</select></div>
+    const categories=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.filter(c=>c.id!=='all');
+    const categoryCards=categories.map(c=>`<button class="publicCategoryCard16 ${c.id===needId?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="catalogue/${c.id}">
+      <span class="publicCategoryArt16" aria-hidden="true">${clinicalNeedIllustration(c.id)}</span>
+      <span class="publicCategoryCopy16"><b>${esc(c.label)}</b><small>${esc(c.note)}</small></span>
+      <i>↗</i>
+    </button>`).join('');
+    const heroTitle=needId==='all'?'Start with the clinical area.':esc(meta.label);
+    const heroLead=needId==='all'?'Choose a category to see the controlled product families behind it. Or keep scrolling to browse the published product catalogue.':`Product families for ${esc(meta.label)} appear below, followed by the published catalogue lines in this clinical area.`;
+    return `<main class="publicPage publicCataloguePage catalogue16Page">${publicHeader('catalogue')}
+      <section class="publicPageHero cataloguePublicHero catalogue16Hero"><span class="kicker">INSTITUTIONAL CATALOGUE</span><h1>${heroTitle}</h1><p>${heroLead}</p></section>
+      <section class="publicSection publicCatalogueJourney16">
+        <div class="publicCatalogueJourneyHead16"><div><span class="kicker">CLINICAL NEEDS</span><h2>Where do you want to start?</h2></div>${needId!=='all'?'<button class="textAction" data-go="catalogue">View all categories</button>':''}</div>
+        <div class="publicCategoryGrid16">${categoryCards}</div>
       </section>
-      <section class="publicSection publicCatalogueResults"><div class="publicCatalogueCount"><b>${filtered.length}</b><span>published institutional lines</span></div>${filtered.length?`<div class="publicCatalogueGrid">${filtered.map(publicCatalogueCard).join('')}</div>`:'<div class="emptyState"><h3>No matching published lines</h3><p>Try another clinical need or send the requirement to Pharma Service.</p><button class="button primary" data-go="contact">Request sourcing</button></div>'}</section>
-      <section class="publicCta"><div><span class="kicker">ACCOUNT PRICING</span><h2>Need a quotation or customer-specific product list?</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="contact">Request supply</button><button class="button primary large" data-go="login">Open Clinic Portal</button></div></section>
+      <section class="publicSection publicCatalogueControls catalogue16Controls">
+        <div class="filterBar"><div class="searchInput"><span>${icon('search')}</span><input data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search families, products, packs or specifications…"></div><select data-cat-filter="category"><option>All product types</option>${types.map(t=>`<option ${ui.catalogueCat===t?'selected':''}>${esc(t)}</option>`).join('')}</select></div>
+      </section>
+      <section class="publicSection publicCatalogueResults catalogue16Results"><div class="publicCatalogueCount"><b>${filtered.length}</b><span>${needId==='all'?'published institutional lines':'published lines in this category'}</span></div>${filtered.length?`<div class="publicCatalogueGrid">${filtered.map(publicCatalogueCard).join('')}</div>`:'<div class="emptyState"><h3>No matching published lines</h3><p>Try another clinical need or send the requirement to Pharma Service.</p><button class="button primary" data-go="contact">Request sourcing</button></div>'}</section>
+      <section class="publicCta"><div><span class="kicker">HAVE A LIST ALREADY?</span><h2>Send the requirement instead of rebuilding it here.</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="start">Send a list / RFQ</button><button class="button primary large" data-go="login">Open Clinic Portal</button></div></section>
       ${publicFooter()}
     </main>`;
   }
@@ -1709,74 +1714,48 @@
   }
 
   function startPage(){
-    return `<main class="publicPage startPage">
+    return `<main class="publicPage startPage start16Page">
       ${publicHeader('')}
-      <section class="startHero">
-        <div class="startHeroCopy">
-          <span class="kicker">PHARMA SERVICE · INSTITUTIONAL SUPPLY</span>
-          <h1>Start with what you have.</h1>
-          <p>Looking for something specific? Browse the catalogue. Already have an RFQ or product list? Send it over. If you just want to understand how Pharma Service works, that is here too.</p>
-          <div class="startScope"><b>Opening supply · Replenishment · Replacement</b><span>Equipment · Consumables · Pharmaceuticals</span></div>
-          <div class="startCredential"><span>Pharma Service Co. L.L.C.</span><span>Dubai, United Arab Emirates</span><span>MOHAP Drug Store Reg. #1505</span></div>
+      <section class="start16Hero">
+        <div class="start16HeroCopy">
+          <span class="kicker">START HERE</span>
+          <h1>Start with the requirement you already have.</h1>
+          <p>An RFQ, spreadsheet, PDF or rough product list is enough to begin. We will clarify the lines that need clarification and come back with a quotation on the basis we can actually support.</p>
+          <div class="start16HeroActions"><button class="button primary large" data-start-scroll="send">Send a list / RFQ</button><button class="button outline large" data-go="catalogue">Browse catalogue</button></div>
         </div>
-        <div class="startChoices" aria-label="Choose how to start">
-          <article class="startChoice startChoiceCatalogue">
-            <span>01</span><h2>Browse the catalogue</h2><p>See the institutional range by clinical need and product category.</p><button class="button light" data-go="catalogue">Browse catalogue</button>
-          </article>
-          <article class="startChoice startChoiceSend">
-            <span>02</span><h2>Send us what you have</h2><p>RFQ, Excel sheet, PDF or a written list. We can clarify the missing details before quoting.</p><button class="button primary" data-start-scroll="send">Send your list</button>
-          </article>
-          <article class="startChoice startChoiceModel">
-            <span>03</span><h2>See how we work</h2><p>A quick look at how we handle specifications, sourcing, regulated lines and repeat supply.</p><button class="button dark" data-go="our-model">Our model</button>
-          </article>
+        <div class="start16RouteBoard" aria-label="Three ways to start">
+          <button data-start-scroll="send"><span>01</span><div><b>I already have a list.</b><small>Send it as it is.</small></div><i>→</i></button>
+          <button data-go="catalogue"><span>02</span><div><b>I need to find the product.</b><small>Browse by clinical need.</small></div><i>→</i></button>
+          <button data-go="our-model"><span>03</span><div><b>I want to understand the process.</b><small>See how PSC handles the supply work.</small></div><i>→</i></button>
         </div>
       </section>
 
-      <section class="startWorkshopStrip">
-        <div><span class="kicker">THE WORKSHOP</span><h2>Not sure what the product actually needs to be?</h2><p>Practical guides to products, compatibility, readiness, expiry and ordering details.</p></div>
-        <button class="button outline" data-go="workshop">Open The Workshop</button>
+      <section class="start16Brief publicSection">
+        <div class="start16BriefHead"><span class="kicker">WHAT HELPS</span><h2>Three details make a request much easier to quote.</h2></div>
+        <div class="start16BriefGrid"><article><b>What</b><p>Product, specification, current brand or whatever description you have.</p></article><article><b>How much</b><p>Quantity, pack basis and number of sites if it is a multi-site requirement.</p></article><article><b>When</b><p>Required date, delivery window or whether this is routine replenishment.</p></article></div>
       </section>
 
-      <section class="startSendSection" id="start-send">
-        <div class="startSendIntro">
-          <span class="kicker">HAVE A LIST?</span>
-          <h2>Send us what you have.</h2>
-          <p>It does not need to be perfectly specified. Send the requirement as it stands and we will clarify what matters before we quote it.</p>
-          <div class="startSendAside"><b>No list yet?</b><button class="textAction" data-go="catalogue">Browse the catalogue</button></div>
+      <section class="startSendSection start16Send" id="start-send">
+        <div class="startSendIntro start16SendIntro">
+          <span class="kicker">SEND THE REQUIREMENT</span>
+          <h2>It does not need to be cleaned up first.</h2>
+          <p>Paste the requirement below or attach the original file. We will use what you provide to qualify the enquiry and come back on the specific lines that need clarification.</p>
+          <p class="start16Fine">No automatic stock, compliance or delivery promise is created by sending the enquiry. Those points are confirmed before commitment.</p>
         </div>
-        <form class="prospectForm startProspectForm" data-public-enquiry data-source-page="business_card_start_v37_5_8" novalidate>
-          <div class="prospectField">
-            <label for="startOrganization">Organization</label>
-            <input id="startOrganization" name="organization" type="text" maxlength="180" placeholder="School group, clinic or company" required>
-          </div>
-          <div class="prospectField">
-            <label for="startInstitutionType">Institution type</label>
-            <select id="startInstitutionType" name="institution_type" required><option value="">Select</option><option>School / education</option><option>Healthcare facility</option><option>Corporate / workplace health</option><option>Government / public institution</option><option>Hospitality / other institution</option><option>Other</option></select>
-          </div>
-          <div class="prospectField">
-            <label for="startName">Name</label>
-            <input id="startName" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Your name" required>
-          </div>
-          <div class="prospectField">
-            <label for="startPhone">Contact number</label>
-            <input id="startPhone" name="contact_number" type="tel" autocomplete="tel" maxlength="40" placeholder="+971" required>
-          </div>
-          <div class="prospectField prospectFieldWide">
-            <label for="startEmail">Contact email</label>
-            <input id="startEmail" name="contact_email" type="email" autocomplete="email" maxlength="254" placeholder="name@organization.ae" required>
-          </div>
-          <div class="prospectField prospectFieldWide">
-            <label for="startRequirement">What do you need?</label>
-            <textarea id="startRequirement" name="requirement" rows="5" maxlength="4000" placeholder="Paste the list, describe the item, quantities or anything else you already know." required></textarea>
-          </div>
-          <div class="prospectField prospectFieldWide rfqUploadField">
-            <label for="startRfq">Attach a list or RFQ <span>optional · PDF, Word, Excel or CSV · max 10 MB</span></label>
-            <input id="startRfq" name="rfq_file" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,application/pdf,text/csv,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-          </div>
+        <form class="prospectForm startProspectForm start16Form" data-public-enquiry data-source-page="business_card_start_v39_16" novalidate>
+          <div class="prospectField"><label for="startOrganization">Organization</label><input id="startOrganization" name="organization" type="text" maxlength="180" placeholder="School group, clinic or company" required></div>
+          <div class="prospectField"><label for="startInstitutionType">Institution type</label><select id="startInstitutionType" name="institution_type" required><option value="">Select</option><option>School / education</option><option>Healthcare facility</option><option>Corporate / workplace health</option><option>Government / public institution</option><option>Hospitality / other institution</option><option>Other</option></select></div>
+          <div class="prospectField"><label for="startName">Name</label><input id="startName" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Your name" required></div>
+          <div class="prospectField"><label for="startPhone">Contact number</label><input id="startPhone" name="contact_number" type="tel" autocomplete="tel" maxlength="40" placeholder="+971" required></div>
+          <div class="prospectField prospectFieldWide"><label for="startEmail">Contact email</label><input id="startEmail" name="contact_email" type="email" autocomplete="email" maxlength="254" placeholder="name@organization.ae" required></div>
+          <div class="prospectField prospectFieldWide"><label for="startRequirement">Requirement</label><textarea id="startRequirement" name="requirement" rows="5" maxlength="4000" placeholder="Paste the list, quantities, specification or anything else you already know." required></textarea></div>
+          <div class="prospectField prospectFieldWide rfqUploadField"><label for="startRfq">Attach a list or RFQ <span>optional · PDF, Word, Excel or CSV · max 10 MB</span></label><input id="startRfq" name="rfq_file" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,application/pdf,text/csv,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></div>
           <div class="prospectHoneypot" aria-hidden="true"><label for="startWebsite">Website</label><input id="startWebsite" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-          <div class="prospectSubmitRow"><p>We will use this to come back to you about the institutional requirement.</p><button class="button primary semanticPrimary" type="submit" data-public-enquiry-submit>Send request</button></div>
+          <div class="prospectSubmitRow"><p>We will use this to contact you about this institutional requirement.</p><button class="button primary semanticPrimary" type="submit" data-public-enquiry-submit>Send requirement</button></div>
         </form>
       </section>
+
+      <section class="start16Bottom publicSection"><div><span class="kicker">NOT READY TO SEND?</span><h2>Browse first, or read one useful guide.</h2></div><div><button class="button outline" data-go="catalogue">Institutional catalogue</button><button class="button light" data-go="workshop">The Workshop</button></div></section>
       ${publicFooter()}
     </main>`;
   }

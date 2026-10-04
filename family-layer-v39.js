@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const VERSION = 'v39.11-task8';
+  const VERSION = 'v39.16-family-hierarchy';
   const familyState = { rows: [], approvedOptions: [], fixedPrices: [], availability: [], loaded: false, source: 'none' };
   const NEED_MAP = {
     'Cuts, Wounds & Burns': 'wounds',
@@ -18,6 +18,11 @@
     'Procedures & Clinical Consumables': 'procedures',
     'Emergency & Resuscitation': 'emergency',
     'Equipment, Mobility & Clinic Setup': 'equipment'
+  };
+  const NEED_ART = {
+    wounds:'/assets/category-wounds.webp?v=3777', sports:'/assets/category-sports.png?v=3915', breathing:'/assets/category-breathing.webp?v=3777', vitals:'/assets/category-vitals.webp?v=3777',
+    screening:'/assets/category-screening.png?v=3915', diabetes:'/assets/category-diabetes.png?v=3915', medicines:'/assets/category-medicines.png?v=3915', allergy:'/assets/category-allergy.png?v=3915',
+    'patient-care':'/assets/category-patient-care.png?v=3915', infection:'/assets/category-infection.png?v=3915', procedures:'/assets/category-procedures.png?v=3915', emergency:'/assets/category-emergency.webp?v=3777', equipment:'/assets/category-equipment.webp?v=3777'
   };
   const NEED_STYLE = {
     wounds: ['#FF8B7B','#53221B'], sports: ['#9180F4','#211A5C'], breathing: ['#9EB8F7','#173D70'],
@@ -150,19 +155,24 @@
     const type=isMedicine(row)?'Medicine family':'Product family';
     const publishedPrice=familyPrice(row);
     const priceLabel=safePriceLabel(row);
-    const inner=`<div class="pscFamilyReadTop"><span>${esc(type)}</span><b>${esc(row.family_id)}</b></div>
-      <h3>${esc(row.family_name)}</h3>
-      ${row.common_brands_line?`<em class="pscFamilyCommonBrand">${esc(row.common_brands_line)}</em>`:''}
-      <p>${esc(safeAvailabilityLabel(row))}</p>
-      <div class="pscFamilyReadFoot"><span class="${publishedPrice?'pscFamilyLivePrice':''}">${esc(priceLabel)}</span><i>Open family →</i>${neutralRequirement(row)?'<small>DHA requirement</small>':''}</div>`;
-    return `<button type="button" class="pscFamilyReadCard pscFamilyReadCardReady" style="--family-bg:${bg};--family-ink:${ink}" data-psc-family-card data-psc-family-open="${esc(row.family_id)}" data-search="${esc(familySearch(row))}">${inner}</button>`;
+    const art=NEED_ART[need]||'';
+    const sub=row.order_pack_basis || row.common_brands_line || safeAvailabilityLabel(row);
+    return `<button type="button" class="pscFamilyReadCard pscFamilyReadCardReady" style="--family-bg:${bg};--family-ink:${ink}" data-psc-family-card data-psc-family-open="${esc(row.family_id)}" data-search="${esc(familySearch(row))}">
+      <span class="pscFamilyCardArt" aria-hidden="true">${art?`<img src="${art}" alt="" loading="lazy" decoding="async">`:''}</span>
+      <span class="pscFamilyCardType">${esc(type)}</span>
+      <span class="pscFamilyCardTitle">${esc(row.family_name)}</span>
+      ${sub?`<span class="pscFamilyCardSub">${esc(sub)}</span>`:''}
+      <span class="pscFamilyCardFoot"><b class="${publishedPrice?'pscFamilyLivePrice':''}">${esc(priceLabel)}</b><i>Open family →</i></span>
+      ${neutralRequirement(row)?'<small class="pscFamilyDhaMini">DHA requirement</small>':''}
+    </button>`;
   }
 
   function familyLayer(need){
     const rows=familyState.rows.filter(r=>need==='all'||needIdFor(r)===need);
     if(!rows.length) return '';
+    const first=rows[0];
     return `<section class="pscFamilyReadLayer" data-psc-family-layer data-version="${VERSION}">
-      <div class="pscFamilyReadHead"><div><span class="eyebrow">PRODUCT FAMILIES</span><h2>Start with the requirement family.</h2><p>PSC keeps the generic or institutional family as the main listing. Brand, model and supplier choices remain separate until they are reviewed and approved.</p></div><div class="pscFamilyReadCount"><b data-psc-family-count>${rows.length}</b><span>controlled families</span></div></div>
+      <div class="pscFamilyReadHead"><div><span class="eyebrow">PRODUCT FAMILIES</span><h2>${esc(first?.clinical_need||'Controlled product families')}</h2><p>Choose the family first. Exact brand, model or presentation is handled inside the family where it matters.</p></div><div class="pscFamilyReadCount"><b data-psc-family-count>${rows.length}</b><span>families</span></div></div>
       <div class="pscFamilyReadGrid">${rows.map(familyCard).join('')}</div>
       <div class="pscFamilyReadEmpty" data-psc-family-empty hidden>No product families match that search.</div>
     </section>`;
@@ -171,7 +181,7 @@
   function install(){
     if(!familyState.loaded) return;
     const need=currentNeed();
-    if(need===null) return;
+    if(need===null || need==='all') return;
     const existing=document.querySelector('[data-psc-family-layer]');
     if(existing) return;
     const html=familyLayer(need);
