@@ -3,7 +3,7 @@
 
   const DRAFT_KEY='pscFamilyQuoteDraftV1';
   const DHA_ICON='/assets/dha-requirement.png';
-  const state={familyId:'',family:null,options:[],prices:[],availability:null,optionAvailability:[],presentation:'',selectedBrands:[],otherBrandActive:false,otherBrand:'',open:false,loading:false};
+  const state={familyId:'',family:null,options:[],prices:[],availability:null,optionAvailability:[],presentation:'',selectedOptionIds:[],selectedFallbackBrands:[],otherBrandActive:false,otherBrand:'',open:false,loading:false};
   const esc=(v='')=>String(v).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':'&quot;'}[c]));
   const upper=v=>String(v||'').trim().toUpperCase();
   const aed=v=>`AED ${Number(v).toLocaleString('en-AE',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
@@ -35,20 +35,42 @@
     if(/compatib|matched to|selected (device|dispenser|thermometer|set)|replacement cartridge|probe cover/.test(spec)) return 'compatibility';
     return 'standard';
   }
-  function brandChoices(f){
-    const out=[]; const seen=new Set();
-    const push=v=>{const x=String(v||'').replace(/^Common brands?:\s*/i,'').trim();if(!x)return;const key=x.toLowerCase();if(!seen.has(key)){seen.add(key);out.push(x);}};
-    const line=String(f?.common_brands_line||'').replace(/^Common brands?:\s*/i,'').trim();
-    line.split(/[,;|]+/).map(x=>x.trim()).filter(Boolean).forEach(push);
+  function normalizedBrand(v){ return String(v||'').replace(/^Common brands?:\s*/i,'').trim(); }
+  function familyBrandFallbacks(f){
+    const out=[],seen=new Set(), optionBrands=new Set((state.options||[]).map(o=>normalizedBrand(o?.brand).toLowerCase()).filter(Boolean));
+    const push=v=>{const x=normalizedBrand(v);if(!x)return;const key=x.toLowerCase();if(optionBrands.has(key)||seen.has(key)||/^n\/?a$|^none$|^various$|^generic$/i.test(x))return;seen.add(key);out.push(x);};
+    String(f?.common_brands_line||'').replace(/^Common brands?:\s*/i,'').split(/[,;|]+/).map(x=>x.trim()).filter(Boolean).forEach(push);
     push(f?.prominent_brand);
-    (state.options||[]).forEach(o=>push(o?.brand));
-    return out.filter(x=>!/^n\/?a$|^none$|^various$|^generic$/i.test(x));
+    return out;
   }
   function selectorAllowed(f){
     const mode=upper(f?.brand_selector_mode);
     if(familyKind(f)==='medicine') return true;
-    if(brandChoices(f).length) return true;
+    if((state.options||[]).length || familyBrandFallbacks(f).length) return true;
     return !mode.includes('HIDDEN') && !mode.includes('NOT NEEDED');
+  }
+  function optionKey(o){ return String(o?.product_option_id||''); }
+  function selectedOptions(){ const ids=new Set(state.selectedOptionIds); return (state.options||[]).filter(o=>ids.has(optionKey(o))); }
+  function meaningfulPresentation(v){ const x=String(v||'').trim(); return x&&!/^other\s*\/\s*verify$/i.test(x)&&!/^other$/i.test(x); }
+  function cleanOptionName(o){
+    let name=String(o?.exact_product_name||'').trim(); const brand=normalizedBrand(o?.brand);
+    if(brand){ const re=new RegExp('^'+brand.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'[\\s–—:_-]*','i'); name=name.replace(re,'').trim(); }
+    name=name.replace(/\s+/g,' ').replace(/\s*[-–—]\s*/g,' · ');
+    return name;
+  }
+  function optionDescriptor(o,f){
+    const parts=[]; const exact=cleanOptionName(o); const presentation=String(o?.presentation||'').trim(); const pack=String(o?.pack||'').trim();
+    if(exact && exact.toLowerCase()!==String(f?.family_name||'').toLowerCase()) parts.push(exact);
+    if(meaningfulPresentation(presentation) && !parts.some(x=>x.toLowerCase().includes(presentation.toLowerCase()))) parts.push(presentation);
+    if(pack && !parts.some(x=>x.toLowerCase().includes(pack.toLowerCase()))) parts.push(pack);
+    if(!parts.length && f?.order_pack_basis) parts.push(String(f.order_pack_basis));
+    return parts.join(' · ') || 'Exact variant confirmed in quotation';
+  }
+  function fallbackBrandDescriptor(f){
+    const presentations=(Array.isArray(f?.presentations)?f.presentations:[]).filter(meaningfulPresentation);
+    if(presentations.length) return presentations.join(' · ');
+    if(f?.order_pack_basis) return String(f.order_pack_basis);
+    return 'Exact variant confirmed in quotation';
   }
   function presentationLabel(f,x){ if(f?.family_id==='PSC-IS-073') return ({'Tablets':'10 mg tablets','Drops':'Oral drops','Oral solution':'Oral solution'})[x]||x; return x; }
   function priceLabel(f){
@@ -70,7 +92,7 @@
     return {kicker:'STANDARD PRODUCT FAMILY'};
   }
   function requirementType(f){ const kind=familyKind(f); if(kind==='medicine') return 'Medicines / regulated products'; if(kind==='equipment') return 'Clinic opening / capital equipment'; if(kind==='specialist') return 'Other'; return 'Recurring consumables'; }
-  function resetSelection(){ state.presentation='';state.selectedBrands=[];state.otherBrandActive=false;state.otherBrand=''; }
+  function resetSelection(){ state.presentation='';state.selectedOptionIds=[];state.selectedFallbackBrands=[];state.otherBrandActive=false;state.otherBrand=''; }
 
   async function loadDetail(id){
     state.loading=true;state.familyId=id;state.family=null;state.options=[];state.prices=[];state.availability=null;state.optionAvailability=[];
@@ -79,7 +101,7 @@
       try{
         const [{data:family,error:fErr},{data:approved,error:oErr},{data:prices,error:pErr},{data:availability,error:aErr},{data:optionAvailability,error:oaErr}]=await Promise.all([
           sb.from('catalogue_family_public').select('*').eq('family_id',id).maybeSingle(),
-          sb.from('catalogue_product_option_public').select('product_option_id,family_id,exact_product_name,brand,presentation,pack').eq('family_id',id).order('presentation').order('exact_product_name'),
+          sb.from('catalogue_family_option_reference_public').select('product_option_id,family_id,exact_product_name,brand,presentation,pack').eq('family_id',id).order('brand').order('exact_product_name'),
           sb.from('catalogue_public_fixed_prices').select('family_id,product_option_id,exact_product_name,brand,presentation,pack,public_sell_price_ex_vat,vat_rate_pct,price_valid_to').eq('family_id',id).order('public_sell_price_ex_vat'),
           sb.from('catalogue_family_availability_public').select('family_id,availability_state,availability_label,verified_at,valid_until').eq('family_id',id).maybeSingle(),
           sb.from('catalogue_product_availability_public').select('family_id,product_option_id,availability_state,availability_label,verified_at,valid_until').eq('family_id',id)
@@ -92,16 +114,22 @@
   }
 
   function preferenceSummary(){
-    const parts=[]; if(state.selectedBrands.length) parts.push(`Acceptable brands: ${state.selectedBrands.join(', ')}`); if(state.otherBrandActive&&state.otherBrand.trim()) parts.push(`Other requested: ${state.otherBrand.trim()}`); return parts.length?parts.join(' · '):'No brand preference';
+    const parts=[];
+    selectedOptions().forEach(o=>parts.push(`${normalizedBrand(o.brand)||'Product'} — ${optionDescriptor(o,state.family)}`));
+    state.selectedFallbackBrands.forEach(b=>parts.push(b));
+    if(state.otherBrandActive&&state.otherBrand.trim()) parts.push(`Other: ${state.otherBrand.trim()}`);
+    return parts.length?parts.join(' · '):'No brand preference';
   }
   function preferenceBlock(f){
     if(!selectorAllowed(f)) return '';
-    const brands=brandChoices(f), noPreference=!state.selectedBrands.length&&!state.otherBrandActive;
+    const refs=(state.options||[]).filter(o=>!state.presentation||!meaningfulPresentation(o.presentation)||String(o.presentation)===state.presentation);
+    const fallbacks=familyBrandFallbacks(f), noPreference=!state.selectedOptionIds.length&&!state.selectedFallbackBrands.length&&!state.otherBrandActive;
     return `<section class="pscFamilyDetailBlock pscFamilyPreferenceBlock">
-      <span class="pscFamilyDetailLabel">Brand preference</span>
+      <span class="pscFamilyDetailLabel">Product preference</span>
       <label class="pscBrandChoice pscBrandNoPreference ${noPreference?'active':''}"><input type="checkbox" data-family-no-preference ${noPreference?'checked':''}><span><b>No brand preference</b><small>PSC can quote a suitable product that meets the family specification.</small></span></label>
-      ${brands.length?`<div class="pscBrandTickGrid">${brands.map(brand=>`<label class="pscBrandTick ${state.selectedBrands.includes(brand)?'active':''}"><input type="checkbox" data-family-brand="${esc(brand)}" ${state.selectedBrands.includes(brand)?'checked':''}><span><b>${esc(brand)}</b><small>Acceptable brand</small></span></label>`).join('')}</div>`:''}
-      <p class="pscBrandPreferenceNote">Tick one or more brands you are happy for PSC to quote. This records a preference only; the exact product, pack, availability and commercial terms are confirmed in the quotation.</p>
+      ${refs.length?`<div class="pscBrandTickGrid">${refs.map(o=>{const key=optionKey(o),brand=normalizedBrand(o.brand)||String(o.exact_product_name||'Product option');return `<label class="pscBrandTick ${state.selectedOptionIds.includes(key)?'active':''}"><input type="checkbox" data-family-option="${esc(key)}" ${state.selectedOptionIds.includes(key)?'checked':''}><span><b>${esc(brand)}</b><small>${esc(optionDescriptor(o,f))}</small></span></label>`;}).join('')}</div>`:''}
+      ${fallbacks.length?`<div class="pscBrandTickGrid pscFallbackBrandGrid">${fallbacks.map(brand=>`<label class="pscBrandTick ${state.selectedFallbackBrands.includes(brand)?'active':''}"><input type="checkbox" data-family-fallback-brand="${esc(brand)}" ${state.selectedFallbackBrands.includes(brand)?'checked':''}><span><b>${esc(brand)}</b><small>${esc(fallbackBrandDescriptor(f))}</small></span></label>`).join('')}</div>`:''}
+      <p class="pscBrandPreferenceNote">Tick one or more exact product options you are happy for PSC to quote. Where more than one SKU exists under the same brand, each SKU is shown separately. Final availability and commercial terms are confirmed in the quotation.</p>
       <label class="pscBrandChoice ${state.otherBrandActive?'active':''}"><input type="checkbox" data-family-other-toggle ${state.otherBrandActive?'checked':''}><span><b>Other brand / manufacturer required</b><small>Specify another brand, manufacturer, model or pack.</small></span></label>
       ${state.otherBrandActive?`<input class="pscOtherBrandInput" data-family-other-brand value="${esc(state.otherBrand)}" placeholder="Brand, manufacturer, model or pack required">`:''}
     </section>`;
@@ -129,9 +157,10 @@
   function close(){state.open=false;document.documentElement.classList.remove('pscFamilyDetailOpen');document.querySelector('[data-psc-family-detail-root]')?.remove();}
   async function open(id){if(!id)return;resetSelection();state.open=true;await loadDetail(id);draw();}
   function quoteSummary(){
-    const f=state.family||fallbackFamily(state.familyId),kind=familyKind(f),brand=preferenceSummary();
-    const mode=state.selectedBrands.length&&state.otherBrandActive?'brand_list_plus_other':state.selectedBrands.length?'brand_list':state.otherBrandActive?'other_brand':'no_preference';
-    return {familyId:f?.family_id||state.familyId,familyName:f?.family_name||state.familyId,familyPageType:f?.page_type||'',orderPackBasis:f?.order_pack_basis||'',presentation:state.presentation||'',brandPreference:brand,brandPreferenceMode:mode,requestedBrands:[...state.selectedBrands],requestedBrand:state.otherBrandActive?state.otherBrand.trim():state.selectedBrands.join(', '),productOption:null,regulated:kind==='medicine',requirementType:requirementType(f),commercialSpecification:f?.commercial_specification||'',priceTreatment:priceLabel(f),availability:familyAvailabilityLabel(f),dhaMapped:isDhaMapped(f),requirementReference:f?.requirement_reference||'',requirementStatus:f?.dha_status||''};
+    const f=state.family||fallbackFamily(state.familyId),kind=familyKind(f),preference=preferenceSummary(),chosen=selectedOptions();
+    const brands=[...new Set([...chosen.map(o=>normalizedBrand(o.brand)).filter(Boolean),...state.selectedFallbackBrands])];
+    const mode=chosen.length||state.selectedFallbackBrands.length?(state.otherBrandActive?'product_options_plus_other':'product_options'):state.otherBrandActive?'other_brand':'no_preference';
+    return {familyId:f?.family_id||state.familyId,familyName:f?.family_name||state.familyId,familyPageType:f?.page_type||'',orderPackBasis:f?.order_pack_basis||'',presentation:state.presentation||'',brandPreference:preference,brandPreferenceMode:mode,requestedBrands:brands,requestedBrand:state.otherBrandActive?state.otherBrand.trim():brands.join(', '),requestedProductOptions:chosen.map(o=>({product_option_id:o.product_option_id,exact_product_name:o.exact_product_name,brand:o.brand,presentation:o.presentation,pack:o.pack})),productOption:chosen.length===1?chosen[0]:null,regulated:kind==='medicine',requirementType:requirementType(f),commercialSpecification:f?.commercial_specification||'',priceTreatment:priceLabel(f),availability:familyAvailabilityLabel(f),dhaMapped:isDhaMapped(f),requirementReference:f?.requirement_reference||'',requirementStatus:f?.dha_status||''};
   }
   function goToQuote(){
     const f=state.family||fallbackFamily(state.familyId),presentations=(Array.isArray(f?.presentations)?f.presentations:[]).filter(Boolean);
@@ -149,8 +178,9 @@
   function bindDetail(root){
     root.querySelectorAll('[data-family-detail-close]').forEach(el=>el.addEventListener('click',close));
     root.querySelectorAll('[data-family-presentation]').forEach(el=>el.addEventListener('click',()=>{state.presentation=el.dataset.familyPresentation;root.querySelector('.pscPresentationChips')?.classList.remove('invalid');draw();}));
-    root.querySelector('[data-family-no-preference]')?.addEventListener('change',e=>{if(e.target.checked){state.selectedBrands=[];state.otherBrandActive=false;state.otherBrand='';draw();}else{draw();}});
-    root.querySelectorAll('[data-family-brand]').forEach(el=>el.addEventListener('change',()=>{const brand=el.dataset.familyBrand||'';const set=new Set(state.selectedBrands);if(el.checked)set.add(brand);else set.delete(brand);state.selectedBrands=[...set];draw();}));
+    root.querySelector('[data-family-no-preference]')?.addEventListener('change',e=>{if(e.target.checked){state.selectedOptionIds=[];state.selectedFallbackBrands=[];state.otherBrandActive=false;state.otherBrand='';draw();}else{draw();}});
+    root.querySelectorAll('[data-family-option]').forEach(el=>el.addEventListener('change',()=>{const id=el.dataset.familyOption||'';const set=new Set(state.selectedOptionIds);if(el.checked)set.add(id);else set.delete(id);state.selectedOptionIds=[...set];draw();}));
+    root.querySelectorAll('[data-family-fallback-brand]').forEach(el=>el.addEventListener('change',()=>{const brand=el.dataset.familyFallbackBrand||'';const set=new Set(state.selectedFallbackBrands);if(el.checked)set.add(brand);else set.delete(brand);state.selectedFallbackBrands=[...set];draw();}));
     root.querySelector('[data-family-other-toggle]')?.addEventListener('change',e=>{state.otherBrandActive=!!e.target.checked;if(!state.otherBrandActive)state.otherBrand='';draw();});
     const other=root.querySelector('[data-family-other-brand]');if(other)other.addEventListener('input',e=>{state.otherBrand=e.target.value;e.target.classList.remove('invalid');const summary=root.querySelector('.pscFamilySelectionSummary b');if(summary)summary.textContent=preferenceSummary();});
     root.querySelector('[data-family-quote]')?.addEventListener('click',goToQuote);
