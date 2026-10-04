@@ -1104,82 +1104,49 @@
   function ourModelPage(){ return publicPage(
     'our-model',
     'OUR MODEL',
-    'Supplying a clinic is mostly about getting the small things right.',
-    'We supply healthcare products to institutions. The job is not complicated for the sake of being complicated — it just needs a more careful eye than ordinary retail. The exact product, the right pack, the compatible accessory, the expiry and the correct supply route all matter.',
-    `<section class="publicSection modelQuietIntro">
-      <div class="modelQuietLead">
-        <h2>We start with the list you actually have.</h2>
-        <p>Sometimes it is beautifully specified. Sometimes it says “gauze 10 × 10 — 5 boxes.” Both are fine as a starting point.</p>
-        <p>Our job is to work out what the clinic really needs before we turn that line into a quotation. Sterile or non-sterile? Which material? How many pieces are actually in the pack? Does the device need a particular cuff, strip, mask, regulator or accessory? Is there an expiry issue we should care about?</p>
-        <p>The point is not to slow the order down. It is to avoid sending the wrong thing quickly.</p>
-      </div>
-      <aside class="modelQuietAside modelQuietVisualBoard">
-        <p><strong>A list tells us what to look for.</strong><br>The specification tells us what to buy.</p>
-        <div class="modelQuietMiniFlow">
-          <article><span>01</span><b>Capture</b><small>List, site and quantities</small></article>
-          <article><span>02</span><b>Specify</b><small>Exact product and route</small></article>
-          <article><span>03</span><b>Source</b><small>Right supplier per line</small></article>
-          <article><span>04</span><b>Record</b><small>Quote, delivery and repeat history</small></article>
-        </div>
-      </aside>
-    </section>
-
-    <section class="publicSection modelSignalStrip">
-      <article><span>SPECIFICATION FIRST</span><b>Exact product, exact pack, exact compatibility.</b></article>
-      <article><span>SOURCE PER LINE</span><b>We do not force diagnostics, PPE, furniture and medicines through one supplier.</b></article>
-      <article><span>REGULATED ROUTES</span><b>Licensed, expiry-sensitive and specialist lines follow the correct channel.</b></article>
-      <article><span>ACCOUNT MEMORY</span><b>The second order should be easier because the first one was recorded properly.</b></article>
-    </section>
-
-    <section class="publicSection modelQuietExamples">
-      <div class="modelQuietHead"><h2>A few examples of the details we mean.</h2><p>They are not dramatic. They are just the things that make a product useful once it reaches the clinic.</p></div>
-      <div class="modelQuietExampleRows">
-        <article><div><span class="modelQuietSectionTag">MONITORING</span><h3>Blood-pressure monitors</h3></div><p>A good monitor with the wrong cuff size is still the wrong setup for the people using it.</p></article>
-        <article><div><span class="modelQuietSectionTag">TESTING</span><h3>Glucose meters</h3></div><p>The meter, strips and control solution have to belong together. “Compatible enough” is not a specification.</p></article>
-        <article><div><span class="modelQuietSectionTag">WOUND CARE</span><h3>Gauze and dressings</h3></div><p>Size is only part of the description. Sterility, material, ply and pack conversion can change what is actually being supplied.</p></article>
-        <article><div><span class="modelQuietSectionTag">EMERGENCY</span><h3>AEDs and emergency equipment</h3></div><p>The main device is only part of readiness. Pads, battery status, accessories, expiry and service support matter too.</p></article>
+    'One requirement. The right line. One accountable supply partner.',
+    'We clarify what is needed, source each category properly, and keep the record so the next order is easier.',
+    `<section class="publicSection modelV2FlowSection">
+      <div class="modelV2FlowIntro"><span class="kicker">HOW IT WORKS</span><h2>Four moves. No procurement maze.</h2></div>
+      <div class="modelV2Flow">
+        <article><img src="/assets/ui-icons/search.webp" alt="Understand"><span>01</span><h3>Understand</h3><p>What does the clinic actually need?</p></article>
+        <article><img src="/assets/ui-icons/checklist.webp" alt="Match"><span>02</span><h3>Match</h3><p>Exact product, pack and specification.</p></article>
+        <article><img src="/assets/ui-icons/shop.webp" alt="Source"><span>03</span><h3>Source</h3><p>Best suitable supplier for that line.</p></article>
+        <article><img src="/assets/ui-icons/delivery.webp" alt="Deliver"><span>04</span><h3>Deliver + repeat</h3><p>One quote, one record, easier reorders.</p></article>
       </div>
     </section>
 
-    <section class="publicSection modelQuietCommercial">
-      <div class="modelQuietHead"><h2>Then we do the commercial work properly.</h2><p>Once the requirement is clear, the rest is fairly practical — but it still needs discipline.</p></div>
-      <div class="modelQuietCommercialRows">
-        <article><div><span class="modelQuietNumber">01</span><h3>We source the line where it belongs.</h3></div><p>Furniture, diagnostics, disposables, emergency equipment, oxygen and medicines do not all belong to the same supplier or the same route. We use category-appropriate sources rather than forcing the whole basket through one channel.</p></article>
-        <article><div><span class="modelQuietNumber">02</span><h3>We compare like with like.</h3></div><p>Brand and price matter, but so do model, pack, stock, lead time, VAT treatment, warranty, delivery and the conditions attached to the offer. A cheaper non-matching line is not a saving.</p></article>
-        <article><div><span class="modelQuietNumber">03</span><h3>We check before we promise.</h3></div><p>Availability changes. Supplier quotations expire. Regulated products have their own controls. We would rather verify the point that matters than make a confident promise we cannot support.</p></article>
-        <article><div><span class="modelQuietNumber">04</span><h3>We keep enough of the record to make the next order easier.</h3></div><p>Quotation, delivery, model, serial or warranty information, and batch or expiry where relevant. The second order should not need everyone to remember what happened the first time.</p></article>
+    <section class="publicSection modelV2CategorySection">
+      <div class="modelV2SectionHead"><span class="kicker">CATEGORY LOGIC</span><h2>Different products need different checks.</h2></div>
+      <div class="modelV2CategoryGrid">
+        <article><img src="/assets/ui-icons/diagnostics.webp" alt="Diagnostics"><h3>Diagnostics</h3><small>Model + compatible consumables</small></article>
+        <article><img src="/assets/ui-icons/clinic-supplies.webp" alt="Consumables"><h3>Consumables</h3><small>Size + sterile status + pack</small></article>
+        <article><img src="/assets/ui-icons/first-aid.webp" alt="Emergency"><h3>Emergency</h3><small>Device + accessories + readiness</small></article>
+        <article><img src="/assets/ui-icons/respiratory.webp" alt="Oxygen"><h3>Oxygen</h3><small>Compatibility + qualified route</small></article>
+        <article><img src="/assets/ui-icons/medicines.webp" alt="Medicines"><h3>Medicines</h3><small>Licensed route + traceability</small></article>
       </div>
     </section>
 
-    <section class="publicSection modelQuietCategories">
-      <div class="modelQuietHead"><h2>Different categories need a different eye.</h2><p>This is the part of institutional supply that is easy to miss if everything is treated like normal retail.</p></div>
-      <div class="modelQuietCategoryGrid">
-        <article><div class="modelQuietCategoryHead"><img src="/assets/ui-icons/diagnostics.webp" alt="Diagnostics icon"><span>CAPITAL + CONSUMABLES</span></div><h3>Diagnostics</h3><p>Exact model, intended use, accuracy information and compatible consumables.</p></article>
-        <article><div class="modelQuietCategoryHead"><img src="/assets/ui-icons/clinic-supplies.webp" alt="Consumables icon"><span>DAY-TO-DAY READINESS</span></div><h3>Consumables</h3><p>Material, size, sterile status, pack conversion and expiry.</p></article>
-        <article><div class="modelQuietCategoryHead"><img src="/assets/ui-icons/first-aid.webp" alt="Emergency equipment icon"><span>READINESS</span></div><h3>Emergency equipment</h3><p>Model, accessories, consumables, service scope and readiness after handover.</p></article>
-        <article><div class="modelQuietCategoryHead"><img src="/assets/ui-icons/respiratory.webp" alt="Oxygen icon"><span>QUALIFIED ROUTE</span></div><h3>Oxygen</h3><p>Medical-grade supply, cylinder and regulator compatibility, handling and the appropriate qualified route.</p></article>
-        <article><div class="modelQuietCategoryHead"><img src="/assets/ui-icons/medicines.webp" alt="Medicines icon"><span>LICENSED LINES</span></div><h3>Medicines</h3><p>The correct licensed procurement route, permitted recipient and traceability. Convenience does not replace those controls.</p></article>
+    <section class="publicSection modelV2BasketSection">
+      <div class="modelV2SectionHead compact"><span class="kicker">WHAT WE MANAGE</span><h2>Opening basket. Recurring basket.</h2></div>
+      <div class="modelV2BasketGrid">
+        <article class="opening"><div class="modelV2BasketIcon"><img src="/assets/ui-icons/clinic-setup.webp" alt="Opening basket"></div><div><span>OPENING / CAPITAL</span><h3>Set the clinic up.</h3><p>Furniture · diagnostics · monitoring · emergency equipment</p></div></article>
+        <article class="recurring"><div class="modelV2BasketIcon"><img src="/assets/ui-icons/returns.webp" alt="Recurring basket"></div><div><span>RECURRING</span><h3>Keep the clinic ready.</h3><p>Dressings · PPE · testing · respiratory · refills</p></div></article>
       </div>
     </section>
 
-    <section class="publicSection modelQuietAftercare">
-      <div><h2>The first delivery is not the whole job.</h2><p>An examination couch may be bought once. Gloves, dressings, swabs and test strips come back. AED pads expire. Batteries age. Equipment needs compatible consumables. Warranties and serials become useful only when someone can find them later.</p><p>That is why we think about replenishment, expiry, replacement and records from the beginning — especially for multi-site institutions and school clinics.</p></div>
-      <div class="modelQuietAftercareList"><div><strong>Opening items</strong><span>Furniture, diagnostics, monitoring, emergency equipment and setup.</span></div><div><strong>Recurring items</strong><span>Dressings, PPE, testing consumables, respiratory items, hygiene and permitted medicines.</span></div><div><strong>Easy to forget</strong><span>Accessories, expiry, replacements, warranty and handover records.</span></div></div>
+    <section class="publicSection modelV2AccountBand">
+      <div class="modelV2AccountLead"><span class="kicker">THE POINT</span><h2>You should not have to manage five suppliers to keep one clinic ready.</h2></div>
+      <div class="modelV2AccountSteps"><span>QUOTE</span><i>→</i><span>DELIVER</span><i>→</i><span>RECORD</span><i>→</i><span>REPLENISH</span></div>
     </section>
 
-    <section class="publicSection modelQuietSchool">
-      <div class="modelQuietSchoolCopy"><h2>School clinics bring all of this together.</h2><p>They have capital equipment, day-to-day consumables, emergency readiness, medicines through the appropriate route, expiry, replenishment and records — all in a small clinical environment that needs to stay ready.</p><p>We would rather become familiar with how the clinic actually runs than simply keep sending boxes at it.</p></div>
-      <div class="modelQuietSchoolVisual"><article><span>OPENING BASKET</span><b>Furniture, diagnostics and emergency setup</b></article><article><span>RECURRING BASKET</span><b>Gloves, dressings, strips, PPE and refills</b></article><article><span>ACCOUNTABILITY</span><b>Records, replenishment and replacement memory</b></article></div>
-      <div class="modelQuietSchoolAction"><button class="button outline large" data-go="catalogue">Browse the institutional catalogue</button></div>
+    <section class="publicSection modelV2School">
+      <div><span class="kicker">FIRST FOCUS</span><h2>School clinics are where the model comes together.</h2><p>Equipment, daily consumables, emergency readiness, regulated lines and repeat supply — in one small clinical environment.</p></div>
+      <button class="button primary large" data-go="catalogue">Browse institutional catalogue</button>
     </section>
     ${schoolWorkshopStrip()}
 
-    <section class="publicSection modelQuietRegulated">
-      <h2>Some lines simply need a different route.</h2>
-      <p>Medicines, oxygen, specialist services and other regulated products remain subject to the applicable UAE licensing, recipient, storage, batch/expiry and professional controls. If a line needs a specialist or licensed route, we treat it that way.</p>
-    </section>
-
-    <section class="publicCta modelQuietCta"><div><h2>Send us the list you have.</h2><p>If something is vague, we will tighten it. If something needs a different route, we will tell you. Then we can quote the requirement on a basis that actually makes sense.</p></div><div class="publicCtaActions"><button class="button outline large" data-go="catalogue">Browse catalogue</button><button class="button primary large" data-go="contact">Send a requirement</button></div></section>`
+    <section class="publicCta modelV2Cta"><div><span class="kicker">START WITH WHAT YOU HAVE</span><h2>Send the list. We will tighten the specification.</h2><p>Regulated lines continue through the appropriate licensed and qualified route.</p></div><div class="publicCtaActions"><button class="button outline large" data-go="catalogue">Browse catalogue</button><button class="button primary large" data-go="contact">Send a requirement</button></div></section>`
   ); }
 
 
@@ -1271,16 +1238,25 @@
       <i>${count} ${count===1?'guide':'guides'}</i>
     </button>`;
   }
+  function workshopGuideImage(g){
+    const images={
+      'which-glove-should-i-actually-wear':'/assets/workshop/glove-selection.png',
+      'oxygen-cylinder-is-not-an-oxygen-system':'/assets/workshop/oxygen-system.png',
+      'aed-has-expiring-parts-too':'/assets/workshop/aed-expiry.png'
+    };
+    return images[g?.slug]||'';
+  }
   function workshopGuideCard(g){
     const meta=workshopCategoryMeta(g.category);
-    return `<article class="workshopGuideCard ${meta.tone}">
+    const guideImage=workshopGuideImage(g);
+    return `<article class="workshopGuideCard ${meta.tone} ${guideImage?'hasGuideImage':''}">
       <button data-go="workshop/${esc(g.slug)}" aria-label="Open ${esc(g.title)}">
         <span class="workshopGuideCardCopy">
           <span class="workshopGuideCardMeta"><b>${esc(g.category)}</b><small>${esc(g.read_time)} read</small></span>
           <h3>${esc(g.title)}</h3>
           <p>${esc(g.excerpt)}</p>
         </span>
-        <span class="workshopGuideCardVisual" aria-hidden="true"><i>${icon(meta.icon)}</i></span>
+        <span class="workshopGuideCardVisual" aria-hidden="true">${guideImage?`<img src="${esc(guideImage)}" alt="">`:`<i>${icon(meta.icon)}</i>`}</span>
       </button>
     </article>`;
   }
@@ -1352,6 +1328,7 @@
           <div class="workshopArticleMeta"><span>${esc(g.read_time)} read</span><span>Last reviewed ${esc(g.last_reviewed)}</span><span>${esc(g.author_or_review_status)}</span></div>
           <div class="workshopArticleActions"><button data-workshop-save="${esc(g.slug)}" aria-pressed="${saved?'true':'false'}">${saved?'Saved':'Save'}</button><button data-workshop-print>Print</button><button data-workshop-share="${esc(g.slug)}">Share</button>${authContext?.isPscAdmin?`<button class="workshopMailAction" data-mail-from-guide="${esc(g.slug)}">Create email</button>`:''}</div>
         </header>
+        ${workshopGuideImage(g)?`<figure class="workshopArticleHeroImage"><img src="${esc(workshopGuideImage(g))}" alt="${esc(g.title)}"></figure>`:''}
         <div class="workshopArticleBody">${(g.body_sections||[]).map(workshopSectionHtml).join('')}</div>
         <section class="workshopSignature">
           <article><span>USE IT RIGHT</span><p>${esc(g.use_it_right)}</p></article>
