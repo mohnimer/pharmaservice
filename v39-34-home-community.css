@@ -1,319 +1,261 @@
 /* =========================================================
-   V39.34 — Home community section
-   Recreates the supplied Canva/PDF composition natively.
-   No core app.js/styles.css replacement.
+   V39.35 — Home community section, corrected
+   Uses the supplied transparent Canva composition as the
+   section background. No reconstructed people/cutout layers.
    ========================================================= */
 
 .homeCommunitySection{
   position:relative;
+  isolation:isolate;
   overflow:hidden;
+  height:clamp(650px,45vw,820px);
+  min-height:650px;
   border-bottom:1px solid #ddd7ce;
   background:#fbfaf7;
-  padding:clamp(68px,7vw,108px) clamp(26px,5.8vw,96px);
+  padding:clamp(70px,7vw,112px) clamp(46px,4vw,78px);
+  display:flex;
+  align-items:center;
 }
+
+/* Exact user-supplied image is the background layer. */
 .homeCommunitySection::before{
   content:"";
   position:absolute;
+  z-index:-2;
+  inset:-2%;
+  pointer-events:none;
+  background-image:url("/assets/home-community-section-bg.png?v=3935");
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center center;
+  will-change:filter,transform,opacity;
+  transition:
+    filter 1.05s ease,
+    transform 1.15s cubic-bezier(.2,.72,.2,1),
+    opacity .78s ease;
+}
+
+/* Very light left-side wash only to keep web text crisp over the source. */
+.homeCommunitySection::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
   inset:0;
   pointer-events:none;
-  background:
-    radial-gradient(circle at 82% 18%,rgba(36,168,161,.07),transparent 34%),
-    linear-gradient(90deg,rgba(255,255,255,.68),transparent 50%);
+  background:linear-gradient(
+    90deg,
+    rgba(251,250,247,.34) 0%,
+    rgba(251,250,247,.14) 36%,
+    rgba(251,250,247,0) 51%
+  );
 }
+
 .homeCommunityInner{
-  position:relative;
-  z-index:1;
-  width:min(1440px,100%);
+  width:min(100%,1440px);
   margin:0 auto;
-  display:grid;
-  grid-template-columns:minmax(360px,.86fr) minmax(560px,1.14fr);
-  gap:clamp(44px,6vw,108px);
-  align-items:center;
+  position:relative;
 }
+
 .homeCommunityCopy{
-  max-width:660px;
+  width:min(43%,700px);
+  max-width:700px;
+  margin-top:-2%;
 }
-.homeCommunityRule{
-  display:block;
-  width:66px;
-  height:2px;
-  margin-bottom:24px;
-  background:#24a8a1;
-  transform-origin:left center;
-}
+
 .homeCommunityCopy h2{
   margin:0;
-  max-width:650px;
-  font-size:clamp(44px,4.9vw,72px);
-  line-height:.95;
-  letter-spacing:-.058em;
+  color:#111413;
+  font-size:clamp(44px,3.35vw,62px);
+  line-height:1.06;
+  letter-spacing:-.055em;
   font-weight:700;
-  color:#171918;
 }
+
+.homeCommunityCopy h2 span{
+  display:block;
+  white-space:nowrap;
+}
+
 .homeCommunityBody{
-  margin-top:clamp(28px,3.2vw,44px);
+  width:min(100%,600px);
+  margin-top:clamp(30px,3vw,46px);
   display:grid;
-  gap:18px;
-  max-width:590px;
+  gap:22px;
 }
+
 .homeCommunityBody p{
   margin:0;
-  font-size:clamp(15px,1.25vw,18px);
-  line-height:1.62;
-  color:#67635d;
+  color:#7a7772;
+  font-size:clamp(15px,1.04vw,18px);
+  line-height:1.5;
+  letter-spacing:-.012em;
 }
+
 .homeCommunityBody p:first-child{
-  color:#3c403e;
-}
-.homeCommunitySince{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  width:max-content;
-  margin-top:28px;
-  padding:9px 12px;
-  border:1px solid #d8d4cc;
-  border-radius:999px;
-  background:rgba(255,255,255,.58);
-  color:#565d5a;
-  font-size:10px;
-  line-height:1;
-  letter-spacing:.11em;
-  font-weight:800;
-}
-.homeCommunitySince::before{
-  content:"";
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:#24a8a1;
+  color:#706d68;
 }
 
-.homeCommunityVisual{
-  position:relative;
-  min-height:clamp(430px,43vw,650px);
-  border-radius:30px;
-  overflow:hidden;
-  border:1px solid rgba(30,35,33,.08);
-  box-shadow:0 26px 64px rgba(39,46,43,.08);
-  background:#f4f3ef;
-  isolation:isolate;
-}
-.homeCommunityCorridor{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:66% center;
-  transform:scale(1.02);
-}
-.homeCommunityVisual::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:2;
-  pointer-events:none;
-  background:
-    linear-gradient(90deg,rgba(251,250,247,.38),transparent 29%),
-    linear-gradient(180deg,transparent 72%,rgba(19,33,31,.035));
-}
-.homeCommunityPerson{
-  position:absolute;
-  z-index:3;
-  display:block;
-  object-fit:contain;
-  filter:drop-shadow(0 12px 16px rgba(41,37,32,.10));
-}
-.homeCommunityDoctor{
-  width:12.5%;
-  right:7%;
-  bottom:21%;
-  opacity:.94;
-}
-.homeCommunityBoy{
-  width:18.2%;
-  right:37%;
-  bottom:8.5%;
-}
-.homeCommunityGirl{
-  width:17%;
-  right:20.5%;
-  bottom:8.4%;
+/* Scroll reveal — restrained and whole-section based. */
+.homeCommunitySection:not(.is-visible)::before{
+  filter:blur(10px);
+  transform:scale(1.025);
+  opacity:.76;
 }
 
-/* Elegant, scroll-triggered reveal. */
-.homeCommunitySection:not(.is-visible) .homeCommunityRule{
-  opacity:0;
-  transform:scaleX(.15);
-}
 .homeCommunitySection:not(.is-visible) .homeCommunityCopy h2,
-.homeCommunitySection:not(.is-visible) .homeCommunityBody p,
-.homeCommunitySection:not(.is-visible) .homeCommunitySince{
+.homeCommunitySection:not(.is-visible) .homeCommunityBody p{
   opacity:0;
   transform:translateY(18px);
 }
-.homeCommunitySection:not(.is-visible) .homeCommunityVisual{
-  opacity:0;
-  transform:translateY(10px) scale(.993);
-}
-.homeCommunitySection:not(.is-visible) .homeCommunityCorridor{
-  filter:blur(11px) saturate(.92);
-  transform:scale(1.045);
-}
-.homeCommunitySection:not(.is-visible) .homeCommunityDoctor{
-  opacity:0;
-  transform:translate(8px,16px);
-}
-.homeCommunitySection:not(.is-visible) .homeCommunityBoy{
-  opacity:0;
-  transform:translate(-7px,18px);
-}
-.homeCommunitySection:not(.is-visible) .homeCommunityGirl{
-  opacity:0;
-  transform:translate(7px,18px);
-}
 
-.homeCommunityRule{
-  transition:opacity .45s ease,transform .55s cubic-bezier(.2,.72,.2,1);
-}
 .homeCommunityCopy h2{
-  transition:opacity .58s ease .05s,transform .62s cubic-bezier(.2,.72,.2,1) .05s;
-}
-.homeCommunityBody p:nth-child(1){
-  transition:opacity .52s ease .14s,transform .58s cubic-bezier(.2,.72,.2,1) .14s;
-}
-.homeCommunityBody p:nth-child(2){
-  transition:opacity .52s ease .21s,transform .58s cubic-bezier(.2,.72,.2,1) .21s;
-}
-.homeCommunitySince{
-  transition:opacity .48s ease .28s,transform .54s cubic-bezier(.2,.72,.2,1) .28s;
-}
-.homeCommunityVisual{
-  transition:opacity .72s ease .05s,transform .78s cubic-bezier(.2,.72,.2,1) .05s;
-}
-.homeCommunityCorridor{
-  transition:filter 1.15s ease .08s,transform 1.2s cubic-bezier(.2,.72,.2,1) .08s;
-}
-.homeCommunityDoctor{
-  transition:opacity .62s ease .24s,transform .72s cubic-bezier(.2,.72,.2,1) .24s;
-}
-.homeCommunityBoy{
-  transition:opacity .62s ease .31s,transform .72s cubic-bezier(.2,.72,.2,1) .31s;
-}
-.homeCommunityGirl{
-  transition:opacity .62s ease .37s,transform .72s cubic-bezier(.2,.72,.2,1) .37s;
+  transition:
+    opacity .58s ease .08s,
+    transform .64s cubic-bezier(.2,.72,.2,1) .08s;
 }
 
-@media(max-width:1050px){
-  .homeCommunityInner{
-    grid-template-columns:minmax(320px,.88fr) minmax(440px,1.12fr);
-    gap:42px;
-  }
-  .homeCommunityVisual{
-    min-height:500px;
-  }
+.homeCommunityBody p:nth-child(1){
+  transition:
+    opacity .52s ease .18s,
+    transform .58s cubic-bezier(.2,.72,.2,1) .18s;
 }
-@media(max-width:820px){
+
+.homeCommunityBody p:nth-child(2){
+  transition:
+    opacity .52s ease .27s,
+    transform .58s cubic-bezier(.2,.72,.2,1) .27s;
+}
+
+/* Large tablet */
+@media(max-width:1080px){
   .homeCommunitySection{
-    padding:58px 24px 64px;
+    height:clamp(620px,59vw,720px);
+    min-height:620px;
+    padding-left:38px;
+    padding-right:38px;
   }
-  .homeCommunityInner{
-    grid-template-columns:1fr;
-    gap:36px;
-  }
+
   .homeCommunityCopy{
-    max-width:680px;
+    width:46%;
   }
+
   .homeCommunityCopy h2{
-    font-size:clamp(42px,10vw,64px);
+    font-size:clamp(39px,4.2vw,50px);
   }
-  .homeCommunityVisual{
-    min-height:0;
-    aspect-ratio:1.2/1;
+
+  .homeCommunityBody{
+    margin-top:28px;
+    gap:18px;
   }
-  .homeCommunityCorridor{
-    object-position:69% center;
-  }
-  .homeCommunityDoctor{
-    width:12%;
-    right:5%;
-  }
-  .homeCommunityBoy{
-    width:19%;
-    right:38%;
-  }
-  .homeCommunityGirl{
-    width:18%;
-    right:19%;
+
+  .homeCommunityBody p{
+    font-size:14px;
   }
 }
-@media(max-width:560px){
+
+/* Mobile: retain the exact attachment as the background, but let
+   the text occupy a clean white upper field and the visual resolve
+   into the lower half. */
+@media(max-width:760px){
   .homeCommunitySection{
-    padding:46px 18px 52px;
+    height:auto;
+    min-height:760px;
+    padding:54px 24px 390px;
+    align-items:flex-start;
+    background:#fbfaf7;
   }
+
+  .homeCommunitySection::before{
+    inset:auto 0 0;
+    width:100%;
+    height:430px;
+    background-size:auto 430px;
+    background-position:center bottom;
+  }
+
+  .homeCommunitySection::after{
+    z-index:-1;
+    background:linear-gradient(
+      180deg,
+      #fbfaf7 0%,
+      #fbfaf7 48%,
+      rgba(251,250,247,.88) 55%,
+      rgba(251,250,247,0) 70%
+    );
+  }
+
   .homeCommunityInner{
-    gap:30px;
+    width:100%;
   }
+
+  .homeCommunityCopy{
+    width:100%;
+    max-width:none;
+    margin:0;
+  }
+
   .homeCommunityCopy h2{
-    font-size:clamp(40px,12.5vw,56px);
-    line-height:.97;
+    font-size:clamp(38px,10.2vw,54px);
+    line-height:1.02;
   }
+
+  .homeCommunityCopy h2 span{
+    white-space:normal;
+  }
+
   .homeCommunityBody{
-    margin-top:24px;
-    gap:14px;
+    margin-top:26px;
+    gap:16px;
+    max-width:620px;
   }
+
   .homeCommunityBody p{
     font-size:15px;
-    line-height:1.56;
+    line-height:1.55;
   }
-  .homeCommunitySince{
+}
+
+@media(max-width:440px){
+  .homeCommunitySection{
+    min-height:735px;
+    padding:46px 18px 350px;
+  }
+
+  .homeCommunitySection::before{
+    height:380px;
+    background-size:auto 380px;
+  }
+
+  .homeCommunityCopy h2{
+    font-size:clamp(36px,10.4vw,46px);
+  }
+
+  .homeCommunityBody{
     margin-top:22px;
+    gap:14px;
   }
-  .homeCommunityVisual{
-    border-radius:22px;
-    aspect-ratio:.96/1;
-  }
-  .homeCommunityCorridor{
-    object-position:73% center;
-  }
-  .homeCommunityBoy{
-    width:25%;
-    right:40%;
-    bottom:8%;
-  }
-  .homeCommunityGirl{
-    width:23%;
-    right:18%;
-    bottom:8%;
-  }
-  .homeCommunityDoctor{
-    width:16%;
-    right:4%;
-    bottom:23%;
+
+  .homeCommunityBody p{
+    font-size:14px;
   }
 }
 
 @media(prefers-reduced-motion:reduce){
-  .homeCommunitySection *,
-  .homeCommunitySection *::before,
-  .homeCommunitySection *::after{
+  .homeCommunitySection::before,
+  .homeCommunityCopy h2,
+  .homeCommunityBody p{
     transition:none!important;
-    animation:none!important;
   }
-  .homeCommunitySection:not(.is-visible) .homeCommunityRule,
+
+  .homeCommunitySection:not(.is-visible)::before{
+    filter:none!important;
+    transform:none!important;
+    opacity:1!important;
+  }
+
   .homeCommunitySection:not(.is-visible) .homeCommunityCopy h2,
-  .homeCommunitySection:not(.is-visible) .homeCommunityBody p,
-  .homeCommunitySection:not(.is-visible) .homeCommunitySince,
-  .homeCommunitySection:not(.is-visible) .homeCommunityVisual,
-  .homeCommunitySection:not(.is-visible) .homeCommunityDoctor,
-  .homeCommunitySection:not(.is-visible) .homeCommunityBoy,
-  .homeCommunitySection:not(.is-visible) .homeCommunityGirl{
+  .homeCommunitySection:not(.is-visible) .homeCommunityBody p{
     opacity:1!important;
     transform:none!important;
-  }
-  .homeCommunitySection:not(.is-visible) .homeCommunityCorridor{
-    filter:none!important;
-    transform:scale(1.02)!important;
   }
 }
