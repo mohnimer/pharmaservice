@@ -1,0 +1,1437 @@
+/* =========================================================
+   V44 — FULL PSC DESIGN SYSTEM REDESIGN
+   Approved direction: procurement itself becomes the visual language.
+   DM Sans and the real Pharma Service logo remain untouched.
+   ========================================================= */
+
+:root{
+  --v44-paper:#fbf8f1;
+  --v44-cream:#fffdf8;
+  --v44-ink:#111412;
+  --v44-muted:#706a63;
+  --v44-line:#d9d2c8;
+  --v44-line-strong:#bcb3a8;
+  --v44-deep:#10211f;
+  --v44-teal:#159b91;
+  --v44-teal-dark:#176d66;
+  --v44-mint:#dceee7;
+  --v44-lilac:#b7b0d6;
+  --v44-lilac-soft:#e6e2f2;
+  --v44-blue:#dce8f3;
+  --v44-peach:#efd2bf;
+  --v44-sun:#f1dfad;
+  --v44-coral:#efaa98;
+  --v44-shadow:0 24px 60px rgba(43,35,28,.085);
+  --v44-shadow-soft:0 10px 30px rgba(43,35,28,.06);
+  --v44-ease:cubic-bezier(.22,1,.36,1);
+}
+
+html,body,button,input,select,textarea{
+  font-family:"DM Sans",sans-serif!important;
+}
+
+body{
+  background:var(--v44-paper)!important;
+  color:var(--v44-ink)!important;
+}
+
+/* =========================================================
+   PUBLIC HEADER / FOOTER
+   ========================================================= */
+.publicHeader{
+  max-width:none!important;
+  margin:0!important;
+  min-height:86px!important;
+  padding:15px clamp(20px,5vw,72px)!important;
+  grid-template-columns:190px 1fr auto!important;
+  gap:32px!important;
+  background:rgba(251,248,241,.95)!important;
+  border-bottom:1px solid var(--v44-line)!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(14px);
+}
+.publicLogo img{
+  width:166px!important;
+}
+.publicNav{
+  gap:24px!important;
+}
+.publicNavLink{
+  position:relative!important;
+  padding:10px 0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#65645f!important;
+  font-size:14px!important;
+  font-weight:650!important;
+}
+.publicNavLink:after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:2px;
+  height:1px;
+  background:#173b37;
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .45s var(--v44-ease);
+}
+.publicNavLink:hover:after,
+.publicNavLink.active:after{transform:scaleX(1)}
+.publicNavLink.active{color:#183a36!important}
+.publicPortalBtn{
+  min-height:44px!important;
+  padding:0 16px!important;
+  border-radius:999px!important;
+  background:var(--v44-deep)!important;
+  color:#fff!important;
+  border-color:var(--v44-deep)!important;
+  box-shadow:none!important;
+}
+.publicFooter{
+  max-width:none!important;
+  margin:0!important;
+  padding:54px clamp(20px,5vw,72px) 42px!important;
+  background:var(--v44-cream)!important;
+  border-top:1px solid var(--v44-line)!important;
+}
+.publicFooter img{width:165px!important}
+.publicFooter p{max-width:420px!important;color:#77716b!important}
+
+/* =========================================================
+   HOME — PROCUREMENT AS HERO OBJECT
+   ========================================================= */
+.publicLanding{
+  background:var(--v44-paper)!important;
+}
+.m44HomeHero{
+  background:var(--v44-lilac);
+  padding:34px clamp(16px,4vw,54px) 62px;
+}
+.m44HomeHeroShell{
+  width:min(1360px,100%);
+  margin:0 auto;
+  min-height:690px;
+  display:grid;
+  grid-template-columns:minmax(0,1.02fr) minmax(440px,.78fr);
+  gap:clamp(46px,6vw,90px);
+  align-items:center;
+  padding:clamp(48px,6vw,88px);
+  border:1px solid rgba(20,22,20,.07);
+  border-radius:34px;
+  background:var(--v44-cream);
+}
+.m44HomeHeroCopy h1{
+  margin:0;
+  max-width:810px;
+  font-size:clamp(58px,6.6vw,102px);
+  line-height:.89;
+  letter-spacing:-.07em;
+  font-weight:500;
+}
+.m44HomeHeroCopy h1 span,
+.m44HomeHeroCopy h1 strong{display:block}
+.m44HomeHeroCopy h1 strong{font-weight:850}
+.m44HomeHeroCopy>p{
+  max-width:620px;
+  margin:28px 0 0;
+  color:var(--v44-muted);
+  font-size:17px;
+  line-height:1.7;
+}
+.m44HeroActions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+.m44HeroActions .button{
+  min-height:48px;
+  padding:0 18px;
+  border-radius:999px!important;
+}
+.m44HomeDesk{
+  position:relative;
+  min-height:520px;
+}
+.m44Requirement{
+  position:absolute;
+  inset:25px 12px 20px 34px;
+  overflow:hidden;
+  border:1px solid #d5cec4;
+  border-radius:23px;
+  background:#fff;
+  box-shadow:var(--v44-shadow);
+  transform:rotate(-1deg);
+}
+.m44ReqHead{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  align-items:flex-start;
+  padding:22px;
+  border-bottom:1px solid var(--v44-line);
+}
+.m44ReqHead b{display:block;font-size:14px}
+.m44ReqHead small{display:block;margin-top:4px;font-size:9.5px;color:#7a756e}
+.m44ReqMark{
+  width:42px;height:42px;
+  display:grid;place-items:center;
+  border-radius:12px;
+  background:var(--v44-deep);
+  color:#fff;
+  font-size:11px;
+  font-weight:900;
+}
+.m44ReqHeader,.m44ReqLine{
+  display:grid;
+  grid-template-columns:32px minmax(0,1fr) 72px;
+  gap:12px;
+  align-items:center;
+}
+.m44ReqHeader{
+  padding:10px 22px;
+  background:#f7f4ee;
+  border-bottom:1px solid var(--v44-line);
+  font-size:8.5px;color:#87817a;
+}
+.m44ReqLine{
+  padding:15px 22px;
+  border-bottom:1px solid #ece7df;
+}
+.m44ReqNo{
+  width:27px;height:27px;
+  display:grid;place-items:center;
+  border-radius:50%;
+  background:#edf4f1;
+  color:#226c66;
+  font-size:8px;font-weight:900;
+}
+.m44ReqLine b{display:block;font-size:11.5px;line-height:1.25}
+.m44ReqLine small{display:block;margin-top:4px;font-size:9px;line-height:1.35;color:#7b766f}
+.m44ReqStatus{
+  justify-self:end;
+  padding:5px 7px;
+  border-radius:999px;
+  background:#e5f3ef;
+  color:#176b64;
+  font-size:8px;
+  font-weight:850;
+}
+.m44ReqFoot{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  padding:16px 22px;
+  background:#f7f4ee;
+  font-size:9px;
+}
+.m44ReqFoot span{color:#77716a}
+.m44ReqFoot b{font-size:10.5px}
+.m44HeroNote{
+  position:absolute;
+  left:0;
+  bottom:21px;
+  width:185px;
+  z-index:3;
+  padding:14px 15px;
+  border:1px solid #cdc4ba;
+  border-radius:15px;
+  background:var(--v44-sun);
+  box-shadow:var(--v44-shadow-soft);
+  transform:rotate(2deg);
+}
+.m44HeroNote small{display:block;font-size:8.5px;color:#716a62}
+.m44HeroNote b{display:block;margin-top:4px;font-size:12px;line-height:1.25}
+
+/* Existing community image remains a visual moment. */
+.homeCommunitySection{
+  margin:0!important;
+  border-radius:0!important;
+}
+
+/* Details = technical ledger, not cards. */
+.publicLanding .homeEditorialIntro{
+  max-width:1360px!important;
+  margin:0 auto!important;
+  padding:105px clamp(28px,6vw,86px) 78px!important;
+  grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr)!important;
+  gap:clamp(70px,10vw,150px)!important;
+  background:var(--v44-cream)!important;
+  background-image:none!important;
+  border:0!important;
+}
+.publicLanding .homeEditorialLead h2{
+  margin:0!important;
+  max-width:520px!important;
+  font-size:clamp(40px,4.8vw,66px)!important;
+  line-height:.97!important;
+  letter-spacing:-.055em!important;
+}
+.publicLanding .homeEditorialCopy{
+  padding-top:5px!important;
+  max-width:700px!important;
+}
+.publicLanding .homeEditorialCopy p{
+  font-size:15.5px!important;
+  line-height:1.72!important;
+  color:#66615b!important;
+}
+.publicLanding .homeEditorialStrong{
+  padding-top:24px!important;
+  border-top:1px solid var(--v44-line)!important;
+  color:#171918!important;
+}
+
+.publicLanding .homeDetailLedger{
+  max-width:1360px!important;
+  margin:0 auto!important;
+  padding:0 clamp(28px,6vw,86px) 104px!important;
+  display:block!important;
+  background:var(--v44-cream)!important;
+}
+.publicLanding .homeDetailLedger article{
+  display:grid!important;
+  grid-template-columns:minmax(150px,.28fr) minmax(260px,.74fr) minmax(0,1fr)!important;
+  gap:32px!important;
+  align-items:start!important;
+  min-height:0!important;
+  padding:20px 0!important;
+  border:0!important;
+  border-top:1px solid var(--v44-line)!important;
+}
+.publicLanding .homeDetailLedger article:last-child{border-bottom:1px solid var(--v44-line)!important}
+.publicLanding .homeDetailLedger span{
+  margin:0!important;padding-top:2px!important;
+  text-transform:none!important;
+  letter-spacing:0!important;
+  font-size:11px!important;font-weight:750!important;
+}
+.publicLanding .homeDetailLedger b{
+  font-size:15px!important;line-height:1.4!important;
+}
+.publicLanding .homeDetailLedger p{
+  margin:0!important;font-size:12px!important;line-height:1.55!important;
+}
+
+/* Clinical need = deliberately asymmetrical product navigation. */
+.publicLanding .publicClinicalPreview{
+  max-width:none!important;
+  margin:0!important;
+  padding:96px max(22px,calc((100vw - 1320px)/2)) 104px!important;
+  background:#f0ebe2!important;
+  border-top:1px solid var(--v44-line)!important;
+  border-bottom:1px solid var(--v44-line)!important;
+}
+.publicLanding .publicClinicalPreviewHead,
+.publicLanding .publicClinicalPreviewGrid,
+.publicLanding .publicClinicalPreviewFoot{
+  max-width:1320px!important;
+  margin-left:auto!important;margin-right:auto!important;
+}
+.publicLanding .publicClinicalPreviewHead{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  gap:40px!important;
+  align-items:end!important;
+  margin-bottom:38px!important;
+}
+.publicLanding .publicClinicalPreviewHead h2{
+  margin:0 0 12px!important;
+  max-width:720px!important;
+  font-size:clamp(38px,4.3vw,62px)!important;
+  line-height:.98!important;
+  letter-spacing:-.055em!important;
+}
+.publicLanding .publicClinicalPreviewGrid{
+  display:grid!important;
+  grid-template-columns:repeat(12,minmax(0,1fr))!important;
+  grid-auto-rows:118px!important;
+  gap:10px!important;
+}
+.publicLanding .publicClinicalCard{
+  min-height:0!important;
+  height:auto!important;
+  border:1px solid rgba(20,23,21,.12)!important;
+  border-radius:19px!important;
+  padding:22px!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+.publicLanding .publicClinicalCard:nth-child(1){grid-column:span 5;grid-row:span 2}
+.publicLanding .publicClinicalCard:nth-child(2){grid-column:span 3;grid-row:span 2}
+.publicLanding .publicClinicalCard:nth-child(3){grid-column:span 4;grid-row:span 1}
+.publicLanding .publicClinicalCard:nth-child(4){grid-column:span 4;grid-row:span 2}
+.publicLanding .publicClinicalCard:nth-child(5){grid-column:span 5;grid-row:span 2}
+.publicLanding .publicClinicalCard:nth-child(6){grid-column:span 3;grid-row:span 1}
+.publicLanding .publicClinicalCard span{font-size:clamp(18px,1.8vw,28px)!important;max-width:72%!important}
+.publicLanding .publicClinicalCard small{font-size:10.5px!important;max-width:30ch!important}
+.publicLanding .publicClinicalCard:hover{box-shadow:none!important;transform:none!important;border-color:rgba(20,23,21,.34)!important}
+
+/* Workshop teaser = feature + supporting stories */
+.publicLanding .homeWorkshopCards{
+  max-width:1360px!important;
+  margin:0 auto!important;
+  padding:104px clamp(28px,6vw,86px)!important;
+  grid-template-columns:230px minmax(0,1fr)!important;
+  gap:52px!important;
+  background:var(--v44-cream)!important;
+  background-image:none!important;
+}
+.publicLanding .homeWorkshopIntro{position:sticky;top:112px;align-self:start}
+.publicLanding .homeWorkshopCardGrid{
+  display:grid!important;
+  grid-template-columns:1.28fr .9fr!important;
+  grid-template-rows:auto auto!important;
+  gap:11px!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:first-child{
+  grid-row:1 / span 2!important;
+}
+.workshopGuideCard{
+  border-radius:20px!important;
+  border:1px solid var(--v44-line)!important;
+  box-shadow:none!important;
+}
+.workshopGuideCard:hover{transform:none!important;box-shadow:none!important;border-color:#aaa39a!important}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:first-child>button{
+  grid-template-rows:minmax(320px,1fr) 220px!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:not(:first-child)>button{
+  min-height:220px!important;
+  grid-template-columns:1fr .82fr!important;
+  grid-template-rows:1fr!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:not(:first-child) .workshopGuideCardVisual{
+  border-top:0!important;border-left:1px solid var(--v44-line)!important;
+}
+
+/* Buyer experience = full-width dark punctuation. */
+.publicLanding .homePortalTeaser{
+  max-width:none!important;
+  margin:0!important;
+  padding:86px max(22px,calc((100vw - 1320px)/2))!important;
+  border:0!important;
+  border-radius:0!important;
+  background:var(--v44-deep)!important;
+  color:#fff!important;
+}
+.publicLanding .homePortalTeaser h2{
+  max-width:760px!important;
+  color:#fff!important;
+  font-size:clamp(38px,4vw,58px)!important;
+}
+.publicLanding .homePortalTeaser p{color:#bdceca!important;max-width:720px!important}
+.publicLanding .homePortalTeaser .button{
+  color:#fff!important;background:transparent!important;border-color:#728985!important;
+}
+
+/* =========================================================
+   GENERIC PUBLIC PAGE HERO
+   ========================================================= */
+.publicPage{
+  background:var(--v44-paper)!important;
+}
+.publicPageHero{
+  max-width:1360px!important;
+  margin:0 auto!important;
+  padding:90px clamp(28px,6vw,86px) 58px!important;
+  border-bottom:1px solid var(--v44-line)!important;
+}
+.publicPageHero h1{
+  margin:0 0 22px!important;
+  max-width:930px!important;
+  font-size:clamp(50px,5.7vw,82px)!important;
+  line-height:.94!important;
+  letter-spacing:-.062em!important;
+}
+.publicPageHero p{
+  margin:0!important;
+  max-width:760px!important;
+  font-size:17px!important;
+  line-height:1.68!important;
+  color:var(--v44-muted)!important;
+}
+
+/* =========================================================
+   START / RFQ
+   ========================================================= */
+.start16Hero{
+  width:min(1360px,100%)!important;
+  margin:0 auto!important;
+  padding:95px clamp(28px,6vw,86px) 82px!important;
+  grid-template-columns:minmax(0,1.04fr) minmax(370px,.76fr)!important;
+  gap:80px!important;
+  align-items:center!important;
+}
+.start16HeroCopy h1{
+  max-width:800px!important;
+  margin:0!important;
+  font-size:clamp(52px,5.6vw,80px)!important;
+  line-height:.94!important;
+  letter-spacing:-.062em!important;
+}
+.start16HeroCopy>p{
+  margin-top:24px!important;
+  max-width:660px!important;
+  font-size:16px!important;
+  line-height:1.68!important;
+}
+.start16RouteBoard{
+  border:1px solid var(--v44-line)!important;
+  border-radius:22px!important;
+  overflow:hidden!important;
+  background:#fff!important;
+  box-shadow:var(--v44-shadow-soft)!important;
+}
+.start16RouteBoard>button{
+  min-height:105px!important;
+  padding:20px!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+.start16RouteBoard>button+button{border-top:1px solid var(--v44-line)!important}
+.start16RouteBoard>button:hover{
+  transform:none!important;
+  background:#f7f5f0!important;
+}
+.start22RouteIcon{border-radius:12px!important}
+.m44StartPaper{
+  margin-top:15px;
+  padding:13px 14px;
+  border:1px solid #d1c8be;
+  border-radius:14px;
+  background:var(--v44-lilac-soft);
+  font-size:10px;
+  color:#625f6b;
+}
+.m44StartPaper b{color:#292a31}
+.start16Send{
+  max-width:1280px!important;
+  margin:0 auto 90px!important;
+  padding:55px!important;
+  display:grid!important;
+  grid-template-columns:minmax(260px,.62fr) minmax(0,1.38fr)!important;
+  gap:70px!important;
+  border:1px solid var(--v44-line)!important;
+  border-radius:28px!important;
+  background:var(--v44-cream)!important;
+}
+.start16SendIntro h2{
+  margin:0!important;
+  font-size:clamp(34px,3.6vw,52px)!important;
+  line-height:.99!important;
+  letter-spacing:-.05em!important;
+}
+.start16Form{
+  padding:28px!important;
+  border:1px solid var(--v44-line)!important;
+  border-radius:18px!important;
+  background:#f8f5ef!important;
+  box-shadow:none!important;
+}
+.start16Form input,.start16Form select,.start16Form textarea{
+  border-radius:10px!important;background:#fff!important;
+}
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+.publicPage:has(.v37ProspectForm) .publicPageHero{
+  padding-bottom:52px!important;
+}
+.publicPage:has(.v37ProspectForm) .publicPageHero h1{
+  max-width:740px!important;
+}
+.publicPage:has(.v37ProspectForm) .prospectSection{
+  max-width:1280px!important;
+  padding:72px 40px 64px!important;
+  grid-template-columns:minmax(260px,.62fr) minmax(0,1.38fr)!important;
+  gap:72px!important;
+}
+.publicPage:has(.v37ProspectForm) .prospectIntro h2{
+  margin:0!important;
+  font-size:clamp(34px,3.7vw,52px)!important;
+}
+.publicPage:has(.v37ProspectForm) .v37ProspectForm{
+  padding:32px!important;
+  border:1px solid var(--v44-line)!important;
+  border-radius:20px!important;
+  background:var(--v44-cream)!important;
+  box-shadow:var(--v44-shadow-soft)!important;
+}
+.v37ProspectForm .prospectField input:not([type="file"]),
+.v37ProspectForm .prospectField select,
+.v37ProspectForm .prospectField textarea,
+.v37ProspectForm .rfqUploadField input[type="file"]{
+  border-radius:10px!important;
+  background:#fff!important;
+}
+.prospectContactGrid{
+  max-width:1280px!important;
+  margin:0 auto!important;
+  padding:0 40px 90px!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:0!important;
+}
+.prospectContactGrid .contactCard{
+  min-height:140px!important;
+  padding:23px!important;
+  border:0!important;
+  border-top:1px solid var(--v44-line-strong)!important;
+  border-bottom:1px solid var(--v44-line-strong)!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+.prospectContactGrid .contactCard+ .contactCard{border-left:1px solid var(--v44-line)!important}
+
+/* =========================================================
+   PUBLIC CATALOGUE — SEARCH FIRST
+   ========================================================= */
+.catalogue16Hero{
+  padding-bottom:38px!important;
+}
+.catalogue16Hero h1{
+  max-width:880px!important;
+}
+.catalogue16Controls{
+  max-width:1240px!important;
+  margin:0 auto!important;
+  padding:26px clamp(28px,5vw,70px) 20px!important;
+}
+.catalogue16Controls .filterBar{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(210px,.28fr)!important;
+  gap:10px!important;
+  padding:13px!important;
+  border:1px solid var(--v44-line)!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  box-shadow:var(--v44-shadow-soft)!important;
+}
+.catalogue16Controls .searchInput{
+  min-height:54px!important;
+  border-radius:12px!important;
+  background:#f7f5f0!important;
+}
+.catalogue16Controls select{
+  min-height:54px!important;
+  border-radius:12px!important;
+  background:#f7f5f0!important;
+}
+.publicCatalogueJourney16{
+  max-width:1320px!important;
+  padding-top:48px!important;
+}
+.publicCatalogueJourneyHead16 h2{
+  margin:0!important;
+  font-size:clamp(34px,3.6vw,52px)!important;
+  letter-spacing:-.05em!important;
+}
+.publicCategoryGrid16{
+  display:grid!important;
+  grid-template-columns:repeat(12,minmax(0,1fr))!important;
+  gap:10px!important;
+}
+.publicCategoryCard16{
+  min-height:190px!important;
+  border-radius:18px!important;
+  box-shadow:none!important;
+}
+.publicCategoryCard16:nth-child(1),
+.publicCategoryCard16:nth-child(5),
+.publicCategoryCard16:nth-child(9){grid-column:span 4}
+.publicCategoryCard16:nth-child(2),
+.publicCategoryCard16:nth-child(6),
+.publicCategoryCard16:nth-child(10){grid-column:span 5}
+.publicCategoryCard16:nth-child(3),
+.publicCategoryCard16:nth-child(7),
+.publicCategoryCard16:nth-child(11){grid-column:span 3}
+.publicCategoryCard16:nth-child(4),
+.publicCategoryCard16:nth-child(8),
+.publicCategoryCard16:nth-child(12){grid-column:span 4}
+.publicCategoryCard16:hover{transform:none!important;box-shadow:none!important;filter:saturate(.98)!important}
+.publicCatalogueResults{
+  max-width:1320px!important;
+  padding-top:45px!important;
+}
+.publicCatalogueCount{
+  padding-bottom:18px!important;
+  border-bottom:1px solid var(--v44-line)!important;
+}
+.publicCatalogueGrid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:14px!important;
+  margin-top:20px!important;
+}
+.publicCatalogueCard{
+  border:1px solid var(--v44-line)!important;
+  border-radius:20px!important;
+  background:#fff!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+.publicCatalogueVisual{
+  min-height:250px!important;
+  border-radius:0!important;
+  background:#f5f1e9!important;
+}
+.publicCatalogueVisual img{
+  transition:transform .75s var(--v44-ease)!important;
+}
+@media(hover:hover) and (pointer:fine){
+  .publicCatalogueCard:hover .publicCatalogueVisual img{transform:scale(1.025)}
+}
+.publicCatalogueBody{
+  padding:22px!important;
+}
+.publicCatalogueBody>small{
+  text-transform:none!important;
+  letter-spacing:0!important;
+  font-size:10px!important;
+}
+.publicCatalogueBody h3{
+  font-size:22px!important;
+  line-height:1.04!important;
+}
+.publicSpec{
+  padding-top:14px!important;
+  border-top:1px solid #ece6df!important;
+  font-size:11px!important;
+  line-height:1.55!important;
+}
+.publicCatalogueCard>.button{
+  margin:0 20px 20px!important;
+  width:calc(100% - 40px)!important;
+  border-radius:999px!important;
+}
+.publicPage .publicCta{
+  max-width:none!important;
+  margin:0!important;
+  padding:72px max(22px,calc((100vw - 1220px)/2))!important;
+  border-radius:0!important;
+  background:var(--v44-deep)!important;
+  color:#fff!important;
+}
+.publicPage .publicCta h2{color:#fff!important}
+.publicPage .publicCta .button.outline{color:#fff!important;border-color:#7a908c!important}
+
+/* =========================================================
+   WORKSHOP — EDITORIAL / TOOLBENCH
+   ========================================================= */
+.workshopPage{
+  background:#f5f1e8!important;
+}
+.workshopHero{
+  padding:90px clamp(28px,6vw,86px) 70px!important;
+  background:var(--v44-cream)!important;
+}
+.workshopHeroGrid{
+  max-width:1320px!important;
+  margin:0 auto!important;
+  grid-template-columns:minmax(0,1.15fr) minmax(280px,.55fr)!important;
+  gap:80px!important;
+}
+.workshopHero h1{
+  margin:0!important;
+  font-size:clamp(64px,7vw,104px)!important;
+  line-height:.9!important;
+  letter-spacing:-.07em!important;
+}
+.workshopHero h2{
+  max-width:740px!important;
+  margin-top:20px!important;
+  font-size:clamp(28px,3vw,44px)!important;
+  line-height:1.02!important;
+}
+.workshopHeroCopy p{
+  font-size:16px!important;
+  line-height:1.7!important;
+}
+.workshopCategorySection{
+  max-width:1320px!important;
+  padding:72px clamp(28px,5vw,70px) 50px!important;
+}
+.workshopCategoryGrid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:10px!important;
+}
+.workshopCategoryCard{
+  border-radius:18px!important;
+  box-shadow:none!important;
+}
+.workshopCategoryCard:hover{transform:none!important}
+.workshopTools{
+  max-width:1220px!important;
+  margin:0 auto!important;
+  padding:18px 30px!important;
+  border:1px solid var(--v44-line)!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  box-shadow:var(--v44-shadow-soft)!important;
+}
+.workshopSearch input{
+  min-height:52px!important;
+}
+.workshopGuideDeck{
+  max-width:1320px!important;
+  padding:70px clamp(28px,5vw,70px) 100px!important;
+  grid-template-columns:230px minmax(0,1fr)!important;
+  gap:48px!important;
+}
+.workshopGuideDeckIntro{
+  position:sticky!important;top:112px!important;
+}
+.workshopGuideDeckScroll{
+  display:grid!important;
+  grid-template-columns:1.25fr .85fr!important;
+  gap:10px!important;
+}
+.workshopGuideDeckScroll .workshopGuideCard:first-child{
+  grid-row:span 2!important;
+}
+.workshopGuideDeckScroll .workshopGuideCard:first-child>button{
+  grid-template-rows:minmax(330px,1fr) 230px!important;
+}
+.workshopGuideDeckScroll .workshopGuideCard:not(:first-child)>button{
+  min-height:245px!important;
+  grid-template-columns:1fr .78fr!important;
+  grid-template-rows:1fr!important;
+}
+.workshopGuideDeckScroll .workshopGuideCard:not(:first-child) .workshopGuideCardVisual{
+  border-top:0!important;border-left:1px solid var(--v44-line)!important;
+}
+.workshopPrinciple{
+  max-width:none!important;
+  padding:76px max(22px,calc((100vw - 1220px)/2))!important;
+  background:var(--v44-deep)!important;
+  color:#fff!important;
+}
+.workshopPrinciple p{color:#bfd0cc!important}
+
+/* Article quality */
+.workshopArticle{
+  max-width:1120px!important;
+}
+.workshopArticleHeader{
+  padding-top:78px!important;
+}
+.workshopArticleHeader h1{
+  font-size:clamp(50px,6vw,82px)!important;
+  line-height:.94!important;
+  letter-spacing:-.06em!important;
+}
+.workshopArticleBody{
+  max-width:860px!important;
+}
+.workshopArticleSection{
+  border-top:1px solid var(--v44-line)!important;
+}
+.workshopSignature{
+  border-radius:22px!important;
+}
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+.loginPublicPage{
+  background:var(--v44-lilac)!important;
+}
+.loginWrap{
+  max-width:1320px!important;
+  margin:34px auto 70px!important;
+  padding:70px!important;
+  grid-template-columns:minmax(0,1.05fr) minmax(360px,.62fr)!important;
+  gap:80px!important;
+  border:1px solid rgba(22,24,22,.07);
+  border-radius:32px!important;
+  background:var(--v44-cream)!important;
+}
+.loginIntro h1{
+  margin:0 0 22px!important;
+  font-size:clamp(50px,5.3vw,76px)!important;
+  line-height:.94!important;
+  letter-spacing:-.062em!important;
+}
+.v26LoginFlow{
+  display:grid!important;
+  grid-template-columns:repeat(4,1fr)!important;
+  gap:0!important;
+  margin-top:34px!important;
+  border-top:1px solid var(--v44-line)!important;
+  border-bottom:1px solid var(--v44-line)!important;
+}
+.v26LoginFlow span{
+  padding:14px 10px!important;
+  border-right:1px solid var(--v44-line)!important;
+  background:transparent!important;
+  border-radius:0!important;
+}
+.v26LoginFlow span:last-child{border-right:0!important}
+.loginCard{
+  padding:28px!important;
+  border:1px solid var(--v44-line)!important;
+  border-radius:22px!important;
+  background:#fff!important;
+  box-shadow:var(--v44-shadow)!important;
+}
+.loginCard img{width:160px!important}
+.loginCard input{border-radius:10px!important}
+.loginCard .button{border-radius:999px!important}
+
+/* =========================================================
+   PORTAL / BUYER EXPERIENCE
+   ========================================================= */
+.customerShell{
+  --portal-paper:#f5f2eb;
+  --portal-white:#fffdf8;
+  --portal-line:#d9d2c8;
+  --portal-ink:#111412;
+  --portal-muted:#706a63;
+  background:var(--portal-paper)!important;
+}
+.customerShell .sidebar{
+  width:98px!important;
+  margin:16px 0 16px 16px!important;
+  border:1px solid var(--portal-line)!important;
+  border-radius:24px!important;
+  background:var(--portal-white)!important;
+  box-shadow:none!important;
+}
+.customerShell .sidebarTop{
+  min-height:82px!important;
+  border-bottom:1px solid var(--portal-line)!important;
+}
+.customerShell .sidebar .brand img{
+  width:48px!important;
+  height:auto!important;
+}
+.customerShell .iconNav{
+  padding:12px 9px!important;
+  gap:4px!important;
+}
+.customerShell .navLink{
+  min-height:58px!important;
+  border-radius:14px!important;
+}
+.customerShell .navLink.active{
+  background:var(--v44-deep)!important;
+  color:#fff!important;
+}
+.customerShell .navLink:not(.active):hover{
+  transform:none!important;
+  background:#eeeae2!important;
+}
+.customerShell .navLabel{
+  font-size:8.5px!important;
+  line-height:1.15!important;
+}
+.customerShell .mainArea{
+  background:var(--portal-paper)!important;
+}
+.customerShell .topbar{
+  min-height:82px!important;
+  margin:16px 16px 0 16px!important;
+  padding:12px 18px!important;
+  border:1px solid var(--portal-line)!important;
+  border-radius:22px!important;
+  background:var(--portal-white)!important;
+  box-shadow:none!important;
+}
+.customerShell .topbarBrandSlot img{width:138px!important}
+.customerShell .topbarSearch{
+  max-width:620px!important;
+  min-height:46px!important;
+  border-radius:999px!important;
+  border:1px solid #d8d1c8!important;
+  background:#f5f2eb!important;
+}
+.customerShell .campusPill{
+  border-radius:14px!important;
+  background:#f5f2eb!important;
+  border:1px solid var(--portal-line)!important;
+}
+.customerShell .pillBasket{
+  border-radius:999px!important;
+  background:var(--v44-deep)!important;
+}
+.customerShell .contentWrap{
+  padding:32px 34px 60px!important;
+}
+
+/* Portal home */
+.customerShell .v26HomeHero{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  gap:40px!important;
+  align-items:end!important;
+  padding:30px 0 28px!important;
+  border-bottom:1px solid var(--portal-line)!important;
+}
+.customerShell .v26HomeHero h1{
+  margin:0!important;
+  max-width:800px!important;
+  font-size:clamp(42px,4.8vw,68px)!important;
+  line-height:.95!important;
+  letter-spacing:-.058em!important;
+}
+.customerShell .v26HomeHero p{
+  max-width:660px!important;
+  color:var(--portal-muted)!important;
+}
+.customerShell .v26HomeStatus{
+  min-width:230px!important;
+  padding:18px!important;
+  border:1px solid var(--portal-line)!important;
+  border-radius:16px!important;
+  background:var(--portal-white)!important;
+  box-shadow:none!important;
+}
+.customerShell .v26QuickActions{
+  display:grid!important;
+  grid-template-columns:1.25fr .85fr .85fr!important;
+  grid-template-rows:auto auto!important;
+  gap:10px!important;
+  margin-top:22px!important;
+}
+.customerShell .v26ActionCard{
+  min-height:185px!important;
+  border:1px solid rgba(20,24,22,.1)!important;
+  border-radius:18px!important;
+  box-shadow:none!important;
+}
+.customerShell .v26ActionCard:nth-child(1){grid-row:span 2;min-height:380px!important}
+.customerShell .v26ActionCard:nth-child(4){grid-column:2/-1}
+.customerShell .v26ActionCard:hover{transform:none!important;box-shadow:none!important;filter:saturate(.98)}
+.customerShell .v26NeedPreview{
+  margin-top:34px!important;
+  padding-top:28px!important;
+  border-top:1px solid var(--portal-line)!important;
+}
+.customerShell .v26NeedStrip{
+  gap:8px!important;
+}
+.customerShell .v26MiniNeed{
+  min-height:88px!important;
+  border-radius:14px!important;
+  box-shadow:none!important;
+}
+.customerShell .v26OperationsStrip{
+  margin-top:32px!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,1fr)!important;
+  gap:0!important;
+  border-top:1px solid var(--portal-line)!important;
+  border-bottom:1px solid var(--portal-line)!important;
+  background:transparent!important;
+}
+.customerShell .v26OperationsStrip>div{
+  padding:20px!important;
+  border-right:1px solid var(--portal-line)!important;
+  background:transparent!important;
+}
+.customerShell .v26OperationsStrip>div:last-child{border-right:0!important}
+.customerShell .customerHomeGrid{
+  margin-top:28px!important;
+  grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr)!important;
+  gap:12px!important;
+}
+.customerShell .panel,
+.customerShell .customerActionPanel{
+  border:1px solid var(--portal-line)!important;
+  border-radius:18px!important;
+  background:var(--portal-white)!important;
+  box-shadow:none!important;
+}
+.customerShell .v26RepeatPanel{
+  background:var(--v44-sun)!important;
+}
+.customerShell .resourcePreview{
+  margin-top:12px!important;
+}
+.customerShell .resourcePreviewGrid{
+  gap:0!important;
+}
+.customerShell .resourcePreviewGrid article{
+  border-radius:0!important;
+  border:0!important;
+  border-right:1px solid var(--portal-line)!important;
+  background:transparent!important;
+}
+.customerShell .resourcePreviewGrid article:last-child{border-right:0!important}
+
+/* Portal catalogue */
+.customerShell .pageHeader,
+.customerShell .categoryHero{
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.customerShell .pageHeader h1,
+.customerShell .categoryHero h1{
+  font-size:clamp(38px,4vw,58px)!important;
+  line-height:.98!important;
+  letter-spacing:-.052em!important;
+}
+.customerShell .catalogueDepthPill{
+  border-radius:16px!important;
+  box-shadow:none!important;
+  background:var(--portal-white)!important;
+  border:1px solid var(--portal-line)!important;
+}
+.customerShell .clinicNeedRail{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:9px!important;
+}
+.customerShell .clinicNeedCard{
+  min-height:155px!important;
+  border-radius:16px!important;
+  box-shadow:none!important;
+}
+.customerShell .clinicNeedCard:hover{transform:none!important;box-shadow:none!important}
+.customerShell .catalogueLandingShortcuts{
+  gap:9px!important;
+}
+.customerShell .catalogueShortcut{
+  border-radius:16px!important;
+  box-shadow:none!important;
+}
+.customerShell .shopFilterBar{
+  padding:12px!important;
+  border:1px solid var(--portal-line)!important;
+  border-radius:16px!important;
+  background:var(--portal-white)!important;
+}
+.customerShell .productGrid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px!important;
+}
+.customerShell .productCard{
+  border-radius:18px!important;
+  border:1px solid var(--portal-line)!important;
+  box-shadow:none!important;
+}
+.customerShell .productCard:hover{transform:none!important;box-shadow:none!important;border-color:#aaa39a!important}
+.customerShell .productVisual{
+  min-height:220px!important;
+  border-radius:16px 16px 0 0!important;
+}
+.customerShell .canvaCardActions{
+  border-top:1px solid var(--portal-line)!important;
+}
+.customerShell .customRequestPanel{
+  border-radius:18px!important;
+  border:1px solid var(--portal-line)!important;
+  background:var(--v44-lilac-soft)!important;
+  box-shadow:none!important;
+}
+
+/* Orders become a procurement ledger. */
+.customerShell .orderSection{
+  margin-top:26px!important;
+}
+.customerShell .orderCardGrid,
+.customerShell .orderCardGrid.compact{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:9px!important;
+}
+.customerShell .customerOrderCard{
+  display:grid!important;
+  grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr) auto!important;
+  gap:22px!important;
+  align-items:center!important;
+  min-height:140px!important;
+  padding:20px!important;
+  border:1px solid var(--portal-line)!important;
+  border-radius:17px!important;
+  background:var(--portal-white)!important;
+  box-shadow:none!important;
+}
+.customerShell .orderCardProduct{margin:0!important}
+.customerShell .orderMessage,
+.customerShell .deliveryPromise{grid-column:2/3!important;margin:0!important}
+.customerShell .orderCardActions{
+  grid-column:3!important;
+  grid-row:1 / span 2!important;
+  align-self:center!important;
+  justify-content:flex-end!important;
+}
+.customerShell .orderCardActions .button{
+  border-radius:999px!important;
+}
+
+/* Replenish / docs / stock / assets */
+.customerShell .replenishGrid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px!important;
+}
+.customerShell .replenishCard{
+  border-radius:18px!important;
+  border:1px solid var(--portal-line)!important;
+  box-shadow:none!important;
+}
+.customerShell .replenishVisual{
+  min-height:200px!important;
+  background:#f4f0e8!important;
+}
+.customerShell .documentsIndexPanel,
+.customerShell .orderDocumentsPanel{
+  overflow:hidden!important;
+  border-radius:18px!important;
+}
+.customerShell .documentIndexRow,
+.customerShell .orderDocumentRow{
+  border-radius:0!important;
+  border-bottom:1px solid var(--portal-line)!important;
+}
+.customerShell .dataTable{
+  border-collapse:collapse!important;
+}
+.customerShell .dataTable th{
+  background:#f0ece4!important;
+  color:#6e6962!important;
+}
+.customerShell .dataTable td{
+  border-bottom:1px solid var(--portal-line)!important;
+}
+.customerShell .assetCard{
+  border-radius:18px!important;
+  border:1px solid var(--portal-line)!important;
+  box-shadow:none!important;
+}
+
+/* =========================================================
+   ADMIN — VISUAL NORMALIZATION ONLY, NO WORKFLOW RESTRUCTURE
+   ========================================================= */
+.adminShell{
+  background:#f3f1ec!important;
+}
+.adminShell .sidebar{
+  border-radius:22px!important;
+  box-shadow:none!important;
+}
+.adminShell .topbar{
+  border-radius:20px!important;
+  box-shadow:none!important;
+}
+.adminShell .panel{
+  border-radius:17px!important;
+  box-shadow:none!important;
+}
+.adminShell .button{
+  box-shadow:none!important;
+}
+
+/* =========================================================
+   MOTION / MICROINTERACTION
+   ========================================================= */
+.m44Reveal{
+  opacity:0;
+  transform:translateY(11px);
+  transition:opacity .84s ease,transform 1s var(--v44-ease);
+}
+.m44Reveal.in{opacity:1;transform:none}
+.m44ObjectReveal{
+  opacity:0;
+  transform:translateY(8px) scale(.995);
+  transition:opacity .96s ease .06s,transform 1.15s var(--v44-ease) .06s;
+}
+.m44ObjectReveal.in{opacity:1;transform:none}
+
+:is(.publicPage,.publicLanding,.customerShell) :where(button,.button,[role="button"]){
+  transition:
+    color .28s ease,
+    background-color .28s ease,
+    border-color .28s ease,
+    opacity .28s ease!important;
+}
+@media(hover:hover) and (pointer:fine){
+  :is(.publicPage,.publicLanding,.customerShell) :where(button,.button,[role="button"]):not(:disabled):hover{
+    transform:none!important;
+  }
+}
+:is(.publicPage,.publicLanding,.customerShell) :where(button,.button,[role="button"]):not(:disabled):active{
+  transform:translateY(1px)!important;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media(max-width:1100px){
+  .m44HomeHeroShell{
+    grid-template-columns:1fr!important;
+  }
+  .m44HomeDesk{max-width:740px;width:100%}
+  .publicLanding .publicClinicalPreviewGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-auto-rows:auto!important;
+  }
+  .publicLanding .publicClinicalCard{
+    grid-column:auto!important;grid-row:auto!important;min-height:185px!important;
+  }
+  .publicCategoryGrid16{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+  .publicCategoryCard16{grid-column:auto!important}
+  .publicCatalogueGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .start16Hero{
+    grid-template-columns:1fr!important;
+  }
+  .start16RouteBoard{max-width:760px}
+  .start16Send{grid-template-columns:1fr!important}
+  .prospectContactGrid{grid-template-columns:repeat(2,1fr)!important}
+  .prospectContactGrid .contactCard:nth-child(3){border-left:0!important}
+  .workshopCategoryGrid{grid-template-columns:repeat(2,1fr)!important}
+  .workshopGuideDeckScroll{grid-template-columns:1fr 1fr!important}
+  .workshopGuideDeckScroll .workshopGuideCard:first-child{grid-column:1/-1!important;grid-row:auto!important}
+  .loginWrap{grid-template-columns:1fr!important}
+  .customerShell .v26QuickActions{
+    grid-template-columns:1fr 1fr!important;
+    grid-template-rows:auto!important;
+  }
+  .customerShell .v26ActionCard:nth-child(1),
+  .customerShell .v26ActionCard:nth-child(4){
+    grid-row:auto!important;grid-column:auto!important;min-height:185px!important;
+  }
+  .customerShell .clinicNeedRail{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .customerShell .productGrid,.customerShell .replenishGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .customerShell .customerOrderCard{
+    grid-template-columns:1fr auto!important;
+  }
+  .customerShell .orderCardProduct,
+  .customerShell .orderMessage,
+  .customerShell .deliveryPromise{grid-column:1!important}
+  .customerShell .orderCardActions{
+    grid-column:2!important;grid-row:1 / span 3!important;
+  }
+}
+@media(max-width:760px){
+  .publicHeader{
+    grid-template-columns:1fr auto!important;
+    min-height:76px!important;
+    padding:12px 20px!important;
+  }
+  .publicLogo img{width:145px!important}
+  .publicNav{gap:0!important}
+  .publicPageHero{padding:58px 20px 38px!important}
+  .publicPageHero h1{font-size:clamp(42px,12vw,58px)!important}
+  .m44HomeHero{padding:18px 12px 42px}
+  .m44HomeHeroShell{
+    min-height:0;
+    padding:36px 22px;
+    border-radius:24px;
+  }
+  .m44HomeHeroCopy h1{font-size:clamp(48px,14vw,66px)}
+  .m44HomeHeroCopy>p{font-size:15px}
+  .m44HomeDesk{min-height:495px}
+  .m44Requirement{inset:22px 0 10px 10px}
+  .m44HeroNote{left:-4px;width:170px}
+  .publicLanding .homeEditorialIntro{
+    grid-template-columns:1fr!important;
+    gap:36px!important;
+    padding:70px 20px 55px!important;
+  }
+  .publicLanding .homeDetailLedger{padding:0 20px 70px!important}
+  .publicLanding .homeDetailLedger article{
+    grid-template-columns:1fr!important;
+    gap:7px!important;
+    padding:18px 0!important;
+  }
+  .publicLanding .publicClinicalPreview{padding:70px 20px 74px!important}
+  .publicLanding .publicClinicalPreviewHead{grid-template-columns:1fr!important;align-items:start!important}
+  .publicLanding .publicClinicalPreviewGrid{grid-template-columns:1fr 1fr!important;gap:8px!important}
+  .publicLanding .publicClinicalCard{min-height:155px!important;padding:16px!important}
+  .publicLanding .homeWorkshopCards{
+    grid-template-columns:1fr!important;
+    gap:28px!important;
+    padding:72px 20px!important;
+  }
+  .publicLanding .homeWorkshopIntro{position:static!important}
+  .publicLanding .homeWorkshopCardGrid{grid-template-columns:1fr!important}
+  .publicLanding .homeWorkshopCardGrid .workshopGuideCard:first-child{grid-row:auto!important}
+  .publicLanding .homeWorkshopCardGrid .workshopGuideCard:not(:first-child)>button{
+    grid-template-columns:1fr!important;grid-template-rows:minmax(180px,auto) 155px!important;
+  }
+  .start16Hero{
+    padding:65px 20px 55px!important;
+    gap:38px!important;
+  }
+  .start16HeroCopy h1{font-size:clamp(44px,12vw,60px)!important}
+  .start16Send{
+    margin:0 20px 70px!important;
+    padding:28px 20px!important;
+    border-radius:22px!important;
+  }
+  .publicPage:has(.v37ProspectForm) .prospectSection{
+    grid-template-columns:1fr!important;
+    padding:55px 20px!important;
+    gap:35px!important;
+  }
+  .prospectContactGrid{
+    padding:0 20px 65px!important;
+    grid-template-columns:1fr!important;
+  }
+  .prospectContactGrid .contactCard,
+  .prospectContactGrid .contactCard+ .contactCard{
+    border-left:0!important;
+    border-top:1px solid var(--v44-line)!important;
+  }
+  .catalogue16Controls{padding:20px!important}
+  .catalogue16Controls .filterBar{grid-template-columns:1fr!important}
+  .publicCategoryGrid16{grid-template-columns:1fr 1fr!important}
+  .publicCatalogueGrid{grid-template-columns:1fr!important}
+  .workshopHero{padding:65px 20px 52px!important}
+  .workshopHeroGrid{grid-template-columns:1fr!important;gap:28px!important}
+  .workshopCategorySection{padding:55px 20px 40px!important}
+  .workshopCategoryGrid{grid-template-columns:1fr 1fr!important}
+  .workshopTools{margin:0 20px!important}
+  .workshopGuideDeck{
+    grid-template-columns:1fr!important;
+    padding:55px 20px 70px!important;
+  }
+  .workshopGuideDeckIntro{position:static!important}
+  .workshopGuideDeckScroll{grid-template-columns:1fr!important}
+  .workshopGuideDeckScroll .workshopGuideCard:first-child{grid-column:auto!important}
+  .workshopGuideDeckScroll .workshopGuideCard:not(:first-child)>button{
+    grid-template-columns:1fr!important;grid-template-rows:minmax(180px,auto) 155px!important;
+  }
+  .loginWrap{
+    margin:18px 12px 42px!important;
+    padding:38px 22px!important;
+    border-radius:24px!important;
+  }
+  .v26LoginFlow{grid-template-columns:1fr 1fr!important}
+  .customerShell .sidebar{margin:0!important;border-radius:0 20px 20px 0!important}
+  .customerShell .topbar{margin:10px 10px 0!important;border-radius:16px!important}
+  .customerShell .contentWrap{padding:24px 18px 50px!important}
+  .customerShell .v26HomeHero{grid-template-columns:1fr!important}
+  .customerShell .v26HomeStatus{min-width:0!important}
+  .customerShell .v26QuickActions{grid-template-columns:1fr!important}
+  .customerShell .v26OperationsStrip{grid-template-columns:1fr 1fr!important}
+  .customerShell .customerHomeGrid{grid-template-columns:1fr!important}
+  .customerShell .clinicNeedRail{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .customerShell .productGrid,.customerShell .replenishGrid{grid-template-columns:1fr!important}
+  .customerShell .customerOrderCard{grid-template-columns:1fr!important}
+  .customerShell .orderCardActions{grid-column:1!important;grid-row:auto!important;justify-content:flex-start!important}
+}
+@media(max-width:500px){
+  .m44HeroActions .button{width:100%}
+  .m44ReqHeader,.m44ReqLine{grid-template-columns:28px 1fr}
+  .m44ReqHeader span:nth-child(3),.m44ReqStatus{display:none}
+  .publicLanding .publicClinicalPreviewGrid{grid-template-columns:1fr!important}
+  .publicCategoryGrid16{grid-template-columns:1fr!important}
+  .workshopCategoryGrid{grid-template-columns:1fr!important}
+  .customerShell .v26OperationsStrip{grid-template-columns:1fr!important}
+  .customerShell .clinicNeedRail{grid-template-columns:1fr!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .m44Reveal,.m44ObjectReveal{
+    opacity:1!important;transform:none!important;transition:none!important;
+  }
+}
