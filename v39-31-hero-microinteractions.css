@@ -1,0 +1,266 @@
+/* =========================================================
+   V39.31 — Hero motion + restrained site-wide micro-interactions
+   Additive patch only. No app.js or styles.css replacement.
+   ========================================================= */
+
+/* ---------- New home hero ---------- */
+.publicLanding .pscInstitutionalHero.v3931Hero{
+  display:block!important;
+  position:relative!important;
+  width:100%!important;
+  height:clamp(560px,56vw,800px)!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-bottom:1px solid #e4e1da!important;
+  background:#fbfaf7!important;
+  isolation:isolate!important;
+}
+.publicLanding .pscInstitutionalHero.v3931Hero::before,
+.publicLanding .pscInstitutionalHero.v3931Hero::after{
+  content:none!important;
+}
+.v3931HeroMedia{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  background:#fbfaf7;
+}
+.v3931HeroMedia img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center center;
+  transform:scale(1.025);
+  filter:blur(20px);
+  opacity:.12;
+  animation:v3931HeroResolve 2.35s cubic-bezier(.22,.72,.18,1) .05s forwards;
+  will-change:filter,opacity,transform;
+}
+.v3931HeroBrand{
+  position:absolute;
+  z-index:2;
+  left:50%;
+  bottom:8.2%;
+  width:min(67vw,920px);
+  transform:translate3d(-50%,72px,0);
+  opacity:0;
+  animation:v3931BrandRise 1.32s cubic-bezier(.16,.82,.22,1) .72s forwards;
+  will-change:transform,opacity;
+  pointer-events:none;
+}
+.v3931HeroBrand img{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  filter:drop-shadow(0 8px 18px rgba(20,31,30,.035));
+}
+.v3931SrOnly{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+@keyframes v3931HeroResolve{
+  0%{opacity:.12;filter:blur(20px);transform:scale(1.025)}
+  58%{opacity:.82;filter:blur(6px)}
+  100%{opacity:1;filter:blur(0);transform:scale(1)}
+}
+@keyframes v3931BrandRise{
+  0%{opacity:0;transform:translate3d(-50%,72px,0)}
+  72%{opacity:1}
+  100%{opacity:1;transform:translate3d(-50%,0,0)}
+}
+
+/* ---------- Buttons: subtle tactile feedback ---------- */
+.button,
+button,
+[role="button"]{
+  -webkit-tap-highlight-color:transparent;
+}
+.button:not(:disabled),
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]){
+  transition:
+    transform .16s cubic-bezier(.2,.7,.2,1),
+    box-shadow .18s ease,
+    border-color .18s ease,
+    background-color .18s ease,
+    color .18s ease,
+    opacity .18s ease!important;
+}
+@media(hover:hover) and (pointer:fine){
+  .button:not(:disabled):hover,
+  button:not(:disabled):hover,
+  [role="button"]:not([aria-disabled="true"]):hover{
+    transform:translateY(-1px);
+  }
+  .publicClinicalCard:hover,
+  .clinicNeedCardIllustrated:hover,
+  .workshopGuideCard:hover,
+  .productCard:hover,
+  .contactCard:hover,
+  .familyCard:hover,
+  .start16RouteBoard>button:hover{
+    transform:translateY(-2px)!important;
+    box-shadow:0 12px 26px rgba(28,38,36,.075)!important;
+  }
+}
+.button:not(:disabled):active,
+button:not(:disabled):active,
+[role="button"]:not([aria-disabled="true"]):active{
+  transform:translateY(0) scale(.985)!important;
+  transition-duration:.07s!important;
+}
+button:focus-visible,
+.button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+  outline:3px solid rgba(22,166,157,.22)!important;
+  outline-offset:3px!important;
+}
+
+/* ---------- Cards / controls ---------- */
+.publicClinicalCard,
+.clinicNeedCardIllustrated,
+.workshopGuideCard,
+.productCard,
+.contactCard,
+.familyCard,
+.start16RouteBoard>button{
+  transition:transform .2s cubic-bezier(.2,.72,.2,1),box-shadow .2s ease,border-color .2s ease!important;
+}
+input[type="checkbox"],
+input[type="radio"]{
+  transition:transform .14s ease,box-shadow .14s ease,filter .14s ease;
+}
+input[type="checkbox"]:checked,
+input[type="radio"]:checked{
+  transform:scale(1.045);
+}
+details summary i,
+details summary svg{
+  transition:transform .2s cubic-bezier(.2,.72,.2,1)!important;
+}
+details[open] summary i{
+  transform:rotate(45deg);
+}
+
+/* ---------- Explicit loading feedback ---------- */
+.ux-is-loading,
+.ux-native-busy{
+  position:relative!important;
+  pointer-events:none!important;
+  cursor:progress!important;
+  padding-right:42px!important;
+  opacity:.88!important;
+}
+.ux-is-loading::after,
+.ux-native-busy::after{
+  content:"";
+  position:absolute;
+  right:15px;
+  top:50%;
+  width:14px;
+  height:14px;
+  margin-top:-8px;
+  border:2px solid rgba(100,111,108,.24);
+  border-top-color:#0f9f98;
+  border-radius:50%;
+  animation:v3931Spin .72s linear infinite;
+  box-sizing:border-box;
+}
+.button.primary.ux-is-loading::after,
+.button.dark.ux-is-loading::after,
+.button.primary.ux-native-busy::after,
+.button.dark.ux-native-busy::after,
+.semanticPrimary.ux-is-loading::after,
+.semanticPrimary.ux-native-busy::after{
+  border-color:rgba(255,255,255,.3);
+  border-top-color:#fff;
+}
+@keyframes v3931Spin{to{transform:rotate(360deg)}}
+
+/* ---------- Add-to-request confirmation ---------- */
+.ux-confirmed{
+  background:#e5f5f1!important;
+  color:#0a766f!important;
+  border-color:#9bd8d1!important;
+  box-shadow:0 0 0 4px rgba(22,166,157,.08)!important;
+}
+.ux-confirmed .ux-confirmMark{
+  display:inline-grid;
+  place-items:center;
+  width:18px;
+  height:18px;
+  margin-right:7px;
+  border-radius:50%;
+  background:#0f9f98;
+  color:#fff;
+  font-size:11px;
+  line-height:1;
+  vertical-align:middle;
+  animation:v3931ConfirmPop .28s cubic-bezier(.2,.9,.25,1.25);
+}
+@keyframes v3931ConfirmPop{
+  from{transform:scale(.55);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+/* ---------- Responsive hero ---------- */
+@media(max-width:900px){
+  .publicLanding .pscInstitutionalHero.v3931Hero{
+    height:clamp(520px,92vw,690px)!important;
+  }
+  .v3931HeroMedia img{
+    object-position:68% center;
+  }
+  .v3931HeroBrand{
+    width:min(82vw,700px);
+    bottom:8%;
+  }
+}
+@media(max-width:560px){
+  .publicLanding .pscInstitutionalHero.v3931Hero{
+    height:min(72svh,610px)!important;
+    min-height:500px!important;
+  }
+  .v3931HeroMedia img{
+    object-position:69% center;
+  }
+  .v3931HeroBrand{
+    width:89vw;
+    bottom:7.5%;
+    transform:translate3d(-50%,54px,0);
+  }
+  @keyframes v3931BrandRise{
+    0%{opacity:0;transform:translate3d(-50%,54px,0)}
+    72%{opacity:1}
+    100%{opacity:1;transform:translate3d(-50%,0,0)}
+  }
+}
+
+/* Respect OS motion preferences. */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+  .v3931HeroMedia img{opacity:1;filter:none;transform:none}
+  .v3931HeroBrand{opacity:1;transform:translate3d(-50%,0,0)}
+}
