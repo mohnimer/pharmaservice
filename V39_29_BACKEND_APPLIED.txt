@@ -1,0 +1,25 @@
+-- V39.29 backend database work has already been APPLIED to Supabase project ewewkojlsgqvcqarmpgr.
+-- This file is an implementation record, not something you need to run manually.
+--
+-- Applied:
+-- 1) V37.7 Mail Desk tables: mail_contacts, mail_campaigns, mail_campaign_recipients
+-- 2) Mail Desk Edge Functions: send-mail-campaign + mail-unsubscribe
+-- 3) V39 quotation persistence spine:
+--    quote_lines
+--    quote_line_costs (PSC-admin only)
+--    quote_snapshots (PSC-admin only)
+--    quote_events (PSC-admin only)
+--    extra quote header fields for revision/currency/cost/GP/GM/audit
+-- 4) Existing quote/order-line commercial data backfilled into quote_lines
+-- 5) Admin RPCs:
+--    psc_ensure_quote
+--    psc_recalculate_quote
+--    psc_capture_quote_snapshot
+--
+-- Frontend bridge in v39-29-quote-persistence.js:
+-- - persists Deal Desk sell / VAT / direct cost
+-- - persists terms, delivery terms and quote reference
+-- - persists order/quote status transitions
+-- - snapshots issued quotations
+-- - hydrates saved direct cost back into the admin quote builder after refresh
+-- - keeps order_lines sell/VAT synchronized for backward compatibility
