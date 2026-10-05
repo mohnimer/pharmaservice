@@ -1,14 +1,19 @@
-PSC V39.25 PATCH ONLY
+PSC V39.27 — CONTACT FORM FIX ONLY
 
-Install on top of your current V39.24/V39.24+ site.
+Upload these files to the repository root:
+- index.html
+- v39-27-contact-fix.js
+- v39-27-contact-fix.css
 
-Replace:
-- app.js
-- styles.css
+This patch intentionally DOES NOT replace app.js or styles.css.
+It loads after V39.26 and only repairs the Contact page.
 
-Add / replace:
-- assets/model-walkthrough/*
-- assets/workshop/*
-
-No backend/Supabase migration in this patch.
-Only files changed or added by V39.25 are included.
+Changes:
+- Contact title: "Let's get to work."
+- Keeps the exact approved one-sentence contact copy
+- Removes the old empty intro-column layout
+- Full-width centered 2-column desktop form
+- Properly sized select controls
+- 1-column mobile form with touch-friendly controls
+- File input constrained to form width
+- Submit row and Clinic Portal contact card fixed responsively
