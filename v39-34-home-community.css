@@ -12,7 +12,7 @@
   min-height:650px;
   border-bottom:1px solid #ddd7ce;
   background:#fbfaf7;
-  padding:clamp(70px,7vw,112px) clamp(46px,4vw,78px);
+  padding:clamp(70px,7vw,112px) 0;
   display:flex;
   align-items:center;
 }
@@ -24,7 +24,7 @@
   z-index:-2;
   inset:-2%;
   pointer-events:none;
-  background-image:url("/assets/home-community-section-bg.png?v=3935");
+  background-image:url("/assets/home-community-section-bg.png?v=3936");
   background-repeat:no-repeat;
   background-size:cover;
   background-position:center center;
@@ -51,14 +51,16 @@
 }
 
 .homeCommunityInner{
-  width:min(100%,1440px);
-  margin:0 auto;
+  width:100%;
+  max-width:none;
+  margin:0;
   position:relative;
 }
 
 .homeCommunityCopy{
-  width:min(43%,700px);
-  max-width:700px;
+  width:min(42%,680px);
+  max-width:680px;
+  margin-left:7.35%;
   margin-top:-2%;
 }
 
@@ -131,12 +133,13 @@
   .homeCommunitySection{
     height:clamp(620px,59vw,720px);
     min-height:620px;
-    padding-left:38px;
-    padding-right:38px;
+    padding-left:0;
+    padding-right:0;
   }
 
   .homeCommunityCopy{
-    width:46%;
+    width:44%;
+    margin-left:7.35%;
   }
 
   .homeCommunityCopy h2{
