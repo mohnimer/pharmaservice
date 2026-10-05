@@ -1,0 +1,14 @@
+PSC V39.25 PATCH ONLY
+
+Install on top of your current V39.24/V39.24+ site.
+
+Replace:
+- app.js
+- styles.css
+
+Add / replace:
+- assets/model-walkthrough/*
+- assets/workshop/*
+
+No backend/Supabase migration in this patch.
+Only files changed or added by V39.25 are included.

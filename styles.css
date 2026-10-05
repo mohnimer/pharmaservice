@@ -7466,575 +7466,106 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
   }
 }
 
-/* =========================================================
-   V38.5 — Catalogue icon, search and Workshop correction
-   ========================================================= */
-.catalogueHeaderTools{
-  flex:0 1 520px;
-  width:min(520px,100%);
-  display:grid;
-  grid-template-columns:minmax(0,1fr) auto;
-  align-items:stretch;
-  gap:12px;
-}
-.catalogueLandingSearch{
-  min-height:58px;
-  display:grid;
-  grid-template-columns:22px minmax(0,1fr) auto;
-  align-items:center;
-  gap:10px;
-  padding:7px 8px 7px 17px;
-  border:1px solid #d9ddd9;
-  border-radius:18px;
-  background:#fff;
-  box-shadow:0 8px 26px rgba(28,39,36,.05);
-}
-.catalogueLandingSearch>span{display:grid;place-items:center;color:#167f79}
-.catalogueLandingSearch>span svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8}
-.catalogueLandingSearch input{
-  width:100%;min-width:0;border:0;outline:0;background:transparent;color:#17211f;
-  font:inherit;font-size:14px;font-weight:650;
-}
-.catalogueLandingSearch input::placeholder{color:#8a918f;font-weight:500}
-.catalogueLandingSearch button{
-  min-height:42px;border:0;border-radius:13px;padding:0 18px;background:#112321;color:#fff;
-  font:inherit;font-size:11px;font-weight:850;cursor:pointer
-}
-.catalogueLandingSearch:focus-within{border-color:#168b84;box-shadow:0 0 0 3px rgba(22,139,132,.10),0 9px 28px rgba(28,39,36,.06)}
-.catalogueHeaderTools .catalogueDepthPill{min-width:160px;padding:13px 16px;border-radius:18px}
-.catalogueHeaderTools .catalogueDepthPill b{font-size:27px}
-
-/* Exact transparent artwork supplied by PSC: no white tile, no forced backdrop. */
-.v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedIcon{
-  width:104px!important;
-  height:104px!important;
-  top:14px!important;
-  right:14px!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  overflow:visible!important;
-}
-.v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedIcon img{
-  width:100%!important;height:100%!important;object-fit:contain!important;background:transparent!important;
-  filter:none!important;mix-blend-mode:normal!important;
-}
-.v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedCopy{
-  left:20px!important;right:128px!important;bottom:22px!important;
-}
-.v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedCopy b{
-  font-size:20px!important;line-height:1.02!important;letter-spacing:-.045em!important;
-}
-.v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedCopy small{display:none!important}
-
-.catalogueStableSearch{position:relative!important}
-.catalogueStableSearch input{padding-right:34px!important}
-.catalogueSearchClear{
-  position:absolute;right:10px;top:50%;transform:translateY(-50%);width:26px;height:26px;
-  border:0;border-radius:50%;background:#edf1ef;color:#56615e;font-size:18px;line-height:1;cursor:pointer
-}
-.catalogueSearchClear:hover{background:#dfe7e4;color:#102421}
-.catalogueSearchEmpty{
-  margin:18px 0 0;padding:32px;border:1px dashed #cfd8d4;border-radius:20px;background:#fbfcfb;text-align:center
-}
-.catalogueSearchEmpty h3{margin:0 0 7px;font-size:19px}.catalogueSearchEmpty p{margin:0;color:#727b78;font-size:12px}
-
-.portalWorkshopPreview{
-  margin-top:18px;padding:28px;border:1px solid #e4dfd5;border-radius:24px;background:#f5f2ea;
-  display:grid;grid-template-columns:.82fr 1.8fr;gap:28px;align-items:stretch;
-}
-.portalWorkshopIntro{display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
-.portalWorkshopIntro h2{margin:7px 0 10px;font-size:30px;line-height:1;letter-spacing:-.05em;color:#16201e}
-.portalWorkshopIntro p{margin:0;color:#69716e;font-size:12px;line-height:1.55;max-width:330px}
-.portalWorkshopIntro .button{margin-top:18px}
-.portalWorkshopGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.portalWorkshopCard{
-  position:relative;min-height:178px;border:1px solid rgba(17,27,25,.12);border-radius:18px;padding:18px;
-  background:#fff;text-align:left;font:inherit;color:#17211f;cursor:pointer;overflow:hidden;
-  transition:transform .18s ease,box-shadow .18s ease
-}
-.portalWorkshopCard:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(28,31,27,.07)}
-.portalWorkshopCard span{display:block;font-size:8px;letter-spacing:.13em;font-weight:900;color:#0b817b;text-transform:uppercase}
-.portalWorkshopCard h3{margin:22px 0 24px;font-size:18px;line-height:1.08;letter-spacing:-.035em}
-.portalWorkshopCard small{position:absolute;left:18px;bottom:17px;font-size:9px;color:#7e807a}
-.portalWorkshopCard i{position:absolute;right:17px;bottom:15px;font-style:normal;font-size:15px}
-.portalWorkshopCard.tone-blue{background:#dfe9fa}.portalWorkshopCard.tone-coral{background:#f9d4ca}.portalWorkshopCard.tone-mint{background:#dceee7}.portalWorkshopCard.tone-yellow{background:#f6e8b6}.portalWorkshopCard.tone-purple{background:#e5ddf8}
-
-@media(max-width:1180px){
-  .catalogueHeaderTools{flex-basis:440px;grid-template-columns:1fr}
-  .catalogueHeaderTools .catalogueDepthPill{width:100%;grid-template-columns:auto 1fr;align-items:end}
-  .catalogueHeaderTools .catalogueDepthPill small{grid-column:1/-1}
-  .portalWorkshopPreview{grid-template-columns:1fr}.portalWorkshopGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedIcon{width:90px!important;height:90px!important}
-}
-@media(max-width:820px){
-  .catalogueHeaderTools{width:100%;flex-basis:auto}.catalogueLandingSearch{min-height:54px}
-  .portalWorkshopGrid{grid-template-columns:1fr}.portalWorkshopCard{min-height:138px}
-  .v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedIcon{width:74px!important;height:74px!important}
-  .v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedCopy{right:98px!important}
-  .v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedCopy b{font-size:16px!important}
-}
-@media(max-width:560px){
-  .catalogueLandingSearch{grid-template-columns:20px minmax(0,1fr)}
-  .catalogueLandingSearch button{grid-column:1/-1;width:100%}
-  .portalWorkshopPreview{padding:22px 18px}
-  .v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedIcon{width:68px!important;height:68px!important}
-}
-
-/* =========================================================
-   V38.6 — PRODUCT CARD IMAGE VISIBILITY HOTFIX
-   The DHA marker was inheriting the generic product-photo img
-   rule (100% width/height), covering the actual product image.
-   Keep it as a small transparent corner badge instead.
-   ========================================================= */
-.exactCanvaCard .productPhoto > img.dhaRequirementIcon.cardDhaIcon,
-.canvaProductCard .productPhoto > img.dhaRequirementIcon.cardDhaIcon{
-  position:absolute!important;
-  z-index:8!important;
-  top:14px!important;
-  right:14px!important;
-  left:auto!important;
-  bottom:auto!important;
-  width:42px!important;
-  height:42px!important;
-  min-width:42px!important;
-  min-height:42px!important;
-  max-width:42px!important;
-  max-height:42px!important;
-  padding:0!important;
-  margin:0!important;
-  object-fit:contain!important;
-  object-position:center!important;
-  background:transparent!important;
-  border:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-  transform:none!important;
-  pointer-events:none!important;
-}
-
-.productVisualButton:hover > img.dhaRequirementIcon.cardDhaIcon,
-.productVisualButton:focus > img.dhaRequirementIcon.cardDhaIcon{
-  transform:none!important;
-}
-
-@media(max-width:720px){
-  .exactCanvaCard .productPhoto > img.dhaRequirementIcon.cardDhaIcon,
-  .canvaProductCard .productPhoto > img.dhaRequirementIcon.cardDhaIcon{
-    top:10px!important;
-    right:10px!important;
-    width:34px!important;
-    height:34px!important;
-    min-width:34px!important;
-    min-height:34px!important;
-    max-width:34px!important;
-    max-height:34px!important;
-  }
-}
 
 
 /* =========================================================
-   V38.7 — deployment/cache + transparent clinical icon correction
+   V39.25 — Start page as homepage + model walkthrough refresh
    ========================================================= */
-/* The catalogue uses the one persistent header search. Do not create a second search control. */
-.v26CatalogueLandingHeader{align-items:flex-end!important}
-/* User-supplied PNG artwork is already transparent; never place a white tile behind it. */
-.v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedIcon,
-.v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedIcon img{
-  background-color:transparent!important;
-  background-image:none!important;
-  border:0!important;
-  outline:0!important;
+.startPageV39{background:#faf8f2;color:#141717}
+.startPageV39 .startHeroV39{max-width:1450px;margin:0 auto;padding:clamp(56px,7vw,104px) clamp(26px,5vw,74px) clamp(46px,6vw,78px);display:grid;grid-template-columns:minmax(0,.98fr) minmax(360px,.82fr);gap:clamp(34px,5vw,74px);align-items:start;background-image:linear-gradient(rgba(21,123,121,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(21,123,121,.055) 1px,transparent 1px);background-size:32px 32px;border-bottom:1px solid rgba(23,23,23,.08)}
+.startPageV39 .startHeroCopy{max-width:720px;padding-top:8px}
+.startPageV39 .startHeroCopy h1{font-size:clamp(60px,6.5vw,98px);line-height:.91;letter-spacing:-.066em;margin:16px 0 20px;max-width:780px}
+.startPageV39 .startHeroCopy>p{font-size:18px;line-height:1.65;color:#57605d;max-width:680px;margin:0}
+.startHeroCueRow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:34px}
+.startHeroCueRow article{background:#fff;border:1px solid rgba(18,25,24,.1);border-radius:20px;padding:16px 16px 15px;display:grid;gap:6px}
+.startHeroCueRow small{font-size:10px;letter-spacing:.12em;color:#0b817b;font-weight:900}
+.startHeroCueRow b{font-size:15px;line-height:1.15;color:#161918}
+.startHeroCueRow span{font-size:12px;line-height:1.5;color:#69716e}
+.startHeroActions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.startHeroActions .button{min-height:50px;border-radius:15px;padding:0 22px}
+.startHeroPreviewPanel{display:grid;gap:14px;align-self:stretch}
+.startHeroPreviewCard{border-radius:26px;padding:24px 24px 22px;border:1px solid rgba(15,25,25,.1);min-height:162px;display:grid;align-content:start;gap:8px}
+.startHeroPreviewCard small{font-size:10px;letter-spacing:.12em;font-weight:900;color:#5e6764}
+.startHeroPreviewCard h2{font-size:28px;line-height:.98;letter-spacing:-.05em;margin:0;max-width:320px}
+.startHeroPreviewCard p{margin:0;color:#5c6462;font-size:13px;line-height:1.58;max-width:330px}
+.startHeroPreviewCard.is-light{background:#fff}
+.startHeroPreviewCard.is-mint{background:#dcefeb}
+.startHeroPreviewCard.is-ink{background:#0d1e1c;color:#fff}
+.startHeroPreviewCard.is-ink small{color:#8ed8d1}.startHeroPreviewCard.is-ink p{color:#c5d0ce}
+.startCataloguePreview{margin-top:8px}
+.startPreviewHead{display:flex;justify-content:space-between;gap:22px;align-items:end;margin-bottom:26px}
+.startPreviewHead>div{max-width:760px}
+.startPreviewHead h2{font-size:clamp(34px,3.4vw,52px);line-height:.96;letter-spacing:-.052em;margin:10px 0 10px}
+.startPreviewHead p{margin:0;color:#656d6a;line-height:1.62;max-width:720px}
+.startPreviewHead.compact{margin-bottom:18px}
+.startModelPreview{max-width:1400px;margin:0 auto;padding:18px clamp(18px,5vw,68px) 0}
+.startModelFlow{display:grid;grid-template-columns:1.05fr .92fr 1.02fr;gap:18px;align-items:stretch}
+.startModelPanel{border:1px solid rgba(18,25,24,.1);border-radius:30px;background:#fff;padding:28px 30px;min-width:0}
+.startModelPanel small{display:block;font-size:10px;letter-spacing:.12em;font-weight:900;color:#64706b;margin-bottom:12px}
+.startModelPanel h3{font-size:clamp(26px,2.35vw,42px);line-height:.98;letter-spacing:-.05em;margin:0 0 10px}
+.startModelPanel p{margin:0;color:#5f6765;line-height:1.62}
+.startModelList{display:grid;gap:10px;margin-top:26px}
+.startModelList>div{display:grid;grid-template-columns:58px 1fr auto;gap:14px;align-items:center;padding:12px 0;border-top:1px solid #e3dfd7}
+.startModelList>div:first-child{border-top:0;padding-top:0}
+.startModelList img{width:58px;height:58px;object-fit:cover;border-radius:14px;background:#f1f2ef}
+.startModelList span{display:grid;gap:4px;min-width:0}
+.startModelList b{font-size:17px;line-height:1.1}.startModelList i{font-style:normal;color:#736d63;font-size:12px;line-height:1.45}.startModelList em{font-style:normal;font-size:13px;color:#8b877f;font-weight:700}
+.startModelCore{background:#082322;color:#fff;position:relative;overflow:hidden}
+.startModelCoreBrand img{width:86px;height:86px;object-fit:contain;border-radius:22px;background:#fff;padding:8px}
+.startModelCoreKicker{display:block;margin-top:18px;font-size:12px;letter-spacing:.12em;font-weight:900;color:#49d1c7}
+.startModelCore h3{margin-top:10px;max-width:340px}
+.startModelCore p{color:#d2dddb;max-width:380px}
+.startModelCore ul{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:0;border-top:1px solid rgba(255,255,255,.12)}
+.startModelCore li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.12);font-weight:700}
+.startModelCore li span{width:10px;height:10px;border-radius:50%;background:#56d5cd;box-shadow:0 0 0 6px rgba(86,213,205,.12);margin-right:10px;flex:0 0 auto}
+.startModelCore li b{font-size:12px;color:#68e0d7;text-transform:uppercase;letter-spacing:.08em}
+.startModelCore li::before{content:''}
+.startModelCore li{display:grid;grid-template-columns:auto 1fr auto}.startModelCore li span+*{grid-column:2/3}
+.startModelTagline{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-top:24px;font-size:14px}.startModelTagline b{background:#5fe0d7;color:#05201f;border-radius:999px;padding:12px 14px;line-height:1}.startModelTagline span{font-weight:700;color:#fff}
+.startModelOutputHead{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:0 0 18px;border-bottom:1px solid #e3dfd7;margin-top:28px}
+.startModelOutputHead span{font-size:12px;letter-spacing:.1em;color:#727067;font-weight:900}.startModelOutputHead b{font-size:15px}
+.startModelOutputList{display:grid;gap:0}
+.startModelOutputList>div{display:grid;grid-template-columns:1fr auto;gap:12px;padding:18px 0;border-bottom:1px solid #e3dfd7;align-items:center}
+.startModelOutputList span{display:grid;gap:4px}.startModelOutputList b{font-size:17px;line-height:1.1}.startModelOutputList i{font-style:normal;font-size:12px;color:#726d63;line-height:1.45}
+.startModelOutputList em{font-style:normal;font-size:12px;font-weight:900;letter-spacing:.07em;color:#0d8c83;background:#e6f5f2;border-radius:999px;padding:10px 12px}
+.startModelOutputFoot{margin-top:24px;padding:18px 20px;background:#f3f0ea;border-radius:20px;display:grid;gap:6px}.startModelOutputFoot b{font-size:15px}.startModelOutputFoot span{font-size:13px;color:#69645c;line-height:1.55}
+.startWalkthroughMini{margin-top:22px;padding-top:14px;border-top:1px solid rgba(18,25,24,.08)}
+.startWalkthroughGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.startWalkthroughGrid article{border:1px solid rgba(18,25,24,.1);border-radius:26px;background:#fff;padding:20px;display:grid;align-content:start;gap:10px}
+.startWalkthroughGrid small{font-size:10px;letter-spacing:.12em;font-weight:900;color:#64706b}
+.startWalkthroughGrid h3{font-size:24px;line-height:1.02;letter-spacing:-.042em;margin:0}
+.startWalkthroughGrid p{margin:0;color:#666e6c;font-size:13px;line-height:1.58;min-height:60px}
+.startWalkthroughGrid img{width:100%;height:235px;object-fit:cover;object-position:top;border-radius:18px;border:1px solid #e3dfd7;background:#fff}
+.startWorkshopPreview,.startPortalPreview{max-width:1400px;margin:0 auto}
+.startWorkshopGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.startWorkshopCard{border:1px solid rgba(18,25,24,.1);border-radius:26px;overflow:hidden;background:#fff}
+.startWorkshopCard button{width:100%;text-align:left;display:grid;grid-template-rows:240px auto;background:none;border:0;padding:0;color:inherit}
+.startWorkshopCardVisual{display:block;background:#eaf0ed}.startWorkshopCardVisual img{display:block;width:100%;height:100%;object-fit:cover}
+.startWorkshopCardCopy{display:grid;gap:10px;padding:20px 20px 22px}.startWorkshopCardCopy small{font-size:10px;letter-spacing:.12em;font-weight:900;color:#0b817b}.startWorkshopCardCopy h3{font-size:24px;line-height:1.05;letter-spacing:-.04em;margin:0}.startWorkshopCardCopy p{margin:0;color:#656d6b;line-height:1.58;font-size:13px}
+.startPortalGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.startPortalGrid article{border:1px solid rgba(18,25,24,.1);border-radius:24px;background:#fff;padding:24px;display:grid;align-content:start;gap:10px;min-height:220px}
+.startPortalGrid i{width:48px;height:48px;border-radius:16px;background:#dcefeb;display:grid;place-items:center;color:#0b817b}
+.startPortalGrid i svg{width:22px;height:22px}
+.startPortalGrid h3{font-size:22px;line-height:1.02;letter-spacing:-.04em;margin:4px 0 0}.startPortalGrid p{margin:0;color:#666e6c;line-height:1.58;font-size:13px}
+.startPageV39 .startSendSection{max-width:1400px;margin-top:34px}
+.modelWalkthroughLite{max-width:1380px;margin:0 auto 22px;padding:0 clamp(20px,5vw,72px) 20px!important}
+.modelWalkthroughLiteHead{max-width:820px;margin-bottom:24px}.modelWalkthroughLiteHead h2{font-size:clamp(34px,3.4vw,52px);line-height:.96;letter-spacing:-.052em;margin:10px 0 10px}.modelWalkthroughLiteHead p{margin:0;color:#666e6c;line-height:1.62;max-width:760px}
+.modelWalkthroughLiteGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.modelWalkthroughLiteGrid article{border:1px solid rgba(18,25,24,.1);border-radius:26px;background:#fff;padding:20px;display:grid;align-content:start;gap:10px}
+.modelWalkthroughLiteGrid small{font-size:10px;letter-spacing:.12em;font-weight:900;color:#64706b}.modelWalkthroughLiteGrid h3{font-size:26px;line-height:1.02;letter-spacing:-.042em;margin:0}.modelWalkthroughLiteGrid p{margin:0;color:#666e6c;font-size:13px;line-height:1.58;min-height:64px}.modelWalkthroughLiteGrid img{width:100%;height:280px;object-fit:cover;object-position:top;border-radius:18px;border:1px solid #e3dfd7;background:#fff}
+@media(max-width:1240px){
+  .startPageV39 .startHeroV39{grid-template-columns:1fr}.startHeroPreviewPanel{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .startModelFlow,.startPortalGrid,.startWorkshopGrid,.startWalkthroughGrid,.modelWalkthroughLiteGrid{grid-template-columns:1fr 1fr}
+  .startModelCore{grid-column:1/-1}.startModelOutput{grid-column:1/-1}
 }
-
-
-/* ---------- Our Model: richer visual finish ---------- */
-main.publicPage:has(.modelQuietIntro){
-  background:
-    radial-gradient(circle at 0% 0%,rgba(39,169,159,.05),transparent 28%),
-    radial-gradient(circle at 100% 0%,rgba(128,145,238,.05),transparent 22%),
-    #fbfaf8;
+@media(max-width:860px){
+  .startPageV39 .startHeroV39{padding:42px 20px 34px;gap:28px;background-size:26px 26px}
+  .startPageV39 .startHeroCopy h1{font-size:54px}.startPageV39 .startHeroCopy>p{font-size:15px}
+  .startHeroCueRow,.startHeroPreviewPanel,.startModelFlow,.startWorkshopGrid,.startPortalGrid,.startWalkthroughGrid,.modelWalkthroughLiteGrid{grid-template-columns:1fr}
+  .startPreviewHead{display:grid;gap:16px;align-items:start}.startPreviewHead h2,.modelWalkthroughLiteHead h2{font-size:34px}
+  .startModelPanel,.startWalkthroughGrid article,.startWorkshopCard,.startPortalGrid article,.modelWalkthroughLiteGrid article{border-radius:22px}
+  .startModelPanel{padding:22px}.startModelList>div{grid-template-columns:52px 1fr auto}.startModelList img{width:52px;height:52px}
+  .startWalkthroughGrid img,.modelWalkthroughLiteGrid img{height:auto}
+  .startPageV39 .startSendSection{margin:18px 18px 48px;padding:30px 20px;border-radius:22px;grid-template-columns:1fr;gap:28px}
+  .modelWalkthroughLite{padding:0 18px 10px!important}
 }
-main.publicPage:has(.modelQuietIntro) .publicPageHero{
-  position:relative;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 8% 18%,rgba(39,169,159,.10),transparent 28%),
-    radial-gradient(circle at 88% 14%,rgba(140,157,232,.14),transparent 24%),
-    linear-gradient(180deg,#f7f4ec 0%,#fbf8f1 72%);
-}
-main.publicPage:has(.modelQuietIntro) .publicPageHero::after{
-  content:'SOURCE PER LINE • SELL ONE SOLUTION';
-  position:absolute;
-  right:6%;
-  bottom:22px;
-  padding:10px 16px;
-  border-radius:999px;
-  border:1px solid rgba(23,23,22,.09);
-  background:rgba(255,255,255,.82);
-  color:#42595a;
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:.16em;
-}
-.modelQuietIntro{align-items:start}
-.modelQuietVisualBoard{
-  background:linear-gradient(180deg,#fffdf9 0%,#f7f4ee 100%);
-  border:1px solid #ddd7cd;
-  border-radius:24px;
-  padding:24px 24px 22px;
-  box-shadow:0 18px 38px rgba(30,28,24,.04);
-}
-.modelQuietVisualBoard p{margin:0}
-.modelQuietMiniFlow{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
-  margin-top:22px;
-}
-.modelQuietMiniFlow article{
-  min-height:120px;
-  padding:16px 15px;
-  border-radius:18px;
-  border:1px solid rgba(23,23,22,.08);
-  background:#fff;
-}
-.modelQuietMiniFlow article:nth-child(1){background:#ecf7f5}
-.modelQuietMiniFlow article:nth-child(2){background:#f1effb}
-.modelQuietMiniFlow article:nth-child(3){background:#f9efe5}
-.modelQuietMiniFlow article:nth-child(4){background:#eef4e8}
-.modelQuietMiniFlow span,
-.modelSignalStrip span,
-.modelQuietSectionTag,
-.modelQuietCategoryHead span,
-.modelQuietSchoolVisual span{
-  display:block;
-  font-size:10px;
-  line-height:1.25;
-  letter-spacing:.14em;
-  font-weight:900;
-  color:#5f6c71;
-}
-.modelQuietMiniFlow b{display:block;margin-top:10px;font-size:18px;line-height:1.08;letter-spacing:-.03em;color:#171716}
-.modelQuietMiniFlow small{display:block;margin-top:8px;font-size:12px;line-height:1.5;color:#625f59}
-.modelSignalStrip{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:12px;
-  padding-top:0!important;
-  padding-bottom:18px!important;
-}
-.modelSignalStrip article{
-  min-height:165px;
-  border-radius:24px;
-  padding:22px 20px 20px;
-  border:1px solid rgba(23,23,22,.08);
-  background:#fff;
-  box-shadow:0 14px 32px rgba(27,23,18,.04);
-}
-.modelSignalStrip article:nth-child(1){background:#e8f3f2}
-.modelSignalStrip article:nth-child(2){background:#eef0f7}
-.modelSignalStrip article:nth-child(3){background:#f6efe5}
-.modelSignalStrip article:nth-child(4){background:#e9f0e4}
-.modelSignalStrip b{display:block;margin-top:28px;font-size:22px;line-height:1.14;letter-spacing:-.045em;color:#171716}
-.modelQuietSectionTag{margin-bottom:12px}
-.modelQuietNumber{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:38px;
-  height:38px;
-  margin-bottom:12px;
-  border-radius:12px;
-  background:#fff;
-  border:1px solid rgba(23,23,22,.12);
-  color:#111;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:.06em;
-}
-.modelQuietCategoryGrid article{
-  position:relative;
-  overflow:hidden;
-  box-shadow:0 14px 30px rgba(24,24,22,.04);
-}
-.modelQuietCategoryGrid article::after{
-  content:'';
-  position:absolute;
-  right:-34px;
-  top:-34px;
-  width:110px;
-  height:110px;
-  border-radius:50%;
-  background:rgba(255,255,255,.36);
-}
-.modelQuietCategoryHead{
-  position:relative;
-  z-index:1;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
-  margin-bottom:18px;
-}
-.modelQuietCategoryHead img{
-  width:56px;
-  height:56px;
-  object-fit:contain;
-  filter:drop-shadow(0 10px 16px rgba(18,16,13,.08));
-}
-.modelQuietCategoryHead span{max-width:90px;text-align:right}
-.modelQuietAftercareList>div{
-  padding:20px 0 20px 18px;
-  position:relative;
-}
-.modelQuietAftercareList>div::before{
-  content:'';
-  position:absolute;
-  left:0;
-  top:24px;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#27a99f;
-}
-.modelQuietSchool{
-  grid-template-columns:minmax(0,1fr) minmax(320px,.82fr);
-  grid-template-areas:'copy visual' 'action visual';
-  align-items:stretch;
-}
-.modelQuietSchoolCopy{grid-area:copy}
-.modelQuietSchoolVisual{
-  grid-area:visual;
-  display:grid;
-  gap:12px;
-  align-self:stretch;
-}
-.modelQuietSchoolVisual article{
-  border-radius:18px;
-  border:1px solid rgba(23,23,22,.08);
-  background:rgba(255,255,255,.72);
-  padding:18px 18px 17px;
-}
-.modelQuietSchoolVisual article:nth-child(1){background:#fffaf4}
-.modelQuietSchoolVisual article:nth-child(2){background:#f4fcfb}
-.modelQuietSchoolVisual article:nth-child(3){background:#f6f3fd}
-.modelQuietSchoolVisual b{
-  display:block;
-  margin-top:8px;
-  font-size:17px;
-  line-height:1.32;
-  letter-spacing:-.03em;
-  color:#171716;
-}
-.modelQuietSchoolAction{
-  grid-area:action;
-  padding-top:8px;
-}
-.modelQuietSchoolAction .button{min-width:260px}
-@media(max-width:1180px){
-  .modelSignalStrip{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:900px){
-  main.publicPage:has(.modelQuietIntro) .publicPageHero::after{position:static;display:inline-flex;margin-top:20px}
-  .modelQuietMiniFlow{grid-template-columns:1fr 1fr}
-  .modelQuietSchool{grid-template-columns:1fr;grid-template-areas:'copy' 'visual' 'action'}
-}
-@media(max-width:720px){
-  .modelQuietVisualBoard{padding:20px 18px}
-  .modelQuietMiniFlow{grid-template-columns:1fr}
-  .modelSignalStrip{grid-template-columns:1fr;padding-bottom:10px!important}
-  .modelSignalStrip article{min-height:0}
-  .modelQuietSchoolAction .button{min-width:0;width:100%}
-}
-
-
-/* =========================================================
-   V39.1 — Our Model simplified visual system
-   ========================================================= */
-main.publicPage:has(.modelV2FlowSection){background:#fbfaf7}
-main.publicPage:has(.modelV2FlowSection) .publicPageHero{
-  max-width:1440px!important;padding:72px clamp(28px,6vw,88px) 58px!important;
-  background:radial-gradient(circle at 86% 18%,rgba(145,160,235,.16),transparent 24%),radial-gradient(circle at 7% 15%,rgba(39,169,159,.12),transparent 24%),linear-gradient(180deg,#f6f2e9 0%,#fbfaf7 78%);
-  border-bottom:1px solid #d9d3c8!important
-}
-main.publicPage:has(.modelV2FlowSection) .publicPageHero h1{max-width:1000px!important;font-size:clamp(48px,5.7vw,82px)!important;line-height:.96!important;letter-spacing:-.06em!important}
-main.publicPage:has(.modelV2FlowSection) .publicPageHero p{max-width:720px!important;font-size:18px!important;line-height:1.6!important}
-.modelV2FlowSection{padding-top:54px!important;padding-bottom:66px!important}
-.modelV2FlowIntro,.modelV2SectionHead{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:28px}
-.modelV2FlowIntro h2,.modelV2SectionHead h2,.modelV2School h2,.modelV2AccountLead h2{margin:0;font-size:clamp(32px,3.7vw,54px);line-height:1;letter-spacing:-.05em}
-.modelV2Flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.modelV2Flow article{position:relative;min-height:280px;padding:24px;border-radius:26px;border:1px solid rgba(24,24,22,.09);overflow:hidden;box-shadow:0 18px 38px rgba(20,18,15,.05)}
-.modelV2Flow article:nth-child(1){background:#e7f3f1}.modelV2Flow article:nth-child(2){background:#f3ecdf}.modelV2Flow article:nth-child(3){background:#eceefa}.modelV2Flow article:nth-child(4){background:#f7e8e6}
-.modelV2Flow article>img{width:92px;height:92px;object-fit:contain;display:block;margin:2px 0 48px;filter:drop-shadow(0 12px 18px rgba(20,18,15,.07))}
-.modelV2Flow article>span{position:absolute;right:20px;top:18px;font-size:11px;font-weight:900;letter-spacing:.11em;color:#5f6969}
-.modelV2Flow h3{margin:0;font-size:29px;line-height:1;letter-spacing:-.05em}.modelV2Flow p{margin:12px 0 0;font-size:14px;line-height:1.5;color:#5d605d;max-width:220px}
-.modelV2CategorySection{padding-top:62px!important;padding-bottom:64px!important}.modelV2SectionHead{align-items:flex-start;flex-direction:column;gap:9px}.modelV2SectionHead.compact{margin-bottom:22px}
-.modelV2CategoryGrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
-.modelV2CategoryGrid article{min-height:210px;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;border:1px solid rgba(24,24,22,.09);border-radius:24px;overflow:hidden}
-.modelV2CategoryGrid article:nth-child(1){background:#e7f3f1}.modelV2CategoryGrid article:nth-child(2){background:#f4ecdf}.modelV2CategoryGrid article:nth-child(3){background:#eef0f8}.modelV2CategoryGrid article:nth-child(4){background:#e9f0e4}.modelV2CategoryGrid article:nth-child(5){background:#f3e8e7}
-.modelV2CategoryGrid img{width:84px;height:84px;object-fit:contain;margin:auto auto 24px 0;filter:drop-shadow(0 10px 16px rgba(20,18,15,.07))}
-.modelV2CategoryGrid h3{margin:0;font-size:23px;letter-spacing:-.04em}.modelV2CategoryGrid small{display:block;margin-top:8px;font-size:12px;line-height:1.4;color:#67645e}
-.modelV2BasketSection{padding-top:42px!important;padding-bottom:70px!important}.modelV2BasketGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.modelV2BasketGrid article{display:grid;grid-template-columns:110px 1fr;gap:24px;align-items:center;min-height:210px;border-radius:28px;padding:28px;border:1px solid rgba(24,24,22,.09)}
-.modelV2BasketGrid .opening{background:#f5eadc}.modelV2BasketGrid .recurring{background:#e4f3f0}.modelV2BasketIcon{width:110px;height:110px;border-radius:24px;background:rgba(255,255,255,.64);display:flex;align-items:center;justify-content:center}.modelV2BasketIcon img{width:82px;height:82px;object-fit:contain}
-.modelV2BasketGrid span{font-size:10px;letter-spacing:.14em;font-weight:900;color:#5e6663}.modelV2BasketGrid h3{margin:10px 0 10px;font-size:32px;line-height:1;letter-spacing:-.05em}.modelV2BasketGrid p{margin:0;font-size:14px;line-height:1.5;color:#625f59}
-.modelV2AccountBand{max-width:none!important;margin:0!important;padding:72px max(6%,calc((100vw - 1320px)/2 + 6%))!important;background:#121918;color:#fff;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);gap:70px;align-items:center}
-.modelV2AccountLead .kicker{color:#65d1cb!important}.modelV2AccountLead h2{color:#fff;max-width:720px}.modelV2AccountSteps{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap}.modelV2AccountSteps span{border:1px solid rgba(255,255,255,.24);border-radius:999px;padding:12px 16px;font-size:11px;font-weight:900;letter-spacing:.11em}.modelV2AccountSteps i{font-style:normal;color:#61cbc5}
-.modelV2School{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:50px;align-items:end;padding-top:68px!important;padding-bottom:40px!important}.modelV2School>div{max-width:820px}.modelV2School p{margin:16px 0 0;max-width:720px;font-size:16px;line-height:1.6;color:#64615a}.modelV2School .button{white-space:nowrap}.modelV2Cta{margin-top:30px!important;margin-bottom:66px!important}.modelV2Cta p{margin:10px 0 0!important}
-@media(max-width:1100px){.modelV2Flow{grid-template-columns:repeat(2,minmax(0,1fr))}.modelV2CategoryGrid{grid-template-columns:repeat(3,minmax(0,1fr))}.modelV2AccountBand{grid-template-columns:1fr;gap:34px}.modelV2AccountSteps{justify-content:flex-start}}
-@media(max-width:760px){main.publicPage:has(.modelV2FlowSection) .publicPageHero{padding:48px 22px 38px!important}main.publicPage:has(.modelV2FlowSection) .publicPageHero h1{font-size:44px!important}main.publicPage:has(.modelV2FlowSection) .publicPageHero p{font-size:16px!important}.modelV2FlowSection,.modelV2CategorySection,.modelV2BasketSection,.modelV2School{padding-left:22px!important;padding-right:22px!important}.modelV2FlowIntro,.modelV2SectionHead{align-items:flex-start;flex-direction:column}.modelV2Flow{grid-template-columns:1fr}.modelV2Flow article{min-height:230px}.modelV2Flow article>img{margin-bottom:32px}.modelV2CategoryGrid{grid-template-columns:1fr 1fr}.modelV2CategoryGrid article{min-height:185px}.modelV2CategoryGrid img{width:70px;height:70px}.modelV2BasketGrid{grid-template-columns:1fr}.modelV2BasketGrid article{grid-template-columns:82px 1fr;min-height:170px;padding:22px}.modelV2BasketIcon{width:82px;height:82px}.modelV2BasketIcon img{width:62px;height:62px}.modelV2AccountBand{padding:52px 22px!important}.modelV2AccountSteps i{display:none}.modelV2School{grid-template-columns:1fr;align-items:start}.modelV2School .button{width:100%}}
-@media(max-width:500px){.modelV2CategoryGrid{grid-template-columns:1fr}}
-
-
-/* ---------- V39.2 Workshop editorial imagery ---------- */
-.workshopGuideCard.hasGuideImage .workshopGuideCardVisual{
-  padding:0!important;
-  overflow:hidden;
-  background:#eef3f2;
-}
-.workshopGuideCard.hasGuideImage .workshopGuideCardVisual img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
-}
-.workshopGuideCard.hasGuideImage>button:hover .workshopGuideCardVisual img{
-  transform:scale(1.018);
-}
-.workshopGuideCard.hasGuideImage .workshopGuideCardVisual img{transition:transform .25s ease}
-.workshopArticleHeroImage{
-  width:min(1120px,100%);
-  margin:18px auto 28px;
-  border:1px solid var(--ws-line,#d6d2ca);
-  border-radius:26px;
-  overflow:hidden;
-  background:#f2f5f3;
-}
-.workshopArticleHeroImage img{
-  display:block;
-  width:100%;
-  height:auto;
-  aspect-ratio:16/9;
-  object-fit:cover;
-}
-@media(max-width:720px){
-  .workshopArticleHeroImage{margin:12px 0 22px;border-radius:18px}
-}
-
-/* =========================================================
-   V39.4 — visual QA cleanup + one site-wide grid system
-   ========================================================= */
-:root{
-  --psc-site-paper:#fbf8f1;
-  --psc-site-grid:rgba(45,57,55,.055);
-}
-
-/* The same quiet technical grid now carries the whole public site. */
-.publicLanding,
-.publicPage{
-  background-color:var(--psc-site-paper)!important;
-  background-image:
-    linear-gradient(var(--psc-site-grid) 1px,transparent 1px),
-    linear-gradient(90deg,var(--psc-site-grid) 1px,transparent 1px)!important;
-  background-size:28px 28px!important;
-}
-.publicHeader,
-.publicHeader.headerScrolled{
-  background-color:rgba(251,248,241,.97)!important;
-  background-image:
-    linear-gradient(var(--psc-site-grid) 1px,transparent 1px),
-    linear-gradient(90deg,var(--psc-site-grid) 1px,transparent 1px)!important;
-  background-size:28px 28px!important;
-}
-
-/* Carry the same grid into the portal/admin canvas without touching cards. */
-.v26Shell .mainArea,
-.mainArea.v7MainArea,
-.mainArea.v7bMainArea{
-  background-color:#f8f5ef!important;
-  background-image:
-    radial-gradient(circle at 97% 3%,rgba(255,232,182,.20),transparent 280px),
-    linear-gradient(var(--psc-site-grid) 1px,transparent 1px),
-    linear-gradient(90deg,var(--psc-site-grid) 1px,transparent 1px),
-    linear-gradient(180deg,#fbfaf7 0%,#f7f4ee 100%)!important;
-  background-size:auto,28px 28px,28px 28px,auto!important;
-}
-
-/* Our Model — only exact transparent crops from the supplied master artwork. */
-.modelV2Flow article>img,
-.modelV2CategoryGrid img,
-.modelV2BasketIcon img{
-  background:transparent!important;
-  border:0!important;
-  border-radius:0!important;
-}
-.modelV2BasketIcon{
-  background:transparent!important;
-  border:0!important;
-  border-radius:0!important;
-}
-.modelV2BasketIcon img{
-  width:100px!important;
-  height:100px!important;
-  filter:drop-shadow(0 12px 18px rgba(20,18,15,.07));
-}
-
-/* Dark account band had inherited dark text in the step pills. */
-.modelV2AccountSteps span{
-  color:#f7fbfa!important;
-  border-color:rgba(255,255,255,.30)!important;
-  background:rgba(255,255,255,.025)!important;
-}
-.modelV2AccountSteps i{color:#61d3cc!important}
-
-/* Workshop strip must stay on the same page grid, never wider than it. */
-.schoolWorkshopStrip{
-  width:min(1320px,88%)!important;
-  max-width:1320px!important;
-  margin:28px auto 0!important;
-  box-sizing:border-box!important;
-  min-width:0!important;
-}
-.schoolWorkshopStrip>div,
-.schoolWorkshopStrip button{min-width:0!important}
-.schoolWorkshopStrip button b{
-  overflow-wrap:anywhere;
-  word-break:normal;
-}
-
-/* Homepage clinical cards: source art is transparent; never manufacture a tile behind it. */
-.publicLanding .publicClinicalCard .publicClinicalArt{
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
-}
-
-@media(max-width:900px){
-  .schoolWorkshopStrip{width:calc(100% - 44px)!important}
-}
-@media(max-width:720px){
-  .modelV2BasketIcon img{width:76px!important;height:76px!important}
-  .schoolWorkshopStrip{width:calc(100% - 36px)!important;margin-top:20px!important}
-}
-
-/* Grid continuity across public hero canvases while preserving each section's own colour treatment. */
-.publicPageHero,
-.workshopHero{
-  position:relative;
-  isolation:isolate;
-}
-.publicPageHero::before,
-.workshopHero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  background-image:
-    linear-gradient(var(--psc-site-grid) 1px,transparent 1px),
-    linear-gradient(90deg,var(--psc-site-grid) 1px,transparent 1px);
-  background-size:28px 28px;
-}
-.publicPageHero>* ,
-.workshopHero>*{position:relative;z-index:1}
