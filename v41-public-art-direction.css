@@ -1,0 +1,887 @@
+/* =========================================================
+   V41 — PUBLIC ART-DIRECTION PASS
+   A deliberately visible redesign of the PUBLIC website only.
+   Portal/admin functionality/layout is intentionally excluded.
+   ========================================================= */
+
+:root{
+  --v41-paper:#fbf8f1;
+  --v41-white:#fffdfa;
+  --v41-ink:#111513;
+  --v41-muted:#68635c;
+  --v41-line:#d4cec4;
+  --v41-line-dark:#aaa297;
+  --v41-teal:#17a59c;
+  --v41-teal-dark:#0d2522;
+  --v41-soft:#edf4f1;
+  --v41-ease:cubic-bezier(.22,1,.36,1);
+}
+
+/* ---------- PUBLIC SITE FRAME ---------- */
+:is(main.publicPage,main.publicLanding){
+  background:var(--v41-paper)!important;
+  color:var(--v41-ink);
+}
+
+/* The old "everything gets a soft card" instinct stops here. */
+:is(main.publicPage,main.publicLanding) :where(
+  .simplePublicPanel,
+  .contactCard,
+  .publicFeatureStack article,
+  .serviceCards article,
+  .publicMediaGrid article,
+  .publicCta,
+  .customRequestPanel,
+  .start16Send,
+  .start16Form,
+  .v3927ContactForm,
+  .workshopGuideCard,
+  .model17RhythmCard,
+  .model17FlowCard,
+  .model24Step
+){
+  box-shadow:none!important;
+}
+
+/* ---------- HEADER: MUCH LESS APP-LIKE ---------- */
+.publicHeader{
+  min-height:86px!important;
+  padding:15px max(26px,5vw)!important;
+  grid-template-columns:190px 1fr auto!important;
+  gap:34px!important;
+  background:rgba(251,248,241,.96)!important;
+  border-bottom:1px solid var(--v41-line)!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(12px);
+}
+.publicLogo img{
+  width:155px!important;
+}
+.publicNav{
+  gap:21px!important;
+}
+.publicNavLink{
+  position:relative!important;
+  padding:10px 0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  font-size:14px!important;
+  font-weight:650!important;
+  color:#5f625f!important;
+}
+.publicNavLink:after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:2px;
+  height:1px;
+  background:#183b37;
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .48s var(--v41-ease);
+}
+.publicNavLink:hover:after,
+.publicNavLink.active:after{transform:scaleX(1)}
+.publicNavLink.active{color:#183b37!important}
+.publicPortalBtn{
+  border-radius:8px!important;
+  box-shadow:none!important;
+}
+
+/* ---------- TYPOGRAPHY: ONE HERO, THEN RESTRAINT ---------- */
+.publicPageHero{
+  max-width:1440px!important;
+  padding:86px clamp(28px,6vw,88px) 54px!important;
+  border-bottom:1px solid var(--v41-line)!important;
+}
+.publicPageHero h1{
+  margin:0 0 22px!important;
+  max-width:980px!important;
+  font-size:clamp(48px,5.45vw,80px)!important;
+  line-height:.95!important;
+  letter-spacing:-.06em!important;
+}
+.publicPageHero p{
+  max-width:760px!important;
+  margin:0!important;
+  font-size:17px!important;
+  line-height:1.66!important;
+  color:var(--v41-muted)!important;
+}
+
+:is(main.publicPage,main.publicLanding) :where(
+  .publicClinicalPreviewHead h2,
+  .homeEditorialLead h2,
+  .homePortalTeaser h2,
+  .model17Promise h2,
+  .model17SourceIntro h2,
+  .workshopGuideDeckIntro h2,
+  .start16SendIntro h2
+){
+  font-size:clamp(31px,3.25vw,48px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.047em!important;
+}
+
+/* ---------- HOME: EDITORIAL, NOT BLOCK BUILDER ---------- */
+.publicLanding .homeEditorialIntro{
+  max-width:1450px!important;
+  padding:96px clamp(28px,6vw,88px) 84px!important;
+  grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr)!important;
+  gap:clamp(70px,10vw,150px)!important;
+  background:var(--v41-white)!important;
+  background-image:none!important;
+  border-bottom:0!important;
+}
+.publicLanding .homeEditorialLead h2{
+  max-width:500px!important;
+}
+.publicLanding .homeEditorialCopy{
+  max-width:710px!important;
+  padding-top:8px!important;
+}
+.publicLanding .homeEditorialCopy p{
+  max-width:66ch!important;
+  font-size:15.5px!important;
+  line-height:1.73!important;
+}
+.publicLanding .homeEditorialStrong{
+  padding-top:24px!important;
+  border-top:1px solid var(--v41-line)!important;
+}
+
+/* The technical details become a procurement ledger. */
+.publicLanding .homeDetailLedger{
+  max-width:1450px!important;
+  padding:0 clamp(28px,6vw,88px) 102px!important;
+  display:block!important;
+  background:var(--v41-white)!important;
+}
+.publicLanding .homeDetailLedger article{
+  display:grid!important;
+  grid-template-columns:minmax(150px,.32fr) minmax(260px,.78fr) minmax(0,1fr)!important;
+  gap:32px!important;
+  align-items:start!important;
+  min-height:0!important;
+  padding:21px 0!important;
+  border:0!important;
+  border-top:1px solid var(--v41-line)!important;
+}
+.publicLanding .homeDetailLedger article:last-child{
+  border-bottom:1px solid var(--v41-line)!important;
+}
+.publicLanding .homeDetailLedger span{
+  margin:0!important;
+  padding-top:3px!important;
+  text-transform:none!important;
+  letter-spacing:0!important;
+  font-size:12px!important;
+  font-weight:700!important;
+  color:#555d59!important;
+}
+.publicLanding .homeDetailLedger b{
+  font-size:15px!important;
+  line-height:1.4!important;
+}
+.publicLanding .homeDetailLedger p{
+  margin:0!important;
+  font-size:13px!important;
+  line-height:1.55!important;
+}
+
+/* CATEGORY PREVIEW = A REAL VISUAL COMPOSITION */
+.publicLanding .publicClinicalPreview{
+  max-width:none!important;
+  margin:0!important;
+  padding:96px max(28px,calc((100vw - 1320px)/2)) 102px!important;
+  background:#f4efe6!important;
+  border-top:1px solid var(--v41-line)!important;
+  border-bottom:1px solid var(--v41-line)!important;
+}
+.publicLanding .publicClinicalPreviewHead{
+  max-width:1320px;
+  margin:0 auto 42px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:end!important;
+  gap:40px!important;
+}
+.publicLanding .publicClinicalPreviewHead>div{
+  max-width:720px!important;
+}
+.publicLanding .publicClinicalPreviewHead h2{
+  margin:0 0 12px!important;
+}
+.publicLanding .publicClinicalPreviewHead p{
+  max-width:610px!important;
+  font-size:14px!important;
+  line-height:1.65!important;
+}
+
+/* Deliberately uneven. This should look art-directed at first glance. */
+.publicLanding .publicClinicalPreviewGrid{
+  max-width:1320px;
+  margin:0 auto;
+  display:grid!important;
+  grid-template-columns:repeat(12,minmax(0,1fr))!important;
+  grid-auto-rows:118px;
+  gap:10px!important;
+}
+.publicLanding .publicClinicalCard{
+  position:relative!important;
+  min-height:0!important;
+  height:auto!important;
+  padding:22px!important;
+  border:1px solid rgba(20,24,22,.13)!important;
+  border-radius:5px!important;
+  box-shadow:none!important;
+  transform:none!important;
+  overflow:hidden!important;
+}
+.publicLanding .publicClinicalCard:nth-child(1){grid-column:span 5;grid-row:span 2}
+.publicLanding .publicClinicalCard:nth-child(2){grid-column:span 3;grid-row:span 2}
+.publicLanding .publicClinicalCard:nth-child(3){grid-column:span 4;grid-row:span 1}
+.publicLanding .publicClinicalCard:nth-child(4){grid-column:span 4;grid-row:span 2}
+.publicLanding .publicClinicalCard:nth-child(5){grid-column:span 5;grid-row:span 2}
+.publicLanding .publicClinicalCard:nth-child(6){grid-column:span 3;grid-row:span 1}
+.publicLanding .publicClinicalCard span{
+  max-width:72%!important;
+  font-size:clamp(18px,1.7vw,27px)!important;
+  line-height:1!important;
+  letter-spacing:-.045em!important;
+}
+.publicLanding .publicClinicalCard small{
+  max-width:31ch!important;
+  margin-top:10px!important;
+  font-size:11px!important;
+  line-height:1.45!important;
+}
+.publicLanding .publicClinicalCard .publicClinicalArt{
+  right:14px!important;
+  top:12px!important;
+  width:min(33%,132px)!important;
+  height:min(55%,132px)!important;
+  transition:transform .85s var(--v41-ease),opacity .4s ease!important;
+}
+.publicLanding .publicClinicalCard:hover{
+  transform:none!important;
+  box-shadow:none!important;
+  border-color:rgba(17,22,20,.42)!important;
+}
+@media(hover:hover) and (pointer:fine){
+  .publicLanding .publicClinicalCard:hover .publicClinicalArt{
+    transform:translate3d(3px,-3px,0) rotate(.7deg)!important;
+  }
+}
+.publicLanding .publicClinicalPreviewFoot{
+  max-width:1320px;
+  margin:28px auto 0!important;
+  padding-top:20px!important;
+}
+
+/* WORKSHOP PREVIEW = FEATURE STORY + TWO SMALL STORIES */
+.publicLanding .homeWorkshopCards{
+  max-width:1450px!important;
+  margin:0 auto!important;
+  padding:100px clamp(28px,6vw,88px)!important;
+  grid-template-columns:235px minmax(0,1fr)!important;
+  gap:50px!important;
+  background:var(--v41-white)!important;
+  background-image:none!important;
+}
+.publicLanding .homeWorkshopIntro{
+  position:sticky;
+  top:112px;
+  align-self:start;
+}
+.publicLanding .homeWorkshopCardGrid{
+  display:grid!important;
+  grid-template-columns:1.3fr .9fr!important;
+  grid-template-rows:auto auto;
+  gap:10px!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:first-child{
+  grid-row:1 / span 2!important;
+}
+.workshopGuideCard{
+  border:1px solid var(--v41-line)!important;
+  border-radius:5px!important;
+  box-shadow:none!important;
+  background:#faf9f5!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:first-child>button{
+  grid-template-rows:minmax(310px,1fr) 210px!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:not(:first-child)>button{
+  grid-template-columns:1fr .82fr!important;
+  grid-template-rows:1fr!important;
+  min-height:205px;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:not(:first-child) .workshopGuideCardVisual{
+  border-top:0!important;
+  border-left:1px solid var(--v41-line)!important;
+}
+.workshopGuideCardVisual:before,
+.workshopGuideCardVisual:after{
+  display:none!important;
+}
+.workshopGuideCard:hover{
+  transform:none!important;
+  box-shadow:none!important;
+  border-color:var(--v41-line-dark)!important;
+}
+
+/* The account side becomes one strong punctuation mark. */
+.publicLanding .homePortalTeaser{
+  max-width:none!important;
+  margin:0!important;
+  padding:82px max(28px,calc((100vw - 1320px)/2))!important;
+  border:0!important;
+  border-radius:0!important;
+  background:var(--v41-teal-dark)!important;
+  color:#fff!important;
+}
+.publicLanding .homePortalTeaser h2{
+  max-width:720px!important;
+  color:#fff!important;
+}
+.publicLanding .homePortalTeaser p{
+  max-width:700px!important;
+  color:#c4d3d0!important;
+}
+.publicLanding .homePortalTeaser .button{
+  border-color:#809793!important;
+  background:transparent!important;
+  color:#fff!important;
+}
+
+/* ---------- OUR MODEL: MAKE IT LOOK LIKE A DESIGNED EDITORIAL PAGE ---------- */
+.model17Hero{
+  padding-top:100px!important;
+  padding-bottom:94px!important;
+  grid-template-columns:minmax(0,1.28fr) minmax(360px,.58fr)!important;
+  gap:88px!important;
+}
+.model17HeroCopy h1.model38Headline{
+  max-width:940px!important;
+  font-size:clamp(48px,5.1vw,76px)!important;
+  line-height:.99!important;
+}
+.model17HeroCopy>p{
+  max-width:690px!important;
+  font-size:17px!important;
+}
+.model17Principle{
+  display:inline-block!important;
+  margin-top:34px!important;
+  padding:0 0 5px!important;
+  border:0!important;
+  border-bottom:1px solid var(--v41-ink)!important;
+  border-radius:0!important;
+  background:none!important;
+  color:var(--v41-ink)!important;
+}
+.model17HeroVisual{
+  height:430px!important;
+  border-radius:4px!important;
+  border:1px solid #cbd9d5!important;
+  background:#e8f3f0!important;
+}
+.model17HeroVisual:before{display:none!important}
+.model17PaperCard{
+  border-radius:3px!important;
+  box-shadow:0 7px 18px rgba(20,31,29,.05)!important;
+}
+
+.model17Promise{
+  padding-top:92px!important;
+  padding-bottom:90px!important;
+  grid-template-columns:minmax(0,1.18fr) minmax(280px,.58fr)!important;
+  gap:100px!important;
+}
+.model17Promise h2{
+  max-width:750px!important;
+  font-size:clamp(37px,4.15vw,62px)!important;
+}
+.model17Promise>p{
+  max-width:430px!important;
+  font-size:17px!important;
+}
+
+/* Capital / recurring becomes a split editorial spread, not two SaaS cards. */
+.model17Rhythm{
+  gap:0!important;
+  padding-top:0!important;
+  padding-bottom:100px!important;
+  border-top:1px solid var(--v41-line)!important;
+  border-bottom:1px solid var(--v41-line)!important;
+}
+.model17RhythmCard{
+  min-height:330px!important;
+  border:0!important;
+  border-radius:0!important;
+  padding:42px 42px 46px!important;
+  background:transparent!important;
+}
+.model17RhythmCard+ .model17RhythmCard{
+  border-left:1px solid var(--v41-line)!important;
+}
+.model17RhythmCard.setup{background:#f4eadf!important}
+.model17RhythmCard.running{background:#e5f0ec!important}
+.model17RhythmCard h2{
+  font-size:clamp(32px,3.35vw,50px)!important;
+}
+.model17RhythmCard img{
+  filter:none!important;
+}
+
+/* "Right source" section looks like a technical plate. */
+.model17Source{
+  padding-top:100px!important;
+  padding-bottom:110px!important;
+  background:#f3eee5!important;
+}
+.model17SourceIntro{
+  margin-bottom:52px!important;
+}
+.model17SupplyFlow{
+  gap:0!important;
+  border-top:1px solid var(--v41-line-dark);
+  border-bottom:1px solid var(--v41-line-dark);
+}
+.model17FlowCard{
+  min-height:350px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  padding:28px!important;
+}
+.model17FlowCard+ .model17Arrow,
+.model17Arrow+ .model17FlowCard{
+  border-left:1px solid var(--v41-line)!important;
+}
+.model17FlowCard.category{background:#ffae79!important}
+.model17FlowCard.family{background:#e6f0f7!important}
+.model17FlowCard.line{background:#fff!important}
+.model17Arrow{
+  width:68px!important;
+}
+.model17LineThumb{
+  border-radius:4px!important;
+}
+.model17BottomCta{
+  padding-top:90px!important;
+  padding-bottom:90px!important;
+}
+
+/* ---------- START PAGE: QUIET ENTRY, STRONG NAVIGATION ---------- */
+.start16Hero{
+  padding-top:100px!important;
+  padding-bottom:88px!important;
+  gap:100px!important;
+}
+.start16HeroCopy h1{
+  max-width:760px!important;
+  font-size:clamp(50px,5.5vw,78px)!important;
+  line-height:.96!important;
+}
+.start16RouteBoard{
+  border-radius:0!important;
+  border-left:0!important;
+  border-right:0!important;
+  background:transparent!important;
+}
+.start16RouteBoard>button{
+  min-height:94px;
+  grid-template-columns:48px 1fr auto!important;
+  padding:21px 4px!important;
+  border-radius:0!important;
+}
+.start16RouteBoard>button>span{
+  font-size:13px!important;
+  font-weight:700!important;
+}
+.start16RouteBoard b{
+  font-size:18px!important;
+}
+.start16RouteBoard>button:hover{
+  transform:none!important;
+  background:rgba(23,165,156,.035)!important;
+}
+.start16RouteBoard i{
+  transition:transform .55s var(--v41-ease)!important;
+}
+.start16RouteBoard button:hover i{transform:translateX(6px)!important}
+
+/* ---------- CONTACT: FORM + LEDGER ---------- */
+.v3927ContactSection{
+  padding-top:60px!important;
+  padding-bottom:54px!important;
+}
+.v3927ContactForm{
+  max-width:1160px!important;
+  border-radius:4px!important;
+  border-color:var(--v41-line)!important;
+  padding:36px!important;
+}
+.v3927ContactForm .prospectField input:not([type="file"]),
+.v3927ContactForm .prospectField select,
+.v3927ContactForm .prospectField textarea,
+.v3927ContactForm .rfqUploadField input[type="file"]{
+  border-radius:4px!important;
+  background:#fffefa!important;
+}
+.prospectContactGrid{
+  gap:0!important;
+  border-top:1px solid var(--v41-line-dark)!important;
+  border-bottom:1px solid var(--v41-line-dark)!important;
+}
+.prospectContactGrid .contactCard{
+  min-height:115px!important;
+  padding:25px 28px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+.prospectContactGrid .contactCard+ .contactCard{
+  border-left:1px solid var(--v41-line)!important;
+}
+
+/* ---------- WORKSHOP LANDING: MAGAZINE-LIKE ---------- */
+.workshopGuideDeck{
+  grid-template-columns:230px minmax(0,1fr)!important;
+  gap:48px!important;
+  padding-top:60px!important;
+}
+.workshopGuideDeckScroll{
+  grid-template-columns:1.25fr .85fr!important;
+  grid-auto-flow:row!important;
+  gap:10px!important;
+}
+.workshopGuideDeckScroll .workshopGuideCard:first-child{
+  grid-row:span 2!important;
+}
+.workshopGuideDeckScroll .workshopGuideCard:first-child>button{
+  grid-template-rows:minmax(330px,1fr) 230px!important;
+}
+.workshopGuideDeckScroll .workshopGuideCard:not(:first-child)>button{
+  grid-template-columns:1fr .78fr!important;
+  grid-template-rows:1fr!important;
+  min-height:240px;
+}
+.workshopGuideDeckScroll .workshopGuideCard:not(:first-child) .workshopGuideCardVisual{
+  border-top:0!important;
+  border-left:1px solid var(--v41-line)!important;
+}
+
+/* ---------- CATALOGUE: KEEP FUNCTIONAL CARDS, REMOVE TEMPLATE HOVER ---------- */
+.publicCategoryCard16{
+  border-radius:6px!important;
+  box-shadow:inset 0 0 0 1px rgba(20,20,18,.09)!important;
+}
+.publicCategoryCard16:hover{
+  transform:none!important;
+  box-shadow:inset 0 0 0 1px rgba(20,20,18,.35)!important;
+}
+.publicCategoryCard16>i{
+  transition:transform .55s var(--v41-ease)!important;
+}
+.publicCategoryCard16:hover>i{
+  transform:translate(3px,-3px)!important;
+}
+.publicCatalogueGrid :where(.productCard,.v25ProductCard,.canvaProductCard),
+.pscFamilySelectorCard{
+  border-radius:7px!important;
+  box-shadow:none!important;
+}
+.publicCatalogueGrid :where(.productCard,.v25ProductCard,.canvaProductCard):hover{
+  transform:none!important;
+  box-shadow:none!important;
+}
+
+/* ---------- GENERIC CTA / MEDIA / SERVICE SECTIONS ---------- */
+.publicPage .publicCta{
+  border-radius:0!important;
+  background:transparent!important;
+  border-top:1px solid var(--v41-line-dark)!important;
+  border-bottom:1px solid var(--v41-line-dark)!important;
+}
+.publicPage .publicMediaGrid,
+.publicPage .serviceCards{
+  gap:0!important;
+  border-top:1px solid var(--v41-line)!important;
+  border-bottom:1px solid var(--v41-line)!important;
+}
+.publicPage .publicMediaGrid article,
+.publicPage .serviceCards article{
+  min-height:230px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  padding:28px 24px 32px!important;
+}
+.publicPage .publicMediaGrid article+article,
+.publicPage .serviceCards article+article{
+  border-left:1px solid var(--v41-line)!important;
+}
+
+/* ---------- BUTTON LANGUAGE ---------- */
+:is(main.publicPage,main.publicLanding) :where(button,.button,[role="button"]){
+  box-shadow:none!important;
+  transition:
+    color .3s ease,
+    background-color .3s ease,
+    border-color .3s ease,
+    opacity .3s ease!important;
+}
+:is(main.publicPage,main.publicLanding) :where(button,.button,[role="button"]):not(:disabled):active{
+  transform:translateY(1px)!important;
+}
+@media(hover:hover) and (pointer:fine){
+  :is(main.publicPage,main.publicLanding) :where(button,.button,[role="button"]):not(:disabled):hover{
+    transform:none!important;
+  }
+}
+
+/* ---------- A SMALL NUMBER OF MOTION FAMILIES ---------- */
+.v41-copy{
+  opacity:0;
+  transform:translate3d(0,14px,0);
+  transition:
+    opacity .9s ease,
+    transform 1.05s var(--v41-ease);
+}
+.v41-copy.v41-in{
+  opacity:1;
+  transform:none;
+}
+
+.v41-media{
+  opacity:0;
+  clip-path:inset(0 0 12% 0);
+  transform:translate3d(0,8px,0) scale(1.008);
+  transition:
+    opacity 1s ease .08s,
+    clip-path 1.25s var(--v41-ease) .08s,
+    transform 1.25s var(--v41-ease) .08s;
+}
+.v41-media.v41-in{
+  opacity:1;
+  clip-path:inset(0 0 0 0);
+  transform:none;
+}
+
+/* Rows don't "fade up"; their content simply resolves as the rule leads the eye. */
+.v41-ledger > *{
+  opacity:0;
+  transform:translateX(-7px);
+  transition:
+    opacity .72s ease,
+    transform .9s var(--v41-ease);
+}
+.v41-ledger.v41-in > *{
+  opacity:1;
+  transform:none;
+}
+.v41-ledger.v41-in > *:nth-child(1){transition-delay:.04s}
+.v41-ledger.v41-in > *:nth-child(2){transition-delay:.12s}
+.v41-ledger.v41-in > *:nth-child(3){transition-delay:.20s}
+.v41-ledger.v41-in > *:nth-child(4){transition-delay:.28s}
+.v41-ledger.v41-in > *:nth-child(5){transition-delay:.36s}
+.v41-ledger.v41-in > *:nth-child(6){transition-delay:.44s}
+
+/* Deliberately slower community section. */
+.homeCommunitySection::before{
+  transition:
+    filter 1.65s ease,
+    transform 1.8s var(--v41-ease),
+    opacity 1.2s ease!important;
+}
+.homeCommunityCopy h2{
+  transition:opacity .95s ease .12s,transform 1.1s var(--v41-ease) .12s!important;
+}
+.homeCommunityBody p:nth-child(1){
+  transition:opacity .9s ease .3s,transform 1.05s var(--v41-ease) .3s!important;
+}
+.homeCommunityBody p:nth-child(2){
+  transition:opacity .9s ease .45s,transform 1.05s var(--v41-ease) .45s!important;
+}
+
+/* Keep the useful loading feedback even though the old V39.32 CSS is retired. */
+.ux32-loading,.ux32-native-loading{
+  position:relative!important;
+  pointer-events:none!important;
+  cursor:progress!important;
+  padding-right:42px!important;
+  opacity:.88!important;
+}
+.ux32-loading::after,.ux32-native-loading::after{
+  content:"";
+  position:absolute;
+  right:15px;top:50%;
+  width:14px;height:14px;margin-top:-7px;
+  box-sizing:border-box;
+  border:2px solid rgba(100,111,108,.22);
+  border-top-color:var(--v41-teal);
+  border-radius:50%;
+  animation:v41spin .82s linear infinite;
+}
+:where(.button.primary,.button.dark,.semanticPrimary,.canvaRequest).ux32-loading::after,
+:where(.button.primary,.button.dark,.semanticPrimary,.canvaRequest).ux32-native-loading::after{
+  border-color:rgba(255,255,255,.3);
+  border-top-color:#fff;
+}
+.ux32-confirmed{
+  background:#e5f5f1!important;color:#0a766f!important;border-color:#9bd8d1!important;
+}
+.ux32-check{
+  display:inline-grid;place-items:center;width:18px;height:18px;margin-right:7px;
+  border-radius:50%;background:var(--v41-teal);color:#fff;font-size:11px;line-height:1;
+}
+@keyframes v41spin{to{transform:rotate(360deg)}}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:1050px){
+  .publicHeader{grid-template-columns:170px 1fr auto!important}
+  .publicLanding .publicClinicalPreviewGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-auto-rows:auto!important;
+  }
+  .publicLanding .publicClinicalCard{
+    grid-column:auto!important;
+    grid-row:auto!important;
+    min-height:185px!important;
+  }
+  .publicLanding .homeWorkshopCardGrid,
+  .workshopGuideDeckScroll{
+    grid-template-columns:1fr 1fr!important;
+  }
+  .publicLanding .homeWorkshopCardGrid .workshopGuideCard:first-child,
+  .workshopGuideDeckScroll .workshopGuideCard:first-child{
+    grid-column:1/-1!important;
+    grid-row:auto!important;
+  }
+  .publicLanding .homeWorkshopCardGrid .workshopGuideCard:not(:first-child)>button,
+  .workshopGuideDeckScroll .workshopGuideCard:not(:first-child)>button{
+    grid-template-columns:1fr!important;
+    grid-template-rows:minmax(180px,auto) 155px!important;
+  }
+  .model17Hero{
+    grid-template-columns:1fr!important;
+  }
+}
+
+@media(max-width:760px){
+  .publicHeader{
+    min-height:78px!important;
+    grid-template-columns:1fr auto!important;
+    padding:12px 20px!important;
+  }
+  .publicLogo img{width:140px!important}
+  .publicNav{display:none!important}
+  .publicPageHero{
+    padding:56px 20px 36px!important;
+  }
+  .publicPageHero h1{
+    font-size:clamp(42px,12vw,58px)!important;
+  }
+  .publicLanding .homeEditorialIntro{
+    grid-template-columns:1fr!important;
+    gap:34px!important;
+    padding:66px 20px 54px!important;
+  }
+  .publicLanding .homeDetailLedger{
+    padding:0 20px 68px!important;
+  }
+  .publicLanding .homeDetailLedger article{
+    grid-template-columns:1fr!important;
+    gap:7px!important;
+    padding:18px 0!important;
+  }
+  .publicLanding .publicClinicalPreview{
+    padding:68px 20px 72px!important;
+  }
+  .publicLanding .publicClinicalPreviewHead{
+    grid-template-columns:1fr!important;
+    align-items:start!important;
+  }
+  .publicLanding .publicClinicalPreviewGrid{
+    grid-template-columns:1fr 1fr!important;
+    gap:8px!important;
+  }
+  .publicLanding .publicClinicalCard{
+    min-height:155px!important;
+    padding:16px!important;
+  }
+  .publicLanding .publicClinicalCard small{
+    font-size:9.5px!important;
+  }
+  .publicLanding .homeWorkshopCards{
+    grid-template-columns:1fr!important;
+    gap:26px!important;
+    padding:68px 20px!important;
+  }
+  .publicLanding .homeWorkshopIntro{
+    position:static!important;
+  }
+  .publicLanding .homeWorkshopCardGrid,
+  .workshopGuideDeckScroll{
+    grid-template-columns:1fr!important;
+  }
+  .publicLanding .homeWorkshopCardGrid .workshopGuideCard:first-child,
+  .workshopGuideDeckScroll .workshopGuideCard:first-child{
+    grid-column:auto!important;
+  }
+  .model17Hero,
+  .start16Hero{
+    width:calc(100% - 40px)!important;
+    padding-top:66px!important;
+    padding-bottom:54px!important;
+    gap:42px!important;
+  }
+  .model17Promise{
+    grid-template-columns:1fr!important;
+    gap:30px!important;
+  }
+  .model17Rhythm{
+    grid-template-columns:1fr!important;
+  }
+  .model17RhythmCard+ .model17RhythmCard{
+    border-left:0!important;
+    border-top:1px solid var(--v41-line)!important;
+  }
+  .prospectContactGrid{
+    grid-template-columns:1fr!important;
+  }
+  .prospectContactGrid .contactCard+ .contactCard{
+    border-left:0!important;
+    border-top:1px solid var(--v41-line)!important;
+  }
+  .v3927ContactForm{
+    border-radius:4px!important;
+    padding:20px!important;
+  }
+  .workshopGuideDeck{
+    grid-template-columns:1fr!important;
+    padding:48px 20px 64px!important;
+  }
+  .workshopGuideDeckIntro{
+    position:static!important;
+  }
+}
+
+/* Motion accessibility */
+@media(prefers-reduced-motion:reduce){
+  .v41-copy,.v41-media,.v41-ledger>*{
+    opacity:1!important;
+    transform:none!important;
+    clip-path:none!important;
+    transition:none!important;
+  }
+  .homeCommunitySection::before,
+  .homeCommunityCopy h2,
+  .homeCommunityBody p{
+    transition:none!important;
+  }
+}
