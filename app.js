@@ -30,7 +30,7 @@
   let authReady = false;
 
   let state = load();
-  let ui = { mobile:false, publicMenu:false, basket:false, modal:null, accountMenu:false, globalSearch:'', catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All', cmsChannel:'institutional', cmsSearch:'', wholesaleQuery:'', wholesaleCat:'All', workshopQuery:'', workshopCategory:'All', tourStep:0, overlayScroll:0, mailTab:'compose', mailSearch:'', mailRole:'All', mailInstitution:'All', mailTemplate:'workshop', mailGuideSlug:'aed-has-expiring-parts-too', mailSelectedContacts:[], mailDraftSubject:'', mailDraftIntro:'', mailDraftCta:'Read the guide' };
+  let ui = { mobile:false, publicMenu:false, basket:false, modal:null, accountMenu:false, globalSearch:'', catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All', cmsChannel:'institutional', cmsSearch:'', wholesaleQuery:'', wholesaleCat:'All', workshopQuery:'', workshopCategory:'All', tourStep:0, overlayScroll:0, mailTab:'compose', mailSearch:'', mailRole:'All', mailInstitution:'All', mailTemplate:'workshop', mailGuideSlug:'aed-has-expiring-parts-too', mailSelectedContacts:[], mailDraftSubject:'', mailDraftIntro:'', mailDraftCta:'Read the guide', optionSearch:'', optionDecision:'All', optionFamily:'all' };
 
   const cms = {
     loaded:false,
@@ -51,6 +51,14 @@
     recipients:[],
     senderName:'Pharma Service',
     senderEmail:'info@pharmaservice.ae'
+  };
+
+
+  const optionDesk = {
+    loaded:false,
+    loading:false,
+    families:[],
+    options:[]
   };
 
   const INSTITUTIONAL_CATALOGUE_TEMPLATE = {
@@ -115,17 +123,17 @@
   function clinicalNeedIllustration(id){
     const m={
       wounds:'/assets/category-wounds.webp?v=3777',
-      sports:'/assets/category-sports.webp?v=3777',
+      sports:'/assets/category-sports.png?v=3915',
       breathing:'/assets/category-breathing.webp?v=3777',
       vitals:'/assets/category-vitals.webp?v=3777',
-      screening:'/assets/category-screening.webp?v=3777',
-      diabetes:'/assets/category-diabetes.webp?v=3777',
-      medicines:'/assets/category-medicines.webp?v=3777',
-      allergy:'/assets/category-allergy.webp?v=3777',
-      patient:'/assets/category-patient-care.webp?v=3777',
-      'patient-care':'/assets/category-patient-care.webp?v=3777',
-      infection:'/assets/category-infection.webp?v=3777',
-      procedures:'/assets/category-procedures.webp?v=3777',
+      screening:'/assets/category-screening.png?v=3915',
+      diabetes:'/assets/category-diabetes.png?v=3915',
+      medicines:'/assets/category-medicines.png?v=3915',
+      allergy:'/assets/category-allergy.png?v=3915',
+      patient:'/assets/category-patient-care.png?v=3915',
+      'patient-care':'/assets/category-patient-care.png?v=3915',
+      infection:'/assets/category-infection.png?v=3915',
+      procedures:'/assets/category-procedures.png?v=3915',
       emergency:'/assets/category-emergency.webp?v=3777',
       equipment:'/assets/category-equipment.webp?v=3777'
     };
@@ -341,6 +349,302 @@
       cms.loading=false;
     }
   }
+
+  async function loadAdminFamilyOptions(){
+    if(!sb || !authContext?.isPscAdmin || optionDesk.loading) return;
+    optionDesk.loading=true;
+    try{
+      const [{data:families,error:fError},{data:options,error:oError}] = await Promise.all([
+        sb.from('catalogue_families').select('family_id,family_name,clinical_need,page_type,common_brands_line,presentations,website_price_treatment,availability_wording').eq('active',true).order('clinical_need').order('family_name'),
+        sb.from('catalogue_product_options').select('*').eq('active',true).order('family_id').order('exact_product_name')
+      ]);
+      if(fError) throw fError;
+      if(oError) throw oError;
+      optionDesk.families=families||[];
+      optionDesk.options=options||[];
+      optionDesk.loaded=true;
+    }catch(e){
+      console.error('Family option control load failed',e);
+      toast('<strong>Could not load family options.</strong><br>Check the PSC admin connection and database permissions.');
+    }finally{
+      optionDesk.loading=false;
+      if(currentRoute()==='admin/family-options') render();
+    }
+  }
+
+  function optionFamilyMeta(id){ return optionDesk.families.find(f=>f.family_id===id)||null; }
+  function optionEvidenceReady(o){
+    return !!(o?.verification_date && o?.supplier_name && o?.source_key);
+  }
+  function optionPreferredReady(o){
+    return !!(optionEvidenceReady(o) && o?.b2b_cost!==null && o?.b2b_cost!=='' && o?.stock && String(o.stock).toUpperCase()!=='UNKNOWN');
+  }
+  function optionFixedPriceEligible(o){
+    const f=optionFamilyMeta(o?.family_id)||{};
+    return String(f.website_price_treatment||'')==='Fixed price when approved';
+  }
+  function optionPricingMetrics(o){
+    const values=[o?.b2b_cost,o?.freight_delivery_cost,o?.install_labour_cost,o?.foc_other_direct_cost];
+    const complete=values.every(v=>v!==null&&v!==''&&Number.isFinite(Number(v)));
+    const landed=complete?values.reduce((sum,v)=>sum+Number(v),0):null;
+    const target=Number.isFinite(Number(o?.target_gm))?Number(o.target_gm):0.20;
+    const targetSell=landed!==null&&target<1?landed/(1-target):null;
+    const sell=o?.public_sell_price_ex_vat!==null&&o?.public_sell_price_ex_vat!==''&&Number.isFinite(Number(o.public_sell_price_ex_vat))?Number(o.public_sell_price_ex_vat):null;
+    const gm=landed!==null&&sell>0?(sell-landed)/sell:null;
+    return {complete,landed,target,targetSell,sell,gm};
+  }
+  function optionFixedPriceLive(o){
+    if(!optionFixedPriceEligible(o) || o?.price_decision!=='APPROVED_FIXED' || !o?.public_sell_price_ex_vat) return false;
+    if(!o?.price_valid_to) return false;
+    const end=new Date(`${o.price_valid_to}T23:59:59`);
+    return Number.isFinite(end.getTime()) && end.getTime()>=Date.now();
+  }
+  function optionPricePill(o){
+    if(!optionFixedPriceEligible(o)) return badge('REQUEST QUOTE','');
+    if(optionFixedPriceLive(o)) return badge('FIXED PRICE LIVE','ok');
+    if(o?.price_decision==='DRAFT_FIXED') return badge('PRICE DRAFT','warn');
+    if(o?.price_decision==='HOLD') return badge('PRICE HOLD','danger');
+    return badge('NO LIVE PRICE','');
+  }
+  function optionAvailabilityPill(o){
+    const status=o?.availability_status||'UNVERIFIED';
+    const valid=o?.availability_valid_until?new Date(o.availability_valid_until):null;
+    const current=valid&&Number.isFinite(valid.getTime())&&valid.getTime()>=Date.now();
+    if(status==='IN_STOCK'&&current) return badge('IN STOCK VERIFIED','ok');
+    if(status==='LIMITED'&&current) return badge('LIMITED STOCK','warn');
+    if(status==='OUT_OF_STOCK'&&current) return badge('OUT OF STOCK','danger');
+    if(status!=='UNVERIFIED') return badge('STOCK EVIDENCE EXPIRED','warn');
+    return badge('AVAILABILITY UNVERIFIED','');
+  }
+  function optionSearchText(o){
+    const f=optionFamilyMeta(o.family_id)||{};
+    return [o.family_id,f.family_name,f.clinical_need,o.exact_product_name,o.brand,o.presentation,o.pack,o.supplier_name,o.supplier_reference,o.source_key,o.company_mah].filter(Boolean).join(' ').toLowerCase();
+  }
+  function optionFamiliesWithCandidates(){
+    const q=(ui.optionSearch||'').trim().toLowerCase();
+    const decision=ui.optionDecision||'All';
+    const byFamily=new Map();
+    optionDesk.options.forEach(o=>{
+      if(decision!=='All' && o.psc_decision!==decision) return;
+      if(q && !optionSearchText(o).includes(q)) return;
+      const arr=byFamily.get(o.family_id)||[]; arr.push(o); byFamily.set(o.family_id,arr);
+    });
+    return [...byFamily.entries()].map(([familyId,options])=>({family:optionFamilyMeta(familyId)||{family_id:familyId,family_name:familyId,clinical_need:''},options})).sort((a,b)=>String(a.family.family_name).localeCompare(String(b.family.family_name)));
+  }
+  function optionDecisionPill(decision){
+    const tone=decision==='APPROVE'?'ok':decision==='VERIFY'?'warn':decision==='HOLD'?'':'danger';
+    return badge(decision||'VERIFY',tone);
+  }
+  function adminFamilyOptionCard(o){
+    const verified=optionEvidenceReady(o);
+    const preferredReady=optionPreferredReady(o);
+    const mrp=o.listed_mrp!==null&&o.listed_mrp!==''?money(Number(o.listed_mrp)):'—';
+    const updated=o.decision_updated_at?date(o.decision_updated_at):'No decision change yet';
+    const family=optionFamilyMeta(o.family_id)||{};
+    const familyPresentations=Array.isArray(family.presentations)?family.presentations.filter(Boolean):[];
+    const presentationOptions=[...new Set([o.presentation,...familyPresentations].filter(Boolean))];
+    const fixedEligible=optionFixedPriceEligible(o);
+    const pm=optionPricingMetrics(o);
+    const gmLabel=pm.gm===null?'—':`${(pm.gm*100).toFixed(1)}%`;
+    const targetLabel=`${(pm.target*100).toFixed(1)}%`;
+    const priceUpdated=o.price_verified_at?date(o.price_verified_at):'Not price-approved';
+    return `<article class="familyOptionCard" data-option-review="${esc(o.id)}">
+      <div class="familyOptionCardHead"><div><span class="eyebrow">${esc(o.source_key||'SOURCE')}</span><h3>${esc(o.exact_product_name)}</h3><p>${esc([o.brand,o.presentation,o.pack].filter(Boolean).join(' · ')||'Presentation / pack to verify')}</p></div><div class="familyOptionCardStatus">${optionDecisionPill(o.psc_decision)}${optionPricePill(o)}${optionAvailabilityPill(o)}<small>${verified?'Evidence reviewed':'Evidence incomplete'}</small></div></div>
+      <div class="familyOptionSourceGrid">
+        <div><span>SUPPLIER</span><b>${esc(o.supplier_name||'Missing')}</b><small>${esc(o.supplier_reference||'No supplier reference')}</small></div>
+        <div><span>COMPANY / MAH</span><b>${esc(o.company_mah||'Not captured')}</b><small>${esc(o.supplier_listing_evidence||'Source-list evidence not recorded')}</small></div>
+        <div><span>ACORUS LISTED MRP</span><b>${mrp}</b><small>Internal retail benchmark only — never PSC selling price</small></div>
+      </div>
+      <div class="familyOptionControlGrid">
+        <label><span>PSC decision</span><select data-option-field="decision"><option ${o.psc_decision==='VERIFY'?'selected':''}>VERIFY</option><option ${o.psc_decision==='APPROVE'?'selected':''}>APPROVE</option><option ${o.psc_decision==='HOLD'?'selected':''}>HOLD</option><option ${o.psc_decision==='REJECT'?'selected':''}>REJECT</option></select></label>
+        <label><span>Confirmed brand</span><input data-option-field="brand" value="${esc(o.brand||'')}" placeholder="Verify brand"></label>
+        <label><span>Controlled presentation</span>${presentationOptions.length?`<select data-option-field="presentation">${presentationOptions.map(x=>`<option ${x===o.presentation?'selected':''}>${esc(x)}</option>`).join('')}</select>`:`<input data-option-field="presentation" value="${esc(o.presentation||'')}" placeholder="Verify presentation">`}</label>
+        <label><span>Exact pack</span><input data-option-field="pack" value="${esc(o.pack||'')}" placeholder="Pack / unit"></label>
+        <label><span>B2B cost ex VAT</span><input data-option-field="cost" type="number" min="0" step="0.01" value="${o.b2b_cost===null?'':esc(o.b2b_cost)}" placeholder="AED"></label>
+        <label><span>VAT evidence / legacy note</span><input data-option-field="vat" value="${esc(o.vat||'')}" placeholder="Legacy evidence note"></label>
+        <label><span>Current stock evidence</span><input data-option-field="stock" value="${esc(o.stock||'UNKNOWN')}" placeholder="UNKNOWN"></label>
+        <label><span>Expiry / batch</span><input data-option-field="expiry" value="${esc(o.expiry_batch||'')}" placeholder="If applicable"></label>
+        <label><span>Verified on</span><input data-option-field="verified" type="date" value="${esc(o.verification_date||'')}"></label>
+      </div>
+      <div class="familyOptionFlags">
+        <label><input type="checkbox" data-option-field="selectable" ${o.customer_selectable?'checked':''}><span><b>Customer selectable</b><small>Requires APPROVE + verification date.</small></span></label>
+        <label><input type="checkbox" data-option-field="preferred" ${o.preferred?'checked':''}><span><b>Internal preferred source</b><small>${preferredReady?'Commercial evidence present.':'Requires APPROVE + verified cost + current stock.'}</small></span></label>
+      </div>
+
+      <details class="familyOptionAvailability" ${o.availability_status&&o.availability_status!=='UNVERIFIED'?'open':''}>
+        <summary><span><b>Availability evidence</b><small>Public stock language is released only from a dated, unexpired evidence window.</small></span><em>${optionAvailabilityPill(o)}</em></summary>
+        <div class="familyAvailabilityGrid">
+          <label><span>Public availability state</span><select data-option-field="availability-status"><option value="UNVERIFIED" ${(!o.availability_status||o.availability_status==='UNVERIFIED')?'selected':''}>UNVERIFIED</option><option value="IN_STOCK" ${o.availability_status==='IN_STOCK'?'selected':''}>IN STOCK</option><option value="LIMITED" ${o.availability_status==='LIMITED'?'selected':''}>LIMITED</option><option value="OUT_OF_STOCK" ${o.availability_status==='OUT_OF_STOCK'?'selected':''}>OUT OF STOCK</option></select></label>
+          <label><span>Evidence verified at</span><input data-option-field="availability-verified" type="datetime-local" value="${o.availability_verified_at?esc(new Date(o.availability_verified_at).toISOString().slice(0,16)):''}"></label>
+          <label><span>Evidence valid until</span><input data-option-field="availability-valid-until" type="datetime-local" value="${o.availability_valid_until?esc(new Date(o.availability_valid_until).toISOString().slice(0,16)):''}"></label>
+          <label class="familyAvailabilityEvidence"><span>Evidence reference</span><input data-option-field="availability-evidence" value="${esc(o.availability_evidence_reference||'')}" placeholder="Supplier stock confirmation / quote / written evidence"></label>
+        </div>
+        <p class="familyOptionControlNote">Do not use IN STOCK from memory, MRP, an old supplier list or a generic product listing. Set a live state only against current evidence with a defined validity window. When the window expires, the customer view automatically falls back to quotation-stage confirmation.</p>
+      </details>
+
+      ${fixedEligible?`<details class="familyOptionPricing" ${o.price_decision==='APPROVED_FIXED'||o.price_decision==='DRAFT_FIXED'?'open':''}>
+        <summary><span><b>Fixed-price control</b><small>Family permits a fixed price only after evidence + margin release.</small></span><em>${optionPricePill(o)}</em></summary>
+        <div class="familyPricingMetrics">
+          <div><span>LANDED COST</span><b>${pm.landed===null?'Missing inputs':money(pm.landed)}</b></div>
+          <div><span>TARGET SELL @ ${targetLabel} GM</span><b>${pm.targetSell===null?'—':money(pm.targetSell)}</b></div>
+          <div class="${pm.gm!==null&&pm.gm<pm.target?'belowTarget':''}"><span>ACTUAL GM</span><b>${gmLabel}</b></div>
+          <div><span>PRICE VERIFIED</span><b>${esc(priceUpdated)}</b></div>
+        </div>
+        <div class="familyPricingGrid">
+          <label><span>Price decision</span><select data-option-field="price-decision"><option value="REQUEST_QUOTE" ${o.price_decision==='REQUEST_QUOTE'?'selected':''}>REQUEST QUOTE</option><option value="DRAFT_FIXED" ${o.price_decision==='DRAFT_FIXED'?'selected':''}>DRAFT FIXED</option><option value="APPROVED_FIXED" ${o.price_decision==='APPROVED_FIXED'?'selected':''}>APPROVED FIXED</option><option value="HOLD" ${o.price_decision==='HOLD'?'selected':''}>HOLD</option></select></label>
+          <label><span>Price evidence</span><select data-option-field="price-evidence"><option value="MISSING" ${o.price_evidence_status==='MISSING'?'selected':''}>MISSING</option><option value="PLANNING" ${o.price_evidence_status==='PLANNING'?'selected':''}>PLANNING</option><option value="PUBLIC_BENCHMARK" ${o.price_evidence_status==='PUBLIC_BENCHMARK'?'selected':''}>PUBLIC BENCHMARK</option><option value="SUPPLIER_EVIDENCE" ${o.price_evidence_status==='SUPPLIER_EVIDENCE'?'selected':''}>SUPPLIER EVIDENCE</option><option value="VERIFIED_CURRENT" ${o.price_evidence_status==='VERIFIED_CURRENT'?'selected':''}>VERIFIED CURRENT</option></select></label>
+          <label><span>Freight / delivery direct cost</span><input data-option-field="freight-cost" type="number" min="0" step="0.01" value="${o.freight_delivery_cost===null?'':esc(o.freight_delivery_cost)}" placeholder="Enter 0 if verified none"></label>
+          <label><span>Install / labour direct cost</span><input data-option-field="install-cost" type="number" min="0" step="0.01" value="${o.install_labour_cost===null?'':esc(o.install_labour_cost)}" placeholder="Enter 0 if verified none"></label>
+          <label><span>FOC / other direct cost</span><input data-option-field="other-cost" type="number" min="0" step="0.01" value="${o.foc_other_direct_cost===null?'':esc(o.foc_other_direct_cost)}" placeholder="Enter 0 if verified none"></label>
+          <label><span>Target GM %</span><input data-option-field="target-gm" type="number" min="0" max="99" step="0.1" value="${esc((pm.target*100).toFixed(1))}"></label>
+          <label><span>PSC sell ex VAT</span><input data-option-field="sell-price" type="number" min="0.01" step="0.01" value="${o.public_sell_price_ex_vat===null?'':esc(o.public_sell_price_ex_vat)}" placeholder="AED"></label>
+          <label><span>Verified VAT %</span><input data-option-field="vat-rate" type="number" min="0" max="100" step="0.01" value="${o.vat_rate_pct===null?'':esc(o.vat_rate_pct)}" placeholder="0 or 5 when verified"></label>
+          <label><span>Supplier quote date</span><input data-option-field="price-quote-date" type="date" value="${esc(o.price_quote_date||'')}"></label>
+          <label><span>Price valid to</span><input data-option-field="price-valid-to" type="date" value="${esc(o.price_valid_to||'')}"></label>
+          <label class="familyPricingWide"><span>Price source / reference</span><input data-option-field="price-source" value="${esc(o.price_source_reference||'')}" placeholder="Supplier quote / written confirmation reference"></label>
+          <label class="familyPricingWide"><span>VAT evidence note</span><input data-option-field="vat-evidence" value="${esc(o.vat_evidence_note||'')}" placeholder="Verified treatment and evidence source"></label>
+          <label class="familyPricingWide"><span>Margin override reason</span><input data-option-field="margin-override" value="${esc(o.margin_override_reason||'')}" placeholder="Required only when live GM is below target"></label>
+          <label class="familyPricingWide"><span>Pricing note</span><textarea data-option-field="pricing-note" rows="2">${esc(o.pricing_note||'')}</textarea></label>
+        </div>
+        <p class="familyPricingRule">Publication gate: complete acquisition + direct-cost inputs, current verified price evidence, VAT evidence, valid dates, APPROVE + customer-selectable option, and target margin or a recorded override. Acorus MRP is never used in this calculation.</p>
+      </details>`:`<div class="familyOptionQuoteOnly"><b>Request-quote family</b><span>${esc(family.website_price_treatment||'Request quote')} · Supplier MRP and internal benchmarks cannot become a public PSC price.</span></div>`}
+
+      <label class="familyOptionReviewNote"><span>Review note</span><textarea data-option-field="note" rows="3">${esc(o.review_note||'')}</textarea></label>
+      <div class="familyOptionCardFoot"><small>${esc(updated)} · Decision and price history are retained in Supabase.</small><button class="button primary" data-option-save="${esc(o.id)}">Save review</button></div>
+    </article>`;
+  }
+
+  async function saveFamilyOptionReview(id){
+    const o=optionDesk.options.find(x=>x.id===id); if(!o) return;
+    const card=document.querySelector(`[data-option-review="${CSS.escape(id)}"]`); if(!card) return;
+    const field=name=>card.querySelector(`[data-option-field="${name}"]`);
+    const decision=field('decision')?.value||'VERIFY';
+    const customerSelectable=!!field('selectable')?.checked;
+    const preferred=!!field('preferred')?.checked;
+    const verificationDate=field('verified')?.value||null;
+    const stock=(field('stock')?.value||'').trim()||'UNKNOWN';
+    const availabilityStatus=field('availability-status')?.value||'UNVERIFIED';
+    const availabilityVerifiedRaw=field('availability-verified')?.value||'';
+    const availabilityValidRaw=field('availability-valid-until')?.value||'';
+    const availabilityEvidence=(field('availability-evidence')?.value||'').trim();
+    const availabilityVerifiedAt=availabilityVerifiedRaw?new Date(availabilityVerifiedRaw).toISOString():null;
+    const availabilityValidUntil=availabilityValidRaw?new Date(availabilityValidRaw).toISOString():null;
+    const numberField=name=>{
+      const raw=(field(name)?.value||'').trim();
+      if(raw==='') return {raw,value:null};
+      const value=Number(raw);
+      return {raw,value};
+    };
+    const costEntry=numberField('cost');
+    const cost=costEntry.value;
+    const brand=(field('brand')?.value||'').trim();
+    const presentation=(field('presentation')?.value||'').trim();
+    const pack=(field('pack')?.value||'').trim()||null;
+    const family=optionFamilyMeta(o.family_id)||{};
+    const familyPresentations=Array.isArray(family.presentations)?family.presentations.filter(Boolean):[];
+    if(costEntry.raw!=='' && !Number.isFinite(cost)){ toast('<strong>Check the B2B cost.</strong><br>Enter a valid numeric acquisition cost or leave it blank.'); return; }
+    if(customerSelectable && decision!=='APPROVE'){ toast('<strong>Cannot publish this option yet.</strong><br>Customer-selectable requires PSC Decision = APPROVE.'); return; }
+    if(customerSelectable && !verificationDate){ toast('<strong>Verification date required.</strong><br>Confirm the current sourcing route before customer selection is enabled.'); return; }
+    if(customerSelectable && (!brand || !presentation)){ toast('<strong>Brand and presentation must be confirmed.</strong><br>Do not publish draft parsing as an approved customer option.'); return; }
+    if(customerSelectable && familyPresentations.length && !familyPresentations.includes(presentation)){ toast('<strong>Presentation does not match the family.</strong><br>Choose one of the controlled family presentations before publishing this option.'); return; }
+    if(preferred && (decision!=='APPROVE' || !verificationDate || cost===null || !Number.isFinite(cost) || stock.toUpperCase()==='UNKNOWN')){
+      toast('<strong>Preferred source is not ready.</strong><br>Approve it and record current verification date, B2B cost and stock evidence first.'); return;
+    }
+    if(availabilityStatus!=='UNVERIFIED'){
+      if(!availabilityVerifiedAt || !availabilityValidUntil || !availabilityEvidence){ toast('<strong>Availability evidence is incomplete.</strong><br>Record the verified time, valid-until time and evidence reference before publishing a stock state.'); return; }
+      if(new Date(availabilityValidUntil).getTime()<new Date(availabilityVerifiedAt).getTime()){ toast('<strong>Check the availability validity.</strong><br>The valid-until time cannot be earlier than the verification time.'); return; }
+    }
+
+    const payload={
+      psc_decision:decision,
+      customer_selectable:customerSelectable,
+      preferred,
+      brand,
+      presentation,
+      pack,
+      b2b_cost:cost,
+      vat:(field('vat')?.value||'').trim()||null,
+      stock,
+      expiry_batch:(field('expiry')?.value||'').trim()||null,
+      verification_date:verificationDate,
+      availability_status:availabilityStatus,
+      availability_verified_at:availabilityStatus==='UNVERIFIED'?null:availabilityVerifiedAt,
+      availability_valid_until:availabilityStatus==='UNVERIFIED'?null:availabilityValidUntil,
+      availability_evidence_reference:availabilityStatus==='UNVERIFIED'?null:availabilityEvidence,
+      review_note:(field('note')?.value||'').trim()||null
+    };
+
+    if(optionFixedPriceEligible(o)){
+      const freight=numberField('freight-cost');
+      const install=numberField('install-cost');
+      const other=numberField('other-cost');
+      const targetPct=numberField('target-gm');
+      const sell=numberField('sell-price');
+      const vatRate=numberField('vat-rate');
+      const priceDecision=field('price-decision')?.value||'REQUEST_QUOTE';
+      const priceEvidence=field('price-evidence')?.value||'MISSING';
+      const quoteDate=field('price-quote-date')?.value||null;
+      const validTo=field('price-valid-to')?.value||null;
+      const priceSource=(field('price-source')?.value||'').trim()||null;
+      const vatEvidence=(field('vat-evidence')?.value||'').trim()||null;
+      const override=(field('margin-override')?.value||'').trim()||null;
+      const pricingNote=(field('pricing-note')?.value||'').trim()||null;
+      const numericFields=[['freight / delivery cost',freight],['install / labour cost',install],['FOC / other direct cost',other],['target GM',targetPct],['PSC sell price',sell],['VAT rate',vatRate]];
+      for(const [label,entry] of numericFields){
+        if(entry.raw!=='' && !Number.isFinite(entry.value)){ toast(`<strong>Check ${esc(label)}.</strong><br>Enter a valid number or leave it blank.`); return; }
+      }
+      const targetGm=targetPct.value===null?0.20:targetPct.value/100;
+      if(targetGm<0 || targetGm>=1){ toast('<strong>Check target GM.</strong><br>Enter a percentage from 0 to below 100.'); return; }
+      if(vatRate.value!==null && (vatRate.value<0 || vatRate.value>100)){ toast('<strong>Check VAT rate.</strong><br>Enter a verified percentage from 0 to 100.'); return; }
+
+      if(priceDecision==='APPROVED_FIXED'){
+        const completeCosts=[cost,freight.value,install.value,other.value].every(v=>v!==null&&Number.isFinite(v));
+        if(decision!=='APPROVE' || !customerSelectable){ toast('<strong>Fixed price cannot go live yet.</strong><br>The product option must first be APPROVE + Customer selectable.'); return; }
+        if(!verificationDate){ toast('<strong>Option verification is required.</strong><br>Record the current verification date before fixed-price publication.'); return; }
+        if(!completeCosts){ toast('<strong>Complete landed-cost inputs.</strong><br>B2B cost, freight/delivery, install/labour and FOC/other direct cost must all be entered. Use 0 explicitly when a component has been verified as no cost.'); return; }
+        if(sell.value===null || sell.value<=0){ toast('<strong>PSC selling price is required.</strong><br>Enter the approved ex-VAT selling price.'); return; }
+        if(vatRate.value===null || !vatEvidence){ toast('<strong>VAT evidence is incomplete.</strong><br>Record the verified VAT rate and evidence note.'); return; }
+        if(priceEvidence!=='VERIFIED_CURRENT'){ toast('<strong>Current price evidence required.</strong><br>Set Price evidence to VERIFIED CURRENT only after checking the current source.'); return; }
+        if(!quoteDate || !validTo){ toast('<strong>Price validity is incomplete.</strong><br>Record the source quote date and valid-to date.'); return; }
+        const landed=cost+freight.value+install.value+other.value;
+        const gm=(sell.value-landed)/sell.value;
+        if(gm<targetGm && !override){ toast(`<strong>Margin is below target.</strong><br>Current GM is ${(gm*100).toFixed(1)}% versus ${(targetGm*100).toFixed(1)}%. Record an explicit override reason or revise price/cost.`); return; }
+      }
+
+      Object.assign(payload,{
+        freight_delivery_cost:freight.value,
+        install_labour_cost:install.value,
+        foc_other_direct_cost:other.value,
+        target_gm:targetGm,
+        public_sell_price_ex_vat:sell.value,
+        vat_rate_pct:vatRate.value,
+        vat_evidence_note:vatEvidence,
+        price_evidence_status:priceEvidence,
+        price_source_reference:priceSource,
+        price_quote_date:quoteDate,
+        price_valid_to:validTo,
+        price_decision:priceDecision,
+        margin_override_reason:override,
+        pricing_note:pricingNote
+      });
+    }
+
+    const button=card.querySelector('[data-option-save]'); if(button){button.disabled=true;button.textContent='Saving…';}
+    try{
+      const {data,error}=await sb.from('catalogue_product_options').update(payload).eq('id',id).select('*').single();
+      if(error) throw error;
+      const i=optionDesk.options.findIndex(x=>x.id===id); if(i>=0) optionDesk.options[i]=data;
+      render();
+      const priceMessage=optionFixedPriceLive(data)?` Live fixed price: ${money(Number(data.public_sell_price_ex_vat))} ex VAT.`:'';
+      const availabilityMessage=data.availability_status&&data.availability_status!=='UNVERIFIED'?` Availability: ${esc(data.availability_status.replaceAll('_',' '))}.`:'';
+      toast(`<strong>${esc(data.psc_decision)} saved.</strong><br>${data.customer_selectable?'This option is customer-selectable.':'This option remains internal only.'}${priceMessage}${availabilityMessage}`);
+    }catch(e){
+      console.error(e);
+      if(button){button.disabled=false;button.textContent='Save review';}
+      toast(`<strong>Could not save option review.</strong><br>${esc(e?.message||'Check the evidence fields and try again.')}`);
+    }
+  }
+
 
   async function loadAdminMail(){
     if(!sb || !authContext?.isPscAdmin) return;
@@ -907,7 +1211,7 @@
     ['portal/stock','Stock & expiry','stock'],
     ['portal/assets','Clinic assets','assets']
   ];
-  const adminNav=[['admin/dashboard','Deal Desk','dashboard'],['admin/mail','Mail','mail'],['admin/storefront','Storefront','edit'],['admin/products','Product Master','boxes'],['admin/requests','Request Queue','checklist'],['admin/fulfilment','Fulfilment Rules','repeat'],['admin/supplier-feed','Supplier Feed','reports']];
+  const adminNav=[['admin/dashboard','Deal Desk','dashboard'],['admin/mail','Mail','mail'],['admin/storefront','Storefront','edit'],['admin/products','Product Master','boxes'],['admin/family-options','Family Options','checklist'],['admin/requests','Request Queue','checklist'],['admin/fulfilment','Fulfilment Rules','repeat'],['admin/supplier-feed','Supplier Feed','reports']];
 
   function shell(content, admin=false){
     const route=currentRoute();
@@ -1046,7 +1350,7 @@
           </button>
 
           <button class="publicClinicalCard mint" data-go="catalogue/infection">
-            <img class="publicClinicalArt" src="/assets/category-infection.webp?v=3777" alt="" aria-hidden="true">
+            <img class="publicClinicalArt" src="/assets/category-infection.png?v=3915" alt="" aria-hidden="true">
             <span>Infection Control &amp; PPE</span>
             <small>PPE, hand hygiene, disinfection and waste control</small>
           </button>
@@ -1100,99 +1404,98 @@
   function servicesPage(){ return publicPage('services','SERVICES','Clinic procurement, made easier.','Pharma Service makes it easy for institutional customers to shop, request quotations, manage orders, repeat previous purchases and optimize procurement costs across pharmaceuticals, medical disposables and medical equipment.',`<section class="publicSection twoPublicCols"><div><span class="kicker">PROCUREMENT COST CONTROL</span><h2>Buy through the right supply channel, not the retail shelf.</h2><p>Pharma Service sources through suitable wholesale and specialist suppliers, then consolidates the commercial process for the institutional customer. The objective is straightforward: optimize procurement costs across pharmaceuticals, medical disposables and medical equipment without pushing sourcing complexity onto the clinic team.</p></div><div class="publicFeatureStack"><article><b>Shop & request</b><p>Browse controlled institutional lines or submit a custom sourcing request.</p></article><article><b>Quote & manage</b><p>Receive the formal quotation, confirm the order and keep the transaction history attached to the account.</p></article><article><b>Repeat efficiently</b><p>Reorder previously supplied items without restarting the procurement process from zero.</p></article></div></section><section class="publicSection procurementFlow"><article><b>SHOP</b><span>01</span><p>Browse the Pharma Service institutional product master.</p></article><article><b>QUOTE</b><span>02</span><p>PSC sources, reviews and sends the formal quotation.</p></article><article><b>MANAGE</b><span>03</span><p>Confirm, cancel or follow the order from the account.</p></article><article><b>REPEAT</b><span>04</span><p>Repeat previously supplied items from the same account history.</p></article></section><section class="publicCta"><div><span class="kicker">SEE IT WORK</span><h2>Take a guided tour of Pharma Service.</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="demo">Take guided tour</button><button class="button primary large" data-go="login">Open Clinic Portal</button></div></section>`); }
 
 
-  function ourModelPage(){ return publicPage(
-    'our-model',
-    'Our model',
-    'Supplying a clinic is mostly about getting the small things right.',
-    'We supply healthcare products to institutions. The job is not complicated for the sake of being complicated — it just needs a more careful eye than ordinary retail. The exact product, the right pack, the compatible accessory, the expiry and the correct supply route all matter.',
-    `<section class="publicSection modelQuietIntro">
-      <div class="modelQuietLead">
-        <h2>We start with the list you actually have.</h2>
-        <p>Sometimes it is beautifully specified. Sometimes it says “gauze 10 × 10 — 5 boxes.” Both are fine as a starting point.</p>
-        <p>Our job is to work out what the clinic really needs before we turn that line into a quotation. Sterile or non-sterile? Which material? How many pieces are actually in the pack? Does the device need a particular cuff, strip, mask, regulator or accessory? Is there an expiry issue we should care about?</p>
-        <p>The point is not to slow the order down. It is to avoid sending the wrong thing quickly.</p>
-      </div>
-      <aside class="modelQuietAside"><p><strong>A list tells us what to look for.</strong><br>The specification tells us what to buy.</p></aside>
-    </section>
+  function ourModelPage(){
+    return `<main class="publicPage model17Page">
+      ${publicHeader('our-model')}
 
-    <section class="publicSection modelQuietExamples">
-      <div class="modelQuietHead"><h2>A few examples of the details we mean.</h2><p>They are not dramatic. They are just the things that make a product useful once it reaches the clinic.</p></div>
-      <div class="modelQuietExampleRows">
-        <article><h3>Blood-pressure monitors</h3><p>A good monitor with the wrong cuff size is still the wrong setup for the people using it.</p></article>
-        <article><h3>Glucose meters</h3><p>The meter, strips and control solution have to belong together. “Compatible enough” is not a specification.</p></article>
-        <article><h3>Gauze and dressings</h3><p>Size is only part of the description. Sterility, material, ply and pack conversion can change what is actually being supplied.</p></article>
-        <article><h3>AEDs and emergency equipment</h3><p>The main device is only part of readiness. Pads, battery status, accessories, expiry and service support matter too.</p></article>
-      </div>
-    </section>
+      <section class="model17Hero">
+        <div class="model17HeroCopy">
+          <span class="kicker">OUR MODEL</span>
+          <h1>The Institutional Way</h1>
+          <p>We source the right products, bring them into one quotation, coordinate the order and stay accountable through delivery.</p>
+          <div class="model17Principle">Source per line. Sell one solution.</div>
+        </div>
+        <div class="model17HeroVisual" aria-hidden="true">
+          <div class="model17PaperCard cardA"><img src="/assets/model-icons/understand.png" alt=""><span>REQUIREMENT</span></div>
+          <div class="model17PaperCard cardB"><img src="/assets/model-icons/source.png" alt=""><span>SOURCING</span></div>
+          <div class="model17PaperCard cardC"><img src="/assets/model-icons/deliver-repeat.png" alt=""><span>ONE SUPPLY</span></div>
+        </div>
+      </section>
 
-    <section class="publicSection modelQuietCommercial">
-      <div class="modelQuietHead"><h2>Then we do the commercial work properly.</h2><p>Once the requirement is clear, the rest is fairly practical.</p></div>
-      <div class="modelQuietCommercialRows">
-        <article><h3>We source the line where it belongs.</h3><p>Furniture, diagnostics, disposables, emergency equipment, oxygen and medicines do not all belong to the same supplier or the same route. We use category-appropriate sources rather than forcing the whole basket through one channel.</p></article>
-        <article><h3>We compare like with like.</h3><p>Brand and price matter, but so do model, pack, stock, lead time, VAT treatment, warranty, delivery and the conditions attached to the offer. A cheaper non-matching line is not a saving.</p></article>
-        <article><h3>We check before we promise.</h3><p>Availability changes. Supplier quotations expire. Regulated products have their own controls. We would rather verify the point that matters than make a confident promise we cannot support.</p></article>
-        <article><h3>We keep enough of the record to make the next order easier.</h3><p>Quotation, delivery, model, serial or warranty information, and batch or expiry where relevant. The second order should not need everyone to remember what happened the first time.</p></article>
-      </div>
-    </section>
+      <section class="model17Promise publicSection">
+        <div>
+          <span class="kicker">ONE COMMERCIAL RELATIONSHIP</span>
+          <h2>That complexity is ours to manage — not yours.</h2>
+        </div>
+        <p>You receive one commercial point of contact and one coordinated supply.</p>
+      </section>
 
-    <section class="publicSection modelQuietCategories">
-      <div class="modelQuietHead"><h2>Different categories need a different eye.</h2><p>This is the part of institutional supply that is easy to miss if everything is treated like normal retail.</p></div>
-      <div class="modelQuietCategoryGrid">
-        <article><h3>Diagnostics</h3><p>Exact model, intended use, accuracy information and compatible consumables.</p></article>
-        <article><h3>Consumables</h3><p>Material, size, sterile status, pack conversion and expiry.</p></article>
-        <article><h3>Emergency equipment</h3><p>Model, accessories, consumables, service scope and readiness after handover.</p></article>
-        <article><h3>Oxygen</h3><p>Medical-grade supply, cylinder and regulator compatibility, handling and the appropriate qualified route.</p></article>
-        <article><h3>Medicines</h3><p>The correct licensed procurement route, permitted recipient and traceability. Convenience does not replace those controls.</p></article>
-      </div>
-    </section>
+      <section class="model17Rhythm publicSection">
+        <article class="model17RhythmCard setup">
+          <div>
+            <span>OPENING / CAPITAL</span>
+            <h2>Set up the clinic.</h2>
+            <p>Beds, furniture, diagnostics, emergency equipment and the other items needed to get a clinic ready.</p>
+          </div>
+          <img src="/assets/model-icons/opening.png" alt="" aria-hidden="true">
+        </article>
+        <article class="model17RhythmCard running">
+          <div>
+            <span>RECURRING SUPPLY</span>
+            <h2>Keep it running.</h2>
+            <p>Consumables, dressings, gloves, testing supplies, respiratory products, medicines and the things that need replacing again and again.</p>
+          </div>
+          <img src="/assets/model-icons/recurring.png" alt="" aria-hidden="true">
+        </article>
+      </section>
 
+      <section class="model17Source publicSection">
+        <div class="model17SourceIntro">
+          <span class="kicker">HOW THE CATALOGUE WORKS</span>
+          <h2>The right source for the right product.</h2>
+          <p>Different products need different expertise. We source each part of the requirement through the route that makes sense, then bring it together for you.</p>
+        </div>
 
-<section class="publicSection modelWalkthroughLite">
-  <div class="modelWalkthroughLiteHead">
-    <span class="kicker">HOW THE CATALOGUE WORKS</span>
-    <h2>From category to exact line.</h2>
-    <p>We offer the right categories, then the relevant product families, then the exact product line with the detail that matters when buying.</p>
-  </div>
-  <div class="modelWalkthroughLiteGrid">
-    <article>
-      <small>01 · CATEGORY</small>
-      <h3>Choose the right category.</h3>
-      <p>The category split keeps browsing practical: start with the clinical need, not the sourcing architecture behind it.</p>
-      <img src="/assets/model-walkthrough/category-card-vitals.png?v=3925" alt="Vitals and Assessment category card">
-    </article>
-    <article>
-      <small>02 · PRODUCT FAMILIES</small>
-      <h3>Open the relevant family.</h3>
-      <p>Families group similar requirement types together before an exact model, presentation or pack is confirmed.</p>
-      <img src="/assets/model-walkthrough/family-selector-vitals.png?v=3925" alt="Example product family selector cards">
-    </article>
-    <article>
-      <small>03 · EXACT LINE</small>
-      <h3>Then confirm the line itself.</h3>
-      <p>The line page carries specification, pack or unit, supply basis, pricing, availability, requirement mapping and brand or product preference where relevant.</p>
-      <img src="/assets/model-walkthrough/line-detail-bp-clean.png?v=3925" alt="Example item line detail page for an electronic blood pressure apparatus">
-    </article>
-  </div>
-</section>
+        <div class="model17SupplyFlow" aria-label="Example of the catalogue hierarchy from category to product family to exact line item">
+          <article class="model17FlowCard category">
+            <div class="model17FlowLabel">01 · CLINICAL CATEGORY</div>
+            <img src="/assets/clinical-icons/vitals.png" alt="">
+            <h3>Vitals &amp; Assessment</h3>
+            <p>Start with the clinical need.</p>
+          </article>
+          <div class="model17Arrow" aria-hidden="true"><span>→</span><small>OPEN FAMILY</small></div>
+          <article class="model17FlowCard family">
+            <div class="model17FlowLabel">02 · PRODUCT FAMILY</div>
+            <img src="/assets/products/inst-0019.webp" alt="Portable pulse oximeter">
+            <h3>Portable Pulse Oximeter</h3>
+            <p>Define what the institution needs.</p>
+          </article>
+          <div class="model17Arrow" aria-hidden="true"><span>→</span><small>CONFIRM LINE</small></div>
+          <article class="model17FlowCard line">
+            <div class="model17FlowLabel">03 · LINE ITEM</div>
+            <div class="model17LineThumb"><img src="/assets/products/inst-0019.webp" alt=""></div>
+            <h3>Pulse — Fingertip Pulse Oximeter A2</h3>
+            <p>Exact product, pack and commercial terms are confirmed before quotation.</p>
+            <b>1 unit · Request quote</b>
+          </article>
+        </div>
+      </section>
 
-    <section class="publicSection modelQuietAftercare">
-      <div><h2>The first delivery is not the whole job.</h2><p>An examination couch may be bought once. Gloves, dressings, swabs and test strips come back. AED pads expire. Batteries age. Equipment needs compatible consumables. Warranties and serials become useful only when someone can find them later.</p><p>That is why we think about replenishment, expiry, replacement and records from the beginning — especially for multi-site institutions and school clinics.</p></div>
-      <div class="modelQuietAftercareList"><div><strong>Opening items</strong><span>Furniture, diagnostics, monitoring, emergency equipment and setup.</span></div><div><strong>Recurring items</strong><span>Dressings, PPE, testing consumables, respiratory items, hygiene and permitted medicines.</span></div><div><strong>Easy to forget</strong><span>Accessories, expiry, replacements, warranty and handover records.</span></div></div>
-    </section>
+      <section class="model17BottomCta">
+        <div>
+          <span>READY WHEN YOU ARE</span>
+          <h2>Send us the requirement.<br>We’ll work out how to supply it.</h2>
+        </div>
+        <div class="model17BottomActions">
+          <button class="button primary large" data-go="start">Send a requirement</button>
+          <button class="button outline large" data-go="catalogue">Browse catalogue</button>
+        </div>
+      </section>
 
-    <section class="publicSection modelQuietSchool">
-      <div><h2>School clinics bring all of this together.</h2><p>They have capital equipment, day-to-day consumables, emergency readiness, medicines through the appropriate route, expiry, replenishment and records — all in a small clinical environment that needs to stay ready.</p><p>We would rather become familiar with how the clinic actually runs than simply keep sending boxes at it.</p></div>
-      <button class="button outline large" data-go="catalogue">Browse the institutional catalogue</button>
-    </section>
-    ${schoolWorkshopStrip()}
+      ${publicFooter()}
+    </main>`;
+  }
 
-    <section class="publicSection modelQuietRegulated">
-      <h2>Some lines simply need a different route.</h2>
-      <p>Medicines, oxygen, specialist services and other regulated products remain subject to the applicable UAE licensing, recipient, storage, batch/expiry and professional controls. If a line needs a specialist or licensed route, we treat it that way.</p>
-    </section>
-
-    <section class="publicCta modelQuietCta"><div><h2>Send us the list you have.</h2><p>If something is vague, we will tighten it. If something needs a different route, we will tell you. Then we can quote the requirement on a basis that actually makes sense.</p></div><div class="publicCtaActions"><button class="button outline large" data-go="catalogue">Browse catalogue</button><button class="button primary large" data-go="contact">Send a requirement</button></div></section>`
-  ); }
 
   function whoWeSupplyPage(){ return publicPage(
     'who-we-supply',
@@ -1400,15 +1703,25 @@
   function publicCataloguePage(needId='all'){
     const meta=clinicalNeedMeta(needId);
     const {filtered,types}=catalogueFilterProducts(needId);
-    const categories=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories;
-    return `<main class="publicPage publicCataloguePage">${publicHeader('catalogue')}
-      <section class="publicPageHero cataloguePublicHero"><span class="kicker">INSTITUTIONAL CATALOGUE</span><h1>${needId==='all'?'Browse the controlled product master.':esc(meta.label)}</h1><p>Read-only public catalogue. Product availability, exact commercial specification, pricing and regulated supply route are confirmed for the account and transaction before commitment.</p></section>
-      <section class="publicSection publicCatalogueControls">
-        <div class="publicNeedRibbon">${categories.map(c=>`<button class="${c.id===needId?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="catalogue/${c.id}">${esc(c.label)}</button>`).join('')}</div>
-        <div class="filterBar"><div class="searchInput"><span>${icon('search')}</span><input data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search product, pack or specification…"></div><select data-cat-filter="category"><option>All product types</option>${types.map(t=>`<option ${ui.catalogueCat===t?'selected':''}>${esc(t)}</option>`).join('')}</select></div>
+    const categories=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.filter(c=>c.id!=='all');
+    const categoryCards=categories.map(c=>`<button class="publicCategoryCard16 ${c.id===needId?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="catalogue/${c.id}">
+      <span class="publicCategoryArt16" aria-hidden="true">${clinicalNeedIllustration(c.id)}</span>
+      <span class="publicCategoryCopy16"><b>${esc(c.label)}</b><small>${esc(c.note)}</small></span>
+      <i>↗</i>
+    </button>`).join('');
+    const heroTitle=needId==='all'?'Start with the clinical area.':esc(meta.label);
+    const heroLead=needId==='all'?'Choose a category to see the controlled product families behind it. Or keep scrolling to browse the published product catalogue.':`Product families for ${esc(meta.label)} appear below, followed by the published catalogue lines in this clinical area.`;
+    return `<main class="publicPage publicCataloguePage catalogue16Page">${publicHeader('catalogue')}
+      <section class="publicPageHero cataloguePublicHero catalogue16Hero"><span class="kicker">INSTITUTIONAL CATALOGUE</span><h1>${heroTitle}</h1><p>${heroLead}</p></section>
+      <section class="publicSection publicCatalogueJourney16">
+        <div class="publicCatalogueJourneyHead16"><div><span class="kicker">CLINICAL NEEDS</span><h2>Where do you want to start?</h2></div>${needId!=='all'?'<button class="textAction" data-go="catalogue">View all categories</button>':''}</div>
+        <div class="publicCategoryGrid16">${categoryCards}</div>
       </section>
-      <section class="publicSection publicCatalogueResults"><div class="publicCatalogueCount"><b>${filtered.length}</b><span>published institutional lines</span></div>${filtered.length?`<div class="publicCatalogueGrid">${filtered.map(publicCatalogueCard).join('')}</div>`:'<div class="emptyState"><h3>No matching published lines</h3><p>Try another clinical need or send the requirement to Pharma Service.</p><button class="button primary" data-go="contact">Request sourcing</button></div>'}</section>
-      <section class="publicCta"><div><span class="kicker">ACCOUNT PRICING</span><h2>Need a quotation or customer-specific product list?</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="contact">Request supply</button><button class="button primary large" data-go="login">Open Clinic Portal</button></div></section>
+      <section class="publicSection publicCatalogueControls catalogue16Controls">
+        <div class="filterBar"><div class="searchInput"><span>${icon('search')}</span><input data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search families, products, packs or specifications…"></div><select data-cat-filter="category"><option>All product types</option>${types.map(t=>`<option ${ui.catalogueCat===t?'selected':''}>${esc(t)}</option>`).join('')}</select></div>
+      </section>
+      <section class="publicSection publicCatalogueResults catalogue16Results"><div class="publicCatalogueCount"><b>${filtered.length}</b><span>${needId==='all'?'published institutional lines':'published lines in this category'}</span></div>${filtered.length?`<div class="publicCatalogueGrid">${filtered.map(publicCatalogueCard).join('')}</div>`:'<div class="emptyState"><h3>No matching published lines</h3><p>Try another clinical need or send the requirement to Pharma Service.</p><button class="button primary" data-go="contact">Request sourcing</button></div>'}</section>
+      <section class="publicCta"><div><span class="kicker">HAVE A LIST ALREADY?</span><h2>Send the requirement instead of rebuilding it here.</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="start">Send a list / RFQ</button><button class="button primary large" data-go="login">Open Clinic Portal</button></div></section>
       ${publicFooter()}
     </main>`;
   }
@@ -1433,255 +1746,54 @@
     }catch(e){console.error(e);host.innerHTML='<p>We could not update this preference automatically. Please email <b>info@pharmaservice.ae</b> and we will update it.</p>';}
   }
 
-
-function startPage(){
-  const startWorkshopSlugs=['which-glove-should-i-actually-wear','aed-has-expiring-parts-too','oxygen-cylinder-is-not-an-oxygen-system'];
-  const startWorkshopImageMap={
-    'which-glove-should-i-actually-wear':'/assets/workshop/which-glove-should-i-actually-wear.webp?v=3925',
-    'aed-has-expiring-parts-too':'/assets/workshop/aed-has-expiring-parts-too.webp?v=3925',
-    'oxygen-cylinder-is-not-an-oxygen-system':'/assets/workshop/oxygen-cylinder-is-not-an-oxygen-system.webp?v=3925'
-  };
-  const workshopCards=startWorkshopSlugs.map(slug=>{
-    const g=workshopGuideBySlug(slug); if(!g) return '';
-    const img=startWorkshopImageMap[slug]||'';
-    return `<article class="startWorkshopCard"><button data-go="workshop/${esc(g.slug)}" aria-label="Open ${esc(g.title)}"><span class="startWorkshopCardVisual">${img?`<img src="${img}" alt="${esc(g.title)}" loading="lazy">`:''}</span><span class="startWorkshopCardCopy"><small>${esc(workshopFormatLabel(g.format))}</small><h3>${esc(g.title)}</h3><p>${esc(g.excerpt)}</p></span></button></article>`;
-  }).join('');
-
-  return `<main class="publicPage startPage startPageV39">
-    ${publicHeader('')}
-
-    <section class="startHero startHeroV39">
-      <div class="startHeroCopy">
-        <span class="kicker">START HERE</span>
-        <h1>Start with the requirement you already have.</h1>
-        <p>An RFQ, spreadsheet, PDF or rough product list is enough to begin. We will clarify the lines that need attention, map them properly and come back with a quotation on the basis we can actually support.</p>
-        <div class="startHeroCueRow" aria-label="Three ways to start">
-          <article><small>01</small><b>Send a requirement</b><span>RFQ, list, spreadsheet or note</span></article>
-          <article><small>02</small><b>Browse the catalogue</b><span>Start from the clinical need</span></article>
-          <article><small>03</small><b>Understand the model</b><span>See how PSC handles the supply work</span></article>
+  function startPage(){
+    return `<main class="publicPage startPage start16Page">
+      ${publicHeader('')}
+      <section class="start16Hero">
+        <div class="start16HeroCopy">
+          <span class="kicker">START HERE</span>
+          <h1>Start with the requirement you already have.</h1>
+          <p>An RFQ, spreadsheet, PDF or rough product list is enough to begin. We will clarify the lines that need clarification and come back with a quotation on the basis we can actually support.</p>
+          <div class="start16HeroActions"><button class="button primary large" data-start-scroll="send">Send a list / RFQ</button><button class="button outline large" data-go="catalogue">Browse catalogue</button></div>
         </div>
-        <div class="startHeroActions">
-          <button class="button primary large semanticPrimary" data-start-scroll="send">Send a list / RFQ</button>
-          <button class="button outline large" data-go="catalogue">Browse catalogue</button>
+        <div class="start16RouteBoard" aria-label="Three ways to start">
+          <button data-start-scroll="send"><span>01</span><div><b>I already have a list.</b><small>Send it as it is.</small></div><i>→</i></button>
+          <button data-go="catalogue"><span>02</span><div><b>I need to find the product.</b><small>Browse by clinical need.</small></div><i>→</i></button>
+          <button data-go="our-model"><span>03</span><div><b>I want to understand the process.</b><small>See how PSC handles the supply work.</small></div><i>→</i></button>
         </div>
-      </div>
-      <div class="startHeroPreviewPanel">
-        <article class="startHeroPreviewCard is-light">
-          <small>01 · SEND THE REQUIREMENT</small>
-          <h2>I already have a list.</h2>
-          <p>Paste it as it is or attach the original file. We qualify the requirement and clarify the lines that need attention.</p>
-        </article>
-        <article class="startHeroPreviewCard is-mint">
-          <small>02 · BROWSE BY NEED</small>
-          <h2>I need to find the product.</h2>
-          <p>Browse the institutional catalogue by clinical category, then narrow to the family and exact line.</p>
-        </article>
-        <article class="startHeroPreviewCard is-ink">
-          <small>03 · SEE THE MODEL</small>
-          <h2>I want to understand the process.</h2>
-          <p>See how PSC sources different product types while keeping one accountable commercial response.</p>
-        </article>
-      </div>
-    </section>
+      </section>
 
-    <section class="publicClinicalPreview startCataloguePreview">
-      <div class="publicClinicalPreviewHead">
-        <div>
-          <span class="kicker">BROWSE BY CLINICAL NEED</span>
-          <h2>Start with the category, not the supplier.</h2>
-          <p>The catalogue is organised around what the clinic is trying to do. Pick the clinical need first, then drill down to the exact product family and line.</p>
+      <section class="start16Brief publicSection">
+        <div class="start16BriefHead"><span class="kicker">WHAT HELPS</span><h2>Three details make a request much easier to quote.</h2></div>
+        <div class="start16BriefGrid"><article><b>What</b><p>Product, specification, current brand or whatever description you have.</p></article><article><b>How much</b><p>Quantity, pack basis and number of sites if it is a multi-site requirement.</p></article><article><b>When</b><p>Required date, delivery window or whether this is routine replenishment.</p></article></div>
+      </section>
+
+      <section class="startSendSection start16Send" id="start-send">
+        <div class="startSendIntro start16SendIntro">
+          <span class="kicker">SEND THE REQUIREMENT</span>
+          <h2>It does not need to be cleaned up first.</h2>
+          <p>Paste the requirement below or attach the original file. We will use what you provide to qualify the enquiry and come back on the specific lines that need clarification.</p>
+          <p class="start16Fine">No automatic stock, compliance or delivery promise is created by sending the enquiry. Those points are confirmed before commitment.</p>
         </div>
-        <button class="textAction" data-go="catalogue">Browse all categories</button>
-      </div>
+        <form class="prospectForm startProspectForm start16Form" data-public-enquiry data-source-page="business_card_start_v39_16" novalidate>
+          <div class="prospectField"><label for="startOrganization">Organization</label><input id="startOrganization" name="organization" type="text" maxlength="180" placeholder="School group, clinic or company" required></div>
+          <div class="prospectField"><label for="startInstitutionType">Institution type</label><select id="startInstitutionType" name="institution_type" required><option value="">Select</option><option>School / education</option><option>Healthcare facility</option><option>Corporate / workplace health</option><option>Government / public institution</option><option>Hospitality / other institution</option><option>Other</option></select></div>
+          <div class="prospectField"><label for="startName">Name</label><input id="startName" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Your name" required></div>
+          <div class="prospectField"><label for="startPhone">Contact number</label><input id="startPhone" name="contact_number" type="tel" autocomplete="tel" maxlength="40" placeholder="+971" required></div>
+          <div class="prospectField prospectFieldWide"><label for="startEmail">Contact email</label><input id="startEmail" name="contact_email" type="email" autocomplete="email" maxlength="254" placeholder="name@organization.ae" required></div>
+          <div class="prospectField prospectFieldWide"><label for="startRequirement">Requirement</label><textarea id="startRequirement" name="requirement" rows="5" maxlength="4000" placeholder="Paste the list, quantities, specification or anything else you already know." required></textarea></div>
+          <div class="prospectField prospectFieldWide rfqUploadField"><label for="startRfq">Attach a list or RFQ <span>optional · PDF, Word, Excel or CSV · max 10 MB</span></label><input id="startRfq" name="rfq_file" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,application/pdf,text/csv,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></div>
+          <div class="prospectHoneypot" aria-hidden="true"><label for="startWebsite">Website</label><input id="startWebsite" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+          <div class="prospectSubmitRow"><p>We will use this to contact you about this institutional requirement.</p><button class="button primary semanticPrimary" type="submit" data-public-enquiry-submit>Send requirement</button></div>
+        </form>
+      </section>
 
-      <div class="publicClinicalPreviewGrid startPreviewClinicalGrid">
-        <button class="publicClinicalCard orange" data-go="catalogue/vitals">
-          <img class="publicClinicalArt" src="/assets/category-vitals.webp?v=3925" alt="" aria-hidden="true">
-          <span>Vitals &amp; Assessment</span>
-          <small>Blood pressure, temperature, oximetry and clinical assessment</small>
-        </button>
+      <section class="start16Bottom publicSection"><div><span class="kicker">NOT READY TO SEND?</span><h2>Browse first, or read one useful guide.</h2></div><div><button class="button outline" data-go="catalogue">Institutional catalogue</button><button class="button light" data-go="workshop">The Workshop</button></div></section>
+      ${publicFooter()}
+    </main>`;
+  }
 
-        <button class="publicClinicalCard mint" data-go="catalogue/infection">
-          <img class="publicClinicalArt" src="/assets/category-infection.webp?v=3925" alt="" aria-hidden="true">
-          <span>Infection Control &amp; PPE</span>
-          <small>Gloves, masks, hygiene, disinfection and waste control</small>
-        </button>
-
-        <button class="publicClinicalCard blue" data-go="catalogue/breathing">
-          <img class="publicClinicalArt" src="/assets/category-breathing.webp?v=3925" alt="" aria-hidden="true">
-          <span>Breathing &amp; Oxygen</span>
-          <small>Nebulisation, oxygen delivery, airway and respiratory support</small>
-        </button>
-
-        <button class="publicClinicalCard rose" data-go="catalogue/medicines">
-          <img class="publicClinicalArt" src="/assets/category-medicines.webp?v=3925" alt="" aria-hidden="true">
-          <span>Medicines &amp; Symptoms</span>
-          <small>Controlled medicine lines through the right licensed route</small>
-        </button>
-      </div>
-
-      <div class="publicClinicalPreviewFoot">
-        <span>Plus diabetes &amp; testing, cuts &amp; wounds, emergency response, equipment &amp; mobility, eyes &amp; screening and more.</span>
-        <button class="button primary semanticPrimary" data-go="catalogue">Open Institutional Catalogue</button>
-      </div>
-    </section>
-
-    <section class="startModelPreview publicSection">
-      <div class="startPreviewHead">
-        <div>
-          <span class="kicker">THE INSTITUTIONAL WAY</span>
-          <h2>Source per line. Sell one solution.</h2>
-          <p>Different categories can follow different supply routes, but that complexity should stay with us — not with the clinic team.</p>
-        </div>
-        <button class="button outline" data-go="our-model">See Our Model</button>
-      </div>
-
-      <div class="startModelFlow">
-        <article class="startModelPanel startModelInput">
-          <small>01 · ONE REQUIREMENT</small>
-          <h3>What the clinic needs.</h3>
-          <p>The list can contain completely different product types. That is normal.</p>
-          <div class="startModelList">
-            <div><img src="/assets/products/pulse-oximeter-clean.png?v=3925" alt="Portable pulse oximeter"><span><b>Portable Pulse Oximeter</b><i>Vitals &amp; Assessment</i></span><em>01</em></div>
-            <div><img src="/assets/workshop/which-glove-should-i-actually-wear.webp?v=3925" alt="Examination gloves"><span><b>Examination Gloves</b><i>Infection Control &amp; PPE</i></span><em>02</em></div>
-            <div><img src="/assets/workshop/oxygen-cylinder-is-not-an-oxygen-system.webp?v=3925" alt="Medical oxygen"><span><b>Medical Oxygen</b><i>Breathing &amp; Oxygen</i></span><em>03</em></div>
-            <div><img src="/assets/category-medicines.webp?v=3925" alt="Cetirizine"><span><b>Cetirizine</b><i>Medicines &amp; Symptoms</i></span><em>04</em></div>
-          </div>
-        </article>
-
-        <article class="startModelPanel startModelCore">
-          <div class="startModelCoreBrand"><img src="/assets/psc-logo-current.png?v=3925" alt="Pharma Service"></div>
-          <span class="startModelCoreKicker">PHARMA SERVICE</span>
-          <h3>We source each line where it belongs.</h3>
-          <p>Equipment, consumables, oxygen and medicines can each follow the route that makes sense, while PSC keeps the commercial responsibility together.</p>
-          <ul>
-            <li><span></span>Equipment source <b>checked</b></li>
-            <li><span></span>Consumables source <b>checked</b></li>
-            <li><span></span>Qualified oxygen route <b>checked</b></li>
-            <li><span></span>Licensed medicine route <b>checked</b></li>
-          </ul>
-          <div class="startModelTagline"><b>Source per line.</b><span>Sell one solution.</span></div>
-        </article>
-
-        <article class="startModelPanel startModelOutput">
-          <small>02 · ONE COMMERCIAL RESPONSE</small>
-          <h3>One coordinated quotation.</h3>
-          <div class="startModelOutputHead"><span>PHARMA SERVICE</span><b>Institutional supply</b></div>
-          <div class="startModelOutputList">
-            <div><span><b>Portable Pulse Oximeter</b><i>Model + pack confirmed</i></span><em>INCLUDED</em></div>
-            <div><span><b>Examination Gloves</b><i>Material + size + box count confirmed</i></span><em>INCLUDED</em></div>
-            <div><span><b>Medical Oxygen</b><i>System compatibility confirmed</i></span><em>INCLUDED</em></div>
-            <div><span><b>Cetirizine</b><i>Presentation + pack confirmed</i></span><em>INCLUDED</em></div>
-          </div>
-          <div class="startModelOutputFoot"><b>One point of contact.</b><span>Specification, quotation and delivery coordination stay together.</span></div>
-        </article>
-      </div>
-
-      <div class="startWalkthroughMini">
-        <div class="startPreviewHead compact">
-          <div>
-            <span class="kicker">FROM CATEGORY TO EXACT PRODUCT</span>
-            <h2>How the catalogue works.</h2>
-            <p>Browse by clinical category, choose the relevant family, then confirm the exact line and quotation basis.</p>
-          </div>
-        </div>
-        <div class="startWalkthroughGrid">
-          <article>
-            <small>01 · CATEGORY</small>
-            <h3>Choose the category.</h3>
-            <p>The category split keeps the catalogue practical and easy to browse by clinical need.</p>
-            <img src="/assets/model-walkthrough/category-card-vitals.png?v=3925" alt="Vitals and Assessment category card">
-          </article>
-          <article>
-            <small>02 · PRODUCT FAMILY</small>
-            <h3>Open the family.</h3>
-            <p>Families group related requirement types before an exact brand, model or presentation is selected.</p>
-            <img src="/assets/model-walkthrough/family-selector-vitals.png?v=3925" alt="Example product family selector cards">
-          </article>
-          <article>
-            <small>03 · EXACT LINE</small>
-            <h3>Confirm the line.</h3>
-            <p>The line page carries the detail that actually matters when buying: specification, pack, supply basis and quote status.</p>
-            <img src="/assets/model-walkthrough/line-detail-bp-clean.png?v=3925" alt="Example item line detail page for an electronic blood pressure apparatus">
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="startWorkshopPreview publicSection">
-      <div class="startPreviewHead">
-        <div>
-          <span class="kicker">THE WORKSHOP</span>
-          <h2>Useful product knowledge, next to the products.</h2>
-          <p>Use the Workshop to understand the small details that affect product choice, readiness and replenishment before the next order.</p>
-        </div>
-        <button class="button outline" data-go="workshop">Enter The Workshop</button>
-      </div>
-      <div class="startWorkshopGrid">${workshopCards}</div>
-    </section>
-
-    <section class="startPortalPreview publicSection">
-      <div class="startPreviewHead">
-        <div>
-          <span class="kicker">CLINIC PORTAL</span>
-          <h2>Keep the relationship going after the first order.</h2>
-          <p>The portal is where requests, quotations and repeat supply can stay attached to the account instead of disappearing into email threads.</p>
-        </div>
-        <button class="button outline" data-go="login">Open Clinic Portal</button>
-      </div>
-      <div class="startPortalGrid">
-        <article><i>${icon('checklist')}</i><h3>Requests</h3><p>Capture the requirement, clarify missing details and keep the enquiry together.</p></article>
-        <article><i>${icon('quote')}</i><h3>Quotations</h3><p>Track quoted lines, commercial terms and what was actually offered.</p></article>
-        <article><i>${icon('reports')}</i><h3>Order history</h3><p>Keep a visible record of what was supplied, when and on what basis.</p></article>
-        <article><i>${icon('repeat')}</i><h3>Repeat supply</h3><p>Come back to recurring items, replacements and replenishment more easily.</p></article>
-      </div>
-    </section>
-
-    <section class="startSendSection" id="start-send">
-      <div class="startSendIntro">
-        <span class="kicker">SEND THE REQUIREMENT</span>
-        <h2>Send us what you have.</h2>
-        <p>It does not need to be perfectly specified. Send the requirement as it stands and we will work out what needs clarification before we quote it.</p>
-        <div class="startSendAside"><b>No list yet?</b><button class="textAction" data-go="catalogue">Browse the catalogue</button></div>
-      </div>
-      <form class="prospectForm startProspectForm" data-public-enquiry data-source-page="start_page_v39_25_home_preview" novalidate>
-        <div class="prospectField">
-          <label for="startOrganization">Organization</label>
-          <input id="startOrganization" name="organization" type="text" maxlength="180" placeholder="School group, clinic or company" required>
-        </div>
-        <div class="prospectField">
-          <label for="startInstitutionType">Institution type</label>
-          <select id="startInstitutionType" name="institution_type" required><option value="">Select</option><option>School / education</option><option>Healthcare facility</option><option>Corporate / workplace health</option><option>Government / public institution</option><option>Hospitality / other institution</option><option>Other</option></select>
-        </div>
-        <div class="prospectField">
-          <label for="startName">Name</label>
-          <input id="startName" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Your name" required>
-        </div>
-        <div class="prospectField">
-          <label for="startPhone">Contact number</label>
-          <input id="startPhone" name="contact_number" type="tel" autocomplete="tel" maxlength="40" placeholder="+971" required>
-        </div>
-        <div class="prospectField prospectFieldWide">
-          <label for="startEmail">Contact email</label>
-          <input id="startEmail" name="contact_email" type="email" autocomplete="email" maxlength="254" placeholder="name@organization.ae" required>
-        </div>
-        <div class="prospectField prospectFieldWide">
-          <label for="startRequirement">Requirement</label>
-          <textarea id="startRequirement" name="requirement" rows="5" maxlength="4000" placeholder="Paste the list, quantities, specification or anything else you already know." required></textarea>
-        </div>
-        <div class="prospectField prospectFieldWide rfqUploadField">
-          <label for="startRfq">Attach a list or RFQ <span>optional · PDF, Word, Excel or CSV · max 10 MB</span></label>
-          <input id="startRfq" name="rfq_file" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,application/pdf,text/csv,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-        </div>
-        <div class="prospectHoneypot" aria-hidden="true"><label for="startWebsite">Website</label><input id="startWebsite" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-        <div class="prospectSubmitRow"><p>No automatic stock, compliance or delivery promise is created by sending the enquiry. Those points are confirmed before commitment.</p><button class="button primary semanticPrimary" type="submit" data-public-enquiry-submit>Send request</button></div>
-      </form>
-    </section>
-    ${publicFooter()}
-  </main>`;
-}
-
-function contactPage(){ return publicPage(
+  function contactPage(){ return publicPage(
     'contact',
     'CONTACT / REQUEST SUPPLY',
     'Tell Pharma Service what the institution needs.',
@@ -2105,10 +2217,10 @@ function contactPage(){ return publicPage(
       ${cancelled.length?`<section class="orderSection"><div class="orderSectionHead"><h2>Cancelled</h2><span>${cancelled.length}</span></div><div class="orderCardGrid compact">${cancelled.map(r=>customerOrderCard(r)).join('')}</div></section>`:''}`);
   }
   function customerOrderCard(r){
-    const q=calcQuote(r), label=friendlyStatus(r.status), p=r.lines[0]?product(r.lines[0].sku):null, extra=Math.max(0,r.lines.length-1);
+    const q=calcQuote(r), label=friendlyStatus(r.status), first=r.lines[0]||null, p=first?.sku?product(first.sku):null, extra=Math.max(0,r.lines.length-1);
     const delivery=['Authorized','Procurement','Delivery'].includes(r.status)?expectedDeliveryLabel(r):'';
     const archiveDate=r.status==='Cancelled'&&r.cancelledAt?addDaysLabel(r.cancelledAt,30):'';
-    return `<article class="customerOrderCard statusCard-${r.status.toLowerCase()}"><div class="orderCardHead"><div><span class="eyebrow">${esc(r.quoteRef||'ORDER UNDER REVIEW')}</span><h3 class="mono">${r.id}</h3><p>${date(r.createdAt)} · ${r.lines.length} lines</p></div>${customerStatusPill(r.status)}</div><div class="orderCardProduct"><div><b>${p?`${r.lines[0].qty} × ${esc(p.name)}`:'Order items'}</b>${extra?`<span>+ ${extra} more line${extra>1?'s':''}</span>`:''}</div>${q.hasSell&&r.quoteRef?`<strong>${money(q.total)}</strong>`:''}</div>${r.status==='Drafting'?`<div class="orderMessage">Under review. Your quotation will be sent to <strong>${esc(accountEmailLabel())}</strong>.</div>`:''}${r.status==='Sent'?`<div class="orderMessage quoteReady">Quotation sent to <strong>${esc(accountEmailLabel())}</strong>. Confirm or cancel below.</div>`:''}${delivery?`<div class="deliveryPromise"><span>TRACK</span><b>${delivery}</b></div>`:''}${r.status==='Accepted'?`<div class="orderMessage deliveredMsg">Delivered ${date(r.deliveredAt||r.createdAt)}. These items are now available on Replenish.</div>`:''}${r.status==='Cancelled'?`<div class="orderMessage cancelledMsg">Cancelled. This will move to Archive after ${archiveDate}.</div>`:''}<div class="orderCardActions"><button class="button light small" data-request-view="${r.id}">View</button>${r.status==='Sent'?`<button class="button primary small" data-confirm-quote="${r.id}">Confirm quote</button><button class="button quietDanger small" data-cancel-quote="${r.id}">Cancel</button>`:''}${['Authorized','Procurement','Delivery'].includes(r.status)?`<button class="button dark small" data-request-view="${r.id}">Track</button>`:''}${r.status==='Accepted'?`<button class="button dark small" data-reorder-order="${r.id}">Replenish order</button>`:''}</div></article>`;
+    return `<article class="customerOrderCard statusCard-${r.status.toLowerCase()}"><div class="orderCardHead"><div><span class="eyebrow">${esc(r.quoteRef||'ORDER UNDER REVIEW')}</span><h3 class="mono">${r.id}</h3><p>${date(r.createdAt)} · ${r.lines.length} lines</p></div>${customerStatusPill(r.status)}</div><div class="orderCardProduct"><div><b>${first?`${first.qty} × ${esc(lineDisplayName(first,p))}`:'Order items'}</b>${extra?`<span>+ ${extra} more line${extra>1?'s':''}</span>`:''}</div>${q.hasSell&&r.quoteRef?`<strong>${money(q.total)}</strong>`:''}</div>${r.status==='Drafting'?`<div class="orderMessage">Under review. Your quotation will be sent to <strong>${esc(accountEmailLabel())}</strong>.</div>`:''}${r.status==='Sent'?`<div class="orderMessage quoteReady">Quotation sent to <strong>${esc(accountEmailLabel())}</strong>. Confirm or cancel below.</div>`:''}${delivery?`<div class="deliveryPromise"><span>TRACK</span><b>${delivery}</b></div>`:''}${r.status==='Accepted'?`<div class="orderMessage deliveredMsg">Delivered ${date(r.deliveredAt||r.createdAt)}. These items are now available on Replenish.</div>`:''}${r.status==='Cancelled'?`<div class="orderMessage cancelledMsg">Cancelled. This will move to Archive after ${archiveDate}.</div>`:''}<div class="orderCardActions"><button class="button light small" data-request-view="${r.id}">View</button>${r.status==='Sent'?`<button class="button primary small" data-confirm-quote="${r.id}">Confirm quote</button><button class="button quietDanger small" data-cancel-quote="${r.id}">Cancel</button>`:''}${['Authorized','Procurement','Delivery'].includes(r.status)?`<button class="button dark small" data-request-view="${r.id}">Track</button>`:''}${r.status==='Accepted'?`<button class="button dark small" data-reorder-order="${r.id}">Replenish order</button>`:''}</div></article>`;
   }
 
   function archivePage(){
@@ -2124,13 +2236,85 @@ function contactPage(){ return publicPage(
     return shell(`<div class="pageHeader"><div><span class="eyebrow">EQUIPMENT RECORD</span><h1>Clinic assets</h1><p>Serials, warranty dates and service prompts stay tied to the campus. Technical service intervals should come from manufacturer or qualified provider evidence.</p></div></div><div class="threeCol">${D.demoAssets.map(a=>`<article class="assetCard"><div class="assetIcon">⚙</div>${statusPill(a.status)}<h3 style="margin-top:10px">${esc(a.asset)}</h3><div class="serial">${esc(a.serial)} · ${esc(a.pscSku)}</div><div class="assetDetails"><div><span>CAMPUS</span><b>${esc(a.campus)}</b></div><div><span>WARRANTY END</span><b>${esc(a.warrantyEnd)}</b></div><div style="grid-column:1/3"><span>NEXT ACTION</span><b>${esc(a.nextService)}</b></div></div></article>`).join('')}</div>`);
   }
 
-  function basketQty(){ return state.basket.reduce((a,b)=>a+b.qty,0); }
+  function isFamilyLine(l){ return !!(l&&l.familyId); }
+  function lineKey(l){
+    if(isFamilyLine(l)){
+      const mode=l.brandPreferenceMode||'no_preference';
+      const choice=mode==='specific_option'?(l.productOptionId||''):mode==='other_brand'?String(l.requestedBrand||'').trim().toLowerCase():'no-preference';
+      const safe=v=>encodeURIComponent(String(v||''));
+      return `family:${safe(l.familyId)}:${safe(l.presentation||'')}:${mode}:${safe(choice)}`;
+    }
+    return l?.sku||'';
+  }
+  function lineDisplayName(l,p=null){ return isFamilyLine(l)?(l.familyName||l.familyId||'Catalogue family'):(p?.catalogueDisplayName||p?.name||l?.sku||'Order item'); }
+  function lineReference(l){ return isFamilyLine(l)?l.familyId:(l?.sku||''); }
+  function linePackLabel(l,p=null){
+    if(isFamilyLine(l)) return l.productOptionSnapshot?.pack||l.presentation||l.orderPackBasis||'Pack / scope to confirm';
+    return p?.cataloguePack||p?.pack||'Pack to confirm';
+  }
+  function lineBrandPreferenceLabel(l){
+    if(!isFamilyLine(l)) return '';
+    if(l.brandPreferenceMode==='specific_option') return l.productOptionSnapshot?.exact_product_name||l.requestedBrand||'Specific approved option';
+    if(l.brandPreferenceMode==='other_brand') return l.requestedBrand?`Requested: ${l.requestedBrand}`:'Other brand required';
+    return 'No brand preference';
+  }
+  function lineIsRegulated(l,p=null){ return !!p?.regulated || !!l?.regulated || (isFamilyLine(l)&&String(l.familyPageType||'').toUpperCase()==='MEDICINE FAMILY'); }
+  function normalizeFamilyRequestLine(detail){
+    const option=detail?.productOption||null;
+    const mode=detail?.brandPreferenceMode||'no_preference';
+    return {
+      type:'family',
+      familyId:String(detail?.familyId||'').trim(),
+      familyName:String(detail?.familyName||detail?.familyId||'').trim(),
+      familyPageType:String(detail?.familyPageType||'').trim(),
+      presentation:String(detail?.presentation||'').trim(),
+      orderPackBasis:String(detail?.orderPackBasis||'').trim(),
+      brandPreferenceMode:mode,
+      requestedBrand:mode==='other_brand'?String(detail?.requestedBrand||'').trim():(mode==='specific_option'?String(option?.brand||'').trim():''),
+      productOptionId:mode==='specific_option'?String(option?.product_option_id||'').trim():'',
+      productOptionSnapshot:mode==='specific_option'&&option?{
+        product_option_id:option.product_option_id,
+        exact_product_name:option.exact_product_name,
+        brand:option.brand,
+        presentation:option.presentation,
+        pack:option.pack
+      }:null,
+      regulated:!!detail?.regulated,
+      qty:Math.max(1,Number(detail?.qty||1))
+    };
+  }
+  function addFamilyBasketLine(detail){
+    const line=normalizeFamilyRequestLine(detail);
+    if(!line.familyId||!line.familyName) return false;
+    if(line.brandPreferenceMode==='specific_option' && !line.productOptionId) return false;
+    if(line.brandPreferenceMode==='other_brand' && !line.requestedBrand) return false;
+    const key=lineKey(line);
+    const existing=state.basket.find(x=>lineKey(x)===key);
+    if(existing) existing.qty+=line.qty;
+    else state.basket.push(line);
+    save();
+    renderUi({preserveScroll:true,transition:false});
+    toast(`<strong>${esc(line.familyName)}</strong> added to Supply Request`);
+    return true;
+  }
+  window.addEventListener('psc:add-family-line',e=>{ try{ addFamilyBasketLine(e.detail||{}); }catch(err){ console.error('Family request add failed',err); } });
+
+  function basketQty(){ return state.basket.reduce((a,b)=>a+Number(b.qty||0),0); }
   function addBasket(sku,qty=1){ const f=state.basket.find(x=>x.sku===sku); if(f)f.qty+=qty; else state.basket.push({sku,qty}); save(); renderUi({preserveScroll:true,transition:false}); toast(`<strong>Added</strong> to Supply Request`); }
-  function reorderRequest(id){ const r=state.requests.find(x=>x.id===id); if(!r)return; r.lines.forEach(l=>{const f=state.basket.find(x=>x.sku===l.sku);if(f)f.qty+=l.qty;else state.basket.push({...l})});save();render();toast(`<strong>${r.lines.length} lines</strong> added to Supply Request`); }
+  function reorderRequest(id){
+    const r=state.requests.find(x=>x.id===id); if(!r)return;
+    r.lines.forEach(l=>{const key=lineKey(l);const f=state.basket.find(x=>lineKey(x)===key);if(f)f.qty+=l.qty;else state.basket.push(JSON.parse(JSON.stringify(l)))});
+    save();render();toast(`<strong>${r.lines.length} lines</strong> added to Supply Request`);
+  }
   function basketDrawer(){
-    const lines=state.basket.map(l=>({l,p:product(l.sku)})).filter(x=>x.p);
-    const indicative=lines.reduce((sum,x)=>sum+(x.p.contractPrice||0)*x.l.qty,0);
-    return `<div class="drawerBackdrop requestDrawerBackdrop" data-close-basket><aside class="drawer requestDrawer" onclick="event.stopPropagation()"><div class="drawerHandle" aria-hidden="true"></div><div class="drawerHeader"><div><span class="eyebrow">PHARMA SERVICE</span><h2>Supply Request</h2><small>${lines.length?`${lines.length} line${lines.length===1?'':'s'} · ${basketQty()} item${basketQty()===1?'':'s'}`:'Build a request while you browse'}</small></div><button class="iconBtn" data-close-basket aria-label="Close request">×</button></div><div class="drawerBody">${lines.length?lines.map(({l,p})=>{const imageUrl=productDisplayImageUrl(p);return `<div class="basketLine requestLine">${imageUrl?`<div class="requestLineImage"><img src="${esc(imageUrl)}" alt="" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'"></div>`:`<div class="productGlyph small">${esc((p.brand||'PS').slice(0,2).toUpperCase())}</div>`}<div class="basketInfo"><b>${esc(p.catalogueDisplayName||p.name)}</b><span>${esc(p.cataloguePack||p.pack||'Pack to confirm')} · ${p.pscSku}</span><small>${p.contractPrice?money(p.contractPrice)+' indicative account price':'Price confirmed in quotation'}</small></div><div class="qty"><button data-basket-delta="${p.pscSku}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-basket-delta="${p.pscSku}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-basket-remove="${p.pscSku}">Remove</button></div>`}).join(''):`<div class="emptyState requestEmpty"><h3>Your request is empty</h3><p>Browse the catalogue and add the products you want PSC to quote.</p><button class="button dark" data-go="portal/catalogue">Browse catalogue</button></div>`}</div>${lines.length?`<div class="drawerFooter requestDrawerFooter"><label class="fieldLabel">Request note <span>optional</span></label><textarea class="textarea" id="basketNote" placeholder="Delivery timing, preferred brand, clinic note…"></textarea><div class="totals"><span>Indicative priced lines</span><b>${money(indicative)}</b></div><div class="checkoutPromise requestNextStep"><span>WHAT HAPPENS NEXT</span><p>PSC reviews the request and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. Nothing is procured until the required customer approval is in place.</p></div><button class="button primary full submitRequestButton" data-submit-request>Submit request</button></div>`:''}</aside></div>`;
+    const lines=state.basket.map((l,index)=>({l,p:l.sku?product(l.sku):null,index})).filter(x=>x.p||isFamilyLine(x.l));
+    const indicative=lines.reduce((sum,x)=>sum+((x.p?.contractPrice)||0)*x.l.qty,0);
+    return `<div class="drawerBackdrop requestDrawerBackdrop" data-close-basket><aside class="drawer requestDrawer" onclick="event.stopPropagation()"><div class="drawerHandle" aria-hidden="true"></div><div class="drawerHeader"><div><span class="eyebrow">PHARMA SERVICE</span><h2>Supply Request</h2><small>${lines.length?`${lines.length} line${lines.length===1?'':'s'} · ${basketQty()} item${basketQty()===1?'':'s'}`:'Build a request while you browse'}</small></div><button class="iconBtn" data-close-basket aria-label="Close request">×</button></div><div class="drawerBody">${lines.length?lines.map(({l,p,index})=>{
+      if(isFamilyLine(l)){
+        return `<div class="basketLine requestLine"><div class="productGlyph small">Rx</div><div class="basketInfo"><b>${esc(lineDisplayName(l,p))}</b><span>${esc(linePackLabel(l,p))} · ${esc(lineReference(l))}</span><small>${esc(lineBrandPreferenceLabel(l))} · Price confirmed in quotation</small></div><div class="qty"><button data-family-basket-delta="${index}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-family-basket-delta="${index}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
+      }
+      const imageUrl=productDisplayImageUrl(p);return `<div class="basketLine requestLine">${imageUrl?`<div class="requestLineImage"><img src="${esc(imageUrl)}" alt="" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'"></div>`:`<div class="productGlyph small">${esc((p.brand||'PS').slice(0,2).toUpperCase())}</div>`}<div class="basketInfo"><b>${esc(p.catalogueDisplayName||p.name)}</b><span>${esc(p.cataloguePack||p.pack||'Pack to confirm')} · ${p.pscSku}</span><small>${p.contractPrice?money(p.contractPrice)+' indicative account price':'Price confirmed in quotation'}</small></div><div class="qty"><button data-basket-delta="${p.pscSku}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-basket-delta="${p.pscSku}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-basket-remove="${p.pscSku}">Remove</button></div>`
+    }).join(''):`<div class="emptyState requestEmpty"><h3>Your request is empty</h3><p>Browse the catalogue and add the products you want PSC to quote.</p><button class="button dark" data-go="portal/catalogue">Browse catalogue</button></div>`}</div>${lines.length?`<div class="drawerFooter requestDrawerFooter"><label class="fieldLabel">Request note <span>optional</span></label><textarea class="textarea" id="basketNote" placeholder="Delivery timing, preferred brand, clinic note…"></textarea><div class="totals"><span>Indicative priced lines</span><b>${money(indicative)}</b></div><div class="checkoutPromise requestNextStep"><span>WHAT HAPPENS NEXT</span><p>PSC reviews the request and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. Nothing is procured until the required customer approval is in place.</p></div><button class="button primary full submitRequestButton" data-submit-request>Submit request</button></div>`:''}</aside></div>`;
   }
 
 
@@ -2144,26 +2328,26 @@ function contactPage(){ return publicPage(
 
   function calcQuote(r){
     let subtotal=0,cost=0,vat=0,hasSell=true,costComplete=true,taxResolved=true;
-    const rows=r.lines.map(l=>{const p=product(l.sku);const q=(r.quote&&r.quote.lines&&r.quote.lines[l.sku])||{};const sell=Number.isFinite(Number(q.sell))?Number(q.sell):(Number.isFinite(Number(p?.contractPrice))?Number(p.contractPrice):null);const c=Number.isFinite(Number(q.cost))?Number(q.cost):(Number.isFinite(Number(p?.supplierCost))?Number(p.supplierCost):null);const vr=q.vat===0||q.vat===5?Number(q.vat):null;if(sell===null)hasSell=false;else subtotal+=sell*l.qty;if(c===null)costComplete=false;else cost+=c*l.qty;if(vr===null){taxResolved=false}else if(sell!==null){vat += sell*l.qty*vr/100;}return {l,p,q,sell,cost:c,vatRate:vr};});
+    const rows=r.lines.map(l=>{const p=l.sku?product(l.sku):null;const key=lineKey(l);const q=(r.quote&&r.quote.lines&&r.quote.lines[key])||{};const sell=Number.isFinite(Number(q.sell))?Number(q.sell):(Number.isFinite(Number(p?.contractPrice))?Number(p.contractPrice):null);const c=Number.isFinite(Number(q.cost))?Number(q.cost):(Number.isFinite(Number(p?.supplierCost))?Number(p.supplierCost):null);const vr=q.vat===0||q.vat===5?Number(q.vat):null;if(sell===null)hasSell=false;else subtotal+=sell*l.qty;if(c===null)costComplete=false;else cost+=c*l.qty;if(vr===null){taxResolved=false}else if(sell!==null){vat += sell*l.qty*vr/100;}return {l,p,key,q,sell,cost:c,vatRate:vr};});
     const gp=hasSell&&costComplete?subtotal-cost:null;const gm=gp!==null&&subtotal>0?gp/subtotal*100:null;
     return {rows,subtotal,cost,vat,total:subtotal+vat,gp,gm,hasSell,costComplete,taxResolved};
   }
 
   function schoolQuote(r,q,canApprove){
     const delivery=['Authorized','Procurement','Delivery'].includes(r.status)?expectedDeliveryLabel(r):'';
-    return `<div class="schoolQuoteBox"><div class="quoteCustomerTop"><div><span class="eyebrow">${r.quoteRef||'ORDER UNDER REVIEW'}</span><h3>${friendlyStatus(r.status)}</h3></div>${customerStatusPill(r.status)}</div>${r.status==='Drafting'?`<div class="quoteStatePanel"><b>PSC is reviewing this order.</b><p>Your formal quotation will be sent to ${esc(accountEmailLabel())}.</p></div>`:''}${r.quoteRef?`<div class="tableWrap"><table class="dataTable"><thead><tr><th>ITEM</th><th>PACK</th><th>QTY</th><th>UNIT EX VAT</th><th>LINE EX VAT</th><th>VAT</th></tr></thead><tbody>${q.rows.map(x=>`<tr><td><b>${esc(x.p?.name||x.l.sku)}</b><div class="sub mono">${x.l.sku}</div></td><td>${esc(x.p?.pack||'')}</td><td>${x.l.qty}</td><td>${x.sell!==null?money(x.sell):'Pending'}</td><td>${x.sell!==null?money(x.sell*x.l.qty):'Pending'}</td><td>${x.vatRate===null?'Review':x.vatRate+'%'}</td></tr>`).join('')}</tbody></table></div><div class="quoteSummary"><div><span>SUBTOTAL EX VAT</span><b>${q.hasSell?money(q.subtotal):'Pending'}</b></div><div><span>VAT</span><b>${q.taxResolved?money(q.vat):'Review'}</b></div><div><span>TOTAL</span><b>${q.hasSell&&q.taxResolved?money(q.total):'Pending'}</b></div><div><span>VALIDITY</span><b>${esc(r.quote?.validity||'Pending')}</b></div></div>`:''}${r.status==='Sent'?`<div class="modalQuoteActions"><button class="button primary" data-confirm-quote="${r.id}">Confirm quotation</button><button class="button quietDanger" data-cancel-quote="${r.id}">Cancel quotation</button></div>`:''}${delivery?`<div class="deliveryPromise large"><span>TRACK ORDER</span><b>${delivery}</b><small>Delivery timing is shown only when PSC has recorded it for this order.</small></div>`:''}${r.status==='Accepted'?`<div class="quoteStatePanel delivered"><b>Delivered.</b><p>This order is now part of your purchase history and its items can be repeated from Replenish.</p></div>`:''}${r.status==='Cancelled'?`<div class="quoteStatePanel cancelled"><b>Cancelled.</b><p>${isArchived(r)?'This quotation is now in Archive.':`It will move to Archive on ${addDaysLabel(r.cancelledAt||r.createdAt,30)}.`}</p></div>`:''}</div>`;
+    return `<div class="schoolQuoteBox"><div class="quoteCustomerTop"><div><span class="eyebrow">${r.quoteRef||'ORDER UNDER REVIEW'}</span><h3>${friendlyStatus(r.status)}</h3></div>${customerStatusPill(r.status)}</div>${r.status==='Drafting'?`<div class="quoteStatePanel"><b>PSC is reviewing this order.</b><p>Your formal quotation will be sent to ${esc(accountEmailLabel())}.</p></div>`:''}${r.quoteRef?`<div class="tableWrap"><table class="dataTable"><thead><tr><th>ITEM</th><th>PACK</th><th>QTY</th><th>UNIT EX VAT</th><th>LINE EX VAT</th><th>VAT</th></tr></thead><tbody>${q.rows.map(x=>`<tr><td><b>${esc(lineDisplayName(x.l,x.p))}</b><div class="sub mono">${esc(lineReference(x.l))}</div>${isFamilyLine(x.l)?`<div class="sub">${esc(lineBrandPreferenceLabel(x.l))}</div>`:''}</td><td>${esc(linePackLabel(x.l,x.p))}</td><td>${x.l.qty}</td><td>${x.sell!==null?money(x.sell):'Pending'}</td><td>${x.sell!==null?money(x.sell*x.l.qty):'Pending'}</td><td>${x.vatRate===null?'Review':x.vatRate+'%'}</td></tr>`).join('')}</tbody></table></div><div class="quoteSummary"><div><span>SUBTOTAL EX VAT</span><b>${q.hasSell?money(q.subtotal):'Pending'}</b></div><div><span>VAT</span><b>${q.taxResolved?money(q.vat):'Review'}</b></div><div><span>TOTAL</span><b>${q.hasSell&&q.taxResolved?money(q.total):'Pending'}</b></div><div><span>VALIDITY</span><b>${esc(r.quote?.validity||'Pending')}</b></div></div>`:''}${r.status==='Sent'?`<div class="modalQuoteActions"><button class="button primary" data-confirm-quote="${r.id}">Confirm quotation</button><button class="button quietDanger" data-cancel-quote="${r.id}">Cancel quotation</button></div>`:''}${delivery?`<div class="deliveryPromise large"><span>TRACK ORDER</span><b>${delivery}</b><small>Delivery timing is shown only when PSC has recorded it for this order.</small></div>`:''}${r.status==='Accepted'?`<div class="quoteStatePanel delivered"><b>Delivered.</b><p>This order is now part of your purchase history and its items can be repeated from Replenish.</p></div>`:''}${r.status==='Cancelled'?`<div class="quoteStatePanel cancelled"><b>Cancelled.</b><p>${isArchived(r)?'This quotation is now in Archive.':`It will move to Archive on ${addDaysLabel(r.cancelledAt||r.createdAt,30)}.`}</p></div>`:''}</div>`;
   }
 
   function adminQuoteBuilder(r,q){
     const target=20;
-    return `<div class="notice"><strong>Quote builder.</strong> Supplier cost and tax must be supported by current evidence before live issue. Values labelled “Demo planning assumption” are not supplier quotations.</div><div class="tableWrap"><table class="dataTable"><thead><tr><th>ITEM</th><th>QTY</th><th>DIRECT COST / UNIT</th><th>SELL / UNIT</th><th>VAT</th><th>LINE GM</th></tr></thead><tbody>${q.rows.map(x=>{const gm=x.sell!==null&&x.cost!==null&&x.sell>0?((x.sell-x.cost)/x.sell*100):null;return `<tr><td><b>${esc(x.p?.name||x.l.sku)}</b><div class="sub mono">${x.l.sku}</div>${x.q.costEvidence?`<div class="quoteLineWarning">${esc(x.q.costEvidence)}</div>`:''}</td><td>${x.l.qty}</td><td><input class="moneyInput" type="number" step="0.01" value="${x.cost===null?'':x.cost}" data-quote-field="${r.id}|${x.l.sku}|cost"></td><td><input class="moneyInput" type="number" step="0.01" value="${x.sell===null?'':x.sell}" data-quote-field="${r.id}|${x.l.sku}|sell"></td><td><select class="selectInput" data-quote-field="${r.id}|${x.l.sku}|vat"><option value="" ${x.vatRate===null?'selected':''}>Review</option><option value="0" ${x.vatRate===0?'selected':''}>0%</option><option value="5" ${x.vatRate===5?'selected':''}>5%</option></select></td><td>${gm===null?'—':`<b class="${gm<target?'dangerText':'successText'}">${gm.toFixed(1)}%</b>`}</td></tr>`}).join('')}</tbody></table></div><div class="quoteSummary"><div><span>DIRECT COST</span><b>${q.costComplete?money(q.cost):'Incomplete'}</b></div><div><span>SELL EX VAT</span><b>${q.hasSell?money(q.subtotal):'Incomplete'}</b></div><div><span>GROSS PROFIT</span><b>${q.gp===null?'Blocked':money(q.gp)}</b></div><div><span>TRUE GM</span><b class="${q.gm!==null&&q.gm<target?'dangerText':''}">${q.gm===null?'Blocked':q.gm.toFixed(1)+'%'}</b></div></div><div class="twoCol"><div><label class="fieldLabel">Delivery</label><input class="input" style="width:100%" value="${esc(r.quote?.delivery||'')}" data-quote-meta="${r.id}|delivery"><label class="fieldLabel" style="margin-top:10px">Terms</label><input class="input" style="width:100%" value="${esc(r.quote?.terms||'')}" data-quote-meta="${r.id}|terms"></div><div><label class="fieldLabel">Quotation status</label><select class="input" style="width:100%" data-request-status="${r.id}">${workflow.map(s=>`<option ${r.status===s?'selected':''}>${s}</option>`).join('')}</select><label class="fieldLabel" style="margin-top:10px">Quotation reference</label><input class="input" style="width:100%" value="${esc(r.quoteRef||'')}" data-quote-ref="${r.id}" placeholder="PSC-Q-YYYY-####"></div></div><div class="gateList" style="margin-top:16px"><div class="gate ${q.costComplete?'ok':'block'}"><span>All direct costs present</span><i></i></div><div class="gate ${q.taxResolved?'ok':'block'}"><span>VAT reviewed by line</span><i></i></div><div class="gate ${q.gm!==null&&q.gm>=20?'ok':'warn'}"><span>Target GM ≥ 20%</span><i></i></div><div class="gate warn"><span>Supplier stock / lead time requires current confirmation</span><i></i></div><div class="gate ${q.rows.some(x=>x.p?.regulated)?'warn':'ok'}"><span>Regulated route check</span><i></i></div><div class="gate block"><span>Funding / customer PO evidence not integrated in prototype</span><i></i></div></div>`;
+    return `<div class="notice"><strong>Quote builder.</strong> Supplier cost and tax must be supported by current evidence before live issue. Values labelled “Demo planning assumption” are not supplier quotations.</div><div class="tableWrap"><table class="dataTable"><thead><tr><th>ITEM</th><th>QTY</th><th>DIRECT COST / UNIT</th><th>SELL / UNIT</th><th>VAT</th><th>LINE GM</th></tr></thead><tbody>${q.rows.map(x=>{const gm=x.sell!==null&&x.cost!==null&&x.sell>0?((x.sell-x.cost)/x.sell*100):null;return `<tr><td><b>${esc(lineDisplayName(x.l,x.p))}</b><div class="sub mono">${esc(lineReference(x.l))}</div>${isFamilyLine(x.l)?`<div class="sub">${esc(lineBrandPreferenceLabel(x.l))}</div>`:''}${x.q.costEvidence?`<div class="quoteLineWarning">${esc(x.q.costEvidence)}</div>`:''}</td><td>${x.l.qty}</td><td><input class="moneyInput" type="number" step="0.01" value="${x.cost===null?'':x.cost}" data-quote-field="${r.id}|${x.key}|cost"></td><td><input class="moneyInput" type="number" step="0.01" value="${x.sell===null?'':x.sell}" data-quote-field="${r.id}|${x.key}|sell"></td><td><select class="selectInput" data-quote-field="${r.id}|${x.key}|vat"><option value="" ${x.vatRate===null?'selected':''}>Review</option><option value="0" ${x.vatRate===0?'selected':''}>0%</option><option value="5" ${x.vatRate===5?'selected':''}>5%</option></select></td><td>${gm===null?'—':`<b class="${gm<target?'dangerText':'successText'}">${gm.toFixed(1)}%</b>`}</td></tr>`}).join('')}</tbody></table></div><div class="quoteSummary"><div><span>DIRECT COST</span><b>${q.costComplete?money(q.cost):'Incomplete'}</b></div><div><span>SELL EX VAT</span><b>${q.hasSell?money(q.subtotal):'Incomplete'}</b></div><div><span>GROSS PROFIT</span><b>${q.gp===null?'Blocked':money(q.gp)}</b></div><div><span>TRUE GM</span><b class="${q.gm!==null&&q.gm<target?'dangerText':''}">${q.gm===null?'Blocked':q.gm.toFixed(1)+'%'}</b></div></div><div class="twoCol"><div><label class="fieldLabel">Delivery</label><input class="input" style="width:100%" value="${esc(r.quote?.delivery||'')}" data-quote-meta="${r.id}|delivery"><label class="fieldLabel" style="margin-top:10px">Terms</label><input class="input" style="width:100%" value="${esc(r.quote?.terms||'')}" data-quote-meta="${r.id}|terms"></div><div><label class="fieldLabel">Quotation status</label><select class="input" style="width:100%" data-request-status="${r.id}">${workflow.map(s=>`<option ${r.status===s?'selected':''}>${s}</option>`).join('')}</select><label class="fieldLabel" style="margin-top:10px">Quotation reference</label><input class="input" style="width:100%" value="${esc(r.quoteRef||'')}" data-quote-ref="${r.id}" placeholder="PSC-Q-YYYY-####"></div></div><div class="gateList" style="margin-top:16px"><div class="gate ${q.costComplete?'ok':'block'}"><span>All direct costs present</span><i></i></div><div class="gate ${q.taxResolved?'ok':'block'}"><span>VAT reviewed by line</span><i></i></div><div class="gate ${q.gm!==null&&q.gm>=20?'ok':'warn'}"><span>Target GM ≥ 20%</span><i></i></div><div class="gate warn"><span>Supplier stock / lead time requires current confirmation</span><i></i></div><div class="gate ${q.rows.some(x=>lineIsRegulated(x.l,x.p))?'warn':'ok'}"><span>Regulated route check</span><i></i></div><div class="gate block"><span>Funding / customer PO evidence not integrated in prototype</span><i></i></div></div>`;
   }
 
   function adminDashboard(){
     const open=state.requests.filter(r=>!['Accepted','Cancelled'].includes(r.status)).length;
     const activeQuotes=state.requests.filter(r=>['Sent','Authorized','Procurement','Delivery'].includes(r.status));
     const qvals=activeQuotes.map(calcQuote);const quoted=qvals.reduce((s,q)=>s+(q.hasSell?q.subtotal:0),0);const gp=qvals.reduce((s,q)=>s+(q.gp||0),0);const gm=quoted?gp/quoted*100:0;
-    return shell(`<div class="pageHeader"><div><span class="eyebrow">PSC DEAL DESK</span><h1>Institutional supply control</h1><p>One desk for requests, quote economics, supplier evidence, release gates and fulfilment. Demo figures are illustrative unless backed by an identified evidence source.</p></div></div><div class="adminStatRow"><div class="adminStat"><span>OPEN REQUESTS</span><b>${open}</b></div><div class="adminStat"><span>QUOTED EX VAT</span><b>${money(quoted)}</b></div><div class="adminStat"><span>AUTHORIZED</span><b>${state.requests.filter(r=>r.status==='Authorized').length}</b></div><div class="adminStat"><span>EST. TRUE GP</span><b>${money(gp)}</b></div><div class="adminStat"><span>EST. GM</span><b>${gm.toFixed(1)}%</b></div><div class="adminStat"><span>PRODUCT MASTER</span><b>${cms.products.filter(p=>p.active).length||D.products.length}</b></div></div><div class="actionGrid"><button class="actionCard" data-go="admin/requests"><div class="actionIcon">${icon('checklist')}</div><div><b>Request queue</b><span>Convert needs into controlled quotes</span></div></button><button class="actionCard" data-go="admin/mail"><div class="actionIcon">${icon('mail')}</div><div><b>Mail Desk</b><span>Workshop + account outreach from info@pharmaservice.ae</span></div></button><button class="actionCard" data-go="admin/storefront"><div class="actionIcon">${icon('edit')}</div><div><b>Storefront manager</b><span>Institutional + wholesale publishing</span></div></button><button class="actionCard" data-go="admin/products"><div class="actionIcon">${icon('boxes')}</div><div><b>Product master</b><span>Product, media and commercial control</span></div></button><button class="actionCard" data-go="admin/fulfilment"><div class="actionIcon">${icon('repeat')}</div><div><b>Fulfilment rules</b><span>Route by site and source</span></div></button><button class="actionCard" data-go="admin/supplier-feed"><div class="actionIcon">${icon('reports')}</div><div><b>Supplier feed</b><span>Acorus / Med7 data ingestion</span></div></button></div><div class="twoCol"><section class="panel"><div class="panelHeader"><h2>Requests needing attention</h2><button data-go="admin/requests">Open queue →</button></div><div class="tableWrap"><table class="dataTable"><thead><tr><th>REQUEST</th><th>ACCOUNT / SITE</th><th>LINES</th><th>STATUS</th><th>NEXT ACTION</th></tr></thead><tbody>${state.requests.filter(r=>r.status!=='Accepted').map(r=>`<tr class="clickable" data-admin-request="${r.id}"><td><b class="mono">${r.id}</b></td><td>${esc(r.groupName||state.groupName||'Institutional account')}<div class="sub">${esc(r.campus)}</div></td><td>${r.lines.length}</td><td>${statusPill(r.status)}</td><td>${r.status==='Drafting'?'Validate stock + price':r.status==='Sent'?'Resolve school decision':'Check procurement release'}</td></tr>`).join('')}</tbody></table></div></section><div style="display:grid;gap:14px"><div class="marginBox"><h3>Deal economics · active quoted demo</h3><div class="marginGrid"><div><span>DIRECT COST</span><b>${money(qvals.reduce((s,q)=>s+(q.costComplete?q.cost:0),0))}</b></div><div><span>SELL</span><b>${money(quoted)}</b></div><div><span>TRUE GM</span><b>${gm.toFixed(1)}%</b></div><div><span>FOC</span><b>AED 0</b></div><div><span>DELIVERY</span><b>Per quote</b></div><div><span>TARGET</span><b>20%</b></div></div></div><section class="panel"><div class="panelHeader"><h2>Release gate</h2></div><div class="gateList"><div class="gate ok"><span>Exact specification mapped</span><i></i></div><div class="gate warn"><span>Supplier stock current</span><i></i></div><div class="gate warn"><span>VAT / tax evidence by line</span><i></i></div><div class="gate ok"><span>Margin incl. direct costs</span><i></i></div><div class="gate block"><span>Customer funding / PO</span><i></i></div><div class="gate warn"><span>Regulated route validated</span><i></i></div></div></section></div></div><div class="notice" style="margin-top:18px"><strong>Control:</strong> a supplier PO is not released merely because a customer approved a quote. Funding, current supplier evidence, tax treatment, regulated route and delivery must pass the release gate.</div>`,true);
+    return shell(`<div class="pageHeader"><div><span class="eyebrow">PSC DEAL DESK</span><h1>Institutional supply control</h1><p>One desk for requests, quote economics, supplier evidence, release gates and fulfilment. Demo figures are illustrative unless backed by an identified evidence source.</p></div></div><div class="adminStatRow"><div class="adminStat"><span>OPEN REQUESTS</span><b>${open}</b></div><div class="adminStat"><span>QUOTED EX VAT</span><b>${money(quoted)}</b></div><div class="adminStat"><span>AUTHORIZED</span><b>${state.requests.filter(r=>r.status==='Authorized').length}</b></div><div class="adminStat"><span>EST. TRUE GP</span><b>${money(gp)}</b></div><div class="adminStat"><span>EST. GM</span><b>${gm.toFixed(1)}%</b></div><div class="adminStat"><span>PRODUCT MASTER</span><b>${cms.products.filter(p=>p.active).length||D.products.length}</b></div></div><div class="actionGrid"><button class="actionCard" data-go="admin/requests"><div class="actionIcon">${icon('checklist')}</div><div><b>Request queue</b><span>Convert needs into controlled quotes</span></div></button><button class="actionCard" data-go="admin/mail"><div class="actionIcon">${icon('mail')}</div><div><b>Mail Desk</b><span>Workshop + account outreach from info@pharmaservice.ae</span></div></button><button class="actionCard" data-go="admin/storefront"><div class="actionIcon">${icon('edit')}</div><div><b>Storefront manager</b><span>Institutional + wholesale publishing</span></div></button><button class="actionCard" data-go="admin/products"><div class="actionIcon">${icon('boxes')}</div><div><b>Product master</b><span>Product, media and commercial control</span></div></button><button class="actionCard" data-go="admin/family-options"><div class="actionIcon">${icon('checklist')}</div><div><b>Family options</b><span>Approve, hold or reject supplier candidates</span></div></button><button class="actionCard" data-go="admin/fulfilment"><div class="actionIcon">${icon('repeat')}</div><div><b>Fulfilment rules</b><span>Route by site and source</span></div></button><button class="actionCard" data-go="admin/supplier-feed"><div class="actionIcon">${icon('reports')}</div><div><b>Supplier feed</b><span>Acorus / Med7 data ingestion</span></div></button></div><div class="twoCol"><section class="panel"><div class="panelHeader"><h2>Requests needing attention</h2><button data-go="admin/requests">Open queue →</button></div><div class="tableWrap"><table class="dataTable"><thead><tr><th>REQUEST</th><th>ACCOUNT / SITE</th><th>LINES</th><th>STATUS</th><th>NEXT ACTION</th></tr></thead><tbody>${state.requests.filter(r=>r.status!=='Accepted').map(r=>`<tr class="clickable" data-admin-request="${r.id}"><td><b class="mono">${r.id}</b></td><td>${esc(r.groupName||state.groupName||'Institutional account')}<div class="sub">${esc(r.campus)}</div></td><td>${r.lines.length}</td><td>${statusPill(r.status)}</td><td>${r.status==='Drafting'?'Validate stock + price':r.status==='Sent'?'Resolve school decision':'Check procurement release'}</td></tr>`).join('')}</tbody></table></div></section><div style="display:grid;gap:14px"><div class="marginBox"><h3>Deal economics · active quoted demo</h3><div class="marginGrid"><div><span>DIRECT COST</span><b>${money(qvals.reduce((s,q)=>s+(q.costComplete?q.cost:0),0))}</b></div><div><span>SELL</span><b>${money(quoted)}</b></div><div><span>TRUE GM</span><b>${gm.toFixed(1)}%</b></div><div><span>FOC</span><b>AED 0</b></div><div><span>DELIVERY</span><b>Per quote</b></div><div><span>TARGET</span><b>20%</b></div></div></div><section class="panel"><div class="panelHeader"><h2>Release gate</h2></div><div class="gateList"><div class="gate ok"><span>Exact specification mapped</span><i></i></div><div class="gate warn"><span>Supplier stock current</span><i></i></div><div class="gate warn"><span>VAT / tax evidence by line</span><i></i></div><div class="gate ok"><span>Margin incl. direct costs</span><i></i></div><div class="gate block"><span>Customer funding / PO</span><i></i></div><div class="gate warn"><span>Regulated route validated</span><i></i></div></div></section></div></div><div class="notice" style="margin-top:18px"><strong>Control:</strong> a supplier PO is not released merely because a customer approved a quote. Funding, current supplier evidence, tax treatment, regulated route and delivery must pass the release gate.</div>`,true);
   }
 
   function adminStorefront(){
@@ -2343,6 +2527,35 @@ function contactPage(){ return publicPage(
           </section>
         </aside>
       </div>
+    `,true);
+  }
+
+  function adminFamilyOptions(){
+    if(!optionDesk.loaded){
+      if(!optionDesk.loading) setTimeout(loadAdminFamilyOptions,0);
+      return shell(`<div class="pageHeader"><div><span class="eyebrow">FAMILY + SUPPLIER CONTROL</span><h1>Supplier option review</h1><p>Loading the controlled Acorus candidate workbench…</p></div></div><section class="panel"><div class="emptyState"><h3>Preparing 719 source-list candidates</h3><p>No candidate becomes customer-selectable until PSC explicitly approves it and records current verification evidence.</p></div></section>`,true);
+    }
+    const options=optionDesk.options;
+    const approved=options.filter(o=>o.psc_decision==='APPROVE').length;
+    const selectable=options.filter(o=>o.customer_selectable).length;
+    const verified=options.filter(optionEvidenceReady).length;
+    const liveFixed=options.filter(optionFixedPriceLive).length;
+    const familyGroups=optionFamiliesWithCandidates();
+    const selectedId=ui.optionFamily==='all'?'':ui.optionFamily;
+    const selectedFamily=selectedId?optionFamilyMeta(selectedId):null;
+    const selectedOptions=selectedId?options.filter(o=>o.family_id===selectedId && (ui.optionDecision==='All'||o.psc_decision===ui.optionDecision) && (!(ui.optionSearch||'').trim()||optionSearchText(o).includes((ui.optionSearch||'').trim().toLowerCase()))):[];
+    const familyRows=familyGroups.map(g=>{
+      const a=g.options.filter(o=>o.psc_decision==='APPROVE').length;
+      const c=g.options.filter(o=>o.customer_selectable).length;
+      const v=g.options.filter(optionEvidenceReady).length;
+      return `<tr><td><b>${esc(g.family.family_name)}</b><div class="sub mono">${esc(g.family.family_id)}</div></td><td>${esc(g.family.clinical_need||'')}</td><td><b>${g.options.length}</b><div class="sub">${v} verified</div></td><td>${a} approved<div class="sub">${c} customer-selectable</div></td><td><button class="button light" data-option-family-open="${esc(g.family.family_id)}">Review</button></td></tr>`;
+    }).join('');
+    return shell(`
+      <div class="pageHeader familyOptionPageHeader"><div><span class="eyebrow">FAMILY + SUPPLIER CONTROL</span><h1>Supplier option review</h1><p>The Acorus source list is a candidate universe, not a live catalogue. PSC explicitly decides fit, records commercial evidence and controls what may become customer-selectable.</p></div>${selectedFamily?`<button class="button light" data-option-family-open="all">← All families</button>`:''}</div>
+      <div class="adminStatRow familyOptionStats"><div class="adminStat"><span>CANDIDATES</span><b>${options.length}</b></div><div class="adminStat"><span>FAMILIES</span><b>${new Set(options.map(o=>o.family_id)).size}</b></div><div class="adminStat"><span>VERIFIED</span><b>${verified}</b></div><div class="adminStat"><span>APPROVED</span><b>${approved}</b></div><div class="adminStat"><span>CUSTOMER SELECTABLE</span><b>${selectable}</b></div><div class="adminStat"><span>LIVE FIXED PRICES</span><b>${liveFixed}</b></div></div>
+      <div class="notice familyOptionGuard"><strong>Release rule:</strong> APPROVE controls product identity. Fixed-price publication is a separate commercial release: verified acquisition cost + every direct-cost component, verified VAT, current price evidence and validity, plus the family must explicitly permit fixed pricing. Target GM defaults to 20%. Acorus MRP remains an internal retail benchmark only.</div>
+      <div class="filterBar familyOptionFilter"><div class="searchInput"><span>${icon('search')}</span><input data-option-search value="${esc(ui.optionSearch)}" placeholder="Search family, brand, Acorus product, supplier or reference…"></div><select data-option-decision><option ${ui.optionDecision==='All'?'selected':''}>All</option><option ${ui.optionDecision==='VERIFY'?'selected':''}>VERIFY</option><option ${ui.optionDecision==='APPROVE'?'selected':''}>APPROVE</option><option ${ui.optionDecision==='HOLD'?'selected':''}>HOLD</option><option ${ui.optionDecision==='REJECT'?'selected':''}>REJECT</option></select></div>
+      ${selectedFamily?`<section class="familyOptionFamilyIntro"><div><span class="eyebrow">${esc(selectedFamily.family_id)}</span><h2>${esc(selectedFamily.family_name)}</h2>${selectedFamily.common_brands_line?`<p><em>${esc(selectedFamily.common_brands_line)}</em></p>`:''}<p>${esc(selectedFamily.clinical_need||'')} · ${esc(selectedFamily.page_type||'Product family')}</p></div><div><b>${selectedOptions.length}</b><span>matching candidate${selectedOptions.length===1?'':'s'}</span></div></section><div class="familyOptionCards">${selectedOptions.length?selectedOptions.map(adminFamilyOptionCard).join(''):`<div class="emptyState"><h3>No candidates match this filter.</h3><p>Clear the search or decision filter to see this family's source-list candidates.</p></div>`}</div>`:`<section class="panel familyOptionFamilyTable"><div class="panelHeader"><div><h2>Families with supplier candidates</h2><p class="smallMuted">${familyGroups.length} families match the current filter. Families without a source-list candidate remain source-on-request.</p></div></div><div class="tableWrap"><table class="dataTable"><thead><tr><th>FAMILY</th><th>CLINICAL NEED</th><th>CANDIDATES</th><th>DECISION STATE</th><th></th></tr></thead><tbody>${familyRows||`<tr><td colspan="5"><div class="emptyState"><h3>No families match.</h3></div></td></tr>`}</tbody></table></div></section>`}
     `,true);
   }
 
@@ -2657,7 +2870,17 @@ function contactPage(){ return publicPage(
       const orderLines=(lines||[]).filter(l=>l.order_id===o.id);
       const q=quoteMap[o.id];
       const qLines={};
-      orderLines.forEach(l=>{ if(l.psc_sku_snapshot) qLines[l.psc_sku_snapshot]={sell:l.unit_price===null?undefined:Number(l.unit_price),vat:l.vat_rate===null?undefined:Number(l.vat_rate)}; });
+      const mappedLines=orderLines.map(l=>{
+        const mapped=l.family_id?{
+          type:'family', familyId:l.family_id, familyName:l.family_name_snapshot||l.line_description||l.family_id,
+          presentation:l.requested_presentation||'', orderPackBasis:l.pack_snapshot||'', brandPreferenceMode:l.brand_preference_mode||'no_preference',
+          requestedBrand:l.requested_brand||'', productOptionId:l.product_option_id||'', productOptionSnapshot:l.product_option_snapshot||null,
+          regulated:true, qty:Number(l.quantity)
+        }:{sku:l.psc_sku_snapshot||'',qty:Number(l.quantity)};
+        const key=lineKey(mapped);
+        if(key) qLines[key]={sell:l.unit_price===null?undefined:Number(l.unit_price),vat:l.vat_rate===null?undefined:Number(l.vat_rate)};
+        return mapped;
+      });
       return {
         dbId:o.id,
         id:o.order_number,
@@ -2672,7 +2895,7 @@ function contactPage(){ return publicPage(
         status:DB_TO_UI_STATUS[o.status]||o.status,
         quoteRef:o.quote_ref||q?.quote_number||'',
         note:o.note||'',
-        lines:orderLines.map(l=>({sku:l.psc_sku_snapshot||'',qty:Number(l.quantity)})),
+        lines:mappedLines,
         quote:q?{validity:q.validity_days?`${q.validity_days} calendar days`:'',delivery:q.delivery_terms||'',terms:q.payment_terms||'',lines:qLines}:{lines:qLines}
       };
     });
@@ -2726,7 +2949,24 @@ function contactPage(){ return publicPage(
       requested_by:session.user.id, status:'under_review', note
     }).select('id,order_number').single();
     if(error) throw error;
-    const dbLines=lines.map(l=>{ const p=product(l.sku); return {order_id:o.id,product_id:null,psc_sku_snapshot:l.sku,line_description:p?.name||l.sku,brand_model_snapshot:p?.brand||null,pack_snapshot:p?.pack||null,quantity:l.qty}; });
+    const dbLines=lines.map(l=>{
+      if(isFamilyLine(l)){
+        return {
+          order_id:o.id, product_id:null, psc_sku_snapshot:null,
+          family_id:l.familyId, family_name_snapshot:l.familyName,
+          line_description:l.familyName||l.familyId,
+          brand_model_snapshot:l.brandPreferenceMode==='specific_option'?(l.productOptionSnapshot?.exact_product_name||l.requestedBrand||null):(l.brandPreferenceMode==='other_brand'?l.requestedBrand:'No preference'),
+          pack_snapshot:l.productOptionSnapshot?.pack||l.orderPackBasis||l.presentation||null, quantity:l.qty,
+          product_option_id:l.brandPreferenceMode==='specific_option'?(l.productOptionId||null):null,
+          requested_presentation:l.presentation||null,
+          brand_preference_mode:l.brandPreferenceMode||'no_preference',
+          requested_brand:l.brandPreferenceMode==='other_brand'?(l.requestedBrand||null):(l.brandPreferenceMode==='specific_option'?(l.productOptionSnapshot?.brand||l.requestedBrand||null):null),
+          product_option_snapshot:l.brandPreferenceMode==='specific_option'?(l.productOptionSnapshot||null):null
+        };
+      }
+      const p=product(l.sku);
+      return {order_id:o.id,product_id:null,psc_sku_snapshot:l.sku,line_description:p?.name||l.sku,brand_model_snapshot:p?.brand||null,pack_snapshot:p?.pack||null,quantity:l.qty};
+    });
     const {error:le}=await sb.from('order_lines').insert(dbLines); if(le) throw le;
     return o.order_number;
   }
@@ -2870,6 +3110,7 @@ function contactPage(){ return publicPage(
       case 'admin/mail': html=adminMail();break;
       case 'admin/storefront': html=adminStorefront();break;
       case 'admin/products': html=adminProducts();break;
+      case 'admin/family-options': html=adminFamilyOptions();break;
       case 'admin/requests': html=adminRequests();break;
       case 'admin/fulfilment': html=adminFulfilment();break;
       case 'admin/supplier-feed': html=adminFeed();break;
@@ -2975,6 +3216,8 @@ function contactPage(){ return publicPage(
     document.querySelectorAll('[data-add]').forEach(el=>el.addEventListener('click',()=>addBasket(el.dataset.add,1)));
     document.querySelectorAll('[data-basket-delta]').forEach(el=>el.addEventListener('click',()=>{const [sku,d]=el.dataset.basketDelta.split('|');const line=state.basket.find(x=>x.sku===sku);if(!line)return;line.qty+=Number(d);if(line.qty<=0)state.basket=state.basket.filter(x=>x.sku!==sku);save();renderUi({preserveScroll:true,transition:false})}));
     document.querySelectorAll('[data-basket-remove]').forEach(el=>el.addEventListener('click',()=>{state.basket=state.basket.filter(x=>x.sku!==el.dataset.basketRemove);save();renderUi({preserveScroll:true,transition:false})}));
+    document.querySelectorAll('[data-family-basket-delta]').forEach(el=>el.addEventListener('click',()=>{const[i,d]=el.dataset.familyBasketDelta.split('|');const line=state.basket[Number(i)];if(!line||!isFamilyLine(line))return;line.qty+=Number(d);if(line.qty<=0)state.basket.splice(Number(i),1);save();renderUi({preserveScroll:true,transition:false})}));
+    document.querySelectorAll('[data-family-basket-remove]').forEach(el=>el.addEventListener('click',()=>{const i=Number(el.dataset.familyBasketRemove);if(Number.isInteger(i)&&state.basket[i]&&isFamilyLine(state.basket[i]))state.basket.splice(i,1);save();renderUi({preserveScroll:true,transition:false})}));
     document.querySelectorAll('[data-submit-request]').forEach(el=>el.addEventListener('click',submitRequest));
     document.querySelectorAll('[data-submit-custom]').forEach(el=>el.addEventListener('click',submitCustomRequest));
     document.querySelectorAll('[data-mail-tab]').forEach(el=>el.addEventListener('click',()=>{ui.mailTab=el.dataset.mailTab;render()}));
@@ -3020,12 +3263,18 @@ function contactPage(){ return publicPage(
     document.querySelectorAll('[data-stock-expiry]').forEach(el=>el.addEventListener('change',e=>{state.stock[Number(el.dataset.stockExpiry)].expiry=e.target.value;save()}));
     document.querySelectorAll('[data-stock-save]').forEach(el=>el.addEventListener('click',()=>{audit('Stock counts saved',state.campus);toast('<strong>Saved.</strong> Demo stock register updated.')}));
     document.querySelectorAll('[data-product-field]').forEach(el=>el.addEventListener('change',e=>{const[sku,field]=el.dataset.productField.split('|');state.productOverrides[sku]=state.productOverrides[sku]||{};const val=e.target.value.trim();state.productOverrides[sku][field]=val===''?undefined:Number(val);audit('Product master updated',`${sku} ${field}`);save();render();toast(`<strong>${sku}</strong> updated locally`)}));
-    document.querySelectorAll('[data-quote-field]').forEach(el=>el.addEventListener('change',e=>{const[id,sku,field]=el.dataset.quoteField.split('|');const r=state.requests.find(x=>x.id===id);r.quote=r.quote||{lines:{}};r.quote.lines=r.quote.lines||{};r.quote.lines[sku]=r.quote.lines[sku]||{};const val=e.target.value;r.quote.lines[sku][field]=val===''?undefined:Number(val);if(field==='cost')r.quote.lines[sku].costEvidence='Manual entry — evidence required';audit('Quote line updated',`${id} ${sku} ${field}`);save();render()}));
+    document.querySelectorAll('[data-quote-field]').forEach(el=>el.addEventListener('change',e=>{const[id,key,field]=el.dataset.quoteField.split('|');const r=state.requests.find(x=>x.id===id);r.quote=r.quote||{lines:{}};r.quote.lines=r.quote.lines||{};r.quote.lines[key]=r.quote.lines[key]||{};const val=e.target.value;r.quote.lines[key][field]=val===''?undefined:Number(val);if(field==='cost')r.quote.lines[key].costEvidence='Manual entry — evidence required';audit('Quote line updated',`${id} ${key} ${field}`);save();render()}));
     document.querySelectorAll('[data-quote-meta]').forEach(el=>el.addEventListener('change',e=>{const[id,field]=el.dataset.quoteMeta.split('|');const r=state.requests.find(x=>x.id===id);r.quote=r.quote||{lines:{}};r.quote[field]=e.target.value;audit('Quote terms updated',`${id} ${field}`);save()}));
     document.querySelectorAll('[data-request-status]').forEach(el=>el.addEventListener('change',e=>{const r=state.requests.find(x=>x.id===el.dataset.requestStatus);r.status=e.target.value;if(r.status==='Sent'&&!r.quoteRef)r.quoteRef=`PSC-Q-${new Date().getFullYear()}-${String(state.requests.indexOf(r)+1001).padStart(4,'0')}`;audit('Request status changed',`${r.id} → ${r.status}`);save();render()}));
     document.querySelectorAll('[data-quote-ref]').forEach(el=>el.addEventListener('change',e=>{const r=state.requests.find(x=>x.id===el.dataset.quoteRef);r.quoteRef=e.target.value;audit('Quote reference updated',r.id);save()}));
     document.querySelectorAll('[data-approve-quote]').forEach(el=>el.addEventListener('click',()=>{const r=state.requests.find(x=>x.id===el.dataset.approveQuote);r.status='Authorized';audit('Quotation confirmed by demo account user',r.id);save();render();toast('<strong>Quotation confirmed.</strong><br>PSC will confirm the fulfilment and delivery timing for this order.')}));
     document.querySelectorAll('[data-export-products]').forEach(el=>el.addEventListener('click',exportProducts));
+
+    const optionSearch=document.querySelector('[data-option-search]'); if(optionSearch)optionSearch.addEventListener('input',e=>{ui.optionSearch=e.target.value;renderUi({preserveScroll:true,focusSelector:'[data-option-search]',cursor:e.target.selectionStart,transition:false})});
+    const optionDecision=document.querySelector('[data-option-decision]'); if(optionDecision)optionDecision.addEventListener('change',e=>{ui.optionDecision=e.target.value;renderUi({preserveScroll:true,transition:false})});
+    document.querySelectorAll('[data-option-family-open]').forEach(el=>el.addEventListener('click',()=>{ui.optionFamily=el.dataset.optionFamilyOpen||'all';ui.optionSearch='';ui.optionDecision='All';render()}));
+    document.querySelectorAll('[data-option-save]').forEach(el=>el.addEventListener('click',async()=>{await saveFamilyOptionReview(el.dataset.optionSave)}));
+    document.querySelectorAll('[data-option-field="decision"]').forEach(el=>el.addEventListener('change',()=>{const card=el.closest('[data-option-review]');if(!card)return;const active=el.value==='APPROVE';const sel=card.querySelector('[data-option-field="selectable"]');const pref=card.querySelector('[data-option-field="preferred"]');if(!active){if(sel){sel.checked=false;sel.disabled=true;}if(pref){pref.checked=false;pref.disabled=true;}}else{if(sel)sel.disabled=false;if(pref)pref.disabled=false;}}));
 
     document.querySelectorAll('[data-cms-channel]').forEach(el=>el.addEventListener('click',()=>{ui.cmsChannel=el.dataset.cmsChannel;render()}));
     const cmsSearch=document.querySelector('[data-cms-search]'); if(cmsSearch)cmsSearch.addEventListener('input',e=>{ui.cmsSearch=e.target.value;render()});
