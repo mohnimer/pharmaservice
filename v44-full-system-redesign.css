@@ -1792,3 +1792,709 @@ body{
     flex-direction:column!important;
   }
 }
+
+
+/* =========================================================
+   V44.2 — CALM SYSTEM RESET
+   User direction:
+   - one uniform background everywhere
+   - remove SaaS-y decorative mockups
+   - remove unnecessary shapes
+   - Workshop: no awkward vertical illustrated cards
+   - KEEP the catalogue search bar
+   - category cards: uniform, empty/quiet, no category colours, no art
+   ========================================================= */
+
+:root{
+  --v44-canvas:#faf9f9;
+  --v44-surface:#faf9f9;
+  --v44-surface-soft:#f6f5f2;
+  --v44-rule:#dedbd6;
+  --v44-rule-strong:#c9c5bf;
+  --v44-text:#111412;
+  --v44-muted-clean:#6f6b65;
+  --v44-accent:#159b91;
+}
+
+/* ---------------------------------------------------------
+   1. ONE BACKGROUND. STOP CHANGING THE ROOM EVERY SECTION.
+   --------------------------------------------------------- */
+html,
+body,
+#app,
+.publicPage,
+.publicLanding,
+.startPage,
+.workshopPage,
+.loginPublicPage,
+.unsubscribePage,
+.model43,
+.customerShell,
+.adminShell,
+.mainArea,
+.contentWrap,
+.v7MainArea,
+.v7ContentWrap{
+  background:var(--v44-canvas)!important;
+}
+
+.publicHeader,
+.publicFooter,
+.publicPageHero,
+.homeEditorialIntro,
+.homeDetailLedger,
+.publicClinicalPreview,
+.homeWorkshop,
+.homePortalTeaser,
+.workshopHero,
+.workshopCategorySection,
+.workshopGuideDeck,
+.workshopPrinciple,
+.catalogue16Hero,
+.catalogue16Controls,
+.publicCatalogueJourney16,
+.publicCatalogueResults,
+.publicCta,
+.start16Hero,
+.start16Send,
+.prospectSection,
+.prospectContactGrid,
+.loginWrap,
+.m43Hero,
+.m43HeroShell,
+.m43Statement,
+.m43Transform,
+.m43TransformShell,
+.m43Rhythm,
+.m43RhythmFeature,
+.m43RhythmSmall,
+.m43Final,
+.m43ExactImage,
+.m43RequestSource,
+.m43Controlled,
+.m43Supplier,
+.m43QuoteCard,
+.m43Activity,
+.m43MemorySide article,
+.m43Paper,
+.m43PaperFoot,
+.m43PaperTop,
+.m43QuoteTop,
+.m43QuoteBottom,
+.m43FloatNote,
+.customerShell .sidebar,
+.customerShell .topbar,
+.customerShell .v26HomeStatus,
+.customerShell .panel,
+.customerShell .customerActionPanel,
+.customerShell .productCard,
+.customerShell .replenishCard,
+.customerShell .customRequestPanel,
+.customerShell .catalogueDepthPill,
+.customerShell .shopFilterBar,
+.customerShell .clinicNeedCard,
+.customerShell .catalogueShortcut,
+.customerShell .customerOrderCard,
+.customerShell .assetCard{
+  background:var(--v44-canvas)!important;
+  background-image:none!important;
+}
+
+/* Keep only functionally meaningful contrast. */
+input,
+select,
+textarea,
+.searchInput,
+.topbarSearch,
+.workshopSearch,
+.loginCard,
+.start16Form,
+.v37ProspectForm,
+.catalogue16Controls .filterBar{
+  background:#fff!important;
+}
+
+/* Remove big coloured / dark decorative bands. */
+.publicLanding .homePortalTeaser,
+.publicPage .publicCta,
+.workshopPrinciple,
+.m43Final{
+  background:var(--v44-canvas)!important;
+  color:var(--v44-text)!important;
+  border-top:1px solid var(--v44-rule)!important;
+  border-bottom:0!important;
+}
+
+.publicLanding .homePortalTeaser h2,
+.publicPage .publicCta h2,
+.workshopPrinciple h2,
+.m43Final h2{
+  color:var(--v44-text)!important;
+}
+
+.publicLanding .homePortalTeaser p,
+.publicPage .publicCta p,
+.workshopPrinciple p,
+.m43Final p{
+  color:var(--v44-muted-clean)!important;
+}
+
+.publicLanding .homePortalTeaser .button,
+.publicPage .publicCta .button.outline,
+.m43Final .button.outline{
+  color:var(--v44-text)!important;
+  border-color:var(--v44-rule-strong)!important;
+}
+
+/* ---------------------------------------------------------
+   2. HOME HERO — REMOVE THE SaaS MOCKUP OBJECT ENTIRELY.
+   Simple, confident, editorial.
+   --------------------------------------------------------- */
+.m44HomeHero{
+  padding:0!important;
+  background:var(--v44-canvas)!important;
+}
+
+.m44HomeHeroShell{
+  width:min(1320px,88%)!important;
+  min-height:0!important;
+  margin:0 auto!important;
+  padding:120px 0 108px!important;
+  display:block!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+}
+
+.m44HomeHeroCopy{
+  max-width:920px!important;
+}
+
+.m44HomeHeroCopy h1{
+  max-width:920px!important;
+  font-size:clamp(64px,7.2vw,112px)!important;
+  line-height:.88!important;
+  letter-spacing:-.072em!important;
+}
+
+.m44HomeHeroCopy>p{
+  max-width:720px!important;
+  margin-top:30px!important;
+  font-size:18px!important;
+  line-height:1.67!important;
+}
+
+.m44HomeDesk{
+  display:none!important;
+}
+
+.m44HeroActions{
+  margin-top:34px!important;
+}
+
+/* Less pill-y. Buttons can still be soft, but stop turning everything into pills. */
+.m44HeroActions .button,
+.publicPortalBtn,
+.publicCatalogueCard>.button,
+.start16HeroActions .button,
+.loginCard .button,
+.m43ExactActions .button,
+.m43Final .button,
+.publicPage .publicCta .button{
+  border-radius:10px!important;
+}
+
+/* ---------------------------------------------------------
+   3. REMOVE DECORATIVE COLOUR / SHAPE NOISE ON OUR MODEL
+   Preserve the approved hierarchy and useful procurement logic.
+   --------------------------------------------------------- */
+.m43Hero{
+  padding-top:0!important;
+  padding-bottom:0!important;
+}
+.m43HeroShell{
+  width:min(1320px,88%)!important;
+  margin:0 auto!important;
+  padding:105px 0 92px!important;
+  border:0!important;
+  border-radius:0!important;
+}
+.m43Statement{
+  padding-top:90px!important;
+}
+.m43Transform{
+  padding-top:90px!important;
+  padding-bottom:90px!important;
+}
+.m43TransformShell{
+  border:1px solid var(--v44-rule)!important;
+  border-radius:16px!important;
+}
+.m43Rhythm{
+  padding-top:90px!important;
+  padding-bottom:90px!important;
+}
+.m43RhythmFeature,
+.m43RhythmSmall{
+  border-radius:16px!important;
+  border-color:var(--v44-rule)!important;
+}
+.m43RhythmImage{
+  background:transparent!important;
+  border:1px solid var(--v44-rule)!important;
+  border-radius:12px!important;
+}
+.m43Paper,
+.m43FloatNote,
+.m43RequestSource,
+.m43Controlled,
+.m43Supplier,
+.m43QuoteCard,
+.m43ExactImage,
+.m43Activity,
+.m43MemorySide article{
+  border-radius:14px!important;
+  box-shadow:none!important;
+}
+.m43Supplier:nth-child(1),
+.m43Supplier:nth-child(2),
+.m43Supplier:nth-child(3),
+.m43MemorySide article:first-child{
+  background:var(--v44-canvas)!important;
+}
+.m43FloatNote{
+  background:var(--v44-canvas)!important;
+}
+.m43ReqStatus,
+.m43Status{
+  background:#edf3f1!important;
+}
+
+/* ---------------------------------------------------------
+   4. CATEGORY CARDS — ALL UNIFORM. NO COLOURS. NO ART.
+   Public home, public catalogue and buyer portal.
+   --------------------------------------------------------- */
+
+/* Home clinical needs */
+.publicLanding .publicClinicalPreview{
+  padding-top:96px!important;
+  padding-bottom:96px!important;
+  background:var(--v44-canvas)!important;
+}
+.publicLanding .publicClinicalPreviewHead{
+  margin-bottom:32px!important;
+}
+.publicLanding .publicClinicalPreviewGrid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-template-rows:none!important;
+  grid-auto-rows:190px!important;
+  gap:12px!important;
+}
+.publicLanding .publicClinicalCard,
+.publicLanding .publicClinicalCard:nth-child(n){
+  grid-column:auto!important;
+  grid-row:auto!important;
+  min-height:190px!important;
+  padding:24px!important;
+  background:transparent!important;
+  border:1px solid var(--v44-rule)!important;
+  border-radius:14px!important;
+  box-shadow:none!important;
+}
+.publicLanding .publicClinicalCard::after{
+  display:none!important;
+}
+.publicLanding .publicClinicalCard .publicClinicalArt{
+  display:none!important;
+}
+.publicLanding .publicClinicalCard>span:not(.publicClinicalArt),
+.publicLanding .publicClinicalCard:nth-child(n)>span:not(.publicClinicalArt){
+  max-width:100%!important;
+  font-size:25px!important;
+  line-height:1!important;
+  color:var(--v44-text)!important;
+}
+.publicLanding .publicClinicalCard>small,
+.publicLanding .publicClinicalCard:nth-child(n)>small{
+  max-width:34ch!important;
+  margin-top:12px!important;
+  font-size:11px!important;
+  line-height:1.5!important;
+  color:var(--v44-muted-clean)!important;
+}
+.publicLanding .publicClinicalCard:hover{
+  border-color:#aaa59f!important;
+  background:transparent!important;
+}
+.publicLanding .publicClinicalPreviewFoot{
+  margin-top:26px!important;
+}
+
+/* Public catalogue categories */
+.publicCategoryGrid16{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px!important;
+}
+.publicCategoryCard16,
+.publicCategoryCard16:nth-child(n){
+  grid-column:auto!important;
+  min-height:164px!important;
+  padding:22px!important;
+  background:transparent!important;
+  border:1px solid var(--v44-rule)!important;
+  border-radius:14px!important;
+  box-shadow:none!important;
+  color:var(--v44-text)!important;
+}
+.publicCategoryArt16{
+  display:none!important;
+}
+.publicCategoryCopy16{
+  position:static!important;
+  inset:auto!important;
+  width:100%!important;
+}
+.publicCategoryCopy16 b{
+  color:var(--v44-text)!important;
+  font-size:22px!important;
+  line-height:1.02!important;
+}
+.publicCategoryCopy16 small{
+  color:var(--v44-muted-clean)!important;
+  max-width:34ch!important;
+  font-size:11px!important;
+  line-height:1.5!important;
+}
+.publicCategoryCard16 i{
+  color:#6d6964!important;
+}
+.publicCategoryCard16:hover,
+.publicCategoryCard16.active{
+  background:transparent!important;
+  border-color:#aaa59f!important;
+  box-shadow:none!important;
+}
+
+/* Portal categories */
+.customerShell .clinicNeedRail{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:10px!important;
+}
+.customerShell .clinicNeedCard,
+.customerShell .clinicNeedCard:nth-child(n){
+  min-height:150px!important;
+  background:transparent!important;
+  border:1px solid var(--v44-rule)!important;
+  border-radius:14px!important;
+  color:var(--v44-text)!important;
+}
+.customerShell .clinicNeedIcon{
+  display:none!important;
+}
+.customerShell .clinicNeedCopy{
+  position:static!important;
+  inset:auto!important;
+  width:100%!important;
+  padding:20px!important;
+}
+.customerShell .clinicNeedCopy b{
+  color:var(--v44-text)!important;
+}
+.customerShell .clinicNeedCopy small{
+  color:var(--v44-muted-clean)!important;
+}
+.customerShell .clinicNeedArrow{
+  color:#6d6964!important;
+}
+
+/* Portal dashboard coloured action cards => same neutral cards. */
+.customerShell .v26QuickActions{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  grid-template-rows:auto!important;
+  gap:10px!important;
+}
+.customerShell .v26ActionCard,
+.customerShell .v26ActionCard:nth-child(n){
+  grid-column:auto!important;
+  grid-row:auto!important;
+  min-height:190px!important;
+  background:transparent!important;
+  border:1px solid var(--v44-rule)!important;
+  border-radius:14px!important;
+  color:var(--v44-text)!important;
+}
+.customerShell .v26ActionCard .v26ActionIcon{
+  background:transparent!important;
+}
+.customerShell .v26ActionCard:hover{
+  border-color:#aaa59f!important;
+  background:transparent!important;
+}
+
+/* ---------------------------------------------------------
+   5. KEEP THE SEARCH BAR. DO NOT MESS WITH IT.
+   Only neutralize the canvas around it.
+   --------------------------------------------------------- */
+.catalogue16Controls{
+  background:var(--v44-canvas)!important;
+}
+.catalogue16Controls .filterBar{
+  background:#fff!important;
+  border:1px solid #d7d2cb!important;
+  border-radius:18px!important;
+  box-shadow:0 14px 30px rgba(43,35,28,.05)!important;
+}
+.catalogue16Controls .searchInput,
+.catalogue16Controls select{
+  background:#f7f5f0!important;
+}
+
+/* ---------------------------------------------------------
+   6. WORKSHOP — HORIZONTAL EDITORIAL ROWS, NO VISUAL PANELS.
+   --------------------------------------------------------- */
+.workshopHero,
+.workshopCategorySection,
+.workshopGuideDeck{
+  background:var(--v44-canvas)!important;
+}
+
+.workshopCategoryGrid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:10px!important;
+}
+.workshopCategoryCard{
+  min-height:125px!important;
+  background:transparent!important;
+  border:1px solid var(--v44-rule)!important;
+  border-radius:14px!important;
+  box-shadow:none!important;
+}
+.workshopCategoryCard [class*="Icon"],
+.workshopCategoryCard svg{
+  display:none!important;
+}
+
+.workshopGuideDeck{
+  grid-template-columns:220px minmax(0,1fr)!important;
+  gap:48px!important;
+}
+.workshopGuideDeckScroll{
+  display:block!important;
+}
+.workshopGuideCard,
+.workshopGuideDeckScroll .workshopGuideCard,
+.workshopGuideDeckScroll .workshopGuideCard:first-child{
+  display:block!important;
+  margin:0!important;
+  border:0!important;
+  border-top:1px solid var(--v44-rule)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.workshopGuideDeckScroll .workshopGuideCard:last-child{
+  border-bottom:1px solid var(--v44-rule)!important;
+}
+.workshopGuideCard>button,
+.workshopGuideDeckScroll .workshopGuideCard>button,
+.workshopGuideDeckScroll .workshopGuideCard:first-child>button,
+.workshopGuideDeckScroll .workshopGuideCard:not(:first-child)>button{
+  min-height:0!important;
+  display:block!important;
+  grid-template-columns:none!important;
+  grid-template-rows:none!important;
+  padding:22px 4px!important;
+  background:transparent!important;
+}
+.workshopGuideCardVisual{
+  display:none!important;
+}
+.workshopGuideCardCopy{
+  display:grid!important;
+  grid-template-columns:150px minmax(0,1fr)!important;
+  column-gap:28px!important;
+  row-gap:7px!important;
+  align-items:start!important;
+}
+.workshopGuideCardMeta{
+  grid-column:1!important;
+  grid-row:1 / span 2!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  gap:4px!important;
+}
+.workshopGuideCard h3{
+  grid-column:2!important;
+  margin:0!important;
+  max-width:680px!important;
+  font-size:clamp(24px,2.3vw,34px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.045em!important;
+}
+.workshopGuideCard p{
+  grid-column:2!important;
+  margin:0!important;
+  max-width:720px!important;
+  font-size:12px!important;
+  line-height:1.55!important;
+  color:var(--v44-muted-clean)!important;
+}
+.workshopGuideCard:hover{
+  background:transparent!important;
+  border-color:#aaa59f!important;
+}
+
+/* Home Workshop also becomes calm text-first rows. */
+.publicLanding .homeWorkshopCards{
+  background:var(--v44-canvas)!important;
+}
+.publicLanding .homeWorkshopCardGrid{
+  display:block!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard,
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:first-child{
+  grid-row:auto!important;
+  border-top:1px solid var(--v44-rule)!important;
+  border-radius:0!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:last-child{
+  border-bottom:1px solid var(--v44-rule)!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard>button,
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:first-child>button,
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:not(:first-child)>button{
+  display:block!important;
+  grid-template-columns:none!important;
+  grid-template-rows:none!important;
+  min-height:0!important;
+  padding:22px 4px!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCardVisual{
+  display:none!important;
+}
+
+/* ---------------------------------------------------------
+   7. LESS RANDOM ROUNDING SITE-WIDE.
+   Functional surfaces can have small radius. Sections should not.
+   --------------------------------------------------------- */
+:is(.publicPage,.publicLanding,.model43,.customerShell)
+:where(
+  .publicClinicalCard,
+  .publicCategoryCard16,
+  .workshopCategoryCard,
+  .workshopGuideCard,
+  .clinicNeedCard,
+  .v26ActionCard,
+  .productCard,
+  .publicCatalogueCard,
+  .replenishCard,
+  .customerOrderCard,
+  .assetCard,
+  .panel,
+  .catalogueShortcut,
+  .customRequestPanel
+){
+  border-radius:14px!important;
+  box-shadow:none!important;
+}
+
+/* ---------------------------------------------------------
+   8. PUBLIC PRODUCT CARDS — neutral, not another colour system.
+   --------------------------------------------------------- */
+.publicCatalogueCard,
+.publicCatalogueVisual,
+.customerShell .productCard,
+.customerShell .productVisual,
+.customerShell .replenishCard,
+.customerShell .replenishVisual{
+  background:var(--v44-canvas)!important;
+}
+.publicCatalogueVisual,
+.customerShell .productVisual,
+.customerShell .replenishVisual{
+  border-bottom:1px solid var(--v44-rule)!important;
+}
+
+/* ---------------------------------------------------------
+   9. PORTAL — SAME CANVAS. FUNCTION > DECORATION.
+   --------------------------------------------------------- */
+.customerShell .sidebar,
+.customerShell .topbar{
+  background:var(--v44-canvas)!important;
+  border-color:var(--v44-rule)!important;
+}
+.customerShell .topbarSearch{
+  background:#fff!important;
+}
+.customerShell .campusPill{
+  background:transparent!important;
+}
+.customerShell .v26OperationsStrip,
+.customerShell .v26NeedPreview{
+  background:transparent!important;
+}
+.customerShell .v26RepeatPanel{
+  background:transparent!important;
+}
+.customerShell .resourcePreviewGrid article{
+  background:transparent!important;
+}
+
+/* ---------------------------------------------------------
+   10. MOBILE / TABLET — UNIFORM, NO WEIRD MOSAIC COLLAPSE.
+   --------------------------------------------------------- */
+@media(max-width:1050px){
+  .publicLanding .publicClinicalPreviewGrid,
+  .publicCategoryGrid16,
+  .customerShell .clinicNeedRail,
+  .customerShell .v26QuickActions{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+
+  .workshopGuideDeck{
+    grid-template-columns:1fr!important;
+  }
+
+  .workshopGuideDeckIntro{
+    position:static!important;
+  }
+}
+
+@media(max-width:700px){
+  .m44HomeHeroShell{
+    width:calc(100% - 40px)!important;
+    padding:72px 0 66px!important;
+  }
+
+  .m44HomeHeroCopy h1{
+    font-size:clamp(52px,14vw,72px)!important;
+  }
+
+  .publicLanding .publicClinicalPreviewGrid,
+  .publicCategoryGrid16,
+  .customerShell .clinicNeedRail,
+  .customerShell .v26QuickActions,
+  .workshopCategoryGrid{
+    grid-template-columns:1fr!important;
+  }
+
+  .publicLanding .publicClinicalCard,
+  .publicLanding .publicClinicalCard:nth-child(n),
+  .publicCategoryCard16,
+  .customerShell .clinicNeedCard{
+    min-height:150px!important;
+  }
+
+  .workshopGuideCardCopy{
+    grid-template-columns:1fr!important;
+    row-gap:10px!important;
+  }
+  .workshopGuideCardMeta,
+  .workshopGuideCard h3,
+  .workshopGuideCard p{
+    grid-column:1!important;
+    grid-row:auto!important;
+  }
+}
