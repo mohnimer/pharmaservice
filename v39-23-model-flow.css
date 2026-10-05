@@ -1,0 +1,93 @@
+/* =========================================================
+   V39.23 — Our Model sourcing-flow rethink
+   Replaces oversized category/family/line cards with a useful
+   requirement -> sourcing desk -> coordinated quotation story.
+   ========================================================= */
+
+.model17Source{padding-bottom:88px!important}
+.model17SourceIntro{max-width:900px!important;margin-bottom:34px!important}
+.model17SourceIntro p{max-width:780px!important}
+
+.model23System{
+  display:grid;
+  grid-template-columns:minmax(330px,1.08fr) 54px minmax(300px,.9fr) 54px minmax(340px,1.02fr);
+  gap:14px;
+  align-items:stretch;
+  max-width:1320px;
+}
+.model23System *{box-sizing:border-box}
+
+.model23Requirement,.model23Desk,.model23Quote{
+  border:1px solid rgba(30,31,27,.10);
+  border-radius:30px;
+  min-width:0;
+}
+.model23Requirement{background:#fbf8f1;padding:26px}
+.model23Desk{background:#11201f;color:#fff;padding:26px;display:flex;flex-direction:column}
+.model23Quote{background:#fff;padding:26px;box-shadow:0 18px 42px rgba(31,32,28,.045)}
+
+.model23PanelHead>span,.model23QuoteTop span,.model23DeskKicker{
+  display:block;font-size:9px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;
+}
+.model23PanelHead>span,.model23QuoteTop span{color:#6c716d}
+.model23DeskKicker{color:#65d2ca;margin-top:8px}
+.model23PanelHead h3,.model23QuoteTop h3,.model23Desk h3{
+  margin:7px 0 8px;font-size:28px;line-height:1;letter-spacing:-.045em;
+}
+.model23PanelHead p,.model23Desk>p{
+  margin:0;font-size:12px;line-height:1.55;
+}
+.model23PanelHead p{color:#6a655e}.model23Desk>p{color:#c6d3d0}
+
+.model23ReqList{margin-top:22px;border-top:1px solid #ddd7ce}
+.model23ReqRow{
+  position:relative;display:grid;grid-template-columns:48px minmax(0,1fr) 24px;gap:12px;align-items:center;
+  min-height:86px;padding:12px 0;border-bottom:1px solid #ddd7ce;
+}
+.model23ReqRow img{width:46px;height:46px;object-fit:contain;background:transparent!important}
+.model23ReqCopy{min-width:0}.model23ReqCopy span,.model23ReqCopy b,.model23ReqCopy small{display:block}
+.model23ReqCopy span{font-size:8px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:#8a857d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.model23ReqCopy b{margin-top:3px;font-size:14px;line-height:1.15;letter-spacing:-.02em}
+.model23ReqCopy small{margin-top:3px;font-size:10px;line-height:1.3;color:#716c65}
+.model23ReqRow em{font-style:normal;font-size:9px;font-weight:900;color:#aaa49b;align-self:start;margin-top:4px}
+
+.model23DeskBadge{width:76px;height:76px;border-radius:24px;background:#f8f5ee;display:grid;place-items:center;transform:rotate(-3deg);box-shadow:0 13px 28px rgba(0,0,0,.14)}
+.model23DeskBadge img{width:62px;height:62px;object-fit:contain}
+.model23Desk h3{font-size:31px;margin-top:12px;max-width:330px}
+.model23RouteList{margin-top:24px;border-top:1px solid rgba(255,255,255,.13)}
+.model23RouteRow{display:grid;grid-template-columns:10px minmax(0,1fr) 20px;gap:10px;align-items:center;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.13)}
+.model23RouteRow>span{width:7px;height:7px;border-radius:50%;background:#64d2ca;box-shadow:0 0 0 4px rgba(100,210,202,.10)}
+.model23RouteRow b{font-size:11px;line-height:1.25}.model23RouteRow i{font-style:normal;color:#64d2ca;font-size:13px;font-weight:900}
+.model23DeskRule{margin-top:auto;padding-top:22px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.model23DeskRule b{padding:8px 10px;border-radius:999px;background:#65d2ca;color:#10201f;font-size:10px}
+.model23DeskRule span{font-size:10px;font-weight:800;color:#d7e0de}
+
+.model23Connector{display:flex;align-items:center;justify-content:center;color:#4e625e}
+.model23Connector span{width:42px;height:42px;border:1px solid #c7cdc8;border-radius:50%;display:grid;place-items:center;background:#f8f6f0;font-size:20px;font-weight:900}
+
+.model23QuoteTop{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+.model23QuoteTop img{width:46px;height:46px;object-fit:contain;background:transparent!important;transform:rotate(5deg)}
+.model23QuoteTop h3{font-size:30px;max-width:300px}
+.model23QuoteMeta{margin-top:20px;padding:11px 0;border-top:1px solid #ded8cf;border-bottom:1px solid #ded8cf;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.model23QuoteMeta span{font-size:8px;font-weight:900;letter-spacing:.11em;color:#818079}.model23QuoteMeta b{font-size:10px}
+.model23QuoteList{padding-top:2px}
+.model23QuoteRow{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:13px 0;border-bottom:1px solid #ebe6de}
+.model23QuoteRow div{min-width:0}.model23QuoteRow b,.model23QuoteRow small{display:block}.model23QuoteRow b{font-size:11px;line-height:1.25}.model23QuoteRow small{margin-top:3px;color:#7b766e;font-size:9px;line-height:1.25}.model23QuoteRow>span{flex:0 0 auto;padding:5px 7px;border-radius:999px;background:#e6f4f1;color:#167f79;font-size:7px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+.model23QuoteFoot{margin-top:20px;padding:16px;border-radius:18px;background:#f5f2eb}.model23QuoteFoot b,.model23QuoteFoot span{display:block}.model23QuoteFoot b{font-size:12px}.model23QuoteFoot span{margin-top:4px;color:#6c675f;font-size:10px;line-height:1.4}
+
+@media(max-width:1120px){
+  .model23System{grid-template-columns:1fr 46px 1fr;grid-template-areas:"req c1 desk" "quote quote quote"}
+  .model23Requirement{grid-area:req}.model23ConnectorIn{grid-area:c1}.model23Desk{grid-area:desk}.model23ConnectorOut{display:none}.model23Quote{grid-area:quote;margin-top:2px}
+  .model23QuoteList{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}.model23QuoteRow:nth-child(odd){border-right:1px solid #ebe6de;padding-right:20px}
+}
+
+@media(max-width:760px){
+  .model17Source{padding-bottom:58px!important}
+  .model23System{grid-template-columns:1fr;grid-template-areas:"req" "c1" "desk" "c2" "quote";gap:12px}
+  .model23Requirement{grid-area:req}.model23Desk{grid-area:desk}.model23Quote{grid-area:quote;margin:0}.model23ConnectorIn{grid-area:c1}.model23ConnectorOut{display:flex;grid-area:c2}
+  .model23Connector{height:40px}.model23Connector span{transform:rotate(90deg);width:36px;height:36px;font-size:17px}
+  .model23Requirement,.model23Desk,.model23Quote{border-radius:24px;padding:21px}
+  .model23PanelHead h3,.model23QuoteTop h3,.model23Desk h3{font-size:25px}
+  .model23ReqRow{grid-template-columns:42px minmax(0,1fr) 20px}.model23ReqRow img{width:40px;height:40px}
+  .model23QuoteList{display:block}.model23QuoteRow:nth-child(odd){border-right:0;padding-right:0}
+}
