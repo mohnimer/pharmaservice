@@ -1,0 +1,113 @@
+/* =========================================================
+   V39.22 — frontend polish: Our Model, Start, Workshop media
+   Additive only. No catalogue / backend behavior changes.
+   ========================================================= */
+
+/* ---------- Our Model: make the category -> family -> line example look finished ---------- */
+.model17FlowCard.family>img{
+  width:188px!important;
+  height:188px!important;
+  margin:0 auto 22px!important;
+  align-self:center!important;
+  object-fit:contain!important;
+  mix-blend-mode:normal!important;
+  filter:drop-shadow(0 16px 20px rgba(24,38,37,.12));
+}
+.model17LineThumb{
+  width:150px!important;
+  height:150px!important;
+  margin:0 auto 24px!important;
+  border-radius:26px!important;
+  background:#f6f4ef!important;
+}
+.model17LineThumb img{
+  width:126px!important;
+  height:126px!important;
+  object-fit:contain!important;
+  mix-blend-mode:normal!important;
+  filter:drop-shadow(0 12px 16px rgba(24,38,37,.11));
+}
+.model17FlowCard.family,.model17FlowCard.line{background:#fff!important}
+.model17FlowCard.family h3,.model17FlowCard.line h3{margin-top:auto!important}
+
+/* ---------- Start: more character without making it decorative noise ---------- */
+.start16RouteBoard{
+  padding:10px 18px!important;
+  border:1px solid #d8d2c8!important;
+  border-radius:28px!important;
+  background:linear-gradient(145deg,#fffdf8 0%,#f2f7f5 100%)!important;
+  box-shadow:0 16px 40px rgba(43,38,29,.055);
+}
+.start16RouteBoard>button{
+  grid-template-columns:30px 48px 1fr auto!important;
+  min-height:92px;
+  padding:14px 2px!important;
+}
+.start22RouteIcon{
+  width:44px;height:44px;
+  display:grid;place-items:center;
+  border-radius:15px;
+  background:#fff;
+  border:1px solid rgba(35,44,42,.08);
+  box-shadow:0 8px 18px rgba(28,37,34,.055);
+}
+.start22RouteIcon img{width:33px;height:33px;object-fit:contain;background:transparent!important}
+.start16RouteBoard>button:nth-child(1) .start22RouteIcon{background:#e7f4f1}
+.start16RouteBoard>button:nth-child(2) .start22RouteIcon{background:#fff0e9}
+.start16RouteBoard>button:nth-child(3) .start22RouteIcon{background:#eef0fb}
+
+.start22SupplyCue{
+  display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+  margin-top:24px;color:#5e625d;
+}
+.start22SupplyCue span{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid #ded8cf;border-radius:999px;background:#fff;font-size:10px;font-weight:800}
+.start22SupplyCue img{width:18px;height:18px;object-fit:contain;background:transparent!important}
+.start22SupplyCue i{font-style:normal;color:#13978f;font-size:13px;font-weight:900}
+
+/* The washed-out form intro in the supplied screenshot is a contrast regression. */
+.start16Send{background:#e9f4f1!important}
+.start16SendIntro{position:relative;padding-top:2px}
+.start16SendIntro .kicker{color:#158f88!important}
+.start16SendIntro h2{color:#101817!important;opacity:1!important;text-shadow:none!important}
+.start16SendIntro>p{color:#4f5b57!important}
+.start16Fine{color:#68736f!important;border-top-color:rgba(15,71,66,.16)!important}
+.start22SendMark{display:flex;align-items:center;margin:0 0 18px 0;height:58px}
+.start22SendMark span{width:54px;height:54px;display:grid;place-items:center;border-radius:18px;background:#fff;border:1px solid rgba(25,60,56,.09);box-shadow:0 9px 20px rgba(31,47,44,.07)}
+.start22SendMark span+span{margin-left:-10px;transform:rotate(6deg);background:#fff7ed}
+.start22SendMark span:first-child{transform:rotate(-5deg)}
+.start22SendMark img{width:39px;height:39px;object-fit:contain;background:transparent!important}
+
+/* ---------- Workshop: use the supplied editorial artwork in previews and articles ---------- */
+.workshopGuideCard.hasWorkshopMedia .workshopGuideCardVisual{background:#eef4f2!important;display:block!important}
+.workshopGuideCard.hasWorkshopMedia .workshopGuideCardVisual:before,
+.workshopGuideCard.hasWorkshopMedia .workshopGuideCardVisual:after{display:none!important}
+.workshop22PreviewImage{display:block;width:100%;height:100%;min-height:170px;object-fit:cover;object-position:center;background:#fff}
+.homeWorkshopCards .workshop22PreviewImage{min-height:155px}
+.workshopGuideCard.hasWorkshopMedia:hover .workshop22PreviewImage{transform:scale(1.018)}
+.workshop22PreviewImage{transition:transform .22s ease}
+
+.workshop22HeroMedia{
+  margin:34px 0 10px;
+  width:100%;
+  border-radius:28px;
+  overflow:hidden;
+  border:1px solid #dcd7ce;
+  background:#f2f3ef;
+  box-shadow:0 18px 42px rgba(29,31,27,.055);
+}
+.workshop22HeroMedia img{display:block;width:100%;aspect-ratio:16/8.6;object-fit:cover;background:#fff}
+
+@media(max-width:760px){
+  .model17FlowCard.family>img{width:150px!important;height:150px!important}
+  .model17LineThumb{width:130px!important;height:130px!important}.model17LineThumb img{width:108px!important;height:108px!important}
+  .start16RouteBoard{padding:7px 13px!important;border-radius:22px!important}
+  .start16RouteBoard>button{grid-template-columns:25px 42px 1fr auto!important;min-height:82px}
+  .start22RouteIcon{width:38px;height:38px;border-radius:13px}.start22RouteIcon img{width:28px;height:28px}
+  .start22SupplyCue{margin-top:18px}.start22SupplyCue span{font-size:9px;padding:6px 8px}.start22SupplyCue i{display:none}
+  .start22SendMark{margin-bottom:12px}
+  .workshop22HeroMedia{margin:24px 0 4px;border-radius:20px}
+}
+
+@media print{
+  .workshop22HeroMedia{box-shadow:none!important;border:0!important;margin:18px 0!important}
+}
