@@ -1,0 +1,696 @@
+/* =========================================================
+   V40.0 — PUBLIC SITE HUMAN-DESIGN PASS
+   Purpose: remove AI-template tells and unify the public site.
+   Scope: public website + login only. Portal/admin layout is untouched.
+   V39.32 JS remains for useful loading/confirmation behavior.
+   ========================================================= */
+
+:root{
+  --v40-paper:#fbfaf6;
+  --v40-paper-2:#f5f1e8;
+  --v40-ink:#161817;
+  --v40-muted:#68645e;
+  --v40-line:#d9d4cb;
+  --v40-line-strong:#bdb6ab;
+  --v40-teal:#169d95;
+  --v40-teal-dark:#0f6f69;
+  --v40-ease:cubic-bezier(.22,1,.36,1);
+}
+
+/* ---------- Stop the generic AI-SaaS surface language ---------- */
+:is(.publicPage,.publicLanding){
+  --card-radius:14px;
+  color:var(--v40-ink);
+}
+
+:is(.publicPage,.publicLanding) :where(
+  .publicCta,
+  .simplePublicPanel,
+  .contactCard,
+  .serviceCards article,
+  .publicMediaGrid article,
+  .publicFeatureStack article,
+  .customRequestPanel,
+  .workshopGuideCard,
+  .model17RhythmCard,
+  .model17FlowCard,
+  .model24Step,
+  .start16Send,
+  .start16Form,
+  .v3927ContactForm,
+  .loginCard
+){
+  box-shadow:none!important;
+}
+
+/* Reduce "everything is a pill / bubble". */
+:is(.publicPage,.publicLanding) :where(
+  .publicClinicalCard,
+  .publicCategoryCard16,
+  .workshopGuideCard,
+  .model17RhythmCard,
+  .model17FlowCard,
+  .model24Step,
+  .start16Send,
+  .start16Form,
+  .v3927ContactForm,
+  .loginCard,
+  .simplePublicPanel,
+  .serviceCards article,
+  .publicMediaGrid article,
+  .publicFeatureStack article,
+  .customRequestPanel
+){
+  border-radius:14px!important;
+}
+
+:is(.publicPage,.publicLanding) :where(.button,button){
+  border-radius:10px!important;
+}
+
+/* Keep truly functional compact pills only. */
+:is(.publicPage,.publicLanding) :where(
+  .chip,
+  .pill,
+  .workshopGuideCardMeta b,
+  .model17Principle
+){
+  border-radius:999px!important;
+}
+
+/* ---------- Navigation: editorial underline instead of active pill ---------- */
+.publicHeader{
+  box-shadow:none!important;
+  border-bottom:1px solid var(--v40-line)!important;
+}
+.publicNavLink{
+  position:relative!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding-left:10px!important;
+  padding-right:10px!important;
+}
+.publicNavLink::after{
+  content:"";
+  position:absolute;
+  left:10px;
+  right:10px;
+  bottom:4px;
+  height:1px;
+  background:currentColor;
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .42s var(--v40-ease);
+}
+.publicNavLink:hover::after,
+.publicNavLink.active::after{
+  transform:scaleX(1);
+}
+.publicNavLink.active{
+  color:#173b38!important;
+}
+
+/* ---------- Typography: one large moment per page, not every section ---------- */
+.publicPageHero{
+  padding-top:82px!important;
+  padding-bottom:50px!important;
+}
+.publicPageHero h1{
+  max-width:980px!important;
+  font-size:clamp(48px,5.6vw,78px)!important;
+  line-height:.96!important;
+  letter-spacing:-.058em!important;
+}
+.publicPageHero p{
+  max-width:780px!important;
+  font-size:clamp(16px,1.35vw,18px)!important;
+  line-height:1.62!important;
+  color:var(--v40-muted)!important;
+}
+
+.start16HeroCopy h1{
+  font-size:clamp(52px,5.5vw,76px)!important;
+  line-height:.94!important;
+  letter-spacing:-.058em!important;
+}
+.start16HeroCopy>p{
+  font-size:17px!important;
+  max-width:660px!important;
+}
+
+.model17HeroCopy h1.model38Headline{
+  max-width:980px!important;
+  font-size:clamp(52px,5.15vw,76px)!important;
+  line-height:.98!important;
+  letter-spacing:-.052em!important;
+}
+.model17HeroCopy>p{
+  font-size:18px!important;
+  line-height:1.58!important;
+}
+
+/* Secondary headings stop competing with the page headline. */
+:is(.publicPage,.publicLanding) :where(
+  .publicClinicalPreviewHead h2,
+  .model17Promise h2,
+  .model17SourceIntro h2,
+  .start16SendIntro h2,
+  .homePortalTeaser h2,
+  .workshopGuideDeckIntro h2
+){
+  font-size:clamp(30px,3.2vw,46px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.045em!important;
+}
+
+/* ---------- Home: more editorial, less template ---------- */
+.publicLanding .homeEditorialIntro{
+  background-image:none!important;
+  padding-top:88px!important;
+  padding-bottom:70px!important;
+}
+.publicLanding .homeEditorialCopy p{
+  font-size:15.5px!important;
+  line-height:1.68!important;
+}
+.publicLanding .homeDetailLedger{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  padding-bottom:88px!important;
+}
+.publicLanding .homeDetailLedger article{
+  min-height:0!important;
+  padding:25px 34px 28px 0!important;
+  border-left:0!important;
+  border-right:0!important;
+}
+.publicLanding .homeDetailLedger article:nth-child(even){
+  padding-left:34px!important;
+  border-left:1px solid var(--v40-line)!important;
+}
+.publicLanding .homeDetailLedger article:nth-child(n+3){
+  border-top:0!important;
+}
+.publicLanding .homeDetailLedger span{
+  margin-bottom:13px!important;
+  letter-spacing:.07em!important;
+  text-transform:none!important;
+  font-size:11px!important;
+}
+.publicLanding .homeDetailLedger b{
+  font-size:16px!important;
+}
+
+/* Human asymmetry in the six category choices. */
+.publicLanding .publicClinicalPreviewGrid{
+  display:grid!important;
+  grid-template-columns:repeat(12,minmax(0,1fr))!important;
+  gap:10px!important;
+}
+.publicLanding .publicClinicalCard:nth-child(1){grid-column:span 5}
+.publicLanding .publicClinicalCard:nth-child(2){grid-column:span 3}
+.publicLanding .publicClinicalCard:nth-child(3){grid-column:span 4}
+.publicLanding .publicClinicalCard:nth-child(4){grid-column:span 4}
+.publicLanding .publicClinicalCard:nth-child(5){grid-column:span 5}
+.publicLanding .publicClinicalCard:nth-child(6){grid-column:span 3}
+.publicLanding .publicClinicalCard{
+  min-height:190px!important;
+  padding:22px!important;
+  border-radius:14px!important;
+  border:1px solid rgba(25,30,28,.13)!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+.publicLanding .publicClinicalCard:nth-child(1),
+.publicLanding .publicClinicalCard:nth-child(5){
+  min-height:216px!important;
+}
+.publicLanding .publicClinicalCard small{
+  max-width:29ch!important;
+}
+.publicLanding .publicClinicalCard:hover{
+  transform:none!important;
+  box-shadow:none!important;
+  border-color:rgba(20,26,24,.34)!important;
+}
+.publicLanding .publicClinicalCard .publicClinicalArt{
+  transition:transform .72s var(--v40-ease),opacity .35s ease!important;
+}
+@media(hover:hover) and (pointer:fine){
+  .publicLanding .publicClinicalCard:hover .publicClinicalArt{
+    transform:translate3d(2px,-2px,0) rotate(.6deg);
+  }
+}
+
+/* Workshop: asymmetrical editorial deck, not three cloned cards. */
+.publicLanding .homeWorkshopCards{
+  background-image:none!important;
+}
+.publicLanding .homeWorkshopCardGrid{
+  grid-template-columns:1.28fr .92fr .92fr!important;
+  gap:12px!important;
+}
+.workshopGuideCard{
+  border-radius:14px!important;
+  box-shadow:none!important;
+}
+.workshopGuideCard:hover{
+  transform:none!important;
+  box-shadow:none!important;
+  border-color:#aaa59d!important;
+}
+.workshopGuideCardVisual:before,
+.workshopGuideCardVisual:after{
+  display:none!important;
+}
+.workshopGuideCardMeta b{
+  background:transparent!important;
+  border:1px solid #cbc7bf!important;
+}
+
+/* Portal teaser becomes an editorial band rather than another card. */
+.publicLanding .homePortalTeaser{
+  background:transparent!important;
+  border-top:1px solid var(--v40-line-strong)!important;
+  border-bottom:1px solid var(--v40-line-strong)!important;
+  border-left:0!important;
+  border-right:0!important;
+  padding-top:48px!important;
+  padding-bottom:48px!important;
+}
+
+/* ---------- Our Model ---------- */
+.model17HeroVisual{
+  border-radius:18px!important;
+  background:#e8f2ef!important;
+}
+.model17HeroVisual:before{
+  background:none!important;
+}
+.model17PaperCard{
+  border-radius:12px!important;
+  box-shadow:0 8px 18px rgba(28,41,38,.05)!important;
+}
+.model17Principle{
+  padding:0 0 5px!important;
+  margin-top:30px!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--v40-ink)!important;
+  border-bottom:1px solid var(--v40-ink)!important;
+}
+.model17Promise{
+  grid-template-columns:minmax(0,1.05fr) minmax(280px,.6fr)!important;
+  gap:clamp(42px,7vw,100px)!important;
+}
+.model17Promise h2{
+  max-width:780px!important;
+}
+.model17Promise>p{
+  font-size:18px!important;
+}
+.model17Rhythm{
+  gap:10px!important;
+}
+.model17RhythmCard{
+  min-height:300px!important;
+  border-radius:14px!important;
+}
+.model17RhythmCard h2{
+  font-size:clamp(32px,3.5vw,48px)!important;
+}
+.model17Source{
+  background:#f3efe7!important;
+}
+.model17FlowCard{
+  border-radius:14px!important;
+}
+.model17LineThumb,
+.model17SupplyFlow .model18FamilyVisual{
+  border-radius:10px!important;
+}
+.model24Step{
+  border-radius:14px!important;
+}
+.model24FamilyVisual img,
+.model24LineVisual img,
+.model24CategoryVisual img{
+  border-radius:10px!important;
+}
+.model17BottomCta{
+  border-top:1px solid #2b3533;
+}
+
+/* ---------- Catalogue ---------- */
+.publicCategoryCard16{
+  border-radius:14px!important;
+  box-shadow:inset 0 0 0 1px rgba(20,20,18,.08)!important;
+}
+.publicCategoryCard16:hover{
+  transform:none!important;
+  box-shadow:inset 0 0 0 1px rgba(20,20,18,.34)!important;
+}
+.publicCategoryCard16>i{
+  transition:transform .5s var(--v40-ease);
+}
+.publicCategoryCard16:hover>i{
+  transform:translate(2px,-2px);
+}
+.pscFamilySelectorCard,
+.pscFamilySelectorRail button{
+  border-radius:10px!important;
+  box-shadow:none!important;
+}
+.publicCatalogueGrid :where(.productCard,.v25ProductCard,.canvaProductCard){
+  border-radius:12px!important;
+  box-shadow:none!important;
+}
+.publicCatalogueGrid :where(.productCard,.v25ProductCard,.canvaProductCard):hover{
+  transform:none!important;
+  box-shadow:none!important;
+  border-color:#aaa59d!important;
+}
+.customRequestPanel{
+  background:#fff!important;
+  border-radius:12px!important;
+}
+
+/* ---------- Start: route board is the navigation, not another card collection ---------- */
+.start16RouteBoard{
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+.start16RouteBoard>button{
+  border-radius:0!important;
+}
+.start16RouteBoard>button:hover{
+  transform:none!important;
+  background:rgba(20,157,149,.035)!important;
+}
+.start16RouteBoard>button i{
+  transition:transform .55s var(--v40-ease)!important;
+}
+.start16RouteBoard>button:hover i{
+  transform:translateX(5px)!important;
+}
+.start16Send{
+  border-radius:14px!important;
+  background:#eef5f2!important;
+}
+.start16Form{
+  border-radius:12px!important;
+}
+
+/* ---------- Contact: information as a ledger, not four cards ---------- */
+.prospectContactGrid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:0!important;
+  border-top:1px solid var(--v40-line-strong);
+  border-bottom:1px solid var(--v40-line-strong);
+}
+.prospectContactGrid .contactCard{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  padding:24px 26px 26px 0!important;
+}
+.prospectContactGrid .contactCard:nth-child(even){
+  padding-left:26px!important;
+  border-left:1px solid var(--v40-line)!important;
+}
+.prospectContactGrid .contactCard:nth-child(n+3){
+  border-top:1px solid var(--v40-line)!important;
+}
+.prospectContactGrid .contactCard span{
+  letter-spacing:.08em!important;
+}
+.v3927ContactForm{
+  border-radius:12px!important;
+}
+.v3927ContactForm .prospectField input:not([type="file"]),
+.v3927ContactForm .prospectField select,
+.v3927ContactForm .prospectField textarea,
+.v3927ContactForm .rfqUploadField input[type="file"]{
+  border-radius:9px!important;
+}
+
+/* ---------- Generic public CTA: stop boxing every conclusion ---------- */
+.publicPage .publicCta{
+  background:transparent!important;
+  border-radius:0!important;
+  border-top:1px solid var(--v40-line-strong)!important;
+  border-bottom:1px solid var(--v40-line-strong)!important;
+  padding-top:42px!important;
+  padding-bottom:42px!important;
+}
+
+/* ---------- Media / service grids: convert clones into editorial rows ---------- */
+.publicPage .publicMediaGrid,
+.publicPage .serviceCards{
+  gap:0!important;
+  border-top:1px solid var(--v40-line)!important;
+}
+.publicPage .publicMediaGrid article,
+.publicPage .serviceCards article{
+  min-height:0!important;
+  border:0!important;
+  border-bottom:1px solid var(--v40-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  padding:26px 24px 28px 0!important;
+}
+.publicPage .publicMediaGrid article+article,
+.publicPage .serviceCards article+article{
+  padding-left:24px!important;
+  border-left:1px solid var(--v40-line)!important;
+}
+
+/* ---------- Login: functional form, not glossy SaaS card ---------- */
+.loginCard{
+  border-radius:14px!important;
+  box-shadow:none!important;
+}
+.loginIntro h1{
+  font-size:clamp(46px,5vw,66px)!important;
+}
+
+/* ---------- Natural interaction language ---------- */
+:is(.publicPage,.publicLanding) :where(button,.button,[role="button"]){
+  transition:
+    background-color .28s ease,
+    color .28s ease,
+    border-color .28s ease,
+    opacity .28s ease!important;
+}
+@media(hover:hover) and (pointer:fine){
+  :is(.publicPage,.publicLanding) :where(button,.button,[role="button"]):not(:disabled):hover{
+    transform:none!important;
+  }
+}
+:is(.publicPage,.publicLanding) :where(button,.button,[role="button"]):not(:disabled):active{
+  transform:translateY(1px)!important;
+}
+:is(.publicPage,.publicLanding) :where(a,.textAction,.canvaDetails,.canvaRequest){
+  text-underline-offset:4px;
+}
+
+/* ---------- V40 section motion ---------- */
+.v40-reveal{
+  opacity:0;
+  transform:translate3d(0,10px,0);
+  transition:
+    opacity .78s ease,
+    transform .92s var(--v40-ease);
+  will-change:opacity,transform;
+}
+.v40-reveal.v40-visible{
+  opacity:1;
+  transform:none;
+}
+.v40-reveal-media{
+  opacity:0;
+  transform:translate3d(0,8px,0) scale(1.006);
+  transition:
+    opacity .9s ease .06s,
+    transform 1.05s var(--v40-ease) .06s;
+  will-change:opacity,transform;
+}
+.v40-reveal-media.v40-visible{
+  opacity:1;
+  transform:none;
+}
+.v40-stagger > *{
+  opacity:0;
+  transform:translate3d(0,8px,0);
+  transition:
+    opacity .68s ease,
+    transform .82s var(--v40-ease);
+}
+.v40-stagger.v40-visible > *{
+  opacity:1;
+  transform:none;
+}
+.v40-stagger.v40-visible > *:nth-child(1){transition-delay:.03s}
+.v40-stagger.v40-visible > *:nth-child(2){transition-delay:.10s}
+.v40-stagger.v40-visible > *:nth-child(3){transition-delay:.17s}
+.v40-stagger.v40-visible > *:nth-child(4){transition-delay:.24s}
+.v40-stagger.v40-visible > *:nth-child(5){transition-delay:.31s}
+.v40-stagger.v40-visible > *:nth-child(6){transition-delay:.38s}
+
+/* Slower, subtler community-section motion than V39.35. */
+.homeCommunitySection::before{
+  transition:
+    filter 1.4s ease,
+    transform 1.55s var(--v40-ease),
+    opacity 1s ease!important;
+}
+.homeCommunityCopy h2{
+  transition:opacity .82s ease .1s,transform .96s var(--v40-ease) .1s!important;
+}
+.homeCommunityBody p:nth-child(1){
+  transition:opacity .78s ease .24s,transform .9s var(--v40-ease) .24s!important;
+}
+.homeCommunityBody p:nth-child(2){
+  transition:opacity .78s ease .36s,transform .9s var(--v40-ease) .36s!important;
+}
+
+/* Keep useful loading feedback from V39.32 JS after its stylesheet is retired. */
+.ux32-loading,
+.ux32-native-loading{
+  position:relative!important;
+  pointer-events:none!important;
+  cursor:progress!important;
+  padding-right:42px!important;
+  opacity:.88!important;
+}
+.ux32-loading::after,
+.ux32-native-loading::after{
+  content:"";
+  position:absolute;
+  right:15px;
+  top:50%;
+  width:14px;
+  height:14px;
+  margin-top:-7px;
+  box-sizing:border-box;
+  border:2px solid rgba(100,111,108,.22);
+  border-top-color:var(--v40-teal);
+  border-radius:50%;
+  animation:v40Spin .78s linear infinite;
+}
+:where(.button.primary,.button.dark,.semanticPrimary,.canvaRequest).ux32-loading::after,
+:where(.button.primary,.button.dark,.semanticPrimary,.canvaRequest).ux32-native-loading::after{
+  border-color:rgba(255,255,255,.3);
+  border-top-color:#fff;
+}
+.ux32-confirmed{
+  background:#e5f5f1!important;
+  color:#0a766f!important;
+  border-color:#9bd8d1!important;
+}
+.ux32-check{
+  display:inline-grid;
+  place-items:center;
+  width:18px;height:18px;margin-right:7px;
+  border-radius:50%;
+  background:var(--v40-teal);
+  color:#fff;font-size:11px;line-height:1;
+}
+@keyframes v40Spin{to{transform:rotate(360deg)}}
+
+/* ---------- Responsive ---------- */
+@media(max-width:980px){
+  .publicLanding .publicClinicalPreviewGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  .publicLanding .publicClinicalCard{
+    grid-column:auto!important;
+    min-height:180px!important;
+  }
+  .publicLanding .homeWorkshopCardGrid{
+    grid-template-columns:1fr 1fr!important;
+  }
+  .publicLanding .homeWorkshopCardGrid .workshopGuideCard:first-child{
+    grid-column:1/-1;
+  }
+  .model17Promise{
+    grid-template-columns:1fr!important;
+  }
+}
+
+@media(max-width:680px){
+  .publicPageHero{
+    padding-top:52px!important;
+    padding-bottom:34px!important;
+  }
+  .publicPageHero h1{
+    font-size:clamp(42px,12vw,58px)!important;
+  }
+  .start16HeroCopy h1,
+  .model17HeroCopy h1.model38Headline{
+    font-size:clamp(42px,12vw,56px)!important;
+  }
+  .publicLanding .homeDetailLedger{
+    grid-template-columns:1fr!important;
+  }
+  .publicLanding .homeDetailLedger article,
+  .publicLanding .homeDetailLedger article:nth-child(even){
+    padding:22px 0!important;
+    border-left:0!important;
+    border-top:1px solid var(--v40-line)!important;
+  }
+  .publicLanding .publicClinicalPreviewGrid{
+    grid-template-columns:1fr 1fr!important;
+    gap:8px!important;
+  }
+  .publicLanding .publicClinicalCard{
+    min-height:158px!important;
+    padding:16px!important;
+  }
+  .publicLanding .homeWorkshopCardGrid{
+    grid-template-columns:1fr!important;
+  }
+  .publicLanding .homeWorkshopCardGrid .workshopGuideCard:first-child{
+    grid-column:auto;
+  }
+  .prospectContactGrid{
+    grid-template-columns:1fr!important;
+  }
+  .prospectContactGrid .contactCard,
+  .prospectContactGrid .contactCard:nth-child(even){
+    padding:20px 0!important;
+    border-left:0!important;
+    border-top:1px solid var(--v40-line)!important;
+  }
+  .publicPage .publicMediaGrid,
+  .publicPage .serviceCards{
+    grid-template-columns:1fr!important;
+  }
+  .publicPage .publicMediaGrid article,
+  .publicPage .serviceCards article,
+  .publicPage .publicMediaGrid article+article,
+  .publicPage .serviceCards article+article{
+    padding:22px 0!important;
+    border-left:0!important;
+  }
+}
+
+/* Motion accessibility */
+@media(prefers-reduced-motion:reduce){
+  .v40-reveal,
+  .v40-reveal-media,
+  .v40-stagger>*{
+    opacity:1!important;
+    transform:none!important;
+    transition:none!important;
+  }
+  .homeCommunitySection::before,
+  .homeCommunityCopy h2,
+  .homeCommunityBody p{
+    transition:none!important;
+  }
+}
