@@ -1435,3 +1435,360 @@ body{
     opacity:1!important;transform:none!important;transition:none!important;
   }
 }
+
+
+/* =========================================================
+   V44.1 — HOME CLINICAL-NEEDS QUALITY CORRECTION
+   Fixes the visibly broken/cheap mosaic from V44.
+   Goal: match the compositional discipline of the approved Our Model page.
+   ========================================================= */
+
+.publicLanding .publicClinicalPreview{
+  --clinical-gap:14px;
+  padding-top:104px!important;
+  padding-bottom:112px!important;
+  background:#efeae2!important;
+}
+
+.publicLanding .publicClinicalPreviewHead{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  gap:48px!important;
+  align-items:end!important;
+  width:100%!important;
+  margin:0 auto 42px!important;
+}
+
+.publicLanding .publicClinicalPreviewHead>div{
+  min-width:0!important;
+  max-width:760px!important;
+}
+
+.publicLanding .publicClinicalPreviewHead h2{
+  margin:0 0 16px!important;
+  max-width:680px!important;
+  font-size:clamp(46px,4.8vw,70px)!important;
+  line-height:.94!important;
+  letter-spacing:-.06em!important;
+  font-weight:800!important;
+}
+
+.publicLanding .publicClinicalPreviewHead p{
+  margin:0!important;
+  max-width:620px!important;
+  font-size:15px!important;
+  line-height:1.65!important;
+  color:#6c665f!important;
+}
+
+.publicLanding .publicClinicalPreviewHead .textAction{
+  align-self:end!important;
+  margin:0 0 6px!important;
+  padding:0 0 5px!important;
+  border-bottom:1px solid #2f5f59!important;
+  border-radius:0!important;
+  color:#1e5550!important;
+  font-size:12px!important;
+  font-weight:800!important;
+  white-space:nowrap!important;
+}
+
+/* Deliberate editorial layout:
+   Vitals is the anchor card.
+   Wounds and Emergency flank it.
+   Three supporting categories form a clean lower row.
+*/
+.publicLanding .publicClinicalPreviewGrid{
+  display:grid!important;
+  grid-template-columns:repeat(12,minmax(0,1fr))!important;
+  grid-template-rows:244px 244px 218px!important;
+  gap:var(--clinical-gap)!important;
+  width:100%!important;
+  margin:0 auto!important;
+  overflow:visible!important;
+}
+
+.publicLanding .publicClinicalCard{
+  position:relative!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-start!important;
+  align-items:flex-start!important;
+  min-width:0!important;
+  min-height:0!important;
+  height:auto!important;
+  padding:26px!important;
+  padding-right:26px!important;
+  overflow:hidden!important;
+  border:1px solid rgba(22,24,22,.12)!important;
+  border-radius:24px!important;
+  box-shadow:none!important;
+  text-align:left!important;
+  isolation:isolate!important;
+}
+
+/* Exact placement by current DOM order:
+   1 wounds, 2 breathing, 3 vitals, 4 infection, 5 emergency, 6 equipment */
+.publicLanding .publicClinicalCard:nth-child(1){
+  grid-column:8 / 13!important;
+  grid-row:1!important;
+}
+.publicLanding .publicClinicalCard:nth-child(2){
+  grid-column:1 / 5!important;
+  grid-row:3!important;
+}
+.publicLanding .publicClinicalCard:nth-child(3){
+  grid-column:1 / 8!important;
+  grid-row:1 / 3!important;
+}
+.publicLanding .publicClinicalCard:nth-child(4){
+  grid-column:5 / 9!important;
+  grid-row:3!important;
+}
+.publicLanding .publicClinicalCard:nth-child(5){
+  grid-column:8 / 13!important;
+  grid-row:2!important;
+}
+.publicLanding .publicClinicalCard:nth-child(6){
+  grid-column:9 / 13!important;
+  grid-row:3!important;
+}
+
+/* Typography: do not let text compete with art. */
+.publicLanding .publicClinicalCard>span:not(.publicClinicalArt){
+  position:relative!important;
+  z-index:2!important;
+  display:block!important;
+  width:auto!important;
+  max-width:72%!important;
+  margin:0!important;
+  font-size:clamp(22px,2vw,32px)!important;
+  line-height:.98!important;
+  letter-spacing:-.045em!important;
+  font-weight:800!important;
+  color:var(--need-ink, #151817)!important;
+  overflow:visible!important;
+}
+
+.publicLanding .publicClinicalCard>small{
+  position:relative!important;
+  z-index:2!important;
+  display:block!important;
+  max-width:34ch!important;
+  margin-top:12px!important;
+  font-size:11.5px!important;
+  line-height:1.5!important;
+  color:color-mix(in srgb,var(--need-ink,#222) 70%,transparent)!important;
+  overflow:visible!important;
+}
+
+/* Anchor card carries the most hierarchy and air. */
+.publicLanding .publicClinicalCard:nth-child(3){
+  padding:34px!important;
+}
+.publicLanding .publicClinicalCard:nth-child(3)>span:not(.publicClinicalArt){
+  max-width:68%!important;
+  font-size:clamp(34px,3.2vw,50px)!important;
+  line-height:.95!important;
+}
+.publicLanding .publicClinicalCard:nth-child(3)>small{
+  max-width:39ch!important;
+  font-size:13px!important;
+  line-height:1.55!important;
+}
+
+/* Art placement: intentional and card-specific, not one rule forced on all cards. */
+.publicLanding .publicClinicalCard .publicClinicalArt{
+  position:absolute!important;
+  z-index:1!important;
+  display:block!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  pointer-events:none!important;
+  object-fit:contain!important;
+}
+
+/* Wounds */
+.publicLanding .publicClinicalCard:nth-child(1) .publicClinicalArt{
+  top:auto!important;
+  right:22px!important;
+  bottom:18px!important;
+  width:112px!important;
+  height:112px!important;
+}
+
+/* Breathing */
+.publicLanding .publicClinicalCard:nth-child(2) .publicClinicalArt{
+  top:auto!important;
+  right:20px!important;
+  bottom:14px!important;
+  width:106px!important;
+  height:106px!important;
+}
+
+/* Vitals anchor */
+.publicLanding .publicClinicalCard:nth-child(3) .publicClinicalArt{
+  top:auto!important;
+  right:38px!important;
+  bottom:26px!important;
+  width:310px!important;
+  height:255px!important;
+}
+.publicLanding .publicClinicalCard:nth-child(3)::after{
+  content:"";
+  position:absolute;
+  inset:auto 26px 24px 26px;
+  height:46%;
+  z-index:0;
+  border-radius:20px;
+  background:rgba(255,255,255,.22);
+}
+
+/* Infection */
+.publicLanding .publicClinicalCard:nth-child(4) .publicClinicalArt{
+  top:auto!important;
+  right:18px!important;
+  bottom:14px!important;
+  width:98px!important;
+  height:98px!important;
+}
+
+/* Emergency */
+.publicLanding .publicClinicalCard:nth-child(5) .publicClinicalArt{
+  top:auto!important;
+  right:22px!important;
+  bottom:18px!important;
+  width:118px!important;
+  height:118px!important;
+}
+
+/* Equipment */
+.publicLanding .publicClinicalCard:nth-child(6) .publicClinicalArt{
+  top:auto!important;
+  right:18px!important;
+  bottom:12px!important;
+  width:108px!important;
+  height:108px!important;
+}
+
+/* Supporting cards use a tighter text scale. */
+.publicLanding .publicClinicalCard:nth-child(2)>span:not(.publicClinicalArt),
+.publicLanding .publicClinicalCard:nth-child(4)>span:not(.publicClinicalArt),
+.publicLanding .publicClinicalCard:nth-child(6)>span:not(.publicClinicalArt){
+  max-width:66%!important;
+  font-size:clamp(20px,1.65vw,26px)!important;
+}
+.publicLanding .publicClinicalCard:nth-child(2)>small,
+.publicLanding .publicClinicalCard:nth-child(4)>small,
+.publicLanding .publicClinicalCard:nth-child(6)>small{
+  max-width:25ch!important;
+  font-size:10.5px!important;
+}
+
+/* No cheap lift. Tiny border response only. */
+.publicLanding .publicClinicalCard:hover{
+  transform:none!important;
+  box-shadow:none!important;
+  border-color:rgba(22,24,22,.28)!important;
+}
+
+/* Footer of the category section becomes a quiet ledger line. */
+.publicLanding .publicClinicalPreviewFoot{
+  width:100%!important;
+  margin:34px auto 0!important;
+  padding-top:20px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:26px!important;
+  border-top:1px solid #c9c1b7!important;
+}
+.publicLanding .publicClinicalPreviewFoot>span{
+  max-width:760px!important;
+  color:#6e6861!important;
+  font-size:11px!important;
+  line-height:1.55!important;
+}
+.publicLanding .publicClinicalPreviewFoot .button{
+  flex:0 0 auto!important;
+  border-radius:999px!important;
+}
+
+/* At this width, stop pretending the asymmetric desktop composition still fits. */
+@media(max-width:1050px){
+  .publicLanding .publicClinicalPreviewGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-template-rows:auto!important;
+  }
+  .publicLanding .publicClinicalCard,
+  .publicLanding .publicClinicalCard:nth-child(n){
+    grid-column:auto!important;
+    grid-row:auto!important;
+    min-height:210px!important;
+    padding:24px!important;
+  }
+  .publicLanding .publicClinicalCard:nth-child(3){
+    grid-column:1 / -1!important;
+    min-height:360px!important;
+    padding:30px!important;
+  }
+  .publicLanding .publicClinicalCard:nth-child(3) .publicClinicalArt{
+    width:250px!important;
+    height:210px!important;
+    right:28px!important;
+    bottom:22px!important;
+  }
+}
+
+@media(max-width:700px){
+  .publicLanding .publicClinicalPreview{
+    padding-top:70px!important;
+    padding-bottom:74px!important;
+  }
+  .publicLanding .publicClinicalPreviewHead{
+    grid-template-columns:1fr!important;
+    gap:18px!important;
+    margin-bottom:28px!important;
+  }
+  .publicLanding .publicClinicalPreviewHead .textAction{
+    justify-self:start!important;
+  }
+  .publicLanding .publicClinicalPreviewGrid{
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+  }
+  .publicLanding .publicClinicalCard,
+  .publicLanding .publicClinicalCard:nth-child(n){
+    grid-column:auto!important;
+    min-height:190px!important;
+    padding:22px!important;
+  }
+  .publicLanding .publicClinicalCard:nth-child(3){
+    min-height:320px!important;
+  }
+  .publicLanding .publicClinicalCard>span:not(.publicClinicalArt),
+  .publicLanding .publicClinicalCard:nth-child(n)>span:not(.publicClinicalArt){
+    max-width:70%!important;
+    font-size:25px!important;
+  }
+  .publicLanding .publicClinicalCard>small,
+  .publicLanding .publicClinicalCard:nth-child(n)>small{
+    max-width:27ch!important;
+    font-size:10.5px!important;
+  }
+  .publicLanding .publicClinicalCard:nth-child(3)>span:not(.publicClinicalArt){
+    font-size:36px!important;
+  }
+  .publicLanding .publicClinicalCard:nth-child(3) .publicClinicalArt{
+    width:205px!important;
+    height:175px!important;
+    right:18px!important;
+    bottom:18px!important;
+  }
+  .publicLanding .publicClinicalPreviewFoot{
+    align-items:flex-start!important;
+    flex-direction:column!important;
+  }
+}
