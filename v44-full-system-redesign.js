@@ -262,3 +262,50 @@
   if(app) new MutationObserver(schedule).observe(app,{childList:true,subtree:true});
   window.addEventListener('hashchange',schedule);
 })();
+
+
+/* =========================================================
+   V44.4 — replace home hero with the supplied desktop/mobile art
+   ========================================================= */
+(() => {
+  'use strict';
+
+  function applyHero(){
+    const page = document.querySelector('main.publicLanding');
+    if(!page) return;
+
+    const hero = page.querySelector('.m44HomeHero');
+    if(!hero || hero.dataset.v444Hero === '1') return;
+
+    hero.innerHTML = `
+      <div class="m445HomeHeroScene m44Reveal" aria-label="Pharma Service hero">
+        <div class="m445HomeHeroText">
+          <p>Offering open supply,<br>replenishment & replacement of<br>health products to institutions</p>
+          <h1>where better community health begins.</h1>
+        </div>
+      </div>
+    `;
+    hero.dataset.v444Hero = '1';
+  }
+
+  function apply(){
+    applyHero();
+  }
+
+  let queued=false;
+  function schedule(){
+    if(queued) return;
+    queued=true;
+    requestAnimationFrame(()=>{{ queued=false; apply(); }});
+  }
+
+  if(document.readyState==='loading'){{
+    document.addEventListener('DOMContentLoaded', schedule, {{once:true}});
+  }} else {{
+    schedule();
+  }}
+
+  const app=document.getElementById('app');
+  if(app) new MutationObserver(schedule).observe(app,{{childList:true,subtree:true}});
+  window.addEventListener('hashchange', schedule);
+})();

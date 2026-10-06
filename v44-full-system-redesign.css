@@ -2872,3 +2872,139 @@ main.workshopPage:not(.workshopArticlePage) .workshopPrinciple{
     right:16px!important;
   }
 }
+
+
+/* =========================================================
+   V44.4 — HERO REPLACEMENT / TYPOGRAPHIC CLEANUP
+   ========================================================= */
+
+/* 1) Remove the framed box around the logo in header / portal topbar */
+.publicLogo,
+.customerShell .topbarBrandSlot,
+.customerShell .sidebar .brand{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+}
+
+/* 2) Remove the old community section entirely */
+.homeCommunitySection{
+  display:none!important;
+}
+
+/* 3–6) Replace the home hero with the new image-led composition */
+.m44HomeHero{
+  background:var(--v44-canvas)!important;
+  padding:0!important;
+}
+.m445HomeHeroScene{
+  width:min(1680px,100%);
+  min-height:760px;
+  margin:0 auto;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  padding:56px clamp(28px,5vw,86px);
+  background-image:url('/v44-4-home-hero-desktop.png');
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center center;
+  overflow:hidden;
+}
+.m445HomeHeroText{
+  width:min(460px,100%);
+  margin-left:clamp(18px,4vw,64px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  color:#151715;
+}
+.m445HomeHeroText p{
+  margin:0 0 28px;
+  font-size:clamp(18px,1.65vw,24px);
+  line-height:.98;
+  letter-spacing:-.045em;
+  font-weight:450;
+  max-width:23ch;
+}
+.m445HomeHeroText h1{
+  margin:0;
+  max-width:8.4ch;
+  font-size:clamp(48px,4.8vw,78px);
+  line-height:.86;
+  letter-spacing:-.082em;
+  font-weight:500;
+  text-wrap:balance;
+}
+
+/* subtle text-system pass across the public site */
+.publicLanding h2,
+.publicLanding .homeWorkshopIntro h2,
+.publicLanding .publicClinicalPreviewHead h2,
+.publicCataloguePage .catalogue16Hero h1,
+.publicCataloguePage .publicCatalogueJourney16 h2,
+.start16Page .start16Hero h1,
+.publicPage .publicPageHero h1,
+.loginPublicPage .loginIntro h1,
+.workshopPage .workshopHero h1,
+.model43 h1,
+.model43 h2{
+  letter-spacing:-.062em!important;
+  line-height:.92!important;
+  font-weight:500!important;
+  text-wrap:balance;
+}
+
+.publicLanding p,
+.publicCataloguePage p,
+.start16Page p,
+.publicPage p,
+.loginPublicPage p,
+.workshopPage p,
+.model43 p{
+  line-height:1.48!important;
+  letter-spacing:-.018em!important;
+}
+
+/* keep headline cards and feature labels a bit cleaner too */
+.publicLanding .publicClinicalCard b,
+.publicCategoryCopy16 b,
+.customerShell .clinicNeedCopy b,
+.homeWorkshopCardGrid .workshopGuideCard h3,
+.workshopGuideCard h3,
+.workshopArticleCard h3{
+  letter-spacing:-.05em!important;
+  line-height:.95!important;
+}
+
+@media (max-width: 900px){
+  .m445HomeHeroScene{
+    min-height:860px;
+    padding:56px 26px 42px;
+    align-items:flex-start;
+    justify-content:center;
+    background-image:url('/v44-4-home-hero-mobile.png');
+    background-position:center top;
+  }
+  .m445HomeHeroText{
+    width:min(310px,100%);
+    margin:0 auto;
+  }
+  .m445HomeHeroText p{
+    font-size:14px;
+    line-height:1.02;
+    letter-spacing:-.04em;
+    margin-bottom:20px;
+    max-width:19ch;
+  }
+  .m445HomeHeroText h1{
+    max-width:7.2ch;
+    font-size:clamp(30px,9vw,54px);
+    line-height:.88;
+    letter-spacing:-.082em;
+  }
+}
