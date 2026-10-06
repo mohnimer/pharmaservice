@@ -399,3 +399,43 @@
   }
   window.addEventListener('hashchange', schedule);
 })();
+
+
+/* V44.7 — keep the supplied-reference vitals icon persistent after rerenders. */
+(() => {
+  'use strict';
+  const src = '/assets/clinical-icons/vitals-reference.svg';
+
+  function apply(){
+    document.querySelectorAll('.publicClinicalCard[data-go="catalogue/vitals"] .publicClinicalArt').forEach(img => {
+      if(img.tagName === 'IMG'){
+        img.src = src;
+        img.removeAttribute('srcset');
+        img.removeAttribute('onerror');
+      }
+    });
+    document.querySelectorAll('.publicCategoryCard16[data-go="catalogue/vitals"] .publicCategoryArt16 img').forEach(img => {
+      img.src = src;
+      img.removeAttribute('srcset');
+      img.removeAttribute('onerror');
+    });
+    document.querySelectorAll('.customerShell .clinicNeedCard[data-go$="/vitals"] .clinicNeedIcon img').forEach(img => {
+      img.src = src;
+      img.removeAttribute('srcset');
+      img.removeAttribute('onerror');
+    });
+  }
+
+  let queued=false;
+  function schedule(){
+    if(queued) return;
+    queued=true;
+    requestAnimationFrame(()=>{ queued=false; apply(); });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',schedule,{once:true});
+  } else schedule();
+  const app=document.getElementById('app');
+  if(app) new MutationObserver(schedule).observe(app,{childList:true,subtree:true});
+  window.addEventListener('hashchange',schedule);
+})();

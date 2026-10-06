@@ -3216,3 +3216,112 @@ main.workshopPage:not(.workshopArticlePage) .workshopPrinciple{
   max-height:64px!important;
   overflow:hidden!important;
 }
+
+
+/* =========================================================
+   V44.7 — REAL PRODUCT IMAGES BACK
+   Show real listing photography. Hide only generated/generic fallback art.
+   ========================================================= */
+
+/* Public catalogue */
+.publicCatalogueVisual > img:not(.publicDhaMark){
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  padding:26px!important;
+  background:#fff!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+.publicCatalogueVisual > img[src*="/assets/products/inst-" i],
+.publicCatalogueVisual > img[src*="clinic-basics.jpg" i],
+.publicCatalogueVisual > img[src*="pharmaservice" i]{
+  display:none!important;
+}
+
+/* Buyer portal product grid */
+.customerShell .productVisual .productMainImage{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  padding:26px!important;
+  background:#fff!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+.customerShell .productVisual .productMainImage[src*="/assets/products/inst-" i],
+.customerShell .productVisual .productMainImage[src*="clinic-basics.jpg" i],
+.customerShell .productVisual .productMainImage[src*="pharmaservice" i]{
+  display:none!important;
+}
+
+/* Product-detail modal */
+.detailProductImageWrap > img:not(.detailDhaIcon){
+  display:block!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  padding:24px!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+.detailProductImageWrap > img[src*="/assets/products/inst-" i],
+.detailProductImageWrap > img[src*="clinic-basics.jpg" i],
+.detailProductImageWrap > img[src*="pharmaservice" i]{
+  display:none!important;
+}
+
+/* Replenish / request visuals follow the same rule. */
+.customerShell .replenishVisual img,
+.requestLineImage img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  padding:18px!important;
+  background:#fff!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+.customerShell .replenishVisual img[src*="/assets/products/inst-" i],
+.customerShell .replenishVisual img[src*="clinic-basics.jpg" i],
+.requestLineImage img[src*="/assets/products/inst-" i],
+.requestLineImage img[src*="clinic-basics.jpg" i]{
+  display:none!important;
+}
+
+/* Keep blank image fields genuinely blank when no real listing image exists. */
+.productNeedVisual,
+.publicCatalogueVisual:has(> img[src*="/assets/products/inst-" i]),
+.customerShell .productVisual:has(> img[src*="/assets/products/inst-" i]){
+  background:#fff!important;
+}
+
+/* DHA mapping mark remains visible above the product photo / blank field. */
+.publicDhaMark,
+.cardDhaIcon,
+.detailDhaIcon,
+.dhaRequirementIcon{
+  display:block!important;
+  z-index:4!important;
+}
+
+/* Vitals icon: use the supplied reference style, not the BP cuff collage. */
+.publicLanding .publicClinicalCard[data-go="catalogue/vitals"] .publicClinicalArt{
+  content:url("/assets/clinical-icons/vitals-reference.svg")!important;
+  width:64px!important;
+  height:64px!important;
+  object-fit:contain!important;
+  padding:0!important;
+}
+.publicCategoryCard16[data-go="catalogue/vitals"] .publicCategoryArt16 img,
+.customerShell .clinicNeedCard[data-go$="/vitals"] .clinicNeedIcon img{
+  content:url("/assets/clinical-icons/vitals-reference.svg")!important;
+  width:64px!important;
+  height:64px!important;
+  object-fit:contain!important;
+}
