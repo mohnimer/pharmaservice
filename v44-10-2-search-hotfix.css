@@ -1,0 +1,140 @@
+
+/* =========================================================
+   V44.10.2 — SEARCH HOTFIX
+   Portal catalogue search is genuinely white, with one clean border.
+   Public catalogue search no longer rerenders on every keystroke.
+   ========================================================= */
+
+/* SHOP PORTAL — remove the cream/beige search panel treatment entirely. */
+.customerShell .shopFilterBar.v25FilterBar,
+.customerShell .shopFilterBar.v26FilterBar,
+.customerShell .filterBar.shopFilterBar{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(180px,230px) minmax(150px,190px)!important;
+  gap:14px!important;
+  align-items:stretch!important;
+  width:100%!important;
+  margin:28px 0 34px!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+
+/* The actual search field is one clean white object. */
+.customerShell .shopFilterBar .searchInput{
+  min-width:0!important;
+  min-height:66px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  padding:0 18px!important;
+  background:#fff!important;
+  border:1px solid #cfcac3!important;
+  border-radius:14px!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+
+.customerShell .shopFilterBar .searchInput > span{
+  flex:0 0 auto!important;
+  display:grid!important;
+  place-items:center!important;
+  width:20px!important;
+  height:20px!important;
+  padding:0!important;
+  margin:0!important;
+  background:#fff!important;
+  border:0!important;
+  color:#4d5350!important;
+  font-size:18px!important;
+  line-height:1!important;
+}
+
+.customerShell .shopFilterBar .searchInput input,
+.customerShell .shopFilterBar input[data-cat-q]{
+  flex:1 1 auto!important;
+  width:100%!important;
+  min-width:0!important;
+  height:64px!important;
+  min-height:64px!important;
+  margin:0!important;
+  padding:0!important;
+  background:#fff!important;
+  background-color:#fff!important;
+  border:0!important;
+  border-radius:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  color:#161817!important;
+  font:400 15px/1.2 "DM Sans",sans-serif!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+}
+
+.customerShell .shopFilterBar .searchInput input::placeholder{
+  color:#77736e!important;
+  opacity:1!important;
+}
+
+/* Filters visually belong to the same white system. */
+.customerShell .shopFilterBar select{
+  min-height:66px!important;
+  height:66px!important;
+  padding:0 42px 0 18px!important;
+  background:#fff!important;
+  background-color:#fff!important;
+  border:1px solid #cfcac3!important;
+  border-radius:14px!important;
+  box-shadow:none!important;
+  color:#161817!important;
+  font:400 14px/1.2 "DM Sans",sans-serif!important;
+}
+
+.customerShell .shopFilterBar .searchInput:focus-within,
+.customerShell .shopFilterBar select:focus{
+  border-color:#47746f!important;
+  box-shadow:0 0 0 3px rgba(37,170,162,.08)!important;
+}
+
+/* Public catalogue: while a query is active, don't make the visitor scroll
+   through the category grid before seeing the results. */
+.publicCataloguePage.v44102Searching .publicCatalogueJourney16{
+  display:none!important;
+}
+
+.publicCataloguePage.v44102Searching .catalogue16Controls{
+  padding-top:34px!important;
+}
+
+/* If the portal catalogue landing's prominent search is active, hide the
+   category chooser immediately so search feels like search, not navigation. */
+.customerShell .v26CatalogueLanding.v44102Searching .clinicNeedHeading,
+.customerShell .v26CatalogueLanding.v44102Searching .clinicNeedRail{
+  display:none!important;
+}
+
+@media(max-width:1050px){
+  .customerShell .shopFilterBar.v25FilterBar,
+  .customerShell .shopFilterBar.v26FilterBar,
+  .customerShell .filterBar.shopFilterBar{
+    grid-template-columns:minmax(0,1fr) 180px!important;
+  }
+  .customerShell .shopFilterBar select:last-child{
+    grid-column:2!important;
+  }
+}
+
+@media(max-width:760px){
+  .customerShell .shopFilterBar.v25FilterBar,
+  .customerShell .shopFilterBar.v26FilterBar,
+  .customerShell .filterBar.shopFilterBar{
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+    margin:20px 0 28px!important;
+  }
+  .customerShell .shopFilterBar select:last-child{
+    grid-column:auto!important;
+  }
+}
