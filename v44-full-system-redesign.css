@@ -3008,3 +3008,211 @@ main.workshopPage:not(.workshopArticlePage) .workshopPrinciple{
     letter-spacing:-.082em;
   }
 }
+
+
+/* =========================================================
+   V44.6 — HERO ALIGNMENT + SITE TITLE SCALE + VITALS FIX
+   ========================================================= */
+
+:root{
+  /* The approved home-section headline scale becomes the site standard. */
+  --psc-major-title:clamp(50px,4.8vw,70px);
+  --psc-major-title-mobile:clamp(38px,10.5vw,52px);
+}
+
+/* ---------------------------------------------------------
+   1) HOME HERO — desktop text left aligned and slightly higher.
+   Mobile remains centered, as previously approved.
+   --------------------------------------------------------- */
+@media (min-width:901px){
+  .m445HomeHeroScene{
+    align-items:flex-start!important;
+    justify-content:flex-start!important;
+    padding-top:clamp(132px,10vw,170px)!important;
+    padding-bottom:50px!important;
+  }
+
+  .m445HomeHeroText{
+    width:min(500px,38vw)!important;
+    margin-left:clamp(52px,7vw,118px)!important;
+    align-items:flex-start!important;
+    text-align:left!important;
+  }
+
+  .m445HomeHeroText p{
+    max-width:25ch!important;
+    margin:0 0 23px!important;
+    font-size:clamp(17px,1.45vw,22px)!important;
+    line-height:1.02!important;
+    letter-spacing:-.042em!important;
+    text-align:left!important;
+  }
+
+  .m445HomeHeroText h1{
+    max-width:8.7ch!important;
+    font-size:var(--psc-major-title)!important;
+    line-height:.89!important;
+    letter-spacing:-.078em!important;
+    text-align:left!important;
+  }
+}
+
+@media (max-width:900px){
+  .m445HomeHeroText{
+    align-items:center!important;
+    text-align:center!important;
+  }
+  .m445HomeHeroText p,
+  .m445HomeHeroText h1{
+    text-align:center!important;
+  }
+}
+
+/* ---------------------------------------------------------
+   2) ONE MAJOR TITLE SCALE ACROSS THE PUBLIC WEBSITE.
+   This intentionally targets page / section titles only —
+   product names and card headings stay smaller.
+   --------------------------------------------------------- */
+
+/* Home sections */
+.publicLanding .homeEditorialLead h2,
+.publicLanding .publicClinicalPreviewHead h2,
+.publicLanding .homeWorkshopIntro h2,
+.publicLanding .homePortalTeaser h2,
+
+/* Our Model */
+.model43 .m43HeroCopy h1,
+.model43 .m43Statement h2,
+.model43 .m43TransformHead h2,
+.model43 .m43RhythmFeature h2,
+.model43 .m43Final h2,
+
+/* Start */
+.start16Page .start16HeroCopy h1,
+.start16Page .start16SendIntro h2,
+
+/* Catalogue */
+.publicCataloguePage .catalogue16Hero h1,
+.publicCataloguePage .publicCatalogueJourneyHead16 h2,
+.publicCataloguePage .publicCatalogueResults h2,
+
+/* Workshop */
+.workshopPage .workshopHero h1,
+.workshopPage .workshopGuideDeckIntro h2,
+.workshopPage .workshopCategorySection h2,
+.workshopArticlePage .workshopArticleHeader h1,
+
+/* Contact / generic public */
+.publicPage .publicPageHero h1,
+.publicPage .prospectIntro h2,
+.publicPage .publicCta h2,
+
+/* Login */
+.loginPublicPage .loginIntro h1,
+
+/* Buyer portal */
+.customerShell .v26HomeHero h1,
+.customerShell .pageHeader h1,
+.customerShell .categoryHero h1{
+  font-size:var(--psc-major-title)!important;
+  line-height:.92!important;
+  letter-spacing:-.062em!important;
+  font-weight:500!important;
+  text-wrap:balance;
+}
+
+/* Our Model's first title was visually overpowering; keep each line in the same scale. */
+.model43 .m43HeroCopy h1 span,
+.model43 .m43HeroCopy h1 em,
+.model43 .m43HeroCopy h1 strong{
+  font-size:inherit!important;
+  line-height:inherit!important;
+}
+
+/* Keep supporting subtitles clearly subordinate. */
+.workshopPage .workshopHero h2{
+  font-size:clamp(25px,2.3vw,34px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.045em!important;
+  font-weight:500!important;
+}
+
+/* Consistent paragraph rhythm underneath the larger titles. */
+.publicLanding .homeEditorialCopy p,
+.publicLanding .publicClinicalPreviewHead p,
+.publicLanding .homeWorkshopIntro p,
+.model43 .m43HeroCopy>p,
+.model43 .m43Statement p,
+.model43 .m43TransformHead p,
+.start16Page .start16HeroCopy>p,
+.publicCataloguePage .catalogue16Hero p,
+.workshopPage .workshopHeroCopy p,
+.publicPage .publicPageHero p,
+.loginPublicPage .loginIntro p{
+  line-height:1.5!important;
+  letter-spacing:-.018em!important;
+}
+
+@media(max-width:760px){
+  .publicLanding .homeEditorialLead h2,
+  .publicLanding .publicClinicalPreviewHead h2,
+  .publicLanding .homeWorkshopIntro h2,
+  .publicLanding .homePortalTeaser h2,
+  .model43 .m43HeroCopy h1,
+  .model43 .m43Statement h2,
+  .model43 .m43TransformHead h2,
+  .model43 .m43RhythmFeature h2,
+  .model43 .m43Final h2,
+  .start16Page .start16HeroCopy h1,
+  .start16Page .start16SendIntro h2,
+  .publicCataloguePage .catalogue16Hero h1,
+  .publicCataloguePage .publicCatalogueJourneyHead16 h2,
+  .workshopPage .workshopHero h1,
+  .workshopPage .workshopGuideDeckIntro h2,
+  .workshopArticlePage .workshopArticleHeader h1,
+  .publicPage .publicPageHero h1,
+  .publicPage .prospectIntro h2,
+  .publicPage .publicCta h2,
+  .loginPublicPage .loginIntro h1,
+  .customerShell .v26HomeHero h1,
+  .customerShell .pageHeader h1,
+  .customerShell .categoryHero h1{
+    font-size:var(--psc-major-title-mobile)!important;
+    line-height:.94!important;
+    letter-spacing:-.058em!important;
+  }
+}
+
+/* ---------------------------------------------------------
+   3) VITALS CARD ICON — lock it to the same clean size as every
+   other category icon. The JS below also replaces the source
+   with a simple waveform icon so the oversized BP illustration
+   cannot return.
+   --------------------------------------------------------- */
+.publicLanding .publicClinicalCard[data-go="catalogue/vitals"]{
+  overflow:hidden!important;
+}
+.publicLanding .publicClinicalCard[data-go="catalogue/vitals"] .publicClinicalArt{
+  top:20px!important;
+  right:20px!important;
+  width:64px!important;
+  height:64px!important;
+  min-width:64px!important;
+  min-height:64px!important;
+  max-width:64px!important;
+  max-height:64px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+
+.publicCategoryCard16[data-go="catalogue/vitals"] .publicCategoryArt16,
+.customerShell .clinicNeedCard[data-go$="/vitals"] .clinicNeedIcon{
+  width:64px!important;
+  height:64px!important;
+  max-width:64px!important;
+  max-height:64px!important;
+  overflow:hidden!important;
+}

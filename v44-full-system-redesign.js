@@ -334,3 +334,68 @@
   }
   window.addEventListener('hashchange', schedule);
 })();
+
+
+/* =========================================================
+   V44.6 — VITALS ICON HARD FIX
+   Uses a clean waveform/monitor SVG instead of the oversized
+   category-vitals illustration.
+   ========================================================= */
+(() => {
+  'use strict';
+
+  const vitalsSvg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+      <rect x="8" y="11" width="48" height="42" rx="9" stroke="#151817" stroke-width="3.2"/>
+      <path d="M13 33h10l5-11 8 22 6-13h9" stroke="#151817" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="18" cy="18" r="2.2" fill="#159b91"/>
+      <circle cx="25" cy="18" r="2.2" fill="#159b91"/>
+    </svg>
+  `;
+  const vitalsData = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(vitalsSvg);
+
+  function fixImg(img){
+    if(!img) return;
+    if(img.getAttribute('src') !== vitalsData){
+      img.setAttribute('src', vitalsData);
+      img.removeAttribute('srcset');
+      img.removeAttribute('onerror');
+    }
+  }
+
+  function apply(){
+    // Home card.
+    document.querySelectorAll('.publicClinicalCard[data-go="catalogue/vitals"] .publicClinicalArt')
+      .forEach(fixImg);
+
+    // Public catalogue card.
+    document.querySelectorAll('.publicCategoryCard16[data-go="catalogue/vitals"] .publicCategoryArt16 img')
+      .forEach(fixImg);
+
+    // Portal clinical category.
+    document.querySelectorAll('.customerShell .clinicNeedCard[data-go$="/vitals"] .clinicNeedIcon img')
+      .forEach(fixImg);
+  }
+
+  let queued=false;
+  function schedule(){
+    if(queued) return;
+    queued=true;
+    requestAnimationFrame(() => {
+      queued=false;
+      apply();
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', schedule, {once:true});
+  } else {
+    schedule();
+  }
+
+  const app=document.getElementById('app');
+  if(app){
+    new MutationObserver(schedule).observe(app,{childList:true,subtree:true});
+  }
+  window.addEventListener('hashchange', schedule);
+})();
