@@ -1,0 +1,206 @@
+/* PSC v45 — Catalogue gate + Workshop Modules
+   Additive, scoped to the public catalogue and Workshop only. */
+
+.workshopPage .workshopModuleNavV45{
+  width:min(1370px,calc(100% - 64px));
+  margin:0 auto;
+  padding:14px 0;
+  display:flex;
+  gap:8px;
+  overflow:auto;
+  border-top:1px solid rgba(25,25,25,.10);
+  border-bottom:1px solid rgba(25,25,25,.10);
+  scrollbar-width:none;
+}
+.workshopPage .workshopModuleNavV45::-webkit-scrollbar{display:none}
+.workshopPage .workshopModuleNavV45 button{
+  flex:0 0 auto;
+  border:0;
+  background:transparent;
+  color:#30302e;
+  padding:8px 10px;
+  font:500 13px/1.2 "DM Sans",sans-serif;
+  letter-spacing:-.01em;
+  border-radius:10px;
+}
+.workshopPage .workshopModuleNavV45 button span{
+  margin-right:5px;
+  color:#8a8781;
+  font-size:11px;
+}
+.workshopPage .workshopModuleNavV45 button:hover,
+.workshopPage .workshopModuleNavV45 button.active{background:rgba(255,255,255,.72);color:#111}
+.workshopPage .workshopModuleNavV45 button.active span{color:#0d9f9d}
+
+.workshopModuleCardV45{position:relative;text-align:left}
+.workshopModuleCardV45 .workshopModuleNumberV45{
+  position:absolute;
+  left:18px;
+  top:16px;
+  font:500 10px/1 "DM Sans",sans-serif;
+  letter-spacing:.08em;
+  color:#77736d;
+}
+.workshopModuleCardV45 .workshopCategoryCopy{padding-top:18px}
+.workshopModuleCardV45 .workshopCategoryCopy b{font-weight:500}
+.workshopModuleCardV45 .workshopCategoryCopy small{font-weight:400}
+
+.workshopModulePageV45,
+.workshopModulePageV45 .workshopModuleBodyV45{background:#fbfaf7}
+.workshopModuleBodyV45{
+  min-height:70vh;
+  padding:0 0 72px;
+  background-image:
+    linear-gradient(rgba(34,34,31,.035) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(34,34,31,.035) 1px, transparent 1px);
+  background-size:28px 28px;
+}
+.workshopModuleHeroV45{
+  width:min(1370px,calc(100% - 64px));
+  margin:0 auto;
+  padding:72px 0 62px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 160px;
+  gap:50px;
+  align-items:end;
+}
+.workshopModuleBackV45{
+  border:0;background:none;padding:0;margin:0 0 26px;
+  color:#77736d;font:500 11px/1 "DM Sans",sans-serif;letter-spacing:.07em
+}
+.workshopModuleHeroCopyV45 h1{
+  margin:0 0 18px;
+  max-width:900px;
+  font:400 clamp(50px,6vw,86px)/.96 "DM Sans",sans-serif;
+  letter-spacing:-.06em;
+}
+.workshopModuleHeroCopyV45 h2{
+  margin:0 0 18px;
+  max-width:860px;
+  font:400 clamp(23px,2.3vw,34px)/1.08 "DM Sans",sans-serif;
+  letter-spacing:-.035em;
+}
+.workshopModuleHeroCopyV45 p{
+  max-width:760px;
+  margin:0;
+  color:#6e6a64;
+  font:400 16px/1.55 "DM Sans",sans-serif;
+}
+.workshopModuleMetaV45{
+  margin-top:28px;color:#77736d;
+  font:400 12px/1.4 "DM Sans",sans-serif;
+}
+.workshopModuleHeroIconV45{
+  width:144px;height:144px;border-radius:34px;
+  display:grid;place-items:center;
+  background:var(--module-bg,#eee);
+  border:1px solid rgba(20,20,18,.10)
+}
+.workshopModuleHeroIconV45 svg{width:58px;height:58px;fill:none;stroke:#1b1b19;stroke-width:1.35}
+.workshopModuleBodyV45.wsTone1{--module-bg:#f4d5cf}
+.workshopModuleBodyV45.wsTone2{--module-bg:#d9e2ee}
+.workshopModuleBodyV45.wsTone3{--module-bg:#d8e9dc}
+.workshopModuleBodyV45.wsTone4{--module-bg:#e9dfcc}
+.workshopModuleBodyV45.wsTone5{--module-bg:#ead9e5}
+.workshopModuleBodyV45.wsTone6{--module-bg:#e9dfc7}
+.workshopModuleBodyV45.wsTone7{--module-bg:#d7e6e4}
+
+.workshopModuleGuidesV45{
+  width:min(1370px,calc(100% - 64px));
+  margin:54px auto 0;
+}
+.workshopModuleGuidesHeadV45{
+  display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:24px
+}
+.workshopModuleGuidesHeadV45 h2{
+  margin:0;font:400 clamp(30px,3vw,45px)/1 "DM Sans",sans-serif;letter-spacing:-.045em
+}
+.workshopModuleGuidesHeadV45 p{margin:0;color:#77736d;font:400 14px/1.45 "DM Sans",sans-serif}
+.workshopModuleGuideGridV45{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+.workshopGuideCardV45{min-width:0}
+.workshopGuideCardV45 .workshopGuideCardCopy h3{font-weight:500}
+.workshopGuideCardV45 .workshopGuideCardMeta b{font-weight:500}
+
+.workshopDoNowV45{
+  width:min(1120px,calc(100% - 64px));
+  margin:24px auto 0;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(15,159,157,.25);
+  color:#087f7d;
+  background:#eff9f7;
+  font:500 11px/1 "DM Sans",sans-serif;
+  letter-spacing:.08em;
+  width:max-content;
+  max-width:calc(100% - 64px);
+}
+.workshopReadinessChainV45{
+  width:min(1120px,calc(100% - 64px));
+  margin:28px auto 8px;
+  padding:22px 24px;
+  background:#f7f4ec;
+  border:1px solid rgba(20,20,18,.10);
+  border-radius:18px;
+}
+.workshopReadinessChainV45>span{font:500 10px/1 "DM Sans",sans-serif;letter-spacing:.09em;color:#706b62}
+.workshopReadinessChainV45>div{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px
+}
+.workshopReadinessChainV45 b{font:500 15px/1.2 "DM Sans",sans-serif}
+.workshopReadinessChainV45 i{font-style:normal;color:#0d9f9d}
+
+.catalogueGateNoteV45{
+  align-self:flex-end;
+  font:400 13px/1.3 "DM Sans",sans-serif;
+  color:#6f6c67;
+}
+.catalogueGateBandV45{
+  width:min(1370px,calc(100% - 64px));
+  margin:18px auto 72px;
+  padding:34px 36px;
+  border-top:1px solid #dcd8d1;
+  border-bottom:1px solid #dcd8d1;
+  display:flex;justify-content:space-between;align-items:center;gap:40px;
+}
+.catalogueGateBandV45 h2{
+  margin:0 0 8px;
+  font:400 clamp(30px,3vw,44px)/1 "DM Sans",sans-serif;
+  letter-spacing:-.045em;
+}
+.catalogueGateBandV45 p{
+  margin:0;max-width:690px;color:#706d68;
+  font:400 15px/1.5 "DM Sans",sans-serif;
+}
+.catalogueGateActionsV45{display:flex;gap:10px;flex-wrap:wrap}
+.cataloguePendingNoteV45{
+  padding:12px 14px;margin:0 0 18px;
+  background:#f2f8f7;border:1px solid #cde6e2;border-radius:12px;
+  display:flex;flex-direction:column;gap:3px;
+}
+.cataloguePendingNoteV45 b{font:500 13px/1.2 "DM Sans",sans-serif}
+.cataloguePendingNoteV45 span{font:400 12px/1.4 "DM Sans",sans-serif;color:#676864}
+
+@media(max-width:900px){
+  .workshopPage .workshopModuleNavV45,
+  .workshopModuleHeroV45,
+  .workshopModuleGuidesV45,
+  .catalogueGateBandV45{width:min(100% - 32px,1370px)}
+  .workshopModuleHeroV45{grid-template-columns:1fr;padding:48px 0 40px}
+  .workshopModuleHeroIconV45{width:96px;height:96px;border-radius:24px}
+  .workshopModuleGuideGridV45{grid-template-columns:1fr}
+  .workshopModuleGuidesHeadV45{display:block}
+  .workshopModuleGuidesHeadV45 p{margin-top:8px}
+  .catalogueGateBandV45{display:block;padding:28px 0}
+  .catalogueGateActionsV45{margin-top:22px}
+}
+@media(max-width:600px){
+  .workshopModuleHeroCopyV45 h1{font-size:48px}
+  .workshopModuleHeroCopyV45 h2{font-size:24px}
+  .workshopModuleHeroV45{gap:26px}
+  .workshopPage .workshopModuleNavV45{padding:10px 0}
+  .workshopPage .workshopModuleNavV45 button{font-size:12px}
+}
