@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/workshop",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/workshop/:path*",
+      "destination": "/index.html"
+    }
+  ]
+}
