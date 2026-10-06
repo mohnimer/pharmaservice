@@ -263,49 +263,74 @@
   window.addEventListener('hashchange',schedule);
 })();
 
-
 /* =========================================================
-   V44.4 — replace home hero with the supplied desktop/mobile art
+   V44.5 — HOME HERO HOTFIX
+   Robust replacement: works whether the original hero or V44 hero
+   exists when this script runs. Also removes the old community section.
    ========================================================= */
 (() => {
   'use strict';
 
-  function applyHero(){
+  const HERO_HTML = `
+    <div class="m445HomeHeroScene m44Reveal" aria-label="Pharma Service institutional healthcare supply">
+      <div class="m445HomeHeroText">
+        <p>Offering open supply,<br>replenishment &amp; replacement of<br>health products to institutions</p>
+        <h1>where better community health begins.</h1>
+      </div>
+    </div>
+  `;
+
+  function applyHomeHero(){
     const page = document.querySelector('main.publicLanding');
     if(!page) return;
 
-    const hero = page.querySelector('.m44HomeHero');
-    if(!hero || hero.dataset.v444Hero === '1') return;
+    // Remove the separate old community-health section completely.
+    page.querySelectorAll('.homeCommunitySection').forEach(el => el.remove());
 
-    hero.innerHTML = `
-      <div class="m445HomeHeroScene m44Reveal" aria-label="Pharma Service hero">
-        <div class="m445HomeHeroText">
-          <p>Offering open supply,<br>replenishment & replacement of<br>health products to institutions</p>
-          <h1>where better community health begins.</h1>
-        </div>
-      </div>
-    `;
-    hero.dataset.v444Hero = '1';
+    // If V44's intermediate hero exists, convert it to the final image hero.
+    const v44Hero = page.querySelector('.m44HomeHero');
+    if(v44Hero){
+      if(v44Hero.dataset.v445Hero !== '1'){
+        v44Hero.innerHTML = HERO_HTML;
+        v44Hero.dataset.v445Hero = '1';
+      }
+      return;
+    }
+
+    // If the original institutional hero is present, replace it directly.
+    const originalHero = page.querySelector('.pscInstitutionalHero');
+    if(originalHero){
+      const replacement = document.createElement('section');
+      replacement.className = 'm44HomeHero';
+      replacement.dataset.v445Hero = '1';
+      replacement.innerHTML = HERO_HTML;
+      originalHero.replaceWith(replacement);
+    }
   }
 
-  function apply(){
-    applyHero();
+  function run(){
+    applyHomeHero();
   }
 
-  let queued=false;
+  let queued = false;
   function schedule(){
     if(queued) return;
-    queued=true;
-    requestAnimationFrame(()=>{{ queued=false; apply(); }});
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      run();
+    });
   }
 
-  if(document.readyState==='loading'){{
-    document.addEventListener('DOMContentLoaded', schedule, {{once:true}});
-  }} else {{
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', schedule, { once:true });
+  } else {
     schedule();
-  }}
+  }
 
-  const app=document.getElementById('app');
-  if(app) new MutationObserver(schedule).observe(app,{{childList:true,subtree:true}});
+  const app = document.getElementById('app');
+  if(app){
+    new MutationObserver(schedule).observe(app, { childList:true, subtree:true });
+  }
   window.addEventListener('hashchange', schedule);
 })();
