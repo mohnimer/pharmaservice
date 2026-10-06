@@ -600,3 +600,58 @@
     grid-template-columns:1fr!important;
   }
 }
+
+
+/* =========================================================
+   V44.10.1 — HOME HERO COPY PLACEMENT
+   Headline first, subline directly underneath, and the whole
+   copy block sits slightly higher inside the open white field.
+   ========================================================= */
+
+.publicLanding .m445HomeHeroText h1{
+  order:1!important;
+}
+
+.publicLanding .m445HomeHeroText p{
+  order:2!important;
+  margin:22px 0 0!important;
+}
+
+@media(min-width:901px){
+  .publicLanding .m445HomeHeroScene{
+    align-items:flex-start!important;
+    padding-top:clamp(96px,7vw,116px)!important;
+  }
+
+  .publicLanding .m445HomeHeroText{
+    justify-content:flex-start!important;
+  }
+
+  .publicLanding .m445HomeHeroText h1{
+    max-width:11.5ch!important;
+  }
+
+  .publicLanding .m445HomeHeroText p{
+    max-width:38ch!important;
+    font-size:17px!important;
+    line-height:1.38!important;
+    letter-spacing:-.025em!important;
+  }
+}
+
+@media(max-width:900px){
+  .publicLanding .m445HomeHeroScene{
+    padding-top:44px!important;
+  }
+
+  .publicLanding .m445HomeHeroText h1{
+    order:1!important;
+  }
+
+  .publicLanding .m445HomeHeroText p{
+    order:2!important;
+    max-width:30ch!important;
+    margin:18px auto 0!important;
+    line-height:1.35!important;
+  }
+}

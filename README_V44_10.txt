@@ -18,3 +18,9 @@ WHAT THIS PASS DOES
 - Our Model: reduces the display type. “More time for what matters.” is smaller and held to one line on desktop, while the large statement headlines are substantially restrained.
 
 NO DATA / QUOTATION / PORTAL WORKFLOW LOGIC IS CHANGED.
+
+HOME HERO ADDENDUM
+- Homepage headline now appears first.
+- The institutional-supply subline sits directly beneath it.
+- The full copy block is shifted upward into the centre of the clean white area, away from the illustration.
+- Mobile preserves the same headline → subline hierarchy.
