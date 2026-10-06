@@ -175,3 +175,90 @@
 
   window.addEventListener('hashchange',schedule);
 })();
+
+/* =========================================================
+   V44.3 — clean clinical icons
+   Replace the old collage category art with the existing clean
+   /assets/clinical-icons/*.png set. No data / workflow changes.
+   ========================================================= */
+(() => {
+  'use strict';
+
+  const valid = new Set([
+    'all','wounds','breathing','vitals','infection','emergency','equipment',
+    'diabetes','medicines','allergy','patient-care','procedures','screening','sports'
+  ]);
+
+  function routeId(el){
+    const route=(el.getAttribute('data-go')||'').split('/').filter(Boolean);
+    const id=route[route.length-1]||'';
+    return valid.has(id)?id:null;
+  }
+
+  function cleanIcon(id){
+    const img=document.createElement('img');
+    img.src=`/assets/clinical-icons/${id}.png`;
+    img.alt='';
+    img.setAttribute('aria-hidden','true');
+    return img;
+  }
+
+  function applyHome(){
+    document.querySelectorAll('.publicLanding .publicClinicalCard').forEach(card=>{
+      const id=routeId(card);
+      if(!id) return;
+      const current=card.querySelector('.publicClinicalArt');
+      if(current && current.tagName==='IMG'){
+        const wanted=`/assets/clinical-icons/${id}.png`;
+        if(current.getAttribute('src')!==wanted) current.setAttribute('src',wanted);
+        current.removeAttribute('srcset');
+        current.removeAttribute('onerror');
+      }
+    });
+  }
+
+  function applyPublicCatalogue(){
+    document.querySelectorAll('.publicCategoryCard16').forEach(card=>{
+      const id=routeId(card);
+      if(!id) return;
+      const host=card.querySelector('.publicCategoryArt16');
+      if(!host || host.dataset.v443Clean==='1') return;
+      host.replaceChildren(cleanIcon(id));
+      host.dataset.v443Clean='1';
+    });
+  }
+
+  function applyPortalCatalogue(){
+    document.querySelectorAll('.customerShell .clinicNeedCard').forEach(card=>{
+      const id=routeId(card);
+      if(!id) return;
+      const host=card.querySelector('.clinicNeedIcon');
+      if(!host || host.dataset.v443Clean==='1') return;
+      host.replaceChildren(cleanIcon(id));
+      host.dataset.v443Clean='1';
+    });
+  }
+
+  function run(){
+    applyHome();
+    applyPublicCatalogue();
+    applyPortalCatalogue();
+  }
+
+  let queued=false;
+  function schedule(){
+    if(queued) return;
+    queued=true;
+    requestAnimationFrame(()=>{ queued=false; run(); });
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',schedule,{once:true});
+  }else{
+    schedule();
+  }
+
+  const app=document.getElementById('app');
+  if(app) new MutationObserver(schedule).observe(app,{childList:true,subtree:true});
+  window.addEventListener('hashchange',schedule);
+})();

@@ -2498,3 +2498,377 @@ textarea,
     grid-row:auto!important;
   }
 }
+
+
+/* =========================================================
+   V44.3 — COLOR / ICON / PRODUCT-IMAGE CORRECTION
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   A. BRING CATEGORY COLOUR BACK — BUT KEEP THE CARD SYSTEM UNIFORM.
+   Same geometry. Controlled colour is the only variable.
+   --------------------------------------------------------- */
+.publicLanding .publicClinicalCard,
+.publicCategoryCard16,
+.customerShell .clinicNeedCard{
+  color:var(--need-ink,#161817)!important;
+}
+
+/* Home uses classes rather than inline --need-bg. */
+.publicLanding .publicClinicalCard.coral{background:#ff9486!important;color:#35221f!important}
+.publicLanding .publicClinicalCard.blue{background:#aabfee!important;color:#162644!important}
+.publicLanding .publicClinicalCard.orange{background:#f4ae79!important;color:#352419!important}
+.publicLanding .publicClinicalCard.mint{background:#9ed8cc!important;color:#133c37!important}
+.publicLanding .publicClinicalCard.rose{background:#ec9ab1!important;color:#40212a!important}
+.publicLanding .publicClinicalCard.sand{background:#e8c39d!important;color:#36281d!important}
+
+.publicCategoryCard16{
+  background:var(--need-bg,#f0ede7)!important;
+}
+.customerShell .clinicNeedCard{
+  background:var(--need-bg,#f0ede7)!important;
+}
+
+.publicLanding .publicClinicalCard>span:not(.publicClinicalArt),
+.publicLanding .publicClinicalCard>small,
+.publicCategoryCopy16 b,
+.publicCategoryCopy16 small,
+.customerShell .clinicNeedCopy b,
+.customerShell .clinicNeedCopy small{
+  color:inherit!important;
+}
+
+.publicLanding .publicClinicalCard>small,
+.publicCategoryCopy16 small,
+.customerShell .clinicNeedCopy small{
+  opacity:.72!important;
+}
+
+/* Clean icon only — no collage / no red torn-paper illustrations. */
+.publicLanding .publicClinicalCard .publicClinicalArt,
+.publicCategoryArt16,
+.customerShell .clinicNeedIcon{
+  display:block!important;
+  position:absolute!important;
+  top:18px!important;
+  right:18px!important;
+  width:64px!important;
+  height:64px!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  pointer-events:none!important;
+}
+
+.publicLanding .publicClinicalCard .publicClinicalArt{
+  object-fit:contain!important;
+}
+
+.publicCategoryArt16 img,
+.customerShell .clinicNeedIcon img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  filter:none!important;
+}
+
+.publicCategoryCopy16,
+.customerShell .clinicNeedCopy{
+  position:static!important;
+  inset:auto!important;
+  padding:0!important;
+  width:100%!important;
+  max-width:calc(100% - 70px)!important;
+}
+
+.customerShell .clinicNeedCopy{
+  padding:20px!important;
+  padding-right:86px!important;
+}
+
+.publicCategoryCard16,
+.customerShell .clinicNeedCard{
+  position:relative!important;
+}
+
+/* Preserve uniform geometry. */
+.publicLanding .publicClinicalPreviewGrid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-auto-rows:190px!important;
+}
+.publicLanding .publicClinicalCard,
+.publicLanding .publicClinicalCard:nth-child(n),
+.publicCategoryCard16,
+.publicCategoryCard16:nth-child(n),
+.customerShell .clinicNeedCard,
+.customerShell .clinicNeedCard:nth-child(n){
+  min-height:164px!important;
+  border-radius:14px!important;
+  border:1px solid rgba(25,28,26,.12)!important;
+}
+
+/* ---------------------------------------------------------
+   B. PRODUCT VISUALS — BLANK. NO GENERATED ILLUSTRATIONS.
+   DHA mark survives.
+   --------------------------------------------------------- */
+
+/* Public catalogue cards */
+.publicCatalogueVisual{
+  background:transparent!important;
+  border-bottom:1px solid var(--v44-rule)!important;
+  box-shadow:none!important;
+}
+.publicCatalogueVisual > img:not(.publicDhaMark),
+.publicCatalogueVisual > span{
+  display:none!important;
+}
+.publicCatalogueVisual .publicDhaMark{
+  display:block!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+
+/* Portal catalogue cards */
+.customerShell .productVisual{
+  background:transparent!important;
+  border-bottom:1px solid var(--v44-rule)!important;
+  box-shadow:none!important;
+}
+.customerShell .productVisual .productMainImage{
+  display:none!important;
+}
+.customerShell .productVisual .cardDhaIcon,
+.customerShell .productVisual .dhaRequirementIcon{
+  display:block!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+.customerShell .productNeedVisual{
+  background:transparent!important;
+}
+
+/* Product details / related cards — blank visual field, keep DHA logo. */
+.detailProductImageWrap{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.detailProductImageWrap > img:not(.detailDhaIcon),
+.detailNeedVisual,
+.productGalleryStrip{
+  display:none!important;
+}
+.detailProductImageWrap .detailDhaIcon{
+  display:block!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+
+.relatedProductVisual{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.relatedProductVisual img,
+.relatedProductVisual i{
+  display:none!important;
+}
+
+/* Remove image-shadow rules even if an image becomes visible later. */
+.publicCatalogueVisual img,
+.productVisual img,
+.detailProductImageWrap img,
+.relatedProductVisual img,
+.replenishVisual img,
+.requestLineImage img{
+  filter:none!important;
+  box-shadow:none!important;
+  text-shadow:none!important;
+}
+
+/* ---------------------------------------------------------
+   C. HOME WORKSHOP PREVIEW — BRING THE BLOG PREVIEW BACK,
+   but as calm editorial cards, not the awkward tall image format.
+   --------------------------------------------------------- */
+.publicLanding .homeWorkshopCards{
+  display:grid!important;
+  grid-template-columns:240px minmax(0,1fr)!important;
+  gap:48px!important;
+  padding-top:96px!important;
+  padding-bottom:96px!important;
+  background:transparent!important;
+}
+
+.publicLanding .homeWorkshopIntro{
+  position:static!important;
+}
+
+.publicLanding .homeWorkshopCardGrid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px!important;
+}
+
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard,
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:first-child{
+  margin:0!important;
+  border:1px solid var(--v44-rule)!important;
+  border-radius:14px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard>button,
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:first-child>button,
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:not(:first-child)>button{
+  display:block!important;
+  min-height:245px!important;
+  padding:24px!important;
+  background:transparent!important;
+}
+
+.publicLanding .homeWorkshopCardGrid .workshopGuideCardCopy{
+  display:block!important;
+}
+
+.publicLanding .homeWorkshopCardGrid .workshopGuideCardMeta{
+  display:flex!important;
+  flex-direction:row!important;
+  justify-content:space-between!important;
+  align-items:center!important;
+  gap:10px!important;
+  margin-bottom:42px!important;
+}
+
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard h3{
+  margin:0!important;
+  max-width:14ch!important;
+  font-size:clamp(24px,2vw,31px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.045em!important;
+}
+
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard p{
+  margin:14px 0 0!important;
+  max-width:32ch!important;
+  font-size:11.5px!important;
+  line-height:1.55!important;
+  color:var(--v44-muted-clean)!important;
+}
+
+.publicLanding .homeWorkshopCardGrid .workshopGuideCardVisual{
+  display:none!important;
+}
+
+/* ---------------------------------------------------------
+   D. WORKSHOP GRID BACKGROUND IS BACK.
+   Keep content readable; grid is atmosphere, not decoration.
+   --------------------------------------------------------- */
+main.workshopPage:not(.workshopArticlePage){
+  background-color:var(--v44-canvas)!important;
+  background-image:
+    linear-gradient(rgba(20,24,22,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(20,24,22,.045) 1px,transparent 1px)!important;
+  background-size:28px 28px!important;
+}
+
+main.workshopPage:not(.workshopArticlePage) .workshopHero,
+main.workshopPage:not(.workshopArticlePage) .workshopCategorySection,
+main.workshopPage:not(.workshopArticlePage) .workshopTools,
+main.workshopPage:not(.workshopArticlePage) .workshopGuideDeck,
+main.workshopPage:not(.workshopArticlePage) .workshopPrinciple{
+  background:transparent!important;
+  background-image:none!important;
+}
+
+.workshopCategoryCard svg,
+.workshopCategoryCard [class*="Icon"]{
+  display:block!important;
+}
+
+/* ---------------------------------------------------------
+   E. PORTAL — REMOVE #FAF9F9 COMPLETELY.
+   Pure white base, very light neutral controls.
+   Category colour is allowed and intentional.
+   --------------------------------------------------------- */
+.customerShell,
+.customerShell .mainArea,
+.customerShell .contentWrap,
+.customerShell .sidebar,
+.customerShell .topbar,
+.customerShell .pageHeader,
+.customerShell .categoryHero,
+.customerShell .v26HomeHero,
+.customerShell .v26NeedPreview,
+.customerShell .v26OperationsStrip,
+.customerShell .customerHomeGrid,
+.customerShell .panel,
+.customerShell .customerActionPanel,
+.customerShell .resourcePreview,
+.customerShell .productCard,
+.customerShell .productVisual,
+.customerShell .replenishCard,
+.customerShell .replenishVisual,
+.customerShell .customerOrderCard,
+.customerShell .assetCard,
+.customerShell .catalogueDepthPill,
+.customerShell .customRequestPanel{
+  background:#fff!important;
+  background-image:none!important;
+}
+
+.customerShell .topbarSearch,
+.customerShell .mobileSearchInput,
+.customerShell .shopFilterBar,
+.customerShell .campusPill,
+.customerShell input,
+.customerShell select,
+.customerShell textarea{
+  background:#f5f6f5!important;
+}
+
+.customerShell .clinicNeedCard{
+  background:var(--need-bg,#f0ede7)!important;
+}
+
+/* Keep the portal from reintroducing the disliked canvas through nested surfaces. */
+.customerShell [style*="#faf9f9" i],
+.customerShell [style*="rgb(250, 249, 249)" i]{
+  background:#fff!important;
+}
+
+/* ---------------------------------------------------------
+   F. RESPONSIVE
+   --------------------------------------------------------- */
+@media(max-width:1050px){
+  .publicLanding .homeWorkshopCards{
+    grid-template-columns:1fr!important;
+  }
+  .publicLanding .homeWorkshopCardGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+
+@media(max-width:760px){
+  .publicLanding .publicClinicalPreviewGrid,
+  .publicCategoryGrid16,
+  .customerShell .clinicNeedRail{
+    grid-template-columns:1fr!important;
+  }
+
+  .publicLanding .homeWorkshopCardGrid{
+    grid-template-columns:1fr!important;
+  }
+
+  .publicLanding .publicClinicalCard .publicClinicalArt,
+  .publicCategoryArt16,
+  .customerShell .clinicNeedIcon{
+    width:54px!important;
+    height:54px!important;
+    top:16px!important;
+    right:16px!important;
+  }
+}
