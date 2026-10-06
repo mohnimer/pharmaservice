@@ -1,0 +1,18 @@
+/* PSC V45.3A — mobile homepage hero image patch */
+@media (max-width: 900px) {
+  body main.publicLanding .m44HomeHero,
+  body main.publicLanding .m445HomeHeroScene {
+    background-image: url('/assets/hero/home-hero-mobile-v453a.png') !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+
+  body main.publicLanding .m44HomeHero::before,
+  body main.publicLanding .m445HomeHeroScene::before {
+    background-image: url('/assets/hero/home-hero-mobile-v453a.png') !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+}
