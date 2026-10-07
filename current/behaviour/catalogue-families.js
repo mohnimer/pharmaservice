@@ -4,6 +4,7 @@
   const VERSION = 'v39.18-family-selector';
   const DHA_ICON = '/assets/dha-requirement.png';
   const familyState = { rows: [], approvedOptions: [], fixedPrices: [], availability: [], loaded: false, source: 'none' };
+  window.PS_FAMILY_BRAND_OPTIONS=()=>familyState.approvedOptions;
   const NEED_MAP = {
     'Cuts, Wounds & Burns': 'wounds','Sports Injuries & Musculoskeletal': 'sports','Breathing, Allergy & Oxygen': 'breathing',
     'Vitals & Clinical Assessment': 'vitals','Eyes, Ears & Screening': 'screening','Diabetes & Blood Glucose': 'diabetes',
@@ -134,5 +135,5 @@
   document.addEventListener('input',e=>{if(e.target?.matches?.('[data-cat-q]')) filterFamilies(e.target.value);},true);
   window.addEventListener('hashchange',schedule); window.addEventListener('popstate',schedule);
   window.PSC_ENHANCEMENTS.createObserver(schedule).observe(document.getElementById('app')||document.body,{childList:true,subtree:true});
-  loadFamilies().finally(schedule);
+  loadFamilies().finally(()=>{schedule();window.dispatchEvent(new Event('ps:catalogue-brands-ready'));});
 })();
