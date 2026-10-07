@@ -411,7 +411,7 @@
         unit_landed_cost: value,
         direct_cost_total: value === null ? null : value * Number(target.line.quantity),
         calculated_gm: gm,
-        pricing_note: value === null ? null : 'Direct cost / unit entered in PSC Deal Desk'
+        pricing_note: value === null ? null : 'Direct cost / unit entered in PS Deal Desk'
       };
 
       const { error } = await sb
@@ -540,7 +540,7 @@
     await recalc(ctx.quoteId);
 
     if (uiStatus === 'Sent') {
-      await snapshot(ctx.quoteId, 'issued', 'Quotation issued from PSC Deal Desk');
+      await snapshot(ctx.quoteId, 'issued', 'Quotation issued from PS Deal Desk');
     }
     if (uiStatus === 'Authorized' || uiStatus === 'Cancelled') {
       await snapshot(ctx.quoteId, 'customer_decision', `Quotation ${uiStatus.toLowerCase()}`);
@@ -576,7 +576,7 @@
       actor_user_id: (await sb.auth.getSession()).data?.session?.user?.id || null
     });
 
-    // Customer cannot execute the admin-only snapshot RPC; PSC status/event remains authoritative.
+    // Customer cannot execute the admin-only snapshot RPC; PS status/event remains authoritative.
   }
 
   async function hydrateInputs(){

@@ -20,7 +20,7 @@ async function setup(path = '/', role = 'anonymous', storage = null) {
 }
 const text = w => w.document.body.textContent;
 async function route(w, value) { w.history.pushState({}, '', value); w.dispatchEvent(new w.PopStateEvent('popstate')); await pause(); }
-async function click(w, selector) { const e = w.document.querySelector(selector); assert(e, `Missing ${selector} at ${w.location.href}`); e.click(); await pause(); }
+async function click(w, selector) { let e = w.document.querySelector(selector); for(let n=0;!e && n<20;n++){await pause();e=w.document.querySelector(selector);} assert(e, `Missing ${selector} at ${w.location.href}; errors: ${errors.join('; ')}`); e.click(); await pause(); }
 async function fill(w, selector, value) { const e = w.document.querySelector(selector); assert(e, `Missing ${selector}`); e.value = value; e.dispatchEvent(new w.Event('input', { bubbles: true })); await pause(); }
 let w;
 try {
@@ -68,8 +68,28 @@ try {
   }
   w=await setup('/#contact');
   assert(w.document.querySelector('.prospectContactGrid a[href="tel:+97143377004"]'));
+  assert(w.document.querySelector('.prospectContactGrid a[href="tel:+971504252641"]'));
+  assert(w.document.querySelector('.prospectContactGrid a[href="https://wa.me/971553511335"]'));
   assert(w.document.querySelector('.prospectContactGrid a[href="mailto:info@pharmaservice.ae"]'));
   await w.happyDOM.close();
+  for(const path of ['/', '/#our-model','/start','/#start','/#contact','/#catalogue']){
+    w=await setup(path);
+    assert(!/\bPSC\b(?![-_])/.test(text(w)),`${path} uses PS branding`);
+    if(path.includes('start')){
+      assert(w.document.querySelector('#startRequirement[required]'));
+      assert(w.document.querySelector('.startContactActions a[href="tel:+971504252641"]'));
+      let scrolled=false;
+      w.document.querySelector('#start-send').scrollIntoView=()=>{scrolled=true;};
+      await click(w,'.start16RouteBoard [data-start-scroll="send"]');
+      assert(scrolled,'Start list action reaches requirement form');
+      await click(w,'.start16RouteBoard [data-go="catalogue"]');
+      assert.equal(w.location.hash,'#catalogue');
+      await route(w,'/start');
+      await click(w,'.startContactActions [data-go="login"]');
+      assert(w.document.querySelector('.loginPublicPage'));
+    }
+    await w.happyDOM.close();
+  }
   w=await setup('/workshop/whats-the-difference');
   assert(w.document.querySelector('.workshopGuideCardV50'));
   assert.equal(w.document.querySelectorAll('.workshopGuideCard').length,0,'V50 guide cards do not inherit old layout selectors');
@@ -116,6 +136,10 @@ try {
   enquiry.dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true})); await pause();
   await new Promise(resolve=>setTimeout(resolve,500));
   assert.equal(w.__backendCalls.filter(c=>c.rpc||c.action!=='select').length,0);
+  await route(w,'/start');
+  w.document.querySelector('[data-public-enquiry]').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));
+  await pause();
+  assert.equal(w.__backendCalls.filter(c=>c.rpc||c.action!=='select').length,0,'Start demo enquiry cannot write backend records');
   await w.happyDOM.close();
   w=await setup('/#portal/requests','demo',liveStorage);
   assert(!w.document.querySelector('[data-request-view^="DEMO-SIM-"]'));

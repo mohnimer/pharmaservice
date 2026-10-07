@@ -25,7 +25,7 @@
           <div class="m44Requirement m44ObjectReveal" aria-label="Example institutional supply requirement">
             <div class="m44ReqHead">
               <div><b>School clinic requirement</b><small>Opening + recurring supply · 4 lines shown</small></div>
-              <div class="m44ReqMark">PSC</div>
+              <div class="m44ReqMark">PS</div>
             </div>
             <div class="m44ReqHeader"><span>#</span><span>Requirement</span><span>Status</span></div>
             <div class="m44ReqLine"><div class="m44ReqNo">01</div><div><b>Blood pressure monitor</b><small>Automatic upper-arm · exact model controlled</small></div><span class="m44ReqStatus">MATCHED</span></div>
@@ -49,7 +49,7 @@
     if(board && !board.querySelector('.m44StartPaper')){
       const note=document.createElement('div');
       note.className='m44StartPaper';
-      note.innerHTML='<b>You do not need to prepare a perfect RFQ.</b> Send the original file, spreadsheet, PDF or rough list and PSC will qualify the lines that need clarification.';
+      note.innerHTML='<b>You do not need to prepare a perfect RFQ.</b> Send the original file, spreadsheet, PDF or rough list and PS will qualify the lines that need clarification.';
       board.insertAdjacentElement('afterend',note);
     }
     page.dataset.v44Start='1';

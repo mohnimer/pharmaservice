@@ -12,7 +12,7 @@
       </div>
       <div class="h48SourceFlow" aria-hidden="true"></div>
       <div class="h48SourceSheet">
-        <div class="h48SourceSheetTop"><span>Institution receives</span><b>PSC</b></div>
+        <div class="h48SourceSheetTop"><span>Institution receives</span><b>PS</b></div>
         <h3>One quotation.<br>One accountable order.</h3>
         <div class="h48SourceSheetRows">
           <div><span>Specification control</span><b>Pharma Service</b></div>

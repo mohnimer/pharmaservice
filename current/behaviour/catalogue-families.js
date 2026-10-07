@@ -72,7 +72,7 @@
           familyState.rows=data.map(normalizeSupabaseRow); familyState.approvedOptions=Array.isArray(approved)?approved:[]; familyState.fixedPrices=Array.isArray(fixedPrices)?fixedPrices:[];
           familyState.availability=Array.isArray(availability)?availability:[]; familyState.loaded=true; familyState.source='supabase'; return;
         }
-      }catch(e){ console.warn('PSC family catalogue Supabase load failed; using frozen fallback.',e?.message||e); }
+      }catch(e){ console.warn('PS family catalogue Supabase load failed; using frozen fallback.',e?.message||e); }
     }
     const fallback=window.PSC_FAMILY_CATALOGUE_V39?.families;
     familyState.rows=Array.isArray(fallback)?fallback.map(normalizeFallbackRow):[]; familyState.approvedOptions=[]; familyState.fixedPrices=[]; familyState.availability=[];

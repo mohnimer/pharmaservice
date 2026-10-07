@@ -19,7 +19,7 @@
           <div class="h47HeroPhoto"></div>
           <div class="h47HeroPaper"></div>
           <div class="h47AccountCard">
-            <div class="h47AccountTop"><span>Clinic account</span><b>PSC</b></div>
+            <div class="h47AccountTop"><span>Clinic account</span><b>PS</b></div>
             <div class="h47AccountStat"><strong>36</strong><span>approved items</span></div>
             <div class="h47AccountMini">
               <span><b>8</b> recurring lines</span>
@@ -117,7 +117,7 @@
           <div class="h47CatalogueHead h47Reveal">
             <div>
               <h2>Start with the requirement.</h2>
-              <p>You do not need to know the supplier or exact catalogue structure. Start with what your institution needs and PSC works backwards from there.</p>
+              <p>You do not need to know the supplier or exact catalogue structure. Start with what your institution needs and PS works backwards from there.</p>
             </div>
             <button class="h47TextLink" data-go="catalogue">Explore catalogue →</button>
           </div>
@@ -216,7 +216,7 @@
           <div class="h47AccountHead h47Reveal">
             <div>
               <h2>See what you’ve bought. Know what’s next.</h2>
-              <p>PSC remembers the account so procurement does not restart from zero.</p>
+              <p>PS remembers the account so procurement does not restart from zero.</p>
             </div>
             <button class="button outline" data-go="login">Open Clinic Portal</button>
           </div>
@@ -256,7 +256,7 @@
           <div class="h47Commercial h47Reveal">
             <div class="h47CommercialCopy">
               <h3>Better visibility creates better buying.</h3>
-              <p>Once PSC understands what an institution repeatedly purchases, commercial attention can focus where it matters most.</p>
+              <p>Once PS understands what an institution repeatedly purchases, commercial attention can focus where it matters most.</p>
             </div>
             <div class="h47CommercialLine">
               <small>Frequently purchased</small>

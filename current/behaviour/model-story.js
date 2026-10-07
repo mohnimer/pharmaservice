@@ -8,7 +8,7 @@
         <div class="m46Shell m46HeroGrid">
           <div class="m46HeroCopy m46Reveal">
             <h1>One supply relationship.</h1>
-            <p>Send the requirement. PSC turns it into something clear, controlled and purchasable.</p>
+            <p>Send the requirement. PS turns it into something clear, controlled and purchasable.</p>
             <div class="m46Actions">
               <button class="button primary" data-go="start">Tell us what you need</button>
               <button class="button outline" data-go="catalogue">Explore the catalogue</button>
@@ -35,7 +35,7 @@
             <div class="m46QuoteCard">
               <div class="m46QuoteTop">
                 <div><b>Pharma Service quotation</b><small>One commercial relationship</small></div>
-                <span class="m46PscMark">PSC</span>
+                <span class="m46PscMark">PS</span>
               </div>
               <div class="m46QuoteRow"><span>01</span><b>Blood pressure monitor</b><i>MATCHED</i></div>
               <div class="m46QuoteRow"><span>02</span><b>Sterile gauze</b><i>CHECKED</i></div>
@@ -73,7 +73,7 @@
 
             <div class="m46IntakeCard">
               <small>Incoming requirement</small>
-              <h3>PSC intake</h3>
+              <h3>PS intake</h3>
               <div><span>Need</span><b>Captured</b></div>
               <div><span>Quantity</span><b>Captured</b></div>
               <div><span>Missing detail</span><b>Flagged</b></div>
@@ -87,13 +87,13 @@
         <div class="m46Shell">
           <div class="m46SectionCopy m46SectionCopyWide m46Reveal">
             <h2>We make the details clear.</h2>
-            <p>Before PSC quotes anything, the supply details that can change what gets delivered are made explicit.</p>
+            <p>Before PS quotes anything, the supply details that can change what gets delivered are made explicit.</p>
           </div>
 
           <div class="m46Frame m46Clarify m46Reveal">
             <div class="m46CompareHead">
               <span>What arrives</span>
-              <span>What PSC controls</span>
+              <span>What PS controls</span>
             </div>
 
             <div class="m46CompareRow">
@@ -211,7 +211,7 @@
         <div class="m46Shell m46Split">
           <div class="m46SectionCopy m46Reveal">
             <h2>So the next purchase gets easier.</h2>
-            <p>PSC does not restart from zero every time. Previous supply becomes the starting point for the next requirement.</p>
+            <p>PS does not restart from zero every time. Previous supply becomes the starting point for the next requirement.</p>
           </div>
 
           <div class="m46Frame m46Repeat m46Reveal">
@@ -247,7 +247,7 @@
         <div class="m46Shell m46Split m46SplitReverse">
           <div class="m46SectionCopy m46Reveal">
             <h2>And better buying becomes possible.</h2>
-            <p>Once purchasing is visible, PSC can focus commercial attention where it actually matters.</p>
+            <p>Once purchasing is visible, PS can focus commercial attention where it actually matters.</p>
           </div>
 
           <div class="m46Frame m46Commercial m46Reveal">

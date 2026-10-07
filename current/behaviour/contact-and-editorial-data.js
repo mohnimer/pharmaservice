@@ -20,7 +20,7 @@
       hero_image: null,
       read_time: quick && quick.length >= 6 ? '5 min' : '4 min',
       last_reviewed: UPDATED,
-      author_or_review_status: 'PSC operational guide',
+      author_or_review_status: 'PS operational guide',
       status: 'published',
       tags,
       body_sections: [
@@ -90,7 +90,7 @@
 
     mkGuide('ws-023','pack-piece-box-bag-or-set','Pack, Piece, Box, Bag or Set?','Ordering & Specifications',"DON'T ORDER IT LIKE THIS",'The smallest unit word in an RFQ can change the quantity dramatically.','One “box” may contain 10, 50 or 100 pieces. A “set” can mean a defined collection rather than a countable piece.',[
       'Find the supplier selling unit.','Record pieces per pack or box.','Check whether the RFQ quantity means pieces or packs.','For sets, record what the set contains.','Check the conversion before pricing.'
-    ],'Requested quantity, selling unit and pack conversion are all explicit.','Use product + pack/unit + units per pack + required quantity.','Resolve the unit conversion before the quote leaves PSC.', ['PSC-WND-001','PSC-PPE-001','PSC-DBT-004'], ['pack','unit','RFQ']),
+    ],'Requested quantity, selling unit and pack conversion are all explicit.','Use product + pack/unit + units per pack + required quantity.','Resolve the unit conversion before the quote leaves PS.', ['PSC-WND-001','PSC-PPE-001','PSC-DBT-004'], ['pack','unit','RFQ']),
 
     mkGuide('ws-024','otoscope-uses-consumables-too','Your Otoscope Uses Consumables Too','Product Basics','ON THE BENCH','The reusable instrument is only part of the supply requirement.','Otoscope use can depend on compatible specula, batteries or charging arrangements and model-specific replacement parts.',[
       'Identify the exact otoscope model.','Check the specula type used with it.','Check reusable versus single-use specula policy.','Check battery or charging setup.','Record the replacement route for compatible parts.'

@@ -2,7 +2,7 @@
   'use strict';
 
   /*
-    PSC V44.8 — PRODUCT IMAGE RECOVERY
+    PS V44.8 — PRODUCT IMAGE RECOVERY
 
     Why this exists:
     - The production CMS overlay can replace a valid local product image with null.

@@ -27,7 +27,7 @@
                   <b>Clinic requirement · October</b>
                   <small>4 lines · mixed equipment and consumables</small>
                 </div>
-                <div class="m43DocMark">PSC</div>
+                <div class="m43DocMark">PS</div>
               </div>
 
               <div class="m43TableHead">
@@ -82,7 +82,7 @@
         <div class="m43TransformShell m43Reveal">
           <div class="m43TransformHead">
             <h2>Watch the requirement become something you can actually buy.</h2>
-            <p>The interface should show the work PSC performs — not hide it behind generic “solutions” language.</p>
+            <p>The interface should show the work PS performs — not hide it behind generic “solutions” language.</p>
           </div>
 
           <div class="m43StageTabs" role="tablist" aria-label="Procurement stages">
@@ -108,7 +108,7 @@
                 </div>
 
                 <div class="m43Controlled">
-                  <h3>What PSC controls</h3>
+                  <h3>What PS controls</h3>
                   <p>Before a line is commercially committed, the details that change what actually gets supplied are made explicit.</p>
                   <div class="m43ControlRows">
                     <div><span>BP monitor</span><b>Automatic upper-arm · cuff range · exact model · validation · warranty</b><i>CONTROLLED</i></div>
@@ -150,7 +150,7 @@
                     <div class="m43QuoteLine"><div><b>Nitrile gloves · M</b><small>100 / box</small></div><span>5 boxes</span></div>
                     <div class="m43QuoteLine"><div><b>Compatible glucose test strips</b><small>Meter match confirmed</small></div><span>4 packs</span></div>
                   </div>
-                  <div class="m43QuoteBottom"><span>Different sources behind the scenes</span><b>One PSC relationship</b></div>
+                  <div class="m43QuoteBottom"><span>Different sources behind the scenes</span><b>One PS relationship</b></div>
                 </div>
               </div>
             </div>

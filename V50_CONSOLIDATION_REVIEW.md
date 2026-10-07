@@ -2,6 +2,14 @@
 
 Branch: `v50-consolidation`. Production/main has not been changed.
 
+## PS branding, spacing and Start follow-up
+
+Visible company prose and badges now use PS. Existing SKU/reference prefixes, storage keys, internal APIs and database field names are intentionally unchanged. No schema or production data changes.
+
+The current spacing stylesheet establishes 24px heading/copy separation, more generous portal panel and contact-card spacing, responsive Start routing/form spacing, and 16px mobile form controls. Contact now includes click-to-call +971504252641 and WhatsApp https://wa.me/971553511335, retaining the landline and email. Start explains required input and next steps and offers direct contact plus existing-customer portal access.
+
+Verification: build and three shell tests pass; DOM regression coverage includes PS branding on public pages, new contact links, both Start URL forms, Start route-board actions and demo enquiry write protection. Click tests now wait for asynchronous enhancement elements rather than assuming an 80ms render deadline. Layout still requires review in a real mobile browser: DOM tests do not prove pixel-level spacing, and the existing browser/protected-preview limitations below remain.
+
 ## Review deployment and publication status
 
 Preview: https://pharmaservice-git-v50-consolidation-mohameds-projects-9022ad5a.vercel.app

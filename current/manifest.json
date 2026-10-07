@@ -71,7 +71,8 @@
     "current/styles/model-story.css",
     "current/styles/home-layout.css",
     "current/styles/system-theme.css",
-    "current/styles/workshop-design.css"
+    "current/styles/workshop-design.css",
+    "current/styles/spacing.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",

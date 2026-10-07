@@ -32,7 +32,7 @@
         <div class="v452IntelligenceHead">
           <h2>More than supply.<br><strong>A smarter way to procure.</strong></h2>
           <p>Every purchase creates information: what your institution requires, what you buy, what you pay, how often you need it and what needs attention next.</p>
-          <p>PSC turns that information into a simpler procurement system.</p>
+          <p>PS turns that information into a simpler procurement system.</p>
         </div>
         <div class="v452IntelligenceGrid">
           <article><span>01</span><h3>Know what you need</h3><p>Requirements mapped against applicable standards, specifications checked and knowledgeable human support when something isn't clear.</p></article>
@@ -44,7 +44,7 @@
     if(!page.querySelector('.v452SourceStrip')){
       const strip=document.createElement('section');
       strip.className='v452SourceStrip';
-      strip.innerHTML=`<div><h2>We handle the sourcing underneath it all.</h2><p>You don't need to manage a different supplier for every category.</p><p>PSC sources across suitable specialist suppliers while remaining your single commercial point of contact.</p></div><strong>One relationship. Multiple sources. One procurement experience.</strong>`;
+      strip.innerHTML=`<div><h2>We handle the sourcing underneath it all.</h2><p>You don't need to manage a different supplier for every category.</p><p>PS sources across suitable specialist suppliers while remaining your single commercial point of contact.</p></div><strong>One relationship. Multiple sources. One procurement experience.</strong>`;
       category.insertAdjacentElement('beforebegin',strip);
     }
   }
@@ -81,7 +81,7 @@
     }
     demo.querySelector('.kicker')?.remove();
     const h2=demo.querySelector('h2'); if(h2) h2.textContent='From requirement to replenishment.';
-    const p=demo.querySelector('p'); if(p) p.textContent='Find what you need. Request it. Receive one clear quotation. Follow the order. Keep the purchasing record. Reorder when you need it. PSC stays accountable throughout.';
+    const p=demo.querySelector('p'); if(p) p.textContent='Find what you need. Request it. Receive one clear quotation. Follow the order. Keep the purchasing record. Reorder when you need it. PS stays accountable throughout.';
     const b=demo.querySelector('button'); if(b) b.textContent='View the guided tour';
   }
 

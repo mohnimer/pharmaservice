@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  /* PSC V50
+  /* PS V50
      Workshop rendering is now native in app.js. This current module provides the public-catalogue access gate and product-card polish hooks.
      No Workshop DOM mutation, no Workshop history shim, no competing router. */
 

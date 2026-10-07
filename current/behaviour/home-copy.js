@@ -56,7 +56,7 @@
       strip.innerHTML=`
         <div>
           <h2>We handle the sourcing underneath it all.</h2>
-          <p>One relationship with PSC, even when the best solution comes from multiple specialist suppliers.</p>
+          <p>One relationship with PS, even when the best solution comes from multiple specialist suppliers.</p>
         </div>`;
     }
   }
