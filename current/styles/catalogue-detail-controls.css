@@ -1,0 +1,6 @@
+/* V39.18 — model hierarchy correction. */
+.model17SupplyFlow .model18FamilyCard,.model17SupplyFlow .model18LineCard{background:#fff!important;position:relative}
+.model17SupplyFlow .model18FamilyCard{border:1px solid #ded9d1!important}.model17SupplyFlow .model18FamilyVisual{height:210px;display:grid;place-items:center;margin:18px 0 22px;border-radius:22px;background:#faf9f5}.model17SupplyFlow .model18FamilyVisual>img{width:78%;height:78%;object-fit:contain;background:transparent!important}
+.model17SupplyFlow .model18FamilyCard>p em{font-style:italic;color:#68635c}.model17SupplyFlow .model18LineCard .model17LineThumb{background:#faf9f5!important}.model17SupplyFlow .model18LineCard .model17LineThumb img{object-fit:contain!important;background:transparent!important}
+.model17SupplyFlow .model18DhaMark{position:absolute!important;right:20px!important;top:18px!important;width:36px!important;height:36px!important;object-fit:contain!important;background:transparent!important;border:0!important;z-index:3}
+@media(max-width:760px){.model17SupplyFlow .model18FamilyVisual{height:150px}.model17SupplyFlow .model18DhaMark{width:30px!important;height:30px!important;right:14px!important;top:14px!important}}

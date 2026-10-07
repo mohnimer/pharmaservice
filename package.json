@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "echo Static site ready"
+    "build": "node tools/build.mjs",
+    "test": "node --test tests/shell.test.mjs",
+    "test:browser": "node tests/browser.mjs",
+    "test:dom": "node tests/dom.mjs"
+  },
+  "devDependencies": {
+    "happy-dom": "20.14.5",
+    "playwright": "1.62.1"
   }
 }

@@ -1,0 +1,85 @@
+/* PSC V45.5 — cleanup only. Keep current approved direction. */
+
+/* 1 + 4 — one divider is enough. Do not frame editorial sections with two rules. */
+.publicLanding .v452SourceStrip{
+  border-bottom:0!important;
+}
+.publicLanding .v452Memory{
+  border-top:0!important;
+  border-bottom:0!important;
+}
+
+/* Avoid doubled rules when adjacent homepage sections already provide separation. */
+.publicLanding .v452SourceStrip + .publicClinicalPreview{
+  border-top:0!important;
+}
+
+/* 5 — exact hero punctuation/case is applied in JS; keep spacing unaffected. */
+.publicLanding .m445HomeHeroText h1{
+  text-wrap:balance;
+}
+
+/* 3 + 6 — EXACT user-supplied Vitals & Assessment artwork.
+   Older V44 scripts keep changing the <img> source; instead of fighting that
+   observer race, visually suppress their image and paint the supplied PNG on
+   the card itself. This makes the exact artwork deterministic. */
+
+.publicLanding .publicClinicalCard[data-go="catalogue/vitals"],
+.publicCategoryCard16[data-go="catalogue/vitals"],
+.customerShell .clinicNeedCard[data-go$="/vitals"]{
+  position:relative!important;
+}
+
+.publicLanding .publicClinicalCard[data-go="catalogue/vitals"] .publicClinicalArt,
+.publicCategoryCard16[data-go="catalogue/vitals"] .publicCategoryArt16,
+.customerShell .clinicNeedCard[data-go$="/vitals"] .clinicNeedIcon{
+  visibility:hidden!important;
+}
+
+.publicLanding .publicClinicalCard[data-go="catalogue/vitals"]::after,
+.publicCategoryCard16[data-go="catalogue/vitals"]::after,
+.customerShell .clinicNeedCard[data-go$="/vitals"]::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:2!important;
+  pointer-events:none!important;
+  background-image:url('/assets/clinical-icons/vitals-assessment-exact.png?v=4550')!important;
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  background-size:contain!important;
+}
+
+/* Homepage clinical tile */
+.publicLanding .publicClinicalCard[data-go="catalogue/vitals"]::after{
+  width:112px!important;
+  height:112px!important;
+  right:24px!important;
+  bottom:18px!important;
+}
+
+/* Public catalogue category tile */
+.publicCategoryCard16[data-go="catalogue/vitals"]::after{
+  width:102px!important;
+  height:102px!important;
+  right:22px!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+}
+
+/* Portal clinical-need tile */
+.customerShell .clinicNeedCard[data-go$="/vitals"]::after{
+  width:82px!important;
+  height:82px!important;
+  right:18px!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+}
+
+@media(max-width:900px){
+  .publicLanding .publicClinicalCard[data-go="catalogue/vitals"]::after{
+    width:88px!important;
+    height:88px!important;
+    right:16px!important;
+    bottom:14px!important;
+  }
+}

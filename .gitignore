@@ -1,0 +1,4 @@
+dist/
+node_modules/
+test-results/
+_v50_backup/

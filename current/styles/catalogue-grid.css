@@ -1,0 +1,55 @@
+/* =========================================================
+   V39.13 — grid scope correction
+   Purpose: undo the V39.4 site-wide grid without redesigning
+   any page. Local/intentional grids remain owned by their
+   components (Workshop hero, family detail header, etc.).
+   ========================================================= */
+
+/* Public canvas: clean paper again. Do not carry a technical
+   grid through every page or behind every section. */
+.publicLanding,
+.publicPage{
+  background-image:none!important;
+}
+
+/* Header should remain a clean navigation surface. */
+.publicHeader,
+.publicHeader.headerScrolled{
+  background-image:none!important;
+}
+
+/* Restore the pre-V39.4 portal/admin canvas treatment.
+   No repeating grid behind operational screens. */
+.v26Shell .mainArea,
+.mainArea.v7MainArea,
+.mainArea.v7bMainArea{
+  background:
+    radial-gradient(circle at 97% 3%,rgba(255,232,182,.22),transparent 280px),
+    linear-gradient(180deg,#fbfaf7 0%,#f7f4ee 100%)!important;
+  background-size:auto!important;
+}
+
+/* V39.4 added a second grid overlay to public heroes.
+   Remove it so locally-designed hero backgrounds render once. */
+.publicPageHero::before{
+  background-image:none!important;
+}
+
+/* Workshop already owns its intentional 26px editorial grid.
+   Remove only the later 28px pseudo-grid overlay that caused
+   the visible moire / doubled-line effect. */
+.workshopHero::before{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+}
+
+/* Explicitly keep Workshop's own single grid. This repeats the
+   existing local treatment only to make the intended scope
+   unambiguous after the global override above. */
+.workshopHero{
+  background-image:
+    linear-gradient(rgba(17,20,20,.042) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(17,20,20,.042) 1px,transparent 1px)!important;
+  background-size:26px 26px!important;
+}

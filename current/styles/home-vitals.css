@@ -1,0 +1,174 @@
+/* PSC V45.4 — hero composition + exact Vitals icon */
+
+/* Exact supplied icon. No generated substitute, emoji or CSS illustration. */
+.v454VitalsExact{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:96px!important;
+  max-height:96px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+  opacity:1!important;
+  transform:none!important;
+}
+.publicLanding .publicClinicalCard[data-go*="vitals"] .publicClinicalArt,
+.publicCategoryCard16[data-go*="vitals"] .publicCategoryArt16{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.customerShell [data-go*="/vitals"] .clinicNeedIcon .v454VitalsExact,
+.customerShell [data-go*="vitals"] .clinicNeedIcon .v454VitalsExact{
+  max-width:76px!important;
+  max-height:76px!important;
+}
+
+/* Desktop: explicitly lock the requested copy and hierarchy into the existing design. */
+@media (min-width:901px){
+  .publicLanding .m445HomeHeroText{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    text-align:left!important;
+    max-width:min(590px,38vw)!important;
+  }
+  .publicLanding .m445HomeHeroText h1{order:1!important}
+  .publicLanding .m445HomeHeroText .v453HeroSub{order:2!important}
+  .publicLanding .m445HomeHeroText .v453HeroBody{order:3!important}
+  .publicLanding .m445HomeHeroText .v453HeroActions{order:4!important}
+}
+
+/* Mobile: use the portrait art as artwork, not as a full-bleed poster behind the copy.
+   This gives the copy its own white field and lets the photography begin lower. */
+@media (max-width:900px){
+  body main.publicLanding .m445HomeHeroScene{
+    box-sizing:border-box!important;
+    min-height:880px!important;
+    height:auto!important;
+    aspect-ratio:auto!important;
+
+    background-image:url('/assets/hero/home-hero-mobile-v453a.png')!important;
+    background-repeat:no-repeat!important;
+    background-size:100% auto!important;
+    background-position:center bottom!important;
+    background-color:#fbfaf8!important;
+
+    padding:48px 18px 0!important;
+    display:block!important;
+    position:relative!important;
+    overflow:hidden!important;
+  }
+
+  /* Some older layers draw the hero through a pseudo-element. Remove that duplicate. */
+  body main.publicLanding .m445HomeHeroScene::before{
+    content:none!important;
+    display:none!important;
+    background-image:none!important;
+  }
+
+  .publicLanding .m445HomeHeroText{
+    position:relative!important;
+    z-index:4!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    width:min(100%,360px)!important;
+    max-width:360px!important;
+    margin:0 auto!important;
+    padding:0!important;
+    text-align:center!important;
+    color:#111412!important;
+  }
+
+  .publicLanding .m445HomeHeroText h1{
+    order:1!important;
+    width:100%!important;
+    max-width:9.8ch!important;
+    margin:0 auto!important;
+    color:#111412!important;
+    font:500 clamp(39px,10.8vw,47px)/.94 "DM Sans",sans-serif!important;
+    letter-spacing:-.058em!important;
+  }
+
+  .publicLanding .m445HomeHeroText .v453HeroSub{
+    order:2!important;
+    width:100%!important;
+    max-width:340px!important;
+    margin:17px auto 0!important;
+    color:#1a1b19!important;
+    font:400 italic 16px/1.32 "DM Sans",sans-serif!important;
+    letter-spacing:-.018em!important;
+  }
+
+  .publicLanding .m445HomeHeroText .v453HeroBody{
+    order:3!important;
+    width:100%!important;
+    max-width:345px!important;
+    margin:15px auto 0!important;
+    color:#343431!important;
+    font:400 13.5px/1.44 "DM Sans",sans-serif!important;
+    letter-spacing:-.01em!important;
+    opacity:1!important;
+  }
+
+  .publicLanding .m445HomeHeroText .v453HeroActions{
+    order:4!important;
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:8px!important;
+    width:100%!important;
+    max-width:350px!important;
+    margin:20px auto 0!important;
+  }
+
+  .publicLanding .m445HomeHeroText .v453HeroActions .button{
+    width:100%!important;
+    min-width:0!important;
+    min-height:44px!important;
+    height:44px!important;
+    margin:0!important;
+    padding:0 10px!important;
+    border-radius:10px!important;
+    white-space:nowrap!important;
+    font:500 11.5px/1 "DM Sans",sans-serif!important;
+    letter-spacing:-.015em!important;
+  }
+
+  .publicLanding .m445HomeHeroText .v453Primary{
+    background:#0f242d!important;
+    color:#fff!important;
+    border:1px solid #0f242d!important;
+  }
+  .publicLanding .m445HomeHeroText .v453Secondary{
+    background:rgba(255,255,255,.88)!important;
+    color:#0f242d!important;
+    border:1px solid rgba(15,36,45,.28)!important;
+  }
+}
+
+/* Smaller phones: keep the same hierarchy, just tighten it slightly. */
+@media (max-width:390px){
+  body main.publicLanding .m445HomeHeroScene{
+    min-height:845px!important;
+    padding-top:40px!important;
+  }
+  .publicLanding .m445HomeHeroText{
+    max-width:338px!important;
+  }
+  .publicLanding .m445HomeHeroText h1{
+    font-size:38px!important;
+  }
+  .publicLanding .m445HomeHeroText .v453HeroSub{
+    font-size:15px!important;
+  }
+  .publicLanding .m445HomeHeroText .v453HeroBody{
+    font-size:13px!important;
+  }
+  .publicLanding .m445HomeHeroText .v453HeroActions .button{
+    font-size:11px!important;
+  }
+}

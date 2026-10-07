@@ -1,0 +1,302 @@
+/* =========================================================
+   V39.32 — Site-wide micro-interactions only
+   IMPORTANT: intentionally does NOT modify the home hero.
+   Additive layer; no app.js or styles.css replacement.
+   ========================================================= */
+
+:root{
+  --ux32-teal:#16a69d;
+  --ux32-ink:#10211f;
+  --ux32-ease:cubic-bezier(.2,.72,.2,1);
+}
+
+/* Respect users who request less motion. */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+
+/* ---------- Tactile actions ---------- */
+:where(button,.button,[role="button"]){
+  -webkit-tap-highlight-color:transparent;
+}
+:where(button,.button,[role="button"]):not(:disabled):not([aria-disabled="true"]){
+  transition:
+    transform .16s var(--ux32-ease),
+    box-shadow .18s ease,
+    border-color .18s ease,
+    background-color .18s ease,
+    color .18s ease,
+    opacity .18s ease!important;
+}
+@media(hover:hover) and (pointer:fine){
+  :where(button,.button,[role="button"]):not(:disabled):not([aria-disabled="true"]):hover{
+    transform:translateY(-1px);
+  }
+}
+:where(button,.button,[role="button"]):not(:disabled):not([aria-disabled="true"]):active{
+  transform:translateY(0) scale(.985)!important;
+  transition-duration:.07s!important;
+}
+
+/* Links / text actions: no jump, just a slight clarity cue. */
+:where(a,.textAction,.canvaDetails,.canvaRequest){
+  transition:color .16s ease,opacity .16s ease,text-decoration-color .16s ease!important;
+}
+@media(hover:hover) and (pointer:fine){
+  :where(a,.textAction,.canvaDetails,.canvaRequest):hover{
+    text-decoration-color:currentColor;
+  }
+}
+
+/* Accessible focus feedback everywhere. */
+:where(button,.button,[role="button"],a,input,select,textarea,summary):focus-visible{
+  outline:3px solid rgba(22,166,157,.22)!important;
+  outline-offset:3px!important;
+}
+
+/* ---------- Inputs / selects / textareas ---------- */
+:where(input,select,textarea){
+  transition:
+    border-color .17s ease,
+    box-shadow .17s ease,
+    background-color .17s ease!important;
+}
+:where(input,select,textarea):focus{
+  border-color:rgba(22,166,157,.6)!important;
+  box-shadow:0 0 0 4px rgba(22,166,157,.08)!important;
+}
+:where(input[type="checkbox"],input[type="radio"]){
+  transition:transform .14s ease,box-shadow .14s ease,filter .14s ease!important;
+}
+:where(input[type="checkbox"],input[type="radio"]):checked{
+  transform:scale(1.055);
+}
+
+/* ---------- Interactive cards ---------- */
+:where(
+  .publicClinicalCard,
+  .clinicNeedCardIllustrated,
+  .workshopGuideCard,
+  .productCard,
+  .contactCard,
+  .familyCard,
+  .v25ProductCard,
+  .canvaProductCard,
+  [data-psc-family-open],
+  [data-product-view],
+  [data-public-product-view],
+  .start16RouteBoard>button,
+  .portalQuickCard,
+  .dashboardCard
+){
+  transition:
+    transform .2s var(--ux32-ease),
+    box-shadow .2s ease,
+    border-color .2s ease,
+    background-color .2s ease!important;
+}
+@media(hover:hover) and (pointer:fine){
+  :where(
+    .publicClinicalCard,
+    .clinicNeedCardIllustrated,
+    .workshopGuideCard,
+    .productCard,
+    .contactCard,
+    .familyCard,
+    .v25ProductCard,
+    .canvaProductCard,
+    [data-psc-family-open],
+    .start16RouteBoard>button,
+    .portalQuickCard,
+    .dashboardCard
+  ):hover{
+    transform:translateY(-2px)!important;
+    box-shadow:0 12px 28px rgba(28,38,36,.07)!important;
+  }
+
+  /* Product imagery gets a tiny lift, never a dramatic zoom. */
+  :where(.productCard,.v25ProductCard,.canvaProductCard):hover :where(.productMainImage,.productVisual img){
+    transform:scale(1.018);
+  }
+}
+:where(.productMainImage,.productVisual img){
+  transition:transform .24s var(--ux32-ease),filter .2s ease!important;
+}
+
+/* ---------- Tables / list rows ---------- */
+:where(
+  .requestRow,
+  .orderDocumentRow,
+  .documentIndexRow,
+  .mailContactPicker label,
+  .catalogueFamilyRow,
+  .adminTable tbody tr
+){
+  transition:background-color .16s ease,border-color .16s ease,transform .16s var(--ux32-ease)!important;
+}
+@media(hover:hover) and (pointer:fine){
+  :where(
+    .requestRow,
+    .orderDocumentRow,
+    .documentIndexRow,
+    .catalogueFamilyRow,
+    .adminTable tbody tr
+  ):hover{
+    background-color:rgba(22,166,157,.035)!important;
+  }
+}
+
+/* ---------- Tabs / chips / nav selectors ---------- */
+:where(
+  [data-mail-tab],
+  [data-clinic-need],
+  [data-workshop-category],
+  [data-template],
+  [data-option-decision],
+  .chip,
+  .pill,
+  .segmented button
+){
+  transition:
+    background-color .16s ease,
+    color .16s ease,
+    border-color .16s ease,
+    transform .16s var(--ux32-ease)!important;
+}
+
+/* ---------- Accordions ---------- */
+details>summary{
+  cursor:pointer;
+}
+details>summary :where(i,svg,.icon){
+  transition:transform .2s var(--ux32-ease)!important;
+}
+details[open]>summary :where(i,.icon){
+  transform:rotate(45deg);
+}
+
+/* ---------- Modal / drawer / toast entrances ---------- */
+.modalOverlay,
+.modalBackdrop{
+  animation:ux32FadeIn .18s ease both;
+}
+.modalShell,
+.productModalShell,
+.requestDrawer,
+.basketDrawer,
+.drawer,
+.toast{
+  transform-origin:center center;
+}
+.modalShell,
+.productModalShell{
+  animation:ux32ModalIn .22s var(--ux32-ease) both;
+}
+.requestDrawer,
+.basketDrawer,
+.drawer{
+  animation:ux32DrawerIn .24s var(--ux32-ease) both;
+}
+.toast{
+  animation:ux32ToastIn .24s var(--ux32-ease) both;
+}
+@keyframes ux32FadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+@keyframes ux32ModalIn{
+  from{opacity:0;transform:translateY(8px) scale(.992)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes ux32DrawerIn{
+  from{opacity:.7;transform:translateX(14px)}
+  to{opacity:1;transform:translateX(0)}
+}
+@keyframes ux32ToastIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ---------- Route/page entrance: only on actual route changes ---------- */
+.ux32-page-enter{
+  animation:ux32PageEnter .23s ease both;
+}
+@keyframes ux32PageEnter{
+  from{opacity:.55;transform:translateY(3px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ---------- Loading / network-action feedback ---------- */
+.ux32-loading,
+.ux32-native-loading{
+  position:relative!important;
+  pointer-events:none!important;
+  cursor:progress!important;
+  padding-right:42px!important;
+  opacity:.9!important;
+}
+.ux32-loading::after,
+.ux32-native-loading::after{
+  content:"";
+  position:absolute;
+  right:15px;
+  top:50%;
+  width:14px;
+  height:14px;
+  margin-top:-7px;
+  box-sizing:border-box;
+  border:2px solid rgba(100,111,108,.22);
+  border-top-color:var(--ux32-teal);
+  border-radius:50%;
+  animation:ux32Spin .72s linear infinite;
+}
+:where(.button.primary,.button.dark,.semanticPrimary,.canvaRequest).ux32-loading::after,
+:where(.button.primary,.button.dark,.semanticPrimary,.canvaRequest).ux32-native-loading::after{
+  border-color:rgba(255,255,255,.32);
+  border-top-color:#fff;
+}
+@keyframes ux32Spin{to{transform:rotate(360deg)}}
+
+/* ---------- Successful add / save confirmation ---------- */
+.ux32-confirmed{
+  background:#e5f5f1!important;
+  color:#0a766f!important;
+  border-color:#9bd8d1!important;
+  box-shadow:0 0 0 4px rgba(22,166,157,.07)!important;
+}
+.ux32-check{
+  display:inline-grid;
+  place-items:center;
+  width:18px;
+  height:18px;
+  margin-right:7px;
+  border-radius:50%;
+  background:var(--ux32-teal);
+  color:#fff;
+  font-size:11px;
+  line-height:1;
+  vertical-align:middle;
+  animation:ux32ConfirmPop .28s cubic-bezier(.2,.9,.25,1.25);
+}
+@keyframes ux32ConfirmPop{
+  from{transform:scale(.55);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+/* ---------- Subtle navigation icon response ---------- */
+@media(hover:hover) and (pointer:fine){
+  :where(.iconBtn,[data-mobile-open],[data-mobile-close],[data-modal-close]):hover{
+    transform:scale(1.045);
+  }
+}
+
+/* ---------- Avoid motion on disabled actions ---------- */
+:where(button,.button,[role="button"]):disabled,
+:where(button,.button,[role="button"])[aria-disabled="true"]{
+  transform:none!important;
+}

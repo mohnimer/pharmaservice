@@ -7,6 +7,154 @@
     {
       "source": "/workshop/:path*",
       "destination": "/index.html"
+    },
+    {
+      "source": "/start",
+      "destination": "/index.html"
+    }
+  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/our-model.html",
+      "destination": "/#our-model",
+      "permanent": true
+    },
+    {
+      "source": "/who-we-supply.html",
+      "destination": "/#our-model",
+      "permanent": true
+    },
+    {
+      "source": "/what-we-supply.html",
+      "destination": "/#our-model",
+      "permanent": true
+    },
+    {
+      "source": "/how-it-works.html",
+      "destination": "/#our-model",
+      "permanent": true
+    },
+    {
+      "source": "/catalogue.html",
+      "destination": "/#catalogue",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "/#about",
+      "permanent": true
+    },
+    {
+      "source": "/careers.html",
+      "destination": "/#careers",
+      "permanent": true
+    },
+    {
+      "source": "/resources.html",
+      "destination": "/#media",
+      "permanent": true
+    },
+    {
+      "source": "/media.html",
+      "destination": "/#media",
+      "permanent": true
+    },
+    {
+      "source": "/wholesale.html",
+      "destination": "/#wholesale",
+      "permanent": true
+    },
+    {
+      "source": "/index (1).html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index (10).html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index (11).html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index (2).html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index (3).html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index (4).html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index (5).html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index (6).html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index (7).html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index (8).html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index (9).html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index-v45-2.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index-v45-workshop-modules-gate (1).html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index-v45-workshop-modules-gate.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/start/index.html",
+      "destination": "/start",
+      "permanent": true
+    },
+    {
+      "source": "/workshop/index.html",
+      "destination": "/workshop",
+      "permanent": true
+    },
+    {
+      "source": "/workshop/:slug/index.html",
+      "destination": "/workshop/:slug",
+      "permanent": true
     }
   ]
 }

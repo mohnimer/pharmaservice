@@ -1,0 +1,241 @@
+/* =========================================================
+   V39.27 — Contact form structural repair
+   Isolated patch. Does not touch app.js or styles.css.
+   ========================================================= */
+
+/* Contact hero */
+.publicPage:has(.v3927ContactForm) .publicPageHero{
+  padding-bottom:42px!important;
+}
+.publicPage:has(.v3927ContactForm) .publicPageHero h1{
+  max-width:900px!important;
+}
+.publicPage:has(.v3927ContactForm) .publicPageHero>p{
+  max-width:900px!important;
+  margin:16px 0 0!important;
+  font-size:18px!important;
+  line-height:1.58!important;
+}
+
+/*
+  V39.26 removed .prospectIntro, so the old two-column
+  "intro + form" grid must also be removed. The form is now
+  the only content in this section and owns the full width.
+*/
+.v3927ContactSection{
+  display:block!important;
+  grid-template-columns:none!important;
+  gap:0!important;
+  width:100%!important;
+  max-width:1320px!important;
+  margin:0 auto!important;
+  padding-top:42px!important;
+  padding-bottom:34px!important;
+}
+
+.v3927ContactForm{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:18px!important;
+  width:100%!important;
+  max-width:1080px!important;
+  min-width:0!important;
+  margin:0 auto!important;
+  padding:30px!important;
+  box-sizing:border-box!important;
+  background:#fff!important;
+  border:1px solid #e2e3dd!important;
+  border-radius:24px!important;
+}
+
+.v3927ContactForm .prospectField{
+  min-width:0!important;
+  width:100%!important;
+  gap:8px!important;
+}
+.v3927ContactForm .prospectFieldWide{
+  grid-column:1/-1!important;
+}
+.v3927ContactForm .prospectField label{
+  display:block!important;
+  margin:0!important;
+  font-size:11px!important;
+  line-height:1.3!important;
+}
+.v3927ContactForm .prospectField label span{
+  font-weight:500!important;
+  color:#898e88!important;
+}
+
+/* Existing rules omitted select elements, which caused the tiny native controls. */
+.v3927ContactForm .prospectField input:not([type="file"]),
+.v3927ContactForm .prospectField select,
+.v3927ContactForm .prospectField textarea{
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+  border:1px solid #dedfd9!important;
+  border-radius:14px!important;
+  background:#fbfbf8!important;
+  color:#171a19!important;
+  font:inherit!important;
+  font-size:14px!important;
+  line-height:1.45!important;
+  outline:none!important;
+}
+.v3927ContactForm .prospectField input:not([type="file"]),
+.v3927ContactForm .prospectField select{
+  min-height:52px!important;
+  padding:0 14px!important;
+}
+.v3927ContactForm .prospectField textarea{
+  min-height:160px!important;
+  padding:14px!important;
+  resize:vertical!important;
+}
+.v3927ContactForm .prospectField select{
+  appearance:auto!important;
+}
+.v3927ContactForm .prospectField input:focus,
+.v3927ContactForm .prospectField select:focus,
+.v3927ContactForm .prospectField textarea:focus{
+  background:#fff!important;
+  border-color:#8ecbc6!important;
+  box-shadow:0 0 0 3px rgba(39,169,159,.12)!important;
+}
+
+.v3927ContactForm .rfqUploadField{
+  min-width:0!important;
+}
+.v3927ContactForm .rfqUploadField input[type="file"]{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+  padding:12px!important;
+  border:1px dashed #d8dad4!important;
+  border-radius:14px!important;
+  background:#fbfbf8!important;
+  font-size:12px!important;
+  overflow:hidden!important;
+}
+
+.v3927ContactForm .prospectSubmitRow{
+  grid-column:1/-1!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:24px!important;
+  min-width:0!important;
+  padding-top:6px!important;
+}
+.v3927ContactForm .prospectSubmitRow p{
+  flex:1 1 auto!important;
+  max-width:520px!important;
+  margin:0!important;
+  font-size:10px!important;
+  line-height:1.5!important;
+}
+.v3927ContactForm .prospectSubmitRow .button{
+  flex:0 0 auto!important;
+  min-width:170px!important;
+  min-height:50px!important;
+}
+
+/* Contact information cards */
+.publicPage:has(.v3927ContactForm) .prospectContactGrid{
+  padding-top:26px!important;
+  padding-bottom:58px!important;
+}
+.publicPage:has(.v3927ContactForm) .prospectContactGrid .contactCard{
+  min-width:0!important;
+}
+.publicPage:has(.v3927ContactForm) .prospectContactGrid .contactCard:last-child{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:space-between!important;
+  gap:18px!important;
+}
+.publicPage:has(.v3927ContactForm) .prospectContactGrid .contactCard:last-child .button{
+  width:auto!important;
+  max-width:100%!important;
+  white-space:normal!important;
+  text-align:center!important;
+}
+
+@media(max-width:900px){
+  .v3927ContactSection{
+    padding:34px 28px 24px!important;
+  }
+  .v3927ContactForm{
+    max-width:760px!important;
+    padding:24px!important;
+  }
+}
+
+@media(max-width:680px){
+  .publicPage:has(.v3927ContactForm) .publicPageHero{
+    padding:50px 20px 30px!important;
+  }
+  .publicPage:has(.v3927ContactForm) .publicPageHero h1{
+    font-size:clamp(46px,14vw,64px)!important;
+    line-height:.94!important;
+    letter-spacing:-.06em!important;
+  }
+  .publicPage:has(.v3927ContactForm) .publicPageHero>p{
+    font-size:15px!important;
+    line-height:1.55!important;
+  }
+  .v3927ContactSection{
+    width:100%!important;
+    padding:24px 16px 18px!important;
+  }
+  .v3927ContactForm{
+    grid-template-columns:1fr!important;
+    gap:14px!important;
+    width:100%!important;
+    max-width:none!important;
+    padding:18px!important;
+    border-radius:20px!important;
+  }
+  .v3927ContactForm .prospectFieldWide,
+  .v3927ContactForm .prospectSubmitRow{
+    grid-column:1!important;
+  }
+  .v3927ContactForm .prospectField input:not([type="file"]),
+  .v3927ContactForm .prospectField select{
+    min-height:50px!important;
+    font-size:16px!important; /* prevents iOS zoom */
+  }
+  .v3927ContactForm .prospectField textarea{
+    min-height:150px!important;
+    font-size:16px!important;
+  }
+  .v3927ContactForm .rfqUploadField input[type="file"]{
+    font-size:12px!important;
+  }
+  .v3927ContactForm .prospectSubmitRow{
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:14px!important;
+  }
+  .v3927ContactForm .prospectSubmitRow p{
+    max-width:none!important;
+  }
+  .v3927ContactForm .prospectSubmitRow .button{
+    width:100%!important;
+    min-width:0!important;
+  }
+  .publicPage:has(.v3927ContactForm) .prospectContactGrid{
+    grid-template-columns:1fr!important;
+    padding:24px 16px 42px!important;
+    gap:12px!important;
+  }
+  .publicPage:has(.v3927ContactForm) .prospectContactGrid .contactCard:last-child .button{
+    width:100%!important;
+  }
+}

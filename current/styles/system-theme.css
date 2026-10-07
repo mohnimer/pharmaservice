@@ -1,0 +1,165 @@
+/* PSC V48 — System visual consistency
+   Extends the V46 Our Model design language across the public site,
+   customer portal and PSC admin without changing application logic. */
+
+:root{
+  --v48-bg:#fbfaf7;
+  --v48-paper:#fffefa;
+  --v48-ink:#111412;
+  --v48-muted:#706d67;
+  --v48-line:#ddd8cf;
+  --v48-line-strong:#c9c2b8;
+  --v48-navy:#10282c;
+  --v48-teal:#157d77;
+  --v48-teal-soft:#e4f0ec;
+  --v48-coral:#e8a68f;
+  --v48-coral-soft:#f4e1d8;
+  --v48-blue-soft:#eef4f7;
+  --v48-sage:#e3e8df;
+  --v48-sand:#f1eadf;
+  --v48-shadow:0 10px 30px rgba(43,39,32,.055);
+  --v48-ease:cubic-bezier(.22,1,.36,1);
+}
+
+html,body,#app{background:var(--v48-bg)!important}
+body,button,input,select,textarea{font-family:"DM Sans",sans-serif!important;color:var(--v48-ink)}
+body{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+.kicker,.eyebrow{display:none!important}
+
+/* Public header */
+.publicHeader.v37PublicHeader,.publicHeader{
+  width:100%!important;min-height:104px!important;display:grid!important;
+  grid-template-columns:auto 1fr auto!important;align-items:center!important;gap:34px!important;
+  padding:18px max(28px,calc((100vw - 1320px)/2))!important;margin:0!important;
+  border:0!important;border-bottom:1px solid var(--v48-line)!important;border-radius:0!important;
+  background:var(--v48-bg)!important;box-shadow:none!important;
+}
+.publicLogo{min-width:0!important;padding:0!important;border:0!important;background:transparent!important}
+.publicLogo img{width:148px!important;height:72px!important;max-width:none!important;object-fit:contain!important;object-position:left center!important}
+.publicNav{justify-self:end!important;display:flex!important;align-items:center!important;gap:30px!important;padding:0!important;border:0!important;background:transparent!important}
+.publicNavLink{
+  position:relative!important;min-height:auto!important;padding:12px 0 10px!important;border:0!important;border-radius:0!important;
+  background:transparent!important;color:#625f59!important;font-size:13px!important;line-height:1.15!important;font-weight:400!important;
+  letter-spacing:-.01em!important;box-shadow:none!important;
+}
+.publicNavLink::after{content:""!important;position:absolute!important;left:0!important;right:100%!important;bottom:4px!important;height:1px!important;background:var(--v48-ink)!important;transition:right .35s var(--v48-ease)!important}
+.publicNavLink:hover,.publicNavLink.active{color:var(--v48-ink)!important}
+.publicNavLink:hover::after,.publicNavLink.active::after{right:0!important}
+.publicPortalBtn{min-height:44px!important;padding:0 18px!important;border:1px solid var(--v48-navy)!important;border-radius:11px!important;background:var(--v48-navy)!important;color:#fff!important;font-size:12.5px!important;font-weight:500!important;box-shadow:none!important}
+.publicMenuButton{border:0!important;background:transparent!important;box-shadow:none!important}
+.mobileClinicPortalLink{display:none!important}
+
+/* Shared public page treatment */
+.publicPage{min-height:100vh;background:var(--v48-bg)!important;color:var(--v48-ink)!important}
+.publicPageHero{width:min(1320px,calc(100% - 64px))!important;margin:0 auto!important;padding:72px 0 58px!important;border:0!important;border-bottom:1px solid var(--v48-line)!important;background:transparent!important}
+.publicPageHero h1,.start16HeroCopy h1,.workshopHero h1,.workshopArticleHeader h1,.loginIntro h1{margin:0!important;color:var(--v48-ink)!important;font-weight:500!important;letter-spacing:-.055em!important;line-height:.98!important;text-wrap:balance!important}
+.publicPageHero h1{max-width:900px!important;font-size:clamp(46px,5vw,68px)!important}
+.publicPageHero p,.start16HeroCopy>p,.workshopHeroCopy p,.loginIntro>p{max-width:720px!important;color:var(--v48-muted)!important;font-size:15px!important;line-height:1.58!important;font-weight:400!important}
+.publicSection{width:min(1320px,calc(100% - 64px))!important;margin:0 auto!important;padding:76px 0!important;border-bottom:1px solid var(--v48-line)!important;background:transparent!important}
+.publicSection h2,.start16BriefHead h2,.startSendIntro h2,.prospectIntro h2,.workshopCategoryHead h2,.workshopGuideDeckIntro h2,.workshopPrinciple h2,.publicCta h2{color:var(--v48-ink)!important;font-weight:500!important;letter-spacing:-.045em!important;line-height:1!important}
+.publicSection p,.startSendIntro p,.prospectIntro p,.workshopCategoryHead p,.workshopGuideDeckIntro p,.workshopPrinciple p,.publicCta p{color:var(--v48-muted)!important;font-weight:400!important}
+.button{box-shadow:none!important}
+.button.primary,.semanticPrimary{border-color:var(--v48-navy)!important;background:var(--v48-navy)!important;color:#fff!important}
+.button.outline{border-color:var(--v48-line-strong)!important;background:var(--v48-paper)!important;color:var(--v48-ink)!important}
+.button.primary,.button.outline,.button.dark{border-radius:11px!important;font-weight:500!important}
+
+/* Sourcing: specific procurement visual, not a generic software funnel */
+.h47Sourcing{padding:98px 0!important;border-top:1px solid var(--v48-line)!important;border-bottom:1px solid var(--v48-line)!important;background:#f6f3ed!important}
+.h47SourcingGrid{grid-template-columns:minmax(300px,.78fr) minmax(560px,1.22fr)!important;gap:92px!important;align-items:center!important}
+.h47SourceCopy h2{max-width:590px!important;font-size:clamp(40px,4vw,56px)!important;font-weight:500!important;line-height:.98!important;letter-spacing:-.052em!important}
+.h47SourceCopy p{max-width:520px!important;margin-top:18px!important;color:var(--v48-muted)!important;font-size:15px!important;line-height:1.58!important}
+.h47SourceDiagram{min-height:0!important;padding:0!important}
+.h48SourceBoard{display:grid;grid-template-columns:minmax(210px,.86fr) 46px minmax(280px,1.14fr);gap:18px;align-items:stretch}
+.h48SourceRows{align-self:stretch;border-top:1px solid var(--v48-line-strong);border-bottom:1px solid var(--v48-line-strong)}
+.h48SourceRow{display:grid;grid-template-columns:28px minmax(0,1fr);gap:13px;align-items:start;padding:14px 2px;border-bottom:1px solid var(--v48-line)}
+.h48SourceRow:last-child{border-bottom:0}.h48SourceRow>span{color:#9a948b;font-size:9px;line-height:1.5}
+.h48SourceRow b{display:block;color:var(--v48-ink);font-size:13px;font-weight:500;line-height:1.25}
+.h48SourceRow small{display:block;margin-top:3px;color:#77726b;font-size:9.5px;line-height:1.35}
+.h48SourceFlow{position:relative;display:grid;place-items:center}.h48SourceFlow::before{content:"";position:absolute;top:24px;bottom:24px;left:50%;width:1px;background:#b9c9c4}.h48SourceFlow::after{content:"→";position:relative;z-index:2;display:grid;place-items:center;width:34px;height:34px;border:1px solid #b9c9c4;border-radius:50%;background:#f6f3ed;color:var(--v48-teal);font-size:16px}
+.h48SourceSheet{position:relative;overflow:hidden;min-height:330px;padding:28px 28px 24px;border:1px solid var(--v48-line);border-radius:20px;background:var(--v48-paper);box-shadow:var(--v48-shadow)}
+.h48SourceSheet::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;background:linear-gradient(rgba(20,20,20,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(20,20,20,.018) 1px,transparent 1px);background-size:28px 28px}
+.h48SourceSheet>*{position:relative;z-index:1}.h48SourceSheetTop{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding-bottom:18px;border-bottom:1px solid var(--v48-line)}
+.h48SourceSheetTop span{color:#78736c;font-size:9px;text-transform:uppercase;letter-spacing:.06em}.h48SourceSheetTop b{display:grid;place-items:center;width:39px;height:39px;border-radius:10px;background:var(--v48-navy);color:#fff;font-size:9px;font-weight:600}
+.h48SourceSheet h3{max-width:390px;margin:22px 0 24px;font-size:29px;font-weight:500;line-height:1.02;letter-spacing:-.045em}.h48SourceSheetRows{border-top:1px solid var(--v48-line)}
+.h48SourceSheetRows>div{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--v48-line)}.h48SourceSheetRows span{color:#747069;font-size:10px}.h48SourceSheetRows b{color:var(--v48-ink);font-size:10px;font-weight:500;text-align:right}.h48SourceSheetFoot{margin-top:18px;color:#356d67;font-size:10px;line-height:1.45}
+
+/* Catalogue */
+.publicCataloguePage,.catalogue16Page{background:var(--v48-bg)!important}.catalogue16Hero{padding-bottom:50px!important}.publicCatalogueJourney16,.publicCatalogueControls,.publicCatalogueResults{background:transparent!important}
+.publicCatalogueJourneyHead16 h2{font-size:clamp(34px,3.5vw,50px)!important;font-weight:500!important;letter-spacing:-.045em!important}.publicCategoryGrid16{gap:12px!important}
+.publicCategoryCard16{min-height:164px!important;border:1px solid var(--v48-line)!important;border-radius:18px!important;background:var(--v48-paper)!important;color:var(--v48-ink)!important;box-shadow:none!important}
+.publicCategoryCard16.active{border-color:#9fb9b3!important;background:#f2f7f5!important}.publicCategoryCard16 b{font-weight:500!important}.publicCategoryCard16 small{color:var(--v48-muted)!important}
+.publicCatalogueControls .filterBar,.catalogue16Controls .filterBar{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+.publicCatalogueControls .searchInput,.catalogue16Controls .searchInput,.workshopSearch{min-height:58px!important;border:1px solid var(--v48-line-strong)!important;border-radius:15px!important;background:#fff!important;box-shadow:none!important}
+.publicCatalogueControls input,.catalogue16Controls input,.workshopSearch input{background:#fff!important;font-weight:400!important}.publicCatalogueControls select,.catalogue16Controls select{min-height:58px!important;border:1px solid var(--v48-line-strong)!important;border-radius:15px!important;background:#fff!important;font-weight:400!important}
+.publicCatalogueCard{border:1px solid var(--v48-line)!important;border-radius:18px!important;background:var(--v48-paper)!important;box-shadow:none!important}.publicCatalogueCard h3,.productTitleButton{font-weight:500!important}.publicCatalogueVisual{background:#fff!important}
+.publicCta{width:min(1320px,calc(100% - 64px))!important;margin:0 auto!important;padding:74px 0!important;border-top:0!important;border-bottom:1px solid var(--v48-line)!important;background:transparent!important}
+
+/* Workshop */
+.workshopPage{background-color:var(--v48-bg)!important;background-image:linear-gradient(rgba(35,34,31,.027) 1px,transparent 1px),linear-gradient(90deg,rgba(35,34,31,.027) 1px,transparent 1px)!important;background-size:28px 28px!important}
+.workshopHero,.workshopCategorySection,.workshopTools,.workshopGuideDeck,.workshopPrinciple,.workshopArticle{width:min(1320px,calc(100% - 64px))!important;margin-left:auto!important;margin-right:auto!important}
+.workshopHero{padding:70px 0 58px!important;border-bottom:1px solid var(--v48-line)!important}.workshopHero h1{font-size:clamp(48px,5vw,68px)!important}.workshopHero h2{max-width:720px!important;margin-top:16px!important;font-size:24px!important;font-weight:400!important;line-height:1.16!important;letter-spacing:-.025em!important}
+.workshopCategorySection{padding:72px 0 54px!important}.workshopCategoryHead h2{max-width:760px!important;font-size:clamp(38px,4vw,56px)!important}.workshopCategoryCard,.workshopGuideCard{border:1px solid var(--v48-line)!important;border-radius:18px!important;background:rgba(255,254,250,.92)!important;box-shadow:none!important}.workshopCategoryCard b,.workshopGuideCard h3{font-weight:500!important}
+.workshopCategoryHead>button,.workshopResultContext button{border:1px solid var(--v48-line-strong)!important;border-radius:11px!important;background:var(--v48-paper)!important;color:var(--v48-ink)!important}.workshopTools{padding:18px 0 34px!important;border-bottom:1px solid var(--v48-line)!important}.workshopGuideDeck{padding:52px 0 76px!important}.workshopGuideDeckIntro h2{font-size:clamp(34px,3.6vw,50px)!important}.workshopPrinciple{padding:72px 0!important;border-top:1px solid var(--v48-line)!important;border-bottom:1px solid var(--v48-line)!important}
+.workshopArticle{background:rgba(255,254,250,.9)!important}.workshopArticleHeader h1{font-size:clamp(48px,5vw,72px)!important}.workshopArticleSection{border-color:var(--v48-line)!important}.workshopArticleSection h2{font-weight:500!important}.workshopComparison article,.workshopSignature article,.workshopRelated button{border-color:var(--v48-line)!important;background:var(--v48-paper)!important;box-shadow:none!important}
+
+/* Start / Contact / Login */
+.start16Hero,.start16Brief,.start16Send,.prospectSection,.loginWrap{width:min(1320px,calc(100% - 64px))!important;margin-left:auto!important;margin-right:auto!important}.start16Hero{padding:72px 0 68px!important;border-bottom:1px solid var(--v48-line)!important}.start16HeroCopy h1{max-width:760px!important;font-size:clamp(46px,5vw,68px)!important}
+.start16RouteBoard{border:1px solid var(--v48-line)!important;border-radius:20px!important;background:var(--v48-paper)!important;box-shadow:none!important}.start16RouteBoard button{border-color:var(--v48-line)!important;background:transparent!important}.start16BriefGrid article,.simplePublicPanel,.contactCard{border:1px solid var(--v48-line)!important;border-radius:18px!important;background:var(--v48-paper)!important;box-shadow:none!important}
+.prospectForm,.startProspectForm{border:1px solid var(--v48-line)!important;border-radius:22px!important;background:var(--v48-paper)!important;box-shadow:none!important}.prospectForm input,.prospectForm select,.prospectForm textarea,.startProspectForm input,.startProspectForm select,.startProspectForm textarea{border:1px solid var(--v48-line)!important;border-radius:11px!important;background:#fff!important;box-shadow:none!important;font-weight:400!important}
+.loginWrap{padding:76px 0!important}.loginIntro h1{font-size:clamp(48px,5vw,68px)!important}.loginCard{border:1px solid var(--v48-line)!important;border-radius:22px!important;background:var(--v48-paper)!important;box-shadow:var(--v48-shadow)!important}.loginCard h2{font-weight:500!important}.loginCard .input{border:1px solid var(--v48-line)!important;border-radius:11px!important;background:#fff!important}
+
+/* Customer portal + backend shell */
+.appShell.customerShell,.appShell.adminShell{background:var(--v48-bg)!important}.customerShell .mainArea,.adminShell .mainArea,.customerShell .contentWrap,.adminShell .contentWrap{background:var(--v48-bg)!important}.customerShell .sidebar,.adminShell .sidebar{border-right:1px solid var(--v48-line)!important;background:var(--v48-bg)!important;box-shadow:none!important}.customerShell .sidebarTop,.adminShell .sidebarTop{border-bottom:1px solid var(--v48-line)!important;background:transparent!important}
+.customerShell .navLink,.adminShell .navLink{border-radius:12px!important;background:transparent!important;box-shadow:none!important}.customerShell .navLink.active,.adminShell .navLink.active{background:#f1eee8!important;box-shadow:inset 2px 0 0 var(--v48-teal)!important}
+.customerShell .portalHeaderBar,.adminShell .portalHeaderBar{min-height:82px!important;padding:12px 24px!important;border:0!important;border-bottom:1px solid var(--v48-line)!important;border-radius:0!important;background:var(--v48-bg)!important;box-shadow:none!important}.topbarBrandSlot img{width:116px!important;height:58px!important;object-fit:contain!important;object-position:left center!important}
+.customerShell .topbarSearch{min-height:50px!important;border:1px solid var(--v48-line-strong)!important;border-radius:14px!important;background:#fff!important;box-shadow:none!important}.customerShell .topbarSearch input{background:#fff!important;font-weight:400!important}
+.accountSwitcherButton,.campusPill{border:1px solid var(--v48-line)!important;border-radius:13px!important;background:var(--v48-paper)!important;box-shadow:none!important}.pillBasket,.mobileCartButton{border:1px solid var(--v48-navy)!important;border-radius:11px!important;background:var(--v48-navy)!important;color:#fff!important;font-weight:500!important}.topbarAdminTitle span{color:#79746d!important;font-weight:400!important}.topbarAdminTitle b{color:var(--v48-ink)!important;font-weight:500!important}.compactUser{border:1px solid var(--v48-line)!important;background:var(--v48-paper)!important;box-shadow:none!important}
+
+/* Portal page headings */
+.customerShell .pageHeader,.adminShell .pageHeader,.v26HomeHero{margin:0 0 26px!important;padding:12px 0 26px!important;border-bottom:1px solid var(--v48-line)!important;background:transparent!important}.customerShell .pageHeader h1,.adminShell .pageHeader h1,.v26HomeHero h1{margin:0!important;color:var(--v48-ink)!important;font-size:clamp(34px,3.7vw,50px)!important;line-height:1!important;font-weight:500!important;letter-spacing:-.045em!important}.customerShell .pageHeader p,.adminShell .pageHeader p,.v26HomeHero p{max-width:760px!important;margin-top:10px!important;color:var(--v48-muted)!important;font-size:13.5px!important;line-height:1.55!important;font-weight:400!important}
+.v26HomeHero{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(220px,.34fr)!important;gap:48px!important;align-items:end!important}.v26HomeStatus{border:1px solid var(--v48-line)!important;border-radius:16px!important;background:var(--v48-paper)!important;box-shadow:none!important}
+
+/* Portal cards: one visual language */
+.v26QuickActions,.actionGrid{gap:12px!important}.v26ActionCard,.actionCard,.panel,.customerActionPanel,.v26RepeatPanel,.v26ActivityPanel,.schoolCardV7,.replenishCard,.customerOrderCard,.orderDocumentsPanel,.documentsIndexPanel,.assetCard,.resourceCard,.customRequestPanel,.quoteStatePanel,.cmsPreviewPanel,.cmsProductMasterPanel,.cmsFormSection,.cmsMediaPanel,.cmsPublishPanel,.familyOptionCard,.fulfilCard,.mailIdentityCard,.mailTemplateCard{border:1px solid var(--v48-line)!important;border-radius:18px!important;background:var(--v48-paper)!important;box-shadow:none!important}
+.v26ActionCard.coral,.v26ActionCard.blue,.v26ActionCard.mint,.v26ActionCard.sand{background:var(--v48-paper)!important;color:var(--v48-ink)!important}.v26ActionCard h2,.actionCard b,.panelHeader h2,.orderSectionHead h2,.cmsPageHeader h1,.familyOptionPageHeader h1{font-weight:500!important}.v26ActionIcon,.actionIcon{border:1px solid var(--v48-line)!important;border-radius:12px!important;background:#f4f1eb!important;color:var(--v48-ink)!important}
+.v26NeedPreview,.clinicNeedSection{border-top:1px solid var(--v48-line)!important;border-bottom:1px solid var(--v48-line)!important;background:transparent!important}.v26MiniNeed,.clinicNeedCard{border:1px solid var(--v48-line)!important;border-radius:14px!important;background:var(--v48-paper)!important;color:var(--v48-ink)!important;box-shadow:none!important}
+.v26OperationsStrip,.adminStatRow{overflow:hidden!important;gap:0!important;border:1px solid var(--v48-line)!important;border-radius:18px!important;background:var(--v48-paper)!important}.v26OperationsStrip>div,.adminStat{border:0!important;border-right:1px solid var(--v48-line)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}.v26OperationsStrip>div:last-child,.adminStat:last-child{border-right:0!important}.adminStat span,.v26OperationsStrip span,.cmsMetric span{color:#7a756e!important;font-weight:400!important;letter-spacing:.045em!important}.adminStat b,.v26OperationsStrip b,.cmsMetric b{font-weight:500!important}
+
+/* Tables / operational data */
+.tableWrap,.dataTable,.cmsMasterTable,.familyOptionFamilyTable{background:var(--v48-paper)!important}.tableWrap{overflow:auto!important;border:1px solid var(--v48-line)!important;border-radius:15px!important}.dataTable,.cmsMasterTable,.familyOptionFamilyTable{border-collapse:collapse!important}.dataTable thead,.cmsMasterTable thead,.familyOptionFamilyTable thead{background:#f4f1eb!important}.dataTable th,.cmsMasterTable th,.familyOptionFamilyTable th{color:#77726b!important;font-size:9px!important;font-weight:500!important;letter-spacing:.05em!important}.dataTable td,.dataTable th,.cmsMasterTable td,.cmsMasterTable th,.familyOptionFamilyTable td,.familyOptionFamilyTable th{border-color:var(--v48-line)!important}.dataTable tbody tr:hover,.cmsMasterTable tbody tr:hover,.familyOptionFamilyTable tbody tr:hover{background:#f8f6f1!important}
+
+/* Admin forms / controls */
+.adminShell input,.adminShell select,.adminShell textarea,.customerShell input,.customerShell select,.customerShell textarea{border-color:var(--v48-line)!important;background:#fff!important;box-shadow:none!important;font-weight:400!important}.adminShell input:focus,.adminShell select:focus,.adminShell textarea:focus,.customerShell input:focus,.customerShell select:focus,.customerShell textarea:focus,.publicPage input:focus,.publicPage select:focus,.publicPage textarea:focus{outline:none!important;border-color:#7ca7a1!important;box-shadow:0 0 0 3px rgba(21,125,119,.08)!important}.cmsChannelTabs,.mailTabs,.filterBar{border-color:var(--v48-line)!important;background:transparent!important;box-shadow:none!important}.statusPill,.badge{box-shadow:none!important}
+
+/* Product cards remain clean and functional */
+.customerShell .productCard,.customerShell .v25ProductCard,.customerShell .v261ProductCard,.customerShell .v262ProductCard,.customerShell .canvaProductCard,.customerShell .exactCanvaCard{border:1px solid var(--v48-line)!important;border-radius:16px!important;background:var(--v48-paper)!important;box-shadow:none!important}.customerShell .productPhoto,.customerShell .productVisual,.customerShell .canvaCardBody{background:#fff!important}.customerShell .canvaCardActions,.customerShell .productStickyBar{border-color:var(--v48-line)!important}
+
+/* Modals / drawers */
+.modal,.modalCard,.productDetailModal,.requestDrawer{border-color:var(--v48-line)!important;background:var(--v48-paper)!important;box-shadow:0 24px 70px rgba(28,26,22,.14)!important}.modalHeader,.productStickyBar,.requestDrawerFooter{border-color:var(--v48-line)!important;background:var(--v48-paper)!important}
+
+/* Footer */
+.publicFooter.v37PublicFooter,.publicFooter{width:100%!important;padding:56px max(28px,calc((100vw - 1320px)/2)) 48px!important;border-top:1px solid var(--v48-line)!important;background:#f2efe8!important;color:var(--v48-ink)!important}.publicFooter img{width:134px!important;height:auto!important}.publicFooter p,.publicFooter span,.publicFooter a,.publicFooter button{color:#68645e!important;font-weight:400!important}.publicFooter a:hover,.publicFooter button:hover{color:var(--v48-ink)!important}
+
+/* Natural interaction only */
+@media(hover:hover) and (pointer:fine){
+  .publicCategoryCard16,.workshopCategoryCard,.workshopGuideCard,.v26ActionCard,.actionCard,.panel{transition:border-color .28s ease,background-color .28s ease!important}
+  .publicCategoryCard16:hover,.workshopCategoryCard:hover,.workshopGuideCard:hover,.v26ActionCard:hover,.actionCard:hover{border-color:#afa89e!important;background:#fff!important;transform:none!important;box-shadow:none!important}
+}
+
+@media(max-width:1100px){
+  .publicHeader.v37PublicHeader,.publicHeader{padding-inline:28px!important}.publicNav{gap:20px!important}
+  .h47SourcingGrid{grid-template-columns:1fr!important;gap:42px!important}.h47SourceCopy h2,.h47SourceCopy p{max-width:760px!important}
+  .v26HomeHero{grid-template-columns:1fr!important}
+}
+@media(max-width:760px){
+  .publicHeader.v37PublicHeader,.publicHeader{min-height:84px!important;grid-template-columns:auto auto!important;justify-content:space-between!important;gap:16px!important;padding:10px 18px!important}
+  .publicLogo img{width:118px!important;height:58px!important}.publicMenuButton{display:grid!important;place-items:center!important}
+  .publicNav{position:absolute!important;z-index:80!important;top:84px!important;left:0!important;right:0!important;display:none!important;padding:16px 18px 22px!important;border-bottom:1px solid var(--v48-line)!important;background:var(--v48-paper)!important}.publicNav.open{display:grid!important;gap:0!important}.publicNavLink{width:100%!important;padding:15px 0!important;border-bottom:1px solid var(--v48-line)!important;text-align:left!important}.publicNavLink::after{display:none!important}.mobileClinicPortalLink{display:flex!important;justify-content:space-between!important}.publicPortalBtn{display:none!important}
+  .publicPageHero,.publicSection,.publicCta,.workshopHero,.workshopCategorySection,.workshopTools,.workshopGuideDeck,.workshopPrinciple,.workshopArticle,.start16Hero,.start16Brief,.start16Send,.prospectSection,.loginWrap{width:calc(100% - 36px)!important}.publicPageHero{padding:48px 0 38px!important}.publicPageHero h1,.start16HeroCopy h1,.workshopHero h1,.workshopArticleHeader h1,.loginIntro h1{font-size:clamp(38px,12vw,52px)!important;line-height:.98!important}.publicSection{padding:54px 0!important}
+  .h47Sourcing{padding:68px 0!important}.h47SourcingGrid{width:calc(100% - 36px)!important;gap:36px!important}.h47SourceCopy h2{font-size:38px!important}.h48SourceBoard{grid-template-columns:1fr!important;gap:18px!important}.h48SourceFlow{min-height:42px!important}.h48SourceFlow::before{top:50%!important;bottom:auto!important;left:12%!important;right:12%!important;width:auto!important;height:1px!important}.h48SourceFlow::after{transform:rotate(90deg)!important}.h48SourceSheet{min-height:0!important;padding:24px!important}
+  .workshopHero{padding:48px 0 38px!important}.workshopHeroGrid{grid-template-columns:1fr!important;gap:20px!important}.workshopCategoryHead{display:block!important}.workshopCategoryHead>button{margin-top:20px!important}
+  .customerShell .portalHeaderBar,.adminShell .portalHeaderBar{min-height:70px!important;padding:8px 12px!important}.customerShell .contentWrap,.adminShell .contentWrap{padding-left:16px!important;padding-right:16px!important}.v26OperationsStrip,.adminStatRow{grid-template-columns:repeat(2,minmax(0,1fr))!important}.v26OperationsStrip>div,.adminStat{border-right:1px solid var(--v48-line)!important;border-bottom:1px solid var(--v48-line)!important}.v26QuickActions,.actionGrid{grid-template-columns:1fr 1fr!important}
+}
+@media(max-width:480px){
+  .v26QuickActions,.actionGrid{grid-template-columns:1fr!important}.v26OperationsStrip,.adminStatRow{grid-template-columns:1fr!important}.v26OperationsStrip>div,.adminStat{border-right:0!important}
+}

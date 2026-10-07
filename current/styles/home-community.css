@@ -1,0 +1,264 @@
+/* =========================================================
+   V39.35 — Home community section, corrected
+   Uses the supplied transparent Canva composition as the
+   section background. No reconstructed people/cutout layers.
+   ========================================================= */
+
+.homeCommunitySection{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  height:clamp(650px,45vw,820px);
+  min-height:650px;
+  border-bottom:1px solid #ddd7ce;
+  background:#fbfaf7;
+  padding:clamp(70px,7vw,112px) 0;
+  display:flex;
+  align-items:center;
+}
+
+/* Exact user-supplied image is the background layer. */
+.homeCommunitySection::before{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:-2%;
+  pointer-events:none;
+  background-image:url("/assets/home-community-section-bg.png?v=3936");
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center center;
+  will-change:filter,transform,opacity;
+  transition:
+    filter 1.05s ease,
+    transform 1.15s cubic-bezier(.2,.72,.2,1),
+    opacity .78s ease;
+}
+
+/* Very light left-side wash only to keep web text crisp over the source. */
+.homeCommunitySection::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(
+    90deg,
+    rgba(251,250,247,.34) 0%,
+    rgba(251,250,247,.14) 36%,
+    rgba(251,250,247,0) 51%
+  );
+}
+
+.homeCommunityInner{
+  width:100%;
+  max-width:none;
+  margin:0;
+  position:relative;
+}
+
+.homeCommunityCopy{
+  width:min(42%,680px);
+  max-width:680px;
+  margin-left:7.35%;
+  margin-top:-2%;
+}
+
+.homeCommunityCopy h2{
+  margin:0;
+  color:#111413;
+  font-size:clamp(44px,3.35vw,62px);
+  line-height:1.06;
+  letter-spacing:-.055em;
+  font-weight:700;
+}
+
+.homeCommunityCopy h2 span{
+  display:block;
+  white-space:nowrap;
+}
+
+.homeCommunityBody{
+  width:min(100%,600px);
+  margin-top:clamp(30px,3vw,46px);
+  display:grid;
+  gap:22px;
+}
+
+.homeCommunityBody p{
+  margin:0;
+  color:#7a7772;
+  font-size:clamp(15px,1.04vw,18px);
+  line-height:1.5;
+  letter-spacing:-.012em;
+}
+
+.homeCommunityBody p:first-child{
+  color:#706d68;
+}
+
+/* Scroll reveal — restrained and whole-section based. */
+.homeCommunitySection:not(.is-visible)::before{
+  filter:blur(10px);
+  transform:scale(1.025);
+  opacity:.76;
+}
+
+.homeCommunitySection:not(.is-visible) .homeCommunityCopy h2,
+.homeCommunitySection:not(.is-visible) .homeCommunityBody p{
+  opacity:0;
+  transform:translateY(18px);
+}
+
+.homeCommunityCopy h2{
+  transition:
+    opacity .58s ease .08s,
+    transform .64s cubic-bezier(.2,.72,.2,1) .08s;
+}
+
+.homeCommunityBody p:nth-child(1){
+  transition:
+    opacity .52s ease .18s,
+    transform .58s cubic-bezier(.2,.72,.2,1) .18s;
+}
+
+.homeCommunityBody p:nth-child(2){
+  transition:
+    opacity .52s ease .27s,
+    transform .58s cubic-bezier(.2,.72,.2,1) .27s;
+}
+
+/* Large tablet */
+@media(max-width:1080px){
+  .homeCommunitySection{
+    height:clamp(620px,59vw,720px);
+    min-height:620px;
+    padding-left:0;
+    padding-right:0;
+  }
+
+  .homeCommunityCopy{
+    width:44%;
+    margin-left:7.35%;
+  }
+
+  .homeCommunityCopy h2{
+    font-size:clamp(39px,4.2vw,50px);
+  }
+
+  .homeCommunityBody{
+    margin-top:28px;
+    gap:18px;
+  }
+
+  .homeCommunityBody p{
+    font-size:14px;
+  }
+}
+
+/* Mobile: retain the exact attachment as the background, but let
+   the text occupy a clean white upper field and the visual resolve
+   into the lower half. */
+@media(max-width:760px){
+  .homeCommunitySection{
+    height:auto;
+    min-height:760px;
+    padding:54px 24px 390px;
+    align-items:flex-start;
+    background:#fbfaf7;
+  }
+
+  .homeCommunitySection::before{
+    inset:auto 0 0;
+    width:100%;
+    height:430px;
+    background-size:auto 430px;
+    background-position:center bottom;
+  }
+
+  .homeCommunitySection::after{
+    z-index:-1;
+    background:linear-gradient(
+      180deg,
+      #fbfaf7 0%,
+      #fbfaf7 48%,
+      rgba(251,250,247,.88) 55%,
+      rgba(251,250,247,0) 70%
+    );
+  }
+
+  .homeCommunityInner{
+    width:100%;
+  }
+
+  .homeCommunityCopy{
+    width:100%;
+    max-width:none;
+    margin:0;
+  }
+
+  .homeCommunityCopy h2{
+    font-size:clamp(38px,10.2vw,54px);
+    line-height:1.02;
+  }
+
+  .homeCommunityCopy h2 span{
+    white-space:normal;
+  }
+
+  .homeCommunityBody{
+    margin-top:26px;
+    gap:16px;
+    max-width:620px;
+  }
+
+  .homeCommunityBody p{
+    font-size:15px;
+    line-height:1.55;
+  }
+}
+
+@media(max-width:440px){
+  .homeCommunitySection{
+    min-height:735px;
+    padding:46px 18px 350px;
+  }
+
+  .homeCommunitySection::before{
+    height:380px;
+    background-size:auto 380px;
+  }
+
+  .homeCommunityCopy h2{
+    font-size:clamp(36px,10.4vw,46px);
+  }
+
+  .homeCommunityBody{
+    margin-top:22px;
+    gap:14px;
+  }
+
+  .homeCommunityBody p{
+    font-size:14px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .homeCommunitySection::before,
+  .homeCommunityCopy h2,
+  .homeCommunityBody p{
+    transition:none!important;
+  }
+
+  .homeCommunitySection:not(.is-visible)::before{
+    filter:none!important;
+    transform:none!important;
+    opacity:1!important;
+  }
+
+  .homeCommunitySection:not(.is-visible) .homeCommunityCopy h2,
+  .homeCommunitySection:not(.is-visible) .homeCommunityBody p{
+    opacity:1!important;
+    transform:none!important;
+  }
+}
