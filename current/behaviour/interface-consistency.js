@@ -55,7 +55,7 @@
 
   function patchPortalCatalogueSearch(){
     const section = document.querySelector('.customerShell .v26CatalogueLanding');
-    if(!section || section.querySelector('.v449CatalogueSearch')) return;
+    if(!section || document.querySelector('.psIntelligentSearch') || section.querySelector('.v449CatalogueSearch')) return;
 
     const row = document.createElement('div');
     row.className = 'v449CatalogueSearch';

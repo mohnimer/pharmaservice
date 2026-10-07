@@ -6,11 +6,11 @@
     if(!value||!allowed.includes(value.intent)) return null;
     const str=v=>typeof v==='string'?v.trim().slice(0,160):'';
     const quantity=Number(value.quantity);
-    return {intent:value.intent,terms:str(value.terms),size:str(value.size),brand:str(value.brand),unit:['box','pack','piece'].includes(value.unit)?value.unit:'',quantity:Number.isInteger(quantity)&&quantity>=1&&quantity<=10000?quantity:null,location:str(value.location),filter:['consumables','equipment','all'].includes(value.filter)?value.filter:'all',ambiguous:!!value.ambiguous,budget:!!value.budget};
+    return {invalidQuantity:value.quantity!==null&&value.quantity!==undefined&&(!Number.isInteger(quantity)||quantity<1||quantity>10000),intent:value.intent,terms:str(value.terms),size:str(value.size),brand:str(value.brand),unit:['box','pack','piece'].includes(value.unit)?value.unit:'',quantity:Number.isInteger(quantity)&&quantity>=1&&quantity<=10000?quantity:null,location:str(value.location),filter:['consumables','equipment','all'].includes(value.filter)?value.filter:'all',ambiguous:!!value.ambiguous,budget:!!value.budget};
   }
   function interpret(text,context={}){
     const t=normalize(text);if(!t)return null;
-    const quantity=Number(t.match(/\b(\d+)\b/)?.[1])||null;
+    const number=text.match(/-?\d+(?:\.\d+)?/);const quantity=number?Number(number[0]):null;
     const unit=/\bbox(?:es)?\b/.test(t)?'box':/\bpacks?\b/.test(t)?'pack':/\bpieces?\b/.test(t)?'piece':'';
     const location=t.match(/\b(?:deliver(?:y)?(?: this| it)?(?: to)?|location(?: is)?|ship(?: this| it)? to)\s+(.+)/)?.[1];
     if(location)return validate({intent:'location',location});

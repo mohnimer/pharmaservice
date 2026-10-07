@@ -5,7 +5,7 @@ import handler from '../api/interpret-request.mjs';
 import {generateText,Output,jsonSchema} from 'ai';
 import {MockLanguageModelV4} from 'ai/test';
 test('constrained commands retain context, quantity bounds and authoritative size',()=>{
-assert.equal(search.interpret('this is for 3 clinics').intent,'sites');
+assert.equal(search.interpret('this is for 3 clinics').intent,'sites');assert.equal(search.interpret('add 0 wheelchairs').invalidQuantity,true);assert.equal(search.interpret('add -2 wheelchairs').invalidQuantity,true);
 assert.equal(search.interpret('add 5 boxes',{terms:'gauze',size:'10x10'}).size,'10x10');
 assert.equal(search.interpret('add 3 boxes of medium gloves').size,'medium');
 assert.equal(search.interpret('something for measuring blood pressure').terms,'blood pressure');

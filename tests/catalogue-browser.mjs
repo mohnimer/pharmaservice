@@ -69,12 +69,12 @@ window.__tables.catalogue_family_option_reference_public=[{family_id:'PSC-SC-C01
   assert(imageCounts.every(n=>n<=1));
   assert.equal(await page.locator('.pscBrandTick .catalogueOptionImage').count(),0);
   await page.locator('.pscBrandTick').first().screenshot({path:`test-results/option-${width}.png`});
-  await page.goto(base+'/#portal/catalogue');assert.equal(await page.locator('[data-psc-family-detail-root]').count(),0);await page.locator('.v449CatalogueSearch input').waitFor();
-  await page.locator('.v449CatalogueSearch input').pressSequentially('gauze',{delay:40});
+  await page.goto(base+'/#portal/catalogue');assert.equal(await page.locator('[data-psc-family-detail-root]').count(),0);await page.locator('.psIntelligentSearch input').waitFor();
+  await page.locator('.psIntelligentSearch input').pressSequentially('gauze',{delay:40});
   await page.waitForTimeout(400);assert.equal(new URL(page.url()).hash,'#portal/catalogue');
-  assert.equal(await page.locator('.v449CatalogueSearch input').inputValue(),'gauze');
-  await page.locator('.v449CatalogueSearch input').press('Enter');await page.locator('[data-cat-q]').waitFor();
-  assert.equal(await page.locator('[data-cat-q]').inputValue(),'gauze');
+  assert.equal(await page.locator('.psIntelligentSearch input').inputValue(),'gauze');
+  await page.locator('.psIntelligentSearch input').press('Enter');await page.locator('[data-cat-q]').waitFor();
+  assert.equal(await page.locator('[data-cat-q]').inputValue(),'');assert.match(await page.locator('.psInterpretation').innerText(),/gauze/i);
   await page.locator('[data-cat-q]').fill('PIC CLASSIC');
   await page.waitForTimeout(300);assert.equal(await page.locator('[data-cat-q]').inputValue(),'PIC CLASSIC');
   assert.match(await page.locator('.productGrid').innerText(),/PIC CLASSIC/i);
