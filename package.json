@@ -8,10 +8,14 @@
     "test:browser": "node tests/browser.mjs",
     "test:dom": "node tests/dom.mjs",
     "test:catalogue": "node tests/catalogue.mjs",
-    "test:catalogue-browser": "node tests/catalogue-browser.mjs"
+    "test:catalogue-browser": "node tests/catalogue-browser.mjs",
+    "test:intelligent-search": "node --test tests/intelligent-search.test.mjs && node tests/intelligent-search-browser.mjs"
   },
   "devDependencies": {
     "happy-dom": "20.14.5",
     "playwright": "1.62.1"
+  },
+  "dependencies": {
+    "ai": "^7.0.131"
   }
 }

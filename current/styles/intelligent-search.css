@@ -1,0 +1,20 @@
+.psIntelligentSearch{margin:28px 0 32px;padding:28px;background:#fffefa;border:1px solid #d9d6ce;border-radius:24px}
+.psIntelligentSearch h2{font-size:clamp(26px,2.5vw,42px);line-height:1.15;margin:16px 0!important;max-width:720px;letter-spacing:-.035em}
+.psIntelligentSearch p{margin:0 0 24px!important;line-height:1.6;color:#737570}
+.psIntelligentSearch label{display:block;font-size:14px;margin-bottom:12px}
+.psIntelligentSearch form{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap}
+.psIntelligentSearch input{min-width:180px;flex:1;padding:18px;border:1px solid #d9d6ce;border-radius:14px;background:white;font:inherit;line-height:1.5;height:auto}
+.psInterpretation{display:grid;gap:10px;margin-top:22px;font-size:14px;line-height:1.6;overflow-wrap:anywhere}.psInterpretation b{font-weight:500}
+.psClarification{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;align-items:center}.psClarification>b{flex-basis:100%;font-weight:500}
+.psCatalogueWorkspace{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:36px;align-items:start}.psCatalogueMain{min-width:0;container-type:inline-size}
+.psLiveRequest{position:sticky;top:100px;border:1px solid #d9d6ce;border-radius:24px;padding:24px;background:#fffefa;max-height:calc(100dvh - 120px);overflow:auto;line-height:1.5}
+.psScopeHeader{display:flex;justify-content:space-between;gap:16px;align-items:center}.psScopeHeader h2{font-size:26px;margin:0 0 24px!important}.psScopeHeader button{display:none}
+.psLiveRequest dl{margin:0}.psLiveRequest dl>div{padding:14px 0;border-bottom:1px solid #e5e2db}.psLiveRequest dt{color:#737570;font-size:12px;margin-bottom:8px}.psLiveRequest dd{margin:0;overflow-wrap:anywhere}.psLiveRequest input,.psLiveRequest select{font:inherit;background:white;color:#151a18;border:1px solid #d9d6ce;border-radius:8px;padding:10px;max-width:100%;width:100%}
+.psScopeItems{margin:24px 0}.psScopeLine{padding:16px 0;border-bottom:1px solid #e5e2db}.psScopeLine b{font-size:14px;font-weight:500;display:block;margin-bottom:12px;overflow-wrap:anywhere}.psScopeLine>div{display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-size:12px}.psScopeLine input{width:64px;margin-left:6px}.psScopeLine label{white-space:nowrap}.psScopeLine .textAction{margin-left:auto}.psRetained{padding:16px 0;font-size:13px;color:#636b66}.psRetained p{margin:12px 0!important;line-height:1.5}
+.psScopeTotals{display:flex;gap:20px;font-size:13px;flex-wrap:wrap}.psLiveRequest progress{display:block;width:100%;height:5px;margin:24px 0 16px;accent-color:#245c58}.psScopeMissing{font-size:13px;line-height:1.6;margin:0 0 16px!important}.psLiveRequest>small{display:block;font-size:12px;color:#737570;margin-bottom:24px;line-height:1.6}.psScopeMobileSummary{display:none!important}
+@container (max-width: 720px){.customerShell .psCatalogueMain .productGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@container (max-width: 480px){.customerShell .psCatalogueMain .productGrid{grid-template-columns:minmax(0,1fr)!important}}
+@media(max-width:1100px){.psCatalogueWorkspace{display:block;padding-bottom:88px}.psLiveRequest{display:none}.psScopeMobileSummary{display:block!important;position:fixed;bottom:18px;left:24px;right:24px;z-index:50;width:calc(100% - 48px);box-shadow:0 4px 20px #0002}.psLiveRequest.isOpen{display:block;position:fixed;inset:70px 16px 16px;max-height:none;z-index:120;box-shadow:0 0 0 100vmax #0007}.psScopeHeader button{display:block}.psIntelligentSearch{padding:24px;margin-top:24px}.psIntelligentSearch form button{min-height:48px}}
+@media(max-width:560px){.psIntelligentSearch form input{flex-basis:100%}.psIntelligentSearch form button{flex:1}.psIntelligentSearch h2{font-size:28px}.psIntelligentSearch{padding:22px}.psLiveRequest.isOpen{inset:60px 12px 12px}}
+.psIntelligentSearch>.sectionLabel{display:block!important;font-size:12px;color:#67716a}
+.psRequestScopeReview{margin-bottom:24px;padding:20px;background:#f5f4ed;border-radius:14px;font-size:13px;line-height:1.7}.psRequestScopeReview p{margin:12px 0 0!important}.psQuantityConfirm{margin-top:18px;font-size:12px;line-height:1.6;text-align:left}
