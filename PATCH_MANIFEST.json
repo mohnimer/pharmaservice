@@ -1,0 +1,24 @@
+{
+  "version": "V50",
+  "prepared": "2026-10-07",
+  "repo": "mohnimer/pharmaservice",
+  "baseline": {
+    "app.js": "a16ce03d4eefe73991007f2eceaf0fede3383870",
+    "index.html": "4f2244b0f33373ce4a98e10dcfabfa6c169b4539",
+    "vercel.json": "20041cad5c1ea981690903878b9eb1edfd3fbad0",
+    "v45-workshop-modules-gate.js": "0e8ae8b86da27f93f22b27980b96680844ca5d16"
+  },
+  "adds": [
+    "v50-workshop-rebuild.css",
+    "v50-workshop-gate.js"
+  ],
+  "patches": [
+    "app.js",
+    "index.html",
+    "vercel.json"
+  ],
+  "removes_from_index": [
+    "v45-workshop-modules-gate.css",
+    "v45-workshop-modules-gate.js"
+  ]
+}

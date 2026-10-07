@@ -1,0 +1,158 @@
+  function workshopGuideBySlug(slug){ return WORKSHOP.find(g=>g.slug===slug && g.status==='published') || null; }
+  function workshopModuleBySlug(slug){ return WORKSHOP_MODULES.find(m=>m.slug===slug) || null; }
+  function workshopModuleForGuide(g){ return WORKSHOP_MODULES.find(m=>m.title===g?.category) || WORKSHOP_MODULES[0]; }
+  function workshopSaved(){ try{return new Set(JSON.parse(localStorage.getItem(WORKSHOP_SAVE_KEY)||'[]'))}catch{return new Set()} }
+  function workshopProductMatches(g,p){
+    if(!g||!p)return false;
+    return (g.related_product_ids||[]).map(String).includes(String(p.pscSku||''));
+  }
+  function workshopForProduct(p,limit=2){ return WORKSHOP.filter(g=>g.status==='published'&&workshopProductMatches(g,p)).slice(0,limit); }
+  function workshopRelatedProducts(g,limit=4){
+    const ids=new Set((g?.related_product_ids||[]).map(String));
+    return products().filter(p=>ids.has(String(p.pscSku||''))).slice(0,limit);
+  }
+  function workshopFormatCode(format){
+    return ({'ON THE BENCH':'BENCH',"WHAT'S THE DIFFERENCE?":'COMPARE','CHECK THIS':'CHECK','WHY DOES THIS MATTER?':'WHY',"DON'T ORDER IT LIKE THIS":'SPEC'})[format]||'GUIDE';
+  }
+  function workshopFormatLabel(format){
+    return ({
+      'ON THE BENCH':'On the bench',
+      "WHAT'S THE DIFFERENCE?":"What's the difference?",
+      'CHECK THIS':'Check this',
+      'WHY DOES THIS MATTER?':'Why does this matter?',
+      "DON'T ORDER IT LIKE THIS":"Don't order it like this"
+    })[format]||'Guide';
+  }
+  function workshopModuleGuides(m){
+    const primary=WORKSHOP.filter(g=>g.status==='published'&&g.category===m.title);
+    const cross=(WORKSHOP_MODULE_CROSS_LINKS[m.slug]||[]).map(workshopGuideBySlug).filter(Boolean);
+    return [...primary,...cross.filter(g=>!primary.some(p=>p.slug===g.slug))];
+  }
+  function workshopModuleCard(m){
+    const count=workshopModuleGuides(m).length;
+    return `<button class="workshopModuleCardV50 ${m.tone}" data-go="workshop/${esc(m.slug)}">
+      <span class="workshopModuleTopV50"><b>MODULE ${esc(m.n)}</b><i aria-hidden="true">${icon(m.icon)}</i></span>
+      <span class="workshopModuleCopyV50"><strong>${esc(m.title)}</strong><small>${esc(m.short)}</small></span>
+      <span class="workshopModuleFootV50">${count} ${count===1?'guide':'guides'} <i>→</i></span>
+    </button>`;
+  }
+  function workshopModuleNav(active=''){
+    return `<nav class="workshopModuleNavV50" aria-label="Workshop modules">${WORKSHOP_MODULES.map(m=>`<button class="${m.slug===active?'active':''}" data-go="workshop/${esc(m.slug)}"><span>${esc(m.n)}</span>${esc(m.title.replace("What's the Difference?",'Differences').replace('Equipment Readiness','Equipment').replace('Ordering & Specifications','Ordering'))}</button>`).join('')}</nav>`;
+  }
+  function workshopGuideCard(g){
+    const m=workshopModuleForGuide(g);
+    return `<article class="workshopGuideCard workshopGuideCardV50 ${m.tone}">
+      <button data-go="workshop/${esc(g.slug)}" aria-label="Open ${esc(g.title)}">
+        <span class="workshopGuideMetaV50"><b>${esc(workshopFormatLabel(g.format))}</b><small>${esc(g.read_time)} read</small></span>
+        <h3>${esc(g.title)}</h3>
+        <p>${esc(g.excerpt)}</p>
+        <span class="workshopGuideFootV50"><span>${esc(g.category)}</span><i aria-hidden="true">${icon(m.icon)}</i></span>
+      </button>
+    </article>`;
+  }
+  function workshopFiltered(){
+    const q=(ui.workshopQuery||'').trim().toLowerCase();
+    return WORKSHOP.filter(g=>{
+      if(g.status!=='published')return false;
+      if(!q)return true;
+      const hay=[g.title,g.subtitle,g.excerpt,g.category,g.format,...(g.tags||[]),...(g.product_match_terms||[]),...(g.clinic_check_topics||[])].join(' ').toLowerCase();
+      return hay.includes(q);
+    });
+  }
+  function workshopLandingPage(){
+    const filtered=workshopFiltered();
+    const searching=!!(ui.workshopQuery||'').trim();
+    const featuredSlugs=['which-glove-should-i-actually-wear','oxygen-cylinder-is-not-an-oxygen-system','aed-has-expiring-parts-too'];
+    const featured=searching?filtered:featuredSlugs.map(workshopGuideBySlug).filter(Boolean);
+    const rest=searching?[]:filtered.filter(g=>!featured.some(f=>f.slug===g.slug));
+    return `<main class="publicPage workshopPage workshopHubV50">${publicHeader('workshop')}
+      <section class="workshopHeroV50">
+        <div class="workshopHeroRuleV50"><span>THE WORKSHOP</span><i></i><small>PRODUCT INTELLIGENCE · FIELD MANUAL</small></div>
+        <div class="workshopHeroGridV50">
+          <div><h1>Practical product intelligence.</h1></div>
+          <div><h2>For people who run clinics.</h2><p>The product details, compatibility questions, readiness checks and ordering specifications that are easy to miss — until they matter.</p></div>
+        </div>
+      </section>
+
+      <section class="workshopModuleIndexV50">
+        <div class="workshopSectionHeadV50"><div><span>07 MODULES</span><h2>Start with what you need to figure out.</h2></div><p>No courses. No progress bars. Just practical guidance organised around the decisions clinics and buyers actually make.</p></div>
+        <div class="workshopModuleGridV50">${WORKSHOP_MODULES.map(workshopModuleCard).join('')}</div>
+      </section>
+
+      <section class="workshopGuideIndexV50">
+        <div class="workshopSearchStripV50"><div class="workshopSearchV50"><span>${icon('search')}</span><input data-workshop-q value="${esc(ui.workshopQuery)}" placeholder="Search a product, question or clinic check…" aria-label="Search The Workshop"></div><div><span>${searching?'SEARCH RESULTS':'PUBLISHED GUIDES'}</span><b>${filtered.length}</b>${searching?'<button data-workshop-clear>Clear</button>':''}</div></div>
+        <div class="workshopSectionHeadV50 workshopGuidesHeadV50"><div><span>${searching?'MATCHING GUIDES':'ON THE BENCH NOW'}</span><h2>${searching?'What matches your search.':'Useful things to know before the next order.'}</h2></div><p>${searching?'Search works across titles, products, questions and clinic-check topics.':'Three strong guides up front. Open the full index only when you want it.'}</p></div>
+        ${filtered.length?`<div class="workshopGuideGridV50">${featured.map(workshopGuideCard).join('')}</div>${rest.length?`<details class="workshopAllGuidesV50"><summary><span>View all guides</span><b>${filtered.length} published</b></summary><div class="workshopGuideGridV50 workshopGuideGridRestV50">${rest.map(workshopGuideCard).join('')}</div></details>`:''}`:`<div class="workshopEmptyV50"><b>Nothing on the bench for that search yet.</b><p>Try a product name, a broader term or one of the seven Modules above.</p><button class="button outline" data-workshop-clear>Clear search</button></div>`}
+      </section>
+
+      <section class="workshopPrincipleV50"><span>THE RULE</span><h2>Useful product knowledge belongs next to the product.</h2><p>The Workshop exists to make specifications, compatibility, readiness and replenishment easier to understand before the next order. Education first; commerce second.</p></section>
+      ${publicFooter()}
+    </main>`;
+  }
+
+  function workshopModulePage(slug){
+    const m=workshopModuleBySlug(slug);
+    if(!m)return workshopGuidePage(slug);
+    const guides=workshopModuleGuides(m);
+    return `<main class="publicPage workshopPage workshopModulePageV50 ${m.tone}">${publicHeader('workshop')}
+      <section class="workshopModuleHeroV50">
+        <div class="workshopModuleLabelV50"><button data-go="workshop">THE WORKSHOP</button><i></i><span>MODULE ${esc(m.n)}</span></div>
+        <div class="workshopModuleHeroGridV50"><div><h1>${esc(m.title)}</h1><h2>${esc(m.short)}</h2></div><div><p>${esc(m.intro)}</p><small>${guides.length} ${guides.length===1?'guide':'guides'} · ${esc(m.meta)}</small></div></div>
+      </section>
+      ${workshopModuleNav(m.slug)}
+      <section class="workshopModuleGuidesV50">
+        <div class="workshopSectionHeadV50"><div><span>MODULE ${esc(m.n)}</span><h2>Guides in ${esc(m.title)}</h2></div><p>Built to change the next check, handover, RFQ or reorder — not to create another training dashboard.</p></div>
+        ${guides.length?`<div class="workshopGuideGridV50">${guides.map(workshopGuideCard).join('')}</div>`:`<div class="workshopEmptyV50 compact"><b>No published guides in this Module yet.</b><p>The Module is ready for additional Workshop content without placeholder cards or empty filler.</p></div>`}
+      </section>
+      ${publicFooter()}
+    </main>`;
+  }
+
+  function workshopSectionHtml(section){
+    if(section.comparison) return `<section class="workshopArticleSection workshopComparisonSectionV50"><h2>${esc(section.title)}</h2><div class="workshopComparisonV50">${section.comparison.map(x=>`<article><span>${esc(x.label)}</span><p>${esc(x.text)}</p></article>`).join('')}</div></section>`;
+    if(section.spec_example){ const x=section.spec_example; return `<section class="workshopArticleSection workshopSpecLessonV50"><h2>${esc(section.title)}</h2><div class="workshopSpecGridV50"><div class="badSpecV50"><span>DON'T ORDER IT LIKE THIS</span><strong>${esc(x.bad)}</strong></div><div class="missingSpecV50"><span>WHAT'S MISSING?</span>${x.missing.map(v=>`<b>${esc(v)}</b>`).join('')}</div><div class="goodSpecV50"><span>ORDER IT LIKE THIS</span><p>${esc(x.good)}</p></div></div></section>`; }
+    if(section.checklist) return `<section class="workshopArticleSection workshopChecklistV50"><h2>${esc(section.title)}</h2><ol>${section.checklist.map((v,i)=>`<li><span>${String(i+1).padStart(2,'0')}</span><p>${esc(v)}</p></li>`).join('')}</ol></section>`;
+    if(section.bullets) return `<section class="workshopArticleSection"><h2>${esc(section.title)}</h2><ul class="workshopBulletsV50">${section.bullets.map(v=>`<li>${esc(v)}</li>`).join('')}</ul></section>`;
+    return `<section class="workshopArticleSection"><h2>${esc(section.title)}</h2><p>${esc(section.text||'')}</p></section>`;
+  }
+  function workshopGuidePage(slug){
+    const g=workshopGuideBySlug(slug);
+    if(!g)return `<main class="publicPage workshopPage">${publicHeader('workshop')}<section class="workshopNotFoundV50"><span>THE WORKSHOP</span><h1>Guide not found.</h1><p>The guide may have moved or is not published.</p><button class="button primary" data-go="workshop">Back to The Workshop</button></section>${publicFooter()}</main>`;
+    const m=workshopModuleForGuide(g);
+    const saved=workshopSaved().has(g.slug);
+    const related=workshopRelatedProducts(g,4);
+    const isEquipment=m.slug==='equipment-readiness';
+    return `<main class="publicPage workshopPage workshopArticlePage workshopArticlePageV50 ${m.tone}">${publicHeader('workshop')}
+      <article class="workshopArticleV50 ${g.format==='CHECK THIS'?'workshopPrintCheck':''}">
+        <header class="workshopArticleHeaderV50">
+          <div class="workshopArticleToplineV50"><button data-go="workshop">THE WORKSHOP</button><i></i><button data-go="workshop/${esc(m.slug)}">MODULE ${esc(m.n)} · ${esc(m.title)}</button><b>${esc(workshopFormatLabel(g.format))}</b></div>
+          <div class="workshopArticleLeadV50"><div><h1>${esc(g.title)}</h1><p>${esc(g.subtitle)}</p></div><aside><span>${esc(g.read_time)} read</span><span>Reviewed ${esc(g.last_reviewed)}</span><div class="workshopArticleActions"><button data-workshop-save="${esc(g.slug)}" aria-pressed="${saved?'true':'false'}">${saved?'Saved':'Save'}</button><button data-workshop-print>Print</button><button data-workshop-share="${esc(g.slug)}">Share</button></div></aside></div>
+        </header>
+        ${workshopModuleNav(m.slug)}
+        ${g.format==='CHECK THIS'?'<div class="workshopDoNowV50">DO THIS NOW · TAKE THE GUIDE INTO THE CLINIC</div>':''}
+        ${isEquipment?'<section class="workshopReadinessChainV50"><span>THE READINESS CHAIN</span><div><b>Equipment</b><i>→</i><b>Accessory</b><i>→</i><b>Consumable</b><i>→</i><b>Replacement / expiry</b><i>→</i><b>Record</b></div></section>':''}
+        <div class="workshopArticleLayoutV50">
+          <div class="workshopArticleBody">${(g.body_sections||[]).map(workshopSectionHtml).join('')}</div>
+          <aside class="workshopArticleRailV50"><span>THIS GUIDE</span><b>${esc(g.category)}</b><p>${esc(g.excerpt)}</p><button data-go="workshop/${esc(m.slug)}">More in Module ${esc(m.n)} →</button></aside>
+        </div>
+        <section class="workshopSignature workshopSignatureV50">
+          <article><span>USE IT RIGHT</span><p>${esc(g.use_it_right)}</p></article>
+          <article><span>CHECK YOUR STOCK</span><p>${esc(g.check_your_stock)}</p></article>
+          <article><span>WHEN ORDERING</span><p>${esc(g.when_ordering)}</p></article>
+        </section>
+        ${related.length?`<section class="workshopRelated workshopRelatedV50"><div class="workshopRelatedHead"><span>PRODUCTS USED IN THIS GUIDE</span><p>Only catalogue lines deliberately linked to this guide are shown.</p></div><div class="workshopRelatedList">${related.map(p=>{const n=clinicalNeedMeta(clinicalNeedIds(p)[0]||'all');return `<button data-go="catalogue/${n.id}"><span>${esc(p.pscSku||'PSC')}</span><b>${esc(p.catalogueDisplayName||p.name)}</b><small>${esc(p.cataloguePack||p.pack||'Pack to confirm')}</small></button>`}).join('')}</div></section>`:''}
+        <footer class="workshopMedicalNote">Workshop guides provide general product and supply information. Clinical decisions should follow product instructions, institutional procedures and applicable professional or regulatory requirements.</footer>
+      </article>${publicFooter()}
+    </main>`;
+  }
+  function workshopRoutePage(slug){ return workshopModuleBySlug(slug)?workshopModulePage(slug):workshopGuidePage(slug); }
+  function workshopTeaser(){
+    const slugs=['which-glove-should-i-actually-wear','oxygen-cylinder-is-not-an-oxygen-system','aed-has-expiring-parts-too'];
+    const items=slugs.map(workshopGuideBySlug).filter(Boolean);
+    return `<section class="homeWorkshop homeWorkshopCards"><div class="homeWorkshopIntro"><span class="kicker">THE WORKSHOP</span><h2>Know what you're working with.</h2><p>Practical guides to the products, equipment and small details that keep clinics ready.</p><button class="button outline" data-go="workshop">Enter The Workshop</button></div><div class="homeWorkshopCardGrid">${items.map(workshopGuideCard).join('')}</div></section>`;
+  }
+  function schoolWorkshopStrip(){
+    const slugs=['ten-minute-school-clinic-stock-expiry-walk','aed-has-expiring-parts-too','oxygen-cylinder-is-not-an-oxygen-system'];
+    return `<section class="schoolWorkshopStrip"><div><span class="kicker">USEFUL IN YOUR CLINIC</span><h2>The Workshop</h2></div><div>${slugs.map(slug=>{const g=workshopGuideBySlug(slug);return g?`<button data-go="workshop/${g.slug}"><span>${esc(workshopFormatLabel(g.format))}</span><b>${esc(g.title)}</b></button>`:''}).join('')}</div></section>`;
+  }
+
