@@ -12,6 +12,7 @@
     "current/behaviour/catalogue-architecture.js",
     "current/behaviour/catalogue-refresh-data.js",
     "current/behaviour/catalogue-refresh.js",
+    "current/behaviour/intelligent-search.js",
     "app.js",
     "current/behaviour/catalogue-families.js",
     "current/behaviour/family-details.js",
@@ -76,7 +77,8 @@
     "current/styles/system-theme.css",
     "current/styles/workshop-design.css",
     "current/styles/spacing.css",
-    "current/styles/product-images.css"
+    "current/styles/product-images.css",
+    "current/styles/intelligent-search.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",
