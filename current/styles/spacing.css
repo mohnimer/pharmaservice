@@ -32,6 +32,8 @@
 .start16Form label span{display:block;margin-top:6px}
 .startContactActions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .startContactActions .button{white-space:normal;min-height:48px;text-align:center}
+.startContactActions a.button{display:inline-flex;align-items:center;justify-content:center;gap:10px}
+.startContactActions .startContactIcon{width:18px;height:18px;flex:0 0 18px;color:#111;pointer-events:none}
 @media(max-width:900px){
   .publicPage .prospectContactGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .start16Hero{grid-template-columns:1fr!important;gap:32px!important}
