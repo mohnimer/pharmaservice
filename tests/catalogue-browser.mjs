@@ -7,7 +7,7 @@ const base=`http://127.0.0.1:${server.address().port}`;
 const browser=await chromium.launch({executablePath:process.env.PSC_CHROME,args:['--no-sandbox']});
 mkdirSync('test-results',{recursive:true});const results=[];
 try{
- for(const width of [390,1024,1440]){
+ for(const width of [390,768,1024,1440]){
   const context=await browser.newContext({viewport:{width,height:900}});
   await context.addInitScript(()=>{window.__testRole='demo';});
   await context.route('**/*',route=>{
@@ -32,6 +32,30 @@ window.__tables.catalogue_family_option_reference_public=[{family_id:'PSC-SC-C01
     return children.every((r,i)=>!i || r.top>=children[i-1].bottom-1) && [...n.querySelectorAll('h3')].every(h=>h.scrollHeight<=h.clientHeight+1);
   }));
   assert(copy.every(Boolean),'card text must not overlap or clip');
+  const layout=await page.locator('.productGrid').evaluate(grid=>{
+    const cards=[...grid.querySelectorAll('.productCard')].filter(n=>!n.hidden);
+    const rows=new Map();
+    for(const card of cards){
+      const top=Math.round(card.getBoundingClientRect().top);
+      const fields=['.productTitleButton','.pack','.catalogueImageNote','.productNeedTags','.catalogueBrandCount','.exactCanvaActions'].map(sel=>{
+        const n=card.querySelector(sel),r=n.getBoundingClientRect();
+        return {top:r.top,bottom:r.bottom,alignment:getComputedStyle(n).textAlign};
+      });
+      if(!rows.has(top))rows.set(top,[]);rows.get(top).push(fields);
+    }
+    return {columns:getComputedStyle(grid).gridTemplateColumns.split(' ').length,rows:[...rows.values()]};
+  });
+  assert.equal(layout.columns,width<=560?1:width<=900?2:3);
+  const firstCard=await page.locator('.productCard:not([hidden])').first().evaluate(n=>({height:n.getBoundingClientRect().height,photo:n.querySelector('.productVisual').getBoundingClientRect().height}));
+  assert(firstCard.height<firstCard.photo+500,'shared tracks must not stretch into oversized cards');
+  for(const row of layout.rows){
+    for(let i=0;i<6;i++){
+      assert(Math.max(...row.map(c=>c[i].top))-Math.min(...row.map(c=>c[i].top))<2,`field ${i} must align across each row`);
+      if(i<5)assert(row.every(c=>c[i].alignment==='left'));
+    }
+  }
+  await page.locator('.productCard:not([hidden])').first().scrollIntoViewIfNeeded();
+  await page.screenshot({path:`test-results/catalogue-row-${width}.png`});
   assert(await page.locator('.catalogueBrandCount').count()>5);
   const referenceImages=await page.evaluate(()=>{
     const refs=new Set(window.PS_CATALOGUE_REFRESH.products.filter(p=>/^REFERENCE TILE/i.test(p.imageStatus)).map(p=>p.pscSku));
@@ -67,7 +91,7 @@ window.__tables.catalogue_family_option_reference_public=[{family_id:'PSC-SC-C01
   await page.goBack();await page.locator('[data-cat-q]').waitFor();assert.equal(await page.locator('[data-cat-q]').inputValue(),'');
   await page.evaluate(()=>window.PSC_NAVIGATE('portal/catalogue/wounds'));await page.locator('[data-cat-q]').waitFor();assert.equal(await page.locator('[data-cat-q]').inputValue(),'');
   await page.locator('[data-cat-q]').fill('gauze');await page.reload();await page.locator('[data-cat-q]').waitFor();assert.equal(await page.locator('[data-cat-q]').inputValue(),'');
-  const header=page.locator(width===390?'.mobileSearchRow [data-global-search]':'.topbarSearch [data-global-search]');
+  const header=page.locator(width<900?'.mobileSearchRow [data-global-search]':'.topbarSearch [data-global-search]');
   await header.fill('NEXIUM 20');await header.press('Enter');await page.locator('[data-cat-q]').waitFor();
   assert.equal(await page.locator('[data-cat-q]').inputValue(),'NEXIUM 20');
   assert.match(await page.locator('.productGrid').innerText(),/NEXIUM/i);
