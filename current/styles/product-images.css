@@ -67,7 +67,24 @@
 .customerShell .productCard .productVisual > img.productMainImage[src*="/assets/products/inst-"],
 .customerShell .productCard .productVisual > img.productMainImage[src*="clinic-basics.jpg"] { display: none !important; }
 
-/* Card copy flows naturally: no fixed tracks, clipping or overlapping metadata. */
+/* Three readable columns; smaller screens use two or one. */
+.customerShell .productGrid.v25ProductGrid,
+.customerShell .productGrid,
+.publicCataloguePage .publicCatalogueGrid {
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:24px!important;
+  grid-auto-rows:auto!important; align-content:start!important;
+}
+@media(max-width:900px){
+  .customerShell .productGrid.v25ProductGrid,.customerShell .productGrid,
+  .publicCataloguePage .publicCatalogueGrid { grid-template-columns:repeat(2,minmax(0,1fr))!important; }
+}
+@media(max-width:560px){
+  .customerShell .productGrid.v25ProductGrid,.customerShell .productGrid,
+  .publicCataloguePage .publicCatalogueGrid { grid-template-columns:minmax(0,1fr)!important; }
+}
+
+/* Copy expands freely; shared tracks align each field with its neighbours. */
 .customerShell .productCard { height:auto!important; min-height:0!important; max-height:none!important; }
 .customerShell .productCard .exactCanvaBody {
   display:flex!important; flex-direction:column!important; flex:1 0 auto!important;
@@ -85,6 +102,19 @@
   line-height:1.6!important; white-space:normal!important; overflow:visible!important;
 }
 .catalogueBrandCount { display:block; color:#737670; font-size:12px; line-height:1.6; }
-.customerShell .productCard .exactCanvaActions { flex:0 0 auto!important; margin-top:auto; padding:0 20px 20px!important; gap:10px!important; }
-
-.customerShell .productCard :is(.productNeedTags,.catalogueBrandCount){text-align:left!important}
+.customerShell .productCard .exactCanvaActions { flex:0 0 auto!important; margin-top:0!important; padding:0 20px 20px!important; gap:10px!important; }
+.customerShell .productGrid .productCard .exactCanvaBody > * {
+  align-self:start!important; justify-self:stretch!important; text-align:left!important;
+}
+@supports(grid-template-rows:subgrid){
+  .customerShell .productGrid .productCard:not([hidden]) {
+    display:grid!important; grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:subgrid!important; grid-row:span 7; row-gap:0!important;
+  }
+  .customerShell .productGrid .productCard .productVisual { grid-row:1; }
+  .customerShell .productGrid .productCard .exactCanvaBody {
+    display:grid!important; grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:subgrid!important; grid-row:2 / span 5; row-gap:14px!important;
+  }
+  .customerShell .productGrid .productCard .exactCanvaActions { grid-row:7; }
+}
