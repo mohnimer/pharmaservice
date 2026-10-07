@@ -2,6 +2,16 @@
 
 Branch: `v50-consolidation`. Production/main has not been changed.
 
+## Review deployment and publication status
+
+Preview: https://pharmaservice-9v76p88nm-mohameds-projects-9022ad5a.vercel.app
+
+Vercel reports deployment `dpl_5LLEZCQgLKTC18ycgpwTNjbHAWok` READY, target `staging` (non-production). This is an API-created review deployment of the tested build, not a deployment triggered by a GitHub branch push. Its application JavaScript, stylesheet and shell are the exact tested build; unchanged images are served through preview-only rewrites to pharmaservice.ae. The repository build includes those images locally.
+
+The preview requires Vercel authentication. Browser access reached the Vercel login page; the connector rejected temporary authenticated access with HTTP 403. Public browser smoke checks therefore remain incomplete. Protection settings were not changed.
+
+GitHub publication is blocked: CLI push has no credentials and the GitHub connector rejected tree creation with `403 Resource not accessible by integration`. All changes are committed locally on `v50-consolidation`; neither remote branch changed. Both remote `main` and `v50-consolidation` were verified at `6f66ac122ced05ebe2abbebc1f7832e21191873c`. A verified git bundle accompanies this review for publishing from an authorized checkout. Automatic GitHub Preview deployment cannot be confirmed until the branch is pushed; vercel.json supplies the explicit build, output directory and route configuration.
+
 ## Architecture
 
 `index.html` is the only HTML shell. The build emits `current.js` and `current.css` from the explicit current-source manifest, preserving the required execution and cascade order. One router in `app.js` owns navigation. Catalogue gating delegates to it. One shared native DOM observer in `current/lifecycle.js` dispatches scoped feature notifications.
