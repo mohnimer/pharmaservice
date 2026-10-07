@@ -129,21 +129,10 @@
     document.querySelectorAll('.workshopPage:not(.workshopArticlePage) .workshopGuideCard').forEach(addWorkshopImage);
   }
 
-  function syncPortalCatalogueSearch(){
-    const prominent = document.querySelector('.customerShell .v449CatalogueSearch input');
-    const global = document.querySelector('.customerShell [data-global-search]');
-    if(!prominent || !global) return;
-
-    if(document.activeElement !== prominent && prominent.value !== global.value){
-      prominent.value = global.value || '';
-    }
-  }
-
   function run(){
     fixWorkshopHierarchy();
     groupWorkshopCards();
     keepWorkshopImages();
-    syncPortalCatalogueSearch();
   }
 
   let queued = false;

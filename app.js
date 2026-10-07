@@ -1104,8 +1104,12 @@
     if(location.hash) return location.hash.slice(1);
     return 'home';
   }
-  function go(route,{replace=false}={}){
-    ui.mobile=false; ui.publicMenu=false; ui.modal=null;
+  let catalogueSearchRoute = null;
+  function go(route,{replace=false,searchQuery=null}={}){
+    ui.mobile=false; ui.publicMenu=false; ui.modal=null; ui.basket=false; ui.accountMenu=false;
+    if(route!==currentRoute()){ ui.globalSearch=''; ui.catalogueQuery=''; }
+    if(searchQuery!==null){ ui.catalogueQuery=String(searchQuery).trim(); ui.globalSearch=ui.catalogueQuery; }
+    catalogueSearchRoute=route;
     const target=route==='start'?'/start':route==='workshop'?'/workshop':route.startsWith('workshop/')?`/workshop/${encodeURIComponent(route.split('/')[1]||'')}`:`/#${route}`;
     history[replace?'replaceState':'pushState']({pscRoute:route},'',target);
     window.scrollTo({top:0,behavior:'instant'});
@@ -1115,17 +1119,22 @@
   }
   window.PSC_NAVIGATE=go;
   window.PSC_CURRENT_ROUTE=currentRoute;
+  window.PS_SEARCH_CATALOGUE=query=>{
+    go('portal/catalogue/all',{searchQuery:query});
+    const input=document.querySelector('[data-cat-q]');
+    if(input){ input.focus({preventScroll:true}); input.setSelectionRange(input.value.length,input.value.length); }
+  };
   function renderUi({preserveScroll=true,focusSelector=null,cursor=null,transition=true}={}){
     const y=window.scrollY;
     const draw=()=>{
       render();
-      requestAnimationFrame(()=>{
-        if(preserveScroll) window.scrollTo({top:y,behavior:'instant'});
-        if(focusSelector){
-          const target=document.querySelector(focusSelector);
-          if(target){ target.focus({preventScroll:true}); if(Number.isInteger(cursor)&&target.setSelectionRange) target.setSelectionRange(cursor,cursor); }
-        }
-      });
+      // Restore focus synchronously: a keystroke before the next animation frame
+      // must not land on a detached input or lose the editing caret.
+      if(preserveScroll) window.scrollTo({top:y,behavior:'instant'});
+      if(focusSelector){
+        const target=document.querySelector(focusSelector);
+        if(target){ target.focus({preventScroll:true}); if(Number.isInteger(cursor)&&target.setSelectionRange) target.setSelectionRange(cursor,cursor); }
+      }
     };
     if(transition && !focusSelector && document.startViewTransition){
       try{ document.startViewTransition(draw); return; }catch{}
@@ -1786,7 +1795,7 @@
         <div class="publicCategoryGrid16">${categoryCards}</div>
       </section>
       <section class="publicSection publicCatalogueControls catalogue16Controls">
-        <div class="filterBar"><div class="searchInput"><span>${icon('search')}</span><input data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search families, products, packs or specifications…"></div><select data-cat-filter="category"><option>All product types</option>${types.map(t=>`<option ${ui.catalogueCat===t?'selected':''}>${esc(t)}</option>`).join('')}</select></div>
+        <div class="filterBar"><div class="searchInput"><span>${icon('search')}</span><input type="search" aria-label="Search catalogue" data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search families, products, packs or specifications…">${ui.catalogueQuery?'<button type="button" class="catalogueSearchClear" data-catalogue-clear aria-label="Clear search">×</button>':''}</div><select data-cat-filter="category"><option>All product types</option>${types.map(t=>`<option ${ui.catalogueCat===t?'selected':''}>${esc(t)}</option>`).join('')}</select></div>
       </section>
       <section class="publicSection publicCatalogueResults catalogue16Results"><div class="publicCatalogueCount"><b>${filtered.length}</b><span>${needId==='all'?'published institutional lines':'published lines in this category'}</span></div>${filtered.length?`<div class="publicCatalogueGrid">${filtered.map(publicCatalogueCard).join('')}</div>`:'<div class="emptyState"><h3>No matching published lines</h3><p>Try another clinical need or send the requirement to Pharma Service.</p><button class="button primary" data-go="contact">Request sourcing</button></div>'}</section>
       <section class="publicCta"><div><span class="kicker">HAVE A LIST ALREADY?</span><h2>Send the requirement instead of rebuilding it here.</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="start">Send a list / RFQ</button><button class="button primary large" data-go="login">Open Clinic Portal</button></div></section>
@@ -2088,13 +2097,13 @@
     const allProducts=catalogueProducts();
     const filtered=allProducts.filter(p=>{
       const needLabels=clinicalNeedIds(p).map(id=>clinicalNeedMeta(id).label).join(' ');
-      const hay=`${p.catalogueDisplayName||p.name} ${p.name||''} ${p.brand||''} ${p.pscSku} ${p.supplierSku||''} ${p.productType||''} ${needLabels}`.toLowerCase();
+      const hay=[p.catalogueDisplayName,p.name,p.brand,p.pscSku,p.supplierSku,p.productType,p.pack,p.cataloguePack,p.spec,p.pscOfferedSpecification,needLabels].filter(Boolean).join(' ').toLowerCase();
       const lineMatch=
         ui.catalogueFilter==='All lines' ||
         (ui.catalogueFilter==='DHA requirement'&&p.dhaMapped) ||
         (ui.catalogueFilter==='Licensed / controlled'&&p.regulated) ||
         (ui.catalogueFilter==='Specification-led'&&p.institutionalProvisional);
-      return hay.includes(q)
+      return q.split(/\s+/).filter(Boolean).every(token=>hay.includes(token))
         && clinicalNeedMatches(p,needId)
         && (ui.catalogueCat==='All product types'||p.productType===ui.catalogueCat)
         && lineMatch;
@@ -2152,7 +2161,7 @@
       <div class="notice shopNotice compactInstitutionalNotice"><strong>One accountable supply relationship.</strong> PS reviews specification, availability and commercial terms before quotation. Regulated lines remain subject to the applicable licensed supply route and professional controls.</div>
 
       <div class="filterBar shopFilterBar v25FilterBar v26FilterBar">
-        <div class="searchInput"><span>⌕</span><input data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search product, brand, PS SKU, supplier SKU or clinical need…"></div>
+        <div class="searchInput"><span>⌕</span><input type="search" aria-label="Search catalogue" data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search product, brand, PS SKU, supplier SKU or clinical need…">${ui.catalogueQuery?'<button type="button" class="catalogueSearchClear" data-catalogue-clear aria-label="Clear search">×</button>':''}</div>
         <select data-cat-filter="category" aria-label="Product type"><option>All product types</option>${types.map(c=>`<option ${c===ui.catalogueCat?'selected':''}>${esc(c)}</option>`).join('')}</select>
         <select data-cat-filter="approval" aria-label="Catalogue status">
           <option>All lines</option>
@@ -3152,6 +3161,7 @@
 
   function render(){
     const r=currentRoute();
+    if(catalogueSearchRoute!==r){ ui.globalSearch=''; ui.catalogueQuery=''; ui.modal=null; ui.basket=false; ui.accountMenu=false; ui.mobile=false; ui.publicMenu=false; catalogueSearchRoute=r; }
     if(protectedRoute(r)){
       if(!authReady){ $app.innerHTML='<main class="publicPage"><section class="publicPageHero"><span class="kicker">PHARMA SERVICE</span><h1>Opening secure account…</h1></section></main>'; return; }
       if(!session){ if(r!=='login') location.hash='login'; return; }
@@ -3298,7 +3308,7 @@
     document.querySelectorAll('[data-public-menu]').forEach(el=>el.addEventListener('click',()=>{ui.publicMenu=!ui.publicMenu;render()}));
     document.querySelectorAll('[data-global-search]').forEach(el=>{
       el.addEventListener('input',e=>{ui.globalSearch=e.target.value;});
-      el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();ui.catalogueQuery=e.target.value.trim();go('portal/catalogue/all');}});
+      el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();window.PS_SEARCH_CATALOGUE(e.target.value);}});
     });
     document.querySelectorAll('[data-tour-next]').forEach(el=>el.addEventListener('click',()=>{ui.tourStep=Math.min(5,(ui.tourStep||0)+1);render()}));
     document.querySelectorAll('[data-tour-prev]').forEach(el=>el.addEventListener('click',()=>{ui.tourStep=Math.max(0,(ui.tourStep||0)-1);render()}));
@@ -3353,7 +3363,11 @@
     document.querySelectorAll('[data-modal-close]').forEach(el=>el.addEventListener('click',closeModalOverlay));
     document.querySelectorAll('[data-document-open]').forEach(el=>el.addEventListener('click',()=>openOrderDocument(el.dataset.documentOpen)));
     document.querySelectorAll('[data-document-upload]').forEach(el=>el.addEventListener('change',async e=>{const file=e.target.files?.[0];if(file)await uploadOrderDocument(el.dataset.documentUpload,file);}));
-    const cq=document.querySelector('[data-cat-q]'); if(cq)cq.addEventListener('input',e=>{ui.catalogueQuery=e.target.value;renderUi({preserveScroll:true,focusSelector:'[data-cat-q]',cursor:e.target.selectionStart,transition:false})});
+    document.querySelectorAll('[data-catalogue-clear]').forEach(button=>button.addEventListener('click',()=>{
+      ui.catalogueQuery='';ui.globalSearch='';
+      renderUi({preserveScroll:true,focusSelector:'[data-cat-q]',cursor:0,transition:false});
+    }));
+    const cq=document.querySelector('[data-cat-q]'); if(cq)cq.addEventListener('input',e=>{ui.catalogueQuery=e.target.value;ui.globalSearch=e.target.value;renderUi({preserveScroll:true,focusSelector:'[data-cat-q]',cursor:e.target.selectionStart,transition:false})});
     document.querySelectorAll('[data-clinic-need]').forEach(el=>el.addEventListener('click',()=>{ui.catalogueNeed=el.dataset.clinicNeed||'all';render()}));
     document.querySelectorAll('[data-cat-filter]').forEach(el=>el.addEventListener('change',e=>{if(el.dataset.catFilter==='category')ui.catalogueCat=e.target.value;else ui.catalogueFilter=e.target.value;renderUi({preserveScroll:true,transition:false})}));
     const pq=document.querySelector('[data-prod-q]'); if(pq)pq.addEventListener('input',e=>{ui.productQuery=e.target.value;render()});

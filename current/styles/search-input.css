@@ -138,3 +138,5 @@
     grid-column:auto!important;
   }
 }
+
+.catalogueSearchClear { flex: 0 0 36px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: #f0f2f1; color: #17211f; font-size: 24px; cursor: pointer; }

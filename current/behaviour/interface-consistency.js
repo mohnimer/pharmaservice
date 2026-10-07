@@ -11,98 +11,9 @@
   let workshopCategoriesExpanded = false;
 
   const clean = v => String(v || '').trim();
-  const lower = v => clean(v).toLowerCase();
 
-  function isRealProductImage(url){
-    const s = lower(url);
-    return !!s &&
-      !/\/assets\/products\/inst-\d{4}\.webp/i.test(s) &&
-      !s.includes('clinic-basics.jpg') &&
-      !s.includes('dha-requirement') &&
-      !s.includes('pharmaservice.png') &&
-      !s.includes('psc-logo');
-  }
-
-  function productRealImage(p){
-    const candidates = [p?.image_url,p?.imageUrl];
-    return candidates.map(clean).find(isRealProductImage) || '';
-  }
-
-  function productsForFamily(familyId){
-    const rows = Array.isArray(window.PSC_DATA?.products) ? window.PSC_DATA.products : [];
-    return rows.filter(p => clean(p?.catalogueParentId) === clean(familyId));
-  }
-
-  function scoreProductForText(p,text){
-    const hay = lower([
-      p?.brand,p?.name,p?.catalogueDisplayName,p?.pack,p?.cataloguePack,
-      p?.pscOfferedSpecification,p?.spec
-    ].filter(Boolean).join(' '));
-    const tokens = lower(text).replace(/[^a-z0-9]+/g,' ').split(/\s+/)
-      .filter(x => x.length >= 3 && !['the','and','pack','tablets','oral','product'].includes(x));
-    let score = 0;
-    [...new Set(tokens)].forEach(t => { if(hay.includes(t)) score += t.length >= 6 ? 2 : 1; });
-    return score;
-  }
-
-  function patchFamilyPreview(){
-    document.querySelectorAll('.pscFamilyProductSheet').forEach(sheet => {
-      const familyId = clean(sheet.querySelector('.modalHeader .mono')?.textContent);
-      if(!familyId) return;
-
-      const products = productsForFamily(familyId)
-        .map(p => ({p,url:productRealImage(p)}))
-        .filter(x => x.url);
-
-      if(!products.length) return;
-
-      const main = sheet.querySelector('.pscFamilyPreview > img');
-      if(main){
-        const chosen = products[0].url;
-        if(main.getAttribute('src') !== chosen){
-          main.src = chosen;
-          main.removeAttribute('srcset');
-          main.onerror = function(){ this.onerror=null; this.style.display='none'; };
-          main.style.display = '';
-        }
-      }
-
-      const pane = sheet.querySelector('.detailImagePane');
-      if(pane){
-        let gallery = pane.querySelector('.productGalleryStrip');
-        if(!gallery){
-          gallery = document.createElement('div');
-          gallery.className = 'productGalleryStrip v449FamilyGallery';
-          pane.querySelector('.detailImageMeta')?.insertAdjacentElement('beforebegin',gallery);
-        }
-        const urls = [...new Set(products.map(x => x.url))];
-        const signature = urls.join('|');
-        if(gallery.dataset.v449Images !== signature){
-          gallery.dataset.v449Images = signature;
-          gallery.innerHTML = urls.map((url,i)=>`<img src="${url}" alt="Product option ${i+1}">`).join('');
-        }
-      }
-
-      sheet.querySelectorAll('.pscBrandTick').forEach(label => {
-        if(label.querySelector('.v449OptionThumb')) return;
-        const text = label.textContent || '';
-        let best = null, bestScore = 0;
-        products.forEach(x => {
-          const score = scoreProductForText(x.p,text);
-          if(score > bestScore){ bestScore = score; best = x; }
-        });
-        if(best && bestScore >= 2){
-          const img = document.createElement('img');
-          img.className = 'v449OptionThumb';
-          img.src = best.url;
-          img.alt = '';
-          img.onerror = ()=>img.remove();
-          const span = label.querySelector(':scope > span');
-          if(span) label.insertBefore(img,span);
-        }
-      });
-    });
-  }
+  // Exact option images and family galleries are rendered by family-details.js.
+  // Do not infer a different pack photograph from shared brand/name tokens.
 
   function patchHomeHero(){
     const heroText = document.querySelector('.publicLanding .m445HomeHeroText');
@@ -160,26 +71,6 @@
     if(head) head.insertAdjacentElement('afterend',row);
     else section.prepend(row);
 
-    const input = row.querySelector('input');
-    input.addEventListener('input',()=>{
-      const global = document.querySelector('.customerShell [data-global-search]');
-      if(global){
-        global.value = input.value;
-        global.dispatchEvent(new Event('input',{bubbles:true}));
-      }
-    });
-    input.addEventListener('keydown',e=>{
-      if(e.key !== 'Enter') return;
-      e.preventDefault();
-      const global = document.querySelector('.customerShell [data-global-search]');
-      if(global){
-        global.value = input.value;
-        global.dispatchEvent(new Event('input',{bubbles:true}));
-        global.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',code:'Enter',bubbles:true}));
-      } else {
-        location.hash = 'portal/catalogue/all';
-      }
-    });
   }
 
   function patchWorkshopPage(){
@@ -241,7 +132,6 @@
   }
 
   function apply(){
-    patchFamilyPreview();
     patchHomeHero();
     patchHomeWorkshop();
     patchPortalCatalogueSearch();
