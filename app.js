@@ -213,7 +213,7 @@
     const rows=[];
     (D.products||[]).forEach(p=>{
       const sku=p.pscSku;
-      if(!sku || seen.has(sku)) return;
+      if(!sku || seen.has(sku) || p.localCatalogueRefresh) return;
       seen.add(sku);
       const reg=p.dhaMapped
         ? [p.dhaReference,p.dhaRequirement,p.dhaCondition].filter(Boolean).join(' · ')
@@ -298,12 +298,13 @@
     const bySku=new Map((D.products||[]).map(p=>[p.pscSku,p]));
     const preferredIds=new Set(rows.filter(r=>r.psc_sku.startsWith('INST-')).map(r=>r.psc_sku));
 
-    (D.products||[]).forEach(p=>{ p.catalogueVisible=false; });
+    (D.products||[]).forEach(p=>{ if(!p.localCatalogueRefresh) p.catalogueVisible=false; });
     // Prefer the authoritative institutional line over an old PS wholesale/master alias.
     const ordered=[...rows].sort((a,b)=>Number(b.psc_sku.startsWith('INST-'))-Number(a.psc_sku.startsWith('INST-')));
     ordered.forEach(r=>{
       let item=byCatalogueId.get(r.psc_sku)||bySku.get(r.psc_sku);
       if(item?.catalogueTransactionId!==r.psc_sku && item?.catalogueTransactionId && preferredIds.has(item.catalogueTransactionId)) return;
+      if(item?.localCatalogueRefresh) { item.storefrontDbId=r.product_id; return; }
       if(!item){
         item={pscSku:r.psc_sku,name:r.name||r.psc_sku,category:r.category||'Institutional Supplies',pack:r.pack||'',brand:r.brand||'',institutionalProvisional:false};
         D.products.push(item);
@@ -1070,6 +1071,8 @@
     return '/assets/products/clinic-basics.jpg';
   }
   function productDisplayImageUrl(p){
+    if(p?.currentImageUrl) return p.currentImageUrl;
+    if(p?.localCatalogueRefresh) return null;
     const sku=institutionalImageSku(p);
     if(sku) return `/assets/products/${sku.toLowerCase()}.webp?v=${PRODUCT_ASSET_RELEASE}`;
     const raw=(p?.imageUrl||'').trim();
@@ -1079,7 +1082,14 @@
     if(p?.dhaMapped && looksLikeStandaloneDhaAsset) return null;
     return raw;
   }
+  function catalogueImageNote(p){
+    if(!p?.localCatalogueRefresh) return '';
+    const label=p.workbookDecision==='ENQUIRY ONLY'?'Enquiry only · exact product and pack to verify':!p.currentImageUrl?'Product photograph pending':String(p.imageStatus||'').startsWith('REFERENCE TILE')?'Reference tile · verified pack photograph pending':'';
+    return label?`<small class="catalogueImageNote">${esc(label)}</small>`:'';
+  }
   function controlledProductImageUrl(p){
+    if(p?.currentImageUrl) return p.currentImageUrl;
+    if(p?.localCatalogueRefresh) return null;
     const sku=institutionalImageSku(p);
     if(sku) return `/assets/products/${sku.toLowerCase()}.webp?v=${PRODUCT_ASSET_RELEASE}`;
     return (p?.image_url||p?.imageUrl||'').trim() || null;
@@ -2182,7 +2192,7 @@
       ${visual}
       <div class="canvaCardBody exactCanvaBody">
         <button class="productTitleButton" data-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button>
-        <p class="pack">${esc(pack)}</p>
+        <p class="pack">${esc(pack)}</p>${catalogueImageNote(p)}
         <div class="productNeedTags">${esc(need.label)}</div>
       </div>
       <div class="canvaCardActions exactCanvaActions">
@@ -2330,6 +2340,7 @@
     const mode=detail?.brandPreferenceMode||'no_preference';
     return {
       type:'family',
+      localFamily:detail?.localFamily===true,
       familyId:String(detail?.familyId||'').trim(),
       familyName:String(detail?.familyName||detail?.familyId||'').trim(),
       familyPageType:String(detail?.familyPageType||'').trim(),
@@ -2684,7 +2695,7 @@
     return `<div class="productDetailModal fluidProductDetail">
       <div class="modalHeader fluidProductHeader"><button class="productBackButton" data-modal-close aria-label="Back to catalogue">←</button><div><span class="eyebrow">${esc(primary.label)}</span><h2>${esc(displayName)}</h2><div class="smallMuted mono">${esc(p.pscSku)}</div></div><span class="productRequestCount">${inRequest?`${inRequest} in request`:''}</span></div>
       <div class="productDetailGrid fluidProductGrid">
-        <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).map(m=>`<img src="${esc(m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span></div><div class="modalNeedChips">${needTags}</div></div>
+        <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).map(m=>`<img src="${esc(m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
         <div class="detailContentPane fluidDetailContent">
           <div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to DHA clinic requirement</b></div>`:''}</div>
           <div class="productDisclosureList">
@@ -2713,7 +2724,7 @@
     return `<div class="productDetailModal fluidProductDetail publicProductSheet">
       <div class="modalHeader fluidProductHeader"><button class="productBackButton" data-modal-close aria-label="Back to catalogue">←</button><div><span class="eyebrow">${esc(primary.label)}</span><h2>${esc(displayName)}</h2><div class="smallMuted mono">${esc(p.pscSku)}</div></div></div>
       <div class="productDetailGrid fluidProductGrid">
-        <div class="detailImagePane fluidImagePane">${imageUrl?`<div class="detailProductImageWrap"><img src="${esc(imageUrl)}" alt="${esc(displayName)}" onerror="this.onerror=null;this.src='${esc(fallback)}'"></div>`:`<div class="detailProductImageWrap"><div class="detailNeedVisual" style="--need-bg:${primary.bg};--need-ink:${primary.ink}"></div></div>`}<div class="detailImageMeta"><b>${esc(displayName)}</b><span>${esc(pack)}</span></div></div>
+        <div class="detailImagePane fluidImagePane">${imageUrl?`<div class="detailProductImageWrap"><img src="${esc(imageUrl)}" alt="${esc(displayName)}" onerror="this.onerror=null;this.src='${esc(fallback)}'"></div>`:`<div class="detailProductImageWrap"><div class="detailNeedVisual" style="--need-bg:${primary.bg};--need-ink:${primary.ink}"></div></div>`}<div class="detailImageMeta"><b>${esc(displayName)}</b><span>${esc(pack)}</span>${catalogueImageNote(p)}</div></div>
         <div class="detailContentPane fluidDetailContent">
           <div class="productDisclosureList publicProductDisclosure">
             <details open><summary><span>Product specification</span><i>+</i></summary><div><p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
@@ -2945,8 +2956,8 @@
       const q=quoteMap[o.id];
       const qLines={};
       const mappedLines=orderLines.map(l=>{
-        const mapped=l.family_id?{
-          type:'family', familyId:l.family_id, familyName:l.family_name_snapshot||l.line_description||l.family_id,
+        const mapped=l.family_id||l.family_name_snapshot?{
+          type:'family', localFamily:!l.family_id, familyId:l.family_id||(window.PSC_FAMILY_CATALOGUE_V39?.families||[]).find(f=>f.familyName===l.family_name_snapshot)?.familyId||l.family_name_snapshot, familyName:l.family_name_snapshot||l.line_description||l.family_id,
           presentation:l.requested_presentation||'', orderPackBasis:l.pack_snapshot||'', brandPreferenceMode:l.brand_preference_mode||'no_preference',
           requestedBrand:l.requested_brand||'', productOptionId:l.product_option_id||'', productOptionSnapshot:l.product_option_snapshot||null,
           regulated:true, qty:Number(l.quantity)
@@ -3030,7 +3041,7 @@
       if(isFamilyLine(l)){
         return {
           order_id:o.id, product_id:null, psc_sku_snapshot:null,
-          family_id:l.familyId, family_name_snapshot:l.familyName,
+          family_id:l.localFamily?null:l.familyId, family_name_snapshot:l.familyName,
           line_description:l.familyName||l.familyId,
           brand_model_snapshot:l.brandPreferenceMode==='specific_option'?(l.productOptionSnapshot?.exact_product_name||l.requestedBrand||null):(l.brandPreferenceMode==='other_brand'?l.requestedBrand:'No preference'),
           pack_snapshot:l.productOptionSnapshot?.pack||l.orderPackBasis||l.presentation||null, quantity:l.qty,

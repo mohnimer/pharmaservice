@@ -6,7 +6,8 @@
     "build": "node tools/build.mjs",
     "test": "node --test tests/shell.test.mjs",
     "test:browser": "node tests/browser.mjs",
-    "test:dom": "node tests/dom.mjs"
+    "test:dom": "node tests/dom.mjs",
+    "test:catalogue": "node tests/catalogue.mjs"
   },
   "devDependencies": {
     "happy-dom": "20.14.5",

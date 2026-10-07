@@ -40,14 +40,14 @@
     const sku = clean(p.pscSku || p.psc_sku).toUpperCase();
     if (!sku) return;
 
-    const candidate = clean(p.image_url || p.imageUrl);
+    const candidate = clean(p.currentImageUrl || p.image_url || p.imageUrl);
     if (candidate && !isGeneratedOrGeneric(candidate)) {
       realImages.set(sku, candidate);
     }
 
     const source = clean(p.source).toLowerCase();
     if (
-      p.localCatalogueOverride === true ||
+      p.localCatalogueRefresh === true || p.localCatalogueOverride === true ||
       source.includes('user-supplied catalogue pack image')
     ) {
       controlledLocalSkus.add(sku);

@@ -1,0 +1,18 @@
+/* Product photography uses a shared square canvas without clipping pack labels. */
+.productCard .productVisual, .publicCatalogueVisual, .replenishVisual,
+.detailProductImageWrap, .relatedProductVisual, .cmsPreviewImage, .cmsMasterThumb {
+  background: #fff;
+}
+.productMainImage, .publicCatalogueVisual > img:not(.publicDhaMark),
+.replenishVisual img, .detailProductImageWrap > img:not(.detailDhaIcon),
+.relatedProductVisual img, .requestLineImage img, .productGalleryStrip img,
+.cmsPreviewImage img, .cmsMasterThumb img {
+  object-fit: contain;
+  object-position: center;
+  aspect-ratio: 1;
+}
+.catalogueImageNote { display: block; margin-top: 12px; color: #737670; font-size: 12px; line-height: 1.5; }
+.catalogueImageEmpty { padding: 28px; text-align: center; color: #737670; }
+.pscBrandTick .catalogueOptionImage { width: 72px; height: 72px; object-fit: contain; border-radius: 8px; background: #fff; flex-shrink: 0; }
+.pscBrandTick { gap: 14px; padding: 16px; }
+.pscBrandTick > span { min-width: 0; overflow-wrap: anywhere; }

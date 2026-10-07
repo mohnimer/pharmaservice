@@ -69,13 +69,16 @@
         ]);
         if(error) throw error; if(optionError) throw optionError; if(priceError) throw priceError; if(availabilityError) throw availabilityError;
         if(Array.isArray(data) && data.length){
-          familyState.rows=data.map(normalizeSupabaseRow); familyState.approvedOptions=Array.isArray(approved)?approved:[]; familyState.fixedPrices=Array.isArray(fixedPrices)?fixedPrices:[];
+          const refresh=window.PS_CATALOGUE_REFRESH;
+          const fallback=(window.PSC_FAMILY_CATALOGUE_V39?.families||[]).map(normalizeFallbackRow);
+          familyState.rows=refresh?refresh.mergeFamilies(data.map(normalizeSupabaseRow),fallback):data.map(normalizeSupabaseRow);
+          familyState.approvedOptions=refresh?refresh.mergeOptions(approved):Array.isArray(approved)?approved:[]; familyState.fixedPrices=Array.isArray(fixedPrices)?fixedPrices:[];
           familyState.availability=Array.isArray(availability)?availability:[]; familyState.loaded=true; familyState.source='supabase'; return;
         }
       }catch(e){ console.warn('PS family catalogue Supabase load failed; using frozen fallback.',e?.message||e); }
     }
     const fallback=window.PSC_FAMILY_CATALOGUE_V39?.families;
-    familyState.rows=Array.isArray(fallback)?fallback.map(normalizeFallbackRow):[]; familyState.approvedOptions=[]; familyState.fixedPrices=[]; familyState.availability=[];
+    familyState.rows=Array.isArray(fallback)?fallback.map(normalizeFallbackRow):[]; familyState.approvedOptions=window.PS_CATALOGUE_REFRESH?.mergeOptions([])||[]; familyState.fixedPrices=[]; familyState.availability=[];
     familyState.loaded=true; familyState.source=familyState.rows.length?'frozen-fallback':'none';
   }
 
