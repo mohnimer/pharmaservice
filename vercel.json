@@ -1,4 +1,12 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false
+  "rewrites": [
+    {
+      "source": "/workshop",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/workshop/:path*",
+      "destination": "/index.html"
+    }
+  ]
 }
