@@ -33,7 +33,7 @@ try{
   const product=name=>w.PSC_DATA.products.find(p=>p.sourceProductName===name);
   const enquiry=product('CEBACT 1000MG INJ IM/IV');assert(enquiry);
   assert.equal(enquiry.catalogueVisible,true);
-  assert(w.document.querySelector(`[data-product-view="${enquiry.pscSku}"] img`).src.endsWith('/001-cebact-1000mg-inj-im-iv.jpg'));
+  assert.equal(w.document.querySelector(`[data-product-view="${enquiry.pscSku}"] .productMainImage`),null); // Supplier reference tile is deliberately blank.
   assert.equal(w.PSC_DATA.products.find(p=>p.pscSku==='PSC-MED-126').catalogueDisplayName,'PANADOL NIGHT - 24 FILM-COATED TABLETS');
   await click(`[data-product-view="${enquiry.pscSku}"]`);
   assert.match(w.document.querySelector('.productDetailModal').textContent,/Enquiry only/);

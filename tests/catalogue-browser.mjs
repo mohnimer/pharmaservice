@@ -7,7 +7,7 @@ const base=`http://127.0.0.1:${server.address().port}`;
 const browser=await chromium.launch({executablePath:process.env.PSC_CHROME,args:['--no-sandbox']});
 mkdirSync('test-results',{recursive:true});const results=[];
 try{
- for(const width of [390,1440]){
+ for(const width of [390,1024,1440]){
   const context=await browser.newContext({viewport:{width,height:900}});
   await context.addInitScript(()=>{window.__testRole='demo';});
   await context.route('**/*',route=>{
@@ -25,14 +25,26 @@ window.__tables.catalogue_family_option_reference_public=[{family_id:'PSC-SC-C01
    return {height:f.height,width:f.width,imageWidth:r.width,inside:r.top>=f.top-1&&r.bottom<=f.bottom+1&&r.left>=f.left-1&&r.right<=f.right+1,fit:s.objectFit,transform:s.transform};
   }));
   assert(frames.length>5);
-  for(const f of frames){assert(f.inside,JSON.stringify(f));assert(f.height>=140);assert(Math.abs(f.width-f.height)<2);assert(f.imageWidth>=f.width-3);assert.equal(f.fit,'contain');assert.equal(f.transform,'none');}
+  for(const f of frames){if(f.transform==='none') assert(f.inside,JSON.stringify(f));assert(f.height>=140);assert(Math.abs(f.width-f.height)<2);assert(f.imageWidth>=f.width-3);assert.equal(f.fit,'contain');}
   assert.equal(new Set(frames.map(f=>Math.round(f.height))).size,1);
+  const copy=await page.locator('.productCard .exactCanvaBody').evaluateAll(nodes=>nodes.map(n=>{
+    const children=[...n.children].map(c=>c.getBoundingClientRect());
+    return children.every((r,i)=>!i || r.top>=children[i-1].bottom-1) && [...n.querySelectorAll('h3')].every(h=>h.scrollHeight<=h.clientHeight+1);
+  }));
+  assert(copy.every(Boolean),'card text must not overlap or clip');
+  assert(await page.locator('.catalogueBrandCount').count()>5);
+  const referenceImages=await page.evaluate(()=>{
+    const refs=new Set(window.PS_CATALOGUE_REFRESH.products.filter(p=>/^REFERENCE TILE/i.test(p.imageStatus)).map(p=>p.pscSku));
+    return [...document.querySelectorAll('.productCard')].filter(c=>refs.has(c.querySelector('[data-product-view]')?.dataset.productView)).some(c=>c.querySelector('.productMainImage'));
+  });
+  assert.equal(referenceImages,false);
   await page.locator('.productCard').first().screenshot({path:`test-results/card-${width}.png`});
   await page.locator('[data-psc-family-open="PSC-SC-C01"]').click();await page.locator('.pscBrandTick').first().waitFor();
   assert.equal(await page.locator('.pscBrandTick .v449OptionThumb').count(),0);
   const imageCounts=await page.locator('.pscBrandTick').evaluateAll(nodes=>nodes.map(n=>n.querySelectorAll('img').length));
   assert(imageCounts.every(n=>n<=1));
-  await page.locator('.pscBrandTick:has(.catalogueOptionImage)').first().screenshot({path:`test-results/option-${width}.png`});
+  assert.equal(await page.locator('.pscBrandTick .catalogueOptionImage').count(),0);
+  await page.locator('.pscBrandTick').first().screenshot({path:`test-results/option-${width}.png`});
   await page.goto(base+'/#portal/catalogue');assert.equal(await page.locator('[data-psc-family-detail-root]').count(),0);await page.locator('.v449CatalogueSearch input').waitFor();
   await page.locator('.v449CatalogueSearch input').pressSequentially('gauze',{delay:40});
   await page.waitForTimeout(400);assert.equal(new URL(page.url()).hash,'#portal/catalogue');
@@ -61,6 +73,22 @@ window.__tables.catalogue_family_option_reference_public=[{family_id:'PSC-SC-C01
   assert.match(await page.locator('.productGrid').innerText(),/NEXIUM/i);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   assert.deepEqual(await page.evaluate(()=>window.__backendCalls.filter(c=>c.rpc||c.action!=='select')),[]);
+  await page.goto(base+'/#portal/catalogue/diabetes');
+  const vildagard=page.locator('.productCard:has([data-product-view="PSC-MED-122"])');
+  await vildagard.waitFor();await page.waitForTimeout(200);
+  assert.match(await vildagard.locator('.productMainImage').evaluate(n=>getComputedStyle(n).transform),/^matrix/);
+  await vildagard.screenshot({path:`test-results/vildagard-${width}.png`});
+  await page.goto(base+'/#our-model');await page.locator('.m46Memory').waitFor();
+  const memory=await page.locator('.m46Memory').evaluate(n=>{
+    const frame=n.getBoundingClientRect();
+    return {height:frame.height,inside:[...n.querySelectorAll('.m46HistoryRow span')].every(x=>{const r=x.getBoundingClientRect();return r.right<=frame.right && r.left>=frame.left;})};
+  });
+  assert(memory.inside);assert(memory.height<600);
+  await page.locator('.m46Memory').screenshot({path:`test-results/memory-${width}.png`});
+  await page.goto(base+'/#contact');await page.locator('a[href="mailto:info@pharmaservice.ae"]').first().waitFor();
+  const email=await page.locator('.contactCard a[href^="mailto:"]').evaluate(n=>({width:n.getBoundingClientRect().width,parent:n.closest('.contactCard').getBoundingClientRect().width,scroll:n.scrollWidth}));
+  assert(email.width<=email.parent-20);assert(email.scroll<=email.width+1);
+  await page.locator('.prospectContactGrid').screenshot({path:`test-results/contact-${width}.png`});
   assert.deepEqual(errors,[]);results.push(`${width}px: uniform contained card photos, exact single option images, stable typing/caret, Enter search, multiword matches, clear/no-results/Escape, navigation/history/refresh reset, no overflow or backend writes`);
   await context.close();
  }

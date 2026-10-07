@@ -350,20 +350,20 @@
 
 /* Memory */
 .m46Memory{
-  min-height:500px;padding:28px;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(240px,.88fr);gap:14px
+  min-height:0;padding:28px;display:grid;grid-template-columns:1fr;gap:24px;align-items:start
 }
 .m46HistoryCard{
   overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#fff
 }
 .m46HistoryCard .m46CardLabel{padding:18px 18px 6px;margin:0}
 .m46HistoryRow{
-  display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:16px 18px;border-top:1px solid #eeeae4
+  display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:20px;align-items:center;padding:16px 18px;border-top:1px solid #eeeae4
 }
 .m46HistoryRow b{font-size:12px;font-weight:600}
 .m46HistoryRow span{font-size:9px;color:#27655f;background:var(--teal-soft);padding:5px 7px;border-radius:999px}
 .m46HistoryRow small{font-size:9px;color:#8b857f}
 .m46MemoryGrid{
-  position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:10px
+  position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start
 }
 .m46MemoryGrid article{
   padding:17px;border:1px solid var(--line);border-radius:16px;background:#fff
@@ -501,3 +501,5 @@
     opacity:1!important;transform:none!important;transition:none!important
   }
 }
+.m46Memory .m46HistoryRow span{white-space:nowrap}
+@media(max-width:520px){.m46HistoryRow{grid-template-columns:minmax(0,1fr) auto;gap:12px}.m46HistoryRow small{grid-column:1/-1}.m46MemoryGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.m46MemoryGrid article{padding:16px;min-width:0}}

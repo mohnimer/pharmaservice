@@ -36,7 +36,7 @@
   }
 
   function rememberProduct(p) {
-    if (!p) return;
+    if (!p || /^REFERENCE TILE/i.test(p.imageStatus || p.image_status || '')) return;
     const sku = clean(p.pscSku || p.psc_sku).toUpperCase();
     if (!sku) return;
 
@@ -133,6 +133,10 @@
 
   function scan() {
     restoreData();
+    document.querySelectorAll('.productMainImage, .publicCatalogueVisual > img:not(.publicDhaMark)').forEach(img => {
+      const fit=window.PS_PHOTO_FRAMING?.[img.getAttribute('src')?.split('?')[0]];
+      if(fit) img.style.setProperty('--photo-fit', `scale(${fit.scale}) translate(${fit.x}%, ${fit.y}%)`);
+    });
 
     document.querySelectorAll('[data-product-view]').forEach(el => {
       patchProductTrigger(el, 'data-product-view');

@@ -51,7 +51,7 @@
   box-sizing: border-box !important;
   object-fit: contain !important;
   object-position: center !important;
-  transform: none !important;
+  transform: var(--photo-fit, none) !important;
   aspect-ratio: auto !important;
 }
 .pscBrandTick .catalogueOptionImage {
@@ -66,3 +66,25 @@
 /* Keep generic generated art retired even inside the authoritative photo frame. */
 .customerShell .productCard .productVisual > img.productMainImage[src*="/assets/products/inst-"],
 .customerShell .productCard .productVisual > img.productMainImage[src*="clinic-basics.jpg"] { display: none !important; }
+
+/* Card copy flows naturally: no fixed tracks, clipping or overlapping metadata. */
+.customerShell .productCard { height:auto!important; min-height:0!important; max-height:none!important; }
+.customerShell .productCard .exactCanvaBody {
+  display:flex!important; flex-direction:column!important; flex:1 0 auto!important;
+  grid-template-rows:none!important; gap:14px!important; height:auto!important;
+  min-height:0!important; max-height:none!important; padding:20px!important;
+}
+.customerShell .productCard .productTitleButton,
+.customerShell .productCard .productTitleButton h3 {
+  display:block!important; height:auto!important; min-height:0!important; max-height:none!important;
+  overflow:visible!important; -webkit-line-clamp:unset!important; white-space:normal!important;
+  overflow-wrap:anywhere!important; line-height:1.5!important; margin:0!important;
+}
+.customerShell .productCard :is(.pack,.productNeedTags,.catalogueImageNote,.catalogueBrandCount) {
+  margin:0!important; padding:0!important; height:auto!important; max-height:none!important;
+  line-height:1.6!important; white-space:normal!important; overflow:visible!important;
+}
+.catalogueBrandCount { display:block; color:#737670; font-size:12px; line-height:1.6; }
+.customerShell .productCard .exactCanvaActions { flex:0 0 auto!important; margin-top:auto; padding:0 20px 20px!important; gap:10px!important; }
+
+.customerShell .productCard :is(.productNeedTags,.catalogueBrandCount){text-align:left!important}
