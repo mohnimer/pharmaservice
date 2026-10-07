@@ -58,6 +58,24 @@ try{
   await navigate('portal/catalogue/patient-care');
   // A new family remains present even when the database returns only an older family.
   assert(w.document.querySelector('[data-psc-family-open="PSC-IS-151"]'));
+  await navigate('portal/catalogue/sports');
+  const fastum=w.PSC_DATA.products.find(p=>p.pscSku==='PSC-MED-101');
+  assert.equal(w.document.querySelector(`[data-catalogue-brand-sku="${fastum.pscSku}"]`).textContent,'Brands Available: 1');
+  const countNode=()=>w.document.querySelector(`[data-catalogue-brand-sku="${fastum.pscSku}"]`);
+  // Other brands in the same category/family must not inflate a named product.
+  w.PSC_DATA.products.push({...fastum,pscSku:'TEST-OTHER-BRAND',brand:'Other brand'});
+  await navigate('portal/catalogue/sports');assert.equal(countNode().textContent,'Brands Available: 1');
+  fastum.brand='Specification-led';
+  w.PS_FAMILY_BRAND_OPTIONS=()=>[
+    {family_id:fastum.catalogueParentId,brand:'Fastum'},
+    {family_id:fastum.catalogueParentId,brand:' fastum '},
+    {family_id:fastum.catalogueParentId,brand:'Other brand'},
+    {family_id:'UNRELATED-FAMILY',brand:'Unrelated'},
+    {family_id:fastum.catalogueParentId,brand:'Generic'}
+  ];
+  await navigate('portal/catalogue/sports');assert.equal(countNode().textContent,'Brands Available: 2');
+  fastum.brand='Fastum';
+  w.dispatchEvent(new w.Event('ps:catalogue-brands-ready'));assert.equal(countNode().textContent,'Brands Available: 1');
   await navigate('portal/catalogue/medicines');
   const q=w.document.querySelector('[data-global-search]');q.value='CEBACT';q.dispatchEvent(new w.Event('input',{bubbles:true}));await pause();
   assert(w.document.querySelector(`[data-product-view="${enquiry.pscSku}"]`));

@@ -7,7 +7,7 @@ const base=`http://127.0.0.1:${server.address().port}`;
 const browser=await chromium.launch({executablePath:process.env.PSC_CHROME,args:['--no-sandbox']});
 mkdirSync('test-results',{recursive:true});const results=[];
 try{
- for(const width of [390,768,1024,1440]){
+ for(const width of (process.env.PS_TEST_WIDTH?[Number(process.env.PS_TEST_WIDTH)]:[390,768,1024,1440])){
   const context=await browser.newContext({viewport:{width,height:900}});
   await context.addInitScript(()=>{window.__testRole='demo';});
   await context.route('**/*',route=>{
@@ -102,6 +102,10 @@ window.__tables.catalogue_family_option_reference_public=[{family_id:'PSC-SC-C01
   await vildagard.waitFor();await page.waitForTimeout(200);
   assert.match(await vildagard.locator('.productMainImage').evaluate(n=>getComputedStyle(n).transform),/^matrix/);
   await vildagard.screenshot({path:`test-results/vildagard-${width}.png`});
+  await page.goto(base+'/#portal/catalogue/sports');
+  const fastum=page.locator('[data-catalogue-brand-sku="PSC-MED-101"]');
+  await fastum.waitFor();assert.equal(await fastum.innerText(),'Brands Available: 1');
+  await page.reload();await fastum.waitFor();assert.equal(await fastum.innerText(),'Brands Available: 1');
   await page.goto(base+'/#our-model');await page.locator('.m46Memory').waitFor();
   const memory=await page.locator('.m46Memory').evaluate(n=>{
     const frame=n.getBoundingClientRect();
