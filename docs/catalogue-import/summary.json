@@ -1,0 +1,15 @@
+{
+  "masterRows": 405,
+  "brandOptions": 906,
+  "approvedOptions": 193,
+  "uniqueImportedIdentities": 405,
+  "existingMatched": 46,
+  "newProducts": 359,
+  "families": 269,
+  "zipImages": 280,
+  "zipPhotographs": 205,
+  "referenceTiles": 75,
+  "normalizedExisting": 117,
+  "failedExistingDownloads": 3,
+  "importedWithoutImage": 79
+}
