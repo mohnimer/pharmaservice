@@ -4,9 +4,9 @@ Branch: `v50-consolidation`. Production/main has not been changed.
 
 ## Review deployment and publication status
 
-Preview: https://pharmaservice-9v76p88nm-mohameds-projects-9022ad5a.vercel.app
+Preview: https://pharmaservice-h8jsqyco2-mohameds-projects-9022ad5a.vercel.app
 
-Vercel reports deployment `dpl_5LLEZCQgLKTC18ycgpwTNjbHAWok` READY, target `staging` (non-production). This is an API-created review deployment of the tested build, not a deployment triggered by a GitHub branch push. Its application JavaScript, stylesheet and shell are the exact tested build; unchanged images are served through preview-only rewrites to pharmaservice.ae. The repository build includes those images locally.
+Vercel reports deployment `dpl_FNrZS3cgHnzvMMsLbwxvtYSNQktJ` READY, target `staging` (non-production). This is an API-created review deployment of the tested build, not a deployment triggered by a GitHub branch push. Its application JavaScript, stylesheet and shell are the exact tested build; unchanged images are served through preview-only rewrites to pharmaservice.ae. The repository build includes those images locally.
 
 The preview requires Vercel authentication. Browser access reached the Vercel login page; the connector rejected temporary authenticated access with HTTP 403. Public browser smoke checks therefore remain incomplete. Protection settings were not changed.
 
@@ -113,6 +113,12 @@ The historical `tools/apply_v50_workshop.py` and `workshop-v50-block.txt` can be
 | v50-workshop-rebuild.css | current/styles/workshop-design.css |
 
 ## Validation
+
+### Screenshot follow-up
+
+Homepage CTAs inserted by the current home feature were missing navigation handlers. Navigation now delegates through the authoritative router, including content inserted after render. Regression coverage clicks the actual homepage Start, catalogue, requirement, Workshop and Portal buttons rather than only testing programmatic routes. The decorative pillar connectors were removed; desktop pillars now use three equal columns. Contact phone/email are actionable tel/mailto links, and catalogue arrows use SVG instead of iPhone emoji rendering.
+
+Native V50 Workshop cards no longer carry the older generic guide-card class, which forced 4px side padding and zero heading margins. They retain the current cream appearance with 26–30px inset padding, 24px grid gaps, clearer title/excerpt spacing and readable line heights. Build, all three structural/server tests and all six DOM regression groups pass after these changes. Browser/visual verification remains blocked as described below.
 
 - `npm run build`: PASS; only one HTML, one local application JS, one CSS; product/media assets retained.
 - `npm test`: PASS (3 automated tests covering manifest/output isolation, repeatable build/syntax and HTTP deep-route/redirect behaviour).
