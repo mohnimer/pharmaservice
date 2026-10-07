@@ -1,0 +1,43 @@
+/* V48.1 — Product-card action cleanup
+   Removes the unnecessary separator above Details / Request
+   and gives the CTA area more breathing room without changing
+   the approved card hierarchy. */
+
+.canvaProductCard .canvaCardBody,
+.canvaProductCard .productNeedTags,
+.canvaProductCard .canvaCardActions,
+.canvaProductCard .exactCanvaBody,
+.canvaProductCard .exactCanvaActions,
+.familyCatalogueCard .canvaCardActions,
+.familyCatalogueCard .exactCanvaActions {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+
+.canvaProductCard .canvaCardActions::before,
+.canvaProductCard .canvaCardActions::after,
+.familyCatalogueCard .exactCanvaActions::before,
+.familyCatalogueCard .exactCanvaActions::after {
+  content: none !important;
+  display: none !important;
+}
+
+.canvaProductCard .canvaCardActions,
+.familyCatalogueCard .exactCanvaActions {
+  gap: 10px !important;
+  margin-top: auto !important;
+  padding: 18px 9px 10px !important;
+}
+
+.canvaProductCard .canvaDetails,
+.canvaProductCard .canvaRequest {
+  min-height: 46px !important;
+}
+
+@media (max-width: 720px) {
+  .canvaProductCard .canvaCardActions,
+  .familyCatalogueCard .exactCanvaActions {
+    gap: 9px !important;
+    padding: 15px 7px 9px !important;
+  }
+}
