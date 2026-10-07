@@ -125,13 +125,13 @@
   }
   function filterFamilies(query){
     const term=String(query||'').trim().toLowerCase(); let visible=0;
-    document.querySelectorAll('[data-psc-family-card]').forEach(card=>{const hit=!term || (card.dataset.search||'').includes(term);card.hidden=!hit;if(hit) visible++;});
+    document.querySelectorAll('[data-psc-family-card]').forEach(card=>{const hit=term.split(/\s+/).filter(Boolean).every(token=>(card.dataset.search||'').includes(token));card.hidden=!hit;if(hit) visible++;});
     const count=document.querySelector('[data-psc-family-count]'); if(count) count.textContent=visible;
     const empty=document.querySelector('[data-psc-family-empty]'); if(empty) empty.hidden=visible!==0;
   }
   let raf=0;
   function schedule(){ if(raf) return; raf=requestAnimationFrame(()=>{raf=0;install();}); }
-  document.addEventListener('input',e=>{if(e.target?.matches?.('[data-cat-q],[data-global-search]')) filterFamilies(e.target.value);},true);
+  document.addEventListener('input',e=>{if(e.target?.matches?.('[data-cat-q]')) filterFamilies(e.target.value);},true);
   window.addEventListener('hashchange',schedule); window.addEventListener('popstate',schedule);
   window.PSC_ENHANCEMENTS.createObserver(schedule).observe(document.getElementById('app')||document.body,{childList:true,subtree:true});
   loadFamilies().finally(schedule);

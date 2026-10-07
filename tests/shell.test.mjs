@@ -11,7 +11,7 @@ test('runtime contains one HTML shell and no historical patch or alternate entry
   assert.deepEqual(files.filter(f => f.endsWith('.html')), ['dist/index.html']);
   assert(!files.some(f => /history|workshop-v50-block|apply_v50|v45-workshop/.test(f)));
   assert(!shell.includes('v45-workshop-modules-gate'));
-  assert(shell.includes('/current.js?v=5002'));
+  assert(shell.includes('/current.js?v=5003'));
   const scripts = [...shell.matchAll(/<script src="([^"]+)"/g)].map(m => m[1].split('?')[0]);
   assert.equal(new Set(scripts).size, scripts.length);
   assert.equal(scripts.at(-1), '/current.js');

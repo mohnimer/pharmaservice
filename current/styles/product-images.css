@@ -16,3 +16,53 @@
 .pscBrandTick .catalogueOptionImage { width: 72px; height: 72px; object-fit: contain; border-radius: 8px; background: #fff; flex-shrink: 0; }
 .pscBrandTick { gap: 14px; padding: 16px; }
 .pscBrandTick > span { min-width: 0; overflow-wrap: anywhere; }
+
+/* One contained photograph frame for every current catalogue card.
+   Absolute fitting prevents inherited grid tracks and intrinsic image dimensions
+   from moving the photograph below the clipped preview. */
+.customerShell .productCard .productVisual,
+.publicCatalogueCard .publicCatalogueVisual {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  flex: 0 0 auto !important;
+  aspect-ratio: 1 !important;
+  box-sizing: border-box !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #fff !important;
+}
+.customerShell .productCard .productVisual > img.productMainImage,
+.publicCatalogueCard .publicCatalogueVisual > img:not(.publicDhaMark) {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 14px !important;
+  box-sizing: border-box !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  transform: none !important;
+  aspect-ratio: auto !important;
+}
+.pscBrandTick .catalogueOptionImage {
+  width: 72px !important;
+  height: 72px !important;
+  flex: 0 0 72px !important;
+  padding: 4px !important;
+  box-sizing: border-box !important;
+}
+.pscBrandTick { gap: 14px !important; padding: 16px !important; }
+
+/* Keep generic generated art retired even inside the authoritative photo frame. */
+.customerShell .productCard .productVisual > img.productMainImage[src*="/assets/products/inst-"],
+.customerShell .productCard .productVisual > img.productMainImage[src*="clinic-basics.jpg"] { display: none !important; }

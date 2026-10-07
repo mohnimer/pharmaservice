@@ -74,8 +74,8 @@ try {
   await page.locator('[data-add="PSC-DIA-001"]').click(); await page.locator('[data-family-quote]').click(); await page.locator('[data-basket]').first().click();
   await page.locator('[data-submit-request]').click();
   assert.match(await page.locator('body').innerText(), /Demo order created/);
-  await page.goto(base + '/#portal/requests'); await page.locator('[data-request-view]').first().click();
-  await page.locator('[data-confirm-quote]').first().click();
+  await page.goto(base + '/#portal/requests'); await page.locator('[data-request-view="TEST-QUOTE-1"]').first().click();
+  await page.locator('.modalBackdrop [data-confirm-quote]').click();
   await page.goto(base + '/#portal/catalogue/all'); await page.locator('#customRequestText').fill('Test compatible accessory');
   await page.locator('[data-submit-custom]').click();
   assert.match(await page.locator('body').innerText(), /Demo request received/);

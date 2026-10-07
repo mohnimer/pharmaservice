@@ -184,7 +184,7 @@
 
   function draw(){ document.querySelector('[data-psc-family-detail-root]')?.remove(); if(!state.open) return; const root=document.createElement('div');root.dataset.pscFamilyDetailRoot='';root.innerHTML=detailHtml();document.body.appendChild(root);document.documentElement.classList.add('pscFamilyDetailOpen');bindDetail(root); }
   function close(){state.open=false;document.documentElement.classList.remove('pscFamilyDetailOpen');document.querySelector('[data-psc-family-detail-root]')?.remove();}
-  async function open(id){if(!id)return;resetSelection();state.open=true;await loadDetail(id);draw();}
+  async function open(id){if(!id)return;resetSelection();state.open=true;state.openRoute=window.PSC_CURRENT_ROUTE();await loadDetail(id);draw();}
   function quoteSummary(){
     const f=state.family||fallbackFamily(state.familyId),kind=familyKind(f),preference=preferenceSummary(),chosen=selectedOptions();
     const brands=[...new Set([...chosen.map(o=>normalizedBrand(o.brand)).filter(Boolean),...state.selectedFallbackBrands])];
@@ -242,6 +242,9 @@
     open(familyId);
   },true);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.open)close();});
+  const closeOnNavigation=()=>{if(state.open&&state.openRoute!==window.PSC_CURRENT_ROUTE())close();};
+  window.addEventListener('popstate',closeOnNavigation);
+  window.addEventListener('hashchange',closeOnNavigation);
   window.addEventListener('hashchange',()=>setTimeout(()=>{prefillContact();hideMedicineFamilyScaffolds();},50));
   const observer=window.PSC_ENHANCEMENTS.createObserver(()=>{prefillContact();hideMedicineFamilyScaffolds();});
   observer.observe(document.getElementById('app')||document.body,{childList:true,subtree:true});
