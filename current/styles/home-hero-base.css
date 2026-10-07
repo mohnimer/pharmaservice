@@ -1,0 +1,79 @@
+
+/* =========================================================
+   PSC V44.10.5 — DEFINITIVE HOME HERO IMAGE IMPLEMENTATION
+   Uses NEW filenames to bypass browser/CDN caching.
+   ========================================================= */
+
+.publicLanding .m445HomeHeroScene{
+  width:100%!important;
+  max-width:none!important;
+  min-height:0!important;
+  aspect-ratio:1672 / 941!important;
+  background-image:url("/v44-10-5-home-hero-desktop.png?v=44105")!important;
+  background-repeat:no-repeat!important;
+  background-size:100% 100%!important;
+  background-position:center center!important;
+}
+
+/* Keep the copy in the open white field, headline first and subline directly below. */
+.publicLanding .m445HomeHeroText{
+  align-self:start!important;
+  justify-content:flex-start!important;
+}
+
+.publicLanding .m445HomeHeroText h1{
+  order:1!important;
+  margin:0!important;
+}
+
+.publicLanding .m445HomeHeroText p{
+  order:2!important;
+  margin:20px 0 0!important;
+}
+
+@media(min-width:901px){
+  .publicLanding .m445HomeHeroScene{
+    padding-top:clamp(86px,6.2vw,106px)!important;
+    padding-left:clamp(70px,8vw,132px)!important;
+    padding-right:clamp(70px,8vw,132px)!important;
+  }
+
+  .publicLanding .m445HomeHeroText{
+    max-width:min(520px,34vw)!important;
+  }
+
+  .publicLanding .m445HomeHeroText h1{
+    max-width:11.5ch!important;
+  }
+
+  .publicLanding .m445HomeHeroText p{
+    max-width:38ch!important;
+  }
+}
+
+@media(max-width:900px){
+  .publicLanding .m445HomeHeroScene{
+    aspect-ratio:941 / 1672!important;
+    background-image:url("/v44-10-5-home-hero-mobile.png?v=44105")!important;
+    background-size:100% 100%!important;
+    background-position:center top!important;
+    padding:54px 28px 0!important;
+  }
+
+  .publicLanding .m445HomeHeroText{
+    width:100%!important;
+    max-width:100%!important;
+    align-items:center!important;
+    text-align:center!important;
+  }
+
+  .publicLanding .m445HomeHeroText h1{
+    max-width:12ch!important;
+    margin-inline:auto!important;
+  }
+
+  .publicLanding .m445HomeHeroText p{
+    max-width:31ch!important;
+    margin:17px auto 0!important;
+  }
+}

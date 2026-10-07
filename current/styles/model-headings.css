@@ -1,0 +1,75 @@
+/* =========================================================
+   V39.38 — No eyebrows + Our Model headline correction
+   Global visual rule: no eyebrow/kicker pre-headings anywhere.
+   ========================================================= */
+
+/* Prevent eyebrow flash before the JS cleanup runs. */
+.kicker,
+.eyebrow,
+.sectionLabel,
+[class*="Eyebrow"],
+[class*="eyebrow"],
+[class*="Kicker"],
+[class*="kicker"]{
+  display:none!important;
+}
+
+/* Our Model — new headline hierarchy. */
+.model17HeroCopy h1.model38Headline{
+  margin-top:0!important;
+  max-width:1000px!important;
+  font-size:clamp(46px,5.35vw,84px)!important;
+  line-height:.97!important;
+  letter-spacing:-.055em!important;
+}
+
+.model38LeadLine{
+  display:block;
+  white-space:nowrap;
+  font-weight:500!important;
+}
+
+.model38LeadLine em{
+  font-style:italic;
+  font-weight:400!important;
+}
+
+.model38Payoff{
+  display:block;
+  font-weight:800!important;
+}
+
+.model17Promise h2{
+  margin-top:0!important;
+}
+
+/* When pre-headings disappear, do not leave artificial top gaps. */
+.publicPageHero > h1:first-child,
+.model17HeroCopy > h1:first-child,
+.model17Promise > div > h2:first-child,
+.model17SourceIntro > h2:first-child,
+.start16HeroCopy > h1:first-child,
+.startSendIntro > h2:first-child,
+.prospectIntro > h2:first-child{
+  margin-top:0!important;
+}
+
+@media(max-width:980px){
+  .model38LeadLine{
+    white-space:normal;
+  }
+}
+
+@media(max-width:640px){
+  .model17HeroCopy h1.model38Headline{
+    font-size:clamp(42px,12vw,60px)!important;
+    line-height:.98!important;
+  }
+}
+
+/* Respect reduced motion just as the existing site does. */
+@media(prefers-reduced-motion:reduce){
+  .model17HeroCopy h1.model38Headline{
+    transition:none!important;
+  }
+}

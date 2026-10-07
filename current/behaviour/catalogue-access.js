@@ -1,9 +1,8 @@
 (() => {
   'use strict';
 
-  /* PSC V50
-     Workshop rendering is now native in app.js. This legacy filename is kept
-     only for the public-catalogue access gate and product-card polish hooks.
+  /* PS V50
+     Workshop rendering is now native in app.js. This current module provides the public-catalogue access gate and product-card polish hooks.
      No Workshop DOM mutation, no Workshop history shim, no competing router. */
 
   const BUILD='50.0';
@@ -124,6 +123,6 @@
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',schedule,{once:true});
   else schedule();
   const root=document.getElementById('app')||document.body;
-  new MutationObserver(schedule).observe(root,{childList:true,subtree:true});
+  window.PSC_ENHANCEMENTS.createObserver(schedule).observe(root,{childList:true,subtree:true});
   [120,500].forEach(ms=>setTimeout(schedule,ms));
 })();

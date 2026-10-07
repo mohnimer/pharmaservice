@@ -1,0 +1,550 @@
+/* PSC V50 — Workshop native rebuild + route-stable presentation
+   Replaces the former Workshop mutation layer. The filename stays unchanged
+   so the current production index can keep its existing include. */
+
+:root{
+  --ws50-paper:#fbfaf6;
+  --ws50-ink:#111310;
+  --ws50-muted:#706c64;
+  --ws50-line:#dad5ca;
+  --ws50-teal:#0a9794;
+  --ws50-white:#fff;
+}
+
+/* =========================================================
+   WORKSHOP SYSTEM
+   ========================================================= */
+main.workshopPage{
+  min-height:100vh!important;
+  color:var(--ws50-ink)!important;
+  background-color:var(--ws50-paper)!important;
+  background-image:
+    linear-gradient(rgba(35,35,30,.032) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(35,35,30,.032) 1px,transparent 1px)!important;
+  background-size:24px 24px!important;
+}
+.workshopPage button{font-family:inherit}
+
+/* ---------- Hub hero ---------- */
+.workshopHeroV50{
+  width:min(1280px,calc(100% - 64px));
+  margin:0 auto;
+  padding:62px 0 48px;
+  border-bottom:1px solid var(--ws50-line);
+}
+.workshopHeroRuleV50{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:18px;
+  margin-bottom:34px;
+  font-size:11px;
+  line-height:1;
+}
+.workshopHeroRuleV50>span{color:var(--ws50-teal);font-weight:700;letter-spacing:.03em}
+.workshopHeroRuleV50>i{height:1px;background:#cfc9bd}
+.workshopHeroRuleV50>small{font-size:10px;color:#767169;letter-spacing:.08em;font-weight:650}
+.workshopHeroGridV50{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(330px,.62fr);
+  gap:74px;
+  align-items:end;
+}
+.workshopHeroGridV50 h1{
+  margin:0;
+  max-width:780px;
+  font-size:clamp(52px,5.2vw,76px);
+  line-height:.94;
+  letter-spacing:-.064em;
+  font-weight:500;
+  text-wrap:balance;
+}
+.workshopHeroGridV50 h2{
+  margin:0 0 13px;
+  font-size:clamp(24px,2.2vw,32px);
+  line-height:1;
+  letter-spacing:-.045em;
+  font-weight:550;
+}
+.workshopHeroGridV50 p{
+  margin:0;
+  max-width:510px;
+  color:var(--ws50-muted);
+  font-size:14px;
+  line-height:1.58;
+}
+
+/* ---------- Shared section heads ---------- */
+.workshopModuleIndexV50,
+.workshopGuideIndexV50,
+.workshopModuleGuidesV50{
+  width:min(1280px,calc(100% - 64px));
+  margin:0 auto;
+}
+.workshopModuleIndexV50{padding:42px 0 54px}
+.workshopGuideIndexV50{padding:0 0 56px}
+.workshopModuleGuidesV50{padding:42px 0 64px}
+.workshopSectionHeadV50{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(280px,.55fr);
+  gap:54px;
+  align-items:end;
+  margin-bottom:22px;
+}
+.workshopSectionHeadV50 span{
+  display:block;
+  margin-bottom:8px;
+  color:#7a756d;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.12em;
+}
+.workshopSectionHeadV50 h2{
+  margin:0;
+  max-width:760px;
+  font-size:clamp(30px,3.2vw,45px);
+  line-height:1;
+  letter-spacing:-.052em;
+  font-weight:520;
+}
+.workshopSectionHeadV50>p{
+  margin:0;
+  max-width:480px;
+  color:var(--ws50-muted);
+  font-size:13px;
+  line-height:1.55;
+}
+
+/* ---------- 7 module index ---------- */
+.workshopModuleGridV50{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:24px;
+}
+.workshopModuleCardV50{
+  min-width:0;
+  min-height:172px;
+  padding:26px;
+  border:1px solid rgba(20,20,18,.12);
+  border-radius:16px;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  text-align:left;
+  color:#171815;
+  box-shadow:none;
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;
+}
+.workshopModuleCardV50:hover{
+  transform:translateY(-2px);
+  border-color:rgba(10,151,148,.38);
+  box-shadow:0 12px 28px rgba(20,22,18,.055);
+}
+.workshopModuleTopV50{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.workshopModuleTopV50>b{font-size:9px;letter-spacing:.11em;color:#6c6861;font-weight:700}
+.workshopModuleTopV50>i{
+  width:34px;height:34px;border:1px solid rgba(20,20,18,.12);border-radius:50%;
+  display:grid;place-items:center;background:rgba(255,255,255,.42)
+}
+.workshopModuleTopV50 svg{width:16px;height:16px;fill:none;stroke:#20211e;stroke-width:1.4}
+.workshopModuleCopyV50{display:block;margin-top:auto}
+.workshopModuleCopyV50 strong{
+  display:block;
+  max-width:220px;
+  margin-bottom:7px;
+  font-size:18px;
+  line-height:1.04;
+  letter-spacing:-.035em;
+  font-weight:650;
+}
+.workshopModuleCopyV50 small{
+  display:block;
+  max-width:240px;
+  color:#59564f;
+  font-size:11px;
+  line-height:1.42;
+}
+.workshopModuleFootV50{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding-top:10px;
+  border-top:1px solid rgba(20,20,18,.10);
+  color:#5e5a53;
+  font-size:9px;
+  font-weight:650;
+}
+.workshopModuleFootV50 i{font-style:normal;color:#121310;font-size:14px}
+
+.wsTone1{--ws-tone:#dff4f3}.wsTone2{--ws-tone:#f5dfe6}.wsTone3{--ws-tone:#f7edc8}.wsTone4{--ws-tone:#dcebf5}.wsTone5{--ws-tone:#e0eee0}.wsTone6{--ws-tone:#e9e5f6}.wsTone7{--ws-tone:#f5dfe6}
+.workshopModuleCardV50.wsTone1,.workshopGuideCardV50.wsTone1{background:#dff4f3}
+.workshopModuleCardV50.wsTone2,.workshopGuideCardV50.wsTone2{background:#f5dfe6}
+.workshopModuleCardV50.wsTone3,.workshopGuideCardV50.wsTone3{background:#f7edc8}
+.workshopModuleCardV50.wsTone4,.workshopGuideCardV50.wsTone4{background:#dcebf5}
+.workshopModuleCardV50.wsTone5,.workshopGuideCardV50.wsTone5{background:#e0eee0}
+.workshopModuleCardV50.wsTone6,.workshopGuideCardV50.wsTone6{background:#e9e5f6}
+.workshopModuleCardV50.wsTone7,.workshopGuideCardV50.wsTone7{background:#f5dfe6}
+
+/* ---------- Search ---------- */
+.workshopSearchStripV50{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:30px;
+  align-items:center;
+  padding:16px 0;
+  margin-bottom:30px;
+  border-top:1px solid var(--ws50-line);
+  border-bottom:1px solid var(--ws50-line);
+}
+.workshopSearchV50{display:flex;align-items:center;gap:10px;max-width:600px}
+.workshopSearchV50>span{width:18px;height:18px;display:grid;place-items:center;color:#494741}
+.workshopSearchV50 svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6}
+.workshopSearchV50 input{
+  width:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#222;
+  font-size:13px;
+  padding:8px 0;
+}
+.workshopSearchStripV50>div:last-child{display:flex;align-items:center;gap:10px;color:#7d786f;font-size:9px;letter-spacing:.08em}
+.workshopSearchStripV50>div:last-child b{font-size:12px;color:#171815;letter-spacing:0}
+.workshopSearchStripV50>div:last-child button{border:0;background:transparent;color:var(--ws50-teal);font-size:10px;font-weight:700}
+.workshopGuidesHeadV50{margin-bottom:18px}
+
+/* ---------- Guide cards ---------- */
+.workshopGuideGridV50{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:24px;
+}
+.workshopGuideCardV50{
+  min-width:0;
+  min-height:280px;
+  border:1px solid rgba(20,20,18,.11);
+  border-radius:17px;
+  overflow:hidden;
+  box-shadow:none;
+  background:rgba(255,254,250,.92)!important;
+}
+.workshopGuideCardV50>button{
+  width:100%;
+  height:100%;
+  min-height:280px;
+  border:0;
+  padding:30px;
+  display:flex;
+  flex-direction:column;
+  text-align:left;
+  color:inherit;
+  background:transparent;
+}
+.workshopGuideMetaV50{display:flex;justify-content:space-between;gap:14px;align-items:center}
+.workshopGuideMetaV50 b,
+.workshopGuideMetaV50 small{font-size:9px;line-height:1;font-weight:650;color:#5e5a54}
+.workshopGuideCardV50 h3{
+  margin:30px 0 18px;
+  max-width:360px;
+  font-size:clamp(22px,1.8vw,27px);
+  line-height:1.1;
+  letter-spacing:-.048em;
+  font-weight:500;
+  text-wrap:balance;
+}
+.workshopGuideCardV50 p{
+  margin:0;
+  max-width:390px;
+  padding-bottom:24px;
+  color:#5f5b55;
+  font-size:13px;
+  line-height:1.6;
+}
+.workshopGuideFootV50{
+  margin-top:auto;
+  padding-top:20px;
+  border-top:1px solid rgba(20,20,18,.10);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  color:#5c5953;
+  font-size:9px;
+}
+.workshopGuideFootV50 i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.35)}
+.workshopGuideFootV50 svg{width:14px;height:14px;fill:none;stroke:#22231f;stroke-width:1.35}
+.workshopGuideCardV50:hover{border-color:rgba(10,151,148,.34)}
+
+.workshopAllGuidesV50{margin-top:14px;border-top:1px solid var(--ws50-line)}
+.workshopAllGuidesV50>summary{
+  list-style:none;
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  cursor:pointer;
+  color:#22231f;
+  font-size:12px;
+  font-weight:700;
+}
+.workshopAllGuidesV50>summary::-webkit-details-marker{display:none}
+.workshopAllGuidesV50>summary span:after{content:' ↓';color:var(--ws50-teal)}
+.workshopAllGuidesV50[open]>summary span:after{content:' ↑'}
+.workshopAllGuidesV50>summary b{font-size:10px;color:#7a756d;font-weight:650}
+.workshopGuideGridRestV50{padding-top:2px}
+.workshopEmptyV50{padding:30px 0;border-top:1px solid var(--ws50-line);border-bottom:1px solid var(--ws50-line)}
+.workshopEmptyV50 b{font-size:23px;letter-spacing:-.03em}.workshopEmptyV50 p{color:var(--ws50-muted);font-size:13px}.workshopEmptyV50.compact{padding:28px 0}
+
+/* ---------- Principle ---------- */
+.workshopPrincipleV50{
+  width:min(1280px,calc(100% - 64px));
+  margin:12px auto 76px;
+  padding:26px 0;
+  display:grid;
+  grid-template-columns:110px minmax(0,1fr) minmax(320px,.65fr);
+  gap:32px;
+  align-items:center;
+  border-top:1px solid #2f302b;
+  border-bottom:1px solid #2f302b;
+}
+.workshopPrincipleV50>span{font-size:9px;letter-spacing:.12em;color:#777168;font-weight:700}
+.workshopPrincipleV50 h2{margin:0;max-width:600px;font-size:clamp(26px,2.8vw,39px);line-height:1;letter-spacing:-.045em;font-weight:520}
+.workshopPrincipleV50 p{margin:0;max-width:520px;color:#6d6962;font-size:12px;line-height:1.58}
+
+/* =========================================================
+   MODULE PAGES
+   ========================================================= */
+.workshopModuleHeroV50{
+  width:min(1280px,calc(100% - 64px));
+  margin:0 auto;
+  padding:50px 0 38px;
+}
+.workshopModuleLabelV50{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;margin-bottom:30px}
+.workshopModuleLabelV50 button{border:0;background:transparent;padding:0;color:var(--ws50-teal);font-size:10px;font-weight:700;letter-spacing:.04em}
+.workshopModuleLabelV50 i{height:1px;background:#cec8bd}
+.workshopModuleLabelV50 span{font-size:9px;color:#78736b;font-weight:700;letter-spacing:.12em}
+.workshopModuleHeroGridV50{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(300px,.55fr);gap:70px;align-items:end}
+.workshopModuleHeroV50 h1{margin:0 0 12px;font-size:clamp(48px,5vw,70px);line-height:.94;letter-spacing:-.06em;font-weight:520}
+.workshopModuleHeroV50 h2{margin:0;max-width:720px;font-size:clamp(22px,2.1vw,30px);line-height:1.04;letter-spacing:-.04em;font-weight:520}
+.workshopModuleHeroGridV50 p{margin:0 0 18px;color:#5f5b55;font-size:14px;line-height:1.55}
+.workshopModuleHeroGridV50 small{display:block;color:#7a756d;font-size:10px;letter-spacing:.04em}
+
+.workshopModuleNavV50{
+  width:min(1280px,calc(100% - 64px));
+  margin:0 auto;
+  padding:10px 0;
+  display:flex;
+  align-items:center;
+  gap:4px;
+  overflow-x:auto;
+  border-top:1px solid var(--ws50-line);
+  border-bottom:1px solid var(--ws50-line);
+  scrollbar-width:none;
+}
+.workshopModuleNavV50::-webkit-scrollbar{display:none}
+.workshopModuleNavV50 button{
+  flex:0 0 auto;
+  border:0;
+  border-radius:8px;
+  padding:8px 10px;
+  background:transparent;
+  color:#55514b;
+  font-size:10px;
+  font-weight:650;
+  white-space:nowrap;
+}
+.workshopModuleNavV50 button span{margin-right:5px;color:#9b958c;font-size:8px}
+.workshopModuleNavV50 button.active{background:#fff;color:#151613}
+.workshopModuleNavV50 button.active span{color:var(--ws50-teal)}
+
+/* =========================================================
+   ARTICLE PAGES
+   ========================================================= */
+.workshopArticleV50{padding-bottom:20px}
+.workshopArticleHeaderV50{
+  width:min(1200px,calc(100% - 64px));
+  margin:0 auto;
+  padding:40px 0 30px;
+}
+.workshopArticleToplineV50{
+  display:grid;
+  grid-template-columns:auto minmax(70px,1fr) auto auto;
+  gap:12px;
+  align-items:center;
+  margin-bottom:32px;
+  color:#68645e;
+}
+.workshopArticleToplineV50 button,
+.workshopArticleToplineV50 b{border:0;background:transparent;padding:0;color:inherit;font-size:9px;font-weight:650;letter-spacing:.04em}
+.workshopArticleToplineV50 button:first-child{color:var(--ws50-teal)}
+.workshopArticleToplineV50 i{height:1px;background:var(--ws50-line)}
+.workshopArticleLeadV50{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 220px;
+  gap:58px;
+  align-items:end;
+}
+.workshopArticleHeaderV50 h1{
+  max-width:900px;
+  margin:0;
+  font-size:clamp(44px,4.7vw,66px);
+  line-height:.95;
+  letter-spacing:-.061em;
+  font-weight:520;
+  text-wrap:balance;
+}
+.workshopArticleHeaderV50 p{
+  max-width:770px;
+  margin:18px 0 0;
+  color:#5e5a54;
+  font-size:16px;
+  line-height:1.5;
+}
+.workshopArticleLeadV50>aside{padding-bottom:3px;display:grid;gap:7px;color:#757068;font-size:10px}
+.workshopArticleActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.workshopArticleActions button{border:1px solid #d2ccc1;background:rgba(255,255,255,.55);border-radius:999px;padding:7px 10px;color:#403d38;font-size:9px;font-weight:700}
+.workshopArticleActions button:hover{border-color:#8fc9c6;color:#0a7774}
+
+.workshopDoNowV50,
+.workshopReadinessChainV50{
+  width:min(940px,calc(100% - 64px));
+  margin:24px auto 0;
+}
+.workshopDoNowV50{padding:12px 0;border-top:1px solid var(--ws50-line);border-bottom:1px solid var(--ws50-line);font-size:9px;letter-spacing:.12em;color:#65615a;font-weight:750}
+.workshopReadinessChainV50{padding:16px 18px;border:1px solid var(--ws50-line);border-radius:14px;background:rgba(255,255,255,.54)}
+.workshopReadinessChainV50>span{font-size:9px;letter-spacing:.12em;color:#6d6860;font-weight:750}
+.workshopReadinessChainV50>div{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:11px}
+.workshopReadinessChainV50 b{font-size:12px}.workshopReadinessChainV50 i{font-style:normal;color:var(--ws50-teal)}
+
+.workshopArticleLayoutV50{
+  width:min(940px,calc(100% - 64px));
+  margin:0 auto;
+  padding:38px 0 20px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 210px;
+  gap:54px;
+  align-items:start;
+}
+.workshopArticleBody{min-width:0}
+.workshopArticleBody .workshopArticleSection{padding:0 0 34px;margin:0 0 34px;border-bottom:1px solid var(--ws50-line)}
+.workshopArticleBody .workshopArticleSection:last-child{margin-bottom:0}
+.workshopArticleBody h2{margin:0 0 14px;font-size:clamp(27px,2.5vw,35px);line-height:1;letter-spacing:-.045em;font-weight:560}
+.workshopArticleBody p,
+.workshopArticleBody li{color:#46433e;font-size:14.5px;line-height:1.68}
+.workshopArticleBody p{margin:0}
+.workshopBulletsV50{margin:0;padding:0;list-style:none;display:grid;gap:9px}
+.workshopBulletsV50 li{padding-left:17px;position:relative}
+.workshopBulletsV50 li:before{content:'—';position:absolute;left:0;color:var(--ws50-teal)}
+.workshopArticleRailV50{position:sticky;top:104px;padding-top:4px}
+.workshopArticleRailV50>span{display:block;margin-bottom:10px;font-size:9px;letter-spacing:.12em;color:#777168;font-weight:700}
+.workshopArticleRailV50>b{display:block;font-size:15px;line-height:1.18}
+.workshopArticleRailV50>p{margin:9px 0 16px;color:#777169;font-size:11px;line-height:1.48}
+.workshopArticleRailV50>button{border:0;background:transparent;padding:0;text-align:left;color:#0a7774;font-size:10px;font-weight:750}
+
+.workshopComparisonV50{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.workshopComparisonV50 article{padding:16px;border:1px solid var(--ws50-line);border-radius:13px;background:rgba(255,255,255,.52)}
+.workshopComparisonV50 span{display:block;margin-bottom:10px;font-size:9px;letter-spacing:.1em;color:#0a7b78;font-weight:750}
+.workshopComparisonV50 p{font-size:13px;line-height:1.55}
+.workshopSpecGridV50{display:grid;gap:10px}
+.badSpecV50,.missingSpecV50,.goodSpecV50{padding:16px;border-radius:13px;border:1px solid var(--ws50-line)}
+.badSpecV50{background:#f7eeee}.goodSpecV50{background:#edf6f2}.missingSpecV50{background:rgba(255,255,255,.5);display:flex;flex-wrap:wrap;gap:7px}
+.badSpecV50 span,.missingSpecV50>span,.goodSpecV50 span{display:block;width:100%;margin-bottom:8px;font-size:9px;letter-spacing:.11em;font-weight:750;color:#6d665f}
+.badSpecV50 strong{font-size:17px}.missingSpecV50 b{padding:6px 8px;border-radius:8px;background:#fff;font-size:10px}.goodSpecV50 p{font-size:13px;line-height:1.55}
+.workshopChecklistV50 ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--ws50-line)}
+.workshopChecklistV50 li{display:grid;grid-template-columns:38px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--ws50-line)}
+.workshopChecklistV50 li>span{font-size:9px;color:var(--ws50-teal);font-weight:750}.workshopChecklistV50 li p{margin:0}
+
+.workshopSignatureV50,
+.workshopRelatedV50,
+.workshopMedicalNote{
+  width:min(940px,calc(100% - 64px));
+  margin-left:auto;
+  margin-right:auto;
+}
+.workshopSignatureV50{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:22px;
+}
+.workshopSignatureV50 article{padding:16px;border:1px solid var(--ws50-line);border-radius:14px;background:rgba(255,255,255,.56)}
+.workshopSignatureV50 span{display:block;margin-bottom:9px;font-size:9px;letter-spacing:.1em;color:#0a7e7a;font-weight:800}
+.workshopSignatureV50 p{margin:0;color:#57534d;font-size:11px;line-height:1.52}
+.workshopRelatedV50{margin-top:42px;padding-top:22px;border-top:1px solid var(--ws50-line)}
+.workshopRelatedV50 .workshopRelatedHead{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:13px}
+.workshopRelatedV50 .workshopRelatedHead span{font-size:9px;letter-spacing:.11em;color:#6d6860;font-weight:800}
+.workshopRelatedV50 .workshopRelatedHead p{margin:0;color:#777169;font-size:10px}
+.workshopRelatedV50 .workshopRelatedList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.workshopRelatedV50 .workshopRelatedList button{border:1px solid var(--ws50-line);border-radius:12px;background:rgba(255,255,255,.56);padding:13px;text-align:left}
+.workshopRelatedV50 .workshopRelatedList span{display:block;font-size:8px;color:#7d776f}.workshopRelatedV50 .workshopRelatedList b{display:block;margin:5px 0;font-size:12px}.workshopRelatedV50 .workshopRelatedList small{font-size:9px;color:#777169}
+.workshopMedicalNote{margin-top:36px;margin-bottom:54px;padding-top:16px;border-top:1px solid var(--ws50-line);color:#777169;font-size:10px;line-height:1.5}
+.workshopNotFoundV50{width:min(900px,calc(100% - 64px));margin:0 auto;padding:100px 0}.workshopNotFoundV50 span{font-size:10px;color:var(--ws50-teal)}.workshopNotFoundV50 h1{font-size:50px;letter-spacing:-.05em;margin:12px 0}.workshopNotFoundV50 p{color:#706c64}
+
+/* =========================================================
+   PRODUCT CARD CTA CLEANUP
+   ========================================================= */
+.canvaProductCard .canvaCardBody,
+.canvaProductCard .productNeedTags,
+.canvaProductCard .canvaCardActions,
+.canvaProductCard .exactCanvaActions,
+.familyCatalogueCard .exactCanvaActions{
+  border-top:0!important;
+  border-bottom:0!important;
+}
+.canvaProductCard .canvaCardActions::before,
+.canvaProductCard .canvaCardActions::after,
+.familyCatalogueCard .exactCanvaActions::before,
+.familyCatalogueCard .exactCanvaActions::after{content:none!important;display:none!important}
+.canvaProductCard .canvaCardActions,
+.familyCatalogueCard .exactCanvaActions{margin-top:auto!important;padding:18px 9px 10px!important;gap:10px!important}
+.canvaProductCard .canvaDetails,
+.canvaProductCard .canvaRequest{min-height:46px!important}
+
+/* =========================================================
+   EXISTING PUBLIC CATALOGUE GATE
+   ========================================================= */
+.catalogueGateNoteV45{align-self:flex-end;font-size:13px;line-height:1.3;color:#6f6c67}
+.catalogueGateBandV45{width:min(1280px,calc(100% - 56px));margin:18px auto 72px;padding:30px 0;border-top:1px solid #dcd8d1;border-bottom:1px solid #dcd8d1;display:flex;justify-content:space-between;align-items:center;gap:40px}
+.catalogueGateBandV45 h2{margin:0 0 8px;font-size:clamp(30px,3vw,44px);line-height:1;letter-spacing:-.045em}
+.catalogueGateBandV45 p{margin:0;max-width:690px;color:#706d68;font-size:15px;line-height:1.5}
+.catalogueGateActionsV45{display:flex;gap:10px;flex-wrap:wrap}
+.cataloguePendingNoteV45{padding:12px 14px;margin:0 0 18px;background:#f2f8f7;border:1px solid #cde6e2;border-radius:12px;display:flex;flex-direction:column;gap:3px}
+.cataloguePendingNoteV45 b{font-size:13px}.cataloguePendingNoteV45 span{font-size:12px;line-height:1.4;color:#676864}
+
+/* ---------- Responsive ---------- */
+@media(max-width:1050px){
+  .workshopModuleGridV50{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .workshopGuideGridV50{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .workshopHeroGridV50,.workshopModuleHeroGridV50{grid-template-columns:1fr;gap:28px}
+  .workshopSectionHeadV50{grid-template-columns:1fr;gap:12px}
+  .workshopPrincipleV50{grid-template-columns:90px 1fr;gap:22px}.workshopPrincipleV50 p{grid-column:2}
+}
+@media(max-width:760px){
+  .workshopHeroV50,.workshopModuleIndexV50,.workshopGuideIndexV50,.workshopPrincipleV50,.workshopModuleHeroV50,.workshopModuleNavV50,.workshopModuleGuidesV50,.workshopArticleHeaderV50,.workshopDoNowV50,.workshopReadinessChainV50,.workshopArticleLayoutV50,.workshopSignatureV50,.workshopRelatedV50,.workshopMedicalNote,.catalogueGateBandV45{width:min(100% - 30px,1280px)}
+  .workshopHeroV50{padding:42px 0 34px}.workshopHeroRuleV50{grid-template-columns:auto 1fr}.workshopHeroRuleV50 small{display:none}.workshopHeroGridV50 h1{font-size:48px}
+  .workshopModuleGridV50,.workshopGuideGridV50{grid-template-columns:1fr}
+  .workshopModuleCardV50{min-height:154px}
+  .workshopSearchStripV50{grid-template-columns:1fr;gap:8px}
+  .workshopPrincipleV50{grid-template-columns:1fr;gap:13px;margin-bottom:48px}.workshopPrincipleV50 p{grid-column:auto}
+  .workshopModuleHeroV50{padding:38px 0 28px}.workshopModuleHeroV50 h1{font-size:46px}
+  .workshopArticleLeadV50{grid-template-columns:1fr;gap:22px}.workshopArticleHeaderV50 h1{font-size:46px}
+  .workshopArticleToplineV50{grid-template-columns:auto 1fr auto}.workshopArticleToplineV50 button:nth-of-type(2){grid-column:1/-1;grid-row:2}.workshopArticleToplineV50 b{grid-column:3}
+  .workshopArticleLayoutV50{grid-template-columns:1fr;gap:22px}.workshopArticleRailV50{position:static;border-top:1px solid var(--ws50-line);padding-top:18px}
+  .workshopSignatureV50{grid-template-columns:1fr}.workshopComparisonV50{grid-template-columns:1fr}.workshopRelatedV50 .workshopRelatedList{grid-template-columns:1fr}
+  .catalogueGateBandV45{display:block;padding:28px 0}.catalogueGateActionsV45{margin-top:20px}
+}
+@media(max-width:430px){
+  .workshopHeroGridV50 h1,.workshopModuleHeroV50 h1,.workshopArticleHeaderV50 h1{font-size:42px}
+  .workshopGuideCardV50 h3{font-size:24px}
+  .workshopGuideCardV50>button{padding:26px}
+  .workshopModuleNavV50{padding-bottom:9px}
+}
+
+@media print{
+  .publicHeader,.publicFooter,.workshopModuleNavV50,.workshopArticleActions,.workshopArticleRailV50,.workshopRelatedV50{display:none!important}
+  main.workshopPage{background:#fff!important;background-image:none!important}
+  .workshopArticleHeaderV50,.workshopArticleLayoutV50,.workshopSignatureV50,.workshopMedicalNote{width:100%!important}
+  .workshopArticleLayoutV50{display:block!important}.workshopArticleBody .workshopArticleSection{break-inside:avoid}.workshopSignatureV50{grid-template-columns:repeat(3,1fr)!important}
+}

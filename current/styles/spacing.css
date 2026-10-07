@@ -1,0 +1,49 @@
+/* Shared current-shell spacing. Keep compact table/control layouts intact. */
+:root{--ps-copy-gap:24px;--ps-card-padding:clamp(24px,3vw,36px)}
+.publicPage .publicPageHero>p,
+.publicPage:has(.v3927ContactForm) .publicPageHero>p,
+.start16HeroCopy>p,.workshopHeroCopy>p,.loginIntro>p,
+.customerShell .pageHeader p,.adminShell .pageHeader p,.v26HomeHero p{
+  margin-top:var(--ps-copy-gap)!important;
+}
+:is(.publicPage,.publicLanding,.customerShell,.adminShell) :is(h1,h2,h3)+p{
+  margin-top:var(--ps-copy-gap)!important;
+}
+:is(.publicPage,.customerShell,.adminShell) :is(.panel,.simplePublicPanel,.publicFeatureStack article,.publicMediaGrid article){
+  padding:var(--ps-card-padding);
+}
+.customerShell .panelHeader,.adminShell .panelHeader{margin-bottom:24px;gap:20px;flex-wrap:wrap}
+.customerShell .headerActions,.adminShell .headerActions{gap:12px;flex-wrap:wrap}
+.v26QuickActions,.actionGrid{gap:20px!important}
+.publicPage .prospectContactGrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px!important}
+.publicPage .prospectContactGrid .contactCard{padding:var(--ps-card-padding)!important;gap:20px!important;min-width:0}
+.publicPage .prospectContactGrid .contactCard b{overflow-wrap:anywhere}
+.v3927ContactForm{gap:24px!important}
+.start16Hero{gap:48px!important}
+.start16RouteBoard>button{padding:24px 4px!important;gap:16px!important;text-align:left;min-width:0}
+.start16RouteBoard>button>div{min-width:0}
+.start16RouteBoard small{display:block;margin-top:10px!important;line-height:1.6!important}
+.start16Send{padding:48px!important;gap:40px!important;scroll-margin-top:100px}
+.start16SendIntro>p{margin-top:24px!important;line-height:1.65!important}
+.start16Form{padding:28px!important;gap:24px!important;min-width:0}
+.start16Form .prospectField{gap:10px!important;min-width:0}
+.start16Form :is(input,select,textarea){max-width:100%;box-sizing:border-box}
+.start16Form label{line-height:1.5}
+.start16Form label span{display:block;margin-top:6px}
+.startContactActions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.startContactActions .button{white-space:normal;min-height:48px;text-align:center}
+.startContactActions a.button{display:inline-flex;align-items:center;justify-content:center;gap:10px}
+.startContactActions .startContactIcon{width:18px;height:18px;flex:0 0 18px;color:#111;pointer-events:none}
+@media(max-width:900px){
+  .publicPage .prospectContactGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .start16Hero{grid-template-columns:1fr!important;gap:32px!important}
+  .start16Send{grid-template-columns:1fr!important;padding:32px!important}
+}
+@media(max-width:680px){
+  .publicPage .prospectContactGrid{grid-template-columns:1fr!important}
+  .start16RouteBoard>button{grid-template-columns:22px 38px minmax(0,1fr) auto!important;gap:12px!important}
+  .start16Send{padding:24px!important;gap:32px!important}
+  .start16Form{grid-template-columns:1fr!important;padding:24px 18px!important}
+  .start16Form :is(input,select,textarea){font-size:16px!important}
+  .startContactActions .button{width:100%}
+}

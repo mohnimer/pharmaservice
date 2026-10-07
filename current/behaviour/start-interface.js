@@ -75,7 +75,7 @@
 
   const app = document.getElementById('app');
   if(app){
-    new MutationObserver(schedule).observe(app, {
+    window.PSC_ENHANCEMENTS.createObserver(schedule).observe(app, {
       childList:true,
       subtree:true
     });

@@ -10,7 +10,7 @@ window.PSC_WORKSHOP = [
     "hero_image": null,
     "read_time": "6 min",
     "last_reviewed": "30 Sep 2026",
-    "author_or_review_status": "PSC editorial first version · source/review record to be completed",
+    "author_or_review_status": "PS editorial first version · source/review record to be completed",
     "status": "published",
     "tags": [
       "gloves",
@@ -71,7 +71,7 @@ window.PSC_WORKSHOP = [
     "hero_image": null,
     "read_time": "5 min",
     "last_reviewed": "30 Sep 2026",
-    "author_or_review_status": "PSC editorial first version · source/review record to be completed",
+    "author_or_review_status": "PS editorial first version · source/review record to be completed",
     "status": "published",
     "tags": [
       "sterile",
@@ -135,7 +135,7 @@ window.PSC_WORKSHOP = [
     "hero_image": null,
     "read_time": "5 min",
     "last_reviewed": "30 Sep 2026",
-    "author_or_review_status": "PSC editorial first version · source/review record to be completed",
+    "author_or_review_status": "PS editorial first version · source/review record to be completed",
     "status": "published",
     "tags": [
       "mask",
@@ -193,7 +193,7 @@ window.PSC_WORKSHOP = [
     "hero_image": null,
     "read_time": "4 min",
     "last_reviewed": "30 Sep 2026",
-    "author_or_review_status": "PSC editorial first version · source/review record to be completed",
+    "author_or_review_status": "PS editorial first version · source/review record to be completed",
     "status": "published",
     "tags": [
       "disinfectant",
@@ -250,7 +250,7 @@ window.PSC_WORKSHOP = [
     "hero_image": null,
     "read_time": "5 min",
     "last_reviewed": "30 Sep 2026",
-    "author_or_review_status": "PSC editorial first version · source/review record to be completed",
+    "author_or_review_status": "PS editorial first version · source/review record to be completed",
     "status": "published",
     "tags": [
       "pulse oximeter",
@@ -309,7 +309,7 @@ window.PSC_WORKSHOP = [
     "hero_image": null,
     "read_time": "5 min",
     "last_reviewed": "30 Sep 2026",
-    "author_or_review_status": "PSC editorial first version · source/review record to be completed",
+    "author_or_review_status": "PS editorial first version · source/review record to be completed",
     "status": "published",
     "tags": [
       "blood pressure",
@@ -363,7 +363,7 @@ window.PSC_WORKSHOP = [
     "hero_image": null,
     "read_time": "5 min",
     "last_reviewed": "30 Sep 2026",
-    "author_or_review_status": "PSC editorial first version · source/review record to be completed",
+    "author_or_review_status": "PS editorial first version · source/review record to be completed",
     "status": "published",
     "tags": [
       "glucometer",
@@ -422,7 +422,7 @@ window.PSC_WORKSHOP = [
     "hero_image": null,
     "read_time": "7 min",
     "last_reviewed": "30 Sep 2026",
-    "author_or_review_status": "PSC editorial first version · source/review record to be completed",
+    "author_or_review_status": "PS editorial first version · source/review record to be completed",
     "status": "published",
     "tags": [
       "oxygen",
@@ -490,7 +490,7 @@ window.PSC_WORKSHOP = [
     "hero_image": null,
     "read_time": "3 min",
     "last_reviewed": "30 Sep 2026",
-    "author_or_review_status": "PSC editorial first version · source/review record to be completed",
+    "author_or_review_status": "PS editorial first version · source/review record to be completed",
     "status": "published",
     "tags": [
       "AED",
@@ -548,7 +548,7 @@ window.PSC_WORKSHOP = [
     "hero_image": null,
     "read_time": "4 min",
     "last_reviewed": "30 Sep 2026",
-    "author_or_review_status": "PSC editorial first version · source/review record to be completed",
+    "author_or_review_status": "PS editorial first version · source/review record to be completed",
     "status": "published",
     "tags": [
       "school clinic",

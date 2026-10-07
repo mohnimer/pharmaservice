@@ -1,0 +1,74 @@
+/* V39.26 — Contact tightening + Workshop utility layer. Isolated patch only. */
+
+/* Contact: one sentence, then the form. */
+.publicPage:has(.v37ProspectForm) .publicPageHero{padding-bottom:30px}
+.publicPage:has(.v37ProspectForm) .publicPageHero>p{max-width:900px;font-size:18px;line-height:1.58;margin-top:16px}
+.publicPage:has(.v37ProspectForm) .prospectSection{padding-top:22px}
+.publicPage:has(.v37ProspectForm) .prospectForm{margin-top:0}
+
+/* Contact cards: prevent Clinic Portal label/button collision. */
+.prospectContactGrid{align-items:stretch}
+.prospectContactGrid .contactCard{min-width:0;gap:14px}
+.prospectContactGrid .contactCard:last-child{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:18px;padding-right:22px}
+.prospectContactGrid .contactCard:last-child .button{width:auto;max-width:100%;white-space:normal;line-height:1.1;text-align:center;padding:13px 18px}
+
+/* Home clinical preview: keep breathing room and CTA inside the content width. */
+.publicClinicalPreview{overflow:hidden}
+.publicClinicalPreviewHead{gap:30px}
+.publicClinicalPreviewHead .textAction{flex:0 0 auto;align-self:flex-end}
+.publicClinicalPreviewFoot{gap:26px;align-items:center}
+.publicClinicalPreviewFoot>span{min-width:0;max-width:820px}
+.publicClinicalPreviewFoot .button{flex:0 0 auto}
+
+/* Workshop landing: deeper content without making the category row heavier. */
+.workshopCategoryCard i{font-variant-numeric:tabular-nums}
+.workshopGuideDeckScroll{scroll-padding-inline:24px}
+.workshopGuideCardCopy p{max-width:34ch}
+
+/* Action view: every article answers the same operational questions. */
+.v3926ActionView{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;margin:0 0 38px;border:1px solid #dedbd4;border-radius:24px;overflow:hidden;background:#dedbd4}
+.v3926ActionView article{background:#fbfaf6;padding:20px 18px;min-width:0}
+.v3926ActionView span{display:block;margin-bottom:10px;font-size:10px;line-height:1;letter-spacing:.13em;font-weight:900;color:#0a857e}
+.v3926ActionView p{margin:0;font-size:13px;line-height:1.52;color:#4f5552}
+
+/* Do This Now: compact physical checklist. */
+.v3926RunCheck{background:#0b2825!important;color:#fff!important;border-color:#0b2825!important}
+.v3926QuickCheck{margin:0 0 42px;padding:30px;border-radius:28px;background:#dff1ed;border:1px solid rgba(11,91,85,.13)}
+.v3926QuickCheck[hidden]{display:none!important}
+.v3926QuickCheckHead{max-width:760px;margin-bottom:22px}
+.v3926QuickCheckHead>span{font-size:11px;letter-spacing:.14em;font-weight:900;color:#087f78}
+.v3926QuickCheckHead h2{margin:8px 0 8px;font-size:32px;line-height:1;letter-spacing:-.045em}
+.v3926QuickCheckHead p{margin:0;color:#5a6460;line-height:1.55}
+.v3926CheckList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.v3926CheckList label{display:flex;align-items:flex-start;gap:12px;padding:14px 15px;background:#fff;border:1px solid rgba(15,46,43,.1);border-radius:16px;cursor:pointer}
+.v3926CheckList input{width:18px;height:18px;margin:2px 0 0;accent-color:#0b9d94;flex:0 0 auto}
+.v3926CheckList span{display:grid;grid-template-columns:28px 1fr;gap:8px;font-size:13px;line-height:1.42;color:#252a28}
+.v3926CheckList span b{font-size:10px;letter-spacing:.08em;color:#0b8e86;padding-top:2px}
+.v3926QuickCheckFoot{display:flex;gap:12px;align-items:baseline;margin-top:18px;padding-top:18px;border-top:1px solid rgba(15,46,43,.12)}
+.v3926QuickCheckFoot b{font-size:15px}.v3926QuickCheckFoot span{font-size:13px;color:#56605d}
+
+/* Strict related products: commerce only when the product is genuinely part of the check. */
+.v3926StrictRelated .workshopRelatedHead span{color:#087f78}
+.v3926StrictRelated .workshopRelatedHead p{max-width:520px}
+.v3926StrictRelated .workshopRelatedList button{position:relative}
+.v3926StrictRelated .workshopRelatedList button:after{content:'VIEW PRODUCT';display:block;margin-top:12px;font-size:9px;letter-spacing:.12em;font-weight:900;color:#0a857e}
+
+@media(max-width:1100px){
+  .v3926ActionView{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .v3926ActionView article:last-child{grid-column:1/-1}
+  .prospectContactGrid .contactCard:last-child{align-items:flex-start}
+}
+@media(max-width:760px){
+  .publicPage:has(.v37ProspectForm) .publicPageHero>p{font-size:15px}
+  .prospectContactGrid .contactCard:last-child .button{width:100%}
+  .publicClinicalPreviewHead,.publicClinicalPreviewFoot{align-items:flex-start}
+  .publicClinicalPreviewHead .textAction{align-self:flex-start}
+  .publicClinicalPreviewFoot{display:grid}
+  .publicClinicalPreviewFoot .button{width:100%}
+  .v3926ActionView{grid-template-columns:1fr;border-radius:20px}
+  .v3926ActionView article:last-child{grid-column:auto}
+  .v3926QuickCheck{padding:22px 18px;border-radius:22px}
+  .v3926CheckList{grid-template-columns:1fr}
+  .v3926QuickCheckHead h2{font-size:27px}
+  .v3926QuickCheckFoot{display:grid;gap:5px}
+}

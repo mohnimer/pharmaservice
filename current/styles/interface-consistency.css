@@ -1,0 +1,609 @@
+
+/* =========================================================
+   PSC V44.9 — UNIFORMITY + CATALOGUE + WORKSHOP POLISH
+   ========================================================= */
+
+:root{
+  --psc-bg:#faf9f9;
+  --psc-white:#ffffff;
+  --psc-ink:#141615;
+  --psc-muted:#6f6b66;
+  --psc-line:#ddd9d3;
+  --psc-line-dark:#c8c2ba;
+  --psc-teal:#25aaa2;
+  --psc-deep:#0e2825;
+  --psc-radius:14px;
+}
+
+/* ---------- GLOBAL TYPE DISCIPLINE ---------- */
+html,body,button,input,select,textarea{
+  font-family:"DM Sans",sans-serif!important;
+}
+body{
+  color:var(--psc-ink)!important;
+}
+body,
+.publicPage,
+.publicLanding,
+.workshopPage,
+.start16Page,
+.model43,
+.customerShell,
+.customerShell .mainArea,
+.customerShell .contentWrap{
+  background:var(--psc-bg)!important;
+}
+h1,h2,h3,
+.publicLanding h1,.publicLanding h2,
+.publicPage h1,.publicPage h2,
+.workshopPage h1,.workshopPage h2,
+.start16Page h1,.start16Page h2,
+.model43 h1,.model43 h2,
+.customerShell h1,.customerShell h2{
+  font-weight:500!important;
+  letter-spacing:-.055em!important;
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+  hyphens:none!important;
+}
+p,small,span,button,input,select,textarea{
+  font-weight:400;
+}
+button,.button,.textAction{
+  font-weight:500!important;
+}
+b,strong{
+  font-weight:500!important;
+}
+
+/* ---------- 1. FAMILY / PREVIEW IMAGE AREA ---------- */
+.pscFamilyPreview{
+  background:#fff!important;
+  overflow:hidden!important;
+}
+.pscFamilyPreview > img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  padding:24px!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+.pscFamilyProductSheet .productGalleryStrip{
+  display:flex!important;
+  gap:8px!important;
+  margin-top:10px!important;
+  overflow:auto!important;
+}
+.pscFamilyProductSheet .productGalleryStrip img{
+  display:block!important;
+  flex:0 0 72px!important;
+  width:72px!important;
+  height:72px!important;
+  object-fit:contain!important;
+  padding:5px!important;
+  background:#fff!important;
+  border:1px solid var(--psc-line)!important;
+  border-radius:10px!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+.v449OptionThumb{
+  width:46px!important;
+  height:46px!important;
+  flex:0 0 46px!important;
+  object-fit:contain!important;
+  background:#fff!important;
+  border:1px solid var(--psc-line)!important;
+  border-radius:8px!important;
+  margin-right:10px!important;
+  padding:4px!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+.pscBrandTick{
+  align-items:center!important;
+}
+.pscBrandTick > span{
+  min-width:0;
+}
+
+/* ---------- 2. PRODUCT IMAGES — BIGGER, NOT TINY ---------- */
+.customerShell .productVisual,
+.publicCatalogueVisual{
+  height:230px!important;
+  min-height:230px!important;
+  overflow:hidden!important;
+  background:#fff!important;
+}
+.customerShell .productVisual .productMainImage,
+.publicCatalogueVisual > img:not(.publicDhaMark){
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  padding:0!important;
+  transform:scale(1.42)!important;
+  transform-origin:center!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+.customerShell .productCard,
+.publicCatalogueCard{
+  overflow:hidden!important;
+}
+.customerShell .productCard .cardDhaIcon,
+.publicCatalogueCard .publicDhaMark{
+  transform:none!important;
+}
+
+/* ---------- 3. PORTAL HEADER — REMOVE THE BIG ROUNDED RECTANGLE ---------- */
+.customerShell .portalHeaderBar,
+.customerShell .topbar,
+.customerShell .sleekTopbar{
+  border-radius:0!important;
+  border:0!important;
+  border-bottom:1px solid var(--psc-line)!important;
+  box-shadow:none!important;
+  background:#fff!important;
+  margin:0!important;
+  max-width:none!important;
+}
+.customerShell .topbarBrandSlot,
+.customerShell .plainLogo{
+  border:0!important;
+  background:transparent!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+}
+
+/* ---------- 4. PORTAL CATALOGUE — WHITE CANVAS + PROMINENT SEARCH ---------- */
+.customerShell .clinicNeedSection,
+.customerShell .v26CatalogueLanding,
+.customerShell .v25NeedJourney{
+  background:#fff!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.customerShell .clinicNeedRail{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px!important;
+  overflow:visible!important;
+  padding:0!important;
+  margin:0!important;
+}
+.customerShell .clinicNeedCard,
+.customerShell .clinicNeedCardIllustrated{
+  min-height:160px!important;
+  position:relative!important;
+  background:#fff!important;
+  color:var(--psc-ink)!important;
+  border:1px solid var(--psc-line)!important;
+  border-radius:var(--psc-radius)!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+.customerShell .clinicNeedCard:hover{
+  border-color:#aaa49d!important;
+  transform:none!important;
+  box-shadow:none!important;
+}
+.customerShell .clinicNeedCardIllustrated .clinicNeedCopy{
+  left:22px!important;
+  right:100px!important;
+  bottom:22px!important;
+}
+.customerShell .clinicNeedCardIllustrated .clinicNeedCopy b{
+  font-size:19px!important;
+  line-height:1.02!important;
+  font-weight:500!important;
+}
+.customerShell .clinicNeedCardIllustrated .clinicNeedCopy small{
+  display:none!important;
+}
+.customerShell .clinicNeedCardIllustrated .clinicNeedIcon{
+  width:68px!important;
+  height:68px!important;
+  top:18px!important;
+  right:18px!important;
+  background:transparent!important;
+}
+.customerShell .clinicNeedArrow{
+  display:none!important;
+}
+
+/* Existing header search gets real presence. */
+.customerShell .topbarSearch{
+  min-height:58px!important;
+  border:1px solid #bdb7b0!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  box-shadow:0 10px 26px rgba(20,22,21,.06)!important;
+}
+.customerShell .topbarSearch input{
+  font-size:15px!important;
+  background:transparent!important;
+}
+.customerShell .topbarSearch:focus-within{
+  border-color:#4f6e69!important;
+  box-shadow:0 0 0 3px rgba(37,170,162,.08)!important;
+}
+
+.v449CatalogueSearch{
+  display:flex!important;
+  align-items:center!important;
+  gap:14px!important;
+  min-height:68px!important;
+  margin:24px 0 28px!important;
+  padding:0 20px!important;
+  border:1px solid #aaa49d!important;
+  border-radius:16px!important;
+  background:#fff!important;
+  box-shadow:0 12px 30px rgba(20,22,21,.055)!important;
+}
+.v449CatalogueSearch svg{
+  width:22px!important;
+  height:22px!important;
+  opacity:.55;
+}
+.v449CatalogueSearch input{
+  width:100%!important;
+  border:0!important;
+  outline:0!important;
+  background:transparent!important;
+  font:400 17px/1.2 "DM Sans",sans-serif!important;
+  color:var(--psc-ink)!important;
+}
+.v449CatalogueSearch input::placeholder{
+  color:#89847f!important;
+}
+
+/* ---------- HOME CATEGORIES — MATCH THE CLEAN PORTAL GRID ---------- */
+.publicLanding .publicClinicalPreview{
+  background:var(--psc-bg)!important;
+  background-image:none!important;
+  border-top:1px solid var(--psc-line)!important;
+  border-bottom:1px solid var(--psc-line)!important;
+}
+.publicLanding .publicClinicalPreviewGrid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-auto-rows:160px!important;
+  gap:12px!important;
+}
+.publicLanding .publicClinicalCard,
+.publicLanding .publicClinicalCard:nth-child(n){
+  grid-column:auto!important;
+  grid-row:auto!important;
+  min-height:160px!important;
+  padding:22px!important;
+  background:#fff!important;
+  color:var(--psc-ink)!important;
+  border:1px solid var(--psc-line)!important;
+  border-radius:var(--psc-radius)!important;
+  box-shadow:none!important;
+}
+.publicLanding .publicClinicalCard>span:not(.publicClinicalArt),
+.publicLanding .publicClinicalCard:nth-child(n)>span:not(.publicClinicalArt){
+  max-width:70%!important;
+  font-size:21px!important;
+  font-weight:500!important;
+  line-height:1.02!important;
+  letter-spacing:-.04em!important;
+}
+.publicLanding .publicClinicalCard>small{
+  display:none!important;
+}
+.publicLanding .publicClinicalCard .publicClinicalArt{
+  display:block!important;
+  width:68px!important;
+  height:68px!important;
+  top:18px!important;
+  right:18px!important;
+  bottom:auto!important;
+  object-fit:contain!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+.publicLanding .publicClinicalCard:hover{
+  transform:none!important;
+  box-shadow:none!important;
+  border-color:#aaa49d!important;
+}
+
+/* ---------- 5. HOME WORKSHOP PREVIEW — IMAGE ABOVE TITLE ---------- */
+.publicLanding .homeWorkshopCards{
+  display:block!important;
+  max-width:1320px!important;
+  margin:0 auto!important;
+  padding:94px clamp(28px,6vw,84px)!important;
+  background:var(--psc-bg)!important;
+  background-image:none!important;
+}
+.publicLanding .homeWorkshopIntro{
+  position:static!important;
+  max-width:760px!important;
+  margin:0 0 36px!important;
+}
+.publicLanding .homeWorkshopIntro h2{
+  max-width:14ch!important;
+  margin:0 0 14px!important;
+  font-size:clamp(46px,4.8vw,70px)!important;
+  line-height:.94!important;
+  font-weight:500!important;
+}
+.publicLanding .homeWorkshopIntro p{
+  max-width:620px!important;
+  margin:0 0 24px!important;
+  font-size:15px!important;
+  line-height:1.5!important;
+}
+.publicLanding .homeWorkshopCardGrid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:14px!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard,
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:first-child{
+  grid-row:auto!important;
+  border:1px solid var(--psc-line)!important;
+  border-radius:14px!important;
+  overflow:hidden!important;
+  background:#fff!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard>button,
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:first-child>button,
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard:not(:first-child)>button{
+  display:flex!important;
+  flex-direction:column!important;
+  min-height:460px!important;
+  padding:0!important;
+  background:#fff!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCardVisual{
+  order:-1!important;
+  display:block!important;
+  width:100%!important;
+  height:235px!important;
+  min-height:235px!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-bottom:1px solid var(--psc-line)!important;
+  background:#f2f0ec!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCardVisual i{
+  display:none!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCardVisual img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCardCopy{
+  display:block!important;
+  padding:22px!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCardMeta{
+  display:flex!important;
+  justify-content:space-between!important;
+  margin:0 0 20px!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCardMeta b,
+.publicLanding .homeWorkshopCardGrid .workshopGuideCardMeta small{
+  font-size:11px!important;
+  font-weight:400!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard h3{
+  margin:0!important;
+  max-width:15ch!important;
+  font-size:28px!important;
+  line-height:1.02!important;
+  font-weight:500!important;
+}
+.publicLanding .homeWorkshopCardGrid .workshopGuideCard p{
+  margin:14px 0 0!important;
+  font-size:13px!important;
+  line-height:1.5!important;
+}
+
+/* ---------- 6. HOME HERO — FULL BLEED + NEW COPY ---------- */
+.publicLanding .m44HomeHero{
+  width:100vw!important;
+  max-width:none!important;
+  margin-left:calc(50% - 50vw)!important;
+  margin-right:calc(50% - 50vw)!important;
+  padding:0!important;
+  background:#fff!important;
+}
+.publicLanding .m445HomeHeroScene{
+  width:100%!important;
+  max-width:none!important;
+  min-height:min(790px,78vw)!important;
+  margin:0!important;
+  border-radius:0!important;
+  background-size:cover!important;
+  background-position:center center!important;
+}
+.publicLanding .m445HomeHeroText{
+  width:min(720px,45vw)!important;
+  margin-left:clamp(42px,8vw,150px)!important;
+  text-align:left!important;
+  align-items:flex-start!important;
+}
+.publicLanding .m445HomeHeroText h1{
+  max-width:12ch!important;
+  margin:0!important;
+  font-size:clamp(58px,5.4vw,82px)!important;
+  line-height:.92!important;
+  letter-spacing:-.065em!important;
+  font-weight:500!important;
+}
+.publicLanding .m445HomeHeroText p{
+  max-width:670px!important;
+  margin:24px 0 0!important;
+  font-size:18px!important;
+  line-height:1.4!important;
+  letter-spacing:-.02em!important;
+  font-weight:400!important;
+}
+
+/* ---------- 7–9. WORKSHOP PAGE — NO VERTICAL TITLES, CLEAN COPY, COLLAPSED CATEGORIES ---------- */
+.workshopPage .workshopHero{
+  background:transparent!important;
+}
+.workshopPage .workshopHeroGrid{
+  grid-template-columns:minmax(0,1fr) minmax(300px,.58fr)!important;
+  gap:70px!important;
+  align-items:end!important;
+}
+.workshopPage .workshopHero h1{
+  margin:0!important;
+  font-size:clamp(54px,5.2vw,76px)!important;
+  line-height:.92!important;
+  font-weight:500!important;
+}
+.workshopPage .workshopHero h2{
+  max-width:660px!important;
+  margin:18px 0 0!important;
+  font-size:24px!important;
+  line-height:1.12!important;
+  letter-spacing:-.035em!important;
+  font-weight:400!important;
+}
+.workshopPage .workshopHeroCopy p{
+  max-width:440px!important;
+  font-size:16px!important;
+  line-height:1.5!important;
+  font-weight:400!important;
+}
+.workshopPage .workshopCategoryHead{
+  align-items:end!important;
+}
+.workshopPage .workshopCategoryHead h2{
+  max-width:760px!important;
+  font-size:clamp(46px,4.8vw,70px)!important;
+  line-height:.94!important;
+  font-weight:500!important;
+}
+.workshopPage .workshopCategoryHead p{
+  max-width:580px!important;
+  font-size:15px!important;
+  line-height:1.5!important;
+}
+.workshopPage .workshopCategoryHead > button{
+  min-width:134px!important;
+  min-height:48px!important;
+  padding:0 18px!important;
+  border-radius:12px!important;
+  font-weight:500!important;
+}
+.workshopPage .workshopCategorySection:not(.v449Expanded) .workshopCategoryGrid .workshopCategoryCard:nth-child(n+4){
+  display:none!important;
+}
+.workshopPage .workshopCategoryGrid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+.workshopPage .workshopCategoryCard{
+  background:rgba(255,255,255,.6)!important;
+  border:1px solid var(--psc-line)!important;
+  border-radius:14px!important;
+}
+.workshopPage .workshopCategoryCard b{
+  font-weight:500!important;
+}
+.workshopPage .workshopGuideDeck{
+  display:block!important;
+}
+.workshopPage .workshopGuideDeckIntro{
+  position:static!important;
+  width:auto!important;
+  max-width:760px!important;
+  margin:0 0 34px!important;
+}
+.workshopPage .workshopGuideDeckIntro h2{
+  max-width:760px!important;
+  font-size:clamp(46px,4.8vw,70px)!important;
+  line-height:.94!important;
+  font-weight:500!important;
+}
+.workshopPage .workshopGuideDeckIntro p{
+  max-width:620px!important;
+  font-size:15px!important;
+  line-height:1.5!important;
+}
+.workshopPage .workshopGuideDeckScroll{
+  width:100%!important;
+}
+
+/* ---------- 10. CONTACT DETAIL TYPOGRAPHY ---------- */
+.prospectContactGrid .contactCard span{
+  font-size:12px!important;
+  font-weight:400!important;
+  letter-spacing:.08em!important;
+}
+.prospectContactGrid .contactCard b{
+  font-size:24px!important;
+  line-height:1.2!important;
+  font-weight:400!important;
+  letter-spacing:-.035em!important;
+}
+.publicFooter,
+.publicFooter button,
+.publicFooter a,
+.publicFooter span,
+.publicFooter p{
+  font-weight:400!important;
+}
+
+/* ---------- MOBILE ---------- */
+@media(max-width:900px){
+  .customerShell .clinicNeedRail,
+  .publicLanding .publicClinicalPreviewGrid,
+  .publicLanding .homeWorkshopCardGrid,
+  .workshopPage .workshopCategoryGrid{
+    grid-template-columns:1fr!important;
+  }
+  .customerShell .clinicNeedCard,
+  .publicLanding .publicClinicalCard{
+    min-height:136px!important;
+  }
+  .publicLanding .m445HomeHeroScene{
+    min-height:860px!important;
+    background-position:center top!important;
+  }
+  .publicLanding .m445HomeHeroText{
+    width:min(340px,86vw)!important;
+    margin:0 auto!important;
+    align-items:center!important;
+    text-align:center!important;
+  }
+  .publicLanding .m445HomeHeroText h1,
+  .publicLanding .m445HomeHeroText p{
+    text-align:center!important;
+  }
+  .publicLanding .m445HomeHeroText h1{
+    font-size:clamp(42px,12vw,58px)!important;
+  }
+  .publicLanding .m445HomeHeroText p{
+    font-size:15px!important;
+  }
+  .workshopPage .workshopHeroGrid{
+    grid-template-columns:1fr!important;
+    gap:24px!important;
+  }
+  .workshopPage .workshopHero h1,
+  .workshopPage .workshopCategoryHead h2,
+  .workshopPage .workshopGuideDeckIntro h2{
+    font-size:clamp(40px,11vw,56px)!important;
+  }
+  .prospectContactGrid .contactCard b{
+    font-size:20px!important;
+  }
+}

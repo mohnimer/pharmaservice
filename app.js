@@ -30,6 +30,7 @@
   let authReady = false;
 
   let state = load();
+  const demoSession = {initialized:false, requestsBySchool:{}};
   let ui = { mobile:false, publicMenu:false, basket:false, modal:null, accountMenu:false, globalSearch:'', catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All', cmsChannel:'institutional', cmsSearch:'', wholesaleQuery:'', wholesaleCat:'All', workshopQuery:'', workshopCategory:'All', tourStep:0, overlayScroll:0, mailTab:'compose', mailSearch:'', mailRole:'All', mailInstitution:'All', mailTemplate:'workshop', mailGuideSlug:'aed-has-expiring-parts-too', mailSelectedContacts:[], mailDraftSubject:'', mailDraftIntro:'', mailDraftCta:'Read the guide', optionSearch:'', optionDecision:'All', optionFamily:'all' };
 
   const cms = {
@@ -63,7 +64,7 @@
 
   const INSTITUTIONAL_CATALOGUE_TEMPLATE = {
     id:'institutional-catalogue-v1',
-    name:'PSC Institutional Catalogue',
+    name:'PS Institutional Catalogue',
     version:'1.0',
     categories:[
       {id:'wounds',label:'Cuts & Wounds',note:'Dressings, antiseptics, gauze, closure and wound protection',icon:'wounds',bg:'#FF8B7B',ink:'#53221B'},
@@ -145,6 +146,13 @@
     catch { return JSON.parse(JSON.stringify(seed)); }
   }
   function save(){
+    if(isDemoAccount()){
+      if(state.activeSchoolId){
+        state.basketsBySchool[state.activeSchoolId]=state.basket||[];
+        demoSession.requestsBySchool[state.activeSchoolId]=JSON.parse(JSON.stringify(state.requests));
+      }
+      return; // Simulated state never overwrites persisted live-account state.
+    }
     try{
       if(state.activeSchoolId){
         state.basketsBySchool=state.basketsBySchool||{};
@@ -162,8 +170,8 @@
   function customerStatusPill(status){ const label=friendlyStatus(status); const k=label.toLowerCase().replace(/\s+/g,'-'); return `<span class="statusPill status-${k}">${esc(label)}</span>`; }
   function expectedDeliveryLabel(r){
     if(r?.expectedDeliveryDate) return `Expected delivery · ${date(r.expectedDeliveryDate)}`;
-    if(r?.status==='Delivery') return 'Out for delivery · timing confirmed by PSC';
-    if(['Authorized','Procurement'].includes(r?.status)) return 'Delivery timing will be confirmed by PSC';
+    if(r?.status==='Delivery') return 'Out for delivery · timing confirmed by PS';
+    if(['Authorized','Procurement'].includes(r?.status)) return 'Delivery timing will be confirmed by PS';
     return '';
   }
   function addDaysLabel(v,days){ const d=new Date(v); d.setDate(d.getDate()+days); return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}); }
@@ -177,6 +185,7 @@
   function availableSchools(){ return (authContext?.schools||[]).filter(Boolean); }
   function canSwitchSchools(){ return !authContext?.isPscAdmin && availableSchools().length>1; }
   function isDemoAccount(){ return authContext?.group?.slug==='psc-demo-group'; }
+  window.PSC_IS_DEMO_ACCOUNT=isDemoAccount;
 
   function storefrontConfig(channel){
     return cms.storefronts.find(x=>x.channel===channel) || null;
@@ -290,7 +299,7 @@
     const preferredIds=new Set(rows.filter(r=>r.psc_sku.startsWith('INST-')).map(r=>r.psc_sku));
 
     (D.products||[]).forEach(p=>{ p.catalogueVisible=false; });
-    // Prefer the authoritative institutional line over an old PSC wholesale/master alias.
+    // Prefer the authoritative institutional line over an old PS wholesale/master alias.
     const ordered=[...rows].sort((a,b)=>Number(b.psc_sku.startsWith('INST-'))-Number(a.psc_sku.startsWith('INST-')));
     ordered.forEach(r=>{
       let item=byCatalogueId.get(r.psc_sku)||bySku.get(r.psc_sku);
@@ -365,7 +374,7 @@
       optionDesk.loaded=true;
     }catch(e){
       console.error('Family option control load failed',e);
-      toast('<strong>Could not load family options.</strong><br>Check the PSC admin connection and database permissions.');
+      toast('<strong>Could not load family options.</strong><br>Check the PS admin connection and database permissions.');
     }finally{
       optionDesk.loading=false;
       if(currentRoute()==='admin/family-options') render();
@@ -453,10 +462,10 @@
       <div class="familyOptionSourceGrid">
         <div><span>SUPPLIER</span><b>${esc(o.supplier_name||'Missing')}</b><small>${esc(o.supplier_reference||'No supplier reference')}</small></div>
         <div><span>COMPANY / MAH</span><b>${esc(o.company_mah||'Not captured')}</b><small>${esc(o.supplier_listing_evidence||'Source-list evidence not recorded')}</small></div>
-        <div><span>ACORUS LISTED MRP</span><b>${mrp}</b><small>Internal retail benchmark only — never PSC selling price</small></div>
+        <div><span>ACORUS LISTED MRP</span><b>${mrp}</b><small>Internal retail benchmark only — never PS selling price</small></div>
       </div>
       <div class="familyOptionControlGrid">
-        <label><span>PSC decision</span><select data-option-field="decision"><option ${o.psc_decision==='VERIFY'?'selected':''}>VERIFY</option><option ${o.psc_decision==='APPROVE'?'selected':''}>APPROVE</option><option ${o.psc_decision==='HOLD'?'selected':''}>HOLD</option><option ${o.psc_decision==='REJECT'?'selected':''}>REJECT</option></select></label>
+        <label><span>PS decision</span><select data-option-field="decision"><option ${o.psc_decision==='VERIFY'?'selected':''}>VERIFY</option><option ${o.psc_decision==='APPROVE'?'selected':''}>APPROVE</option><option ${o.psc_decision==='HOLD'?'selected':''}>HOLD</option><option ${o.psc_decision==='REJECT'?'selected':''}>REJECT</option></select></label>
         <label><span>Confirmed brand</span><input data-option-field="brand" value="${esc(o.brand||'')}" placeholder="Verify brand"></label>
         <label><span>Controlled presentation</span>${presentationOptions.length?`<select data-option-field="presentation">${presentationOptions.map(x=>`<option ${x===o.presentation?'selected':''}>${esc(x)}</option>`).join('')}</select>`:`<input data-option-field="presentation" value="${esc(o.presentation||'')}" placeholder="Verify presentation">`}</label>
         <label><span>Exact pack</span><input data-option-field="pack" value="${esc(o.pack||'')}" placeholder="Pack / unit"></label>
@@ -497,7 +506,7 @@
           <label><span>Install / labour direct cost</span><input data-option-field="install-cost" type="number" min="0" step="0.01" value="${o.install_labour_cost===null?'':esc(o.install_labour_cost)}" placeholder="Enter 0 if verified none"></label>
           <label><span>FOC / other direct cost</span><input data-option-field="other-cost" type="number" min="0" step="0.01" value="${o.foc_other_direct_cost===null?'':esc(o.foc_other_direct_cost)}" placeholder="Enter 0 if verified none"></label>
           <label><span>Target GM %</span><input data-option-field="target-gm" type="number" min="0" max="99" step="0.1" value="${esc((pm.target*100).toFixed(1))}"></label>
-          <label><span>PSC sell ex VAT</span><input data-option-field="sell-price" type="number" min="0.01" step="0.01" value="${o.public_sell_price_ex_vat===null?'':esc(o.public_sell_price_ex_vat)}" placeholder="AED"></label>
+          <label><span>PS sell ex VAT</span><input data-option-field="sell-price" type="number" min="0.01" step="0.01" value="${o.public_sell_price_ex_vat===null?'':esc(o.public_sell_price_ex_vat)}" placeholder="AED"></label>
           <label><span>Verified VAT %</span><input data-option-field="vat-rate" type="number" min="0" max="100" step="0.01" value="${o.vat_rate_pct===null?'':esc(o.vat_rate_pct)}" placeholder="0 or 5 when verified"></label>
           <label><span>Supplier quote date</span><input data-option-field="price-quote-date" type="date" value="${esc(o.price_quote_date||'')}"></label>
           <label><span>Price valid to</span><input data-option-field="price-valid-to" type="date" value="${esc(o.price_valid_to||'')}"></label>
@@ -507,7 +516,7 @@
           <label class="familyPricingWide"><span>Pricing note</span><textarea data-option-field="pricing-note" rows="2">${esc(o.pricing_note||'')}</textarea></label>
         </div>
         <p class="familyPricingRule">Publication gate: complete acquisition + direct-cost inputs, current verified price evidence, VAT evidence, valid dates, APPROVE + customer-selectable option, and target margin or a recorded override. Acorus MRP is never used in this calculation.</p>
-      </details>`:`<div class="familyOptionQuoteOnly"><b>Request-quote family</b><span>${esc(family.website_price_treatment||'Request quote')} · Supplier MRP and internal benchmarks cannot become a public PSC price.</span></div>`}
+      </details>`:`<div class="familyOptionQuoteOnly"><b>Request-quote family</b><span>${esc(family.website_price_treatment||'Request quote')} · Supplier MRP and internal benchmarks cannot become a public PS price.</span></div>`}
 
       <label class="familyOptionReviewNote"><span>Review note</span><textarea data-option-field="note" rows="3">${esc(o.review_note||'')}</textarea></label>
       <div class="familyOptionCardFoot"><small>${esc(updated)} · Decision and price history are retained in Supabase.</small><button class="button primary" data-option-save="${esc(o.id)}">Save review</button></div>
@@ -543,7 +552,7 @@
     const family=optionFamilyMeta(o.family_id)||{};
     const familyPresentations=Array.isArray(family.presentations)?family.presentations.filter(Boolean):[];
     if(costEntry.raw!=='' && !Number.isFinite(cost)){ toast('<strong>Check the B2B cost.</strong><br>Enter a valid numeric acquisition cost or leave it blank.'); return; }
-    if(customerSelectable && decision!=='APPROVE'){ toast('<strong>Cannot publish this option yet.</strong><br>Customer-selectable requires PSC Decision = APPROVE.'); return; }
+    if(customerSelectable && decision!=='APPROVE'){ toast('<strong>Cannot publish this option yet.</strong><br>Customer-selectable requires PS Decision = APPROVE.'); return; }
     if(customerSelectable && !verificationDate){ toast('<strong>Verification date required.</strong><br>Confirm the current sourcing route before customer selection is enabled.'); return; }
     if(customerSelectable && (!brand || !presentation)){ toast('<strong>Brand and presentation must be confirmed.</strong><br>Do not publish draft parsing as an approved customer option.'); return; }
     if(customerSelectable && familyPresentations.length && !familyPresentations.includes(presentation)){ toast('<strong>Presentation does not match the family.</strong><br>Choose one of the controlled family presentations before publishing this option.'); return; }
@@ -589,7 +598,7 @@
       const vatEvidence=(field('vat-evidence')?.value||'').trim()||null;
       const override=(field('margin-override')?.value||'').trim()||null;
       const pricingNote=(field('pricing-note')?.value||'').trim()||null;
-      const numericFields=[['freight / delivery cost',freight],['install / labour cost',install],['FOC / other direct cost',other],['target GM',targetPct],['PSC sell price',sell],['VAT rate',vatRate]];
+      const numericFields=[['freight / delivery cost',freight],['install / labour cost',install],['FOC / other direct cost',other],['target GM',targetPct],['PS sell price',sell],['VAT rate',vatRate]];
       for(const [label,entry] of numericFields){
         if(entry.raw!=='' && !Number.isFinite(entry.value)){ toast(`<strong>Check ${esc(label)}.</strong><br>Enter a valid number or leave it blank.`); return; }
       }
@@ -602,7 +611,7 @@
         if(decision!=='APPROVE' || !customerSelectable){ toast('<strong>Fixed price cannot go live yet.</strong><br>The product option must first be APPROVE + Customer selectable.'); return; }
         if(!verificationDate){ toast('<strong>Option verification is required.</strong><br>Record the current verification date before fixed-price publication.'); return; }
         if(!completeCosts){ toast('<strong>Complete landed-cost inputs.</strong><br>B2B cost, freight/delivery, install/labour and FOC/other direct cost must all be entered. Use 0 explicitly when a component has been verified as no cost.'); return; }
-        if(sell.value===null || sell.value<=0){ toast('<strong>PSC selling price is required.</strong><br>Enter the approved ex-VAT selling price.'); return; }
+        if(sell.value===null || sell.value<=0){ toast('<strong>PS selling price is required.</strong><br>Enter the approved ex-VAT selling price.'); return; }
         if(vatRate.value===null || !vatEvidence){ toast('<strong>VAT evidence is incomplete.</strong><br>Record the verified VAT rate and evidence note.'); return; }
         if(priceEvidence!=='VERIFIED_CURRENT'){ toast('<strong>Current price evidence required.</strong><br>Set Price evidence to VERIFIED CURRENT only after checking the current source.'); return; }
         if(!quoteDate || !validTo){ toast('<strong>Price validity is incomplete.</strong><br>Record the source quote date and valid-to date.'); return; }
@@ -728,14 +737,14 @@
     const g=mailGuide(); const snap=mailCampaignSnapshot();
     const kicker=ui.mailTemplate==='supply-note'?'INSTITUTIONAL SUPPLY':'THE WORKSHOP';
     const meta=g&&ui.mailTemplate!=='supply-note'?`${esc(g.category)} · ${esc(g.read_time||'')}`:'Pharma Service Co. L.L.C.';
-    return `<div class="mailPreviewChrome"><div class="mailPreviewTop"><span>From</span><b>Pharma Service &lt;${esc(mailDesk.senderEmail)}&gt;</b></div><div class="mailPreviewSubject"><span>Subject</span><b>${esc(snap.subject)}</b></div><div class="mailEmailCanvas"><div class="mailEmailBrand"><img src="${PSC_LOGO}" alt="Pharma Service"><span>${kicker}</span></div><div class="mailEmailRule"></div><small>${meta}</small><h2>${esc(g?.title||snap.subject)}</h2><p>${esc(snap.intro)}</p>${g?.subtitle&&ui.mailTemplate!=='supply-note'?`<blockquote>${esc(g.subtitle)}</blockquote>`:''}<a href="${esc(snap.cta_url)}" class="mailEmailCta">${esc(snap.cta_label)}</a><div class="mailEmailFooter"><b>Pharma Service Co. L.L.C.</b><span>Institutional healthcare supply · Dubai, UAE</span><span>Sent from ${esc(mailDesk.senderEmail)}</span><small>Recipients can opt out of future PSC marketing emails at any time.</small></div></div></div>`;
+    return `<div class="mailPreviewChrome"><div class="mailPreviewTop"><span>From</span><b>Pharma Service &lt;${esc(mailDesk.senderEmail)}&gt;</b></div><div class="mailPreviewSubject"><span>Subject</span><b>${esc(snap.subject)}</b></div><div class="mailEmailCanvas"><div class="mailEmailBrand"><img src="${PSC_LOGO}" alt="Pharma Service"><span>${kicker}</span></div><div class="mailEmailRule"></div><small>${meta}</small><h2>${esc(g?.title||snap.subject)}</h2><p>${esc(snap.intro)}</p>${g?.subtitle&&ui.mailTemplate!=='supply-note'?`<blockquote>${esc(g.subtitle)}</blockquote>`:''}<a href="${esc(snap.cta_url)}" class="mailEmailCta">${esc(snap.cta_label)}</a><div class="mailEmailFooter"><b>Pharma Service Co. L.L.C.</b><span>Institutional healthcare supply · Dubai, UAE</span><span>Sent from ${esc(mailDesk.senderEmail)}</span><small>Recipients can opt out of future PS marketing emails at any time.</small></div></div></div>`;
   }
 
   function adminMailCompose(){
     const guides=mailPublishedGuides(); const contacts=mailFilteredContacts(); const selected=new Set(ui.mailSelectedContacts||[]);
     const guideSelect=guides.map(g=>`<option value="${esc(g.slug)}" ${g.slug===mailGuide()?.slug?'selected':''}>${esc(g.title)}</option>`).join('');
     const contactRows=contacts.map(c=>`<label class="mailContactPick ${!mailEligibleContact(c)?'disabled':''}"><input type="checkbox" data-mail-contact-select="${c.id}" ${selected.has(c.id)?'checked':''} ${!mailEligibleContact(c)?'disabled':''}><span><b>${esc([c.first_name,c.last_name].filter(Boolean).join(' ')||c.email)}</b><small>${esc(c.organization||'No organization')} · ${esc(c.role||'Role not set')}</small></span><em>${mailEligibleContact(c)?'Eligible':c.status==='unsubscribed'?'Opted out':'Basis required'}</em></label>`).join('');
-    return `<div class="mailComposeGrid"><section class="panel mailComposer"><div class="mailSectionHead"><div><span class="eyebrow">COMPOSE</span><h2>Turn PSC content into a useful email.</h2></div><span class="mailSenderBadge">FROM · ${esc(mailDesk.senderEmail)}</span></div>
+    return `<div class="mailComposeGrid"><section class="panel mailComposer"><div class="mailSectionHead"><div><span class="eyebrow">COMPOSE</span><h2>Turn PS content into a useful email.</h2></div><span class="mailSenderBadge">FROM · ${esc(mailDesk.senderEmail)}</span></div>
       <div class="mailTemplateRow"><button class="mailTemplateCard ${ui.mailTemplate==='workshop'?'active':''}" data-mail-template="workshop"><small>01</small><b>Workshop note</b><span>One useful guide, one reason to read it.</span></button><button class="mailTemplateCard ${ui.mailTemplate==='clinic-check'?'active':''}" data-mail-template="clinic-check"><small>02</small><b>Clinic check</b><span>Fast readiness or stock check.</span></button><button class="mailTemplateCard ${ui.mailTemplate==='supply-note'?'active':''}" data-mail-template="supply-note"><small>03</small><b>Supply note</b><span>Replenishment, replacement or catalogue update.</span></button></div>
       ${ui.mailTemplate!=='supply-note'?`<label class="fieldLabel">Workshop guide</label><select class="input mailFull" data-mail-guide>${guideSelect}</select>`:''}
       <label class="fieldLabel">Subject</label><input class="input mailFull" data-mail-subject value="${esc(mailCampaignSubject())}" maxlength="160">
@@ -760,13 +769,13 @@
   }
 
   function adminMailSettings(){
-    return `<div class="twoCol"><section class="panel"><span class="eyebrow">SENDER IDENTITY</span><h2>Pharma Service</h2><div class="mailSettingRows"><div><span>From</span><b>${esc(mailDesk.senderEmail)}</b></div><div><span>Reply-to</span><b>${esc(mailDesk.senderEmail)}</b></div><div><span>Display name</span><b>${esc(mailDesk.senderName)}</b></div><div><span>Delivery</span><b>Google Workspace Gmail API via delegated PSC service account</b></div></div></section><section class="panel"><span class="eyebrow">CONTROL</span><h2>Human approval first.</h2><p class="smallMuted">Mail Desk does not auto-send marketing. A PSC admin chooses content, recipients and explicitly approves each send. Contacts marked unsubscribed, paused or without a reviewed marketing basis are excluded.</p><div class="gateList" style="margin-top:18px"><div class="gate ${mailDesk.backendReady?'ok':'warn'}"><span>Mail database tables</span><i></i></div><div class="gate warn"><span>Google delegated service-account connection verified at send time</span><i></i></div><div class="gate ok"><span>Sender locked to info@pharmaservice.ae</span><i></i></div><div class="gate ok"><span>No tracking pixels in V37.7</span><i></i></div></div></section></div>`;
+    return `<div class="twoCol"><section class="panel"><span class="eyebrow">SENDER IDENTITY</span><h2>Pharma Service</h2><div class="mailSettingRows"><div><span>From</span><b>${esc(mailDesk.senderEmail)}</b></div><div><span>Reply-to</span><b>${esc(mailDesk.senderEmail)}</b></div><div><span>Display name</span><b>${esc(mailDesk.senderName)}</b></div><div><span>Delivery</span><b>Google Workspace Gmail API via delegated PS service account</b></div></div></section><section class="panel"><span class="eyebrow">CONTROL</span><h2>Human approval first.</h2><p class="smallMuted">Mail Desk does not auto-send marketing. A PS admin chooses content, recipients and explicitly approves each send. Contacts marked unsubscribed, paused or without a reviewed marketing basis are excluded.</p><div class="gateList" style="margin-top:18px"><div class="gate ${mailDesk.backendReady?'ok':'warn'}"><span>Mail database tables</span><i></i></div><div class="gate warn"><span>Google delegated service-account connection verified at send time</span><i></i></div><div class="gate ok"><span>Sender locked to info@pharmaservice.ae</span><i></i></div><div class="gate ok"><span>No tracking pixels in V37.7</span><i></i></div></div></section></div>`;
   }
 
   function adminMail(){
     const tabs=[['compose','Compose'],['contacts','Contacts'],['history','History'],['settings','Settings']];
     const body=ui.mailTab==='contacts'?adminMailContacts():ui.mailTab==='history'?adminMailHistory():ui.mailTab==='settings'?adminMailSettings():adminMailCompose();
-    return shell(`<div class="pageHeader mailDeskHeader"><div><span class="eyebrow">PSC MAIL DESK</span><h1>Useful emails, from the same system.</h1><p>Turn Workshop guides and institutional supply updates into controlled outreach from <b>${esc(mailDesk.senderEmail)}</b>.</p></div><div class="mailIdentityCard"><span>${icon('mail')}</span><div><small>SENDING MAILBOX</small><b>${esc(mailDesk.senderEmail)}</b></div></div></div><div class="mailTabs">${tabs.map(([id,label])=>`<button class="${ui.mailTab===id?'active':''}" data-mail-tab="${id}">${label}</button>`).join('')}</div>${body}`,true);
+    return shell(`<div class="pageHeader mailDeskHeader"><div><span class="eyebrow">PS MAIL DESK</span><h1>Useful emails, from the same system.</h1><p>Turn Workshop guides and institutional supply updates into controlled outreach from <b>${esc(mailDesk.senderEmail)}</b>.</p></div><div class="mailIdentityCard"><span>${icon('mail')}</span><div><small>SENDING MAILBOX</small><b>${esc(mailDesk.senderEmail)}</b></div></div></div><div class="mailTabs">${tabs.map(([id,label])=>`<button class="${ui.mailTab===id?'active':''}" data-mail-tab="${id}">${label}</button>`).join('')}</div>${body}`,true);
   }
 
   async function addMailContact(form){
@@ -1002,7 +1011,7 @@
       const {error:pe}=await sb.from('products').update({image_url:primaryUrl}).eq('id',productId);
       if(pe) throw pe;
     }
-    // New gallery images become visible only in the channel explicitly published by PSC.
+    // New gallery images become visible only in the channel explicitly published by PS.
     const mediaPublish={published:true,[`published_${channel}`]:true};
     const {error:mediaError}=await sb.from('product_media').update(mediaPublish).eq('product_id',productId);
     if(mediaError) throw mediaError;
@@ -1077,25 +1086,25 @@
   }
   function products(){ return D.products.map(p=>product(p.pscSku)); }
   function currentRoute(){
-    if(location.hash) return location.hash.slice(1);
     const path=location.pathname.replace(/\/+$/,'');
+    if(location.hash && location.hash!=='#home') return location.hash.slice(1);
     if(path==='/start') return 'start';
     if(path==='/workshop') return 'workshop';
     if(path.startsWith('/workshop/')) return `workshop/${decodeURIComponent(path.split('/')[2]||'')}`;
+    if(location.hash) return location.hash.slice(1);
     return 'home';
   }
-  function go(route){
+  function go(route,{replace=false}={}){
     ui.mobile=false; ui.publicMenu=false; ui.modal=null;
-    if(route==='start' || route==='workshop' || route.startsWith('workshop/')){
-      const target=route==='start'?'/start':route==='workshop'?'/workshop':`/workshop/${encodeURIComponent(route.split('/')[1]||'')}`;
-      history.pushState({pscRoute:route},'',target);
-      window.scrollTo({top:0,behavior:'instant'}); render();
-      return;
-    }
-    const target=`/#${route}`;
-    if(location.pathname!=='/' || !location.hash){ location.href=target; return; }
-    location.hash=route; window.scrollTo({top:0,behavior:'instant'}); render();
+    const target=route==='start'?'/start':route==='workshop'?'/workshop':route.startsWith('workshop/')?`/workshop/${encodeURIComponent(route.split('/')[1]||'')}`:`/#${route}`;
+    history[replace?'replaceState':'pushState']({pscRoute:route},'',target);
+    window.scrollTo({top:0,behavior:'instant'});
+    render();
+    // Retained behavioural layers consume route events as well as DOM updates.
+    window.dispatchEvent(new PopStateEvent('popstate'));
   }
+  window.PSC_NAVIGATE=go;
+  window.PSC_CURRENT_ROUTE=currentRoute;
   function renderUi({preserveScroll=true,focusSelector=null,cursor=null,transition=true}={}){
     const y=window.scrollY;
     const draw=()=>{
@@ -1224,7 +1233,7 @@
         <div class="sidebarTop">${brand()}<button class="iconBtn mobileClose" data-mobile-close aria-label="Close menu">${icon('close')}</button></div>
         <nav class="iconNav">${links.map(([href,label,ico])=>`<button class="navLink iconOnly ${(route===href || (href==='portal/catalogue' && route.startsWith('portal/catalogue/')))?'active':''}" data-go="${href}" aria-label="${label}"><span class="navIcon">${admin?icon(ico):portalSidebarIcon(href,ico)}</span><span class="navLabel">${label}</span></button>`).join('')}</nav>
         <div class="sidebarFooter compactFooter">
-          ${admin?`<button class="navLink iconOnly" data-go="portal/dashboard" aria-label="Client portal"><span class="navIcon">${icon('home')}</span><span class="navLabel">Client portal</span></button>`:(authContext?.isPscAdmin?`<button class="navLink iconOnly" data-go="admin/dashboard" aria-label="PSC admin"><span class="navIcon">${icon('home')}</span><span class="navLabel">PSC admin</span></button>`:'')}
+          ${admin?`<button class="navLink iconOnly" data-go="portal/dashboard" aria-label="Client portal"><span class="navIcon">${icon('home')}</span><span class="navLabel">Client portal</span></button>`:(authContext?.isPscAdmin?`<button class="navLink iconOnly" data-go="admin/dashboard" aria-label="PS admin"><span class="navIcon">${icon('home')}</span><span class="navLabel">PS admin</span></button>`:'')}
           <button class="navLink iconOnly" data-signout aria-label="Sign out"><span class="navIcon">${admin?icon('logout'):portalUtilityIcon('logout')}</span><span class="navLabel">Sign out</span></button>
         </div>
       </aside>
@@ -1232,9 +1241,9 @@
         <header class="topbar sleekTopbar v7Topbar v7bTopbar portalHeaderBar">
           <button class="iconBtn mobileMenu" data-mobile-open aria-label="Open menu">${icon('menu')}</button>
           <div class="topbarBrandSlot plainLogo"><img src="${PSC_LOGO}" alt="Pharma Service"></div>
-          ${!admin?`<div class="topbarSearch"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search institutional catalogue…" aria-label="Search institutional catalogue"></div>`:`<div class="topbarAdminTitle"><span>PSC</span><b>${route==='admin/mail'?'Mail Desk':'Deal Desk'}</b></div>`}
+          ${!admin?`<div class="topbarSearch"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search institutional catalogue…" aria-label="Search institutional catalogue"></div>`:`<div class="topbarAdminTitle"><span>PS</span><b>${route==='admin/mail'?'Mail Desk':'Deal Desk'}</b></div>`}
           <div class="topbarActions topbarActionsV4">
-            ${admin?`<span class="userPill compactUser"><span class="avatarDot">MH</span><span><b>Mohamed</b><small>PSC admin</small></span></span>`:`
+            ${admin?`<span class="userPill compactUser"><span class="avatarDot">MH</span><span><b>Mohamed</b><small>PS admin</small></span></span>`:`
             <div class="accountSwitcherWrap">
               <button class="campusPill accountSwitcherButton ${canSwitchSchools()?'switchable':''}" ${canSwitchSchools()?'data-account-switcher':''} aria-expanded="${ui.accountMenu?'true':'false'}">
                 <span class="mobileAccountDot" aria-hidden="true">${esc((state.groupName||'A').slice(0,2).toUpperCase())}</span>
@@ -1383,7 +1392,7 @@
     const steps=[
       {n:'01',label:'CURATED SUPPLY',title:'Start with the right product.',text:'The clinic browses a curated institutional catalogue instead of searching through thousands of consumer listings.',outcome:'Clear products, packs and specifications built around the clinic environment.',visual:'shop'},
       {n:'02',label:'BUILD THE REQUEST',title:'Order what the clinic actually needs.',text:'Approved lines go into one basket. If something is missing, the clinic can submit a custom sourcing request without leaving the portal.',outcome:'One request reaches Pharma Service with the school, user, lines and quantities already attached.',visual:'request'},
-      {n:'03',label:'PSC CONTROL',title:'We validate before we quote.',text:'PSC checks the exact product, source, current commercial evidence, applicable supply route and delivery before issuing the quotation.',outcome:'The customer gets simplicity. PSC keeps control of the complexity behind it.',visual:'control'},
+      {n:'03',label:'PS CONTROL',title:'We validate before we quote.',text:'PS checks the exact product, source, current commercial evidence, applicable supply route and delivery before issuing the quotation.',outcome:'The customer gets simplicity. PS keeps control of the complexity behind it.',visual:'control'},
       {n:'04',label:'QUOTE & DELIVERY',title:'A clear decision and a visible next step.',text:'The quotation is sent to the registered account. The school confirms or cancels it, then follows the order through processing and delivery.',outcome:'No WhatsApp archaeology. The commercial history remains attached to the account.',visual:'delivery'},
       {n:'05',label:'REPLENISH',title:'The second order should be easier than the first.',text:'Delivered consumables automatically become available for repeat request, while previously supplied equipment stays visible for reference or another-unit requests.',outcome:'Every completed transaction makes the account easier to service next time.',visual:'repeat'}
     ];
@@ -1391,8 +1400,8 @@
     const visual={
       shop:`<div class="demoMachine shopMachine"><div class="demoMachineBar"><span></span><span></span><span></span><b>Curated Clinic Supply</b></div><div class="demoProductGrid"><article><div class="demoPack">GAUZE</div><span>Sterile Gauze</span><small>Requirement mapped</small><button>+</button></article><article><div class="demoPack diag">BP</div><span>BP Monitor</span><small>Exact spec shown</small><button>+</button></article><article><div class="demoPack saline">NaCl</div><span>Sterile Saline</span><small>Clinic consumable</small><button>+</button></article></div><div class="demoCursor cursorOne"></div></div>`,
       request:`<div class="demoMachine requestMachine"><div class="demoMachineBar"><span></span><span></span><span></span><b>Supply Request</b></div><div class="requestDemoLines"><div><i>01</i><span><b>Sterile Gauze</b><small>100 swabs</small></span><strong>6</strong></div><div><i>02</i><span><b>Sterile Saline</b><small>2.5 ml</small></span><strong>10</strong></div><div class="customDemo"><span>Can’t find it?</span><b>Paediatric nebulizer masks…</b><em>Custom request</em></div></div><button class="demoSubmit">Place order for review</button></div>`,
-      control:`<div class="demoMachine controlMachine"><div class="demoMachineBar"><span></span><span></span><span></span><b>PSC Review</b></div><div class="controlTrack"><span class="trackLine"></span><div class="trackDot done">✓<small>SPEC</small></div><div class="trackDot done">✓<small>SOURCE</small></div><div class="trackDot active">●<small>ROUTE</small></div><div class="trackDot">4<small>QUOTE</small></div></div><div class="controlCards"><article><span>PRODUCT</span><b>Exact specification</b><small>Matched to controlled line</small></article><article><span>SUPPLY</span><b>Current evidence</b><small>Price / stock checked</small></article><article><span>ROUTE</span><b>Appropriate channel</b><small>Validated before commitment</small></article></div></div>`,
-      delivery:`<div class="demoMachine deliveryMachine"><div class="demoMachineBar"><span></span><span></span><span></span><b>Order & Quotation</b></div><div class="quoteDemo"><div><span>PSC-Q-2026-1042</span><b>Quotation ready</b><small>Sent to registered account email</small></div><div class="quoteActions"><button>Cancel</button><button class="confirm">Confirm quote</button></div></div><div class="deliveryTrack"><div class="deliveryVan">▰</div><span></span><div class="deliveryPin">✓</div></div><div class="deliveryPromiseDemo"><small>NEXT</small><b>Delivery timing confirmed by PSC</b></div></div>`,
+      control:`<div class="demoMachine controlMachine"><div class="demoMachineBar"><span></span><span></span><span></span><b>PS Review</b></div><div class="controlTrack"><span class="trackLine"></span><div class="trackDot done">✓<small>SPEC</small></div><div class="trackDot done">✓<small>SOURCE</small></div><div class="trackDot active">●<small>ROUTE</small></div><div class="trackDot">4<small>QUOTE</small></div></div><div class="controlCards"><article><span>PRODUCT</span><b>Exact specification</b><small>Matched to controlled line</small></article><article><span>SUPPLY</span><b>Current evidence</b><small>Price / stock checked</small></article><article><span>ROUTE</span><b>Appropriate channel</b><small>Validated before commitment</small></article></div></div>`,
+      delivery:`<div class="demoMachine deliveryMachine"><div class="demoMachineBar"><span></span><span></span><span></span><b>Order & Quotation</b></div><div class="quoteDemo"><div><span>PSC-Q-2026-1042</span><b>Quotation ready</b><small>Sent to registered account email</small></div><div class="quoteActions"><button>Cancel</button><button class="confirm">Confirm quote</button></div></div><div class="deliveryTrack"><div class="deliveryVan">▰</div><span></span><div class="deliveryPin">✓</div></div><div class="deliveryPromiseDemo"><small>NEXT</small><b>Delivery timing confirmed by PS</b></div></div>`,
       repeat:`<div class="demoMachine repeatMachine"><div class="demoMachineBar"><span></span><span></span><span></span><b>Replenish</b></div><div class="repeatCards"><article><div class="repeatThumb">GAUZE</div><div><span>Previously delivered</span><b>Sterile Gauze</b><small>Last qty · 6</small></div><button>Replenish 6</button></article><article><div class="repeatThumb saline">NaCl</div><div><span>Previously delivered</span><b>Sterile Saline</b><small>Last qty · 10</small></div><button>Replenish 10</button></article></div><div class="repeatLoop">↻ <span>Order history becomes the next order shortcut.</span></div></div>`
     }[st.visual];
     return `<main class="publicPage publicDemoPage">${publicHeader('')}<section class="demoPublicHero"><div><span class="kicker">GUIDED DEMONSTRATION</span><h1>See the supply relationship<br>work from end to end.</h1><p>See how Pharma Service takes an institutional customer from product selection and quotation through order management, delivery and repeat purchasing — while keeping the sourcing complexity behind the scenes.</p></div><div class="demoHeroFlow"><div><b>01</b><span>SELECT</span></div><i></i><div><b>02</b><span>REQUEST</span></div><i></i><div><b>03</b><span>CONTROL</span></div><i></i><div><b>04</b><span>DELIVER</span></div><i></i><div><b>05</b><span>REPEAT</span></div><span class="flowRunner"></span></div></section><section class="publicDemoBody"><div class="publicDemoStepper">${steps.map((x,j)=>`<button class="demoStepButton ${j===i?'active':j<i?'done':''}" data-tour-jump="${j}"><span>${x.n}</span><b>${x.label}</b></button>`).join('')}</div><div class="publicDemoStage"><div class="publicDemoCopy"><span class="kicker">${st.label}</span><h2>${st.title}</h2><p>${st.text}</p><div class="demoOutcome"><span>WHAT THIS ACHIEVES</span><b>${st.outcome}</b></div><div class="tourNav"><button class="button outline" data-tour-prev ${i===0?'disabled':''}>Previous</button>${i<steps.length-1?'<button class="button primary" data-tour-next>Next</button>':'<button class="button primary" data-go="login">Open Clinic Portal</button>'}</div></div><div class="publicDemoVisual">${visual}</div></div><div class="demoDisclosure"><b>Demonstration scope</b><span>The animation illustrates the live customer workflow and planned presentation layer. Actual products, prices, availability, regulatory route and delivery dates remain account- and transaction-specific.</span></div></section>${publicFooter()}</main>`;
@@ -1401,7 +1410,7 @@
 
   function aboutPage(){ return publicPage('about','ABOUT PHARMA SERVICE','Built for accountable healthcare supply.','Pharma Service Co. L.L.C. is a UAE healthcare supplier focused on helping institutions source, organize and receive the products they need through one accountable commercial relationship.',`<section class="publicSection twoPublicCols"><div><span class="kicker">OUR ROLE</span><h2>Source per line. Deliver one solution.</h2><p>Institutions should not need to coordinate a different supplier for every requirement. Pharma Service combines category-specific sourcing with one commercial and operating point of accountability.</p></div><div class="publicFeatureStack"><article><b>Institutional supply</b><p>School clinics, healthcare facilities and institutional accounts.</p></article><article><b>Controlled specifications</b><p>Product selection is mapped to the relevant requirement and confirmed before commitment.</p></article><article><b>Recurring account service</b><p>Order history, replenishment and consistent follow-through over time.</p></article></div></section>`); }
 
-  function servicesPage(){ return publicPage('services','SERVICES','Clinic procurement, made easier.','Pharma Service makes it easy for institutional customers to shop, request quotations, manage orders, repeat previous purchases and optimize procurement costs across pharmaceuticals, medical disposables and medical equipment.',`<section class="publicSection twoPublicCols"><div><span class="kicker">PROCUREMENT COST CONTROL</span><h2>Buy through the right supply channel, not the retail shelf.</h2><p>Pharma Service sources through suitable wholesale and specialist suppliers, then consolidates the commercial process for the institutional customer. The objective is straightforward: optimize procurement costs across pharmaceuticals, medical disposables and medical equipment without pushing sourcing complexity onto the clinic team.</p></div><div class="publicFeatureStack"><article><b>Shop & request</b><p>Browse controlled institutional lines or submit a custom sourcing request.</p></article><article><b>Quote & manage</b><p>Receive the formal quotation, confirm the order and keep the transaction history attached to the account.</p></article><article><b>Repeat efficiently</b><p>Reorder previously supplied items without restarting the procurement process from zero.</p></article></div></section><section class="publicSection procurementFlow"><article><b>SHOP</b><span>01</span><p>Browse the Pharma Service institutional product master.</p></article><article><b>QUOTE</b><span>02</span><p>PSC sources, reviews and sends the formal quotation.</p></article><article><b>MANAGE</b><span>03</span><p>Confirm, cancel or follow the order from the account.</p></article><article><b>REPEAT</b><span>04</span><p>Repeat previously supplied items from the same account history.</p></article></section><section class="publicCta"><div><span class="kicker">SEE IT WORK</span><h2>Take a guided tour of Pharma Service.</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="demo">Take guided tour</button><button class="button primary large" data-go="login">Open Clinic Portal</button></div></section>`); }
+  function servicesPage(){ return publicPage('services','SERVICES','Clinic procurement, made easier.','Pharma Service makes it easy for institutional customers to shop, request quotations, manage orders, repeat previous purchases and optimize procurement costs across pharmaceuticals, medical disposables and medical equipment.',`<section class="publicSection twoPublicCols"><div><span class="kicker">PROCUREMENT COST CONTROL</span><h2>Buy through the right supply channel, not the retail shelf.</h2><p>Pharma Service sources through suitable wholesale and specialist suppliers, then consolidates the commercial process for the institutional customer. The objective is straightforward: optimize procurement costs across pharmaceuticals, medical disposables and medical equipment without pushing sourcing complexity onto the clinic team.</p></div><div class="publicFeatureStack"><article><b>Shop & request</b><p>Browse controlled institutional lines or submit a custom sourcing request.</p></article><article><b>Quote & manage</b><p>Receive the formal quotation, confirm the order and keep the transaction history attached to the account.</p></article><article><b>Repeat efficiently</b><p>Reorder previously supplied items without restarting the procurement process from zero.</p></article></div></section><section class="publicSection procurementFlow"><article><b>SHOP</b><span>01</span><p>Browse the Pharma Service institutional product master.</p></article><article><b>QUOTE</b><span>02</span><p>PS sources, reviews and sends the formal quotation.</p></article><article><b>MANAGE</b><span>03</span><p>Confirm, cancel or follow the order from the account.</p></article><article><b>REPEAT</b><span>04</span><p>Repeat previously supplied items from the same account history.</p></article></section><section class="publicCta"><div><span class="kicker">SEE IT WORK</span><h2>Take a guided tour of Pharma Service.</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="demo">Take guided tour</button><button class="button primary large" data-go="login">Open Clinic Portal</button></div></section>`); }
 
 
   function ourModelPage(){
@@ -1542,17 +1551,55 @@
     <section class="publicSection controlCallout"><span class="kicker">REGULATED LINES</span><h2>Commercial convenience does not replace authorization.</h2><p>Medicines, oxygen, specialist services and other regulated products remain subject to the applicable UAE licensing, recipient, storage, batch/expiry and professional controls.</p></section>`
   ); }
 
+  const WORKSHOP_MODULES = [
+    {n:'01', slug:'product-basics', title:'Product Basics', tone:'wsTone1', icon:'products',
+      short:'Understand the product before you order it.',
+      intro:'Understand what the product actually is, which details matter and what else may be required around it.',
+      meta:'Product selection · Clinic supply'},
+    {n:'02', slug:'whats-the-difference', title:"What's the Difference?", tone:'wsTone2', icon:'repeat',
+      short:'Understand what looks similar but is not necessarily interchangeable.',
+      intro:'Clear comparisons for products that appear similar but should not automatically be treated as interchangeable.',
+      meta:'Product comparison · Specifications'},
+    {n:'03', slug:'clinic-checks', title:'Clinic Checks', tone:'wsTone3', icon:'checklist',
+      short:'Quick practical checks staff can perform in their own clinic.',
+      intro:'Short checks that take the reader out of the screen and into the actual clinic.',
+      meta:'Practical checks · Clinic readiness'},
+    {n:'04', slug:'equipment-readiness', title:'Equipment Readiness', tone:'wsTone4', icon:'assets',
+      short:'Make sure the complete equipment system — not just the main device — is ready.',
+      intro:'Owning the main device does not mean the system is ready. Check the accessories, consumables, compatibility and replacement requirements around it.',
+      meta:'Equipment systems · Readiness'},
+    {n:'05', slug:'stock-expiry', title:'Stock & Expiry', tone:'wsTone5', icon:'inventory',
+      short:'Know what to use first, what needs attention and what should actually be reordered.',
+      intro:'Understand what is on hand, what needs attention and what should actually be reordered.',
+      meta:'Stock control · Expiry'},
+    {n:'06', slug:'school-clinic', title:'School Clinic', tone:'wsTone6', icon:'home',
+      short:'Practical guidance for the realities of operating healthcare inside a school.',
+      intro:'Practical supply guidance built around the specific operational realities of school clinics.',
+      meta:'School health · Clinic operations'},
+    {n:'07', slug:'ordering-specifications', title:'Ordering & Specifications', tone:'wsTone7', icon:'edit',
+      short:'Turn vague requests into controlled, sourceable product specifications.',
+      intro:'Turn vague product requests into specifications suppliers can actually quote correctly.',
+      meta:'RFQs · Product specifications'}
+  ];
+
+  const WORKSHOP_MODULE_CROSS_LINKS = {
+    'school-clinic':['ten-minute-school-clinic-stock-expiry-walk'],
+    'equipment-readiness':['aed-has-expiring-parts-too']
+  };
+
   function workshopGuideBySlug(slug){ return WORKSHOP.find(g=>g.slug===slug && g.status==='published') || null; }
+  function workshopModuleBySlug(slug){ return WORKSHOP_MODULES.find(m=>m.slug===slug) || null; }
+  function workshopModuleForGuide(g){ return WORKSHOP_MODULES.find(m=>m.title===g?.category) || WORKSHOP_MODULES[0]; }
   function workshopSaved(){ try{return new Set(JSON.parse(localStorage.getItem(WORKSHOP_SAVE_KEY)||'[]'))}catch{return new Set()} }
   function workshopProductMatches(g,p){
     if(!g||!p)return false;
-    const sku=String(p.pscSku||'');
-    if((g.related_product_ids||[]).includes(sku))return true;
-    const hay=[p.name,p.catalogueDisplayName,p.pscOfferedSpecification,p.spec].filter(Boolean).join(' ').toLowerCase();
-    return (g.product_match_terms||[]).some(t=>hay.includes(String(t).toLowerCase()));
+    return (g.related_product_ids||[]).map(String).includes(String(p.pscSku||''));
   }
   function workshopForProduct(p,limit=2){ return WORKSHOP.filter(g=>g.status==='published'&&workshopProductMatches(g,p)).slice(0,limit); }
-  function workshopRelatedProducts(g,limit=4){ return products().filter(p=>workshopProductMatches(g,p)).slice(0,limit); }
+  function workshopRelatedProducts(g,limit=4){
+    const ids=new Set((g?.related_product_ids||[]).map(String));
+    return products().filter(p=>ids.has(String(p.pscSku||''))).slice(0,limit);
+  }
   function workshopFormatCode(format){
     return ({'ON THE BENCH':'BENCH',"WHAT'S THE DIFFERENCE?":'COMPARE','CHECK THIS':'CHECK','WHY DOES THIS MATTER?':'WHY',"DON'T ORDER IT LIKE THIS":'SPEC'})[format]||'GUIDE';
   }
@@ -1565,118 +1612,129 @@
       "DON'T ORDER IT LIKE THIS":"Don't order it like this"
     })[format]||'Guide';
   }
-  function workshopCategoryMeta(category){
-    return ({
-      'Product Basics':{tone:'wsTone1',icon:'products',desc:'What the product is, how it differs and the details that matter.'},
-      "What's the Difference?":{tone:'wsTone2',icon:'repeat',desc:'Clear comparisons when two options look almost the same.'},
-      'Clinic Checks':{tone:'wsTone3',icon:'checklist',desc:'Fast checks for a clinic that needs to stay ready.'},
-      'Equipment Readiness':{tone:'wsTone4',icon:'assets',desc:'Setup, compatibility, maintenance and replacement.'},
-      'Stock & Expiry':{tone:'wsTone5',icon:'inventory',desc:'What to inspect before stock becomes a problem.'},
-      'School Clinic':{tone:'wsTone6',icon:'home',desc:'Practical guidance for school and student health rooms.'},
-      'Ordering & Specifications':{tone:'wsTone7',icon:'edit',desc:'Turn vague requests into controlled specifications.'}
-    })[category]||{tone:'wsTone1',icon:'resource',desc:'Practical product guidance for institutional clinics.'};
+  function workshopModuleGuides(m){
+    const primary=WORKSHOP.filter(g=>g.status==='published'&&g.category===m.title);
+    const cross=(WORKSHOP_MODULE_CROSS_LINKS[m.slug]||[]).map(workshopGuideBySlug).filter(Boolean);
+    return [...primary,...cross.filter(g=>!primary.some(p=>p.slug===g.slug))];
   }
-  function workshopCategoryCard(category){
-    const m=workshopCategoryMeta(category);
-    const count=WORKSHOP.filter(g=>g.status==='published'&&g.category===category).length;
-    return `<button class="workshopCategoryCard ${m.tone} ${ui.workshopCategory===category?'active':''}" data-workshop-category="${esc(category)}">
-      <span class="workshopCategoryVisual" aria-hidden="true">${icon(m.icon)}</span>
-      <span class="workshopCategoryCopy"><b>${esc(category)}</b><small>${esc(m.desc)}</small></span>
-      <i>${count} ${count===1?'guide':'guides'}</i>
+  function workshopModuleCard(m){
+    const count=workshopModuleGuides(m).length;
+    return `<button class="workshopModuleCardV50 ${m.tone}" data-go="workshop/${esc(m.slug)}">
+      <span class="workshopModuleTopV50"><b>MODULE ${esc(m.n)}</b><i aria-hidden="true">${icon(m.icon)}</i></span>
+      <span class="workshopModuleCopyV50"><strong>${esc(m.title)}</strong><small>${esc(m.short)}</small></span>
+      <span class="workshopModuleFootV50">${count} ${count===1?'guide':'guides'} <i>→</i></span>
     </button>`;
   }
-  function workshopGuideCard(g){
-    const meta=workshopCategoryMeta(g.category);
-    return `<article class="workshopGuideCard ${meta.tone}">
-      <button data-go="workshop/${esc(g.slug)}" aria-label="Open ${esc(g.title)}">
-        <span class="workshopGuideCardCopy">
-          <span class="workshopGuideCardMeta"><b>${esc(g.category)}</b><small>${esc(g.read_time)} read</small></span>
-          <h3>${esc(g.title)}</h3>
-          <p>${esc(g.excerpt)}</p>
-        </span>
-        <span class="workshopGuideCardVisual" aria-hidden="true"><i>${icon(meta.icon)}</i></span>
-      </button>
-    </article>`;
+  function workshopModuleNav(active=''){
+    return `<nav class="workshopModuleNavV50" aria-label="Workshop modules">${WORKSHOP_MODULES.map(m=>`<button class="${m.slug===active?'active':''}" data-go="workshop/${esc(m.slug)}"><span>${esc(m.n)}</span>${esc(m.title.replace("What's the Difference?",'Differences').replace('Equipment Readiness','Equipment').replace('Ordering & Specifications','Ordering'))}</button>`).join('')}</nav>`;
   }
-
-  function workshopIndexRow(g,i=0){
-    const tone=workshopCategoryMeta(g.category).tone;
-    return `<article class="workshopIndexRow ${tone}">
-      <div class="workshopIndexNo">${String(i+1).padStart(2,'0')}</div>
-      <div class="workshopIndexMeta"><span>${esc(workshopFormatLabel(g.format))}</span><small>${esc(g.category)}</small></div>
-      <button class="workshopIndexTitle" data-go="workshop/${esc(g.slug)}"><h2>${esc(g.title)}</h2><p>${esc(g.excerpt)}</p></button>
-      <div class="workshopIndexRead"><span>${esc(g.read_time)}</span><small>${esc(g.last_reviewed)}</small></div>
+  function workshopGuideCard(g){
+    const m=workshopModuleForGuide(g);
+    return `<article class="workshopGuideCardV50 ${m.tone}">
+      <button data-go="workshop/${esc(g.slug)}" aria-label="Open ${esc(g.title)}">
+        <span class="workshopGuideMetaV50"><b>${esc(workshopFormatLabel(g.format))}</b><small>${esc(g.read_time)} read</small></span>
+        <h3>${esc(g.title)}</h3>
+        <p>${esc(g.excerpt)}</p>
+        <span class="workshopGuideFootV50"><span>${esc(g.category)}</span><i aria-hidden="true">${icon(m.icon)}</i></span>
+      </button>
     </article>`;
   }
   function workshopFiltered(){
     const q=(ui.workshopQuery||'').trim().toLowerCase();
     return WORKSHOP.filter(g=>{
       if(g.status!=='published')return false;
-      if(ui.workshopCategory!=='All' && g.category!==ui.workshopCategory)return false;
       if(!q)return true;
-      const hay=[g.title,g.subtitle,g.excerpt,g.category,g.format,...(g.tags||[])].join(' ').toLowerCase();
+      const hay=[g.title,g.subtitle,g.excerpt,g.category,g.format,...(g.tags||[]),...(g.product_match_terms||[]),...(g.clinic_check_topics||[])].join(' ').toLowerCase();
       return hay.includes(q);
     });
   }
   function workshopLandingPage(){
     const filtered=workshopFiltered();
-    const categories=WORKSHOP_CATEGORIES.filter(c=>c!=='All');
-    const resultLabel=ui.workshopCategory==='All'?'All guides':ui.workshopCategory;
-    return `<main class="publicPage workshopPage">${publicHeader('workshop')}
-      <section class="workshopHero">
-        <div class="workshopHeroGrid">
-          <div><h1>The Workshop</h1><h2>Practical product intelligence for people who run clinics.</h2></div>
-          <div class="workshopHeroCopy"><p>The small details that make medical products safer to choose, easier to use and simpler to manage.</p></div>
+    const searching=!!(ui.workshopQuery||'').trim();
+    const featuredSlugs=['which-glove-should-i-actually-wear','oxygen-cylinder-is-not-an-oxygen-system','aed-has-expiring-parts-too'];
+    const featured=searching?filtered:featuredSlugs.map(workshopGuideBySlug).filter(Boolean);
+    const rest=searching?[]:filtered.filter(g=>!featured.some(f=>f.slug===g.slug));
+    return `<main class="publicPage workshopPage workshopHubV50">${publicHeader('workshop')}
+      <section class="workshopHeroV50">
+        <div class="workshopHeroRuleV50"><span>THE WORKSHOP</span><i></i><small>PRODUCT INTELLIGENCE · FIELD MANUAL</small></div>
+        <div class="workshopHeroGridV50">
+          <div><h1>Practical product intelligence.</h1></div>
+          <div><h2>For people who run clinics.</h2><p>The product details, compatibility questions, readiness checks and ordering specifications that are easy to miss — until they matter.</p></div>
         </div>
       </section>
-      <section class="workshopCategorySection">
-        <div class="workshopCategoryHead"><div><h2>Start with what you need to figure out.</h2><p>The categories are here to get you to the useful bit quickly.</p></div><button class="${ui.workshopCategory==='All'?'active':''}" data-workshop-category="All">View all guides</button></div>
-        <div class="workshopCategoryGrid">${categories.map(workshopCategoryCard).join('')}</div>
+
+      <section class="workshopModuleIndexV50">
+        <div class="workshopSectionHeadV50"><div><span>07 MODULES</span><h2>Start with what you need to figure out.</h2></div><p>No courses. No progress bars. Just practical guidance organised around the decisions clinics and buyers actually make.</p></div>
+        <div class="workshopModuleGridV50">${WORKSHOP_MODULES.map(workshopModuleCard).join('')}</div>
       </section>
-      <section class="workshopTools">
-        <div class="workshopSearch"><span>${icon('search')}</span><input data-workshop-q value="${esc(ui.workshopQuery)}" placeholder="Search product, question or clinic check…" aria-label="Search The Workshop"></div>
-        <div class="workshopResultContext"><span>${esc(resultLabel)}</span><b>${filtered.length} ${filtered.length===1?'guide':'guides'}</b>${(ui.workshopCategory!=='All'||ui.workshopQuery)?'<button data-workshop-clear>Reset</button>':''}</div>
+
+      <section class="workshopGuideIndexV50">
+        <div class="workshopSearchStripV50"><div class="workshopSearchV50"><span>${icon('search')}</span><input data-workshop-q value="${esc(ui.workshopQuery)}" placeholder="Search a product, question or clinic check…" aria-label="Search The Workshop"></div><div><span>${searching?'SEARCH RESULTS':'PUBLISHED GUIDES'}</span><b>${filtered.length}</b>${searching?'<button data-workshop-clear>Clear</button>':''}</div></div>
+        <div class="workshopSectionHeadV50 workshopGuidesHeadV50"><div><span>${searching?'MATCHING GUIDES':'ON THE BENCH NOW'}</span><h2>${searching?'What matches your search.':'Useful things to know before the next order.'}</h2></div><p>${searching?'Search works across titles, products, questions and clinic-check topics.':'Three strong guides up front. Open the full index only when you want it.'}</p></div>
+        ${filtered.length?`<div class="workshopGuideGridV50">${featured.map(workshopGuideCard).join('')}</div>${rest.length?`<details class="workshopAllGuidesV50"><summary><span>View all guides</span><b>${filtered.length} published</b></summary><div class="workshopGuideGridV50 workshopGuideGridRestV50">${rest.map(workshopGuideCard).join('')}</div></details>`:''}`:`<div class="workshopEmptyV50"><b>Nothing on the bench for that search yet.</b><p>Try a product name, a broader term or one of the seven Modules above.</p><button class="button outline" data-workshop-clear>Clear search</button></div>`}
       </section>
-      ${filtered.length?`<section class="workshopGuideDeck">
-        <div class="workshopGuideDeckIntro"><h2>${ui.workshopCategory==='All'&&!ui.workshopQuery?'Useful things to know before the next order.':esc(resultLabel)}</h2><p>${ui.workshopCategory==='All'&&!ui.workshopQuery?'Short, practical guides about the products, checks and specifications that tend to matter in real clinics.':'Guides matching the category or search you selected.'}</p></div>
-        <div class="workshopGuideDeckScroll">${filtered.map(workshopGuideCard).join('')}</div>
-      </section>`:`<section class="workshopEmpty"><h2>Nothing on the bench for that search yet.</h2><p>Try a product name, category or broader term.</p><button class="button outline" data-workshop-clear>Clear search</button></section>`}
-      <section class="workshopPrinciple"><div><h2>Useful product knowledge belongs next to the product.</h2></div><p>The Workshop is there to make specifications, compatibility, readiness and replenishment easier to understand before the next order — not to turn education into a sales pitch.</p></section>
+
+      <section class="workshopPrincipleV50"><span>THE RULE</span><h2>Useful product knowledge belongs next to the product.</h2><p>The Workshop exists to make specifications, compatibility, readiness and replenishment easier to understand before the next order. Education first; commerce second.</p></section>
+      ${publicFooter()}
+    </main>`;
+  }
+
+  function workshopModulePage(slug){
+    const m=workshopModuleBySlug(slug);
+    if(!m)return workshopGuidePage(slug);
+    const guides=workshopModuleGuides(m);
+    return `<main class="publicPage workshopPage workshopModulePageV50 ${m.tone}">${publicHeader('workshop')}
+      <section class="workshopModuleHeroV50">
+        <div class="workshopModuleLabelV50"><button data-go="workshop">THE WORKSHOP</button><i></i><span>MODULE ${esc(m.n)}</span></div>
+        <div class="workshopModuleHeroGridV50"><div><h1>${esc(m.title)}</h1><h2>${esc(m.short)}</h2></div><div><p>${esc(m.intro)}</p><small>${guides.length} ${guides.length===1?'guide':'guides'} · ${esc(m.meta)}</small></div></div>
+      </section>
+      ${workshopModuleNav(m.slug)}
+      <section class="workshopModuleGuidesV50">
+        <div class="workshopSectionHeadV50"><div><span>MODULE ${esc(m.n)}</span><h2>Guides in ${esc(m.title)}</h2></div><p>Built to change the next check, handover, RFQ or reorder — not to create another training dashboard.</p></div>
+        ${guides.length?`<div class="workshopGuideGridV50">${guides.map(workshopGuideCard).join('')}</div>`:`<div class="workshopEmptyV50 compact"><b>No published guides in this Module yet.</b><p>The Module is ready for additional Workshop content without placeholder cards or empty filler.</p></div>`}
+      </section>
       ${publicFooter()}
     </main>`;
   }
 
   function workshopSectionHtml(section){
-    if(section.comparison) return `<section class="workshopArticleSection"><h2>${esc(section.title)}</h2><div class="workshopComparison">${section.comparison.map(x=>`<article><span>${esc(x.label)}</span><p>${esc(x.text)}</p></article>`).join('')}</div></section>`;
-    if(section.spec_example){ const x=section.spec_example; return `<section class="workshopArticleSection workshopSpecLesson"><h2>${esc(section.title)}</h2><div class="badSpec"><span>VAGUE RFQ</span><strong>${esc(x.bad)}</strong></div><div class="missingSpec"><span>WHAT'S MISSING?</span>${x.missing.map(v=>`<b>${esc(v)}</b>`).join('')}</div><div class="goodSpec"><span>ORDER IT LIKE THIS</span><p>${esc(x.good)}</p></div></section>`; }
-    if(section.checklist) return `<section class="workshopArticleSection workshopChecklist"><h2>${esc(section.title)}</h2><ol>${section.checklist.map((v,i)=>`<li><span>${String(i+1).padStart(2,'0')}</span><p>${esc(v)}</p></li>`).join('')}</ol></section>`;
-    if(section.bullets) return `<section class="workshopArticleSection"><h2>${esc(section.title)}</h2><ul class="workshopBullets">${section.bullets.map(v=>`<li>${esc(v)}</li>`).join('')}</ul></section>`;
+    if(section.comparison) return `<section class="workshopArticleSection workshopComparisonSectionV50"><h2>${esc(section.title)}</h2><div class="workshopComparisonV50">${section.comparison.map(x=>`<article><span>${esc(x.label)}</span><p>${esc(x.text)}</p></article>`).join('')}</div></section>`;
+    if(section.spec_example){ const x=section.spec_example; return `<section class="workshopArticleSection workshopSpecLessonV50"><h2>${esc(section.title)}</h2><div class="workshopSpecGridV50"><div class="badSpecV50"><span>DON'T ORDER IT LIKE THIS</span><strong>${esc(x.bad)}</strong></div><div class="missingSpecV50"><span>WHAT'S MISSING?</span>${x.missing.map(v=>`<b>${esc(v)}</b>`).join('')}</div><div class="goodSpecV50"><span>ORDER IT LIKE THIS</span><p>${esc(x.good)}</p></div></div></section>`; }
+    if(section.checklist) return `<section class="workshopArticleSection workshopChecklistV50"><h2>${esc(section.title)}</h2><ol>${section.checklist.map((v,i)=>`<li><span>${String(i+1).padStart(2,'0')}</span><p>${esc(v)}</p></li>`).join('')}</ol></section>`;
+    if(section.bullets) return `<section class="workshopArticleSection"><h2>${esc(section.title)}</h2><ul class="workshopBulletsV50">${section.bullets.map(v=>`<li>${esc(v)}</li>`).join('')}</ul></section>`;
     return `<section class="workshopArticleSection"><h2>${esc(section.title)}</h2><p>${esc(section.text||'')}</p></section>`;
   }
   function workshopGuidePage(slug){
     const g=workshopGuideBySlug(slug);
-    if(!g)return `<main class="publicPage workshopPage">${publicHeader('workshop')}<section class="workshopNotFound"><span>THE WORKSHOP</span><h1>Guide not found.</h1><p>The guide may have moved or is not published.</p><button class="button primary" data-go="workshop">Back to The Workshop</button></section>${publicFooter()}</main>`;
+    if(!g)return `<main class="publicPage workshopPage">${publicHeader('workshop')}<section class="workshopNotFoundV50"><span>THE WORKSHOP</span><h1>Guide not found.</h1><p>The guide may have moved or is not published.</p><button class="button primary" data-go="workshop">Back to The Workshop</button></section>${publicFooter()}</main>`;
+    const m=workshopModuleForGuide(g);
     const saved=workshopSaved().has(g.slug);
     const related=workshopRelatedProducts(g,4);
-    return `<main class="publicPage workshopPage workshopArticlePage">${publicHeader('workshop')}
-      <article class="workshopArticle ${g.format==='CHECK THIS'?'workshopPrintCheck':''}">
-        <header class="workshopArticleHeader">
-          <div class="workshopArticleTopline"><button data-go="workshop">THE WORKSHOP</button><i></i><span>${esc(g.category)}</span><b>${esc(workshopFormatLabel(g.format))}</b></div>
-          <h1>${esc(g.title)}</h1><p class="workshopDeck">${esc(g.subtitle)}</p>
-          <div class="workshopArticleMeta"><span>${esc(g.read_time)} read</span><span>Last reviewed ${esc(g.last_reviewed)}</span><span>${esc(g.author_or_review_status)}</span></div>
-          <div class="workshopArticleActions"><button data-workshop-save="${esc(g.slug)}" aria-pressed="${saved?'true':'false'}">${saved?'Saved':'Save'}</button><button data-workshop-print>Print</button><button data-workshop-share="${esc(g.slug)}">Share</button>${authContext?.isPscAdmin?`<button class="workshopMailAction" data-mail-from-guide="${esc(g.slug)}">Create email</button>`:''}</div>
+    const isEquipment=m.slug==='equipment-readiness';
+    return `<main class="publicPage workshopPage workshopArticlePage workshopArticlePageV50 ${m.tone}">${publicHeader('workshop')}
+      <article class="workshopArticleV50 ${g.format==='CHECK THIS'?'workshopPrintCheck':''}">
+        <header class="workshopArticleHeaderV50">
+          <div class="workshopArticleToplineV50"><button data-go="workshop">THE WORKSHOP</button><i></i><button data-go="workshop/${esc(m.slug)}">MODULE ${esc(m.n)} · ${esc(m.title)}</button><b>${esc(workshopFormatLabel(g.format))}</b></div>
+          <div class="workshopArticleLeadV50"><div><h1>${esc(g.title)}</h1><p>${esc(g.subtitle)}</p></div><aside><span>${esc(g.read_time)} read</span><span>Reviewed ${esc(g.last_reviewed)}</span><div class="workshopArticleActions"><button data-workshop-save="${esc(g.slug)}" aria-pressed="${saved?'true':'false'}">${saved?'Saved':'Save'}</button><button data-workshop-print>Print</button><button data-workshop-share="${esc(g.slug)}">Share</button></div></aside></div>
         </header>
-        <div class="workshopArticleBody">${(g.body_sections||[]).map(workshopSectionHtml).join('')}</div>
-        <section class="workshopSignature">
+        ${workshopModuleNav(m.slug)}
+        ${g.format==='CHECK THIS'?'<div class="workshopDoNowV50">DO THIS NOW · TAKE THE GUIDE INTO THE CLINIC</div>':''}
+        ${isEquipment?'<section class="workshopReadinessChainV50"><span>THE READINESS CHAIN</span><div><b>Equipment</b><i>→</i><b>Accessory</b><i>→</i><b>Consumable</b><i>→</i><b>Replacement / expiry</b><i>→</i><b>Record</b></div></section>':''}
+        <div class="workshopArticleLayoutV50">
+          <div class="workshopArticleBody">${(g.body_sections||[]).map(workshopSectionHtml).join('')}</div>
+          <aside class="workshopArticleRailV50"><span>THIS GUIDE</span><b>${esc(g.category)}</b><p>${esc(g.excerpt)}</p><button data-go="workshop/${esc(m.slug)}">More in Module ${esc(m.n)} →</button></aside>
+        </div>
+        <section class="workshopSignature workshopSignatureV50">
           <article><span>USE IT RIGHT</span><p>${esc(g.use_it_right)}</p></article>
           <article><span>CHECK YOUR STOCK</span><p>${esc(g.check_your_stock)}</p></article>
           <article><span>WHEN ORDERING</span><p>${esc(g.when_ordering)}</p></article>
         </section>
-        ${related.length?`<section class="workshopRelated"><div class="workshopRelatedHead"><span>RELATED CLINIC SUPPLIES</span><p>Relevant catalogue lines are shown after the product guidance — education first, commerce second.</p></div><div class="workshopRelatedList">${related.map(p=>{const n=clinicalNeedMeta(clinicalNeedIds(p)[0]||'all');return `<button data-go="catalogue/${n.id}"><span>${esc(p.pscSku||'PSC')}</span><b>${esc(p.catalogueDisplayName||p.name)}</b><small>${esc(p.cataloguePack||p.pack||'Pack to confirm')}</small></button>`}).join('')}</div></section>`:''}
-        <footer class="workshopMedicalNote">Workshop guides provide general product and supply information. Clinical decisions should follow the product instructions, institutional procedures and applicable professional or regulatory requirements.</footer>
+        ${related.length?`<section class="workshopRelated workshopRelatedV50"><div class="workshopRelatedHead"><span>PRODUCTS USED IN THIS GUIDE</span><p>Only catalogue lines deliberately linked to this guide are shown.</p></div><div class="workshopRelatedList">${related.map(p=>{const n=clinicalNeedMeta(clinicalNeedIds(p)[0]||'all');return `<button data-go="catalogue/${n.id}"><span>${esc(p.pscSku||'PS')}</span><b>${esc(p.catalogueDisplayName||p.name)}</b><small>${esc(p.cataloguePack||p.pack||'Pack to confirm')}</small></button>`}).join('')}</div></section>`:''}
+        <footer class="workshopMedicalNote">Workshop guides provide general product and supply information. Clinical decisions should follow product instructions, institutional procedures and applicable professional or regulatory requirements.</footer>
       </article>${publicFooter()}
     </main>`;
   }
+  function workshopRoutePage(slug){ return workshopModuleBySlug(slug)?workshopModulePage(slug):workshopGuidePage(slug); }
   function workshopTeaser(){
     const slugs=['which-glove-should-i-actually-wear','oxygen-cylinder-is-not-an-oxygen-system','aed-has-expiring-parts-too'];
     const items=slugs.map(workshopGuideBySlug).filter(Boolean);
@@ -1707,7 +1765,7 @@
     const categoryCards=categories.map(c=>`<button class="publicCategoryCard16 ${c.id===needId?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="catalogue/${c.id}">
       <span class="publicCategoryArt16" aria-hidden="true">${clinicalNeedIllustration(c.id)}</span>
       <span class="publicCategoryCopy16"><b>${esc(c.label)}</b><small>${esc(c.note)}</small></span>
-      <i>↗</i>
+      <i aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 18 18 6M6 6h12v12"/></svg></i>
     </button>`).join('');
     const heroTitle=needId==='all'?'Start with the clinical area.':esc(meta.label);
     const heroLead=needId==='all'?'Choose a category to see the controlled product families behind it. Or keep scrolling to browse the published product catalogue.':`Product families for ${esc(meta.label)} appear below, followed by the published catalogue lines in this clinical area.`;
@@ -1728,11 +1786,11 @@
 
   function careersPage(){ return publicPage('careers','CAREERS','Build practical healthcare supply with us.','We are interested in people who value accuracy, follow-through and institutional customer service.',`<section class="publicSection simplePublicPanel"><h2>Current opportunities</h2><p>Roles will be posted here as the institutional-supply business expands. For now, career enquiries can be directed through the Contact page.</p><button class="button outline" data-go="contact">Contact Pharma Service</button></section>`); }
 
-  function mediaPage(){ return publicPage('media','MEDIA','Updates, resources and institutional supply notes.','A public space for Pharma Service company updates and practical institutional healthcare-supply resources.',`<section class="publicSection publicMediaGrid"><article><span>SCHOOL CLINICS</span><h3>Building a cleaner replenishment process</h3><p>Why repeat ordering should get easier after the first completed supply cycle.</p></article><article><span>PRODUCT CONTROL</span><h3>Requirement-mapped specifications</h3><p>How PSC separates regulatory requirements from exact commercial product specifications.</p></article><article><span>PSC UPDATE</span><h3>Institutional Supply Portal</h3><p>The first MVP brings ordering, quotations and replenishment into one customer account.</p></article></section>`); }
+  function mediaPage(){ return publicPage('media','MEDIA','Updates, resources and institutional supply notes.','A public space for Pharma Service company updates and practical institutional healthcare-supply resources.',`<section class="publicSection publicMediaGrid"><article><span>SCHOOL CLINICS</span><h3>Building a cleaner replenishment process</h3><p>Why repeat ordering should get easier after the first completed supply cycle.</p></article><article><span>PRODUCT CONTROL</span><h3>Requirement-mapped specifications</h3><p>How PS separates regulatory requirements from exact commercial product specifications.</p></article><article><span>PS UPDATE</span><h3>Institutional Supply Portal</h3><p>The first MVP brings ordering, quotations and replenishment into one customer account.</p></article></section>`); }
 
   function unsubscribePage(){
     const token=new URLSearchParams(location.search).get('token')||'';
-    return `<main class="publicPage unsubscribePage">${publicHeader('')}<section class="unsubscribeCard"><span class="kicker">PHARMA SERVICE MAIL</span><h1>Email preferences</h1><div data-unsubscribe-state>${token?'<p>Updating your email preference…</p>':'<p>This unsubscribe link is missing its contact token.</p>'}</div><p class="unsubscribeFine">This only stops PSC marketing/outreach emails. It does not affect transactional messages about active quotations, orders, deliveries, invoices or service matters.</p><button class="button light" data-go="home">Back to Pharma Service</button></section>${publicFooter()}</main>`;
+    return `<main class="publicPage unsubscribePage">${publicHeader('')}<section class="unsubscribeCard"><span class="kicker">PHARMA SERVICE MAIL</span><h1>Email preferences</h1><div data-unsubscribe-state>${token?'<p>Updating your email preference…</p>':'<p>This unsubscribe link is missing its contact token.</p>'}</div><p class="unsubscribeFine">This only stops PS marketing/outreach emails. It does not affect transactional messages about active quotations, orders, deliveries, invoices or service matters.</p><button class="button light" data-go="home">Back to Pharma Service</button></section>${publicFooter()}</main>`;
   }
 
   async function processMailUnsubscribe(){
@@ -1742,7 +1800,7 @@
     if(!sb){host.innerHTML='<p>We could not update this preference automatically. Please email info@pharmaservice.ae and we will update it.</p>';return;}
     try{
       const {data,error}=await sb.functions.invoke('mail-unsubscribe',{body:{token}}); if(error)throw error; if(data?.error)throw new Error(data.error);
-      host.innerHTML='<div class="unsubscribeDone"><b>You are unsubscribed.</b><p>PSC will no longer send marketing/outreach emails to this contact record.</p></div>';
+      host.innerHTML='<div class="unsubscribeDone"><b>You are unsubscribed.</b><p>PS will no longer send marketing/outreach emails to this contact record.</p></div>';
     }catch(e){console.error(e);host.innerHTML='<p>We could not update this preference automatically. Please email <b>info@pharmaservice.ae</b> and we will update it.</p>';}
   }
 
@@ -1753,13 +1811,13 @@
         <div class="start16HeroCopy">
           <span class="kicker">START HERE</span>
           <h1>Start with the requirement you already have.</h1>
-          <p>An RFQ, spreadsheet, PDF or rough product list is enough to begin. We will clarify the lines that need clarification and come back with a quotation on the basis we can actually support.</p>
+          <p>Send a product list, browse by clinical need, or see how the supply process works. PS will check your specification, quantities and timing before preparing a quotation.</p>
           <div class="start16HeroActions"><button class="button primary large" data-start-scroll="send">Send a list / RFQ</button><button class="button outline large" data-go="catalogue">Browse catalogue</button></div>
         </div>
         <div class="start16RouteBoard" aria-label="Three ways to start">
           <button data-start-scroll="send"><span>01</span><div><b>I already have a list.</b><small>Send it as it is.</small></div><i>→</i></button>
           <button data-go="catalogue"><span>02</span><div><b>I need to find the product.</b><small>Browse by clinical need.</small></div><i>→</i></button>
-          <button data-go="our-model"><span>03</span><div><b>I want to understand the process.</b><small>See how PSC handles the supply work.</small></div><i>→</i></button>
+          <button data-go="our-model"><span>03</span><div><b>I want to understand the process.</b><small>See how PS handles the supply work.</small></div><i>→</i></button>
         </div>
       </section>
 
@@ -1772,8 +1830,14 @@
         <div class="startSendIntro start16SendIntro">
           <span class="kicker">SEND THE REQUIREMENT</span>
           <h2>It does not need to be cleaned up first.</h2>
-          <p>Paste the requirement below or attach the original file. We will use what you provide to qualify the enquiry and come back on the specific lines that need clarification.</p>
+          <p>Tell us what you need, how much, and when. Paste your list below and add the original file if helpful. If you only have a file, write a short summary in the requirement field.</p>
+          <p>Next, PS reviews your enquiry, clarifies any missing details, and confirms the available supply and quotation basis with you.</p>
           <p class="start16Fine">No automatic stock, compliance or delivery promise is created by sending the enquiry. Those points are confirmed before commitment.</p>
+          <div class="startContactActions" aria-label="Other ways to get started">
+            <a class="button outline" href="tel:+971504252641"><svg class="startContactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.09 5.18 2 2 0 0 1 5.08 3h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.79a2 2 0 0 1-.45 2.11L9.06 10.9a16 16 0 0 0 4.04 4.04l1.28-1.27a2 2 0 0 1 2.11-.45c.89.34 1.83.58 2.79.7A2 2 0 0 1 22 16.92Z"/></svg><span>Call us now</span></a>
+            <a class="button outline" href="https://wa.me/971553511335" target="_blank" rel="noopener noreferrer"><svg class="startContactIcon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.52 3.48A11.9 11.9 0 0 0 12.04 0C5.43 0 .05 5.38.05 11.99c0 2.11.55 4.17 1.6 5.99L0 24l6.16-1.62a11.98 11.98 0 0 0 5.87 1.5h.01C18.65 23.88 24 18.5 24 11.89c0-3.2-1.24-6.21-3.48-8.41ZM12.04 21.86a9.91 9.91 0 0 1-5.05-1.38l-.36-.21-3.65.96.98-3.56-.24-.37a9.94 9.94 0 1 1 8.32 4.56Zm5.45-7.44c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.09 4.49.71.3 1.27.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.77-.73 2.02-1.44.25-.7.25-1.3.17-1.43-.07-.12-.27-.2-.57-.35Z"/></svg><span>WhatsApp</span></a>
+            <button class="button light" data-go="login">Open Clinic Portal</button>
+          </div>
         </div>
         <form class="prospectForm startProspectForm start16Form" data-public-enquiry data-source-page="business_card_start_v39_16" novalidate>
           <div class="prospectField"><label for="startOrganization">Organization</label><input id="startOrganization" name="organization" type="text" maxlength="180" placeholder="School group, clinic or company" required></div>
@@ -1857,8 +1921,10 @@
     </section>
 
     <section class="publicSection contactGrid prospectContactGrid">
-      <div class="contactCard"><span>PHONE</span><b>+971 4 337 7004</b></div>
-      <div class="contactCard"><span>EMAIL</span><b>info@pharmaservice.ae</b></div>
+      <div class="contactCard"><span>PHONE</span><b><a href="tel:+97143377004">+971 4 337 7004</a></b></div>
+      <div class="contactCard"><span>MOBILE</span><b><a href="tel:+971504252641">+971 50 425 2641</a></b></div>
+      <div class="contactCard"><span>WHATSAPP</span><b><a href="https://wa.me/971553511335" target="_blank" rel="noopener noreferrer">+971 55 351 1335</a></b></div>
+      <div class="contactCard"><span>EMAIL</span><b><a href="mailto:info@pharmaservice.ae">info@pharmaservice.ae</a></b></div>
       <div class="contactCard"><span>LOCATION</span><b>Dubai, United Arab Emirates</b></div>
       <div class="contactCard"><span>CLINIC PORTAL</span><button class="button primary" data-go="login">Open account access</button></div>
     </section>`
@@ -1890,7 +1956,7 @@
           <h3>${esc(r.name)}</h3>
           <p>${esc(r.short_description||r.pack||'')}</p>
           <div class="wholesaleMeta">${r.pack?`<span>${esc(r.pack)}</span>`:''}${r.moq?`<span>MOQ ${esc(r.moq)}</span>`:''}</div>
-          <div class="wholesaleAction">${r.price_display_mode==='show_price'&&r.display_price!==null?`<b>${money(r.display_price)}</b>`:`<b>${r.price_display_mode==='contact'?'Contact PSC':'Request quote'}</b>`}<button class="button primary" data-go="contact">Enquire</button></div>
+          <div class="wholesaleAction">${r.price_display_mode==='show_price'&&r.display_price!==null?`<b>${money(r.display_price)}</b>`:`<b>${r.price_display_mode==='contact'?'Contact PS':'Request quote'}</b>`}<button class="button primary" data-go="contact">Enquire</button></div>
         </article>`).join('')}</div>`:`<div class="emptyState wholesaleEmpty"><h3>Wholesale catalogue is being prepared.</h3><p>Contact Pharma Service for trade pricing and product availability.</p><button class="button primary" data-go="contact">Contact Pharma Service</button></div>`}
       </section>
       ${publicFooter()}
@@ -1960,33 +2026,33 @@
       const score=idx===0?88:76;
       return `<article class="schoolCardV7 ${idx===0?'featured':''}"><div class="schoolCardHead"><div><span class="eyebrow">${esc(c.emirate.toUpperCase())}</span><h3>${esc(c.name)}</h3></div><span class="campusScore">${score}%</span></div><p>${esc(c.clinicCode)} · Preferred source: ${esc(c.preferredSource)}</p><div class="schoolStats"><div><b>${siteRequests}</b><span>Requests</span></div><div><b>${siteAssets}</b><span>Tracked assets</span></div><div><b>${esc(c.sla)}</b><span>SLA</span></div></div><div class="schoolMetaRows"><div><span>Partner hub</span><b>${esc(c.hub)}</b></div><div><span>Backup route</span><b>${esc(c.backup)}</b></div><div><span>Last activity</span><b>${lastReq?esc(lastReq.id):'No request yet'}</b></div></div><div class="schoolCardActions"><button class="button dark" data-go="portal/clinic-list">Open clinic list</button><button class="button light" data-go="portal/requests">View requests</button></div></article>`;
     }).join('');
-    return shell(`<div class="pageHeader"><div><span class="eyebrow">MULTI-SITE SCHOOL VIEW</span><h1>School Clinics</h1><p>Show each school or campus as its own managed clinic account with a clear source route, request history and readiness context.</p></div><div class="headerActions"><button class="button light" data-go="portal/demo">Run navigator demo</button><button class="button primary" data-go="portal/catalogue">Browse catalogue</button></div></div><div class="schoolHeroStrip"><div><b>2</b><span>Managed school clinics</span></div><div><b>1</b><span>Primary supply partner</span></div><div><b>1</b><span>Backup route per site</span></div><div><b>100%</b><span>School-specific visibility</span></div></div><div class="schoolGridV7">${cards}</div><section class="panel" style="margin-top:18px"><div class="panelHeader"><h2>How to position it</h2></div><div class="v5PositionGrid"><div><span class="eyebrow">FOR THE SCHOOL</span><h3>One simple interface</h3><p class="smallMuted">Each clinic sees only what matters: approved essentials, quick refill workflows, reports and equipment records.</p></div><div><span class="eyebrow">FOR PSC</span><h3>Controlled account structure</h3><p class="smallMuted">Every site can still map to specific routing logic, supplier decisions, commercial rules and delivery controls behind the scenes.</p></div><div><span class="eyebrow">FOR ACORUS / MED7</span><h3>Repeatable fulfilment</h3><p class="smallMuted">Orders can be grouped by school, campus and nearest fulfilment logic once the proper partner feed is connected.</p></div></div></section>`);
+    return shell(`<div class="pageHeader"><div><span class="eyebrow">MULTI-SITE SCHOOL VIEW</span><h1>School Clinics</h1><p>Show each school or campus as its own managed clinic account with a clear source route, request history and readiness context.</p></div><div class="headerActions"><button class="button light" data-go="portal/demo">Run navigator demo</button><button class="button primary" data-go="portal/catalogue">Browse catalogue</button></div></div><div class="schoolHeroStrip"><div><b>2</b><span>Managed school clinics</span></div><div><b>1</b><span>Primary supply partner</span></div><div><b>1</b><span>Backup route per site</span></div><div><b>100%</b><span>School-specific visibility</span></div></div><div class="schoolGridV7">${cards}</div><section class="panel" style="margin-top:18px"><div class="panelHeader"><h2>How to position it</h2></div><div class="v5PositionGrid"><div><span class="eyebrow">FOR THE SCHOOL</span><h3>One simple interface</h3><p class="smallMuted">Each clinic sees only what matters: approved essentials, quick refill workflows, reports and equipment records.</p></div><div><span class="eyebrow">FOR PS</span><h3>Controlled account structure</h3><p class="smallMuted">Every site can still map to specific routing logic, supplier decisions, commercial rules and delivery controls behind the scenes.</p></div><div><span class="eyebrow">FOR ACORUS / MED7</span><h3>Repeatable fulfilment</h3><p class="smallMuted">Orders can be grouped by school, campus and nearest fulfilment logic once the proper partner feed is connected.</p></div></div></section>`);
   }
 
   function guidedDemo(){
     const steps=[
       {n:'01',label:'SELECT THE SCHOOL',title:'Start with the clinic, not the catalogue.',text:'Choose a school or campus and immediately present a controlled clinic workspace instead of a generic consumer-pharmacy storefront.',outcome:'The school sees its own clinic account, not thousands of irrelevant lines.',visual:'school'},
-      {n:'02',label:'BUILD THE REQUEST',title:'Refill the clinic in minutes.',text:'Use approved items, previous purchases and fast quantity entry to create one clean request for PSC review.',outcome:'The nurse or doctor spends less time chasing products and more time managing the clinic.',visual:'request'},
-      {n:'03',label:'PSC CONTROLS THE COMPLEXITY',title:'Behind the scenes, PSC does the hard part.',text:'PSC validates route, supplier evidence, tax, stock and delivery before a quotation is issued and before procurement is released.',outcome:'The school experiences simplicity while PSC protects quality, compliance, margin and execution.',visual:'control'},
+      {n:'02',label:'BUILD THE REQUEST',title:'Refill the clinic in minutes.',text:'Use approved items, previous purchases and fast quantity entry to create one clean request for PS review.',outcome:'The nurse or doctor spends less time chasing products and more time managing the clinic.',visual:'request'},
+      {n:'03',label:'PS CONTROLS THE COMPLEXITY',title:'Behind the scenes, PS does the hard part.',text:'PS validates route, supplier evidence, tax, stock and delivery before a quotation is issued and before procurement is released.',outcome:'The school experiences simplicity while PS protects quality, compliance, margin and execution.',visual:'control'},
       {n:'04',label:'END WITH REPORTING',title:'Turn supply into visibility.',text:'Close the story with inventory readiness, stock alerts, expiring items, asset actions and the next steps the school should take.',outcome:'You are no longer just supplying items — you are helping the school manage readiness.',visual:'report'}
     ];
     const i=Math.max(0,Math.min(steps.length-1,ui.tourStep||0)), st=steps[i];
     const talkTracks=[
       '"Each school gets its own clinic workspace and approved supply view."',
       '"This is how a nurse can build a refill request in just a few clicks."',
-      '"PSC keeps the sourcing and control complexity behind the curtain."',
+      '"PS keeps the sourcing and control complexity behind the curtain."',
       '"The portal ends with a report the school can act on immediately."'
     ];
     const visual={
       school:`<div class="demoShotV7"><div class="shotHeader"><span>School clinics</span><b>${esc(state.groupName||'School Group')}</b></div><div class="shotBody schoolSelector"><article class="schoolMini active"><b>${esc(state.campus||'Main Campus Clinic')}</b><small>Your authorized clinic account</small><span>Account ready</span></article><article class="schoolMini"><b>Additional campus</b><small>Available when assigned</small><span>Group access</span></article></div><div class="shotFoot">Every campus gets its own request history, inventory view and asset register.</div></div>`,
-      request:`<div class="demoShotV7"><div class="shotHeader"><span>Approved clinic list</span><b>Fast refill request</b></div><div class="shotBody requestStack"><div class="reqRow"><div><b>Gauze Swab 5 × 5 cm</b><small>First aid / wound care</small></div><span>6</span></div><div class="reqRow"><div><b>Instant Cold Pack</b><small>Sports day refill</small></div><span>8</span></div><div class="reqRow"><div><b>Antiseptic Liquid 125 ml</b><small>Clinic essentials</small></div><span>3</span></div><button class="button primary full">Send supply request</button></div><div class="shotFoot">The school builds one request; PSC handles the commercial route.</div></div>`,
-      control:`<div class="demoShotV7"><div class="shotHeader"><span>PSC release gate</span><b>Quote before procurement</b></div><div class="shotBody controlGrid"><div class="controlChip ok"><b>Exact SKU</b><small>Mapped and approved</small></div><div class="controlChip ok"><b>Stock</b><small>Current source verified</small></div><div class="controlChip warn"><b>VAT</b><small>Evidence checked</small></div><div class="controlChip ok"><b>Delivery</b><small>Campus route matched</small></div><div class="controlChip warn"><b>Licensed route</b><small>Controlled if needed</small></div><div class="controlChip block"><b>Funding</b><small>Release before supplier PO</small></div></div><div class="shotFoot">PSC stays accountable even when products come from multiple underlying vendors.</div></div>`,
+      request:`<div class="demoShotV7"><div class="shotHeader"><span>Approved clinic list</span><b>Fast refill request</b></div><div class="shotBody requestStack"><div class="reqRow"><div><b>Gauze Swab 5 × 5 cm</b><small>First aid / wound care</small></div><span>6</span></div><div class="reqRow"><div><b>Instant Cold Pack</b><small>Sports day refill</small></div><span>8</span></div><div class="reqRow"><div><b>Antiseptic Liquid 125 ml</b><small>Clinic essentials</small></div><span>3</span></div><button class="button primary full">Send supply request</button></div><div class="shotFoot">The school builds one request; PS handles the commercial route.</div></div>`,
+      control:`<div class="demoShotV7"><div class="shotHeader"><span>PS release gate</span><b>Quote before procurement</b></div><div class="shotBody controlGrid"><div class="controlChip ok"><b>Exact SKU</b><small>Mapped and approved</small></div><div class="controlChip ok"><b>Stock</b><small>Current source verified</small></div><div class="controlChip warn"><b>VAT</b><small>Evidence checked</small></div><div class="controlChip ok"><b>Delivery</b><small>Campus route matched</small></div><div class="controlChip warn"><b>Licensed route</b><small>Controlled if needed</small></div><div class="controlChip block"><b>Funding</b><small>Release before supplier PO</small></div></div><div class="shotFoot">PS stays accountable even when products come from multiple underlying vendors.</div></div>`,
       report:`<div class="demoShotV7"><div class="shotHeader"><span>Clinic account</span><b>${esc(state.campus||'School clinic')} overview</b></div><div class="shotBody reportStack"><div class="reportBig"><b>72%</b><span>Readiness</span></div><div class="reportBars"><div><label>Wound care</label><i style="width:81%"></i></div><div><label>PPE</label><i style="width:66%"></i></div><div><label>Clinical disposables</label><i style="width:54%"></i></div><div><label>Respiratory</label><i style="width:38%"></i></div></div><div class="reportActionsMini"><span>Replenish 4 low-stock lines</span><span>Review 5 watch items</span><span>Check 1 asset action</span></div></div><div class="shotFoot">Finish the demo by showing clear actions, not just data.</div></div>`
     }[st.visual];
     return shell(`<div class="pageHeader demoHeader"><div><span class="eyebrow">GUIDED EXPLAINER / NAVIGATOR</span><h1>Four-step school demo</h1><p>A tighter, cleaner walk-through you can present live to a school nurse, doctor, administrator or procurement lead.</p></div><button class="button outline" data-go="portal/insights">Jump to report</button></div>
       <div class="tourProgress tourProgressV7">${steps.map((x,j)=>`<button class="tourDot ${j===i?'active':j<i?'done':''}" data-tour-jump="${j}"><b>${x.n}</b><span>${x.title}</span></button>`).join('')}</div>
       <section class="tourStage tourStageV7"><div class="tourNarrative"><span class="kicker">${st.label}</span><h2>${st.title}</h2><p>${st.text}</p><div class="demoOutcome"><span>What the school understands</span><b>${st.outcome}</b></div><div class="demoTalkTrack"><span>Suggested presenter line</span><strong>${talkTracks[i]}</strong></div><div class="tourNav"><button class="button outline" data-tour-prev ${i===0?'disabled':''}>Previous</button>${i<steps.length-1?'<button class="button primary" data-tour-next>Next</button>':'<button class="button primary" data-go="portal/insights">Open full report →</button>'}</div></div><div class="tourVisual tourVisualV7">${visual}</div></section>
-      <section class="panel" style="margin-top:18px"><div class="panelHeader"><h2>Why this demo works</h2></div><div class="v5PositionGrid"><div><span class="eyebrow">SIMPLE</span><h3>Less AI, less clutter</h3><p class="smallMuted">The story is shorter, more visual and easier to walk through live.</p></div><div><span class="eyebrow">COMMERCIAL</span><h3>Shows PSC's role clearly</h3><p class="smallMuted">It communicates that PSC is not merely a product list — it is the accountable operating partner.</p></div><div><span class="eyebrow">ACTIONABLE</span><h3>Ends with insight</h3><p class="smallMuted">Schools see that the portal can lead to concrete inventory actions, not just another order screen.</p></div></div></section>`);
+      <section class="panel" style="margin-top:18px"><div class="panelHeader"><h2>Why this demo works</h2></div><div class="v5PositionGrid"><div><span class="eyebrow">SIMPLE</span><h3>Less AI, less clutter</h3><p class="smallMuted">The story is shorter, more visual and easier to walk through live.</p></div><div><span class="eyebrow">COMMERCIAL</span><h3>Shows PS's role clearly</h3><p class="smallMuted">It communicates that PS is not merely a product list — it is the accountable operating partner.</p></div><div><span class="eyebrow">ACTIONABLE</span><h3>Ends with insight</h3><p class="smallMuted">Schools see that the portal can lead to concrete inventory actions, not just another order screen.</p></div></div></section>`);
   }
 
   function insightsPage(){
@@ -2038,7 +2104,7 @@
     const needCards=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.map(c=>`<button class="clinicNeedCard clinicNeedCardIllustrated" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}">
         <span class="clinicNeedIcon" aria-hidden="true">${clinicalNeedIllustration(c.id)}</span>
         <span class="clinicNeedCopy"><b>${esc(c.label)}</b><small>${esc(c.note)}</small></span>
-        <span class="clinicNeedArrow" aria-hidden="true">↗</span>
+        <span class="clinicNeedArrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 18 18 6M6 6h12v12"/></svg></span>
       </button>`).join('');
 
     const sf=storefrontConfig('institutional');
@@ -2073,10 +2139,10 @@
 
       ${clinicalNeedRibbon(selected.id)}
 
-      <div class="notice shopNotice compactInstitutionalNotice"><strong>One accountable supply relationship.</strong> PSC reviews specification, availability and commercial terms before quotation. Regulated lines remain subject to the applicable licensed supply route and professional controls.</div>
+      <div class="notice shopNotice compactInstitutionalNotice"><strong>One accountable supply relationship.</strong> PS reviews specification, availability and commercial terms before quotation. Regulated lines remain subject to the applicable licensed supply route and professional controls.</div>
 
       <div class="filterBar shopFilterBar v25FilterBar v26FilterBar">
-        <div class="searchInput"><span>⌕</span><input data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search product, brand, PSC SKU, supplier SKU or clinical need…"></div>
+        <div class="searchInput"><span>⌕</span><input data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search product, brand, PS SKU, supplier SKU or clinical need…"></div>
         <select data-cat-filter="category" aria-label="Product type"><option>All product types</option>${types.map(c=>`<option ${c===ui.catalogueCat?'selected':''}>${esc(c)}</option>`).join('')}</select>
         <select data-cat-filter="approval" aria-label="Catalogue status">
           <option>All lines</option>
@@ -2094,7 +2160,7 @@
       <div class="productGrid v25ProductGrid">${filtered.map(productCard).join('')}</div>
 
       <section class="customRequestPanel v25CustomRequest v26CustomRequest">
-        <div><span class="eyebrow">CAN'T FIND IT?</span><h2>Request something else.</h2><p>Describe the product, brand, size or specification. PSC will review it as an account-specific product request.</p></div>
+        <div><span class="eyebrow">CAN'T FIND IT?</span><h2>Request something else.</h2><p>Describe the product, brand, size or specification. PS will review it as an account-specific product request.</p></div>
         <div class="customRequestForm"><textarea id="customRequestText" class="textarea" placeholder="Example: paediatric nebulizer masks compatible with our existing unit…"></textarea><div class="customRequestActions"><label>Qty <input id="customRequestQty" type="number" min="1" value="1"></label><button class="button dark semanticPrimary" data-submit-custom>Send custom request →</button></div></div>
       </section>
     `);
@@ -2143,7 +2209,7 @@
       return `<article class="replenishCard"><div class="replenishVisual">${visual}</div><div class="replenishBody"><span class="sku">${x.p.pscSku}</span><h3>${esc(x.p.name)}</h3><p>${esc(x.p.pack)}</p><div class="replenishMeta"><div><span>LAST QTY</span><b>${x.qty}</b></div><div><span>LAST DELIVERED</span><b>${deliveredLabel}</b></div></div><button class="button ${capital?'dark':'primary'} full semanticPrimary" data-replenish="${x.p.pscSku}|${x.qty}">${actionLabel} →</button></div></article>`;
     }).join('');
     const body=items.length?`<div class="replenishGrid">${cards}</div>`:'<div class="emptyState"><h3>No delivered items yet</h3><p>Products will appear here after their first completed order.</p></div>';
-    return shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">PREVIOUSLY DELIVERED</span><h1>Replenish</h1><p>Repeat products already supplied to this clinic. Consumables can go straight to the request; capital equipment can be requested again for PSC review.</p></div><button class="button dark" data-basket>Open request</button></div>${body}`);
+    return shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">PREVIOUSLY DELIVERED</span><h1>Replenish</h1><p>Repeat products already supplied to this clinic. Consumables can go straight to the request; capital equipment can be requested again for PS review.</p></div><button class="button dark" data-basket>Open request</button></div>${body}`);
   }
 
 
@@ -2314,7 +2380,7 @@
         return `<div class="basketLine requestLine"><div class="productGlyph small">Rx</div><div class="basketInfo"><b>${esc(lineDisplayName(l,p))}</b><span>${esc(linePackLabel(l,p))} · ${esc(lineReference(l))}</span><small>${esc(lineBrandPreferenceLabel(l))} · Price confirmed in quotation</small></div><div class="qty"><button data-family-basket-delta="${index}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-family-basket-delta="${index}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
       }
       const imageUrl=productDisplayImageUrl(p);return `<div class="basketLine requestLine">${imageUrl?`<div class="requestLineImage"><img src="${esc(imageUrl)}" alt="" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'"></div>`:`<div class="productGlyph small">${esc((p.brand||'PS').slice(0,2).toUpperCase())}</div>`}<div class="basketInfo"><b>${esc(p.catalogueDisplayName||p.name)}</b><span>${esc(p.cataloguePack||p.pack||'Pack to confirm')} · ${p.pscSku}</span><small>${p.contractPrice?money(p.contractPrice)+' indicative account price':'Price confirmed in quotation'}</small></div><div class="qty"><button data-basket-delta="${p.pscSku}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-basket-delta="${p.pscSku}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-basket-remove="${p.pscSku}">Remove</button></div>`
-    }).join(''):`<div class="emptyState requestEmpty"><h3>Your request is empty</h3><p>Browse the catalogue and add the products you want PSC to quote.</p><button class="button dark" data-go="portal/catalogue">Browse catalogue</button></div>`}</div>${lines.length?`<div class="drawerFooter requestDrawerFooter"><label class="fieldLabel">Request note <span>optional</span></label><textarea class="textarea" id="basketNote" placeholder="Delivery timing, preferred brand, clinic note…"></textarea><div class="totals"><span>Indicative priced lines</span><b>${money(indicative)}</b></div><div class="checkoutPromise requestNextStep"><span>WHAT HAPPENS NEXT</span><p>PSC reviews the request and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. Nothing is procured until the required customer approval is in place.</p></div><button class="button primary full submitRequestButton" data-submit-request>Submit request</button></div>`:''}</aside></div>`;
+    }).join(''):`<div class="emptyState requestEmpty"><h3>Your request is empty</h3><p>Browse the catalogue and add the products you want PS to quote.</p><button class="button dark" data-go="portal/catalogue">Browse catalogue</button></div>`}</div>${lines.length?`<div class="drawerFooter requestDrawerFooter"><label class="fieldLabel">Request note <span>optional</span></label><textarea class="textarea" id="basketNote" placeholder="Delivery timing, preferred brand, clinic note…"></textarea><div class="totals"><span>Indicative priced lines</span><b>${money(indicative)}</b></div><div class="checkoutPromise requestNextStep"><span>WHAT HAPPENS NEXT</span><p>PS reviews the request and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. Nothing is procured until the required customer approval is in place.</p></div><button class="button primary full submitRequestButton" data-submit-request>Submit request</button></div>`:''}</aside></div>`;
   }
 
 
@@ -2322,7 +2388,7 @@
     const r=state.requests.find(x=>x.id===id); if(!r)return '';
     const quote=calcQuote(r);
     const canApprove=r.status==='Sent' && quote.taxResolved && quote.hasSell;
-    return `<div><div class="modalHeader"><div><span class="eyebrow">${admin?'PSC REQUEST CONTROL':'REQUEST / QUOTATION'}</span><h2 class="mono">${r.id}</h2><div class="smallMuted">${esc(r.groupName||state.groupName||'Institutional account')} · ${esc(r.campus)} · ${date(r.createdAt)}</div></div><button class="iconBtn" data-modal-close>×</button></div>
+    return `<div><div class="modalHeader"><div><span class="eyebrow">${admin?'PS REQUEST CONTROL':'REQUEST / QUOTATION'}</span><h2 class="mono">${r.id}</h2><div class="smallMuted">${esc(r.groupName||state.groupName||'Institutional account')} · ${esc(r.campus)} · ${date(r.createdAt)}</div></div><button class="iconBtn" data-modal-close>×</button></div>
       ${admin?adminQuoteBuilder(r,quote):schoolQuote(r,quote,canApprove)}${orderDocumentsSection(r,admin)}</div>`;
   }
 
@@ -2335,7 +2401,7 @@
 
   function schoolQuote(r,q,canApprove){
     const delivery=['Authorized','Procurement','Delivery'].includes(r.status)?expectedDeliveryLabel(r):'';
-    return `<div class="schoolQuoteBox"><div class="quoteCustomerTop"><div><span class="eyebrow">${r.quoteRef||'ORDER UNDER REVIEW'}</span><h3>${friendlyStatus(r.status)}</h3></div>${customerStatusPill(r.status)}</div>${r.status==='Drafting'?`<div class="quoteStatePanel"><b>PSC is reviewing this order.</b><p>Your formal quotation will be sent to ${esc(accountEmailLabel())}.</p></div>`:''}${r.quoteRef?`<div class="tableWrap"><table class="dataTable"><thead><tr><th>ITEM</th><th>PACK</th><th>QTY</th><th>UNIT EX VAT</th><th>LINE EX VAT</th><th>VAT</th></tr></thead><tbody>${q.rows.map(x=>`<tr><td><b>${esc(lineDisplayName(x.l,x.p))}</b><div class="sub mono">${esc(lineReference(x.l))}</div>${isFamilyLine(x.l)?`<div class="sub">${esc(lineBrandPreferenceLabel(x.l))}</div>`:''}</td><td>${esc(linePackLabel(x.l,x.p))}</td><td>${x.l.qty}</td><td>${x.sell!==null?money(x.sell):'Pending'}</td><td>${x.sell!==null?money(x.sell*x.l.qty):'Pending'}</td><td>${x.vatRate===null?'Review':x.vatRate+'%'}</td></tr>`).join('')}</tbody></table></div><div class="quoteSummary"><div><span>SUBTOTAL EX VAT</span><b>${q.hasSell?money(q.subtotal):'Pending'}</b></div><div><span>VAT</span><b>${q.taxResolved?money(q.vat):'Review'}</b></div><div><span>TOTAL</span><b>${q.hasSell&&q.taxResolved?money(q.total):'Pending'}</b></div><div><span>VALIDITY</span><b>${esc(r.quote?.validity||'Pending')}</b></div></div>`:''}${r.status==='Sent'?`<div class="modalQuoteActions"><button class="button primary" data-confirm-quote="${r.id}">Confirm quotation</button><button class="button quietDanger" data-cancel-quote="${r.id}">Cancel quotation</button></div>`:''}${delivery?`<div class="deliveryPromise large"><span>TRACK ORDER</span><b>${delivery}</b><small>Delivery timing is shown only when PSC has recorded it for this order.</small></div>`:''}${r.status==='Accepted'?`<div class="quoteStatePanel delivered"><b>Delivered.</b><p>This order is now part of your purchase history and its items can be repeated from Replenish.</p></div>`:''}${r.status==='Cancelled'?`<div class="quoteStatePanel cancelled"><b>Cancelled.</b><p>${isArchived(r)?'This quotation is now in Archive.':`It will move to Archive on ${addDaysLabel(r.cancelledAt||r.createdAt,30)}.`}</p></div>`:''}</div>`;
+    return `<div class="schoolQuoteBox"><div class="quoteCustomerTop"><div><span class="eyebrow">${r.quoteRef||'ORDER UNDER REVIEW'}</span><h3>${friendlyStatus(r.status)}</h3></div>${customerStatusPill(r.status)}</div>${r.status==='Drafting'?`<div class="quoteStatePanel"><b>PS is reviewing this order.</b><p>Your formal quotation will be sent to ${esc(accountEmailLabel())}.</p></div>`:''}${r.quoteRef?`<div class="tableWrap"><table class="dataTable"><thead><tr><th>ITEM</th><th>PACK</th><th>QTY</th><th>UNIT EX VAT</th><th>LINE EX VAT</th><th>VAT</th></tr></thead><tbody>${q.rows.map(x=>`<tr><td><b>${esc(lineDisplayName(x.l,x.p))}</b><div class="sub mono">${esc(lineReference(x.l))}</div>${isFamilyLine(x.l)?`<div class="sub">${esc(lineBrandPreferenceLabel(x.l))}</div>`:''}</td><td>${esc(linePackLabel(x.l,x.p))}</td><td>${x.l.qty}</td><td>${x.sell!==null?money(x.sell):'Pending'}</td><td>${x.sell!==null?money(x.sell*x.l.qty):'Pending'}</td><td>${x.vatRate===null?'Review':x.vatRate+'%'}</td></tr>`).join('')}</tbody></table></div><div class="quoteSummary"><div><span>SUBTOTAL EX VAT</span><b>${q.hasSell?money(q.subtotal):'Pending'}</b></div><div><span>VAT</span><b>${q.taxResolved?money(q.vat):'Review'}</b></div><div><span>TOTAL</span><b>${q.hasSell&&q.taxResolved?money(q.total):'Pending'}</b></div><div><span>VALIDITY</span><b>${esc(r.quote?.validity||'Pending')}</b></div></div>`:''}${r.status==='Sent'?`<div class="modalQuoteActions"><button class="button primary" data-confirm-quote="${r.id}">Confirm quotation</button><button class="button quietDanger" data-cancel-quote="${r.id}">Cancel quotation</button></div>`:''}${delivery?`<div class="deliveryPromise large"><span>TRACK ORDER</span><b>${delivery}</b><small>Delivery timing is shown only when PS has recorded it for this order.</small></div>`:''}${r.status==='Accepted'?`<div class="quoteStatePanel delivered"><b>Delivered.</b><p>This order is now part of your purchase history and its items can be repeated from Replenish.</p></div>`:''}${r.status==='Cancelled'?`<div class="quoteStatePanel cancelled"><b>Cancelled.</b><p>${isArchived(r)?'This quotation is now in Archive.':`It will move to Archive on ${addDaysLabel(r.cancelledAt||r.createdAt,30)}.`}</p></div>`:''}</div>`;
   }
 
   function adminQuoteBuilder(r,q){
@@ -2347,7 +2413,7 @@
     const open=state.requests.filter(r=>!['Accepted','Cancelled'].includes(r.status)).length;
     const activeQuotes=state.requests.filter(r=>['Sent','Authorized','Procurement','Delivery'].includes(r.status));
     const qvals=activeQuotes.map(calcQuote);const quoted=qvals.reduce((s,q)=>s+(q.hasSell?q.subtotal:0),0);const gp=qvals.reduce((s,q)=>s+(q.gp||0),0);const gm=quoted?gp/quoted*100:0;
-    return shell(`<div class="pageHeader"><div><span class="eyebrow">PSC DEAL DESK</span><h1>Institutional supply control</h1><p>One desk for requests, quote economics, supplier evidence, release gates and fulfilment. Demo figures are illustrative unless backed by an identified evidence source.</p></div></div><div class="adminStatRow"><div class="adminStat"><span>OPEN REQUESTS</span><b>${open}</b></div><div class="adminStat"><span>QUOTED EX VAT</span><b>${money(quoted)}</b></div><div class="adminStat"><span>AUTHORIZED</span><b>${state.requests.filter(r=>r.status==='Authorized').length}</b></div><div class="adminStat"><span>EST. TRUE GP</span><b>${money(gp)}</b></div><div class="adminStat"><span>EST. GM</span><b>${gm.toFixed(1)}%</b></div><div class="adminStat"><span>PRODUCT MASTER</span><b>${cms.products.filter(p=>p.active).length||D.products.length}</b></div></div><div class="actionGrid"><button class="actionCard" data-go="admin/requests"><div class="actionIcon">${icon('checklist')}</div><div><b>Request queue</b><span>Convert needs into controlled quotes</span></div></button><button class="actionCard" data-go="admin/mail"><div class="actionIcon">${icon('mail')}</div><div><b>Mail Desk</b><span>Workshop + account outreach from info@pharmaservice.ae</span></div></button><button class="actionCard" data-go="admin/storefront"><div class="actionIcon">${icon('edit')}</div><div><b>Storefront manager</b><span>Institutional + wholesale publishing</span></div></button><button class="actionCard" data-go="admin/products"><div class="actionIcon">${icon('boxes')}</div><div><b>Product master</b><span>Product, media and commercial control</span></div></button><button class="actionCard" data-go="admin/family-options"><div class="actionIcon">${icon('checklist')}</div><div><b>Family options</b><span>Approve, hold or reject supplier candidates</span></div></button><button class="actionCard" data-go="admin/fulfilment"><div class="actionIcon">${icon('repeat')}</div><div><b>Fulfilment rules</b><span>Route by site and source</span></div></button><button class="actionCard" data-go="admin/supplier-feed"><div class="actionIcon">${icon('reports')}</div><div><b>Supplier feed</b><span>Acorus / Med7 data ingestion</span></div></button></div><div class="twoCol"><section class="panel"><div class="panelHeader"><h2>Requests needing attention</h2><button data-go="admin/requests">Open queue →</button></div><div class="tableWrap"><table class="dataTable"><thead><tr><th>REQUEST</th><th>ACCOUNT / SITE</th><th>LINES</th><th>STATUS</th><th>NEXT ACTION</th></tr></thead><tbody>${state.requests.filter(r=>r.status!=='Accepted').map(r=>`<tr class="clickable" data-admin-request="${r.id}"><td><b class="mono">${r.id}</b></td><td>${esc(r.groupName||state.groupName||'Institutional account')}<div class="sub">${esc(r.campus)}</div></td><td>${r.lines.length}</td><td>${statusPill(r.status)}</td><td>${r.status==='Drafting'?'Validate stock + price':r.status==='Sent'?'Resolve school decision':'Check procurement release'}</td></tr>`).join('')}</tbody></table></div></section><div style="display:grid;gap:14px"><div class="marginBox"><h3>Deal economics · active quoted demo</h3><div class="marginGrid"><div><span>DIRECT COST</span><b>${money(qvals.reduce((s,q)=>s+(q.costComplete?q.cost:0),0))}</b></div><div><span>SELL</span><b>${money(quoted)}</b></div><div><span>TRUE GM</span><b>${gm.toFixed(1)}%</b></div><div><span>FOC</span><b>AED 0</b></div><div><span>DELIVERY</span><b>Per quote</b></div><div><span>TARGET</span><b>20%</b></div></div></div><section class="panel"><div class="panelHeader"><h2>Release gate</h2></div><div class="gateList"><div class="gate ok"><span>Exact specification mapped</span><i></i></div><div class="gate warn"><span>Supplier stock current</span><i></i></div><div class="gate warn"><span>VAT / tax evidence by line</span><i></i></div><div class="gate ok"><span>Margin incl. direct costs</span><i></i></div><div class="gate block"><span>Customer funding / PO</span><i></i></div><div class="gate warn"><span>Regulated route validated</span><i></i></div></div></section></div></div><div class="notice" style="margin-top:18px"><strong>Control:</strong> a supplier PO is not released merely because a customer approved a quote. Funding, current supplier evidence, tax treatment, regulated route and delivery must pass the release gate.</div>`,true);
+    return shell(`<div class="pageHeader"><div><span class="eyebrow">PS DEAL DESK</span><h1>Institutional supply control</h1><p>One desk for requests, quote economics, supplier evidence, release gates and fulfilment. Demo figures are illustrative unless backed by an identified evidence source.</p></div></div><div class="adminStatRow"><div class="adminStat"><span>OPEN REQUESTS</span><b>${open}</b></div><div class="adminStat"><span>QUOTED EX VAT</span><b>${money(quoted)}</b></div><div class="adminStat"><span>AUTHORIZED</span><b>${state.requests.filter(r=>r.status==='Authorized').length}</b></div><div class="adminStat"><span>EST. TRUE GP</span><b>${money(gp)}</b></div><div class="adminStat"><span>EST. GM</span><b>${gm.toFixed(1)}%</b></div><div class="adminStat"><span>PRODUCT MASTER</span><b>${cms.products.filter(p=>p.active).length||D.products.length}</b></div></div><div class="actionGrid"><button class="actionCard" data-go="admin/requests"><div class="actionIcon">${icon('checklist')}</div><div><b>Request queue</b><span>Convert needs into controlled quotes</span></div></button><button class="actionCard" data-go="admin/mail"><div class="actionIcon">${icon('mail')}</div><div><b>Mail Desk</b><span>Workshop + account outreach from info@pharmaservice.ae</span></div></button><button class="actionCard" data-go="admin/storefront"><div class="actionIcon">${icon('edit')}</div><div><b>Storefront manager</b><span>Institutional + wholesale publishing</span></div></button><button class="actionCard" data-go="admin/products"><div class="actionIcon">${icon('boxes')}</div><div><b>Product master</b><span>Product, media and commercial control</span></div></button><button class="actionCard" data-go="admin/family-options"><div class="actionIcon">${icon('checklist')}</div><div><b>Family options</b><span>Approve, hold or reject supplier candidates</span></div></button><button class="actionCard" data-go="admin/fulfilment"><div class="actionIcon">${icon('repeat')}</div><div><b>Fulfilment rules</b><span>Route by site and source</span></div></button><button class="actionCard" data-go="admin/supplier-feed"><div class="actionIcon">${icon('reports')}</div><div><b>Supplier feed</b><span>Acorus / Med7 data ingestion</span></div></button></div><div class="twoCol"><section class="panel"><div class="panelHeader"><h2>Requests needing attention</h2><button data-go="admin/requests">Open queue →</button></div><div class="tableWrap"><table class="dataTable"><thead><tr><th>REQUEST</th><th>ACCOUNT / SITE</th><th>LINES</th><th>STATUS</th><th>NEXT ACTION</th></tr></thead><tbody>${state.requests.filter(r=>r.status!=='Accepted').map(r=>`<tr class="clickable" data-admin-request="${r.id}"><td><b class="mono">${r.id}</b></td><td>${esc(r.groupName||state.groupName||'Institutional account')}<div class="sub">${esc(r.campus)}</div></td><td>${r.lines.length}</td><td>${statusPill(r.status)}</td><td>${r.status==='Drafting'?'Validate stock + price':r.status==='Sent'?'Resolve school decision':'Check procurement release'}</td></tr>`).join('')}</tbody></table></div></section><div style="display:grid;gap:14px"><div class="marginBox"><h3>Deal economics · active quoted demo</h3><div class="marginGrid"><div><span>DIRECT COST</span><b>${money(qvals.reduce((s,q)=>s+(q.costComplete?q.cost:0),0))}</b></div><div><span>SELL</span><b>${money(quoted)}</b></div><div><span>TRUE GM</span><b>${gm.toFixed(1)}%</b></div><div><span>FOC</span><b>AED 0</b></div><div><span>DELIVERY</span><b>Per quote</b></div><div><span>TARGET</span><b>20%</b></div></div></div><section class="panel"><div class="panelHeader"><h2>Release gate</h2></div><div class="gateList"><div class="gate ok"><span>Exact specification mapped</span><i></i></div><div class="gate warn"><span>Supplier stock current</span><i></i></div><div class="gate warn"><span>VAT / tax evidence by line</span><i></i></div><div class="gate ok"><span>Margin incl. direct costs</span><i></i></div><div class="gate block"><span>Customer funding / PO</span><i></i></div><div class="gate warn"><span>Regulated route validated</span><i></i></div></div></section></div></div><div class="notice" style="margin-top:18px"><strong>Control:</strong> a supplier PO is not released merely because a customer approved a quote. Funding, current supplier evidence, tax treatment, regulated route and delivery must pass the release gate.</div>`,true);
   }
 
   function adminStorefront(){
@@ -2364,7 +2430,7 @@
 
     return shell(`
       <div class="pageHeader cmsPageHeader">
-        <div><span class="eyebrow">PSC STOREFRONT CONTROL</span><h1>Storefront manager</h1><p>One controlled product master, two customer-facing presentations. Institutional and wholesale can use different copy, categories, visibility and commercial display without duplicating the SKU.</p></div>
+        <div><span class="eyebrow">PS STOREFRONT CONTROL</span><h1>Storefront manager</h1><p>One controlled product master, two customer-facing presentations. Institutional and wholesale can use different copy, categories, visibility and commercial display without duplicating the SKU.</p></div>
         <button class="button light" data-go="${channel==='institutional'?'portal/catalogue':'wholesale'}">${channel==='institutional'?'Open institutional catalogue':'Open wholesale storefront'} →</button>
       </div>
 
@@ -2401,18 +2467,18 @@
 
   function adminProducts(){
     if(!cms.loaded){
-      return shell(`<div class="pageHeader"><div><span class="eyebrow">CONTROLLED PRODUCT MASTER</span><h1>Product master</h1><p>Loading the database-backed catalogue…</p></div></div><section class="panel"><div class="emptyState"><h3>Preparing the master</h3><p>PSC is moving the live catalogue from static code into the controlled database.</p></div></section>`,true);
+      return shell(`<div class="pageHeader"><div><span class="eyebrow">CONTROLLED PRODUCT MASTER</span><h1>Product master</h1><p>Loading the database-backed catalogue…</p></div></div><section class="panel"><div class="emptyState"><h3>Preparing the master</h3><p>PS is moving the live catalogue from static code into the controlled database.</p></div></section>`,true);
     }
     const q=(ui.cmsSearch||'').toLowerCase().trim();
     const activeMaster=cms.products.filter(p=>p.active);
     const rows=activeMaster.filter(p=>`${p.psc_sku} ${p.name||''} ${p.brand||''} ${p.category||''} ${p.supplier_name||''}`.toLowerCase().includes(q));
     return shell(`
       <div class="pageHeader cmsPageHeader">
-        <div><span class="eyebrow">CONTROLLED PRODUCT MASTER</span><h1>Products & media</h1><p>Edit the controlled SKU once, then publish a separate Institutional or Wholesale presentation. Supplier, cost, evidence and internal notes remain restricted to PSC admin.</p></div>
+        <div><span class="eyebrow">CONTROLLED PRODUCT MASTER</span><h1>Products & media</h1><p>Edit the controlled SKU once, then publish a separate Institutional or Wholesale presentation. Supplier, cost, evidence and internal notes remain restricted to PS admin.</p></div>
         <button class="button light" data-go="admin/storefront">Storefront manager →</button>
       </div>
 
-      <div class="filterBar cmsMasterFilter"><div class="searchInput"><span>⌕</span><input data-cms-search value="${esc(ui.cmsSearch)}" placeholder="Search product, PSC SKU, brand, supplier or category…"></div><div class="cmsMasterCount">${rows.length} / ${activeMaster.length}</div></div>
+      <div class="filterBar cmsMasterFilter"><div class="searchInput"><span>⌕</span><input data-cms-search value="${esc(ui.cmsSearch)}" placeholder="Search product, PS SKU, brand, supplier or category…"></div><div class="cmsMasterCount">${rows.length} / ${activeMaster.length}</div></div>
 
       <section class="panel cmsProductMasterPanel">
         <div class="tableWrap"><table class="dataTable cmsMasterTable">
@@ -2475,7 +2541,7 @@
           </section>
 
           <section class="panel cmsFormSection">
-            <div class="panelHeader"><div><span class="eyebrow">INTERNAL ONLY</span><h2>Supply & commercial evidence</h2></div><span class="cmsPrivateLabel">PSC ADMIN</span></div>
+            <div class="panelHeader"><div><span class="eyebrow">INTERNAL ONLY</span><h2>Supply & commercial evidence</h2></div><span class="cmsPrivateLabel">PS ADMIN</span></div>
             <div class="cmsFieldGrid">
               <label><span>Supplier</span><input class="input" id="cmsSupplier" value="${esc(p.supplier_name||'')}"></label>
               <label><span>Supplier SKU</span><input class="input" id="cmsSupplierSku" value="${esc(p.supplier_sku||'')}"></label>
@@ -2496,7 +2562,7 @@
               <label><span>Storefront category</span><input class="input" id="cmsChannelCategory" value="${esc(cv('category',s.category)||p.category||'')}"></label>
               <label><span>Pack label</span><input class="input" id="cmsPackLabel" value="${esc(cv('pack_label',s.pack_label)||'')}" placeholder="${esc(p.pack||'')}"></label>
               <label><span>Display order</span><input class="input" id="cmsOrder" type="number" value="${cv('display_order',s.display_order)??1000}"></label>
-              <label><span>Price display</span><select class="input" id="cmsPriceMode"><option value="request_quote" ${cv('price_display_mode',s.price_display_mode)==='request_quote'?'selected':''}>Request quote</option><option value="show_price" ${cv('price_display_mode',s.price_display_mode)==='show_price'?'selected':''}>Show price</option><option value="contact" ${cv('price_display_mode',s.price_display_mode)==='contact'?'selected':''}>Contact PSC</option></select></label>
+              <label><span>Price display</span><select class="input" id="cmsPriceMode"><option value="request_quote" ${cv('price_display_mode',s.price_display_mode)==='request_quote'?'selected':''}>Request quote</option><option value="show_price" ${cv('price_display_mode',s.price_display_mode)==='show_price'?'selected':''}>Show price</option><option value="contact" ${cv('price_display_mode',s.price_display_mode)==='contact'?'selected':''}>Contact PS</option></select></label>
               <label><span>Display price</span><input class="input" id="cmsDisplayPrice" type="number" step="0.01" value="${cv('display_price',s.display_price)??''}"></label>
               <label><span>MOQ</span><input class="input" id="cmsMoq" type="number" step="1" value="${cv('moq',s.moq)??''}"></label>
               <div class="cmsToggleGroup">
@@ -2533,7 +2599,7 @@
   function adminFamilyOptions(){
     if(!optionDesk.loaded){
       if(!optionDesk.loading) setTimeout(loadAdminFamilyOptions,0);
-      return shell(`<div class="pageHeader"><div><span class="eyebrow">FAMILY + SUPPLIER CONTROL</span><h1>Supplier option review</h1><p>Loading the controlled Acorus candidate workbench…</p></div></div><section class="panel"><div class="emptyState"><h3>Preparing 719 source-list candidates</h3><p>No candidate becomes customer-selectable until PSC explicitly approves it and records current verification evidence.</p></div></section>`,true);
+      return shell(`<div class="pageHeader"><div><span class="eyebrow">FAMILY + SUPPLIER CONTROL</span><h1>Supplier option review</h1><p>Loading the controlled Acorus candidate workbench…</p></div></div><section class="panel"><div class="emptyState"><h3>Preparing 719 source-list candidates</h3><p>No candidate becomes customer-selectable until PS explicitly approves it and records current verification evidence.</p></div></section>`,true);
     }
     const options=optionDesk.options;
     const approved=options.filter(o=>o.psc_decision==='APPROVE').length;
@@ -2551,7 +2617,7 @@
       return `<tr><td><b>${esc(g.family.family_name)}</b><div class="sub mono">${esc(g.family.family_id)}</div></td><td>${esc(g.family.clinical_need||'')}</td><td><b>${g.options.length}</b><div class="sub">${v} verified</div></td><td>${a} approved<div class="sub">${c} customer-selectable</div></td><td><button class="button light" data-option-family-open="${esc(g.family.family_id)}">Review</button></td></tr>`;
     }).join('');
     return shell(`
-      <div class="pageHeader familyOptionPageHeader"><div><span class="eyebrow">FAMILY + SUPPLIER CONTROL</span><h1>Supplier option review</h1><p>The Acorus source list is a candidate universe, not a live catalogue. PSC explicitly decides fit, records commercial evidence and controls what may become customer-selectable.</p></div>${selectedFamily?`<button class="button light" data-option-family-open="all">← All families</button>`:''}</div>
+      <div class="pageHeader familyOptionPageHeader"><div><span class="eyebrow">FAMILY + SUPPLIER CONTROL</span><h1>Supplier option review</h1><p>The Acorus source list is a candidate universe, not a live catalogue. PS explicitly decides fit, records commercial evidence and controls what may become customer-selectable.</p></div>${selectedFamily?`<button class="button light" data-option-family-open="all">← All families</button>`:''}</div>
       <div class="adminStatRow familyOptionStats"><div class="adminStat"><span>CANDIDATES</span><b>${options.length}</b></div><div class="adminStat"><span>FAMILIES</span><b>${new Set(options.map(o=>o.family_id)).size}</b></div><div class="adminStat"><span>VERIFIED</span><b>${verified}</b></div><div class="adminStat"><span>APPROVED</span><b>${approved}</b></div><div class="adminStat"><span>CUSTOMER SELECTABLE</span><b>${selectable}</b></div><div class="adminStat"><span>LIVE FIXED PRICES</span><b>${liveFixed}</b></div></div>
       <div class="notice familyOptionGuard"><strong>Release rule:</strong> APPROVE controls product identity. Fixed-price publication is a separate commercial release: verified acquisition cost + every direct-cost component, verified VAT, current price evidence and validity, plus the family must explicitly permit fixed pricing. Target GM defaults to 20%. Acorus MRP remains an internal retail benchmark only.</div>
       <div class="filterBar familyOptionFilter"><div class="searchInput"><span>${icon('search')}</span><input data-option-search value="${esc(ui.optionSearch)}" placeholder="Search family, brand, Acorus product, supplier or reference…"></div><select data-option-decision><option ${ui.optionDecision==='All'?'selected':''}>All</option><option ${ui.optionDecision==='VERIFY'?'selected':''}>VERIFY</option><option ${ui.optionDecision==='APPROVE'?'selected':''}>APPROVE</option><option ${ui.optionDecision==='HOLD'?'selected':''}>HOLD</option><option ${ui.optionDecision==='REJECT'?'selected':''}>REJECT</option></select></div>
@@ -2568,7 +2634,7 @@
   }
 
   function adminFeed(){
-    return shell(`<div class="pageHeader"><div><span class="eyebrow">ACORUS / MED7 INTEGRATION</span><h1>Supplier feed</h1><p>The production portal should ingest a B2B supplier master rather than scrape a retail storefront. CSV, SFTP or API can all map into the same controlled PSC product master.</p></div></div><div class="feedDiagram"><div class="feedNode"><div style="font-size:23px;color:#ff5a1f">▤</div><h3>Acorus / Med7 source</h3><p>Supplier SKU, barcode, brand, pack, B2B cost, stock, batch/expiry, VAT evidence, product authorization, image/media permission.</p></div><div class="feedArrow">→</div><div class="feedNode"><div style="font-size:23px;color:#ff5a1f">▦</div><h3>PSC product master</h3><p>Map supplier records to PSC SKU, school-approved status, requirement status, backup source, margin rules and evidence date.</p></div><div class="feedArrow">→</div><div class="feedNode"><div style="font-size:23px;color:#ff5a1f">⌁</div><h3>School portal</h3><p>Expose only approved customer-facing fields. Never show internal supplier cost or routing logic to the clinic.</p></div></div><div class="twoCol"><section class="panel"><div class="panelHeader"><h2>Required feed fields</h2></div><div class="codeBlock">supplier_sku<br>barcode<br>brand<br>product_name<br>pack_size<br>category<br>b2b_unit_cost<br>vat_status_or_evidence<br>stock_qty_or_status<br>lead_time<br>batch_tracking_required<br>expiry_tracking_required<br>regulated_flag<br>registration_reference<br>image_url_or_asset_id<br>media_usage_permission<br>last_updated_at</div></section><section class="panel"><div class="panelHeader"><h2>Ingestion controls</h2></div><div class="gateList"><div class="gate ok"><span>Supplier SKU uniqueness</span><i></i></div><div class="gate ok"><span>Public benchmark kept separate</span><i></i></div><div class="gate warn"><span>Tax evidence expiry alert</span><i></i></div><div class="gate warn"><span>Product image permission</span><i></i></div><div class="gate block"><span>No silent substitute mapping</span><i></i></div><div class="gate ok"><span>Audit every manual cost change</span><i></i></div></div></section></div><div class="notice" style="margin-top:18px"><strong>Recommended commercial ask to Acorus:</strong> B2B price file + product master + live/periodic stock feed + permitted product media + agreed fulfilment rules. Once supplied, this page becomes the connector rather than a manual upload screen.</div>`,true);
+    return shell(`<div class="pageHeader"><div><span class="eyebrow">ACORUS / MED7 INTEGRATION</span><h1>Supplier feed</h1><p>The production portal should ingest a B2B supplier master rather than scrape a retail storefront. CSV, SFTP or API can all map into the same controlled PS product master.</p></div></div><div class="feedDiagram"><div class="feedNode"><div style="font-size:23px;color:#ff5a1f">▤</div><h3>Acorus / Med7 source</h3><p>Supplier SKU, barcode, brand, pack, B2B cost, stock, batch/expiry, VAT evidence, product authorization, image/media permission.</p></div><div class="feedArrow">→</div><div class="feedNode"><div style="font-size:23px;color:#ff5a1f">▦</div><h3>PS product master</h3><p>Map supplier records to PS SKU, school-approved status, requirement status, backup source, margin rules and evidence date.</p></div><div class="feedArrow">→</div><div class="feedNode"><div style="font-size:23px;color:#ff5a1f">⌁</div><h3>School portal</h3><p>Expose only approved customer-facing fields. Never show internal supplier cost or routing logic to the clinic.</p></div></div><div class="twoCol"><section class="panel"><div class="panelHeader"><h2>Required feed fields</h2></div><div class="codeBlock">supplier_sku<br>barcode<br>brand<br>product_name<br>pack_size<br>category<br>b2b_unit_cost<br>vat_status_or_evidence<br>stock_qty_or_status<br>lead_time<br>batch_tracking_required<br>expiry_tracking_required<br>regulated_flag<br>registration_reference<br>image_url_or_asset_id<br>media_usage_permission<br>last_updated_at</div></section><section class="panel"><div class="panelHeader"><h2>Ingestion controls</h2></div><div class="gateList"><div class="gate ok"><span>Supplier SKU uniqueness</span><i></i></div><div class="gate ok"><span>Public benchmark kept separate</span><i></i></div><div class="gate warn"><span>Tax evidence expiry alert</span><i></i></div><div class="gate warn"><span>Product image permission</span><i></i></div><div class="gate block"><span>No silent substitute mapping</span><i></i></div><div class="gate ok"><span>Audit every manual cost change</span><i></i></div></div></section></div><div class="notice" style="margin-top:18px"><strong>Recommended commercial ask to Acorus:</strong> B2B price file + product master + live/periodic stock feed + permitted product media + agreed fulfilment rules. Once supplied, this page becomes the connector rather than a manual upload screen.</div>`,true);
   }
 
   function relatedProductsFor(p,limit=6){
@@ -2624,7 +2690,7 @@
           <div class="productDisclosureList">
             <details open><summary><span>Specification</span><i>+</i></summary><div><p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
             ${mapped?`<details><summary><span>Requirement mapping</span><i>+</i></summary><div><p><strong>${esc(p.dhaRequirement||'Mapped requirement')}</strong></p><p>${esc(p.dhaReference||'DHA requirement')} · ${esc(p.dhaStatus||'Status to verify')}</p>${p.dhaCondition?`<small>${esc(p.dhaCondition)}</small>`:''}<p class="disclosureFinePrint">Mapped to the applicable DHA clinic requirement. This is not a DHA product endorsement or product approval.</p></div></details>`:''}
-            <details><summary><span>Supply & compatibility</span><i>+</i></summary><div><p>${p.regulated?'Availability and supply remain subject to applicable UAE licensing, recipient authorization, product registration, storage, batch/expiry and professional controls.':'PSC confirms the exact specification, current availability and commercial terms before quotation.'}</p></div></details>
+            <details><summary><span>Supply & compatibility</span><i>+</i></summary><div><p>${p.regulated?'Availability and supply remain subject to applicable UAE licensing, recipient authorization, product registration, storage, batch/expiry and professional controls.':'PS confirms the exact specification, current availability and commercial terms before quotation.'}</p></div></details>
             ${workshop?`<details><summary><span>From The Workshop</span><i>+</i></summary><div><button class="productWorkshopInline" data-go="workshop/${esc(workshop.slug)}"><small>${esc(workshopFormatLabel(workshop.format))}</small><b>${esc(workshop.title)}</b></button></div></details>`:''}
           </div>
         </div>
@@ -2677,14 +2743,14 @@
 
     if(isDemoAccount()){
       audit('Demo custom request',`${qty} × ${text}`);
-      toast('<strong>Demo request received.</strong><br>This action is simulated and has not been sent to PSC.');
+      toast('<strong>Demo request received.</strong><br>This action is simulated and has not been sent to PS.');
       if(el) el.value='';
       return;
     }
 
     try{
       await persistCustomRequest(text,qty);
-      toast(`<strong>Custom request received.</strong><br>PSC will review it and contact ${esc(accountEmailLabel())}.`);
+      toast(`<strong>Custom request received.</strong><br>PS will review it and contact ${esc(accountEmailLabel())}.`);
       if(el) el.value='';
     }catch(e){ console.error(e); toast('<strong>Could not send custom request.</strong>'); }
   }
@@ -2785,6 +2851,10 @@
       schools
     };
 
+    if(isDemoAccount() && !demoSession.initialized){
+      state=JSON.parse(JSON.stringify(seed));
+      demoSession.initialized=true;
+    }
     state.accountEmail=session.user.email||'';
     if(group) state.groupName=group.name;
 
@@ -2843,6 +2913,10 @@
 
   async function loadOrdersFromDatabase(){
     if(!sb || !session?.user) return;
+    if(isDemoAccount() && demoSession.requestsBySchool[authContext?.school?.id]){
+      state.requests=JSON.parse(JSON.stringify(demoSession.requestsBySchool[authContext.school.id]));
+      return;
+    }
     let query=sb.from('orders').select('*').order('created_at',{ascending:false});
     if(!authContext?.isPscAdmin){
       if(!authContext?.school?.id){ state.requests=[]; return; }
@@ -2916,11 +2990,13 @@
   }
 
   async function signOut(){
+    const wasDemo=isDemoAccount();
     if(sb) await sb.auth.signOut();
     session=null; authContext=null;
     state={...JSON.parse(JSON.stringify(seed)),basket:[]};
-    try{ localStorage.removeItem(STORAGE); }catch{}
-    location.hash='login'; render();
+    demoSession.initialized=false; demoSession.requestsBySchool={};
+    if(!wasDemo){ try{ localStorage.removeItem(STORAGE); }catch{} }
+    go('login');
   }
 
   async function bootstrapAuth(){
@@ -2941,6 +3017,7 @@
   }
 
   async function persistNewOrder(lines,note=''){
+    if(isDemoAccount()) throw new Error('Demo orders must remain local.');
     if(!sb || !session?.user || !authContext?.school?.id || !authContext?.group?.id) throw new Error('Account context is missing.');
     const now=new Date();
     const orderNumber=`PSC-REQ-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getTime()).slice(-6)}`;
@@ -2972,6 +3049,7 @@
   }
 
   async function persistCustomRequest(description,quantity){
+    if(isDemoAccount()) throw new Error('Demo custom requests must remain local.');
     if(!sb || !session?.user || !authContext?.school?.id || !authContext?.group?.id) throw new Error('Account context is missing.');
     const {error}=await sb.from('custom_requests').insert({group_id:authContext.group.id,school_id:authContext.school.id,requested_by:session.user.id,description,quantity,status:'under_review'});
     if(error) throw error;
@@ -3044,9 +3122,11 @@
     };
     const workshopSlug=route.startsWith('workshop/')?route.split('/')[1]:null;
     const workshopGuide=workshopSlug?workshopGuideBySlug(workshopSlug):null;
+    const workshopModule=workshopSlug?workshopModuleBySlug(workshopSlug):null;
     const baseRoute=route.startsWith('catalogue/')?'catalogue':route.startsWith('workshop/')?'workshop':route;
     let item=publicMeta[baseRoute];
-    if(workshopGuide)item=[`${workshopGuide.title} | The Workshop`,workshopGuide.excerpt,`/workshop/${workshopGuide.slug}`];
+    if(workshopModule)item=[`${workshopModule.title} | The Workshop`,workshopModule.intro,`/workshop/${workshopModule.slug}`];
+    else if(workshopGuide)item=[`${workshopGuide.title} | The Workshop`,workshopGuide.excerpt,`/workshop/${workshopGuide.slug}`];
     if(!item) return;
     document.title=item[0];
     let description=document.querySelector('meta[name="description"]');
@@ -3064,7 +3144,7 @@
     if(protectedRoute(r)){
       if(!authReady){ $app.innerHTML='<main class="publicPage"><section class="publicPageHero"><span class="kicker">PHARMA SERVICE</span><h1>Opening secure account…</h1></section></main>'; return; }
       if(!session){ if(r!=='login') location.hash='login'; return; }
-      if(r.startsWith('admin/') && !authContext?.isPscAdmin){ location.hash='portal/dashboard'; return; }
+      if(r.startsWith('admin/') && (!authContext?.isPscAdmin || isDemoAccount())){ location.hash='portal/dashboard'; return; }
     }
     let html;
     if(r.startsWith('portal/catalogue/')){
@@ -3075,7 +3155,7 @@
       html=publicCataloguePage(needId);
     } else if(r.startsWith('workshop/')){
       const slug=r.split('/')[1]||'';
-      html=workshopGuidePage(slug);
+      html=workshopRoutePage(slug);
     } else if(r.startsWith('admin/products/')){
       html=adminProductEditor(r.split('/')[2]);
     } else switch(r){
@@ -3102,8 +3182,8 @@
       case 'portal/requests': html=requestsPage();break;
       case 'portal/replenish': html=replenishPage();break;
       case 'portal/documents': html=documentsPage();break;
-      case 'portal/stock': html=isDemoAccount()?stockPage():shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">ACCOUNT MODULE</span><h1>Stock & expiry</h1><p>This module is not enabled for this live account yet. PSC will only activate it when the account has real stock and expiry records to display.</p></div></div><section class="panel"><div class="emptyState"><h3>No simulated stock on a live account.</h3><p>Use Orders, Replenish and Documents for current live account activity.</p><button class="button primary" data-go="portal/dashboard">Back to Home</button></div></section>`);break;
-      case 'portal/assets': html=isDemoAccount()?assetsPage():shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">ACCOUNT MODULE</span><h1>Clinic assets</h1><p>This module is not enabled for this live account yet. PSC will only activate it when verified model, serial, warranty and service records have been loaded.</p></div></div><section class="panel"><div class="emptyState"><h3>No simulated assets on a live account.</h3><p>Verified asset records will appear here after onboarding.</p><button class="button primary" data-go="portal/dashboard">Back to Home</button></div></section>`);break;
+      case 'portal/stock': html=isDemoAccount()?stockPage():shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">ACCOUNT MODULE</span><h1>Stock & expiry</h1><p>This module is not enabled for this live account yet. PS will only activate it when the account has real stock and expiry records to display.</p></div></div><section class="panel"><div class="emptyState"><h3>No simulated stock on a live account.</h3><p>Use Orders, Replenish and Documents for current live account activity.</p><button class="button primary" data-go="portal/dashboard">Back to Home</button></div></section>`);break;
+      case 'portal/assets': html=isDemoAccount()?assetsPage():shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">ACCOUNT MODULE</span><h1>Clinic assets</h1><p>This module is not enabled for this live account yet. PS will only activate it when verified model, serial, warranty and service records have been loaded.</p></div></div><section class="panel"><div class="emptyState"><h3>No simulated assets on a live account.</h3><p>Verified asset records will appear here after onboarding.</p><button class="button primary" data-go="portal/dashboard">Back to Home</button></div></section>`);break;
       case 'portal/insights': html=insightsPage();break;
       case 'portal/archive': html=archivePage();break;
       case 'admin/dashboard': html=adminDashboard();break;
@@ -3122,6 +3202,7 @@
 
   async function submitPublicEnquiry(event){
     event.preventDefault();
+    if(isDemoAccount()){ toast('<strong>Demo enquiry received.</strong><br>This action is simulated and has not been sent to PS.'); return; }
     const form=event.currentTarget;
     const button=form.querySelector('[data-public-enquiry-submit]');
     const field=n=>(form.querySelector(`[name="${n}"]`)?.value||'').trim();
@@ -3185,8 +3266,15 @@
   }
 
 
+  // Delegation includes current feature content inserted after the shell render.
+  document.addEventListener('click',event=>{
+    const control=event.target.closest?.('[data-go]');
+    if(!control || event.defaultPrevented || control.disabled || !document.getElementById('app')?.contains(control)) return;
+    event.preventDefault();
+    go(control.dataset.go);
+  });
+
   function bind(){
-    document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>go(el.dataset.go)));
     document.querySelectorAll('[data-start-scroll]').forEach(el=>el.addEventListener('click',()=>document.getElementById('start-send')?.scrollIntoView({behavior:'smooth',block:'start'})));
     if(document.querySelector('[data-unsubscribe-state]')) processMailUnsubscribe();
     const wSearch=document.querySelector('[data-workshop-q]'); if(wSearch)wSearch.addEventListener('input',e=>{ui.workshopQuery=e.target.value;const pos=e.target.selectionStart||ui.workshopQuery.length;render();requestAnimationFrame(()=>{const n=document.querySelector('[data-workshop-q]');if(n){n.focus();try{n.setSelectionRange(pos,pos)}catch{}}});});
@@ -3246,7 +3334,7 @@
 
     document.querySelectorAll('[data-replenish]').forEach(el=>el.addEventListener('click',()=>{const [sku,q]=el.dataset.replenish.split('|');addBasket(sku,Math.max(1,Number(q)||1));toast('<strong>Added to request.</strong><br>Previous delivered quantity restored.')}));
     document.querySelectorAll('[data-reorder-order]').forEach(el=>el.addEventListener('click',()=>reorderRequest(el.dataset.reorderOrder)));
-    document.querySelectorAll('[data-confirm-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.confirmQuote,'confirm');toast('<strong>Quotation confirmed.</strong><br>PSC will confirm the fulfilment and delivery timing for this order.')}catch(e){console.error(e);toast('<strong>Could not confirm quotation.</strong>')}}));
+    document.querySelectorAll('[data-confirm-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.confirmQuote,'confirm');toast('<strong>Quotation confirmed.</strong><br>PS will confirm the fulfilment and delivery timing for this order.')}catch(e){console.error(e);toast('<strong>Could not confirm quotation.</strong>')}}));
     document.querySelectorAll('[data-cancel-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.cancelQuote,'cancel');toast('<strong>Quotation cancelled.</strong><br>It will remain visible for 30 days before moving to Archive.')}catch(e){console.error(e);toast('<strong>Could not cancel quotation.</strong>')}}));
     document.querySelectorAll('[data-reorder-last]').forEach(el=>el.addEventListener('click',()=>{const r=state.requests.find(x=>x.campus===state.campus);if(r)reorderRequest(r.id)}));
     document.querySelectorAll('[data-request-view]').forEach(el=>el.addEventListener('click',()=>{ui.modal={type:'request',id:el.dataset.requestView,admin:false};render()}));
@@ -3267,7 +3355,7 @@
     document.querySelectorAll('[data-quote-meta]').forEach(el=>el.addEventListener('change',e=>{const[id,field]=el.dataset.quoteMeta.split('|');const r=state.requests.find(x=>x.id===id);r.quote=r.quote||{lines:{}};r.quote[field]=e.target.value;audit('Quote terms updated',`${id} ${field}`);save()}));
     document.querySelectorAll('[data-request-status]').forEach(el=>el.addEventListener('change',e=>{const r=state.requests.find(x=>x.id===el.dataset.requestStatus);r.status=e.target.value;if(r.status==='Sent'&&!r.quoteRef)r.quoteRef=`PSC-Q-${new Date().getFullYear()}-${String(state.requests.indexOf(r)+1001).padStart(4,'0')}`;audit('Request status changed',`${r.id} → ${r.status}`);save();render()}));
     document.querySelectorAll('[data-quote-ref]').forEach(el=>el.addEventListener('change',e=>{const r=state.requests.find(x=>x.id===el.dataset.quoteRef);r.quoteRef=e.target.value;audit('Quote reference updated',r.id);save()}));
-    document.querySelectorAll('[data-approve-quote]').forEach(el=>el.addEventListener('click',()=>{const r=state.requests.find(x=>x.id===el.dataset.approveQuote);r.status='Authorized';audit('Quotation confirmed by demo account user',r.id);save();render();toast('<strong>Quotation confirmed.</strong><br>PSC will confirm the fulfilment and delivery timing for this order.')}));
+    document.querySelectorAll('[data-approve-quote]').forEach(el=>el.addEventListener('click',()=>{const r=state.requests.find(x=>x.id===el.dataset.approveQuote);r.status='Authorized';audit('Quotation confirmed by demo account user',r.id);save();render();toast('<strong>Quotation confirmed.</strong><br>PS will confirm the fulfilment and delivery timing for this order.')}));
     document.querySelectorAll('[data-export-products]').forEach(el=>el.addEventListener('click',exportProducts));
 
     const optionSearch=document.querySelector('[data-option-search]'); if(optionSearch)optionSearch.addEventListener('input',e=>{ui.optionSearch=e.target.value;renderUi({preserveScroll:true,focusSelector:'[data-option-search]',cursor:e.target.selectionStart,transition:false})});
@@ -3309,6 +3397,7 @@
   window.addEventListener('scroll',onPublicHeaderScroll,{passive:true});
   window.addEventListener('hashchange',render);
   window.addEventListener('popstate',render);
-  if(!location.hash && !location.pathname.startsWith('/workshop')) location.hash='home';
+  // Clean Workshop and Start URLs are owned by currentRoute; do not inject #home.
+  if(!location.hash && location.pathname==='/') history.replaceState(history.state,'','/#home');
   bootstrapAuth();
 })();
