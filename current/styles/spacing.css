@@ -15,7 +15,7 @@
 .customerShell .panelHeader,.adminShell .panelHeader{margin-bottom:24px;gap:20px;flex-wrap:wrap}
 .customerShell .headerActions,.adminShell .headerActions{gap:12px;flex-wrap:wrap}
 .v26QuickActions,.actionGrid{gap:20px!important}
-.publicPage .prospectContactGrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px!important}
+.publicPage .prospectContactGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:32px!important}
 .publicPage .prospectContactGrid .contactCard{padding:var(--ps-card-padding)!important;gap:20px!important;min-width:0}
 .publicPage .prospectContactGrid .contactCard b{overflow-wrap:anywhere}
 .v3927ContactForm{gap:24px!important}
@@ -35,7 +35,7 @@
 .startContactActions a.button{display:inline-flex;align-items:center;justify-content:center;gap:10px}
 .startContactActions .startContactIcon{width:18px;height:18px;flex:0 0 18px;color:#111;pointer-events:none}
 @media(max-width:900px){
-  .publicPage .prospectContactGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .publicPage .prospectContactGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
   .start16Hero{grid-template-columns:1fr!important;gap:32px!important}
   .start16Send{grid-template-columns:1fr!important;padding:32px!important}
 }
@@ -47,3 +47,6 @@
   .start16Form :is(input,select,textarea){font-size:16px!important}
   .startContactActions .button{width:100%}
 }
+
+.publicPage .prospectContactGrid .contactCard b { font-size:clamp(16px,1.45vw,22px)!important; line-height:1.5!important; letter-spacing:-.02em!important; }
+.publicPage .prospectContactGrid .contactCard a[href^="mailto:"] { white-space:nowrap; font-size:clamp(15px,1.3vw,20px); }

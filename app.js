@@ -1071,6 +1071,7 @@
     return '/assets/products/clinic-basics.jpg';
   }
   function productDisplayImageUrl(p){
+    if(/^REFERENCE TILE/i.test(p?.imageStatus||'')) return null;
     if(p?.currentImageUrl) return p.currentImageUrl;
     if(p?.localCatalogueRefresh) return null;
     const sku=institutionalImageSku(p);
@@ -1084,10 +1085,11 @@
   }
   function catalogueImageNote(p){
     if(!p?.localCatalogueRefresh) return '';
-    const label=p.workbookDecision==='ENQUIRY ONLY'?'Enquiry only · exact product and pack to verify':!p.currentImageUrl?'Product photograph pending':String(p.imageStatus||'').startsWith('REFERENCE TILE')?'Reference tile · verified pack photograph pending':'';
+    const label=p.workbookDecision==='ENQUIRY ONLY'?'Enquiry only · exact product and pack to verify':!p.currentImageUrl?'':'';
     return label?`<small class="catalogueImageNote">${esc(label)}</small>`:'';
   }
   function controlledProductImageUrl(p){
+    if(/^REFERENCE TILE/i.test(p?.imageStatus||'')) return null;
     if(p?.currentImageUrl) return p.currentImageUrl;
     if(p?.localCatalogueRefresh) return null;
     const sku=institutionalImageSku(p);
@@ -1772,7 +1774,7 @@
     const workshop=workshopForProduct(p,1)[0];
     return `<article class="publicCatalogueCard">
       <button class="publicCatalogueVisual publicProductView" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-public-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details">${imageUrl?`<img src="${esc(imageUrl)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'">`:`<span>${esc(need.label)}</span>`}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>
-      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(pack)}</p>${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
+      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount">Brands Available: ${catalogueBrandCount(need.id||clinicalNeedIds(p)[0]||'all')}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(pack)}</p>${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
       <button class="button outline full" data-go="contact">Request institutional quote</button>
     </article>`;
   }
@@ -2185,6 +2187,15 @@
     `);
   }
 
+  function catalogueBrandCount(needId){
+    const brands=new Set();
+    for(const item of catalogueProducts()){
+      if(item.catalogueVisible===false || (needId!=='all' && !clinicalNeedIds(item).includes(needId))) continue;
+      const brand=String(item.brand||'').trim();
+      if(brand && !/^(specification-led|institutional range|needs verification|generic|unbranded|PS|PSC)$/i.test(brand)) brands.add(brand.toLowerCase());
+    }
+    return brands.size;
+  }
   function productCard(p){
     const needId=clinicalNeedIds(p)[0]||'all';
     const need=clinicalNeedMeta(needId);
@@ -2202,7 +2213,7 @@
       <div class="canvaCardBody exactCanvaBody">
         <button class="productTitleButton" data-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button>
         <p class="pack">${esc(pack)}</p>${catalogueImageNote(p)}
-        <div class="productNeedTags">${esc(need.label)}</div>
+        <div class="productNeedTags">${esc(need.label)}</div><small class="catalogueBrandCount">Brands Available: ${catalogueBrandCount(needId)}</small>
       </div>
       <div class="canvaCardActions exactCanvaActions">
         <button class="canvaDetails" data-product-view="${p.pscSku}">Details</button>

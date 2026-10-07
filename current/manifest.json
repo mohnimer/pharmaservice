@@ -28,6 +28,7 @@
     "current/behaviour/model-headings.js",
     "current/behaviour/procurement-interface.js",
     "current/behaviour/system-interface.js",
+    "current/behaviour/photo-framing-data.js",
     "current/behaviour/product-images.js",
     "current/behaviour/interface-consistency.js",
     "current/behaviour/search-refinement.js",
