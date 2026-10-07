@@ -667,6 +667,7 @@
   }
 
   document.addEventListener('change', event => {
+    if(window.PSC_IS_DEMO_ACCOUNT?.()) return;
     const el = event.target;
     if (!(el instanceof HTMLElement)) return;
 
@@ -688,6 +689,7 @@
   });
 
   document.addEventListener('click', event => {
+    if(window.PSC_IS_DEMO_ACCOUNT?.()) return;
     const el = event.target instanceof Element ? event.target.closest('[data-confirm-quote],[data-cancel-quote]') : null;
     if (!el) return;
 
