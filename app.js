@@ -2121,6 +2121,7 @@
     }
     if(seq!==intelligent.sequence||route!==currentRoute())return;
     if(!action)return;
+    if(action.invalidQuantity&&['add','quantity','sites'].includes(action.intent)){intelligent.said=String(text).slice(0,400);intelligent.message='Enter a whole quantity between 1 and 10,000; your request is unchanged';ui.catalogueQuery='';ui.globalSearch='';renderUi({preserveScroll:true,transition:false});return;}
     intelligent.said=String(text).slice(0,400);intelligent.message='Matching catalogue records';intelligent.pending=null;intelligent.choices=[];
     const scope=scopeDraft();
     if(action.intent==='location'){scope.location=action.location;intelligent.message=`Delivery location: ${action.location}`;}
