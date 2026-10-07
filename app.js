@@ -1630,7 +1630,7 @@
   }
   function workshopGuideCard(g){
     const m=workshopModuleForGuide(g);
-    return `<article class="workshopGuideCard workshopGuideCardV50 ${m.tone}">
+    return `<article class="workshopGuideCardV50 ${m.tone}">
       <button data-go="workshop/${esc(g.slug)}" aria-label="Open ${esc(g.title)}">
         <span class="workshopGuideMetaV50"><b>${esc(workshopFormatLabel(g.format))}</b><small>${esc(g.read_time)} read</small></span>
         <h3>${esc(g.title)}</h3>
@@ -1765,7 +1765,7 @@
     const categoryCards=categories.map(c=>`<button class="publicCategoryCard16 ${c.id===needId?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="catalogue/${c.id}">
       <span class="publicCategoryArt16" aria-hidden="true">${clinicalNeedIllustration(c.id)}</span>
       <span class="publicCategoryCopy16"><b>${esc(c.label)}</b><small>${esc(c.note)}</small></span>
-      <i>↗</i>
+      <i aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 18 18 6M6 6h12v12"/></svg></i>
     </button>`).join('');
     const heroTitle=needId==='all'?'Start with the clinical area.':esc(meta.label);
     const heroLead=needId==='all'?'Choose a category to see the controlled product families behind it. Or keep scrolling to browse the published product catalogue.':`Product families for ${esc(meta.label)} appear below, followed by the published catalogue lines in this clinical area.`;
@@ -1915,8 +1915,8 @@
     </section>
 
     <section class="publicSection contactGrid prospectContactGrid">
-      <div class="contactCard"><span>PHONE</span><b>+971 4 337 7004</b></div>
-      <div class="contactCard"><span>EMAIL</span><b>info@pharmaservice.ae</b></div>
+      <div class="contactCard"><span>PHONE</span><b><a href="tel:+97143377004">+971 4 337 7004</a></b></div>
+      <div class="contactCard"><span>EMAIL</span><b><a href="mailto:info@pharmaservice.ae">info@pharmaservice.ae</a></b></div>
       <div class="contactCard"><span>LOCATION</span><b>Dubai, United Arab Emirates</b></div>
       <div class="contactCard"><span>CLINIC PORTAL</span><button class="button primary" data-go="login">Open account access</button></div>
     </section>`
@@ -2096,7 +2096,7 @@
     const needCards=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.map(c=>`<button class="clinicNeedCard clinicNeedCardIllustrated" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}">
         <span class="clinicNeedIcon" aria-hidden="true">${clinicalNeedIllustration(c.id)}</span>
         <span class="clinicNeedCopy"><b>${esc(c.label)}</b><small>${esc(c.note)}</small></span>
-        <span class="clinicNeedArrow" aria-hidden="true">↗</span>
+        <span class="clinicNeedArrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 18 18 6M6 6h12v12"/></svg></span>
       </button>`).join('');
 
     const sf=storefrontConfig('institutional');
@@ -3258,8 +3258,15 @@
   }
 
 
+  // Delegation includes current feature content inserted after the shell render.
+  document.addEventListener('click',event=>{
+    const control=event.target.closest?.('[data-go]');
+    if(!control || event.defaultPrevented || control.disabled || !document.getElementById('app')?.contains(control)) return;
+    event.preventDefault();
+    go(control.dataset.go);
+  });
+
   function bind(){
-    document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>go(el.dataset.go)));
     document.querySelectorAll('[data-start-scroll]').forEach(el=>el.addEventListener('click',()=>document.getElementById('start-send')?.scrollIntoView({behavior:'smooth',block:'start'})));
     if(document.querySelector('[data-unsubscribe-state]')) processMailUnsubscribe();
     const wSearch=document.querySelector('[data-workshop-q]'); if(wSearch)wSearch.addEventListener('input',e=>{ui.workshopQuery=e.target.value;const pos=e.target.selectionStart||ui.workshopQuery.length;render();requestAnimationFrame(()=>{const n=document.querySelector('[data-workshop-q]');if(n){n.focus();try{n.setSelectionRange(pos,pos)}catch{}}});});

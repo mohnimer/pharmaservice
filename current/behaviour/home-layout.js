@@ -51,7 +51,6 @@
               </div>
             </article>
 
-            <div class="h47PillarLink" aria-hidden="true">→</div>
 
             <article class="h47Pillar h47PillarBuy">
               <div class="h47PillarCopy">
@@ -67,7 +66,6 @@
               </div>
             </article>
 
-            <div class="h47PillarLink" aria-hidden="true">→</div>
 
             <article class="h47Pillar h47PillarNext">
               <div class="h47PillarCopy">

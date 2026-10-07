@@ -51,6 +51,30 @@ try {
     assert(text(w).trim().length > 100); await w.happyDOM.close();
   }
   report.push('Homepage, Start and trailing slash, About, Our Model, Contact, login and direct Workshop deep routes render actual shell scripts');
+  // The current home body is installed after bind(); exercise its actual CTAs.
+  for(const [selector,destination] of [
+    ['.h47Hero [data-go="start"]','/start'],
+    ['.h47CatalogueFoot [data-go="catalogue"]','#catalogue'],
+    ['.h47CatalogueFoot [data-go="start"]','/start'],
+    ['.home47 [data-go="workshop"]','/workshop'],
+    ['.home47 [data-go="login"]','#login']
+  ]){
+    w=await setup('/');
+    assert.equal(w.document.querySelectorAll('.h47PillarLink').length,0);
+    await click(w,selector);
+    assert.equal(destination.startsWith('#')?w.location.hash:w.location.pathname,destination);
+    assert(!w.document.querySelector('.home47'),'CTA opens destination rather than leaving homepage visible');
+    await w.happyDOM.close();
+  }
+  w=await setup('/#contact');
+  assert(w.document.querySelector('.prospectContactGrid a[href="tel:+97143377004"]'));
+  assert(w.document.querySelector('.prospectContactGrid a[href="mailto:info@pharmaservice.ae"]'));
+  await w.happyDOM.close();
+  w=await setup('/workshop/whats-the-difference');
+  assert(w.document.querySelector('.workshopGuideCardV50'));
+  assert.equal(w.document.querySelectorAll('.workshopGuideCard').length,0,'V50 guide cards do not inherit old layout selectors');
+  await w.happyDOM.close();
+  report.push('Inserted homepage CTAs open Start/catalogue/Workshop/login; decorative connectors removed; contact phone/email links; native Workshop cards isolated from historical CSS');
   w = await setup('/#catalogue'); assert(w.document.querySelector('[data-v50-gated-category]'));
   assert.equal(w.document.querySelectorAll('.publicCatalogueResults').length, 0);
   await click(w, '[data-v50-gated-category]'); assert.equal(w.location.hash, '#login');

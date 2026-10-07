@@ -131,7 +131,7 @@
 .h47PillarIntro p{margin:0;color:#77736d;font:400 14px/1.45 "DM Sans",sans-serif}
 .h47PillarCanvas{
   display:grid;
-  grid-template-columns:minmax(0,1fr) 32px minmax(0,1fr) 32px minmax(0,1fr);
+  grid-template-columns:repeat(3,minmax(0,1fr));
   align-items:stretch;
   border:1px solid var(--line);
   border-radius:26px;
@@ -156,14 +156,6 @@
   letter-spacing:-.045em;
 }
 .h47PillarCopy p{margin:13px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
-.h47PillarLink{
-  display:grid;
-  place-items:center;
-  border-left:1px solid var(--line);
-  border-right:1px solid var(--line);
-  color:var(--teal);
-  font-size:18px;
-}
 .h47NeedVisual,.h47BuyVisual,.h47NextVisual{
   align-self:end;
   padding:18px;
@@ -472,7 +464,6 @@
   .h47Hero{grid-template-columns:1fr 1fr}
   .h47SourcingGrid{grid-template-columns:1fr;gap:42px}
   .h47PillarCanvas{grid-template-columns:1fr}
-  .h47PillarLink{min-height:34px;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(90deg)}
   .h47Pillar{grid-template-columns:minmax(0,.8fr) minmax(300px,1.2fr);grid-template-rows:auto;align-items:center}
   .h47CategoryGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .h47AccountCanvas{grid-template-columns:1fr 1fr}
@@ -563,7 +554,6 @@
   .h47PillarCopy h2{font-size:32px}
   .h47PillarCopy p{font-size:12.5px}
   .h47NeedVisual,.h47BuyVisual,.h47NextVisual{margin-top:25px}
-  .h47PillarLink{min-height:28px}
 
   .h47Sourcing{padding:72px 0}
   .h47SourceCopy h2,.h47CatalogueHead h2,.h47WorkshopHead h2,.h47AccountHead h2,.h47JourneyHead h2{font-size:40px}
