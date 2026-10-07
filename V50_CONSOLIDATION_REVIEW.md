@@ -4,13 +4,13 @@ Branch: `v50-consolidation`. Production/main has not been changed.
 
 ## Review deployment and publication status
 
-Preview: https://pharmaservice-h8jsqyco2-mohameds-projects-9022ad5a.vercel.app
+Preview: https://pharmaservice-git-v50-consolidation-mohameds-projects-9022ad5a.vercel.app
 
-Vercel reports deployment `dpl_FNrZS3cgHnzvMMsLbwxvtYSNQktJ` READY, target `staging` (non-production). This is an API-created review deployment of the tested build, not a deployment triggered by a GitHub branch push. Its application JavaScript, stylesheet and shell are the exact tested build; unchanged images are served through preview-only rewrites to pharmaservice.ae. The repository build includes those images locally.
+GitHub publication is now working after the user installed the ChatGPT Codex Connector for the repository. The six logical implementation/review commits were published to `v50-consolidation` through the GitHub API; every uploaded Git tree matched its tested local tree exactly. GitHub commit IDs differ from the original local bundle because the API supplies commit metadata. The application-bearing published tip is `90e94cad18e8976b725227068f0f5abb0a78ccee`.
 
-The preview requires Vercel authentication. Browser access reached the Vercel login page; the connector rejected temporary authenticated access with HTTP 403. Public browser smoke checks therefore remain incomplete. Protection settings were not changed.
+The push automatically triggered Vercel deployment `dpl_3mdkgMCr48AumNoen2U3JTvDaBMQ`, verified READY with source `git`, branch `v50-consolidation`, and Preview target. This deployment builds the repository using vercel.json, including local image assets; it replaces the earlier API-only review preview. Remote `main` was verified unchanged at `6f66ac122ced05ebe2abbebc1f7832e21191873c`. No merge or production promotion was performed.
 
-GitHub publication is blocked: CLI push has no credentials and the GitHub connector rejected tree creation with `403 Resource not accessible by integration`. All changes are committed locally on `v50-consolidation`; neither remote branch changed. Both remote `main` and `v50-consolidation` were verified at `6f66ac122ced05ebe2abbebc1f7832e21191873c`. A verified git bundle accompanies this review for publishing from an authorized checkout. Automatic GitHub Preview deployment cannot be confirmed until the branch is pushed; vercel.json supplies the explicit build, output directory and route configuration.
+Browser/visual checks remain incomplete: the earlier preview required Vercel authentication, temporary preview access was rejected with HTTP 403, and local Chromium could not launch. Protection settings were not changed. The passing automated checks and their limitations are recorded below.
 
 ## Architecture
 
