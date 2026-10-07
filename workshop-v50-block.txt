@@ -1,3 +1,39 @@
+  const WORKSHOP_MODULES = [
+    {n:'01', slug:'product-basics', title:'Product Basics', tone:'wsTone1', icon:'products',
+      short:'Understand the product before you order it.',
+      intro:'Understand what the product actually is, which details matter and what else may be required around it.',
+      meta:'Product selection · Clinic supply'},
+    {n:'02', slug:'whats-the-difference', title:"What's the Difference?", tone:'wsTone2', icon:'repeat',
+      short:'Understand what looks similar but is not necessarily interchangeable.',
+      intro:'Clear comparisons for products that appear similar but should not automatically be treated as interchangeable.',
+      meta:'Product comparison · Specifications'},
+    {n:'03', slug:'clinic-checks', title:'Clinic Checks', tone:'wsTone3', icon:'checklist',
+      short:'Quick practical checks staff can perform in their own clinic.',
+      intro:'Short checks that take the reader out of the screen and into the actual clinic.',
+      meta:'Practical checks · Clinic readiness'},
+    {n:'04', slug:'equipment-readiness', title:'Equipment Readiness', tone:'wsTone4', icon:'assets',
+      short:'Make sure the complete equipment system — not just the main device — is ready.',
+      intro:'Owning the main device does not mean the system is ready. Check the accessories, consumables, compatibility and replacement requirements around it.',
+      meta:'Equipment systems · Readiness'},
+    {n:'05', slug:'stock-expiry', title:'Stock & Expiry', tone:'wsTone5', icon:'inventory',
+      short:'Know what to use first, what needs attention and what should actually be reordered.',
+      intro:'Understand what is on hand, what needs attention and what should actually be reordered.',
+      meta:'Stock control · Expiry'},
+    {n:'06', slug:'school-clinic', title:'School Clinic', tone:'wsTone6', icon:'home',
+      short:'Practical guidance for the realities of operating healthcare inside a school.',
+      intro:'Practical supply guidance built around the specific operational realities of school clinics.',
+      meta:'School health · Clinic operations'},
+    {n:'07', slug:'ordering-specifications', title:'Ordering & Specifications', tone:'wsTone7', icon:'edit',
+      short:'Turn vague requests into controlled, sourceable product specifications.',
+      intro:'Turn vague product requests into specifications suppliers can actually quote correctly.',
+      meta:'RFQs · Product specifications'}
+  ];
+
+  const WORKSHOP_MODULE_CROSS_LINKS = {
+    'school-clinic':['ten-minute-school-clinic-stock-expiry-walk'],
+    'equipment-readiness':['aed-has-expiring-parts-too']
+  };
+
   function workshopGuideBySlug(slug){ return WORKSHOP.find(g=>g.slug===slug && g.status==='published') || null; }
   function workshopModuleBySlug(slug){ return WORKSHOP_MODULES.find(m=>m.slug===slug) || null; }
   function workshopModuleForGuide(g){ return WORKSHOP_MODULES.find(m=>m.title===g?.category) || WORKSHOP_MODULES[0]; }

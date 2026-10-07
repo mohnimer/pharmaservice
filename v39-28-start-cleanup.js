@@ -2,6 +2,7 @@
   'use strict';
 
   function route(){
+    if(window.PSC_CURRENT_ROUTE) return window.PSC_CURRENT_ROUTE();
     return String(location.hash || '')
       .replace(/^#/, '')
       .replace(/^\//, '')

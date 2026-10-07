@@ -8,21 +8,10 @@
 
   const BUILD='50.0';
   const esc=(v='')=>String(v).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':'&quot;'}[c]));
-  const routeHash=()=>String(location.hash||'').replace(/^#/,'');
+  const routeHash=()=>window.PSC_CURRENT_ROUTE();
 
-  function softGo(route){
-    if(route==='start'){
-      if(location.pathname==='/start'&&!location.hash) window.dispatchEvent(new PopStateEvent('popstate'));
-      else location.assign('/start');
-      return;
-    }
-    const hash=`#${route}`;
-    if(location.pathname!=='/'){
-      location.assign(`/${hash}`);
-      return;
-    }
-    if(location.hash===hash) window.dispatchEvent(new HashChangeEvent('hashchange'));
-    else location.hash=route;
+  function softGo(route,options){
+    window.PSC_NAVIGATE(route,options);
   }
 
   function patchCatalogueGate(){
@@ -30,8 +19,7 @@
     if(route.startsWith('catalogue/') && route!=='catalogue'){
       const id=route.split('/')[1]||'all';
       try{sessionStorage.setItem('pscPendingRoute',`portal/catalogue/${id}`);}catch{}
-      history.replaceState(history.state,'',`/#portal/catalogue/${id}`);
-      window.dispatchEvent(new HashChangeEvent('hashchange'));
+      softGo(`portal/catalogue/${id}`,{replace:true});
       return;
     }
     if(route!=='catalogue') return;
@@ -124,7 +112,7 @@
   },true);
 
   window.addEventListener('hashchange',()=>setTimeout(()=>{resumePendingAfterLogin();apply();},0));
-  window.addEventListener('popstate',()=>setTimeout(apply,0));
+  window.addEventListener('popstate',()=>setTimeout(()=>{resumePendingAfterLogin();apply();},0));
   window.addEventListener('pageshow',()=>setTimeout(apply,0));
 
   let queued=false;
