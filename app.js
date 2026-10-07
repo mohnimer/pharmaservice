@@ -1833,7 +1833,7 @@
           <p>Tell us what you need, how much, and when. Paste your list below and add the original file if helpful. If you only have a file, write a short summary in the requirement field.</p>
           <p>Next, PS reviews your enquiry, clarifies any missing details, and confirms the available supply and quotation basis with you.</p>
           <p class="start16Fine">No automatic stock, compliance or delivery promise is created by sending the enquiry. Those points are confirmed before commitment.</p>
-          <div class="startContactActions" aria-label="Other ways to get started"><a class="button outline" href="tel:+971504252641">Call PS</a><a class="button outline" href="https://wa.me/971553511335" target="_blank" rel="noopener noreferrer">WhatsApp PS</a><button class="button light" data-go="login">Existing customer? Open Clinic Portal</button></div>
+          <div class="startContactActions" aria-label="Other ways to get started"><a class="button outline" href="tel:+971504252641">Call us now</a><a class="button outline" href="https://wa.me/971553511335" target="_blank" rel="noopener noreferrer">Chat with us through WhatsApp</a><button class="button light" data-go="login">Open Clinic Portal</button></div>
         </div>
         <form class="prospectForm startProspectForm start16Form" data-public-enquiry data-source-page="business_card_start_v39_16" novalidate>
           <div class="prospectField"><label for="startOrganization">Organization</label><input id="startOrganization" name="organization" type="text" maxlength="180" placeholder="School group, clinic or company" required></div>
