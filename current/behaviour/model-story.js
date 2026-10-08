@@ -8,7 +8,8 @@
         <div class="m46Shell m46HeroGrid">
           <div class="m46HeroCopy m46Reveal">
             <h1>One supply relationship.</h1>
-            <p>Send the requirement. PS turns it into something clear, controlled and purchasable.</p>
+            <p>A clinic requirement may involve ten products from five different places. You shouldn’t have to manage five suppliers to buy them.</p>
+            <p>Pharma Service brings the requirement together and stays accountable for the supply.</p>
             <div class="m46Actions">
               <button class="button primary" data-go="start">Tell us what you need</button>
               <button class="button outline" data-go="catalogue">Explore the catalogue</button>
@@ -49,8 +50,8 @@
       <section class="m46Section">
         <div class="m46Shell m46Split">
           <div class="m46SectionCopy m46Reveal">
-            <h2>Start with the requirement.</h2>
-            <p>The customer does not need to know the exact SKU. A rough list, recurring need or single product request is enough to start.</p>
+            <h2>Start with what you need.</h2>
+            <p>Send us the list, search in your own words or describe the requirement as you understand it. It doesn’t need to be translated into supplier language first.</p>
           </div>
 
           <div class="m46Frame m46Intake m46Reveal">
@@ -61,11 +62,11 @@
               </div>
               <div class="m46InputCard">
                 <span>Message</span>
-                <b>“Need gauze + strips for school clinic”</b>
+                <b>“big sterile gauze<br>antihistamine”</b>
               </div>
               <div class="m46InputCard m46TiltA">
-                <span>Recurring list</span>
-                <b>Dressings · gloves · saline</b>
+                <span>Opening list</span>
+                <b>clinic opening list.xlsx</b>
               </div>
             </div>
 
@@ -86,14 +87,14 @@
       <section class="m46Section m46Soft">
         <div class="m46Shell">
           <div class="m46SectionCopy m46SectionCopyWide m46Reveal">
-            <h2>We make the details clear.</h2>
-            <p>Before PS quotes anything, the supply details that can change what gets delivered are made explicit.</p>
+            <h2>We make the detail clear.</h2>
+            <p>We match the requirement to actual products and clarify the things that change what should be supplied: size, pack, model, quantity or compatibility.</p>
           </div>
 
           <div class="m46Frame m46Clarify m46Reveal">
             <div class="m46CompareHead">
               <span>What arrives</span>
-              <span>What PS controls</span>
+              <span>What we confirm</span>
             </div>
 
             <div class="m46CompareRow">
@@ -143,13 +144,13 @@
         <div class="m46Shell m46Split">
           <div class="m46SectionCopy m46Reveal">
             <h2>Then we source each line properly.</h2>
-            <p>Different lines can take different routes underneath. The institution still deals with one accountable supplier.</p>
+            <p>The best source for a BP monitor may not be the best source for dressings, furniture or medicines. We source each line where it makes sense and bring it back together commercially.</p>
           </div>
 
           <div class="m46Frame m46SourceVisual m46Reveal">
             <div class="m46Basket">
               <small>Requirement basket</small>
-              <b>4 controlled lines</b>
+              <b>4 product lines</b>
             </div>
 
             <div class="m46SourceLanes">
@@ -173,8 +174,8 @@
       <section class="m46Section m46Soft">
         <div class="m46Shell m46Split m46SplitReverse">
           <div class="m46SectionCopy m46Reveal">
-            <h2>Every order builds intelligence.</h2>
-            <p>The relationship becomes smarter because the purchasing record stays useful.</p>
+            <h2>You manage one order.</h2>
+            <p>One quotation. One point of contact. One coordinated supply, even when the products underneath come through different routes.</p>
           </div>
 
           <div class="m46Frame m46Memory m46Reveal">
@@ -195,8 +196,8 @@
                 <b>Monthly pattern visible</b>
               </article>
               <article>
-                <small>Upcoming replacement</small>
-                <b>AED pads · 62 days</b>
+                <small>Previous product</small>
+                <b>AED pads · pack recorded</b>
               </article>
               <article>
                 <small>Approved specification</small>
@@ -210,8 +211,8 @@
       <section class="m46Section">
         <div class="m46Shell m46Split">
           <div class="m46SectionCopy m46Reveal">
-            <h2>So the next purchase gets easier.</h2>
-            <p>PS does not restart from zero every time. Previous supply becomes the starting point for the next requirement.</p>
+            <h2>And the next order starts further ahead.</h2>
+            <p>What was supplied becomes useful account history. Repeat lines are easier to find, existing products don’t need to be rediscovered and your purchasing record becomes clearer over time.</p>
           </div>
 
           <div class="m46Frame m46Repeat m46Reveal">
@@ -246,28 +247,28 @@
       <section class="m46Section m46Soft">
         <div class="m46Shell m46Split m46SplitReverse">
           <div class="m46SectionCopy m46Reveal">
-            <h2>And better buying becomes possible.</h2>
-            <p>Once purchasing is visible, PS can focus commercial attention where it actually matters.</p>
+            <h2>Set it up. Keep it running.</h2>
+            <p>Opening a clinic and keeping it supplied are different jobs. We help with both.</p>
           </div>
 
           <div class="m46Frame m46Commercial m46Reveal">
             <div class="m46CommercialTop">
-              <small>Commercial review</small>
-              <b>High-use lines</b>
+              <small>Opening and repeat supply</small>
+              <b>One supply relationship</b>
             </div>
             <div class="m46CommercialRow">
-              <div><b>Nitrile gloves · M</b><small>12-month repeat pattern</small></div>
-              <span>Volume opportunity</span>
+              <div><b>Set it up.</b><small>Beds, diagnostics, emergency equipment and clinic furniture.</small></div>
+              <span>Opening requirements</span>
             </div>
             <div class="m46CommercialRow">
-              <div><b>Sterile gauze 10 × 10</b><small>Frequently replenished</small></div>
-              <span>Relevant promotion</span>
+              <div><b>Keep it running.</b><small>Gloves, gauze, testing supplies, respiratory products and medicines.</small></div>
+              <span>Repeat requirements</span>
             </div>
             <div class="m46CommercialRow">
-              <div><b>Compatible test strips</b><small>Repeat line with stable spec</small></div>
-              <span>Sharper repeat pricing</span>
+              <div><b>Refills and replacements.</b><small>Start with the product already in use and confirm what fits.</small></div>
+              <span>Confirm the detail</span>
             </div>
-            <div class="m46CommercialNote">Better economics on the lines the institution actually buys.</div>
+            <div class="m46CommercialNote">From the opening list to the next refill.</div>
           </div>
         </div>
       </section>
@@ -276,7 +277,7 @@
         <div class="m46Shell">
           <div class="m46SectionCopy m46SectionCopyWide m46Reveal">
             <h2>That’s how supply becomes a partnership.</h2>
-            <p>Not a one-off quote. A supply relationship that becomes clearer, easier to repeat and more useful over time.</p>
+            <p>The first order solves today’s requirement. Keeping the record together makes the next one easier.</p>
           </div>
 
           <div class="m46Frame m46Partnership m46Reveal">
@@ -301,8 +302,8 @@
       <section class="m46Final">
         <div class="m46Shell m46FinalGrid m46Reveal">
           <div>
-            <h2>Send the requirement. We’ll take it from there.</h2>
-            <p>One product, a recurring list, a clinic opening or a broader institutional RFQ.</p>
+            <h2>Tell us what you need. We’ll make it easier to buy.</h2>
+            <p>One product, a rough list, an old order or a clinic opening. Start with what you have.</p>
           </div>
 
           <div class="m46FinalCard">

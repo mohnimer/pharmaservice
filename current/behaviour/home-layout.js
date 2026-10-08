@@ -6,9 +6,9 @@
 
       <section class="h47Hero">
         <div class="h47HeroCopy h47Reveal">
-          <h1>Institutional healthcare supply.</h1>
-          <p class="h47HeroLead">With intelligence, and one accountable supply partner.</p>
-          <p class="h47HeroBody">Pharma Service helps institutions stay aligned with requirements, buy better and replenish with less friction.</p>
+          <h1>Institutional healthcare supply. Made easier.</h1>
+          <p class="h47HeroLead">Tell us what your clinic needs.</p>
+          <p class="h47HeroBody">Pharma Service helps you find the right products, brings the requirement together and stays with the order from quotation to repeat supply.</p>
           <div class="h47HeroActions">
             <button class="button primary" data-go="start">Start with your requirement</button>
             <button class="button outline" data-go="catalogue">Explore the catalogue</button>
@@ -23,7 +23,7 @@
             <div class="h47AccountStat"><strong>36</strong><span>approved items</span></div>
             <div class="h47AccountMini">
               <span><b>8</b> recurring lines</span>
-              <span><b>2</b> replacements upcoming</span>
+              <span><b>2</b> previous orders</span>
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@
       <section class="h47Pillars">
         <div class="h47Shell">
           <div class="h47PillarIntro h47Reveal">
-            <p>Good procurement gets clearer as the account builds.</p>
+            <p>You shouldn’t have to understand the medical-supply market just to run a clinic.</p>
           </div>
 
           <div class="h47PillarCanvas h47Reveal">
@@ -40,14 +40,14 @@
               <div class="h47PillarCopy">
                 <span>01</span>
                 <h2>Know what you need.</h2>
-                <p>Requirements mapped, specifications checked and knowledgeable human support when something is not clear.</p>
+                <p>Start with whatever you have: a proper RFQ, a rough list, a product name or simply the way your nurse describes it.</p>
               </div>
               <div class="h47NeedVisual">
                 <div class="h47NeedHead"><span>Clinic requirement</span><b>PSC-CL-021</b></div>
-                <div class="h47NeedRow"><b>BP monitor</b><span>Required</span></div>
-                <div class="h47NeedRow"><b>Gauze 10 × 10</b><span>Specification confirmed</span></div>
-                <div class="h47NeedRow"><b>Gloves · M</b><span>Needs verification</span></div>
-                <div class="h47NeedFoot">Requirement → controlled specification</div>
+                <div class="h47NeedRow"><b>“big sterile gauze”</b><span>Larger sizes</span></div>
+                <div class="h47NeedRow"><b>“antihistamine”</b><span>Catalogue medicines</span></div>
+                <div class="h47NeedRow"><b>“Gloves · M”</b><span>Confirm the pack</span></div>
+                <div class="h47NeedFoot">Your words → actual products</div>
               </div>
             </article>
 
@@ -56,7 +56,7 @@
               <div class="h47PillarCopy">
                 <span>02</span>
                 <h2>Know you’re buying well.</h2>
-                <p>Wholesale pricing, institutional promotions and better economics on the products your organisation buys most.</p>
+                <p>Different products need different sources. We compare the requirement properly and bring the right lines back together in one quotation.</p>
               </div>
               <div class="h47BuyVisual">
                 <div class="h47BuyHead"><span>Commercial review</span><b>PSC-CL-021</b></div>
@@ -71,14 +71,14 @@
               <div class="h47PillarCopy">
                 <span>03</span>
                 <h2>Know what comes next.</h2>
-                <p>Purchase history, replenishment patterns, expiry and replacement visibility make repeat buying easier and more predictable.</p>
+                <p>Your account keeps the useful history: what you bought, what you repeat and what needs confirming next. Next time, we don’t start from zero.</p>
               </div>
               <div class="h47NextVisual">
                 <div class="h47NextHead"><span>Account memory</span><b>PSC-CL-021</b></div>
                 <div class="h47Timeline">
                   <div><i></i><b>Gloves</b><small>ordered 6×</small></div>
-                  <div><i></i><b>Gauze</b><small>reorder expected</small></div>
-                  <div><i></i><b>AED pads</b><small>replacement upcoming</small></div>
+                  <div><i></i><b>Gauze</b><small>previous pack retained</small></div>
+                  <div><i></i><b>AED pads</b><small>check before repeating</small></div>
                 </div>
               </div>
             </article>
@@ -89,8 +89,8 @@
       <section class="h47Sourcing">
         <div class="h47Shell h47SourcingGrid">
           <div class="h47SourceCopy h47Reveal">
-            <h2>We handle the sourcing underneath it all.</h2>
-            <p>One relationship with Pharma Service, even when the right solution comes from multiple specialist suppliers.</p>
+            <h2>Behind one order, we do the supplier work.</h2>
+            <p>Equipment, consumables, medicines and clinic furniture do not always come from the same place. Pharma Service sources each line where it makes sense and brings the requirement back together for you.</p>
           </div>
 
           <div class="h47SourceDiagram h47Reveal" aria-label="Multiple specialist sources converging into one Pharma Service relationship">
@@ -117,10 +117,16 @@
           <div class="h47CatalogueHead h47Reveal">
             <div>
               <h2>Start with the requirement.</h2>
-              <p>You do not need to know the supplier or exact catalogue structure. Start with what your institution needs and PS works backwards from there.</p>
+              <p>It doesn’t need to arrive perfectly prepared. Send the list you already have, search the catalogue in your own words, or tell us what the clinic is trying to buy.</p>
             </div>
             <button class="h47TextLink" data-go="catalogue">Explore catalogue →</button>
           </div>
+
+          <section class="psIntelligentSearch h47Discovery h47Reveal" aria-label="Find clinic supplies">
+            <h2>Tell us what you need</h2><p>the way you’d normally say it</p>
+            <label for="psHomeCommand">Search the catalogue</label>
+            <form data-ps-command-form><input id="psHomeCommand" type="search" data-cat-q aria-label="Search catalogue" placeholder="big sterile gauze, a wheelchair, a BP monitor…" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Search</button></form>
+          </section>
 
           <div class="h47CategoryGrid h47Reveal">
             <button class="h47Category" data-go="catalogue/wounds">
@@ -175,7 +181,7 @@
           <div class="h47WorkshopHead h47Reveal">
             <div>
               <h2>Understand what you’re buying.</h2>
-              <p>Practical guidance on products, specifications and the details that affect suitability, readiness and cost.</p>
+              <p>When the detail matters, we make it visible: size, pack, model, compatibility or whatever needs confirming before the order is placed.</p>
             </div>
             <button class="button outline" data-go="workshop">Enter The Workshop</button>
           </div>
@@ -216,7 +222,7 @@
           <div class="h47AccountHead h47Reveal">
             <div>
               <h2>See what you’ve bought. Know what’s next.</h2>
-              <p>PS remembers the account so procurement does not restart from zero.</p>
+              <p>Your previous products, quotations and supplied orders stay together. Familiar lines are easier to find next time.</p>
             </div>
             <button class="button outline" data-go="login">Open Clinic Portal</button>
           </div>
@@ -230,10 +236,10 @@
             </div>
 
             <div class="h47ComingUp">
-              <small>Coming up</small>
+              <small>Before you repeat</small>
               <h3>AED pads</h3>
-              <p>Replacement window approaching</p>
-              <div><span>62 days</span><i></i></div>
+              <p>Confirm the model and pack</p>
+              <div><span>Review the previous line</span><i></i></div>
             </div>
 
             <div class="h47Frequently">
@@ -256,7 +262,7 @@
           <div class="h47Commercial h47Reveal">
             <div class="h47CommercialCopy">
               <h3>Better visibility creates better buying.</h3>
-              <p>Once PS understands what an institution repeatedly purchases, commercial attention can focus where it matters most.</p>
+              <p>Knowing what you buy regularly helps us review the packs, quantities and pricing that matter to your account.</p>
             </div>
             <div class="h47CommercialLine">
               <small>Frequently purchased</small>
@@ -276,21 +282,21 @@
         <div class="h47Shell">
           <div class="h47JourneyHead h47Reveal">
             <h2>From first requirement to repeat supply.</h2>
-            <p>One accountable Pharma Service relationship throughout.</p>
+            <p>The first order solves today’s requirement. A good account makes the next one easier.</p>
           </div>
 
           <div class="h47JourneyFlow h47Reveal">
-            <div><span>01</span><b>Requirement</b></div>
+            <div><span>01</span><b>First requirement</b></div>
             <i></i>
-            <div><span>02</span><b>Specification</b></div>
+            <div><span>02</span><b>Clarify</b></div>
             <i></i>
             <div><span>03</span><b>Quote</b></div>
             <i></i>
             <div><span>04</span><b>Supply</b></div>
             <i></i>
-            <div><span>05</span><b>Record</b></div>
+            <div><span>05</span><b>Account history</b></div>
             <i></i>
-            <div><span>06</span><b>Replenish</b></div>
+            <div><span>06</span><b>Repeat requirement</b></div>
           </div>
 
           <div class="h47JourneyActions h47Reveal">

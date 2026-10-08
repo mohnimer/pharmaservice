@@ -2003,8 +2003,7 @@
 
     return shell(`
       <section class="v26HomeHero">
-        <div><span class="eyebrow">${isDemoAccount()?'PHARMA SERVICE DEMO':'YOUR PHARMA SERVICE ACCOUNT'}</span><h1>${isDemoAccount()?'Explore the institutional workflow.':'What do you need today?'}</h1><p>${isDemoAccount()?'Browse the catalogue, switch sites, review sample quotations, repeat supplied items and simulate new requests.':'Shop, repeat, review and request through one accountable institutional supply relationship.'}</p></div>
-        <div class="v26HomeStatus"><span>ACCOUNT</span><b>${esc(state.campus||'Institutional account')}</b><small>${active.length} active · ${awaiting} quote ready</small></div>
+        <div><h1>Start</h1>${intelligentSearchField()}<p>${isDemoAccount()?'Browse the catalogue, switch sites, review sample quotations, repeat supplied items and simulate new requests.':'Browse the catalogue, switch sites, review quotations, repeat supplied items and bring a new request together.'}</p></div>
       </section>
 
       <section class="v26QuickActions">
@@ -2130,10 +2129,14 @@
   function resetIntelligentSearch(){clearTimeout(searchTypingTimer);intelligent.sequence++;intelligent.action=null;intelligent.pending=null;intelligent.choices=[];intelligent.confirmed='';intelligent.said='';intelligent.message='';intelligent.sheet=false;}
   async function applyIntelligentCommand(text){
     if(!String(text).trim())return;
+    if(currentRoute()==='home'&&!session){
+      try{sessionStorage.setItem('pscPendingRoute','portal/catalogue/all');sessionStorage.setItem('pscPendingSearch',String(text).slice(0,400));}catch{}
+      go('login');return;
+    }
     // The browse landing is an entry point, not a separate search surface.
     // Submit into the same full-catalogue workspace used by category searches.
     // Do this before capturing the route/sequence so async ranking stays valid.
-    if(currentRoute()==='portal/catalogue'){
+    if(['portal/catalogue','portal/dashboard','home'].includes(currentRoute())){
       ui.catalogueCat='All product types';ui.catalogueFilter='All lines';
       go('portal/catalogue/all',{searchQuery:text});
     }
@@ -3462,6 +3465,13 @@
     go(control.dataset.go);
   });
 
+  document.addEventListener('submit',async event=>{
+    const form=event.target.closest?.('[data-ps-command-form]');
+    if(!form || !document.getElementById('app')?.contains(form))return;
+    event.preventDefault();
+    await applyIntelligentCommand(form.querySelector('[data-cat-q]').value);
+  });
+
   function bind(){
     document.querySelectorAll('[data-start-scroll]').forEach(el=>el.addEventListener('click',()=>document.getElementById('start-send')?.scrollIntoView({behavior:'smooth',block:'start'})));
     if(document.querySelector('[data-unsubscribe-state]')) processMailUnsubscribe();
@@ -3531,7 +3541,6 @@
     document.querySelectorAll('[data-document-open]').forEach(el=>el.addEventListener('click',()=>openOrderDocument(el.dataset.documentOpen)));
     document.querySelectorAll('[data-document-upload]').forEach(el=>el.addEventListener('change',async e=>{const file=e.target.files?.[0];if(file)await uploadOrderDocument(el.dataset.documentUpload,file);}));
     bindUnlistedRequirement(document);
-    document.querySelectorAll('[data-ps-command-form]').forEach(form=>form.addEventListener('submit',async e=>{e.preventDefault();const text=form.querySelector('[data-cat-q]').value;await applyIntelligentCommand(text);}));
     document.querySelectorAll('[data-ps-select-sku]').forEach(el=>el.addEventListener('click',()=>{intelligent.selected=el.dataset.psSelectSku;intelligent.confirmed=intelligent.selected;applyIntelligentCommand(intelligent.said);}));
     document.querySelectorAll('[data-ps-clarify-type]').forEach(el=>el.addEventListener('click',()=>applyIntelligentCommand(el.dataset.psClarifyType)));
     document.querySelectorAll('[data-ps-clarify]').forEach(el=>el.addEventListener('click',()=>{window.PS_SEARCH_ANALYTICS?.record('clarification_selected',{query:intelligent.said});return applyIntelligentCommand(el.dataset.psClarify==='both'?'gauze':`gauze ${el.dataset.psClarify}`);}));

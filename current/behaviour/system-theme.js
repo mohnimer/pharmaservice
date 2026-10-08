@@ -20,7 +20,7 @@
           <div><span>Delivery coordination</span><b>Pharma Service</b></div>
           <div><span>Order record & follow-up</span><b>Pharma Service</b></div>
         </div>
-        <div class="h48SourceSheetFoot">Multiple sources underneath. One procurement experience in front.</div>
+        <div class="h48SourceSheetFoot">However many products or sources sit underneath it, you deal with Pharma Service.</div>
       </div>
     </div>`;
 
