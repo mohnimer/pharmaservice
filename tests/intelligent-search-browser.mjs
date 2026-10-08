@@ -20,7 +20,23 @@ await page.locator('[data-cat-q]').focus();
 await page.evaluate(()=>{window.__searchInput=document.querySelector('[data-cat-q]');window.__searchTop=window.__searchInput.getBoundingClientRect().top;window.__searchFocus=0;window.__searchInput.addEventListener('focus',()=>window.__searchFocus++);});
 for(const char of 'whelchair'){await page.locator('[data-cat-q]').pressSequentially(char);await page.waitForTimeout(170);assert(await page.evaluate(()=>window.__searchInput===document.querySelector('[data-cat-q]')&&document.activeElement===window.__searchInput));assert(Math.abs(await page.evaluate(()=>window.__searchInput.getBoundingClientRect().top-window.__searchTop))<2,'input must not shift while typing');}
 assert.equal(await page.evaluate(()=>window.__searchFocus),0);assert.match(await page.locator('.productGrid').innerText(),/wheel ?chair/i);
-await page.goto(base+'/#portal/catalogue/all');await page.locator('[data-cat-q]').waitFor();
+await page.locator('[data-ps-command-form] button[type="submit"]').click();
+await page.waitForURL('**/#portal/catalogue/all');
+await page.locator('.psInterpretation').waitFor();
+assert.match(await page.locator('.productGrid').innerText(),/wheel ?chair/i);
+assert.equal(await page.locator('.psSearchResults').isVisible(),true);
+// A keyboard submission from the landing must also reach real full-range results.
+await page.locator('[data-cat-filter="approval"]').selectOption('DHA requirement');
+await page.goto(base+'/#portal/catalogue');await page.locator('[data-cat-q]').waitFor();
+await page.locator('[data-cat-q]').fill('antihistamine');
+await page.waitForFunction(()=>/Zyrtec|Claritine|Telfast/i.test(document.querySelector('.productGrid')?.innerText||''));
+assert.equal(await page.locator('.psSearchResults').isVisible(),true);
+await page.locator('[data-cat-q]').press('Enter');
+await page.waitForURL('**/#portal/catalogue/all');
+await page.locator('.psInterpretation').waitFor();
+assert((await page.locator('.productCard').count())>0);
+assert.match(await page.locator('.productGrid').innerText(),/Zyrtec|Claritine|Telfast/i);
+assert.equal(await page.locator('[data-cat-filter="approval"]').inputValue(),'All lines');
 const command=async text=>{await page.locator('[data-cat-q]').fill(text);await page.locator('[data-cat-q]').press('Enter');await page.locator('.psInterpretation').waitFor();await page.waitForTimeout(120);console.log(width,text,await page.locator('.psInterpretation').innerText());};
 const request=()=>page.locator('.psLiveRequest');
 await command('we need a wheelchair');assert.match(await page.locator('.productGrid').innerText(),/wheel ?chair/i);
