@@ -2130,6 +2130,13 @@
   function resetIntelligentSearch(){clearTimeout(searchTypingTimer);intelligent.sequence++;intelligent.action=null;intelligent.pending=null;intelligent.choices=[];intelligent.confirmed='';intelligent.said='';intelligent.message='';intelligent.sheet=false;}
   async function applyIntelligentCommand(text){
     if(!String(text).trim())return;
+    // The browse landing is an entry point, not a separate search surface.
+    // Submit into the same full-catalogue workspace used by category searches.
+    // Do this before capturing the route/sequence so async ranking stays valid.
+    if(currentRoute()==='portal/catalogue'){
+      ui.catalogueCat='All product types';ui.catalogueFilter='All lines';
+      go('portal/catalogue/all',{searchQuery:text});
+    }
     clearTimeout(searchTypingTimer);const seq=++intelligent.sequence,route=currentRoute(),context=productSearchContext();
     let action=window.PS_INTELLIGENT_SEARCH.interpret(text,context);
     if(seq!==intelligent.sequence||route!==currentRoute())return;
@@ -2216,7 +2223,9 @@
   }
   function updateCatalogueResults(){
     const area=document.querySelector('[data-ps-search-results]');if(!area)return;
-    const route=currentRoute(),landing=route==='portal/catalogue',need=route.split('/')[2]||'all';const {filtered}=catalogueFilterProducts(need);
+    const route=currentRoute(),landing=route==='portal/catalogue',need=route.split('/')[2]||'all';
+    if(landing&&ui.catalogueQuery){ui.catalogueCat='All product types';ui.catalogueFilter='All lines';}
+    const {filtered}=catalogueFilterProducts(need);
     area.hidden=landing&&!ui.catalogueQuery&&!intelligent.action;
     const grid=area.querySelector('.productGrid');grid.innerHTML=area.hidden?'':filtered.map(productCard).join('');
     area.querySelector('[data-ps-result-count]').textContent=`${filtered.length} products`;
