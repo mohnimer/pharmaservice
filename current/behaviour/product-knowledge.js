@@ -53,7 +53,7 @@
     return {id:p.pscSku,visible:p.catalogueVisible!==false,officialName,displayName:name,category:p.category||'',subcategory:p.productType||'',brand:p.brand||'',model,specifications,pack:p.cataloguePack||p.pack||'',concepts:ids,descriptions:aliases,abbreviations:aliases.filter(a=>a.length<5),misspellings:Object.keys(repairs).filter(a=>aliases.includes(a)),intendedUse:aliases[0]||'',institutionContext:p.schoolApproved?'Institutional / school clinic requirement':'Institutional supply enquiry',compatibleIds:Array.isArray(p.verifiedCompatibleSkus)?p.verifiedCompatibleSkus.filter(x=>typeof x==='string'):[],alternatives:[],vector:v,fingerprint:fingerprint(p)};
   }
   const stop=new Set('we i need needs a an the some something for our to this it please want of add remove delete already have retain keep existing change set make quantity compare show me cheaper budget boxes box packs pack pieces piece you know another those and one that called with'.split(' '));
-  function tokens(text){return clean(text).split(' ').filter(t=>t&&!stop.has(t)&&!/^\d+$/.test(t));}
+  function tokens(text){return clean(text).split(' ').filter(t=>t&&!stop.has(t));}
   function retrieve(items,action,context={}){
     const persisted=root.PS_PRODUCT_KNOWLEDGE_INDEX?.records||[];const byId=new Map(persisted.map(r=>[r.id,r]));
     const entries=items.map(p=>{const known=byId.get(p.pscSku);return {p,k:known?.fingerprint===fingerprint(p)?known:enrich(p)};});

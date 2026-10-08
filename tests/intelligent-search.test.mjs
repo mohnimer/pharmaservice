@@ -49,3 +49,5 @@ test('model IDs and session references are grounded, verified compatibility requ
  const ranked=search.retrieve(rows,{terms:'glucose strips'},{selectedProducts:[meter]});
  assert.equal(ranked[0].product.pscSku,'verified');assert.equal(ranked[0].verifiedCompatibility,true);assert.equal(ranked[1].verifiedCompatibility,false);
 });
+
+test('search retains numeric product strengths without treating them as quantities',()=>{assert.equal(search.interpret('NEXIUM 20').terms,'nexium 20');assert.deepEqual(search.rank([{pscSku:'20',name:'NEXIUM 20 MG'},{pscSku:'40',name:'NEXIUM 40 MG'}],search.interpret('NEXIUM 20')).map(p=>p.pscSku),['20']);});

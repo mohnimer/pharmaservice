@@ -20,7 +20,8 @@
     if(/\b(?:only show|show only|filter|show all)\b/.test(t))return validate({intent:'filter',filter:/consumable/.test(t)?'consumables':/equipment/.test(t)?'equipment':'all'});
     let intent=/\b(?:already have|retain|keep existing)\b/.test(t)?'retain':/\b(?:remove|delete|take out)\b/.test(t)?'remove':/\b(?:replace|swap)\b/.test(t)?'replace':/\b(?:change|set|make)\b/.test(t)&&quantity?'quantity':/\b(?:add|another|more)\b/.test(t)?'add':/\bcompare\b/.test(t)?'compare':'search';
     let size=t.match(/\b\d+(?:\.\d+)?\s*x\s*\d+(?:\.\d+)?\b/)?.[0]||'';
-    let terms=t.replace(/\b(?:we|i|need|needs|a|an|the|some|something|for|our|to|this|it|please|want|of|add|remove|delete|already|have|retain|keep|existing|change|set|make|quantity|compare|show|me|cheaper|budget|boxes|box|packs|pack|pieces|piece)\b/g,' ').replace(/\b\d+\b/g,' ').replace(/\s+/g,' ').trim();
+    let terms=t.replace(/\b(?:we|i|need|needs|a|an|the|some|something|for|our|to|this|it|please|want|of|add|remove|delete|already|have|retain|keep|existing|change|set|make|quantity|compare|show|me|cheaper|budget|boxes|box|packs|pack|pieces|piece)\b/g,' ').replace(size?new RegExp(size.replace(/\s*x\s*/,'\\s*x\\s*')):/$^/,' ').replace(/\s+/g,' ').trim();
+    if(['add','quantity','remove','retain'].includes(intent))terms=terms.replace(/\b\d+\b/g,' ').replace(/\s+/g,' ').trim();
     if(size) terms=terms.replace(/\bx\b/g,'').trim();
     if(/wheelchair/.test(t))terms='wheelchair';
     else if(/gauze/.test(t))terms='gauze';
