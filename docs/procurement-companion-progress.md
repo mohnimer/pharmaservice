@@ -1,6 +1,6 @@
 # Procurement companion: search candidate boundary
 
-Status: implementation and local regression verification; authenticated production acceptance is still pending. This is not completion of the procurement companion programme.
+Status: candidate-boundary fix deployed and all 11 query grids verified in an authenticated production desktop browser. See `live-search-audit-2026-10-08.md` for exact rendered IDs and limitations. This is not completion of the procurement companion programme.
 
 ## Findings and changes
 
@@ -27,7 +27,7 @@ The existing complete command journey covers three sites, adding products, selec
 
 ## Remaining work
 
-1. Authenticated live browser acceptance with the actual published storefront and provider response.
+1. Real mobile Safari verification; production request submission in an approved test account.
 2. Repeat the complete clinic request on that verified live demo session.
 3. Reversible request edits with Undo, broader reference/site handling and source-approved metadata gap review.
 4. A small customer pilot and real iPhone keyboard testing.

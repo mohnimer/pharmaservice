@@ -1,0 +1,938 @@
+{
+  "testedAt": "2026-10-08T17:56:23.141Z",
+  "site": "https://pharmaservice.ae/",
+  "commit": "328bcef95035b07c453a48ebec95aea99f00cc1a",
+  "environment": "Authenticated production browser; landing → Apply → rendered DOM cards. Desktop only; responsive local checks recorded separately.",
+  "visibleCatalogueLines": 664,
+  "before": [
+    {
+      "query": "antihistamine",
+      "concept": "PS understood: antihistamine",
+      "count": 19,
+      "products": [
+        {
+          "id": "PSC-MED-003",
+          "name": "ZYRTEC 10MG TAB 20'S"
+        },
+        {
+          "id": "PSC-MED-102",
+          "name": "ZYRTEC 1MG/ML ORAL SOLUTION 75ML"
+        },
+        {
+          "id": "PSC-MED-104",
+          "name": "ZYRTEC 10MG/ML ORAL DROPS 10ML"
+        },
+        {
+          "id": "INST-0208",
+          "name": "Cetirizine — Oral liquid presentation"
+        },
+        {
+          "id": "INST-0209",
+          "name": "Loratadine — Tablet presentation"
+        },
+        {
+          "id": "INST-0210",
+          "name": "Loratadine — Oral liquid presentation"
+        },
+        {
+          "id": "PS-AC-49C544EA6E0C",
+          "name": "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml"
+        },
+        {
+          "id": "PS-AC-70BCF2EF8CA0",
+          "name": "CLARITINE 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-8E9FE3B9BBC4",
+          "name": "Dora Desloratadine 5 mg — 30 Tablets"
+        },
+        {
+          "id": "PS-AC-CF2A59100FF8",
+          "name": "FINALLERG 10MG TAB 10’S"
+        },
+        {
+          "id": "PS-AC-3E7CD6BDAB3C",
+          "name": "FINALLERG 10MG TAB 20'S"
+        },
+        {
+          "id": "PS-AC-89836E13CEAE",
+          "name": "FINALLERG 1MG/ML ORAL SOLUTION 100ML"
+        },
+        {
+          "id": "PS-AC-B5F68F0EEF03",
+          "name": "Glotrizine 5 mg/5 ml Syrup — 100 ml"
+        },
+        {
+          "id": "PS-AC-CA529915334B",
+          "name": "Glozal Levocetirizine 5 mg — 20 Tablets"
+        },
+        {
+          "id": "PS-AC-8D861823242C",
+          "name": "LOHIST 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-A9F14BB5E5C6",
+          "name": "LOHIST 5MG/5ML SYRUP 100ML"
+        },
+        {
+          "id": "PS-AC-7789FFECC541",
+          "name": "TELFAST 120MG TAB 30'S"
+        },
+        {
+          "id": "PS-AC-286239754589",
+          "name": "TELFAST 180MG TAB 30'S"
+        },
+        {
+          "id": "PSC-MED-126",
+          "name": "PANADOL NIGHT - 24 FILM-COATED TABLETS"
+        }
+      ]
+    },
+    {
+      "query": "anti histamine",
+      "concept": "PS understood: anti histamine",
+      "count": 19,
+      "products": [
+        {
+          "id": "PSC-MED-003",
+          "name": "ZYRTEC 10MG TAB 20'S"
+        },
+        {
+          "id": "PSC-MED-102",
+          "name": "ZYRTEC 1MG/ML ORAL SOLUTION 75ML"
+        },
+        {
+          "id": "PSC-MED-104",
+          "name": "ZYRTEC 10MG/ML ORAL DROPS 10ML"
+        },
+        {
+          "id": "INST-0208",
+          "name": "Cetirizine — Oral liquid presentation"
+        },
+        {
+          "id": "INST-0209",
+          "name": "Loratadine — Tablet presentation"
+        },
+        {
+          "id": "INST-0210",
+          "name": "Loratadine — Oral liquid presentation"
+        },
+        {
+          "id": "PS-AC-49C544EA6E0C",
+          "name": "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml"
+        },
+        {
+          "id": "PS-AC-70BCF2EF8CA0",
+          "name": "CLARITINE 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-8E9FE3B9BBC4",
+          "name": "Dora Desloratadine 5 mg — 30 Tablets"
+        },
+        {
+          "id": "PS-AC-CF2A59100FF8",
+          "name": "FINALLERG 10MG TAB 10’S"
+        },
+        {
+          "id": "PS-AC-3E7CD6BDAB3C",
+          "name": "FINALLERG 10MG TAB 20'S"
+        },
+        {
+          "id": "PS-AC-89836E13CEAE",
+          "name": "FINALLERG 1MG/ML ORAL SOLUTION 100ML"
+        },
+        {
+          "id": "PS-AC-B5F68F0EEF03",
+          "name": "Glotrizine 5 mg/5 ml Syrup — 100 ml"
+        },
+        {
+          "id": "PS-AC-CA529915334B",
+          "name": "Glozal Levocetirizine 5 mg — 20 Tablets"
+        },
+        {
+          "id": "PS-AC-8D861823242C",
+          "name": "LOHIST 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-A9F14BB5E5C6",
+          "name": "LOHIST 5MG/5ML SYRUP 100ML"
+        },
+        {
+          "id": "PS-AC-7789FFECC541",
+          "name": "TELFAST 120MG TAB 30'S"
+        },
+        {
+          "id": "PS-AC-286239754589",
+          "name": "TELFAST 180MG TAB 30'S"
+        },
+        {
+          "id": "PSC-MED-126",
+          "name": "PANADOL NIGHT - 24 FILM-COATED TABLETS"
+        }
+      ]
+    },
+    {
+      "query": "antihistamin",
+      "concept": "PS understood: antihistamin",
+      "count": 19,
+      "products": [
+        {
+          "id": "PSC-MED-003",
+          "name": "ZYRTEC 10MG TAB 20'S"
+        },
+        {
+          "id": "PSC-MED-102",
+          "name": "ZYRTEC 1MG/ML ORAL SOLUTION 75ML"
+        },
+        {
+          "id": "PSC-MED-104",
+          "name": "ZYRTEC 10MG/ML ORAL DROPS 10ML"
+        },
+        {
+          "id": "INST-0208",
+          "name": "Cetirizine — Oral liquid presentation"
+        },
+        {
+          "id": "INST-0209",
+          "name": "Loratadine — Tablet presentation"
+        },
+        {
+          "id": "INST-0210",
+          "name": "Loratadine — Oral liquid presentation"
+        },
+        {
+          "id": "PS-AC-49C544EA6E0C",
+          "name": "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml"
+        },
+        {
+          "id": "PS-AC-70BCF2EF8CA0",
+          "name": "CLARITINE 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-8E9FE3B9BBC4",
+          "name": "Dora Desloratadine 5 mg — 30 Tablets"
+        },
+        {
+          "id": "PS-AC-CF2A59100FF8",
+          "name": "FINALLERG 10MG TAB 10’S"
+        },
+        {
+          "id": "PS-AC-3E7CD6BDAB3C",
+          "name": "FINALLERG 10MG TAB 20'S"
+        },
+        {
+          "id": "PS-AC-89836E13CEAE",
+          "name": "FINALLERG 1MG/ML ORAL SOLUTION 100ML"
+        },
+        {
+          "id": "PS-AC-B5F68F0EEF03",
+          "name": "Glotrizine 5 mg/5 ml Syrup — 100 ml"
+        },
+        {
+          "id": "PS-AC-CA529915334B",
+          "name": "Glozal Levocetirizine 5 mg — 20 Tablets"
+        },
+        {
+          "id": "PS-AC-8D861823242C",
+          "name": "LOHIST 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-A9F14BB5E5C6",
+          "name": "LOHIST 5MG/5ML SYRUP 100ML"
+        },
+        {
+          "id": "PS-AC-7789FFECC541",
+          "name": "TELFAST 120MG TAB 30'S"
+        },
+        {
+          "id": "PS-AC-286239754589",
+          "name": "TELFAST 180MG TAB 30'S"
+        },
+        {
+          "id": "PSC-MED-126",
+          "name": "PANADOL NIGHT - 24 FILM-COATED TABLETS"
+        }
+      ]
+    },
+    {
+      "query": "cetirizine",
+      "concept": "PS understood: cetirizine",
+      "count": 9,
+      "products": [
+        {
+          "id": "INST-0208",
+          "name": "Cetirizine — Oral liquid presentation"
+        },
+        {
+          "id": "PSC-MED-003",
+          "name": "ZYRTEC 10MG TAB 20'S"
+        },
+        {
+          "id": "PSC-MED-102",
+          "name": "ZYRTEC 1MG/ML ORAL SOLUTION 75ML"
+        },
+        {
+          "id": "PSC-MED-104",
+          "name": "ZYRTEC 10MG/ML ORAL DROPS 10ML"
+        },
+        {
+          "id": "PS-AC-49C544EA6E0C",
+          "name": "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml"
+        },
+        {
+          "id": "PS-AC-CF2A59100FF8",
+          "name": "FINALLERG 10MG TAB 10’S"
+        },
+        {
+          "id": "PS-AC-3E7CD6BDAB3C",
+          "name": "FINALLERG 10MG TAB 20'S"
+        },
+        {
+          "id": "PS-AC-89836E13CEAE",
+          "name": "FINALLERG 1MG/ML ORAL SOLUTION 100ML"
+        },
+        {
+          "id": "PS-AC-B5F68F0EEF03",
+          "name": "Glotrizine 5 mg/5 ml Syrup — 100 ml"
+        }
+      ]
+    },
+    {
+      "query": "allergy medicine",
+      "concept": "PS understood: allergy medicine",
+      "count": 18,
+      "products": [
+        {
+          "id": "PSC-MED-003",
+          "name": "ZYRTEC 10MG TAB 20'S"
+        },
+        {
+          "id": "PSC-MED-102",
+          "name": "ZYRTEC 1MG/ML ORAL SOLUTION 75ML"
+        },
+        {
+          "id": "PSC-MED-104",
+          "name": "ZYRTEC 10MG/ML ORAL DROPS 10ML"
+        },
+        {
+          "id": "INST-0208",
+          "name": "Cetirizine — Oral liquid presentation"
+        },
+        {
+          "id": "INST-0209",
+          "name": "Loratadine — Tablet presentation"
+        },
+        {
+          "id": "INST-0210",
+          "name": "Loratadine — Oral liquid presentation"
+        },
+        {
+          "id": "PS-AC-49C544EA6E0C",
+          "name": "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml"
+        },
+        {
+          "id": "PS-AC-70BCF2EF8CA0",
+          "name": "CLARITINE 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-8E9FE3B9BBC4",
+          "name": "Dora Desloratadine 5 mg — 30 Tablets"
+        },
+        {
+          "id": "PS-AC-CF2A59100FF8",
+          "name": "FINALLERG 10MG TAB 10’S"
+        },
+        {
+          "id": "PS-AC-3E7CD6BDAB3C",
+          "name": "FINALLERG 10MG TAB 20'S"
+        },
+        {
+          "id": "PS-AC-89836E13CEAE",
+          "name": "FINALLERG 1MG/ML ORAL SOLUTION 100ML"
+        },
+        {
+          "id": "PS-AC-B5F68F0EEF03",
+          "name": "Glotrizine 5 mg/5 ml Syrup — 100 ml"
+        },
+        {
+          "id": "PS-AC-CA529915334B",
+          "name": "Glozal Levocetirizine 5 mg — 20 Tablets"
+        },
+        {
+          "id": "PS-AC-8D861823242C",
+          "name": "LOHIST 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-A9F14BB5E5C6",
+          "name": "LOHIST 5MG/5ML SYRUP 100ML"
+        },
+        {
+          "id": "PS-AC-7789FFECC541",
+          "name": "TELFAST 120MG TAB 30'S"
+        },
+        {
+          "id": "PS-AC-286239754589",
+          "name": "TELFAST 180MG TAB 30'S"
+        }
+      ]
+    },
+    {
+      "query": "whelchair",
+      "concept": "PS understood: wheelchair",
+      "count": 1,
+      "products": [
+        {
+          "id": "PSC-EQP-006",
+          "name": "Wheel chair"
+        }
+      ]
+    },
+    {
+      "query": "oxygen thing with meter",
+      "concept": "PS understood: oxygen regulator",
+      "count": 2,
+      "products": [
+        {
+          "id": "INST-0122",
+          "name": "Oxygen regulator and flowmeter"
+        },
+        {
+          "id": "PSC-OXY-001",
+          "name": "Oxygen cylinder with regulator and flow meter"
+        }
+      ]
+    },
+    {
+      "query": "machine to check pressure",
+      "concept": "PS understood: blood pressure",
+      "count": 4,
+      "products": [
+        {
+          "id": "PSC-DIA-003",
+          "name": "Electronic Blood Pressure (BP) apparatus"
+        },
+        {
+          "id": "INST-0138",
+          "name": "BP pediatric cuff"
+        },
+        {
+          "id": "INST-0139",
+          "name": "BP replacement cuff — Adult"
+        },
+        {
+          "id": "INST-0140",
+          "name": "BP replacement cuff — Large adult"
+        }
+      ]
+    },
+    {
+      "query": "sugar machine",
+      "concept": "PS understood: glucose meter",
+      "count": 1,
+      "products": [
+        {
+          "id": "PSC-DBT-001",
+          "name": "Glucometer"
+        }
+      ]
+    },
+    {
+      "query": "big gauze",
+      "concept": "PS understood: gauze",
+      "count": 5,
+      "products": [
+        {
+          "id": "PSC-WND-016",
+          "name": "Sterile gauze — 10 × 10 cm"
+        },
+        {
+          "id": "PSC-WND-002",
+          "name": "Sterile gauze — 5 × 5 cm"
+        },
+        {
+          "id": "PSC-WND-003",
+          "name": "Gauze bandage — 7.5 cm"
+        },
+        {
+          "id": "INST-0081",
+          "name": "Gauze bandage — 10 cm"
+        },
+        {
+          "id": "PSC-WND-001",
+          "name": "Gauze bandage — 5 cm"
+        }
+      ]
+    },
+    {
+      "query": "stethscope",
+      "concept": "PS understood: stethoscope",
+      "count": 1,
+      "products": [
+        {
+          "id": "PSC-DIA-008",
+          "name": "Stethoscope"
+        }
+      ]
+    }
+  ],
+  "after": [
+    {
+      "query": "antihistamine",
+      "concept": "PS understood: antihistamine",
+      "count": 19,
+      "products": [
+        {
+          "id": "PSC-MED-003",
+          "name": "ZYRTEC 10MG TAB 20'S"
+        },
+        {
+          "id": "PSC-MED-102",
+          "name": "ZYRTEC 1MG/ML ORAL SOLUTION 75ML"
+        },
+        {
+          "id": "PSC-MED-104",
+          "name": "ZYRTEC 10MG/ML ORAL DROPS 10ML"
+        },
+        {
+          "id": "INST-0208",
+          "name": "Cetirizine — Oral liquid presentation"
+        },
+        {
+          "id": "INST-0209",
+          "name": "Loratadine — Tablet presentation"
+        },
+        {
+          "id": "INST-0210",
+          "name": "Loratadine — Oral liquid presentation"
+        },
+        {
+          "id": "PS-AC-49C544EA6E0C",
+          "name": "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml"
+        },
+        {
+          "id": "PS-AC-70BCF2EF8CA0",
+          "name": "CLARITINE 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-8E9FE3B9BBC4",
+          "name": "Dora Desloratadine 5 mg — 30 Tablets"
+        },
+        {
+          "id": "PS-AC-CF2A59100FF8",
+          "name": "FINALLERG 10MG TAB 10’S"
+        },
+        {
+          "id": "PS-AC-3E7CD6BDAB3C",
+          "name": "FINALLERG 10MG TAB 20'S"
+        },
+        {
+          "id": "PS-AC-89836E13CEAE",
+          "name": "FINALLERG 1MG/ML ORAL SOLUTION 100ML"
+        },
+        {
+          "id": "PS-AC-B5F68F0EEF03",
+          "name": "Glotrizine 5 mg/5 ml Syrup — 100 ml"
+        },
+        {
+          "id": "PS-AC-CA529915334B",
+          "name": "Glozal Levocetirizine 5 mg — 20 Tablets"
+        },
+        {
+          "id": "PS-AC-8D861823242C",
+          "name": "LOHIST 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-A9F14BB5E5C6",
+          "name": "LOHIST 5MG/5ML SYRUP 100ML"
+        },
+        {
+          "id": "PS-AC-7789FFECC541",
+          "name": "TELFAST 120MG TAB 30'S"
+        },
+        {
+          "id": "PS-AC-286239754589",
+          "name": "TELFAST 180MG TAB 30'S"
+        },
+        {
+          "id": "PSC-MED-126",
+          "name": "PANADOL NIGHT - 24 FILM-COATED TABLETS"
+        }
+      ],
+      "browserObservationMs": 958
+    },
+    {
+      "query": "anti histamine",
+      "concept": "PS understood: anti histamine",
+      "count": 19,
+      "products": [
+        {
+          "id": "PSC-MED-003",
+          "name": "ZYRTEC 10MG TAB 20'S"
+        },
+        {
+          "id": "PSC-MED-102",
+          "name": "ZYRTEC 1MG/ML ORAL SOLUTION 75ML"
+        },
+        {
+          "id": "PSC-MED-104",
+          "name": "ZYRTEC 10MG/ML ORAL DROPS 10ML"
+        },
+        {
+          "id": "INST-0208",
+          "name": "Cetirizine — Oral liquid presentation"
+        },
+        {
+          "id": "INST-0209",
+          "name": "Loratadine — Tablet presentation"
+        },
+        {
+          "id": "INST-0210",
+          "name": "Loratadine — Oral liquid presentation"
+        },
+        {
+          "id": "PS-AC-49C544EA6E0C",
+          "name": "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml"
+        },
+        {
+          "id": "PS-AC-70BCF2EF8CA0",
+          "name": "CLARITINE 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-8E9FE3B9BBC4",
+          "name": "Dora Desloratadine 5 mg — 30 Tablets"
+        },
+        {
+          "id": "PS-AC-CF2A59100FF8",
+          "name": "FINALLERG 10MG TAB 10’S"
+        },
+        {
+          "id": "PS-AC-3E7CD6BDAB3C",
+          "name": "FINALLERG 10MG TAB 20'S"
+        },
+        {
+          "id": "PS-AC-89836E13CEAE",
+          "name": "FINALLERG 1MG/ML ORAL SOLUTION 100ML"
+        },
+        {
+          "id": "PS-AC-B5F68F0EEF03",
+          "name": "Glotrizine 5 mg/5 ml Syrup — 100 ml"
+        },
+        {
+          "id": "PS-AC-CA529915334B",
+          "name": "Glozal Levocetirizine 5 mg — 20 Tablets"
+        },
+        {
+          "id": "PS-AC-8D861823242C",
+          "name": "LOHIST 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-A9F14BB5E5C6",
+          "name": "LOHIST 5MG/5ML SYRUP 100ML"
+        },
+        {
+          "id": "PS-AC-7789FFECC541",
+          "name": "TELFAST 120MG TAB 30'S"
+        },
+        {
+          "id": "PS-AC-286239754589",
+          "name": "TELFAST 180MG TAB 30'S"
+        },
+        {
+          "id": "PSC-MED-126",
+          "name": "PANADOL NIGHT - 24 FILM-COATED TABLETS"
+        }
+      ],
+      "browserObservationMs": 879
+    },
+    {
+      "query": "antihistamin",
+      "concept": "PS understood: antihistamin",
+      "count": 19,
+      "products": [
+        {
+          "id": "PSC-MED-003",
+          "name": "ZYRTEC 10MG TAB 20'S"
+        },
+        {
+          "id": "PSC-MED-102",
+          "name": "ZYRTEC 1MG/ML ORAL SOLUTION 75ML"
+        },
+        {
+          "id": "PSC-MED-104",
+          "name": "ZYRTEC 10MG/ML ORAL DROPS 10ML"
+        },
+        {
+          "id": "INST-0208",
+          "name": "Cetirizine — Oral liquid presentation"
+        },
+        {
+          "id": "INST-0209",
+          "name": "Loratadine — Tablet presentation"
+        },
+        {
+          "id": "INST-0210",
+          "name": "Loratadine — Oral liquid presentation"
+        },
+        {
+          "id": "PS-AC-49C544EA6E0C",
+          "name": "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml"
+        },
+        {
+          "id": "PS-AC-70BCF2EF8CA0",
+          "name": "CLARITINE 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-8E9FE3B9BBC4",
+          "name": "Dora Desloratadine 5 mg — 30 Tablets"
+        },
+        {
+          "id": "PS-AC-CF2A59100FF8",
+          "name": "FINALLERG 10MG TAB 10’S"
+        },
+        {
+          "id": "PS-AC-3E7CD6BDAB3C",
+          "name": "FINALLERG 10MG TAB 20'S"
+        },
+        {
+          "id": "PS-AC-89836E13CEAE",
+          "name": "FINALLERG 1MG/ML ORAL SOLUTION 100ML"
+        },
+        {
+          "id": "PS-AC-B5F68F0EEF03",
+          "name": "Glotrizine 5 mg/5 ml Syrup — 100 ml"
+        },
+        {
+          "id": "PS-AC-CA529915334B",
+          "name": "Glozal Levocetirizine 5 mg — 20 Tablets"
+        },
+        {
+          "id": "PS-AC-8D861823242C",
+          "name": "LOHIST 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-A9F14BB5E5C6",
+          "name": "LOHIST 5MG/5ML SYRUP 100ML"
+        },
+        {
+          "id": "PS-AC-7789FFECC541",
+          "name": "TELFAST 120MG TAB 30'S"
+        },
+        {
+          "id": "PS-AC-286239754589",
+          "name": "TELFAST 180MG TAB 30'S"
+        },
+        {
+          "id": "PSC-MED-126",
+          "name": "PANADOL NIGHT - 24 FILM-COATED TABLETS"
+        }
+      ],
+      "browserObservationMs": 834
+    },
+    {
+      "query": "cetirizine",
+      "concept": "PS understood: cetirizine",
+      "count": 9,
+      "products": [
+        {
+          "id": "INST-0208",
+          "name": "Cetirizine — Oral liquid presentation"
+        },
+        {
+          "id": "PSC-MED-003",
+          "name": "ZYRTEC 10MG TAB 20'S"
+        },
+        {
+          "id": "PSC-MED-102",
+          "name": "ZYRTEC 1MG/ML ORAL SOLUTION 75ML"
+        },
+        {
+          "id": "PSC-MED-104",
+          "name": "ZYRTEC 10MG/ML ORAL DROPS 10ML"
+        },
+        {
+          "id": "PS-AC-49C544EA6E0C",
+          "name": "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml"
+        },
+        {
+          "id": "PS-AC-CF2A59100FF8",
+          "name": "FINALLERG 10MG TAB 10’S"
+        },
+        {
+          "id": "PS-AC-3E7CD6BDAB3C",
+          "name": "FINALLERG 10MG TAB 20'S"
+        },
+        {
+          "id": "PS-AC-89836E13CEAE",
+          "name": "FINALLERG 1MG/ML ORAL SOLUTION 100ML"
+        },
+        {
+          "id": "PS-AC-B5F68F0EEF03",
+          "name": "Glotrizine 5 mg/5 ml Syrup — 100 ml"
+        }
+      ],
+      "browserObservationMs": 633
+    },
+    {
+      "query": "allergy medicine",
+      "concept": "PS understood: allergy medicine",
+      "count": 18,
+      "products": [
+        {
+          "id": "PSC-MED-003",
+          "name": "ZYRTEC 10MG TAB 20'S"
+        },
+        {
+          "id": "PSC-MED-102",
+          "name": "ZYRTEC 1MG/ML ORAL SOLUTION 75ML"
+        },
+        {
+          "id": "PSC-MED-104",
+          "name": "ZYRTEC 10MG/ML ORAL DROPS 10ML"
+        },
+        {
+          "id": "INST-0208",
+          "name": "Cetirizine — Oral liquid presentation"
+        },
+        {
+          "id": "INST-0209",
+          "name": "Loratadine — Tablet presentation"
+        },
+        {
+          "id": "INST-0210",
+          "name": "Loratadine — Oral liquid presentation"
+        },
+        {
+          "id": "PS-AC-49C544EA6E0C",
+          "name": "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml"
+        },
+        {
+          "id": "PS-AC-70BCF2EF8CA0",
+          "name": "CLARITINE 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-8E9FE3B9BBC4",
+          "name": "Dora Desloratadine 5 mg — 30 Tablets"
+        },
+        {
+          "id": "PS-AC-CF2A59100FF8",
+          "name": "FINALLERG 10MG TAB 10’S"
+        },
+        {
+          "id": "PS-AC-3E7CD6BDAB3C",
+          "name": "FINALLERG 10MG TAB 20'S"
+        },
+        {
+          "id": "PS-AC-89836E13CEAE",
+          "name": "FINALLERG 1MG/ML ORAL SOLUTION 100ML"
+        },
+        {
+          "id": "PS-AC-B5F68F0EEF03",
+          "name": "Glotrizine 5 mg/5 ml Syrup — 100 ml"
+        },
+        {
+          "id": "PS-AC-CA529915334B",
+          "name": "Glozal Levocetirizine 5 mg — 20 Tablets"
+        },
+        {
+          "id": "PS-AC-8D861823242C",
+          "name": "LOHIST 10MG TAB 10'S"
+        },
+        {
+          "id": "PS-AC-A9F14BB5E5C6",
+          "name": "LOHIST 5MG/5ML SYRUP 100ML"
+        },
+        {
+          "id": "PS-AC-7789FFECC541",
+          "name": "TELFAST 120MG TAB 30'S"
+        },
+        {
+          "id": "PS-AC-286239754589",
+          "name": "TELFAST 180MG TAB 30'S"
+        }
+      ],
+      "browserObservationMs": 691
+    },
+    {
+      "query": "whelchair",
+      "concept": "PS understood: wheelchair",
+      "count": 1,
+      "products": [
+        {
+          "id": "PSC-EQP-006",
+          "name": "Wheel chair"
+        }
+      ],
+      "browserObservationMs": 637
+    },
+    {
+      "query": "oxygen thing with meter",
+      "concept": "PS understood: oxygen regulator",
+      "count": 2,
+      "products": [
+        {
+          "id": "INST-0122",
+          "name": "Oxygen regulator and flowmeter"
+        },
+        {
+          "id": "PSC-OXY-001",
+          "name": "Oxygen cylinder with regulator and flow meter"
+        }
+      ],
+      "browserObservationMs": 552
+    },
+    {
+      "query": "machine to check pressure",
+      "concept": "PS understood: blood pressure",
+      "count": 1,
+      "products": [
+        {
+          "id": "PSC-DIA-003",
+          "name": "Electronic Blood Pressure (BP) apparatus"
+        }
+      ],
+      "browserObservationMs": 594
+    },
+    {
+      "query": "sugar machine",
+      "concept": "PS understood: glucose meter",
+      "count": 1,
+      "products": [
+        {
+          "id": "PSC-DBT-001",
+          "name": "Glucometer"
+        }
+      ],
+      "browserObservationMs": 560
+    },
+    {
+      "query": "big gauze",
+      "concept": "PS understood: gauze",
+      "count": 1,
+      "products": [
+        {
+          "id": "PSC-WND-016",
+          "name": "Sterile gauze — 10 × 10 cm"
+        }
+      ],
+      "browserObservationMs": 468
+    },
+    {
+      "query": "stethscope",
+      "concept": "PS understood: stethoscope",
+      "count": 1,
+      "products": [
+        {
+          "id": "PSC-DIA-008",
+          "name": "Stethoscope"
+        }
+      ],
+      "browserObservationMs": 563
+    }
+  ],
+  "notes": [
+    "19 class matches comprise 16 exact product records and 3 existing generic presentation records. Allergy medicine excludes Panadol Night combination.",
+    "Browser observation timing includes automation/DOM observation overhead; not a precise application latency measurement.",
+    "No production request submitted. Temporary wheelchair draft line removed.",
+    "Live drawer close button overlap discovered: header z-index 120; drawer z-index 100. Separate follow-up fix under verification."
+  ]
+}
