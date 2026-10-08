@@ -2207,28 +2207,30 @@
   function catalogueFilterProducts(needId='all'){
     const q=ui.catalogueQuery.trim(),types=(D.productTypes||[]).filter(Boolean),allProducts=catalogueProducts(),context=productSearchContext();
     const action=q?window.PS_INTELLIGENT_SEARCH.interpret(q,context):intelligent.action;
-    let retrieval=action?.terms?window.PS_INTELLIGENT_SEARCH.rank(allProducts,action,context):allProducts;
-    if(action?.rankedIds?.length){const first=action.rankedIds.map(id=>allProducts.find(p=>p.pscSku===id)).filter(Boolean),ids=new Set(first.map(p=>p.pscSku));retrieval=[...first,...retrieval.filter(p=>!ids.has(p.pscSku))];}
-    const crossCategory=!!(q||action?.terms); // Searching the whole range must not dead-end in the previous category.
+    const retrieval=window.PS_INTELLIGENT_SEARCH.candidates(allProducts,action,context);
+    const searching=!!(q||action&&action.intent!=='filter');
+    const crossCategory=searching; // Searching the whole range must not dead-end in the previous category.
     const filtered=retrieval.filter(p=>{
       const lineMatch=ui.catalogueFilter==='All lines'||(ui.catalogueFilter==='DHA requirement'&&p.dhaMapped)||(ui.catalogueFilter==='Licensed / controlled'&&p.regulated)||(ui.catalogueFilter==='Specification-led'&&p.institutionalProvisional);
       const viewMatch=!action||action.intent!=='filter'||action.filter==='all'||(action.filter==='equipment'?clinicalNeedIds(p).includes('equipment'):!clinicalNeedIds(p).includes('equipment')&&!clinicalNeedIds(p).includes('medicines'));
       return viewMatch&&(crossCategory||clinicalNeedMatches(p,needId))&&(ui.catalogueCat==='All product types'||p.productType===ui.catalogueCat)&&lineMatch;
     });
-    return {allProducts,filtered,types};
+    return {allProducts,filtered,types,searching};
   }
   function catalogueSearchResults(needId='all',landing=false){
-    const {filtered}=catalogueFilterProducts(needId);const visible=!landing||ui.catalogueQuery||intelligent.action;
-    return `<section class="psSearchResults" data-ps-search-results ${visible?'':'hidden'}><div class="catalogueMeta"><span data-ps-result-count role="status" aria-live="polite" aria-atomic="true">${filtered.length} products</span></div><div class="productGrid v25ProductGrid">${visible?filtered.map(productCard).join(''):''}</div><p class="psSearchEmpty" ${filtered.length?'hidden':''}>${esc(window.PS_INTELLIGENT_SEARCH.outcome(window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'' ,productSearchContext())||{terms:''},filtered).message)} Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button></p></section>`;
+    const {filtered,searching}=catalogueFilterProducts(needId);const visible=!landing||ui.catalogueQuery||intelligent.action;
+    return `<section class="psSearchResults" data-ps-search-results ${visible?'':'hidden'}><div class="catalogueMeta"><span data-ps-result-count role="status" aria-live="polite" aria-atomic="true">${filtered.length} ${searching?'matching products':'products'}</span></div><div class="productGrid v25ProductGrid">${visible?filtered.map(productCard).join(''):''}</div><p class="psSearchEmpty" ${filtered.length?'hidden':''}>${esc(window.PS_INTELLIGENT_SEARCH.outcome(window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'' ,productSearchContext())||{terms:''},filtered).message)} Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button></p></section>`;
   }
   function updateCatalogueResults(){
     const area=document.querySelector('[data-ps-search-results]');if(!area)return;
     const route=currentRoute(),landing=route==='portal/catalogue',need=route.split('/')[2]||'all';
     if(landing&&ui.catalogueQuery){ui.catalogueCat='All product types';ui.catalogueFilter='All lines';}
-    const {filtered}=catalogueFilterProducts(need);
+    const {filtered,searching}=catalogueFilterProducts(need);
     area.hidden=landing&&!ui.catalogueQuery&&!intelligent.action;
     const grid=area.querySelector('.productGrid');grid.innerHTML=area.hidden?'':filtered.map(productCard).join('');
-    area.querySelector('[data-ps-result-count]').textContent=`${filtered.length} products`;
+    area.querySelector('[data-ps-result-count]').textContent=`${filtered.length} ${searching?'matching products':'products'}`;
+    const heroCount=document.querySelector('.categoryHeroCount b');if(heroCount)heroCount.textContent=filtered.length;
+    const heroLabel=document.querySelector('.categoryHeroCount span');if(heroLabel)heroLabel.textContent=searching?'matching products':'products';
     const empty=area.querySelector('.psSearchEmpty');empty.hidden=filtered.length>0;const action=window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'',productSearchContext())||{terms:''};empty.innerHTML=esc(window.PS_INTELLIGENT_SEARCH.outcome(action,filtered).message)+' Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button>';bindUnlistedRequirement(empty);
     // Bind only newly rendered cards. Never replace or refocus the command input while typing.
     bindCatalogueResultCards(grid);

@@ -84,7 +84,8 @@ window.__tables.catalogue_family_option_reference_public=[{family_id:'PSC-SC-C01
   await page.locator('[data-cat-q]').pressSequentially('zzzznotfound',{delay:0});
   assert.equal(await page.locator('[data-cat-q]').inputValue(),'zzzznotfound');
   await page.waitForFunction(()=>document.querySelector('.productGrid')?.children.length===0);assert.equal(await page.locator('.productGrid .productCard').count(),0);
-  await page.locator('[data-cat-q]').press('Escape');assert.equal(await page.locator('[data-cat-q]').inputValue(),'');assert.equal(await page.locator('[data-ps-search-results]').isVisible(),false);
+  await page.locator('[data-cat-q]').press('Escape');assert.equal(await page.locator('[data-cat-q]').inputValue(),'');assert.equal(await page.locator('[data-ps-search-results]').isVisible(),true);
+  assert((await page.locator('.productGrid .productCard').count())>10);
   await page.locator('[data-cat-q]').fill('gauze');
   await page.evaluate(()=>window.PSC_NAVIGATE('portal/requests'));await page.locator('.customerShell').waitFor();
   assert((await page.locator('[data-global-search]').evaluateAll(nodes=>nodes.map(n=>n.value))).every(v=>v===''));

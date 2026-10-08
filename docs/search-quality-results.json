@@ -7,8 +7,8 @@
     "zeroResultRateOnExpectedMatches": 0,
     "clarificationRate": 0.07142857142857142,
     "incorrectTop1Rate": 0,
-    "averageLatencyMs": 3.957334164285711,
-    "p95LatencyMs": 22.75849900000003
+    "averageLatencyMs": 3.826364285714284,
+    "p95LatencyMs": 21.934163000000012
   },
   "antihistamines": [
     {
@@ -462,10 +462,7 @@
       "concept": "gauze",
       "ids": [
         "PSC-WND-016",
-        "PSC-WND-002",
-        "PSC-WND-003",
-        "INST-0081",
-        "PSC-WND-001"
+        "PSC-WND-002"
       ],
       "top1": true,
       "top3": true,
@@ -478,10 +475,7 @@
       "concept": "gauze",
       "ids": [
         "PSC-WND-016",
-        "PSC-WND-002",
-        "PSC-WND-003",
-        "INST-0081",
-        "PSC-WND-001"
+        "PSC-WND-002"
       ],
       "top1": true,
       "top3": true,
@@ -535,10 +529,7 @@
       "query": "machine to check pressure",
       "concept": "blood pressure",
       "ids": [
-        "PSC-DIA-003",
-        "INST-0138",
-        "INST-0139",
-        "INST-0140"
+        "PSC-DIA-003"
       ],
       "top1": true,
       "top3": true,

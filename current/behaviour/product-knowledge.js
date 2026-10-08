@@ -9,6 +9,7 @@
     ['gauze',/gauze|wound pad|absorbent.*dressing/,/gauze|gaws|guaze|gauz|wound dressing/,['guaze','gaws','gauz','wound dressing','absorbent pad','big gauze','large wound pad']],
     ['oxygen-regulator',/oxygen regulator|regulator.*flow.*meter/,/oxgen regulater|oxygen.*(?:meter|regulator|flow)|regulator.*oxygen/,['oxygen thing with meter','oxgen regulater','oxygen gauge','oxygen flowmeter','flow meter','oxygen control']],
     ['bp-monitor',/blood pressure|sphygmomanometer|\bbp\b/,/blood pressure|\bbp\b|machine.*(?:check|measure).*pressure|sphygmomanometer/,['machine to check pressure','measure blood pressure','blood pressure machine','bp monitor','sphygmomanometer']],
+    ['bp-cuff',/(?:blood pressure|\bbp\b).*cuff/,/(?:blood pressure|\bbp\b).*cuff|replacement cuff/,['blood pressure cuff','bp cuff','replacement cuff']],
     ['glucose-meter',/glucometer|glucose (?:monitor|meter)|guide kit/,/sugar machine|glucose meter|glucometer|blood sugar|diabetes machine/,['sugar machine','check sugar','blood sugar monitor','glucose meter','glucometer','diabetes machine']],
     ['glucose-strips',/(?:glucose|glucometer|accu chek).*strips|guide test strips|instant test strips/,/glucose strips|glucometer strips|sugar strips/,['sugar strips','glucose strips','diabetes strips','meter test strips']],
     ['lancet',/lancet/,/lancet|finger prick/,['finger prick','lancing needles','blood sugar needles','lancets']],
@@ -45,6 +46,14 @@
   function enrich(p){
     const name=p.catalogueDisplayName||p.name||'',officialName=p.name||name;
     const primary=clean(name+' '+officialName);let v=vector(primary,true);
+    if(/cuff/.test(primary))v[concepts.findIndex(c=>c.id==='bp-monitor')]=0;
+    if(/non sterile|nonsterile/.test(primary))v[concepts.findIndex(c=>c.id==='sterile')]=0;
+    const displayedDimensions=clean(name).match(/(\d+(?:\.\d+)?)\s*x\s*(\d+(?:\.\d+)?)/);
+    if(displayedDimensions){
+      const sides=displayedDimensions.slice(1).map(Number);
+      v[concepts.findIndex(c=>c.id==='large')]=sides.every(n=>n>=10)?1:0;
+      v[concepts.findIndex(c=>c.id==='small')]=sides.every(n=>n<=5)?1:0;
+    }
     // A strip containing "meter" in its specification is not itself a meter.
     if(!/strips/.test(clean(name))&&/glucometer|glucose (?:meter|monitor)/.test(clean(name)))v[concepts.findIndex(c=>c.id==='glucose-strips')]=0;
     if(/strips/.test(clean(name))){v[concepts.findIndex(c=>c.id==='glucose-meter')]=0;}
@@ -66,7 +75,7 @@
     if(key!==corpusKey){queryCache.clear();corpusKey=key;corpusEntries=items.map(p=>{const known=byId.get(p.pscSku);const k=known?.fingerprint===fingerprint(p)?known:enrich(p);const hay=clean([...(k.medicine?.activeIngredients||[]),...(k.medicine?.therapeuticClasses||[]),k.displayName,k.officialName,k.id,k.category,k.subcategory,k.brand,k.model,k.specifications,k.pack,...k.descriptions].join(' '));return {k,hay,words:[...new Set(tokens(hay))]};});corpusFrequency=new Map();for(const {words}of corpusEntries)for(const word of words)corpusFrequency.set(word,(corpusFrequency.get(word)||0)+1);}
     const entries=corpusEntries.map((entry,i)=>({...entry,p:items[i]}));
     const cacheKey=JSON.stringify([action,(context.selectedProducts||[]).map(fingerprint),context.category,context.institutionType]);if(queryCache.has(cacheKey)){const byId=new Map(items.map(p=>[p.pscSku,p]));return queryCache.get(cacheKey).map(x=>({...x,product:byId.get(x.id)}));}
-    const query=clean(action.terms),qt=tokens(query),qv=vector(query);const medicalClass=medicine.query(query),ingredient=medicine.ingredients.find(x=>new RegExp('\\b'+x+'\\b').test(query));const requiredForm=/\btablets?\b/.test(query)?'tablet':/\bcapsules?\b/.test(query)?'capsule':/\bsyrup\b/.test(query)?'syrup':/\bdrops?\b/.test(query)?'oral drops':/\boral solution\b/.test(query)?'oral solution':null;if(qv[concepts.findIndex(c=>c.id==='nebulizer-mask')])qv[concepts.findIndex(c=>c.id==='nebulizer')]=0;const strong=concepts.filter((c,i)=>qv[i]&&!['large','small','medium','sterile','adult','pediatric'].includes(c.id)).map(c=>c.id);
+    const query=clean(action.terms),qt=tokens(query),qv=vector(query);const medicalClass=medicine.query(query),ingredient=medicine.ingredients.find(x=>new RegExp('\\b'+x+'\\b').test(query));const requiredForm=/\btablets?\b/.test(query)?'tablet':/\bcapsules?\b/.test(query)?'capsule':/\bsyrup\b/.test(query)?'syrup':/\bdrops?\b/.test(query)?'oral drops':/\boral solution\b/.test(query)?'oral solution':null;if(qv[concepts.findIndex(c=>c.id==='nebulizer-mask')])qv[concepts.findIndex(c=>c.id==='nebulizer')]=0;if(qv[concepts.findIndex(c=>c.id==='bp-cuff')])qv[concepts.findIndex(c=>c.id==='bp-monitor')]=0;const strong=concepts.filter((c,i)=>qv[i]&&!['large','small','medium','sterile','adult','pediatric'].includes(c.id)).map(c=>c.id);
     const selected=(context.selectedProducts||[]).map(enrich),active=selected.at(-1);const size=norm(action.size).replace(/\s/g,'');
     const frequency=corpusFrequency;
     const ranked=entries.map(({p,k,hay,words})=>{
@@ -81,6 +90,7 @@
       if(requiredForm&&k.medicine?.dosageForm!==requiredForm)return null;
       if(/non drowsy|non sedating/.test(query)&&!k.medicine?.claims.includes('non-drowsy'))return null;
       if(action.pediatric&&k.concepts.includes('adult'))return null;
+      if(action.large&&strong.includes('gauze')&&!k.concepts.includes('large'))return null;
       const strength=query.match(/\b(\d+(?:\.\d+)?)\s*(mg|mcg)(?:\s*(?:per| )\s*(\d+(?:\.\d+)?)?\s*ml)?/);
       if(strength&&k.medicine){const actual=norm(k.medicine.strength).replace(/\s/g,'');const expected=strength[1]+strength[2]+(strength[0].includes('ml')?(strength[3]||'')+'ml':'');if(actual!==expected)return null;}
       if(!exact&&!conceptMatch&&!medicinalMatch&&!ingredient&&(!qt.length||hits/qt.length<0.65))return null;

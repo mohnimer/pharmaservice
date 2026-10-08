@@ -26,6 +26,7 @@
     if(/oxygen.*finger|finger.*oxygen/.test(t))terms='oximeter';
     else if(/wheelchair/.test(t))terms='wheelchair';
     else if(/gauze/.test(t))terms='gauze';
+    else if(/(?:blood pressure|\bbp\b).*cuff/.test(t))terms='blood pressure cuff';
     else if(/blood pressure|\bbp\b/.test(t))terms='blood pressure';
     else if(/gloves?/.test(t)){terms='gloves';size=t.match(/\b(?:small|medium|large)\b/)?.[0]||size;}
     else if(/beds?/.test(t))terms='bed';
@@ -47,7 +48,21 @@
     return validate({intent,terms,concept:medicalClass||ingredient||terms,conceptType:medicalClass?'therapeutic_class':ingredient?'ingredient':'product_family',clarificationField:maskAmbiguous?'product_type':/big|large gauze/.test(t)?'size':'',size,quantity:size&&!/\badd\b/.test(t)?null:quantity,unit,reference,large:/\bbig\b|\blarge\b/.test(t),pediatric:/kids|child|pediatric|paediatric/.test(t),ambiguous:maskAmbiguous||/big|large gauze/.test(t),budget:/cheaper|budget|lowest price/.test(t)});
   }
   function rank(items,action,context={}){try{return knowledge.retrieve(items,action,context).map(x=>x.product);}catch{return items.filter(p=>{const q=normalize(action.terms);return q&&normalize([p.pscSku,p.name,p.catalogueDisplayName,p.brand].join(' ')).includes(q);});}}
-  const api={outcome:knowledge.outcome,normalize,validate,interpret,rank,retrieve:knowledge.retrieve};
+  function candidates(items,action,context={}){
+    const visible=items.filter(p=>p.catalogueVisible!==false);
+    if(!action||action.intent==='filter'&&!action.terms&&!action.rankedIds?.length)return visible;
+    const local=action.terms?rank(visible,action,context):[];
+    if(!action.rankedIds?.length)return local;
+    const medicine=root.PS_MEDICINE_KNOWLEDGE;
+    const medical=medicine.query(action.terms)||medicine.ingredients.some(x=>new RegExp('\\b'+x+'\\b').test(action.terms));
+    // Verified medical membership remains authoritative; model IDs may reorder it.
+    // Other model searches use only grounded IDs, never the remaining catalogue.
+    const pool=medical?local:visible,byId=new Map(pool.map(p=>[p.pscSku,p]));
+    const first=[...new Set(action.rankedIds)].map(id=>byId.get(id)).filter(Boolean);
+    if(!medical)return first;
+    const ids=new Set(first.map(p=>p.pscSku));return [...first,...local.filter(p=>!ids.has(p.pscSku))];
+  }
+  const api={outcome:knowledge.outcome,normalize,validate,interpret,rank,candidates,retrieve:knowledge.retrieve};
   if(typeof module!=='undefined')module.exports=api;
   root.PS_INTELLIGENT_SEARCH=api;
 })(typeof window==='undefined'?globalThis:window);

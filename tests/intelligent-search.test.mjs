@@ -4,6 +4,15 @@ import search from '../current/behaviour/intelligent-search.js';
 import handler from '../api/interpret-request.mjs';
 import {generateText,Output,jsonSchema} from 'ai';
 import {MockLanguageModelV4} from 'ai/test';
+test('search candidate IDs exclude unrelated and hidden records; browse remains separate',()=>{
+const rows=[{pscSku:'wheel',name:'Wheelchair'},{pscSku:'gauze',name:'Gauze'},{pscSku:'hidden',name:'Wheelchair',catalogueVisible:false}];
+assert.deepEqual(search.candidates(rows,null).map(p=>p.pscSku),['wheel','gauze']);
+assert.deepEqual(search.candidates(rows,{intent:'search',terms:'',rankedIds:['wheel','hidden','invented']}).map(p=>p.pscSku),['wheel']);
+assert.deepEqual(search.candidates(rows,{intent:'search',terms:'',rankedIds:[]}),[]);
+assert.deepEqual(search.candidates(rows,search.interpret('zzznothing')),[]);
+const meds=[{pscSku:'cet',name:'Cetirizine 10mg tablet',category:'Medicines'},{pscSku:'ibu',name:'Ibuprofen 200mg tablet',category:'Medicines'}];
+assert.deepEqual(search.candidates(meds,{intent:'search',terms:'antihistamine',rankedIds:['ibu','cet']}).map(p=>p.pscSku),['cet']);
+});
 test('constrained commands retain context, quantity bounds and authoritative size',()=>{
 assert.equal(search.interpret('this is for 3 clinics').intent,'sites');assert.equal(search.interpret('add 0 wheelchairs').invalidQuantity,true);assert.equal(search.interpret('add -2 wheelchairs').invalidQuantity,true);
 assert.equal(search.interpret('add 5 boxes',{terms:'gauze',size:'10x10'}).size,'10x10');
