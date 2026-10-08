@@ -1,0 +1,35 @@
+import {readFileSync} from 'node:fs';
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {createServer} from '../tools/serve.mjs';
+const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
+const base=`http://127.0.0.1:${server.address().port}`;
+const browser=await chromium.launch({executablePath:process.env.PSC_CHROME,args:['--no-sandbox']});
+try{for(const width of [390,1440]){
+ const context=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce'});
+ await context.addInitScript(()=>{window.__testRole='demo';});
+ await context.route('**/*',r=>{const u=new URL(r.request().url());if(u.hostname==='127.0.0.1'&&u.pathname!='/api/interpret-request')return r.continue();if(u.hostname==='cdn.jsdelivr.net')return r.fulfill({contentType:'text/javascript',body:readFileSync('tests/mock-supabase.js','utf8')});return r.fulfill({status:503,body:''});});
+ const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(base+'/#portal/catalogue/all');await page.locator('[data-cat-q]').waitFor();
+ const cmd=async t=>{await page.locator('[data-cat-q]').fill(t);await page.locator('[data-cat-q]').press('Enter');};
+ const undo=async()=>{await page.locator('.psIntelligentSearch [data-ps-undo]').click();};
+ const qty=()=>page.locator('[data-ps-line-qty]').first().inputValue();
+ await cmd('wheelchair');assert.equal(await page.locator('[data-ps-undo]').count(),0,'search is not a draft edit');
+ await cmd('add 2 wheelchairs');assert.equal(await qty(),'2');
+ await cmd('make that 5');assert.equal(await qty(),'5');await undo();assert.equal(await qty(),'2');
+ await cmd('deliver this to Sharjah');assert.equal(await page.locator('[data-ps-scope="location"]').inputValue(),'sharjah');await undo();assert.equal(await page.locator('[data-ps-scope="location"]').inputValue(),'');
+ await cmd('we already have the wheelchair');assert.equal(await page.locator('[data-ps-line-qty]').count(),0);assert.equal(await page.locator('.psRetained').count(),1);await undo();assert.equal(await qty(),'2');assert.equal(await page.locator('.psRetained').count(),0);
+ if(width===390)await page.locator('[data-ps-sheet-open]').click();
+ await page.locator('[data-ps-line-qty]').fill('4');await page.locator('[data-ps-line-qty]').press('Tab');
+ if(width===390)await page.locator('[data-ps-sheet-close]').click();
+ await undo();assert.equal(await qty(),'2');
+ await cmd('remove wheelchair');assert.equal(await page.locator('[data-ps-line-qty]').count(),0);await cmd('undo');assert.equal(await qty(),'2');
+ await cmd('add 1 glucometer');await cmd('remove the second one');assert.equal(await page.locator('[data-ps-line-qty]').count(),1);await undo();assert.equal(await page.locator('[data-ps-line-qty]').count(),2);await undo();assert.equal(await page.locator('[data-ps-line-qty]').count(),1);
+ await page.locator('[data-account-switcher]').click();await page.locator('[data-school-select="s2"]').click();assert.equal(await page.locator('[data-ps-line-qty]').count(),0);assert.equal(await page.locator('[data-ps-undo]').count(),0,'Undo cannot cross sites');assert.equal(await page.locator('.psInterpretation').count(),0,'site switch clears stale query');
+ await cmd('add 1 glucometer');assert.equal(await qty(),'1');await undo();assert.equal(await page.locator('[data-ps-line-qty]').count(),0);
+ await page.locator('[data-account-switcher]').click();await page.locator('[data-school-select="s1"]').click();assert.equal(await qty(),'2');await undo();assert.equal(await page.locator('[data-ps-line-qty]').count(),0,'site one history retained separately');
+ await cmd('add 1 wheelchair');await page.locator('[data-basket]:visible').first().click();await page.locator('.requestDrawer [data-ps-undo]').click();assert.equal(await page.locator('[data-ps-line-qty]').count(),0);await page.locator('.requestDrawer [data-close-basket]').click();
+ await cmd('add 1 wheelchair');await page.locator('[data-basket]:visible').first().click();await page.locator('[data-submit-request]').click();assert.equal(await page.locator('[data-ps-undo]').count(),0,'submission clears Undo; no resubmission restoration');
+ assert.deepEqual(await page.evaluate(()=>window.__backendCalls.filter(c=>c.rpc||c.action!=='select')),[]);assert.deepEqual(errors,[]);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ await context.close();console.log(`Undo, retained items, quantities, location, drawer, site isolation and demo submission boundary ${width}: PASS`);
+}}finally{await browser.close();server.close();}

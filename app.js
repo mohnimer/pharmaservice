@@ -30,6 +30,31 @@
   let authReady = false;
 
   let state = load();
+  const draftHistory=new Map();
+  const draftKey=()=>`${session?.user?.id||'anonymous'}:${state.activeSchoolId||'draft'}`;
+  const draftSnapshot=()=>JSON.parse(JSON.stringify({basket:state.basket||[],scope:state.scopesBySchool?.[state.activeSchoolId||'draft']||{institution:'',location:'',sites:null,orderType:'',retained:[],quantityConfirmation:false}}));
+  function draftCheckpoint(){
+    const key=draftKey();if(!draftHistory.has(key))draftHistory.set(key,{current:draftSnapshot(),undo:[]});
+    return draftHistory.get(key);
+  }
+  function trackDraftChange(){
+    const history=draftCheckpoint(),next=draftSnapshot();
+    if(JSON.stringify(history.current)===JSON.stringify(next))return;
+    history.undo.push(history.current);history.undo=history.undo.slice(-10);history.current=next;
+  }
+  function clearDraftUndo(){draftHistory.set(draftKey(),{current:draftSnapshot(),undo:[]});}
+  function draftUndoControl(){
+    return draftCheckpoint().undo.length?'<div class="psDraftUndo"><span>Draft changes can be reversed.</span><button type="button" class="textAction" data-ps-undo>Undo last change</button></div>':'';
+  }
+  function undoDraftChange(){
+    const history=draftCheckpoint(),previous=history.undo.pop();if(!previous)return;
+    state.basket=JSON.parse(JSON.stringify(previous.basket));state.scopesBySchool=state.scopesBySchool||{};
+    if(previous.scope)state.scopesBySchool[state.activeSchoolId||'draft']=JSON.parse(JSON.stringify(previous.scope));
+    else delete state.scopesBySchool[state.activeSchoolId||'draft'];
+    history.current=draftSnapshot();
+    resetIntelligentSearch();const memory=productSearchMemory();memory.selectedSku=state.basket.at(-1)?.sku||state.basket.at(-1)?.familyId||'';memory.terms='';memory.size='';memory.resultIds=[];
+    ui.catalogueQuery='';ui.globalSearch='';save();renderUi({preserveScroll:true,transition:false});toast('<strong>Last draft change undone.</strong><br>No submitted order was changed.');
+  }
   const demoSession = {initialized:false, requestsBySchool:{}};
   let ui = { mobile:false, publicMenu:false, basket:false, modal:null, accountMenu:false, globalSearch:'', catalogueQuery:'', catalogueNeed:'all', catalogueCat:'All product types', catalogueFilter:'All lines', productQuery:'', productCat:'All', evidence:'All', cmsChannel:'institutional', cmsSearch:'', wholesaleQuery:'', wholesaleCat:'All', workshopQuery:'', workshopCategory:'All', tourStep:0, overlayScroll:0, mailTab:'compose', mailSearch:'', mailRole:'All', mailInstitution:'All', mailTemplate:'workshop', mailGuideSlug:'aed-has-expiring-parts-too', mailSelectedContacts:[], mailDraftSubject:'', mailDraftIntro:'', mailDraftCta:'Read the guide', optionSearch:'', optionDecision:'All', optionFamily:'all' };
 
@@ -146,6 +171,7 @@
     catch { return JSON.parse(JSON.stringify(seed)); }
   }
   function save(){
+    trackDraftChange();
     if(isDemoAccount()){
       if(state.activeSchoolId){
         state.basketsBySchool[state.activeSchoolId]=state.basket||[];
@@ -1109,7 +1135,7 @@
   let catalogueSearchRoute = null;
   function go(route,{replace=false,searchQuery=null}={}){
     ui.mobile=false; ui.publicMenu=false; ui.modal=null; ui.basket=false; ui.accountMenu=false;
-    if(route!==currentRoute()){ ui.globalSearch=''; ui.catalogueQuery=''; }
+    if(route!==currentRoute()){ resetIntelligentSearch();ui.globalSearch=''; ui.catalogueQuery=''; }
     if(searchQuery!==null){ ui.catalogueQuery=String(searchQuery).trim(); ui.globalSearch=ui.catalogueQuery; }
     catalogueSearchRoute=route;
     const target=route==='start'?'/start':route==='workshop'?'/workshop':route.startsWith('workshop/')?`/workshop/${encodeURIComponent(route.split('/')[1]||'')}`:`/#${route}`;
@@ -2119,7 +2145,7 @@
     return ['PS request scope',scope.institution&&`Institution / site: ${scope.institution}`,scope.location&&`Delivery location: ${scope.location}`,scope.sites&&`Sites: ${scope.sites} — ${scope.quantityConfirmation?'quantities require confirmation':'quantities are totals across all sites'}`,scope.orderType&&`Order type: ${scope.orderType}`,state.basket.some(l=>l.requestUnit)&&`Requested units: ${state.basket.filter(l=>l.requestUnit).map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty} ${l.requestUnit}`).join('; ')} — pack basis needs PS verification`,scope.retained.length&&`Existing / retain (excluded from supply): ${scope.retained.map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty}`).join('; ')}`,'Specifications, availability, pack basis and commercial terms need PS verification.'].filter(Boolean).join('\n');
   }
   function intelligentSearchField(){
-    return `<section class="psIntelligentSearch"><span class="sectionLabel">Search the catalogue</span><h2>Tell us what you need</h2><p>the way you’d normally say it</p><label for="psCommand">${state.basket.length?'Change this scope in plain language':'Search the catalogue'}</label><form data-ps-command-form><input id="psCommand" type="search" data-cat-q aria-label="Search catalogue" value="${esc(ui.catalogueQuery)}" placeholder="We need a wheelchair…" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Apply</button><button class="button outline" type="button" data-catalogue-clear ${!ui.catalogueQuery&&!intelligent.action?'disabled':''}>Clear</button></form>${intelligent.said?`<div class="psInterpretation" role="status"><span>You said: “${esc(intelligent.said)}”</span><b>PS understood: ${esc(intelligent.message)}</b></div>`:''}${intelligent.choices.length?`<div class="psClarification"><b>Which catalogue line should we add?</b>${intelligent.choices.map(p=>`<button type="button" class="button outline" data-ps-select-sku="${esc(p.pscSku)}">${esc(p.catalogueDisplayName||p.name)}</button>`).join('')}</div>`:''}${intelligent.pending?.kind==='product_type'?`<div class="psClarification"><b>Which type of mask did you mean?</b>${['nebulizer mask','oxygen mask','face mask'].map(q=>`<button type="button" class="button outline" data-ps-clarify-type="${q}">${q}</button>`).join('')}</div>`:''}${intelligent.pending&&intelligent.pending.kind!=='product_type'?`<div class="psClarification"><b>Which size did you mean?</b>${intelligent.pending.sizes.map(size=>`<button class="button outline" data-ps-clarify="${esc(size)}">${esc(size.replace('x',' × '))} cm</button>`).join('')}<button class="button outline" data-ps-clarify="both">Show both</button></div>`:''}</section>`;
+    return `<section class="psIntelligentSearch">${draftUndoControl()}<span class="sectionLabel">Search the catalogue</span><h2>Tell us what you need</h2><p>the way you’d normally say it</p><label for="psCommand">${state.basket.length?'Change this scope in plain language':'Search the catalogue'}</label><form data-ps-command-form><input id="psCommand" type="search" data-cat-q aria-label="Search catalogue" value="${esc(ui.catalogueQuery)}" placeholder="We need a wheelchair…" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Apply</button><button class="button outline" type="button" data-catalogue-clear ${!ui.catalogueQuery&&!intelligent.action?'disabled':''}>Clear</button></form>${intelligent.said?`<div class="psInterpretation" role="status"><span>You said: “${esc(intelligent.said)}”</span><b>PS understood: ${esc(intelligent.message)}</b></div>`:''}${intelligent.choices.length?`<div class="psClarification"><b>Which catalogue line should we add?</b>${intelligent.choices.map(p=>`<button type="button" class="button outline" data-ps-select-sku="${esc(p.pscSku)}">${esc(p.catalogueDisplayName||p.name)}</button>`).join('')}</div>`:''}${intelligent.pending?.kind==='product_type'?`<div class="psClarification"><b>Which type of mask did you mean?</b>${['nebulizer mask','oxygen mask','face mask'].map(q=>`<button type="button" class="button outline" data-ps-clarify-type="${q}">${q}</button>`).join('')}</div>`:''}${intelligent.pending&&intelligent.pending.kind!=='product_type'?`<div class="psClarification"><b>Which size did you mean?</b>${intelligent.pending.sizes.map(size=>`<button class="button outline" data-ps-clarify="${esc(size)}">${esc(size.replace('x',' × '))} cm</button>`).join('')}<button class="button outline" data-ps-clarify="both">Show both</button></div>`:''}</section>`;
   }
   function requestScopePanel(){
     const scope=scopeDraft(),lines=state.basket;const missing=[!lines.length&&'Items',!state.groupName&&!scope.institution&&'Institution name',!scope.location&&'Delivery location',scope.quantityConfirmation&&'Quantities per site / total',lines.some(l=>!l.requestUnit)&&'Pack / unit confirmation'].filter(Boolean);
@@ -2129,6 +2155,7 @@
   function resetIntelligentSearch(){clearTimeout(searchTypingTimer);intelligent.sequence++;intelligent.action=null;intelligent.pending=null;intelligent.choices=[];intelligent.confirmed='';intelligent.said='';intelligent.message='';intelligent.sheet=false;}
   async function applyIntelligentCommand(text){
     if(!String(text).trim())return;
+    if(/^(?:undo|undo (?:that|last change|the last change))\s*[.!]?$/i.test(String(text).trim())){undoDraftChange();return;}
     if(currentRoute()==='home'&&!session){
       try{sessionStorage.setItem('pscPendingRoute','portal/catalogue/all');sessionStorage.setItem('pscPendingSearch',String(text).slice(0,400));}catch{}
       go('login');return;
@@ -2163,7 +2190,7 @@
       }
       if(action.budget)intelligent.message='Matching products — PS must verify pricing before comparison';
       let matchingLines=state.basket.filter(l=>window.PS_INTELLIGENT_SEARCH.rank([{pscSku:l.sku||l.familyId,name:lineDisplayName(l,l.sku?product(l.sku):null),pack:linePackLabel(l,l.sku?product(l.sku):null)}],action).length);
-      if(action.reference){const line=action.reference==='first'?state.basket[0]:action.reference==='last'?state.basket.at(-1):state.basket.find(l=>(l.sku||l.familyId)===memory.selectedSku);matchingLines=line?[line]:[];}
+      if(action.reference){const line=action.reference==='first'?state.basket[0]:action.reference==='second'?state.basket[1]:action.reference==='last'?state.basket.at(-1):state.basket.find(l=>(l.sku||l.familyId)===memory.selectedSku);matchingLines=line?[line]:[];}
       if(['remove','retain'].includes(action.intent)){
         if(action.intent==='retain')scope.retained.push(...matchingLines.map(l=>({...l,scopeStatus:'existing',retainedAt:new Date().toISOString()})));
         state.basket=state.basket.filter(l=>!matchingLines.includes(l));intelligent.message=matchingLines.length?`${matchingLines.length} ${action.intent==='retain'?'lines marked existing / retain':'lines removed'}`:'No matching items in your request';
@@ -2171,7 +2198,7 @@
         if(matchingLines.length===1&&action.quantity){matchingLines[0].qty=action.quantity;if(action.unit)matchingLines[0].requestUnit=action.unit;intelligent.message='Requested quantity updated';}
         else intelligent.message='Choose one request line and set its quantity';
       }else if(action.intent==='add'&&!intelligent.pending){
-        const referenceLine=action.reference==='first'?state.basket[0]:action.reference==='last'?state.basket.at(-1):state.basket.find(l=>(l.sku||l.familyId)===memory.selectedSku);
+        const referenceLine=action.reference==='first'?state.basket[0]:action.reference==='second'?state.basket[1]:action.reference==='last'?state.basket.at(-1):state.basket.find(l=>(l.sku||l.familyId)===memory.selectedSku);
         const referenceSku=referenceLine?.sku||memory.selectedSku;
         if(action.reference&&referenceLine?.familyId){const total=referenceLine.qty+(action.quantity||1);if(total<=10000){referenceLine.qty=total;intelligent.message=`${referenceLine.familyName} × ${action.quantity||1} added to your request`;}else intelligent.message='Keep requested quantity at or below 10,000';ui.catalogueQuery='';ui.globalSearch='';save();renderUi({preserveScroll:true,transition:false});return;}
         const selected=action.reference?catalogueProducts().find(p=>p.pscSku===referenceSku):matches.find(p=>p.pscSku===intelligent.selected)||matches[0];
@@ -2562,7 +2589,7 @@
   function basketDrawer(){
     const lines=state.basket.map((l,index)=>({l,p:l.sku?product(l.sku):null,index})).filter(x=>x.p||isFamilyLine(x.l)||x.l.kind==='unlisted');
     const indicative=lines.reduce((sum,x)=>sum+((x.p?.contractPrice)||0)*x.l.qty,0);
-    return `<div class="drawerBackdrop requestDrawerBackdrop" data-close-basket><aside class="drawer requestDrawer" onclick="event.stopPropagation()"><div class="drawerHandle" aria-hidden="true"></div><div class="drawerHeader"><div><span class="eyebrow">PHARMA SERVICE</span><h2>Supply Request</h2><small>${lines.length?`${lines.length} line${lines.length===1?'':'s'} · ${basketQty()} item${basketQty()===1?'':'s'}`:'Build a request while you browse'}</small></div><button class="iconBtn" data-close-basket aria-label="Close request">×</button></div><div class="drawerBody">${lines.length?lines.map(({l,p,index})=>{
+    return `<div class="drawerBackdrop requestDrawerBackdrop" data-close-basket><aside class="drawer requestDrawer" onclick="event.stopPropagation()"><div class="drawerHandle" aria-hidden="true"></div><div class="drawerHeader"><div><span class="eyebrow">PHARMA SERVICE</span><h2>Supply Request</h2><small>${lines.length?`${lines.length} line${lines.length===1?'':'s'} · ${basketQty()} item${basketQty()===1?'':'s'}`:'Build a request while you browse'}</small></div><button class="iconBtn" data-close-basket aria-label="Close request">×</button></div><div class="drawerBody">${draftUndoControl()}${lines.length?lines.map(({l,p,index})=>{
       if(l.kind==='unlisted')return `<div class="basketLine requestLine"><div class="basketInfo"><b>${esc(l.description)}</b><span>Unlisted item — requires PS review</span></div><span>Qty ${l.qty}</span><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
       if(isFamilyLine(l)){
         return `<div class="basketLine requestLine"><div class="productGlyph small">Rx</div><div class="basketInfo"><b>${esc(lineDisplayName(l,p))}</b><span>${esc(linePackLabel(l,p))} · ${esc(lineReference(l))}</span><small>${esc(lineBrandPreferenceLabel(l))} · Price confirmed in quotation</small></div><div class="qty"><button data-family-basket-delta="${index}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-family-basket-delta="${index}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
@@ -2964,6 +2991,7 @@
         demoLocal:true
       });
       state.basket=[]; state.scopesBySchool[state.activeSchoolId||'draft']=emptyScope(); ui.basket=false;
+      clearDraftUndo();
       save(); render();
       toast(`<strong>Demo order created.</strong><br>${esc(orderNumber)} is a simulated request and will reset on refresh.`);
       return;
@@ -2972,6 +3000,7 @@
     try{
       const orderNumber=await persistNewOrder(lines,note);
       state.basket=[]; state.scopesBySchool[state.activeSchoolId||'draft']=emptyScope(); ui.basket=false;
+      clearDraftUndo();
       await loadOrdersFromDatabase(); save(); render();
       toast(`<strong>Order placed.</strong><br>${esc(orderNumber)} is under review. Your quotation will be sent to ${esc(accountEmailLabel())}.`);
     }catch(e){ console.error(e); toast('<strong>Could not place the order.</strong><br>Please try again or contact Pharma Service.'); }
@@ -3084,6 +3113,7 @@
     state.activeSchoolId=next.id;
     state.campus=schoolLabel(next);
     state.basket=JSON.parse(JSON.stringify(state.basketsBySchool[next.id]||[]));
+    resetIntelligentSearch();ui.catalogueQuery='';ui.globalSearch='';
     ui.accountMenu=false;
     ui.basket=false;
     ui.modal=null;
@@ -3330,6 +3360,7 @@
   }
 
   function render(){
+    draftCheckpoint();
     const r=currentRoute();
     if(catalogueSearchRoute!==r){ resetIntelligentSearch(); ui.globalSearch=''; ui.catalogueQuery=''; ui.modal=null; ui.basket=false; ui.accountMenu=false; ui.mobile=false; ui.publicMenu=false; catalogueSearchRoute=r; }
     if(protectedRoute(r)){
@@ -3473,6 +3504,7 @@
   });
 
   function bind(){
+    document.querySelectorAll('[data-ps-undo]').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();undoDraftChange();}));
     document.querySelectorAll('[data-start-scroll]').forEach(el=>el.addEventListener('click',()=>document.getElementById('start-send')?.scrollIntoView({behavior:'smooth',block:'start'})));
     if(document.querySelector('[data-unsubscribe-state]')) processMailUnsubscribe();
     const wSearch=document.querySelector('[data-workshop-q]'); if(wSearch)wSearch.addEventListener('input',e=>{ui.workshopQuery=e.target.value;const pos=e.target.selectionStart||ui.workshopQuery.length;render();requestAnimationFrame(()=>{const n=document.querySelector('[data-workshop-q]');if(n){n.focus();try{n.setSelectionRange(pos,pos)}catch{}}});});
@@ -3546,9 +3578,9 @@
     document.querySelectorAll('[data-ps-clarify]').forEach(el=>el.addEventListener('click',()=>{window.PS_SEARCH_ANALYTICS?.record('clarification_selected',{query:intelligent.said});return applyIntelligentCommand(el.dataset.psClarify==='both'?'gauze':`gauze ${el.dataset.psClarify}`);}));
     document.querySelectorAll('[data-ps-sheet-open]').forEach(el=>el.addEventListener('click',()=>{intelligent.sheet=true;renderUi({preserveScroll:true,transition:false});document.querySelector('[data-ps-sheet-close]')?.focus();}));
     document.querySelectorAll('[data-ps-sheet-close]').forEach(el=>el.addEventListener('click',()=>{intelligent.sheet=false;renderUi({preserveScroll:true,transition:false});document.querySelector('[data-ps-sheet-open]')?.focus();}));
-    document.querySelectorAll('[data-ps-scope]').forEach(el=>el.addEventListener('change',()=>{const scope=scopeDraft();const field=el.dataset.psScope;if(field==='sites'){const n=Number(el.value);scope.sites=Number.isInteger(n)&&n>=1&&n<=10000?n:null;scope.quantityConfirmation=!!scope.sites;}else scope[field]=el.value.slice(0,160);save();renderUi({preserveScroll:true,transition:false});}));
+    document.querySelectorAll('[data-ps-scope]').forEach(el=>el.addEventListener('change',()=>{if(el.dataset.psCommittedValue===el.value)return;el.dataset.psCommittedValue=el.value;const scope=scopeDraft();const field=el.dataset.psScope;if(field==='sites'){const n=Number(el.value);scope.sites=Number.isInteger(n)&&n>=1&&n<=10000?n:null;scope.quantityConfirmation=!!scope.sites;}else scope[field]=el.value.slice(0,160);save();renderUi({preserveScroll:true,transition:false});}));
     document.querySelectorAll('[data-ps-confirm-totals]').forEach(el=>el.addEventListener('click',()=>{scopeDraft().quantityConfirmation=false;save();renderUi({preserveScroll:true,transition:false});}));
-    document.querySelectorAll('[data-ps-line-qty]').forEach(el=>el.addEventListener('change',()=>{const n=Number(el.value),line=state.basket[Number(el.dataset.psLineQty)];if(line&&Number.isInteger(n)&&n>=1&&n<=10000)line.qty=n;save();renderUi({preserveScroll:true,transition:false});}));
+    document.querySelectorAll('[data-ps-line-qty]').forEach(el=>el.addEventListener('change',()=>{if(el.dataset.psCommittedValue===el.value)return;el.dataset.psCommittedValue=el.value;const n=Number(el.value),line=state.basket[Number(el.dataset.psLineQty)];if(line&&Number.isInteger(n)&&n>=1&&n<=10000)line.qty=n;save();renderUi({preserveScroll:true,transition:false});}));
     document.querySelectorAll('[data-ps-line-remove]').forEach(el=>el.addEventListener('click',()=>{state.basket.splice(Number(el.dataset.psLineRemove),1);save();renderUi({preserveScroll:true,transition:false});}));
     document.querySelectorAll('[data-ps-prepare]').forEach(el=>el.addEventListener('click',()=>{intelligent.sheet=false;ui.basket=true;renderUi({preserveScroll:true,transition:false});}));
     document.querySelectorAll('[data-catalogue-clear]').forEach(button=>button.addEventListener('click',()=>{

@@ -30,3 +30,5 @@
 .home47 .h47Discovery h2{font-weight:400;letter-spacing:-.04em}
 .home47 .h47Discovery form{grid-template-columns:minmax(0,1fr) auto}
 @media(max-width:600px){.home47 .h47Discovery form{grid-template-columns:minmax(0,1fr)}.home47 .h47Discovery input{min-width:0;width:100%}}
+.psDraftUndo{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:16px;font-size:14px}
+.psDraftUndo button{min-height:44px;text-decoration:underline}
