@@ -1,7 +1,9 @@
+import {buildProductIndex} from './build-product-index.mjs';
 import { readFile, writeFile, mkdir, rm, copyFile, cp, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
+await buildProductIndex();
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = path.join(root, 'dist');
 const shell = await readFile(path.join(root, 'index.html'), 'utf8');
