@@ -70,11 +70,13 @@ await page.screenshot({path:`test-results/intelligent-search-${width}.png`,fullP
 }
 const context=await browser.newContext({viewport:{width:390,height:900}});
 await context.addInitScript(()=>{window.__testRole='demo';window.__testAccessToken='test.jwt.token';});let calls=0,secondStarted;const secondRequest=new Promise(r=>secondStarted=r);
-await context.route('**/*',async route=>{const u=new URL(route.request().url());if(u.pathname==='/api/interpret-request'){calls++;if(calls===2)secondStarted();await new Promise(r=>setTimeout(r,350));return route.fulfill({contentType:'application/json',body:JSON.stringify({action:{intent:'search',terms:'wheelchair'},rankedIds:['invented-product','PSC-MOB-001']})});}if(u.hostname==='127.0.0.1')return route.continue();if(u.hostname==='cdn.jsdelivr.net')return route.fulfill({contentType:'text/javascript',body:readFileSync('tests/mock-supabase.js','utf8')});return route.fulfill({status:200,body:''});});
+await context.route('**/*',async route=>{const u=new URL(route.request().url());if(u.pathname==='/api/interpret-request'){calls++;if(calls===2)secondStarted();await new Promise(r=>setTimeout(r,350));return route.fulfill({contentType:'application/json',body:JSON.stringify({action:{intent:'search',terms:''},rankedIds:['invented-product','PSC-MOB-001','PSC-EQP-006']})});}if(u.hostname==='127.0.0.1')return route.continue();if(u.hostname==='cdn.jsdelivr.net')return route.fulfill({contentType:'text/javascript',body:readFileSync('tests/mock-supabase.js','utf8')});return route.fulfill({status:200,body:''});});
 const page=await context.newPage();await page.goto(base+'/#portal/catalogue');await page.locator('[data-cat-q]').waitFor();
 await page.locator('[data-cat-q]').fill('unfamiliar description');await page.locator('[data-cat-q]').press('Enter');
 await page.waitForFunction(()=>document.querySelector('.productCard')?.textContent.match(/wheel ?chair/i));
 assert.equal(await page.locator('[data-product-view="invented-product"]').count(),0);
+assert.equal(await page.locator('.productCard').count(),1,'ranked IDs must exclude the remaining catalogue even without model terms');
+assert.equal(await page.locator('[data-ps-result-count]').innerText(),'1 matching products');
 await page.locator('[data-cat-q]').fill('different unfamiliar description');await page.locator('[data-cat-q]').press('Enter');
 await Promise.race([secondRequest,new Promise((_,reject)=>setTimeout(()=>reject(new Error('second model request did not start')),5000))]);await page.locator('[data-cat-q]').fill('gauze');await page.waitForTimeout(650);
 assert.equal(await page.locator('[data-cat-q]').inputValue(),'gauze');assert.match(await page.locator('.productCard').first().innerText(),/gauze/i);assert.equal(calls,2);

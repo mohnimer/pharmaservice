@@ -1,0 +1,665 @@
+{
+  "environment": "Local browser with mocked demo authentication and backend unavailable; not live acceptance",
+  "results": [
+    {
+      "width": 320,
+      "query": "antihistamine",
+      "interpretation": "PS understood: antihistamine",
+      "count": 16,
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589",
+        "PSC-MED-126"
+      ],
+      "firstFive": [
+        "ZYRTEC 10MG TAB 20'S",
+        "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+        "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+        "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+        "CLARITINE 10MG TAB 10'S"
+      ]
+    },
+    {
+      "width": 320,
+      "query": "anti histamine",
+      "interpretation": "PS understood: anti histamine",
+      "count": 16,
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589",
+        "PSC-MED-126"
+      ],
+      "firstFive": [
+        "ZYRTEC 10MG TAB 20'S",
+        "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+        "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+        "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+        "CLARITINE 10MG TAB 10'S"
+      ]
+    },
+    {
+      "width": 320,
+      "query": "antihistamin",
+      "interpretation": "PS understood: antihistamin",
+      "count": 16,
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589",
+        "PSC-MED-126"
+      ],
+      "firstFive": [
+        "ZYRTEC 10MG TAB 20'S",
+        "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+        "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+        "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+        "CLARITINE 10MG TAB 10'S"
+      ]
+    },
+    {
+      "width": 320,
+      "query": "cetirizine",
+      "interpretation": "PS understood: cetirizine",
+      "count": 8,
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03"
+      ],
+      "firstFive": [
+        "ZYRTEC 10MG TAB 20'S",
+        "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+        "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+        "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+        "FINALLERG 10MG TAB 10’S"
+      ]
+    },
+    {
+      "width": 320,
+      "query": "allergy medicine",
+      "interpretation": "PS understood: allergy medicine",
+      "count": 15,
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589"
+      ],
+      "firstFive": [
+        "ZYRTEC 10MG TAB 20'S",
+        "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+        "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+        "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+        "CLARITINE 10MG TAB 10'S"
+      ]
+    },
+    {
+      "width": 320,
+      "query": "whelchair",
+      "interpretation": "PS understood: wheelchair",
+      "count": 1,
+      "ids": [
+        "PSC-EQP-006"
+      ],
+      "firstFive": [
+        "Wheel chair"
+      ]
+    },
+    {
+      "width": 320,
+      "query": "oxygen thing with meter",
+      "interpretation": "PS understood: oxygen regulator",
+      "count": 2,
+      "ids": [
+        "INST-0122",
+        "PSC-OXY-001"
+      ],
+      "firstFive": [
+        "Oxygen regulator and flowmeter",
+        "Oxygen cylinder with regulator and flow meter"
+      ]
+    },
+    {
+      "width": 320,
+      "query": "machine to check pressure",
+      "interpretation": "PS understood: blood pressure",
+      "count": 1,
+      "ids": [
+        "PSC-DIA-003"
+      ],
+      "firstFive": [
+        "Electronic Blood Pressure (BP) apparatus"
+      ]
+    },
+    {
+      "width": 320,
+      "query": "sugar machine",
+      "interpretation": "PS understood: glucose meter",
+      "count": 1,
+      "ids": [
+        "PSC-DBT-001"
+      ],
+      "firstFive": [
+        "Glucometer"
+      ]
+    },
+    {
+      "width": 320,
+      "query": "big gauze",
+      "interpretation": "PS understood: gauze",
+      "count": 1,
+      "ids": [
+        "PSC-WND-016"
+      ],
+      "firstFive": [
+        "Sterile gauze — 10 × 10 cm"
+      ]
+    },
+    {
+      "width": 320,
+      "query": "stethscope",
+      "interpretation": "PS understood: stethoscope",
+      "count": 1,
+      "ids": [
+        "PSC-DIA-008"
+      ],
+      "firstFive": [
+        "Stethoscope"
+      ]
+    },
+    {
+      "width": 390,
+      "query": "antihistamine",
+      "interpretation": "PS understood: antihistamine",
+      "count": 16,
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589",
+        "PSC-MED-126"
+      ],
+      "firstFive": [
+        "ZYRTEC 10MG TAB 20'S",
+        "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+        "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+        "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+        "CLARITINE 10MG TAB 10'S"
+      ]
+    },
+    {
+      "width": 390,
+      "query": "anti histamine",
+      "interpretation": "PS understood: anti histamine",
+      "count": 16,
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589",
+        "PSC-MED-126"
+      ],
+      "firstFive": [
+        "ZYRTEC 10MG TAB 20'S",
+        "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+        "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+        "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+        "CLARITINE 10MG TAB 10'S"
+      ]
+    },
+    {
+      "width": 390,
+      "query": "antihistamin",
+      "interpretation": "PS understood: antihistamin",
+      "count": 16,
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589",
+        "PSC-MED-126"
+      ],
+      "firstFive": [
+        "ZYRTEC 10MG TAB 20'S",
+        "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+        "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+        "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+        "CLARITINE 10MG TAB 10'S"
+      ]
+    },
+    {
+      "width": 390,
+      "query": "cetirizine",
+      "interpretation": "PS understood: cetirizine",
+      "count": 8,
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03"
+      ],
+      "firstFive": [
+        "ZYRTEC 10MG TAB 20'S",
+        "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+        "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+        "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+        "FINALLERG 10MG TAB 10’S"
+      ]
+    },
+    {
+      "width": 390,
+      "query": "allergy medicine",
+      "interpretation": "PS understood: allergy medicine",
+      "count": 15,
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589"
+      ],
+      "firstFive": [
+        "ZYRTEC 10MG TAB 20'S",
+        "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+        "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+        "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+        "CLARITINE 10MG TAB 10'S"
+      ]
+    },
+    {
+      "width": 390,
+      "query": "whelchair",
+      "interpretation": "PS understood: wheelchair",
+      "count": 1,
+      "ids": [
+        "PSC-EQP-006"
+      ],
+      "firstFive": [
+        "Wheel chair"
+      ]
+    },
+    {
+      "width": 390,
+      "query": "oxygen thing with meter",
+      "interpretation": "PS understood: oxygen regulator",
+      "count": 2,
+      "ids": [
+        "INST-0122",
+        "PSC-OXY-001"
+      ],
+      "firstFive": [
+        "Oxygen regulator and flowmeter",
+        "Oxygen cylinder with regulator and flow meter"
+      ]
+    },
+    {
+      "width": 390,
+      "query": "machine to check pressure",
+      "interpretation": "PS understood: blood pressure",
+      "count": 1,
+      "ids": [
+        "PSC-DIA-003"
+      ],
+      "firstFive": [
+        "Electronic Blood Pressure (BP) apparatus"
+      ]
+    },
+    {
+      "width": 390,
+      "query": "sugar machine",
+      "interpretation": "PS understood: glucose meter",
+      "count": 1,
+      "ids": [
+        "PSC-DBT-001"
+      ],
+      "firstFive": [
+        "Glucometer"
+      ]
+    },
+    {
+      "width": 390,
+      "query": "big gauze",
+      "interpretation": "PS understood: gauze",
+      "count": 1,
+      "ids": [
+        "PSC-WND-016"
+      ],
+      "firstFive": [
+        "Sterile gauze — 10 × 10 cm"
+      ]
+    },
+    {
+      "width": 390,
+      "query": "stethscope",
+      "interpretation": "PS understood: stethoscope",
+      "count": 1,
+      "ids": [
+        "PSC-DIA-008"
+      ],
+      "firstFive": [
+        "Stethoscope"
+      ]
+    },
+    {
+      "width": 1440,
+      "query": "antihistamine",
+      "interpretation": "PS understood: antihistamine",
+      "count": 16,
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589",
+        "PSC-MED-126"
+      ],
+      "firstFive": [
+        "ZYRTEC 10MG TAB 20'S",
+        "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+        "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+        "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+        "CLARITINE 10MG TAB 10'S"
+      ]
+    },
+    {
+      "width": 1440,
+      "query": "anti histamine",
+      "interpretation": "PS understood: anti histamine",
+      "count": 16,
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589",
+        "PSC-MED-126"
+      ],
+      "firstFive": [
+        "ZYRTEC 10MG TAB 20'S",
+        "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+        "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+        "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+        "CLARITINE 10MG TAB 10'S"
+      ]
+    },
+    {
+      "width": 1440,
+      "query": "antihistamin",
+      "interpretation": "PS understood: antihistamin",
+      "count": 16,
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589",
+        "PSC-MED-126"
+      ],
+      "firstFive": [
+        "ZYRTEC 10MG TAB 20'S",
+        "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+        "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+        "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+        "CLARITINE 10MG TAB 10'S"
+      ]
+    },
+    {
+      "width": 1440,
+      "query": "cetirizine",
+      "interpretation": "PS understood: cetirizine",
+      "count": 8,
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03"
+      ],
+      "firstFive": [
+        "ZYRTEC 10MG TAB 20'S",
+        "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+        "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+        "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+        "FINALLERG 10MG TAB 10’S"
+      ]
+    },
+    {
+      "width": 1440,
+      "query": "allergy medicine",
+      "interpretation": "PS understood: allergy medicine",
+      "count": 15,
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589"
+      ],
+      "firstFive": [
+        "ZYRTEC 10MG TAB 20'S",
+        "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+        "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+        "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+        "CLARITINE 10MG TAB 10'S"
+      ]
+    },
+    {
+      "width": 1440,
+      "query": "whelchair",
+      "interpretation": "PS understood: wheelchair",
+      "count": 1,
+      "ids": [
+        "PSC-EQP-006"
+      ],
+      "firstFive": [
+        "Wheel chair"
+      ]
+    },
+    {
+      "width": 1440,
+      "query": "oxygen thing with meter",
+      "interpretation": "PS understood: oxygen regulator",
+      "count": 2,
+      "ids": [
+        "INST-0122",
+        "PSC-OXY-001"
+      ],
+      "firstFive": [
+        "Oxygen regulator and flowmeter",
+        "Oxygen cylinder with regulator and flow meter"
+      ]
+    },
+    {
+      "width": 1440,
+      "query": "machine to check pressure",
+      "interpretation": "PS understood: blood pressure",
+      "count": 1,
+      "ids": [
+        "PSC-DIA-003"
+      ],
+      "firstFive": [
+        "Electronic Blood Pressure (BP) apparatus"
+      ]
+    },
+    {
+      "width": 1440,
+      "query": "sugar machine",
+      "interpretation": "PS understood: glucose meter",
+      "count": 1,
+      "ids": [
+        "PSC-DBT-001"
+      ],
+      "firstFive": [
+        "Glucometer"
+      ]
+    },
+    {
+      "width": 1440,
+      "query": "big gauze",
+      "interpretation": "PS understood: gauze",
+      "count": 1,
+      "ids": [
+        "PSC-WND-016"
+      ],
+      "firstFive": [
+        "Sterile gauze — 10 × 10 cm"
+      ]
+    },
+    {
+      "width": 1440,
+      "query": "stethscope",
+      "interpretation": "PS understood: stethoscope",
+      "count": 1,
+      "ids": [
+        "PSC-DIA-008"
+      ],
+      "firstFive": [
+        "Stethoscope"
+      ]
+    }
+  ]
+}
