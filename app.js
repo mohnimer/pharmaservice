@@ -2094,6 +2094,7 @@
   let searchTypingTimer;
   function productSearchMemory(){const key=state.activeSchoolId||'draft';if(!searchSessions.has(key))searchSessions.set(key,{terms:'',size:'',selectedSku:'',resultIds:[],searches:[]});return searchSessions.get(key);}
   function searchProductForLine(line){
+    if(line.kind==='unlisted')return null;
     if(line.sku)return product(line.sku);
     const options=[line.productOptionSnapshot,...(line.requestedProductOptions||[])].filter(Boolean);
     const option=options.at(-1),name=option?.exact_product_name;
@@ -2119,7 +2120,7 @@
     return ['PS request scope',scope.institution&&`Institution / site: ${scope.institution}`,scope.location&&`Delivery location: ${scope.location}`,scope.sites&&`Sites: ${scope.sites} — ${scope.quantityConfirmation?'quantities require confirmation':'quantities are totals across all sites'}`,scope.orderType&&`Order type: ${scope.orderType}`,state.basket.some(l=>l.requestUnit)&&`Requested units: ${state.basket.filter(l=>l.requestUnit).map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty} ${l.requestUnit}`).join('; ')} — pack basis needs PS verification`,scope.retained.length&&`Existing / retain (excluded from supply): ${scope.retained.map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty}`).join('; ')}`,'Specifications, availability, pack basis and commercial terms need PS verification.'].filter(Boolean).join('\n');
   }
   function intelligentSearchField(){
-    return `<section class="psIntelligentSearch"><span class="sectionLabel">PS Intelligent Search</span><h2>You don’t need to know what it’s called.</h2><p>Tell us what you need the way you’d normally say it.</p><label for="psCommand">${state.basket.length?'Change this scope in plain language':'Search the catalogue'}</label><form data-ps-command-form><input id="psCommand" type="search" data-cat-q aria-label="Search catalogue" value="${esc(ui.catalogueQuery)}" placeholder="We need a wheelchair…" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Apply</button><button class="button outline" type="button" data-catalogue-clear ${!ui.catalogueQuery&&!intelligent.action?'disabled':''}>Clear</button></form>${intelligent.said?`<div class="psInterpretation" role="status"><span>You said: “${esc(intelligent.said)}”</span><b>PS understood: ${esc(intelligent.message)}</b></div>`:''}${intelligent.choices.length?`<div class="psClarification"><b>Which catalogue line should we add?</b>${intelligent.choices.map(p=>`<button type="button" class="button outline" data-ps-select-sku="${esc(p.pscSku)}">${esc(p.catalogueDisplayName||p.name)}</button>`).join('')}</div>`:''}${intelligent.pending?`<div class="psClarification"><b>Which size did you mean?</b>${intelligent.pending.sizes.map(size=>`<button class="button outline" data-ps-clarify="${esc(size)}">${esc(size.replace('x',' × '))} cm</button>`).join('')}<button class="button outline" data-ps-clarify="both">Show both</button></div>`:''}</section>`;
+    return `<section class="psIntelligentSearch"><span class="sectionLabel">Search the catalogue</span><h2>You don’t need to know what it’s called.</h2><p>Tell us what you need the way you’d normally say it.</p><label for="psCommand">${state.basket.length?'Change this scope in plain language':'Search the catalogue'}</label><form data-ps-command-form><input id="psCommand" type="search" data-cat-q aria-label="Search catalogue" value="${esc(ui.catalogueQuery)}" placeholder="We need a wheelchair…" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Apply</button><button class="button outline" type="button" data-catalogue-clear ${!ui.catalogueQuery&&!intelligent.action?'disabled':''}>Clear</button></form>${intelligent.said?`<div class="psInterpretation" role="status"><span>You said: “${esc(intelligent.said)}”</span><b>PS understood: ${esc(intelligent.message)}</b></div>`:''}${intelligent.choices.length?`<div class="psClarification"><b>Which catalogue line should we add?</b>${intelligent.choices.map(p=>`<button type="button" class="button outline" data-ps-select-sku="${esc(p.pscSku)}">${esc(p.catalogueDisplayName||p.name)}</button>`).join('')}</div>`:''}${intelligent.pending?.kind==='product_type'?`<div class="psClarification"><b>Which type of mask did you mean?</b>${['nebulizer mask','oxygen mask','face mask'].map(q=>`<button type="button" class="button outline" data-ps-clarify-type="${q}">${q}</button>`).join('')}</div>`:''}${intelligent.pending&&intelligent.pending.kind!=='product_type'?`<div class="psClarification"><b>Which size did you mean?</b>${intelligent.pending.sizes.map(size=>`<button class="button outline" data-ps-clarify="${esc(size)}">${esc(size.replace('x',' × '))} cm</button>`).join('')}<button class="button outline" data-ps-clarify="both">Show both</button></div>`:''}</section>`;
   }
   function requestScopePanel(){
     const scope=scopeDraft(),lines=state.basket;const missing=[!lines.length&&'Items',!state.groupName&&!scope.institution&&'Institution name',!scope.location&&'Delivery location',scope.quantityConfirmation&&'Quantities per site / total',lines.some(l=>!l.requestUnit)&&'Pack / unit confirmation'].filter(Boolean);
@@ -2135,6 +2136,7 @@
     if(!action)return;
     if(action.invalidQuantity&&['add','quantity','sites'].includes(action.intent)){intelligent.said=String(text).slice(0,400);intelligent.message='Enter a whole quantity between 1 and 10,000; your request is unchanged';ui.catalogueQuery='';ui.globalSearch='';renderUi({preserveScroll:true,transition:false});return;}
     intelligent.said=String(text).slice(0,400);intelligent.message='Matching catalogue records';intelligent.pending=null;intelligent.choices=[];
+    window.PS_SEARCH_ANALYTICS?.record('search',{query:text,intent:action.intent,resultIds:window.PS_INTELLIGENT_SEARCH.rank(catalogueProducts(),action,context).slice(0,12).map(p=>p.pscSku),clarification:action.ambiguous});
     const scope=scopeDraft();
     if(action.intent==='location'){scope.location=action.location;intelligent.message=`Delivery location: ${action.location}`;}
     else if(action.intent==='sites'){scope.sites=action.quantity;scope.quantityConfirmation=true;intelligent.message=`${action.quantity} sites — confirm quantities; items have not been multiplied`;}
@@ -2144,6 +2146,7 @@
       const memory=productSearchMemory();if(matches.length){memory.terms=action.terms;memory.size=action.size;memory.resultIds=matches.slice(0,12).map(p=>p.pscSku);memory.searches.push(String(text).slice(0,400));memory.searches=memory.searches.slice(-12);}
       intelligent.confidence=action.ambiguous?'clarification':matches.some(p=>p.pscSku.toLowerCase()===action.terms.toLowerCase())?'exact':matches.length?'strong':'possible';
       intelligent.action=action;
+      if(action.clarificationField==='product_type'){intelligent.message='Which type of mask did you mean?';intelligent.pending={kind:'product_type',sizes:[]};}
       if(action.ambiguous&&action.terms==='gauze'){
         const sizes=[...new Set(matches.flatMap(p=>[...(String([p.catalogueDisplayName||p.name,p.cataloguePack||p.pack].join(' '))).matchAll(/(\d+(?:\.\d+)?)\s*[x×]\s*(\d+(?:\.\d+)?)/gi)].map(m=>`${m[1]}x${m[2]}`)))].filter(v=>Number(v.split('x')[0])>=10).slice(0,4);
         if(sizes.length>1){intelligent.pending={sizes};intelligent.message='Gauze — choose a size before adding';}
@@ -2164,13 +2167,13 @@
         const selected=action.reference?catalogueProducts().find(p=>p.pscSku===referenceSku):matches.find(p=>p.pscSku===intelligent.selected)||matches[0];
         if(matches.length>1&&!action.reference&&!matches.some(p=>p.pscSku===intelligent.confirmed)){intelligent.choices=matches.slice(0,12);intelligent.message='Choose an existing catalogue line before adding';save();ui.catalogueQuery='';ui.globalSearch='';renderUi({preserveScroll:true,transition:false});return;}
         intelligent.confirmed='';
-        if(selected){const l=state.basket.find(l=>l.sku===selected.pscSku);if(l){l.qty+=action.quantity||1;if(action.unit)l.requestUnit=action.unit;}else state.basket.push({sku:selected.pscSku,qty:action.quantity||1,requestUnit:action.unit});intelligent.selected=selected.pscSku;memory.selectedSku=selected.pscSku;intelligent.message=`${selected.catalogueDisplayName||selected.name} × ${action.quantity||1} — needs PS verification`;}
-        else intelligent.message='No confident match. Try another description or browse categories.';
+        if(selected){const prior=state.basket.find(l=>l.sku===selected.pscSku);if((prior?.qty||0)+(action.quantity||1)>10000){intelligent.message='Keep requested quantity at or below 10,000';ui.catalogueQuery='';ui.globalSearch='';save();renderUi({preserveScroll:true,transition:false});return;}const l=state.basket.find(l=>l.sku===selected.pscSku);if(l){l.qty+=action.quantity||1;if(action.unit)l.requestUnit=action.unit;}else state.basket.push({sku:selected.pscSku,qty:action.quantity||1,requestUnit:action.unit});window.PS_SEARCH_ANALYTICS?.record('added',{query:text,productId:selected.pscSku,intent:action.intent});intelligent.selected=selected.pscSku;memory.selectedSku=selected.pscSku;intelligent.message=`${selected.catalogueDisplayName||selected.name} × ${action.quantity||1} — needs PS verification`;}
+        else intelligent.message=window.PS_INTELLIGENT_SEARCH.outcome(action,matches).message;
       }else if(action.intent==='replace')intelligent.message='Choose the replacement product, then remove the old line; no items changed';
-      else if(!matches.length)intelligent.message='We couldn’t confidently interpret that. Try another description or browse matching categories below.';
+      else if(!matches.length)intelligent.message=window.PS_INTELLIGENT_SEARCH.outcome(action,matches).message;
       else if(!intelligent.pending&&!action.budget&&action.intent==='search'){intelligent.selected=matches[0].pscSku;if(matches.length===1)memory.selectedSku=matches[0].pscSku;intelligent.message=action.size?`${action.terms} · ${action.size}${/x/.test(action.size)?' cm':''}`:action.terms;}
     }
-    if(['search','compare'].includes(action.intent)&&/strips|lancet|mask/.test(action.terms)&&context.selectedProducts.length)intelligent.message+=' · model / compatibility needs PS verification';
+    if(['search','compare'].includes(action.intent)&&/strips|lancet|mask/.test(action.terms)&&context.selectedProducts.length){const matches=window.PS_INTELLIGENT_SEARCH.retrieve(catalogueProducts(),action,context);intelligent.message+=matches[0]?.verifiedCompatibility?' · verified compatible catalogue match':' · model / compatibility needs PS verification';}
     ui.catalogueQuery='';ui.globalSearch='';save();renderUi({preserveScroll:true,transition:false});
     if(action.intent==='search'&&!intelligent.pending)enhanceProductSearch(text,context,seq,route,action);
   }
@@ -2182,7 +2185,7 @@
       if(!response.ok)return;const data=await response.json();
       if(seq!==intelligent.sequence||route!==currentRoute()||ui.catalogueQuery)return;
       const action=window.PS_INTELLIGENT_SEARCH.validate({...data.action,rankedIds:data.rankedIds});if(!action||!['search','compare'].includes(action.intent))return;
-      const ids=new Set(catalogueProducts().map(p=>p.pscSku));action.rankedIds=action.rankedIds.filter(id=>ids.has(id));
+      const ids=new Set(catalogueProducts().map(p=>p.pscSku));const knownMedical=window.PS_MEDICINE_KNOWLEDGE.query(localAction.terms)||window.PS_MEDICINE_KNOWLEDGE.ingredients.some(x=>new RegExp('\\b'+x+'\\b').test(localAction.terms));const permitted=knownMedical?new Set(window.PS_INTELLIGENT_SEARCH.rank(catalogueProducts(),localAction,context).map(p=>p.pscSku)):null;action.rankedIds=action.rankedIds.filter(id=>ids.has(id)&&(!permitted||permitted.has(id)));if(knownMedical){action.terms=localAction.terms;action.size=localAction.size;}action.pediatric=localAction.pediatric||action.pediatric;action.large=localAction.large||action.large;
       if(!action.rankedIds.length&&!window.PS_INTELLIGENT_SEARCH.rank(catalogueProducts(),action,context).length)return;
       intelligent.action={...localAction,...action};intelligent.message=action.terms||localAction.terms;
       const memory=productSearchMemory();memory.terms=action.terms||memory.terms;memory.resultIds=action.rankedIds;
@@ -2209,7 +2212,7 @@
   }
   function catalogueSearchResults(needId='all',landing=false){
     const {filtered}=catalogueFilterProducts(needId);const visible=!landing||ui.catalogueQuery||intelligent.action;
-    return `<section class="psSearchResults" data-ps-search-results ${visible?'':'hidden'}><div class="catalogueMeta"><span data-ps-result-count>${filtered.length} products</span></div><div class="productGrid v25ProductGrid">${visible?filtered.map(productCard).join(''):''}</div><p class="psSearchEmpty" ${filtered.length?'hidden':''}>Try another description or browse the categories below. PS can also review an unlisted requirement.</p></section>`;
+    return `<section class="psSearchResults" data-ps-search-results ${visible?'':'hidden'}><div class="catalogueMeta"><span data-ps-result-count role="status" aria-live="polite" aria-atomic="true">${filtered.length} products</span></div><div class="productGrid v25ProductGrid">${visible?filtered.map(productCard).join(''):''}</div><p class="psSearchEmpty" ${filtered.length?'hidden':''}>${esc(window.PS_INTELLIGENT_SEARCH.outcome(window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'' ,productSearchContext())||{terms:''},filtered).message)} Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button></p></section>`;
   }
   function updateCatalogueResults(){
     const area=document.querySelector('[data-ps-search-results]');if(!area)return;
@@ -2217,14 +2220,15 @@
     area.hidden=landing&&!ui.catalogueQuery&&!intelligent.action;
     const grid=area.querySelector('.productGrid');grid.innerHTML=area.hidden?'':filtered.map(productCard).join('');
     area.querySelector('[data-ps-result-count]').textContent=`${filtered.length} products`;
-    area.querySelector('.psSearchEmpty').hidden=filtered.length>0;
+    const empty=area.querySelector('.psSearchEmpty');empty.hidden=filtered.length>0;const action=window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'',productSearchContext())||{terms:''};empty.innerHTML=esc(window.PS_INTELLIGENT_SEARCH.outcome(action,filtered).message)+' Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button>';bindUnlistedRequirement(empty);
     // Bind only newly rendered cards. Never replace or refocus the command input while typing.
     bindCatalogueResultCards(grid);
     const clear=document.querySelector('[data-ps-command-form] [data-catalogue-clear]');if(clear)clear.disabled=!ui.catalogueQuery&&!intelligent.action;
     window.dispatchEvent(new Event('ps:search-results-updated'));
   }
+  function bindUnlistedRequirement(root){root.querySelectorAll('[data-ps-unlisted]').forEach(button=>button.addEventListener('click',()=>{const description=String(ui.catalogueQuery||intelligent.said||'').trim().slice(0,400);if(!description)return;state.basket.push({kind:'unlisted',requestId:'unlisted-'+crypto.randomUUID(),description,qty:1});window.PS_SEARCH_ANALYTICS?.record('unlisted',{query:description});ui.catalogueQuery='';intelligent.said='';intelligent.message='Unlisted item — requires PS review';save();renderUi({preserveScroll:true,transition:false});}));}
   function bindCatalogueResultCards(root){
-    root.querySelectorAll('[data-product-view]').forEach(el=>el.addEventListener('click',()=>{productSearchMemory().selectedSku=el.dataset.productView;openProductOverlay(el.dataset.productView,false);}));
+    root.querySelectorAll('[data-product-view]').forEach(el=>el.addEventListener('click',()=>{window.PS_SEARCH_ANALYTICS?.record('clicked',{productId:el.dataset.productView});productSearchMemory().selectedSku=el.dataset.productView;openProductOverlay(el.dataset.productView,false);}));
     root.querySelectorAll('[data-add]').forEach(el=>el.addEventListener('click',()=>addBasket(el.dataset.add,1)));
     root.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>go(el.dataset.go)));
   }
@@ -2469,6 +2473,7 @@
 
   function isFamilyLine(l){ return !!(l&&l.familyId); }
   function lineKey(l){
+    if(l?.kind==='unlisted')return l.requestId;
     if(isFamilyLine(l)){
       const mode=l.brandPreferenceMode||'no_preference';
       const choice=mode==='specific_option'?(l.productOptionId||''):mode==='other_brand'?String(l.requestedBrand||'').trim().toLowerCase():'no-preference';
@@ -2477,9 +2482,10 @@
     }
     return l?.sku||'';
   }
-  function lineDisplayName(l,p=null){ return isFamilyLine(l)?(l.familyName||l.familyId||'Catalogue family'):(p?.catalogueDisplayName||p?.name||l?.sku||'Order item'); }
-  function lineReference(l){ return isFamilyLine(l)?l.familyId:(l?.sku||''); }
+  function lineDisplayName(l,p=null){ if(l?.kind==='unlisted')return l.description;return isFamilyLine(l)?(l.familyName||l.familyId||'Catalogue family'):(p?.catalogueDisplayName||p?.name||l?.sku||'Order item'); }
+  function lineReference(l){ if(l?.kind==='unlisted')return 'Unlisted item — requires PS review';return isFamilyLine(l)?l.familyId:(l?.sku||''); }
   function linePackLabel(l,p=null){
+    if(l?.kind==='unlisted')return l.requestUnit||'Unit to confirm';
     if(isFamilyLine(l)) return l.productOptionSnapshot?.pack||l.presentation||l.orderPackBasis||'Pack / scope to confirm';
     return p?.cataloguePack||p?.pack||'Pack to confirm';
   }
@@ -2533,16 +2539,17 @@
   window.addEventListener('psc:add-family-line',e=>{ try{ addFamilyBasketLine(e.detail||{}); }catch(err){ console.error('Family request add failed',err); } });
 
   function basketQty(){ return state.basket.reduce((a,b)=>a+Number(b.qty||0),0); }
-  function addBasket(sku,qty=1){ productSearchMemory().selectedSku=sku;const f=state.basket.find(x=>x.sku===sku); if(f)f.qty+=qty; else state.basket.push({sku,qty}); save(); renderUi({preserveScroll:true,transition:false}); toast(`<strong>Added</strong> to Supply Request`); }
+  function addBasket(sku,qty=1){ window.PS_SEARCH_ANALYTICS?.record('added',{productId:sku}); productSearchMemory().selectedSku=sku;const f=state.basket.find(x=>x.sku===sku); if(f)f.qty+=qty; else state.basket.push({sku,qty}); save(); renderUi({preserveScroll:true,transition:false}); toast(`<strong>Added</strong> to Supply Request`); }
   function reorderRequest(id){
     const r=state.requests.find(x=>x.id===id); if(!r)return;
     r.lines.forEach(l=>{const key=lineKey(l);const f=state.basket.find(x=>lineKey(x)===key);if(f)f.qty+=l.qty;else state.basket.push(JSON.parse(JSON.stringify(l)))});
     save();render();toast(`<strong>${r.lines.length} lines</strong> added to Supply Request`);
   }
   function basketDrawer(){
-    const lines=state.basket.map((l,index)=>({l,p:l.sku?product(l.sku):null,index})).filter(x=>x.p||isFamilyLine(x.l));
+    const lines=state.basket.map((l,index)=>({l,p:l.sku?product(l.sku):null,index})).filter(x=>x.p||isFamilyLine(x.l)||x.l.kind==='unlisted');
     const indicative=lines.reduce((sum,x)=>sum+((x.p?.contractPrice)||0)*x.l.qty,0);
     return `<div class="drawerBackdrop requestDrawerBackdrop" data-close-basket><aside class="drawer requestDrawer" onclick="event.stopPropagation()"><div class="drawerHandle" aria-hidden="true"></div><div class="drawerHeader"><div><span class="eyebrow">PHARMA SERVICE</span><h2>Supply Request</h2><small>${lines.length?`${lines.length} line${lines.length===1?'':'s'} · ${basketQty()} item${basketQty()===1?'':'s'}`:'Build a request while you browse'}</small></div><button class="iconBtn" data-close-basket aria-label="Close request">×</button></div><div class="drawerBody">${lines.length?lines.map(({l,p,index})=>{
+      if(l.kind==='unlisted')return `<div class="basketLine requestLine"><div class="basketInfo"><b>${esc(l.description)}</b><span>Unlisted item — requires PS review</span></div><span>Qty ${l.qty}</span><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
       if(isFamilyLine(l)){
         return `<div class="basketLine requestLine"><div class="productGlyph small">Rx</div><div class="basketInfo"><b>${esc(lineDisplayName(l,p))}</b><span>${esc(linePackLabel(l,p))} · ${esc(lineReference(l))}</span><small>${esc(lineBrandPreferenceLabel(l))} · Price confirmed in quotation</small></div><div class="qty"><button data-family-basket-delta="${index}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-family-basket-delta="${index}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
       }
@@ -3117,7 +3124,7 @@
           presentation:l.requested_presentation||'', orderPackBasis:l.pack_snapshot||'', brandPreferenceMode:l.brand_preference_mode||'no_preference',
           requestedBrand:l.requested_brand||'', productOptionId:l.product_option_id||'', productOptionSnapshot:l.product_option_snapshot||null,
           regulated:true, qty:Number(l.quantity)
-        }:{sku:l.psc_sku_snapshot||'',qty:Number(l.quantity)};
+        }:!l.psc_sku_snapshot&&!l.product_id&&l.line_description?{kind:'unlisted',requestId:'unlisted-'+l.id,description:l.line_description,requestUnit:l.pack_snapshot==='Unlisted item — requires PS review'?'':l.pack_snapshot||'',qty:Number(l.quantity)}:{sku:l.psc_sku_snapshot||'',qty:Number(l.quantity)};
         const key=lineKey(mapped);
         if(key) qLines[key]={sell:l.unit_price===null?undefined:Number(l.unit_price),vat:l.vat_rate===null?undefined:Number(l.vat_rate)};
         return mapped;
@@ -3195,6 +3202,7 @@
     }).select('id,order_number').single();
     if(error) throw error;
     const dbLines=lines.map(l=>{
+      if(l.kind==='unlisted')return {order_id:o.id,product_id:null,psc_sku_snapshot:null,line_description:l.description,brand_model_snapshot:null,pack_snapshot:l.requestUnit||'Unlisted item — requires PS review',quantity:l.qty};
       if(isFamilyLine(l)){
         return {
           order_id:o.id, product_id:null, psc_sku_snapshot:null,
@@ -3511,9 +3519,11 @@
     document.querySelectorAll('[data-modal-close]').forEach(el=>el.addEventListener('click',closeModalOverlay));
     document.querySelectorAll('[data-document-open]').forEach(el=>el.addEventListener('click',()=>openOrderDocument(el.dataset.documentOpen)));
     document.querySelectorAll('[data-document-upload]').forEach(el=>el.addEventListener('change',async e=>{const file=e.target.files?.[0];if(file)await uploadOrderDocument(el.dataset.documentUpload,file);}));
+    bindUnlistedRequirement(document);
     document.querySelectorAll('[data-ps-command-form]').forEach(form=>form.addEventListener('submit',async e=>{e.preventDefault();const text=form.querySelector('[data-cat-q]').value;await applyIntelligentCommand(text);}));
     document.querySelectorAll('[data-ps-select-sku]').forEach(el=>el.addEventListener('click',()=>{intelligent.selected=el.dataset.psSelectSku;intelligent.confirmed=intelligent.selected;applyIntelligentCommand(intelligent.said);}));
-    document.querySelectorAll('[data-ps-clarify]').forEach(el=>el.addEventListener('click',()=>applyIntelligentCommand(el.dataset.psClarify==='both'?'gauze':`gauze ${el.dataset.psClarify}`)));
+    document.querySelectorAll('[data-ps-clarify-type]').forEach(el=>el.addEventListener('click',()=>applyIntelligentCommand(el.dataset.psClarifyType)));
+    document.querySelectorAll('[data-ps-clarify]').forEach(el=>el.addEventListener('click',()=>{window.PS_SEARCH_ANALYTICS?.record('clarification_selected',{query:intelligent.said});return applyIntelligentCommand(el.dataset.psClarify==='both'?'gauze':`gauze ${el.dataset.psClarify}`);}));
     document.querySelectorAll('[data-ps-sheet-open]').forEach(el=>el.addEventListener('click',()=>{intelligent.sheet=true;renderUi({preserveScroll:true,transition:false});document.querySelector('[data-ps-sheet-close]')?.focus();}));
     document.querySelectorAll('[data-ps-sheet-close]').forEach(el=>el.addEventListener('click',()=>{intelligent.sheet=false;renderUi({preserveScroll:true,transition:false});document.querySelector('[data-ps-sheet-open]')?.focus();}));
     document.querySelectorAll('[data-ps-scope]').forEach(el=>el.addEventListener('change',()=>{const scope=scopeDraft();const field=el.dataset.psScope;if(field==='sites'){const n=Number(el.value);scope.sites=Number.isInteger(n)&&n>=1&&n<=10000?n:null;scope.quantityConfirmation=!!scope.sites;}else scope[field]=el.value.slice(0,160);save();renderUi({preserveScroll:true,transition:false});}));

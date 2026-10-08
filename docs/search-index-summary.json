@@ -1,0 +1,353 @@
+{
+  "indexed": 685,
+  "visible": 613,
+  "missingImportantMetadata": 483,
+  "medicines": 323,
+  "medicinesIncomplete": 311,
+  "antihistamines": [
+    {
+      "id": "PSC-MED-003",
+      "name": "ZYRTEC 10MG TAB 20'S",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "evidence": {
+        "identity": "Existing controlled PSC record; explicit name/specification only",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "cetirizine",
+          "ingredientAtcCode": "R06AE07",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AE"
+        }
+      ]
+    },
+    {
+      "id": "PSC-MED-102",
+      "name": "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "evidence": {
+        "identity": "Existing controlled PSC record; explicit name/specification only",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "cetirizine",
+          "ingredientAtcCode": "R06AE07",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AE"
+        }
+      ]
+    },
+    {
+      "id": "PSC-MED-104",
+      "name": "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "evidence": {
+        "identity": "Existing controlled PSC record; explicit name/specification only",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "cetirizine",
+          "ingredientAtcCode": "R06AE07",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AE"
+        }
+      ]
+    },
+    {
+      "id": "PSC-MED-126",
+      "name": "PANADOL NIGHT - 24 FILM-COATED TABLETS",
+      "ingredients": [
+        "paracetamol",
+        "diphenhydramine"
+      ],
+      "evidence": {
+        "identity": "https://www.haleonhealthpartner-gne.com/content/dam/cf-consumer-healthcare/health-professionals/en_AE/pdf/PIL-Panadol-Night.pdf",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "diphenhydramine",
+          "ingredientAtcCode": "R06AA02",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AA"
+        },
+        {
+          "id": "analgesic-antipyretic",
+          "label": "Analgesics and antipyretics",
+          "ingredient": "paracetamol",
+          "ingredientAtcCode": "N02BE01",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=N02BE"
+        }
+      ]
+    },
+    {
+      "id": "PS-AC-49C544EA6E0C",
+      "name": "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "evidence": {
+        "identity": "Existing controlled PSC record; explicit name/specification only",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "cetirizine",
+          "ingredientAtcCode": "R06AE07",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AE"
+        }
+      ]
+    },
+    {
+      "id": "PS-AC-70BCF2EF8CA0",
+      "name": "CLARITINE 10MG TAB 10'S",
+      "ingredients": [
+        "loratadine"
+      ],
+      "evidence": {
+        "identity": "https://www.claritine.me/en/products/claritine-medicine",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "loratadine",
+          "ingredientAtcCode": "R06AX13",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AX"
+        }
+      ]
+    },
+    {
+      "id": "PS-AC-8E9FE3B9BBC4",
+      "name": "Dora Desloratadine 5 mg — 30 Tablets",
+      "ingredients": [
+        "desloratadine"
+      ],
+      "evidence": {
+        "identity": "Existing controlled PSC record; explicit name/specification only",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "desloratadine",
+          "ingredientAtcCode": "R06AX27",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AX"
+        }
+      ]
+    },
+    {
+      "id": "PS-AC-CF2A59100FF8",
+      "name": "FINALLERG 10MG TAB 10’S",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "evidence": {
+        "identity": "https://www.sfda.gov.sa/ar/details_data?id=0603233335&nid=17582&page=131",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "cetirizine",
+          "ingredientAtcCode": "R06AE07",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AE"
+        }
+      ]
+    },
+    {
+      "id": "PS-AC-3E7CD6BDAB3C",
+      "name": "FINALLERG 10MG TAB 20'S",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "evidence": {
+        "identity": "https://www.sfda.gov.sa/ar/details_data?id=0603233335&nid=17582&page=131",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "cetirizine",
+          "ingredientAtcCode": "R06AE07",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AE"
+        }
+      ]
+    },
+    {
+      "id": "PS-AC-89836E13CEAE",
+      "name": "FINALLERG 1MG/ML ORAL SOLUTION 100ML",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "evidence": {
+        "identity": "https://www.sfda.gov.sa/ar/details_data?id=0406245390&nid=17582&page=131",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "cetirizine",
+          "ingredientAtcCode": "R06AE07",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AE"
+        }
+      ]
+    },
+    {
+      "id": "PS-AC-B5F68F0EEF03",
+      "name": "Glotrizine 5 mg/5 ml Syrup — 100 ml",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "evidence": {
+        "identity": "https://www.globalpharma.ae/medicines/allergy/",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "cetirizine",
+          "ingredientAtcCode": "R06AE07",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AE"
+        }
+      ]
+    },
+    {
+      "id": "PS-AC-CA529915334B",
+      "name": "Glozal Levocetirizine 5 mg — 20 Tablets",
+      "ingredients": [
+        "levocetirizine"
+      ],
+      "evidence": {
+        "identity": "Existing controlled PSC record; explicit name/specification only",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "levocetirizine",
+          "ingredientAtcCode": "R06AE09",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AE"
+        }
+      ]
+    },
+    {
+      "id": "PS-AC-8D861823242C",
+      "name": "LOHIST 10MG TAB 10'S",
+      "ingredients": [
+        "loratadine"
+      ],
+      "evidence": {
+        "identity": "https://sfda.gov.sa/en/details_data?id=0801256550&nid=17582&page=23",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "loratadine",
+          "ingredientAtcCode": "R06AX13",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AX"
+        }
+      ]
+    },
+    {
+      "id": "PS-AC-A9F14BB5E5C6",
+      "name": "LOHIST 5MG/5ML SYRUP 100ML",
+      "ingredients": [
+        "loratadine"
+      ],
+      "evidence": {
+        "identity": "https://sfda.gov.sa/en/details_data?id=0801256549&nid=17582&page=23",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "loratadine",
+          "ingredientAtcCode": "R06AX13",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AX"
+        }
+      ]
+    },
+    {
+      "id": "PS-AC-7789FFECC541",
+      "name": "TELFAST 120MG TAB 30'S",
+      "ingredients": [
+        "fexofenadine"
+      ],
+      "evidence": {
+        "identity": "https://www.telfast.com/en-ae/products/telfast-tablets-120-mg",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "fexofenadine",
+          "ingredientAtcCode": "R06AX26",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AX"
+        }
+      ]
+    },
+    {
+      "id": "PS-AC-286239754589",
+      "name": "TELFAST 180MG TAB 30'S",
+      "ingredients": [
+        "fexofenadine"
+      ],
+      "evidence": {
+        "identity": "https://www.telfast.com/en-ae/products/telfast-tablets-180-mg",
+        "classification": "WHO ATC ingredient mapping; not product registration or product ATC assignment",
+        "reviewedAt": "2026-10-08"
+      },
+      "classifications": [
+        {
+          "id": "antihistamine",
+          "label": "Antihistamines",
+          "ingredient": "fexofenadine",
+          "ingredientAtcCode": "R06AX26",
+          "source": "https://atcddd.fhi.no/atc_ddd_index/?code=R06AX"
+        }
+      ]
+    }
+  ]
+}
