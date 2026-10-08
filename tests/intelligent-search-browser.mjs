@@ -51,6 +51,12 @@ await command('only show consumables');assert.equal(await request().locator('[da
 await command('remove the gauze');assert.equal(await request().locator('[data-ps-line-qty]').count(),0);assert.match(await request().locator('.psScopeTotals').textContent(),/Lines: 0.*Total quantity: 0/);
 await command('add 2 wheelchairs');
 await command('set wheelchair quantity 4');assert.equal(await request().locator('[data-ps-line-qty]').inputValue(),'4');
+await page.locator('[data-basket]:visible').first().click();
+const closeDrawer=page.locator('.requestDrawer [data-close-basket]');
+await page.locator('.requestDrawer').waitFor({state:'visible'});await page.waitForTimeout(750);
+const drawerHit=await closeDrawer.evaluate(el=>{const r=el.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {uncovered:el.contains(hit),hit:hit?.tagName+' '+hit?.className,z:getComputedStyle(el.closest('.drawerBackdrop')).zIndex};});
+assert(drawerHit.uncovered,`request close button must not be covered by the portal header: ${JSON.stringify(drawerHit)}`);
+await closeDrawer.click();assert.equal(await page.locator('.requestDrawer').count(),0);
 if(width===390){await page.locator('[data-ps-sheet-open]').click();assert.equal(await request().isVisible(),true);await page.locator('[data-ps-sheet-close]').click();assert.equal(await request().isVisible(),false);await page.locator('[data-ps-sheet-open]').click();}
 await page.locator('[data-ps-prepare]').click();assert.match(await page.locator('.psRequestScopeReview').textContent(),/sharjah/i);assert.match(await page.locator('.psRequestScopeReview').textContent(),/Existing \/ retain/);await page.locator('[data-submit-request]').click();assert.match(await page.locator('body').innerText(),/simulated request/i);
 assert.deepEqual(await page.evaluate(()=>window.__backendCalls.filter(c=>c.rpc||c.action!=='select')),[]);
