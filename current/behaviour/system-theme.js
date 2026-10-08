@@ -2,27 +2,22 @@
   'use strict';
 
   const SOURCE_MARKUP = `
-    <div class="h48SourceBoard" aria-label="How Pharma Service consolidates specialist sourcing">
-      <div class="h48SourceRows">
-        <div class="h48SourceRow"><span>01</span><div><b>Equipment</b><small>Specialist equipment source</small></div></div>
-        <div class="h48SourceRow"><span>02</span><div><b>Diagnostics</b><small>Model and compatibility checked</small></div></div>
-        <div class="h48SourceRow"><span>03</span><div><b>Consumables</b><small>Pack, specification and cost compared</small></div></div>
-        <div class="h48SourceRow"><span>04</span><div><b>Specialist supply</b><small>Correct technical route retained</small></div></div>
-        <div class="h48SourceRow"><span>05</span><div><b>Regulated lines</b><small>Handled through the applicable licensed route</small></div></div>
+    <figure class="pscOrderDiagram" aria-label="Diagnostic equipment, consumables, clinic furniture and medicines brought together in one Pharma Service order">
+      <div class="pscOrderCategories">
+        <span>Diagnostic equipment</span><span>Consumables</span><span>Clinic furniture</span><span>Medicines</span>
       </div>
-      <div class="h48SourceFlow" aria-hidden="true"></div>
-      <div class="h48SourceSheet">
-        <div class="h48SourceSheetTop"><span>Institution receives</span><b>PS</b></div>
-        <h3>One quotation.<br>One accountable order.</h3>
-        <div class="h48SourceSheetRows">
-          <div><span>Specification control</span><b>Pharma Service</b></div>
-          <div><span>Commercial contact</span><b>Pharma Service</b></div>
-          <div><span>Delivery coordination</span><b>Pharma Service</b></div>
-          <div><span>Order record & follow-up</span><b>Pharma Service</b></div>
+      <svg class="pscOrderConnections" viewBox="0 0 100 240" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 H55 Q100 30 100 65 M0 90 H100 M0 150 H100 M0 210 H55 Q100 210 100 175"/></svg>
+      <div class="pscOrderInvoice">
+        <header><img src="/assets/psc-logo-current.png" alt="Pharma Service"><div><small>Illustrative order</small><h3>Invoice</h3></div></header>
+        <div class="pscOrderColumns"><span>Product / specification</span><span>Qty · AED amount</span></div>
+        <div class="pscOrderInvoiceBody">
+          <div class="pscOrderInvoiceLines"><div>Adrenaline injection · 2 ampoules</div><div>Hydrocortisone injection · 2 vials</div><div>Fingertip pulse oximeter · A2</div><div>Automatic upper-arm BP monitor · BUA 5000</div></div>
+          <div class="pscOrderWholesale">Wholesale<br>prices</div>
         </div>
-        <div class="h48SourceSheetFoot">However many products or sources sit underneath it, you deal with Pharma Service.</div>
+        <footer><span>VAT &amp; total</span><span>Confirmed for your order</span></footer>
       </div>
-    </div>`;
+      <figcaption>However many sources sit underneath it, you deal with Pharma Service.<small>Source per line. Sell one solution.</small></figcaption>
+    </figure>`;
 
   function installSourceVisual(){
     const diagram=document.querySelector('.home47 .h47SourceDiagram');

@@ -163,3 +163,32 @@ body{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
 @media(max-width:480px){
   .v26QuickActions,.actionGrid{grid-template-columns:1fr!important}.v26OperationsStrip,.adminStatRow{grid-template-columns:1fr!important}.v26OperationsStrip>div,.adminStat{border-right:0!important}
 }
+
+/* Brochure sourcing diagram: real text, responsive paper invoice. */
+.home47 .h47SourcingGrid{grid-template-columns:minmax(0,1fr)!important;gap:34px!important}
+.home47 .h47SourceCopy h2{max-width:100%!important}
+.home47 .h47SourceCopy p{max-width:850px!important}
+.pscOrderDiagram{display:grid;grid-template-columns:minmax(180px,.7fr) 90px minmax(0,1.4fr);align-items:center;margin:0;gap:0}
+.pscOrderCategories{display:grid;gap:12px}
+.pscOrderCategories span{display:flex;align-items:center;min-height:58px;padding:14px 20px;border:1px solid #dedbd5;border-radius:10px;background:#fffefa;font-size:18px;line-height:1.35}
+.pscOrderCategories span:nth-child(2){background:#f4e2da}.pscOrderCategories span:nth-child(3){background:#e2e7df}.pscOrderCategories span:nth-child(4){background:#dfefea}
+.pscOrderConnections{width:100%;height:280px;overflow:visible}.pscOrderConnections path{fill:none;stroke:#b5c5bf;stroke-width:1.5;vector-effect:non-scaling-stroke}
+.pscOrderInvoice{min-width:0;overflow:hidden;border:1px solid #d5d3cb;border-radius:18px;background:#fffefa;box-shadow:0 18px 22px -12px #213d3b40,0 5px 9px #213d3b16}
+.pscOrderInvoice header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 28px}
+.pscOrderInvoice header img{width:155px;height:105px;object-fit:contain}.pscOrderInvoice header>div{text-align:right}.pscOrderInvoice header small{font-size:12px;color:#86847c}.pscOrderInvoice h3{font-family:Georgia,serif;font-size:42px;font-weight:400;line-height:1.15;margin:8px 0 0;color:#153235}
+.pscOrderColumns{display:flex;justify-content:space-between;gap:12px;padding:12px 24px;background:#e0eee9;color:#777f78;font-size:13px}
+.pscOrderInvoiceBody{position:relative;padding:0 24px}.pscOrderInvoiceLines>div{padding:13px 0;border-bottom:1px solid #dddcd4;font-size:16px;line-height:1.4;white-space:nowrap;overflow:hidden;mask-image:linear-gradient(to right,#000 65%,transparent 90%)}
+.pscOrderWholesale{position:absolute;right:20px;top:50%;transform:translateY(-50%);padding:14px 8px;background:linear-gradient(90deg,#fffefa00,#fffefa 20%);color:#248e88;text-align:center;font-size:21px;line-height:1.45}
+.pscOrderInvoice footer{display:flex;justify-content:space-between;gap:16px;padding:18px 24px;color:#878a82;font-size:13px}
+.pscOrderDiagram figcaption{grid-column:1/-1;margin-top:30px;font-size:20px;line-height:1.5;color:#163135}.pscOrderDiagram figcaption small{display:block;margin-top:8px;font-size:13px;color:#7d7c74}
+@media(max-width:700px){
+ .pscOrderDiagram{grid-template-columns:minmax(0,1fr)}
+ .pscOrderCategories{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .pscOrderCategories span{min-height:64px;padding:12px;font-size:16px}
+ .pscOrderConnections{height:38px;width:1px;margin:0 auto;background:#b5c5bf}.pscOrderConnections path{display:none}
+ .pscOrderInvoice header{padding:18px;gap:12px}.pscOrderInvoice header img{width:120px;height:80px}.pscOrderInvoice h3{font-size:34px}
+ .pscOrderColumns{padding:10px 16px;font-size:12px}.pscOrderColumns span:last-child{max-width:80px;text-align:right}
+ .pscOrderInvoiceBody{padding:0 16px}.pscOrderInvoiceLines>div{font-size:14px;padding:14px 0}.pscOrderWholesale{right:12px;font-size:18px}
+ .pscOrderInvoice footer{padding:16px;font-size:12px}.pscOrderInvoice footer span:last-child{text-align:right}
+ .pscOrderDiagram figcaption{font-size:18px;margin-top:24px}
+}
