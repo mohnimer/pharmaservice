@@ -9,7 +9,9 @@
     "test:dom": "node tests/dom.mjs",
     "test:catalogue": "node tests/catalogue.mjs",
     "test:catalogue-browser": "node tests/catalogue-browser.mjs",
-    "test:intelligent-search": "node --test tests/intelligent-search.test.mjs && node tests/intelligent-search-browser.mjs"
+    "test:intelligent-search": "node --test tests/intelligent-search.test.mjs && node tests/intelligent-search-browser.mjs",
+    "test:search-quality": "node tests/search-quality.mjs",
+    "test:search-acceptance-browser": "node tests/search-acceptance-browser.mjs"
   },
   "devDependencies": {
     "happy-dom": "20.14.5",

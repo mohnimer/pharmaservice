@@ -46,7 +46,7 @@ await command('and needles');assert.match(await page.locator('.productCard').fir
 await command('we need another 3 of those');assert.equal(await request().locator('[data-ps-line-qty]').last().inputValue(),'3');
 await command('remove the first one');assert.equal(await request().locator('[data-ps-line-qty]').count(),1);
 await command('remove the first one');assert.equal(await request().locator('[data-ps-line-qty]').count(),0);
-await command('zzznothing');assert.match(await page.locator('.psInterpretation').textContent(),/couldn’t confidently/i);
+await command('zzznothing');assert.match(await page.locator('.psInterpretation').textContent(),/Try describing what the item is used for/i);
 await page.locator('[data-catalogue-clear]').click();assert((await page.locator('.productCard').count())>10);
 assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));assert.deepEqual(errors,[]);
 await page.screenshot({path:`test-results/intelligent-search-${width}.png`,fullPage:false});await context.close();console.log('PASS command sequence, fallback, handoff, demo safety, refresh and layout',width);

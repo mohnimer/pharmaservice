@@ -38,7 +38,7 @@ test('product knowledge resolves misspellings and descriptions to controlled rec
  assert.equal(search.interpret('we need another 3 of those',context).quantity,3);
  assert.equal(search.interpret('remove the first one',context).reference,'first');
  assert(index.records.every(r=>!('price' in r)&&!('stock' in r)&&!('supplier' in r)));
- assert(index.records.some(r=>r.alternatives.length));
+ assert(index.records.some(r=>r.relatedIds.length));
 });
 test('model IDs and session references are grounded, verified compatibility requires explicit data',async()=>{
  const {groundedIds,knowledgeContext}=await import('../api/interpret-request.mjs');

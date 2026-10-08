@@ -1,0 +1,602 @@
+{
+  "environment": "Node local retrieval, no network or render time; includes cold and warm corpus work",
+  "retrievalCases": 28,
+  "metrics": {
+    "top1Relevance": 1,
+    "top3Relevance": 1,
+    "zeroResultRateOnExpectedMatches": 0,
+    "clarificationRate": 0.07142857142857142,
+    "incorrectTop1Rate": 0,
+    "averageLatencyMs": 3.957334164285711,
+    "p95LatencyMs": 22.75849900000003
+  },
+  "antihistamines": [
+    {
+      "id": "PSC-MED-003",
+      "name": "ZYRTEC 10MG TAB 20'S",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "combination": false
+    },
+    {
+      "id": "PSC-MED-102",
+      "name": "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "combination": false
+    },
+    {
+      "id": "PSC-MED-104",
+      "name": "ZYRTEC 10MG/ML ORAL DROPS 10ML",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "combination": false
+    },
+    {
+      "id": "PSC-MED-126",
+      "name": "PANADOL NIGHT - 24 FILM-COATED TABLETS",
+      "ingredients": [
+        "paracetamol",
+        "diphenhydramine"
+      ],
+      "combination": true
+    },
+    {
+      "id": "PS-AC-49C544EA6E0C",
+      "name": "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "combination": false
+    },
+    {
+      "id": "PS-AC-70BCF2EF8CA0",
+      "name": "CLARITINE 10MG TAB 10'S",
+      "ingredients": [
+        "loratadine"
+      ],
+      "combination": false
+    },
+    {
+      "id": "PS-AC-8E9FE3B9BBC4",
+      "name": "Dora Desloratadine 5 mg — 30 Tablets",
+      "ingredients": [
+        "desloratadine"
+      ],
+      "combination": false
+    },
+    {
+      "id": "PS-AC-CF2A59100FF8",
+      "name": "FINALLERG 10MG TAB 10’S",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "combination": false
+    },
+    {
+      "id": "PS-AC-3E7CD6BDAB3C",
+      "name": "FINALLERG 10MG TAB 20'S",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "combination": false
+    },
+    {
+      "id": "PS-AC-89836E13CEAE",
+      "name": "FINALLERG 1MG/ML ORAL SOLUTION 100ML",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "combination": false
+    },
+    {
+      "id": "PS-AC-B5F68F0EEF03",
+      "name": "Glotrizine 5 mg/5 ml Syrup — 100 ml",
+      "ingredients": [
+        "cetirizine"
+      ],
+      "combination": false
+    },
+    {
+      "id": "PS-AC-CA529915334B",
+      "name": "Glozal Levocetirizine 5 mg — 20 Tablets",
+      "ingredients": [
+        "levocetirizine"
+      ],
+      "combination": false
+    },
+    {
+      "id": "PS-AC-8D861823242C",
+      "name": "LOHIST 10MG TAB 10'S",
+      "ingredients": [
+        "loratadine"
+      ],
+      "combination": false
+    },
+    {
+      "id": "PS-AC-A9F14BB5E5C6",
+      "name": "LOHIST 5MG/5ML SYRUP 100ML",
+      "ingredients": [
+        "loratadine"
+      ],
+      "combination": false
+    },
+    {
+      "id": "PS-AC-7789FFECC541",
+      "name": "TELFAST 120MG TAB 30'S",
+      "ingredients": [
+        "fexofenadine"
+      ],
+      "combination": false
+    },
+    {
+      "id": "PS-AC-286239754589",
+      "name": "TELFAST 180MG TAB 30'S",
+      "ingredients": [
+        "fexofenadine"
+      ],
+      "combination": false
+    }
+  ],
+  "results": [
+    {
+      "kind": "exact product",
+      "query": "ZYRTEC 10MG TAB 20'S",
+      "concept": "zyrtec 10mg tab 20 s",
+      "ids": [
+        "PSC-MED-003",
+        "PS-AC-3E7CD6BDAB3C"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "SKU",
+      "query": "PSC-DBT-001",
+      "concept": "PSC-DBT-001",
+      "ids": [
+        "PSC-DBT-001"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "brand",
+      "query": "Zyrtec",
+      "concept": "zyrtec",
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "ingredient",
+      "query": "cetirizine",
+      "concept": "cetirizine",
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "class",
+      "query": "antihistamine",
+      "concept": "antihistamine",
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589",
+        "PSC-MED-126"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "class spelling",
+      "query": "anti histamine",
+      "concept": "antihistamine",
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589",
+        "PSC-MED-126"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "class spelling",
+      "query": "antihistamin",
+      "concept": "antihistamine",
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589",
+        "PSC-MED-126"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "class spelling",
+      "query": "anti histamin",
+      "concept": "antihistamine",
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589",
+        "PSC-MED-126"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "lay language",
+      "query": "allergy medicine",
+      "concept": "antihistamine",
+      "ids": [
+        "PSC-MED-003",
+        "PSC-MED-102",
+        "PSC-MED-104",
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-89836E13CEAE",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-A9F14BB5E5C6",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "lay form",
+      "query": "allergy tablets",
+      "concept": "antihistamine",
+      "ids": [
+        "PSC-MED-003",
+        "PS-AC-70BCF2EF8CA0",
+        "PS-AC-8E9FE3B9BBC4",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C",
+        "PS-AC-CA529915334B",
+        "PS-AC-8D861823242C",
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "class form",
+      "query": "antihistamine syrup",
+      "concept": "antihistamine",
+      "ids": [
+        "PS-AC-49C544EA6E0C",
+        "PS-AC-B5F68F0EEF03",
+        "PS-AC-A9F14BB5E5C6"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "strength",
+      "query": "cetirizine 10 mg",
+      "concept": "cetirizine",
+      "ids": [
+        "PSC-MED-003",
+        "PS-AC-CF2A59100FF8",
+        "PS-AC-3E7CD6BDAB3C"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "ingredient form",
+      "query": "loratadine syrup",
+      "concept": "loratadine",
+      "ids": [
+        "PS-AC-A9F14BB5E5C6"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "approved attribute",
+      "query": "non drowsy antihistamine",
+      "concept": "antihistamine",
+      "ids": [
+        "PS-AC-7789FFECC541",
+        "PS-AC-286239754589"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "other class",
+      "query": "proton pump inhibitor",
+      "concept": "proton-pump-inhibitor",
+      "ids": [
+        "PSC-MED-107",
+        "PSC-MED-112"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "other class",
+      "query": "nsaid tablets",
+      "concept": "nsaid",
+      "ids": [
+        "PS-AC-764E4D0DB998"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "typo",
+      "query": "whelchair",
+      "concept": "wheelchair",
+      "ids": [
+        "PSC-EQP-006"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "spacing",
+      "query": "wheel chair",
+      "concept": "wheelchair",
+      "ids": [
+        "PSC-EQP-006"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "large descriptive",
+      "query": "we need big gauze",
+      "concept": "gauze",
+      "ids": [
+        "PSC-WND-016",
+        "PSC-WND-002",
+        "PSC-WND-003",
+        "INST-0081",
+        "PSC-WND-001"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": true
+    },
+    {
+      "kind": "large typo",
+      "query": "need big gaws",
+      "concept": "gauze",
+      "ids": [
+        "PSC-WND-016",
+        "PSC-WND-002",
+        "PSC-WND-003",
+        "INST-0081",
+        "PSC-WND-001"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": true
+    },
+    {
+      "kind": "typo",
+      "query": "gause",
+      "concept": "gauze",
+      "ids": [
+        "PSC-WND-003",
+        "INST-0081",
+        "PSC-WND-001",
+        "PSC-WND-016",
+        "PSC-WND-002"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "descriptive",
+      "query": "oxygen thing with meter",
+      "concept": "oxygen regulator",
+      "ids": [
+        "INST-0122",
+        "PSC-OXY-001"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "typo",
+      "query": "oxgen regulater",
+      "concept": "oxygen regulator",
+      "ids": [
+        "INST-0122",
+        "PSC-OXY-001"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "descriptive",
+      "query": "machine to check pressure",
+      "concept": "blood pressure",
+      "ids": [
+        "PSC-DIA-003",
+        "INST-0138",
+        "INST-0139",
+        "INST-0140"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "colloquial",
+      "query": "sugar machine",
+      "concept": "glucose meter",
+      "ids": [
+        "PSC-DBT-001"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "accessory",
+      "query": "kids mask for nebuliser",
+      "concept": "nebulizer mask",
+      "ids": [
+        "PSC-RES-007"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "typo",
+      "query": "stethscope",
+      "concept": "stethoscope",
+      "ids": [
+        "PSC-DIA-008"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    },
+    {
+      "kind": "descriptive",
+      "query": "oxygen meter finger",
+      "concept": "oximeter",
+      "ids": [
+        "PSC-DIA-001"
+      ],
+      "top1": true,
+      "top3": true,
+      "zero": false,
+      "clarification": false
+    }
+  ],
+  "limitations": [
+    "Verified compatibility is limited to the evidence-backed Guide meter/Guide strip relationship; other links remain unverified.",
+    "Provisional medicines without matched authoritative evidence remain incomplete.",
+    "Browser tests simulate backend/auth; no live provider inference measured."
+  ]
+}
