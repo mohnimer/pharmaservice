@@ -186,9 +186,10 @@ body{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
  .pscOrderCategories{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
  .pscOrderCategories span{min-height:64px;padding:12px;font-size:16px}
  .pscOrderConnections{height:38px;width:1px;margin:0 auto;background:#b5c5bf}.pscOrderConnections path{display:none}
- .pscOrderInvoice header{padding:18px;gap:12px}.pscOrderInvoice header img{width:120px;height:80px}.pscOrderInvoice h3{font-size:34px}
- .pscOrderColumns{padding:10px 16px;font-size:12px}.pscOrderColumns span:last-child{max-width:80px;text-align:right}
- .pscOrderInvoiceBody{padding:0 16px}.pscOrderInvoiceLines>div{font-size:14px;padding:14px 0}.pscOrderWholesale{right:12px;font-size:18px}
+ .pscOrderInvoice header{padding:16px;gap:12px}.pscOrderInvoice header img{width:100px;height:68px}.pscOrderInvoice h3{font-size:30px}
+ .pscOrderColumns{padding:10px 16px;font-size:13px}.pscOrderColumns span:last-child{display:none}
+ .pscOrderInvoiceBody{padding:0 16px}.pscOrderInvoiceLines>div{font-size:16px;padding:12px 0;white-space:normal;overflow:visible;mask-image:none;overflow-wrap:anywhere}
+ .pscOrderWholesale{position:static;transform:none;background:#edf5f1;margin:16px 0;padding:10px;border-radius:8px;font-size:17px;line-height:1.3}
  .pscOrderInvoice footer{padding:16px;font-size:12px}.pscOrderInvoice footer span:last-child{text-align:right}
  .pscOrderDiagram figcaption{font-size:18px;margin-top:24px}
 }
