@@ -24,3 +24,9 @@
 .psSearchEmpty{font-size:15px;line-height:1.6;padding:24px 0}
 @media(max-width:1100px){.psCatalogueWorkspace:has(.psIntelligentSearch:focus-within)>.psScopeMobileSummary{display:none!important}.psScopeMobileSummary{bottom:calc(18px + env(safe-area-inset-bottom))}}
 .requestDrawerBackdrop{z-index:140}
+.customerShell .v26HomeHero{grid-template-columns:minmax(0,1fr)!important}
+.customerShell .v26HomeHero .psIntelligentSearch{margin-top:24px}
+.home47 .h47Discovery{margin:28px 0 36px;font-family:inherit}
+.home47 .h47Discovery h2{font-weight:400;letter-spacing:-.04em}
+.home47 .h47Discovery form{grid-template-columns:minmax(0,1fr) auto}
+@media(max-width:600px){.home47 .h47Discovery form{grid-template-columns:minmax(0,1fr)}.home47 .h47Discovery input{min-width:0;width:100%}}

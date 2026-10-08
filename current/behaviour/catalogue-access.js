@@ -84,7 +84,9 @@
     try{pending=sessionStorage.getItem('pscPendingRoute')||'';}catch{}
     if(!pending.startsWith('portal/')) return;
     try{sessionStorage.removeItem('pscPendingRoute');}catch{}
-    softGo(pending);
+    let query='';
+    try{query=sessionStorage.getItem('pscPendingSearch')||'';sessionStorage.removeItem('pscPendingSearch');}catch{}
+    softGo(pending,query?{searchQuery:query}:undefined);
   }
 
   function apply(){
