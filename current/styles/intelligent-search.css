@@ -18,3 +18,8 @@
 @media(max-width:560px){.psIntelligentSearch form input{flex-basis:100%}.psIntelligentSearch form button{flex:1}.psIntelligentSearch h2{font-size:28px}.psIntelligentSearch{padding:22px}.psLiveRequest.isOpen{inset:60px 12px 12px}}
 .psIntelligentSearch>.sectionLabel{display:block!important;font-size:12px;color:#67716a}
 .psRequestScopeReview{margin-bottom:24px;padding:20px;background:#f5f4ed;border-radius:14px;font-size:13px;line-height:1.7}.psRequestScopeReview p{margin:12px 0 0!important}.psQuantityConfirm{margin-top:18px;font-size:12px;line-height:1.6;text-align:left}
+.psCatalogueLandingWorkspace>.psCatalogueMain>.psIntelligentSearch{margin-top:0}
+.psIntelligentSearch input{font-size:16px!important;scroll-margin-top:110px}
+.psSearchResults{overflow-anchor:none;min-width:0}.psSearchResults[hidden],.psSearchEmpty[hidden]{display:none!important}
+.psSearchEmpty{font-size:15px;line-height:1.6;padding:24px 0}
+@media(max-width:1100px){.psCatalogueWorkspace:has(.psIntelligentSearch input:focus)>.psScopeMobileSummary{display:none!important}.psScopeMobileSummary{bottom:calc(18px + env(safe-area-inset-bottom))}}

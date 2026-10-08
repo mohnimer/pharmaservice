@@ -38,7 +38,7 @@
     }
   }
   let signedIn=role!=='anonymous';
-  const getSession=()=>signedIn?{user:{id:'u1',email:'test@example.invalid'}}:null;
+  const getSession=()=>signedIn?{access_token:window.__testAccessToken,user:{id:'u1',email:'test@example.invalid'}}:null;
   const client = {
     from: table => new Query(table),
     auth: {

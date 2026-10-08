@@ -12,6 +12,8 @@
     "current/behaviour/catalogue-architecture.js",
     "current/behaviour/catalogue-refresh-data.js",
     "current/behaviour/catalogue-refresh.js",
+    "current/behaviour/product-knowledge.js",
+    "current/behaviour/product-knowledge-index.js",
     "current/behaviour/intelligent-search.js",
     "app.js",
     "current/behaviour/catalogue-families.js",

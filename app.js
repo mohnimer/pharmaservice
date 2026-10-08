@@ -1144,6 +1144,7 @@
     draw();
   }
   function openProductOverlay(sku,publicMode=false){
+    if(!publicMode)productSearchMemory().selectedSku=sku;
     ui.overlayScroll=window.scrollY;
     ui.modal={type:publicMode?'public-product':'product',sku};
     renderUi({preserveScroll:true});
@@ -2089,6 +2090,22 @@
   }
 
 
+  const searchSessions=new Map();
+  let searchTypingTimer;
+  function productSearchMemory(){const key=state.activeSchoolId||'draft';if(!searchSessions.has(key))searchSessions.set(key,{terms:'',size:'',selectedSku:'',resultIds:[],searches:[]});return searchSessions.get(key);}
+  function searchProductForLine(line){
+    if(line.sku)return product(line.sku);
+    const options=[line.productOptionSnapshot,...(line.requestedProductOptions||[])].filter(Boolean);
+    const option=options.at(-1),name=option?.exact_product_name;
+    if(name){const exact=products().find(p=>window.PS_PRODUCT_KNOWLEDGE.norm(p.name)===window.PS_PRODUCT_KNOWLEDGE.norm(name));if(exact)return exact;}
+    return line.familyId?{pscSku:line.familyId,name:name||line.familyName,brand:option?.brand||line.requestedBrand||'',spec:line.commercialSpecification||'',pack:option?.pack||line.orderPackBasis||''}:null;
+  }
+  function productSearchContext(){
+    const memory=productSearchMemory(),selected=state.basket.map(searchProductForLine).filter(Boolean);
+    const focus=memory.selectedSku?(product(memory.selectedSku)||searchProductForLine(state.basket.find(l=>l.familyId===memory.selectedSku)||{})):null;
+    if(focus&&!selected.some(p=>p.pscSku===focus.pscSku))selected.push(focus);
+    return {terms:memory.terms,size:memory.size,selectedProducts:selected,previousSearches:memory.searches.slice(-5),category:currentRoute().split('/')[2]||'all',institutionType:authContext?.school?'school':'',orderType:scopeDraft().orderType,location:scopeDraft().location};
+  }
   const intelligent = {choices:[],confirmed:'',confidence:'possible',action:null, said:'', message:'', selected:'', pending:null, sheet:false, sequence:0};
   const emptyScope=()=>({institution:'',location:'',sites:null,orderType:'',retained:[],quantityConfirmation:false});
   function scopeDraft(){
@@ -2102,23 +2119,18 @@
     return ['PS request scope',scope.institution&&`Institution / site: ${scope.institution}`,scope.location&&`Delivery location: ${scope.location}`,scope.sites&&`Sites: ${scope.sites} — ${scope.quantityConfirmation?'quantities require confirmation':'quantities are totals across all sites'}`,scope.orderType&&`Order type: ${scope.orderType}`,state.basket.some(l=>l.requestUnit)&&`Requested units: ${state.basket.filter(l=>l.requestUnit).map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty} ${l.requestUnit}`).join('; ')} — pack basis needs PS verification`,scope.retained.length&&`Existing / retain (excluded from supply): ${scope.retained.map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty}`).join('; ')}`,'Specifications, availability, pack basis and commercial terms need PS verification.'].filter(Boolean).join('\n');
   }
   function intelligentSearchField(){
-    return `<section class="psIntelligentSearch"><span class="sectionLabel">PS Intelligent Search</span><h2>Searching for the product doesn’t have to be complicated.</h2><p>Tell us what you need in your own words.</p><label for="psCommand">${state.basket.length?'Change this scope in plain language':'Search the catalogue'}</label><form data-ps-command-form><input id="psCommand" type="search" data-cat-q aria-label="Search catalogue" value="${esc(ui.catalogueQuery)}" placeholder="We need a wheelchair…" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Apply</button>${ui.catalogueQuery||intelligent.action?'<button class="button outline" type="button" data-catalogue-clear>Clear</button>':''}</form>${intelligent.said?`<div class="psInterpretation" role="status"><span>You said: “${esc(intelligent.said)}”</span><b>PS understood: ${esc(intelligent.message)}</b></div>`:''}${intelligent.choices.length?`<div class="psClarification"><b>Which catalogue line should we add?</b>${intelligent.choices.map(p=>`<button type="button" class="button outline" data-ps-select-sku="${esc(p.pscSku)}">${esc(p.catalogueDisplayName||p.name)}</button>`).join('')}</div>`:''}${intelligent.pending?`<div class="psClarification"><b>Which size did you mean?</b>${intelligent.pending.sizes.map(size=>`<button class="button outline" data-ps-clarify="${esc(size)}">${esc(size.replace('x',' × '))} cm</button>`).join('')}<button class="button outline" data-ps-clarify="both">Show both</button></div>`:''}</section>`;
+    return `<section class="psIntelligentSearch"><span class="sectionLabel">PS Intelligent Search</span><h2>You don’t need to know what it’s called.</h2><p>Tell us what you need the way you’d normally say it.</p><label for="psCommand">${state.basket.length?'Change this scope in plain language':'Search the catalogue'}</label><form data-ps-command-form><input id="psCommand" type="search" data-cat-q aria-label="Search catalogue" value="${esc(ui.catalogueQuery)}" placeholder="We need a wheelchair…" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Apply</button><button class="button outline" type="button" data-catalogue-clear ${!ui.catalogueQuery&&!intelligent.action?'disabled':''}>Clear</button></form>${intelligent.said?`<div class="psInterpretation" role="status"><span>You said: “${esc(intelligent.said)}”</span><b>PS understood: ${esc(intelligent.message)}</b></div>`:''}${intelligent.choices.length?`<div class="psClarification"><b>Which catalogue line should we add?</b>${intelligent.choices.map(p=>`<button type="button" class="button outline" data-ps-select-sku="${esc(p.pscSku)}">${esc(p.catalogueDisplayName||p.name)}</button>`).join('')}</div>`:''}${intelligent.pending?`<div class="psClarification"><b>Which size did you mean?</b>${intelligent.pending.sizes.map(size=>`<button class="button outline" data-ps-clarify="${esc(size)}">${esc(size.replace('x',' × '))} cm</button>`).join('')}<button class="button outline" data-ps-clarify="both">Show both</button></div>`:''}</section>`;
   }
   function requestScopePanel(){
     const scope=scopeDraft(),lines=state.basket;const missing=[!lines.length&&'Items',!state.groupName&&!scope.institution&&'Institution name',!scope.location&&'Delivery location',scope.quantityConfirmation&&'Quantities per site / total',lines.some(l=>!l.requestUnit)&&'Pack / unit confirmation'].filter(Boolean);
     const done=[lines.length>0,!!(state.groupName||scope.institution),!!scope.location,!!scope.sites].filter(Boolean).length;
     return `<aside class="psLiveRequest ${intelligent.sheet?'isOpen':''}" aria-label="Your Request"><div class="psScopeHeader"><h2>Your Request</h2><button class="iconBtn" data-ps-sheet-close aria-label="Close request sheet">×</button></div><dl><div><dt>Institution / site</dt><dd>${state.groupName?`${esc(state.groupName)}${state.campus?` · ${esc(state.campus)}`:''}`:`<input aria-label="Institution / site" data-ps-scope="institution" value="${esc(scope.institution||'')}" placeholder="Not provided yet" maxlength="160">`}</dd></div><div><dt>Delivery location</dt><dd><input aria-label="Delivery location" data-ps-scope="location" value="${esc(scope.location)}" placeholder="Not provided yet" maxlength="160"></dd></div><div><dt>Sites</dt><dd><input aria-label="Number of sites" data-ps-scope="sites" type="number" min="1" max="10000" value="${scope.sites||''}" placeholder="Not provided yet"></dd></div><div><dt>Order type</dt><dd><select aria-label="Order type" data-ps-scope="orderType"><option value="">Not provided yet</option>${['Opening clinic supply','Replenishment','Equipment requirement'].map(x=>`<option ${scope.orderType===x?'selected':''}>${x}</option>`).join('')}</select></dd></div></dl><div class="psScopeItems">${lines.length?lines.map((l,i)=>`<div class="psScopeLine"><b>${esc(lineDisplayName(l,l.sku?product(l.sku):null))}</b><div><label>Qty <input aria-label="Quantity for ${esc(lineDisplayName(l,l.sku?product(l.sku):null))}" data-ps-line-qty="${i}" type="number" min="1" max="10000" value="${l.qty}"></label><span>${esc(l.requestUnit||linePackLabel(l,l.sku?product(l.sku):null))}</span><button class="textAction" data-ps-line-remove="${i}">Remove</button></div></div>`).join(''):'<p>Add products while you browse.</p>'}</div>${scope.retained.length?`<div class="psRetained"><b>Existing / retain</b>${scope.retained.map(l=>`<p>${esc(lineDisplayName(l,l.sku?product(l.sku):null))} × ${l.qty}</p>`).join('')}<small>Excluded from active supply quantities.</small></div>`:''}<div class="psScopeTotals"><span>Lines: <b>${lines.length}</b></span><span>Total quantity: <b>${basketQty()}</b></span></div>${scope.quantityConfirmation?'<button class="textAction psQuantityConfirm" data-ps-confirm-totals>Quantities are totals across all sites</button>':''}<progress aria-label="Request completeness" max="4" value="${done}"></progress><p class="psScopeMissing">Still needed: ${esc(missing.join(', ')||'PS verification')}</p><small>Needs PS verification. Quantities are requested pack counts; no stock or price commitment.</small><button class="button primary full" data-ps-prepare ${!lines.length?'disabled':''}>Prepare Request</button></aside><button class="psScopeMobileSummary button dark" data-ps-sheet-open>Your Request · ${lines.length} ${lines.length===1?'item':'items'}</button>`;
   }
-  function resetIntelligentSearch(){intelligent.sequence++;intelligent.action=null;intelligent.pending=null;intelligent.choices=[];intelligent.confirmed='';intelligent.said='';intelligent.message='';intelligent.sheet=false;}
+  function resetIntelligentSearch(){clearTimeout(searchTypingTimer);intelligent.sequence++;intelligent.action=null;intelligent.pending=null;intelligent.choices=[];intelligent.confirmed='';intelligent.said='';intelligent.message='';intelligent.sheet=false;}
   async function applyIntelligentCommand(text){
     if(!String(text).trim())return;
-    const seq=++intelligent.sequence,route=currentRoute();
-    let action=window.PS_INTELLIGENT_SEARCH.interpret(text,{terms:intelligent.action?.terms,size:intelligent.action?.size});
-    // Local supported commands remain responsive; model enhancement handles unfamiliar descriptions.
-    if(action?.intent==='search'&&!window.PS_INTELLIGENT_SEARCH.rank(catalogueProducts(),action).length){
-      const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),4000);
-      try{const response=await fetch('/api/interpret-request',{method:'POST',headers:{'Content-Type':'application/json',...(session?.access_token?{Authorization:`Bearer ${session.access_token}`}:{})},body:JSON.stringify({text:String(text).slice(0,400),context:{terms:intelligent.action?.terms||''}}),signal:controller.signal});if(response.ok){const candidate=window.PS_INTELLIGENT_SEARCH.validate((await response.json()).action);if(candidate&&['search','compare'].includes(candidate.intent))action=candidate;}}catch{}finally{clearTimeout(timer);}
-    }
+    clearTimeout(searchTypingTimer);const seq=++intelligent.sequence,route=currentRoute(),context=productSearchContext();
+    let action=window.PS_INTELLIGENT_SEARCH.interpret(text,context);
     if(seq!==intelligent.sequence||route!==currentRoute())return;
     if(!action)return;
     if(action.invalidQuantity&&['add','quantity','sites'].includes(action.intent)){intelligent.said=String(text).slice(0,400);intelligent.message='Enter a whole quantity between 1 and 10,000; your request is unchanged';ui.catalogueQuery='';ui.globalSearch='';renderUi({preserveScroll:true,transition:false});return;}
@@ -2128,15 +2140,17 @@
     else if(action.intent==='sites'){scope.sites=action.quantity;scope.quantityConfirmation=true;intelligent.message=`${action.quantity} sites — confirm quantities; items have not been multiplied`;}
     else if(action.intent==='filter'){intelligent.action=action;intelligent.message=action.filter==='all'?'All catalogue lines':`Showing ${action.filter}; your request is unchanged`;}
     else{
-      const matches=window.PS_INTELLIGENT_SEARCH.rank(catalogueProducts(),action);
+      const matches=window.PS_INTELLIGENT_SEARCH.rank(catalogueProducts(),action,context);
+      const memory=productSearchMemory();if(matches.length){memory.terms=action.terms;memory.size=action.size;memory.resultIds=matches.slice(0,12).map(p=>p.pscSku);memory.searches.push(String(text).slice(0,400));memory.searches=memory.searches.slice(-12);}
       intelligent.confidence=action.ambiguous?'clarification':matches.some(p=>p.pscSku.toLowerCase()===action.terms.toLowerCase())?'exact':matches.length?'strong':'possible';
       intelligent.action=action;
       if(action.ambiguous&&action.terms==='gauze'){
         const sizes=[...new Set(matches.flatMap(p=>[...(String([p.catalogueDisplayName||p.name,p.cataloguePack||p.pack].join(' '))).matchAll(/(\d+(?:\.\d+)?)\s*[x×]\s*(\d+(?:\.\d+)?)/gi)].map(m=>`${m[1]}x${m[2]}`)))].filter(v=>Number(v.split('x')[0])>=10).slice(0,4);
-        if(sizes.length){intelligent.pending={sizes};intelligent.message='Gauze — choose a size before adding';}
+        if(sizes.length>1){intelligent.pending={sizes};intelligent.message='Gauze — choose a size before adding';}
       }
       if(action.budget)intelligent.message='Matching products — PS must verify pricing before comparison';
-      const matchingLines=state.basket.filter(l=>window.PS_INTELLIGENT_SEARCH.rank([{pscSku:l.sku||l.familyId,name:lineDisplayName(l,l.sku?product(l.sku):null),pack:linePackLabel(l,l.sku?product(l.sku):null)}],action).length);
+      let matchingLines=state.basket.filter(l=>window.PS_INTELLIGENT_SEARCH.rank([{pscSku:l.sku||l.familyId,name:lineDisplayName(l,l.sku?product(l.sku):null),pack:linePackLabel(l,l.sku?product(l.sku):null)}],action).length);
+      if(action.reference){const line=action.reference==='first'?state.basket[0]:action.reference==='last'?state.basket.at(-1):state.basket.find(l=>(l.sku||l.familyId)===memory.selectedSku);matchingLines=line?[line]:[];}
       if(['remove','retain'].includes(action.intent)){
         if(action.intent==='retain')scope.retained.push(...matchingLines.map(l=>({...l,scopeStatus:'existing',retainedAt:new Date().toISOString()})));
         state.basket=state.basket.filter(l=>!matchingLines.includes(l));intelligent.message=matchingLines.length?`${matchingLines.length} ${action.intent==='retain'?'lines marked existing / retain':'lines removed'}`:'No matching items in your request';
@@ -2144,16 +2158,36 @@
         if(matchingLines.length===1&&action.quantity){matchingLines[0].qty=action.quantity;if(action.unit)matchingLines[0].requestUnit=action.unit;intelligent.message='Requested quantity updated';}
         else intelligent.message='Choose one request line and set its quantity';
       }else if(action.intent==='add'&&!intelligent.pending){
-        const selected=matches.find(p=>p.pscSku===intelligent.selected)||matches[0];
-        if(matches.length>1&&!matches.some(p=>p.pscSku===intelligent.confirmed)){intelligent.choices=matches.slice(0,12);intelligent.message='Choose an existing catalogue line before adding';save();ui.catalogueQuery='';ui.globalSearch='';renderUi({preserveScroll:true,transition:false});return;}
+        const referenceLine=action.reference==='first'?state.basket[0]:action.reference==='last'?state.basket.at(-1):state.basket.find(l=>(l.sku||l.familyId)===memory.selectedSku);
+        const referenceSku=referenceLine?.sku||memory.selectedSku;
+        if(action.reference&&referenceLine?.familyId){const total=referenceLine.qty+(action.quantity||1);if(total<=10000){referenceLine.qty=total;intelligent.message=`${referenceLine.familyName} × ${action.quantity||1} added to your request`;}else intelligent.message='Keep requested quantity at or below 10,000';ui.catalogueQuery='';ui.globalSearch='';save();renderUi({preserveScroll:true,transition:false});return;}
+        const selected=action.reference?catalogueProducts().find(p=>p.pscSku===referenceSku):matches.find(p=>p.pscSku===intelligent.selected)||matches[0];
+        if(matches.length>1&&!action.reference&&!matches.some(p=>p.pscSku===intelligent.confirmed)){intelligent.choices=matches.slice(0,12);intelligent.message='Choose an existing catalogue line before adding';save();ui.catalogueQuery='';ui.globalSearch='';renderUi({preserveScroll:true,transition:false});return;}
         intelligent.confirmed='';
-        if(selected){const l=state.basket.find(l=>l.sku===selected.pscSku);if(l){l.qty+=action.quantity||1;if(action.unit)l.requestUnit=action.unit;}else state.basket.push({sku:selected.pscSku,qty:action.quantity||1,requestUnit:action.unit});intelligent.selected=selected.pscSku;intelligent.message=`${selected.catalogueDisplayName||selected.name} × ${action.quantity||1} — needs PS verification`;}
+        if(selected){const l=state.basket.find(l=>l.sku===selected.pscSku);if(l){l.qty+=action.quantity||1;if(action.unit)l.requestUnit=action.unit;}else state.basket.push({sku:selected.pscSku,qty:action.quantity||1,requestUnit:action.unit});intelligent.selected=selected.pscSku;memory.selectedSku=selected.pscSku;intelligent.message=`${selected.catalogueDisplayName||selected.name} × ${action.quantity||1} — needs PS verification`;}
         else intelligent.message='No confident match. Try another description or browse categories.';
       }else if(action.intent==='replace')intelligent.message='Choose the replacement product, then remove the old line; no items changed';
       else if(!matches.length)intelligent.message='We couldn’t confidently interpret that. Try another description or browse matching categories below.';
-      else if(!intelligent.pending&&!action.budget&&action.intent==='search'){intelligent.selected=matches[0].pscSku;intelligent.message=action.size?`${action.terms} · ${action.size}${/x/.test(action.size)?' cm':''}`:action.terms;}
+      else if(!intelligent.pending&&!action.budget&&action.intent==='search'){intelligent.selected=matches[0].pscSku;if(matches.length===1)memory.selectedSku=matches[0].pscSku;intelligent.message=action.size?`${action.terms} · ${action.size}${/x/.test(action.size)?' cm':''}`:action.terms;}
     }
-    ui.catalogueQuery='';ui.globalSearch='';save();renderUi({preserveScroll:true,focusSelector:'[data-cat-q]',cursor:0,transition:false});
+    if(['search','compare'].includes(action.intent)&&/strips|lancet|mask/.test(action.terms)&&context.selectedProducts.length)intelligent.message+=' · model / compatibility needs PS verification';
+    ui.catalogueQuery='';ui.globalSearch='';save();renderUi({preserveScroll:true,transition:false});
+    if(action.intent==='search'&&!intelligent.pending)enhanceProductSearch(text,context,seq,route,action);
+  }
+  async function enhanceProductSearch(text,context,seq,route,localAction){
+    if(intelligent.confidence==='exact')return;
+    const token=session?.access_token;if(!token)return;
+    try{
+      const response=await fetch('/api/interpret-request',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`},body:JSON.stringify({text:String(text).slice(0,400),context:{...context,selectedProducts:undefined,selectedIds:context.selectedProducts.map(p=>p.pscSku)}}),signal:AbortSignal.timeout(5500)});
+      if(!response.ok)return;const data=await response.json();
+      if(seq!==intelligent.sequence||route!==currentRoute()||ui.catalogueQuery)return;
+      const action=window.PS_INTELLIGENT_SEARCH.validate({...data.action,rankedIds:data.rankedIds});if(!action||!['search','compare'].includes(action.intent))return;
+      const ids=new Set(catalogueProducts().map(p=>p.pscSku));action.rankedIds=action.rankedIds.filter(id=>ids.has(id));
+      if(!action.rankedIds.length&&!window.PS_INTELLIGENT_SEARCH.rank(catalogueProducts(),action,context).length)return;
+      intelligent.action={...localAction,...action};intelligent.message=action.terms||localAction.terms;
+      const memory=productSearchMemory();memory.terms=action.terms||memory.terms;memory.resultIds=action.rankedIds;
+      updateCatalogueResults();const label=document.querySelector('.psInterpretation b');if(label)label.textContent=`PS understood: ${intelligent.message}`;
+    }catch{}
   }
 
   function catalogueProducts(){
@@ -2161,27 +2195,38 @@
   }
 
   function catalogueFilterProducts(needId='all'){
-    const q=ui.catalogueQuery.toLowerCase().trim();
-    const types=(D.productTypes||[]).filter(Boolean);
-    const allProducts=catalogueProducts();
-    const filtered=allProducts.filter(p=>{
-      const needLabels=clinicalNeedIds(p).map(id=>clinicalNeedMeta(id).label).join(' ');
-      const hay=[p.catalogueDisplayName,p.name,p.brand,p.pscSku,p.supplierSku,p.productType,p.pack,p.cataloguePack,p.spec,p.pscOfferedSpecification,needLabels].filter(Boolean).join(' ').toLowerCase();
-      const lineMatch=
-        ui.catalogueFilter==='All lines' ||
-        (ui.catalogueFilter==='DHA requirement'&&p.dhaMapped) ||
-        (ui.catalogueFilter==='Licensed / controlled'&&p.regulated) ||
-        (ui.catalogueFilter==='Specification-led'&&p.institutionalProvisional);
-      const action=intelligent.action;
-      const semantic=!q&&action&&action.terms&&!['remove','retain','quantity'].includes(action.intent);
-      const semanticMatch=!semantic||window.PS_INTELLIGENT_SEARCH.rank([p],action).length>0;
+    const q=ui.catalogueQuery.trim(),types=(D.productTypes||[]).filter(Boolean),allProducts=catalogueProducts(),context=productSearchContext();
+    const action=q?window.PS_INTELLIGENT_SEARCH.interpret(q,context):intelligent.action;
+    let retrieval=action?.terms?window.PS_INTELLIGENT_SEARCH.rank(allProducts,action,context):allProducts;
+    if(action?.rankedIds?.length){const first=action.rankedIds.map(id=>allProducts.find(p=>p.pscSku===id)).filter(Boolean),ids=new Set(first.map(p=>p.pscSku));retrieval=[...first,...retrieval.filter(p=>!ids.has(p.pscSku))];}
+    const crossCategory=!!(q||action?.terms); // Searching the whole range must not dead-end in the previous category.
+    const filtered=retrieval.filter(p=>{
+      const lineMatch=ui.catalogueFilter==='All lines'||(ui.catalogueFilter==='DHA requirement'&&p.dhaMapped)||(ui.catalogueFilter==='Licensed / controlled'&&p.regulated)||(ui.catalogueFilter==='Specification-led'&&p.institutionalProvisional);
       const viewMatch=!action||action.intent!=='filter'||action.filter==='all'||(action.filter==='equipment'?clinicalNeedIds(p).includes('equipment'):!clinicalNeedIds(p).includes('equipment')&&!clinicalNeedIds(p).includes('medicines'));
-      return semanticMatch && viewMatch && q.split(/\s+/).filter(Boolean).every(token=>hay.includes(token))
-        && clinicalNeedMatches(p,needId)
-        && (ui.catalogueCat==='All product types'||p.productType===ui.catalogueCat)
-        && lineMatch;
+      return viewMatch&&(crossCategory||clinicalNeedMatches(p,needId))&&(ui.catalogueCat==='All product types'||p.productType===ui.catalogueCat)&&lineMatch;
     });
     return {allProducts,filtered,types};
+  }
+  function catalogueSearchResults(needId='all',landing=false){
+    const {filtered}=catalogueFilterProducts(needId);const visible=!landing||ui.catalogueQuery||intelligent.action;
+    return `<section class="psSearchResults" data-ps-search-results ${visible?'':'hidden'}><div class="catalogueMeta"><span data-ps-result-count>${filtered.length} products</span></div><div class="productGrid v25ProductGrid">${visible?filtered.map(productCard).join(''):''}</div><p class="psSearchEmpty" ${filtered.length?'hidden':''}>Try another description or browse the categories below. PS can also review an unlisted requirement.</p></section>`;
+  }
+  function updateCatalogueResults(){
+    const area=document.querySelector('[data-ps-search-results]');if(!area)return;
+    const route=currentRoute(),landing=route==='portal/catalogue',need=route.split('/')[2]||'all';const {filtered}=catalogueFilterProducts(need);
+    area.hidden=landing&&!ui.catalogueQuery&&!intelligent.action;
+    const grid=area.querySelector('.productGrid');grid.innerHTML=area.hidden?'':filtered.map(productCard).join('');
+    area.querySelector('[data-ps-result-count]').textContent=`${filtered.length} products`;
+    area.querySelector('.psSearchEmpty').hidden=filtered.length>0;
+    // Bind only newly rendered cards. Never replace or refocus the command input while typing.
+    bindCatalogueResultCards(grid);
+    const clear=document.querySelector('[data-ps-command-form] [data-catalogue-clear]');if(clear)clear.disabled=!ui.catalogueQuery&&!intelligent.action;
+    window.dispatchEvent(new Event('ps:search-results-updated'));
+  }
+  function bindCatalogueResultCards(root){
+    root.querySelectorAll('[data-product-view]').forEach(el=>el.addEventListener('click',()=>{productSearchMemory().selectedSku=el.dataset.productView;openProductOverlay(el.dataset.productView,false);}));
+    root.querySelectorAll('[data-add]').forEach(el=>el.addEventListener('click',()=>addBasket(el.dataset.add,1)));
+    root.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>go(el.dataset.go)));
   }
 
   function clinicalNeedRibbon(activeId='all'){
@@ -2201,12 +2246,12 @@
 
     const sf=storefrontConfig('institutional');
     return shell(`
+      <div class="psCatalogueWorkspace psCatalogueLandingWorkspace"><div class="psCatalogueMain">${intelligentSearchField()}${catalogueSearchResults('all',true)}
       <div class="pageHeader institutionalCatalogueHeader v26CatalogueLandingHeader">
         <div><span class="eyebrow">INSTITUTIONAL CATALOGUE</span><h1>${esc(sf?.headline||'Browse by clinical need.')}</h1><p>${esc(sf?.subheadline||'Start with the situation, task or area of care. The catalogue keeps sourcing complexity behind the scenes while giving clinical teams a faster route to the right products.')}</p></div>
         <div class="catalogueDepthPill"><b>${allProducts.length}</b><span>catalogue lines</span><small>${dhaCount} lines mapped to DHA requirements</small></div>
       </div>
 
-      ${intelligentSearchField()}
       <section class="clinicNeedSection v25NeedJourney v26CatalogueLanding">
         <div class="clinicNeedHeading"><div><span class="eyebrow">CLINICAL NEEDS</span><h2>Where do you want to start?</h2><p>Choose the clinical context first. Once inside, use the product and requirement filters to narrow the catalogue.</p></div></div>
         <div class="clinicNeedRail">${needCards}</div>
@@ -2217,6 +2262,7 @@
         <button class="catalogueShortcut blue" data-go="portal/replenish"><span>${icon('repeat')}</span><div><b>Repeat a previous order</b><small>Replenish from account history</small></div><i>→</i></button>
         <button class="catalogueShortcut mint" data-go="portal/requests"><span>${icon('request')}</span><div><b>Orders & quotations</b><small>Review active and historical requests</small></div><i>→</i></button>
       </section>
+      </div>${requestScopePanel()}</div>
     `);
   }
 
@@ -2251,7 +2297,7 @@
         <button class="textAction" data-go="portal/catalogue">Clinical needs ↑</button>
       </div>
 
-      <div class="productGrid v25ProductGrid">${filtered.map(productCard).join('')}</div>
+      ${catalogueSearchResults(selected.id)}
 
       <section class="customRequestPanel v25CustomRequest v26CustomRequest">
         <div><span class="eyebrow">CAN'T FIND IT?</span><h2>Request something else.</h2><p>Describe the product, brand, size or specification. PS will review it as an account-specific product request.</p></div>
@@ -2474,6 +2520,7 @@
     if(!line.familyId||!line.familyName) return false;
     if(line.brandPreferenceMode==='specific_option' && !line.productOptionId) return false;
     if(line.brandPreferenceMode==='other_brand' && !line.requestedBrand) return false;
+    productSearchMemory().selectedSku=line.familyId;
     const key=lineKey(line);
     const existing=state.basket.find(x=>lineKey(x)===key);
     if(existing) existing.qty+=line.qty;
@@ -2486,7 +2533,7 @@
   window.addEventListener('psc:add-family-line',e=>{ try{ addFamilyBasketLine(e.detail||{}); }catch(err){ console.error('Family request add failed',err); } });
 
   function basketQty(){ return state.basket.reduce((a,b)=>a+Number(b.qty||0),0); }
-  function addBasket(sku,qty=1){ const f=state.basket.find(x=>x.sku===sku); if(f)f.qty+=qty; else state.basket.push({sku,qty}); save(); renderUi({preserveScroll:true,transition:false}); toast(`<strong>Added</strong> to Supply Request`); }
+  function addBasket(sku,qty=1){ productSearchMemory().selectedSku=sku;const f=state.basket.find(x=>x.sku===sku); if(f)f.qty+=qty; else state.basket.push({sku,qty}); save(); renderUi({preserveScroll:true,transition:false}); toast(`<strong>Added</strong> to Supply Request`); }
   function reorderRequest(id){
     const r=state.requests.find(x=>x.id===id); if(!r)return;
     r.lines.forEach(l=>{const key=lineKey(l);const f=state.basket.find(x=>lineKey(x)===key);if(f)f.qty+=l.qty;else state.basket.push(JSON.parse(JSON.stringify(l)))});
@@ -3110,6 +3157,7 @@
   }
 
   async function signOut(){
+    searchSessions.clear();resetIntelligentSearch();
     const wasDemo=isDemoAccount();
     if(sb) await sb.auth.signOut();
     session=null; authContext=null;
@@ -3463,7 +3511,7 @@
     document.querySelectorAll('[data-modal-close]').forEach(el=>el.addEventListener('click',closeModalOverlay));
     document.querySelectorAll('[data-document-open]').forEach(el=>el.addEventListener('click',()=>openOrderDocument(el.dataset.documentOpen)));
     document.querySelectorAll('[data-document-upload]').forEach(el=>el.addEventListener('change',async e=>{const file=e.target.files?.[0];if(file)await uploadOrderDocument(el.dataset.documentUpload,file);}));
-    document.querySelectorAll('[data-ps-command-form]').forEach(form=>form.addEventListener('submit',async e=>{e.preventDefault();const text=form.querySelector('[data-cat-q]').value;if(currentRoute()==='portal/catalogue'){go('portal/catalogue/all',{searchQuery:text});}await applyIntelligentCommand(text);}));
+    document.querySelectorAll('[data-ps-command-form]').forEach(form=>form.addEventListener('submit',async e=>{e.preventDefault();const text=form.querySelector('[data-cat-q]').value;await applyIntelligentCommand(text);}));
     document.querySelectorAll('[data-ps-select-sku]').forEach(el=>el.addEventListener('click',()=>{intelligent.selected=el.dataset.psSelectSku;intelligent.confirmed=intelligent.selected;applyIntelligentCommand(intelligent.said);}));
     document.querySelectorAll('[data-ps-clarify]').forEach(el=>el.addEventListener('click',()=>applyIntelligentCommand(el.dataset.psClarify==='both'?'gauze':`gauze ${el.dataset.psClarify}`)));
     document.querySelectorAll('[data-ps-sheet-open]').forEach(el=>el.addEventListener('click',()=>{intelligent.sheet=true;renderUi({preserveScroll:true,transition:false});document.querySelector('[data-ps-sheet-close]')?.focus();}));
@@ -3477,7 +3525,7 @@
       resetIntelligentSearch();ui.catalogueQuery='';ui.globalSearch='';
       renderUi({preserveScroll:true,focusSelector:'[data-cat-q]',cursor:0,transition:false});
     }));
-    const cq=document.querySelector('[data-cat-q]'); if(cq)cq.addEventListener('input',e=>{ui.catalogueQuery=e.target.value;ui.globalSearch=e.target.value;if(!e.target.value)resetIntelligentSearch();renderUi({preserveScroll:true,focusSelector:'[data-cat-q]',cursor:e.target.selectionStart,transition:false})});
+    const cq=document.querySelector('[data-cat-q]'); if(cq)cq.addEventListener('input',e=>{intelligent.sequence++;ui.catalogueQuery=e.target.value;ui.globalSearch=e.target.value;clearTimeout(searchTypingTimer);if(!e.target.value){resetIntelligentSearch();updateCatalogueResults();return;}searchTypingTimer=setTimeout(updateCatalogueResults,140);});
     document.querySelectorAll('[data-clinic-need]').forEach(el=>el.addEventListener('click',()=>{ui.catalogueNeed=el.dataset.clinicNeed||'all';render()}));
     document.querySelectorAll('[data-cat-filter]').forEach(el=>el.addEventListener('change',e=>{if(el.dataset.catFilter==='category')ui.catalogueCat=e.target.value;else ui.catalogueFilter=e.target.value;renderUi({preserveScroll:true,transition:false})}));
     const pq=document.querySelector('[data-prod-q]'); if(pq)pq.addEventListener('input',e=>{ui.productQuery=e.target.value;render()});
@@ -3529,6 +3577,7 @@
     const blob=new Blob([csv],{type:'text/csv'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='PSC_Product_Master_Demo.csv';a.click();URL.revokeObjectURL(url);toast('<strong>Exported.</strong> Product master CSV downloaded.');
   }
 
+  window.addEventListener('click',e=>{const target=e.target.closest?.('[data-product-view]');if(target&&product(target.dataset.productView))productSearchMemory().selectedSku=target.dataset.productView;},true);
   window.addEventListener('scroll',onPublicHeaderScroll,{passive:true});
   window.addEventListener('hashchange',render);
   window.addEventListener('popstate',render);
