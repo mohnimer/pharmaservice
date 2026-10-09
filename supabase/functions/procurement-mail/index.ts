@@ -2,6 +2,12 @@ import {draftSender,senderStatus,verifySender,routedMime} from '../_shared/mail-
 import {intakeAction,checkIntakeSend} from '../_shared/mail-intake.ts'
 import {service,admin,json,MAILBOX,check,accessToken,gmail,mime,send,hash,noDemoOrder,email,logAttempt,safeCode,MailError} from '../_shared/psc-mail.ts'
 import {quotePdf} from '../_shared/quote-pdf.ts'
+async function directContact(svc:any,id:string){
+ const c=check(await svc.from('mail_contacts').select('*').eq('id',id).single());
+ if(!c||!email(c.email)||c.status==='bounced')throw new MailError('contact_not_available');
+ if(c.school_id){const s=check(await svc.from('schools').select('account_groups(slug)').eq('id',c.school_id).single());if(s.account_groups?.slug==='psc-demo-group')throw new MailError('demo_mail_disabled');}
+ return c;
+}
 async function recipient(svc:any,o:any){const school=check(await svc.from('schools').select('quote_email,name,campus_name').eq('id',o.school_id).single());let to=school.quote_email;if(!to){const result=await svc.auth.admin.getUserById(o.requested_by);to=result.data?.user?.email}if(!email(to))throw new MailError('verified_customer_recipient_required');return {to,name:[school.name,school.campus_name].filter(Boolean).join(' - ')}}
 async function currentQuote(svc:any,orderId:string){await noDemoOrder(svc,orderId);const q=check(await svc.from('quotes').select('*').eq('order_id',orderId).single());if(!['sent','confirmed'].includes(q.status))throw new MailError('issued_quotation_required');const fp=check(await svc.rpc('psc_mail_quote_fingerprint',{p_order_id:orderId}));return {q,fp}}
 function currentSnapshot(q:any,s:any,fp:string){return s?.commercial_fingerprint===fp&&s.revision_no===q.current_revision&&['subtotal','vat','total','currency','payment_terms','delivery_terms','validity_days','customer_note'].every(k=>String(s.header_snapshot?.[k]??'')===String(q[k]??''))}
@@ -12,6 +18,12 @@ Deno.serve(async req=>{
  try{
   const user=await admin(req,svc),b=await req.json();
   if(b.action==='sender_status')return json({senders:await senderStatus(await accessToken(svc))});
+  if(b.action==='contact_draft'){
+   if(b.confirm_transactional!==true||!['customer','supplier'].includes(b.audience)||!['request_response','account_followup'].includes(b.purpose))throw new MailError('transactional_context_required');
+   if(typeof b.subject!=='string'||!b.subject.trim()||/[\r\n]/.test(b.subject)||b.subject.length>300||typeof b.body_text!=='string'||!b.body_text.trim()||b.body_text.length>30000)throw new MailError('invalid_draft');
+   const c=await directContact(svc,b.contact_id);
+   return json(check(await svc.from('psc_mail_drafts').insert({kind:b.audience==='supplier'?'rfq':'followup',contact_id:c.id,communication_purpose:b.purpose,recipient:c.email,subject:b.subject.trim(),body_text:b.body_text,created_by:user.id}).select('*').single()));
+  }
   if(['intake_source','intake_save','intake_rfq'].includes(b.action))return json(await intakeAction(svc,user,b));
   if(b.action==='link'){
    if(!['customer','supplier'].includes(b.kind))throw new MailError('correspondence_kind_required');await noDemoOrder(svc,b.order_id);
@@ -56,7 +68,11 @@ Deno.serve(async req=>{
   if(b.action!=='send'||b.approve!==true)throw new MailError('explicit_send_approval_required')
   draft=check(await svc.from('psc_mail_drafts').select('*').eq('id',b.draft_id).single());if(draft.status!=='draft')throw new MailError('draft_locked')
   if(draft.kind==='test'&&draft.recipient!==MAILBOX)throw new MailError('test_recipient_locked')
-  if(draft.intake_message_id)await checkIntakeSend(svc,draft);
+  if(draft.contact_id){
+   if(!['rfq','followup'].includes(draft.kind)||!['request_response','account_followup'].includes(draft.communication_purpose)||draft.attachment_path||draft.order_id)throw new MailError('invalid_contact_draft');
+   const c=await directContact(svc,draft.contact_id);if(c.email.toLowerCase()!==draft.recipient.toLowerCase())throw new MailError('customer_recipient_changed');
+  }
+  else if(draft.intake_message_id)await checkIntakeSend(svc,draft);
   else if(['rfq','followup'].includes(draft.kind))await noDemoOrder(svc,draft.order_id)
   let pdf:Uint8Array|undefined;
   if(draft.kind==='quotation'){

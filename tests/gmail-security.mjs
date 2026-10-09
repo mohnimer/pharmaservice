@@ -27,6 +27,17 @@ Deno.test('workflow routing pins From and Reply-To and rejects unknown types',()
  assert(notificationSender('quote_sent')===SALES);assert(notificationSender('portal_order_received')==='info@pharmaservice.ae');let blocked=false;try{draftSender('unknown')}catch{blocked=true}assert(blocked);
 });
 Deno.test('transactional aliases fail closed independently',async()=>{const original=fetch;try{globalThis.fetch=(async()=>Response.json({sendAs:[{sendAsEmail:SALES,verificationStatus:'accepted'},{sendAsEmail:PROCUREMENT,verificationStatus:'pending'}]})) as any;await verifySender('fake',SALES);let blocked=false;try{await verifySender('fake',PROCUREMENT)}catch(e){blocked=safeCode(e)==='procurement_alias_not_ready'}assert(blocked)}finally{globalThis.fetch=original}});
+Deno.test('individual email requires a business purpose and current contact recipient',async()=>{
+ set(svc());writes=0;const invalid=await procurement(request({action:'contact_draft',audience:'customer',purpose:'promotion',confirm_transactional:true}));assert((await invalid.json()).error==='transactional_context_required');assert(writes===0);
+ set(svc({draft:{id:'d',status:'draft',kind:'followup',contact_id:'contact',communication_purpose:'request_response',recipient:'changed@example.com'}}));
+ const changed=await procurement(request({action:'send',draft_id:'d',approve:true}));assert((await changed.json()).error==='customer_recipient_changed');assert(writes===0);
+});
+Deno.test('individual business email accepts a non-subscriber only after approval and cannot resend',async()=>{
+ const draft={id:'direct',status:'draft',kind:'followup',contact_id:'test-contact',communication_purpose:'request_response',recipient:'buyer@example.com',subject:'Your request',body_text:'Please confirm quantities',updated_at:'2026-10-09'};
+ set(svc({draft}));const original=fetch;let sends=0;
+ globalThis.fetch=(async(url:any,init:any)=>{if(String(url).includes('messages/send')){sends++;const raw=atob(JSON.parse(init.body).raw.replace(/-/g,'+').replace(/_/g,'/'));assert(raw.includes('From: Pharma Service <sales@pharmaservice.ae>'));return Response.json({id:'accepted-id',threadId:'thread'})}return Response.json(String(url).includes('settings/sendAs')?{sendAs:[{sendAsEmail:SALES,verificationStatus:'accepted'}]}:{access_token:'fresh'})}) as any;
+ try{const first=await procurement(request({action:'send',draft_id:'direct',approve:true}));assert((await first.json()).accepted_by_gmail===true);const second=await procurement(request({action:'send',draft_id:'direct',approve:true}));assert((await second.json()).error==='draft_locked');assert(sends===1)}finally{globalThis.fetch=original}
+});
 Deno.test('marketing MIME pins alias, preserves transactional sender and includes unsubscribe headers',()=>{
  const c={sender_email:OUTREACH,subject:'PSC newsletter',intro:'Hello <script>bad</script>',cta_label:'Read',cta_url:'https://pharmaservice.ae/workshop',template:'workshop'};
  const raw=marketingMime(c,{email_snapshot:'subscriber@example.com'},'11111111-1111-4111-8111-111111111111','test-attempt');
@@ -54,7 +65,7 @@ Deno.test('obsolete intake draft and external test recipient are blocked',async(
 let writes=0,sendCalls=0;
 const request=(body:any,authorized=true)=>new Request('https://example.test',{method:'POST',headers:authorized?{Authorization:'Bearer valid'}:{},body:JSON.stringify(body)});
 function svc(options:any={}){
- const rows:any={profiles:{is_psc_admin:options.admin!==false},memberships:options.demo?[{account_groups:{slug:'psc-demo-group'}}]:[],psc_mail_connection:{status:'connected'},psc_mail_drafts:options.draft,orders:{id:'order',account_groups:{slug:options.demo?'psc-demo-group':'live'}},notification_outbox:options.notification,institutional_enquiries:{organization:'Isolated school',requirement:'Test gauze'},mail_contacts:{id:'test-contact'},quotes:{status:'sent',current_revision:2,order_id:'order'},quote_snapshots:{revision_no:1,commercial_fingerprint:'old'}};
+ const rows:any={profiles:{is_psc_admin:options.admin!==false},memberships:options.demo?[{account_groups:{slug:'psc-demo-group'}}]:[],psc_mail_connection:{status:'connected'},psc_mail_drafts:options.draft,orders:{id:'order',account_groups:{slug:options.demo?'psc-demo-group':'live'}},notification_outbox:options.notification,institutional_enquiries:{organization:'Isolated school',requirement:'Test gauze'},mail_contacts:{id:'test-contact',email:'buyer@example.com',status:'paused'},quotes:{status:'sent',current_revision:2,order_id:'order'},quote_snapshots:{revision_no:1,commercial_fingerprint:'old'}};
  return {auth:{getUser:async()=>({data:{user:{id:'admin'}},error:null})},rpc:async(name:string)=>({data:name==='psc_mail_worker_valid'?false:name==='psc_mail_rate'?true:name==='psc_mail_secret'?'fake-refresh':name==='psc_mail_quote_fingerprint'?'current':null,error:null}),from:(name:string)=>{
   const chain:any={};for(const method of ['select','eq','in','order','limit','single','maybeSingle'])chain[method]=()=>chain;
   let mutation:any=null;for(const method of ['update','insert','upsert'])chain[method]=(value:any)=>{writes++;mutation=value;return chain};

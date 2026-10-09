@@ -35,6 +35,7 @@
     "current/behaviour/procurement-mail.js",
     "current/behaviour/workstation.js",
     "current/behaviour/outreach.js",
+    "current/behaviour/direct-correspondence.js",
     "current/behaviour/interaction-feedback.js",
     "current/behaviour/home-community.js",
     "current/behaviour/public-copy.js",
