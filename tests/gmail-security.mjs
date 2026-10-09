@@ -4,12 +4,13 @@ import {join} from 'node:path';
 import {spawnSync} from 'node:child_process';
 // Keep production source intact; replace only external adapters in isolated tests.
 const root=mkdtempSync(join(tmpdir(),'psc-mail-test-'));
-for(const path of ['_shared/psc-mail.ts','_shared/quote-pdf.ts','dispatch-notification/index.ts','psc-gmail-oauth/index.ts','poll-procurement-mail/index.ts','procurement-mail/index.ts','send-mail-campaign/index.ts','mail-unsubscribe/index.ts']){
+for(const path of ['_shared/mail-intake.ts','_shared/psc-mail.ts','_shared/quote-pdf.ts','dispatch-notification/index.ts','psc-gmail-oauth/index.ts','poll-procurement-mail/index.ts','procurement-mail/index.ts','send-mail-campaign/index.ts','mail-unsubscribe/index.ts']){
  const file=join(root,path);mkdirSync(join(file,'..'),{recursive:true});
  writeFileSync(file,readFileSync('supabase/functions/'+path,'utf8').replace(/import \{\s*createClient\s*\} from 'https:\/\/esm.sh\/[^']+'/g,'const createClient:any=()=> (globalThis as any).testService').replace(/import \{PDFDocument,StandardFonts,rgb\} from '[^']+'/,'const PDFDocument:any={},StandardFonts:any={},rgb:any=()=>({})'));
 }
 writeFileSync(join(root,'security_test.ts'),String.raw`
 import {admin,accessToken,gmail,mime,MailError,safeCode} from './_shared/psc-mail.ts';
+import {validateIntake,checkIntakeSend,intakeAction} from './_shared/mail-intake.ts';
 function assert(v:unknown,label='assertion failed'){if(!v)throw new Error(label)}
 let handler:any;Deno.serve=((fn:any)=>{handler=fn;return {}}) as any;
 await import('./procurement-mail/index.ts');const procurement=handler;
@@ -17,6 +18,19 @@ await import('./psc-gmail-oauth/index.ts');const oauth=handler;
 await import('./dispatch-notification/index.ts');const dispatch=handler;
 await import('./poll-procurement-mail/index.ts');const poll=handler;
 await import('./mail-unsubscribe/index.ts');const unsubscribe=handler;
+
+Deno.test('intake requires reviewed quantities and decisions',()=>{
+ const base={customer_name:'Buyer',institution:'Test School',customer_email:'buyer@example.com',source_text:'Gloves 10 boxes',is_test:true,reviewed:true,lines:[{id:'1',original:'Gloves 10 boxes',description:'Gloves',quantity:10,unit:'boxes',specification:'Confirm size',sku:'',product_name:'',decision:'pending'}]};
+ let blocked=false;try{validateIntake(base)}catch{blocked=true}assert(blocked);
+ base.lines[0].decision='sourcing';assert(validateIntake(base).lines.length===1);
+ base.lines[0].quantity=0;blocked=false;try{validateIntake(base)}catch{blocked=true}assert(blocked);
+});
+Deno.test('obsolete intake draft and external test recipient are blocked',async()=>{
+ const s:any={from:()=>{const c:any={select:()=>c,eq:()=>c,single:async()=>({data:{reviewed:true,revision:2,is_test:true}})};return c}};
+ for(const d of [{intake_revision:1,recipient:'info@pharmaservice.ae'},{intake_revision:2,recipient:'supplier@example.com'}]){let blocked=false;try{await checkIntakeSend(s,d)}catch{blocked=true}assert(blocked)}
+ await checkIntakeSend(s,{intake_revision:2,recipient:'info@pharmaservice.ae'});
+});
+
 let writes=0,sendCalls=0;
 const request=(body:any,authorized=true)=>new Request('https://example.test',{method:'POST',headers:authorized?{Authorization:'Bearer valid'}:{},body:JSON.stringify(body)});
 function svc(options:any={}){

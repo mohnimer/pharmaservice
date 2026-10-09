@@ -1,3 +1,4 @@
+import {intakeAction,checkIntakeSend} from '../_shared/mail-intake.ts'
 import {service,admin,json,MAILBOX,check,accessToken,gmail,mime,send,hash,noDemoOrder,email,logAttempt,safeCode,MailError} from '../_shared/psc-mail.ts'
 import {quotePdf} from '../_shared/quote-pdf.ts'
 async function recipient(svc:any,o:any){const school=check(await svc.from('schools').select('quote_email,name,campus_name').eq('id',o.school_id).single());let to=school.quote_email;if(!to){const result=await svc.auth.admin.getUserById(o.requested_by);to=result.data?.user?.email}if(!email(to))throw new MailError('verified_customer_recipient_required');return {to,name:[school.name,school.campus_name].filter(Boolean).join(' - ')}}
@@ -9,6 +10,7 @@ Deno.serve(async req=>{
  const svc=service();let draft:any=null,attemptedSend=false;
  try{
   const user=await admin(req,svc),b=await req.json();
+  if(['intake_source','intake_save','intake_rfq'].includes(b.action))return json(await intakeAction(svc,user,b));
   if(b.action==='link'){
    if(!['customer','supplier'].includes(b.kind))throw new MailError('correspondence_kind_required');await noDemoOrder(svc,b.order_id);
    check(await svc.from('psc_mail_messages').update({order_id:b.order_id,kind:b.kind,review_status:'linked'}).eq('id',b.message_id).eq('direction','inbound'));return json({linked:true})
@@ -52,7 +54,8 @@ Deno.serve(async req=>{
   if(b.action!=='send'||b.approve!==true)throw new MailError('explicit_send_approval_required')
   draft=check(await svc.from('psc_mail_drafts').select('*').eq('id',b.draft_id).single());if(draft.status!=='draft')throw new MailError('draft_locked')
   if(draft.kind==='test'&&draft.recipient!==MAILBOX)throw new MailError('test_recipient_locked')
-  if(['rfq','followup'].includes(draft.kind))await noDemoOrder(svc,draft.order_id)
+  if(draft.intake_message_id)await checkIntakeSend(svc,draft);
+  else if(['rfq','followup'].includes(draft.kind))await noDemoOrder(svc,draft.order_id)
   let pdf:Uint8Array|undefined;
   if(draft.kind==='quotation'){
    const {q,fp}=await currentQuote(svc,draft.order_id);if(fp!==draft.quote_fingerprint)throw new MailError('obsolete_quotation');
@@ -60,8 +63,8 @@ Deno.serve(async req=>{
    const c=await recipient(svc,await noDemoOrder(svc,draft.order_id));if(c.to.toLowerCase()!==draft.recipient.toLowerCase())throw new MailError('customer_recipient_changed');
    const file=check(await svc.storage.from('psc-correspondence').download(draft.attachment_path));pdf=new Uint8Array(await file.arrayBuffer());if(await hash(pdf)!==draft.attachment_sha256)throw new MailError('quotation_attachment_changed')
   }
-  const token=await accessToken(svc),claimed=check(await svc.from('psc_mail_drafts').update({status:'sending',approved_by:user.id,approved_at:new Date().toISOString(),updated_at:new Date().toISOString()}).eq('id',draft.id).eq('status','draft').eq('updated_at',draft.updated_at).select('*').maybeSingle());if(!claimed)throw new MailError('draft_changed_or_claimed')
-  draft=claimed;await logAttempt(svc,null,draft.id,'started');attemptedSend=true;
+  const token=await accessToken(svc),claimed=draft.intake_message_id?check(await svc.rpc('psc_claim_intake_draft',{p_draft:draft.id,p_updated_at:draft.updated_at,p_user:user.id})):check(await svc.from('psc_mail_drafts').update({status:'sending',approved_by:user.id,approved_at:new Date().toISOString(),updated_at:new Date().toISOString()}).eq('id',draft.id).eq('status','draft').eq('updated_at',draft.updated_at).select('*').maybeSingle());if(!claimed)throw new MailError('draft_changed_or_claimed')
+  draft=Array.isArray(claimed)?claimed[0]:claimed;if(!draft?.id)throw new MailError('draft_changed_or_claimed');await logAttempt(svc,null,draft.id,'started');attemptedSend=true;
   const result=await send(token,mime({to:draft.recipient,subject:draft.subject,text:draft.body_text,id:'draft-'+draft.id,pdf}));
   check(await svc.from('psc_mail_drafts').update({status:'accepted',provider_message_id:result.id,accepted_at:new Date().toISOString(),last_error:null}).eq('id',draft.id));
   await logAttempt(svc,null,draft.id,'gmail_accepted',null,result.id);
