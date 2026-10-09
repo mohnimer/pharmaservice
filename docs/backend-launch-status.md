@@ -12,18 +12,15 @@
 - Atomic admin status RPC updates request, quotation and audit records; failed checks leave status unchanged. Issuance generates a permanent quote reference and records the existing immutable quote snapshot.
 - Downloadable supplier RFQ draft reuses requested items and quantities. Accounting handoff CSV reuses request, quotation and funding references. Customer text is escaped against spreadsheet formula execution. Downloads do not send anything or create ERPNext entries.
 
-## Release state — not yet deployed
+## Release state — deployed 9 October 2026
 
-Database tables, functions and policies have been applied. The browser changes remain in the local branch. The production status trigger is **disabled pending matching frontend deployment**, so the existing live interface does not acquire a blocker without an evidence-entry screen. Database tests temporarily enable the trigger inside rolled-back transactions. No test orders, evidence or notifications were retained.
+PR #19 merged to production as `846de0ce3a3e2dff8844ea899bdf3c6acf2be11f`. Vercel reported a successful production build through its GitHub integration. The JavaScript and stylesheet fetched from `https://pharmaservice.ae` exactly match the tested local build (SHA-256 checks).
 
-Release sequence:
+The commercial release gate is now enabled through migration `enable_commercial_release_gate`. The full database journey was rerun successfully inside a rolled-back transaction before activation. No test orders, evidence or notifications were retained.
 
-1. Push this reviewed branch to the existing repository and deploy a Vercel preview.
-2. Smoke-test real admin and customer access, public enquiries, document downloads, quote PDF and email handling on that deployment.
-3. Promote the matching frontend, then apply `alter table public.orders enable trigger commercial_release_gate;` through a recorded Supabase migration. Confirm the trigger is enabled.
-4. Run a controlled request-to-accepted-delivery pilot before broad promotion. If frontend rollback is required, disable the trigger first to restore compatibility with the prior admin interface.
+The Vercel connector's deployment-list API returned 403; no authenticated CLI was available. Deployment succeeded through the established GitHub integration. The remote-browser check encountered ERR_EMPTY_RESPONSE, so authenticated live-browser acceptance has not been certified. Local mobile/desktop browser checks and live asset matching passed.
 
-No push/deploy was attempted again after the earlier automatic approval rejection. Explicit approval to send the code to `mohnimer/pharmaservice` and deploy is still needed.
+If frontend rollback is required, disable `commercial_release_gate` before restoring the previous admin interface. A controlled live operational pilot and email validation are still required before broad promotion.
 
 ## Validation
 
