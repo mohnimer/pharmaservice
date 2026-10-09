@@ -8,6 +8,6 @@ verify_jwt = false
 [functions.procurement-mail]
 verify_jwt = false
 [functions.send-mail-campaign]
-verify_jwt = true
+verify_jwt = false
 [functions.mail-unsubscribe]
 verify_jwt = false

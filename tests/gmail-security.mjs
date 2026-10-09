@@ -4,13 +4,14 @@ import {join} from 'node:path';
 import {spawnSync} from 'node:child_process';
 // Keep production source intact; replace only external adapters in isolated tests.
 const root=mkdtempSync(join(tmpdir(),'psc-mail-test-'));
-for(const path of ['_shared/mail-intake.ts','_shared/psc-mail.ts','_shared/quote-pdf.ts','dispatch-notification/index.ts','psc-gmail-oauth/index.ts','poll-procurement-mail/index.ts','procurement-mail/index.ts','send-mail-campaign/index.ts','mail-unsubscribe/index.ts']){
+for(const path of ['_shared/outreach.ts','_shared/mail-intake.ts','_shared/psc-mail.ts','_shared/quote-pdf.ts','dispatch-notification/index.ts','psc-gmail-oauth/index.ts','poll-procurement-mail/index.ts','procurement-mail/index.ts','send-mail-campaign/index.ts','mail-unsubscribe/index.ts']){
  const file=join(root,path);mkdirSync(join(file,'..'),{recursive:true});
  writeFileSync(file,readFileSync('supabase/functions/'+path,'utf8').replace(/import \{\s*createClient\s*\} from 'https:\/\/esm.sh\/[^']+'/g,'const createClient:any=()=> (globalThis as any).testService').replace(/import \{PDFDocument,StandardFonts,rgb\} from '[^']+'/,'const PDFDocument:any={},StandardFonts:any={},rgb:any=()=>({})'));
 }
 writeFileSync(join(root,'security_test.ts'),String.raw`
 import {admin,accessToken,gmail,mime,MailError,safeCode} from './_shared/psc-mail.ts';
 import {validateIntake,checkIntakeSend,intakeAction} from './_shared/mail-intake.ts';
+import {marketingMime,verifyAlias,eligible,OUTREACH} from './_shared/outreach.ts';
 function assert(v:unknown,label='assertion failed'){if(!v)throw new Error(label)}
 let handler:any;Deno.serve=((fn:any)=>{handler=fn;return {}}) as any;
 await import('./procurement-mail/index.ts');const procurement=handler;
@@ -18,6 +19,19 @@ await import('./psc-gmail-oauth/index.ts');const oauth=handler;
 await import('./dispatch-notification/index.ts');const dispatch=handler;
 await import('./poll-procurement-mail/index.ts');const poll=handler;
 await import('./mail-unsubscribe/index.ts');const unsubscribe=handler;
+await import('./send-mail-campaign/index.ts');const campaigns=handler;
+
+Deno.test('marketing MIME pins alias, preserves transactional sender and includes unsubscribe headers',()=>{
+ const c={sender_email:OUTREACH,subject:'PSC newsletter',intro:'Hello <script>bad</script>',cta_label:'Read',cta_url:'https://pharmaservice.ae/workshop',template:'workshop'};
+ const raw=marketingMime(c,{email_snapshot:'subscriber@example.com'},'11111111-1111-4111-8111-111111111111','test-attempt');
+ assert(raw.includes('From: Pharma Service <outreach@pharmaservice.ae>'));assert(raw.includes('Reply-To: outreach@pharmaservice.ae'));assert(raw.includes('List-Unsubscribe-Post: List-Unsubscribe=One-Click'));
+ assert(mime({to:'info@pharmaservice.ae',subject:'Quote',text:'Test',id:'q'}).includes('From: Pharma Service <info@pharmaservice.ae>'));
+ for(const change of [{sender_email:'wrong@example.com'},{subject:'Injected\r\nBcc: victim@example.com'},{cta_url:'javascript:alert(1)'},{cta_url:'https://evil.example.com'}]){let blocked=false;try{marketingMime({...c,...change},{email_snapshot:'subscriber@example.com'},null,'id')}catch{blocked=true}assert(blocked)}
+});
+Deno.test('only active subscribed recipients qualify; adding a contact is insufficient',()=>{
+ assert(eligible({status:'active',marketing_basis:'manual_permission'}));for(const c of [{status:'unsubscribed',marketing_basis:'manual_permission'},{status:'active',marketing_basis:'existing_customer'},{status:'active',marketing_basis:'manual_permission',unsubscribed_at:'today'},{status:'paused',marketing_basis:'requested_updates'}])assert(!eligible(c));
+});
+Deno.test('alias must exist and be verified, using existing readonly scope',async()=>{const original=fetch;try{for(const status of ['pending','accepted']){globalThis.fetch=(async()=>Response.json({sendAs:[{sendAsEmail:OUTREACH,verificationStatus:status}]})) as any;let blocked=false;try{await verifyAlias('fake')}catch{blocked=true}assert(blocked===(status==='pending'))}}finally{globalThis.fetch=original}});
 
 Deno.test('intake requires reviewed quantities and decisions',()=>{
  const base={customer_name:'Buyer',institution:'Test School',customer_email:'buyer@example.com',source_text:'Gloves 10 boxes',is_test:true,reviewed:true,lines:[{id:'1',original:'Gloves 10 boxes',description:'Gloves',quantity:10,unit:'boxes',specification:'Confirm size',sku:'',product_name:'',decision:'pending'}]};
@@ -43,7 +57,9 @@ function svc(options:any={}){
 }
 const set=(v:any)=>(globalThis as any).testService=v;
 Deno.env.set('PSC_GOOGLE_OAUTH_CLIENT_ID','test-client');Deno.env.set('PSC_GOOGLE_OAUTH_CLIENT_SECRET','test-secret');
-Deno.test('all sending, reading and account endpoints reject anonymous calls without writes',async()=>{set(svc());writes=0;for(const fn of [procurement,oauth,dispatch,poll]){const r=await fn(request({action:'send',approve:true},false));assert(r.status===401,'anonymous endpoint accepted');}assert(writes===0,'anonymous call mutated records');});
+Deno.test('all sending, reading and account endpoints reject anonymous calls without writes',async()=>{set(svc());writes=0;for(const fn of [procurement,oauth,dispatch,poll,campaigns]){const r=await fn(request({action:'send',approve:true},false));assert(r.status===401,'anonymous endpoint accepted');}assert(writes===0,'anonymous call mutated records');});
+Deno.test('campaign worker rejects caller without worker secret; setup and test require explicit approval',async()=>{set(svc());writes=0;const tick=await campaigns(request({action:'tick'}));assert(tick.status===401);const test=await campaigns(request({action:'test'}));assert((await test.json()).error==='explicit_test_approval_required');const enable=await campaigns(request({action:'enable'}));assert((await enable.json()).error==='setup_confirmation_required');assert(writes===0)});
+Deno.test('one-click unsubscribe supports form POST without opening website',async()=>{set(svc());writes=0;const r=await unsubscribe(new Request('https://example.test?token=11111111-1111-4111-8111-111111111111',{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded'},body:'List-Unsubscribe=One-Click'}));assert((await r.json()).ok===true);assert(writes===1)});
 Deno.test('ordinary user and demo administrator cannot send',async()=>{for(const opts of [{admin:false},{demo:true}]){let rejected=false;try{await admin(request({}),svc(opts))}catch(e){rejected=['forbidden','demo_mail_disabled'].includes(safeCode(e))}assert(rejected);}});
 Deno.test('quotation send requires explicit email approval before reading draft',async()=>{set(svc());writes=0;const r=await procurement(request({action:'send',draft_id:'draft'}));assert((await r.json()).error==='explicit_send_approval_required');assert(writes===0);});
 Deno.test('obsolete quotation blocked before Gmail or record claim',async()=>{set(svc({draft:{id:'draft',status:'draft',kind:'quotation',order_id:'order',quote_fingerprint:'old'}}));writes=0;const r=await procurement(request({action:'send',draft_id:'draft',approve:true}));assert((await r.json()).error==='obsolete_quotation');assert(writes===0&&sendCalls===0);});
