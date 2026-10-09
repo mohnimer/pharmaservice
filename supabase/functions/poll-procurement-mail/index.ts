@@ -15,8 +15,8 @@ Deno.serve(async req=>{
    if(check(await svc.from('psc_mail_messages').select('id').eq('gmail_message_id',item.id).maybeSingle()))continue
    const metadata=await gmail(token,'messages/'+item.id+'?format=metadata&metadataHeaders=From&metadataHeaders=To&metadataHeaders=Subject&metadataHeaders=Date')
    if((metadata.labelIds||[]).includes('SENT'))continue
-   const previous=check(await svc.from('psc_mail_messages').select('order_id,enquiry_id,kind').eq('gmail_thread_id',item.threadId).eq('review_status','linked').limit(2))||[]
-   const links=new Set(previous.filter((x:any)=>x.order_id||x.enquiry_id).map((x:any)=>String(x.order_id||x.enquiry_id)));const linked=links.size===1?previous.find((x:any)=>x.order_id||x.enquiry_id):null;
+   const previous=check(await svc.from('psc_mail_messages').select('order_id,enquiry_id,kind').eq('gmail_thread_id',item.threadId).eq('review_status','linked').limit(101))||[]
+   const links=new Set(previous.filter((x:any)=>x.order_id||x.enquiry_id).map((x:any)=>String(x.order_id||x.enquiry_id)));const linked=links.size===1&&previous.length<101?previous.find((x:any)=>x.order_id||x.enquiry_id):null;
    // Full content is imported only after an administrator labels it PSC-Procurement.
    const message=await gmail(token,'messages/'+item.id+'?format=full'),raw=await gmail(token,'messages/'+item.id+'?format=raw');
    const rawBytes=unb64(raw.raw);if(rawBytes.length>10*1024*1024)throw new MailError('message_size_exceeded')

@@ -74,6 +74,7 @@ Secure credential configuration and redirect registration are prerequisites; the
 | Gmail failure | Isolated 429 leaves associated request intact and notification recoverable; 503/timeout outcomes held uncertain |
 | Demo isolation | Isolated demo administrator denied; existing browser suite uses mocked traffic and checks demo restrictions; actual account acceptance outstanding |
 | OAuth replay/rate | Production rollback test consumes state once and denies second rate slot |
+| Actual quotation PDF generation | Local production generator executed with real pdf-lib; rendered PDF checked, totals/bank details present, internal cost snapshot excluded |
 | Existing site | Build and three shell tests pass; commercial inbox browser tests pass at 390/1440 px |
 
 Commands: `node tests/gmail-security.mjs`, `PSC_CHROME=/path/to/chromium node tests/gmail-browser.mjs`, existing `npm test` and commercial-inbox suite. Local Deno external dependency fetch was blocked; the isolated harness substitutes only external adapters while type-checking and executing source handlers. Actual dependencies successfully bundled during Supabase deployment. Database fixtures were rolled back; browser fixtures remain local.
@@ -99,3 +100,7 @@ Commands: `node tests/gmail-security.mjs`, `PSC_CHROME=/path/to/chromium node te
 Only **after actual OAuth send, refresh and reconnect tests pass**, inspect remaining uses of GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY and PSC_MAIL_SENDER, remove obsolete secrets, revoke psc-mailer's unnecessary domain-wide delegation and retire the account if unused elsewhere. Current mail source no longer requires those credentials. No Google permissions were removed, and key-creation policy remains unchanged.
 
 References: [Google web OAuth](https://developers.google.com/identity/protocols/oauth2/web-server), [security guidance](https://developers.google.com/identity/protocols/oauth2/resources/best-practices), [Gmail list](https://developers.google.com/workspace/gmail/api/reference/rest/v1/users.messages/list), [Gmail send](https://developers.google.com/workspace/gmail/api/reference/rest/v1/users.messages/send).
+
+## Deployment record
+
+Production migration applied and all six Edge Functions ACTIVE. OAuth v1, dispatcher v4, procurement-mail v2, campaign/unsubscribe v3; polling deployed with conservative thread association. Source release `856245e647ed53263a491e6f5477695660dcd451` reported successful Vercel deployment. Live protected-function HTTP tests returned the expected authorization failures; no Gmail send was attempted. Browser correspondence tests passed at 390 and 1440 pixels.
