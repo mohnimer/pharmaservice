@@ -1,6 +1,6 @@
 # PSC Google Workspace procurement communications — 9 October 2026
 
-**Backend deployed; Google credential configuration, owner consent and real Gmail acceptance tests remain outstanding. Mail delivery is not yet verified.** No real emails, campaigns or customer orders were generated during these tests.
+**Backend deployed; Private worker transport activation, Google credential configuration, owner consent and real Gmail acceptance tests remain outstanding. Mail delivery is not yet verified.** No real emails, campaigns or customer orders were generated during these tests.
 
 ## Infrastructure audit
 
@@ -18,7 +18,7 @@ Vault was initially empty. Edge environment secret **names could not be inspecte
 
 - Migration `20261009105227_gmail_procurement_communications.sql`: connection metadata, hashed single-use OAuth state, mail messages, drafts, attempts and rate slots; all new tables have RLS. Ordinary users cannot execute secret/worker RPCs or access correspondence.
 - Vault encrypts refresh token as `psc_gmail_refresh`; internal worker token is independently generated as `psc_mail_worker`. Neither is returned to frontend callers.
-- Existing outbox gains attempt, acceptance and retry timestamps, approval fields, held/uncertain states. Its webhook now authenticates and isolates errors from request persistence. Five-minute `psc-procurement-mail` cron processes bounded notifications and one inbound page only while connected. Interrupted sends become uncertain.
+- Existing outbox gains attempt, acceptance and retry timestamps, approval fields, held/uncertain states. Notifications stay queued independently of request persistence; the private scheduled worker authenticates its calls. Five-minute `psc-procurement-mail` cron processes up to three due notifications and one inbound page only while connected. Interrupted sends become uncertain.
 - psc-gmail-oauth: verified admin POST; single-use ten-minute callback state; server code exchange; exact mailbox identity verification; offline consent; safe revoked-token reconnection state.
 - dispatch-notification: OAuth refresh, conditional send claims, safe failure logs, three bounded attempts with five-minute retry delay. Unknown send outcomes require reconciliation. Gmail acceptance is distinct from actual delivery. Unapproved quotation notifications are held; approved PDF communication supersedes them.
 - poll-procurement-mail: imports administrator-labelled mail, original EML and private attachments; unique Gmail ID prevents repeat imports. Existing reviewed thread associations may link replies, otherwise mail enters review. Customer requirements are not overwritten.
@@ -28,11 +28,13 @@ Vault was initially empty. Edge environment secret **names could not be inspecte
 
 ## Administrator configuration
 
-1. Google Cloud project **tenacious-veld-510710-j9** → Google Auth Platform → Clients → existing **PSC Procurement Backend** web application. Register this redirect URI exactly, without a trailing slash:
+1. In Supabase Database → Extensions enable **http** in the extensions schema. Connector activation returned invalid/expired requestState errors. The private worker checks/restricts function permissions before sending and fails safely when unavailable. The platform-owned pg_net queue grants could not be revoked by the project role; mail no longer uses that shared queue. Scheduled notifications may wait up to five minutes. Direct administrator sends do not use this database transport.
+
+2. Google Cloud project **tenacious-veld-510710-j9** → Google Auth Platform → Clients → existing **PSC Procurement Backend** web application. Register this redirect URI exactly, without a trailing slash:
 
    `https://ewewkojlsgqvcqarmpgr.supabase.co/functions/v1/psc-gmail-oauth`
 
-2. In [Supabase Edge Function secrets](https://supabase.com/dashboard/project/ewewkojlsgqvcqarmpgr/functions/secrets), enter directly:
+3. In [Supabase Edge Function secrets](https://supabase.com/dashboard/project/ewewkojlsgqvcqarmpgr/functions/secrets), enter directly:
 
    | Secret name | Source |
    | --- | --- |
@@ -41,9 +43,9 @@ Vault was initially empty. Edge environment secret **names could not be inspecte
 
    Do not transmit values in chat, screenshots, GitHub, frontend code or commands that print them. Supabase supplies SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY at runtime. Refresh and worker secrets are managed inside Vault.
 
-3. Keep the audience Internal. Requested scopes are **gmail.send** and **gmail.readonly**. gmail.compose is unnecessary because drafts stay in PSC's private database; the code does not request it. Workspace API controls must permit this existing app if consent is restricted. No new client, extra Gmail scopes or service-account key is needed.
-4. Sign in to [PSC admin requests](https://pharmaservice.ae/#admin/requests), choose **Connect / reconnect Google**, and complete consent as **info@pharmaservice.ae**. The server rejects a different mailbox even if account-selection hints are ignored.
-5. Confirm connected status; prepare internal test draft, inspect it, tick approval and send. Verify Gmail Sent, the PSC accepted-message record and actual receipt at info@. Acceptance alone is not delivery confirmation.
+4. Keep the audience Internal. Requested scopes are **gmail.send** and **gmail.readonly**. gmail.compose is unnecessary because drafts stay in PSC's private database; the code does not request it. Workspace API controls must permit this existing app if consent is restricted. No new client, extra Gmail scopes or service-account key is needed.
+5. Sign in to [PSC admin requests](https://pharmaservice.ae/#admin/requests), choose **Connect / reconnect Google**, and complete consent as **info@pharmaservice.ae**. The server rejects a different mailbox even if account-selection hints are ignored.
+6. Confirm connected status; prepare internal test draft, inspect it, tick approval and send. Verify Gmail Sent, the PSC accepted-message record and actual receipt at info@. Acceptance alone is not delivery confirmation.
 
 Secure credential configuration and redirect registration are prerequisites; the owner's Google consent is the only manual authorization step after configuration. No passwords or tokens should be shared with the builder.
 
@@ -91,7 +93,7 @@ Commands: `node tests/gmail-security.mjs`, `PSC_CHROME=/path/to/chromium node te
 
 ## Remaining launch blockers, ranked
 
-1. **Transactional:** configure current OAuth replacement credential and redirect, then complete owner consent. Working production notification delivery cannot yet be confirmed.
+1. **Transactional:** enable the private worker http transport, then configure current OAuth replacement credential and redirect, then complete owner consent. Working production notification delivery cannot yet be confirmed.
 2. **Acceptance:** approved internal send plus actual saved-request notification; verify Sent/receipt/history, refresh and revocation/reconnect.
 3. **Procurement correspondence:** labelled RFQ, attachment, reply and approved/current quotation PDF tests against controlled records before broad operation.
 4. **Operational:** review historical snapshots, size limits and non-Latin PDF handling; customer acknowledgment needs a separately approved template/policy.
@@ -104,3 +106,5 @@ References: [Google web OAuth](https://developers.google.com/identity/protocols/
 ## Deployment record
 
 Production migration applied and all six Edge Functions ACTIVE. OAuth v1, dispatcher v4, procurement-mail v2, campaign/unsubscribe v3; polling deployed with conservative thread association. Source release `856245e647ed53263a491e6f5477695660dcd451` reported successful Vercel deployment. Live protected-function HTTP tests returned the expected authorization failures; no Gmail send was attempted. Browser correspondence tests passed at 390 and 1440 pixels.
+
+Transport security migrations: `20261009112732_restrict_internal_mail_transport_queue.sql` attempted to revoke platform-owned grants but verification showed they unchanged; `20261009113011_isolate_mail_worker_transport.sql` therefore removed all mail use of that queue. `20261009120937_verify_private_mail_transport.sql` adds activation/permission checks and safe operational errors. Production checks confirm private transport cannot be called by anon/authenticated, webhook and cron contain no net.http_post, and missing transport returns false. Actual private HTTP request remains untested until extension activation. The worker token was not read or copied during this check; no customer events were pending.
