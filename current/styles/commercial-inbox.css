@@ -1,0 +1,19 @@
+[data-commercial-inbox]{margin-bottom:24px}
+.commercialInboxFilters{margin:16px 0}.commercialInboxFilters select{margin-left:8px;padding:10px;font:inherit}
+.commercialInboxCard{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;border:1px solid #d5dad6;border-radius:16px;padding:24px;margin:14px 0;background:#fff}
+.commercialInboxCard.overdue{border-left:4px solid #a54d32}
+.commercialInboxCard h3{font-size:20px;font-weight:500;overflow-wrap:anywhere}
+.commercialInboxCard p,.commercialInboxCard label,.commercialInboxCard summary{font-size:14px;line-height:1.6;overflow-wrap:anywhere}
+.commercialRequirement{white-space:pre-wrap}
+.commercialInboxCard form label{display:block;margin-bottom:12px}
+.commercialInboxCard input:not([type=checkbox]){display:block;box-sizing:border-box;width:100%;min-width:0;padding:10px;border:1px solid #c9d1cc;border-radius:8px;font:inherit}
+.commercialInboxFields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.commercialInboxCheck{display:flex!important;align-items:center;gap:8px}
+@media(max-width:700px){.commercialInboxCard{grid-template-columns:minmax(0,1fr);padding:16px;gap:12px}.commercialInboxFields{grid-template-columns:minmax(0,1fr)}.commercialInboxFilters label{display:grid;gap:8px}.commercialInboxFilters select{margin:0}}
+
+.commercialEvidence{grid-column:1 / -1;border-top:1px solid var(--line,#ddd);padding-top:16px}.commercialEvidence form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.commercialEvidence input{width:100%;box-sizing:border-box}.commercialEvidence .commercialInboxCheck,.commercialEvidence [role="status"]{grid-column:1 / -1}@media(max-width:700px){.commercialEvidence form{grid-template-columns:1fr}}
+
+.commercialExports{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:10px}.commercialExports p{width:100%}
+.commercialEvidence input[type=checkbox]{width:auto;flex:0 0 auto;margin:0}.commercialEvidence .commercialInboxCheck{align-items:flex-start}.commercialInboxCheck input[type=checkbox]{margin-top:5px}[data-commercial-inbox] [data-inbox-refresh]{min-height:40px;padding:8px 16px}
+
+.bankTransferInstructions{margin-top:20px}.bankTransferInstructions dl{display:grid;gap:12px}.bankTransferInstructions dl div{display:grid;grid-template-columns:130px minmax(0,1fr);gap:12px}.bankTransferInstructions dt{font-weight:500}.bankTransferInstructions dd{margin:0;overflow-wrap:anywhere;user-select:text}@media(max-width:700px){.bankTransferInstructions dl div{grid-template-columns:1fr;gap:2px}}
