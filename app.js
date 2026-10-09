@@ -2599,12 +2599,19 @@
   }
 
 
+  function bankTransferInstructions(r){
+    const b=window.PSC_PAYMENT_INSTRUCTIONS;
+    if(!b||!r.quoteRef||['Drafting','Cancelled'].includes(r.status))return '';
+    const fields=[['Account name',b.accountName],['Bank',b.bankName],['Account number',b.accountNumber],['Currency',b.currency],['IBAN',b.iban],['SWIFT',b.swift]];
+    return `<section class="quoteStatePanel bankTransferInstructions" data-bank-transfer><h3>Bank transfer details</h3><p>Transfer only the amount requested by Pharma Service under the agreed payment terms. Please use your invoice reference, or quotation reference if no invoice has been issued, and send us the transfer confirmation.</p><dl>${fields.map(([label,value])=>`<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl><p>Payment is confirmed after PSC verifies the funds received in its bank account. A transfer confirmation alone does not release procurement.</p></section>`;
+  }
+
   function requestModal(id, admin=false){
     const r=state.requests.find(x=>x.id===id); if(!r)return '';
     const quote=calcQuote(r);
     const canApprove=r.status==='Sent' && quote.taxResolved && quote.hasSell;
     return `<div><div class="modalHeader"><div><span class="eyebrow">${admin?'PS REQUEST CONTROL':'REQUEST / QUOTATION'}</span><h2 class="mono">${r.id}</h2><div class="smallMuted">${esc(r.groupName||state.groupName||'Institutional account')} · ${esc(r.campus)} · ${date(r.createdAt)}</div></div><button class="iconBtn" data-modal-close>×</button></div>
-      ${admin?adminQuoteBuilder(r,quote):schoolQuote(r,quote,canApprove)}${orderDocumentsSection(r,admin)}</div>`;
+      ${admin?adminQuoteBuilder(r,quote):schoolQuote(r,quote,canApprove)}${bankTransferInstructions(r)}${orderDocumentsSection(r,admin)}</div>`;
   }
 
   function calcQuote(r){
@@ -2621,7 +2628,7 @@
 
   function adminQuoteBuilder(r,q){
     const target=20;
-    return `<div class="notice"><strong>Quote builder.</strong> Supplier cost and tax must be supported by current evidence before live issue. Values labelled “Demo planning assumption” are not supplier quotations.</div><div class="tableWrap"><table class="dataTable"><thead><tr><th>ITEM</th><th>QTY</th><th>DIRECT COST / UNIT</th><th>SELL / UNIT</th><th>VAT</th><th>LINE GM</th></tr></thead><tbody>${q.rows.map(x=>{const gm=x.sell!==null&&x.cost!==null&&x.sell>0?((x.sell-x.cost)/x.sell*100):null;return `<tr><td><b>${esc(lineDisplayName(x.l,x.p))}</b><div class="sub mono">${esc(lineReference(x.l))}</div>${isFamilyLine(x.l)?`<div class="sub">${esc(lineBrandPreferenceLabel(x.l))}</div>`:''}${x.q.costEvidence?`<div class="quoteLineWarning">${esc(x.q.costEvidence)}</div>`:''}</td><td>${x.l.qty}</td><td><input class="moneyInput" type="number" step="0.01" value="${x.cost===null?'':x.cost}" data-quote-field="${r.id}|${x.key}|cost"></td><td><input class="moneyInput" type="number" step="0.01" value="${x.sell===null?'':x.sell}" data-quote-field="${r.id}|${x.key}|sell"></td><td><select class="selectInput" data-quote-field="${r.id}|${x.key}|vat"><option value="" ${x.vatRate===null?'selected':''}>Review</option><option value="0" ${x.vatRate===0?'selected':''}>0%</option><option value="5" ${x.vatRate===5?'selected':''}>5%</option></select></td><td>${gm===null?'—':`<b class="${gm<target?'dangerText':'successText'}">${gm.toFixed(1)}%</b>`}</td></tr>`}).join('')}</tbody></table></div><div class="quoteSummary"><div><span>DIRECT COST</span><b>${q.costComplete?money(q.cost):'Incomplete'}</b></div><div><span>SELL EX VAT</span><b>${q.hasSell?money(q.subtotal):'Incomplete'}</b></div><div><span>GROSS PROFIT</span><b>${q.gp===null?'Blocked':money(q.gp)}</b></div><div><span>TRUE GM</span><b class="${q.gm!==null&&q.gm<target?'dangerText':''}">${q.gm===null?'Blocked':q.gm.toFixed(1)+'%'}</b></div></div><div class="twoCol"><div><label class="fieldLabel">Delivery</label><input class="input" style="width:100%" value="${esc(r.quote?.delivery||'')}" data-quote-meta="${r.id}|delivery"><label class="fieldLabel" style="margin-top:10px">Terms</label><input class="input" style="width:100%" value="${esc(r.quote?.terms||'')}" data-quote-meta="${r.id}|terms"></div><div><label class="fieldLabel">Quotation status</label><select class="input" style="width:100%" data-request-status="${r.id}">${workflow.map(s=>`<option ${r.status===s?'selected':''}>${s}</option>`).join('')}</select><label class="fieldLabel" style="margin-top:10px">Quotation reference</label><input class="input" style="width:100%" value="${esc(r.quoteRef||'')}" data-quote-ref="${r.id}" placeholder="PSC-Q-YYYY-####"></div></div><div class="gateList" style="margin-top:16px"><div class="gate ${q.costComplete?'ok':'block'}"><span>All direct costs present</span><i></i></div><div class="gate ${q.taxResolved?'ok':'block'}"><span>VAT reviewed by line</span><i></i></div><div class="gate ${q.gm!==null&&q.gm>=20?'ok':'warn'}"><span>Target GM ≥ 20%</span><i></i></div><div class="gate warn"><span>Supplier stock / lead time requires current confirmation</span><i></i></div><div class="gate ${q.rows.some(x=>lineIsRegulated(x.l,x.p))?'warn':'ok'}"><span>Regulated route check</span><i></i></div><div class="gate block"><span>Funding / customer PO evidence not integrated in prototype</span><i></i></div></div>`;
+    return `<div class="notice"><strong>Quote builder.</strong> Supplier cost and tax must be supported by current evidence before live issue. Values labelled “Demo planning assumption” are not supplier quotations.</div><div class="tableWrap"><table class="dataTable"><thead><tr><th>ITEM</th><th>QTY</th><th>DIRECT COST / UNIT</th><th>SELL / UNIT</th><th>VAT</th><th>LINE GM</th></tr></thead><tbody>${q.rows.map(x=>{const gm=x.sell!==null&&x.cost!==null&&x.sell>0?((x.sell-x.cost)/x.sell*100):null;return `<tr><td><b>${esc(lineDisplayName(x.l,x.p))}</b><div class="sub mono">${esc(lineReference(x.l))}</div>${isFamilyLine(x.l)?`<div class="sub">${esc(lineBrandPreferenceLabel(x.l))}</div>`:''}${x.q.costEvidence?`<div class="quoteLineWarning">${esc(x.q.costEvidence)}</div>`:''}</td><td>${x.l.qty}</td><td><input class="moneyInput" type="number" step="0.01" value="${x.cost===null?'':x.cost}" data-quote-field="${r.id}|${x.key}|cost"></td><td><input class="moneyInput" type="number" step="0.01" value="${x.sell===null?'':x.sell}" data-quote-field="${r.id}|${x.key}|sell"></td><td><select class="selectInput" data-quote-field="${r.id}|${x.key}|vat"><option value="" ${x.vatRate===null?'selected':''}>Review</option><option value="0" ${x.vatRate===0?'selected':''}>0%</option><option value="5" ${x.vatRate===5?'selected':''}>5%</option></select></td><td>${gm===null?'—':`<b class="${gm<target?'dangerText':'successText'}">${gm.toFixed(1)}%</b>`}</td></tr>`}).join('')}</tbody></table></div><div class="quoteSummary"><div><span>DIRECT COST</span><b>${q.costComplete?money(q.cost):'Incomplete'}</b></div><div><span>SELL EX VAT</span><b>${q.hasSell?money(q.subtotal):'Incomplete'}</b></div><div><span>GROSS PROFIT</span><b>${q.gp===null?'Blocked':money(q.gp)}</b></div><div><span>TRUE GM</span><b class="${q.gm!==null&&q.gm<target?'dangerText':''}">${q.gm===null?'Blocked':q.gm.toFixed(1)+'%'}</b></div></div><div class="twoCol"><div><label class="fieldLabel">Delivery</label><input class="input" style="width:100%" value="${esc(r.quote?.delivery||'')}" data-quote-meta="${r.id}|delivery"><label class="fieldLabel" style="margin-top:10px">Terms</label><input class="input" style="width:100%" value="${esc(r.quote?.terms||'')}" data-quote-meta="${r.id}|terms"></div><div><label class="fieldLabel">Quotation status</label><select class="input" style="width:100%" data-request-status="${r.id}">${workflow.map(s=>`<option ${r.status===s?'selected':''}>${s}</option>`).join('')}</select><label class="fieldLabel" style="margin-top:10px">Quotation reference</label><input class="input" style="width:100%" value="${esc(r.quoteRef||'')}" data-quote-ref="${r.id}" placeholder="PSC-Q-YYYY-####"></div></div><div class="gateList" style="margin-top:16px"><div class="gate ${q.costComplete?'ok':'block'}"><span>All direct costs present</span><i></i></div><div class="gate ${q.taxResolved?'ok':'block'}"><span>VAT reviewed by line</span><i></i></div><div class="gate ${q.gm!==null&&q.gm>=20?'ok':'warn'}"><span>Target GM ≥ 20%</span><i></i></div><div class="gate warn"><span>Supplier stock / lead time requires current confirmation</span><i></i></div><div class="gate ${q.rows.some(x=>lineIsRegulated(x.l,x.p))?'warn':'ok'}"><span>Regulated route check</span><i></i></div><div class="gate block"><span>Funding / customer PO evidence: save in the commercial inbox</span><i></i></div></div>`;
   }
 
   function adminDashboard(){
@@ -2841,7 +2848,7 @@
   }
 
   function adminRequests(){
-    return shell(`<div class="pageHeader"><div><span class="eyebrow">REQUEST → QUOTE → RELEASE</span><h1>Request queue</h1><p>Validate scope before pricing. Authorization advances the customer decision state; it does not automatically release procurement.</p></div></div><section class="panel"><div class="tableWrap"><table class="dataTable"><thead><tr><th>REQUEST</th><th>ACCOUNT / SITE</th><th>LINES</th><th>STATUS</th><th>QUOTE</th><th>ACTION</th></tr></thead><tbody>${state.requests.map(r=>{const q=calcQuote(r);return `<tr><td><b class="mono">${r.id}</b><div class="sub">${date(r.createdAt)}</div></td><td>${esc(r.groupName||state.groupName||'Institutional account')}<div class="sub">${esc(r.campus)}</div></td><td>${r.lines.length}</td><td>${statusPill(r.status)}</td><td>${r.quoteRef?`<b>${esc(r.quoteRef)}</b>`:'Pending'}<div class="sub">${q.hasSell?money(q.subtotal)+' ex VAT':'Pricing incomplete'}</div></td><td><button class="button dark" data-admin-request="${r.id}">Open builder</button></td></tr>`}).join('')}</tbody></table></div></section>`,true);
+    return shell(`<div class="pageHeader"><div><span class="eyebrow">REQUEST → QUOTE → RELEASE</span><h1>Request queue</h1><p>Validate scope before pricing. Authorization advances the customer decision state; it does not automatically release procurement.</p></div></div><section data-commercial-inbox aria-live="polite"><p>Loading incoming requirements…</p></section><section class="panel"><div class="panelHeader"><h2>Portal quotation builders</h2></div><div class="tableWrap"><table class="dataTable"><thead><tr><th>REQUEST</th><th>ACCOUNT / SITE</th><th>LINES</th><th>STATUS</th><th>QUOTE</th><th>ACTION</th></tr></thead><tbody>${state.requests.map(r=>{const q=calcQuote(r);return `<tr><td><b class="mono">${r.id}</b><div class="sub">${date(r.createdAt)}</div></td><td>${esc(r.groupName||state.groupName||'Institutional account')}<div class="sub">${esc(r.campus)}</div></td><td>${r.lines.length}</td><td>${statusPill(r.status)}</td><td>${r.quoteRef?`<b>${esc(r.quoteRef)}</b>`:'Pending'}<div class="sub">${q.hasSell?money(q.subtotal)+' ex VAT':'Pricing incomplete'}</div></td><td><button class="button dark" data-admin-request="${r.id}">Open builder</button></td></tr>`}).join('')}</tbody></table></div></section>`,true);
   }
 
   function adminFulfilment(){
@@ -2970,8 +2977,11 @@
     }catch(e){ console.error(e); toast('<strong>Could not send custom request.</strong>'); }
   }
 
+  let requestSubmitting=false;
+  let pendingSubmission=null;
+  let pendingSubmissions={};
   async function submitRequest(){
-    if(!state.basket.length)return;
+    if(!state.basket.length || requestSubmitting)return;
     const note=[(document.getElementById('basketNote')||{}).value||'',scopeNote()].filter(Boolean).join('\n\n');
     const lines=JSON.parse(JSON.stringify(state.basket));
 
@@ -2997,13 +3007,21 @@
       return;
     }
 
+    requestSubmitting=true;
+    document.querySelectorAll('[data-submit-request]').forEach(b=>{b.disabled=true;});
     try{
       const orderNumber=await persistNewOrder(lines,note);
+      delete pendingSubmissions[pendingSubmission?.fingerprint];
+      pendingSubmission=null;
+      try{if(Object.keys(pendingSubmissions).length)sessionStorage.setItem('psc-pending-submission',JSON.stringify(pendingSubmissions));else sessionStorage.removeItem('psc-pending-submission');}catch{}
       state.basket=[]; state.scopesBySchool[state.activeSchoolId||'draft']=emptyScope(); ui.basket=false;
       clearDraftUndo();
-      await loadOrdersFromDatabase(); save(); render();
-      toast(`<strong>Order placed.</strong><br>${esc(orderNumber)} is under review. Your quotation will be sent to ${esc(accountEmailLabel())}.`);
-    }catch(e){ console.error(e); toast('<strong>Could not place the order.</strong><br>Please try again or contact Pharma Service.'); }
+      save();
+      try{await loadOrdersFromDatabase();}catch(e){console.warn('Request saved; history refresh failed:',e);}
+      render();
+      toast(`<strong>Request received.</strong><br>${esc(orderNumber)} is under review. PS will check the requirement before quoting.`);
+    }catch(e){ console.error(e); toast('<strong>Request not confirmed.</strong><br>Your draft is retained. Retry this same requirement safely or contact Pharma Service.'); }
+    finally{requestSubmitting=false;document.querySelectorAll('[data-submit-request]').forEach(b=>{b.disabled=false;});}
   }
 
   const DB_TO_UI_STATUS = {
@@ -3095,6 +3113,7 @@
   }
 
   async function switchInstitutionAccount(schoolId){
+    if(requestSubmitting){toast('<strong>Please wait for the request acknowledgement before switching sites.</strong>');return;}
     if(!authContext || authContext.isPscAdmin) return;
     const schools=availableSchools();
     const next=schools.find(sc=>sc.id===schoolId);
@@ -3238,18 +3257,15 @@
   async function persistNewOrder(lines,note=''){
     if(isDemoAccount()) throw new Error('Demo orders must remain local.');
     if(!sb || !session?.user || !authContext?.school?.id || !authContext?.group?.id) throw new Error('Account context is missing.');
-    const now=new Date();
-    const orderNumber=`PSC-REQ-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getTime()).slice(-6)}`;
-    const {data:o,error}=await sb.from('orders').insert({
-      order_number:orderNumber, group_id:authContext.group.id, school_id:authContext.school.id,
-      requested_by:session.user.id, status:'under_review', note
-    }).select('id,order_number').single();
-    if(error) throw error;
     const dbLines=lines.map(l=>{
-      if(l.kind==='unlisted')return {order_id:o.id,product_id:null,psc_sku_snapshot:null,line_description:l.description,brand_model_snapshot:null,pack_snapshot:l.requestUnit||'Unlisted item — requires PS review',quantity:l.qty};
+      if(l.kind==='unlisted')return {product_id:null,psc_sku_snapshot:null,line_description:l.description,brand_model_snapshot:null,pack_snapshot:l.requestUnit||'Unlisted item — requires PS review',quantity:l.qty};
       if(isFamilyLine(l)){
+        // Frontend-only families are requirements, not invented database family IDs.
+        if(l.localFamily)return {product_id:null,psc_sku_snapshot:null,
+          line_description:[l.familyName||l.familyId,l.presentation,l.requestedBrand?`Requested brand: ${l.requestedBrand}`:''].filter(Boolean).join(' · '),
+          brand_model_snapshot:null,pack_snapshot:l.orderPackBasis||l.presentation||'Unlisted item — requires PS review',quantity:l.qty};
         return {
-          order_id:o.id, product_id:null, psc_sku_snapshot:null,
+          product_id:null, psc_sku_snapshot:null,
           family_id:l.localFamily?null:l.familyId, family_name_snapshot:l.familyName,
           line_description:l.familyName||l.familyId,
           brand_model_snapshot:l.brandPreferenceMode==='specific_option'?(l.productOptionSnapshot?.exact_product_name||l.requestedBrand||null):(l.brandPreferenceMode==='other_brand'?l.requestedBrand:'No preference'),
@@ -3262,10 +3278,21 @@
         };
       }
       const p=product(l.sku);
-      return {order_id:o.id,product_id:null,psc_sku_snapshot:l.sku,line_description:p?.name||l.sku,brand_model_snapshot:p?.brand||null,pack_snapshot:p?.pack||null,quantity:l.qty};
+      return {product_id:null,psc_sku_snapshot:l.sku,line_description:p?.name||l.sku,brand_model_snapshot:p?.brand||null,pack_snapshot:p?.pack||null,quantity:l.qty};
     });
-    const {error:le}=await sb.from('order_lines').insert(dbLines); if(le) throw le;
-    return o.order_number;
+    const payloadBytes=new TextEncoder().encode(JSON.stringify({user:session.user.id,school:authContext.school.id,lines:dbLines,note}));
+    const fingerprint=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',payloadBytes)),b=>b.toString(16).padStart(2,'0')).join('');
+    try{pendingSubmissions=JSON.parse(sessionStorage.getItem('psc-pending-submission')||'{}');}catch{}
+    if(!pendingSubmissions||typeof pendingSubmissions!=='object'||Array.isArray(pendingSubmissions))pendingSubmissions={};
+    pendingSubmission=pendingSubmissions[fingerprint]||{fingerprint,key:crypto.randomUUID()};
+    pendingSubmissions[fingerprint]=pendingSubmission;
+    try{sessionStorage.setItem('psc-pending-submission',JSON.stringify(pendingSubmissions));}catch{}
+    const {data,error}=await sb.rpc('psc_submit_institutional_request',{
+      p_school_id:authContext.school.id,p_submission_key:pendingSubmission.key,p_lines:dbLines,p_note:note
+    });
+    if(error) throw error;
+    if(!data?.order_number)throw new Error('Submission acknowledgement missing');
+    return data.order_number;
   }
 
   async function persistCustomRequest(description,quantity){
@@ -3598,7 +3625,7 @@
     document.querySelectorAll('[data-product-field]').forEach(el=>el.addEventListener('change',e=>{const[sku,field]=el.dataset.productField.split('|');state.productOverrides[sku]=state.productOverrides[sku]||{};const val=e.target.value.trim();state.productOverrides[sku][field]=val===''?undefined:Number(val);audit('Product master updated',`${sku} ${field}`);save();render();toast(`<strong>${sku}</strong> updated locally`)}));
     document.querySelectorAll('[data-quote-field]').forEach(el=>el.addEventListener('change',e=>{const[id,key,field]=el.dataset.quoteField.split('|');const r=state.requests.find(x=>x.id===id);r.quote=r.quote||{lines:{}};r.quote.lines=r.quote.lines||{};r.quote.lines[key]=r.quote.lines[key]||{};const val=e.target.value;r.quote.lines[key][field]=val===''?undefined:Number(val);if(field==='cost')r.quote.lines[key].costEvidence='Manual entry — evidence required';audit('Quote line updated',`${id} ${key} ${field}`);save();render()}));
     document.querySelectorAll('[data-quote-meta]').forEach(el=>el.addEventListener('change',e=>{const[id,field]=el.dataset.quoteMeta.split('|');const r=state.requests.find(x=>x.id===id);r.quote=r.quote||{lines:{}};r.quote[field]=e.target.value;audit('Quote terms updated',`${id} ${field}`);save()}));
-    document.querySelectorAll('[data-request-status]').forEach(el=>el.addEventListener('change',e=>{const r=state.requests.find(x=>x.id===el.dataset.requestStatus);r.status=e.target.value;if(r.status==='Sent'&&!r.quoteRef)r.quoteRef=`PSC-Q-${new Date().getFullYear()}-${String(state.requests.indexOf(r)+1001).padStart(4,'0')}`;audit('Request status changed',`${r.id} → ${r.status}`);save();render()}));
+    document.querySelectorAll('[data-request-status]').forEach(el=>el.addEventListener('change',e=>{if(!window.PSC_IS_DEMO_ACCOUNT?.())return;const r=state.requests.find(x=>x.id===el.dataset.requestStatus);r.status=e.target.value;if(r.status==='Sent'&&!r.quoteRef)r.quoteRef=`PSC-Q-${new Date().getFullYear()}-${String(state.requests.indexOf(r)+1001).padStart(4,'0')}`;audit('Request status changed',`${r.id} → ${r.status}`);save();render()}));
     document.querySelectorAll('[data-quote-ref]').forEach(el=>el.addEventListener('change',e=>{const r=state.requests.find(x=>x.id===el.dataset.quoteRef);r.quoteRef=e.target.value;audit('Quote reference updated',r.id);save()}));
     document.querySelectorAll('[data-approve-quote]').forEach(el=>el.addEventListener('click',()=>{const r=state.requests.find(x=>x.id===el.dataset.approveQuote);r.status='Authorized';audit('Quotation confirmed by demo account user',r.id);save();render();toast('<strong>Quotation confirmed.</strong><br>PS will confirm the fulfilment and delivery timing for this order.')}));
     document.querySelectorAll('[data-export-products]').forEach(el=>el.addEventListener('click',exportProducts));
@@ -3642,6 +3669,7 @@
   window.addEventListener('click',e=>{const target=e.target.closest?.('[data-product-view]');if(target&&product(target.dataset.productView))productSearchMemory().selectedSku=target.dataset.productView;},true);
   window.addEventListener('scroll',onPublicHeaderScroll,{passive:true});
   window.addEventListener('hashchange',render);
+  window.addEventListener('psc-commercial-status-saved',async()=>{try{await loadOrdersFromDatabase();save();render();}catch(error){toast('<strong>Status saved.</strong><br>Refresh the request list to see the latest status.');console.warn('Status saved; list refresh failed:',error);}});
   window.addEventListener('popstate',render);
   // Clean Workshop and Start URLs are owned by currentRoute; do not inject #home.
   if(!location.hash && location.pathname==='/') history.replaceState(history.state,'','/#home');

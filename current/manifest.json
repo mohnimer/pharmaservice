@@ -19,6 +19,7 @@
     "current/behaviour/product-knowledge-index.js",
     "current/behaviour/intelligent-search.js",
     "current/behaviour/search-analytics.js",
+    "current/behaviour/payment-instructions.js",
     "app.js",
     "current/behaviour/catalogue-families.js",
     "current/behaviour/family-details.js",
@@ -29,6 +30,7 @@
     "current/behaviour/contact-form.js",
     "current/behaviour/start-interface.js",
     "current/behaviour/admin-quote-persistence.js",
+    "current/behaviour/commercial-inbox.js",
     "current/behaviour/interaction-feedback.js",
     "current/behaviour/home-community.js",
     "current/behaviour/public-copy.js",
@@ -52,6 +54,7 @@
   ],
   "stylesheets": [
     "styles.css",
+    "current/styles/commercial-inbox.css",
     "current/styles/catalogue-families.css",
     "current/styles/family-details.css",
     "current/styles/family-options.css",
@@ -84,7 +87,8 @@
     "current/styles/workshop-design.css",
     "current/styles/spacing.css",
     "current/styles/product-images.css",
-    "current/styles/intelligent-search.css"
+    "current/styles/intelligent-search.css",
+    "current/styles/admin-interface.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",

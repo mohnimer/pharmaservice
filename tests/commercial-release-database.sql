@@ -1,0 +1,35 @@
+begin;
+alter table public.orders enable trigger commercial_release_gate;
+do $$
+declare v_user uuid; v_admin uuid; v_school uuid; v_order uuid; v_quote uuid; v_line uuid; v_order_line uuid; v_result jsonb; v_blocked boolean;
+begin
+ select m.user_id,s.id into v_user,v_school from public.memberships m join public.profiles p on p.user_id=m.user_id join public.account_groups g on g.id=m.group_id join public.schools s on s.group_id=g.id where not p.is_psc_admin and g.slug<>'psc-demo-group' and s.active limit 1;
+ select user_id into v_admin from public.profiles where is_psc_admin limit 1;
+ perform set_config('request.jwt.claim.sub',v_user::text,true);execute 'set local role authenticated';
+ v_result:=public.psc_submit_institutional_request(v_school,gen_random_uuid(),'[{"line_description":"Commercial release test — rollback","quantity":1}]','Rollback');v_order:=(v_result->>'id')::uuid;
+ perform set_config('request.jwt.claim.sub',v_admin::text,true);
+ select id into v_order_line from public.order_lines where order_id=v_order limit 1;
+ v_quote:=public.psc_ensure_quote(v_order);
+ insert into public.quote_lines(quote_id,order_line_id,line_no,line_description_snapshot,quantity,unit_sell_price_ex_vat,vat_rate_pct) values(v_quote,v_order_line,1,'Release test',1,100,5) returning id into v_line;
+ insert into public.quote_line_costs(quote_line_id,unit_landed_cost) values(v_line,70);
+ begin perform public.psc_set_commercial_status(v_order,'quote_sent');raise exception 'TEST FAILURE: sent without evidence';exception when others then if sqlerrm like 'TEST FAILURE:%' then raise;end if;end;
+ insert into public.order_commercial_controls(order_id,supplier_evidence_ref,supplier_valid_until,authorization_ref,invoice_ref,funding_required,funding_received,receipt_ref) values(v_order,'Verified supplier source test',current_date+30,'PO-test','ERP-test',100,50,'Receipt-test');
+ perform public.psc_set_commercial_status(v_order,'quote_sent');
+ begin update public.orders set status='under_process' where id=v_order;raise exception 'TEST FAILURE: underfunded direct update';exception when others then if sqlerrm like 'TEST FAILURE:%' then raise;end if;end;
+ if (select status from public.orders where id=v_order)<>'quote_sent' then raise exception 'Failed status changed order';end if;
+ update public.order_commercial_controls set funding_received=100 where order_id=v_order;
+ perform public.psc_set_commercial_status(v_order,'under_process');
+ update public.quote_lines set unit_sell_price_ex_vat=101 where id=v_line;
+ begin perform public.psc_set_commercial_status(v_order,'out_for_delivery');raise exception 'TEST FAILURE: stale quote evidence';exception when others then if sqlerrm like 'TEST FAILURE:%' then raise;end if;end;
+ update public.order_commercial_controls set supplier_po_ref='Supplier-PO-test',dispatch_ref='Dispatch-test' where order_id=v_order;
+ perform public.psc_set_commercial_status(v_order,'out_for_delivery');
+ begin perform public.psc_set_commercial_status(v_order,'delivered');raise exception 'TEST FAILURE: accepted without evidence';exception when others then if sqlerrm like 'TEST FAILURE:%' then raise;end if;end;
+ update public.order_commercial_controls set acceptance_ref='Signed-DN-test' where order_id=v_order;
+ perform public.psc_set_commercial_status(v_order,'delivered');
+ if not exists(select 1 from public.orders where id=v_order and status='delivered' and delivered_at is not null) then raise exception 'Completed journey failed';end if;
+ if (select count(*) from public.commercial_control_history where order_id=v_order)<>4 then raise exception 'Evidence audit missing';end if;
+ perform set_config('request.jwt.claim.sub',v_user::text,true);
+ if exists(select 1 from public.order_commercial_controls) or exists(select 1 from public.commercial_control_history) then raise exception 'Customer sees internal evidence';end if;
+ begin perform public.psc_set_commercial_status(v_order,'under_review');raise exception 'TEST FAILURE: customer admin transition';exception when others then if sqlerrm like 'TEST FAILURE:%' then raise;end if;end;
+end $$;
+rollback;

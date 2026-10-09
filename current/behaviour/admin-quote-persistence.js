@@ -475,76 +475,24 @@
     const uiStatus = el.value;
     if (!orderNumber || !UI_TO_DB_STATUS[uiStatus]) return;
 
-    const ctx = await quoteContext(orderNumber);
-    if (!ctx) return;
-
-    const oldOrderStatus = ctx.order.status;
-    const dbStatus = UI_TO_DB_STATUS[uiStatus];
-    const quoteStatus = UI_TO_QUOTE_STATUS[uiStatus] || ctx.quote.status;
-    const now = new Date().toISOString();
-
-    const orderPayload = { status: dbStatus };
-    const quotePayload = {
-      status: quoteStatus,
-      last_edited_by: ctx.user.id
-    };
-
-    if (uiStatus === 'Sent') {
-      let ref = ctx.quote.quote_number;
-      if (!ref || ref.startsWith('PSC-DRAFT-')) ref = realQuoteNumber(orderNumber);
-
-      quotePayload.quote_number = ref;
-      quotePayload.sent_at = ctx.quote.sent_at || now;
-      quotePayload.issued_by = ctx.user.id;
-
-      orderPayload.quote_ref = ref;
-
-      const validityDays = Number(ctx.quote.validity_days || 0);
-      if (validityDays > 0 && !ctx.quote.expires_at) {
-        quotePayload.expires_at = new Date(Date.now() + validityDays * 86400000).toISOString();
-      }
-    }
-
-    if (uiStatus === 'Authorized') {
-      quotePayload.confirmed_at = ctx.quote.confirmed_at || now;
-    }
-
-    if (uiStatus === 'Cancelled') {
-      quotePayload.cancelled_at = ctx.quote.cancelled_at || now;
-      orderPayload.cancelled_at = now;
-    }
-
-    if (uiStatus === 'Accepted') {
-      orderPayload.delivered_at = now;
-    }
-
-    const { error: orderError } = await sb.from('orders').update(orderPayload).eq('id', ctx.order.id);
-    if (orderError) throw orderError;
-
-    const { error: quoteError } = await sb.from('quotes').update(quotePayload).eq('id', ctx.quoteId);
-    if (quoteError) throw quoteError;
-
-    if (oldOrderStatus !== dbStatus) {
-      await sb.from('status_history').insert({
-        order_id: ctx.order.id,
-        status: dbStatus,
-        note: `Deal Desk status changed to ${uiStatus}`,
-        changed_by: ctx.user.id
+    el.disabled = true;
+    let ctx;
+    try {
+      if(!await currentAdmin()) throw new Error('PSC administrator sign-in required');
+      const order = await findOrder(orderNumber);
+      if(!order) throw new Error('Request not found');
+      ctx = {order};
+      const { error } = await sb.rpc('psc_set_commercial_status', {
+        p_order_id: ctx.order.id, p_status: UI_TO_DB_STATUS[uiStatus]
       });
-      await recordEvent(ctx.quoteId, 'status_changed', ctx.quote.status, quoteStatus, `Deal Desk status changed to ${uiStatus}`, {
-        old_order_status: oldOrderStatus,
-        new_order_status: dbStatus
-      });
-    }
-
-    await recalc(ctx.quoteId);
-
-    if (uiStatus === 'Sent') {
-      await snapshot(ctx.quoteId, 'issued', 'Quotation issued from PS Deal Desk');
-    }
-    if (uiStatus === 'Authorized' || uiStatus === 'Cancelled') {
-      await snapshot(ctx.quoteId, 'customer_decision', `Quotation ${uiStatus.toLowerCase()}`);
-    }
+      if (error) throw error;
+      window.dispatchEvent(new CustomEvent('psc-commercial-status-saved'));
+    } catch (error) {
+      if(ctx) el.value = Object.keys(UI_TO_DB_STATUS).find(k => UI_TO_DB_STATUS[k] === ctx.order.status) || 'Drafting';
+      let feedback = el.parentElement.querySelector('[data-status-feedback]');
+      if (!feedback) { feedback = document.createElement('p'); feedback.dataset.statusFeedback=''; feedback.setAttribute('role','alert'); el.insertAdjacentElement('afterend',feedback); }
+      feedback.textContent = 'Status not changed: ' + (error.message || 'Please retry');
+    } finally { el.disabled = false; }
   }
 
   async function syncCustomerDecision(orderNumber, action){
