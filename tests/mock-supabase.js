@@ -34,6 +34,10 @@
         window.__backendCalls.push({ table: this.table, action: this.action });
         if (role === 'demo' && this.action !== 'select') throw new Error('Demo attempted a backend write');
         let rows = (tables[this.table] || []).filter(row => this.filters.every(f => f(row)));
+        if(this.action==='insert'){
+          const values=Array.isArray(this.value)?this.value:[this.value];tables[this.table]??=[];
+          rows=values.map(value=>({id:crypto.randomUUID(),created_at:new Date().toISOString(),completed:false,...structuredClone(value)}));tables[this.table].push(...rows);
+        }
         if(this.action==='upsert'){
           const values=Array.isArray(this.value)?this.value:[this.value];tables[this.table]??=[];
           rows=values.map(value=>{const old=tables[this.table].find(r=>this.table==='order_commercial_controls'?r.order_id===value.order_id:r.entity_type===value.entity_type&&r.entity_id===value.entity_id);if(old){Object.assign(old,value);return old;}tables[this.table].push(structuredClone(value));return value;});

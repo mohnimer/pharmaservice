@@ -1,0 +1,30 @@
+import {readFileSync} from 'node:fs';
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {createServer} from '../tools/serve.mjs';
+const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
+const base=`http://127.0.0.1:${server.address().port}`;
+const browser=await chromium.launch({executablePath:process.env.PSC_CHROME,args:['--no-sandbox']});
+const extension=`(()=>{const c=window.supabase.createClient();Object.assign(window.__tables,{mail_contacts:[],psc_crm_tasks:[],psc_crm_notes:[],psc_mail_messages:[{id:'m1',direction:'inbound',sender:'buyer@example.invalid',recipient:'info@pharmaservice.ae',subject:'School supplies',body_text:'Please confirm the delivery date.',received_at:'2026-10-09',review_status:'unmatched',attachments:[]}],psc_mail_drafts:[]});c.functions={invoke:async()=>({data:{configured:true,connection:{status:'connected'}},error:null})};})();`;
+try{for(const width of [390,1440]){
+ const context=await browser.newContext({viewport:{width,height:1000}});await context.addInitScript(()=>{window.__testRole='admin'});
+ await context.route('**/*',r=>{const u=new URL(r.request().url());if(u.hostname==='127.0.0.1')return r.continue();if(u.hostname==='cdn.jsdelivr.net')return r.fulfill({contentType:'text/javascript',body:readFileSync('tests/mock-supabase.js','utf8')+extension});return r.fulfill({status:503,body:''});});
+ const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(base+'/#admin/dashboard');await page.locator('.wsStats').waitFor();
+ assert.equal(await page.locator('.wsSuggestion').count(),1);
+ await page.locator('[data-suggest-task]').click();await page.locator('dialog [name=title]').fill('Check lead time with supplier');await page.locator('dialog button[type=submit],dialog form .primary').click();await page.locator('dialog').waitFor({state:'detached'});
+ assert.equal(await page.evaluate(()=>window.__tables.psc_crm_tasks.length),1);
+ await page.goto(base+'/#admin/tasks');await page.locator('.wsTask').waitFor();
+ const ics=await page.evaluate(()=>PSC_WORKSPACE_UTILS.calendar([{key:'test',due_date:'2026-10-09',title:'Call, buyer',owner_label:'Mohamed'}]));assert(ics.includes('SUMMARY:Call\\, buyer'));assert(ics.includes('DTEND;VALUE=DATE:20261010'));
+ await page.locator('[data-task-toggle]').click();await page.waitForFunction(()=>window.__tables.psc_crm_tasks[0].completed===true);
+ await page.goto(base+'/#admin/customers');await page.locator('[data-new-customer]').click();await page.locator('dialog [name=first_name]').fill('Buyer');await page.locator('dialog [name=email]').fill('buyer@example.invalid');await page.locator('dialog [name=organization]').fill('Test school');await page.locator('dialog form .primary').click();await page.locator('dialog').waitFor({state:'detached'});
+ await page.locator('[data-ws-note] textarea').fill('Prefers a call in the morning.');await page.locator('[data-ws-note] button').click();await page.waitForFunction(()=>window.__tables.psc_crm_notes.length===1);
+ assert.equal(await page.evaluate(()=>window.__tables.mail_contacts[0].marketing_basis),'not_set');assert.equal(await page.evaluate(()=>window.__tables.mail_contacts[0].status),'paused');
+ await page.goto(base+'/#admin/requests');await page.locator('[data-open-request="mail:m1"]').click();await page.locator('[data-mail-message="m1"]').waitFor();assert.equal(await page.locator('[data-inbox-record]').count(),0);assert.equal(await page.locator('[data-mail-connect]').isVisible(),false);
+ await page.locator('[data-back-requests]').click();await page.locator('[data-open-request="order:o0"]').click();await page.locator('[data-inbox-record]').waitFor();assert.equal(await page.locator('[data-inbox-record]').count(),1);assert.equal(await page.locator('[data-mail-message]').count(),0);
+ await page.goto(base+'/#admin/mail');await page.locator('[data-mail-template="custom"]').click();assert(await page.locator('.mailEmailCanvas').innerText().then(t=>t.includes('Would you be the right person')));assert(await page.locator('.mailEmailCta').innerText().then(t=>t.includes('See how')));
+ await page.goto(base+'/#admin/dashboard');await page.locator('.wsStats').waitFor();
+ assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'horizontal overflow');
+ const label=await page.locator('.sidebar .navLabel').first().evaluate(el=>({position:getComputedStyle(el).position,shadow:getComputedStyle(el).boxShadow}));assert.equal(label.position,'static');assert.equal(label.shadow,'none');
+ await page.screenshot({path:'test-results/workstation-'+width+'.png',fullPage:true});assert.deepEqual(errors,[]);await context.close();console.log('Workspace customer/task/calendar/request isolation '+width+': PASS');
+}}finally{await browser.close();server.close();}

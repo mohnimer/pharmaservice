@@ -10,7 +10,7 @@ try{
  for(const width of [390,1440]){
   const context=await browser.newContext({viewport:{width,height:900}});await context.addInitScript(()=>{window.__testRole='admin'});
   await context.route('**/*',r=>{const u=new URL(r.request().url());if(u.hostname==='127.0.0.1')return r.continue();if(u.hostname==='cdn.jsdelivr.net')return r.fulfill({contentType:'text/javascript',body:readFileSync('tests/mock-supabase.js','utf8')+extension});return r.fulfill({status:503,body:''});});
-  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/#admin/requests');await page.locator('[data-mail-draft]').waitFor();
+  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/#admin/requests');await page.locator('[data-open-request="mail:m1"]').click();await page.locator('[data-mail-message]').waitFor();
   await page.locator('[data-mail-intake]').click();await page.locator('[data-intake-editor]').waitFor();
   await page.locator('[name=institution]').fill('Test Institution');
   await page.locator('[data-add-line]').click();

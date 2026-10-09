@@ -1,0 +1,49 @@
+/* Daily-work navigation: labels are real navigation, never floating tooltips. */
+.adminShell .navLink{display:flex!important;justify-content:flex-start!important;align-items:center!important;gap:12px!important;min-height:48px!important;height:auto!important;width:100%!important;padding:12px 14px!important;overflow:visible!important}
+.adminShell .navLink .navLabel{position:static!important;display:block!important;opacity:1!important;visibility:visible!important;transform:none!important;background:transparent!important;color:inherit!important;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;white-space:normal!important;font-size:14px!important;font-weight:600!important;pointer-events:auto!important}
+.adminShell .navLink .navLabel:before,.adminShell .navLink .navLabel:after{display:none!important}
+.adminShell .sidebar{width:240px!important;overflow-y:auto!important;background:#faf9f5!important}
+.adminShell .mainArea{margin-left:240px!important;width:calc(100% - 240px)!important}
+.adminShell .navLink.active{background:#e5f0ec!important;color:#176b60!important;box-shadow:none!important;border-color:#bfd8cf!important}
+.adminShell .navLink svg{width:22px!important;height:22px!important;flex-shrink:0}
+[data-psc-workspace]{--ws-ink:#173c36;--ws-line:#dedfd7;max-width:1360px;margin:auto;color:#263a35}
+[data-psc-workspace] *, .wsDialog *{box-sizing:border-box}
+[data-psc-workspace] h1{font-size:clamp(28px,3.2vw,42px);letter-spacing:-1.2px;line-height:1.15;margin:0 0 10px;color:var(--ws-ink)}
+[data-psc-workspace] h2,.wsDialog h2{font-size:20px;line-height:1.3;margin:0 0 16px}
+[data-psc-workspace] h3{font-size:16px;margin:22px 0 10px}
+[data-psc-workspace] p{line-height:1.6;margin:8px 0 14px;overflow-wrap:anywhere}
+.wsHeader{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:24px}
+.wsHeader p,.wsMuted{color:#6c7770;font-size:14px}
+.wsActions,.wsToolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0 20px}
+[data-psc-workspace] button,.wsDialog button{cursor:pointer;font:inherit;font-size:14px;min-height:42px;border:1px solid #cdd6ce;border-radius:9px;padding:10px 14px;background:#fff;color:#244a41;box-shadow:none}
+[data-psc-workspace] button:hover,.wsDialog button:hover{background:#eef4ef;border-color:#88b2a3}
+[data-psc-workspace] button:focus-visible,.wsDialog button:focus-visible{outline:3px solid #259e91;outline-offset:3px}
+[data-psc-workspace] .primary,.wsDialog .primary{background:#17695e!important;color:white!important;border-color:#17695e!important}
+.wsPanel,.wsSuggestion,.wsEmpty{border:1px solid var(--ws-line,#dedfd7);background:#fff;border-radius:16px;padding:24px;margin-bottom:20px;min-width:0}
+.wsSplit{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;align-items:start}
+.wsStats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0 0 26px}
+.wsStats button{text-align:left!important;padding:20px!important;background:#f0f3eb!important;display:grid;gap:10px;border:0!important}
+.wsStats b{font-size:32px;line-height:1;color:#174e42}.wsStats span{font-size:13px;color:#5e6e65}
+.wsTask{padding:16px 0;border-bottom:1px solid #e7e9e2;display:flex;gap:12px;align-items:flex-start}
+.wsTask>div{flex:1;min-width:0}.wsTask input[type=checkbox]{width:20px;height:20px;margin-top:4px;accent-color:#17695e;flex-shrink:0}
+.wsTask>label{display:flex;gap:12px;flex:1;min-width:0}.wsTask>.wsTaskActions{flex:0 0 auto;max-width:130px}.mailEmailCanvas>p{white-space:pre-line}
+.wsTask small{display:block;color:#727a72;margin:6px 0}.wsTask button{font-size:12px;padding:6px 9px;min-height:34px;margin:6px 5px 0 0}
+.wsSuggestion{background:#f7f8f2;padding:18px}.wsSuggestion blockquote{margin:12px 0;padding-left:14px;border-left:3px solid #b7cfc2;font-size:14px;color:#59685f;overflow-wrap:anywhere}
+.wsPill{display:inline-block;background:#eaf0e7;color:#416048;border-radius:30px;padding:5px 10px;font-size:12px;white-space:normal}
+.wsList{display:grid;gap:10px}.wsRequest{display:flex!important;justify-content:space-between;gap:18px;padding:20px!important;text-align:left!important;border-radius:14px!important}
+.wsRequest>span:first-child{min-width:0}.wsRequest>span:last-child{flex-shrink:0;max-width:35%;text-align:right;display:grid;justify-items:end;gap:10px}.wsRequest b{display:block;font-size:18px;margin:6px 0}.wsRequest small{font-size:11px;color:#788176}.wsRequest p{font-size:14px}.wsRequest strong{font-size:12px}
+.wsJourney{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}.wsJourney span{font-size:12px;padding:9px 12px;background:#eeeFE9;border-radius:8px}.wsJourney .active{background:#d9ebe2;color:#145a48}
+.wsCustomerGrid,.wsResourceGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:24px}.wsCustomer,.wsResource{padding:24px!important;text-align:left!important;border-radius:16px!important;overflow-wrap:anywhere}.wsCustomer h2{margin-top:18px}.wsCustomer small{word-break:break-word}
+.wsForm label,.wsDialog label{display:grid;gap:7px;margin-bottom:16px;font-size:13px;font-weight:600}
+[data-psc-workspace] input:not([type=checkbox]),[data-psc-workspace] select,[data-psc-workspace] textarea,.wsDialog input,.wsDialog select,.wsDialog textarea{font:inherit;font-size:15px;width:100%;min-width:0;max-width:100%;padding:11px 12px;border:1px solid #cdd6ce;border-radius:8px;background:#fff;color:#293e35;min-height:44px}
+[data-psc-workspace] textarea,.wsDialog textarea{min-height:100px}.wsToolbar input{flex:1}.wsToolbar select{width:auto;max-width:100%}
+.wsColumns{display:grid;grid-template-columns:1fr 1fr;gap:14px}.wsNote{border-bottom:1px solid #e4e8df;padding:14px 0}.wsNote p,.wsPre{white-space:pre-wrap}.wsNote small{color:#758173}
+.wsWeek{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:24px}.wsWeek button{display:grid;gap:8px;text-align:center;padding:12px 4px}.wsWeek b{font-size:24px}.wsWeek span{font-size:11px;color:#6b7c6e}
+.wsDialog{width:min(650px,calc(100% - 28px));max-height:90dvh;border:1px solid #cdd6ce;border-radius:18px;padding:26px;background:#fafbf6;color:#263a35}.wsDialog::backdrop{background:#152c2890}.wsDialogHead{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:20px}.wsDialogHead h2{margin:0}.wsDialogHead button{font-size:24px}
+[data-psc-workspace] [hidden]{display:none!important}
+[data-psc-workspace] .pscMailPanel{padding:24px;border-radius:16px;margin:20px 0;box-shadow:none}
+[data-psc-workspace] .pscMailPanel details{margin:16px 0;padding:12px 0;border-top:1px solid #e2e5dc}
+[data-psc-workspace] .pscMailPanel article{padding:16px 0}.mailPreview p{white-space:pre-line}
+@media(max-width:1000px){.wsCustomerGrid,.wsResourceGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.wsSplit{grid-template-columns:1fr}}
+@media(max-width:900px){.adminShell .sidebar{width:min(310px,86vw)!important}.adminShell .mainArea{margin-left:0!important;width:100%!important}.adminShell .navLink .navLabel{font-size:16px!important}.adminShell .navLink{min-height:52px!important}}
+@media(max-width:560px){.wsHeader{display:block}.wsHeader>div:last-child{margin-top:14px}.wsStats{grid-template-columns:repeat(2,1fr);gap:10px}.wsStats button{padding:16px!important}.wsPanel,.wsSuggestion{padding:18px}.wsCustomerGrid,.wsResourceGrid,.wsColumns{grid-template-columns:1fr}.wsWeek{gap:3px}.wsWeek button{font-size:12px;padding:10px 2px;min-width:0}.wsWeek b{font-size:19px}.wsWeek span{font-size:9px}.wsRequest{padding:16px!important}.wsRequest b{font-size:16px}.wsDialog{padding:20px}.wsActions{align-items:stretch}.wsActions button{flex-grow:1}.wsToolbar{display:grid}.wsToolbar select{width:100%}}

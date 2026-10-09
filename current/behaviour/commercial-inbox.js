@@ -33,6 +33,7 @@
     }
   }
   async function mount(host){
+    if(host.dataset.messageId||host.dataset.mailSettings)return;
     if(host.dataset.loading)return;
     host.dataset.loading='true';
     try{
@@ -44,6 +45,7 @@
       const records=[...orders.map(o=>({type:'order',id:o.id,ref:o.order_number,name:siteName(o)||'Portal request',detail:o.note||'Open the quotation builder below for product lines.',status:o.status,created:o.created_at})),
         ...enquiries.map(e=>({type:'enquiry',id:e.id,ref:'ENQ-'+e.id.slice(0,8).toUpperCase(),name:e.organization||e.name,detail:e.requirement,status:e.status,created:e.created_at,contact:[e.name,e.contact_email,e.contact_number].filter(Boolean).join(' · '),attachment:e.rfq_object_path,fileName:e.rfq_file_name,requiredBy:e.required_by})),
         ...custom.map(c=>({type:'custom',id:c.id,ref:'SRC-'+c.id.slice(0,8).toUpperCase(),name:siteName(c)||'Unlisted sourcing requirement',detail:[c.description,'Quantity: '+c.quantity,c.notes].filter(Boolean).join('\n'),status:c.status,created:c.created_at}))];
+      if(host.dataset.entityId)records.splice(0,records.length,...records.filter(r=>r.id===host.dataset.entityId));
       for(const r of records){r.action=actionMap.get(r.type+':'+r.id);r.control=controls.find(c=>c.order_id===r.id&&r.type==='order');r.closed=['delivered','cancelled','archived','closed'].includes(r.status);r.overdue=!r.closed&&!r.action?.completed&&r.action?.due_date<today();}
       records.sort((a,b)=>Number(b.overdue)-Number(a.overdue)||String(b.created).localeCompare(String(a.created)));
       host.innerHTML=`<div class="panelHeader"><div><h2>Incoming requirements & follow-ups</h2><p>${records.length} requirements · ${records.filter(r=>r.overdue).length} overdue · ${records.filter(r=>!r.closed&&!r.action).length} without a next action</p></div><button class="button outline" data-inbox-refresh>Refresh</button></div><div class="commercialInboxFilters"><label>Show <select data-inbox-filter><option value="open">Open requirements</option><option value="overdue">Overdue follow-ups</option><option value="unassigned">No next action</option><option value="all">All requirements</option></select></label></div><div data-inbox-cards></div><p class="smallMuted">Completing a follow-up does not confirm payment or release procurement.</p>`;

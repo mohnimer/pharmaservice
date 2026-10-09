@@ -33,6 +33,7 @@
     "current/behaviour/commercial-inbox.js",
     "current/behaviour/mail-intake.js",
     "current/behaviour/procurement-mail.js",
+    "current/behaviour/workstation.js",
     "current/behaviour/interaction-feedback.js",
     "current/behaviour/home-community.js",
     "current/behaviour/public-copy.js",
@@ -90,7 +91,8 @@
     "current/styles/spacing.css",
     "current/styles/product-images.css",
     "current/styles/intelligent-search.css",
-    "current/styles/admin-interface.css"
+    "current/styles/admin-interface.css",
+    "current/styles/workstation.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",

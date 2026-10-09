@@ -733,25 +733,28 @@
     if((ui.mailDraftSubject||'').trim()) return ui.mailDraftSubject.trim();
     if(ui.mailTemplate==='workshop' && g) return g.title;
     if(ui.mailTemplate==='clinic-check' && g) return `Clinic check: ${g.title}`;
+    if(ui.mailTemplate==='custom') return 'One contact for your clinic supplies';
     if(ui.mailTemplate==='supply-note') return 'A quick supply note from Pharma Service';
     return g?.title||'From Pharma Service';
   }
   function mailCampaignIntro(){
     const g=mailGuide();
     if((ui.mailDraftIntro||'').trim()) return ui.mailDraftIntro.trim();
+    if(ui.mailTemplate==='custom') return 'Hello,\n\nI’m Mohamed from Pharma Service in Dubai. We help schools, clinics and institutions organise their medical supplies through one point of contact. Send us your clinic list, replenishment needs or an existing specification, and we’ll review the requirement, source suitable options and prepare one clear quotation.\n\nWould you be the right person to speak with about clinic purchasing, or could you point me to the colleague who handles it?\n\nMohamed Hassan Al Nimer\nManaging Director | Pharma Service Co. L.L.C.\ninfo@pharmaservice.ae';
     if(ui.mailTemplate==='clinic-check') return g?.excerpt||'A practical check worth adding to the clinic routine.';
     if(ui.mailTemplate==='supply-note') return 'A short note from Pharma Service on the products, replacements and small supply details worth keeping visible.';
     return g?.excerpt||'Practical product intelligence from The Workshop.';
   }
-  function mailCampaignCta(){ return (ui.mailDraftCta||'').trim() || (ui.mailTemplate==='supply-note'?'Browse the institutional catalogue':'Read the guide'); }
+  function mailCampaignCta(){ return (ui.mailDraftCta||'').trim() || (ui.mailTemplate==='custom'?'See how Pharma Service works':ui.mailTemplate==='supply-note'?'Browse the institutional catalogue':'Read the guide'); }
   function mailCampaignUrl(){
     const g=mailGuide();
+    if(ui.mailTemplate==='custom') return 'https://pharmaservice.ae/#our-model';
     if(ui.mailTemplate==='supply-note') return 'https://pharmaservice.ae/catalogue.html';
     return g?`https://pharmaservice.ae/workshop/${g.slug}`:'https://pharmaservice.ae/workshop';
   }
   function mailCampaignSnapshot(){
     const g=mailGuide();
-    return {template:ui.mailTemplate,workshop_slug:g?.slug||null,workshop_title:g?.title||null,subject:mailCampaignSubject(),intro:mailCampaignIntro(),cta_label:mailCampaignCta(),cta_url:mailCampaignUrl()};
+    return {template:ui.mailTemplate,workshop_slug:ui.mailTemplate==='custom'?null:g?.slug||null,workshop_title:ui.mailTemplate==='custom'?null:g?.title||null,subject:mailCampaignSubject(),intro:mailCampaignIntro(),cta_label:mailCampaignCta(),cta_url:mailCampaignUrl()};
   }
   function mailStatusPill(status){ const tone=({sent:'ok',sending:'warn',draft:'',failed:'danger',partial:'warn'})[status]||''; return badge(String(status||'draft').replace('_',' '),tone); }
   function mailAudienceSummary(){
@@ -762,9 +765,9 @@
   }
   function mailPreview(){
     const g=mailGuide(); const snap=mailCampaignSnapshot();
-    const kicker=ui.mailTemplate==='supply-note'?'INSTITUTIONAL SUPPLY':'THE WORKSHOP';
-    const meta=g&&ui.mailTemplate!=='supply-note'?`${esc(g.category)} · ${esc(g.read_time||'')}`:'Pharma Service Co. L.L.C.';
-    return `<div class="mailPreviewChrome"><div class="mailPreviewTop"><span>From</span><b>Pharma Service &lt;${esc(mailDesk.senderEmail)}&gt;</b></div><div class="mailPreviewSubject"><span>Subject</span><b>${esc(snap.subject)}</b></div><div class="mailEmailCanvas"><div class="mailEmailBrand"><img src="${PSC_LOGO}" alt="Pharma Service"><span>${kicker}</span></div><div class="mailEmailRule"></div><small>${meta}</small><h2>${esc(g?.title||snap.subject)}</h2><p>${esc(snap.intro)}</p>${g?.subtitle&&ui.mailTemplate!=='supply-note'?`<blockquote>${esc(g.subtitle)}</blockquote>`:''}<a href="${esc(snap.cta_url)}" class="mailEmailCta">${esc(snap.cta_label)}</a><div class="mailEmailFooter"><b>Pharma Service Co. L.L.C.</b><span>Institutional healthcare supply · Dubai, UAE</span><span>Sent from ${esc(mailDesk.senderEmail)}</span><small>Recipients can opt out of future PS marketing emails at any time.</small></div></div></div>`;
+    const kicker=['custom','supply-note'].includes(ui.mailTemplate)?'INSTITUTIONAL SUPPLY':'THE WORKSHOP';
+    const meta=g&&!['supply-note','custom'].includes(ui.mailTemplate)?`${esc(g.category)} · ${esc(g.read_time||'')}`:'Pharma Service Co. L.L.C.';
+    return `<div class="mailPreviewChrome"><div class="mailPreviewTop"><span>From</span><b>Pharma Service &lt;${esc(mailDesk.senderEmail)}&gt;</b></div><div class="mailPreviewSubject"><span>Subject</span><b>${esc(snap.subject)}</b></div><div class="mailEmailCanvas"><div class="mailEmailBrand"><img src="${PSC_LOGO}" alt="Pharma Service"><span>${kicker}</span></div><div class="mailEmailRule"></div><small>${meta}</small><h2>${esc(ui.mailTemplate==='custom'?snap.subject:g?.title||snap.subject)}</h2><p>${esc(snap.intro)}</p>${g?.subtitle&&!['supply-note','custom'].includes(ui.mailTemplate)?`<blockquote>${esc(g.subtitle)}</blockquote>`:''}<a href="${esc(snap.cta_url)}" class="mailEmailCta">${esc(snap.cta_label)}</a><div class="mailEmailFooter"><b>Pharma Service Co. L.L.C.</b><span>Institutional healthcare supply · Dubai, UAE</span><span>Sent from ${esc(mailDesk.senderEmail)}</span><small>Recipients can opt out of future PS marketing emails at any time.</small></div></div></div>`;
   }
 
   function adminMailCompose(){
@@ -772,15 +775,15 @@
     const guideSelect=guides.map(g=>`<option value="${esc(g.slug)}" ${g.slug===mailGuide()?.slug?'selected':''}>${esc(g.title)}</option>`).join('');
     const contactRows=contacts.map(c=>`<label class="mailContactPick ${!mailEligibleContact(c)?'disabled':''}"><input type="checkbox" data-mail-contact-select="${c.id}" ${selected.has(c.id)?'checked':''} ${!mailEligibleContact(c)?'disabled':''}><span><b>${esc([c.first_name,c.last_name].filter(Boolean).join(' ')||c.email)}</b><small>${esc(c.organization||'No organization')} · ${esc(c.role||'Role not set')}</small></span><em>${mailEligibleContact(c)?'Eligible':c.status==='unsubscribed'?'Opted out':'Basis required'}</em></label>`).join('');
     return `<div class="mailComposeGrid"><section class="panel mailComposer"><div class="mailSectionHead"><div><span class="eyebrow">COMPOSE</span><h2>Turn PS content into a useful email.</h2></div><span class="mailSenderBadge">FROM · ${esc(mailDesk.senderEmail)}</span></div>
-      <div class="mailTemplateRow"><button class="mailTemplateCard ${ui.mailTemplate==='workshop'?'active':''}" data-mail-template="workshop"><small>01</small><b>Workshop note</b><span>One useful guide, one reason to read it.</span></button><button class="mailTemplateCard ${ui.mailTemplate==='clinic-check'?'active':''}" data-mail-template="clinic-check"><small>02</small><b>Clinic check</b><span>Fast readiness or stock check.</span></button><button class="mailTemplateCard ${ui.mailTemplate==='supply-note'?'active':''}" data-mail-template="supply-note"><small>03</small><b>Supply note</b><span>Replenishment, replacement or catalogue update.</span></button></div>
-      ${ui.mailTemplate!=='supply-note'?`<label class="fieldLabel">Workshop guide</label><select class="input mailFull" data-mail-guide>${guideSelect}</select>`:''}
+      <div class="mailTemplateRow"><button class="mailTemplateCard ${ui.mailTemplate==='custom'?'active':''}" data-mail-template="custom"><small>INTRODUCTION</small><b>New prospect</b><span>A personal introduction with one clear question.</span></button><button class="mailTemplateCard ${ui.mailTemplate==='workshop'?'active':''}" data-mail-template="workshop"><small>01</small><b>Workshop newsletter</b><span>One useful guide, one reason to read it.</span></button><button class="mailTemplateCard ${ui.mailTemplate==='clinic-check'?'active':''}" data-mail-template="clinic-check"><small>02</small><b>Clinic check</b><span>Fast readiness or stock check.</span></button><button class="mailTemplateCard ${ui.mailTemplate==='supply-note'?'active':''}" data-mail-template="supply-note"><small>03</small><b>Supply note</b><span>Replenishment, replacement or catalogue update.</span></button></div>
+      ${!['supply-note','custom'].includes(ui.mailTemplate)?`<label class="fieldLabel">Workshop guide</label><select class="input mailFull" data-mail-guide>${guideSelect}</select>`:''}
       <label class="fieldLabel">Subject</label><input class="input mailFull" data-mail-subject value="${esc(mailCampaignSubject())}" maxlength="160">
       <label class="fieldLabel">Opening note</label><textarea class="textarea mailFull" data-mail-intro rows="4" maxlength="1200">${esc(mailCampaignIntro())}</textarea>
       <label class="fieldLabel">CTA label</label><input class="input mailFull" data-mail-cta value="${esc(mailCampaignCta())}" maxlength="80">
       <div class="mailAudienceHead"><div><span class="eyebrow">AUDIENCE</span><h3>${esc(mailAudienceSummary())}</h3></div><button class="textAction" data-mail-select-filtered>Select eligible shown</button></div>
       <div class="mailAudienceFilters"><input class="input" placeholder="Search contacts…" value="${esc(ui.mailSearch)}" data-mail-search><select class="input" data-mail-role>${mailRoleOptions().map(x=>`<option ${x===ui.mailRole?'selected':''}>${esc(x)}</option>`).join('')}</select><select class="input" data-mail-institution>${mailInstitutionOptions().map(x=>`<option ${x===ui.mailInstitution?'selected':''}>${esc(x)}</option>`).join('')}</select></div>
       <div class="mailContactPicker">${contactRows||`<div class="emptyState"><h3>No contacts yet.</h3><p>Add controlled business contacts under Contacts before sending.</p></div>`}</div>
-      <div class="mailComposerActions"><button class="button light" data-mail-save-draft ${!mailDesk.backendReady?'disabled':''}>Save draft</button><button class="button outline" data-mail-test ${!mailDesk.backendReady?'disabled':''}>Send test to info@</button><button class="button dark" data-mail-send ${!mailDesk.backendReady||!mailSelectedEligibleContacts().length?'disabled':''}>Approve & send</button></div>
+      <p class="wsNotice">Campaign delivery is paused. Prepare and save your prospect email or Workshop newsletter here. Recipient permissions and unsubscribe records remain in place; activating bulk delivery needs a configured marketing provider.</p><div class="mailComposerActions"><button class="button light" data-mail-save-draft ${!mailDesk.backendReady?'disabled':''}>Save draft</button></div>
       ${!mailDesk.backendReady?`<div class="mailBackendNotice"><b>Mail data layer not deployed yet.</b><span>The interface is ready. Apply the included V37.7.1 migration and deploy the mail Edge Functions before live sending.</span></div>`:''}
     </section><aside class="mailPreviewPane"><div class="mailPreviewLabel"><span>EMAIL PREVIEW</span><small>Responsive HTML · no tracking pixels</small></div>${mailPreview()}</aside></div>`;
   }
@@ -791,18 +794,18 @@
   }
 
   function adminMailHistory(){
-    const rows=mailDesk.campaigns.map(c=>{const rs=mailDesk.recipients.filter(r=>r.campaign_id===c.id);const sent=rs.filter(r=>r.status==='sent').length;const failed=rs.filter(r=>r.status==='failed').length;return `<tr><td><b>${esc(c.subject)}</b><div class="sub">${esc(c.template||'campaign')}</div></td><td>${date(c.created_at)}</td><td>${mailStatusPill(c.status)}</td><td>${rs.length}</td><td>${sent}</td><td>${failed}</td></tr>`}).join('');
+    const rows=mailDesk.campaigns.map(c=>{const rs=mailDesk.recipients.filter(r=>r.campaign_id===c.id);const sent=rs.filter(r=>r.status==='sent').length;const failed=rs.filter(r=>r.status==='failed').length;return `<tr><td><b>${esc(c.subject)}</b><div class="sub">${esc(c.template||'campaign')}</div><button class="button outline" data-mail-copy="${esc(c.id)}">Open as editable copy</button></td><td>${date(c.created_at)}</td><td>${mailStatusPill(c.status)}</td><td>${rs.length}</td><td>${sent}</td><td>${failed}</td></tr>`}).join('');
     return `<section class="panel"><div class="panelHeader"><div><h2>Send history</h2><p>Delivery history only. Opens and clicks are deliberately not fabricated.</p></div></div><div class="tableWrap"><table class="dataTable"><thead><tr><th>CAMPAIGN</th><th>CREATED</th><th>STATUS</th><th>RECIPIENTS</th><th>SENT</th><th>FAILED</th></tr></thead><tbody>${rows||'<tr><td colspan="6">No campaigns sent yet.</td></tr>'}</tbody></table></div></section>`;
   }
 
   function adminMailSettings(){
-    return `<div class="twoCol"><section class="panel"><span class="eyebrow">SENDER IDENTITY</span><h2>Pharma Service</h2><div class="mailSettingRows"><div><span>From</span><b>${esc(mailDesk.senderEmail)}</b></div><div><span>Reply-to</span><b>${esc(mailDesk.senderEmail)}</b></div><div><span>Display name</span><b>${esc(mailDesk.senderName)}</b></div><div><span>Delivery</span><b>Google Workspace Gmail API via delegated PS service account</b></div></div></section><section class="panel"><span class="eyebrow">CONTROL</span><h2>Human approval first.</h2><p class="smallMuted">Mail Desk does not auto-send marketing. A PS admin chooses content, recipients and explicitly approves each send. Contacts marked unsubscribed, paused or without a reviewed marketing basis are excluded.</p><div class="gateList" style="margin-top:18px"><div class="gate ${mailDesk.backendReady?'ok':'warn'}"><span>Mail database tables</span><i></i></div><div class="gate warn"><span>Google delegated service-account connection verified at send time</span><i></i></div><div class="gate ok"><span>Sender locked to info@pharmaservice.ae</span><i></i></div><div class="gate ok"><span>No tracking pixels in V37.7</span><i></i></div></div></section></div>`;
+    return `<div class="twoCol"><section class="panel"><span class="eyebrow">SENDER IDENTITY</span><h2>Pharma Service</h2><div class="mailSettingRows"><div><span>From</span><b>${esc(mailDesk.senderEmail)}</b></div><div><span>Reply-to</span><b>${esc(mailDesk.senderEmail)}</b></div><div><span>Display name</span><b>${esc(mailDesk.senderName)}</b></div><div><span>Delivery</span><b>Campaign delivery paused; transactional Gmail uses OAuth</b></div></div></section><section class="panel"><span class="eyebrow">CONTROL</span><h2>Human approval first.</h2><p class="smallMuted">Mail Desk does not auto-send marketing. A PS admin chooses content, recipients and explicitly approves each send. Contacts marked unsubscribed, paused or without a reviewed marketing basis are excluded.</p><div class="gateList" style="margin-top:18px"><div class="gate ${mailDesk.backendReady?'ok':'warn'}"><span>Mail database tables</span><i></i></div><div class="gate warn"><span>Marketing provider configuration required before campaign delivery</span><i></i></div><div class="gate ok"><span>Sender locked to info@pharmaservice.ae</span><i></i></div><div class="gate ok"><span>No tracking pixels in V37.7</span><i></i></div></div></section></div>`;
   }
 
   function adminMail(){
     const tabs=[['compose','Compose'],['contacts','Contacts'],['history','History'],['settings','Settings']];
     const body=ui.mailTab==='contacts'?adminMailContacts():ui.mailTab==='history'?adminMailHistory():ui.mailTab==='settings'?adminMailSettings():adminMailCompose();
-    return shell(`<div class="pageHeader mailDeskHeader"><div><span class="eyebrow">PS MAIL DESK</span><h1>Useful emails, from the same system.</h1><p>Turn Workshop guides and institutional supply updates into controlled outreach from <b>${esc(mailDesk.senderEmail)}</b>.</p></div><div class="mailIdentityCard"><span>${icon('mail')}</span><div><small>SENDING MAILBOX</small><b>${esc(mailDesk.senderEmail)}</b></div></div></div><div class="mailTabs">${tabs.map(([id,label])=>`<button class="${ui.mailTab===id?'active':''}" data-mail-tab="${id}">${label}</button>`).join('')}</div>${body}`,true);
+    return shell(`<div class="pageHeader mailDeskHeader"><div><span class="eyebrow">CUSTOMER COMMUNICATIONS</span><h1>Outreach</h1><p>Turn Workshop guides and institutional supply updates into controlled outreach from <b>${esc(mailDesk.senderEmail)}</b>.</p></div><div class="mailIdentityCard"><span>${icon('mail')}</span><div><small>SENDING MAILBOX</small><b>${esc(mailDesk.senderEmail)}</b></div></div></div><div class="mailTabs">${tabs.map(([id,label])=>`<button class="${ui.mailTab===id?'active':''}" data-mail-tab="${id}">${label}</button>`).join('')}</div>${body}`,true);
   }
 
   async function addMailContact(form){
@@ -827,6 +830,7 @@
 
   async function saveMailCampaign(status='draft',testMode=false){
     if(!sb||!authContext?.isPscAdmin||!mailDesk.backendReady) return;
+    if(status!=='draft'){toast('Campaign delivery is paused. Save the draft for review.');return;}
     const snap=mailCampaignSnapshot();
     const contacts=mailSelectedEligibleContacts();
     if(status!=='draft'&&!testMode&&!contacts.length){toast('<strong>Select at least one eligible contact.</strong>');return;}
@@ -1204,6 +1208,8 @@
   function badge(text,tone=''){ return `<span class="badge ${tone}">${esc(text)}</span>`; }
   function icon(name){
     const map={
+      users:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6M18 15a5 5 0 0 1 3 5"/></svg>`,
+      calendar:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6M17 2v6M3 11h18M7 15h3M14 15h3"/></svg>`,
       dashboard:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="6" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/></svg>`,
       overview:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="6" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/></svg>`,
       home:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5"/><path d="M6.5 9.5V20h4.5v-5h2v5h4.5V9.5"/></svg>`,
@@ -1268,10 +1274,13 @@
     ['portal/stock','Stock & expiry','stock'],
     ['portal/assets','Clinic assets','assets']
   ];
-  const adminNav=[['admin/dashboard','Deal Desk','dashboard'],['admin/mail','Mail','mail'],['admin/storefront','Storefront','edit'],['admin/products','Product Master','boxes'],['admin/family-options','Family Options','checklist'],['admin/requests','Request Queue','checklist'],['admin/fulfilment','Fulfilment Rules','repeat'],['admin/supplier-feed','Supplier Feed','reports']];
+  const adminNav=[['admin/dashboard','Today','home'],['admin/requests','Requests','checklist'],['admin/customers','Customers','users'],['admin/tasks','Tasks & calendar','calendar'],['admin/mail','Outreach','mail'],['admin/resources','Products & suppliers','boxes'],['admin/settings','Settings','settings']];
 
   function shell(content, admin=false){
     const route=currentRoute();
+    const resourceRoutes=['admin/products','admin/family-options','admin/supplier-feed','admin/storefront'];
+    if(admin&&resourceRoutes.includes(route))content=`<button class="button outline" data-go="admin/resources">← Products & suppliers</button>`+content;
+    if(admin&&route==='admin/fulfilment')content=`<button class="button outline" data-go="admin/settings">← Settings</button>`+content;
     const liveCustomerNav=schoolNav.filter(([href])=>isDemoAccount() || !['portal/stock','portal/assets'].includes(href));
     const links=admin?adminNav:liveCustomerNav;
     const searchValue=esc(ui.globalSearch||'');
@@ -1289,7 +1298,7 @@
         <header class="topbar sleekTopbar v7Topbar v7bTopbar portalHeaderBar">
           <button class="iconBtn mobileMenu" data-mobile-open aria-label="Open menu">${icon('menu')}</button>
           <div class="topbarBrandSlot plainLogo"><img src="${PSC_LOGO}" alt="Pharma Service"></div>
-          ${!admin?`<div class="topbarSearch"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search institutional catalogue…" aria-label="Search institutional catalogue"></div>`:`<div class="topbarAdminTitle"><span>PS</span><b>${route==='admin/mail'?'Mail Desk':'Deal Desk'}</b></div>`}
+          ${!admin?`<div class="topbarSearch"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search institutional catalogue…" aria-label="Search institutional catalogue"></div>`:`<div class="topbarAdminTitle"><span>PS</span><b>${esc(adminNav.find(x=>x[0]===route)?.[1]||'Workspace')}</b></div>`}
           <div class="topbarActions topbarActionsV4">
             ${admin?`<span class="userPill compactUser"><span class="avatarDot">MH</span><span><b>Mohamed</b><small>PS admin</small></span></span>`:`
             <div class="accountSwitcherWrap">
@@ -2631,6 +2640,8 @@
     return `<div class="notice"><strong>Quote builder.</strong> Supplier cost and tax must be supported by current evidence before live issue. Values labelled “Demo planning assumption” are not supplier quotations.</div><div class="tableWrap"><table class="dataTable"><thead><tr><th>ITEM</th><th>QTY</th><th>DIRECT COST / UNIT</th><th>SELL / UNIT</th><th>VAT</th><th>LINE GM</th></tr></thead><tbody>${q.rows.map(x=>{const gm=x.sell!==null&&x.cost!==null&&x.sell>0?((x.sell-x.cost)/x.sell*100):null;return `<tr><td><b>${esc(lineDisplayName(x.l,x.p))}</b><div class="sub mono">${esc(lineReference(x.l))}</div>${isFamilyLine(x.l)?`<div class="sub">${esc(lineBrandPreferenceLabel(x.l))}</div>`:''}${x.q.costEvidence?`<div class="quoteLineWarning">${esc(x.q.costEvidence)}</div>`:''}</td><td>${x.l.qty}</td><td><input class="moneyInput" type="number" step="0.01" value="${x.cost===null?'':x.cost}" data-quote-field="${r.id}|${x.key}|cost"></td><td><input class="moneyInput" type="number" step="0.01" value="${x.sell===null?'':x.sell}" data-quote-field="${r.id}|${x.key}|sell"></td><td><select class="selectInput" data-quote-field="${r.id}|${x.key}|vat"><option value="" ${x.vatRate===null?'selected':''}>Review</option><option value="0" ${x.vatRate===0?'selected':''}>0%</option><option value="5" ${x.vatRate===5?'selected':''}>5%</option></select></td><td>${gm===null?'—':`<b class="${gm<target?'dangerText':'successText'}">${gm.toFixed(1)}%</b>`}</td></tr>`}).join('')}</tbody></table></div><div class="quoteSummary"><div><span>DIRECT COST</span><b>${q.costComplete?money(q.cost):'Incomplete'}</b></div><div><span>SELL EX VAT</span><b>${q.hasSell?money(q.subtotal):'Incomplete'}</b></div><div><span>GROSS PROFIT</span><b>${q.gp===null?'Blocked':money(q.gp)}</b></div><div><span>TRUE GM</span><b class="${q.gm!==null&&q.gm<target?'dangerText':''}">${q.gm===null?'Blocked':q.gm.toFixed(1)+'%'}</b></div></div><div class="twoCol"><div><label class="fieldLabel">Delivery</label><input class="input" style="width:100%" value="${esc(r.quote?.delivery||'')}" data-quote-meta="${r.id}|delivery"><label class="fieldLabel" style="margin-top:10px">Terms</label><input class="input" style="width:100%" value="${esc(r.quote?.terms||'')}" data-quote-meta="${r.id}|terms"></div><div><label class="fieldLabel">Quotation status</label><select class="input" style="width:100%" data-request-status="${r.id}">${workflow.map(s=>`<option ${r.status===s?'selected':''}>${s}</option>`).join('')}</select><label class="fieldLabel" style="margin-top:10px">Quotation reference</label><input class="input" style="width:100%" value="${esc(r.quoteRef||'')}" data-quote-ref="${r.id}" placeholder="PSC-Q-YYYY-####"></div></div><div class="gateList" style="margin-top:16px"><div class="gate ${q.costComplete?'ok':'block'}"><span>All direct costs present</span><i></i></div><div class="gate ${q.taxResolved?'ok':'block'}"><span>VAT reviewed by line</span><i></i></div><div class="gate ${q.gm!==null&&q.gm>=20?'ok':'warn'}"><span>Target GM ≥ 20%</span><i></i></div><div class="gate warn"><span>Supplier stock / lead time requires current confirmation</span><i></i></div><div class="gate ${q.rows.some(x=>lineIsRegulated(x.l,x.p))?'warn':'ok'}"><span>Regulated route check</span><i></i></div><div class="gate block"><span>Funding / customer PO evidence: save in the commercial inbox</span><i></i></div></div>`;
   }
 
+  function workspacePage(view){return shell(`<section data-psc-workspace="${view}" aria-live="polite"><p>Opening your workspace…</p></section>`,true);}
+  window.PSC_WORKSPACE_OPEN_REQUEST=(id)=>{const r=state.requests.find(x=>x.dbId===id||x.id===id);if(!r){toast('Refresh the workspace to load this request.');return;}ui.modal={type:'request',id:r.id,admin:true};render();};
   function adminDashboard(){
     const open=state.requests.filter(r=>!['Accepted','Cancelled'].includes(r.status)).length;
     const activeQuotes=state.requests.filter(r=>['Sent','Authorized','Procurement','Delivery'].includes(r.status));
@@ -3435,12 +3446,17 @@
       case 'portal/assets': html=isDemoAccount()?assetsPage():shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">ACCOUNT MODULE</span><h1>Clinic assets</h1><p>This module is not enabled for this live account yet. PS will only activate it when verified model, serial, warranty and service records have been loaded.</p></div></div><section class="panel"><div class="emptyState"><h3>No simulated assets on a live account.</h3><p>Verified asset records will appear here after onboarding.</p><button class="button primary" data-go="portal/dashboard">Back to Home</button></div></section>`);break;
       case 'portal/insights': html=insightsPage();break;
       case 'portal/archive': html=archivePage();break;
-      case 'admin/dashboard': html=adminDashboard();break;
+      case 'admin/dashboard': html=workspacePage('today');break;
+      case 'admin/customers': html=workspacePage('customers');break;
+      case 'admin/tasks': html=workspacePage('tasks');break;
+      case 'admin/resources': html=workspacePage('resources');break;
+      case 'admin/settings': html=workspacePage('settings');break;
       case 'admin/mail': html=adminMail();break;
       case 'admin/storefront': html=adminStorefront();break;
       case 'admin/products': html=adminProducts();break;
       case 'admin/family-options': html=adminFamilyOptions();break;
-      case 'admin/requests': html=adminRequests();break;
+      case 'admin/requests': html=workspacePage('requests');break;
+      case 'admin/legacy-requests': html=adminRequests();break;
       case 'admin/fulfilment': html=adminFulfilment();break;
       case 'admin/supplier-feed': html=adminFeed();break;
       default: html=landing();
@@ -3566,7 +3582,8 @@
     document.querySelectorAll('[data-submit-request]').forEach(el=>el.addEventListener('click',submitRequest));
     document.querySelectorAll('[data-submit-custom]').forEach(el=>el.addEventListener('click',submitCustomRequest));
     document.querySelectorAll('[data-mail-tab]').forEach(el=>el.addEventListener('click',()=>{ui.mailTab=el.dataset.mailTab;render()}));
-    document.querySelectorAll('[data-mail-template]').forEach(el=>el.addEventListener('click',()=>{ui.mailTemplate=el.dataset.mailTemplate;ui.mailDraftSubject='';ui.mailDraftIntro='';ui.mailDraftCta=ui.mailTemplate==='supply-note'?'Browse catalogue':'Read the guide';render()}));
+    document.querySelectorAll('[data-mail-copy]').forEach(el=>el.addEventListener('click',()=>{const c=mailDesk.campaigns.find(c=>c.id===el.dataset.mailCopy);if(!c)return;ui.mailTemplate=c.template;ui.mailGuideSlug=c.workshop_slug||ui.mailGuideSlug;ui.mailDraftSubject=c.subject;ui.mailDraftIntro=c.intro;ui.mailDraftCta=c.cta_label;ui.mailSelectedContacts=mailDesk.recipients.filter(r=>r.campaign_id===c.id).map(r=>r.contact_id);ui.mailTab='compose';render();toast('Editable copy opened. Saving creates a new draft; nothing is sent.')}));
+    document.querySelectorAll('[data-mail-template]').forEach(el=>el.addEventListener('click',()=>{ui.mailTemplate=el.dataset.mailTemplate;ui.mailDraftSubject='';ui.mailDraftIntro='';ui.mailDraftCta=ui.mailTemplate==='custom'?'See how Pharma Service works':ui.mailTemplate==='supply-note'?'Browse catalogue':'Read the guide';render()}));
     document.querySelectorAll('[data-mail-guide]').forEach(el=>el.addEventListener('change',e=>{ui.mailGuideSlug=e.target.value;ui.mailDraftSubject='';ui.mailDraftIntro='';render()}));
     document.querySelectorAll('[data-mail-subject]').forEach(el=>el.addEventListener('input',e=>{ui.mailDraftSubject=e.target.value;const preview=document.querySelector('.mailPreviewPane');if(preview)preview.innerHTML=`<div class="mailPreviewLabel"><span>EMAIL PREVIEW</span><small>Responsive HTML · no tracking pixels</small></div>${mailPreview()}`;}));
     document.querySelectorAll('[data-mail-intro]').forEach(el=>el.addEventListener('input',e=>{ui.mailDraftIntro=e.target.value;const preview=document.querySelector('.mailPreviewPane');if(preview)preview.innerHTML=`<div class="mailPreviewLabel"><span>EMAIL PREVIEW</span><small>Responsive HTML · no tracking pixels</small></div>${mailPreview()}`;}));
