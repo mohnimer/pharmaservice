@@ -1,3 +1,4 @@
+import {draftSender,senderStatus,verifySender,routedMime} from '../_shared/mail-senders.ts'
 import {intakeAction,checkIntakeSend} from '../_shared/mail-intake.ts'
 import {service,admin,json,MAILBOX,check,accessToken,gmail,mime,send,hash,noDemoOrder,email,logAttempt,safeCode,MailError} from '../_shared/psc-mail.ts'
 import {quotePdf} from '../_shared/quote-pdf.ts'
@@ -10,6 +11,7 @@ Deno.serve(async req=>{
  const svc=service();let draft:any=null,attemptedSend=false;
  try{
   const user=await admin(req,svc),b=await req.json();
+  if(b.action==='sender_status')return json({senders:await senderStatus(await accessToken(svc))});
   if(['intake_source','intake_save','intake_rfq'].includes(b.action))return json(await intakeAction(svc,user,b));
   if(b.action==='link'){
    if(!['customer','supplier'].includes(b.kind))throw new MailError('correspondence_kind_required');await noDemoOrder(svc,b.order_id);
@@ -39,7 +41,7 @@ Deno.serve(async req=>{
    const o=await noDemoOrder(svc,b.order_id),{q,fp}=await currentQuote(svc,o.id),contact=await recipient(svc,o);
    const snapshot=check(await svc.from('quote_snapshots').select('*').eq('quote_id',q.id).eq('revision_no',q.current_revision).eq('snapshot_kind','issued').single());if(!currentSnapshot(q,snapshot,fp))throw new MailError('current_issued_snapshot_required');
    const pdf=await quotePdf(snapshot,contact.name),id=crypto.randomUUID(),path='drafts/'+id+'/quotation.pdf';check(await svc.storage.from('psc-correspondence').upload(path,pdf,{contentType:'application/pdf'}));
-   const body=`Hello,\n\nPlease find attached Pharma Service quotation ${q.quote_number}, revision ${q.current_revision}, for ${contact.name}.\n\nTotal: ${q.currency||'AED'} ${Number(q.total).toFixed(2)} including applicable VAT.\nPayment terms: ${q.payment_terms||'As recorded in the quotation'}.\nDelivery terms: ${q.delivery_terms||'Subject to PSC confirmation'}.\nValidity: ${q.validity_days} calendar days.\n\nPlease review the quotation and confirm your requirements and written approval. Procurement release remains subject to the agreed funding and supply checks.\n\nRegards,\nPharma Service Co. L.L.C.\ninfo@pharmaservice.ae`;
+   const body=`Hello,\n\nPlease find attached Pharma Service quotation ${q.quote_number}, revision ${q.current_revision}, for ${contact.name}.\n\nTotal: ${q.currency||'AED'} ${Number(q.total).toFixed(2)} including applicable VAT.\nPayment terms: ${q.payment_terms||'As recorded in the quotation'}.\nDelivery terms: ${q.delivery_terms||'Subject to PSC confirmation'}.\nValidity: ${q.validity_days} calendar days.\n\nPlease review the quotation and confirm your requirements and written approval. Procurement release remains subject to the agreed funding and supply checks.\n\nRegards,\nPharma Service Co. L.L.C.\nsales@pharmaservice.ae`;
    const data=check(await svc.from('psc_mail_drafts').insert({id,order_id:o.id,quote_id:q.id,quote_snapshot_id:snapshot.id,quote_fingerprint:fp,kind:'quotation',recipient:contact.to,subject:'Quotation '+q.quote_number+' - Pharma Service',body_text:body,attachment_path:path,attachment_sha256:await hash(pdf),created_by:user.id}).select('id').single());return json(data)
   }
   if(b.action==='test_draft')return json(check(await svc.from('psc_mail_drafts').insert({kind:'test',recipient:MAILBOX,subject:'PSC controlled Gmail connection test',body_text:'Approved internal integration test. No customer order or commercial commitment.',created_by:user.id}).select('id').single()))
@@ -63,12 +65,13 @@ Deno.serve(async req=>{
    const c=await recipient(svc,await noDemoOrder(svc,draft.order_id));if(c.to.toLowerCase()!==draft.recipient.toLowerCase())throw new MailError('customer_recipient_changed');
    const file=check(await svc.storage.from('psc-correspondence').download(draft.attachment_path));pdf=new Uint8Array(await file.arrayBuffer());if(await hash(pdf)!==draft.attachment_sha256)throw new MailError('quotation_attachment_changed')
   }
-  const token=await accessToken(svc),claimed=draft.intake_message_id?check(await svc.rpc('psc_claim_intake_draft',{p_draft:draft.id,p_updated_at:draft.updated_at,p_user:user.id})):check(await svc.from('psc_mail_drafts').update({status:'sending',approved_by:user.id,approved_at:new Date().toISOString(),updated_at:new Date().toISOString()}).eq('id',draft.id).eq('status','draft').eq('updated_at',draft.updated_at).select('*').maybeSingle());if(!claimed)throw new MailError('draft_changed_or_claimed')
+  const token=await accessToken(svc),sender=draftSender(draft.kind);await verifySender(token,sender);
+  const claimed=draft.intake_message_id?check(await svc.rpc('psc_claim_intake_draft',{p_draft:draft.id,p_updated_at:draft.updated_at,p_user:user.id})):check(await svc.from('psc_mail_drafts').update({status:'sending',approved_by:user.id,approved_at:new Date().toISOString(),updated_at:new Date().toISOString()}).eq('id',draft.id).eq('status','draft').eq('updated_at',draft.updated_at).select('*').maybeSingle());if(!claimed)throw new MailError('draft_changed_or_claimed')
   draft=Array.isArray(claimed)?claimed[0]:claimed;if(!draft?.id)throw new MailError('draft_changed_or_claimed');await logAttempt(svc,null,draft.id,'started');attemptedSend=true;
-  const result=await send(token,mime({to:draft.recipient,subject:draft.subject,text:draft.body_text,id:'draft-'+draft.id,pdf}));
+  const result=await send(token,routedMime(sender,{to:draft.recipient,subject:draft.subject,text:draft.body_text,id:'draft-'+draft.id,pdf}));
   check(await svc.from('psc_mail_drafts').update({status:'accepted',provider_message_id:result.id,accepted_at:new Date().toISOString(),last_error:null}).eq('id',draft.id));
   await logAttempt(svc,null,draft.id,'gmail_accepted',null,result.id);
-  check(await svc.from('psc_mail_messages').upsert({gmail_message_id:result.id,gmail_thread_id:result.threadId||result.id,direction:'outbound',kind:draft.kind,order_id:draft.order_id,sender:MAILBOX,recipient:draft.recipient,subject:draft.subject,body_text:draft.body_text,received_at:new Date().toISOString(),review_status:'linked',attachments:draft.attachment_path?[{object_path:draft.attachment_path,file_name:'PSC-quotation.pdf'}]:[]}));
+  check(await svc.from('psc_mail_messages').upsert({gmail_message_id:result.id,gmail_thread_id:result.threadId||result.id,direction:'outbound',kind:draft.kind,order_id:draft.order_id,sender,recipient:draft.recipient,subject:draft.subject,body_text:draft.body_text,received_at:new Date().toISOString(),review_status:'linked',attachments:draft.attachment_path?[{object_path:draft.attachment_path,file_name:'PSC-quotation.pdf'}]:[]}));
   // Replace the old automatic portal-ready email with the explicitly approved PDF communication.
   if(draft.kind==='quotation')await svc.from('notification_outbox').update({status:'blocked',last_error:'Superseded by approved quotation email',next_attempt_at:null}).eq('entity_id',draft.quote_id).eq('event_type','quote_sent').in('status',['queued','held','failed']);
   return json({accepted_by_gmail:true,delivery_confirmed:false})

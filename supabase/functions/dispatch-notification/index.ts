@@ -1,3 +1,4 @@
+import {SALES,notificationSender,verifySender,routedMime} from '../_shared/mail-senders.ts'
 import {service,admin,worker,accessToken,mime,send,check,logAttempt,noDemoOrder,safeCode,MailError,json} from '../_shared/psc-mail.ts'
 
 const cors = {
@@ -22,11 +23,11 @@ const clean = (v: unknown) => {
 
 const validEmail = (v: unknown) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v || '').trim())
 
-function shell(kicker:string,title:string,body:string,ctaLabel?:string,ctaUrl?:string){
+function shell(kicker:string,title:string,body:string,ctaLabel?:string,ctaUrl?:string,replyTo=SENDER){
   const cta=ctaLabel&&ctaUrl
     ? `<a href="${esc(ctaUrl)}" style="display:inline-block;margin-top:22px;background:#10211f;color:#fff;text-decoration:none;padding:13px 18px;border-radius:10px;font-size:13px;font-weight:700">${esc(ctaLabel)}</a>`
     : ''
-  return `<!doctype html><html><body style="margin:0;background:#f2f4f3;font-family:Arial,Helvetica,sans-serif;color:#17211f"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f2f4f3;padding:28px 12px"><tr><td align="center"><table role="presentation" width="620" cellspacing="0" cellpadding="0" style="max-width:620px;width:100%;background:#fbfaf5;border:1px solid #dfe4e2;border-radius:18px;overflow:hidden"><tr><td style="padding:28px 34px 30px"><div style="font-size:12px;font-weight:800;letter-spacing:.12em;color:#15978f">${esc(kicker)}</div><div style="height:1px;background:#d9d4cb;margin:18px 0 26px"></div><h1 style="font-size:32px;line-height:1.05;letter-spacing:-1px;margin:0 0 18px">${esc(title)}</h1>${body}${cta}<div style="height:1px;background:#d9d4cb;margin:34px 0 18px"></div><div style="font-size:12px;font-weight:700">Pharma Service Co. L.L.C.</div><div style="font-size:11px;line-height:1.55;color:#75807d;margin-top:5px">Institutional healthcare supply · Dubai, UAE<br>info@pharmaservice.ae</div></td></tr></table></td></tr></table></body></html>`
+  return `<!doctype html><html><body style="margin:0;background:#f2f4f3;font-family:Arial,Helvetica,sans-serif;color:#17211f"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f2f4f3;padding:28px 12px"><tr><td align="center"><table role="presentation" width="620" cellspacing="0" cellpadding="0" style="max-width:620px;width:100%;background:#fbfaf5;border:1px solid #dfe4e2;border-radius:18px;overflow:hidden"><tr><td style="padding:28px 34px 30px"><div style="font-size:12px;font-weight:800;letter-spacing:.12em;color:#15978f">${esc(kicker)}</div><div style="height:1px;background:#d9d4cb;margin:18px 0 26px"></div><h1 style="font-size:32px;line-height:1.05;letter-spacing:-1px;margin:0 0 18px">${esc(title)}</h1>${body}${cta}<div style="height:1px;background:#d9d4cb;margin:34px 0 18px"></div><div style="font-size:12px;font-weight:700">Pharma Service Co. L.L.C.</div><div style="font-size:11px;line-height:1.55;color:#75807d;margin-top:5px">Institutional healthcare supply · Dubai, UAE<br>${esc(replyTo)}</div></td></tr></table></td></tr></table></body></html>`
 }
 
 function row(label:string,value:unknown){
@@ -148,7 +149,7 @@ async function buildQuoteSent(svc:any,notification:any){
     recipientEmail:recipient,
     recipientName:site || group?.name || 'Institutional customer',
     subject:notification.subject || `Quotation ${q.quote_number} — Pharma Service`,
-    html:shell('QUOTATION READY',q.quote_number,details,'View quotation',PORTAL_URL)
+    html:shell('QUOTATION READY',q.quote_number,details,'View quotation',PORTAL_URL,SALES)
   }
 }
 
@@ -181,15 +182,15 @@ Deno.serve(async req=>{
    }
   }
   // Obtain the token before claiming. Lack of configuration must not consume send attempts.
-  const token=await accessToken(svc)
+  const token=await accessToken(svc),sender=notificationSender(current.event_type);await verifySender(token,sender)
   claimed=check(await svc.from('notification_outbox').update({status:'sending',attempts:current.attempts+1,last_attempt_at:new Date().toISOString(),last_error:null}).eq('id',id).eq('status',current.status).select('*').maybeSingle());if(!claimed)return json({claimed_elsewhere:true})
   const message=await buildMessage(svc,claimed);if(!validEmail(message.recipientEmail))throw new MailError('invalid_recipient')
   await logAttempt(svc,id,null,'started')
   attemptedSend=true;
-  const result=await send(token,mime({to:message.recipientEmail,subject:message.subject,html:message.html,id:'notification-'+id}))
+  const result=await send(token,routedMime(sender,{to:message.recipientEmail,subject:message.subject,html:message.html,id:'notification-'+id}))
   check(await svc.from('notification_outbox').update({status:'sent',recipient_email:message.recipientEmail,recipient_name:message.recipientName,subject:message.subject,provider_message_id:result.id,accepted_at:new Date().toISOString(),sent_at:new Date().toISOString(),last_error:null}).eq('id',id))
   await logAttempt(svc,id,null,'gmail_accepted',null,result.id)
-  check(await svc.from('psc_mail_messages').upsert({gmail_message_id:result.id,gmail_thread_id:result.threadId||result.id,direction:'outbound',kind:'notification',order_id:claimed.entity_type==='order'?claimed.entity_id:claimed.payload?.order_id||null,enquiry_id:claimed.entity_type==='enquiry'?claimed.entity_id:null,sender:SENDER,recipient:message.recipientEmail,subject:message.subject,received_at:new Date().toISOString(),review_status:'linked'}))
+  check(await svc.from('psc_mail_messages').upsert({gmail_message_id:result.id,gmail_thread_id:result.threadId||result.id,direction:'outbound',kind:'notification',order_id:claimed.entity_type==='order'?claimed.entity_id:claimed.payload?.order_id||null,enquiry_id:claimed.entity_type==='enquiry'?claimed.entity_id:null,sender,recipient:message.recipientEmail,subject:message.subject,received_at:new Date().toISOString(),review_status:'linked'}))
   return json({accepted_by_gmail:true,delivery_confirmed:false})
  }catch(e){
   const code=safeCode(e),unknown=e instanceof MailError?e.uncertain:attemptedSend;

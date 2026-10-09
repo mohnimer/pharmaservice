@@ -11,6 +11,7 @@ try{
   const context=await browser.newContext({viewport:{width,height:900}});await context.addInitScript(()=>{window.__testRole='admin'});
   await context.route('**/*',r=>{const u=new URL(r.request().url());if(u.hostname==='127.0.0.1')return r.continue();if(u.hostname==='cdn.jsdelivr.net')return r.fulfill({contentType:'text/javascript',body:readFileSync('tests/mock-supabase.js','utf8')+extension});return r.fulfill({status:503,body:''});});
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/#admin/requests');await page.locator('[data-open-request="order:o0"]').click();await page.locator('[data-mail-draft]').waitFor();
+  assert(await page.locator('[data-mail-draft]').textContent().then(t=>t.includes('From: sales@pharmaservice.ae')));
   assert.equal(await page.locator('.pscMailPanel script,.pscMailPanel img').count(),0,'unsafe email content rendered');
   await page.locator('[data-mail-draft] button[type=submit]').click();assert.equal(await page.evaluate(()=>window.__mailCalls.filter(c=>c.body.action==='send').length),0);
   await page.locator('[data-mail-draft] [name=approve]').check();await page.locator('[data-mail-draft] button[type=submit]').click();await page.locator('[data-mail-draft]').filter({hasText:'accepted'}).waitFor();assert.equal(await page.evaluate(()=>window.__mailCalls.filter(c=>c.body.action==='send').length),1);
