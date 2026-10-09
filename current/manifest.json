@@ -31,6 +31,7 @@
     "current/behaviour/start-interface.js",
     "current/behaviour/admin-quote-persistence.js",
     "current/behaviour/commercial-inbox.js",
+    "current/behaviour/procurement-mail.js",
     "current/behaviour/interaction-feedback.js",
     "current/behaviour/home-community.js",
     "current/behaviour/public-copy.js",

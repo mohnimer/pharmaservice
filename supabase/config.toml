@@ -1,0 +1,13 @@
+project_id = "ewewkojlsgqvcqarmpgr"
+[functions.psc-gmail-oauth]
+verify_jwt = false
+[functions.dispatch-notification]
+verify_jwt = false
+[functions.poll-procurement-mail]
+verify_jwt = false
+[functions.procurement-mail]
+verify_jwt = false
+[functions.send-mail-campaign]
+verify_jwt = true
+[functions.mail-unsubscribe]
+verify_jwt = false
