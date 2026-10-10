@@ -1,10 +1,11 @@
-import {readFileSync} from 'node:fs';
+import {readFileSync,mkdirSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {createServer} from '../tools/serve.mjs';
 const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const base=`http://127.0.0.1:${server.address().port}`;
 const browser=await chromium.launch({executablePath:process.env.PSC_CHROME,args:['--no-sandbox']});
+mkdirSync('test-results',{recursive:true});
 try{for(const width of [390,1440]){
  const ctx=await browser.newContext({viewport:{width,height:950}});
  await ctx.addInitScript(()=>window.__testRole='customer');
@@ -13,6 +14,8 @@ try{for(const width of [390,1440]){
  await page.goto(base+'/#portal/dashboard');await page.locator('.pscHomeCategory').first().waitFor();
  assert.equal(await page.locator('.pscHomeCategory').count(),6);
  assert.equal(await page.locator('.pscHomeGuide').count(),2);
+ assert.equal(await page.locator('.pscHomeDha').count(),3);
+ assert(!(await page.locator('.pscHomeCategoryColumns').innerText()).includes('↗'));
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  await page.screenshot({path:`test-results/portal-home-${width}.png`,fullPage:true});
  const collected=[];
@@ -21,6 +24,20 @@ try{for(const width of [390,1440]){
   await page.waitForURL('**/#portal/catalogue/'+id);
   assert(await page.locator('[data-ps-search-results]').count());
   if(id.startsWith('dha-')){
+   const card=page.locator('.pscEditorialCard').first();
+   assert.equal(await card.evaluate(el=>getComputedStyle(el).borderTopWidth),'0px');
+   assert(await card.locator('.pscPricePreview').count());
+   if(id==='dha-equipment'){
+    const pulse=page.locator('.pscEditorialCard').filter({has:page.locator('[data-add="PSC-DIA-001"]')});
+    assert((await pulse.innerText()).includes('45.00'));
+    assert((await pulse.innerText()).includes('49.00'));
+    assert((await pulse.innerText()).includes('final price & VAT confirmed'));
+    assert(await pulse.locator('.pscBrandChoices').isVisible(),'brand row is visible');
+    assert(await pulse.locator('.pscBrandChoices button').first().isVisible(),'brand choice is visible');
+    assert(await pulse.evaluate(el=>{const b=el.querySelector('.pscBrandChoices').getBoundingClientRect(),c=el.querySelector('.exactCanvaBody').getBoundingClientRect();return b.bottom<=c.top+1}),'brand row precedes product information');
+    await pulse.screenshot({path:`test-results/card-editorial-${width}.png`});
+    await page.screenshot({path:`test-results/catalogue-editorial-${width}.png`,fullPage:true});
+   }
    const skus=await page.locator('[data-ps-search-results] [data-add]').evaluateAll(els=>els.map(e=>e.dataset.add));
    assert(skus.length>0,'mapped category must contain products');collected.push(...skus);
    assert(await page.evaluate(skus=>skus.every(sku=>PSC_DATA.products.find(p=>p.pscSku===sku)?.dhaMapped),skus));

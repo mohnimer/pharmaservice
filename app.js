@@ -2053,7 +2053,7 @@
     const processing=visible.filter(r=>['Authorized','Procurement','Delivery'].includes(r.status)).length;
     const delivered=state.requests.filter(r=>r.campus===state.campus&&r.status==='Accepted');
     const deliveredSkus=new Set(delivered.flatMap(r=>r.lines.map(l=>l.sku)));
-    const homeCategory=(id,label,note)=>{const c=clinicalNeedMeta(id);return `<button class="pscHomeCategory" style="--category-tint:${c.bg}" data-go="portal/catalogue/${id}"><span class="pscHomeCategoryIcon" aria-hidden="true">${clinicalNeedIcon(c.icon)}</span><span><b>${esc(label||c.label)}</b><small>${esc(note||c.note)}</small></span><span aria-hidden="true">↗</span></button>`;};
+    const homeCategory=(id,label,note)=>{const c=clinicalNeedMeta(id);return `<button class="pscHomeCategory" style="--category-tint:${c.bg}" data-go="portal/catalogue/${id}"><span class="pscHomeCategoryIcon" aria-hidden="true">${clinicalNeedIcon(c.icon)}</span><span><b>${esc(label||c.label)}</b><small>${esc(note||c.note)}</small></span>${id.startsWith('dha-')?`<img class="pscHomeDha" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>`;};
     const workshopPreview=WORKSHOP.filter(g=>g.status==='published').slice(0,2);
 
     return shell(`
@@ -2072,13 +2072,13 @@
         <div class="v26SectionHead"><div><span class="eyebrow">FIND YOUR STARTING POINT</span><h2 id="psc-browse-title">What does your clinic need?</h2></div><button data-go="portal/catalogue">Browse all categories →</button></div>
         <div class="pscHomeCategoryColumns">
           <section><h3>By clinical need</h3><p>Start with the care you provide.</p>${homeCategory('wounds')}${homeCategory('breathing')}${homeCategory('vitals')}<button class="pscHomeAll" data-go="portal/catalogue">All therapeutic & clinical categories →</button></section>
-          <section><h3>Clinic essentials</h3><p>Your DHA requirement list, organised.</p>${homeCategory('dha-medicines',null,'Medicines mapped to the clinic requirements')}${homeCategory('dha-equipment',null,'Required equipment, diagnostics & furniture')}${homeCategory('dha-consumables',null,'Required disposables, wound care & PPE')}<small class="pscHomeScopeNote">Based on the catalogue’s DHA educational clinic mapping. Conditional items and required alternatives are identified; exact product suitability is checked before quotation.</small></section>
+          <section><h3>Clinic essentials</h3><p>Your DHA requirement list, organised.</p>${homeCategory('dha-medicines','Medicines','Medicines mapped to the clinic requirements')}${homeCategory('dha-equipment','Equipment','Required equipment, diagnostics & furniture')}${homeCategory('dha-consumables','Consumables','Required disposables, wound care & PPE')}<small class="pscHomeScopeNote">Based on the catalogue’s DHA educational clinic mapping. Conditional items and required alternatives are identified; exact product suitability is checked before quotation.</small></section>
         </div>
       </section>
 
       <section class="pscHomeWorkshop" aria-labelledby="psc-workshop-title">
-        <div class="pscHomeWorkshopIntro"><span class="eyebrow">THE WORKSHOP</span><h2 id="psc-workshop-title">A little know-how.<br>A more confident clinic.</h2><p>Practical reads on the products, equipment and everyday details you work with.</p><button class="button dark" data-go="workshop">Explore the Workshop ↗</button></div>
-        <div class="pscHomeWorkshopGuides">${workshopPreview.map((g,i)=>`<button class="pscHomeGuide" data-go="workshop/${esc(g.slug)}"><span class="pscHomeGuideArt" aria-hidden="true">${clinicalNeedIcon(i?'vitals':'infection')}</span><small>${esc(g.category)} · ${esc(g.read_time||'Guide')}</small><h3>${esc(g.title)}</h3><p>${esc(g.excerpt||g.subtitle||'')}</p><b>Read the guide ↗</b></button>`).join('')}</div>
+        <div class="pscHomeWorkshopIntro"><span class="eyebrow">THE WORKSHOP</span><h2 id="psc-workshop-title">A little know-how.<br>A more confident clinic.</h2><p>Practical reads on the products, equipment and everyday details you work with.</p><button class="button dark" data-go="workshop">Explore the Workshop</button></div>
+        <div class="pscHomeWorkshopGuides">${workshopPreview.map((g,i)=>`<button class="pscHomeGuide" data-go="workshop/${esc(g.slug)}"><span class="pscHomeGuideArt" aria-hidden="true">${clinicalNeedIcon(i?'vitals':'infection')}</span><small>${esc(g.category)} · ${esc(g.read_time||'Guide')}</small><h3>${esc(g.title)}</h3><p>${esc(g.excerpt||g.subtitle||'')}</p><b>Read the guide</b></button>`).join('')}</div>
       </section>
 
       <div class="v26OperationsStrip">
@@ -2412,24 +2412,40 @@
       if(p)label.textContent=`Brands Available: ${catalogueBrandCount(p)}`;
     });
   });
+  function cataloguePricePreview(p){
+    const record=window.PSC_RECORDED_PRICES?.[p.pscSku]||{};
+    const indicative=Number(p.contractPrice)>0?Number(p.contractPrice):record.indicative;
+    const retail=record.retail;
+    if(!indicative&&!retail) return '<div class="pscPricePreview"><b>Price on request</b><small>No price recorded yet</small></div>';
+    return `<div class="pscPricePreview">${indicative?`<b>${money(indicative)}</b><span>Indicative PSC price</span>`:`<b>${money(retail)}</b><span>Recorded retail benchmark</span>`}${indicative&&retail?`<small>Retail benchmark: ${money(retail)}</small>`:''}<small>Reference only · final price & VAT confirmed in quotation${record.checked?`<br>Record checked ${esc(record.checked)}`:''}</small></div>`;
+  }
+  function catalogueBrandChoices(p){
+    const familyId=p.catalogueParentId||p.pscSku;
+    const options=window.PS_FAMILY_BRAND_OPTIONS?.()||window.PS_CATALOGUE_REFRESH?.approvedOptions||[];
+    const real=b=>b&&!/^(specification-led|institutional range|needs verification|generic|unbranded|various|none|n\/?a|PS|PSC)$/i.test(b);
+    const brands=[...new Set([p.brand,...options.filter(o=>o.family_id===familyId).map(o=>o.brand)].filter(real))];
+    return brands.length?`<div class="pscBrandChoices" aria-label="Brand options">${brands.map(b=>b===p.brand?`<button type="button" class="selected" data-product-view="${esc(p.pscSku)}" aria-label="View ${esc(b)} product">${esc(b)}</button>`:`<button type="button" data-psc-family-open="${esc(familyId)}" aria-label="Review ${esc(b)} options and specifications">${esc(b)}</button>`).join('')}</div>`:'<div class="pscBrandChoices"><small>Brand confirmed at quotation</small></div>';
+  }
   function productCard(p){
     const needId=clinicalNeedIds(p)[0]||'all';
     const need=clinicalNeedMeta(needId);
     const displayName=p.catalogueDisplayName||p.name;
     const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
     const fallback=legacyProductImageUrl(p);
-    const dhaMark=p.dhaMapped?`<img class="dhaRequirementIcon cardDhaIcon" src="${DHA_ICON}" alt="DHA requirement">`:'';
+    const dhaMark=p.dhaMapped?`<span class="pscRequirementBadge"><img class="dhaRequirementIcon cardDhaIcon" src="${DHA_ICON}" alt=""><span>DHA requirement</span></span>`:'';
     const displayImage=productDisplayImageUrl(p);
     const visual=displayImage
       ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img class="productMainImage" src="${esc(displayImage)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.style.visibility='hidden'">${dhaMark}</button>`
       : `<button class="productVisual productNeedVisual productVisualButton" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)}">${dhaMark}</button>`;
 
-    return `<article class="productCard v25ProductCard v261ProductCard v262ProductCard canvaProductCard exactCanvaCard">
+    return `<article class="productCard v25ProductCard v261ProductCard v262ProductCard canvaProductCard exactCanvaCard pscEditorialCard">
       ${visual}
+      ${catalogueBrandChoices(p)}
       <div class="canvaCardBody exactCanvaBody">
         <button class="productTitleButton" data-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button>
         <p class="pack">${esc(pack)}</p>${catalogueImageNote(p)||'<small class="catalogueImageNote catalogueImageNoteEmpty" aria-hidden="true"></small>'}
-        <div class="productNeedTags">${esc(need.label)}</div><small class="catalogueBrandCount" data-catalogue-brand-sku="${esc(p.pscSku)}">Brands Available: ${catalogueBrandCount(p)}</small>
+        <div class="productNeedTags">${esc(need.id==='all'?(p.productType||p.category||'Institutional supplies'):need.label)}</div>
+        ${cataloguePricePreview(p)}
         ${currentRoute().startsWith('portal/catalogue/dha-')&&p.dhaMapped?`<small class="pscDhaStatus">${esc(p.dhaStatus==='Strict'?'Required category':p.dhaStatus||'Mapped requirement')}${p.dhaReference?` · ${esc(p.dhaReference)}`:''}${p.dhaStatus==='Conditional'&&p.dhaCondition?`<br>${esc(p.dhaCondition)}`:''}</small>`:''}
       </div>
       <div class="canvaCardActions exactCanvaActions">

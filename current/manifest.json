@@ -2,6 +2,7 @@
   "javascript": [
     "current/lifecycle.js",
     "data.js",
+    "current/behaviour/recorded-prices.js",
     "current/behaviour/catalogue-data-extension.js",
     "core60-regulatory.js",
     "current/behaviour/catalogue-classification.js",
@@ -96,7 +97,8 @@
     "current/styles/intelligent-search.css",
     "current/styles/admin-interface.css",
     "current/styles/workstation.css",
-    "current/styles/portal-home.css"
+    "current/styles/portal-home.css",
+    "current/styles/product-editorial.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",
