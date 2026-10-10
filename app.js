@@ -2040,16 +2040,12 @@
     const processing=visible.filter(r=>['Authorized','Procurement','Delivery'].includes(r.status)).length;
     const delivered=state.requests.filter(r=>r.campus===state.campus&&r.status==='Accepted');
     const deliveredSkus=new Set(delivered.flatMap(r=>r.lines.map(l=>l.sku)));
-    const quickNeeds=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.filter(c=>!['all'].includes(c.id)).slice(0,7);
-    const resources=[
-      {tag:'PROCUREMENT',title:'Building a cleaner institutional replenishment cycle',date:'Updated 28 Sep 2026'},
-      {tag:'CATALOGUE',title:'Clinical-need navigation is now available',date:'Updated 28 Sep 2026'},
-      {tag:'ACCOUNT',title:'Keep quotations, orders and repeats in one supply history',date:'Updated 27 Sep 2026'}
-    ];
+    const homeCategory=(id,label,note)=>{const c=clinicalNeedMeta(id);return `<button class="pscHomeCategory" style="--category-tint:${c.bg}" data-go="portal/catalogue/${id}"><span class="pscHomeCategoryIcon" aria-hidden="true">${clinicalNeedIcon(c.icon)}</span><span><b>${esc(label||c.label)}</b><small>${esc(note||c.note)}</small></span><span aria-hidden="true">↗</span></button>`;};
+    const workshopPreview=WORKSHOP.filter(g=>g.status==='published').slice(0,2);
 
     return shell(`
       <section class="v26HomeHero">
-        <div><h1>Start</h1>${intelligentSearchField()}<p>${isDemoAccount()?'Browse the catalogue, switch sites, review sample quotations, repeat supplied items and simulate new requests.':'Browse the catalogue, switch sites, review quotations, repeat supplied items and bring a new request together.'}</p></div>
+        <div><span class="eyebrow">YOUR CLINIC, CONNECTED</span><h1>A little more ready.<br>Every day.</h1><p>Your place to find supplies, plan the next refill and keep things moving.${isDemoAccount()?' You’re exploring a demo account.':''}</p>${intelligentSearchField()}</div>
       </section>
 
       <section class="v26QuickActions">
@@ -2059,9 +2055,17 @@
         <button class="v26ActionCard sand" data-go="portal/catalogue/all"><span class="v26ActionIcon">${icon('search')}</span><small>04</small><h2>Find anything</h2><p>Search the full institutional catalogue or submit a sourcing request.</p><i>→</i></button>
       </section>
 
-      <section class="v26NeedPreview">
-        <div class="v26SectionHead"><div><span class="eyebrow">CONTINUE BY CLINICAL NEED</span><h2>Start where the clinical work starts.</h2></div><button data-go="portal/catalogue">View all needs →</button></div>
-        <div class="v26NeedStrip">${quickNeeds.map(c=>`<button class="v26MiniNeed" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}"><b>${esc(c.label)}</b></button>`).join('')}</div>
+      <section class="pscHomeBrowse" aria-labelledby="psc-browse-title">
+        <div class="v26SectionHead"><div><span class="eyebrow">FIND YOUR STARTING POINT</span><h2 id="psc-browse-title">What does your clinic need?</h2></div><button data-go="portal/catalogue">Browse all categories →</button></div>
+        <div class="pscHomeCategoryColumns">
+          <section><h3>By clinical need</h3><p>Start with the care you provide.</p>${homeCategory('wounds')}${homeCategory('breathing')}${homeCategory('vitals')}<button class="pscHomeAll" data-go="portal/catalogue">All therapeutic & clinical categories →</button></section>
+          <section><h3>Clinic essentials</h3><p>Start with the supplies you work with.</p>${homeCategory('medicines','Medicines','Browse medicines and symptom-support products')}${homeCategory('equipment','Equipment & mobility','Explore clinic furniture, mobility and equipment')}${homeCategory('procedures','Consumables','Find disposables and procedure supplies')}<small class="pscHomeScopeNote">Planning for an inspection? Requirements depend on your health authority and facility type. These are browsing categories, not a mandated checklist.</small></section>
+        </div>
+      </section>
+
+      <section class="pscHomeWorkshop" aria-labelledby="psc-workshop-title">
+        <div class="pscHomeWorkshopIntro"><span class="eyebrow">THE WORKSHOP</span><h2 id="psc-workshop-title">A little know-how.<br>A more confident clinic.</h2><p>Practical reads on the products, equipment and everyday details you work with.</p><button class="button dark" data-go="workshop">Explore the Workshop ↗</button></div>
+        <div class="pscHomeWorkshopGuides">${workshopPreview.map((g,i)=>`<button class="pscHomeGuide" data-go="workshop/${esc(g.slug)}"><span class="pscHomeGuideArt" aria-hidden="true">${clinicalNeedIcon(i?'vitals':'infection')}</span><small>${esc(g.category)} · ${esc(g.read_time||'Guide')}</small><h3>${esc(g.title)}</h3><p>${esc(g.excerpt||g.subtitle||'')}</p><b>Read the guide ↗</b></button>`).join('')}</div>
       </section>
 
       <div class="v26OperationsStrip">
@@ -2076,7 +2080,6 @@
         <section class="customerActionPanel v26RepeatPanel"><span class="eyebrow">QUICK REPEAT</span><h2>Need the same items again?</h2><p>Replenish from products already supplied to this account.</p><button class="button dark" data-go="portal/replenish">Open Replenish →</button></section>
       </div>
 
-      <section class="panel resourcePreview v26Resources"><div class="panelHeader"><h2>Latest resources & updates</h2><button data-go="portal/insights">Open page →</button></div><div class="resourcePreviewGrid">${resources.map(x=>`<article><span>${x.tag}</span><h3>${x.title}</h3><small>${x.date}</small></article>`).join('')}</div></section>
     `);
   }
 

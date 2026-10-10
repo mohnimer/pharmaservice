@@ -1,0 +1,37 @@
+/* Customer home only: existing catalogue and commercial controls are unchanged. */
+.v26HomeGrid .v26RepeatPanel h2,.v26HomeGrid .v26RepeatPanel p{color:#263f38!important}
+.v26QuickActions .v26ActionCard{min-height:120px;padding:20px}
+.v26QuickActions .v26ActionCard small,.v26QuickActions .v26ActionIcon{display:none}
+.v26QuickActions .v26ActionCard h2{margin:0 0 10px}
+.pscHomeBrowse,.pscHomeWorkshop{margin:32px 0 40px}
+.pscHomeCategoryColumns{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:24px}
+.pscHomeCategoryColumns>section{min-width:0;background:#f5f3ec;border-radius:26px;padding:24px}
+.pscHomeCategoryColumns>section:nth-child(2){background:#edf4ef}
+.pscHomeCategoryColumns h3{font-size:23px;margin:0 0 6px}
+.pscHomeCategoryColumns>section>p{margin:0 0 22px;color:#626963}
+.pscHomeCategory{display:flex;align-items:center;gap:16px;width:100%;min-height:108px;background:#fffefa;border:1px solid #deded5;border-radius:17px;padding:16px;margin:10px 0;text-align:left;color:#172e2b;cursor:pointer}
+.pscHomeCategory>span:nth-child(2){flex:1;min-width:0}
+.pscHomeCategory b{display:block;font-size:18px;line-height:1.3}
+.pscHomeCategory small{display:block;margin-top:5px;font-size:13px;line-height:1.5;color:#616761}
+.pscHomeCategoryIcon{display:grid;place-items:center;flex:0 0 50px;height:50px;border-radius:17px;background:var(--category-tint)}
+.pscHomeCategoryIcon svg,.pscHomeGuideArt svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.pscHomeCategory:hover,.pscHomeGuide:hover{border-color:#258c7e;box-shadow:0 4px 16px #143d2910}
+.pscHomeCategory:focus-visible,.pscHomeGuide:focus-visible,.pscHomeAll:focus-visible{outline:3px solid #258c7e;outline-offset:3px}
+.pscHomeAll{border:0;background:none;color:#216d61;padding:14px 0;font-weight:600;text-align:left;cursor:pointer}
+.pscHomeScopeNote{display:block;line-height:1.5;color:#626963;margin-top:16px;font-size:12px}
+.pscHomeWorkshop{display:grid;grid-template-columns:.8fr 1.2fr;gap:32px;padding:32px;border-radius:32px;background:#eee9df;color:#1b3831}
+.pscHomeWorkshopIntro{align-self:center}
+.pscHomeWorkshopIntro h2{font-size:clamp(26px,3vw,38px);line-height:1.15;margin:16px 0}
+.pscHomeWorkshopIntro p{line-height:1.6;max-width:32ch;margin-bottom:24px}
+.pscHomeWorkshopGuides{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pscHomeGuide{min-width:0;text-align:left;padding:20px;border:1px solid #deded5;border-radius:24px;background:#fffefa;color:inherit;cursor:pointer}
+.pscHomeGuideArt{display:grid;place-items:center;height:100px;border-radius:20px 50px 20px 50px;background:#d9e6d6;margin-bottom:20px}
+.pscHomeGuide:nth-child(2) .pscHomeGuideArt{background:#efd3b7;border-radius:50px 20px 50px 20px}
+.pscHomeGuideArt svg{width:58px;height:58px}
+.pscHomeGuide small{font-size:12px;color:#59655f}
+.pscHomeGuide h3{font-size:20px;line-height:1.3;margin:12px 0}
+.pscHomeGuide p{font-size:14px;line-height:1.5;margin:0 0 18px}
+.pscHomeGuide>b{font-size:13px}
+@media(max-width:850px){.pscHomeWorkshop{grid-template-columns:1fr}.pscHomeCategoryColumns{gap:16px}.pscHomeCategoryColumns>section{padding:18px}.pscHomeCategory{gap:10px;padding:12px}.pscHomeCategoryIcon{flex-basis:40px;height:40px}}
+@media(max-width:600px){.pscHomeCategoryColumns{grid-template-columns:1fr}.pscHomeWorkshop{padding:22px;border-radius:24px}.pscHomeWorkshopGuides{grid-template-columns:1fr}.pscHomeGuideArt{height:110px}.pscHomeBrowse .v26SectionHead{align-items:flex-start;gap:14px;flex-direction:column}}
+@media(max-width:600px){.v26QuickActions{grid-template-columns:1fr 1fr!important;gap:10px!important}.v26QuickActions .v26ActionCard{padding:16px;min-height:108px}.v26QuickActions .v26ActionCard h2{font-size:17px}.v26QuickActions .v26ActionCard p{display:none}.v26HomeHero h1{font-size:36px!important}}

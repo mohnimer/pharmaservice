@@ -95,7 +95,8 @@
     "current/styles/product-images.css",
     "current/styles/intelligent-search.css",
     "current/styles/admin-interface.css",
-    "current/styles/workstation.css"
+    "current/styles/workstation.css",
+    "current/styles/portal-home.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",
