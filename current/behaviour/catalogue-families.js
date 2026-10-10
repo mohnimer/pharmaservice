@@ -64,7 +64,7 @@
       try{
         const [{data,error},{data:approved,error:optionError},{data:fixedPrices,error:priceError},{data:availability,error:availabilityError}]=await Promise.all([
           sb.from('catalogue_family_public').select('family_id,clinical_need,family_name,page_type,dha_badge,dha_status,requirement_reference,brand_selector_mode,default_brand_choice,prominent_brand,common_brands_line,presentations,website_price_treatment,availability_wording,portal_treatment,commercial_specification,order_pack_basis,exact_controlled_wording').order('clinical_need').order('family_name'),
-          sb.from('catalogue_product_option_public').select('family_id,exact_product_name,brand,presentation,pack'),
+          sb.from('catalogue_family_option_reference_public').select('family_id,exact_product_name,brand,presentation,pack'),
           sb.from('catalogue_family_price_public').select('family_id,min_price_ex_vat,max_price_ex_vat,priced_option_count,earliest_valid_to'),
           sb.from('catalogue_family_availability_public').select('family_id,availability_state,availability_label,verified_at,valid_until')
         ]);

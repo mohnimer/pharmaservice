@@ -1,2 +1,2 @@
 // Customer-facing reference values only. Never export supplier costs.
-window.PSC_RECORDED_PRICES=Object.fromEntries((window.PSC_DATA?.products||[]).filter(p=>Number(p.contractPrice)>0||Number(p.retailBenchmark)>0).map(p=>[p.pscSku,{indicative:Number(p.contractPrice)>0?Number(p.contractPrice):null,retail:Number(p.retailBenchmark)>0?Number(p.retailBenchmark):null,checked:p.lastVerified||null,pack:p.pack||''}]));
+window.PSC_RECORDED_PRICES=Object.fromEntries((window.PSC_DATA?.products||[]).filter(p=>Number(p.contractPrice)>0||Number(p.retailBenchmark)>0).map(p=>[p.pscSku,{indicative:Number(p.contractPrice)>0?Number(p.contractPrice):null,retail:Number(p.retailBenchmark)>0?Number(p.retailBenchmark):null,checked:p.lastVerified||null,pack:p.pack||'',brand:p.brand||''}]));

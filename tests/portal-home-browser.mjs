@@ -9,7 +9,7 @@ mkdirSync('test-results',{recursive:true});
 try{for(const width of [390,1440]){
  const ctx=await browser.newContext({viewport:{width,height:950}});
  await ctx.addInitScript(()=>window.__testRole='customer');
- await ctx.route('**/*',r=>{const u=new URL(r.request().url());if(u.hostname==='127.0.0.1')return r.continue();if(u.hostname==='cdn.jsdelivr.net')return r.fulfill({contentType:'text/javascript',body:readFileSync('tests/mock-supabase.js','utf8')});return r.fulfill({status:503,body:''})});
+ await ctx.route('**/*',r=>{const u=new URL(r.request().url());if(u.hostname==='127.0.0.1')return r.continue();if(u.hostname==='cdn.jsdelivr.net')return r.fulfill({contentType:'text/javascript',body:readFileSync('tests/mock-supabase.js','utf8')+`;Object.assign(window.__tables,{catalogue_family_public:[{family_id:'PSC-SC-D06C',family_name:'Distilled water for oxygen humidifier'}],catalogue_family_option_reference_public:[{family_id:'PSC-SC-D06C',brand:'Oxygenizer',exact_product_name:'OXYGENIZER WATER 350ML'},{family_id:'PSC-SC-D02',brand:'Betadine',exact_product_name:'BETADINE ANTISEPTIC SLN 120ML'},{family_id:'PSC-SC-D02',brand:'Sepadine',exact_product_name:'SEPADINE ANTISEPTIC SOLUTION 100ML'}]});`});return r.fulfill({status:503,body:''})});
  const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(base+'/#portal/dashboard');await page.locator('.pscHomeCategory').first().waitFor();
  assert.equal(await page.locator('.pscHomeCategory').count(),6);
@@ -26,7 +26,19 @@ try{for(const width of [390,1440]){
   if(id.startsWith('dha-')){
    const card=page.locator('.pscEditorialCard').first();
    assert.equal(await card.evaluate(el=>getComputedStyle(el).borderTopWidth),'0px');
+   assert.equal(await card.locator('.exactCanvaBody').evaluate(el=>getComputedStyle(el).backgroundColor),'rgba(0, 0, 0, 0)');
+   assert.equal(await page.locator('.v25ProductGrid').first().evaluate(el=>getComputedStyle(el).columnGap),'0px');
    assert(await card.locator('.pscPricePreview').count());
+   if(id==='dha-medicines'){
+    const water=page.locator('.pscEditorialCard').filter({has:page.locator('[data-add="INST-0110"]')});
+    assert((await water.locator('.pscBrandChoices').innerText()).includes('Oxygenizer'));
+    await water.locator('.pscBrandChoices button').click();await page.locator('.pscFamilyProductSheet').waitFor();
+    await page.keyboard.press('Escape');
+    await page.evaluate(()=>PSC_NAVIGATE('portal/catalogue/dha-medicines'));
+    const iodine=page.locator('.pscEditorialCard').filter({has:page.locator('[data-add="PSC-INF-001"]')});
+    assert((await iodine.locator('.pscBrandChoices').innerText()).includes('Betadine'));
+    assert(!(await iodine.locator('.pscBrandChoices').innerText()).includes('Dettol'));
+   }
    if(id==='dha-equipment'){
     const pulse=page.locator('.pscEditorialCard').filter({has:page.locator('[data-add="PSC-DIA-001"]')});
     assert((await pulse.innerText()).includes('45.00'));

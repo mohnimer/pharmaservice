@@ -27,3 +27,15 @@
 .customerShell .pscEditorialCard .exactCanvaActions button{min-height:40px!important;font-size:13px!important;border-radius:4px!important;flex:1}
 .customerShell .v25ProductGrid:has(.pscEditorialCard){grid-template-columns:repeat(auto-fill,minmax(220px,1fr))!important;gap:32px 22px!important}
 @media(max-width:600px){.customerShell .v25ProductGrid:has(.pscEditorialCard){grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:28px 14px!important}.customerShell .pscEditorialCard .productVisual{padding:10px!important}.customerShell .pscEditorialCard .productTitleButton h3{font-size:15px!important}.customerShell .pscEditorialCard .pscRequirementBadge{bottom:6px;left:5px;font-size:9px;padding:4px}.customerShell .pscEditorialCard .pscRequirementBadge .cardDhaIcon{width:16px!important;height:16px!important}.pscPricePreview>b{font-size:19px}.customerShell .pscEditorialCard .exactCanvaActions{flex-wrap:wrap}.customerShell .pscEditorialCard .exactCanvaActions button{min-width:60px}}
+#app .customerShell .v25ProductGrid:has(.pscEditorialCard){column-gap:0!important}
+#app .customerShell .pscEditorialCard .productVisual{padding:0!important;margin:0!important}
+#app .customerShell .pscEditorialCard .exactCanvaBody,
+#app .customerShell .pscEditorialCard .productTitleButton,
+#app .customerShell .pscEditorialCard .productTitleButton h3,
+#app .customerShell .pscEditorialCard .pack,
+#app .customerShell .pscEditorialCard .productNeedTags,
+#app .customerShell .pscEditorialCard .pscPricePreview,
+#app .customerShell .pscEditorialCard .pscDhaStatus{background:transparent!important;box-shadow:none!important}
+#app .customerShell .pscEditorialCard .exactCanvaBody{padding:8px 12px 12px!important}
+#app .customerShell .pscEditorialCard .pscBrandChoices{padding:12px 12px 4px!important}
+#app .customerShell .pscEditorialCard .exactCanvaActions{padding:10px 12px 0!important}

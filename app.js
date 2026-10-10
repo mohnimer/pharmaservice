@@ -2411,20 +2411,25 @@
       const p=product(label.dataset.catalogueBrandSku);
       if(p)label.textContent=`Brands Available: ${catalogueBrandCount(p)}`;
     });
+    document.querySelectorAll('[data-brand-row]').forEach(row=>{const p=product(row.dataset.brandRow);if(p)row.outerHTML=catalogueBrandChoices(p);});
   });
   function cataloguePricePreview(p){
-    const record=window.PSC_RECORDED_PRICES?.[p.pscSku]||{};
-    const indicative=Number(p.contractPrice)>0?Number(p.contractPrice):record.indicative;
+    const saved=window.PSC_RECORDED_PRICES?.[p.pscSku]||{};
+    const packKey=v=>String(v||'').toLowerCase().replace(/\s+/g,'');
+    const record=packKey(saved.pack)===packKey(p.cataloguePack||p.pack)?saved:{};
+    const indicative=p.storefrontPriceMode==='show_price'&&Number(p.contractPrice)>0?Number(p.contractPrice):record.indicative;
     const retail=record.retail;
     if(!indicative&&!retail) return '<div class="pscPricePreview"><b>Price on request</b><small>No price recorded yet</small></div>';
     return `<div class="pscPricePreview">${indicative?`<b>${money(indicative)}</b><span>Indicative PSC price</span>`:`<b>${money(retail)}</b><span>Recorded retail benchmark</span>`}${indicative&&retail?`<small>Retail benchmark: ${money(retail)}</small>`:''}<small>Reference only · final price & VAT confirmed in quotation${record.checked?`<br>Record checked ${esc(record.checked)}`:''}</small></div>`;
   }
   function catalogueBrandChoices(p){
-    const familyId=p.catalogueParentId||p.pscSku;
+    const familyId=p.catalogueParentId||p.catalogueReferenceFamilyId||p.pscSku;
     const options=window.PS_FAMILY_BRAND_OPTIONS?.()||window.PS_CATALOGUE_REFRESH?.approvedOptions||[];
     const real=b=>b&&!/^(specification-led|institutional range|needs verification|generic|unbranded|various|none|n\/?a|PS|PSC)$/i.test(b);
-    const brands=[...new Set([p.brand,...options.filter(o=>o.family_id===familyId).map(o=>o.brand)].filter(real))];
-    return brands.length?`<div class="pscBrandChoices" aria-label="Brand options">${brands.map(b=>b===p.brand?`<button type="button" class="selected" data-product-view="${esc(p.pscSku)}" aria-label="View ${esc(b)} product">${esc(b)}</button>`:`<button type="button" data-psc-family-open="${esc(familyId)}" aria-label="Review ${esc(b)} options and specifications">${esc(b)}</button>`).join('')}</div>`:'<div class="pscBrandChoices"><small>Brand confirmed at quotation</small></div>';
+    const familyBrands=options.filter(o=>o.family_id===familyId).map(o=>o.brand).filter(real);
+    const exactBrand=p.localCatalogueRefresh?p.brand:(window.PSC_RECORDED_PRICES?.[p.pscSku]?.brand||p.brand);
+    const brands=[...new Set((familyBrands.length&&!p.localCatalogueRefresh?familyBrands:[exactBrand,...familyBrands]).filter(real))];
+    return brands.length?`<div class="pscBrandChoices" data-brand-row="${esc(p.pscSku)}" aria-label="Brand options">${brands.map(b=>p.localCatalogueRefresh&&b===exactBrand?`<button type="button" class="selected" data-product-view="${esc(p.pscSku)}" aria-label="View ${esc(b)} product">${esc(b)}</button>`:`<button type="button" data-psc-family-open="${esc(familyId)}" aria-label="Review ${esc(b)} options and specifications">${esc(b)}</button>`).join('')}</div>`:`<div class="pscBrandChoices" data-brand-row="${esc(p.pscSku)}"><small>Brand confirmed at quotation</small></div>`;
   }
   function productCard(p){
     const needId=clinicalNeedIds(p)[0]||'all';
