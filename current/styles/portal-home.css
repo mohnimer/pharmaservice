@@ -1,4 +1,5 @@
 /* Customer home only: existing catalogue and commercial controls are unchanged. */
+.pscDhaStatus{display:block;font-size:12px;line-height:1.5;color:#52665e;margin-top:8px}
 .v26HomeGrid .v26RepeatPanel h2,.v26HomeGrid .v26RepeatPanel p{color:#263f38!important}
 .v26QuickActions .v26ActionCard{min-height:120px;padding:20px}
 .v26QuickActions .v26ActionCard small,.v26QuickActions .v26ActionIcon{display:none}

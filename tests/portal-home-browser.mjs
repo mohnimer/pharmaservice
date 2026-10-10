@@ -15,12 +15,25 @@ try{for(const width of [390,1440]){
  assert.equal(await page.locator('.pscHomeGuide').count(),2);
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  await page.screenshot({path:`test-results/portal-home-${width}.png`,fullPage:true});
- for(const id of ['wounds','breathing','vitals','medicines','equipment','procedures']){
+ const collected=[];
+ for(const id of ['wounds','breathing','vitals','dha-medicines','dha-equipment','dha-consumables']){
   await page.locator(`.pscHomeCategory[data-go="portal/catalogue/${id}"]`).click();
   await page.waitForURL('**/#portal/catalogue/'+id);
   assert(await page.locator('[data-ps-search-results]').count());
+  if(id.startsWith('dha-')){
+   const skus=await page.locator('[data-ps-search-results] [data-add]').evaluateAll(els=>els.map(e=>e.dataset.add));
+   assert(skus.length>0,'mapped category must contain products');collected.push(...skus);
+   assert(await page.evaluate(skus=>skus.every(sku=>PSC_DATA.products.find(p=>p.pscSku===sku)?.dhaMapped),skus));
+   assert((await page.locator('.categoryHero h1').innerText()).startsWith('DHA-required'));
+   await page.locator('[data-cat-q]').fill('gauze');
+   await page.waitForTimeout(500);
+   const searchSkus=await page.locator('[data-ps-search-results] [data-add]').evaluateAll(els=>els.map(e=>e.dataset.add));
+   assert(searchSkus.every(sku=>skus.includes(sku)),'search cannot escape DHA group');
+  }
   await page.evaluate(()=>PSC_NAVIGATE('portal/dashboard'));
  }
+ const expected=await page.evaluate(()=>PSC_DATA.products.filter(p=>p.catalogueVisible!==false&&p.dhaMapped).map(p=>p.pscSku).sort());
+ assert.deepEqual([...collected].sort(),expected,'every mapped product appears exactly once across essentials');
  const target=await page.locator('.pscHomeGuide').first().getAttribute('data-go');
  await page.locator('.pscHomeGuide').first().click();await page.waitForURL('**/'+target);
  assert(!(await page.locator('body').innerText()).includes('Guide not found'));

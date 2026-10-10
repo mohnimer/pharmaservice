@@ -124,8 +124,20 @@
     if(cat==='Hygiene & Student Care') return ['patient-care'];
     return ['procedures'];
   }
-  function clinicalNeedMatches(p,id){ return id==='all' || clinicalNeedIds(p).includes(id); }
-  function clinicalNeedMeta(id){ return INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.find(c=>c.id===id)||INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.at(-1); }
+  const DHA_ESSENTIAL_CATEGORIES = [
+    {id:'dha-medicines',label:'DHA-required medicines',icon:'medicines',bg:'#F7A7B8',ink:'#5A2030'},
+    {id:'dha-equipment',label:'DHA-required equipment',icon:'equipment',bg:'#DDBA9B',ink:'#4A3323'},
+    {id:'dha-consumables',label:'DHA-required consumables',icon:'procedures',bg:'#AEC1F7',ink:'#233D72'}
+  ].map(c=>({...c,note:'Products mapped to DHA educational clinic requirements in the PSC catalogue. Conditional requirements and alternatives apply where indicated.'}));
+  function dhaEssentialGroup(p){
+    if(!p.dhaMapped) return null;
+    const section=String(p.dhaReference||p.dhaSection||'').match(/Appendix\s*3\s*([A-D])/i)?.[1]?.toUpperCase();
+    if(section==='D'||(!section&&p.productType==='Medicines')) return 'dha-medicines';
+    if(['A','B'].includes(section)||(!section&&['Equipment & Furniture','Diagnostics & Devices','Devices & Accessories'].includes(p.productType))) return 'dha-equipment';
+    return 'dha-consumables';
+  }
+  function clinicalNeedMatches(p,id){ return id.startsWith('dha-') ? dhaEssentialGroup(p)===id : id==='all' || clinicalNeedIds(p).includes(id); }
+  function clinicalNeedMeta(id){ return DHA_ESSENTIAL_CATEGORIES.find(c=>c.id===id)||INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.find(c=>c.id===id)||INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.at(-1); }
   function clinicalNeedIcon(id){
     const m={
       all:'<svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></svg>',
@@ -1150,6 +1162,7 @@
   let catalogueSearchRoute = null;
   function go(route,{replace=false,searchQuery=null}={}){
     ui.mobile=false; ui.publicMenu=false; ui.modal=null; ui.basket=false; ui.accountMenu=false;
+    if(route.startsWith('portal/catalogue/dha-')&&route!==currentRoute()){ui.catalogueCat='All product types';ui.catalogueFilter='All lines';}
     if(route!==currentRoute()){ resetIntelligentSearch();ui.globalSearch=''; ui.catalogueQuery=''; }
     if(searchQuery!==null){ ui.catalogueQuery=String(searchQuery).trim(); ui.globalSearch=ui.catalogueQuery; }
     catalogueSearchRoute=route;
@@ -2059,7 +2072,7 @@
         <div class="v26SectionHead"><div><span class="eyebrow">FIND YOUR STARTING POINT</span><h2 id="psc-browse-title">What does your clinic need?</h2></div><button data-go="portal/catalogue">Browse all categories →</button></div>
         <div class="pscHomeCategoryColumns">
           <section><h3>By clinical need</h3><p>Start with the care you provide.</p>${homeCategory('wounds')}${homeCategory('breathing')}${homeCategory('vitals')}<button class="pscHomeAll" data-go="portal/catalogue">All therapeutic & clinical categories →</button></section>
-          <section><h3>Clinic essentials</h3><p>Start with the supplies you work with.</p>${homeCategory('medicines','Medicines','Browse medicines and symptom-support products')}${homeCategory('equipment','Equipment & mobility','Explore clinic furniture, mobility and equipment')}${homeCategory('procedures','Consumables','Find disposables and procedure supplies')}<small class="pscHomeScopeNote">Planning for an inspection? Requirements depend on your health authority and facility type. These are browsing categories, not a mandated checklist.</small></section>
+          <section><h3>Clinic essentials</h3><p>Your DHA requirement list, organised.</p>${homeCategory('dha-medicines',null,'Medicines mapped to the clinic requirements')}${homeCategory('dha-equipment',null,'Required equipment, diagnostics & furniture')}${homeCategory('dha-consumables',null,'Required disposables, wound care & PPE')}<small class="pscHomeScopeNote">Based on the catalogue’s DHA educational clinic mapping. Conditional items and required alternatives are identified; exact product suitability is checked before quotation.</small></section>
         </div>
       </section>
 
@@ -2266,7 +2279,7 @@
     const filtered=retrieval.filter(p=>{
       const lineMatch=ui.catalogueFilter==='All lines'||(ui.catalogueFilter==='DHA requirement'&&p.dhaMapped)||(ui.catalogueFilter==='Licensed / controlled'&&p.regulated)||(ui.catalogueFilter==='Specification-led'&&p.institutionalProvisional);
       const viewMatch=!action||action.intent!=='filter'||action.filter==='all'||(action.filter==='equipment'?clinicalNeedIds(p).includes('equipment'):!clinicalNeedIds(p).includes('equipment')&&!clinicalNeedIds(p).includes('medicines'));
-      return viewMatch&&(crossCategory||clinicalNeedMatches(p,needId))&&(ui.catalogueCat==='All product types'||p.productType===ui.catalogueCat)&&lineMatch;
+      return viewMatch&&((crossCategory&&!needId.startsWith('dha-'))||clinicalNeedMatches(p,needId))&&(ui.catalogueCat==='All product types'||p.productType===ui.catalogueCat)&&lineMatch;
     });
     return {allProducts,filtered,types,searching};
   }
@@ -2335,7 +2348,7 @@
   }
 
   function catalogueCategory(needId='all'){
-    const selected=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.find(c=>c.id===needId)||INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.find(c=>c.id==='all');
+    const selected=clinicalNeedMeta(needId);
     const {allProducts,filtered,types}=catalogueFilterProducts(selected.id);
 
     return shell(`
@@ -2344,7 +2357,7 @@
         <div class="categoryHeroCount"><b>${filtered.length}</b><span>products</span></div>
       </section>
 
-      ${clinicalNeedRibbon(selected.id)}
+      ${selected.id.startsWith('dha-')?`<nav class="needRibbon" aria-label="DHA clinic essentials">${DHA_ESSENTIAL_CATEGORIES.map(c=>`<button class="needRibbonChip ${c.id===selected.id?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}" aria-current="${c.id===selected.id?'page':'false'}"><b>${esc(c.label)}</b></button>`).join('')}<button class="needRibbonChip" data-go="portal/catalogue">Full catalogue →</button></nav>`:clinicalNeedRibbon(selected.id)}
 
       <div class="notice shopNotice compactInstitutionalNotice"><strong>One accountable supply relationship.</strong> PS reviews specification, availability and commercial terms before quotation. Regulated lines remain subject to the applicable licensed supply route and professional controls.</div>
 
@@ -2417,6 +2430,7 @@
         <button class="productTitleButton" data-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button>
         <p class="pack">${esc(pack)}</p>${catalogueImageNote(p)||'<small class="catalogueImageNote catalogueImageNoteEmpty" aria-hidden="true"></small>'}
         <div class="productNeedTags">${esc(need.label)}</div><small class="catalogueBrandCount" data-catalogue-brand-sku="${esc(p.pscSku)}">Brands Available: ${catalogueBrandCount(p)}</small>
+        ${currentRoute().startsWith('portal/catalogue/dha-')&&p.dhaMapped?`<small class="pscDhaStatus">${esc(p.dhaStatus==='Strict'?'Required category':p.dhaStatus||'Mapped requirement')}${p.dhaReference?` · ${esc(p.dhaReference)}`:''}${p.dhaStatus==='Conditional'&&p.dhaCondition?`<br>${esc(p.dhaCondition)}`:''}</small>`:''}
       </div>
       <div class="canvaCardActions exactCanvaActions">
         <button class="canvaDetails" data-product-view="${p.pscSku}">Details</button>
