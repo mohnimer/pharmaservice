@@ -29,6 +29,10 @@ try{for(const width of [390,1440]){
    assert.equal(await card.evaluate(el=>getComputedStyle(el).borderTopWidth),'0px');
    assert.equal(await card.locator('.exactCanvaBody').evaluate(el=>getComputedStyle(el).backgroundColor),'rgba(0, 0, 0, 0)');
    assert.equal(await page.locator('.v25ProductGrid').first().evaluate(el=>getComputedStyle(el).columnGap),'0px');
+   assert.equal(await page.locator('.pscDhaLegend').count(),1);
+   assert.equal(await card.locator('.pscRequirementBadge>span').count(),0);
+   assert.equal(await card.locator('.pscRequirementBadge').evaluate(el=>getComputedStyle(el).right),'10px');
+   if(width===390){const gridBox=await page.locator('.v25ProductGrid').first().boundingBox();assert(Math.abs(gridBox.x)<1);assert(Math.abs(gridBox.width-width)<1);const imageBox=await card.locator('.productVisual').boundingBox();assert(Math.abs(imageBox.width-width/2)<1);}
    assert(await card.locator('.pscPricePreview').count());
    if(id==='dha-medicines'){
     const water=page.locator('.pscEditorialCard').filter({has:page.locator('[data-add="INST-0110"]')});

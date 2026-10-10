@@ -2285,7 +2285,7 @@
   }
   function catalogueSearchResults(needId='all',landing=false){
     const {filtered,searching}=catalogueFilterProducts(needId);const visible=!landing||ui.catalogueQuery||intelligent.action;
-    return `<section class="psSearchResults" data-ps-search-results ${visible?'':'hidden'}><div class="catalogueMeta"><span data-ps-result-count role="status" aria-live="polite" aria-atomic="true">${filtered.length} ${searching?'matching products':'products'}</span></div><div class="productGrid v25ProductGrid">${visible?filtered.map(productCard).join(''):''}</div><p class="psSearchEmpty" ${filtered.length?'hidden':''}>${esc(window.PS_INTELLIGENT_SEARCH.outcome(window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'' ,productSearchContext())||{terms:''},filtered).message)} Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button></p></section>`;
+    return `<section class="psSearchResults" data-ps-search-results ${visible?'':'hidden'}><div class="catalogueMeta"><span data-ps-result-count role="status" aria-live="polite" aria-atomic="true">${filtered.length} ${searching?'matching products':'products'}</span></div>${filtered.some(p=>p.dhaMapped)?`<p class="pscDhaLegend"><img src="${DHA_ICON}" alt="DHA requirement mapping"><span>The DHA logo at the top right identifies a product mapped to a DHA clinic requirement. Conditional requirements and alternatives apply; exact specifications and suitability are checked before quotation.</span></p>`:''}<div class="productGrid v25ProductGrid">${visible?filtered.map(productCard).join(''):''}</div><p class="psSearchEmpty" ${filtered.length?'hidden':''}>${esc(window.PS_INTELLIGENT_SEARCH.outcome(window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'' ,productSearchContext())||{terms:''},filtered).message)} Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button></p></section>`;
   }
   function updateCatalogueResults(){
     const area=document.querySelector('[data-ps-search-results]');if(!area)return;
@@ -2437,7 +2437,7 @@
     const displayName=p.catalogueDisplayName||p.name;
     const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
     const fallback=legacyProductImageUrl(p);
-    const dhaMark=p.dhaMapped?`<span class="pscRequirementBadge"><img class="dhaRequirementIcon cardDhaIcon" src="${DHA_ICON}" alt=""><span>DHA requirement</span></span>`:'';
+    const dhaMark=p.dhaMapped?`<span class="pscRequirementBadge" title="Mapped DHA clinic requirement"><img class="dhaRequirementIcon cardDhaIcon" src="${DHA_ICON}" alt="Mapped DHA clinic requirement"></span>`:'';
     const displayImage=productDisplayImageUrl(p);
     const visual=displayImage
       ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img class="productMainImage" src="${esc(displayImage)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.style.visibility='hidden'">${dhaMark}</button>`
