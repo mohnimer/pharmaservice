@@ -17,6 +17,7 @@ try{for(const width of [390,1440]){
  assert.equal(await page.locator('.pscHomeDha').count(),3);
  assert(!(await page.locator('.pscHomeCategoryColumns').innerText()).includes('↗'));
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ assert.equal(await page.locator('.mobileSearchInput').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 255, 255)');
  await page.screenshot({path:`test-results/portal-home-${width}.png`,fullPage:true});
  const collected=[];
  for(const id of ['wounds','breathing','vitals','dha-medicines','dha-equipment','dha-consumables']){
@@ -33,6 +34,8 @@ try{for(const width of [390,1440]){
     const water=page.locator('.pscEditorialCard').filter({has:page.locator('[data-add="INST-0110"]')});
     assert((await water.locator('.pscBrandChoices').innerText()).includes('Oxygenizer'));
     await water.locator('.pscBrandChoices button').click();await page.locator('.pscFamilyProductSheet').waitFor();
+    assert((await page.locator('.pscBrandTick').first().innerText()).includes('AED -'));
+    assert((await page.locator('.pscBrandTick').first().innerText()).includes('Price on request'));
     await page.keyboard.press('Escape');
     await page.evaluate(()=>PSC_NAVIGATE('portal/catalogue/dha-medicines'));
     const iodine=page.locator('.pscEditorialCard').filter({has:page.locator('[data-add="PSC-INF-001"]')});

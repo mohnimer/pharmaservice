@@ -2419,7 +2419,7 @@
     const record=packKey(saved.pack)===packKey(p.cataloguePack||p.pack)?saved:{};
     const indicative=p.storefrontPriceMode==='show_price'&&Number(p.contractPrice)>0?Number(p.contractPrice):record.indicative;
     const retail=record.retail;
-    if(!indicative&&!retail) return '<div class="pscPricePreview"><b>Price on request</b><small>No price recorded yet</small></div>';
+    if(!indicative&&!retail) return '<div class="pscPricePreview"><b>AED -</b><small>Price on request</small></div>';
     return `<div class="pscPricePreview">${indicative?`<b>${money(indicative)}</b><span>Indicative PSC price</span>`:`<b>${money(retail)}</b><span>Recorded retail benchmark</span>`}${indicative&&retail?`<small>Retail benchmark: ${money(retail)}</small>`:''}<small>Reference only · final price & VAT confirmed in quotation${record.checked?`<br>Record checked ${esc(record.checked)}`:''}</small></div>`;
   }
   function catalogueBrandChoices(p){

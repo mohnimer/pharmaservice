@@ -92,6 +92,22 @@
     if(!parts.length && f?.order_pack_basis) parts.push(String(f.order_pack_basis));
     return parts.join(' · ') || 'Exact variant confirmed in quotation';
   }
+  function optionPrice(o){
+    const fixed=(state.prices||[]).find(p=>p.product_option_id && p.product_option_id===o.product_option_id && (!p.price_valid_to || Date.parse(p.price_valid_to)>=Date.now()));
+    if(Number(fixed?.public_sell_price_ex_vat)>0) return `<span class="pscOptionPrice"><b>${esc(aed(Number(fixed.public_sell_price_ex_vat)))}</b><small>Ex VAT · quotation confirms</small></span>`;
+    // Match reference prices to the exact family, brand and pack; never borrow
+    // a price from another size or expose a supplier cost.
+    const normalize=v=>String(v||'').toLowerCase().replace(/\s+/g,'');
+    const sizes=v=>(normalize(v).match(/\d+(?:\.\d+)?(?:ml|mg|cm|litres?|liters?|g)\b/g)||[]).sort().join('|');
+    const descriptor=[o.exact_product_name,o.presentation,o.pack].join(' ');
+    const matches=(window.PSC_DATA?.products||[]).filter(p=>{
+      const saved=window.PSC_RECORDED_PRICES?.[p.pscSku];
+      return saved && (p.catalogueParentId||p.catalogueReferenceFamilyId||p.pscSku)===state.familyId && normalize(saved.brand)===normalize(o.brand) && (normalize(saved.pack)===normalize(o.pack) || (!o.pack && sizes(saved.pack) && sizes(saved.pack)===sizes(descriptor)));
+    }).map(p=>window.PSC_RECORDED_PRICES[p.pscSku]);
+    const values=matches.map(p=>p.indicative||p.retail).filter(v=>Number(v)>0);
+    if(values.length && new Set(values).size===1){const record=matches[0];return `<span class="pscOptionPrice"><b>${esc(aed(values[0]))}</b><small>${record.indicative?'Indicative PSC price':'Retail benchmark'}</small></span>`;}
+    return '<span class="pscOptionPrice"><b>AED -</b><small>Price on request</small></span>';
+  }
   function fallbackBrandDescriptor(f){
     const presentations=(Array.isArray(f?.presentations)?f.presentations:[]).filter(meaningfulPresentation);
     if(presentations.length) return presentations.join(' · ');
@@ -156,7 +172,7 @@
     return `<section class="pscFamilyDetailBlock pscFamilyPreferenceBlock">
       <span class="pscFamilyDetailLabel">Product preference</span>
       <label class="pscBrandChoice pscBrandNoPreference ${noPreference?'active':''}"><input type="checkbox" data-family-no-preference ${noPreference?'checked':''}><span><b>No brand preference</b><small>PS can quote a suitable product that meets the family specification.</small></span></label>
-      ${refs.length?`<div class="pscBrandTickGrid">${refs.map(o=>{const key=optionKey(o),brand=normalizedBrand(o.brand)||String(o.exact_product_name||'Product option');return `<label class="pscBrandTick ${state.selectedOptionIds.includes(key)?'active':''}"><input type="checkbox" data-family-option="${esc(key)}" ${state.selectedOptionIds.includes(key)?'checked':''}>${o.image_url?`<img class="catalogueOptionImage" src="${esc(o.image_url)}" alt="${esc(o.exact_product_name)}" loading="lazy">`:''}<span><b>${esc(brand)}</b><small>${esc(optionDescriptor(o,f))}</small>${!o.image_url&&o.local_reference?'<small>Product photograph pending</small>':''}</span></label>`;}).join('')}</div>`:''}
+      ${refs.length?`<div class="pscBrandTickGrid">${refs.map(o=>{const key=optionKey(o),brand=normalizedBrand(o.brand)||String(o.exact_product_name||'Product option');return `<label class="pscBrandTick ${state.selectedOptionIds.includes(key)?'active':''}"><input type="checkbox" data-family-option="${esc(key)}" ${state.selectedOptionIds.includes(key)?'checked':''}>${o.image_url?`<img class="catalogueOptionImage" src="${esc(o.image_url)}" alt="${esc(o.exact_product_name)}" loading="lazy">`:''}<span><b>${esc(brand)}</b><small>${esc(optionDescriptor(o,f))}</small>${!o.image_url&&o.local_reference?'<small>Product photograph pending</small>':''}</span>${optionPrice(o)}</label>`;}).join('')}</div>`:''}
       ${fallbacks.length?`<div class="pscBrandTickGrid pscFallbackBrandGrid">${fallbacks.map(brand=>`<label class="pscBrandTick ${state.selectedFallbackBrands.includes(brand)?'active':''}"><input type="checkbox" data-family-fallback-brand="${esc(brand)}" ${state.selectedFallbackBrands.includes(brand)?'checked':''}><span><b>${esc(brand)}</b><small>${esc(fallbackBrandDescriptor(f))}</small></span></label>`).join('')}</div>`:''}
       <p class="pscBrandPreferenceNote">Tick one or more exact product options you are happy for PS to quote. Where more than one SKU exists under the same brand, each SKU is shown separately. Final availability and commercial terms are confirmed in the quotation.</p>
       <label class="pscBrandChoice ${state.otherBrandActive?'active':''}"><input type="checkbox" data-family-other-toggle ${state.otherBrandActive?'checked':''}><span><b>Other brand / manufacturer required</b><small>Specify another brand, manufacturer, model or pack.</small></span></label>
