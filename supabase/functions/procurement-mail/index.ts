@@ -2,6 +2,8 @@ import {draftSender,senderStatus,verifySender,routedMime} from '../_shared/mail-
 import {intakeAction,checkIntakeSend} from '../_shared/mail-intake.ts'
 import {service,admin,json,MAILBOX,check,accessToken,gmail,mime,send,hash,noDemoOrder,email,logAttempt,safeCode,MailError} from '../_shared/psc-mail.ts'
 import {quotePdf} from '../_shared/quote-pdf.ts'
+import {onboardingAction,onboardingTick,validateOnboardingSend} from '../_shared/onboarding.ts'
+import {worker} from '../_shared/psc-mail.ts'
 async function directContact(svc:any,id:string){
  const c=check(await svc.from('mail_contacts').select('*').eq('id',id).single());
  if(!c||!email(c.email)||c.status==='bounced')throw new MailError('contact_not_available');
@@ -16,7 +18,10 @@ Deno.serve(async req=>{
  if(req.method!=='POST')return json({error:'method_not_allowed'},405)
  const svc=service();let draft:any=null,attemptedSend=false;
  try{
-  const user=await admin(req,svc),b=await req.json();
+  const b=await req.json();
+  if(b.action==='onboarding_tick'){if(!await worker(req,svc))throw new MailError('unauthorized');return json(await onboardingTick(svc));}
+  const user=await admin(req,svc);
+  if(String(b.action).startsWith('onboarding_'))return json(await onboardingAction(svc,user,b));
   if(b.action==='sender_status')return json({senders:await senderStatus(await accessToken(svc))});
   if(b.action==='contact_draft'){
    if(b.confirm_transactional!==true||!['customer','supplier'].includes(b.audience)||!['request_response','account_followup'].includes(b.purpose))throw new MailError('transactional_context_required');
@@ -81,8 +86,9 @@ Deno.serve(async req=>{
    const c=await recipient(svc,await noDemoOrder(svc,draft.order_id));if(c.to.toLowerCase()!==draft.recipient.toLowerCase())throw new MailError('customer_recipient_changed');
    const file=check(await svc.storage.from('psc-correspondence').download(draft.attachment_path));pdf=new Uint8Array(await file.arrayBuffer());if(await hash(pdf)!==draft.attachment_sha256)throw new MailError('quotation_attachment_changed')
   }
+  if(draft.onboarding_id)await validateOnboardingSend(svc,draft);
   const token=await accessToken(svc),sender=draftSender(draft.kind);await verifySender(token,sender);
-  const claimed=draft.intake_message_id?check(await svc.rpc('psc_claim_intake_draft',{p_draft:draft.id,p_updated_at:draft.updated_at,p_user:user.id})):check(await svc.from('psc_mail_drafts').update({status:'sending',approved_by:user.id,approved_at:new Date().toISOString(),updated_at:new Date().toISOString()}).eq('id',draft.id).eq('status','draft').eq('updated_at',draft.updated_at).select('*').maybeSingle());if(!claimed)throw new MailError('draft_changed_or_claimed')
+  const claimed=draft.onboarding_id?check(await svc.rpc('psc_claim_onboarding_draft',{p_draft:draft.id,p_updated_at:draft.updated_at,p_user:user.id})):draft.intake_message_id?check(await svc.rpc('psc_claim_intake_draft',{p_draft:draft.id,p_updated_at:draft.updated_at,p_user:user.id})):check(await svc.from('psc_mail_drafts').update({status:'sending',approved_by:user.id,approved_at:new Date().toISOString(),updated_at:new Date().toISOString()}).eq('id',draft.id).eq('status','draft').eq('updated_at',draft.updated_at).select('*').maybeSingle());if(!claimed)throw new MailError('draft_changed_or_claimed')
   draft=Array.isArray(claimed)?claimed[0]:claimed;if(!draft?.id)throw new MailError('draft_changed_or_claimed');await logAttempt(svc,null,draft.id,'started');attemptedSend=true;
   const result=await send(token,routedMime(sender,{to:draft.recipient,subject:draft.subject,text:draft.body_text,id:'draft-'+draft.id,pdf}));
   check(await svc.from('psc_mail_drafts').update({status:'accepted',provider_message_id:result.id,accepted_at:new Date().toISOString(),last_error:null}).eq('id',draft.id));

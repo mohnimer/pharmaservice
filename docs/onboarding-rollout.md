@@ -1,0 +1,15 @@
+# Onboarding — first customer-journey release
+
+Open Customers & contacts → a customer → Onboarding / account opening. Starting is explicit; no existing contacts are enrolled. The checklist covers the signed agreement, account form, registration, VAT, ordering contacts, billing/delivery/invoice requirements, customer vendor registration and optional credit review.
+
+The agreement and account form start as PSC document not ready. Finalize them outside this workflow, save the checklist, and record the final pack as sent only after actually sending it. This action records a manual event; it does not attach or send a pack. Originals remain in controlled correspondence/document records, referenced in checklist notes. Upload/e-signature collection is not implemented in this release.
+
+Reminders are scheduled for 9am Dubai time after 3 and 7 Monday–Friday working days; public holidays are not configured. The existing private worker secret invokes procurement-mail every five minutes. For each due reminder it creates a draft and task atomically; there is no unattended Gmail send. A pending current reminder prevents another being created until resolved. Editing the checklist invalidates old drafts and returns unaccepted reminder jobs to pending. Verified/received/not-applicable items are not requested again.
+
+The worker checks Gmail for new mail from the exact enrolled contact since the pack was recorded (or reminders resumed), without requiring PSC-Procurement. Any such message, including an unrelated or automated reply, pauses reminders conservatively and creates a review task. Different sender addresses are not matched automatically. Contact email/journey changes pause reminders. Gmail failure prevents draft generation; no content interpretation or automatic commercial decision occurs. Sending a reminder also checks for replies and validates the current checklist revision under a database lock.
+
+Activation requires every mandatory item verified, and evidence notes for verified items or valid optional exemptions. This approves the onboarding record and sets the contact journey to Customer. It does not create a login, grant credit, approve a purchase order or release procurement. Only an authorized non-demo administrator can change onboarding through the backend. New tables retain admin-read RLS and service-only writes; mutation RPCs are not executable by anon/authenticated.
+
+Tests: 27 isolated security tests, embedded PostgreSQL idempotency/transaction/permission tests, onboarding browser checks at 390/1440 pixels, existing workstation and Gmail approval regressions, shell build tests. No real emails or customer enrollments were created during implementation. Production checks confirm zero enrollments and restricted direct writes.
+
+Remaining: finalize agreement and account-opening form; document upload/e-signature workflow; owner-controlled live onboarding acceptance test; additional prospect, requirement and quotation sequences; template editing and sequence-level approval for eventual unattended routine sending. This is the onboarding draft-first release, not completion of the entire journey automation proposal.

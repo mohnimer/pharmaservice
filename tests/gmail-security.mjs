@@ -4,12 +4,13 @@ import {join} from 'node:path';
 import {spawnSync} from 'node:child_process';
 // Keep production source intact; replace only external adapters in isolated tests.
 const root=mkdtempSync(join(tmpdir(),'psc-mail-test-'));
-for(const path of ['_shared/mail-senders.ts','_shared/outreach.ts','_shared/mail-intake.ts','_shared/psc-mail.ts','_shared/quote-pdf.ts','dispatch-notification/index.ts','psc-gmail-oauth/index.ts','poll-procurement-mail/index.ts','procurement-mail/index.ts','send-mail-campaign/index.ts','mail-unsubscribe/index.ts']){
+for(const path of ['_shared/onboarding.ts','_shared/mail-senders.ts','_shared/outreach.ts','_shared/mail-intake.ts','_shared/psc-mail.ts','_shared/quote-pdf.ts','dispatch-notification/index.ts','psc-gmail-oauth/index.ts','poll-procurement-mail/index.ts','procurement-mail/index.ts','send-mail-campaign/index.ts','mail-unsubscribe/index.ts']){
  const file=join(root,path);mkdirSync(join(file,'..'),{recursive:true});
  writeFileSync(file,readFileSync('supabase/functions/'+path,'utf8').replace(/import \{\s*createClient\s*\} from 'https:\/\/esm.sh\/[^']+'/g,'const createClient:any=()=> (globalThis as any).testService').replace(/import \{PDFDocument,StandardFonts,rgb\} from '[^']+'/,'const PDFDocument:any={},StandardFonts:any={},rgb:any=()=>({})'));
 }
 writeFileSync(join(root,'security_test.ts'),String.raw`
 import {draftSender,notificationSender,verifySender,routedMime,SALES,PROCUREMENT} from './_shared/mail-senders.ts';
+import {initialItems,validateItems,canActivate,reminderBody,businessDate,detectReply,onboardingAction} from './_shared/onboarding.ts';
 import {admin,accessToken,gmail,mime,MailError,safeCode} from './_shared/psc-mail.ts';
 import {validateIntake,checkIntakeSend,intakeAction} from './_shared/mail-intake.ts';
 import {marketingMime,verifyAlias,eligible,OUTREACH} from './_shared/outreach.ts';
@@ -22,6 +23,19 @@ await import('./poll-procurement-mail/index.ts');const poll=handler;
 await import('./mail-unsubscribe/index.ts');const unsubscribe=handler;
 await import('./send-mail-campaign/index.ts');const campaigns=handler;
 
+Deno.test('onboarding keeps unfinished contract blocked and reminders only chase missing documents',()=>{
+ const items=initialItems();assert(items.agreement.status==='internal_pending');assert(!canActivate(items));items.registration.status='received';
+ const body=reminderBody('Buyer',items);assert(!body.includes('Signed supply agreement'));assert(!body.includes('Company / institutional registration'));assert(body.includes('Authorized ordering contacts'));
+ items.agreement.status='not_applicable';let rejected=false;try{validateItems(items)}catch{rejected=true}assert(rejected);
+ assert(businessDate('2026-10-09T20:30:00Z',3)==='2026-10-14T05:00:00.000Z');
+});
+Deno.test('unlabelled contact reply pauses onboarding without sending',async()=>{
+ const original=fetch;let paused=false,task=false,query='';const c:any={select:()=>c,eq:()=>c,single:async()=>({data:{email:'buyer@example.com'}}),upsert:async()=>{task=true;return {data:{}}}};
+ const s:any={from:()=>c,rpc:async(_n:any,args:any)=>{paused=args.p_patch.status==='paused';return {data:{}}}};
+ globalThis.fetch=(async(url:any)=>{query=String(url);return Response.json({messages:[{id:'reply'}]})}) as any;
+ try{assert(await detectReply(s,{id:'board',revision:1,contact_id:'contact',recipient:'buyer@example.com',reply_after:'2026-10-10T10:00:00Z',created_by:'user'},'test'));assert(paused&&task);assert(!query.includes('label'));}finally{globalThis.fetch=original}
+});
+Deno.test('onboarding worker rejects unauthorized callers',async()=>{set(svc());writes=0;const r=await procurement(request({action:'onboarding_tick'}));assert(r.status===401);assert(writes===0)});
 Deno.test('workflow routing pins From and Reply-To and rejects unknown types',()=>{
  for(const [kind,address] of [['rfq',PROCUREMENT],['quotation',SALES],['followup',SALES],['test','info@pharmaservice.ae']]){assert(draftSender(kind)===address);const raw=routedMime(address,{to:'info@pharmaservice.ae',subject:'Test',text:'Body',id:'test'});assert(raw.includes('From: Pharma Service <'+address+'>'));assert(raw.includes('Reply-To: '+address));}
  assert(notificationSender('quote_sent')===SALES);assert(notificationSender('portal_order_received')==='info@pharmaservice.ae');let blocked=false;try{draftSender('unknown')}catch{blocked=true}assert(blocked);
