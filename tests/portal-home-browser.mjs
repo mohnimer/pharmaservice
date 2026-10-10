@@ -38,6 +38,7 @@ try{for(const width of [390,1440]){
     const iodine=page.locator('.pscEditorialCard').filter({has:page.locator('[data-add="PSC-INF-001"]')});
     assert((await iodine.locator('.pscBrandChoices').innerText()).includes('Betadine'));
     assert(!(await iodine.locator('.pscBrandChoices').innerText()).includes('Dettol'));
+    assert((await iodine.locator('.productMainImage').getAttribute('src')).includes('inst-0104.webp'));
    }
    if(id==='dha-equipment'){
     const pulse=page.locator('.pscEditorialCard').filter({has:page.locator('[data-add="PSC-DIA-001"]')});
