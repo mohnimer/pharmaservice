@@ -1040,7 +1040,7 @@
     "image_source_url": "https://media.myaster.com/images/products/1004823/gloclav-228mg-5ml-powder-for-oral-suspension-70ml/1004823_1.jpg",
     "listing_source_url": "https://www.myaster.com/en/online-pharmacy/p/gloclav-228mg5ml-powder-for-oral-suspension-70ml/1004823",
     "checked_at": "2026-10-11",
-    "price_aed": "12.00",
+    "price_aed": 12,
     "price_type": "PUBLIC_RETAIL_BENCHMARK",
     "price_unit": "70 ml when reconstituted",
     "vat_basis": "VAT basis not specified in retrieved retailer evidence",

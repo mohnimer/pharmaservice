@@ -757,7 +757,7 @@
   "image_verified": true,
   "description_verified": true,
   "price_verified": true,
-  "price_aed": "12.00",
+  "price_aed": 12,
   "price_type": "PUBLIC_RETAIL_BENCHMARK",
   "price_unit": "70 ml when reconstituted",
   "price_vat_basis": "VAT basis not specified in retrieved retailer evidence",
