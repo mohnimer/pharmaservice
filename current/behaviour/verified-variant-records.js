@@ -1182,6 +1182,30 @@
   "price_note": "Dated public UAE retail reference, not a regulatory MRP or PSC approved selling price. Retailer availability does not establish PSC stock; quotation confirms supply and commercial terms.",
   "release_status": "APPROVED"
 }
+,
+{
+  "family_id": "PSC-IS-179",
+  "product_option_id": "local-acorus-a0a3ef8669fa",
+  "psc_sku": "PS-AC-A0A3EF8669FA",
+  "exact_product_name": "Ozempic Semaglutide 0.25 mg Prefilled Pen",
+  "brand": "Ozempic",
+  "pack": "1 prefilled pen, 1.5 ml, with 4 needles",
+  "description": "Ozempic semaglutide 0.25 mg prefilled injection pen, 1.5 ml, supplied with 4 disposable needles.",
+  "description_source": "https://www.nahdionline.com/en-ae/ozempic-025-mg-1-prefilled-pen-15-ml/pdp/101677011",
+  "image_url": "/assets/products/verified-20261012/local-acorus-a0a3ef8669fa.jpg",
+  "image_source": "https://ecombe.nahdionline.com/media/catalog/product/o/z/ozempic-0-25-mg-1-prefilled-pen-1-5-ml-refrigerator-1_1.jpg",
+  "image_verified": true,
+  "description_verified": true,
+  "price_verified": true,
+  "price_aed": 743.5,
+  "price_type": "PUBLIC_RETAIL_BENCHMARK",
+  "price_unit": "1 prefilled pen, 1.5 ml, with 4 needles",
+  "price_vat_basis": "VAT basis not specified in retrieved retailer evidence",
+  "price_source": "https://www.nahdionline.com/en-ae/ozempic-025-mg-1-prefilled-pen-15-ml/pdp/101677011",
+  "price_checked_at": "2026-10-12",
+  "price_note": "Dated public UAE retail reference, not a regulatory MRP or PSC approved selling price. Retailer availability does not establish PSC stock; quotation confirms supply and commercial terms.",
+  "release_status": "APPROVED"
+}
   ];
   const norm = value => String(value || '').normalize('NFKC').trim().replace(/\s+/g,' ').toUpperCase();
   const eligible = (option, record) => option.product_option_id === record.product_option_id &&

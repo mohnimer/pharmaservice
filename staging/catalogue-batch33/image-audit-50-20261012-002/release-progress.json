@@ -208,7 +208,7 @@
       "local_option_ids": [
         "local-acorus-a0a3ef8669fa"
       ],
-      "status": "PENDING_REPLACEMENT_AND_EXACT_PACK_GUARD",
+      "status": "INTEGRATED_AWAITING_CI_SCREENSHOT_REVIEW_AND_LIVE_VERIFICATION",
       "tested_commit": null,
       "deployed_commit": null,
       "live_image_url": null,

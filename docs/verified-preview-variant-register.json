@@ -1631,5 +1631,37 @@
     "browser_route": "patient-care",
     "quality_review": "Unchanged native retailer photograph visually reviewed against exact local name and source pack; product area readable. Supplier originals, historical holds and rejected alternatives retained. No enlargement, cropping, background removal or generation.",
     "price_note": "Dated public UAE retail reference, not a regulatory MRP or PSC approved selling price. Retailer availability does not establish PSC stock; quotation confirms supply and commercial terms."
+  },
+  {
+    "family_id": "PSC-IS-179",
+    "product_option_id": "local-acorus-a0a3ef8669fa",
+    "psc_sku": "PS-AC-A0A3EF8669FA",
+    "product_name": "Ozempic Semaglutide 0.25 mg Prefilled Pen",
+    "brand": "Ozempic",
+    "pack": "1 prefilled pen, 1.5 ml, with 4 needles",
+    "image_path": "/assets/products/verified-20261012/local-acorus-a0a3ef8669fa.jpg",
+    "sha256": "970eec492d6d2a68ca06fd6db55f7fdb9a37220eee5d0b8a57d7f230ba9c5a49",
+    "dimensions": [
+      1100,
+      1100
+    ],
+    "image_source_url": "https://ecombe.nahdionline.com/media/catalog/product/o/z/ozempic-0-25-mg-1-prefilled-pen-1-5-ml-refrigerator-1_1.jpg",
+    "listing_source_url": "https://www.nahdionline.com/en-ae/ozempic-025-mg-1-prefilled-pen-15-ml/pdp/101677011",
+    "checked_at": "2026-10-12",
+    "price_aed": 743.5,
+    "price_type": "PUBLIC_RETAIL_BENCHMARK",
+    "price_unit": "1 prefilled pen, 1.5 ml, with 4 needles",
+    "vat_basis": "VAT basis not specified in retrieved retailer evidence",
+    "description": "Ozempic semaglutide 0.25 mg prefilled injection pen, 1.5 ml, supplied with 4 disposable needles.",
+    "description_source": "https://www.nahdionline.com/en-ae/ozempic-025-mg-1-prefilled-pen-15-ml/pdp/101677011",
+    "image_identity_verified": true,
+    "image_quality_approved": true,
+    "description_verified": true,
+    "psc_sell_price_approved": false,
+    "overall_release_status": "HOLD",
+    "variant_evidence_status": "VERIFIED_PREVIEW_CANDIDATE",
+    "browser_route": "diabetes",
+    "quality_review": "Unchanged native retailer photograph visually reviewed against exact local name and source pack; product area readable. Supplier originals, historical holds and rejected alternatives retained. No enlargement, cropping, background removal or generation.",
+    "price_note": "Dated public UAE retail reference, not a regulatory MRP or PSC approved selling price. Retailer availability does not establish PSC stock; quotation confirms supply and commercial terms."
   }
 ]

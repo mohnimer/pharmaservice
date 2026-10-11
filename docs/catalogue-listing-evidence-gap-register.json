@@ -4,10 +4,10 @@
   "production_changed": false,
   "counts": {
     "cards": 613,
-    "verified_cards": 52,
-    "cards_pending": 561,
+    "verified_cards": 53,
+    "cards_pending": 560,
     "local_options": 193,
-    "verified_local_options": 52
+    "verified_local_options": 53
   },
   "cards": [
     {
@@ -8239,16 +8239,11 @@
       "sku": "PS-AC-A0A3EF8669FA",
       "name": "Ozempic Semaglutide 0.25 mg Prefilled Pen",
       "family_id": "PSC-IS-179",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-a0a3ef8669fa.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-a0a3ef8669fa",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-17E4DAD608DF",
@@ -9809,7 +9804,7 @@
       "local_option_id": "local-acorus-a0a3ef8669fa",
       "family_id": "PSC-IS-179",
       "name": "Ozempic Semaglutide 0.25 mg Prefilled Pen",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-17e4dad608df",
