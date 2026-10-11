@@ -73,3 +73,24 @@ test('checked-in preview register agrees with exact local identities and image b
   assert.equal(card.currentImageUrl,row.image_path);assert.equal(card.verified_description,record.description);
  }
 });
+
+test('reviewed snapshot packs retain both IDs and quarantine unapproved photographs',()=>{
+ const root=path.join(__dirname,'..');
+ const crypto=require('node:crypto');
+ const register=JSON.parse(fs.readFileSync(path.join(root,'docs/verified-preview-variant-register.json'),'utf8'));
+ const reviews=JSON.parse(fs.readFileSync(path.join(root,'docs/imodium-zyrtec-option-evidence-20261011.json'),'utf8')).records;
+ const reconciliation=JSON.parse(fs.readFileSync(path.join(root,'docs/option-id-reconciliation-candidates.json'),'utf8'));
+ assert.equal(reviews.length,6);assert.equal(reconciliation.reviewed_pack_identity_pairs,6);
+ for(const review of reviews){
+  const pair=reconciliation.pairs.find(p=>p.local_product_option_id===review.product_option_id && p.database_product_option_id===review.database_product_option_id);assert(pair);
+  assert.equal(pair.pack_identity_evidence_status,'VERIFIED_EXACT_RETAILER_PACK');
+  assert.equal(pair.verified_pack,review.pack);assert.equal(pair.release_status,'HOLD');
+  assert.equal(pair.automatic_id_merge_authorized,false);assert.equal(pair.current_database_record_verified,false);
+  assert.equal(pair.database_customer_selectable,'false');
+  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,review.image_path))).digest('hex'),review.sha256);
+  assert.equal(register.some(r=>r.product_option_id===review.product_option_id),review.image_quality_approved);
+ }
+ const drops=reviews.find(r=>r.product_name.includes('ORAL DROPS'));
+ assert(drops.excluded_source_claim);assert(!drops.description.includes('ambroxol'));
+ assert(drops.description_source.startsWith('https://assets.gskstatic.com/'));
+});

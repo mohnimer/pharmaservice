@@ -2,11 +2,13 @@
   "scope": "2026-10-11 retained snapshots; no fresh production database query",
   "source_files": {
     "docs/local-catalogue-overlay-variant-audit-20261011.csv": "36b662f78d76ca67cd0c6e232071b03e31bd7a61c3bea9c23372f01e5f77cea7",
-    "docs/live-variant-audit-20261011.csv": "203e8a359366a53fe34acdc060131290a4f77e8c04195f5fe01cb9b317eb88fe"
+    "docs/live-variant-audit-20261011.csv": "203e8a359366a53fe34acdc060131290a4f77e8c04195f5fe01cb9b317eb88fe",
+    "docs/imodium-zyrtec-option-evidence-20261011.json": "f498990000c6addc5f0508a50bb56337c9e340af9371b5946349ac6d8f4bd146"
   },
   "local_record_count": 193,
   "database_record_count": 719,
   "exact_identity_overlap_pairs": 6,
+  "reviewed_pack_identity_pairs": 6,
   "release_status": "HOLD",
   "pairs": [
     {
@@ -22,9 +24,16 @@
       "identity_unique_in_both_snapshots": true,
       "pack_status": "MISSING_DATABASE_PACK",
       "database_customer_selectable": "false",
+      "pack_identity_evidence_status": "VERIFIED_EXACT_RETAILER_PACK",
+      "verified_pack": "6 capsules",
+      "evidence_image_path": "/assets/products/verified-20261011/imodium-2mg-6-capsules.jpg",
+      "evidence_image_sha256": "2f6dbefa6b3184cc5f95cc8f0614cecb232594ce430c724f06995dd574433945",
+      "evidence_listing_url": "https://www.lifepharmacy.com/product/imodium-2mg-cap-hard-gelatin-6-s-blister",
+      "image_quality_approved": true,
+      "current_database_record_verified": false,
       "release_status": "HOLD",
       "automatic_id_merge_authorized": false,
-      "hold_reason": "Snapshot identity overlap only; validate pack and current database record, exact photograph, description and commercial evidence before reconciliation."
+      "hold_reason": "Reviewed retailer pack identity; current database record and commercial approval remain unverified. Image quality holds are recorded separately."
     },
     {
       "family_id": "PSC-IS-098",
@@ -39,9 +48,16 @@
       "identity_unique_in_both_snapshots": true,
       "pack_status": "MISSING_DATABASE_PACK",
       "database_customer_selectable": "false",
+      "pack_identity_evidence_status": "VERIFIED_EXACT_RETAILER_PACK",
+      "verified_pack": "60 capsules",
+      "evidence_image_path": "/staging/catalogue-batch33/imodium-2mg-60-capsules.jpg",
+      "evidence_image_sha256": "23f2fe450d91a5a51e43296f62e63f44310970c2b2ebeeaa3ce532aa3e44dc24",
+      "evidence_listing_url": "https://www.lifepharmacy.com/ae-ar/product/imodium-2mg-cap-hard-gelatin-60-s-10-s-bliser-x-6",
+      "image_quality_approved": false,
+      "current_database_record_verified": false,
       "release_status": "HOLD",
       "automatic_id_merge_authorized": false,
-      "hold_reason": "Snapshot identity overlap only; validate pack and current database record, exact photograph, description and commercial evidence before reconciliation."
+      "hold_reason": "Reviewed retailer pack identity; current database record and commercial approval remain unverified. Image quality holds are recorded separately."
     },
     {
       "family_id": "PSC-IS-098",
@@ -56,9 +72,16 @@
       "identity_unique_in_both_snapshots": true,
       "pack_status": "MISSING_DATABASE_PACK",
       "database_customer_selectable": "false",
+      "pack_identity_evidence_status": "VERIFIED_EXACT_RETAILER_PACK",
+      "verified_pack": "6 tablets",
+      "evidence_image_path": "/staging/catalogue-batch33/imodium-instants-2mg-6-tablets.png",
+      "evidence_image_sha256": "3b1a2d5db5da430c70d4a2677f3131ca985fbdab4acf92947ebdf684a04e76b3",
+      "evidence_listing_url": "https://www.lifepharmacy.com/product/imodium-instants-2mg-tab-6-s",
+      "image_quality_approved": false,
+      "current_database_record_verified": false,
       "release_status": "HOLD",
       "automatic_id_merge_authorized": false,
-      "hold_reason": "Snapshot identity overlap only; validate pack and current database record, exact photograph, description and commercial evidence before reconciliation."
+      "hold_reason": "Reviewed retailer pack identity; current database record and commercial approval remain unverified. Image quality holds are recorded separately."
     },
     {
       "family_id": "PSC-IS-073",
@@ -73,9 +96,16 @@
       "identity_unique_in_both_snapshots": true,
       "pack_status": "DIFFERENT_PACK_TEXT_REQUIRES_REVIEW",
       "database_customer_selectable": "false",
+      "pack_identity_evidence_status": "VERIFIED_EXACT_RETAILER_PACK",
+      "verified_pack": "20 tablets",
+      "evidence_image_path": "/assets/products/verified-20261011/zyrtec-10mg-20-tablets.jpg",
+      "evidence_image_sha256": "41768cd8c2e63a93eb3208b75f5d6b077ea1111f19ad4ec9e8bd786f4bf2b846",
+      "evidence_listing_url": "https://www.lifepharmacy.com/product/zyrtec-10mg-tab-20s-10s-blister-x-2",
+      "image_quality_approved": true,
+      "current_database_record_verified": false,
       "release_status": "HOLD",
       "automatic_id_merge_authorized": false,
-      "hold_reason": "Snapshot identity overlap only; validate pack and current database record, exact photograph, description and commercial evidence before reconciliation."
+      "hold_reason": "Reviewed retailer pack identity; current database record and commercial approval remain unverified. Image quality holds are recorded separately."
     },
     {
       "family_id": "PSC-IS-073",
@@ -90,9 +120,16 @@
       "identity_unique_in_both_snapshots": true,
       "pack_status": "DIFFERENT_PACK_TEXT_REQUIRES_REVIEW",
       "database_customer_selectable": "false",
+      "pack_identity_evidence_status": "VERIFIED_EXACT_RETAILER_PACK",
+      "verified_pack": "75 ml",
+      "evidence_image_path": "/assets/products/verified-20261011/zyrtec-1mgml-75ml.jpg",
+      "evidence_image_sha256": "7d412400b8322b22d81497b4d202750dd0b7188d3e45201740c8542cec11a2b2",
+      "evidence_listing_url": "https://www.lifepharmacy.com/ae-ar/product/zyrtec-1mg-ml-oral-sol-75ml-bot",
+      "image_quality_approved": true,
+      "current_database_record_verified": false,
       "release_status": "HOLD",
       "automatic_id_merge_authorized": false,
-      "hold_reason": "Snapshot identity overlap only; validate pack and current database record, exact photograph, description and commercial evidence before reconciliation."
+      "hold_reason": "Reviewed retailer pack identity; current database record and commercial approval remain unverified. Image quality holds are recorded separately."
     },
     {
       "family_id": "PSC-IS-073",
@@ -107,9 +144,16 @@
       "identity_unique_in_both_snapshots": true,
       "pack_status": "DIFFERENT_PACK_TEXT_REQUIRES_REVIEW",
       "database_customer_selectable": "false",
+      "pack_identity_evidence_status": "VERIFIED_EXACT_RETAILER_PACK",
+      "verified_pack": "10 ml",
+      "evidence_image_path": "/staging/catalogue-batch33/zyrtec-10mgml-10ml.webp",
+      "evidence_image_sha256": "9ead6e7997e4d86785cad648aa6296b3864a3b5a22548a29c7aca77e9083dd19",
+      "evidence_listing_url": "https://www.lifepharmacy.com/product/zyrtec-10mg-ml-drp-oral-10mlbot",
+      "image_quality_approved": false,
+      "current_database_record_verified": false,
       "release_status": "HOLD",
       "automatic_id_merge_authorized": false,
-      "hold_reason": "Snapshot identity overlap only; validate pack and current database record, exact photograph, description and commercial evidence before reconciliation."
+      "hold_reason": "Reviewed retailer pack identity; current database record and commercial approval remain unverified. Image quality holds are recorded separately."
     }
   ]
 }

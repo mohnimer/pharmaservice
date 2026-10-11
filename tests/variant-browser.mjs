@@ -74,6 +74,10 @@ try{
    {route:'patient-care',sku:'PS-AC-5ED2FF06E0AF',optionId:'local-acorus-5ed2ff06e0af',
     photo:'/assets/products/verified-20261011/nexium-40mg-14-tablets.jpg',pack:'14 tablets',price:110,
     description:'Nexium esomeprazole 40 mg tablets, pack of 14 tablets.'}
+,
+{"route": "patient-care", "sku": "PSC-MED-130", "optionId": "local-acorus-4a24ef48aa96", "photo": "/assets/products/verified-20261011/imodium-2mg-6-capsules.jpg", "pack": "6 capsules", "price": 6.5, "description": "Imodium loperamide hydrochloride 2 mg capsules, pack of 6 capsules."},
+{"route": "breathing", "sku": "PSC-MED-003", "optionId": "local-acorus-f8356dfd8db2", "photo": "/assets/products/verified-20261011/zyrtec-10mg-20-tablets.jpg", "pack": "20 tablets", "price": 39.5, "description": "Zyrtec cetirizine dihydrochloride 10 mg film-coated tablets, pack of 20 tablets.", "descriptionSource": "https://assets.gskstatic.com/pharma/PM-PI_portal/Lebanon/zyrtec_oral_drops_pil_lb.pdf"},
+{"route": "breathing", "sku": "PSC-MED-102", "optionId": "local-acorus-9d511aa6c569", "photo": "/assets/products/verified-20261011/zyrtec-1mgml-75ml.jpg", "pack": "75 ml", "price": 17.5, "description": "Zyrtec cetirizine dihydrochloride 1 mg/ml oral solution, 75 ml bottle.", "descriptionSource": "https://assets.gskstatic.com/pharma/PM-PI_portal/Lebanon/zyrtec_oral_drops_pil_lb.pdf"}
   ]) {
   await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/'+variant.route);
   const {sku,optionId}=variant;
@@ -99,11 +103,12 @@ try{
   assert.equal(actual.verified_price_type,'PUBLIC_RETAIL_BENCHMARK');
   assert.equal(actual.verified_description,variant.description);
   assert.equal(actual.verified_price_vat_basis,'Inclusive of VAT as displayed by retailer');
-  assert.equal(actual.verified_description_source,actual.verified_price_source);
+  assert.equal(actual.verified_description_source,variant.descriptionSource || actual.verified_price_source);
   assert.equal(actual.verified_price_checked_at,'2026-10-11');
   assert((await page.locator('body').evaluate(el=>el.scrollWidth))<=width+1,'catalogue must not overflow horizontally');
   }
   // Real same-brand/same-pack strengths must stay distinct under multiple selection.
+  await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/patient-care');
   const nexiumCard=page.locator('.productCard:has([data-product-view="PS-AC-56CB26FE529B"])');
   await nexiumCard.locator('.productVisual').click();
   for(const id of ['local-acorus-56cb26fe529b','local-acorus-5ed2ff06e0af'])
@@ -124,6 +129,6 @@ try{
   }
   assert.deepEqual(errors,[]);
   assert.deepEqual(await page.evaluate(()=>window.__backendCalls.filter(c=>c.rpc||c.action!=='select')),[]);
-  await context.close();console.log(width+'px: fixture selection and four real variants, Nexium strength multiselect, VAT/source request snapshots and no overflow passed');
+  await context.close();console.log(width+'px: fixture selection and seven real variants, Nexium strength multiselect, VAT/source request snapshots and no overflow passed');
  }
 }finally{await browser.close();await new Promise(r=>server.close(r));}

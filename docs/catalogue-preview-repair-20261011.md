@@ -112,3 +112,13 @@ approved. This comparison is distinct from the Batch 33 source-master-name
 crosswalk, which found no exact database links. The snapshots are not a new
 production database read. Run `python3 tools/reconcile-option-identities.py`
 to reproduce the register.
+
+### Imodium and Zyrtec exact-pack review
+
+Seven individual variants now have preview evidence (the previous four plus Imodium 2 mg/6 capsules, Zyrtec 10 mg/20 tablets and Zyrtec 1 mg/ml/75 ml). The three new photographs are unchanged 1024×1024 retailer originals, with checksums, brand, exact pack, descriptive identity and VAT-inclusive UAE retail benchmarks in the register. These prices are not approved PSC selling prices.
+
+All six retained Imodium/Zyrtec local/database identity overlaps now have separately reviewed retailer pack evidence. The reconciliation tool checks exact ID pairs, family, full name, brand, historical pack text and photograph checksum. It records confirmed pack identity without changing historical database pack text, enabling database options or merging IDs. All six database snapshot records were non-selectable; current database records and commercial approval remain unverified.
+
+Imodium 60 capsules, Imodium Instants 6 tablets and Zyrtec oral drops 10 ml remain on image-quality hold. The alternative Imodium Instants gallery images are promotional illustrations, not pack photographs. The 700 px alternative Imodium and Zyrtec photographs do not resolve the quality hold. Their sources, original bytes and decisions are retained privately outside the built site.
+
+The Zyrtec oral-drops retailer description incorrectly claims a cetirizine/ambroxol combination and includes tablet instructions. That copy was excluded. Zyrtec descriptive identity uses the photographed strength/form plus the manufacturer’s regional leaflet; this does not establish UAE registration. Mobile and desktop browser checks now cover all seven preview variants, including separate description and price sources in procurement snapshots. Overall release remains HOLD and production is unchanged.

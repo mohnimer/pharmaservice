@@ -1,0 +1,50 @@
+[
+  {
+    "path": "staging/catalogue-batch33/imodium-instants-gallery2.jpg",
+    "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/imodium-instants-2mg-tab-6-s/111992-2.jpg",
+    "sha256": "ed10ef04384e5c3b4221a6888a4e902fd8632e4de90c34affafc13aa27a2d1cb",
+    "dimensions": [
+      1000,
+      1000
+    ],
+    "decision": "REJECT_FOR_PREVIEW",
+    "reason": "Illustration, not an exact pack photograph",
+    "reviewed_at": "2026-10-11"
+  },
+  {
+    "path": "staging/catalogue-batch33/imodium-instants-gallery3.jpg",
+    "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/imodium-instants-2mg-tab-6-s/111992-3.jpg",
+    "sha256": "20ea5ca89283a93709ae394abf5e97da6fd03a22f0074fd3c1d3d5d7f978bcce",
+    "dimensions": [
+      1000,
+      1000
+    ],
+    "decision": "REJECT_FOR_PREVIEW",
+    "reason": "Promotional illustration, not an exact pack photograph",
+    "reviewed_at": "2026-10-11"
+  },
+  {
+    "path": "staging/catalogue-batch33/imodium-60-gallery2.png",
+    "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/imodium-2mg-cap-hard-gelatin-60-s-10-s-bliser-x-6/111989-2.png",
+    "sha256": "c625824211e90f64c343331f53e5334394e7ca25deea338b610aec37178def50",
+    "dimensions": [
+      700,
+      700
+    ],
+    "decision": "REJECT_FOR_PREVIEW",
+    "reason": "Soft 700 px alternative; insufficient improvement over held original",
+    "reviewed_at": "2026-10-11"
+  },
+  {
+    "path": "staging/catalogue-batch33/zyrtec-drops-gallery2.png",
+    "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/zyrtec-10mg-ml-drp-oral-10mlbot/117022-2.png",
+    "sha256": "8e2b6ea1dd5253dc149baa0850af32b371f3cc936ecf4da16ca6053fc37f6c49",
+    "dimensions": [
+      700,
+      700
+    ],
+    "decision": "REJECT_FOR_PREVIEW",
+    "reason": "700 px alternative; seek sharper original for high-quality pack image",
+    "reviewed_at": "2026-10-11"
+  }
+]
