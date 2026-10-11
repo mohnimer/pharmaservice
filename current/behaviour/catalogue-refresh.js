@@ -40,7 +40,7 @@
     const norm = value => String(value || '').normalize('NFKC').trim().replace(/\s+/g, ' ').toUpperCase();
     const family = r => r.family_id || r.catalogueParentId || r.catalogueReferenceFamilyId || '';
     const key = (id, name) => norm(id) + '|' + norm(name);
-    const identity = r => [norm(family(r)), norm(r.exact_product_name), norm(r.brand), norm(r.pack)].join('|');
+    const identity = r => [norm(family(r)), norm(r.exact_product_name), norm(r.brand), norm(r.pack), r.local_reference?'LOCAL':r.reference_only?'REFERENCE':'DATABASE'].join('|');
     const productIdentity = new Map();
     const collisions = new Set();
     for (const product of refresh.products) {

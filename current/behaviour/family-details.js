@@ -146,7 +146,7 @@
           sb.from('catalogue_product_availability_public').select('family_id,product_option_id,availability_state,availability_label,verified_at,valid_until').eq('family_id',id)
         ]);
         if(fErr) throw fErr;if(oErr) throw oErr;if(pErr) throw pErr;if(aErr) throw aErr;if(oaErr) throw oaErr;
-        if(family) {state.family=family;state.familyInDatabase=true;} state.options=Array.isArray(approved)?approved:[];state.prices=Array.isArray(prices)?prices:[];state.availability=availability||null;state.optionAvailability=Array.isArray(optionAvailability)?optionAvailability:[];
+        if(family) {state.family=family;state.familyInDatabase=true;} state.options=Array.isArray(approved)?approved.map(o=>({...o,reference_only:true,reference_source:'catalogue_family_option_reference_public'})):[];state.prices=Array.isArray(prices)?prices:[];state.availability=availability||null;state.optionAvailability=Array.isArray(optionAvailability)?optionAvailability:[];
       }catch(e){console.warn('PS family detail load failed; using controlled fallback.',e?.message||e);}
     }
     if(!state.family) state.family=fallbackFamily(id);
@@ -169,7 +169,7 @@
     return `<section class="pscFamilyDetailBlock pscFamilyPreferenceBlock">
       <span class="pscFamilyDetailLabel">Product preference</span>
       <label class="pscBrandChoice pscBrandNoPreference ${noPreference?'active':''}"><input type="checkbox" data-family-no-preference ${noPreference?'checked':''}><span><b>No brand preference</b><small>PS can quote a suitable product that meets the family specification.</small></span></label>
-      ${refs.length?`<div class="pscBrandTickGrid">${refs.map(o=>{const key=optionKey(o),brand=normalizedBrand(o.brand)||String(o.exact_product_name||'Product option');return `<label class="pscBrandTick ${state.selectedOptionIds.includes(key)?'active':''}"><input type="checkbox" data-family-option="${esc(key)}" ${state.selectedOptionIds.includes(key)?'checked':''}>${o.image_url?`<img class="catalogueOptionImage" src="${esc(o.image_url)}" alt="${esc(o.exact_product_name)}" loading="lazy">`:''}<span><b>${esc(brand)}</b><small>${esc(optionDescriptor(o,f))}</small>${!o.image_url?'<small>Exact variant photograph pending verification</small>':''}</span>${optionPrice(o)}</label>`;}).join('')}</div>`:''}
+      ${refs.length?`<div class="pscBrandTickGrid">${refs.map(o=>{const key=optionKey(o),brand=normalizedBrand(o.brand)||String(o.exact_product_name||'Product option');return `<label class="pscBrandTick ${state.selectedOptionIds.includes(key)?'active':''}"><input type="checkbox" data-family-option="${esc(key)}" ${state.selectedOptionIds.includes(key)?'checked':''}>${o.image_url?`<img class="catalogueOptionImage" src="${esc(o.image_url)}" alt="${esc(o.exact_product_name)}" loading="lazy">`:''}<span><b>${esc(brand)}</b><small>${esc(optionDescriptor(o,f))}</small>${!o.image_url?'<small>Exact variant photograph pending verification</small>':''}${o.reference_only?'<small>Catalogue reference · exact supply approval pending</small>':''}</span>${optionPrice(o)}</label>`;}).join('')}</div>`:''}
       ${fallbacks.length?`<div class="pscBrandTickGrid pscFallbackBrandGrid">${fallbacks.map(brand=>`<label class="pscBrandTick ${state.selectedFallbackBrands.includes(brand)?'active':''}"><input type="checkbox" data-family-fallback-brand="${esc(brand)}" ${state.selectedFallbackBrands.includes(brand)?'checked':''}><span><b>${esc(brand)}</b><small>${esc(fallbackBrandDescriptor(f))}</small><small>Requested brand only · exact variant, photo and price to confirm</small></span></label>`).join('')}</div>`:''}
       <p class="pscBrandPreferenceNote">Tick one or more exact product options you are happy for PS to quote. Where more than one SKU exists under the same brand, each SKU is shown separately. Final availability and commercial terms are confirmed in the quotation.</p>
       <label class="pscBrandChoice ${state.otherBrandActive?'active':''}"><input type="checkbox" data-family-other-toggle ${state.otherBrandActive?'checked':''}><span><b>Other brand / manufacturer required</b><small>Specify another brand, manufacturer, model or pack.</small></span></label>
@@ -224,11 +224,12 @@
   function quoteSummary(){
     const f=state.family||fallbackFamily(state.familyId),kind=familyKind(f),preference=preferenceSummary(),chosen=selectedOptions();
     const brands=[...new Set([...chosen.map(o=>normalizedBrand(o.brand)).filter(Boolean),...state.selectedFallbackBrands])];
-    const specific=chosen.length===1&&!chosen[0].local_reference&&!state.selectedFallbackBrands.length&&!state.otherBrandActive;
+    const specific=chosen.length===1&&!chosen[0].local_reference&&!chosen[0].reference_only&&!state.selectedFallbackBrands.length&&!state.otherBrandActive;
     const mode=specific?'specific_option':chosen.length||state.selectedFallbackBrands.length||state.otherBrandActive?'other_brand':'no_preference';
     const snapshots=chosen.map(o=>({...o,
       local_product_option_id:o.local_reference?o.product_option_id:null,
-      product_option_id:o.local_reference?null:o.product_option_id}));
+      reference_product_option_id:o.reference_only?o.product_option_id:null,
+      product_option_id:o.local_reference||o.reference_only?null:o.product_option_id}));
     return {localFamily:!state.familyInDatabase,familyId:f?.family_id||state.familyId,familyName:f?.family_name||state.familyId,familyPageType:f?.page_type||'',orderPackBasis:f?.order_pack_basis||'',presentation:state.presentation||'',brandPreference:preference,brandPreferenceMode:mode,requestedBrands:brands,requestedBrand:mode==='other_brand'?preference:brands.join(', '),requestedProductOptions:snapshots,productOption:snapshots.length===1?snapshots[0]:null,regulated:kind==='medicine',requirementType:requirementType(f),commercialSpecification:f?.commercial_specification||'',priceTreatment:priceLabel(f),availability:familyAvailabilityLabel(f),dhaMapped:isDhaMapped(f),requirementReference:f?.requirement_reference||'',requirementStatus:f?.dha_status||''};
   }
   function goToQuote(){
@@ -248,7 +249,7 @@
     root.querySelectorAll('[data-family-detail-close]').forEach(el=>el.addEventListener('click',event=>{
       if(el.tagName==='BUTTON'||event.target===el) close();
     }));
-    root.querySelectorAll('[data-family-presentation]').forEach(el=>el.addEventListener('click',()=>{state.presentation=el.dataset.familyPresentation;root.querySelector('.pscPresentationChips')?.classList.remove('invalid');draw();}));
+    root.querySelectorAll('[data-family-presentation]').forEach(el=>el.addEventListener('click',()=>{state.presentation=el.dataset.familyPresentation;state.selectedOptionIds=selectedOptions().filter(o=>!meaningfulPresentation(o.presentation)||String(o.presentation)===state.presentation).map(optionKey);root.querySelector('.pscPresentationChips')?.classList.remove('invalid');draw();}));
     root.querySelector('[data-family-no-preference]')?.addEventListener('change',e=>{if(e.target.checked){state.selectedOptionIds=[];state.selectedFallbackBrands=[];state.otherBrandActive=false;state.otherBrand='';draw();}else{draw();}});
     root.querySelectorAll('[data-family-option]').forEach(el=>el.addEventListener('change',()=>{const id=el.dataset.familyOption||'';const set=new Set(state.selectedOptionIds);if(el.checked)set.add(id);else set.delete(id);state.selectedOptionIds=[...set];draw();}));
     root.querySelectorAll('[data-family-fallback-brand]').forEach(el=>el.addEventListener('change',()=>{const brand=el.dataset.familyFallbackBrand||'';const set=new Set(state.selectedFallbackBrands);if(el.checked)set.add(brand);else set.delete(brand);state.selectedFallbackBrands=[...set];draw();}));

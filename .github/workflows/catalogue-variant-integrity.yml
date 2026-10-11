@@ -34,6 +34,7 @@ jobs:
       - run: npm test
       - run: npm run test:dom
       - run: npm run test:catalogue
+      - run: node tests/reference-overlay.mjs
       - run: npx playwright install --with-deps chromium
       - run: node tests/variant-browser.mjs
       - uses: actions/upload-artifact@v4

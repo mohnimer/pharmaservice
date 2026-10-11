@@ -57,7 +57,8 @@ try{
   const requests=await page.evaluate(()=>window.__variantRequests);
   assert.equal(requests.length,1);
   const selected=requests[0].requestedProductOptions;
-  assert.equal(selected.length,1);assert.equal(selected[0].product_option_id,'fixture-20');
+  assert.equal(selected.length,1);assert.equal(selected[0].product_option_id,null);
+  assert.equal(selected[0].reference_product_option_id,'fixture-20');
   assert.equal(selected[0].pack,'20 pieces');
   assert.equal(selected[0].image_url,options[1].image_url);
   assert.equal(selected[0].verified_price_aed,12);
@@ -105,7 +106,9 @@ try{
   assert((await page.locator('.detailImageMeta').innerText()).includes(String(variant.price)));
   // Medicine families require a presentation as well as an exact option.
   // Assert a new event so a blocked submission cannot reuse a prior variant.
-  const presentationChoice=page.locator('[data-family-presentation]').first();
+  const exactPresentation=await page.locator('[data-family-option="'+optionId+'"]').evaluate(el=>{const o=window.PS_CATALOGUE_REFRESH.approvedOptions.find(o=>o.product_option_id===el.dataset.familyOption);return o?.presentation||'';});
+  const matchingPresentation=page.locator('[data-family-presentation]').filter({hasText:exactPresentation});
+  const presentationChoice=exactPresentation&&await matchingPresentation.count()?matchingPresentation.first():page.locator('[data-family-presentation]').first();
   if(await presentationChoice.count())await presentationChoice.click();
   await preview.waitFor({state:'visible'});
   assert((await page.locator('.detailImageMeta').innerText()).includes(variant.description),'exact description must survive layout enhancements');

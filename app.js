@@ -2618,13 +2618,9 @@
       brandPreferenceMode:mode,
       requestedBrand:mode==='other_brand'?String(detail?.requestedBrand||'').trim():(mode==='specific_option'?String(option?.brand||'').trim():''),
       productOptionId:mode==='specific_option'?String(option?.product_option_id||'').trim():'',
-      productOptionSnapshot:mode==='specific_option'&&option?{
-        product_option_id:option.product_option_id,
-        exact_product_name:option.exact_product_name,
-        brand:option.brand,
-        presentation:option.presentation,
-        pack:option.pack
-      }:null,
+      // Quotation-reference snapshots are not purchase-option foreign keys.
+      requestedProductOptions:Array.isArray(detail?.requestedProductOptions)?structuredClone(detail.requestedProductOptions):[],
+      productOptionSnapshot:option?structuredClone(option):null,
       regulated:!!detail?.regulated,
       qty:Math.max(1,Number(detail?.qty||1))
     };
