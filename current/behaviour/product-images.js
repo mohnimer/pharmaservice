@@ -37,7 +37,8 @@
 
   function rememberProduct(p) {
     if (!p || /^REFERENCE TILE/i.test(p.imageStatus || p.image_status || '')) return;
-    // Do not substitute a different SKU's image for this product.\n    const sku = clean(p.pscSku || p.psc_sku).toUpperCase();
+    // Do not substitute a different SKU's image for this product.
+    const sku = clean(p.pscSku || p.psc_sku).toUpperCase();
     if (!sku) return;
 
     const candidate = clean(p.currentImageUrl || p.image_url || p.imageUrl);
