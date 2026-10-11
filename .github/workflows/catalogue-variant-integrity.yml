@@ -21,3 +21,5 @@ jobs:
       - run: node --test tests/variant-evidence.test.cjs
       - run: npm run build
       - run: npm test
+      - run: npm run test:catalogue
+      - run: npm run test:dom
