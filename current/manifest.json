@@ -24,6 +24,7 @@
     "app.js",
     "current/behaviour/catalogue-families.js",
     "current/behaviour/acorus-batch33-integrity.js",
+    "current/behaviour/variant-evidence.js",
     "current/behaviour/family-details.js",
     "current/behaviour/catalogue-detail-controls.js",
     "current/behaviour/public-interface.js",
