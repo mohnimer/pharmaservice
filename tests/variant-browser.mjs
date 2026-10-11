@@ -56,7 +56,8 @@ try{
   await page.locator('#psHomeCommand').fill('sterile gauze');
   await page.locator('.h47Discovery [type="submit"]').click();
   await page.waitForURL('**/#portal/catalogue/all');
-  assert.equal(await page.locator('[data-cat-q]').first().inputValue(),'sterile gauze');
+  await page.waitForFunction(()=>document.querySelector('#psCommand')?.value==='sterile gauze');
+  assert.equal(await page.locator('#psCommand').inputValue(),'sterile gauze');
   await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/wounds');
   await page.locator('.pscFamilySelector[data-psc-family-open="'+family+'"]').click();
   await page.locator('[data-family-option="fixture-10"]').waitFor();
