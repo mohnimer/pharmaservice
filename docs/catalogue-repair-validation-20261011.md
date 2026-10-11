@@ -32,9 +32,11 @@ and saved in `staging/catalogue-batch33/uae-retail-evidence.json`:
 
 These are public retailer benchmarks, not PSC prices, supplier costs or stock
 commitments. URL, retailer product ID, commercial unit, exact local option ID,
-description and remaining gates are captured per record. No record has public
-release approval. The release inventory initially generated at import remains a
-snapshot; this evidence file is the subsequent price-research checkpoint.
+description and remaining gates are captured per record. All three original
+front-pack photographs were visually inspected for the stated strength/pack;
+their presentation quality remains unapproved. No record has public release
+approval. The importer now joins this evidence by exact family and option ID
+into the reconciliation and release inventory, preserving PSC price holds.
 
 ## Release decision
 

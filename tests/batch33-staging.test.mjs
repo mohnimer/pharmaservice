@@ -32,3 +32,15 @@ test('private candidates are absent from runtime manifest and built release',()=
  assert(!existsSync(new URL('dist/staging/',root)));
  assert(!existsSync(new URL('assets/catalogue-batch33/originals/',root)));
 });
+test('retail evidence is exact-option scoped and never promoted to PSC pricing',()=>{
+ const evidence=JSON.parse(read('staging/catalogue-batch33/uae-retail-evidence.json'));
+ assert.equal(evidence.records.length,3);
+ assert.equal(evidence.runtime_installed,false);
+ for(const e of evidence.records){
+  const source=rows.filter(r=>r.family_id===e.family_id&&r.local_option_ids.includes(e.product_option_id));
+  assert.equal(source.length,1);assert.equal(source[0].source_name,e.catalogue_name);
+  assert.equal(e.price_type,'PUBLIC_RETAIL_BENCHMARK');
+  assert(e.price_aed>0);assert.equal(e.psc_sell_price_approved,false);
+  assert.equal(e.release_status,'HOLD');assert.equal(e.image_quality_approved,false);
+ }
+});

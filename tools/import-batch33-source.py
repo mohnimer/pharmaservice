@@ -25,6 +25,17 @@ def run(source):
     originals = source / "deduped_product_source_images"
     local = read_csv("local-catalogue-overlay-variant-audit-20261011.csv")
     live = read_csv("live-variant-audit-20261011.csv")
+    evidence_path = ROOT / "staging/catalogue-batch33/uae-retail-evidence.json"
+    evidence = {}
+    if evidence_path.exists():
+        for r in json.loads(evidence_path.read_text())["records"]:
+            key = (r["family_id"], r["product_option_id"])
+            assert key not in evidence and r["price_type"] == "PUBLIC_RETAIL_BENCHMARK"
+            assert r["release_status"] == "HOLD" and not r["psc_sell_price_approved"]
+            assert r["price_aed"] > 0 and r["source_url"].startswith("https://")
+            match = [o for o in local if (o["family_id"], o["product_option_id"]) == key]
+            assert len(match) == 1 and norm(match[0]["exact_product_name"]) == norm(r["catalogue_name"])
+            evidence[key] = r
     assert len(products) == 150 and len(local) == 193 and len(live) == 719
     files, hashes, prepared = set(), set(), []
     # Validate the entire batch before writing anything.
@@ -58,12 +69,19 @@ def run(source):
             release_status="HOLD", image_verified=False, price_verified=False))
         for origin, matches in [("LOCAL", lm), ("DATABASE", dm)]:
             for o in matches:
+                retail = evidence.get((family, o["product_option_id"]), {}) if origin == "LOCAL" else {}
                 links.append(dict(origin=origin, family_id=family,
                     product_option_id=o["product_option_id"], exact_product_name=o["exact_product_name"],
                     brand=o["brand"], recorded_pack=o["pack"], source_name=p["Product"],
                     source_pack_claim=p["Pack / Spec Status"], image_file=register[-1]["file"],
                     image_sha256=digest, identity_status="EXACT_FAMILY_AND_NAME" if len(matches)==1 else "COLLISION",
-                    listed_mrp=o.get("listed_mrp",""), price_status="UNAPPROVED_MRP" if float(o.get("listed_mrp") or 0)>0 else "MISSING",
+                    listed_mrp=o.get("listed_mrp",""), price_status="RETAIL_BENCHMARK_RETRIEVED_PSC_PRICE_HOLD" if retail else "UNAPPROVED_MRP" if float(o.get("listed_mrp") or 0)>0 else "MISSING",
+                    retail_benchmark_aed=retail.get("price_aed", ""),
+                    retail_source=retail.get("source_url", ""),
+                    retail_unit=retail.get("price_unit", ""),
+                    retail_checked_at="2026-10-11" if retail else "",
+                    retail_evidence_status=retail.get("price_evidence_status", "MISSING"),
+                    source_image_identity_reviewed=retail.get("image_identity_verified", False),
                     release_status="HOLD"))
     (destination.parent / "source-manifest.json").write_bytes(manifest_bytes)
     (destination.parent / "candidate-image-register.json").write_text(json.dumps(register, indent=2)+"\n")
@@ -73,12 +91,18 @@ def run(source):
     inventory=[]
     for origin, options in [("LOCAL",local),("DATABASE",live)]:
         for o in options:
+            retail = evidence.get((o["family_id"], o["product_option_id"]), {}) if origin == "LOCAL" else {}
             inventory.append(dict(origin=origin, product_option_id=o["product_option_id"],
                 family_id=o["family_id"], exact_product_name=o["exact_product_name"], brand=o["brand"],
                 pack=o["pack"], batch33_candidate=("YES" if (origin,o["product_option_id"]) in linked else "NO"),
                 recorded_image=o["image_url"], listed_mrp=o.get("listed_mrp",""),
-                image_status="NEEDS_VISUAL_IDENTITY_REVIEW", description_status="NEEDS_EXACT_SPEC_EVIDENCE",
-                price_status="UNAPPROVED_MRP" if float(o.get("listed_mrp") or 0)>0 else "MISSING",
+                image_status="IDENTITY_REVIEWED_QUALITY_HOLD" if retail.get("image_identity_verified") else "NEEDS_VISUAL_IDENTITY_REVIEW",
+                description_status="NEEDS_EXACT_SPEC_EVIDENCE",
+                price_status="RETAIL_BENCHMARK_RETRIEVED_PSC_PRICE_HOLD" if retail else "UNAPPROVED_MRP" if float(o.get("listed_mrp") or 0)>0 else "MISSING",
+                retail_benchmark_aed=retail.get("price_aed", ""),
+                retail_source=retail.get("source_url", ""),
+                retail_unit=retail.get("price_unit", ""),
+                retail_evidence_status=retail.get("price_evidence_status", "MISSING"),
                 release_status="HOLD"))
     with (ROOT / "docs/catalogue-option-release-inventory.csv").open("w",newline="") as f:
         writer=csv.DictWriter(f,fieldnames=list(inventory[0]));writer.writeheader();writer.writerows(inventory)
@@ -89,6 +113,7 @@ def run(source):
         existing_master_local_links=sum(bool(r["existing_master_product"]) and bool(r["local_option_ids"]) for r in register),
         new_to_master_local_links=sum(not r["existing_master_product"] and bool(r["local_option_ids"]) for r in register),
         source_pack_uncertain=sum(r["source_pack_claim"]!="CONFIRMED FROM FRONT PACK / EXISTING SOURCE" for r in register),
+        retrieved_retail_benchmarks=len(evidence),
         approved_images=0,approved_prices=0,production_changed=False)
     (destination.parent / "import-summary.json").write_text(json.dumps(summary,indent=2)+"\n")
     print(json.dumps(summary,indent=2))
