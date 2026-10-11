@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: '22'
           cache: npm
+      - run: node --check tools/stage-batch33-images.mjs
       - run: npm ci
       - run: node --test tests/variant-evidence.test.cjs
       - run: npm run build
