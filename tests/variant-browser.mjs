@@ -114,6 +114,7 @@ try{
   assert((await page.locator('.detailImageMeta').innerText()).includes(variant.description),'exact description must survive layout enhancements');
   const optionText=page.locator('.pscBrandTick:has([data-family-option="'+optionId+'"]) > span:not(.pscOptionPrice)');
   assert((await optionText.boundingBox()).width>=140,'exact option text must retain a readable column');
+  await page.locator('.pscBrandTick:has([data-family-option="'+optionId+'"])').screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-option.png'});
   await page.locator('.detailImagePane').screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-selected.png'});
   await page.screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-dialog.png'});
   const requestCount=await page.evaluate(()=>window.__variantRequests.length);

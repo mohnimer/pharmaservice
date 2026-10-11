@@ -31,6 +31,18 @@ try{
   assert.equal(o.pack,pair.current_record.pack);assert.equal(o.verified_price_aed,undefined);
   assert.equal(draft.productOption.reference_product_option_id,pair.database_id);
  }
+ // Verified local previews retain evidence in the actual basket, alongside references.
+ for(const [localId,price] of [['local-acorus-4a24ef48aa96',6.5],['local-acorus-f8356dfd8db2',39.5],['local-acorus-9d511aa6c569',17.5]]){
+  const pair=pairs.find(p=>p.local_id===localId);
+  await w.PSC_OPEN_FAMILY_DETAIL(pair.family_id);await pause();
+  await click('[data-family-option="'+localId+'"]');
+  await click('[data-family-presentation="'+pair.current_record.presentation+'"]');
+  await click('[data-family-quote]');
+  const basket=JSON.parse(w.localStorage.getItem('pscClinicPortalStateV12_1')).basket;
+  const snapshot=basket.flatMap(l=>l.requestedProductOptions||[]).find(o=>o.local_product_option_id===localId);
+  assert(snapshot);assert.equal(snapshot.product_option_id,null);assert.equal(snapshot.verified_price_aed,price);
+  assert(snapshot.verified_description);assert(snapshot.verified_price_source);assert.equal(snapshot.reference_product_option_id,null);
+ }
  // A matching textual pack must also preserve both provenance identities.
  const row=review.rows[0],local=w.PS_CATALOGUE_REFRESH.approvedOptions.find(o=>o.product_option_id===pairs[3].local_id);
  const merged=w.PS_CATALOGUE_REFRESH.mergeOptions([{...row,pack:local.pack,reference_only:true}],row.family_id);
