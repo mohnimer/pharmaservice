@@ -1,0 +1,1655 @@
+{
+  "batch_size": 50,
+  "records": [
+    {
+      "source_name": "Acure Gripe Water",
+      "family_id": "PSC-IS-155",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/acure_gripe_water.jpg",
+      "sha256": "b49f8fda9069ddc23c164a37b37eab9efb113c9e2210d79fe88e642925abfc3a",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; EXACT PACK/PRESENTATION NEEDS VERIFICATION",
+      "local_option_ids": [
+        "local-acorus-59db0a861342"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 1,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        341,
+        815,
+        773
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Aldomet 250 mg \u2014 30 Tablets",
+      "family_id": "PSC-IS-166",
+      "existing_master_product": "ALDOMET 250MG TAB 30'S",
+      "file": "staging/catalogue-batch33/originals/aldomet_250_mg_30_tablets.jpg",
+      "sha256": "9291055bfa8c15c3cb838784bdabfa69593fe43ce910efa9afcf02ebd353b1f0",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-0dec19acea05"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 2,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        208,
+        816,
+        992
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Apex 400 mg \u2014 6 Capsules",
+      "family_id": "PSC-IS-143",
+      "existing_master_product": "APEX 400MG CAP 6'S",
+      "file": "staging/catalogue-batch33/originals/apex_400_mg_6_capsules.jpg",
+      "sha256": "76eb24295511d0e52a66057500003d242ae4f4c9a338f6f374d11e84cb6ca2d4",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-1f1a9e6b4fc8"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 3,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        209,
+        816,
+        992
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "B+ Vitamin B Complex \u2014 30 Softgels",
+      "family_id": "PSC-IS-188",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/bplus_vitamin_b_complex_30_softgels.jpg",
+      "sha256": "6c3614d7a7251629d63995c4599898c1506671c750a060b2c014a2722cc0660d",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-fc78af3cb44f"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 4,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        208,
+        817,
+        991
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Beauty Plus Hair Skin & Nails \u2014 30 Softgels",
+      "family_id": "PSC-IS-188",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/beauty_plus_hair_skin_and_nails_30_softgels.jpg",
+      "sha256": "d8ee3e00587b424d21f7b4473426de79f97832eb0735c369a120288de08fc687",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-c4b46b23533f"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 5,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        341,
+        817,
+        858
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Bepanthen Moisturizing Cream \u2014 30 g",
+      "family_id": "PSC-IS-111",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/bepanthen_moisturizing_cream_30_g.jpg",
+      "sha256": "b49ad0733300581b2247c2f70a13b17fcd3e97efad7ae314e1dc137eaec0d944",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-8500ef9636bd"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 6,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        818,
+        858
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Blink Intensive Soothing Eye Drops",
+      "family_id": "PSC-IS-102",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/blink_intensive_soothing_eye_drops.jpg",
+      "sha256": "22c4322a21996eb487ee0babcc8451422af5025e4368da61418988795744ce15",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; EXACT PACK/PRESENTATION NEEDS VERIFICATION",
+      "local_option_ids": [
+        "local-acorus-99fa1184061d"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 7,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        342,
+        815,
+        857
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Braun Beard Trimmer BT-5060",
+      "family_id": "PSC-IS-173",
+      "existing_master_product": "BRAUN BEARD TRIMMER BT-5060",
+      "file": "staging/catalogue-batch33/originals/braun_beard_trimmer_bt_5060.jpg",
+      "sha256": "b9bf0fcdff75a1754839f8ec3f4a47c9c6c2762d7c78c2453f4ce0de6886a97d",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-0bbe53b55838"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 8,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        208,
+        816,
+        992
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Braun Hair Dryer HD 2.2 \u2014 2200 W",
+      "family_id": "PSC-IS-173",
+      "existing_master_product": "BRAUN HAIR DRYER HD 2.2 (2200W)91721",
+      "file": "staging/catalogue-batch33/originals/braun_hair_dryer_hd_2_2_2200_w.jpg",
+      "sha256": "c5a38d1a055f67cd981618fd2dfc7b91763769d2f558f346cc00303bbe03cef2",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-ad5d840073e9"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 9,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        816,
+        858
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Calvit D3 Calcium + Magnesium + Vitamins \u2014 30 Tablets",
+      "family_id": "PSC-IS-188",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/calvit_d3_calcium_plus_magnesium_plus_vitamins_30_tablets.jpg",
+      "sha256": "58f726c1c55e851d532b885ce11867face7e71737cb48533e28875b84a4052aa",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-d0fa94cc5ccd"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 10,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        386,
+        324,
+        815,
+        877
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Cetralon Cetirizine 5 mg/5 ml Syrup \u2014 75 ml",
+      "family_id": "PSC-IS-073",
+      "existing_master_product": "CETRALON 5MG SYRUP 75ML",
+      "file": "staging/catalogue-batch33/originals/cetralon_cetirizine_5_mg_5_ml_syrup_75_ml.jpg",
+      "sha256": "138ac163f34d8cd7fbc6083578b02060d8a0a8e4af838ec0336cfdc9681c72f0",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-49c544ea6e0c"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 11,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        392,
+        818,
+        767
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Clozac Acne Face Wash \u2014 60 ml",
+      "family_id": "PSC-IS-152",
+      "existing_master_product": "CLOZAC ACNE FACE WASH 60ML",
+      "file": "staging/catalogue-batch33/originals/clozac_acne_face_wash_60_ml.jpg",
+      "sha256": "7bb53b6719c483a82e510725009c155f408e020abe5a8309af8dab5e8c140057",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-3f16d478897a"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 12,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        207,
+        818,
+        991
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Clozac Acne Facial Gel \u2014 50 g",
+      "family_id": "PSC-IS-152",
+      "existing_master_product": "CLOZAC ACNE FACIAL GEL 50GM",
+      "file": "staging/catalogue-batch33/originals/clozac_acne_facial_gel_50_g.jpg",
+      "sha256": "082b2790d730feb8ccdc842843d1400b3e87fea0829586d8f4661c119a948054",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-0bc7a350ed13"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 13,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        818,
+        747
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "CorDx Flu A/B + COVID-19 3-in-1 Rapid Test \u2014 1 Test",
+      "family_id": "PSC-IS-177",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/cordx_flu_a_b_plus_covid_19_3_in_1_rapid_test_1_test.jpg",
+      "sha256": "dbe1489592cdf12c301ee96c676d8faca680b18e5fbe64eca4b527d75c6183dc",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-2d2c9351df5b"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 14,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        818,
+        859
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "CorDx Influenza A/B + COVID-19 + RSV Combo Ag Self-Test",
+      "family_id": "PSC-IS-177",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/cordx_influenza_a_b_plus_covid_19_plus_rsv_combo_ag_self_test.jpg",
+      "sha256": "7f4a255ef29b9494d7a5829108cd2eb4fba1794f1c0001fb835c3173a850702f",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-0ce987fecf69"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 15,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        816,
+        858
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Creon 10000 Pancreatin 150 mg \u2014 20 Capsules",
+      "family_id": "PSC-IS-172",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/creon_10000_pancreatin_150_mg_20_capsules.jpg",
+      "sha256": "273d31807cd9508396ad5404c9aa0fbb357a23b39bfb9239952160fd35f8b0ea",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-a1c278062616"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 16,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        428,
+        814,
+        772
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "D-Cal Calcium + Vitamin D3 \u2014 30 Softgels",
+      "family_id": "PSC-IS-188",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/d_cal_calcium_plus_vitamin_d3_30_softgels.jpg",
+      "sha256": "47bc7ec483d1566046b27b6a27e56cbe6855df69312b8046a4ccd9d770ac49fd",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-6398358f2b96"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 17,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        208,
+        817,
+        992
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Dibase Vitamin D3 10,000 IU/ml Oral Drops",
+      "family_id": "PSC-IS-187",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/dibase_vitamin_d3_10_000_iu_ml_oral_drops.jpg",
+      "sha256": "c77c30e83e9b4ef2d3c1d769161a50162c9f28f76ab94dbf02834dfcc9ece13a",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-184db35b4013"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 18,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        342,
+        815,
+        857
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Dibase Vitamin D3 300,000 IU/ml Injection \u2014 1 Ampoule",
+      "family_id": "PSC-IS-117",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/dibase_vitamin_d3_300_000_iu_ml_injection_1_ampoule.jpg",
+      "sha256": "009aa3a30354cbff61a0176a1251a72c04b4c65e30ef3ef342a6c6e5d6983e9a",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-08126835b052"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 19,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        341,
+        816,
+        858
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Dibase Vitamin D3 50,000 IU/2.5 ml Oral Solution",
+      "family_id": "PSC-IS-187",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/dibase_vitamin_d3_50_000_iu_2_5_ml_oral_solution.jpg",
+      "sha256": "c0a76aeee2c65c8418bca4f99cdec53c441f22074e374f9adc3ddc6c96f50f9b",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-fbba279d40a7"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 20,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        209,
+        815,
+        990
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Dolvic-K Diclofenac Potassium 50 mg \u2014 20 Tablets",
+      "family_id": "PSC-IS-149",
+      "existing_master_product": "DOLVIC K 50MG TAB 20'S",
+      "file": "staging/catalogue-batch33/originals/dolvic_k_diclofenac_potassium_50_mg_20_tablets.jpg",
+      "sha256": "a21afd0be3b5fd3c932b8105ffdb9a72ce0f2c5b6915dcee4a5c36c0db8d3a99",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-a60a93407a6d"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 21,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        342,
+        817,
+        858
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Dora Desloratadine 5 mg \u2014 30 Tablets",
+      "family_id": "PSC-IS-147",
+      "existing_master_product": "DORA 5MG TAB 30'S",
+      "file": "staging/catalogue-batch33/originals/dora_desloratadine_5_mg_30_tablets.jpg",
+      "sha256": "cdaa481e891b4aff1e171ebeb7baa5ab3802d37d1e53c8ad74c541098206559d",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-8e9fe3b9bbc4"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 22,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        818,
+        860
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Duphalac Double Action",
+      "family_id": "PSC-IS-100",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/duphalac_double_action.jpg",
+      "sha256": "bf6e796f00c406a7253208c62f281d4bd2c34a1898eee958cbf395fee8e053f2",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; EXACT PACK/PRESENTATION NEEDS VERIFICATION",
+      "local_option_ids": [
+        "local-acorus-6f0697d8906b"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 23,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        400,
+        818,
+        698
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Duphalac Fruit Lactulose 667 mg/ml \u2014 200 ml",
+      "family_id": "PSC-IS-100",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/duphalac_fruit_lactulose_667_mg_ml_200_ml.jpg",
+      "sha256": "4daff976d64907dddb5a3835e9e8cde1b275d8d670542e619a28843c13d41671",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-75531f59fdd5"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 24,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        385,
+        276,
+        815,
+        923
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Emidol Paracetamol 500 mg \u2014 24 Tablets",
+      "family_id": "PSC-IS-090",
+      "existing_master_product": "EMIDOL 500MG TAB 24'S",
+      "file": "staging/catalogue-batch33/originals/emidol_paracetamol_500_mg_24_tablets.jpg",
+      "sha256": "7498f83aef17929ba8a94e0b31e3ecce4abb5e2151436fddd2a43adf885dd980",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-e50487d58b2a"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 25,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        345,
+        818,
+        855
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Emivanz 500/5 mg \u2014 30 Tablets",
+      "family_id": "PSC-IS-165",
+      "existing_master_product": "EMIVANZ 500/5MG TAB 30'S",
+      "file": "staging/catalogue-batch33/originals/emivanz_500_5_mg_30_tablets.jpg",
+      "sha256": "b1e2b5c874052ff8957ac2e0d45a2cdd99f28f94111ce22edc6a165e7fef9556",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-dc2a1ff485e5"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 26,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        385,
+        342,
+        815,
+        857
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Ergonomic Toothbrush Black \u2014 Medium",
+      "family_id": "PSC-IS-184",
+      "existing_master_product": "ERGONOMIC TOOTHBRUSH BLACK (MEDIUM)",
+      "file": "staging/catalogue-batch33/originals/ergonomic_toothbrush_black_medium.jpg",
+      "sha256": "cd80c1e7bf315e0a2935f52002318fbd61ad5cc4ff7abfb3fb56d26e8ebc8d54",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-18b8322bf411"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 27,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        208,
+        818,
+        991
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Ergonomic Toothbrush Purple \u2014 Medium",
+      "family_id": "PSC-IS-184",
+      "existing_master_product": "ERGONOMIC TOOTHBRUSH PURPLE (MEDIUM)",
+      "file": "staging/catalogue-batch33/originals/ergonomic_toothbrush_purple_medium.jpg",
+      "sha256": "a90fc2b7eb48af61dfd10663633574483a485785d43c283a37176df2d6e95783",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-e0c03159604a"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 28,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        341,
+        817,
+        859
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Gevhart 20 mg \u2014 30 Tablets",
+      "family_id": "PSC-IS-170",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/gevhart_20_mg_30_tablets.jpg",
+      "sha256": "0c87030a28122c96551288750365ceaca0e84f9be25dca57e3a68a83c4ab6836",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-28e43b7879f6"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 29,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        341,
+        816,
+        858
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Glotrizine 5 mg/5 ml Syrup \u2014 100 ml",
+      "family_id": "PSC-IS-073",
+      "existing_master_product": "GLOTRIZINE 5MG/5ML SYRUP 100ML",
+      "file": "staging/catalogue-batch33/originals/glotrizine_5_mg_5_ml_syrup_100_ml.jpg",
+      "sha256": "aaf0f004e2a47ff3612ff3c8ea27a67c03a92dd34e794ff4abee012eba07666c",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-b5f68f0eef03"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 30,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        385,
+        210,
+        814,
+        850
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Glozal Levocetirizine 5 mg \u2014 20 Tablets",
+      "family_id": "PSC-IS-161",
+      "existing_master_product": "GLOZAL 5MG TAB 20'S",
+      "file": "staging/catalogue-batch33/originals/glozal_levocetirizine_5_mg_20_tablets.jpg",
+      "sha256": "bfe9bbb236528f67e97bd317d6a7543e22788f551e74528f4c0f096bf8cd68d4",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-ca529915334b"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 31,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        341,
+        816,
+        679
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "HY+AI Oral Gel \u2014 12 g",
+      "family_id": "PSC-IS-168",
+      "existing_master_product": "HY+AI GEL 12GM",
+      "file": "staging/catalogue-batch33/originals/hyplusai_oral_gel_12_g.jpg",
+      "sha256": "b696e51eb4fe8f9360831798455c19d5ac564b1f8b19a0e3a2a6ffb8d25cc679",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-ef89a3d78de4"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 32,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        465,
+        817,
+        734
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "HY+AI Oral Gel \u2014 30 g",
+      "family_id": "PSC-IS-168",
+      "existing_master_product": "HY+AI GEL 30GM",
+      "file": "staging/catalogue-batch33/originals/hyplusai_oral_gel_30_g.jpg",
+      "sha256": "90c6ebb460df4292acdcf0710a4311ac8e66019305ec286be6ddabbb9d7404ea",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-d96e047c2187"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 33,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        436,
+        817,
+        763
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Isomar Baby No Gas Spray \u2014 30 ml",
+      "family_id": "PSC-IS-106",
+      "existing_master_product": "ISOMAR BABY NO GAS SPRAY 30ML",
+      "file": "staging/catalogue-batch33/originals/isomar_baby_no_gas_spray_30_ml.jpg",
+      "sha256": "7d8f32f572d2e1a5b2550520fe98708f06b1b86247a13be774f9db04b9c44284",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-4d49e9d2478b"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 34,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        207,
+        817,
+        884
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Isomar Daily Hygiene Spray Nose & Ear \u2014 100 ml",
+      "family_id": "PSC-IS-106",
+      "existing_master_product": "ISOMAR DAILY HYGIENE SPRAY NOSE&EAR 100ML",
+      "file": "staging/catalogue-batch33/originals/isomar_daily_hygiene_spray_nose_and_ear_100_ml.jpg",
+      "sha256": "2c9ab8b5665f1a231421b077465e522bff1b808d5c35ac0044d973e0068ab9d0",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-7de9e565ce7f"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 35,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        340,
+        816,
+        858
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Isomar Daily Hygiene Vials Nose & Eyes \u2014 20 x 5 ml",
+      "family_id": "PSC-IS-106",
+      "existing_master_product": "ISOMAR DAILY HYGIENE VIAL NOSE&EYES 20X5ML",
+      "file": "staging/catalogue-batch33/originals/isomar_daily_hygiene_vials_nose_and_eyes_20_x_5_ml.jpg",
+      "sha256": "e208dc8a28a5027f4eff0d9edfb89ec4c4d45f5196fab65395c298dd12fbeed8",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-308b2bdde1d1"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 36,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        817,
+        667
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Isomar Nose Decongestant Vials \u2014 20 x 5 ml",
+      "family_id": "PSC-IS-106",
+      "existing_master_product": "ISOMAR NOSE DECONGESTANT VIAL 20X5ML",
+      "file": "staging/catalogue-batch33/originals/isomar_nose_decongestant_vials_20_x_5_ml.jpg",
+      "sha256": "b9f565b9405550d97051d34c42748c0fb2479652ea3557cd748ce6ccd5a461e9",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-bae369b8d77d"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 37,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        341,
+        817,
+        678
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Kool Temp Cooling Gel Sheets \u2014 Baby \u2014 6 Pieces",
+      "family_id": "PSC-IS-042",
+      "existing_master_product": "KOOL TEMP PATCHES 6'S-BABY",
+      "file": "staging/catalogue-batch33/originals/kool_temp_cooling_gel_sheets_baby_6_pieces.jpg",
+      "sha256": "36d1bec215001a27383be9184112f567bb254179c713c8fc79486478d256e675",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-a819e3e83997"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 38,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        342,
+        816,
+        764
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Kool Temp Cooling Gel Sheets \u2014 Child \u2014 6 Pieces",
+      "family_id": "PSC-IS-042",
+      "existing_master_product": "KOOL TEMP PATCHES 6'S-CHILD",
+      "file": "staging/catalogue-batch33/originals/kool_temp_cooling_gel_sheets_child_6_pieces.jpg",
+      "sha256": "35a4c3a16494c8813c16a15a7b78f2c965a8359f0d18cd5ab50f829720207b25",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-2f1516e65f2a"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 39,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        209,
+        816,
+        983
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Livatrum \u2014 30 Tablets",
+      "family_id": "PSC-IS-188",
+      "existing_master_product": "LIVATRUM TABLET 30'S",
+      "file": "staging/catalogue-batch33/originals/livatrum_30_tablets.jpg",
+      "sha256": "b59a4deb4ce32c844db56025dfcf26803c5b78e4f688017aa0b555496cf9b823",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-ff88cb6488f5"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 40,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        211,
+        815,
+        848
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Lomexin 200 mg \u2014 3 Ovules",
+      "family_id": "PSC-IS-186",
+      "existing_master_product": "LOMEXIN 200MG OVULES 3'S",
+      "file": "staging/catalogue-batch33/originals/lomexin_200_mg_3_ovules.jpg",
+      "sha256": "3421d2c7f9e98806857b98abb88507552412e1181e6a98760207e6c45e62fccd",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-d0757b6ab503"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 41,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        341,
+        816,
+        858
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Lomexin T 1000 mg \u2014 1 Ovule",
+      "family_id": "PSC-IS-186",
+      "existing_master_product": "LOMEXIN T 1000MG OVULES 1'S",
+      "file": "staging/catalogue-batch33/originals/lomexin_t_1000_mg_1_ovule.jpg",
+      "sha256": "232eb17394c5db192dae79c5acf0d831108931df80abfef716cffcda2b377650",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-7f7266b6e568"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 42,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        208,
+        816,
+        992
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Lomidex Loperamide 2 mg \u2014 10 Capsules",
+      "family_id": "PSC-IS-098",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/lomidex_loperamide_2_mg_10_capsules.jpg",
+      "sha256": "c07ff8464100d7f947d985c8b71ce6646cc90b0e3d7dc0d7c704e96745ce4931",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-27ed37eee993"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 43,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        211,
+        817,
+        989
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Lozaty Ginger \u2014 24 Lozenges",
+      "family_id": "PSC-IS-121",
+      "existing_master_product": "LOZATY LOZENGES GINGER 24'S",
+      "file": "staging/catalogue-batch33/originals/lozaty_ginger_24_lozenges.jpg",
+      "sha256": "23337ff07c8f34d89794e446490b0c024f0cb92bd8f81b126ba0e39994d5cc8c",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-4d0091180ab9"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 44,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        209,
+        815,
+        990
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Lozaty Orange \u2014 24 Lozenges",
+      "family_id": "PSC-IS-121",
+      "existing_master_product": "LOZATY LOZENGES ORANGE 24'S",
+      "file": "staging/catalogue-batch33/originals/lozaty_orange_24_lozenges.jpg",
+      "sha256": "a9c5e78018ccb2df1a5d2278f479af5dda0fb3e587a9ee52f65868d07763e55e",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-f8d8b1697f75"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 45,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        342,
+        816,
+        758
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Manforce Epic Desire Super Thin Silk Chocolate \u2014 3 Condoms",
+      "family_id": "PSC-IS-145",
+      "existing_master_product": "MANFORCE EPIC DESIRE SUPER THIN CONDOMS-SILK CHOC 3'S",
+      "file": "staging/catalogue-batch33/originals/manforce_epic_desire_super_thin_silk_chocolate_3_condoms.jpg",
+      "sha256": "899bd693f551fe906bfe00d203e591265cace425798187553167100e49fcf537",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-b018fcd1ab8f"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 46,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        208,
+        816,
+        992
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Manforce Epic Passion Extra Dotted Fruit Punch \u2014 10 Condoms",
+      "family_id": "PSC-IS-145",
+      "existing_master_product": "MANFORCE EPIC PASSION EXTRA DOTTED CONDEMS-FRUIT PUNCH 10'S",
+      "file": "staging/catalogue-batch33/originals/manforce_epic_passion_extra_dotted_fruit_punch_10_condoms.jpg",
+      "sha256": "fe10ebb873722a68ed08f40ce1794644fd6cc3eaee385baa999d3f8e3553e44a",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-add977090a6e"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 47,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        207,
+        818,
+        992
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Manforce Epic Passion Extra Dotted Fruit Punch \u2014 3 Condoms",
+      "family_id": "PSC-IS-145",
+      "existing_master_product": "MANFORCE EPIC PASSION EXTRA DOTTED CONDEMS-FRUIT PUNCH 3'S",
+      "file": "staging/catalogue-batch33/originals/manforce_epic_passion_extra_dotted_fruit_punch_3_condoms.jpg",
+      "sha256": "60a8b2141193e7726b3fdfee913984c76be0b6559c2b723a374b53f903ab2715",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-3189da62a42b"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 48,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        818,
+        859
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Manforce Epic Pleasure Long Lasting Raspberry \u2014 3 Condoms",
+      "family_id": "PSC-IS-145",
+      "existing_master_product": "MANFORCE EPIC PLEASURE LONG LASTING CONDEMS-RASPBERRY 3'S",
+      "file": "staging/catalogue-batch33/originals/manforce_epic_pleasure_long_lasting_raspberry_3_condoms.jpg",
+      "sha256": "fb87003444fa46994ab0397f8cf41295f107645fa5ee1ddd2989b36cf3327782",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-a3c78a070fa9"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 49,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        816,
+        860
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    },
+    {
+      "source_name": "Miderizone Tolperisone 150 mg \u2014 30 Tablets",
+      "family_id": "PSC-IS-183",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/miderizone_tolperisone_150_mg_30_tablets.jpg",
+      "sha256": "06e10a44566d12fe94bc98f6326d1d482d41a75c319ae74b34003c74b7a9df2d",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-7cc2887c65f3"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 50,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        339,
+        818,
+        860
+      ],
+      "visual_review": "PENDING",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12"
+    }
+  ]
+}
