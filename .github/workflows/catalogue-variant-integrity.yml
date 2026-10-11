@@ -10,6 +10,7 @@ on:
       - 'current/manifest.json'
       - 'staging/catalogue-batch33/**'
       - 'tests/batch33-staging.test.mjs'
+      - 'tests/variant-browser.mjs'
       - 'tools/import-batch33-source.py'
 jobs:
   verify:
@@ -28,3 +29,5 @@ jobs:
       - run: npm test
       - run: npm run test:dom
       - run: npm run test:catalogue
+      - run: npx playwright install --with-deps chromium
+      - run: node tests/variant-browser.mjs
