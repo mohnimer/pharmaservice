@@ -155,6 +155,7 @@
     }
     if(!state.family) state.family=fallbackFamily(id);
     state.options=window.PS_CATALOGUE_REFRESH?.mergeOptions(state.options,id)||state.options;
+    state.options=window.PSC_ACORUS_ATTACH_OPTIONS?.(state.options,id)||state.options;
     state.loading=false;
   }
 
