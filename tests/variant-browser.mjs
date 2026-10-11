@@ -34,6 +34,29 @@ try{
    return route.fulfill({status:200,body:''});
   });
   const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto('http://127.0.0.1:'+server.address().port+'/');
+  await page.locator('.home47.h47Compact').waitFor();
+  assert.equal(await page.locator('.home47 > section').count(),4);
+  assert.equal(await page.locator('.h47Category').count(),6);
+  assert.equal(await page.locator('main.publicLanding > .publicHeader').count(),1);
+  assert.equal(await page.locator('main.publicLanding > .publicFooter').count(),1);
+  for(const selector of ['.h47Hero','.h47Catalogue','.h47Journey','.h47Visibility']){
+   await page.locator(selector).scrollIntoViewIfNeeded();
+   await page.waitForTimeout(800);
+  }
+  await page.evaluate(()=>window.scrollTo(0,0));await page.waitForTimeout(400);
+  assert((await page.locator('body').evaluate(el=>el.scrollWidth))<=width+1,'homepage must not overflow');
+  await page.screenshot({path:'test-results/variant-visual-review/'+width+'-homepage.png',fullPage:true});
+  await page.locator('.h47Hero [data-go="our-model"]').click();
+  await page.waitForURL('**/#our-model');
+  await page.goto('http://127.0.0.1:'+server.address().port+'/');
+  await page.locator('.h47Hero [data-go="contact"]').click();
+  await page.waitForURL('**/#contact');
+  await page.goto('http://127.0.0.1:'+server.address().port+'/');
+  await page.locator('#psHomeCommand').fill('sterile gauze');
+  await page.locator('.h47Discovery [type="submit"]').click();
+  await page.waitForURL('**/#portal/catalogue/all');
+  assert.equal(await page.locator('[data-cat-q]').first().inputValue(),'sterile gauze');
   await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/wounds');
   await page.locator('.pscFamilySelector[data-psc-family-open="'+family+'"]').click();
   await page.locator('[data-family-option="fixture-10"]').waitFor();
