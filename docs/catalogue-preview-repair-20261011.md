@@ -99,3 +99,16 @@ Betaserc 8 mg / 100 tablets has a retrieved AED 81.27 retailer benchmark,
 but image download failed and the retailer's brand field says Generic. Both
 remain unapproved, with source URLs and hold reasons in the additional
 retailer evidence register. No PSC prices or production changes are approved.
+
+## Snapshot option ID reconciliation candidates
+
+A reproducible exact full-name/family/brand comparison of the 193 local and
+719 database snapshot records found six unique overlap pairs: three Imodium
+presentations and three Zyrtec presentations. Both original option IDs are
+retained in `option-id-reconciliation-candidates.json`, along with source file
+checksums. All three Imodium database pack fields are missing; all three
+Zyrtec pairs have different pack text. No ID merge or pack equivalence is
+approved. This comparison is distinct from the Batch 33 source-master-name
+crosswalk, which found no exact database links. The snapshots are not a new
+production database read. Run `python3 tools/reconcile-option-identities.py`
+to reproduce the register.
