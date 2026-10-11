@@ -93,19 +93,14 @@
     return parts.join(' · ') || 'Exact variant confirmed in quotation';
   }
   function optionPrice(o){
-    const fixed=(state.prices||[]).find(p=>p.product_option_id && p.product_option_id===o.product_option_id && (!p.price_valid_to || Date.parse(p.price_valid_to)>=Date.now()));
-    if(Number(fixed?.public_sell_price_ex_vat)>0) return `<span class="pscOptionPrice"><b>${esc(aed(Number(fixed.public_sell_price_ex_vat)))}</b><small>Ex VAT · quotation confirms</small></span>`;
-    // Match reference prices to the exact family, brand and pack; never borrow
-    // a price from another size or expose a supplier cost.
-    const normalize=v=>String(v||'').toLowerCase().replace(/\s+/g,'');
-    const sizes=v=>(normalize(v).match(/\d+(?:\.\d+)?(?:ml|mg|cm|litres?|liters?|g)\b/g)||[]).sort().join('|');
-    const descriptor=[o.exact_product_name,o.presentation,o.pack].join(' ');
-    const matches=(window.PSC_DATA?.products||[]).filter(p=>{
-      const saved=window.PSC_RECORDED_PRICES?.[p.pscSku];
-      return saved && (p.catalogueParentId||p.catalogueReferenceFamilyId||p.pscSku)===state.familyId && normalize(saved.brand)===normalize(o.brand) && (normalize(saved.pack)===normalize(o.pack) || (!o.pack && sizes(saved.pack) && sizes(saved.pack)===sizes(descriptor)));
-    }).map(p=>window.PSC_RECORDED_PRICES[p.pscSku]);
-    const values=matches.map(p=>p.indicative||p.retail).filter(v=>Number(v)>0);
-    if(values.length && new Set(values).size===1){const record=matches[0];return `<span class="pscOptionPrice"><b>${esc(aed(values[0]))}</b><small>${record.indicative?'Indicative PSC price':'Retail benchmark'}</small></span>`;}
+    // Price must be keyed by the selected option ID, not a family or brand.
+    const verified=window.PSC_VARIANT_EVIDENCE_FOR?.(o,state.familyId);
+    if(verified){
+      const basis=verified.price_type==='PUBLIC_RETAIL_BENCHMARK'?'UAE retail benchmark':'PSC customer price';
+      return `<span class="pscOptionPrice"><b>${esc(aed(Number(verified.price_aed)))}</b><small>${esc(basis)} · ${esc(verified.price_unit)}</small></span>`;
+    }
+    const fixed=(state.prices||[]).find(p=>p.product_option_id && String(p.product_option_id)===String(o.product_option_id) && (!p.price_valid_to || Date.parse(p.price_valid_to)>=Date.now()));
+    if(Number(fixed?.public_sell_price_ex_vat)>0) return `<span class="pscOptionPrice"><b>${esc(aed(Number(fixed.public_sell_price_ex_vat)))}</b><small>PSC price · ex VAT · quotation confirms</small></span>`;
     return '<span class="pscOptionPrice"><b>AED -</b><small>Price on request</small></span>';
   }
   function fallbackBrandDescriptor(f){
@@ -155,7 +150,7 @@
     }
     if(!state.family) state.family=fallbackFamily(id);
     state.options=window.PS_CATALOGUE_REFRESH?.mergeOptions(state.options,id)||state.options;
-    state.options=window.PSC_ACORUS_ATTACH_OPTIONS?.(state.options,id)||state.options;
+    state.options=window.PSC_VARIANT_APPLY_OPTIONS?.(state.options,id)||state.options;
     state.loading=false;
   }
 
