@@ -1,0 +1,2546 @@
+[
+  {
+    "source_name": "Acure Gripe Water",
+    "family_id": "PSC-IS-155",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/acure_gripe_water.jpg",
+    "sha256": "b49f8fda9069ddc23c164a37b37eab9efb113c9e2210d79fe88e642925abfc3a",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; EXACT PACK/PRESENTATION NEEDS VERIFICATION",
+    "local_option_ids": [
+      "local-acorus-59db0a861342"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Aldomet 250 mg \u2014 30 Tablets",
+    "family_id": "PSC-IS-166",
+    "existing_master_product": "ALDOMET 250MG TAB 30'S",
+    "file": "staging/catalogue-batch33/originals/aldomet_250_mg_30_tablets.jpg",
+    "sha256": "9291055bfa8c15c3cb838784bdabfa69593fe43ce910efa9afcf02ebd353b1f0",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-0dec19acea05"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Alicoxa 200 mg \u2014 20 Capsules",
+    "family_id": "PSC-IS-144",
+    "existing_master_product": "ALCOXA 200MG CAP 20'S",
+    "file": "staging/catalogue-batch33/originals/alicoxa_200_mg_20_capsules.jpg",
+    "sha256": "2b99a9c735e0ed54cfbbdf256706963c46c7b8432ac7bf4ea09a2f02f6c35e48",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-fa9568435322"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Apex 400 mg \u2014 6 Capsules",
+    "family_id": "PSC-IS-143",
+    "existing_master_product": "APEX 400MG CAP 6'S",
+    "file": "staging/catalogue-batch33/originals/apex_400_mg_6_capsules.jpg",
+    "sha256": "76eb24295511d0e52a66057500003d242ae4f4c9a338f6f374d11e84cb6ca2d4",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-1f1a9e6b4fc8"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Avamys Fluticasone Furoate Nasal Spray \u2014 120 Sprays",
+    "family_id": "PSC-IS-154",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/avamys_fluticasone_furoate_nasal_spray_120_sprays.jpg",
+    "sha256": "3e3c9f85e891276c072a56f78adb979817dc04e7f87ee124ecb8483e0252029d",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-f28fe7b861a0"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Azomycin 200 mg/5 ml Oral Suspension \u2014 30 ml",
+    "family_id": "PSC-IS-139",
+    "existing_master_product": "AZOMYCIN 200MG/5ML SUSP 30ML",
+    "file": "staging/catalogue-batch33/originals/azomycin_200_mg_5_ml_oral_suspension_30_ml.jpg",
+    "sha256": "f6df2038d5093f1f754045424cd8fa4a21c5ff638c85796027a741e91429cb7e",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-d6f2bf1d5bc2"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Azomycin 250 mg \u2014 6 Capsules",
+    "family_id": "PSC-IS-139",
+    "existing_master_product": "AZOMYCIN 250MG CAP 6'S",
+    "file": "staging/catalogue-batch33/originals/azomycin_250_mg_6_capsules.jpg",
+    "sha256": "640cbc17f82c9311634ad0a74e27fd1f4b0b941f59f4236d55c9e56167d24cd9",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-ae309306c236"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "B+ Vitamin B Complex \u2014 30 Softgels",
+    "family_id": "PSC-IS-188",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/bplus_vitamin_b_complex_30_softgels.jpg",
+    "sha256": "6c3614d7a7251629d63995c4599898c1506671c750a060b2c014a2722cc0660d",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-fc78af3cb44f"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Beauty Plus Hair Skin & Nails \u2014 30 Softgels",
+    "family_id": "PSC-IS-188",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/beauty_plus_hair_skin_and_nails_30_softgels.jpg",
+    "sha256": "d8ee3e00587b424d21f7b4473426de79f97832eb0735c369a120288de08fc687",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-c4b46b23533f"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Bepanthen Moisturizing Cream \u2014 30 g",
+    "family_id": "PSC-IS-111",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/bepanthen_moisturizing_cream_30_g.jpg",
+    "sha256": "b49ad0733300581b2247c2f70a13b17fcd3e97efad7ae314e1dc137eaec0d944",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-8500ef9636bd"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Bepanthen Protective Baby Ointment \u2014 100 g",
+    "family_id": "PSC-IS-148",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/bepanthen_protective_baby_ointment_100_g.jpg",
+    "sha256": "d71c8e287760f373c2a3d07745138a89f9ff27f1dd73ccc290d633ff34f5e278",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-82eeffa2d41b"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Betaserc 8 mg \u2014 100 Tablets",
+    "family_id": "PSC-IS-142",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/betaserc_8_mg_100_tablets.jpg",
+    "sha256": "ef29c2f98d7225259aeb82e05157c70a0c49c8d1640fcabf0ee5972ef72d1ac3",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-4d6c5f1f73f7"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Blink Intensive Soothing Eye Drops",
+    "family_id": "PSC-IS-102",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/blink_intensive_soothing_eye_drops.jpg",
+    "sha256": "22c4322a21996eb487ee0babcc8451422af5025e4368da61418988795744ce15",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; EXACT PACK/PRESENTATION NEEDS VERIFICATION",
+    "local_option_ids": [
+      "local-acorus-99fa1184061d"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Braun Beard Trimmer BT-5060",
+    "family_id": "PSC-IS-173",
+    "existing_master_product": "BRAUN BEARD TRIMMER BT-5060",
+    "file": "staging/catalogue-batch33/originals/braun_beard_trimmer_bt_5060.jpg",
+    "sha256": "b9bf0fcdff75a1754839f8ec3f4a47c9c6c2762d7c78c2453f4ce0de6886a97d",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-0bbe53b55838"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Braun Hair Dryer HD 2.2 \u2014 2200 W",
+    "family_id": "PSC-IS-173",
+    "existing_master_product": "BRAUN HAIR DRYER HD 2.2 (2200W)91721",
+    "file": "staging/catalogue-batch33/originals/braun_hair_dryer_hd_2_2_2200_w.jpg",
+    "sha256": "c5a38d1a055f67cd981618fd2dfc7b91763769d2f558f346cc00303bbe03cef2",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-ad5d840073e9"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Braun Manual Nasal Aspirator",
+    "family_id": "PSC-IS-163",
+    "existing_master_product": "BRAUN BNA 050 MANUAL NASAL ASPIRATOR (50120)",
+    "file": "staging/catalogue-batch33/originals/braun_manual_nasal_aspirator.jpg",
+    "sha256": "8c355f58668ac0c5a686da4130d74eeb277a67e8ae97a1680ad4bc75564cfd52",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-e0a3afba003e"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Braun ThermoScan 7 IRT 6520",
+    "family_id": "PSC-SC-B23",
+    "existing_master_product": "BRAUN THERMOSCAN-7 IRT 6520 BLACK (65200)",
+    "file": "staging/catalogue-batch33/originals/braun_thermoscan_7_irt_6520.jpg",
+    "sha256": "13d8fd9b632bc5c790b787105e9e4b856ee5d5c35d896d02dc1f3ead8c8bc331",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-48939d08ef0a"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Braun ThermoScan 7+ IRT 6525",
+    "family_id": "PSC-SC-B23",
+    "existing_master_product": "BRAUN THERMOSCAN-7+ IRT 6525 (52546)",
+    "file": "staging/catalogue-batch33/originals/braun_thermoscan_7plus_irt_6525.jpg",
+    "sha256": "7cfa34fa956724b91919de2aa4941f6a8c960f5400c7c2fa624d146710e3cbc8",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-8291a039f14f"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Braun ThermoScan Hygiene Caps \u2014 40",
+    "family_id": "PSC-SC-C12",
+    "existing_master_product": "BRAUN THERMOSCAN CAP LF 40'S (00062)",
+    "file": "staging/catalogue-batch33/originals/braun_thermoscan_hygiene_caps_40.jpg",
+    "sha256": "0559fced2b16b6076b47e1656dab58497b9f89461160eb7f491c668c23c2f72b",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-94b60f8eaf61"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Calvit D3 Calcium + Magnesium + Vitamins \u2014 30 Tablets",
+    "family_id": "PSC-IS-188",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/calvit_d3_calcium_plus_magnesium_plus_vitamins_30_tablets.jpg",
+    "sha256": "58f726c1c55e851d532b885ce11867face7e71737cb48533e28875b84a4052aa",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-d0fa94cc5ccd"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Cetralon Cetirizine 5 mg/5 ml Syrup \u2014 75 ml",
+    "family_id": "PSC-IS-073",
+    "existing_master_product": "CETRALON 5MG SYRUP 75ML",
+    "file": "staging/catalogue-batch33/originals/cetralon_cetirizine_5_mg_5_ml_syrup_75_ml.jpg",
+    "sha256": "138ac163f34d8cd7fbc6083578b02060d8a0a8e4af838ec0336cfdc9681c72f0",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-49c544ea6e0c"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Clozac Acne Face Wash \u2014 60 ml",
+    "family_id": "PSC-IS-152",
+    "existing_master_product": "CLOZAC ACNE FACE WASH 60ML",
+    "file": "staging/catalogue-batch33/originals/clozac_acne_face_wash_60_ml.jpg",
+    "sha256": "7bb53b6719c483a82e510725009c155f408e020abe5a8309af8dab5e8c140057",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-3f16d478897a"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Clozac Acne Facial Gel \u2014 50 g",
+    "family_id": "PSC-IS-152",
+    "existing_master_product": "CLOZAC ACNE FACIAL GEL 50GM",
+    "file": "staging/catalogue-batch33/originals/clozac_acne_facial_gel_50_g.jpg",
+    "sha256": "082b2790d730feb8ccdc842843d1400b3e87fea0829586d8f4661c119a948054",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-0bc7a350ed13"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "CorDx Flu A/B + COVID-19 3-in-1 Rapid Test \u2014 1 Test",
+    "family_id": "PSC-IS-177",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/cordx_flu_a_b_plus_covid_19_3_in_1_rapid_test_1_test.jpg",
+    "sha256": "dbe1489592cdf12c301ee96c676d8faca680b18e5fbe64eca4b527d75c6183dc",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-2d2c9351df5b"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "CorDx Influenza A/B + COVID-19 + RSV Combo Ag Self-Test",
+    "family_id": "PSC-IS-177",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/cordx_influenza_a_b_plus_covid_19_plus_rsv_combo_ag_self_test.jpg",
+    "sha256": "7f4a255ef29b9494d7a5829108cd2eb4fba1794f1c0001fb835c3173a850702f",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-0ce987fecf69"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Creon 10000 Pancreatin 150 mg \u2014 20 Capsules",
+    "family_id": "PSC-IS-172",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/creon_10000_pancreatin_150_mg_20_capsules.jpg",
+    "sha256": "273d31807cd9508396ad5404c9aa0fbb357a23b39bfb9239952160fd35f8b0ea",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-a1c278062616"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "D-Cal Calcium + Vitamin D3 \u2014 30 Softgels",
+    "family_id": "PSC-IS-188",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/d_cal_calcium_plus_vitamin_d3_30_softgels.jpg",
+    "sha256": "47bc7ec483d1566046b27b6a27e56cbe6855df69312b8046a4ccd9d770ac49fd",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-6398358f2b96"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Dibase Vitamin D3 10,000 IU/ml Oral Drops",
+    "family_id": "PSC-IS-187",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/dibase_vitamin_d3_10_000_iu_ml_oral_drops.jpg",
+    "sha256": "c77c30e83e9b4ef2d3c1d769161a50162c9f28f76ab94dbf02834dfcc9ece13a",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-184db35b4013"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Dibase Vitamin D3 300,000 IU/ml Injection \u2014 1 Ampoule",
+    "family_id": "PSC-IS-117",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/dibase_vitamin_d3_300_000_iu_ml_injection_1_ampoule.jpg",
+    "sha256": "009aa3a30354cbff61a0176a1251a72c04b4c65e30ef3ef342a6c6e5d6983e9a",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-08126835b052"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Dibase Vitamin D3 50,000 IU/2.5 ml Oral Solution",
+    "family_id": "PSC-IS-187",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/dibase_vitamin_d3_50_000_iu_2_5_ml_oral_solution.jpg",
+    "sha256": "c0a76aeee2c65c8418bca4f99cdec53c441f22074e374f9adc3ddc6c96f50f9b",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-fbba279d40a7"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Dolvic-K Diclofenac Potassium 50 mg \u2014 20 Tablets",
+    "family_id": "PSC-IS-149",
+    "existing_master_product": "DOLVIC K 50MG TAB 20'S",
+    "file": "staging/catalogue-batch33/originals/dolvic_k_diclofenac_potassium_50_mg_20_tablets.jpg",
+    "sha256": "a21afd0be3b5fd3c932b8105ffdb9a72ce0f2c5b6915dcee4a5c36c0db8d3a99",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-a60a93407a6d"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Dora Desloratadine 5 mg \u2014 30 Tablets",
+    "family_id": "PSC-IS-147",
+    "existing_master_product": "DORA 5MG TAB 30'S",
+    "file": "staging/catalogue-batch33/originals/dora_desloratadine_5_mg_30_tablets.jpg",
+    "sha256": "cdaa481e891b4aff1e171ebeb7baa5ab3802d37d1e53c8ad74c541098206559d",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-8e9fe3b9bbc4"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Duphalac Double Action",
+    "family_id": "PSC-IS-100",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/duphalac_double_action.jpg",
+    "sha256": "bf6e796f00c406a7253208c62f281d4bd2c34a1898eee958cbf395fee8e053f2",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; EXACT PACK/PRESENTATION NEEDS VERIFICATION",
+    "local_option_ids": [
+      "local-acorus-6f0697d8906b"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Duphalac Fruit Lactulose 667 mg/ml \u2014 200 ml",
+    "family_id": "PSC-IS-100",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/duphalac_fruit_lactulose_667_mg_ml_200_ml.jpg",
+    "sha256": "4daff976d64907dddb5a3835e9e8cde1b275d8d670542e619a28843c13d41671",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-75531f59fdd5"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Emidol Paracetamol 500 mg \u2014 24 Tablets",
+    "family_id": "PSC-IS-090",
+    "existing_master_product": "EMIDOL 500MG TAB 24'S",
+    "file": "staging/catalogue-batch33/originals/emidol_paracetamol_500_mg_24_tablets.jpg",
+    "sha256": "7498f83aef17929ba8a94e0b31e3ecce4abb5e2151436fddd2a43adf885dd980",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-e50487d58b2a"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Emivanz 500/5 mg \u2014 30 Tablets",
+    "family_id": "PSC-IS-165",
+    "existing_master_product": "EMIVANZ 500/5MG TAB 30'S",
+    "file": "staging/catalogue-batch33/originals/emivanz_500_5_mg_30_tablets.jpg",
+    "sha256": "b1e2b5c874052ff8957ac2e0d45a2cdd99f28f94111ce22edc6a165e7fef9556",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-dc2a1ff485e5"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Ergonomic Toothbrush Black \u2014 Medium",
+    "family_id": "PSC-IS-184",
+    "existing_master_product": "ERGONOMIC TOOTHBRUSH BLACK (MEDIUM)",
+    "file": "staging/catalogue-batch33/originals/ergonomic_toothbrush_black_medium.jpg",
+    "sha256": "cd80c1e7bf315e0a2935f52002318fbd61ad5cc4ff7abfb3fb56d26e8ebc8d54",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-18b8322bf411"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Ergonomic Toothbrush Purple \u2014 Medium",
+    "family_id": "PSC-IS-184",
+    "existing_master_product": "ERGONOMIC TOOTHBRUSH PURPLE (MEDIUM)",
+    "file": "staging/catalogue-batch33/originals/ergonomic_toothbrush_purple_medium.jpg",
+    "sha256": "a90fc2b7eb48af61dfd10663633574483a485785d43c283a37176df2d6e95783",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-e0c03159604a"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Femoston 2/10 mg \u2014 28 Tablets",
+    "family_id": "PSC-IS-158",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/femoston_2_10_mg_28_tablets.jpg",
+    "sha256": "cdf47f1c0a6f88ff71638d69583ac424e6bb505d5e418005d2fe0680572362bf",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-579df1ae3909"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Femoston Conti 1/5 mg \u2014 28 Tablets",
+    "family_id": "PSC-IS-158",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/femoston_conti_1_5_mg_28_tablets.jpg",
+    "sha256": "b92db41ac21568d8a04b539b98b6c5d41d41a4dd2925841ec4223f3bfd082687",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-7e0e1d8d4182"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Gevhart 20 mg \u2014 30 Tablets",
+    "family_id": "PSC-IS-170",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/gevhart_20_mg_30_tablets.jpg",
+    "sha256": "0c87030a28122c96551288750365ceaca0e84f9be25dca57e3a68a83c4ab6836",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-28e43b7879f6"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Gloclav 1 g \u2014 14 Tablets",
+    "family_id": "PSC-IS-138",
+    "existing_master_product": "GLOCLAV 1GM TAB 14'S",
+    "file": "staging/catalogue-batch33/originals/gloclav_1_g_14_tablets.jpg",
+    "sha256": "81c5bab7fd3d7400262d775fd6da72627b83d24c24840901eba39c62e7bf6ae9",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-77936b1c484c"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Gloclav 228 mg/5 ml Oral Suspension \u2014 70 ml",
+    "family_id": "PSC-IS-138",
+    "existing_master_product": "GLOCLAV 228MG/5ML SYRUP 70ML",
+    "file": "staging/catalogue-batch33/originals/gloclav_228_mg_5_ml_oral_suspension_70_ml.jpg",
+    "sha256": "c4601ac052bed710b69ab516ba2130e7ba9474f5a9bb83c5652ce3ee7815634c",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-fe9b988eff75"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Gloclav 625 mg \u2014 20 Tablets",
+    "family_id": "PSC-IS-138",
+    "existing_master_product": "GLOCLAV 625MG TAB 20'S",
+    "file": "staging/catalogue-batch33/originals/gloclav_625_mg_20_tablets.jpg",
+    "sha256": "b693ba07d74081ac07298acd09d0fafba998860e7389e011e66aed07ff42fa34",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-22b20fd5de67"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Glotrizine 5 mg/5 ml Syrup \u2014 100 ml",
+    "family_id": "PSC-IS-073",
+    "existing_master_product": "GLOTRIZINE 5MG/5ML SYRUP 100ML",
+    "file": "staging/catalogue-batch33/originals/glotrizine_5_mg_5_ml_syrup_100_ml.jpg",
+    "sha256": "aaf0f004e2a47ff3612ff3c8ea27a67c03a92dd34e794ff4abee012eba07666c",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-b5f68f0eef03"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Glozal Levocetirizine 5 mg \u2014 20 Tablets",
+    "family_id": "PSC-IS-161",
+    "existing_master_product": "GLOZAL 5MG TAB 20'S",
+    "file": "staging/catalogue-batch33/originals/glozal_levocetirizine_5_mg_20_tablets.jpg",
+    "sha256": "bfe9bbb236528f67e97bd317d6a7543e22788f551e74528f4c0f096bf8cd68d4",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-ca529915334b"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Gupisone Prednisolone 20 mg \u2014 40 Tablets",
+    "family_id": "PSC-IS-175",
+    "existing_master_product": "GUPISONE 20MG TAB 40'S",
+    "file": "staging/catalogue-batch33/originals/gupisone_prednisolone_20_mg_40_tablets.jpg",
+    "sha256": "fe3b8931aea1921155aac1f1ef1bd7f30b8215db77e8827a96b05fc2a59decc3",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-2524e51a60a8"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "HY+AI Oral Gel \u2014 12 g",
+    "family_id": "PSC-IS-168",
+    "existing_master_product": "HY+AI GEL 12GM",
+    "file": "staging/catalogue-batch33/originals/hyplusai_oral_gel_12_g.jpg",
+    "sha256": "b696e51eb4fe8f9360831798455c19d5ac564b1f8b19a0e3a2a6ffb8d25cc679",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-ef89a3d78de4"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "HY+AI Oral Gel \u2014 30 g",
+    "family_id": "PSC-IS-168",
+    "existing_master_product": "HY+AI GEL 30GM",
+    "file": "staging/catalogue-batch33/originals/hyplusai_oral_gel_30_g.jpg",
+    "sha256": "90c6ebb460df4292acdcf0710a4311ac8e66019305ec286be6ddabbb9d7404ea",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-d96e047c2187"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Isomar Baby No Gas Spray \u2014 30 ml",
+    "family_id": "PSC-IS-106",
+    "existing_master_product": "ISOMAR BABY NO GAS SPRAY 30ML",
+    "file": "staging/catalogue-batch33/originals/isomar_baby_no_gas_spray_30_ml.jpg",
+    "sha256": "7d8f32f572d2e1a5b2550520fe98708f06b1b86247a13be774f9db04b9c44284",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-4d49e9d2478b"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Isomar Daily Hygiene Spray Nose & Ear \u2014 100 ml",
+    "family_id": "PSC-IS-106",
+    "existing_master_product": "ISOMAR DAILY HYGIENE SPRAY NOSE&EAR 100ML",
+    "file": "staging/catalogue-batch33/originals/isomar_daily_hygiene_spray_nose_and_ear_100_ml.jpg",
+    "sha256": "2c9ab8b5665f1a231421b077465e522bff1b808d5c35ac0044d973e0068ab9d0",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-7de9e565ce7f"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Isomar Daily Hygiene Vials Nose & Eyes \u2014 20 x 5 ml",
+    "family_id": "PSC-IS-106",
+    "existing_master_product": "ISOMAR DAILY HYGIENE VIAL NOSE&EYES 20X5ML",
+    "file": "staging/catalogue-batch33/originals/isomar_daily_hygiene_vials_nose_and_eyes_20_x_5_ml.jpg",
+    "sha256": "e208dc8a28a5027f4eff0d9edfb89ec4c4d45f5196fab65395c298dd12fbeed8",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-308b2bdde1d1"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Isomar Nose Decongestant Vials \u2014 20 x 5 ml",
+    "family_id": "PSC-IS-106",
+    "existing_master_product": "ISOMAR NOSE DECONGESTANT VIAL 20X5ML",
+    "file": "staging/catalogue-batch33/originals/isomar_nose_decongestant_vials_20_x_5_ml.jpg",
+    "sha256": "b9f565b9405550d97051d34c42748c0fb2479652ea3557cd748ce6ccd5a461e9",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-bae369b8d77d"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Kool Temp Cooling Gel Sheets \u2014 Baby \u2014 6 Pieces",
+    "family_id": "PSC-IS-042",
+    "existing_master_product": "KOOL TEMP PATCHES 6'S-BABY",
+    "file": "staging/catalogue-batch33/originals/kool_temp_cooling_gel_sheets_baby_6_pieces.jpg",
+    "sha256": "36d1bec215001a27383be9184112f567bb254179c713c8fc79486478d256e675",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-a819e3e83997"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Kool Temp Cooling Gel Sheets \u2014 Child \u2014 6 Pieces",
+    "family_id": "PSC-IS-042",
+    "existing_master_product": "KOOL TEMP PATCHES 6'S-CHILD",
+    "file": "staging/catalogue-batch33/originals/kool_temp_cooling_gel_sheets_child_6_pieces.jpg",
+    "sha256": "35a4c3a16494c8813c16a15a7b78f2c965a8359f0d18cd5ab50f829720207b25",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-2f1516e65f2a"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Livatrum \u2014 30 Tablets",
+    "family_id": "PSC-IS-188",
+    "existing_master_product": "LIVATRUM TABLET 30'S",
+    "file": "staging/catalogue-batch33/originals/livatrum_30_tablets.jpg",
+    "sha256": "b59a4deb4ce32c844db56025dfcf26803c5b78e4f688017aa0b555496cf9b823",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-ff88cb6488f5"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Livazo 2 mg \u2014 28 Tablets",
+    "family_id": "PSC-IS-174",
+    "existing_master_product": "LIVAZO 2MG TAB 28'S",
+    "file": "staging/catalogue-batch33/originals/livazo_2_mg_28_tablets.jpg",
+    "sha256": "caa2e013e89925c6499f14b59566d57ef0f6d9eff6d723cfe90be8fcf5099e9c",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-a5018581b24c"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Livazo 4 mg \u2014 28 Tablets",
+    "family_id": "PSC-IS-174",
+    "existing_master_product": "LIVAZO 4MG TAB 28'S",
+    "file": "staging/catalogue-batch33/originals/livazo_4_mg_28_tablets.jpg",
+    "sha256": "37f5d7a6a9ef45b082c9d29f473023fc3f7708e341e37e404864757d1c0a48e6",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-98520485e956"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Lomexin 200 mg \u2014 3 Ovules",
+    "family_id": "PSC-IS-186",
+    "existing_master_product": "LOMEXIN 200MG OVULES 3'S",
+    "file": "staging/catalogue-batch33/originals/lomexin_200_mg_3_ovules.jpg",
+    "sha256": "3421d2c7f9e98806857b98abb88507552412e1181e6a98760207e6c45e62fccd",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-d0757b6ab503"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Lomexin T 1000 mg \u2014 1 Ovule",
+    "family_id": "PSC-IS-186",
+    "existing_master_product": "LOMEXIN T 1000MG OVULES 1'S",
+    "file": "staging/catalogue-batch33/originals/lomexin_t_1000_mg_1_ovule.jpg",
+    "sha256": "232eb17394c5db192dae79c5acf0d831108931df80abfef716cffcda2b377650",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-7f7266b6e568"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Lomidex Loperamide 2 mg \u2014 10 Capsules",
+    "family_id": "PSC-IS-098",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/lomidex_loperamide_2_mg_10_capsules.jpg",
+    "sha256": "c07ff8464100d7f947d985c8b71ce6646cc90b0e3d7dc0d7c704e96745ce4931",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-27ed37eee993"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Lozaty Ginger \u2014 24 Lozenges",
+    "family_id": "PSC-IS-121",
+    "existing_master_product": "LOZATY LOZENGES GINGER 24'S",
+    "file": "staging/catalogue-batch33/originals/lozaty_ginger_24_lozenges.jpg",
+    "sha256": "23337ff07c8f34d89794e446490b0c024f0cb92bd8f81b126ba0e39994d5cc8c",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-4d0091180ab9"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Lozaty Orange \u2014 24 Lozenges",
+    "family_id": "PSC-IS-121",
+    "existing_master_product": "LOZATY LOZENGES ORANGE 24'S",
+    "file": "staging/catalogue-batch33/originals/lozaty_orange_24_lozenges.jpg",
+    "sha256": "a9c5e78018ccb2df1a5d2278f479af5dda0fb3e587a9ee52f65868d07763e55e",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-f8d8b1697f75"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Manforce Epic Desire Super Thin Silk Chocolate \u2014 3 Condoms",
+    "family_id": "PSC-IS-145",
+    "existing_master_product": "MANFORCE EPIC DESIRE SUPER THIN CONDOMS-SILK CHOC 3'S",
+    "file": "staging/catalogue-batch33/originals/manforce_epic_desire_super_thin_silk_chocolate_3_condoms.jpg",
+    "sha256": "899bd693f551fe906bfe00d203e591265cace425798187553167100e49fcf537",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-b018fcd1ab8f"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Manforce Epic Passion Extra Dotted Fruit Punch \u2014 10 Condoms",
+    "family_id": "PSC-IS-145",
+    "existing_master_product": "MANFORCE EPIC PASSION EXTRA DOTTED CONDEMS-FRUIT PUNCH 10'S",
+    "file": "staging/catalogue-batch33/originals/manforce_epic_passion_extra_dotted_fruit_punch_10_condoms.jpg",
+    "sha256": "fe10ebb873722a68ed08f40ce1794644fd6cc3eaee385baa999d3f8e3553e44a",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-add977090a6e"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Manforce Epic Passion Extra Dotted Fruit Punch \u2014 3 Condoms",
+    "family_id": "PSC-IS-145",
+    "existing_master_product": "MANFORCE EPIC PASSION EXTRA DOTTED CONDEMS-FRUIT PUNCH 3'S",
+    "file": "staging/catalogue-batch33/originals/manforce_epic_passion_extra_dotted_fruit_punch_3_condoms.jpg",
+    "sha256": "60a8b2141193e7726b3fdfee913984c76be0b6559c2b723a374b53f903ab2715",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-3189da62a42b"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Manforce Epic Pleasure Long Lasting Raspberry \u2014 3 Condoms",
+    "family_id": "PSC-IS-145",
+    "existing_master_product": "MANFORCE EPIC PLEASURE LONG LASTING CONDEMS-RASPBERRY 3'S",
+    "file": "staging/catalogue-batch33/originals/manforce_epic_pleasure_long_lasting_raspberry_3_condoms.jpg",
+    "sha256": "fb87003444fa46994ab0397f8cf41295f107645fa5ee1ddd2989b36cf3327782",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-a3c78a070fa9"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Miderizone Tolperisone 150 mg \u2014 30 Tablets",
+    "family_id": "PSC-IS-183",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/miderizone_tolperisone_150_mg_30_tablets.jpg",
+    "sha256": "06e10a44566d12fe94bc98f6326d1d482d41a75c319ae74b34003c74b7a9df2d",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-7cc2887c65f3"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Moven Meloxicam 15 mg \u2014 10 Capsules",
+    "family_id": "PSC-IS-164",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/moven_meloxicam_15_mg_10_capsules.jpg",
+    "sha256": "2acd108d021fb8dd992306e4003a3ef662124948dbd17494d5aafb92d781fed8",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-13a292d3b033"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Moven Meloxicam 7.5 mg \u2014 10 Capsules",
+    "family_id": "PSC-IS-164",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/moven_meloxicam_7_5_mg_10_capsules.jpg",
+    "sha256": "9bb29b19b193492f5b02f18d3c9f0bfd21ab507adad4e84a363e60da8576dac6",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-7249b30e2d1f"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "NAN Comfort 1 \u2014 800 g",
+    "family_id": "PSC-IS-159",
+    "existing_master_product": "NAN COMFORT 1 800GM",
+    "file": "staging/catalogue-batch33/originals/nan_comfort_1_800_g.jpg",
+    "sha256": "7eb44f7cc939361298fb625643797edcb60e5867875737c9bba4f040ba252f12",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-6e59a30ef053"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "NAN Comfort 2 \u2014 400 g",
+    "family_id": "PSC-IS-159",
+    "existing_master_product": "NAN COMFORT 2 400GM",
+    "file": "staging/catalogue-batch33/originals/nan_comfort_2_400_g.jpg",
+    "sha256": "fe8690665bd25c575fd78eb2ed8a9743dc0e172ab1a918bff5777f8965c759f3",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-5b958d72413a"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "NAN Comfort 2 \u2014 800 g",
+    "family_id": "PSC-IS-159",
+    "existing_master_product": "NAN COMFORT 2 800GM",
+    "file": "staging/catalogue-batch33/originals/nan_comfort_2_800_g.jpg",
+    "sha256": "fa6cdc0eafab560e0597e418bc63fbebfa25f86bb8ce99eea42729a237d4fb55",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-c7db4fa9acc4"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "NAN Comfort 3 \u2014 800 g",
+    "family_id": "PSC-IS-159",
+    "existing_master_product": "NAN COMFORT 3 800GM",
+    "file": "staging/catalogue-batch33/originals/nan_comfort_3_800_g.jpg",
+    "sha256": "4798d0521dae2bf7140e9bdcb1f1e878845c55cf0395b315eaef36d473273703",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-b8f2cffcef03"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "NAN Lactose Free \u2014 400 g",
+    "family_id": "PSC-IS-159",
+    "existing_master_product": "NAN LF 400GM (LACTOSE FREE)",
+    "file": "staging/catalogue-batch33/originals/nan_lactose_free_400_g.jpg",
+    "sha256": "206a25614669a60a33031722c73206d373b8e3d717fa51cde2400c1afbb4e9a4",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-09bdd311ca5a"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "NAN Optipro 1 \u2014 400 g",
+    "family_id": "PSC-IS-159",
+    "existing_master_product": "NAN 1 OPTIPRO 400GM",
+    "file": "staging/catalogue-batch33/originals/nan_optipro_1_400_g.jpg",
+    "sha256": "35e6e6bda9b3a08be95fc4b7ee66f8fb4f759b92e16a48b42f8c9daad2cefd06",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-d3d58af8dbdc"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "NAN Optipro 1 \u2014 800 g",
+    "family_id": "PSC-IS-159",
+    "existing_master_product": "NAN 1 OPTIPRO 800GM",
+    "file": "staging/catalogue-batch33/originals/nan_optipro_1_800_g.jpg",
+    "sha256": "0e8d658bcd457084a3a92b1c1947ea224471bf563f4a2d6d30dad88c722abc53",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-6703b683d432"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "NAN Optipro 3 \u2014 400 g",
+    "family_id": "PSC-IS-159",
+    "existing_master_product": "NAN 3 OPTIPRO 400GM",
+    "file": "staging/catalogue-batch33/originals/nan_optipro_3_400_g.jpg",
+    "sha256": "b80056ff40ee621eb6d49804e7fa859f8b83acc74c87e1d6e4902034d9d1b0d3",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-d45d30f1493e"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "NAN SupremePro 2 \u2014 400 g",
+    "family_id": "PSC-IS-159",
+    "existing_master_product": "NAN PRO 2 SUPREME 400GM",
+    "file": "staging/catalogue-batch33/originals/nan_supremepro_2_400_g.jpg",
+    "sha256": "56e05daea271ee5dd43a5d7b57a6193e2f0c14afd9138ac6dd2bf2aa8f2e574e",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-98dba85b5a1d"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "NAN SupremePro 3 \u2014 800 g",
+    "family_id": "PSC-IS-159",
+    "existing_master_product": "NAN PRO 3 SUPREME 800G (806116)",
+    "file": "staging/catalogue-batch33/originals/nan_supremepro_3_800_g.jpg",
+    "sha256": "ae1ccf4d487b672030b4a484c18bc18ded7f84c6979838aa3be7f407e4c27d56",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-05fcd107c286"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Nasaflex Mometasone Furoate Nasal Spray",
+    "family_id": "PSC-IS-167",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/nasaflex_mometasone_furoate_nasal_spray.jpg",
+    "sha256": "8cce21cae20656b0f14f22593e640ec3931ae59e0f8eb0c98abc1a731d0f75bf",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; EXACT PACK/PRESENTATION NEEDS VERIFICATION",
+    "local_option_ids": [
+      "local-acorus-83090d95f22b"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Nexium 20 mg \u2014 14 Tablets",
+    "family_id": "PSC-IS-151",
+    "existing_master_product": "NEXIUM 20MG TAB 14'S",
+    "file": "staging/catalogue-batch33/originals/nexium_20_mg_14_tablets.jpg",
+    "sha256": "cd68cce171ed2753d5e006d913efc4fcac6de5a8ee6b0b0de6ce9efe4a333df5",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-56cb26fe529b"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Nexium 40 mg \u2014 14 Tablets",
+    "family_id": "PSC-IS-151",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/nexium_40_mg_14_tablets.jpg",
+    "sha256": "505f2025ef74e80ffbe881246e8d8e2cd58dfd81a7a439ff92358b58e9fe7404",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-5ed2ff06e0af"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Nokamen \u2014 30 Tablets",
+    "family_id": "PSC-IS-157",
+    "existing_master_product": "NOKAMEN TAB 30S",
+    "file": "staging/catalogue-batch33/originals/nokamen_30_tablets.jpg",
+    "sha256": "4c4ccc48f22636499a7a89c2ee475618130e3a2a2bdaa5fe0c54cc1729e8bc74",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-ba1ba46ab93c"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Nolvadex Tamoxifen 10 mg \u2014 30 Tablets",
+    "family_id": "PSC-IS-182",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/nolvadex_tamoxifen_10_mg_30_tablets.jpg",
+    "sha256": "9b8e94ce72e83dcf2fde52d43e4aa1315111442729d28eb29d315449e56ddc26",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-dbd40d8389ac"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Nolvadex-D Tamoxifen 20 mg \u2014 30 Tablets",
+    "family_id": "PSC-IS-182",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/nolvadex_d_tamoxifen_20_mg_30_tablets.jpg",
+    "sha256": "a28447489f0a9067bf72d36bf0821305c7e4070abeade09c29180787b532d8ee",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-11702595f8a6"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Oral-B Vitality 100 3D White Pink D100",
+    "family_id": "PSC-IS-150",
+    "existing_master_product": "ORAL B T/B VITALITY 100 3D WHITE PINK D100 (11515)",
+    "file": "staging/catalogue-batch33/originals/oral_b_vitality_100_3d_white_pink_d100.jpg",
+    "sha256": "66e3100cc081a478f6b1391bc18288a8894e9e72687c804cb26ea55e0642c0ca",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-19495a4b8eb2"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Oral-B Vitality 100 CrossAction White D100",
+    "family_id": "PSC-IS-150",
+    "existing_master_product": "ORAL B T/B VITALITY 100 CROSS ACTION W D100(62015)",
+    "file": "staging/catalogue-batch33/originals/oral_b_vitality_100_crossaction_white_d100.jpg",
+    "sha256": "b97ae3facf04d129cd56c5874d33336b805d6590897f07a5db2e9e81aa09cd93",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-f50a5698bd58"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Ozempic Semaglutide 0.25 mg Prefilled Pen",
+    "family_id": "PSC-IS-179",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/ozempic_semaglutide_0_25_mg_prefilled_pen.jpg",
+    "sha256": "ef57688c5cfa76d0374edb99adb02e5f6ae1b7a4c64a922e3b775007d7e0460d",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-a0a3ef8669fa"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Ozempic Semaglutide 0.5 mg Prefilled Pen",
+    "family_id": "PSC-IS-179",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/ozempic_semaglutide_0_5_mg_prefilled_pen.jpg",
+    "sha256": "7fc63c5d7c686ac514701218378b697cc9d4bd646e043e2157afc7741db15aac",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-17e4dad608df"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Ozempic Semaglutide 1 mg Prefilled Pen",
+    "family_id": "PSC-IS-179",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/ozempic_semaglutide_1_mg_prefilled_pen.jpg",
+    "sha256": "cc62992a462156e7fc35d855f720bfb3d0dff02bee0cd8ca8b24cfdcde6b7dc3",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-126d63a7fb1a"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "PediaVIT Multi 50 ml",
+    "family_id": "PSC-IS-188",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/pediavit_multi_50_ml.jpg",
+    "sha256": "64dbab3876733fb2123791c65a13c170e6bf9562f6bb6e4bad69d1da721c1280",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-e0a6920e38dc"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "ProLifer Prebiotic + Probiotic + L-Glutamate \u2014 30 Softgels",
+    "family_id": "PSC-IS-176",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/prolifer_prebiotic_plus_probiotic_plus_l_glutamate_30_softgels.jpg",
+    "sha256": "7c7999a05b4aafb117569bd27c403a08790eb09ef18e95914dadb1c3b2c4d29e",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-bad79542e340"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "ProRise 20 mg \u2014 30 Capsules",
+    "family_id": "PSC-IS-171",
+    "existing_master_product": "PRORISE 20MG CAP 30'S",
+    "file": "staging/catalogue-batch33/originals/prorise_20_mg_30_capsules.jpg",
+    "sha256": "8e70f7886ac2fcfc4635086faeb45c5be46b885adf9124fcd397fa2a0c121814",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-e35706fb3a4e"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "ProRise 40 mg \u2014 30 Capsules",
+    "family_id": "PSC-IS-171",
+    "existing_master_product": "PRORISE 40MG CAP 30'S",
+    "file": "staging/catalogue-batch33/originals/prorise_40_mg_30_capsules.jpg",
+    "sha256": "54f2003a5fc17f50b3b961b24495548b758a4805ff9fee2058238b3464ec0f88",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-382e97b1a135"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Prospan Cough Syrup \u2014 100 ml",
+    "family_id": "PSC-IS-126",
+    "existing_master_product": "PROSPAN COUGH SYRUP 100ML",
+    "file": "staging/catalogue-batch33/originals/prospan_cough_syrup_100_ml.jpg",
+    "sha256": "032bf6c8a14112727083b84405bccaa31f0f13e787f2b6a422c27f37d7fc0c1f",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-ad974c05853f"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Ruset 20/10 mg \u2014 30 Tablets",
+    "family_id": "PSC-IS-178",
+    "existing_master_product": "RUSET 20MG/10MG TAB 30'S",
+    "file": "staging/catalogue-batch33/originals/ruset_20_10_mg_30_tablets.jpg",
+    "sha256": "603851063b195851cfc3761361587313b5218eda68868b9803e35f05e1e813b2",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-971a2f43b366"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Ruset 5/10 mg \u2014 30 Tablets",
+    "family_id": "PSC-IS-178",
+    "existing_master_product": "RUSET 5MG/10MG TAB 30'S",
+    "file": "staging/catalogue-batch33/originals/ruset_5_10_mg_30_tablets.jpg",
+    "sha256": "8e419df49bba0d9208058c09a0b46b1a50739a133e4b66a74dc97b84ed2b4ebc",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-e5ba62deaf28"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Anti-Dandruff Shampoo",
+    "family_id": "PSC-IS-115",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_anti_dandruff_shampoo.jpg",
+    "sha256": "e2fd71d38787f9cae922743de89fb606baa841ab8e6fc7158d6b4c6ec8d1d9b6",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-81356e98ebbb"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Anti-Hairloss Shampoo",
+    "family_id": "PSC-IS-156",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_anti_hairloss_shampoo.jpg",
+    "sha256": "766dcdc8658014f1ddefee308272cb5db100286baae639ed60314f650fddc32c",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-2c36d93e590e"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Anti-Stretch Mark Cream",
+    "family_id": "PSC-IS-181",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_anti_stretch_mark_cream.jpg",
+    "sha256": "1b9fc9adb096f198e83a401a176a0d8c174ceb6593809e996c4d67afd876c8ae",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-375459036d52"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Body Lotion with Camomile",
+    "family_id": "PSC-IS-111",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_body_lotion_with_camomile.jpg",
+    "sha256": "23f474f63ebebbeb890edb0d627e6a8cb84eadb9c430a08bbf6197ad31a36c1b",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-bca4c20a407a"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Body Milk",
+    "family_id": "PSC-IS-111",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_body_milk.jpg",
+    "sha256": "7f2d8346af47a629f06230bc76a0e8e8f7e2fc34964863697e66e4c7ba9675d4",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-a7e10bc19b2e"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Bubble Bath with Camomile",
+    "family_id": "PSC-IS-131",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_bubble_bath_with_camomile.jpg",
+    "sha256": "fe2ce992e061284d1033642d39ef24e900fc2444f9df6e52f4ea03bf415e886a",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-bc5797476cd0"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Cleansing Bar",
+    "family_id": "PSC-IS-180",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_cleansing_bar.jpg",
+    "sha256": "b0e1724703d62574c1eb175b2bb97e90965a042976ada041e9578b982e26df05",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-33236ab32b6c"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Cleansing Bar Value Pack \u2014 2 x 150 g",
+    "family_id": "PSC-IS-180",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_cleansing_bar_value_pack_2_x_150_g.jpg",
+    "sha256": "b1181376488574b21b65a981c705b27fc8531d1c993d2d00fe51faed5bc6d79c",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-23f413c882d9"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Cleansing Wipes \u2014 25 Wipes",
+    "family_id": "PSC-IS-049",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_cleansing_wipes_25_wipes.jpg",
+    "sha256": "464763f6f4d27c27e9e122169f8c5ee62100357c46372516cdef5187f7b009d2",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-2757418e4121"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Cream Extra Soft",
+    "family_id": "PSC-IS-111",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_cream_extra_soft.jpg",
+    "sha256": "d98a2f83bd7ff5db14b0c6603a45fad9e1cdf17631d4783da5f96ea04dc0efde",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-11057618863a"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Detangling Shampoo with Bisabolol",
+    "family_id": "PSC-IS-156",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_detangling_shampoo_with_bisabolol.jpg",
+    "sha256": "c0ea7ddaadb17d0c30b1d01909525b510cedf2070aeb1167b3a972697f4a7b96",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-7a9f0b81f0ac"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Diaper Rash Cream",
+    "family_id": "PSC-IS-148",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_diaper_rash_cream.jpg",
+    "sha256": "9dca476b8627e8ca38d48bba5e201cdeb3b2f24a33efe050234e80517bc73ee6",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-7db9b5951968"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Eau de Cologne",
+    "family_id": "PSC-IS-140",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_eau_de_cologne.jpg",
+    "sha256": "4baa3f240348572b701caa3bc2d350c7313e5e8553179d9c906784d0b001f9e4",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-c53213d441f5"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Face & Body Wash Foam",
+    "family_id": "PSC-IS-131",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_face_and_body_wash_foam.jpg",
+    "sha256": "cdab3449d1809527db8e964ba00eb72595e737f7dc85e2e431716575ec3ef27a",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-541065052372"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Gentle Wash with Allantoin",
+    "family_id": "PSC-IS-131",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_gentle_wash_with_allantoin.jpg",
+    "sha256": "40593c8cadd457d6524d8edf037d51b7e1b6c78d166c40fd15f699f009bf93e2",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-fc0e90234c62"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Gentle Wash with Calendula",
+    "family_id": "PSC-IS-131",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_gentle_wash_with_calendula.jpg",
+    "sha256": "980d1a46f9a136c661878611a03f38377a58bdf89c063328c25cf1b85d8ccc76",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-7becd2db56a1"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Lip Balm",
+    "family_id": "PSC-IS-162",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_lip_balm.jpg",
+    "sha256": "6e674b46060991ec227824fefd0ba49a681f07557f7519c3de36d1638d0d1456",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-c24e6eff64e5"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Massage Oil",
+    "family_id": "PSC-IS-111",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_massage_oil.jpg",
+    "sha256": "ac5609c31ffe1aca6e69b47019f1f9aacd06d256d92cb5c4dbecebadf85525cc",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-616aa1152228"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Powder with Olive Oil",
+    "family_id": "PSC-IS-141",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_powder_with_olive_oil.jpg",
+    "sha256": "e4384f927c4b4bcf50c862010642a192b298dde57d11287a981b52fbcc7e3b95",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-3ee243ee9ad4"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Shampoo with Camomile",
+    "family_id": "PSC-IS-131",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_shampoo_with_camomile.jpg",
+    "sha256": "808009004368f0423e0aac30821ba68de2d2d645c12b59d68c564aaedd21be3e",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-dd458ae96334"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Baby Skin Care Oil",
+    "family_id": "PSC-IS-111",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_baby_skin_care_oil.jpg",
+    "sha256": "abe2f2051d87aa1270b8f91d8e4f87d9403715784eaa42fd1e8e4c64cbb6bad2",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-779d958f18b0"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Clear Face Antibacterial Cleansing Foam",
+    "family_id": "PSC-IS-152",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_clear_face_antibacterial_cleansing_foam.jpg",
+    "sha256": "633860f29c94f923978ea4edeabba94f36dad7b86d016eb1ac72f10c7057be7d",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-26f075753c6d"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Everyday Shampoo",
+    "family_id": "PSC-IS-156",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_everyday_shampoo.jpg",
+    "sha256": "6e7f631855289f1049db62178e46f0750685c7f263b35a5733f8e37c3083fd3c",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-add6ae257643"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Extreme Dry Skin Relief Shampoo 5% Urea",
+    "family_id": "PSC-IS-115",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_extreme_dry_skin_relief_shampoo_5_urea.jpg",
+    "sha256": "b9a445d165b3a7f44c4a624fa6f6ed56a129cd5b151f717921f15c18a1df7c56",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-4f24389acd4a"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Fresh Classic Roll-On Deodorant",
+    "family_id": "PSC-IS-146",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_fresh_classic_roll_on_deodorant.jpg",
+    "sha256": "92bed619200814dc48571c9c7a646e70e319c2cea47577af3f52718aacf19ef3",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-7cb34745b16f"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Gentle Facial Cleanser",
+    "family_id": "PSC-IS-152",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_gentle_facial_cleanser.jpg",
+    "sha256": "23c0ecc628407f52f07238d6123db7c38932112585e27d64a5479c84ca63bfe9",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-4f230bd47c18"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Intimate Wash Foam pH 3.8",
+    "family_id": "PSC-IS-160",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_intimate_wash_foam_ph_3_8.jpg",
+    "sha256": "e461e396a6aa3dfbb818a93aab80b09b9168f9e56d3da1c7c50de451c6ae5365",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-d62fdc588e1a"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Intimate Wash pH 3.8 \u2014 Women 15\u201350",
+    "family_id": "PSC-IS-160",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_intimate_wash_ph_3_8_women_15_50.jpg",
+    "sha256": "f1b8d2f6c903246bce77d03dcf45ec430d33bbdb8f84ed1595e1a2020d8e0e27",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-e5c59ffa9071"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Intimate Wash pH 6.8 \u2014 Women 50+",
+    "family_id": "PSC-IS-160",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_intimate_wash_ph_6_8_women_50plus.jpg",
+    "sha256": "95a65837cef539359fbb41d3ad6b2ded3b30a2902fffe3668c12d3d9a86b9da0",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-76ad982e8388"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Lip Defense SPF 30",
+    "family_id": "PSC-IS-162",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_lip_defense_spf_30.jpg",
+    "sha256": "bede5fcf67273563e41e04e522406515c37d6ea9f0e19066380701cd3ae14021",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-e49654795a8f"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Moisturizing Body Lotion",
+    "family_id": "PSC-IS-111",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_moisturizing_body_lotion.jpg",
+    "sha256": "44018bf86988ca94bb9fc2e56101fddcaeed0a0d15eb33e496d4677c64c61603",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-a2c365842b5e"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Multi Protect Sun Cream SPF 50+",
+    "family_id": "PSC-IS-087",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_multi_protect_sun_cream_spf_50plus.jpg",
+    "sha256": "a9cbaafd5a518bf7430f101c4df99196b2b98881953f5308ed669a782b299067",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-162f00e6e627"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Repair Conditioner",
+    "family_id": "PSC-IS-156",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_repair_conditioner.jpg",
+    "sha256": "4e3927da0356ca3f48b8f772156d9554d59b404e99abc95deaf2840b93b990fa",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-9da175f24e74"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Sensitive Skin Cleansing Bar",
+    "family_id": "PSC-IS-180",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_sensitive_skin_cleansing_bar.jpg",
+    "sha256": "f11f47476c392ca1dc61ab057a1ee130808e5c9ec15c6fe0b5d7ee86a2f940a1",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-cc054b5f47b0"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sebamed Sensitive Skin Liquid Face & Body Wash",
+    "family_id": "PSC-IS-180",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/sebamed_sensitive_skin_liquid_face_and_body_wash.jpg",
+    "sha256": "019da16521c9aaaf0ed5c3192e8c8052f58dcd760c96ee6082014e63f1e2bf2f",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+    "local_option_ids": [
+      "local-acorus-9400698fa1d2"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Sophy Berberine Phytosome 550 mg \u2014 30 Tablets",
+    "family_id": "PSC-IS-120",
+    "existing_master_product": "Sophy Berberine Phytosome 550 mg \u2014 30 Tablets",
+    "file": "staging/catalogue-batch33/originals/sophy_berberine_phytosome_550_mg_30_tablets.jpg",
+    "sha256": "fefadfee50bdbfa837898eb5754e8094c90548ce04ebc3747fc2ca1089f90b31",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Spedifen Ibuprofen 400 mg \u2014 24 Tablets",
+    "family_id": "PSC-IS-091",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/spedifen_ibuprofen_400_mg_24_tablets.jpg",
+    "sha256": "2f331c9ab7265aee5b3c8c2bd567a9fc8a247de2cb0acb9130d835e8487ac463",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-764e4d0db998"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Unident Kids Toothpaste 1000 ppm \u2014 50 ml",
+    "family_id": "PSC-IS-185",
+    "existing_master_product": "UNIDENT KIDS CHILDRENS 1000 PPM TOOTHPASTE 50ML",
+    "file": "staging/catalogue-batch33/originals/unident_kids_toothpaste_1000_ppm_50_ml.jpg",
+    "sha256": "734ea220a8ac64d60338eb3fbc6fe0bad6c3fb89e30e686612cda371c5f45d76",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-6110fe43dde2"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Unident Pharma Ortho Smile Care Toothpaste \u2014 75 ml",
+    "family_id": "PSC-IS-185",
+    "existing_master_product": "UNIDENT PHARMA ORTHO SMILE CARE TOOTHPASTE 75ML",
+    "file": "staging/catalogue-batch33/originals/unident_pharma_ortho_smile_care_toothpaste_75_ml.jpg",
+    "sha256": "f495175d20fcfcf59eb39ed936afe53431b64025abceb2d2da14bd0e066d0003",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-4edf32469b8d"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Unident Pharma Perio Care Toothpaste \u2014 75 ml",
+    "family_id": "PSC-IS-185",
+    "existing_master_product": "UNIDENT PHARMA PERIO CARE TOOTHPASTE 75ML",
+    "file": "staging/catalogue-batch33/originals/unident_pharma_perio_care_toothpaste_75_ml.jpg",
+    "sha256": "ebb48d79cb3aa9886fb15c85b003291484b261210572261d22b8ac929601aae5",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-8cbd36f03d69"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Urispas 200 mg \u2014 30 Tablets",
+    "family_id": "PSC-IS-153",
+    "existing_master_product": "URISPAS 200MG TAB 30'S",
+    "file": "staging/catalogue-batch33/originals/urispas_200_mg_30_tablets.jpg",
+    "sha256": "c38ee946343edc8df9486189af15cd1c455721b9a87543b7c114135452a5879c",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-fd2beb73a834"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Vildagard 50/1000 mg \u2014 60 Tablets",
+    "family_id": "PSC-IS-127",
+    "existing_master_product": "Vildagard 50/1000 mg \u2014 Vildagliptin + Metformin \u2014 60 Tablets",
+    "file": "staging/catalogue-batch33/originals/vildagard_50_1000_mg_60_tablets.jpg",
+    "sha256": "26c9e9913330b67d2a1f481c270416ac06b530ec339244bf95e326f44364d5f5",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Vildagard 50/850 mg \u2014 60 Tablets",
+    "family_id": "PSC-IS-127",
+    "existing_master_product": "Vildagard 50/850 mg \u2014 Vildagliptin + Metformin \u2014 60 Tablets",
+    "file": "staging/catalogue-batch33/originals/vildagard_50_850_mg_60_tablets.jpg",
+    "sha256": "a78c9dbbdbe8e931ce823ca95e44131d2ed9e0818fafd7d288292b889a4c2b04",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Vitane Liquid Vitamins + Minerals \u2014 200 ml",
+    "family_id": "PSC-IS-188",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/vitane_liquid_vitamins_plus_minerals_200_ml.jpg",
+    "sha256": "a9d688b2d68c40fa3b70a371aaa2b33b5cac9b4cd34249ebc2d3a5a7057f1832",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-1f1419e1172d"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Wegovy Semaglutide 0.25 mg Prefilled Pen",
+    "family_id": "PSC-IS-179",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/wegovy_semaglutide_0_25_mg_prefilled_pen.jpg",
+    "sha256": "d6b8ba357e7610ecc92587c09b4ca30cbb19945a48ed59fa24cd4979fd95113b",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-e204e9a3db72"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Wegovy Semaglutide 0.5 mg Prefilled Pen",
+    "family_id": "PSC-IS-179",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/wegovy_semaglutide_0_5_mg_prefilled_pen.jpg",
+    "sha256": "7cacf05acf269c17390394b4a565a8e8358c09d3ab738818bbe1dfb60f56b154",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-c78ee225849d"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Wegovy Semaglutide 1 mg Prefilled Pen",
+    "family_id": "PSC-IS-179",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/wegovy_semaglutide_1_mg_prefilled_pen.jpg",
+    "sha256": "35d8ceeeded1a79a3d1b49a8612c7c8e470a716d20775cd2d8283a6b547cbe5e",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-0eff9e2ac288"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Wegovy Semaglutide 1.7 mg Prefilled Pen",
+    "family_id": "PSC-IS-179",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/wegovy_semaglutide_1_7_mg_prefilled_pen.jpg",
+    "sha256": "b3988cf030cf3c035a1b806e8789d62f9c9c18fe15982180566108bc37587196",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-1739d7036b10"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Wegovy Semaglutide 2.4 mg Prefilled Pen",
+    "family_id": "PSC-IS-179",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/wegovy_semaglutide_2_4_mg_prefilled_pen.jpg",
+    "sha256": "d1ecd763f1fa51d07a4efdd267b69e9f9838204377fdde6a6aa567ba2e5ca672",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-643a0525b55c"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Zecuf Herbal Cough Remedy \u2014 100 ml",
+    "family_id": "PSC-IS-126",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/zecuf_herbal_cough_remedy_100_ml.jpg",
+    "sha256": "1b6fa3dc39b92cb0c0333e452151f717f452ad164bbc9d9ca4339c91fb615613",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-e015b822e20f"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Zovirax Aciclovir 400 mg \u2014 25 Tablets",
+    "family_id": "PSC-IS-137",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/zovirax_aciclovir_400_mg_25_tablets.jpg",
+    "sha256": "9a2ac7d02a42fad02a9a55267884c65423459a904a078426559660977107e5a6",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-907534527424"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  },
+  {
+    "source_name": "Zyme Nasal Spray 30 ml with Lysozyme",
+    "family_id": "PSC-IS-169",
+    "existing_master_product": "",
+    "file": "staging/catalogue-batch33/originals/zyme_nasal_spray_30_ml_with_lysozyme.jpg",
+    "sha256": "073a00d2aca6d8e9e3df09b36d2cd3a7b014ce8415e6c662a0839fba70b67400",
+    "width": 1200,
+    "height": 1200,
+    "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+    "local_option_ids": [
+      "local-acorus-d5d8299cc052"
+    ],
+    "database_option_ids": [],
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false
+  }
+]

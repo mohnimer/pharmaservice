@@ -8,6 +8,9 @@ on:
       - 'current/behaviour/family-details.js'
       - 'tests/variant-evidence.test.cjs'
       - 'current/manifest.json'
+      - 'staging/catalogue-batch33/**'
+      - 'tests/batch33-staging.test.mjs'
+      - 'tools/import-batch33-source.py'
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -21,6 +24,7 @@ jobs:
       - run: npm ci
       - run: node --test tests/variant-evidence.test.cjs
       - run: npm run build
+      - run: node --test tests/batch33-staging.test.mjs
       - run: npm test
       - run: npm run test:dom
       - run: npm run test:catalogue
