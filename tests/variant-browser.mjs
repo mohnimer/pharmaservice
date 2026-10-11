@@ -45,6 +45,7 @@ try{
   assert((await page.locator('.detailImageMeta').innerText()).includes('11'));
   await page.locator('.pscBrandTick:has([data-family-option="fixture-20"])').click();
   assert.equal(await page.locator('.pscSelectedVariantRow').count(),2);
+  await page.locator('.pscSelectedVariantGallery').waitFor({state:'visible'});
   assert.equal(await page.locator('.pscFamilyPreview img').count(),0);
   await page.locator('.pscBrandTick:has([data-family-option="fixture-10"])').click();
   assert.equal(await preview.getAttribute('src'),options[1].image_url);
@@ -81,6 +82,8 @@ try{
 {"route": "breathing", "sku": "PSC-MED-102", "optionId": "local-acorus-9d511aa6c569", "photo": "/assets/products/verified-20261011/zyrtec-1mgml-75ml.jpg", "pack": "75 ml", "price": 17.5, "description": "Zyrtec cetirizine dihydrochloride 1 mg/ml oral solution, 75 ml bottle.", "descriptionSource": "https://assets.gskstatic.com/pharma/PM-PI_portal/Lebanon/zyrtec_oral_drops_pil_lb.pdf"}
 ,
 {"route": "medicines", "sku": "PSC-MED-126", "optionId": "local-acorus-d226ac6267ee", "photo": "/assets/products/verified-20261011/panadol-night-24-caplets.jpg", "pack": "24 film-coated tablets", "price": 25, "description": "Panadol Night paracetamol 500 mg and diphenhydramine hydrochloride 25 mg film-coated caplets, pack of 24.", "descriptionSource": "https://www.panadol.com/en-me/adult-products/panadol-night/"}
+,
+{"route": "breathing", "sku": "PS-AC-F28FE7B861A0", "optionId": "local-acorus-f28fe7b861a0", "photo": "/assets/products/verified-20261011/avamys-275mcg-120-sprays.jpg", "pack": "120 sprays", "price": 63, "description": "Avamys fluticasone furoate 27.5 micrograms per spray nasal spray suspension, one bottle containing 120 sprays.", "descriptionSource": "https://assets.gskstatic.com/pharma/PM-PI_portal/Jordan/avamys_nasal_spray_pil_jo.pdf"}
   ]) {
   await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/'+variant.route);
   const {sku,optionId}=variant;
@@ -104,6 +107,8 @@ try{
   // Assert a new event so a blocked submission cannot reuse a prior variant.
   const presentationChoice=page.locator('[data-family-presentation]').first();
   if(await presentationChoice.count())await presentationChoice.click();
+  await preview.waitFor({state:'visible'});
+  assert((await page.locator('.detailImageMeta').innerText()).includes(variant.description),'exact description must survive layout enhancements');
   await page.locator('.detailImagePane').screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-selected.png'});
   await page.screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-dialog.png'});
   const requestCount=await page.evaluate(()=>window.__variantRequests.length);
@@ -130,6 +135,7 @@ try{
   for(const id of ['local-acorus-56cb26fe529b','local-acorus-5ed2ff06e0af'])
    await page.locator('.pscBrandTick:has([data-family-option="'+id+'"])').click();
   assert.equal(await page.locator('.pscSelectedVariantRow').count(),2);
+  await page.locator('.pscSelectedVariantGallery').waitFor({state:'visible'});
   assert.equal(await preview.count(),0);
   const gallery=await page.locator('.pscSelectedVariantRow img').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('src')).sort());
   assert.deepEqual(gallery,['/assets/products/verified-20261011/nexium-20mg-14-tablets.jpg','/assets/products/verified-20261011/nexium-40mg-14-tablets.jpg']);
@@ -150,6 +156,6 @@ try{
   }
   assert.deepEqual(errors,[]);
   assert.deepEqual(await page.evaluate(()=>window.__backendCalls.filter(c=>c.rpc||c.action!=='select')),[]);
-  await context.close();console.log(width+'px: fixture selection and eight real variants, Nexium strength multiselect, VAT/source request snapshots and no overflow passed');
+  await context.close();console.log(width+'px: fixture selection and nine real variants, Nexium strength multiselect, VAT/source request snapshots and no overflow passed');
  }
 }finally{await browser.close();await new Promise(r=>server.close(r));}

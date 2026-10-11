@@ -158,6 +158,29 @@
     "price_checked_at": "2026-10-11",
     "price_note": "Retailer shows a free-voucher promotion; benchmark excludes any voucher value. Stock and PSC supply terms require confirmation.",
     "release_status": "APPROVED"
+},
+{
+    "family_id": "PSC-IS-154",
+    "product_option_id": "local-acorus-f28fe7b861a0",
+    "psc_sku": "PS-AC-F28FE7B861A0",
+    "exact_product_name": "Avamys Fluticasone Furoate Nasal Spray \u2014 120 Sprays",
+    "brand": "Avamys",
+    "pack": "120 sprays",
+    "description": "Avamys fluticasone furoate 27.5 micrograms per spray nasal spray suspension, one bottle containing 120 sprays.",
+    "description_source": "https://assets.gskstatic.com/pharma/PM-PI_portal/Jordan/avamys_nasal_spray_pil_jo.pdf",
+    "image_url": "/assets/products/verified-20261011/avamys-275mcg-120-sprays.jpg",
+    "image_source": "https://cdn.lifepharmacy.com/products/avamys-27-5mcg-nasal-spray120-sprays/111122-1.jpg",
+    "image_verified": true,
+    "description_verified": true,
+    "price_verified": true,
+    "price_aed": 63,
+    "price_type": "PUBLIC_RETAIL_BENCHMARK",
+    "price_unit": "120 sprays",
+    "price_vat_basis": "Inclusive of VAT as displayed by retailer",
+    "price_source": "https://www.lifepharmacy.com/product/avamys-27-5mcg-nasal-spray120-sprays",
+    "price_checked_at": "2026-10-11",
+    "price_note": "Retailer shows a free-voucher promotion; benchmark excludes any voucher value. Retailer availability is location-dependent and does not establish PSC stock.",
+    "release_status": "APPROVED"
 }
   ];
   const norm = value => String(value || '').normalize('NFKC').trim().replace(/\s+/g,' ').toUpperCase();

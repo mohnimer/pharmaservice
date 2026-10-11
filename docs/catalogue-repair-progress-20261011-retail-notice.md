@@ -39,3 +39,19 @@ Earlier image quality holds, 193/719 historical snapshots, six reviewed separate
 ## Verification
 
 Eight-variant build/evidence/identity/staging checks passed locally. Latest broad checks and eight-variant CI are pending until recorded at their actual tested head. CI now retains card, selected-image, dialog and Nexium-multiple-selection screenshots at 390/1440 px as variant-visual-review artifacts for human visual review. Capturing screenshots does not itself approve layout.
+
+## Follow-on runtime correction and current identity checks
+
+Run 38139890586 on 17c5dd261c506139b8041106fd7ae3e6d0a7ea2b passed build/evidence/identity/staging/shell/DOM/catalogue checks, but its new screenshot check exposed a genuine runtime image-visibility failure. The legacy catalogue-card-details familyImageRule compared a selected brand against the first catalogue child brand, hid the entire image pane when that brand differed and rewrote the first description line. Image decode tests alone had not detected the hidden pane.
+
+The family renderer now labels its preview state as single, multiple or unselected-family. The layout enhancement follows that state and never rewrites exact descriptions. Browser checks explicitly require visible selected photographs, preserved exact descriptions and visible multiple-selection galleries before screenshots and submission. Screenshot success at the new head remains pending until CI completes.
+
+Read-only Supabase verification found all six previously matched Imodium/Zyrtec UUIDs still agree exactly on ID, family, full name and brand. All remain active but customer_selectable=false, PSC decision VERIFY, price evidence MISSING and price decision REQUEST_QUOTE. Three Imodium pack columns are still null. This establishes current database identity only, not commercial approval or pack-field repair. No writes or automatic merges occurred. Fresh aggregate query at 2026-10-11 12:38:35 UTC found 719 active database options and zero customer-selectable options. Historical inventories remain intact; fresh results are separate files:
+
+- docs/current-option-identity-verification-20261011.json
+- docs/current-catalogue-option-counts-20261011.json
+- tools/verify-current-option-identities.py replays the dated identity review against retained source evidence; it does not query or mutate Supabase.
+
+Avamys 27.5 micrograms per spray, one 120-spray bottle is the ninth verified preview candidate. Exact local ID local-acorus-f28fe7b861a0, SKU PS-AC-F28FE7B861A0, family PSC-IS-154. The unchanged 1024×1024 retailer photograph visibly confirms brand, strength, form, ingredient and pack. GSK's regional manufacturer leaflet corroborates these descriptive details without establishing UAE registration: https://assets.gskstatic.com/pharma/PM-PI_portal/Jordan/avamys_nasal_spray_pil_jo.pdf
+
+Life Pharmacy UAE benchmark AED 63 per 120-spray bottle, VAT-inclusive as displayed, checked 2026-10-11. Free-voucher promotion value is excluded. Location-dependent retailer stock does not establish PSC stock. Retail benchmark and sourced description remain distinct from wholesale quotation price and regulatory/commercial approval.

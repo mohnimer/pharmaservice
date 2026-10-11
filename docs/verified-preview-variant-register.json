@@ -225,5 +225,35 @@
     "overall_release_status": "HOLD",
     "variant_evidence_status": "VERIFIED_PREVIEW_CANDIDATE",
     "pack_identity_review": "Front and top panel show 24 caplets. Regional manufacturer confirms film-coated caplets; retained local pack term film-coated tablets is the same dosage form. No UAE registration or supplier-stock approval inferred."
+  },
+  {
+    "family_id": "PSC-IS-154",
+    "product_option_id": "local-acorus-f28fe7b861a0",
+    "psc_sku": "PS-AC-F28FE7B861A0",
+    "product_name": "Avamys Fluticasone Furoate Nasal Spray \u2014 120 Sprays",
+    "pack": "120 sprays",
+    "image_path": "/assets/products/verified-20261011/avamys-275mcg-120-sprays.jpg",
+    "sha256": "082de3ffd8e738bdc12d77945c75286bee3164324c83cca8e77d6b2d37050596",
+    "dimensions": [
+      1024,
+      1024
+    ],
+    "image_source_url": "https://cdn.lifepharmacy.com/products/avamys-27-5mcg-nasal-spray120-sprays/111122-1.jpg",
+    "listing_source_url": "https://www.lifepharmacy.com/product/avamys-27-5mcg-nasal-spray120-sprays",
+    "checked_at": "2026-10-11",
+    "price_aed": 63,
+    "price_type": "PUBLIC_RETAIL_BENCHMARK",
+    "price_unit": "120 sprays",
+    "vat_basis": "Retailer displays inclusive of VAT",
+    "image_identity_verified": true,
+    "image_quality_approved": true,
+    "description_verified": true,
+    "description": "Avamys fluticasone furoate 27.5 micrograms per spray nasal spray suspension, one bottle containing 120 sprays.",
+    "description_source": "https://assets.gskstatic.com/pharma/PM-PI_portal/Jordan/avamys_nasal_spray_pil_jo.pdf",
+    "price_note": "Retailer shows a free-voucher promotion; benchmark excludes any voucher value. Retailer availability is location-dependent and does not establish PSC stock.",
+    "psc_sell_price_approved": false,
+    "overall_release_status": "HOLD",
+    "variant_evidence_status": "VERIFIED_PREVIEW_CANDIDATE",
+    "pack_identity_review": "Front panel visibly confirms 27.5 micrograms per spray, fluticasone furoate, nasal spray suspension, one bottle/120 sprays. No supplier-stock, regulatory or commercial approval inferred. GSK regional manufacturer leaflet corroborates strength, form and pack; it does not establish current UAE registration."
   }
 ]
