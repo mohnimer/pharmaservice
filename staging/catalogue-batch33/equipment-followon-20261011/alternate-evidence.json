@@ -1,0 +1,45 @@
+[
+  {
+    "local_option_id": "local-acorus-48939d08ef0a",
+    "source_url": "https://www.mumzworld.com/en/braun-irt6520-thermoscan-7-age-precision-black-qcom",
+    "retrieval_date": "2026-10-11",
+    "images": [
+      {
+        "source_url": "https://www.mumzworld.com/media/catalog/product/t/n/tns-irt_6520b-braun-irt6520-thermoscan-7-age-precision-black-1567238330_1.jpg",
+        "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-48939d08ef0a-alternate-0.jpg",
+        "sha256": "3a4b7957b000276501357ccb841716b3d2ca817900f98b51ca32ad51f8d1a3b6",
+        "width": 1000,
+        "height": 1000,
+        "unchanged": true
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-94b60f8eaf61",
+    "source_url": "https://www.medxpharmacy.com/product/braun-thermoscan-hygiene-cap-lf-20-box-of-40/",
+    "retrieval_date": "2026-10-11",
+    "images": [],
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "local_option_id": "local-acorus-f50a5698bd58",
+    "source_url": "https://makkahpharmacy.ae/products/oral-b-vitality-100-white-criss-cross-electric-rechargeable-toothbrush-powered-by-braun",
+    "retrieval_date": "2026-10-11",
+    "images": [
+      {
+        "source_url": "https://cdn.shopify.com/s/files/1/0954/5239/7880/files/81HLyhgUShL._SL1500.jpg?v=1756359666",
+        "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-f50a5698bd58-alternate-0.jpg",
+        "sha256": "3a28712ae1418bcfe87cbee976195f68994c77670dbe5e147888d0526e8bbd60",
+        "width": 1500,
+        "height": 1500,
+        "unchanged": true
+      }
+    ],
+    "product_facts": {
+      "title": "Oral B Vitality 100 White Criss Cross Electric Rechargeable Toothbrush Powered By Braun",
+      "price": 15645,
+      "compare_at_price": 15645,
+      "available": true
+    }
+  }
+]

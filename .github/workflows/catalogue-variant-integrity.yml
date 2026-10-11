@@ -30,6 +30,7 @@ jobs:
       - run: node --test tests/catalogue-refresh-identity.test.cjs
       - run: python3 tools/verify-current-option-identities.py
       - run: npm run build
+      - run: node tools/audit-listing-evidence.mjs --check
       - run: node --test tests/batch33-staging.test.mjs
       - run: npm test
       - run: npm run test:dom

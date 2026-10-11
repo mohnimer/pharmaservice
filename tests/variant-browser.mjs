@@ -4,6 +4,11 @@ import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {createServer} from '../tools/serve.mjs';
 const family='PSC-SC-C01';
+const followonVariants=JSON.parse(readFileSync('docs/verified-preview-variant-register.json','utf8'))
+ .filter(row=>row.browser_route).map(row=>({route:row.browser_route,sku:row.psc_sku,
+  optionId:row.product_option_id,photo:row.image_path,pack:row.pack,price:row.price_aed,
+  description:row.description,descriptionSource:row.description_source,
+  imageWidth:row.dimensions[0],priceNote:row.price_note,vatBasis:row.vat_basis}));
 const options=[10,20].map(n=>({family_id:family,product_option_id:'fixture-'+n,
  exact_product_name:'TEST ONLY dressing '+n,brand:'Fixture Brand',pack:n+' pieces',
  presentation:'',image_url:'/__variant-fixture/'+n+'.svg'}));
@@ -110,7 +115,7 @@ try{
 {"route": "medicines", "sku": "PSC-MED-126", "optionId": "local-acorus-d226ac6267ee", "photo": "/assets/products/verified-20261011/panadol-night-24-caplets.jpg", "pack": "24 film-coated tablets", "price": 25, "description": "Panadol Night paracetamol 500 mg and diphenhydramine hydrochloride 25 mg film-coated caplets, pack of 24.", "descriptionSource": "https://www.panadol.com/en-me/adult-products/panadol-night/"}
 ,
 {"route": "breathing", "sku": "PS-AC-F28FE7B861A0", "optionId": "local-acorus-f28fe7b861a0", "photo": "/assets/products/verified-20261011/avamys-275mcg-120-sprays.jpg", "pack": "120 sprays", "price": 63, "description": "Avamys fluticasone furoate 27.5 micrograms per spray nasal spray suspension, one bottle containing 120 sprays.", "descriptionSource": "https://assets.gskstatic.com/pharma/PM-PI_portal/Jordan/avamys_nasal_spray_pil_jo.pdf"}
-  ]) {
+  ].concat(followonVariants)) {
   await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/'+variant.route);
   const {sku,optionId}=variant;
   assert.equal(await page.locator('.psSearchResults .pscRetailPriceNotice').count(),1);
@@ -126,7 +131,7 @@ try{
   await page.locator('.pscBrandTick:has([data-family-option="'+optionId+'"])').click();
   assert.equal(await page.locator('.pscFamilyProductSheet .pscRetailPriceNotice').count(),1);
   assert.equal(await preview.getAttribute('src'),variant.photo);
-  await page.waitForFunction(()=>{const img=document.querySelector('.pscFamilyPreview img');return img?.complete&&img.naturalWidth===1024;});
+  await page.waitForFunction(expected=>{const img=document.querySelector('.pscFamilyPreview img');return img?.complete&&img.naturalWidth===expected;},variant.imageWidth||1024);
   assert((await page.locator('.detailImageMeta').innerText()).includes(variant.pack));
   assert((await page.locator('.detailImageMeta').innerText()).includes(String(variant.price)));
   // Medicine families require a presentation as well as an exact option.
@@ -154,9 +159,10 @@ try{
   assert.equal(actual.verified_price_aed,variant.price);
   assert.equal(actual.verified_price_type,'PUBLIC_RETAIL_BENCHMARK');
   assert.equal(actual.verified_description,variant.description);
-  assert.equal(actual.verified_price_vat_basis,'Inclusive of VAT as displayed by retailer');
+  assert.equal(actual.verified_price_vat_basis,variant.vatBasis||'Inclusive of VAT as displayed by retailer');
   assert.equal(actual.verified_description_source,variant.descriptionSource || actual.verified_price_source);
   assert.equal(actual.verified_price_checked_at,'2026-10-11');
+  if(variant.priceNote)assert.equal(actual.verified_price_note,variant.priceNote);
   assert((await page.locator('body').evaluate(el=>el.scrollWidth))<=width+1,'catalogue must not overflow horizontally');
   }
   // Real same-brand/same-pack strengths must stay distinct under multiple selection.
@@ -187,6 +193,6 @@ try{
   }
   assert.deepEqual(errors,[]);
   assert.deepEqual(await page.evaluate(()=>window.__backendCalls.filter(c=>c.rpc||c.action!=='select')),[]);
-  await context.close();console.log(width+'px: fixture selection and nine real variants, Nexium strength multiselect, VAT/source request snapshots and no overflow passed');
+  await context.close();console.log(width+'px: fixture selection and '+(9+followonVariants.length)+' real variants, Nexium strength multiselect, VAT/source request snapshots and no overflow passed');
  }
 }finally{await browser.close();await new Promise(r=>server.close(r));}
