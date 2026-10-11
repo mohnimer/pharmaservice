@@ -21,7 +21,7 @@ const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r))
 mkdirSync('test-results/variant-visual-review',{recursive:true});
 const browser=await chromium.launch({args:['--no-sandbox']});
 try{
- for(const width of [390,1440]){
+ for(const width of [1440,390]){
   const context=await browser.newContext({viewport:{width,height:900}});
   await context.addInitScript(records=>{
    window.__testRole='demo';window.PSC_VERIFIED_VARIANTS=records;
@@ -41,6 +41,10 @@ try{
   const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto('http://127.0.0.1:'+server.address().port+'/');
   await page.locator('.home47.h47Compact').waitFor();
+  assert.equal(await page.locator('.h47Hero h1').innerText(),'From requirement to replenishment. All in one place.');
+  assert.equal(await page.locator('.h47Hero h1 em').count(),0);
+  assert.equal(await page.locator('.h47HeroClosing').evaluate(el=>getComputedStyle(el).whiteSpace),'nowrap');
+  assert.equal(await page.locator('.h47Hero .h47HeroBody').innerText(),'Shop our comprehensive catalogue of healthcare products, with visibility and compliance throughout.');
   assert.equal(await page.locator('.home47 > section').count(),4);
   assert.equal(await page.locator('.h47Category').count(),6);
   assert.equal(await page.locator('main.publicLanding > .publicHeader').count(),1);
@@ -64,6 +68,31 @@ try{
   await page.locator('.psInterpretation').waitFor();
   assert((await page.locator('.psInterpretation').innerText()).includes('sterile gauze'));
   assert(await page.locator('.psSearchResults .productCard').count()>0);
+  await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/sports');
+  await page.locator('.productCard.pscEditorialCard').first().waitFor();
+  await page.locator('.productCard.pscEditorialCard img.productMainImage').evaluateAll(async images=>{
+   await Promise.all(images.map(async img=>{img.loading='eager';try{await img.decode();}catch{}}));
+  });
+  await page.evaluate(()=>document.fonts.ready);
+  const layout=await page.locator('.productCard.pscEditorialCard').evaluateAll(cards=>cards.map(card=>{
+   const r=card.getBoundingClientRect(),v=card.querySelector('.productVisual').getBoundingClientRect(),a=card.querySelector('.exactCanvaActions').getBoundingClientRect();
+   return {top:r.top,bottom:r.bottom,imageTop:v.top,imageHeight:v.height,actionsTop:a.top,span:getComputedStyle(card).gridRow,sku:card.querySelector('[data-product-view]')?.dataset.productView};
+  }));
+  await page.screenshot({path:'test-results/variant-visual-review/'+width+'-sports-level-grid.png',fullPage:true});
+  console.log(width+'px sports row geometry: '+JSON.stringify(layout));
+  assert(layout.some(c=>c.sku==='PS-AC-A819E3E83997'),'Baby cooling-sheet regression card exists');
+  assert(layout.some(c=>c.sku==='PS-AC-2F1516E65F2A'),'Child cooling-sheet regression card exists');
+  for(const card of layout){
+   assert.equal(card.span,'auto','Editorial cards occupy one grid row');
+   const peers=layout.filter(c=>Math.abs(c.top-card.top)<1);
+   for(const peer of peers){
+    assert(Math.abs(peer.imageTop-card.imageTop)<1,'Image frames start level');
+    assert(Math.abs(peer.imageHeight-card.imageHeight)<1,'Image frames have equal heights');
+    assert(Math.abs(peer.actionsTop-card.actionsTop)<1,'Row actions align: '+JSON.stringify({peer,card}));
+    assert(Math.abs(peer.bottom-card.bottom)<1,'Row bottoms align');
+   }
+  }
+  await page.screenshot({path:'test-results/variant-visual-review/'+width+'-sports-level-grid.png',fullPage:true});
   await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/wounds');
   await page.locator('.pscFamilySelector[data-psc-family-open="'+family+'"]').click();
   await page.locator('[data-family-option="fixture-10"]').waitFor();

@@ -4,10 +4,10 @@
   "production_changed": false,
   "counts": {
     "cards": 613,
-    "verified_cards": 31,
-    "cards_pending": 582,
+    "verified_cards": 34,
+    "cards_pending": 579,
     "local_options": 193,
-    "verified_local_options": 31
+    "verified_local_options": 34
   },
   "cards": [
     {
@@ -5494,31 +5494,21 @@
       "sku": "PS-AC-77936B1C484C",
       "name": "Gloclav 1 g — 14 Tablets",
       "family_id": "PSC-IS-138",
-      "image": "/assets/products/acorus-2026-10/016-gloclav-1gm-tab-14-s.jpg",
+      "image": "/assets/products/verified-20261011/local-acorus-77936b1c484c.jpg",
       "image_status": "PRODUCT IMAGE",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "evidence_option_id": "local-acorus-77936b1c484c",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-FE9B988EFF75",
       "name": "Gloclav 228 mg/5 ml Oral Suspension — 70 ml",
       "family_id": "PSC-IS-138",
-      "image": "/assets/products/acorus-2026-10/164-gloclav-228mg-5ml-syrup-70ml.jpg",
+      "image": "/assets/products/verified-20261011/local-acorus-fe9b988eff75.jpg",
       "image_status": "PRODUCT IMAGE",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "evidence_option_id": "local-acorus-fe9b988eff75",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-A8F5876D3083",
@@ -5539,16 +5529,11 @@
       "sku": "PS-AC-22B20FD5DE67",
       "name": "Gloclav 625 mg — 20 Tablets",
       "family_id": "PSC-IS-138",
-      "image": "/assets/products/acorus-2026-10/017-gloclav-625mg-tab-20-s.jpg",
+      "image": "/assets/products/verified-20261011/local-acorus-22b20fd5de67.jpg",
       "image_status": "PRODUCT IMAGE",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "evidence_option_id": "local-acorus-22b20fd5de67",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-F8251FCFED2E",
@@ -9236,19 +9221,19 @@
       "local_option_id": "local-acorus-77936b1c484c",
       "family_id": "PSC-IS-138",
       "name": "Gloclav 1 g — 14 Tablets",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-fe9b988eff75",
       "family_id": "PSC-IS-138",
       "name": "Gloclav 228 mg/5 ml Oral Suspension — 70 ml",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-22b20fd5de67",
       "family_id": "PSC-IS-138",
       "name": "Gloclav 625 mg — 20 Tablets",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-b5f68f0eef03",

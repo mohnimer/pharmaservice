@@ -1,5 +1,9 @@
 # Pharma Service catalogue repair — new-chat handover
 
+## Latest checkpoint — production release authorized and completed
+
+Moe explicitly requested the existing homepage and latest listing changes go live. PR #20 merged as e733802ac536efb4bb2e721e7f98b524a058d2ee; Vercel production status succeeded. https://pharmaservice.ae now serves HTML/JS/CSS matching the tested build exactly. Read docs/production-release-20261011.md and docs/production-variant-assets-20261011.json. This supersedes earlier draft-only/production-unchanged status for the released frontend. No database migration/backend deployment or selling-price approval; server snapshot gap and whole-catalogue evidence remain unresolved. Next3 Gloclav candidates remain private staging outside runtime31. Continue remaining listings in tested batches through a new draft PR; preserve original150 sources and all completed work. Fetch actual main/repair branch heads before edits. Earlier checkpoints below remain historical.
+
 ## Updated checkpoint — remaining store listings
 
 Latest verified runtime: cfd08c84a76591891c297d56aeb781e5a6ed18de, passed Actions38155318574; all31variants at390/1440px. Artifact11708611763 has252screenshots; representative mobile selected panels and desktop full Spedifen dialog reviewed. Read final review at end for focused-capture limitations. Follow-on documentation commit preserves this checkpoint only; fetch actual head/latest CI. Next three Gloclav packs are staged but not runtime-integrated. Whole catalogue remains incomplete, PR draft and production unchanged.
