@@ -85,6 +85,7 @@
     return name;
   }
   function optionDescriptor(o,f){
+    if(o?.verified_description) return String(o.verified_description);
     const parts=[]; const exact=cleanOptionName(o); const presentation=String(o?.presentation||'').trim(); const pack=String(o?.pack||'').trim();
     if(exact && exact.toLowerCase()!==String(f?.family_name||'').toLowerCase()) parts.push(exact);
     if(meaningfulPresentation(presentation) && !parts.some(x=>x.toLowerCase().includes(presentation.toLowerCase()))) parts.push(presentation);
