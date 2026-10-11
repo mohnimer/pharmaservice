@@ -1,0 +1,28 @@
+[
+  {
+    "family_id": "PSC-IS-126",
+    "product_option_id": "local-acorus-ad974c05853f",
+    "psc_sku": "PS-AC-AD974C05853F",
+    "product_name": "Prospan Cough Syrup \u2014 100 ml",
+    "pack": "100 ml bottle",
+    "image_path": "/assets/products/verified-20261011/prospan-100ml.jpg",
+    "sha256": "3fe3911e2526a0246c890d1d1ff4e06af3f0ed266ab0f549fe285dee19705e0d",
+    "dimensions": [
+      1024,
+      1024
+    ],
+    "image_source_url": "https://cdn.lifepharmacy.com/products/prospan-syrup-100-ml-bottle/110614-1.jpg",
+    "listing_source_url": "https://www.lifepharmacy.com/product/prospan-syrup-100-ml-bottle/",
+    "checked_at": "2026-10-11",
+    "price_aed": 42,
+    "price_type": "PUBLIC_RETAIL_BENCHMARK",
+    "price_unit": "100 ml bottle",
+    "vat_basis": "Retailer displays inclusive of VAT",
+    "image_identity_verified": true,
+    "image_quality_approved": true,
+    "description_verified": true,
+    "psc_sell_price_approved": false,
+    "overall_release_status": "HOLD",
+    "variant_evidence_status": "VERIFIED_PREVIEW_CANDIDATE"
+  }
+]

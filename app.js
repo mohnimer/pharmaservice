@@ -2414,6 +2414,10 @@
     document.querySelectorAll('[data-brand-row]').forEach(row=>{const p=product(row.dataset.brandRow);if(p)row.outerHTML=catalogueBrandChoices(p);});
   });
   function cataloguePricePreview(p){
+    const evidence=window.PSC_VARIANT_EVIDENCE_FOR?.({
+      product_option_id:p.product_option_id,exact_product_name:p.name,brand:p.brand,pack:p.pack
+    },p.catalogueParentId||p.catalogueReferenceFamilyId||p.pscSku);
+    if(evidence) return `<div class="pscPricePreview"><b>${money(Number(evidence.price_aed))}</b><span>${evidence.price_type==='PUBLIC_RETAIL_BENCHMARK'?'UAE retail benchmark':'PSC customer price'}</span><small>${esc(evidence.price_unit)} · ${esc(evidence.price_vat_basis||'VAT confirmed in quotation')}<br>Source checked ${esc(evidence.price_checked_at)} · final quotation confirms</small></div>`;
     const saved=window.PSC_RECORDED_PRICES?.[p.pscSku]||{};
     const packKey=v=>String(v||'').toLowerCase().replace(/\s+/g,'');
     const record=packKey(saved.pack)===packKey(p.cataloguePack||p.pack)?saved:{};

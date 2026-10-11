@@ -226,7 +226,9 @@
     const brands=[...new Set([...chosen.map(o=>normalizedBrand(o.brand)).filter(Boolean),...state.selectedFallbackBrands])];
     const specific=chosen.length===1&&!chosen[0].local_reference&&!state.selectedFallbackBrands.length&&!state.otherBrandActive;
     const mode=specific?'specific_option':chosen.length||state.selectedFallbackBrands.length||state.otherBrandActive?'other_brand':'no_preference';
-    const snapshots=chosen.map(o=>({...o,product_option_id:o.local_reference?null:o.product_option_id}));
+    const snapshots=chosen.map(o=>({...o,
+      local_product_option_id:o.local_reference?o.product_option_id:null,
+      product_option_id:o.local_reference?null:o.product_option_id}));
     return {localFamily:!state.familyInDatabase,familyId:f?.family_id||state.familyId,familyName:f?.family_name||state.familyId,familyPageType:f?.page_type||'',orderPackBasis:f?.order_pack_basis||'',presentation:state.presentation||'',brandPreference:preference,brandPreferenceMode:mode,requestedBrands:brands,requestedBrand:mode==='other_brand'?preference:brands.join(', '),requestedProductOptions:snapshots,productOption:snapshots.length===1?snapshots[0]:null,regulated:kind==='medicine',requirementType:requirementType(f),commercialSpecification:f?.commercial_specification||'',priceTreatment:priceLabel(f),availability:familyAvailabilityLabel(f),dhaMapped:isDhaMapped(f),requirementReference:f?.requirement_reference||'',requirementStatus:f?.dha_status||''};
   }
   function goToQuote(){
