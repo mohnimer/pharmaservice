@@ -21,7 +21,7 @@ const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r))
 mkdirSync('test-results/variant-visual-review',{recursive:true});
 const browser=await chromium.launch({args:['--no-sandbox']});
 try{
- for(const width of [390,1440]){
+ for(const width of [1440,390]){
   const context=await browser.newContext({viewport:{width,height:900}});
   await context.addInitScript(records=>{
    window.__testRole='demo';window.PSC_VERIFIED_VARIANTS=records;
@@ -74,6 +74,8 @@ try{
    const r=card.getBoundingClientRect(),v=card.querySelector('.productVisual').getBoundingClientRect(),a=card.querySelector('.exactCanvaActions').getBoundingClientRect();
    return {top:r.top,bottom:r.bottom,imageTop:v.top,imageHeight:v.height,actionsTop:a.top,span:getComputedStyle(card).gridRow,sku:card.querySelector('[data-product-view]')?.dataset.productView};
   }));
+  await page.screenshot({path:'test-results/variant-visual-review/'+width+'-sports-level-grid.png',fullPage:true});
+  console.log(width+'px sports row geometry: '+JSON.stringify(layout));
   assert(layout.some(c=>c.sku==='PS-AC-A819E3E83997'),'Baby cooling-sheet regression card exists');
   assert(layout.some(c=>c.sku==='PS-AC-2F1516E65F2A'),'Child cooling-sheet regression card exists');
   for(const card of layout){
@@ -82,7 +84,7 @@ try{
    for(const peer of peers){
     assert(Math.abs(peer.imageTop-card.imageTop)<1,'Image frames start level');
     assert(Math.abs(peer.imageHeight-card.imageHeight)<1,'Image frames have equal heights');
-    assert(Math.abs(peer.actionsTop-card.actionsTop)<1,'Row actions align');
+    assert(Math.abs(peer.actionsTop-card.actionsTop)<1,'Row actions align: '+JSON.stringify({peer,card}));
     assert(Math.abs(peer.bottom-card.bottom)<1,'Row bottoms align');
    }
   }
