@@ -158,7 +158,11 @@ try{
   await card.scrollIntoViewIfNeeded();
   await card.locator('.productMainImage').evaluate(async img=>{img.loading='eager';await img.decode();});
   assert.equal(await card.locator('.productMainImage').evaluate(img=>img.naturalWidth),variant.imageWidth||1024);
+  // A taller capture keeps the existing sticky search header from covering the pack.
+  await page.setViewportSize({width,height:1500});
+  await card.evaluate(el=>{const y=el.getBoundingClientRect().top+window.scrollY;window.scrollTo(0,Math.max(0,y-320));});
   await card.screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-card.png'});
+  await page.setViewportSize({width,height:900});
   await card.locator('.productVisual').click();
   await page.locator('.pscBrandTick:has([data-family-option="'+optionId+'"])').click();
   assert.equal(await page.locator('.pscFamilyProductSheet .pscRetailPriceNotice').count(),1);
