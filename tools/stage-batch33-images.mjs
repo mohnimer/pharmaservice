@@ -17,7 +17,7 @@ const seenFiles=new Set(), seenImages=new Set();
 const outcome=[];
 for(const row of rows){
   const publicPath=String(row.website_image_path||'');
-  if(!/^\\/assets\\/acorus-batch-33\\/[a-z0-9_]+\\.webp$/.test(publicPath))
+  if(!publicPath.startsWith('/assets/acorus-batch-33/') || !/^[a-z0-9_]+[.]webp$/.test(path.basename(publicPath)))
     fail('unsafe or noncanonical image path for '+row.product_name);
   const name=path.basename(publicPath);
   if(seenFiles.has(name)||!names.includes(name))fail('missing or duplicate '+name);
@@ -40,6 +40,6 @@ for(const row of rows){
 await mkdir(destination,{recursive:true});
 for(const name of names)await copyFile(path.join(source,name),path.join(destination,name));
 await writeFile(path.resolve('staging/catalogue-batch33/candidate-image-register.json'),
-  JSON.stringify(outcome,null,2)+'\\n');
+  JSON.stringify(outcome,null,2)+'\n');
 console.log('Staged 150 checksum-verified source photographs; zero released.');
 console.log('Production assets, product prices, runtime manifest and Supabase unchanged.');
