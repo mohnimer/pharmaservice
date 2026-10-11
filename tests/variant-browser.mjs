@@ -70,6 +70,10 @@ try{
   assert(await page.locator('.psSearchResults .productCard').count()>0);
   await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/sports');
   await page.locator('.productCard.pscEditorialCard').first().waitFor();
+  await page.locator('.productCard.pscEditorialCard img.productMainImage').evaluateAll(async images=>{
+   await Promise.all(images.map(async img=>{img.loading='eager';try{await img.decode();}catch{}}));
+  });
+  await page.evaluate(()=>document.fonts.ready);
   const layout=await page.locator('.productCard.pscEditorialCard').evaluateAll(cards=>cards.map(card=>{
    const r=card.getBoundingClientRect(),v=card.querySelector('.productVisual').getBoundingClientRect(),a=card.querySelector('.exactCanvaActions').getBoundingClientRect();
    return {top:r.top,bottom:r.bottom,imageTop:v.top,imageHeight:v.height,actionsTop:a.top,span:getComputedStyle(card).gridRow,sku:card.querySelector('[data-product-view]')?.dataset.productView};
