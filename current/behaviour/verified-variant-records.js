@@ -1170,6 +1170,7 @@
     if (matches.length !== 1) continue;
     const option = matches[0];
     Object.assign(option,{pack:record.pack,image_url:record.image_url,
+      image_status:'VERIFIED EXACT PRODUCT IMAGE', image_pending:false,
       verified_description:record.description});
     // SKU, family, name and brand must also agree on the card record.
     for (const collection of [window.PSC_DATA?.products, window.PS_CATALOGUE_REFRESH?.products]) {
@@ -1180,7 +1181,9 @@
             norm(product.brand) !== norm(record.brand)) continue;
         Object.assign(product,{product_option_id:record.product_option_id,
           pack:record.pack,cataloguePack:record.pack,currentImageUrl:record.image_url,
-          imageUrl:record.image_url,verified_description:record.description});
+          imageUrl:record.image_url,imageStatus:'VERIFIED EXACT PRODUCT IMAGE',
+          imageSource:record.image_source,imageVerification:'Exact local identity and native photograph verified',
+          verified_description:record.description});
       }
     }
   }
