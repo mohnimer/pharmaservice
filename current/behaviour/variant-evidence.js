@@ -7,7 +7,7 @@
   const valid = r => r && r.release_status === 'APPROVED' &&
     r.image_verified === true && r.description_verified === true && r.price_verified === true &&
     r.family_id && r.product_option_id && r.exact_product_name && r.brand && r.pack &&
-    r.image_url && r.image_source && Number(r.price_aed) > 0 &&
+    r.image_url && r.image_source && r.description && Number(r.price_aed) > 0 &&
     ['PUBLIC_RETAIL_BENCHMARK','PSC_CUSTOMER_PRICE'].includes(r.price_type) &&
     r.price_source && r.price_checked_at && r.price_unit;
   for (const r of records) {
