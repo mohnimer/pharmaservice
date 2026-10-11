@@ -1,0 +1,757 @@
+{
+  "source_filename": "PSC_Acorus_B2B_Request_with_Wholesale_List_Matches(1).xlsx",
+  "source_sha256": "07b02fa9953aa8df196a8ba744577200782f8fcda400c36ec2c22619817e3d0c",
+  "sheet": "Acorus Source List",
+  "rows": [
+    {
+      "worksheet_row": 622,
+      "supplier_row_id": 621,
+      "supplier_product_name": "SM BABY SHAMPOO 2X150ML (TWIN PACK)",
+      "source_value": 30,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 856,
+      "supplier_row_id": 855,
+      "supplier_product_name": "SM SHOWER GEL FRESH 200ML (24043)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 1102,
+      "supplier_row_id": 1101,
+      "supplier_product_name": "SM BABY SHAMPOO 150ML (14228)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 3326,
+      "supplier_row_id": 3325,
+      "supplier_product_name": "SM LIQ FACE&BODY WASH 200ML (15263)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 3696,
+      "supplier_row_id": 3695,
+      "supplier_product_name": "SM BABY WASH 200ML GENTLE WASH",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 3697,
+      "supplier_row_id": 3696,
+      "supplier_product_name": "SM BABY SHAMPOO 250ML (14488)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 3698,
+      "supplier_row_id": 3697,
+      "supplier_product_name": "SM BABY POWDER 200GM (22359)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 3699,
+      "supplier_row_id": 3698,
+      "supplier_product_name": "SM BABY BODY LOTION 200ML (22476)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 3703,
+      "supplier_row_id": 3702,
+      "supplier_product_name": "SM BABY POWDER 400GM (05434)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 4052,
+      "supplier_row_id": 4051,
+      "supplier_product_name": "SM EXTREME DRY SKIN REPAIR LOTION UREA 10% 200ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 4575,
+      "supplier_row_id": 4574,
+      "supplier_product_name": "SM BABY SOOTHING MASSAGE OIL 150ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 5292,
+      "supplier_row_id": 5291,
+      "supplier_product_name": "SM INTIMATE WASH EMLS PH 3.8 200ML (47271)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 5293,
+      "supplier_row_id": 5292,
+      "supplier_product_name": "SM INTIMATE WASH EMLS PH 6.8 200ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 5294,
+      "supplier_row_id": 5293,
+      "supplier_product_name": "SM MULTI PRO SUN CREAM SPF-50 75ML (99736)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 5295,
+      "supplier_row_id": 5294,
+      "supplier_product_name": "SM RELIEF SHAMPOO UREA 5% 200ML (06868)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 5296,
+      "supplier_row_id": 5295,
+      "supplier_product_name": "SM SUN CREAM SPF-50+ VERY HIGH 75ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 5297,
+      "supplier_row_id": 5296,
+      "supplier_product_name": "SM SUN LOTION SPF-50+ VERY HIGH 150ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 5652,
+      "supplier_row_id": 5651,
+      "supplier_product_name": "SM LIQ FACE&BODY WASH 500ML (12156)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 5990,
+      "supplier_row_id": 5989,
+      "supplier_product_name": "SM ADULT EVERY DAY SHAMPOO 400ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6040,
+      "supplier_row_id": 6039,
+      "supplier_product_name": "SM BABY CREAM EXTRA SOFT 200ML (16239)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6043,
+      "supplier_row_id": 6042,
+      "supplier_product_name": "SM BABY CLEANSING BAR 150GM (19261)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6044,
+      "supplier_row_id": 6043,
+      "supplier_product_name": "SM BABY CLEANSING BAR 2X100GM (TWIN PACK)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6045,
+      "supplier_row_id": 6044,
+      "supplier_product_name": "SM BABY CREAM EXTRA SOFT 300ML (01835)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6047,
+      "supplier_row_id": 6046,
+      "supplier_product_name": "SM ADULT CLEANSING BAR 100GM (11241)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6051,
+      "supplier_row_id": 6050,
+      "supplier_product_name": "SM ADULT CLEANSING BAR 2X150GM (11791)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6054,
+      "supplier_row_id": 6053,
+      "supplier_product_name": "SM BABY WET WIPES W/O PERF 72'S",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6055,
+      "supplier_row_id": 6054,
+      "supplier_product_name": "SM BABY SHAMPOO 2X500ML (TWIN PACK)",
+      "source_value": 66.25,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6064,
+      "supplier_row_id": 6063,
+      "supplier_product_name": "SM ADULT ANTI DANDRUFF SHAMPOO 200ML (17298)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6066,
+      "supplier_row_id": 6065,
+      "supplier_product_name": "SM ADULT EVERY DAY SHAMPOO 200ML (17953)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6069,
+      "supplier_row_id": 6068,
+      "supplier_product_name": "SM ADULT LIP DEFENSE SPF-30",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6081,
+      "supplier_row_id": 6080,
+      "supplier_product_name": "SM ADULT OLIVE CLEANSING BAR 150GM (21536)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6101,
+      "supplier_row_id": 6100,
+      "supplier_product_name": "SM BABY CREAM EXTRA SOFT 200ML{XXXXX}",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6221,
+      "supplier_row_id": 6220,
+      "supplier_product_name": "SM BABY CREAM EXTRA SOFT 2X200ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6225,
+      "supplier_row_id": 6224,
+      "supplier_product_name": "SM BABY CREAM EXTRA SOFT 50ML (20489)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6226,
+      "supplier_row_id": 6225,
+      "supplier_product_name": "SM BABY DIAPER RASH CREAM 100ML (13221)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6227,
+      "supplier_row_id": 6226,
+      "supplier_product_name": "SM BABY EAU DE COLOGNE 250ML (15214)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6230,
+      "supplier_row_id": 6229,
+      "supplier_product_name": "SM BABY FACE&BODY WASH FOAM 400ML (04741)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6231,
+      "supplier_row_id": 6230,
+      "supplier_product_name": "SM SHOWER GEL FRESH 200ML{XXXXX}",
+      "source_value": 18,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6232,
+      "supplier_row_id": 6231,
+      "supplier_product_name": "SM INTIMATE DEODORANT SPRAY 125ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6234,
+      "supplier_row_id": 6233,
+      "supplier_product_name": "SM DETANGLING SHAMPOO 150ML (40855)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6235,
+      "supplier_row_id": 6234,
+      "supplier_product_name": "SM INTIMATE WASH EMLS PH 3.8 2X200ML (TWIN)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6236,
+      "supplier_row_id": 6235,
+      "supplier_product_name": "SM MOIST BODY LOTION 200ML (12491)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6237,
+      "supplier_row_id": 6236,
+      "supplier_product_name": "SM MULTI PRO SUN LOTION SPF-50 150ML (99811)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6238,
+      "supplier_row_id": 6237,
+      "supplier_product_name": "SM NOURISH HAND CREAM 75ML (25425)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6239,
+      "supplier_row_id": 6238,
+      "supplier_product_name": "SM RELIEF FACE CREAM UREA 5% 50ML (06882)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6242,
+      "supplier_row_id": 6241,
+      "supplier_product_name": "SM BABY WET WIPES 5*72'S VALUE PACK",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6244,
+      "supplier_row_id": 6243,
+      "supplier_product_name": "SM AFTER SHAVE BALM 100ML (20215)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6246,
+      "supplier_row_id": 6245,
+      "supplier_product_name": "SM ADULT HAIR REPAIR CONDITIONR 200ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6504,
+      "supplier_row_id": 6503,
+      "supplier_product_name": "SM BABY CLEANSING BAR 2X150GM (TWIN PACK)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6543,
+      "supplier_row_id": 6542,
+      "supplier_product_name": "SM CLEAR FACE CLEANSING BAR 100GM",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6552,
+      "supplier_row_id": 6551,
+      "supplier_product_name": "SM CLEAR FACE CLEANSING BAR 150GM",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6553,
+      "supplier_row_id": 6552,
+      "supplier_product_name": "SM DEODORANT ROLL-ON FOR MEN 50ML (BALSAM DEO)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6554,
+      "supplier_row_id": 6553,
+      "supplier_product_name": "SM DEODORANT ROLL-ON FRESH 50ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6556,
+      "supplier_row_id": 6555,
+      "supplier_product_name": "SM DEODORANT SPRAY ACTIVE 75ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6560,
+      "supplier_row_id": 6559,
+      "supplier_product_name": "SM DEODORANT SPRAY BLOSSOM 75ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6566,
+      "supplier_row_id": 6565,
+      "supplier_product_name": "SM DEODORANT SPRAY FRESH 75ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6567,
+      "supplier_row_id": 6566,
+      "supplier_product_name": "SM FACIAL CLEANSER FOR NORMAL SKIN 150ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6569,
+      "supplier_row_id": 6568,
+      "supplier_product_name": "SM FACIAL CLEANSER FOR OILY SKIN 150ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 6735,
+      "supplier_row_id": 6734,
+      "supplier_product_name": "SM CLEAR FACE A-PIMPLE GEL 10ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 7153,
+      "supplier_row_id": 7152,
+      "supplier_product_name": "SM MULTI PRO SUN LOTION SPF-30 150ML (99798)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 8056,
+      "supplier_row_id": 8055,
+      "supplier_product_name": "SM BABY GENTLE WASH W/ALLANTOIN 2X200ML TWIN PACK",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 8142,
+      "supplier_row_id": 8141,
+      "supplier_product_name": "SM BABY CLEANSING BAR 100GM (13696)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 8143,
+      "supplier_row_id": 8142,
+      "supplier_product_name": "SM ANTI-HAIRLOSS INTENSIVE FOAM 70ML",
+      "source_value": 56.5,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 8144,
+      "supplier_row_id": 8143,
+      "supplier_product_name": "SM ANTI-HAIRLOSS SHAMPOO 200ML (02788)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 8145,
+      "supplier_row_id": 8144,
+      "supplier_product_name": "SM ANTI-STRETCH MARK CREAM 200ML",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 8146,
+      "supplier_row_id": 8145,
+      "supplier_product_name": "SM BABY BODY LOTION W/CALENDULA 200ML (27009)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 8147,
+      "supplier_row_id": 8146,
+      "supplier_product_name": "SM BABY GENTLE WASH W/CALENDULA 200ML",
+      "source_value": 21.25,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 8148,
+      "supplier_row_id": 8147,
+      "supplier_product_name": "SM BABY BODY MILK 200ML (48155)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 8149,
+      "supplier_row_id": 8148,
+      "supplier_product_name": "SM BABY BUBBLE BATH 200ML (13931)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 8150,
+      "supplier_row_id": 8149,
+      "supplier_product_name": "SM BABY BUBBLE BATH 500ML (10510)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 8151,
+      "supplier_row_id": 8150,
+      "supplier_product_name": "SM BABY CHILD SHAMBOO 500ML (PUMP)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 9483,
+      "supplier_row_id": 9482,
+      "supplier_product_name": "SM BABY LIP BALM 4.8GM",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "CITY PHARMACY LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 9484,
+      "supplier_row_id": 9483,
+      "supplier_product_name": "SM BABY POWDER 100GM (17949)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "CITY PHARMACY LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 9590,
+      "supplier_row_id": 9589,
+      "supplier_product_name": "SM ADULT LIP DEFENSE CHERRY 4.8GM",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "CITY PHARMACY LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    },
+    {
+      "worksheet_row": 10244,
+      "supplier_row_id": 10243,
+      "supplier_product_name": "SM BABY SKIN CARE OIL 150ML (14600)",
+      "source_value": 0,
+      "brand_or_principal": "SEBAMED",
+      "supplier": "MEDSEVEN DRUGSTORE LLC",
+      "pack_binding_status": "CANDIDATE_ONLY_NOT_BOUND_TO_SIZELESS_PHOTOGRAPH",
+      "price_status": "HISTORICAL_SOURCE_VALUE_NOT_CURRENT_QUOTE_OR_APPROVED_SELLING_PRICE"
+    }
+  ]
+}

@@ -8,7 +8,7 @@ const followonVariants=JSON.parse(readFileSync('docs/verified-preview-variant-re
  .filter(row=>row.browser_route).map(row=>({route:row.browser_route,sku:row.psc_sku,
   optionId:row.product_option_id,photo:row.image_path,pack:row.pack,price:row.price_aed,
   description:row.description,descriptionSource:row.description_source,
-  imageWidth:row.dimensions[0],priceNote:row.price_note,vatBasis:row.vat_basis}));
+  imageWidth:row.dimensions[0],priceNote:row.price_note,vatBasis:row.vat_basis,checkedAt:row.checked_at}));
 const options=[10,20].map(n=>({family_id:family,product_option_id:'fixture-'+n,
  exact_product_name:'TEST ONLY dressing '+n,brand:'Fixture Brand',pack:n+' pieces',
  presentation:'',image_url:'/__variant-fixture/'+n+'.svg'}));
@@ -190,7 +190,7 @@ try{
   assert.equal(actual.verified_description,variant.description);
   assert.equal(actual.verified_price_vat_basis,variant.vatBasis||'Inclusive of VAT as displayed by retailer');
   assert.equal(actual.verified_description_source,variant.descriptionSource || actual.verified_price_source);
-  assert.equal(actual.verified_price_checked_at,'2026-10-11');
+  assert.equal(actual.verified_price_checked_at,variant.checkedAt || '2026-10-11');
   if(variant.priceNote)assert.equal(actual.verified_price_note,variant.priceNote);
   assert((await page.locator('body').evaluate(el=>el.scrollWidth))<=width+1,'catalogue must not overflow horizontally');
   }

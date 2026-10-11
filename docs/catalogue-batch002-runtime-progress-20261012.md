@@ -1,0 +1,9 @@
+# Batch002: 17 integrated candidates, 50-live batch unfinished
+
+Interrupted local checkpoint c0fc232 was absent remotely. Recovered all33 changed files through GitHub blob/tree/commit APIs as f9f58e3eca13eb5d3b80bfbc626e9613dbfc5bf7; tree ff507fdc8ede6ebbc0457580bcf4de14cf3f485e is identical to c0fc232. Confirmed remote repair branch head after update. No missing source evidence.
+
+Seventeen exact-product native photos integrated, increasing verified frontend records34→51. Current batch indices1,3–10,13,14,16,17,19,21,22,23. Unchanged asset bytes, exact existing localID/family/name/brand/SKU guards, descriptions, packs and dated retail benchmarks retained. No database writes, identity merges, PSC selling-price approvals or homepage/layout changes. No source photo overwritten. ProRise20mg candidate rejected because the actual image shows40mg despite the source page title. Original source/rejection decisions retained in staging. Nasaflex source identifies combination formulation and uses store-logo schema image; remains HOLD. Moven7.5 and PediaVit remain quality HOLD. Sebamed size-less photos cannot be bound to one of the75 historical source-workbook pack entries without individual supplier/barcode evidence.
+
+Browser test date assertion now uses each register entry's checked_at, preserving original11October assertions for old entries and allowing genuinely current12October sources. Existing evidence/identity/staging tests pass. Browser/CI, desktop/mobile screenshot review and actual live verification are still pending; release-progress remains incomplete and reports zero new live products until that evidence exists.
+
+Do not start another50-product batch. Do not call51 total verified records a completed batch of50:34 existed before this batch. Continue the same50 until every release-progress entry has tested/deployed commit, reviewed viewports and actual live asset/hash evidence.

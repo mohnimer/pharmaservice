@@ -1,0 +1,924 @@
+[
+  {
+    "local_option_id": "local-acorus-13a292d3b033",
+    "batch_index": 1,
+    "source_url": "https://www.lifepharmacy.com/product/moven-15mg-cap-hard-gelatin-10s-blister",
+    "checked_at": "2026-10-11T21:43:53.255548+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/moven-15mg-cap-hard-gelatin-10s-blister",
+    "page_sha256": "90574e4dcef8f140206078eec3e1b78165335e74e03373bfcde3e82e2b7a67dc",
+    "source_name": "MOVEN 15MG CAP (HARD GELATIN)10S BLISTER",
+    "source_sku": "107813",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/moven-15mg-cap-hard-gelatin-10s-blister",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 14,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/moven-15mg-cap-hard-gelatin-10s-blister/107813-1.png",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-20261012/local-acorus-13a292d3b033-0.png",
+        "sha256": "8e6e8ca26d550d39cf656e36f07bec8b12e9f57e47350c86937c1b245aeaf67f",
+        "dimensions": [
+          700,
+          700
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-7249b30e2d1f",
+    "batch_index": 2,
+    "source_url": "https://www.lifepharmacy.com/product/moven-7-5mg-cap-hard-gelatin-10s-blister",
+    "checked_at": "2026-10-11T21:43:53.256362+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/moven-7-5mg-cap-hard-gelatin-10s-blister",
+    "page_sha256": "a449b9727cc8540518cc97af764e473ded5710cf56552a52d3089ccc95324872",
+    "source_name": "MOVEN 7.5MG CAP (HARD GELATIN)10S BLISTER",
+    "source_sku": "107814",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/moven-7-5mg-cap-hard-gelatin-10s-blister",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 9.5,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/moven-7-5mg-cap-hard-gelatin-10s-blister/107814-1.png",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-20261012/local-acorus-7249b30e2d1f-0.png",
+        "sha256": "5dbb4709e4ea97d6d3201c730b3b09ad9ee224de452bcbe3e8843677bfd27245",
+        "dimensions": [
+          700,
+          700
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-6e59a30ef053",
+    "batch_index": 3,
+    "source_url": "https://www.lifepharmacy.com/product/nan-comfort-1-800-gm",
+    "checked_at": "2026-10-11T21:43:53.256758+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/nan-comfort-1-800-gm",
+    "page_sha256": "755ae99097e3a212f0773380773146e3d0f143222e524dc2a04f8c04795d919b",
+    "source_name": "Nan Comfort 1 800 Gm",
+    "source_sku": "132809",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "NAN",
+      "url": "https://www.lifepharmacy.com/brand/nan"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/nan-comfort-1-800-gm",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 114.98,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/nan-comfort-1-800-gm/132809-1.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-20261012/local-acorus-6e59a30ef053-0.jpg",
+        "sha256": "566c4d82b8b0c2c75f48b16b9de5f1968ecc2eb110c4effa29a4189bda6cdee4",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-c7db4fa9acc4",
+    "batch_index": 5,
+    "source_url": "https://www.lifepharmacy.com/product/nan-comfort-2-800-gm",
+    "checked_at": "2026-10-11T21:43:53.257434+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieval_error": "The read operation timed out"
+  },
+  {
+    "local_option_id": "local-acorus-b8f2cffcef03",
+    "batch_index": 6,
+    "source_url": "https://www.lifepharmacy.com/product/nan-comfort-3-800-gm",
+    "checked_at": "2026-10-11T21:44:10.023282+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/nan-comfort-3-800-gm",
+    "page_sha256": "276eabb37d9e3475ba9ec6a2e112fab3109a0ae9f7bddf50a9e005acb469ee68",
+    "source_name": "Nan Comfort 3 800 gm",
+    "source_sku": "132811",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "NAN",
+      "url": "https://www.lifepharmacy.com/brand/nan"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/nan-comfort-3-800-gm",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 98.35,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/nan-comfort-3-800-gm/132811-1.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-20261012/local-acorus-b8f2cffcef03-0.jpg",
+        "sha256": "4e10686d2f32169b4a2c9d4814c6a0889f54492a174cb38e3a3248e6f9f6a02a",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-09bdd311ca5a",
+    "batch_index": 7,
+    "source_url": "https://www.lifepharmacy.com/product/nestle-nan-lactose-free-al-110-400-g",
+    "checked_at": "2026-10-11T21:44:10.073275+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/nestle-nan-lactose-free-al-110-400-g",
+    "page_sha256": "29e107fc414a682d4adc7841517fbd5868890398a079c67e79ccbe391af9aef8",
+    "source_name": "Nestle Nan Lactose Free 400 g",
+    "source_sku": "113934",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "NAN",
+      "url": "https://www.lifepharmacy.com/brand/nan"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/nestle-nan-lactose-free-al-110-400-g",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 57.83,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/nestle-nan-lactose-free-al-110-400-g/113934-1.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-20261012/local-acorus-09bdd311ca5a-0.jpg",
+        "sha256": "af3e88528dd9bd8e012d6e18a0b70c2db418049eb819820ead01df34292d51cf",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-d45d30f1493e",
+    "batch_index": 8,
+    "source_url": "https://www.lifepharmacy.com/product/nestle-nan-optipro-stage-3-400-g",
+    "checked_at": "2026-10-11T21:44:10.087011+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/nestle-nan-optipro-stage-3-400-g",
+    "page_sha256": "4232f74c53466ce3cdaebe5ed52639e64014696fd037f73630f9890c3b4c497e",
+    "source_name": "Nestle NAN  Optipro stage 3- 400 g",
+    "source_sku": "113925",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "NAN",
+      "url": "https://www.lifepharmacy.com/brand/nan"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/nestle-nan-optipro-stage-3-400-g",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 44.18,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/nestle-nan-optipro-stage-3-400-g/113925-1.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-20261012/local-acorus-d45d30f1493e-0.jpg",
+        "sha256": "4e865315724a7a6f65ecd5e225ec22c7a6c403f66c2da1af206f03b9832f78fd",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-98dba85b5a1d",
+    "batch_index": 9,
+    "source_url": "https://www.lifepharmacy.com/product/nan-supreme-pro-2-400-gm",
+    "checked_at": "2026-10-11T21:44:25.242452+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/nan-supreme-pro-2-400-gm",
+    "page_sha256": "c65a45fad55384a50ba8ab3b98974e4e00b88e5e58026bc08563c245db3ba851",
+    "source_name": "Nan Supreme Pro 2 400 Gm",
+    "source_sku": "132815",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "NAN",
+      "url": "https://www.lifepharmacy.com/brand/nan"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/nan-supreme-pro-2-400-gm",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 70.17,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/nan-supreme-pro-2-400-gm/132815-1.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-20261012/local-acorus-98dba85b5a1d-0.jpg",
+        "sha256": "df73eeefcfe4bab076a172207af8b59a52ccd31904256cb86e3ff038a1f4cbdf",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-05fcd107c286",
+    "batch_index": 10,
+    "source_url": "https://www.lifepharmacy.com/product/nan-supreme-pro-3-800-gm",
+    "checked_at": "2026-10-11T21:44:25.249106+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/nan-supreme-pro-3-800-gm",
+    "page_sha256": "1e1f23a23d2f2c2d2f4a5be286d5bd4fd49797851d14b5d2fe7cb682c64c3687",
+    "source_name": "Nan Supreme Pro 3 800 Gm",
+    "source_sku": "132817",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "NAN",
+      "url": "https://www.lifepharmacy.com/brand/nan"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/nan-supreme-pro-3-800-gm",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 120.4,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/nan-supreme-pro-3-800-gm/132817-1.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-20261012/local-acorus-05fcd107c286-0.jpg",
+        "sha256": "752cbbe4de8062e5c8301f1dd2c87efb6651d646640f6f54f78106622852b174",
+        "dimensions": [
+          1000,
+          1000
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-dbd40d8389ac",
+    "batch_index": 13,
+    "source_url": "https://www.lifepharmacy.com/product/nolvadex-10-mg-tab-30s-3-blis",
+    "checked_at": "2026-10-11T21:44:25.299514+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/nolvadex-10-mg-tab-30s-3-blis",
+    "page_sha256": "8cdf9bc5f82f50cff6a87ba6c3388a63121a63cc62186e0bbc02f72b773843e3",
+    "source_name": "NOLVADEX 10 MG TAB 30S 3 BLIS",
+    "source_sku": "108171",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/nolvadex-10-mg-tab-30s-3-blis",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 49.5,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/nolvadex-10-mg-tab-30s-3-blis/108171-1.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-20261012/local-acorus-dbd40d8389ac-0.jpg",
+        "sha256": "2fa7acca3c8a7beb842ea886e7c58e8a1ce0acb26e961f8cb08ef8595bc15579",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-e0a6920e38dc",
+    "batch_index": 18,
+    "source_url": "https://www.lifepharmacy.com/product/pediavit-multi-oral-drops-50-ml",
+    "checked_at": "2026-10-11T21:44:30.832534+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/pediavit-multi-oral-drops-50-ml",
+    "page_sha256": "4352ed05bb1ec150fe35beb3526714ff7a1d6b22e29ace366d6bf421c4b334f5",
+    "source_name": "Pediavit Multi Oral Drops 50 ml",
+    "source_sku": "122601",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/pediavit-multi-oral-drops-50-ml",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 38,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/pediavit-multi-oral-drops-50-ml/122601-1.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-20261012/local-acorus-e0a6920e38dc-0.jpg",
+        "sha256": "8b0da2ccb7afb5ab4a6999267eb044334f8f2ea1d8b9151ef3d48fa674b54c44",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-e35706fb3a4e",
+    "batch_index": 20,
+    "source_url": "https://www.lifepharmacy.com/product/prorise-20mg-cap-30s",
+    "checked_at": "2026-10-11T21:44:41.979346+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/prorise-20mg-cap-30s",
+    "page_sha256": "96a78ed46eb9bc31fa8e3ca2fe2e686dfa6074438ce31e802c5b733ac3e9bdd6",
+    "retrieval_error": "Expected one primary structured product, found 0"
+  },
+  {
+    "local_option_id": "local-acorus-382e97b1a135",
+    "batch_index": 21,
+    "source_url": "https://www.lifepharmacy.com/product/prorise-40mg-cap-30s",
+    "checked_at": "2026-10-11T21:44:41.980979+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/prorise-40mg-cap-30s",
+    "page_sha256": "bc7a33565b28ea29e26a383f1db2f3419fb3f11ad116ea2186fe84e84f05e05e",
+    "source_name": "ProRise 40MG/1100MG Cap 30s",
+    "source_sku": "134157",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/prorise-40mg-cap-30s",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 100.5,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/prorise-40mg-cap-30s/134157-1.png",
+        "error": "<urlopen error timed out>"
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-971a2f43b366",
+    "batch_index": 22,
+    "source_url": "https://www.lifepharmacy.com/product/ruset-20mg-10mg-film-coated-tab-30s",
+    "checked_at": "2026-10-11T21:44:42.002439+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/ruset-20mg-10mg-film-coated-tab-30s",
+    "page_sha256": "2060ec95b48e7e48ce5be72093b1e8209dde89de2b12932c8f17c1398e4ba63a",
+    "source_name": "Ruset 20MG/10MG Film Coated Tab 30s",
+    "source_sku": "140301",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/ruset-20mg-10mg-film-coated-tab-30s",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 75,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/ruset-20mg-10mg-film-coated-tab-30s/140301-1.png",
+        "error": "<urlopen error timed out>"
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-e5ba62deaf28",
+    "batch_index": 23,
+    "source_url": "https://www.lifepharmacy.com/product/ruset-5mg-10mg-film-coated-tab-30s",
+    "checked_at": "2026-10-11T21:44:42.011153+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieval_error": "The read operation timed out"
+  },
+  {
+    "local_option_id": "local-acorus-83090d95f22b",
+    "batch_index": 11,
+    "source_url": "https://dawapharmacy.ae/products/nasaflex-nasal-spray",
+    "checked_at": "2026-10-11T21:44:50.711328+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://dawapharmacy.ae/products/nasaflex-nasal-spray",
+    "page_sha256": "d752ca31a119b97417925e133ceb4f630bf3c59f1d1d5fa714c651c7fb126ac7",
+    "retrieval_error": "Expected one primary structured product, found 2"
+  }
+]

@@ -1,0 +1,162 @@
+[
+  {
+    "batch_index": 20,
+    "source_url": "https://www.lifepharmacy.com/product/prorise-20mg-1100mg-hard-gelatin-cap-30s",
+    "file": "continuation-final-sources-20261012/local-acorus-e35706fb3a4e-0.png",
+    "decision": "REJECT_WRONG_STRENGTH",
+    "reason": "Page title and offer say 20mg/1100mg, but actual photo visibly prints 40mg/1100mg. Do not integrate or borrow another strength."
+  },
+  {
+    "batch_index": 2,
+    "file": "continuation-20261012/local-acorus-7249b30e2d1f-0.png",
+    "decision": "HOLD_IMAGE_QUALITY_AND_ARTWORK",
+    "reason": "Soft historical carton photograph; count is not readable. Need clearer exact 7.5mg/10 capsule image."
+  },
+  {
+    "batch_index": 18,
+    "file": "continuation-20261012/local-acorus-e0a6920e38dc-0.jpg",
+    "decision": "HOLD_IMAGE_QUALITY",
+    "reason": "Soft native photograph remains less clear than accepted product imagery."
+  },
+  {
+    "batch_index": 11,
+    "source_url": "https://dawapharmacy.ae/products/nasaflex-nasal-spray",
+    "decision": "HOLD_IDENTITY_AND_IMAGE",
+    "reason": "Retailer description identifies combination mometasone plus azelastine; local title omits azelastine and quantity. Retailer structured image is store logo, not packshot. No corrected identity or quantity inferred."
+  },
+  {
+    "batch_index": 24,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 25,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 26,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 27,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 28,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 29,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 30,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 31,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 32,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 33,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 34,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 35,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 36,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 37,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 38,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 39,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 40,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 41,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 42,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 43,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 44,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 45,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 46,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 47,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 48,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 49,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  },
+  {
+    "batch_index": 50,
+    "decision": "HOLD_EXACT_SUPPLIER_PACK_BINDING",
+    "reason": "Size-less local option and supplier front photo. Historical supplier workbook has possible pack candidates, including multiple sizes; product-specific barcode or supplier SKU binding is required before choosing a size."
+  }
+]

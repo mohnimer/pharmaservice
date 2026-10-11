@@ -1,0 +1,144 @@
+[
+  {
+    "local_option_id": "local-acorus-e35706fb3a4e",
+    "batch_index": 20,
+    "source_url": "https://www.lifepharmacy.com/product/prorise-20mg-1100mg-hard-gelatin-cap-30s",
+    "checked_at": "2026-10-11T21:47:42.773542+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/prorise-20mg-1100mg-hard-gelatin-cap-30s",
+    "page_sha256": "df28ba536ec5c2456ba6d47e24e4d62fcdb28a8d90b7eecd5e987892b908cd3f",
+    "source_name": "ProRise 20MG/1100MG Hard Gelatin Cap 30s",
+    "source_sku": "142285",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/prorise-20mg-1100mg-hard-gelatin-cap-30s",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 72,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/prorise-20mg-1100mg-hard-gelatin-cap-30s/142285-1.png",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-final-sources-20261012/local-acorus-e35706fb3a4e-0.png",
+        "sha256": "11e147018a8eaf24a092d5d875e7cdc373a2fe750145db7512ce0a4ace53d292",
+        "dimensions": [
+          700,
+          700
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-11702595f8a6",
+    "batch_index": 14,
+    "source_url": "https://www.myaster.com/en/online-pharmacy/p/nolvadex-d-20mg-tablets-pack-of-30s/1039951",
+    "checked_at": "2026-10-11T21:47:42.774557+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.myaster.com/en/online-pharmacy/p/nolvadex-d-20mg-tablets-pack-of-30s/1039951",
+    "page_sha256": "d915e9db167a64491be1ef47ee656cf8a3aea1bfac62c62f19749e46de40912f",
+    "source_name": "Nolvadex-D 20mg Tablets, Pack of 30's",
+    "source_sku": "1039951",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Astrazeneca"
+    },
+    "offer": {
+      "@type": "Offer",
+      "url": "https://www.myaster.com/en/online-pharmacy/p/nolvadex-d-20mg-tablets-pack-of-30s/1039951",
+      "priceCurrency": "AED",
+      "price": "68.00",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": "myAster"
+      }
+    },
+    "vat_inclusive_text_present": false,
+    "images": [
+      {
+        "source_url": "https://media.myaster.com/images/products/1039951/nolvadex-d-20mg-tablets-pack-of-30s/1039951_1.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-final-sources-20261012/local-acorus-11702595f8a6-0.jpg",
+        "sha256": "35b335c6f771591d6fc2d40db4732e607ae610ef08b003c25d04b157458d7638",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/products/1039951/nolvadex-d-20mg-tablets-pack-of-30s/1039951_2.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-final-sources-20261012/local-acorus-11702595f8a6-1.jpg",
+        "sha256": "c4c80a6027dcc4974de67682fd31b645d5280588b15866a1c9543a35b1a424f2",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/shop-with-confidence.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-final-sources-20261012/local-acorus-11702595f8a6-2.jpg",
+        "sha256": "9bbe4787e2a6fba23b36743713ac9851cab2c1d8e773ebc39b0ec974126007bf",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/quality.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-final-sources-20261012/local-acorus-11702595f8a6-3.jpg",
+        "sha256": "310555326f6e31264b7e69f75a4eee510b842308ffcd313457826ed916e0ac63",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      }
+    ]
+  }
+]
