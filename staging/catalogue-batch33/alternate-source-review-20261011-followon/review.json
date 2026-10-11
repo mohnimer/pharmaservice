@@ -1,0 +1,68 @@
+[
+  {
+    "path": "staging/catalogue-batch33/alternate-source-review-20261011-followon/zyrtec-drops-alhadi.webp",
+    "source_url": "https://alhadipharmacy.ae/cdn/shop/files/Zyrtec_10_mg-ml_Oral_Drops_10_ml.webp?v=1782730545",
+    "dimensions": [
+      700,
+      700
+    ],
+    "sha256": "ec144385106de972b435caaa64be51ada00f96282d9e2eb0b71cafaa6423699d",
+    "decision": "QUALITY_HOLD",
+    "reason": "Exact 10 ml/1% pack photograph but soft enlarged edges/text and promotional 10 ML corner badge; not a clean high-quality replacement.",
+    "reviewed_at": "2026-10-11",
+    "image_quality_approved": false,
+    "overall_release_status": "HOLD",
+    "listing_url": "https://alhadipharmacy.ae/products/zyrtec-10-mg-ml-oral-drops-10-ml"
+  },
+  {
+    "path": "staging/catalogue-batch33/alternate-source-review-20261011-followon/zyrtec-drops-medx-0.avif",
+    "source_url": "https://cdn.medxpharmacy.com/products/3fadcb14-691a-40fe-9e83-cfc6125916a4.avif?q=80&w=3840",
+    "dimensions": [
+      1000,
+      1000
+    ],
+    "sha256": "fd451854efa86b97558cae41ed9af897a1a3f7f3e08aa8185ccf48653332222d",
+    "decision": "QUALITY_HOLD",
+    "reason": "Exact front pack matches 10 mg/ml oral drops 10 ml; native 1000x1000 AVIF. Same artwork/angle as retained 1280px Life photograph, lower resolution and similarly narrow canvas occupancy. No material improvement over the retained original; quality hold remains. No transformations applied.",
+    "reviewed_at": "2026-10-11",
+    "image_quality_approved": false,
+    "overall_release_status": "HOLD",
+    "listing_url": "https://www.medxpharmacy.com/product/zyrtec-10mgml-drops-10ml/"
+  },
+  {
+    "path": "staging/catalogue-batch33/alternate-source-review-20261011-followon/zyrtec-drops-medx-1.avif",
+    "source_url": "https://cdn.medxpharmacy.com/products/69922d61-58a0-4324-b041-55270d4cb02a.avif?q=80&w=3840",
+    "dimensions": [
+      1000,
+      1000
+    ],
+    "sha256": "3cc2387d98cfa03df46e752711b3aca97bd052c8b4d1293cd789b7132881f560",
+    "decision": "QUALITY_HOLD",
+    "reason": "10 ml/1% bottle and pack visible but blurred text/edges; no quality improvement.",
+    "reviewed_at": "2026-10-11",
+    "image_quality_approved": false,
+    "overall_release_status": "HOLD",
+    "listing_url": "https://www.medxpharmacy.com/product/zyrtec-10mgml-drops-10ml/"
+  },
+  {
+    "path": "staging/catalogue-batch33/alternate-source-review-20261011-followon/zyrtec-drops-medx-2.avif",
+    "source_url": "https://cdn.medxpharmacy.com/products/40dfef9d-5649-4f05-b25a-ff43f564cd40.avif?q=80&w=3840",
+    "dimensions": [
+      1000,
+      1000
+    ],
+    "sha256": "f09df58e70709ad3d20efbd7e81345dc6ea3efa88b52e61b9e84c06b928f9491",
+    "decision": "QUALITY_HOLD",
+    "reason": "Older pack photograph, 700x700 original; softly rendered and historical artwork. Current UAE pack identity not established from this photograph alone.",
+    "reviewed_at": "2026-10-11",
+    "image_quality_approved": false,
+    "overall_release_status": "HOLD",
+    "listing_url": "https://www.medxpharmacy.com/product/zyrtec-10mgml-drops-10ml/"
+  },
+  {
+    "listing_url": "https://www.binsina.ae/en/buy-imodium-instants-2mg-tablets-6-s.html",
+    "decision": "RETRIEVAL_FAILED",
+    "error": "HTTP 405 from both page retrieval methods",
+    "reviewed_at": "2026-10-11"
+  }
+]

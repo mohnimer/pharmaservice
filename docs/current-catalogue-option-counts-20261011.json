@@ -1,0 +1,9 @@
+{
+  "checked_at": "2026-10-11 12:38:35.772196+00",
+  "total_option_records": 719,
+  "active_option_records": 719,
+  "customer_selectable_records": 0,
+  "scope": "Fresh aggregate count only; historical 719-record inventory preserved separately.",
+  "database_writes": 0,
+  "query": "select now() as checked_at, count(*) as total_option_records, count(*) filter (where active) as active_option_records, count(*) filter (where customer_selectable) as customer_selectable_records from public.catalogue_product_options;"
+}

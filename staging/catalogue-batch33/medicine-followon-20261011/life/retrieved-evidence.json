@@ -1,0 +1,305 @@
+[
+  {
+    "local_option_id": "local-acorus-907534527424",
+    "source_url": "https://www.lifepharmacy.com/product/zovirax-400mg-tab-25s-5s-blister-x-5",
+    "checked_at": "2026-10-11T15:59:35.498420+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/zovirax-400mg-tab-25s-5s-blister-x-5",
+    "page_sha256": "1b25f6a1e71b2137a58b41d00a6a48c6bedd6c0649e538bcf169715e5685bafb",
+    "source_name": "Zovirax 400MG Tab 25s",
+    "source_sku": "133058",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/zovirax-400mg-tab-25s-5s-blister-x-5",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 139,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/zovirax-400mg-tab-25s-5s-blister-x-5/133058-1.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/life/local-acorus-907534527424-0.jpg",
+        "sha256": "72db19d3539ebfd4e9f39f4bc0d988ef7789aa49149efec24a07a84f8f7f793e",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-ae309306c236",
+    "source_url": "https://www.lifepharmacy.com/product/azomycin-250mg-cap-hard-gelatin-6s-blister",
+    "checked_at": "2026-10-11T15:59:35.499570+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/azomycin-250mg-cap-hard-gelatin-6s-blister",
+    "page_sha256": "11bc8b9f486d102f7e99afac4fb823aa0bf9d16adc8f91845bc4a24e2540749d",
+    "source_name": "AZOMYCIN 250MG CAP (HARD GELATIN) 6S BLISTER",
+    "source_sku": "112107",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/azomycin-250mg-cap-hard-gelatin-6s-blister",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 56.5,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/azomycin-250mg-cap-hard-gelatin-6s-blister/112107-1.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/life/local-acorus-ae309306c236-0.jpg",
+        "sha256": "fd88270522f3e7fa645552a011556f4675494e70f4fa3ee29380edb888b3be4b",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-764e4d0db998",
+    "source_url": "https://www.lifepharmacy.com/product/spedifen-400mg-fc-tab-24s",
+    "checked_at": "2026-10-11T15:59:35.501201+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/spedifen-400mg-fc-tab-24s",
+    "page_sha256": "4ed230ea437de34cab252d2a281dce8e04408e521d975f5d7284c06bbc13847a",
+    "source_name": "Spedifen 400MG Film Coated Tab 24s",
+    "source_sku": "136686",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "ZAMBON",
+      "url": "https://www.lifepharmacy.com/brand/Zambon"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/spedifen-400mg-fc-tab-24s",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 28.5,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/spedifen-400mg-fc-tab-24s/136686-1.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/life/local-acorus-764e4d0db998-0.jpg",
+        "sha256": "be1c4912a5a4ebd2222a819f0f490c675381208f78e366202ea9f7dc39f3c50f",
+        "dimensions": [
+          1000,
+          1000
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-d6f2bf1d5bc2",
+    "source_url": "https://www.lifepharmacy.com/product/azomycin-200mg-5ml-pow-for-susp-30ml-bot",
+    "checked_at": "2026-10-11T15:59:35.502130+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/azomycin-200mg-5ml-pow-for-susp-30ml-bot",
+    "page_sha256": "62a649dd2dc54223ad8a69b944fd79610074514c78b67d8f22723aee08bbb2ee",
+    "source_name": "AZOMYCIN 200MG/5ML POW FOR SUSP 30ML BOT",
+    "source_sku": "112106",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/azomycin-200mg-5ml-pow-for-susp-30ml-bot",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 37.5,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/azomycin-200mg-5ml-pow-for-susp-30ml-bot/112106-1.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/life/local-acorus-d6f2bf1d5bc2-0.jpg",
+        "sha256": "b801b29153e798fb7ed64c006306a4ff421ea1640868537009ac60de84d7d58c",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-2524e51a60a8",
+    "source_url": "https://www.lifepharmacy.com/product/gupisone-20mg-tab-40s-10s-blister-x-4",
+    "checked_at": "2026-10-11T15:59:45.925563+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/gupisone-20mg-tab-40s-10s-blister-x-4",
+    "page_sha256": "dcce9fcdc770469afbce093332b0a18cefc60e868f19ac72d3417dc172b303e7",
+    "retrieval_error": "Expected one primary structured product, found 0"
+  }
+]

@@ -1,0 +1,913 @@
+origin,product_option_id,family_id,exact_product_name,brand,pack,batch33_candidate,recorded_image,listed_mrp,image_status,description_status,price_status,retail_benchmark_aed,retail_source,retail_unit,retail_evidence_status,release_status
+LOCAL,local-acorus-fa9568435322,PSC-IS-144,Alicoxa 200 mg — 20 Capsules,Alicoxa,Exact pack to confirm,YES,/assets/products/acorus-2026-10/127-alcoxa-200mg-cap-20-s.jpg,,IDENTITY_REVIEWED_QUALITY_HOLD,NEEDS_EXACT_SPEC_EVIDENCE,RETAIL_BENCHMARK_RETRIEVED_PSC_PRICE_HOLD,32.5,https://www.myaster.com/en/online-pharmacy/p/alicoxa-200mg-20-capsules/1062828,One pack of 20 capsules,DIRECT_RETAILER_LISTING_RETRIEVED,HOLD
+LOCAL,local-acorus-0dec19acea05,PSC-IS-166,Aldomet 250 mg — 30 Tablets,Aldomet,Exact pack to confirm,YES,/assets/products/acorus-2026-10/128-aldomet-250mg-tab-30-s.jpg,,IDENTITY_REVIEWED_QUALITY_HOLD,NEEDS_EXACT_SPEC_EVIDENCE,RETAIL_BENCHMARK_RETRIEVED_PSC_PRICE_HOLD,18.5,https://www.nahdionline.com/en-ae/aldomet-250-mg-tablet-30pcs/pdp/100032350,One pack of 30 tablets,DIRECT_RETAILER_LISTING_RETRIEVED,HOLD
+LOCAL,local-acorus-1f1a9e6b4fc8,PSC-IS-143,Apex 400 mg — 6 Capsules,Apex,Exact pack to confirm,YES,/assets/products/acorus-2026-10/091-apex-400mg-cap-6-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-aefa5893c7b0,PSC-IS-131,AVEENO BABY CALMING COMFORT BEDTIME BATH & WASH - 250 ML,Aveeno Baby,250 ml,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-20546fca57de,PSC-IS-111,AVEENO BABY DAILY CARE MOISTURISING LOTION 150 ML,Aveeno,150 ml,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-204ebc87709b,PSC-IS-111,AVEENO DAILY MOISTURISING BODY LOTION - 300 ML,Aveeno,300 ml,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-d6f2bf1d5bc2,PSC-IS-139,Azomycin 200 mg/5 ml Oral Suspension — 30 ml,Azomycin,Exact pack to confirm,YES,/assets/products/acorus-2026-10/135-azomycin-200mg-5ml-susp-30ml.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-ae309306c236,PSC-IS-139,Azomycin 250 mg — 6 Capsules,Azomycin,Exact pack to confirm,YES,/assets/products/acorus-2026-10/136-azomycin-250mg-cap-6-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-5b9227e83978,PSC-IS-114,BENZ-OX BENZOYL PEROXIDE SOAP 2.5% - 100 G,Benz-OX,100 g,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-0bbe53b55838,PSC-IS-173,Braun Beard Trimmer BT-5060,Braun,Exact pack to confirm,YES,/assets/products/acorus-2026-10/137-braun-beard-trimmer-bt-5060.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-e0a3afba003e,PSC-IS-163,Braun Manual Nasal Aspirator,Braun,Exact pack to confirm,YES,/assets/products/acorus-2026-10/138-braun-bna-050-manual-nasal-aspirator-50120.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-ad5d840073e9,PSC-IS-173,Braun Hair Dryer HD 2.2 — 2200 W,Braun,Exact pack to confirm,YES,/assets/products/acorus-2026-10/141-braun-hair-dryer-hd-2-2-2200w-91721.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-94b60f8eaf61,PSC-SC-C12,Braun ThermoScan Hygiene Caps — 40,Braun,Exact pack to confirm,YES,/assets/products/acorus-2026-10/144-braun-thermoscan-cap-lf-40-s-00062.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-48939d08ef0a,PSC-SC-B23,Braun ThermoScan 7 IRT 6520,Braun,Exact pack to confirm,YES,/assets/products/acorus-2026-10/145-braun-thermoscan-7-irt-6520-black-65200.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-8291a039f14f,PSC-SC-B23,Braun ThermoScan 7+ IRT 6525,Braun,Exact pack to confirm,YES,/assets/products/acorus-2026-10/146-braun-thermoscan-7-irt-6525-52546.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-49c544ea6e0c,PSC-IS-073,Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml,Cetralon,Exact pack to confirm,YES,/assets/products/acorus-2026-10/150-cetralon-5mg-syrup-75ml.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-3f16d478897a,PSC-IS-152,Clozac Acne Face Wash — 60 ml,Clozac,Exact pack to confirm,YES,/assets/products/acorus-2026-10/152-clozac-acne-face-wash-60ml.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-0bc7a350ed13,PSC-IS-152,Clozac Acne Facial Gel — 50 g,Clozac,Exact pack to confirm,YES,/assets/products/acorus-2026-10/153-clozac-acne-facial-gel-50gm.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-5de4e2f221e9,PSC-IS-123,COSOPT OPHTHALMIC SOLUTION 2% / 0.5% - 5 ML,COSOPT,5 ml,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-6e440102375f,PSC-IS-115,DERMATAR THERAPEUTIC SHAMPOO EXTRA STRENGTH - 200 ML,Dermatar,200 ml,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-e43835e04ae6,PSC-IS-117,"DEVIT-3 VITAMIN D3 IM AMPOULE 300,000 IU/ML - 1 AMPOULE",Devit-3,1 ampoule,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-a60a93407a6d,PSC-IS-149,Dolvic-K Diclofenac Potassium 50 mg — 20 Tablets,Dolvic-K,Exact pack to confirm,YES,/assets/products/acorus-2026-10/003-dolvic-k-50mg-tab-20-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-8e9fe3b9bbc4,PSC-IS-147,Dora Desloratadine 5 mg — 30 Tablets,Dora,Exact pack to confirm,YES,/assets/products/acorus-2026-10/156-dora-5mg-tab-30-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-e50487d58b2a,PSC-IS-090,Emidol Paracetamol 500 mg — 24 Tablets,Emidol,Exact pack to confirm,YES,/assets/products/acorus-2026-10/158-emidol-500mg-tab-24-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-dc2a1ff485e5,PSC-IS-165,Emivanz 500/5 mg — 30 Tablets,Emivanz,Exact pack to confirm,YES,/assets/products/acorus-2026-10/160-emivanz-500-5mg-tab-30-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-18b8322bf411,PSC-IS-184,Ergonomic Toothbrush Black — Medium,Ergonomic,Exact pack to confirm,YES,/assets/products/acorus-2026-10/161-ergonomic-toothbrush-black-medium.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-e0c03159604a,PSC-IS-184,Ergonomic Toothbrush Purple — Medium,Ergonomic,Exact pack to confirm,YES,/assets/products/acorus-2026-10/162-ergonomic-toothbrush-purple-medium.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-09ad15e89507,PSC-IS-118,ESOMEPRAZOL AZEVEDOS 40 MG POWDER FOR INJECTION/INFUSION - 10 VIALS,Esomeprazol Azevedos,10 vials,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-ea6c47697d6f,PSC-IS-112,FASTUM GEL 2.5% - KETOPROFEN - 50 G DISPENSER,Fastum,50 g tube,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-6a019cc0f1e0,PSC-IS-116,FLUGENIL VAGINAL GEL - 30 ML + 5 DISPOSABLE APPLICATORS,Flugenil,30 ml tube + 5 applicators,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-77936b1c484c,PSC-IS-138,Gloclav 1 g — 14 Tablets,Gloclav,Exact pack to confirm,YES,/assets/products/acorus-2026-10/016-gloclav-1gm-tab-14-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-fe9b988eff75,PSC-IS-138,Gloclav 228 mg/5 ml Oral Suspension — 70 ml,Gloclav,Exact pack to confirm,YES,/assets/products/acorus-2026-10/164-gloclav-228mg-5ml-syrup-70ml.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-22b20fd5de67,PSC-IS-138,Gloclav 625 mg — 20 Tablets,Gloclav,Exact pack to confirm,YES,/assets/products/acorus-2026-10/017-gloclav-625mg-tab-20-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-b5f68f0eef03,PSC-IS-073,Glotrizine 5 mg/5 ml Syrup — 100 ml,Glotrizine,Exact pack to confirm,YES,/assets/products/acorus-2026-10/167-glotrizine-5mg-5ml-syrup-100ml.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-ca529915334b,PSC-IS-161,Glozal Levocetirizine 5 mg — 20 Tablets,Glozal,Exact pack to confirm,YES,/assets/products/acorus-2026-10/168-glozal-5mg-tab-20-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-2524e51a60a8,PSC-IS-175,Gupisone Prednisolone 20 mg — 40 Tablets,Gupisone,Exact pack to confirm,YES,/assets/products/acorus-2026-10/170-gupisone-20mg-tab-40-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-5e79f4517545,PSC-IS-128,HEMAGEL HYDROPHILIC WOUND GEL - 15 G,HemaGel,15 g,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-3367dd851c8d,PSC-IS-128,HEMAGEL HYDROPHILIC WOUND GEL - 30 G,HemaGel,30 g,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-898cf7f45b8b,PSC-IS-124,HEMAGEL PROCTO - 10 SUPPOSITORIES,HemaGel,10 suppositories,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-ef89a3d78de4,PSC-IS-168,HY+AI Oral Gel — 12 g,HY+AI,Exact pack to confirm,YES,/assets/products/acorus-2026-10/174-hy-ai-gel-12gm.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-d96e047c2187,PSC-IS-168,HY+AI Oral Gel — 30 g,HY+AI,Exact pack to confirm,YES,/assets/products/acorus-2026-10/175-hy-ai-gel-30gm.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-4a24ef48aa96,PSC-IS-098,IMODIUM 2MG CAP 6'S,Imodium,6 capsules,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-16081b246120,PSC-IS-098,IMODIUM 2MG CAP 60'S,Imodium,60 capsules,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-f54a3395eb72,PSC-IS-098,IMODIUM INSTANT 2MG TAB 6'S,Imodium,6 tablets,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-4d49e9d2478b,PSC-IS-106,Isomar Baby No Gas Spray — 30 ml,Isomar,Exact pack to confirm,YES,/assets/products/acorus-2026-10/176-isomar-baby-no-gas-spray-30ml.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-7de9e565ce7f,PSC-IS-106,Isomar Daily Hygiene Spray Nose & Ear — 100 ml,Isomar,Exact pack to confirm,YES,/assets/products/acorus-2026-10/177-isomar-daily-hygiene-spray-nose-ear-100ml.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-308b2bdde1d1,PSC-IS-106,Isomar Daily Hygiene Vials Nose & Eyes — 20 x 5 ml,Isomar,Exact pack to confirm,YES,/assets/products/acorus-2026-10/178-isomar-daily-hygiene-vial-nose-eyes-20x5ml.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-bae369b8d77d,PSC-IS-106,Isomar Nose Decongestant Vials — 20 x 5 ml,Isomar,Exact pack to confirm,YES,/assets/products/acorus-2026-10/179-isomar-nose-decongestant-vial-20x5ml.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-a819e3e83997,PSC-IS-042,Kool Temp Cooling Gel Sheets — Baby — 6 Pieces,Kool Temp,Exact pack to confirm,YES,/assets/products/acorus-2026-10/182-kool-temp-patches-6-s-baby.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-2f1516e65f2a,PSC-IS-042,Kool Temp Cooling Gel Sheets — Child — 6 Pieces,Kool Temp,Exact pack to confirm,YES,/assets/products/acorus-2026-10/183-kool-temp-patches-6-s-child.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-42db06dabacf,PSC-IS-129,LISTERINE COOL MINT DAILY MOUTHWASH - 250 ML,Listerine,250 ml,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-708ad2b6542b,PSC-IS-129,LISTERINE COOL MINT MILDER TASTE ZERO ALCOHOL - 250 ML,Listerine,250 ml,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-ff88cb6488f5,PSC-IS-188,Livatrum — 30 Tablets,Livatrum,Exact pack to confirm,YES,/assets/products/acorus-2026-10/184-livatrum-tablet-30-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-a5018581b24c,PSC-IS-174,Livazo 2 mg — 28 Tablets,Livazo,Exact pack to confirm,YES,/assets/products/acorus-2026-10/185-livazo-2mg-tab-28-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-98520485e956,PSC-IS-174,Livazo 4 mg — 28 Tablets,Livazo,Exact pack to confirm,YES,/assets/products/acorus-2026-10/186-livazo-4mg-tab-28-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-d0757b6ab503,PSC-IS-186,Lomexin 200 mg — 3 Ovules,Lomexin,Exact pack to confirm,YES,/assets/products/acorus-2026-10/187-lomexin-200mg-ovules-3-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-7f7266b6e568,PSC-IS-186,Lomexin T 1000 mg — 1 Ovule,Lomexin,Exact pack to confirm,YES,/assets/products/acorus-2026-10/188-lomexin-t-1000mg-ovules-1-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-4d0091180ab9,PSC-IS-121,Lozaty Ginger — 24 Lozenges,Lozaty,Exact pack to confirm,YES,/assets/products/acorus-2026-10/190-lozaty-lozenges-ginger-24-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-f8d8b1697f75,PSC-IS-121,Lozaty Orange — 24 Lozenges,Lozaty,Exact pack to confirm,YES,/assets/products/acorus-2026-10/192-lozaty-lozenges-orange-24-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-b018fcd1ab8f,PSC-IS-145,Manforce Epic Desire Super Thin Silk Chocolate — 3 Condoms,Manforce,Exact pack to confirm,YES,/assets/products/acorus-2026-10/194-manforce-epic-desire-super-thin-condoms-silk-choc-3-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-add977090a6e,PSC-IS-145,Manforce Epic Passion Extra Dotted Fruit Punch — 10 Condoms,Manforce,Exact pack to confirm,YES,/assets/products/acorus-2026-10/195-manforce-epic-passion-extra-dotted-condems-fruit-punch-10-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-3189da62a42b,PSC-IS-145,Manforce Epic Passion Extra Dotted Fruit Punch — 3 Condoms,Manforce,Exact pack to confirm,YES,/assets/products/acorus-2026-10/196-manforce-epic-passion-extra-dotted-condems-fruit-punch-3-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-a3c78a070fa9,PSC-IS-145,Manforce Epic Pleasure Long Lasting Raspberry — 3 Condoms,Manforce,Exact pack to confirm,YES,/assets/products/acorus-2026-10/197-manforce-epic-pleasure-long-lasting-condems-raspberry-3-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-d3d58af8dbdc,PSC-IS-159,NAN Optipro 1 — 400 g,NAN,Exact pack to confirm,YES,/assets/products/acorus-2026-10/199-nan-1-optipro-400gm.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-6703b683d432,PSC-IS-159,NAN Optipro 1 — 800 g,NAN,Exact pack to confirm,YES,/assets/products/acorus-2026-10/200-nan-1-optipro-800gm.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-d45d30f1493e,PSC-IS-159,NAN Optipro 3 — 400 g,NAN,Exact pack to confirm,YES,/assets/products/acorus-2026-10/201-nan-3-optipro-400gm.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-6e59a30ef053,PSC-IS-159,NAN Comfort 1 — 800 g,NAN,Exact pack to confirm,YES,/assets/products/acorus-2026-10/203-nan-comfort-1-800gm.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-5b958d72413a,PSC-IS-159,NAN Comfort 2 — 400 g,NAN,Exact pack to confirm,YES,/assets/products/acorus-2026-10/204-nan-comfort-2-400gm.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-c7db4fa9acc4,PSC-IS-159,NAN Comfort 2 — 800 g,NAN,Exact pack to confirm,YES,/assets/products/acorus-2026-10/205-nan-comfort-2-800gm.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-b8f2cffcef03,PSC-IS-159,NAN Comfort 3 — 800 g,NAN,Exact pack to confirm,YES,/assets/products/acorus-2026-10/206-nan-comfort-3-800gm.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-09bdd311ca5a,PSC-IS-159,NAN Lactose Free — 400 g,NAN,Exact pack to confirm,YES,/assets/products/acorus-2026-10/207-nan-lf-400gm-lactose-free.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-98dba85b5a1d,PSC-IS-159,NAN SupremePro 2 — 400 g,NAN,Exact pack to confirm,YES,/assets/products/acorus-2026-10/209-nan-pro-2-supreme-400gm.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-05fcd107c286,PSC-IS-159,NAN SupremePro 3 — 800 g,NAN,Exact pack to confirm,YES,/assets/products/acorus-2026-10/211-nan-pro-3-supreme-800g-806116.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-56cb26fe529b,PSC-IS-151,Nexium 20 mg — 14 Tablets,Nexium,Exact pack to confirm,YES,/assets/products/acorus-2026-10/272-nexium-20mg-tab-14-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-deec5eca8afa,PSC-IS-125,NICORETTE FRESHMINT GUM 2 MG - 30 PIECES,Nicorette,30 pieces,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-6db8d7a34081,PSC-IS-125,NICORETTE FRESHMINT GUM 4 MG - 30 PIECES,Nicorette,30 pieces,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-d4be42e7fc3f,PSC-IS-125,NICORETTE INVISIPATCH 10 MG - 7 PATCHES - STEP 3,Nicorette,7 patches,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-57538860931f,PSC-IS-125,NICORETTE INVISIPATCH 15 MG - 7 PATCHES - STEP 2,Nicorette,7 patches,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-56ff2385c771,PSC-IS-125,NICORETTE INVISIPATCH 25 MG - 7 PATCHES - STEP 1,Nicorette,7 patches,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-ba1ba46ab93c,PSC-IS-157,Nokamen — 30 Tablets,Nokamen,Exact pack to confirm,YES,/assets/products/acorus-2026-10/213-nokamen-tab-30s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-19495a4b8eb2,PSC-IS-150,Oral-B Vitality 100 3D White Pink D100,Oral-B,Exact pack to confirm,YES,/assets/products/acorus-2026-10/216-oral-b-t-b-vitality-100-3d-white-pink-d100-11515.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-f50a5698bd58,PSC-IS-150,Oral-B Vitality 100 CrossAction White D100,Oral-B,Exact pack to confirm,YES,/assets/products/acorus-2026-10/217-oral-b-t-b-vitality-100-cross-action-w-d100-62015.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-b3a9ccf09406,PSC-IS-090,PANADOL ADVANCE - PARACETAMOL 500 MG - 24 TABLETS,Panadol,24 tablets,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-05120e41d7d9,PSC-IS-090,PANADOL CHILDREN'S 5–12 YEARS ELIXIR - PARACETAMOL 240 MG/5 ML - 100 ML,Panadol,100 ml,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-ac3c911f916d,PSC-IS-136,PANADOL COLD & FLU DAY NON-DROWSY - 24 CAPLETS,Panadol,24 caplets,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-b6b3dec97747,PSC-IS-135,PANADOL EXTRA - 24 TABLETS,Panadol,24 tablets,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-d226ac6267ee,PSC-IS-134,PANADOL NIGHT - 24 FILM-COATED TABLETS,Panadol,24 film-coated tablets,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-f3f76d3fa030,PSC-IS-121,PANANATURAL COUGH & SORE THROAT LOZENGES - RASPBERRY - 16 LOZENGES,PanaNatural,16 lozenges,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-2d9cdedd0918,PSC-IS-126,PANANATURAL COUGH SYRUP - 128 G,PanaNatural,128 g,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-e35706fb3a4e,PSC-IS-171,ProRise 20 mg — 30 Capsules,ProRise,Exact pack to confirm,YES,/assets/products/acorus-2026-10/221-prorise-20mg-cap-30-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-382e97b1a135,PSC-IS-171,ProRise 40 mg — 30 Capsules,ProRise,Exact pack to confirm,YES,/assets/products/acorus-2026-10/222-prorise-40mg-cap-30-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-ad974c05853f,PSC-IS-126,Prospan Cough Syrup — 100 ml,Prospan,Exact pack to confirm,YES,/assets/products/acorus-2026-10/065-prospan-cough-syrup-100ml.jpg,,IDENTITY_REVIEWED_QUALITY_HOLD,NEEDS_EXACT_SPEC_EVIDENCE,RETAIL_BENCHMARK_RETRIEVED_PSC_PRICE_HOLD,42,https://www.lifepharmacy.com/product/prospan-syrup-100-ml-bottle/,One 100 ml bottle,DIRECT_RETAILER_LISTING_RETRIEVED,HOLD
+LOCAL,local-acorus-7cea87c55d31,PSC-IS-132,REGAINE 2% MINOXIDIL TOPICAL SOLUTION - 60 ML,Regaine,1 × 60 ml bottle,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-6d07dd51bba8,PSC-IS-132,REGAINE FOR MEN 5% MINOXIDIL FOAM - 3 × 73 ML,Regaine,3 × 73 ml,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-c45ec76764f0,PSC-IS-130,RHINOCORT AQUA NASAL SPRAY - BUDESONIDE 64 MCG/DOSE - 120 DOSES,Rhinocort,120 doses,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-971a2f43b366,PSC-IS-178,Ruset 20/10 mg — 30 Tablets,Ruset,Exact pack to confirm,YES,/assets/products/acorus-2026-10/225-ruset-20mg-10mg-tab-30-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-e5ba62deaf28,PSC-IS-178,Ruset 5/10 mg — 30 Tablets,Ruset,Exact pack to confirm,YES,/assets/products/acorus-2026-10/226-ruset-5mg-10mg-tab-30-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-b121e76ab9fe,PSC-IS-120,SOPHY BERBERINE PHYTOSOME 550 MG - 30 TABLETS,Sophy,30 tablets,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-c62a7598906b,PSC-IS-121,TRAZESIL ORANGE FLAVOUR LOZENGES - 12 LOZENGES,Trazesil,12 lozenges,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-70ae95869390,PSC-IS-121,TRAZESIL PINEAPPLE FLAVOUR LOZENGES - 12 LOZENGES,Trazesil,12 lozenges,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-6110fe43dde2,PSC-IS-185,Unident Kids Toothpaste 1000 ppm — 50 ml,Unident,Exact pack to confirm,YES,/assets/products/acorus-2026-10/230-unident-kids-childrens-1000-ppm-toothpaste-50ml.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-4edf32469b8d,PSC-IS-185,Unident Pharma Ortho Smile Care Toothpaste — 75 ml,Unident,Exact pack to confirm,YES,/assets/products/acorus-2026-10/231-unident-pharma-ortho-smile-care-toothpaste-75ml.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-8cbd36f03d69,PSC-IS-185,Unident Pharma Perio Care Toothpaste — 75 ml,Unident,Exact pack to confirm,YES,/assets/products/acorus-2026-10/232-unident-pharma-perio-care-toothpaste-75ml.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-fd2beb73a834,PSC-IS-153,Urispas 200 mg — 30 Tablets,Urispas,Exact pack to confirm,YES,/assets/products/acorus-2026-10/233-urispas-200mg-tab-30-s.jpg,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-f87d3355fa1f,PSC-IS-127,VILDAGARD 50/1000 MG - VILDAGLIPTIN + METFORMIN - 60 TABLETS,Vildagard,60 tablets,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-39ba2c475002,PSC-IS-127,VILDAGARD 50/850 MG - VILDAGLIPTIN + METFORMIN - 60 TABLETS,Vildagard,60 tablets,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-dabc9af949b4,PSC-IS-119,XOLSTAT ROSUVASTATIN 10 MG - 30 TABLETS,Xolstat,30 tablets (3 × 10),NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-c4a4fb244dca,PSC-IS-122,ZOLPRA PANTOPRAZOLE 40 MG GASTRO-RESISTANT TABLETS - 30 TABLETS,Zolpra,30 tablets (3 × 10),NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-7fc563f8fe51,PSC-IS-133,ZOMIG 2.5 MG - ZOLMITRIPTAN - 3 TABLETS,Zomig,3 tablets,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-d1843cab67c4,PSC-IS-133,ZOMIG 2.5 MG - ZOLMITRIPTAN - 6 TABLETS,Zomig,6 tablets,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-5d3e9a70481c,PSC-IS-113,ZOVIRAX SUSPENSION - ACICLOVIR - 125 ML,Zovirax,125 ml,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-f8356dfd8db2,PSC-IS-073,ZYRTEC 10MG TAB 20'S,Zyrtec,20 tablets,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-9d511aa6c569,PSC-IS-073,ZYRTEC 1MG/ML ORAL SOLUTION 75ML,Zyrtec,75 ml,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-eb1ffb1b4fda,PSC-IS-073,ZYRTEC 10MG/ML ORAL DROPS 10ML,Zyrtec,10 ml,NO,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-59db0a861342,PSC-IS-155,Acure Gripe Water,Acure,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-f28fe7b861a0,PSC-IS-154,Avamys Fluticasone Furoate Nasal Spray — 120 Sprays,Avamys,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-fc78af3cb44f,PSC-IS-188,B+ Vitamin B Complex — 30 Softgels,B+,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-c4b46b23533f,PSC-IS-188,Beauty Plus Hair Skin & Nails — 30 Softgels,Beauty,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-8500ef9636bd,PSC-IS-111,Bepanthen Moisturizing Cream — 30 g,Bepanthen,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-82eeffa2d41b,PSC-IS-148,Bepanthen Protective Baby Ointment — 100 g,Bepanthen,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-4d6c5f1f73f7,PSC-IS-142,Betaserc 8 mg — 100 Tablets,Betaserc,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-99fa1184061d,PSC-IS-102,Blink Intensive Soothing Eye Drops,Blink,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-d0fa94cc5ccd,PSC-IS-188,Calvit D3 Calcium + Magnesium + Vitamins — 30 Tablets,Calvit,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-2d2c9351df5b,PSC-IS-177,CorDx Flu A/B + COVID-19 3-in-1 Rapid Test — 1 Test,CorDx,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-0ce987fecf69,PSC-IS-177,CorDx Influenza A/B + COVID-19 + RSV Combo Ag Self-Test,CorDx,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-a1c278062616,PSC-IS-172,Creon 10000 Pancreatin 150 mg — 20 Capsules,Creon,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-6398358f2b96,PSC-IS-188,D-Cal Calcium + Vitamin D3 — 30 Softgels,D-Cal,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-184db35b4013,PSC-IS-187,"Dibase Vitamin D3 10,000 IU/ml Oral Drops",Dibase,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-08126835b052,PSC-IS-117,"Dibase Vitamin D3 300,000 IU/ml Injection — 1 Ampoule",Dibase,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-fbba279d40a7,PSC-IS-187,"Dibase Vitamin D3 50,000 IU/2.5 ml Oral Solution",Dibase,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-6f0697d8906b,PSC-IS-100,Duphalac Double Action,Duphalac,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-75531f59fdd5,PSC-IS-100,Duphalac Fruit Lactulose 667 mg/ml — 200 ml,Duphalac,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-579df1ae3909,PSC-IS-158,Femoston 2/10 mg — 28 Tablets,Femoston,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-7e0e1d8d4182,PSC-IS-158,Femoston Conti 1/5 mg — 28 Tablets,Femoston,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-28e43b7879f6,PSC-IS-170,Gevhart 20 mg — 30 Tablets,Gevhart,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-27ed37eee993,PSC-IS-098,Lomidex Loperamide 2 mg — 10 Capsules,Lomidex,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-7cc2887c65f3,PSC-IS-183,Miderizone Tolperisone 150 mg — 30 Tablets,Miderizone,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-13a292d3b033,PSC-IS-164,Moven Meloxicam 15 mg — 10 Capsules,Moven,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-7249b30e2d1f,PSC-IS-164,Moven Meloxicam 7.5 mg — 10 Capsules,Moven,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-83090d95f22b,PSC-IS-167,Nasaflex Mometasone Furoate Nasal Spray,Nasaflex,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-5ed2ff06e0af,PSC-IS-151,Nexium 40 mg — 14 Tablets,Nexium,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-dbd40d8389ac,PSC-IS-182,Nolvadex Tamoxifen 10 mg — 30 Tablets,Nolvadex,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-11702595f8a6,PSC-IS-182,Nolvadex-D Tamoxifen 20 mg — 30 Tablets,Nolvadex-D,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-a0a3ef8669fa,PSC-IS-179,Ozempic Semaglutide 0.25 mg Prefilled Pen,Ozempic,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-17e4dad608df,PSC-IS-179,Ozempic Semaglutide 0.5 mg Prefilled Pen,Ozempic,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-126d63a7fb1a,PSC-IS-179,Ozempic Semaglutide 1 mg Prefilled Pen,Ozempic,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-e0a6920e38dc,PSC-IS-188,PediaVIT Multi 50 ml,PediaVIT,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-bad79542e340,PSC-IS-176,ProLifer Prebiotic + Probiotic + L-Glutamate — 30 Softgels,ProLifer,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-81356e98ebbb,PSC-IS-115,Sebamed Anti-Dandruff Shampoo,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-2c36d93e590e,PSC-IS-156,Sebamed Anti-Hairloss Shampoo,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-375459036d52,PSC-IS-181,Sebamed Anti-Stretch Mark Cream,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-bca4c20a407a,PSC-IS-111,Sebamed Baby Body Lotion with Camomile,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-a7e10bc19b2e,PSC-IS-111,Sebamed Baby Body Milk,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-bc5797476cd0,PSC-IS-131,Sebamed Baby Bubble Bath with Camomile,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-33236ab32b6c,PSC-IS-180,Sebamed Baby Cleansing Bar,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-23f413c882d9,PSC-IS-180,Sebamed Baby Cleansing Bar Value Pack — 2 x 150 g,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-2757418e4121,PSC-IS-049,Sebamed Baby Cleansing Wipes — 25 Wipes,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-11057618863a,PSC-IS-111,Sebamed Baby Cream Extra Soft,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-7a9f0b81f0ac,PSC-IS-156,Sebamed Baby Detangling Shampoo with Bisabolol,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-7db9b5951968,PSC-IS-148,Sebamed Baby Diaper Rash Cream,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-c53213d441f5,PSC-IS-140,Sebamed Baby Eau de Cologne,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-541065052372,PSC-IS-131,Sebamed Baby Face & Body Wash Foam,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-fc0e90234c62,PSC-IS-131,Sebamed Baby Gentle Wash with Allantoin,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-7becd2db56a1,PSC-IS-131,Sebamed Baby Gentle Wash with Calendula,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-c24e6eff64e5,PSC-IS-162,Sebamed Baby Lip Balm,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-616aa1152228,PSC-IS-111,Sebamed Baby Massage Oil,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-3ee243ee9ad4,PSC-IS-141,Sebamed Baby Powder with Olive Oil,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-dd458ae96334,PSC-IS-131,Sebamed Baby Shampoo with Camomile,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-779d958f18b0,PSC-IS-111,Sebamed Baby Skin Care Oil,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-26f075753c6d,PSC-IS-152,Sebamed Clear Face Antibacterial Cleansing Foam,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-add6ae257643,PSC-IS-156,Sebamed Everyday Shampoo,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-4f24389acd4a,PSC-IS-115,Sebamed Extreme Dry Skin Relief Shampoo 5% Urea,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-7cb34745b16f,PSC-IS-146,Sebamed Fresh Classic Roll-On Deodorant,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-4f230bd47c18,PSC-IS-152,Sebamed Gentle Facial Cleanser,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-d62fdc588e1a,PSC-IS-160,Sebamed Intimate Wash Foam pH 3.8,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-e5c59ffa9071,PSC-IS-160,Sebamed Intimate Wash pH 3.8 — Women 15–50,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-76ad982e8388,PSC-IS-160,Sebamed Intimate Wash pH 6.8 — Women 50+,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-e49654795a8f,PSC-IS-162,Sebamed Lip Defense SPF 30,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-a2c365842b5e,PSC-IS-111,Sebamed Moisturizing Body Lotion,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-162f00e6e627,PSC-IS-087,Sebamed Multi Protect Sun Cream SPF 50+,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-9da175f24e74,PSC-IS-156,Sebamed Repair Conditioner,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-cc054b5f47b0,PSC-IS-180,Sebamed Sensitive Skin Cleansing Bar,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-9400698fa1d2,PSC-IS-180,Sebamed Sensitive Skin Liquid Face & Body Wash,Sebamed,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-764e4d0db998,PSC-IS-091,Spedifen Ibuprofen 400 mg — 24 Tablets,Spedifen,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-1f1419e1172d,PSC-IS-188,Vitane Liquid Vitamins + Minerals — 200 ml,Vitane,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-e204e9a3db72,PSC-IS-179,Wegovy Semaglutide 0.25 mg Prefilled Pen,Wegovy,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-c78ee225849d,PSC-IS-179,Wegovy Semaglutide 0.5 mg Prefilled Pen,Wegovy,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-0eff9e2ac288,PSC-IS-179,Wegovy Semaglutide 1 mg Prefilled Pen,Wegovy,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-1739d7036b10,PSC-IS-179,Wegovy Semaglutide 1.7 mg Prefilled Pen,Wegovy,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-643a0525b55c,PSC-IS-179,Wegovy Semaglutide 2.4 mg Prefilled Pen,Wegovy,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-e015b822e20f,PSC-IS-126,Zecuf Herbal Cough Remedy — 100 ml,Zecuf,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-907534527424,PSC-IS-137,Zovirax Aciclovir 400 mg — 25 Tablets,Zovirax,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+LOCAL,local-acorus-d5d8299cc052,PSC-IS-169,Zyme Nasal Spray 30 ml with Lysozyme,Zyme,Exact pack to confirm,YES,,,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,32b94735-4885-4187-83fe-23d8cdb69732,PSC-IS-008,AM CPR MASK (FS-104),Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a4be6a27-517f-4fba-ab8c-86efaff70ac4,PSC-IS-008,AM POCKET MASK,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,65dc90cc-d9fb-4deb-9f67-bd205447f724,PSC-IS-013,OXYGENIZER WATER 350ML,Oxygenizer,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,62e1dc95-3a3a-48bf-aa6f-fa1c0ae7d24d,PSC-IS-013,OXYGENIZER WATER 350ML (15 BOTTLE/BOX),Oxygenizer,,NO,,105,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,fd6786ef-49fc-4378-b170-79fb5369ced9,PSC-IS-013,OXYGENIZER WATER 500ML,Oxygenizer,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5329d461-78dd-44cc-8510-035c52475f32,PSC-IS-018,NEBULIZER MASK ADULT (CEUMED),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a328809b-d5e2-453c-832d-34a64c118646,PSC-IS-018,NEBULIZER MASK ADULT EUROMED&OXIMED,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c13e2ae2-a4a1-4817-a157-488c57abe1ec,PSC-IS-018,NEBULIZER MASK PEAD EUROMED&OXIMED,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,93933fb0-0640-4bc9-b0d7-776904fdfdec,PSC-IS-018,NEBULIZER MASK PEADIA (CEUMED),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,eee49f65-26bc-4b71-8dc5-3c02093d1748,PSC-IS-018,OMRON NEBULIZER SET KIT (05720),Omron,,NO,,75,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,9b9a7a43-eef9-44ac-93ac-e069cd9233a6,PSC-IS-018,WOLAID MESH NEBULIZER MASK,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,4b08d30c-f2d1-4a07-a45b-c8a4e3eb70f3,PSC-IS-018,"WOLAID NEBULIZER MASK ADULT 1""S",Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,bf840fe9-f276-4622-a5b8-440b5956aa46,PSC-IS-018,"WOLAID NEBULIZER MASK CHILD 1""S",Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f83077ba-4110-4045-a69c-6f3b4c9815a3,PSC-IS-020,HUF PUF KIT TRANSPARENT ZEROSTAT VT SPACER& BABY,Huf,,NO,,173,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,1fd81b08-e91f-44c9-83f4-9f5bc9759f58,PSC-IS-020,ZEROSTAT VT SPACER TRANSPARENT CIPLA INHALER,Zerostat,,NO,,98,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,e36f540e-77e9-453e-a89e-a25ab23b0da1,PSC-IS-021,ACCU-CHEK ACTIVE METER+STRIP+LANCET (OFFER),Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,af470e9d-b050-406b-9d37-730c142a70c4,PSC-IS-021,ACCU-CHEK ACTIVE STRIP 50'S (70350),Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c729e519-84be-4f10-9516-0c8bd967b20c,PSC-IS-021,ACCU-CHEK GUIDE METER+STRIP 50'S,Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e283a38b-fa94-4d6d-b4be-deca71c43287,PSC-IS-021,ACCU-CHEK GUIDE METER+STRIP 50'S+LANCET 100'S,Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a51b5e0d-1ce9-4353-9aa5-6d6e63195b1e,PSC-IS-021,ACCU-CHEK GUIDE STRIP 50'S,Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,376fab7f-749b-44ca-8ebc-89438015dd44,PSC-IS-021,ACCU-CHEK GUIDE STRIP 50'S+LANCET 100'S,Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,18e38290-0348-4b35-aeca-62abb731ccbd,PSC-IS-021,ACCU-CHEK GUIDE TEST STRIP 50S (1+1),Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,4fe6d6ab-1f78-4bbc-adfa-5a9ace9f93f1,PSC-IS-021,ACCU-CHEK INSTANT METER+STRIP 50'S,Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c6d5b66e-9b6f-4ba1-9ce1-721663fc520c,PSC-IS-021,ACCU-CHEK INSTANT STRIP 50'S,Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b5aefd43-5d87-401a-a024-a80e3b7016a6,PSC-IS-021,ACCU-CHEK INSTANT STRIP 50'S (1+1),Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,8136a25d-d028-4597-9406-def8e2af5c94,PSC-IS-021,ACCU-CHEK PERFORMA STRIP 50'S,Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,57e48497-4236-4c94-9c69-eb4a94ef25a1,PSC-IS-021,ACCU-CHEK PERFORMA STRIP 50'S (1+1),Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,2a07d813-6071-484f-afd4-09ecd8592670,PSC-IS-021,BEURER GL 44 GLUCOSE MONITOR+GL 44/50 STRIP 10'S,Beurer,,NO,,149,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,1b9b00be-fdfe-470d-9017-b50a3b4b3d0e,PSC-IS-021,CARESENS N BLOOD GLUCOSE TEST STRIPS (50),Caresens,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,bc411768-22a5-43d9-b168-6f0ccfbad67f,PSC-IS-021,CARESENS N METER+50 STRIPS+100 LANCETS (COMBO),Caresens,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,464a2ee1-a268-47ca-9916-5b344f1de14b,PSC-IS-021,FORA 6 BLOOD GLUCOSE TEST STRIP 50S,Fora,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,8aa5f6f5-c88b-4674-94b4-078d3a757a6e,PSC-IS-021,"FORA BLOOD GLUCOSE TEST STRIP 50""S",Fora,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,04c6acf2-171f-4f9f-b045-a2374220440c,PSC-IS-022,ACCU-CHEK ACTIVE METER+STRIP+LANCET (OFFER),Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,1b38ef56-848f-4e04-b522-8bc081d32297,PSC-IS-022,ACCU-CHEK GUIDE METER+STRIP 50'S+LANCET 100'S,Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b214bf1e-ed92-4088-9416-3a92177251a6,PSC-IS-022,ACCU-CHEK GUIDE STRIP 50'S+LANCET 100'S,Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f2b2182b-4d3c-40bc-bee9-f827b4682c24,PSC-IS-022,ACCU-CHEK SOFTCLIX LANCET 28GM 100'S,Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,2bd062b4-d049-4617-8597-3a9f496122ed,PSC-IS-022,BLOOD LANCETS 100PCS/PKT(EUROMED),Blood,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,4b570893-1559-4cb1-895a-ccef59db10de,PSC-IS-022,BLOOD LANCETS 200PCS/PKT(EUROMED),Blood,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,6fafa520-0a96-45e3-a065-193f870869aa,PSC-IS-022,CARESENS N METER+50 STRIPS+100 LANCETS (COMBO),Caresens,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f364ea8a-cfbe-404a-a667-fefb0986ff0a,PSC-IS-022,FORA LANCET SET/30G 100PCS,Fora,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5f5f5047-9455-4dd6-867d-8f88ecd4cdb1,PSC-IS-022,FORA LANCET SET/30G 200PCS,Fora,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,033fbd5a-0165-4d5b-afe6-dca3f45c9767,PSC-IS-022,FORA LANCET SET/33G 100PCS,Fora,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,4ca2dfe5-04f2-400e-83ba-20aeae254aec,PSC-IS-022,"FREESTYLE FREEDOM LITE KIT+STRIPS50+LANCET50""S",Freestyle,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,0a578bff-873d-4e77-a9bd-643935d171e5,PSC-IS-022,"FREESTYLE OPTIUM KIT+STRIPS50+LANCET50""S",Freestyle,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,49f75ba8-84f8-411c-9451-b6f5e1ea1213,PSC-IS-022,"PRIME BLOOD LANCETS  200""S",Prime,,NO,,25,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,af1ec4fb-65e1-4642-8628-0e82fc7c7b9d,PSC-IS-035,LAICA BABY SCALE-PS3001,Laica,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e22217e4-770b-44fb-b64a-4f8b83f79cc8,PSC-IS-035,SPECTRUM DIGITAL BABY SCALE (B-02),Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f94a245d-910d-447a-b236-739a2f5ff094,PSC-IS-038,"AM EYE PAD 50""S",Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,bbfb4e5f-772c-4e40-a284-2e2d580d3912,PSC-IS-038,"AM STERILE EYE PADS 50""S(PKT)",Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,847fa113-96df-4b0b-8e1f-9aa26d64eeb0,PSC-IS-038,"NOVA OPTIC EYE PAD ADHESIVE 5""S",Nova,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,74535ffe-827d-4c8e-84b1-af5d47ac0388,PSC-IS-038,NOVAMED EYE PAD ADULT 6.5x9.5CM 50'S,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c88a9028-52e0-4466-b6a5-618ed55824af,PSC-IS-038,WOLAID EYE PAD 10S,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,17224130-ce26-421f-ac96-fc89fcaac721,PSC-IS-039,AM TRIANGULAR BANDAGE,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,4ea9871e-74c3-4b2b-a75d-453a5adda79e,PSC-IS-039,HEALTH CHOICE TRIANGULAR BANDAGE,Health,,NO,,4.95,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,787dc5a7-9e57-4c52-8b2e-ef9dd7446804,PSC-IS-039,NOVAMED TRIANGULAR BANDAGE 38*38854 INCH NON WOVEN,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,837edfb6-25ae-46b4-a715-27b0d26e9bc5,PSC-IS-039,NOVAMED TRIANGULAR BANDAGE 40X40X56 INCH NON WOVEN,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c2cd9428-c11e-4f66-b88d-dff0ebf0c3d6,PSC-IS-040,MEDILITE PAPER TAPE 1.25CMX5M (MD754),Medilite,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,85552a61-107d-43c7-9031-1922e69e2fbd,PSC-IS-040,MEDILITE PAPER TAPE 2.5CMX5M (MD755),Medilite,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,45b2e466-921a-4f21-9ab4-d527b7eb2d5f,PSC-IS-040,MEDILITE PAPER TAPE 5CMX5M (MD767),Medilite,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f0475e03-f607-44eb-bb73-a36b44d50c06,PSC-IS-042,SPECTRUM INSTANT COLD PACK (SK-SL100),Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,47e8c30c-e446-408e-8ca4-13ae520dcb78,PSC-IS-042,WOLAID INSTANT COLD PACK 5*6 1'S,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f2fb75f8-bd4f-45ed-ac9c-3556b89615b2,PSC-IS-042,"WOLAID INSTANT COLD PACK 6*9 1""S",Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,db37c32a-b105-4e72-8c27-14a4f9336429,PSC-IS-043,MEDICARE REUSABLE HOT/COLD PACK (MD602),Medicare,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,0c906249-b5cd-46bb-8ac5-d19fd3740c0b,PSC-IS-043,SPECTRUM HOT/COLD PACK FOR HEAD AND SINUS 29.5X9CM,Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,7b9365bb-2622-42c1-8aab-1fb5ea4721c7,PSC-IS-043,SPECTRUM HOT/COLD PACK FOR KNEE&ELBOW 25.5X20.5CM,Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,19e345fd-6815-4f05-9066-734159971288,PSC-IS-043,SPECTRUM HOT/COLD PACK FOR LOWER BACK 32X13.5CM,Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,26fcb63b-c24a-4161-bddf-78cadb06f90e,PSC-IS-043,SPECTRUM HOT/COLD PACK FOR WRIST& ANK 16X9.5CM,Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,d0fae7cb-91b8-42d3-907b-8ecd1e889517,PSC-IS-043,SPECTRUM HOT/COLD PACK MULTI PURPOSE (L) 26.5X17CM,Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,22f2696c-9891-4458-82e1-a12c51601f15,PSC-IS-043,SPECTRUM HOT/COLD PACK MULTI PURPOSE (M) 80172,Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,89d083fe-be1a-4f3e-9228-9e75d7eaef80,PSC-IS-043,SPECTRUM HOT/COLD PACK MULTI PURPOSE (S),Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,146cafec-963f-4fc7-85fd-fa71889ef2ed,PSC-IS-044,BURNSHIELD HYDROGEL BURNCARE 50ML,Burnshield,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5ee131d9-01b5-4532-83ec-35cea8515fb6,PSC-IS-046,EASY TWEEZER FASHION PLUS-TFP511,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3b4d7129-b2c9-40a7-be98-f7b5066367df,PSC-IS-046,EASY TWEEZER FASHION PLUS-TFP513,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,766537f6-4370-40cf-8f87-78b199b09824,PSC-IS-046,EASY TWEEZER FASHION PLUS-TFP520,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3337c822-33ad-44bb-8c29-03dae0a80d34,PSC-IS-047,"NIMED UNDERPADS 90*180CM 20""S",Nimed,,NO,,99,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,8dec2efd-d40c-43d8-9b1e-a63738ba4fdf,PSC-IS-047,SERENITY CL UNDERPAD 60X90 15'S,Serenity,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,186fb0bc-7259-45d8-aab8-4f7407fcafb7,PSC-IS-047,SERENITY CL UNDERPAD 60X90 30'S,Serenity,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,aff0d301-1f45-418b-a1a9-ff515623b3ec,PSC-IS-047,SERENITY CL UNDERPAD 80X180 15'S,Serenity,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,6b94214a-bdfe-4ab0-9881-5da453429427,PSC-IS-047,SERENITY CL UNDERPAD 80X180 30'S,Serenity,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c10918bd-d098-46fb-bfa3-fac01c035225,PSC-IS-047,UNDERPAD 60X90CM 15'S (EUROMED-OXIMED),Underpad,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b6b802a1-71a1-4373-8a7a-a5aabfb7c8e0,PSC-IS-047,UNDERPAD 60X90CM 30'S (EGOSAN),Underpad,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,36a7c99f-aa92-4ab7-b141-ae2345e20f25,PSC-IS-047,UNDERPAD 60X90CM ULTRA (VERNOLIFE),Underpad,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,87b52de8-c2c6-4a39-8c9e-eea52922a2af,PSC-IS-047,UNDERPAD 80X180CM 30'S (EGOSAN),Underpad,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c440e60d-428c-4c6d-b829-c93697533d85,PSC-IS-047,UNDERPAD 90X180CM (20PCS/PKT)-EUROMED,Underpad,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,01812a6e-2548-46dd-8bfa-1e45e5fbb7fd,PSC-IS-047,UNDERPAD 90X180CM 30'S (DR.MARCO),Underpad,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,120ab460-acbd-4120-869f-7d385dbd54c5,PSC-IS-047,WOLAID UNDERPADS PREMIUM ADULT 60X90CM 15S L,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,17cc78a0-431c-4831-b753-ba977f0d0812,PSC-IS-048,"WOLAID VOMIT BAG WITH GEL 10""S",Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b810d343-998c-4cd4-a873-61bc8a80a7d8,PSC-IS-048,"WOLAID VOMIT BAG WITH GEL 2""S",Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c6b14ec4-ce7f-43d0-8b72-dcb72e3ecddb,PSC-IS-049,"C&C MINI TISSUE 6""S - M799",C&C,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,0eb4ac86-2e07-4c79-bff3-46854d60822c,PSC-IS-049,DEEP MUSCLE TISSUE FASICA,Deep,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f1527ff3-12e1-4b4d-b2ad-758bde07c5b7,PSC-IS-052,MEDICAL MASK FFP2 MARQUARDT,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a294c372-d867-410b-a94f-38d46c342532,PSC-IS-053,MASK FFP2,Mask,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,d4da13fd-1dd2-4d24-9d5a-d5eb5b08bf6d,PSC-IS-053,MEDICAL MASK FFP2 MARQUARDT,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,053c35ed-4944-4599-8ea2-94a11b4c40b5,PSC-IS-053,MUSK FACE MASK N95 BLACK 10'S (72205),Musk,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,4babc0b7-6c2c-4dc6-adbf-459b704d69b1,PSC-IS-053,MUSK FACE MASK N95 WHITE 10'S (72205),Musk,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,15931ffc-ed29-4aaa-b5f6-012701f6466d,PSC-IS-053,N95 3D BLACK MASK SINGLES,N95,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5b318ba6-434f-4b2e-a1a8-742b5737993f,PSC-IS-053,N95 3D WHITE MASK SINGLES,N95,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,ef9a98d6-9cb3-4507-9f7b-007a5f03cd3d,PSC-IS-053,VENTOLIN RESPIRATORY SOLN 20ML,Ventolin,,NO,,15.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,f866c40e-6c5b-4a0c-99f3-8a58a4fff42e,PSC-IS-060,"C&C DISINFECTANT A & B  WIPE 84""",C&C,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,de3b4495-6844-4ca0-905a-63c4dd4ebf7b,PSC-IS-060,"C&C DISINFECTANT TOILET WIPES 20""S",C&C,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,62d91eef-095a-422d-a19f-dd6442d62f83,PSC-IS-060,"C&C DISINFECTANT TOILET WIPES 48 ""S",C&C,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c3b0de81-5914-4868-9149-2d265153e4b1,PSC-IS-060,"C&C DISINFECTANT WIPES 10""S",C&C,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3417a7a7-74e3-4f1c-9199-582eacc24952,PSC-IS-060,"C&C DISINFECTANT WIPES 40""S",C&C,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,de1e4eff-d7fe-4bea-9232-b0bc6c2e03e2,PSC-IS-061,OPTI-FREE PUREMOIST DISINFECTING SOLUTION 300ML,Opti-Free,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,6b4871ac-ee6b-483b-9e1c-f0bee9a00d3b,PSC-IS-061,OPTI-FREE PUREMOIST DISINFECTING SOLUTION 90ML,Opti-Free,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3fd2568c-8957-4502-869e-b3c166e3bc50,PSC-IS-068,CW ORAL MEDICINE SYRINGE-1ML 717,Cw,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c70b6cb8-abab-4ae8-b8fc-de332b731a79,PSC-IS-068,CW ORAL MEDICINE SYRINGE-5ML 716,Cw,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,248ac340-0ae0-402f-913b-05f78df8182c,PSC-IS-068,EASY ORAL SYRINGE 10ML,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,4c35e93a-e52b-49fc-acf7-72b718cc85e3,PSC-IS-068,EASY ORAL SYRINGE 5ML,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,246dbd57-f532-41c4-813a-ba2c87363543,PSC-IS-071,URINE CONTAINER STERILE 60ML EUROMED,Urine,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f2e1d312-51e9-46f6-8c9f-27ed392a0641,PSC-IS-073,ZYRTEC 10MG TAB 20'S,Zyrtec,20s,NO,,39.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,4848ea2d-acbc-42df-b940-1ea4d359cd40,PSC-IS-073,ZYRTEC 10MG/ML ORAL DROPS 10ML,Zyrtec,10 mg/ml · 10 ml,NO,,22,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,16b29d43-b6d6-43ba-8013-300a977ea732,PSC-IS-073,ZYRTEC 1MG/ML ORAL SOLUTION 75ML,Zyrtec,1 mg/ml · 75 ml,NO,,17.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,6c332730-799b-4e61-86d4-2ed4dd275b8f,PSC-IS-074,CLARITINE 10MG TAB 10'S,Claritine,,NO,,20.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,170f66a2-54c9-41c9-8d03-40e5fad97c74,PSC-IS-074,CLARITINE 10MG TAB 30'S,Claritine,,NO,,50,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,89f55cd5-0ac9-49da-ae9e-55054e3f22bb,PSC-IS-074,CLARITINE CHILD SYRUP 120ML (GRAPES),Claritine,,NO,,31,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,bce4ae95-8984-40f4-90da-ae9714eed822,PSC-IS-074,LORATIN 10MG TAB 20'S,Loratin,,NO,,23,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,6c7f9260-5b12-493b-932f-18808f6e1018,PSC-IS-074,LORATIN SYRUP 100ML,Loratin,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,6dc0c448-c966-4dda-80ca-04552329cb22,PSC-IS-075,VENTOLIN EVOHALER 100MCG 200DS,Ventolin,,NO,,38.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,8a335a1d-3312-4258-bc6d-1e437dac1feb,PSC-IS-076,VENTOLIN NEBULES 2.5ML 10X4,Ventolin,,NO,,62.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,e951ab61-1446-4139-ae97-62237677b9fd,PSC-IS-076,VENTOLIN RESPIRATORY SOLN 20ML,Ventolin,,NO,,15.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,cb036853-18da-44cd-87e5-6c587034f88d,PSC-IS-077,BUDECORT 0.25MG/ML RESPULES,Budecort,,NO,,108,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,159d6529-8702-41f3-a3dc-e79dcd839d10,PSC-IS-077,BUDECORT 0.5MG/ML RESPULES,Budecort,,NO,,120.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a105b037-3550-4bc7-9014-f0fdad90293d,PSC-IS-077,PULMICORT 0.25MG/ML NEBULISING SUSP 2MLx20'S,Pulmicort,,NO,,149.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,60010320-cf07-4c9b-a760-4ada55a5dbf3,PSC-IS-077,PULMICORT 0.5MG/ML NEBULISING SUSP 2MLx20'S,Pulmicort,,NO,,209.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,e30a5b9e-088a-4c8a-96a2-3ef77e9325f7,PSC-IS-078,BECLOSONE FORTE 100MCG INHLR,Beclosone,,NO,,31,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,cd7e46ad-a6cf-4b42-a990-3f6eab688c7f,PSC-IS-079,M-KAST 10MG TAB 30S (MONTELUKAST),M-Kast,,NO,,71.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,23375280-fed1-4227-8e14-25396ba558cf,PSC-IS-079,M-KAST 4MG CHEW TAB 30S (MONTELUKAST),M-Kast,,NO,,71.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,fffe1a97-08d5-4ab2-a1a9-89a96f5206d1,PSC-IS-079,MONTILAG 10MG TAB 30'S (MONTELUKAST),Montilag,,NO,,131.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,f32a8e7f-edb5-417b-8bb0-87d4cf24f2f3,PSC-IS-079,MONTILAG 4MG CHEW TAB 30'S (MONTELUKAST),Montilag,,NO,,123,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,d746b98d-cd6e-44c6-bd52-a1bc68244570,PSC-IS-079,MONTILAG 5MG CHEW TAB 30'S (MONTELUKAST),Montilag,,NO,,132,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,b87e2483-0d86-4ce9-8ee5-cec7a92dd33d,PSC-IS-080,RINOPHAR SALINE SOLUTION FOR NEBULISATION 5ML 30'S,Rinophar,,NO,,58,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,fb7ee126-29f6-4c07-b917-9e709c944f64,PSC-IS-082,FUCIDIN CREAM 2% 15GM,Fucidin,,NO,,17.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,751c7321-a979-4fe8-9e2c-2bc5a0bd7cab,PSC-IS-082,FUCIDIN CREAM 2% 30GM,Fucidin,,NO,,31,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,f754f6be-2ebf-4d5c-b82e-5975a493411c,PSC-IS-082,FUCIDIN OINTMENT 2% 15GM,Fucidin,,NO,,17.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,bd287e20-b7fd-4227-9a2a-0f6c844ab862,PSC-IS-082,FUCIDIN OINTMENT 2% 30GM,Fucidin,,NO,,31,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,d3a138e0-8b76-4705-807c-9b01288f6ca3,PSC-IS-082,FUSIDERM CREAM 15GM,Fusiderm,,NO,,10,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a32c8ae2-58f4-42a4-aa31-c945d894a647,PSC-IS-082,TOPIDIC 2% OINTMENT 15GM (FUSIDIC ACID),Topidic,,NO,,10.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,5c5bb774-ba7b-44d8-ad0f-0de203caaed7,PSC-IS-085,AMBYA CALAMINE LOTION BP 100S,Ambya,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,d39917f6-ef86-4141-b801-2c933b7ecbc2,PSC-IS-085,AMEYA CALAMINE LOTION 200ML{XXXXX},Ameya,,NO,,12,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,10d5e1a3-5dd7-43b8-b9ad-273df3a32e2b,PSC-IS-085,AMEYA CALAMINE LOTION BP 100ML,Ameya,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,747beb65-378b-46a3-9db6-5d435c0aec60,PSC-IS-085,AMEYA CALAMINE LOTION BP 200ML,Ameya,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f207e368-96b9-4f43-879f-fe6a0ab503e8,PSC-IS-085,BELLS CALAMINE LOTION BP 200ML,Bells,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,fadb39c9-946c-4285-8fbc-12ab0c6c2286,PSC-IS-085,CALORA CALAMINE LOTION 100ML,Calora,,NO,,23,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,efcea681-51ad-40d7-839a-92497cfd0cca,PSC-IS-085,WOLCURE CALAMINE LOTION 100ML,Wolcure,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,030a9c94-b599-44cf-82ef-51e598ef98a4,PSC-IS-086,CANESTEN 1% CREAM 20GM,Canesten,,NO,,16,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,79a4ebf5-e67f-49b0-aa89-8140cdf5c0ae,PSC-IS-086,MYCORIL 1% CREAM 20GM (CLOTRIMAZOLE),Mycoril,,NO,,9.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,27e16beb-c3ba-4f8d-a531-09baa6631d3e,PSC-IS-087,ALOEGARVE BARLAVENTO SUNSCREEN SPF 50 100ML,Aloegarve,,NO,,140,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,24236e73-3760-47f5-874a-95f1b9541f1a,PSC-IS-087,AVALON CARE SUNSCREEN LOTION SPF50 200ML (1+1),Avalon,,NO,,168.71,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,7b7b7328-0563-47bf-b6c8-b6fec3573d2d,PSC-IS-087,AVALON CARE SUNSCREEN SPRAY SPF50 200ML (1+1),Avalon,,NO,,148.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,cf6a72be-020d-47c8-9da5-b349feb4e623,PSC-IS-087,BABE SUPER FLUID COLOR SUNSCREEN SPF 50 50ML,Babe,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,fa948ca8-3e68-486e-b8ba-27fbd2cf0829,PSC-IS-087,BABE SUPERFLUID SUNSCREEN SPF 50 50ML,Babe,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,d5fb20e4-c0d0-4962-a811-988d2d438d5b,PSC-IS-087,C&C SUNSCREEN LOTION SPF50+ 50ML,C&C,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e332070a-e951-4585-a1de-2f0a62800191,PSC-IS-087,"CERAVE SUNSCREEN BROAD SPECTRUM SPF50,150ML",Cerave,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c9501203-cf4a-4176-84cb-a9ae54187eb4,PSC-IS-087,DERMA SUNSCREEN ADVANCE SPF 50+ CREAM-GEL 50GM,Derma,,NO,,165,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,21f78898-a808-4bf0-a4bc-d93dede8aca4,PSC-IS-087,DERMA SUNSCREEN ADVANCE SPF 50+ CRM-GEL 50GM (1+1),Derma,,NO,,165,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a3d488f5-1c56-4006-bd5e-91b0aef71cf1,PSC-IS-087,GENOVE GENOSUN FACIAL SUNSCREEN SPF-50+ 50ML,Genove,,NO,,139,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,847076bd-8278-4e15-977b-3dbb931b4c44,PSC-IS-087,GENOVE GENOSUN ZERO SUNSCREEN SPF-50+ 125ML,Genove,,NO,,185,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,20d0eba9-cabe-4e1f-8e3b-4110ce9fa1b7,PSC-IS-087,N+ SPF 50 SUNSCREEN LOTION 100ML,N+,,NO,,40,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,0bb73eff-9d6e-4e82-b7c3-48a4be34c74d,PSC-IS-087,PHORDERM SUNSCREEN LOTION SPF 50 50ML,Phorderm,,NO,,68.25,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,2a46bb10-ca2b-44c0-877e-4752bc6a0b61,PSC-IS-087,PURE BEAUTY WHITENING SUNSCREEN LOTION SPF50+200ML,Pure,,NO,,105,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,670045aa-39cb-42a1-a980-457205459d9c,PSC-IS-087,SKINLAB SPF 50 SUNSCREEN 100ML+50ML (COMBO PACK),Skinlab,,NO,,135,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,08688374-e19d-4122-9078-d107d27fee07,PSC-IS-087,SKINLAB SUNSCREEN SPF50 100ML,Skinlab,,NO,,120,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,c5bfb46a-cc14-4630-aeac-95d1f3a633ee,PSC-IS-087,SKINLAB SUNSCREEN SPF50 50ML,Skinlab,,NO,,90,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,f2d382c4-08fe-4d95-b0e2-df32a693b987,PSC-IS-087,UVEELITE SUNSCREEN CREAM SPF50+ 60GM,Uveelite,,NO,,47.25,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,56ec70b0-dc92-408f-9948-c541323ca049,PSC-IS-087,UVMED SUNSCREEN GEL SPF-50 50ML,Uvmed,,NO,,70,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,6c076cb2-acd9-4d05-a9e8-7dd6002bb15d,PSC-IS-089,BURNSHIELD HYDROGEL BURNCARE 50ML,Burnshield,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,59359f57-36e4-4c23-9b4a-71caa9d29687,PSC-IS-090,ADOL 500MG TAB 24'S,Adol,,NO,,9.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,89ff7bc0-7709-45a3-9a10-e038d378f0ac,PSC-IS-090,ADOL 500MG TAB 48'S,Adol,,NO,,16.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a39aae54-af6c-4598-aa09-da489bf51a99,PSC-IS-090,ADOL 500MG TAB 96'S,Adol,,NO,,21.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,2b897c03-8c9d-44b0-9e21-31989114316f,PSC-IS-090,FEVADOL 500MG RMBP TAB 20'S,Fevadol,,NO,,5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,4222899f-1d42-4516-be9d-77cd7023b483,PSC-IS-090,PANADOL BABY SYRUP 100ML,Panadol,,NO,,15,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,d2cf7a8b-b6b9-4947-bb83-689bc5a27b76,PSC-IS-091,BRUFEN 400MG TAB 30'S,Brufen,,NO,,16.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,9f9a81c2-aab0-4f43-9919-c9c511f71192,PSC-IS-091,BRUFEN 600MG TAB 30'S,Brufen,,NO,,23.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,f0c29d3f-53ea-4491-8dfe-5a5075bdfdfc,PSC-IS-091,BRUFEN PAEDIATRIC SYRUP 100ML,Brufen,,NO,,15.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,61eeee43-c67c-4f06-8c87-dbed8252c345,PSC-IS-091,BRUFEN PAEDIATRIC SYRUP 200ML,Brufen,,NO,,31,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,90533ed2-3e46-4d3e-8d04-a57d0eb1bd00,PSC-IS-091,BRUFEN RAPID 400MG CAP 20'S,Brufen,,NO,,16.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,2e52581a-a4c4-400a-aa13-62c4a1ae98d1,PSC-IS-091,BRUFEN RETARD 800MG TAB 20'S,Brufen,,NO,,31,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,62dbc9cb-935f-45a6-a278-ae5f49872f46,PSC-IS-091,EXPREN 400MG S/G CAPS 30S (IBUPROFEN),Expren,,NO,,23.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,f583f73a-4943-41be-97f0-633fce052c45,PSC-IS-091,MEDAFEN 100MG SUSPENSION 100ML (IBUPROFEN),Medafen,,NO,,11.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,d5c891c0-2b76-4adf-8e83-6b840a600205,PSC-IS-091,NUROFEN SUSP 100MG/5ML 100ML,Nurofen,,NO,,14,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a180602e-f8c9-4cca-8ea7-6dd88c69a7bf,PSC-IS-091,SPEDIFEN 400MG TAB 24'S (IBUPROFEN L-ARGININE),Spedifen,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,57a2ac10-a8b7-4ae4-a301-fa7ed6e64c05,PSC-IS-092,ASPIRAYA 75MG TAB 56'S (ASPIRIN),Aspiraya,,NO,,30,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,2f2fde3b-b260-406e-b023-e0d6b213fa5b,PSC-IS-092,ASPIRIN C EFFERVESCENT 10'S,,,NO,,21.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,c4700d02-ef0a-47c1-bc36-43e3112e5abf,PSC-IS-092,ASPIRIN C EFFERVESCENT 10'S (2+1) PROMO,,,NO,,43,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,70977c09-d3d7-4d66-aedd-e12982399d72,PSC-IS-092,ASPIRIN PROTECT 100MG TAB 30'S,,,NO,,19.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,e9a87eb3-7345-4abb-8fa5-d9a133221d75,PSC-IS-092,ASPIRIN PROTECT 100MG TAB 90'S,,,NO,,53,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,afe435d8-83a0-48f2-9aa2-3c0d9a4e7e14,PSC-IS-094,ELECTRAL ORS 21.8GM SACHETS 10'S,Electral,,NO,,39,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,adcce950-7b14-426d-8e1c-9ebba2d3ecd1,PSC-IS-094,ELECTRONA ORS-APPLE 200ML,Electrona,,NO,,10,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,1ffb817e-761a-4d61-825d-1a7f8e5077d5,PSC-IS-094,ELECTRONA ORS-ORANGE 200ML,Electrona,,NO,,10,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,35417c55-1ed4-4c5b-92f8-02e89dc9c37f,PSC-IS-094,NOVALYTE 21.8GM ORS LEMON SACHET 10'S,Novalyte,,NO,,38,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,699fed7b-6229-4b92-b85d-ed27e55b0272,PSC-IS-094,NOVALYTE 21.8GM ORS ORANGE SACHET 10'S,Novalyte,,NO,,38,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,f153aea7-5bff-4fe1-a039-abe52646de97,PSC-IS-094,NOVALYTE 4.4GM ORS LEMON SACHET 10S,Novalyte,,NO,,20,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,dba1a5b7-5016-474a-88b1-5cfa14b849c4,PSC-IS-094,NOVALYTE 4.4GM ORS ORANGE SACHET 10'S,Novalyte,,NO,,20,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,3923a521-5ad5-44f0-8e81-d6a9ef84e2bc,PSC-IS-094,NUTRALYTE 21.8 GM ORS SACHETS 10S,Nutralyte,,NO,,35,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,e3416826-4993-402d-8e96-d83ac4421786,PSC-IS-094,ORIX 6G 10SACHETS - ORS,Orix,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f174f199-1f18-4d2a-bbac-2e644292d755,PSC-IS-094,"OROLYTE 21.8GM ORS SACHETS 10""S",Orolyte,,NO,,35,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,740f1be0-5723-4f05-8355-bf23818e3fdd,PSC-IS-094,"OROLYTE 4.4GM ORS SACHETS 10""S",Orolyte,,NO,,16,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,6abeccbc-9d2d-404e-b282-5af928899e55,PSC-IS-094,ORS ACCURE 21.80GM SACHET 10'S,,,NO,,35,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,f5403c8b-c7d2-472f-8e05-97777e49df34,PSC-IS-094,ORS ACCURE 4.4GM SACHET 10'S,,,NO,,16,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a2f9eefa-ab3c-42d3-90d8-11cd1b0a270a,PSC-IS-094,ORS ELECTRORUSH 21GM POWDER SACHET ORANGE 10'S,,,NO,,15.9,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,e52a13cc-c661-4e24-ad50-bcc6e7840f25,PSC-IS-094,ORS ELECTRORUSH APPLE THERAPY DRINK 200ML,,,NO,,9.9,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,8e1b86b4-cbe5-4e97-8708-8577e87b415e,PSC-IS-094,ORS ELECTRORUSH ORANGE THERAPY DRINK 200ML,,,NO,,9.9,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,9c4d7182-5fec-41dd-9720-b994a63bb1fa,PSC-IS-094,ORS NEW 25S (1 LITRE) MUSCAT,,,NO,,39.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,3c76e60c-6111-4aad-b829-3097f1968dfc,PSC-IS-094,ORS NEW SACHETS 10'S,,,NO,,20,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,d73bbf95-4162-4d3f-8297-fc0e57f4fef0,PSC-IS-094,ORS SOLUBLE TAB BLACK CURRANT 24'S,,,NO,,38,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,ddca3956-a411-486a-9230-286dc30c1d1e,PSC-IS-094,ORS SOLUBLE TAB LEMON 24'S,,,NO,,38,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a603d5f9-2675-49e4-bf28-037a3a7f434a,PSC-IS-094,ORS SOLUBLE TAB SPORT ORANGE 20'S,,,NO,,40,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,2ec10728-ff21-4315-bd1e-ea3ec8c589d1,PSC-IS-094,ORS SOLUBLE TAB STRAWBERRY 24'S,,,NO,,38,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,4f59c7e3-e56a-4fd5-848f-71fc25be3063,PSC-IS-094,PROLYTE ORS 21GM LEMON SACHET 10'S,Prolyte,,NO,,50,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,56f7a642-b95e-4d67-8974-234f61a89a54,PSC-IS-094,PROLYTE ORS 21GM ORANGE SACHET 10'S,Prolyte,,NO,,50,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,301a574a-a102-47cb-87bc-3089d6d3508f,PSC-IS-094,PROLYTE ORS 4.2GM LEMON SACHET 10'S,Prolyte,,NO,,20,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,99d9ba2c-9ac9-47de-975b-032e5db4b220,PSC-IS-094,PROLYTE ORS 4.2GM LEMON SACHET 40'S,Prolyte,,NO,,80,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,8ebb2c57-3fd2-41e3-9986-e494a8684b07,PSC-IS-094,PROLYTE ORS 4.2GM ORANGE SACHET 10'S,Prolyte,,NO,,20,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,4ecb35dc-129f-485c-8e85-293ccf61e52d,PSC-IS-094,PROLYTE ORS 4.2GM ORANGE SACHET 40'S,Prolyte,,NO,,80,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,7b76ab76-14de-4a86-a23e-c498c8f4f35d,PSC-IS-094,SUNLYTE ORS 21.8GM LIME 1*10,Sunlyte,,NO,,35,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,ed27c27b-6f8e-4312-be01-079ed4b82e74,PSC-IS-094,SUNLYTE ORS 21.8GM ORANGE 1*10,Sunlyte,,NO,,35,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,34450456-e042-48e0-b86f-fd562c46d036,PSC-IS-094,SUNLYTE ORS 21.8GM PINEAPPLE 1*10,Sunlyte,,NO,,35,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,b7922542-a6c4-42cb-aaff-4f7633db2ed3,PSC-IS-094,SUPER ORS 21GM ORANGE SACHETS 25'S,Super,,NO,,40,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,7b603131-4fca-4c63-b732-c904b99789a6,PSC-IS-094,SUPERLYTE 4.4GM ORS LEMON SACHET 20'S,Superlyte,,NO,,40,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,3ca8c7f7-bc83-4a6f-bf83-e48d020ab314,PSC-IS-094,SUPERLYTE 4.4GM ORS ORANGE SACHET 20'S,Superlyte,,NO,,40,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,5ec24daa-9569-4680-8028-e4137390e3fa,PSC-IS-094,XTRALYTE ORS 21GM SACHETS 10'S (ORANGE),Xtralyte,,NO,,39,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,30eddac5-ca35-44b6-8102-80e1cc697004,PSC-IS-095,MOTILIUM 10MG TAB 30'S,Motilium,,NO,,18.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,5b481112-d29b-49b4-b5d5-4887f4dfaa2e,PSC-IS-095,MOTILIUM SUSPENSION 200ML,Motilium,,NO,,16.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,34c0ab87-389f-488c-8c08-0d357c0dd604,PSC-IS-096,DEVOMIT 2MG/ML (4MG/2ML) INJ 5'S (ONDANSETRON),Devomit,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,85b43e5e-724f-4d4e-ab72-762318d426bc,PSC-IS-096,IMATOX 4MG TAB 10'S (ONDANSETRON),Imatox,,NO,,108.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,b1a244c6-de27-4fd0-8221-5f98fc403267,PSC-IS-096,IMATOX 4MG/2ML INJ 5'S (ONDANSETRON HCL),Imatox,,NO,,113,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,b9eac945-50bb-4809-8334-c2633f3a0eee,PSC-IS-096,IMATOX 8MG/4ML INJ 5'S (ONDANSETRON HCL),Imatox,,NO,,208.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a585be01-56e3-4ead-9c37-43a3bd1483dd,PSC-IS-096,LAVONDA 4MG/5ML SYRUP 50ML (ONDANSETRON),Lavonda,,NO,,117.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a3e105fc-2974-4204-9763-ebd20b906016,PSC-IS-096,ONDAZO 2MG/ML VIAL 2ML*10'S (ONDANSETRON),Ondazo,,NO,,226.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,d824cb35-59ca-49a1-92fe-0fb4e3490857,PSC-IS-096,TESNAD 4MG TAB 10'S (ONDANSETRON),Tesnad,,NO,,108.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,e688e813-513c-4529-9d05-dd318a218a7e,PSC-IS-096,VOMRAN 4MG TAB 10'S (ONDANSETRON),Vomran,,NO,,108.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a052f225-c44a-4267-a141-f0bceb74d052,PSC-IS-096,VOMRAN 4MG/2ML AMP 5'S (ondansetron),Vomran,,NO,,93.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,94f43a8f-3b73-499d-bce1-562230d2f7f9,PSC-IS-096,XANDON 4MG/2ML INJ 5'S (ONDANSETRON),Xandon,,NO,,113.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,c6ddadb6-64b8-4b64-918d-6ac352412b50,PSC-IS-096,ZOPHRALEN 4MG/2ML INJ 10'S (ONDANSETRON),Zophralen,,NO,,226.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,4a3e2976-258d-4b38-8958-f1b11380f2c8,PSC-IS-097,ACIFIX SACHETS CITRUS 10'S (ANTACID),Acifix,,NO,,15,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,3e2324e5-c931-4d80-b805-20de471c9569,PSC-IS-097,ACIFIX SACHETS LEMON 10'S (ANTACID),Acifix,,NO,,15,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,2877da7b-d5a7-4acf-9206-340351155f59,PSC-IS-097,ACIFIX SACHETS ORNGE 10'S (ANTACID),Acifix,,NO,,15,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,d16eb757-a851-4ad0-b29c-84018ca8ebc2,PSC-IS-097,CAL C ANTACID CHEW TAB FRUIT FLV 150S,Cal,,NO,,29,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,4c1f3da3-4f01-440d-8026-5ba831588801,PSC-IS-097,GAVISCON ADV PEPPERMINT LIQUID SACHET 12'S,Gaviscon,,NO,,29,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,457203a8-0092-4419-969b-5007b0ebd54d,PSC-IS-097,GAVISCON ADV SUSP 300ML,Gaviscon,,NO,,32.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,c445b1e4-62df-4cf1-a70f-30cf4219f896,PSC-IS-097,GAVISCON ADV SUSP PEPPERMINT 300ML,Gaviscon,,NO,,32.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,ee9450b8-c10e-42fd-a732-f0734ab3fc66,PSC-IS-097,GAVISCON DOUBLE ACTION 250MG TAB 32'S,Gaviscon,,NO,,25,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,f24b925a-622b-470a-a973-8436cfa5208b,PSC-IS-097,GAVISCON DOUBLE ACTION LIQUID SACHET 12'S,Gaviscon,,NO,,28,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,48836b60-344f-4a28-a68b-8c38290f482c,PSC-IS-097,GAVISCON DOUBLE ACTION SUSP 300ML,Gaviscon,,NO,,30.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,3ebd1513-6fa3-45df-beab-a32d502056a4,PSC-IS-097,GAVISCON EXTRA PEPPERMINT 500MG TAB 24'S,Gaviscon,,NO,,28.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,6807b264-5fe4-412e-a9e7-51bfd0d42a5f,PSC-IS-097,GAVISCON INFANT SACHET 30'S,Gaviscon,,NO,,34,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,eefa7233-3ddd-4921-81d2-e731730e83df,PSC-IS-097,GAVISCON SUSP 200ML,Gaviscon,,NO,,19.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,7b43938f-d2d0-4216-87df-6d4bca110de4,PSC-IS-097,GAVISCON SUSP PEPPERMINT 200ML,Gaviscon,,NO,,19.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,3a02890a-b068-43b8-b2d9-3655cfa7ae32,PSC-IS-097,RENNIE TAB 96'S,Rennie,,NO,,29,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,45233321-9504-4139-9952-96a145460cac,PSC-IS-098,IMODIUM 2MG CAP 6'S,Imodium,,NO,,6.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,f3644622-d666-4f80-add4-469b2057f6b9,PSC-IS-098,IMODIUM 2MG CAP 60'S,Imodium,,NO,,48,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,399b6957-a89f-4e63-a79d-3ac503c17701,PSC-IS-098,IMODIUM INSTANT 2MG TAB 12'S,Imodium,,NO,,27.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,1d4c0b35-c0c4-4cb1-b5dd-cb62223eeb2b,PSC-IS-098,IMODIUM INSTANT 2MG TAB 6'S,Imodium,,NO,,15.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,d6b62d1a-7b63-4e37-9d00-d27be9ade1ac,PSC-IS-099,GASTOP 250MG S/G CAP 30'S (SIMETHICONE),Gastop,,NO,,60,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,0fc8ccc4-5b45-4dd2-8d87-66efbacdb272,PSC-IS-100,LACTULOSE SYRUP 300ML (EIPICO),,,NO,,17,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,b2dfcf5c-9500-4fc4-a09d-84c1a8e0d32f,PSC-IS-100,LIFULAX LACTULOSE ORAL SOLUTION 200ML,Lifulax,,NO,,12,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,2314f19f-c8fe-41ff-a89d-4797e451168a,PSC-IS-100,LIFULAX LACTULOSE SYRUP 300ML,Lifulax,,NO,,17,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,06b19d3c-641b-42e0-ad6d-21584f27462a,PSC-IS-102,CMC LUVIS EYE DROPS 10ML,Cmc,,NO,,45,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,e0b3626a-e4a7-45af-93a4-5ed40ca2c4a4,PSC-IS-105,CIPROCIN EYE/EAR DROPS 5ML,Ciprocin,,NO,,13.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,56a9ca93-9600-4138-a981-7ad18c5478ad,PSC-IS-106,FESS EUCALYPTUS SALINE NASAL SPRAY 30ML,Fess,,NO,,40,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,fb13d84a-5f8d-4918-825d-7986480a5d15,PSC-IS-106,FESS SALINE NASAL SPRAY 30ML,Fess,,NO,,30,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,1ee5f3ad-6829-4a30-aaab-4256e29a37fa,PSC-IS-106,RELISPRAY SALINE NASAL SPRAY 15ML,Relispray,,NO,,27,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,6f4158fa-515d-4e62-a427-f382e6ba9224,PSC-IS-109,GLARICON INSULIN 100IU 5X3ML,Glaricon,,NO,,241,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,806a5a2f-ddf2-4eb7-b0eb-a5fd50b4061d,PSC-IS-109,MEDCASE INSULIN CARRIER BAG,Medcase,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,654a34ae-30ef-4ac8-9e3a-fc83bf827d85,PSC-IS-109,MIXTARD 30HM INSULIN 10ML,Mixtard,,NO,,61.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,ad9e6e25-6779-46c8-a1b2-c752f271cc01,PSC-IS-109,SEMGLEE 100 U/ML 5 PRE-FILLED INSULIN INJECTION,Semglee,,NO,,209.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,7ba6402d-fb4d-48e8-85f1-88e99fcfd44a,PSC-IS-109,VERIFINE INSULIN PEN NEEDLE 4MM 32G 100'S,Verifine,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f7161458-bcc6-4f70-a28d-8c9d490a625c,PSC-IS-109,VERIFINE INSULIN PEN NEEDLE 5MM 31G 100'S,Verifine,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,ac366bbc-7a24-4b57-83da-9595d0bec3ed,PSC-IS-109,VERIFINE INSULIN PEN NEEDLE 6MM 31G 100'S,Verifine,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,8befca54-ef69-4072-8ba6-7398440a60d9,PSC-IS-109,VERIFINE INSULIN SYRINGE 0.5ML 6MM 30G 100'S,Verifine,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,cb071f34-3782-4fbb-a2d8-ea152eff2e98,PSC-IS-110,ADACEL 0.5ML SINGLE DOSE VACCINE INJECTION 1'S,Adacel,,NO,,81.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,c3ce9864-1b1e-47b8-8985-b82f4dbcea5b,PSC-IS-110,BE TT 0.5ML VIAL IM (TETANUS VACCINE BP),Be,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3f5e0c4a-a4b2-41eb-9bbe-789adba40078,PSC-IS-110,ENGERIX B 20MCG ADULT VACCINE 1ML,Engerix,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,631bda6a-8319-47d7-b2ec-cfed7c328569,PSC-IS-110,HAVRIX 720 JUNIOR 0.5ML VACCINE 1'S,Havrix,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,6f1efeea-a6a8-43d9-bdbd-dada5ce9efb1,PSC-IS-110,HEPATITIS B VACCINE(RDNA) ADULT,Hepatitis,,NO,,20.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,39e476f3-3ac3-45eb-a12b-30754d859496,PSC-IS-110,HEXAXIM 0.5ML VACCINE INJECTION 1'S,Hexaxim,,NO,,191,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,97002b6a-4a87-4b74-a857-9ff3006dc47e,PSC-IS-110,INFANRIX HEXA VACCINE,Infanrix,,NO,,222.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,35c6cfe7-834a-4583-bb3f-0607c06df543,PSC-IS-110,INFLUENZA VACCINE (SPLIT VIRION) 0.5ML 1 PFS,Influenza,,NO,,38.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,58ef1fbf-fcfd-4883-8c18-df3190b51ab2,PSC-IS-110,INFLUVAC 0.5ML SYRINGE INJ 1'S (VACCINE),Influvac,,NO,,26,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a2b1fe14-b528-4d01-9fbd-dc643638fab8,PSC-IS-110,INFLUVAC TETRA 0.5ML SYRINGE INJ 1'S (VACCINE),Influvac,,NO,,55,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,afabb14e-2be0-4eab-835c-32eb31b5785d,PSC-IS-110,MENACTRA VACCINE 1 DOSE VIAL,Menactra,,NO,,327.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,6cd44bb5-52e7-417a-9b7a-2cb0c037b0f1,PSC-IS-110,MENVEO 0.5ML 1 DOSE VACCINE INJECTION 1'S,Menveo,,NO,,285,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,9382e471-5933-4430-87a5-37f588a6ccc5,PSC-IS-110,PENTAXIM 0.5ML VACCINE INJECTION 1'S,Pentaxim,,NO,,133,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,b48a4128-ff0e-4c04-8ddb-151562b6cd70,PSC-IS-110,PREVENAR 13 VACCINE 1 DOSE 0.5ML SYRINGE,Prevenar,,NO,,335.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,e8ffae4b-dcbd-4c13-bdae-c482306005c0,PSC-IS-110,PRIORIX 0.5ML 1 DOSE VACCINE INJECTION 1'S,Priorix,,NO,,50.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,46116609-a54d-4d4a-a01d-41a7bb3a4370,PSC-IS-110,ROTARIX 1.5ML VACCINE ORAL SUSPENSION 1'S,Rotarix,,NO,,253,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,d3ba3703-e203-4991-9967-d306c07cfab4,PSC-IS-110,TETRAXIM VACCINE,Tetraxim,,NO,,71,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,c3f6945a-9410-4e18-af39-3c4d2ccfe2a8,PSC-IS-110,TT VACCINE (TETANUS TOXOID),Tt,,NO,,4,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,b2ec2d57-1acf-4145-b936-825f61612ac2,PSC-IS-110,TYPHIM VI 0.5ML VACCINE INJECTION 1'S,Typhim,,NO,,57.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,c72a4a87-923b-48e3-96c2-2de28e5ff652,PSC-IS-110,VARIVAX 0.5ML SINGLE DOSE VIAL VACCINE 1'S,Varivax,,NO,,168,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,941b9f13-eef4-4c4b-9993-a0b304bc860d,PSC-SC-A04,BEURER HM 16 HYGROMETER,Beurer,,NO,,125,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,5606fbd5-317b-404b-8774-74be57e56101,PSC-SC-A15,WOLAID HEAVY DUTY BATH STOOL JL797LH,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,bacf6e7d-f862-428b-9d70-883638869812,PSC-SC-A20,"BROMED ICE PACK DISP 175X115MM,130G",Bromed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e04049f8-076e-410b-a484-922c14e0a3ca,PSC-SC-A21,WOLAID BASIC WHEELCHAIR ALLOY-JL809B,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,4e7f228b-242e-476f-b185-72bc1b537b92,PSC-SC-A21,WOLAID CHILD WHEELCHAIR-JL802-35,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a6380124-4c9b-404f-8147-84c735411aed,PSC-SC-A21,WOLAID ELECTRIC WHEELCHAIR RED-JL157,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c0da88af-5a48-4a92-8cb9-a84b83e66f5f,PSC-SC-A21,WOLAID FOLDABLE ELECTRIC WHEELCHAIR-JL15,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,73bc921f-30c4-4fcf-80c7-0471458aa1d6,PSC-SC-A21,WOLAID HEAVY DUTY WHEELCHAIR-JL951B-56,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9777b185-d0b4-4469-92c0-3b62d34403d8,PSC-SC-A21,WOLAID HEAVY DUTY WHEELCHAIR-JL973-61,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,7b69a973-cdec-44df-8f3c-0e680dd881a0,PSC-SC-A21,WOLAID LIGHTWEIGHT WHEELCHAIR-JL832LABJ,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c8c6f2da-e239-43f2-b0f1-a7e7aeba6c53,PSC-SC-A21,WOLAID PEDIATRIC WHEELCHAIR-JL9020L,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,09eedae4-a387-40d9-941b-eb40e4f6ed76,PSC-SC-A21,WOLAID RECLINING WHEELCHAIR-JL954GC,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,7db5ee05-891a-4303-adaa-7cd6ba491d59,PSC-SC-A21,WOLAID WHEELCHAIR ELEVATING FOOTREST-JI902C,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e2ff7662-09ba-4e38-bab2-f9b3141d4c6f,PSC-SC-A21,WOLAID WHEELCHAIR-BLUE-JL8391LAJB,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f918f97d-57ed-4ee7-9c86-15b1d95a0809,PSC-SC-A21,WOLAID WHEELCHAIR-ORANGE-JL8391LAJO,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3b085108-f6da-482e-a316-a4e6b5eede4b,PSC-SC-A21,WOLAID WHEELCHAIR-RED-JL908LABJ,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e1ecb487-5207-479a-83c0-1c8f0bd1a26d,PSC-SC-B02,SPECTRUM MULTIFUNCTION STERILIZER (HB-313E),Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9873902e-eb9d-4aa8-91fb-220b139d932b,PSC-SC-B04,EASY FIRST AID SCISSOR,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3686eb7a-d916-47a8-a5ba-c9b7c08b6c82,PSC-SC-B04,HEALTH WEALTH SURGICAL SCISSOR 18CM,Health,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,ad756a69-4cdc-4d5a-a7ea-693e78107952,PSC-SC-B07,ACCU-CHEK INSTANT METER+AND BP MONITOR UA-611,Accu-Chek,,NO,,179,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,3b5b4e5c-a23e-49cb-aeca-b03c34c64ada,PSC-SC-B07,AFRA BLACK ARM TYPE SMALL DIGITAL BP MONITOR,Afra,,NO,,169,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,f8a9e1eb-896f-4c02-8481-3fa76856438f,PSC-SC-B07,AFRA BLACK WRIST TYPE SMALL DIGITAL BP MONITOR,Afra,,NO,,145,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,73fc731d-6993-499a-ad0b-43c93e440390,PSC-SC-B07,AFRA WHITE ARM TYPE LARGE DIGITAL BP MONITOR,Afra,,NO,,179,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,45a44a03-298e-4d50-831c-90f8f231b619,PSC-SC-B07,AFRA WHITE WRIST TYPE LARGE DIGITAL BP MONITOR,Afra,,NO,,139,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,00271f7a-8396-424a-be9a-4f1fe9bd0a53,PSC-SC-B07,AKTEV A3 BP MONITOR,Aktev,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3c24ac2c-b536-413a-9653-58fa36b2258e,PSC-SC-B07,AKTEV A3 PLUS BP MONITOR,Aktev,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,7ae172e3-bca6-4d6c-b20c-3d1f7ef7fca9,PSC-SC-B07,AKTEV BP MONITOR (PW3-PRO),Aktev,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,22b8acd2-1cb0-4f28-83c2-0a0717c89e2b,PSC-SC-B07,AME BP MONITOR BP-103H S-SERIES,Ame,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a268a962-b840-4eec-b4e5-92d8ac87efd5,PSC-SC-B07,B.WELL AUTOMATIC BP MONITOR MED-55,B.Well,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c9334d8e-02d4-4e95-9897-719c6dd76320,PSC-SC-B07,B.WELL BP MONITOR PRO-33,B.Well,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,cf065f46-2918-4451-9c43-58be07553b94,PSC-SC-B07,B.WELL BP MONITOR PRO-35(M/L),B.Well,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,916d6d70-20a7-414d-9bf3-2d8f2c1bad72,PSC-SC-B07,B.WELL WRIST BP MONITOR PRO-39,B.Well,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3b9b4ce5-7ca9-4df5-bfe3-5c9f17a2c2f2,PSC-SC-B07,BEON BLOOD PRESSURE MONITOR ARM TYPE,Beon,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,6ec46202-6517-41da-bb60-be57f93cdf6e,PSC-SC-B07,BEURER BM 27+ BP MONITOR BLACK-BM27+,Beurer,,NO,,154,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,db0b420c-6359-4060-b1c4-58e5bba20322,PSC-SC-B07,BEURER BM 28 UPPER ARM BP MONITER,Beurer,,NO,,195,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,537dd4cf-9ca0-4f56-a077-200dcf6ff771,PSC-SC-B07,BEURER BM 40 UPPER ARM BP MONITOR W/ADAPTOR,Beurer,,NO,,199,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a7e1e5fa-b732-4fed-ac04-14c46ef60520,PSC-SC-B07,BEURER BM 45 BP MONITOR W/ADAPTOR,Beurer,,NO,,240,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,c31bd9d6-6f14-49aa-b126-63b1a337b506,PSC-SC-B07,BRAUN BP MONITOR BUA-4000 (40028),Braun,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,6c324546-b339-4116-9645-38f3b699de52,PSC-SC-B07,BRAUN BP MONITOR BUA-4050 (63405),Braun,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a31c130c-8605-4fae-8f5e-8c221258568a,PSC-SC-B07,BRAUN BP MONITOR BUA-5000 (03003),Braun,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,705f0ac0-99fd-4417-84cf-43ba5845b7e7,PSC-SC-B07,BRAUN BP MONITOR BUA-6150,Braun,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,59c98b13-5376-43a7-b4b5-2e82267db424,PSC-SC-B07,BRAUN BP MONITOR BUA-6350 BLUETOOTH,Braun,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,451f7e55-3a18-482a-b48a-8425a741c9fb,PSC-SC-B07,CITIZEN DIGITAL BP MONITOR ARM-CH453,Citizen,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,09c776bc-47a6-4d3f-b786-ba31cd1f3467,PSC-SC-B07,DUDDOO BP MONITOR,Duddoo,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,aec7569b-a266-4739-8dde-4d072fe7a8e2,PSC-SC-B07,FORA GLUCOMETER+ NOVAMED N-04 BP MONITER(OFFER),Fora,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,7cc1e149-8d80-4a33-a7f8-4a6a68394a0c,PSC-SC-B07,LAICA BP MONITOR-BM2301,Laica,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e413832a-3479-4da6-a130-44ca2665074e,PSC-SC-B07,LAICA WRIST BP MONITOR-BM1006,Laica,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,6912f35a-7230-443d-96a4-8c6b2e2250ce,PSC-SC-B07,LIFESENSE A4 UPPER ARM BP MONITOR (MD1809),Lifesense,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,4ced3987-5bff-4ccb-986d-96079b7647ff,PSC-SC-B07,MAX DIGITAL BLOOD PRESSURE MONITOR FULL AUTO-MX6,Max,,NO,,125,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,c99a764b-ed76-47e3-9b50-64d7aec771fc,PSC-SC-B07,MAX DIGITAL BLOOD PRESSURE MONITOR-MX9,Max,,NO,,150,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,230e611d-60ff-47b2-ae4c-c2ddc026783b,PSC-SC-B07,MAX DIGITAL WRIST BLOOD PRESSURE MONITOR-MX5,Max,,NO,,99,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,97eaddcf-38c3-4556-8e37-3312643feedd,PSC-SC-B07,MAX DIGITAL WRIST BLOOD PRESSURE MONITOR-MX8,Max,,NO,,110,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,f6549c6c-699d-44a9-8a8c-34eba4376201,PSC-SC-B07,MAX PALM ANEROID SPHYGMOMANOMETER W/T STETHOSCOPE,Max,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,0d079cfd-510c-4f14-8a68-0630acff9463,PSC-SC-B07,MEDICARE LIFESENSE A2 BP MONITOR (MD638),Medicare,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,fc415acc-b5e8-4ad1-8f10-003597dc069f,PSC-SC-B07,MONTEX PROLIFE BASIC BP MONITOR (PA2),Montex,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b17bae40-d3cf-4c51-849f-a76c332921d8,PSC-SC-B07,MONTEX PROLIFE DIGITAL BP MONITOR (PA2 BT),Montex,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,1bee14eb-b515-4da0-809d-14f3089178a7,PSC-SC-B07,NIMED BP MONITOR .FULLY AUTO -BP 607,Nimed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,01750586-04d0-45cc-8678-9c12109849b0,PSC-SC-B07,NOVAMED BP MONITOR KD595 ARM,Novamed,,NO,,143,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,343cc14c-6ecd-418d-ac2a-d99268d610f0,PSC-SC-B07,NOVAMED BP MONITOR N-05,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,d43ddc5d-479d-4a8a-b937-22f117d485c2,PSC-SC-B07,NOVAMED N-04 BP MONITOR,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,18655fd3-347a-43e3-9f4b-ee13412cf6c1,PSC-SC-B07,NUMED BP MONITOR NM-24,Numed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a1c19694-fa24-48a9-be5c-486a5bf555f3,PSC-SC-B07,NUMED BP MONITOR NM-27,Numed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,2449a382-1197-49f5-9417-8d8d02005298,PSC-SC-B07,OMRON BP MONITOR M2 ECO-110304,Omron,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,1ed3fb54-beb4-4927-93fd-2e6d3b645e1a,PSC-SC-B07,OMRON M2 BP MONITOR,Omron,,NO,,299,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,1da8bc86-da66-4fc0-b414-3ebd9aca2cbe,PSC-SC-B07,OMRON M3 BP MONITOR,Omron,,NO,,325,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,401d0fd3-3d6b-4c90-a0c6-bd6bb67d4c39,PSC-SC-B07,OMRON M6 COMFORT BP MONITOR,Omron,,NO,,499,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,45df74cd-efc9-4379-9a9e-6c6fae472d22,PSC-SC-B07,OMRON RS2 WRIST BP MONITOR PROMO,Omron,,NO,,199,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,62904f7c-4069-48ad-9ed2-8a00de19ce50,PSC-SC-B07,PIC CARDIO SIMPLE BP MONITER,Pic,,NO,,199,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,6c9903b3-66c5-46fb-a407-63b7e1a59d2e,PSC-SC-B07,PIC CLEAR RAPID BP MONITOR,Pic,,NO,,299,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,afacb058-7807-4d77-99ed-bb5f75680795,PSC-SC-B07,S-ORTHO BP MONITOR DBP1313,S-Ortho,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5c740d02-e7ff-4ecf-8883-6646456d7f53,PSC-SC-B07,S-ORTHO BP MONITOR DBP1359,S-Ortho,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,7706d21d-6db4-4bdd-aff8-69fd4c0468b0,PSC-SC-B07,VEROVAL DUO CONTROL UPPER ARM BP MONITOR-LARGE,Veroval,,NO,,450,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,7148a6d7-a968-48ad-ac2a-b6b8c8180c81,PSC-SC-B07,VEROVAL UPPER ARM BP MONITOR-HTC 925307.A,Veroval,,NO,,320,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,ddb8d5bb-ca74-4aa6-9ae3-5c4b5fd6e7a9,PSC-SC-B07,VEROVAL WRIST BP MONITOR-HTC 925327.A,Veroval,,NO,,260,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,fce55f38-8a01-4fb4-9b5b-b1c8d38f5db2,PSC-SC-B07,VIGO TECH DIGITAL BP MONITOR,Vigo,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3fbac486-2827-4588-be91-6d5d48e0ea69,PSC-SC-B07,WAVE BALANCE BP MONITOR BP-35I NEW,Wave,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3598ea46-626c-4e9f-8bdc-34a3c5ac8716,PSC-SC-B07,WOLAID BP MONITOR CLASSIC-BP-11,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,4238f46a-70c9-4f73-9141-3abf23bd8fd6,PSC-SC-B07,WOLPRO ARM BP MONITOR CLASSIC,Wolpro,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9faf067e-f22c-47be-b0f5-8a1a52044083,PSC-SC-B08,OTOSCOPE,Otoscope,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,14d7adce-752d-4838-a094-231e0178be6a,PSC-SC-B10,EASY FIRST AID BOX LARGE,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9bce485f-1ed3-4d2f-a44a-da1916eaf2c9,PSC-SC-B10,EASY FIRST AID BOX MEDIUM,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,4ecde61e-73e2-422c-aa74-0323d98f0a87,PSC-SC-B10,EASY FIRST AID BOX SMALL,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5abda152-915c-4f12-932e-30f0361e54b1,PSC-SC-B10,NOVAMED FIRST AID BOX HY2930 LARGE,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5f45a08d-5106-473c-961f-f7ed0174c925,PSC-SC-B10,NOVAMED FIRST AID BOX HY2931 MEDIUM,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3929f653-bf73-402f-90e2-fb113244aa9b,PSC-SC-B10,NOVAMED FIRST AID BOX HY2932 SMALL,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e2641b24-cc6d-439f-9ecf-e0a669db91cb,PSC-SC-B10,NOVAMED FIRST AID KIT (37X30X14) M EMPTY STEEL BOX,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,cb9a5d6d-d0dd-486a-aa1f-1a59aa1864c9,PSC-SC-B10,NOVAMED FIRST AID KIT (46X30X14) L EMPTY STEEL BOX,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a18d1cb9-4104-4165-b229-54000cd18c78,PSC-SC-B10,NOVAMED FIRST AID KIT (L) GREEN,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,32db9990-c727-4c87-b596-73e2edee4494,PSC-SC-B10,NOVAMED FIRST AID KIT (M) GREEN,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e71583a8-fb50-4ce2-8e5f-5d6ff1299ab5,PSC-SC-B10,NOVAMED FIRST AID KIT (S) GREEN,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3f8a3192-f86a-4455-be22-8cd46f07ed9a,PSC-SC-B10,NOVAMED MULTIPURPOSE FIRST AID KIT HY2011,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,7d1351f1-1aa3-4c6f-bbb4-4e59898ac796,PSC-SC-B12,ACCU-CHEK ACTIVE METER+STRIP+LANCET (OFFER),Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,fcbbe044-ffa6-4eda-ad12-ded16755478e,PSC-SC-B12,ACCU-CHEK GUIDE METER+STRIP 50'S,Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b559bf75-f18f-4b47-b089-18635ac2c47f,PSC-SC-B12,ACCU-CHEK GUIDE METER+STRIP 50'S+LANCET 100'S,Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9a2fa0ba-5e61-441d-a5ec-f0f43c314474,PSC-SC-B12,ACCU-CHEK INSTANT METER+AND BP MONITOR UA-611,Accu-Chek,,NO,,179,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,38abe5d5-3166-4989-9ae8-b1e1647796d5,PSC-SC-B12,ACCU-CHEK INSTANT METER+STRIP 50'S,Accu-Chek,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a12e384c-9b4e-4db2-aac3-c96c9d62f5c0,PSC-SC-B12,BEURER GL 44 GLUCOSE MONITOR+GL 44/50 STRIP 10'S,Beurer,,NO,,149,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,e3120157-f86a-4fb4-91ac-a8f699264d8e,PSC-SC-B12,CARESENS N METER+50 STRIPS+100 LANCETS (COMBO),Caresens,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e77f64c4-8a6d-4ef8-ab00-1f9d8804224a,PSC-SC-B12,FORA 6 CONNECT MONITORING SYSTEM,Fora,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e50e93dd-e455-47bf-b6ed-9401fc507ee5,PSC-SC-B12,FORA BLOOD GLUCOSE MONITORING SYSTEM,Fora,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,72919b3f-e846-42a0-8659-6db3ea032fe0,PSC-SC-B12,FORA GLUCOMETER+ NOVAMED N-04 BP MONITER(OFFER),Fora,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,8f4f0c50-b0fa-4418-9008-b899864efbea,PSC-SC-B14,NATURES ANSWER LIVER & KIDNEY CLEANSE MAX CAP 60'S,Natures,,NO,,330,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,090a0163-0d2d-4d26-89fd-81d25a87f1cd,PSC-SC-B15,AFRA WHITE COMPRESSOR NEBULIZER AC WITH ACCESORIES,Afra,,NO,,179,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,d6489384-085e-453b-967a-fdeb49bb0f72,PSC-SC-B15,AFRA WHITE MESH NEBULIZER AA WITH ACCESORIES,Afra,,NO,,235,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a8d796ca-00eb-47fc-98ff-779f100d81e2,PSC-SC-B15,B.WELL COMPRESSOR NEBULIZER TRAIN PRO-115,B.Well,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,62049fa4-4051-498e-a64f-224cf90c9514,PSC-SC-B15,B.WELL MEDICAL NEBULIZER PRO-110,B.Well,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,0e0920ed-e232-401d-8a0d-65ba5f389a8d,PSC-SC-B15,B.WELL SMART COMPRESSOR NEBULIZER MED-120,B.Well,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,83d8eb22-6e3e-4690-8fd1-ba4d981f9275,PSC-SC-B15,BEON NEBULIZER (BEON4A),Beon,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b2831353-04cb-4caa-aa29-150099d7ed0c,PSC-SC-B15,BEON NEBULIZER CLASSIC (BEON10A),Beon,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9bdd03dc-8311-4a98-aac1-fb49f9ffd2b5,PSC-SC-B15,BEURER IH 18 NEBULIZER,Beurer,,NO,,250,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,1e04f638-009e-4dee-90c9-2b5da16940f2,PSC-SC-B15,BEURER IH 21 NEBULIZER,Beurer,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,085fc2f3-61fb-47a4-9f33-6dd69ae5ef39,PSC-SC-B15,BEURER IH 55  NEBULIZER,Beurer,,NO,,549,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,5f235966-2e20-4730-8d99-25565e7880bd,PSC-SC-B15,BEURER IH 57 NEBULIZER,Beurer,,NO,,364,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a5da95cd-9936-4243-a1b3-1c9e52993ed5,PSC-SC-B15,BEURER IH 60 NEBULIZER,Beurer,,NO,,399,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,76b906d1-213a-450d-ab21-42ed6f27768d,PSC-SC-B15,CANUSOFT COMPRES NEBULIZER CHILD (BLUE),Canusoft,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,41642f2e-69e1-42e9-8cda-a801b433b213,PSC-SC-B15,CANUSOFT COMPRES NEBULIZER CHILD (PINK),Canusoft,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f76c68ee-0503-42c4-a227-b6bc504fb77e,PSC-SC-B15,CANUSOFT COMPRESSOR NEBULIZER,Canusoft,,NO,,199,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,37c759e8-0e83-4a68-9ea9-3440365c6c81,PSC-SC-B15,COMPRESSOR NEBULIZER-(CNB69017),Compressor,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,2ce01882-7b06-47cf-80a8-732b401bac36,PSC-SC-B15,DUDDOO MESH NEBULIZER,Duddoo,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,29f3d34a-9351-47e0-9669-5b15ae71bbd2,PSC-SC-B15,MEDEL EASY NEBULIZER (95116),Medel,,NO,,169,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a1a86be1-8b81-4d1e-bb2a-e12fe87ef996,PSC-SC-B15,MEDICARE V1 COMPRESSOR NEBULISER (MD2006),Medicare,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,7402a9da-e14c-46fb-894a-58d354e72752,PSC-SC-B15,MEDICARE V2 PORTABLE NEBULISER (MD634),Medicare,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c55d1858-8b16-4a60-b8d4-589fada3dfdd,PSC-SC-B15,MEDTECH NEBULIZER HANDYNEB CLASSIC- P02814,Medtech,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,58ce93d2-21a3-4b76-bdc5-29f9131999c5,PSC-SC-B15,MONTEX PROLIFE COMPRESSOR NEBULIZER (PN BASIC),Montex,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,1657cdd7-2c81-442e-b283-3dc8336814a8,PSC-SC-B15,MONTEX PROLIFE MESH NEBULIZER (NA10),Montex,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,1d0583d4-f712-4692-a11c-19e25ee604ab,PSC-SC-B15,NEBULIZER NORDITALIA(ARIANNE POWER)AEROSL,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3728da88-83e8-4160-b91e-761929ad61e3,PSC-SC-B15,NIMED NEBULIZER COMPRESSOR RE- 723,Nimed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,d0f637ab-dde6-4eaf-90d6-a869a2e94489,PSC-SC-B15,NOVAMED N-12 ULTRASONIC MESH NEBULIZER,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,06b938f6-a43f-46c2-86b2-70fe4767f8b2,PSC-SC-B15,NOVAMED NEBULIZER GOLD (N-03G),Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b2862401-29f7-4f76-aa48-0dd0af858f4d,PSC-SC-B15,NUMED COMPRESSOR NEBULIZER NM-23,Numed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b483675d-3196-4e60-9f09-b4565fea8e19,PSC-SC-B15,NUMED MEDICAL COMPRES NEBULIZER NM-28,Numed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3c12c09e-c4dd-4cd7-96a9-2bea17d41d99,PSC-SC-B15,NUMED ULTRASONIC MESH NEBULIZER WITH TIMER NM-26,Numed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,44371e21-9e37-4f7b-ac22-f110aeaf70e7,PSC-SC-B15,OMRON C28 NEBULIZER 07922,Omron,,NO,,320,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,a734b969-c22b-4eab-8e33-be92d0669ea8,PSC-SC-B15,OMRON C801 NEBULIZER,Omron,,NO,,199,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,e55bdf2f-24b6-4441-898c-21738ba89127,PSC-SC-B15,OMRON NEBULIZER SET KIT (05720),Omron,,NO,,75,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,c626ae8e-1033-4e91-b617-5c4135b8fdf6,PSC-SC-B15,PIC AIRCUBE NEBULISER,Pic,,NO,,199,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,87aeda88-5403-4f27-a7ff-6bdb872e9d9b,PSC-SC-B15,SPECTRUM COMPRESSOR NEBULIZER-CN-01W,Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,50e4a227-a802-4e02-b98f-9e1630c5f859,PSC-SC-B15,SPECTRUM MESH NEBULIZER (N-400),Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b60715e1-6cfb-44b7-9a27-26050a5be75a,PSC-SC-B15,SPECTRUM MESH NEBULIZER-LT (N-100),Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,11fdb599-5b50-4d0f-86cd-9f8ad1353aed,PSC-SC-B15,STANOM PORTABLE MESH NEBULIZER,Stanom,,NO,,390,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,547b9756-64ab-40de-99ff-72886ae93650,PSC-SC-B15,VIGO TECH MESH NEBULIZER (COMPRESSOR) D-1040,Vigo,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,73966d83-c467-4e05-bf65-42fa63601ce1,PSC-SC-B15,WOLAID NEBULIZER SUPER-WD03,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5da3ef34-1655-4238-9431-81e50ce0a353,PSC-SC-B15,WOLAID ULTRA MIST MESH NEBULIZER,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,ef81250f-9112-482f-a037-2256ab9de1c1,PSC-SC-B15,WOLPRO COMPRESSOR NEBULIZER WD-02G,Wolpro,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5ab2f066-2105-412d-aecf-ba4e8bf67a8f,PSC-SC-B15,WOLPRO COMPRESSOR NEBULIZER WD-03G,Wolpro,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,382c942c-bd32-4e55-b8a4-ca23612a5154,PSC-SC-B15,WOLPRO COMPROSSOR NEBULIZER(PISTON TYPE),Wolpro,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,ac5a1cfa-d76b-4d3b-a438-1a130455bbba,PSC-SC-B19,BEURER PO 13 KIDS PULSE OXIMETER,Beurer,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,69062ae2-adba-46a3-a305-773b85426988,PSC-SC-B19,BRAUN PULSE OXIMETER 1 (1018),Braun,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3c921f3f-db51-45b1-aaeb-f03f6087897f,PSC-SC-B19,PULSE OXIMETER (LK87),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f7bcc39c-8a0c-45f7-bf70-9de475d85f05,PSC-SC-B19,PULSE OXIMETER A2,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9ef9fef0-a031-4cc1-bfa4-006fbebf23e4,PSC-SC-B20,"CL TRIPLE ACTION SHARP THOUGHT CAP 30""S",Cl,,NO,,308,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,b1477532-19ac-4dc3-a15c-6163d18e92a1,PSC-SC-B21,ANEROID BP W/STETHOSCOPE BK-2001,Aneroid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9806c428-31be-498e-88f3-b36f64b5175d,PSC-SC-B21,MAX CLASSIC STETHOSCOPE,Max,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5524fd6e-53bc-42fc-bb6b-d2a464a644f7,PSC-SC-B21,MAX CLASSIC STETHOSCOPE (CARDIOLOGY),Max,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,56f526c7-eaa0-42fe-8e3d-d2c613b42eee,PSC-SC-B21,MAX CLASSIC STETHOSCOPE (CHILDREN),Max,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,ec538d6d-961d-4107-a3fb-d6823595c563,PSC-SC-B21,MAX PALM ANEROID SPHYGMOMANOMETER W/T STETHOSCOPE,Max,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,55c470bf-8c92-4293-85ec-15cfade34f29,PSC-SC-B21,SPECTRUM ST.STEEL STETHOSCOPE CLASSIC (KS-2026BG),Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a43d9f30-9661-4c92-90b6-e87b3dee6eed,PSC-SC-B23,AFRA WHITE DIGITAL THERMOMETER WITH FLEXIBLE TIP,Afra,,NO,,25,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,3f4a9679-5d32-47ab-bb43-63f242da6271,PSC-SC-B23,AFRA WHITE INFRARED THERMOMETER EAR TYPE AUTOMATIC,Afra,,NO,,159,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,692bebe1-2554-4718-a5ce-1565607395dd,PSC-SC-B23,AFRA WHITE NON-CONTACT INFRARED THERMOMETER GUNTYP,Afra,,NO,,139,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,978e0117-fbe2-40cf-baa6-4e0cb9291870,PSC-SC-B23,AICARE INFRARED FOREHEAD THERMOMETER (A66),Aicare,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,35d60460-c386-4923-8e6f-479954a2256d,PSC-SC-B23,B.WELL BASE DIGITAL THERMOMETER WT-03,B.Well,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e06f9932-9ef2-4b0a-8015-965649d90440,PSC-SC-B23,B.WELL NON CONTACT THERMOMETER MED-3000,B.Well,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9ff9f5b3-d644-4479-a951-af02b212c5eb,PSC-SC-B23,B.WELL STANDARD DIGITAL THERMOMETER WT-04,B.Well,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5a3a33b2-c85d-4161-9f4c-e7f61ca90127,PSC-SC-B23,BEON DIGITAL THERMOMETER FLEXIBLE (BEON6B),Beon,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5e3dfa17-7a62-4b3e-bf16-6e21f766db06,PSC-SC-B23,BEON DIGITAL THERMOMETER RIGID (BEON6A),Beon,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9c8b8aa6-5475-46c5-bed6-f2aa75a2685e,PSC-SC-B23,BEON EAR THERMOMETER (BEON5A),Beon,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,81276e48-fd96-4776-a9b5-d25569531bf7,PSC-SC-B23,BEURER BY 11 INSTANT THERMOMETER (DOG),Beurer,,NO,,43,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,352e3fa9-35b5-4b7f-a1a0-7ea3d6ffa251,PSC-SC-B23,BEURER BY 11 INSTANT THERMOMETER (MONKEY),Beurer,,NO,,43,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,139e2426-bae1-4133-bbdb-e73fb4a16c9a,PSC-SC-B23,BEURER FT 09 CLINICAL THERMOMETER,Beurer,,NO,,33,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,3899e454-2755-4fd1-aaa0-6ff4db818557,PSC-SC-B23,BEURER FT 13 CLINICAL THERMOMETER,Beurer,,NO,,36,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,74ddb6b8-1f99-42d5-8b26-2e352d5e091e,PSC-SC-B23,BEURER FT 58 EAR THERMOMETER,Beurer,,NO,,260,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,f0f485d7-459e-44ed-aca0-ae9eec9d5229,PSC-SC-B23,BEURER FT 70 MULTIFUNCTIONAL SPEAKING THERMOMETER,Beurer,,NO,,214.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,60811df9-eea5-4342-b318-7328e6c0e8f7,PSC-SC-B23,BEURER FT 85 NON-CONTACT THERMOMETER,Beurer,,NO,,340,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,ab619cdf-a4e4-4042-988e-cc9ecf539dd2,PSC-SC-B23,BEURER FT 90 NON-CONTACT THERMOMETER,Beurer,,NO,,274,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,dd30b54c-86dc-43f5-9587-2eadef7616a6,PSC-SC-B23,BRAUN BNT 400 TOUCH THERMOMETER,Braun,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,96284399-cd98-4a72-b8e4-117e023c1d6d,PSC-SC-B23,BRAUN BST 200 FOREHEAD THERMOMETER SWIPE,Braun,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,68898efa-9c83-4621-8989-904888a4f32d,PSC-SC-B23,BRAUN DIGITAL THERMOMETER PRT-1000 (00658),Braun,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b9a7a666-2c99-4bd0-84ce-ad4bb33af4ab,PSC-SC-B23,BRAUN DIGITAL THERMOMETER PRT-2000,Braun,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f131f8a6-f9eb-49cf-b01c-bc4053c231f0,PSC-SC-B23,BRAUN THERMOMETER NTF-3000,Braun,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,cf891ee2-e2b0-4f32-b18c-7a6635c717a8,PSC-SC-B23,CUIRE DIGITAL THERMOMETER,Cuire,,NO,,25,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,0d25b5aa-b76e-48c0-8fde-5c1820c3ed2b,PSC-SC-B23,DUDDOO NON CONTACT THERMOMETER,Duddoo,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f65fbe08-2231-4c67-8f23-7365fb97daa4,PSC-SC-B23,FORA FOREHEAD THERMOMETER,Fora,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,8c0ef631-8ed0-426f-8ffe-0913105ff70c,PSC-SC-B23,"FORA IR19 FOREHEAD,FOOT,SKIN,THERMOMETER",Fora,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,dca4d8e4-4c92-48c3-be4f-7a39e93fa09a,PSC-SC-B23,FOREHEAD THERMOMETER NON-CONTACT (40526),Forehead,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3ded1dcc-8347-4ef0-917b-aaaba1511483,PSC-SC-B23,LIFESENSE T2 DIGITAL THERMOMETER (MD061),Lifesense,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,cd425b58-08d7-479e-93f9-e5abca70feba,PSC-SC-B23,MEDEL THERMO DIGITAL THERMOMETER (95128),Medel,,NO,,18.95,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,5e4af5f7-7e5c-4490-9a24-7b2d7614122e,PSC-SC-B23,SPECTRUM INFRARED EAR THERMOMETER (KFT-23),Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,da760638-064c-4662-859c-0b02b5157293,PSC-SC-B23,SPECTRUM SPEAR&FOREHEAD INFRARED THERMOMETER,Spectrum,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,7a6f3fdc-459f-4f40-8d7c-66cf158d4ea9,PSC-SC-B23,VEROVAL BABY INFRARED THERMOMETER,Veroval,,NO,,317,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,bf8ac450-d6ca-4ab9-8302-3eb3b01997e6,PSC-SC-B23,VEROVAL EAR&FOREHEAD THERMOMETER (HTC 925466),Veroval,,NO,,220,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,9fec4276-fe80-4131-b90a-c2ec9c255dda,PSC-SC-B23,WOLPRO DIGITAL THERMOMETER,Wolpro,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,7cf98c63-1106-4a10-94a8-a1403716d6d0,PSC-SC-C01,AM WOUND ADHESIV PLASTER ROUND 100S,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,04250c0f-21b4-46da-be17-49bf30d5d228,PSC-SC-C01,"AM WOUND BLUE BANDAGE PLASTER 100""S",Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,7978f764-7a9e-48bb-9750-1522d7b1ca7c,PSC-SC-C01,AM WOUND PLASTER LONG 100'S,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,10614d0f-f701-4cf9-abad-c1e55b86ccc6,PSC-SC-C01,AM WOUND PLASTER LONG 20'S,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,705f10df-ee71-4fa5-82b8-42015845ab56,PSC-SC-C01,AM ZINK OXIDE PLASTER 1.25CM-COTTON,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,bdc27e8c-3a3d-4fa5-a29d-c112aa892a1b,PSC-SC-C01,AM ZINK OXIDE PLASTER 1.25CM-PAPER,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3704b413-1e7b-45ce-bdcf-be828d8f5ec4,PSC-SC-C01,AM ZINK OXIDE PLASTER 1.25CM-TRANSPARENT,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a3563a73-1b9f-42ae-bd16-96d09801d9b4,PSC-SC-C01,AM ZINK OXIDE PLASTER 2.5CM-COTTON,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,bd3bf092-4a2c-4fae-b7ba-889558fe35c0,PSC-SC-C01,AM ZINK OXIDE PLASTER 2.5CM-PAPER,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,00f46bad-fef7-421e-9b0c-9795ce5d8e41,PSC-SC-C01,AM ZINK OXIDE PLASTER 2.5CM-TRANSPARENT,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,ed20b483-f0b1-41f1-b3b5-8406618391d2,PSC-SC-C01,AM ZINK OXIDE PLASTER 5CM X 5M-COTTON,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,215784e6-9a18-4455-ae47-ad50039625a8,PSC-SC-C01,AM ZINK OXIDE PLASTER 5CM-COTTON,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,d6a5a438-ff74-4e3a-b91e-9fbf28b6bc4c,PSC-SC-C01,AM ZINK OXIDE PLASTER 5CM-PAPER,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,2a918f5b-7f7a-44c9-96c0-7ba4c5cd1a4a,PSC-SC-C01,AM ZINK OXIDE PLASTER 5CM-TRANSPARENT,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,28ce5e6b-04a1-4a55-a04a-6fbf3f0dea53,PSC-SC-C01,"COMPEED BLISTER PLASTER MIXED 5""S",Compeed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,06d09e4b-ece4-4148-8e86-ff3e0ce0bf14,PSC-SC-C01,DERAMED BLISTER PLASTER 5'S (8218),Deramed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3e5bb462-1e6b-4f03-b8f4-e17c5d8ae8e5,PSC-SC-C01,DERMAPLAST PLASTER AQUA 20'S (535540),Dermaplast,,NO,,10,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,ec32c33a-5aee-4398-b796-62ef772b116e,PSC-SC-C01,DERMAPLAST PLASTER KIDS 20'S XXXXXX,Dermaplast,,NO,,16,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,bfff8239-c086-4178-a7dc-b7ea66f0d2c5,PSC-SC-C01,DERMAPLAST PLASTER PROTECT PLUS 20'S (535420),Dermaplast,,NO,,18,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,904ef0bb-6301-4297-81fb-c8f367716f55,PSC-SC-C01,DERMAPLAST PLASTER PROTECT PLUS FAMILY 32'S-522860,Dermaplast,,NO,,18.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,616ffddd-52b5-4703-b50a-23ea4660d9cb,PSC-SC-C01,DERMAPLAST PLASTER SOFT SILICONE 8'S (535311),Dermaplast,,NO,,18,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,b39bb844-bca8-455c-93d6-91600f291a46,PSC-SC-C01,DERMAPLAST PLASTER WATER RESISTANT 20'S (535143),Dermaplast,,NO,,12,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,9fb34724-ef3a-4317-946a-871169520a1e,PSC-SC-C01,DERMAPLAST SOFT 22MM SPOTS PLASTER 200'S,Dermaplast,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b849204a-8a88-43bd-8749-d97821836ea6,PSC-SC-C01,EASY COOL BOY FIRST AID PLASTER 15PCS,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,621e4601-2ec6-466e-8c9c-d0b65855408a,PSC-SC-C01,EASY COOL GIRL FIRST AID PLASTER 15PCS,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,488aea86-7d45-4daa-938e-c409b4bf0c9e,PSC-SC-C01,EASY FLEXIBLE FIRST AID PLASTER 20'S,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,93fa7357-0eb9-44f7-8ce2-43cbfee602a1,PSC-SC-C01,EASY MIXED FIRST AID PLASTER 25'S,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f7e587df-9bcd-42cb-b248-3d1e532405ef,PSC-SC-C01,EASY ROUND FIRST AID PLASTER 20PCS,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f40a3404-2ef6-46e2-89e1-c4ed7d13bc17,PSC-SC-C01,HANSAPLAST AQUA PROT W/P PLASTER STRIP 20'S,Hansaplast,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e2c3c308-24b9-418d-9076-ed680b9ef52a,PSC-SC-C01,HANSAPLAST ELASTIC PLASTER STRIP 100'S,Hansaplast,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,4aa804dc-ae3f-4a45-a0a1-56470fd716e5,PSC-SC-C01,HANSAPLAST ELASTIC PLASTER STRIP 20'S,Hansaplast,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,8c6612bd-9070-4645-9d52-a813b67e1512,PSC-SC-C01,HANSAPLAST EXTRA TOUGH W/P PLASTER STRIP 16'S,Hansaplast,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a38e24d0-8d5b-4b9b-b94c-5b8620a11afe,PSC-SC-C01,HANSAPLAST FINGER STRIP PLASTER 16'S,Hansaplast,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c255e3d3-f677-40e2-9763-a025a363c553,PSC-SC-C01,HANSAPLAST SENSITIVE KIDS PLASTER STRIP 20'S,Hansaplast,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,30243c2d-d800-4f1d-a328-e32c8e91d8a6,PSC-SC-C01,HANSAPLAST SENSITIVE PLASTER STRIP 20'S,Hansaplast,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,69db578e-de53-43a8-8294-17f40ffbc5db,PSC-SC-C01,HANSAPLAST TRANSPARENT PLASTER 20'S,Hansaplast,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,bb1843f7-db7a-4388-9262-ba62df84303f,PSC-SC-C01,HANSAPLAST UNIVERSAL W/R PLASTER STRIP 100'S,Hansaplast,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b0d7dc4c-3f5d-44f7-8430-3833089f3978,PSC-SC-C01,HANSAPLAST UNIVERSAL W/R PLASTER STRIP 20'S,Hansaplast,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3305c43e-ac10-4ce9-8373-e81c6c526922,PSC-SC-C01,HANSAPLAST UNIVERSAL W/R PLASTER STRIP 40'S,Hansaplast,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f081a429-6542-45a2-8f94-cff4e069e0df,PSC-SC-C01,HANSAPLAST UNIVERSAL W/R SPOT PLASTER 50'S,Hansaplast,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,18c1e532-83a3-4f96-870d-8ab79c6f24cc,PSC-SC-C01,"HEALTH CHOICE DERAMED BLISTER PLASTER 42X68MM 5""S",Health,,NO,,49,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,2023414a-e8f8-474e-9176-e4e56ae509c3,PSC-SC-C01,LION ARNICA HEAT PLASTER 1'S,Lion,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,68ec49d2-edc3-45d8-88a2-a00f7fbf74ce,PSC-SC-C01,MEDICARE ASSORTED CLEAR PLASTER 30'S (MD11),Medicare,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b8f06121-96f7-4f24-a721-e200f71ad72a,PSC-SC-C01,MEDICARE EXTRA LARGE CLEAR PLASTER 30'S (MD17),Medicare,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,94dba981-2cc5-4648-921d-d821c243645b,PSC-SC-C01,MEDICARE EXTRA LARGE WATERPROOF PLASTER 30'S(MD18),Medicare,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3471689e-4b6d-44ae-9aaa-700e9244ca66,PSC-SC-C01,MEDICARE FABRIC PLASTER 30'S (MD02/1),Medicare,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b31a9caa-8287-4fbd-8ac2-6adbc9860094,PSC-SC-C01,MEDICARE FABRIC PLASTER FAMILY PACK 50'S (MD220),Medicare,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,fdae5b45-f644-4345-9352-df2e162c01e5,PSC-SC-C01,MEDICARE SENSITIVE PLASTER 30'S (MD05/1),Medicare,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,11c53e5d-f227-4bf9-be7f-e7c530a8fcbf,PSC-SC-C01,MEDICARE SENSITIVE PLASTER FAMILY PACK 50'S(MD222),Medicare,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,fdc02bc2-adeb-4c41-a8d2-e10a7f596009,PSC-SC-C01,MEDICARE WATERPROOF PLASTER 10'S (MD08),Medicare,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,8a6417ad-dc27-4054-883d-91b64a31e64b,PSC-SC-C01,MEDICARE WATERPROOF PLASTER 30'S (MD04/1),Medicare,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,97f3766f-18bd-4e8b-b734-0cfff4c7cf2e,PSC-SC-C01,NOVAMED CLAER PLASTER WATER RESISTENT 50S HY6302,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5454b5a2-e0c1-4afe-9e56-3584da041657,PSC-SC-C01,WOLAID ROUND PAPER PLASTER 1.25CM X9M 24S,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b0f0a868-e6ca-49aa-ba09-c8f75b669767,PSC-SC-C01,WOLAID ROUND PAPER PLASTER 5CM X9M 6S,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,d3025209-5cb6-4c73-b1d0-6a4b6609553e,PSC-SC-C02,ALCOHOL SWAB 100'S (EUROMED-OXIMED),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,fdb8fd9c-a81a-40b3-b4e7-e5f9b927caa4,PSC-SC-C02,ALCOHOL SWAB 200'S (EUROMED-OXIMED),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,342ed7ea-355d-46f2-abb1-15ec70049736,PSC-SC-C02,NIMED ALCOHOL SWAB 100'S,Nimed,,NO,,10,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,b9ae164a-a304-4298-9d40-dc533348ea78,PSC-SC-C02,WOLAID ALCOHOL SWAB 100'S,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3695887d-f67f-408b-8b48-875f57613ba7,PSC-SC-C02,WOLAID ALCOHOL SWAB 200'S,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,2948831c-6e97-49f1-b029-c54571d45289,PSC-SC-C02,WOLAID ALCOHOL SWAB 200'S{XXXXX},Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,4a9637e9-d661-4a80-9914-6caf4c03c399,PSC-SC-C03,BROMED BAND AID STRIP BROPLAST 100'S,Bromed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,bc072713-9f28-4172-85db-1c90c3c0f93f,PSC-SC-C03,EUROMED BAND AID STRIP 100'S (OXIMED),Euromed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a1fd160b-4a81-4885-b317-e2dbb05c9c0a,PSC-SC-C05,DART NITRILE EXAMINATION P/F GLOVES (L) 100'S,Dart,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,994ba685-8843-434b-90dc-9f98ead1cf70,PSC-SC-C05,DART NITRILE EXAMINATION P/F GLOVES (M) 100'S,Dart,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f6c8175b-263a-47b3-95dd-65333aea2b3b,PSC-SC-C05,DART NITRILE EXAMINATION P/F GLOVES (S) 100'S,Dart,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f3a73d7a-a091-4b96-9b6f-c3820b9a5102,PSC-SC-C05,GESALIFE NITRILE GLOVES P/F BLUE- L,Gesalife,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3e8f135e-8a30-49a3-9b4d-283b95d2557a,PSC-SC-C05,GESALIFE NITRILE GLOVES P/F BLUE- M,Gesalife,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,fc6da8a5-dadd-45ad-929e-96c5ab09efe8,PSC-SC-C05,I GLOVES LATEX POWDER FREE- SMALL,I,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3e8d8dc0-52c1-43f2-bbf1-beba8f89835f,PSC-SC-C05,LATEX GLOVES LARGE (3261),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a3958eec-ecba-48c9-af9a-12aa079249d6,PSC-SC-C05,LATEX GLOVES MEDIUM (3261),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f70d904f-d736-473d-b389-6b7b686e1654,PSC-SC-C05,LATEX GLOVES POWER FREE MEDIUM,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,8a2c0904-3b98-425d-8287-c8dd692c98ee,PSC-SC-C05,LATEX GLOVES SMALL (3261),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,047c1f7a-5faa-4d02-91bf-abdd06cbb78e,PSC-SC-C05,MAXAR GLOVES NITRILE POWDER FREE (M) 100'S,Maxar,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e78524d2-f853-42d9-9e4e-161ef0f1bcd4,PSC-SC-C05,MEDIC LATEX GLOVES POWDERFREE MEDIUM,Medic,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c9766257-758d-45a0-b8b1-2b1cadb59b5f,PSC-SC-C05,MEDIC LATEX GLOVES POWDERFREE SMALL,Medic,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,92557e95-a590-4bc4-b0ea-770b5a18e7d2,PSC-SC-C05,MEDIC LATEX GLOVES X LARGE,Medic,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,df718c18-d8c3-4bc0-b50e-9c3d3dfcd2ca,PSC-SC-C05,NICE CARE LATEX PF GLOVES EXTRA LARGE,Nice,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b8e8cc23-bc43-4dcd-97e5-cb7a420d7b6c,PSC-SC-C05,NICE CARE LATEX PF GLOVES LARGE,Nice,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,975e1f1c-d7b2-4f43-8db8-a876a6821938,PSC-SC-C05,NICE CARE LATEX PF GLOVES MEDIUM,Nice,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,28cb7dc1-52fa-4ff2-bc65-e94f60dbb8ad,PSC-SC-C05,NICE CARE LATEX PF GLOVES SMALL,Nice,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a23f5511-7345-4165-aab3-be6493018337,PSC-SC-C05,NICE CARE NITRILE PF GLOVES LARGE,Nice,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,75d0a458-363e-42c0-a312-793102b5ab02,PSC-SC-C05,NICE CARE NITRILE PF GLOVES MEDIUM,Nice,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,6fc8500f-5164-4866-b2f2-0ce7ed906377,PSC-SC-C05,NICE CARE NITRILE PF GLOVES SMALL,Nice,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,611604bd-87a4-47eb-b7a1-d6bbfe330aed,PSC-SC-C05,NITRILE DISPOSABLE GLOVE PF LARGE 100PCS,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,90998a9a-caaa-49f3-b4e8-7d8a7c00e9da,PSC-SC-C05,NITRILE DISPOSABLE GLOVE PF MEDIUM 100PCS,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,109d7181-f329-4080-88f1-b9d0b56804c3,PSC-SC-C05,NITRILE GLOVES LARGE,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a8d03fb6-ec70-4c60-bb8f-cd42c2c9a6b9,PSC-SC-C05,NITRILE GLOVES MEDIUM,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,63b756aa-2d20-493f-9a2f-307776e752f0,PSC-SC-C05,NITRILE GLOVES SMALL,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,0ebd8c8b-bb8c-4520-bd47-2a27429c22d2,PSC-SC-C05,NITRILE GLOVES X- LARGE,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5bebc305-df71-4aa2-88c6-1f5bfaf771a1,PSC-SC-C05,PALM CARE  NITRILE EXAM  GLOVES MEDIUM PF,Palm,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,6769898e-9a0c-4568-a898-05b10fe5eaf5,PSC-SC-C05,POWDER FREE LATEX GLOVES -L,Powder,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,d85c0cad-b886-4feb-a24a-48b970362e44,PSC-SC-C05,POWDER FREE LATEX GLOVES XL,Powder,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f52be301-555c-4705-89c9-489e54a0ec47,PSC-SC-C05,POWDER FREE LATEX GLOVES-LARGE,Powder,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,6c65fa1c-0ccd-4f93-bb52-2cdc56760d9a,PSC-SC-C05,POWDERED LATEX GLOVES(L),Powdered,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e3ebef5a-cc28-4137-9078-3d91b2aacad7,PSC-SC-C05,POWDERED LATEX GLOVES(M),Powdered,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c8e66676-380e-456d-a65c-a4d45c08502a,PSC-SC-C05,POWDERED LATEX GLOVES(S),Powdered,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,ffee312c-5e16-4832-96a8-4077663aafad,PSC-SC-C05,VINYL GLOVES LARGE (1604),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,27c4f2ff-75db-4b94-8d65-4b0b5898c5bd,PSC-SC-C05,VINYL GLOVES MEDIUM (4607),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,34096b42-5863-4151-b89d-82958607bf84,PSC-SC-C05,VINYL GLOVES POWDER FREE - XL,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,8bbd1aa2-9428-496b-970f-f0552b622230,PSC-SC-C05,VINYL GLOVES POWDER FREE -LARGE,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,33a36660-5a52-443a-be1f-c6d5d5662a6f,PSC-SC-C05,VINYL GLOVES POWDER FREE -MEDIUM,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9320b297-29c8-4a2e-8df7-5fe3534f53f1,PSC-SC-C05,VINYL GLOVES SMALL (4607),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e098e384-ce03-4149-a769-b0704e534b65,PSC-SC-C05,VINYL GLOVES X LARGE (4607),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,141daf09-33c5-450a-85f6-4ee46d8da2a4,PSC-SC-C05,VINYLGLOVESPOWDER FREE- S,Vinylglovespowder,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,034c380e-7cee-4ccd-9d8f-aeb140561b9f,PSC-SC-C08,NEBULIZER MASK ADULT (CEUMED),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,84099140-0aef-4ec5-9bb2-a40a0552f0ee,PSC-SC-C08,NEBULIZER MASK ADULT EUROMED&OXIMED,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,16cd90d8-2d03-4f8a-a78e-dc30ad63ca7f,PSC-SC-C08,NEBULIZER MASK PEAD EUROMED&OXIMED,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,0e4953d7-fb1e-4799-89aa-0c580874093b,PSC-SC-C08,NEBULIZER MASK PEADIA (CEUMED),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9ce151f2-6f35-406f-9407-5772d8a1a19c,PSC-SC-C08,OMRON NEBULIZER SET KIT (05720),Omron,,NO,,75,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,6c8bdadb-c777-4980-9934-796c82b98258,PSC-SC-C08,WOLAID MESH NEBULIZER MASK,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f1c7d794-144f-47ae-8009-bae30ed41dd7,PSC-SC-C08,"WOLAID NEBULIZER MASK ADULT 1""S",Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a1ad8fcd-68b4-4cfd-b361-1131b899b300,PSC-SC-C08,"WOLAID NEBULIZER MASK CHILD 1""S",Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f0dee5d3-cd70-4b9a-aa14-fc7f435014b5,PSC-SC-C09,WOLAID OXYGEN MASK ADULT,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a867cbad-9ac2-4742-b764-2dc25e5bcb74,PSC-SC-C09,WOLAID OXYGEN MASK CHILD,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,559d53cd-df71-42e9-a338-9db2bcc52283,PSC-SC-C10,DADA FACE MASK 3D WHITE 50'S (80318),Dada,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e5aeb581-ab0b-4be3-b80c-4bb93e10d7f3,PSC-SC-C10,DADA FACE MASK BLACK&WHITE 50'S (40006),Dada,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e4c3344b-0f9f-46b6-b27c-4f67f08c42f0,PSC-SC-C10,DADA FACE MASK BLUE 50'S (40020),Dada,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,164a2d18-4975-466e-96f0-25f4062a9dff,PSC-SC-C10,DADA FACE MASK HYGIENIC BLUE (SINGLE 50S),Dada,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,ad9487e6-5d34-49a5-8093-3da9f6c119d9,PSC-SC-C10,DADA FACE MASK SINGLE BLACK & WHITE (4006),Dada,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,24ffa643-dadd-42cc-a8ed-598068f25aba,PSC-SC-C10,DADA FACE MASK SINGLE BLACK 50'S (40013),Dada,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9aa444d3-42bc-4cd3-9487-637c859d5c01,PSC-SC-C10,DADA FACE MASK SINGLE WHITE 50'S (81329),Dada,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5f0eb0b6-a71a-4d2a-a34e-92e66751df8e,PSC-SC-C10,"FACE MASK 3 PLY  50""S - BLACK",Face,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e4178a95-d830-4b44-87c5-f8c1036fbc07,PSC-SC-C10,"FACE MASK 3 PLY  50""S - WHITE",Face,,NO,,6,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,61119b5c-c19f-4cc4-944b-c380cad42000,PSC-SC-C10,FACE MASK 50'S 3PLY,Face,,NO,,5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,32781afc-3316-42a3-b9b1-406c43f6b025,PSC-SC-C10,FACE MASK JUST CARE 4 PLY,Face,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,ddcf0453-d07b-4aad-ae33-839d7e182dfe,PSC-SC-C10,"FACE MASK KN95 INDIVIDUAL50""S SINGLES",Face,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5fc6fe29-1ff6-40d6-b41d-6ab143040dd9,PSC-SC-C10,KANG KN95 FACE MASK WITHOUT FILTER 10'S (70007),Kang,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,51e2a283-085c-4d45-8f11-f1eab109a509,PSC-SC-C10,"KIDS FACE MASK 10""S X 5/BOX",Kids,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9d7a2c41-6386-4d96-8360-2591f4ecdcfc,PSC-SC-C10,MUSK FACE MASK N95 BLACK 10'S (72205),Musk,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,8800e939-5365-4ea0-afde-5ab18a62aeea,PSC-SC-C10,MUSK FACE MASK N95 WHITE 10'S (72205),Musk,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,631669ca-6167-4ee0-8bc5-5e9f04f43995,PSC-SC-C10,SWIFT FACE MASK 3D BLACK 50'S (50155),Swift,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,0a09b2fc-c294-4310-b716-9e91cbc83f2b,PSC-SC-C10,SWIFT FACE MASK 3D WHITE 50'S (50155),Swift,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,37ffd6ca-9936-4fa3-802c-74313e285fa1,PSC-SC-C14,AM ELASTIC CREPE BANDAGE 10CM(12DOZ),Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,47fdb765-028a-4635-9bad-326af6eabd23,PSC-SC-C14,AM ELASTIC CREPE BANDAGE 5CM(12DOZ),Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,7067b54e-7c40-444a-9728-0c51be38bc97,PSC-SC-C14,AM ELASTIC CREPE BANDAGE 7.5CM(12DOZ),Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,1c7c8aab-17af-4d50-b143-535d27aa9ba9,PSC-SC-C14,AM HIGH ELASTIC BANDAGE 10CM(12DOZ),Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,95e63fc4-cf5a-495e-b349-9a136a1b5d09,PSC-SC-C14,AM HIGH ELASTIC BANDAGE 15CM(12DOZ),Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,2ced310d-5183-43f4-abb5-f545e15fe6b7,PSC-SC-C14,AM HIGH ELASTIC BANDAGE 5CM(12DOZ),Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,8c0e4d63-3200-4894-987a-8f5ab9b5ec38,PSC-SC-C14,AM HIGH ELASTIC BANDAGE 7.5CM(12DOZ),Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,45a1eb95-ec7e-4be9-a401-cda142d2584b,PSC-SC-C14,ELASTIC CREPE BANDAGE 10CM X 4M (ELOCREPE),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,be113f3f-7224-4e9e-a754-c6843d2496f3,PSC-SC-C14,ELASTIC CREPE BANDAGE 15CM X 4M (ELOCREPE),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,d4e57e7c-3dd2-473f-a195-6f1dfa1a12b8,PSC-SC-C14,ELASTIC CREPE BANDAGE 6CM X 4M (ELOCREPE),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,2d91253e-8a8e-48c8-909f-807ed9523372,PSC-SC-C14,ELASTIC CREPE BANDAGE 8CM X 4M (ELOCREPE),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,aa920756-042b-4014-b3c2-6f84d556f0b5,PSC-SC-C14,FLAMICREPE BANDAGE 10CM X 4 MTR,Flamicrepe,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b819b736-ae24-449c-a6fc-b53cefc7a120,PSC-SC-C14,FLAMICREPE BANDAGE 15CM X 4 MTR,Flamicrepe,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,d2c2dd0e-7024-4072-b400-f4b96d9b6c49,PSC-SC-C14,FLAMICREPE BANDAGE 5CM X 4 MTR,Flamicrepe,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c4354258-2381-47ad-91c3-a6d0b7f59115,PSC-SC-C14,FLAMICREPE BANDAGE 7.5CM X 4 MTR,Flamicrepe,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e7f8c3d1-37d7-4784-b335-8aa807e48e03,PSC-SC-C14,WOLAID RUBBER ELASTIC BANDAGE 15CM X 4.5M 12P,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,93e1a396-281d-4dc4-910a-3ba1f38da089,PSC-SC-C14,WOLAID RUBBER ELASTIC BANDAGE 5CM X4.5M,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b9cbabdc-6f6b-46fc-a975-050dcd2129dc,PSC-SC-C14,WOLAID RUBBER ELASTIC BANDAGE 7.5CM X4.5M,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5cb7473a-a80f-4bfc-a7ba-c916efd80da6,PSC-SC-C14,WOLAID RUBBER ELASTIC BANDAGE10CM X4.5M,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,6df25978-b8c2-4edd-9cea-d8ee9e4d2f99,PSC-SC-C15,AM CONFORMING BANDAGE 10CM(12DOZ),Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,be6c0ea6-b707-464c-ac7a-70f0b17778dd,PSC-SC-C15,AM CONFORMING BANDAGE 5CM(12DOZ),Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,91def7ab-b288-447c-afc8-71fcb33d73e3,PSC-SC-C15,AM CONFORMING BANDAGE 7.5CM(12DOZ)-BROMED,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,fa23b4e4-0eaf-4d2b-ba87-5b8d7a2415ce,PSC-SC-C15,AM GAUZE BANDAGE 10CM(12 ROLLS),Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,6325b31b-867e-4946-baf1-dbc405dcee2b,PSC-SC-C15,AM GAUZE BANDAGE 5CM(12 ROLLS),Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,296b9619-45f5-47bb-bf91-2030031952d9,PSC-SC-C15,AM GAUZE BANDAGE 7.5CM(12 ROLLS),Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3b39359c-abc8-4428-b329-6512f07ca79b,PSC-SC-C15,BROMED CONFORMING BANDAGE 2 (12X1),Bromed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,86ec07e9-9be8-45b5-8d0a-2299ce1f6221,PSC-SC-C15,BROMED CONFORMING BANDAGE 3 (12X1),Bromed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9425babf-a6cc-4097-903b-dffd36ade22c,PSC-SC-C15,ELASTIC CONFORMING BANDAGE 10CM X 4M (ELO),Elastic,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,3a9a7e9e-46a7-43a6-a314-7461e510c7be,PSC-SC-C15,ELASTIC CONFORMING BANDAGE 15CM X 4M (ELO),Elastic,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5a07d264-4788-4549-bf6f-b27ebdb6027c,PSC-SC-C15,ELASTIC CONFORMING BANDAGE 5CM X 4M (ELO),Elastic,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,629f3e77-979a-4eb8-b0f0-14dd8ba96277,PSC-SC-C15,ELASTIC CONFORMING BANDAGE 7.5CM X 4M (ELO),Elastic,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,f82d7caf-f695-483d-aa88-698c8faa94a1,PSC-SC-C15,WOLAID CONFORMING BANDAGE 10CM X4M 12PCS,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,168d354a-9699-45f9-baf7-70fa8eaa9523,PSC-SC-C15,WOLAID CONFORMING BANDAGE 5CM X04.5M 12PCS,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9237ec01-e982-48fd-8991-30eb3ea8b9f0,PSC-SC-C15,WOLAID CONFORMING BANDAGE 7.5CM X4M 12PCS,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,0b2dda70-b846-415e-8a6b-f949c930c6e3,PSC-SC-C18,841C EANAMEL BUTTERFLY PINK EARRINGS (PAIR),,,NO,,40,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,1a2671eb-7fa7-4a66-9a41-09ee8bb20b09,PSC-SC-C19,AM INFUSION SET,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,ba69bef1-f5d4-4169-80f4-002a60912095,PSC-SC-C19,IV SET LUER LOCK (EUROMED-OXIMED),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,ba5fdeae-d3e8-4cdd-8453-98048c669d9a,PSC-SC-C20,EASY TWO SIDED FINGER SPLINT LARGE,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,94bf6f81-203f-48e9-a4e8-80b73ba6652e,PSC-SC-C20,EASY TWO SIDED FINGER SPLINT MEDIUM,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,fdef4aaa-ee17-49fb-8b11-1db2cb8bf310,PSC-SC-C20,EASY TWO SIDED FINGER SPLINT SMALL,Easy,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,d015f64d-b896-4b9b-8119-3d07a57f984b,PSC-SC-C20,HERCULES WRIST BRACE W/SPLINT ONE SIZE (08770),Hercules,,NO,,80,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,453d8f81-6465-4b3d-9f38-7355611a3321,PSC-SC-C20,S-ORTHO ELASTIC WRIST SPLINT A4-001,S-Ortho,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,d8b2e4f5-0bf7-415f-babb-48695bc2be23,PSC-SC-C20,S-ORTHO WRIST THUMB SPLINT-C4-018,S-Ortho,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,62dbae5e-fe7b-45b4-8ff8-3dbba99e4f39,PSC-SC-C21,"AM COTTON TIP APPLICATOR 100""S(PKT)",Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,385e1181-3d4b-4020-aa63-328cfe902118,PSC-SC-C21,"BROMED COTTON TIPED APPLICATOR 6""S",Bromed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,52777b48-9473-4527-9b6d-20d0f92c47bf,PSC-SC-C21,COTTON BAMBOO EAR BUDS,,,NO,,10,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,92aa4c3f-a57b-43f8-b42e-3ba7e58435ff,PSC-SC-C21,DADA BABY COTTON EAR BUDS 200'S,Dada,,NO,,10,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,7123303a-60ca-49be-8ba6-3fec282f3b87,PSC-SC-C21,DADA BAMBOO COTTON EAR BUDS 100'S,Dada,,NO,,7,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,07554733-f565-4674-9425-9384a64baa72,PSC-SC-C21,DADA BAMBOO COTTON EAR BUDS 200'S,Dada,,NO,,10,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,6d7b0372-6451-4512-bb5d-14feb1bc426f,PSC-SC-C22,COTTON BAMBOO EAR BUDS,Cotton,,NO,,10,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,7a242482-c162-4236-8f35-6d7cbdf1d43e,PSC-SC-C22,DADA BABY COTTON EAR BUDS 200'S,Dada,,NO,,10,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,103b07a2-0b6f-4848-98c5-5c47c4ea661d,PSC-SC-C22,DADA BAMBOO COTTON EAR BUDS 100'S,Dada,,NO,,7,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,0dc1f819-dff0-44b5-a507-8490a30942e0,PSC-SC-C22,DADA BAMBOO COTTON EAR BUDS 200'S,Dada,,NO,,10,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,b96d1390-48b8-4667-9248-96f7a2a47bec,PSC-SC-C23,AM GAUZE SWAB STERILE 10CM,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,5145b31a-f6d8-4b1d-9ac9-07e301a27769,PSC-SC-C23,AM GAUZE SWAB STERILE 5CM(BROMED),Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a70c6c33-4fcc-4ccc-b095-ba1460d5fc99,PSC-SC-C23,AM GAUZE SWAB STERILE 7.5CM(BROMED),Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c024073d-c508-4c6a-834d-401d47227f4a,PSC-SC-C23,EUROMED GAUZE SWAB STERILE 10*10CM 8 PLY 5PCS/20P,Euromed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,265a80ce-4ebb-4eec-a331-31b8b6990f86,PSC-SC-C23,EUROMED GAUZE SWAB STERILE 5*5CM 8 PLY 5PCS/20PKT,Euromed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,503639b4-1973-4c4c-b7cd-e9d390c52786,PSC-SC-C23,EUROMED GAUZE SWAB STERILE 7.5*7.5CM 8 PLY 5PCS/P,Euromed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,bffce661-ed79-407c-8a75-1c6e5e4a7cd2,PSC-SC-C23,WOLAID NON-WOVEN STERIL WOUND DRESSING 10X10CM 25S,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,08f4d955-7c99-4989-9eee-5ebe3b77412f,PSC-SC-C23,WOLAID NON-WOVEN STERIL WOUND DRESSING 10X15CM 25S,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,166daccd-d394-493a-929e-09f74b02ac3c,PSC-SC-C23,WOLAID NON-WOVEN STERIL WOUND DRESSING 10X25CM 25S,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,2cead9e5-b9f6-439d-bc85-480e67472116,PSC-SC-C23,"WOLAID NON-WOVEN STERIL WOUND DRESSING 6X7CM 50""S",Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9cc58778-7dd9-44ed-84f9-4e926cd22d96,PSC-SC-C23,WOLAID TRNSP STERIL WOUND DRESSING PAD 10X10CM 25S,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,1809cab4-5302-4591-b57b-a17e481f42e3,PSC-SC-C23,WOLAID TRNSP STERIL WOUND DRESSING PAD 10X25CM 25S,Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b7b4db43-3726-4b18-8cf3-2a72fdab2174,PSC-SC-C23,"WOLAID TRNSP STERIL WOUND DRESSING PAD 6X7CM 50""S",Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c333f73c-7ada-494a-b47c-ab75559648e5,PSC-SC-C23,"WOLAID TRNSP STERIL WOUND DRESSING PAD 7X10CM 25""S",Wolaid,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,b9d5c028-a893-45d3-9a06-3ce518fd672b,PSC-SC-C24,AM DISPOSABLE SYRINGE 3ML 100'S,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,8973250f-4fb1-4ef1-83fa-5465e5b1451d,PSC-SC-C24,AM DISPOSABLE SYRINGE 5ML 100'S,Am,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,1e6ef7d5-933d-486c-aa31-20ced0514539,PSC-SC-C24,DISPOSABLE SYRINGE -20ML,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,1ab87ba1-65d8-4131-93e0-1df2e8b12eee,PSC-SC-C24,NOVAMED SYRINGE 3ML 100S,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,8f9939e9-9748-4c02-8b1f-3ad251ad6c62,PSC-SC-C24,NOVAMED SYRINGE 5ML 100S,Novamed,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9bbadf6f-718a-4b49-bf0a-53deab8577ac,PSC-SC-C24,SYRINGES 10ML 100'S (OXIMED),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9fd16637-6f01-42c3-ae6f-44e458a4e894,PSC-SC-C24,SYRINGES 10ML 50'S (EUROMED),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,bd29123a-7bab-4be9-a601-2e777045f311,PSC-SC-C24,SYRINGES 10ML 50'S EUROMED{XXXXX},,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c1838542-b5f0-4123-8856-260322dcc262,PSC-SC-C24,SYRINGES 1ML 100'S (EUROMED),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,703fb780-873f-4710-93d2-161ecbfeb898,PSC-SC-C24,SYRINGES 1ML 100'S (OXIMED),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,dc240d17-1402-4895-b3d3-8504f53e66c9,PSC-SC-C24,SYRINGES 1ML 100'S EUROMED{XXXXX},,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,6a6625a6-a2b1-4f0b-9519-dcaad31060be,PSC-SC-C24,SYRINGES 20ML 50'S (EUROMED),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,be917aba-db42-4f35-8f9b-38a07a628bb0,PSC-SC-C24,SYRINGES 30ML 50'S (EUROMED)-OXIMED,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,acc1e0ed-07f1-44b1-8a43-8750e838144f,PSC-SC-C24,SYRINGES 3ML 100'S (EUROMED-OXIMED),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,73eba621-91fc-4d7f-9311-43109bae9cbf,PSC-SC-C24,SYRINGES 50ML 25'S (EUROMED),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,154ff53f-8de1-4c39-aa41-85c44d00b103,PSC-SC-C24,SYRINGES 5ML 100'S (EUROMED-OXIMED),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c6bfd435-96a8-4258-867d-88cb35a729b4,PSC-SC-D01,ADRENALINE 1MG/ML MET,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,e5228c86-0746-4f8e-8e37-d74672fb8c25,PSC-SC-D02,BETADINE ANTISEPTIC SLN 120ML,Betadine,,NO,,44.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,5031c47b-cf1e-4c3f-bbc2-85b85598eede,PSC-SC-D02,BETADINE ANTISEPTIC SLN 500ML,Betadine,,NO,,69,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,5d9b9230-6bf7-4e4a-8247-efbc07d7f1f2,PSC-SC-D02,DERMACYN WOUND CARE 500ML,Dermacyn,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,05ffca70-88d6-4378-8f6d-2b4dfd9e5dc4,PSC-SC-D02,GERMIDINE ANTISEPTIC SOLUTION 10% 125ML,Germidine,,NO,,35,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,35548085-b499-4473-9ef4-eef1058f4699,PSC-SC-D02,SEPADINE ANTISEPTIC SOLUTION 100ML,Sepadine,,NO,,22,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,44670646-29c2-4507-8348-b90a8d917d47,PSC-SC-D02,SEPADINE ANTISEPTIC SOLUTION 250ML,Sepadine,,NO,,40,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,31b4d379-4ce7-4533-ab08-d70d8f8abc53,PSC-SC-D05,HYDROCORTISONE 100MG VIAL 2ML 1'S (EIPICO),,,NO,,9.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,9e59d618-ff90-45c4-8cf9-8fc26a93b737,PSC-SC-D06A,SODIUM CHLORIDE + DEXTROSE IV 500ML (DNS) (PSI),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,232637b4-150b-48a8-b06b-177cc43d87f3,PSC-SC-D06A,SODIUM CHLORIDE 0.9%&GLUCOSE 5% IV 500ML(GULF INJ),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,da2d226f-f2c2-42fb-955c-a1be6131519a,PSC-SC-D06A,SODIUM CHLORIDE 0.9%+DEXTROSE 500ML (KUW SAUDI),,,NO,,4.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,ec2c7278-78ce-469c-a99e-b7b6da7b00c1,PSC-SC-D06B,SODIUM CHLORIDE 0.9% IV INFUSION B.P 500ML-GULFINJ,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,99dd35d4-13bd-4b62-b5d5-424ad478edf7,PSC-SC-D06B,SODIUM CHLORIDE 0.9%&GLUCOSE 5% IV 500ML(GULF INJ),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,a1131d3b-9a8b-4404-81e2-f386ee46c92f,PSC-SC-D06B,SODIUM CHLORIDE 0.9%+DEXTROSE 500ML (KUW SAUDI),,,NO,,4.5,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,870a97b1-7ae7-4072-855d-f04fd86a3d97,PSC-SC-D06C,OXYGENIZER WATER 350ML,Oxygenizer,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,05f0ac21-bd56-4f96-8ab4-682e31bb12ff,PSC-SC-D06C,OXYGENIZER WATER 350ML (15 BOTTLE/BOX),Oxygenizer,,NO,,105,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,UNAPPROVED_MRP,,,,MISSING,HOLD
+DATABASE,d2fc84f6-3dad-4ea1-ba53-d46d00ebeb41,PSC-SC-D06C,OXYGENIZER WATER 500ML,Oxygenizer,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,c081a771-57fd-460c-910f-7c9a76b4d2f3,PSC-SC-D07,SODIUM CHLORIDE 0.9% IV INFUSION B.P 500ML-GULFINJ,,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,0f443957-e594-407c-9eec-e0d876a6fb17,PSC-SC-D07,SODIUM CHLORIDE 0.9%&GLUCOSE 5% IV 500ML(GULF INJ),,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,9afbc715-8aea-4361-acd9-8084a0a7ed14,PSC-SC-D09,AMEYA SURGICAL SPIRIT 500ML,Ameya,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD
+DATABASE,29f501b7-7eca-42cc-8e8c-067237494cad,PSC-SC-D09,SURGICAL SPIRIT 500ML (CIBA),Surgical,,NO,,0,NEEDS_VISUAL_IDENTITY_REVIEW,NEEDS_EXACT_SPEC_EVIDENCE,MISSING,,,,MISSING,HOLD

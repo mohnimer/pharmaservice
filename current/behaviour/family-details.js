@@ -85,6 +85,7 @@
     return name;
   }
   function optionDescriptor(o,f){
+    if(o?.verified_description) return String(o.verified_description);
     const parts=[]; const exact=cleanOptionName(o); const presentation=String(o?.presentation||'').trim(); const pack=String(o?.pack||'').trim();
     if(exact && exact.toLowerCase()!==String(f?.family_name||'').toLowerCase()) parts.push(exact);
     if(meaningfulPresentation(presentation) && !parts.some(x=>x.toLowerCase().includes(presentation.toLowerCase()))) parts.push(presentation);
@@ -93,19 +94,14 @@
     return parts.join(' · ') || 'Exact variant confirmed in quotation';
   }
   function optionPrice(o){
-    const fixed=(state.prices||[]).find(p=>p.product_option_id && p.product_option_id===o.product_option_id && (!p.price_valid_to || Date.parse(p.price_valid_to)>=Date.now()));
-    if(Number(fixed?.public_sell_price_ex_vat)>0) return `<span class="pscOptionPrice"><b>${esc(aed(Number(fixed.public_sell_price_ex_vat)))}</b><small>Ex VAT · quotation confirms</small></span>`;
-    // Match reference prices to the exact family, brand and pack; never borrow
-    // a price from another size or expose a supplier cost.
-    const normalize=v=>String(v||'').toLowerCase().replace(/\s+/g,'');
-    const sizes=v=>(normalize(v).match(/\d+(?:\.\d+)?(?:ml|mg|cm|litres?|liters?|g)\b/g)||[]).sort().join('|');
-    const descriptor=[o.exact_product_name,o.presentation,o.pack].join(' ');
-    const matches=(window.PSC_DATA?.products||[]).filter(p=>{
-      const saved=window.PSC_RECORDED_PRICES?.[p.pscSku];
-      return saved && (p.catalogueParentId||p.catalogueReferenceFamilyId||p.pscSku)===state.familyId && normalize(saved.brand)===normalize(o.brand) && (normalize(saved.pack)===normalize(o.pack) || (!o.pack && sizes(saved.pack) && sizes(saved.pack)===sizes(descriptor)));
-    }).map(p=>window.PSC_RECORDED_PRICES[p.pscSku]);
-    const values=matches.map(p=>p.indicative||p.retail).filter(v=>Number(v)>0);
-    if(values.length && new Set(values).size===1){const record=matches[0];return `<span class="pscOptionPrice"><b>${esc(aed(values[0]))}</b><small>${record.indicative?'Indicative PSC price':'Retail benchmark'}</small></span>`;}
+    // Price must be keyed by the selected option ID, not a family or brand.
+    const verified=window.PSC_VARIANT_EVIDENCE_FOR?.(o,state.familyId);
+    if(verified){
+      const basis=verified.price_type==='PUBLIC_RETAIL_BENCHMARK'?'UAE retail benchmark':'PSC customer price';
+      return `<span class="pscOptionPrice"><b>${esc(aed(Number(verified.price_aed)))}</b><small>${esc(basis)} · ${esc(verified.price_unit)} · ${esc(verified.price_vat_basis||'VAT basis not supplied')} · checked ${esc(verified.price_checked_at)}${verified.price_note?' · '+esc(verified.price_note):''}</small></span>`;
+    }
+    const fixed=(state.prices||[]).find(p=>p.product_option_id && String(p.product_option_id)===String(o.product_option_id) && (!p.price_valid_to || Date.parse(p.price_valid_to)>=Date.now()));
+    if(Number(fixed?.public_sell_price_ex_vat)>0) return `<span class="pscOptionPrice"><b>${esc(aed(Number(fixed.public_sell_price_ex_vat)))}</b><small>PSC price · ex VAT · quotation confirms</small></span>`;
     return '<span class="pscOptionPrice"><b>AED -</b><small>Price on request</small></span>';
   }
   function fallbackBrandDescriptor(f){
@@ -150,11 +146,19 @@
           sb.from('catalogue_product_availability_public').select('family_id,product_option_id,availability_state,availability_label,verified_at,valid_until').eq('family_id',id)
         ]);
         if(fErr) throw fErr;if(oErr) throw oErr;if(pErr) throw pErr;if(aErr) throw aErr;if(oaErr) throw oaErr;
-        if(family) {state.family=family;state.familyInDatabase=true;} state.options=Array.isArray(approved)?approved:[];state.prices=Array.isArray(prices)?prices:[];state.availability=availability||null;state.optionAvailability=Array.isArray(optionAvailability)?optionAvailability:[];
+        if(family) {state.family=family;state.familyInDatabase=true;} state.options=Array.isArray(approved)?approved.map(o=>({...o,reference_only:true,reference_source:'catalogue_family_option_reference_public'})):[];state.prices=Array.isArray(prices)?prices:[];state.availability=availability||null;state.optionAvailability=Array.isArray(optionAvailability)?optionAvailability:[];
       }catch(e){console.warn('PS family detail load failed; using controlled fallback.',e?.message||e);}
     }
     if(!state.family) state.family=fallbackFamily(id);
     state.options=window.PS_CATALOGUE_REFRESH?.mergeOptions(state.options,id)||state.options;
+    state.options=window.PSC_VARIANT_APPLY_OPTIONS?.(state.options,id)||state.options;
+    // Controlled local/reference descriptors can carry a more exact presentation
+    // than the family's generic scaffold. Keep those choices reachable without
+    // rewriting their identities or relaxing incompatible-selection clearing.
+    if(state.family?.presentations?.some(Boolean)) state.family={...state.family,presentations:[...new Set([
+      ...(Array.isArray(state.family.presentations)?state.family.presentations:[]),
+      ...state.options.map(o=>o.presentation).filter(meaningfulPresentation)
+    ])]};
     state.loading=false;
   }
 
@@ -172,26 +176,49 @@
     return `<section class="pscFamilyDetailBlock pscFamilyPreferenceBlock">
       <span class="pscFamilyDetailLabel">Product preference</span>
       <label class="pscBrandChoice pscBrandNoPreference ${noPreference?'active':''}"><input type="checkbox" data-family-no-preference ${noPreference?'checked':''}><span><b>No brand preference</b><small>PS can quote a suitable product that meets the family specification.</small></span></label>
-      ${refs.length?`<div class="pscBrandTickGrid">${refs.map(o=>{const key=optionKey(o),brand=normalizedBrand(o.brand)||String(o.exact_product_name||'Product option');return `<label class="pscBrandTick ${state.selectedOptionIds.includes(key)?'active':''}"><input type="checkbox" data-family-option="${esc(key)}" ${state.selectedOptionIds.includes(key)?'checked':''}>${o.image_url?`<img class="catalogueOptionImage" src="${esc(o.image_url)}" alt="${esc(o.exact_product_name)}" loading="lazy">`:''}<span><b>${esc(brand)}</b><small>${esc(optionDescriptor(o,f))}</small>${!o.image_url&&o.local_reference?'<small>Product photograph pending</small>':''}</span>${optionPrice(o)}</label>`;}).join('')}</div>`:''}
-      ${fallbacks.length?`<div class="pscBrandTickGrid pscFallbackBrandGrid">${fallbacks.map(brand=>`<label class="pscBrandTick ${state.selectedFallbackBrands.includes(brand)?'active':''}"><input type="checkbox" data-family-fallback-brand="${esc(brand)}" ${state.selectedFallbackBrands.includes(brand)?'checked':''}><span><b>${esc(brand)}</b><small>${esc(fallbackBrandDescriptor(f))}</small></span></label>`).join('')}</div>`:''}
+      ${refs.length?`<div class="pscBrandTickGrid">${refs.map(o=>{const key=optionKey(o),brand=normalizedBrand(o.brand)||String(o.exact_product_name||'Product option');return `<label class="pscBrandTick ${state.selectedOptionIds.includes(key)?'active':''}"><input type="checkbox" data-family-option="${esc(key)}" ${state.selectedOptionIds.includes(key)?'checked':''}>${o.image_url?`<img class="catalogueOptionImage" src="${esc(o.image_url)}" alt="${esc(o.exact_product_name)}" loading="lazy">`:''}<span><b>${esc(brand)}</b><small>${esc(optionDescriptor(o,f))}</small>${!o.image_url?'<small>Exact variant photograph pending verification</small>':''}${o.reference_only?'<small>Catalogue reference · exact supply approval pending</small>':''}</span>${optionPrice(o)}</label>`;}).join('')}</div>`:''}
+      ${fallbacks.length?`<div class="pscBrandTickGrid pscFallbackBrandGrid">${fallbacks.map(brand=>`<label class="pscBrandTick ${state.selectedFallbackBrands.includes(brand)?'active':''}"><input type="checkbox" data-family-fallback-brand="${esc(brand)}" ${state.selectedFallbackBrands.includes(brand)?'checked':''}><span><b>${esc(brand)}</b><small>${esc(fallbackBrandDescriptor(f))}</small><small>Requested brand only · exact variant, photo and price to confirm</small></span></label>`).join('')}</div>`:''}
       <p class="pscBrandPreferenceNote">Tick one or more exact product options you are happy for PS to quote. Where more than one SKU exists under the same brand, each SKU is shown separately. Final availability and commercial terms are confirmed in the quotation.</p>
       <label class="pscBrandChoice ${state.otherBrandActive?'active':''}"><input type="checkbox" data-family-other-toggle ${state.otherBrandActive?'checked':''}><span><b>Other brand / manufacturer required</b><small>Specify another brand, manufacturer, model or pack.</small></span></label>
       ${state.otherBrandActive?`<input class="pscOtherBrandInput" data-family-other-brand value="${esc(state.otherBrand)}" placeholder="Brand, manufacturer, model or pack required">`:''}
     </section>`;
   }
 
+  function variantPreview(f){
+    const chosen=selectedOptions();
+    if(chosen.length===1){
+      const o=chosen[0], verified=window.PSC_VARIANT_EVIDENCE_FOR?.(o,state.familyId);
+      return {image:String(o.image_url||''),title:String(o.exact_product_name||'Selected product'),
+        pack:String(o.pack||o.presentation||'Pack to confirm'),gallery:[],
+        description:String(o.verified_description||optionDescriptor(o,f)),
+        evidence:verified?'Verified variant photograph':'Variant image / pack requires verification',
+        pricing:optionPrice(o),selected:true,multiple:false};
+    }
+    if(chosen.length>1){
+      return {image:'',title:`${chosen.length} variants selected`,pack:'Each product is quoted separately',
+        gallery:chosen.map(o=>({url:String(o.image_url||''),alt:String(o.exact_product_name||'Selected product'),
+          pack:String(o.pack||'Pack to confirm'),price:optionPrice(o)})),
+        description:'Review each selected variant below. No single family photograph represents all selected products.',
+        evidence:'Exact product photos and prices are shown per variant where available',
+        pricing:'',selected:true,multiple:true};
+    }
+    const base=familyPreview(f);
+    return {...base,description:'Choose an exact product variant to view its image, description and price.',
+      evidence:'Representative family preview only — not a selected variant',pricing:'',selected:false,multiple:false};
+  }
+
   function detailHtml(){
     const f=state.family||fallbackFamily(state.familyId);if(!f) return '';
     const presentations=(Array.isArray(f.presentations)?f.presentations:[]).filter(Boolean), portalMode=location.hash.startsWith('#portal/catalogue');
-    const copy=kindCopy(f),kind=familyKind(f),dha=isDhaMapped(f),preview=familyPreview(f),configurationNeeded=presentations.length||selectorAllowed(f);
+    const copy=kindCopy(f),kind=familyKind(f),dha=isDhaMapped(f),preview=variantPreview(f),configurationNeeded=presentations.length||selectorAllowed(f);
     const regulatory=dha?`<details><summary><span>Requirement mapping</span><i>+</i></summary><div class="pscFamilyRegulatoryDisclosure"><div class="pscFamilyRegulatoryTitle"><img src="${DHA_ICON}" alt="DHA requirement"><strong>Mapped to DHA Standards for Clinics in Educational and Academic Settings V4.1</strong></div>${f.exact_controlled_wording?`<p>${esc(f.exact_controlled_wording)}</p>`:''}<p>${esc(f.requirement_reference||'DHA requirement')} · ${esc(f.dha_status||'Status to verify')}</p>${/conditional|required alternative/i.test(String(f.dha_status||''))?'<small>The source classification is preserved; conditional or alternative wording is not converted into an automatic mandatory purchase line.</small>':''}<p class="disclosureFinePrint">Requirement mapping only. This is not a DHA product endorsement or product approval.</p></div></details>`:'';
     const compatibility=kind==='compatibility'?'<p><strong>Compatibility comes first.</strong> PS confirms the relevant device, dispenser, holder, waste route or other fit requirement before supply.</p>':'';
     const supplyCopy=kind==='medicine'?'Licensed supply route, product registration, storage, batch/expiry and recipient authorization are confirmed before commitment. Once a specific brand or product is agreed, PS does not silently substitute it.':kind==='equipment'?'Exact model, included accessories, warranty, installation and compatibility are confirmed in the quotation before procurement.':kind==='specialist'?'PS confirms the responsible specialist route, deliverables, timing and commercial scope before acceptance.':'PS sources against the controlled family specification. Any material brand, pack or compatibility change is confirmed before commitment.';
     return `<div class="modalBackdrop fluidOverlay pscFamilyDetailBackdrop" data-family-detail-close><div class="modal productModalShell fluidProductShell pscFamilyModalShell" onclick="event.stopPropagation()"><section class="productDetailModal fluidProductDetail publicProductSheet pscFamilyProductSheet" role="dialog" aria-modal="true" aria-labelledby="pscFamilyTitle">
       <div class="modalHeader fluidProductHeader"><button class="productBackButton" type="button" data-family-detail-close aria-label="Back to catalogue">←</button><div><span class="eyebrow">${esc(copy.kicker)}</span><h2 id="pscFamilyTitle">${esc(f.family_name)}</h2><div class="smallMuted mono">${esc(f.family_id)}</div></div>${dha?`<img class="pscFamilyHeaderDha" src="${DHA_ICON}" alt="DHA requirement">`:''}</div>
-      <div class="productDetailGrid fluidProductGrid"><div class="detailImagePane fluidImagePane"><div class="detailProductImageWrap pscFamilyPreview">${preview.image?`<img src="${esc(preview.image)}" alt="${esc(preview.title)}" onerror="this.style.display='none'">`:'<span class="catalogueImageEmpty">Product photograph pending</span>'}</div>${preview.gallery.length>1?`<div class="productGalleryStrip">${preview.gallery.map(x=>`<img src="${esc(x.url)}" alt="${esc(x.alt)}" loading="lazy" onerror="this.style.display='none'">`).join('')}</div>`:''}<div class="detailImageMeta"><b>${esc(preview.title)}</b><span>${esc(preview.pack)}</span>${f.common_brands_line?`<small>${esc(f.common_brands_line)}</small>`:'<small>Representative catalogue preview. Exact brand/model is confirmed in quotation.</small>'}</div></div>
-      <div class="detailContentPane fluidDetailContent"><div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(f.order_pack_basis||'To confirm')}</b></div><div><span>SUPPLY BASIS</span><b>${esc(kind==='medicine'?'Licensed route':kind==='specialist'?'Scope confirmed at quotation':'Confirmed at quotation')}</b></div><div><span>PRICING</span><b>${esc(priceLabel(f))}</b></div><div><span>AVAILABILITY</span><b>${esc(familyAvailabilityLabel(f))}</b></div>${dha?`<div><span>REQUIREMENT</span><b>${esc(f.dha_status||'DHA mapped')}</b></div>`:''}</div>
-      <div class="productDisclosureList pscFamilyDisclosureList"><details open><summary><span>Product specification</span><i>+</i></summary><div><p>${esc(f.commercial_specification||'Exact institutional specification confirmed before quotation.')}</p><small>Order / pack basis: ${esc(f.order_pack_basis||'To confirm')}</small></div></details>
+      <div class="productDetailGrid fluidProductGrid"><div class="detailImagePane fluidImagePane" data-psc-preview-mode="${preview.selected?(preview.multiple?'multiple':'single'):'family'}"><div class="detailProductImageWrap pscFamilyPreview">${preview.image?`<img src="${esc(preview.image)}" alt="${esc(preview.title)}" onerror="this.style.display='none'">`:`<span class="catalogueImageEmpty">${preview.selected?'Exact variant photograph pending verification':'Select a variant to see its product photograph'}</span>`}</div>${preview.gallery.length&&preview.multiple?`<div class="pscSelectedVariantGallery">${preview.gallery.map(x=>`<div class="pscSelectedVariantRow">${x.url?`<img src="${esc(x.url)}" alt="${esc(x.alt)}" loading="lazy" onerror="this.style.display='none'">`:'<span>Photo pending</span>'}<div><b>${esc(x.alt)}</b><small>${esc(x.pack)}</small>${x.price}</div></div>`).join('')}</div>`:(!preview.selected&&preview.gallery.length>1?`<div class="productGalleryStrip">${preview.gallery.map(x=>`<img src="${esc(x.url)}" alt="${esc(x.alt)}" loading="lazy" onerror="this.style.display='none'">`).join('')}</div>`:'')}<div class="detailImageMeta"><b>${esc(preview.title)}</b><span>${esc(preview.pack)}</span><small>${esc(preview.description)}</small><small>${esc(preview.evidence)}</small>${preview.pricing}</div></div>
+      <div class="detailContentPane fluidDetailContent">${window.PSC_RETAIL_PRICE_NOTICE_HTML?.()||''}<div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(preview.selected?preview.pack:(f.order_pack_basis||'To confirm'))}</b></div><div><span>SUPPLY BASIS</span><b>${esc(kind==='medicine'?'Licensed route':kind==='specialist'?'Scope confirmed at quotation':'Confirmed at quotation')}</b></div><div><span>PRICING</span><b>${esc(preview.selected?(preview.multiple?'By selected variant':'See selected variant price'):priceLabel(f))}</b></div><div><span>AVAILABILITY</span><b>${esc(familyAvailabilityLabel(f))}</b></div>${dha?`<div><span>REQUIREMENT</span><b>${esc(f.dha_status||'DHA mapped')}</b></div>`:''}</div>
+      <div class="productDisclosureList pscFamilyDisclosureList"><details open><summary><span>Product specification</span><i>+</i></summary><div><p>${esc(preview.selected&&!preview.multiple?preview.description:(f.commercial_specification||'Exact institutional specification confirmed before quotation.'))}</p>${preview.selected&&!preview.multiple?`<small>Exact selected product: ${esc(preview.title)} · ${esc(preview.pack)}</small><p><small>Family specification: ${esc(f.commercial_specification||'Confirmed at quotation')}</small></p>`:`<small>Order / pack basis: ${esc(f.order_pack_basis||'To confirm')}</small>`}</div></details>
       ${configurationNeeded?`<details open><summary><span>${kind==='medicine'?'Presentation & brand preference':'Brand / product preference'}</span><i>+</i></summary><div class="pscFamilyConfiguration">${presentations.length?`<div class="pscFamilyInlineSection"><span class="pscFamilyDetailLabel">${kind==='medicine'?'Available presentations':'Presentation / format'}</span><div class="pscPresentationChips">${presentations.map(x=>`<button type="button" class="${state.presentation===x?'active':''}" data-family-presentation="${esc(x)}">${esc(presentationLabel(f,x))}</button>`).join('')}</div></div>`:''}${preferenceBlock(f)}<p class="pscFamilySelectionSummary"><span>CURRENT PREFERENCE</span><b>${esc(preferenceSummary())}</b></p></div></details>`:''}
       ${regulatory}<details><summary><span>Availability & quotation</span><i>+</i></summary><div><p><strong>${esc(familyAvailabilityLabel(f))}</strong></p><p>Live stock language is shown only against dated, unexpired evidence. Otherwise PS reconfirms availability when the quotation is prepared.</p>${state.availability?.verified_at?`<small>Evidence verified ${esc(fmtEvidenceDate(state.availability.verified_at))}${state.availability?.valid_until?` · valid through ${esc(fmtEvidenceDate(state.availability.valid_until))}`:''}</small>`:''}</div></details><details><summary><span>Supply & compatibility</span><i>+</i></summary><div>${compatibility}<p>${esc(supplyCopy)}</p></div></details></div></div></div>
       <div class="productStickyBar publicProductSticky pscFamilyStickyBar"><button type="button" class="button light" data-family-detail-close>Continue browsing</button><button type="button" class="button primary" data-family-quote>${portalMode?'Add to request':'Request quotation'}</button></div>
@@ -204,9 +231,12 @@
   function quoteSummary(){
     const f=state.family||fallbackFamily(state.familyId),kind=familyKind(f),preference=preferenceSummary(),chosen=selectedOptions();
     const brands=[...new Set([...chosen.map(o=>normalizedBrand(o.brand)).filter(Boolean),...state.selectedFallbackBrands])];
-    const specific=chosen.length===1&&!chosen[0].local_reference&&!state.selectedFallbackBrands.length&&!state.otherBrandActive;
+    const specific=chosen.length===1&&!chosen[0].local_reference&&!chosen[0].reference_only&&!state.selectedFallbackBrands.length&&!state.otherBrandActive;
     const mode=specific?'specific_option':chosen.length||state.selectedFallbackBrands.length||state.otherBrandActive?'other_brand':'no_preference';
-    const snapshots=chosen.map(o=>({...o,product_option_id:o.local_reference?null:o.product_option_id}));
+    const snapshots=chosen.map(o=>({...o,
+      local_product_option_id:o.local_reference?o.product_option_id:null,
+      reference_product_option_id:o.reference_only?o.product_option_id:null,
+      product_option_id:o.local_reference||o.reference_only?null:o.product_option_id}));
     return {localFamily:!state.familyInDatabase,familyId:f?.family_id||state.familyId,familyName:f?.family_name||state.familyId,familyPageType:f?.page_type||'',orderPackBasis:f?.order_pack_basis||'',presentation:state.presentation||'',brandPreference:preference,brandPreferenceMode:mode,requestedBrands:brands,requestedBrand:mode==='other_brand'?preference:brands.join(', '),requestedProductOptions:snapshots,productOption:snapshots.length===1?snapshots[0]:null,regulated:kind==='medicine',requirementType:requirementType(f),commercialSpecification:f?.commercial_specification||'',priceTreatment:priceLabel(f),availability:familyAvailabilityLabel(f),dhaMapped:isDhaMapped(f),requirementReference:f?.requirement_reference||'',requirementStatus:f?.dha_status||''};
   }
   function goToQuote(){
@@ -226,7 +256,7 @@
     root.querySelectorAll('[data-family-detail-close]').forEach(el=>el.addEventListener('click',event=>{
       if(el.tagName==='BUTTON'||event.target===el) close();
     }));
-    root.querySelectorAll('[data-family-presentation]').forEach(el=>el.addEventListener('click',()=>{state.presentation=el.dataset.familyPresentation;root.querySelector('.pscPresentationChips')?.classList.remove('invalid');draw();}));
+    root.querySelectorAll('[data-family-presentation]').forEach(el=>el.addEventListener('click',()=>{state.presentation=el.dataset.familyPresentation;state.selectedOptionIds=selectedOptions().filter(o=>!meaningfulPresentation(o.presentation)||String(o.presentation)===state.presentation).map(optionKey);root.querySelector('.pscPresentationChips')?.classList.remove('invalid');draw();}));
     root.querySelector('[data-family-no-preference]')?.addEventListener('change',e=>{if(e.target.checked){state.selectedOptionIds=[];state.selectedFallbackBrands=[];state.otherBrandActive=false;state.otherBrand='';draw();}else{draw();}});
     root.querySelectorAll('[data-family-option]').forEach(el=>el.addEventListener('change',()=>{const id=el.dataset.familyOption||'';const set=new Set(state.selectedOptionIds);if(el.checked)set.add(id);else set.delete(id);state.selectedOptionIds=[...set];draw();}));
     root.querySelectorAll('[data-family-fallback-brand]').forEach(el=>el.addEventListener('change',()=>{const brand=el.dataset.familyFallbackBrand||'';const set=new Set(state.selectedFallbackBrands);if(el.checked)set.add(brand);else set.delete(brand);state.selectedFallbackBrands=[...set];draw();}));

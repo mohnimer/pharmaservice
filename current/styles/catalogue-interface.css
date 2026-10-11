@@ -98,3 +98,8 @@
   .model16BoundaryRows>div{grid-template-columns:1fr;gap:7px;padding:17px 0}.model16School{margin-left:18px!important;margin-right:18px!important;padding:28px 24px!important}.model16SchoolActions{width:100%}.model16SchoolActions .button{flex:1 1 190px}
 }
 @media(max-width:500px){.publicCategoryGrid16{grid-template-columns:1fr 1fr}.publicCategoryCard16{min-height:158px}.publicCategoryArt16{width:78px;height:78px}.publicCategoryCopy16 b{font-size:16px}.start16HeroCopy h1{font-size:46px}.model16HeroCopy h1{font-size:41px}}
+
+/* Retail reference / account quotation notice, shared by listings and details. */
+.pscRetailPriceNotice{display:block;margin:0 0 18px;padding:12px 15px;border-left:3px solid #207b69;border-radius:0 8px 8px 0;background:#eef5f1;color:#35534a;font-size:12px;line-height:1.55;text-align:left;overflow-wrap:anywhere}
+.pscRetailPriceNotice strong{font-weight:650;color:#173e33}
+@media(max-width:600px){.pscRetailPriceNotice{padding:11px 12px;font-size:12px}.pscRetailPriceNotice strong{display:block}}

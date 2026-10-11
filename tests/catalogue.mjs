@@ -60,11 +60,16 @@ try{
   assert(w.document.querySelector('[data-psc-family-open="PSC-IS-151"]'));
   await navigate('portal/catalogue/sports');
   const fastum=w.PSC_DATA.products.find(p=>p.pscSku==='PSC-MED-101');
-  assert.equal(w.document.querySelector(`[data-catalogue-brand-sku="${fastum.pscSku}"]`).textContent,'Brands Available: 1');
-  const countNode=()=>w.document.querySelector(`[data-catalogue-brand-sku="${fastum.pscSku}"]`);
-  // Other brands in the same category/family must not inflate a named product.
+  assert(fastum);
+  // The modern catalogue uses a brand-choice row rather than the removed
+  // "Brands Available" label. Verify actual rendered choices.
+  const brandRow=()=>w.document.querySelector(`[data-brand-row="${fastum.pscSku}"]`);
+  assert(brandRow(), 'Fastum must render its brand-choice row in sports');
+  assert.deepEqual([...brandRow().querySelectorAll('button')].map(b=>b.textContent.trim()),['Fastum']);
+  // A second product in the category does not create a Fastum brand choice.
   w.PSC_DATA.products.push({...fastum,pscSku:'TEST-OTHER-BRAND',brand:'Other brand'});
-  await navigate('portal/catalogue/sports');assert.equal(countNode().textContent,'Brands Available: 1');
+  await navigate('portal/catalogue/sports');
+  assert.deepEqual([...brandRow().querySelectorAll('button')].map(b=>b.textContent.trim()),['Fastum']);
   fastum.brand='Specification-led';
   w.PS_FAMILY_BRAND_OPTIONS=()=>[
     {family_id:fastum.catalogueParentId,brand:'Fastum'},
@@ -73,9 +78,14 @@ try{
     {family_id:'UNRELATED-FAMILY',brand:'Unrelated'},
     {family_id:fastum.catalogueParentId,brand:'Generic'}
   ];
-  await navigate('portal/catalogue/sports');assert.equal(countNode().textContent,'Brands Available: 2');
+  await navigate('portal/catalogue/sports');
+  const choices=[...brandRow().querySelectorAll('button')].map(b=>b.textContent.trim());
+  assert(choices.includes('Fastum'));
+  assert(choices.includes('Other brand'));
+  assert(!choices.includes('Unrelated')&&!choices.includes('Generic'));
   fastum.brand='Fastum';
-  w.dispatchEvent(new w.Event('ps:catalogue-brands-ready'));assert.equal(countNode().textContent,'Brands Available: 1');
+  w.dispatchEvent(new w.Event('ps:catalogue-brands-ready'));
+  assert(brandRow().textContent.includes('Fastum'));
   await navigate('portal/catalogue/medicines');
   const q=w.document.querySelector('[data-global-search]');q.value='CEBACT';q.dispatchEvent(new w.Event('input',{bubbles:true}));await pause();
   assert(w.document.querySelector(`[data-product-view="${enquiry.pscSku}"]`));

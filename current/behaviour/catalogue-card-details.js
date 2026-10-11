@@ -99,27 +99,16 @@
     });
   }
 
-  function normalizeBrand(v=''){return String(v).toLowerCase().replace(/^common brands?:\s*/,'').replace(/[^a-z0-9]+/g,' ').trim();}
-  function primaryBrand(familyId){
-    const rows=Array.isArray(window.PSC_DATA?.products)?window.PSC_DATA.products:[];
-    const p=rows.find(x=>String(x?.catalogueParentId||'')===String(familyId||''));
-    return normalizeBrand(p?.brand||'');
-  }
-
   function familyImageRule(){
     const root=document.querySelector('[data-psc-family-detail-root]');
     if(!root) return;
     const grid=root.querySelector('.fluidProductGrid'), pane=root.querySelector('.detailImagePane');
     if(!grid||!pane) return;
-    const familyId=(root.querySelector('.fluidProductHeader .mono')?.textContent||'').trim();
-    const brand=primaryBrand(familyId);
-    const selected=[...root.querySelectorAll('.pscBrandTick.active b')].map(x=>normalizeBrand(x.textContent)).filter(Boolean);
-    const noPreference=!!root.querySelector('.pscBrandNoPreference.active');
-    const other=!!root.querySelector('[data-family-other-toggle]:checked');
-    const keep=!noPreference&&!other&&brand&&selected.length===1&&(selected[0]===brand||selected[0].includes(brand)||brand.includes(selected[0]));
+    // The family renderer owns exact option identity, photos and descriptions.
+    // Its first catalogue child's brand cannot represent other selected variants.
+    const keep=['single','multiple'].includes(pane.dataset.pscPreviewMode);
     pane.hidden=!keep;
     grid.classList.toggle('v452NoBrandImage',!keep);
-    if(keep){ const meta=pane.querySelector('.detailImageMeta small'); if(meta) meta.textContent='Image shown for the selected brand.'; }
   }
 
   function run(){

@@ -37,12 +37,7 @@
 
   function rememberProduct(p) {
     if (!p || /^REFERENCE TILE/i.test(p.imageStatus || p.image_status || '')) return;
-    // INST-0103 is the povidone-iodine requirement; its old Dettol art is
-    // inconsistent with that specification. Reuse the existing Betadine reference.
-    if(!p.localCatalogueRefresh && p.catalogueTransactionId==='INST-0103'){
-      p.currentImageUrl='/assets/products/inst-0104.webp?v=povidone-reference';
-      realImages.set(clean(p.pscSku).toUpperCase(),p.currentImageUrl);
-    }
+    // Do not substitute a different SKU's image for this product.
     const sku = clean(p.pscSku || p.psc_sku).toUpperCase();
     if (!sku) return;
 

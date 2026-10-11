@@ -37,23 +37,35 @@
     return [...rows.values()];
   };
   refresh.mergeOptions = (databaseRows, familyId = null) => {
-    const identity = r => String(r.exact_product_name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const norm = value => String(value || '').normalize('NFKC').trim().replace(/\s+/g, ' ').toUpperCase();
+    const family = r => r.family_id || r.catalogueParentId || r.catalogueReferenceFamilyId || '';
+    const key = (id, name) => norm(id) + '|' + norm(name);
+    const identity = r => [norm(family(r)), norm(r.exact_product_name), norm(r.brand), norm(r.pack), r.local_reference?'LOCAL':r.reference_only?'REFERENCE':'DATABASE'].join('|');
     const productIdentity = new Map();
+    const collisions = new Set();
     for (const product of refresh.products) {
+      if (!family(product)) continue;
       for (const name of [product.name, product.sourceProductName]) {
-        productIdentity.set(identity({exact_product_name:name}), bySku.get(product.pscSku));
+        if (!name) continue;
+        const id = key(family(product), name), existing = productIdentity.get(id);
+        if (existing && existing.pscSku !== product.pscSku) collisions.add(id);
+        else productIdentity.set(id, bySku.get(product.pscSku));
       }
     }
+    for (const id of collisions) productIdentity.delete(id);
     const rows = (databaseRows || []).map(row => {
-      const product = productIdentity.get(identity(row));
+      const candidate = productIdentity.get(key(row.family_id, row.exact_product_name));
+      const knownPack = value => norm(value) && !/CONFIRM|VERIFY|PENDING/.test(norm(value));
+      const product = candidate && norm(candidate.brand) === norm(row.brand) &&
+        !(knownPack(candidate.pack) && knownPack(row.pack) && norm(candidate.pack) !== norm(row.pack)) ? candidate : null;
       return product ? {...row, image_url:referenceTile(product) ? null : product.currentImageUrl || row.image_url,
         image_status:product.imageStatus, image_pending:!product.currentImageUrl} : row;
     });
-    const seen = new Set(rows.map(r => r.family_id + ':' + identity(r)));
+    const seen = new Set(rows.map(identity));
     for (const row of refresh.approvedOptions) {
       if (familyId && row.family_id !== familyId) continue;
-      const key = row.family_id + ':' + identity(row);
-      if (!seen.has(key)) { rows.push(row); seen.add(key); }
+      const id = identity(row);
+      if (!seen.has(id)) { rows.push(row); seen.add(id); }
     }
     return rows;
   };

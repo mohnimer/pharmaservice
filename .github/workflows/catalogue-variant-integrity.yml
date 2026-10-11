@@ -1,0 +1,47 @@
+name: Catalogue variant integrity
+on:
+  push:
+    branches: [catalogue-evidence-repair-20261010]
+  pull_request:
+    paths:
+      - 'current/behaviour/variant-evidence.js'
+      - 'current/behaviour/family-details.js'
+      - 'tests/variant-evidence.test.cjs'
+      - 'current/manifest.json'
+      - 'staging/catalogue-batch33/**'
+      - 'tests/batch33-staging.test.mjs'
+      - 'tests/variant-browser.mjs'
+      - 'tools/import-batch33-source.py'
+      - 'current/behaviour/catalogue-refresh.js'
+      - 'current/behaviour/verified-variant-records.js'
+      - 'tests/catalogue-refresh-identity.test.cjs'
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: node --check tools/stage-batch33-images.mjs
+      - run: npm ci
+      - run: node --test tests/variant-evidence.test.cjs
+      - run: node --test tests/catalogue-refresh-identity.test.cjs
+      - run: python3 tools/verify-current-option-identities.py
+      - run: npm run build
+      - run: node tools/audit-listing-evidence.mjs --check
+      - run: node --test tests/batch33-staging.test.mjs
+      - run: npm test
+      - run: npm run test:dom
+      - run: npm run test:catalogue
+      - run: node tests/reference-overlay.mjs
+      - run: npx playwright install --with-deps chromium
+      - run: node tests/variant-browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: variant-visual-review
+          path: test-results/variant-visual-review/
+          if-no-files-found: ignore
+          retention-days: 14

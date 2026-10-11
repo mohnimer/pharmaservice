@@ -1,0 +1,89 @@
+{
+  "local_option_id": "local-acorus-94b60f8eaf61",
+  "source_url": "https://www.lifepharmacy.com/product/braun-lens-filter-refills-for-thermoscan-lf-40/",
+  "retrieval_date": "2026-10-11",
+  "source_sku": "109215",
+  "images": [
+    {
+      "source_url": "https://cdn.lifepharmacy.com/products/braun-lens-filter-refills-for-thermoscan-lf-40/109215-1.jpg",
+      "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-94b60f8eaf61-0.jpg",
+      "sha256": "e64553fcf09b76ff07791f8d108db2041c1fad669f4dbae2566d03f7cecac818",
+      "width": 1000,
+      "height": 1000,
+      "byte_count": 90627,
+      "unchanged": true
+    },
+    {
+      "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/braun-lens-filter-refills-for-thermoscan-lf-40/109215-2.png",
+      "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-94b60f8eaf61-1.png",
+      "sha256": "9f576636bbf304f1c33c020f34ca752ccd9696aa3c8a2fc925be5c66571c4d1f",
+      "width": 700,
+      "height": 700,
+      "byte_count": 164566,
+      "unchanged": true
+    },
+    {
+      "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/braun-lens-filter-refills-for-thermoscan-lf-40/109215-3.jpg",
+      "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-94b60f8eaf61-2.jpg",
+      "sha256": "3451f88f35ae090f4a083857fe22532bd43612e23d8a24324a9a787aa8b560e0",
+      "width": 1000,
+      "height": 1000,
+      "byte_count": 53831,
+      "unchanged": true
+    }
+  ],
+  "retrieved_url": "https://www.lifepharmacy.com/product/braun-lens-filter-refills-for-thermoscan-lf-40/",
+  "product_facts": {
+    "name": "Braun Thermoscan Ear Thermometer Probe Covers 40s LF40",
+    "sku": "109215",
+    "brand": {
+      "@type": "Brand",
+      "name": "BRAUN",
+      "url": "https://www.lifepharmacy.com/brand/braun"
+    },
+    "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/braun-lens-filter-refills-for-thermoscan-lf-40",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 39.9,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    }
+  }
+}

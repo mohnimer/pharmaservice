@@ -1,0 +1,120 @@
+# Pharma Service catalogue repair — new-chat handover
+
+## Updated checkpoint — remaining store listings
+
+Latest verified runtime: cfd08c84a76591891c297d56aeb781e5a6ed18de, passed Actions38155318574; all31variants at390/1440px. Artifact11708611763 has252screenshots; representative mobile selected panels and desktop full Spedifen dialog reviewed. Read final review at end for focused-capture limitations. Follow-on documentation commit preserves this checkpoint only; fetch actual head/latest CI. Next three Gloclav packs are staged but not runtime-integrated. Whole catalogue remains incomplete, PR draft and production unchanged.
+
+Latest user steering: complete the remaining store listings, preserving all previous work. Runtime/evidence batch dc9691b5d6a1b2215bef10df18738a23c771290c adds 22 individually reviewed previews to the original nine (31 total), unchanged native photographs, exact descriptions/packs and qualified UAE retail benchmarks. Read docs/catalogue-listing-repair-progress-20261011.md and docs/catalogue-listing-evidence-gap-register.json. The ledger tracks 613 local visible cards, 31 verified preview cards and 582 pending; 193 local options, 31 preview verified. These are not unique saleable products or live database counts. Whole-catalogue completion and commercial release remain HOLD.
+
+Evidence remains privately staged in listing-followon-20261011, medicine-followon-20261011, equipment-followon-20261011 and sebamed-followon-20261011. Preserve rejected gallery images, native dimensions/checksums, unspecified VAT for two Aster medicines, regular/promotional distinctions and sixteen unresolved Sebamed pack-size holds. Three bounded research agents assisted with sources under the Sites workflow; only the main agent changed runtime/GitHub. No production, database, reference/local ID merges or server-persistence changes. Original 150 photos, original three photo holds, retail/wholesale notice, nine previews and homepage refinement remain intact.
+
+Nineteen local evidence/identity/staging/shell tests, build, gap-register freshness, actual-reference/basket replay, DOM and catalogue checks passed. Browser tests dynamically cover all 31 registered variants at 390/1440 px, including native image widths and exact request VAT/price qualifications. Browser approval is pending the actual batch CI and screenshot review; inspect dc9691b5 and its Actions before continuing. Previous documentation head e7f94b66345b25142290ecd8ecdaeb987da3753d passed run 38144227147. The documented server snapshot-clearing trigger remains unresolved. Keep PR #20 draft and production unchanged; continue remaining exact-pack source work and identity/persistence design without claiming frontend tests prove server persistence.
+
+Follow-on correction: run38154679002 failed at Spedifen after90mobile captures (artifact11707483787), no desktop approval. Its existing exact presentation was missing from generic Ibuprofen family chips. The follow-on fix exposes existing controlled option presentations, preserving descriptor IDs and incompatible-option clearing; adds an isolated Spedifen regression. This supersedes the pending-browser statement above: inspect actual newest head/run before claiming approval. Gupisone mobile selected capture was reviewed, exact40-tablet carton and VAT-unspecified qualification legible. Gloclav three-pack source batch is saved privately in gloclav-followon-20261011 and remains outside runtime31; read its REVIEW.md before integrating. Whole catalogue and server persistence remain unresolved.
+
+The first presentation follow-on430fd503 failed run38155133098 in the existing catalogue request regression: adding chips to a family previously without presentations made its optional request flow mandatory. Corrected in cfd08c84a76591891c297d56aeb781e5a6ed18de: append exact descriptor choices only where family presentation selection already exists. Both catalogue flow and isolated reference/Spedifen replay pass locally. Run38155318574 verifies this actual runtime head; inspect its result and screenshots. No frontend success is server persistence approval.
+
+## Updated checkpoint — homepage reference refinement
+
+User subsequently requested the homepage body follow their attached one-pager, retaining existing header, footer and functionality. This authorizes the homepage refinement despite the earlier no-redesign scope below. Runtime change d38f9ebf5973906d5bd511014b067c1f28305ccd reduces the body to hero, catalogue search/six categories, repeat-supply flow and buying-visibility strip. Current collage/category assets, navigation, search hooks and procurement behavior remain intact. No catalogue evidence or backend modifications in this batch. See docs/homepage-reference-refinement-20261011.md.
+
+Browser test head 23af09ee78956da4b6583225aebee49cc0f34382 corrects new search assertions to the existing interpretation behavior: submission clears the input and retains the phrase in “You said”. Earlier homepage runs 38143401100 and 38143669802 failed only that incorrect new assertion; the mobile screenshot was reviewed. Run 38143881081 passed at 23af09ee78956da4b6583225aebee49cc0f34382, including homepage search interpretation/results, navigation, no overflow and all nine variant checks at 390/1440 px. Artifact 11703663344 contains 76 screenshots; both homepage captures were visually reviewed. Desktop retains the three-column category grid and six-stage horizontal flow; mobile stacks cards and wraps the flow. This final checkpoint changes documentation only; inspect its actual newest head/run. Keep the PR draft and production unchanged. The reconciliation/evidence holds documented below remain unresolved.
+
+## Updated checkpoint — reference reconciliation continuation
+
+This section supersedes the dated checkpoints below without deleting them. Runtime/evidence head 869946efac2b5d1918368fd0d2f062d20c71f923 passed Actions run 38141484081. All nine candidates passed at 390/1440 px, including readable option text, exact matching presentation, visible images, descriptions, qualified benchmarks, local request IDs, multiselect and no overflow. Artifact 11702987084 contains 56 screenshots, expires 25 October. Representative desktop/mobile dialog/card/selected/multiselect images were visually reviewed. This is not whole-catalogue release approval.
+
+Starting run 38140734219 failed at the Zyrtec oral-solution label because the test selected Tablets. It produced only 19 mobile screenshots and no desktop images. Corrected the test to match the option presentation and corrected runtime presentation changes to clear incompatible selected options. The earlier nine previews and price notice remain intact.
+
+Fresh read-only public reference descriptors: docs/current-public-reference-descriptors-20261011.json. Seven actual Imodium/Zyrtec rows, including Instant 12 tablets; six paired records agree with earlier identity checks. The reference view includes VERIFY/APPROVE regardless of customer_selectable. Do not mistake its records for approved customer purchase options. UI reference rows carry reference_only, reference_source and an approval-pending label. Requests preserve their UUID only as reference_product_option_id, with product_option_id null and other_brand quotation mode. Local variants retain local_product_option_id. Both identities are preserved even if exact pack text agrees; no ID merges, pack repair, commercial approvals or database writes.
+
+App basket normalization had discarded requestedProductOptions on quotation-preference lines despite correct emitted event data. Now it retains complete option/evidence snapshots. tests/reference-overlay.mjs exercises actual public descriptors, six paired IDs, separate packs, reference approval limits, persistent browser basket and presentation reset. The follow-on test also checks three evidenced local previews in the actual basket; CI must be checked at the latest head for those additional assertions. Browser tests now additionally capture each selected option card for focused desktop/mobile selector inspection.
+
+Server persistence remains unresolved. The legacy order-line trigger clears product_option_snapshot for other_brand; frontend-only family submission bypasses structured family IDs. Browser event/basket success does not prove structured evidence survives server submission. Fresh read-only trigger/RPC definitions are saved in docs/current-request-persistence-definitions-20261011.json and confirm the snapshot-clearing behavior. Next design a migration and transport-isolated submission fixture; do not apply production changes. Preserve reference/local provenance and null unapproved option foreign keys.
+
+Four new Zyrtec-drops alternate originals and decisions are retained privately in staging/catalogue-batch33/alternate-source-review-20261011-followon. Al Hadi's original is 700 px with historical artwork. Three MedX AVIFs are 1000 px: softened branded photograph, the same narrow front pack as the sharper retained 1280px original, and softened bottle/pack. No quality improvement; all remain HOLD. BinSina Instants page retrieval returned HTTP 405. Original 150 source photos and earlier three quality holds are unchanged. Do not transform/reconstruct them or substitute promotional/generated images.
+
+Read docs/catalogue-repair-progress-20261011-reference-reconciliation.md and docs/catalogue-repair-continuation-prompt-20261011.md. Follow-on commit saves these findings and source assets; inspect actual branch head and latest Actions before continuing. Keep PR #20 draft and production unchanged. No subagents used. Warn before context runs low and save a new continuation prompt.
+
+## Updated checkpoint — 11 October 2026, after b5c1747
+
+This section supersedes dated status below; retain the original history. Latest verified runtime/evidence commit is b5c1747a1fa93744bdb694e61dec3d5194589267. Actions run 38140330487 passed all checks, including nine real candidates at 390/1440 px. Original requested run 38138752128 failed because the Imodium test submitted without required presentation and reused the preceding request. Commit 90e8bd0 fixed event-count/presentation assertions; run 38139237059 passed. Run 38139890586 then exposed a genuine hidden image pane; b5c1747 fixed the legacy enhancement that hid selected photos and overwrote exact descriptions.
+
+- Shared listing/detail notice: “Retail prices shown are for reference. Wholesale prices are provided in your quotation.” Added at the user's request. These values are qualified benchmarks; do not claim undiscounted standard prices or PSC-approved wholesale prices.
+- Nine verified previews now: original seven plus Panadol Night 24 caplets (AED 25) and Avamys 27.5 micrograms/spray, 120 sprays (AED 63). Exact photo/checksum/source/description/retail qualifications are in docs/verified-preview-variant-register.json. Manufacturer sources support descriptions; regional leaflets do not prove UAE registration.
+- Fresh read-only Supabase checks are saved separately in docs/current-option-identity-verification-20261011.json and docs/current-catalogue-option-counts-20261011.json. Six exact identity pairs verified against current records; commercial approval/automatic merging remain false. Current count: 719 active options, zero customer selectable. No database writes. Historical snapshots remain unchanged. tools/verify-current-option-identities.py replays the dated evidence, not a fresh live query.
+- CI screenshot artifact 11702891413 from run 38140330487 contains 56 images, expires 25 October. Mobile exact preview images, descriptions, qualified prices, notice and separate Nexium multiselect were inspected. Desktop review found compressed brand-selector text; the next commit changes selector cards to one readable column with qualified price below and adds a >=140 px text-width assertion. Its CI must be checked before claiming final visual approval.
+- Search index regenerated after the new evidence; preserve it. Production unchanged, PR remains draft, release HOLD. Original 150 photos and three image-quality holds remain. Additional retailer alternatives and rejection decisions are saved in staging/catalogue-batch33/alternate-source-review-20261011/review.json.
+- Current workspace: /workspace/scratch/69bd7e1b2f0c/pharmaservice. Read docs/catalogue-repair-progress-20261011-retail-notice.md as well as this handover.
+
+Next: inspect Actions at actual branch head and review updated desktop screenshots. Then test real read-only public reference-view descriptors mixed with local overlays: the view includes active VERIFY/APPROVE descriptors regardless of customer_selectable. Check exact duplicate/pack handling and request provenance using isolated fixtures, preserving non-selectable/commercial boundaries. Do not promote snapshot UUIDs or perform production writes. Continue unresolved sharp exact-pack photo sourcing and remaining evidence audit. Keep the user informed before a chat limit and provide a continuation prompt referencing this handover and actual latest head/run.
+
+Checkpoint: 11 October 2026, approximately 16:20 UAE time.
+Repository: https://github.com/mohnimer/pharmaservice
+Draft PR: https://github.com/mohnimer/pharmaservice/pull/20
+Branch: catalogue-evidence-repair-20261010
+Latest runtime/evidence commit: cb0b8c13d65d71f3f5205596f909251d2254a56f
+This handover is committed after that runtime commit. Read the actual branch head before making changes.
+
+## User objective and boundaries
+
+Every individual variant needs the correct high-quality photograph, exact description, brand, pack and sourced UAE price, consistent across cards, selectors, detail and procurement requests. Preserve completed work and website design. Never invent a price, substitute a family photo for a variant, or equate recorded MRP/retailer price with approved PSC selling price. Production must remain unchanged until full verification. Keep PR draft; no merge or deployment has been performed. Report actual commits and tests, not completion by assumption.
+
+## Saved work
+
+- All 150 original Batch 33 JPEGs are committed privately under staging/catalogue-batch33, unchanged and checksummed. Originals remain HOLD for quality/identity review.
+- 147 exact local family/name source links: 68 existing-master and 79 additional overlay entries; three source products unmatched locally. No fuzzy source-name matching.
+- The retained snapshots contain 193 local overlay records and 719 database options. They are not 912 unique products or a fresh production database query.
+- Historical release inventory remains HOLD, separate from individual preview candidates. 254 recorded MRPs are unapproved; 655 inventory records lack price evidence; zero PSC selling prices approved.
+- Seven exact preview candidates have unchanged, visually inspected 1024×1024 retailer photographs: Prospan cough syrup 100 ml; Bepanthen Protective Baby Ointment 100 g; Nexium 20 mg/14 tablets; Nexium 40 mg/14 tablets; Imodium 2 mg/6 capsules; Zyrtec 10 mg/20 tablets; Zyrtec 1 mg/ml oral solution 75 ml.
+- Their sourced UAE retail benchmarks respectively are AED 42, 59, 78.50, 110, 6.50, 39.50 and 17.50. VAT-inclusive as displayed by Life Pharmacy, checked 2026-10-11. These are preview benchmarks, not PSC selling prices.
+- Six exact local/database family/full-name/brand overlaps (three Imodium, three Zyrtec) now have separately reviewed retailer pack identity evidence. Both IDs and historical pack text are retained. Current database records and commercial authorization are unverified. Snapshot database records were all customer_selectable=false. No automatic ID merges or database writes.
+- Imodium 60 capsules and Imodium Instants 6 tablets have 700 px photographs on quality hold. Zyrtec oral drops 10 ml has an underfilled photo on quality hold. Additional gallery illustrations/photos were inspected and rejected as unsuitable replacements.
+- Zyrtec oral-drops retailer description incorrectly claims cetirizine plus ambroxol and includes tablet instructions. Exclude it. The descriptive identity uses the photographed strength/form and GSK regional manufacturer leaflet. That leaflet does not prove UAE registration.
+
+## Important implementation files
+
+- current/behaviour/catalogue-refresh-data.js: local overlay data.
+- current/behaviour/catalogue-refresh.js: image identity matching constrained by family, explicit full-name alias, brand and known pack; punctuation preserved, collisions quarantined.
+- current/behaviour/verified-variant-records.js: seven individually evidenced preview records; strict local ID/family/full-name/brand/pack eligibility and card SKU matching.
+- current/behaviour/variant-evidence.js: evidence approval guard and exact identity checks; description source, price source/date/type/unit/VAT/qualification propagation.
+- current/behaviour/family-details.js and app.js: selected exact image, separate multiselect gallery, per-option benchmarks, and procurement snapshots. Local IDs retained as local_product_option_id; database foreign-key product_option_id stays null for local overlays.
+- current/manifest.json: verified record and evidence scripts load before app.js.
+- tools/build-product-index.mjs: regenerate search index after relevant product changes, then npm run build.
+- tools/reconcile-option-identities.py: reproducible snapshot overlap audit; validates six reviewed exact ID pairs and photo checksums. Run python3 tools/reconcile-option-identities.py.
+
+## Audit and source records to read
+
+- docs/verified-preview-variant-register.json: seven preview identities, image paths/checksums/dimensions, sources, descriptions, prices and approval limits.
+- docs/imodium-zyrtec-option-evidence-20261011.json: six detailed pack reviews, both IDs, source photos/prices, quality holds and excluded description claim.
+- docs/option-id-reconciliation-candidates.json: reproducible six-pair snapshot reconciliation and separate verified-pack evidence status.
+- docs/catalogue-preview-repair-20261011.md: runtime repair and review findings.
+- docs/catalogue-option-release-inventory.csv, docs/live-variant-audit-20261011.csv, docs/local-catalogue-overlay-variant-audit-20261011.csv: retained historical snapshots; do not overwrite as though fresh queries.
+- staging/catalogue-batch33/source-manifest.json, candidate-image-register.json, uae-retail-evidence.json, additional-retailer-evidence.json and imodium-zyrtec-gallery-review.json: original assets and private evidence/hold decisions. Staging must remain excluded from built release.
+
+## Actual test state at this checkpoint
+
+- Local npm run build, syntax checks, diff check and 16 evidence/identity/staging tests passed for the latest change. Shell tests also passed. A longer local DOM/catalogue sequence was interrupted by session reset; do not assert its completion without rerunning or CI evidence.
+- Previous head ba2250be1dfc4b87bdfbe225e75953de7e400f8d passed GitHub run 38135478455. Previous runtime d3edf4540554438d5965ab252e87f57f5bfee453 passed run 38135378136.
+- Latest runtime/evidence cb0b8c13d65d71f3f5205596f909251d2254a56f was pushed successfully. Its GitHub integrity run 38138752128 was queued at handover creation. Inspect its actual conclusion first: https://github.com/mohnimer/pharmaservice/actions/runs/38138752128
+- Browser test tests/variant-browser.mjs now covers seven real candidates at 390 px and 1440 px, fixture selection and multiselect, exact image decode, card/detail/request packs and benchmarks, separate description and price sources, local-ID snapshots and no horizontal overflow. Nexium strength multiselect keeps separate photos/prices. This expanded seven-variant browser run is pending CI confirmation.
+- Local Chromium downloads previously failed with invalid/truncated ZIPs; GitHub installs Chromium successfully. Do not repeatedly retry local downloads without a new reason.
+- The workflow .github/workflows/catalogue-variant-integrity.yml runs evidence, identity, staging, shell, DOM, catalogue and browser checks. Transport-isolated browser tests make no production backend writes; they do not establish production database persistence or full visual release approval.
+
+## Resume actions
+
+1. Fetch the repair branch and inspect PR/head and CI run 38138752128. Fix any failures, particularly new Imodium/Zyrtec routes, selector/card identity, separate manufacturer description source and overflow. Keep all existing work.
+2. Resolve the three image-quality holds with sharper exact-pack originals, never promotional illustrations or generated substitute photos. Review additional catalogue variants with exact source evidence and dated UAE price units/VAT/stock/discount qualifications.
+3. Reconcile real database/local identities through authorized read-only verification, preserving non-selectable/commercial boundaries. Do not promote snapshot UUIDs to customer requests merely because names match.
+4. Continue remaining catalogue evidence audit, real mobile/desktop visual review and procurement persistence verification in a safe test context; prepare a fully audited release only after gates pass.
+5. Commit and push repair-branch changes; inspect CI at the actual pushed head and update PR with actual outcomes. No production changes until verified release approval.
+
+## Workspace and GitHub operations
+
+Last workspace was /workspace/scratch/ba331b459d21/pharmaservice; a new chat may need to clone/fetch the repository again. The repository is the durable source of progress. No AGENTS.md was found during prior work; check again if repository contents change. No subagents were used; do not delegate unless explicitly authorized by applicable instructions.
+
+Git fetch works; local CLI git push lacked credentials. The GitHub connector successfully pushed via create_blob, create_tree, create_commit, update_ref with expected_sha lease and force=false. Compare the remote-created tree SHA against the tested local tree before moving the ref. Remote commit metadata can produce a different commit SHA from the identical local tree; synchronize local history with fetch and soft reset only after verifying identical trees and preserving local work. Never force-push over someone else's changes.
+
+The locally attached older institutional project handover/company bible/financial model are not needed to resume this code/evidence repair. No new image-generation or redesign task is authorized.
+
+Final verified runtime cfd08c84a76591891c297d56aeb781e5a6ed18de passed Actions run38155318574. All31 real variants passed at390/1440px, including exact native image dimensions, descriptions/packs, qualified price/VAT/note request snapshots, Nexium multiselect and no overflow. Artifact11708611763 contains252screenshots, expires25October. Main visually reviewed mobile selected Spedifen, blackIRT6520, pink3DWhite, whiteCrossAction and Sebamed2x150g; desktop Spedifen full dialog and Sebamed25-wipe card. Exact printed packs/models and pricing qualifications are legible. Focused desktop selected/option element captures intersect the fixed modal header/footer and can include dimmed background outside the viewport; these are capture limitations, not whole-dialog approval. Full desktop Spedifen dialog shows the exact chip and active selection unobscured. Preserve this distinction and review full dialogs/scroll states for other variants before claiming complete visual approval. The ledger's613count means local records with catalogueVisible!==false, not necessarily613simultaneously rendered tiles or unique saleable products. Whole catalogue still incomplete (582pending ledger records); no production/backend/commercial changes. Next integrate the three staged Gloclav exact packs, then continue the gap register.

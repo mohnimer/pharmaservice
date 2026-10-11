@@ -1,0 +1,366 @@
+[
+  {
+    "local_option_id": "local-acorus-48939d08ef0a",
+    "source_url": "https://www.lifepharmacy.com/product/braun-thermoscan-7-age-precision-ear-thermometer/",
+    "retrieval_date": "2026-10-11",
+    "source_sku": "109214",
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/braun-thermoscan-7-age-precision-ear-thermometer/109214-1.png",
+        "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-48939d08ef0a-0.png",
+        "sha256": "c1edd34cdb68714abb537612485d0eb231d723ef4902b492db7f34b513d1e54c",
+        "width": 700,
+        "height": 700,
+        "byte_count": 119865,
+        "unchanged": true
+      },
+      {
+        "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/braun-thermoscan-7-age-precision-ear-thermometer/109214-2.jpg",
+        "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-48939d08ef0a-1.jpg",
+        "sha256": "049f9c14240d470dec3c35f5d3debf96481245fa7b4f87d2b3247496218bf0be",
+        "width": 1200,
+        "height": 1200,
+        "byte_count": 157124,
+        "unchanged": true
+      },
+      {
+        "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/braun-thermoscan-7-age-precision-ear-thermometer/109214-3.jpg",
+        "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-48939d08ef0a-2.jpg",
+        "sha256": "b131f5b1d851da2dd7fb64469cb0e7190f7672cb52a941216c8d2df23e330c81",
+        "width": 1200,
+        "height": 1200,
+        "byte_count": 203888,
+        "unchanged": true
+      }
+    ],
+    "retrieved_url": "https://www.lifepharmacy.com/product/braun-thermoscan-7-age-precision-ear-thermometer/",
+    "product_facts": {
+      "name": "Braun Thermoscan 7 Age Precision Ear Thermometer IRT6520",
+      "sku": "109214",
+      "brand": {
+        "@type": "Brand",
+        "name": "BRAUN",
+        "url": "https://www.lifepharmacy.com/brand/braun"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.lifepharmacy.com/product/braun-thermoscan-7-age-precision-ear-thermometer",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": 312.9,
+        "priceCurrency": "AED",
+        "priceValidUntil": "2027-12-30T00:00:00.000Z",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": 0,
+            "currency": "AED"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            }
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "AE"
+          }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "AE",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 3,
+          "returnFees": "https://schema.org/FreeReturn",
+          "returnMethod": "https://schema.org/ReturnByMail"
+        }
+      }
+    }
+  },
+  {
+    "local_option_id": "local-acorus-e0a3afba003e",
+    "source_url": "https://www.lifepharmacy.com/product/brn-nasal-aspirator-1-clears-stuffy-noses-gently-bna050eu",
+    "retrieval_date": "2026-10-11",
+    "source_sku": "135904",
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/brn-nasal-aspirator-1-clears-stuffy-noses-gently-bna050eu/135904-1.png",
+        "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-e0a3afba003e-0.png",
+        "sha256": "ce83741357cfb091c3d1f94bb06b3772ca4ba558b2c9e9d8db388a638fd215a5",
+        "width": 700,
+        "height": 700,
+        "byte_count": 108931,
+        "unchanged": true
+      },
+      {
+        "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/brn-nasal-aspirator-1-clears-stuffy-noses-gently-bna050eu/135904-2.jpg",
+        "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-e0a3afba003e-1.jpg",
+        "sha256": "05a16d0524519d40f7fa9a59aaf7b649519e9de3e06bffd3500a697d2f504614",
+        "width": 1000,
+        "height": 1000,
+        "byte_count": 173937,
+        "unchanged": true
+      },
+      {
+        "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/brn-nasal-aspirator-1-clears-stuffy-noses-gently-bna050eu/135904-3.png",
+        "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-e0a3afba003e-2.png",
+        "sha256": "c110e3bb11b22947f62903e6652b11cc079913e2565c479be34adc4af9f6a59e",
+        "width": 700,
+        "height": 700,
+        "byte_count": 215768,
+        "unchanged": true
+      }
+    ],
+    "retrieved_url": "https://www.lifepharmacy.com/product/brn-nasal-aspirator-1-clears-stuffy-noses-gently-bna050eu",
+    "product_facts": {
+      "name": "Braun Manual Nasal Aspirator 1 BNA050EU",
+      "sku": "135904",
+      "brand": {
+        "@type": "Brand",
+        "name": "BRAUN",
+        "url": "https://www.lifepharmacy.com/brand/braun"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.lifepharmacy.com/product/brn-nasal-aspirator-1-clears-stuffy-noses-gently-bna050eu",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": 49.95,
+        "priceCurrency": "AED",
+        "priceValidUntil": "2027-12-30T00:00:00.000Z",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": 0,
+            "currency": "AED"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            }
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "AE"
+          }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "AE",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 3,
+          "returnFees": "https://schema.org/FreeReturn",
+          "returnMethod": "https://schema.org/ReturnByMail"
+        }
+      }
+    }
+  },
+  {
+    "local_option_id": "local-acorus-f50a5698bd58",
+    "source_url": "https://www.lifepharmacy.com/product/braun-oral-b-vitality-100-cross-action-rechargeable-toothbrush-d100-413-1",
+    "retrieval_date": "2026-10-11",
+    "source_sku": "131055",
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/braun-oral-b-vitality-100-cross-action-rechargeable-toothbrush-d100-413-1/131055-1.jpg",
+        "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-f50a5698bd58-0.jpg",
+        "sha256": "8d1a0c2774b75349c003fe4314972bc6f102a0f73175ab03b69b38c087f40fdd",
+        "width": 1024,
+        "height": 1024,
+        "byte_count": 69323,
+        "unchanged": true
+      },
+      {
+        "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/braun-oral-b-vitality-100-cross-action-rechargeable-toothbrush-d100-413-1/131055-2.avif",
+        "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-f50a5698bd58-1.avif",
+        "sha256": "8cd2f3ef4ac5d393e0f8425579cc63afb5318a5d0dd80df4c04fd8844e3d900f",
+        "width": 700,
+        "height": 700,
+        "byte_count": 36362,
+        "unchanged": true
+      },
+      {
+        "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/braun-oral-b-vitality-100-cross-action-rechargeable-toothbrush-d100-413-1/131055-3.avif",
+        "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-f50a5698bd58-2.avif",
+        "sha256": "804521fa752cc8bd88e591998efd923ceded0a092935f94910e300e2b94123ff",
+        "width": 700,
+        "height": 700,
+        "byte_count": 41536,
+        "unchanged": true
+      }
+    ],
+    "retrieved_url": "https://www.lifepharmacy.com/product/braun-oral-b-vitality-100-cross-action-rechargeable-toothbrush-d100-413-1",
+    "product_facts": {
+      "name": "Braun Oral B Vitality 100 Cross Action Toothbrush White D100",
+      "sku": "131055",
+      "brand": {
+        "@type": "Brand",
+        "name": "ORAL B",
+        "url": "https://www.lifepharmacy.com/brand/oral-b"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.lifepharmacy.com/product/braun-oral-b-vitality-100-cross-action-rechargeable-toothbrush-d100-413-1",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": 179,
+        "priceCurrency": "AED",
+        "priceValidUntil": "2027-12-30T00:00:00.000Z",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": 0,
+            "currency": "AED"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            }
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "AE"
+          }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "AE",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 3,
+          "returnFees": "https://schema.org/FreeReturn",
+          "returnMethod": "https://schema.org/ReturnByMail"
+        }
+      }
+    }
+  },
+  {
+    "local_option_id": "local-acorus-19495a4b8eb2",
+    "source_url": "https://www.lifepharmacy.com/product/braun-oral-b-vitality-100-3d-white-rechargeable-toothbrush-d100-413-1-pink",
+    "retrieval_date": "2026-10-11",
+    "source_sku": "131057",
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/braun-oral-b-vitality-100-3d-white-rechargeable-toothbrush-d100-413-1-pink/131057-1.jpg",
+        "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-19495a4b8eb2-0.jpg",
+        "sha256": "ab67d087b8fc8a49cf747afa58c4e5c493bee0621c7847c5474c5a0f8b0d507b",
+        "width": 700,
+        "height": 700,
+        "byte_count": 116762,
+        "unchanged": true
+      },
+      {
+        "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/braun-oral-b-vitality-100-3d-white-rechargeable-toothbrush-d100-413-1-pink/131057-2.avif",
+        "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-19495a4b8eb2-1.avif",
+        "sha256": "804dfe30e69b91598102531741e309d3708f589a254e2b29c2033f87624c0b7a",
+        "width": 1000,
+        "height": 1000,
+        "byte_count": 19085,
+        "unchanged": true
+      },
+      {
+        "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/braun-oral-b-vitality-100-3d-white-rechargeable-toothbrush-d100-413-1-pink/131057-3.jpg",
+        "file": "staging/catalogue-batch33/equipment-followon-20261011/local-acorus-19495a4b8eb2-2.jpg",
+        "sha256": "cda9f629679632c8789d774896918b4e28a8d42ed2af0fa04e2e3f43110f7246",
+        "width": 900,
+        "height": 900,
+        "byte_count": 58909,
+        "unchanged": true
+      }
+    ],
+    "retrieved_url": "https://www.lifepharmacy.com/product/braun-oral-b-vitality-100-3d-white-rechargeable-toothbrush-d100-413-1-pink",
+    "product_facts": {
+      "name": "Braun Oral B Vitality 100 3D White Toothbrush Pink D100.413.",
+      "sku": "131057",
+      "brand": {
+        "@type": "Brand",
+        "name": "ORAL B",
+        "url": "https://www.lifepharmacy.com/brand/oral-b"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.lifepharmacy.com/product/braun-oral-b-vitality-100-3d-white-rechargeable-toothbrush-d100-413-1-pink",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": 179,
+        "priceCurrency": "AED",
+        "priceValidUntil": "2027-12-30T00:00:00.000Z",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": 0,
+            "currency": "AED"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            }
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "AE"
+          }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "AE",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 3,
+          "returnFees": "https://schema.org/FreeReturn",
+          "returnMethod": "https://schema.org/ReturnByMail"
+        }
+      }
+    }
+  },
+  {
+    "local_option_id": "local-acorus-94b60f8eaf61",
+    "source_url": "https://www.myaster.com/en/online-pharmacy/p/braun-thermoscan-probe-covers-lf40/1001888",
+    "retrieval_date": "2026-10-11",
+    "source_sku": "1001888",
+    "images": [],
+    "error": "HTTP Error 403: Forbidden"
+  }
+]

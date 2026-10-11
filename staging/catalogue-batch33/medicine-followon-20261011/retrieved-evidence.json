@@ -1,0 +1,408 @@
+[
+  {
+    "local_option_id": "local-acorus-fa9568435322",
+    "source_url": "https://www.myaster.com/en/online-pharmacy/p/alicoxa-200mg-20-capsules/1062828",
+    "checked_at": "2026-10-11T15:58:41.865972+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.myaster.com/en/online-pharmacy/p/alicoxa-200mg-20-capsules/1062828",
+    "page_sha256": "1f6f844b8e8e1d2bdb4abd49b7148893af93886dc5b6745d0012d13e4b33e24f",
+    "source_name": "Alicoxa 200mg - 20 Capsules",
+    "source_sku": "1062828",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Tabuk"
+    },
+    "offer": {
+      "@type": "Offer",
+      "url": "https://www.myaster.com/en/online-pharmacy/p/alicoxa-200mg-20-capsules/1062828",
+      "priceCurrency": "AED",
+      "price": "32.50",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": "myAster"
+      }
+    },
+    "vat_inclusive_text_present": false,
+    "images": [
+      {
+        "source_url": "https://media.myaster.com/images/products/1062828/alicoxa-200mg-20-capsules/1062828-1new1.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-fa9568435322-0.jpg",
+        "sha256": "7c9b3c79fe20c63afe09d6b980e8ac876d1c1c2b226f05d3715b371d14443bc5",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/products/1062828/alicoxa-200mg-20-capsules/1062828-2new1.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-fa9568435322-1.jpg",
+        "sha256": "8d1a5ea4cce1b3b03cb6d031a915fd541c2d05be9acc485e99636b1dc75ff698",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/shop-with-confidence.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-fa9568435322-2.jpg",
+        "sha256": "9bbe4787e2a6fba23b36743713ac9851cab2c1d8e773ebc39b0ec974126007bf",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/quality.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-fa9568435322-3.jpg",
+        "sha256": "310555326f6e31264b7e69f75a4eee510b842308ffcd313457826ed916e0ac63",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-d6f2bf1d5bc2",
+    "source_url": "https://www.myaster.com/en/online-pharmacy/p/azomycin-200mg-5ml-powder-for-oral-suspension-30ml/1000868",
+    "checked_at": "2026-10-11T15:58:41.866829+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.myaster.com/en/online-pharmacy/p/azomycin-200mg-5ml-powder-for-oral-suspension-30ml/1000868",
+    "page_sha256": "cee19af7e14cbbdf4a9bee78844538ae3162ff8cbd18bac02e5a049bc2768132",
+    "source_name": "Azomycin 200mg/5ml Powder For Oral Suspension 30ml",
+    "source_sku": "1000868",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Azomycin"
+    },
+    "offer": {
+      "@type": "Offer",
+      "url": "https://www.myaster.com/en/online-pharmacy/p/azomycin-200mg-5ml-powder-for-oral-suspension-30ml/1000868",
+      "priceCurrency": "AED",
+      "price": "37.50",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": "myAster"
+      }
+    },
+    "vat_inclusive_text_present": false,
+    "images": [
+      {
+        "source_url": "https://media.myaster.com/images/products/1000868/azomycin-200mg-5ml-powder-for-oral-suspension-30ml/1000868_1.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-d6f2bf1d5bc2-0.jpg",
+        "sha256": "88a49d14ce0b8f2935cab2cd85429a1174182aa3e1452ba0e70093f0f74c699d",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/products/1000868/azomycin-200mg-5ml-powder-for-oral-suspension-30ml/1000868_2.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-d6f2bf1d5bc2-1.jpg",
+        "sha256": "773e1c06aa3960dd7992e9f32d23998bb4cff1d1f2c09e6d4bef21f06cdfadbe",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/shop-with-confidence.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-d6f2bf1d5bc2-2.jpg",
+        "sha256": "9bbe4787e2a6fba23b36743713ac9851cab2c1d8e773ebc39b0ec974126007bf",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/quality.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-d6f2bf1d5bc2-3.jpg",
+        "sha256": "310555326f6e31264b7e69f75a4eee510b842308ffcd313457826ed916e0ac63",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-2524e51a60a8",
+    "source_url": "https://www.myaster.com/en/online-pharmacy/p/gupisone-20mg-tablets-pack-of-40s/1055669",
+    "checked_at": "2026-10-11T15:58:41.867677+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.myaster.com/en/online-pharmacy/p/gupisone-20mg-tablets-pack-of-40s/1055669",
+    "page_sha256": "ad9f0f11b5fcec2ce377cf591ad601abf79fffdb3e5e792ec569daf2d8ef0c02",
+    "source_name": "Gupisone 20mg Tablets, Pack of 40's",
+    "source_sku": "1055669",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Gupisone"
+    },
+    "offer": {
+      "@type": "Offer",
+      "url": "https://www.myaster.com/en/online-pharmacy/p/gupisone-20mg-tablets-pack-of-40s/1055669",
+      "priceCurrency": "AED",
+      "price": "57.00",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": "myAster"
+      }
+    },
+    "vat_inclusive_text_present": false,
+    "images": [
+      {
+        "source_url": "https://media.myaster.com/images/products/1055669/gupisone-20mg-tablets-pack-of-40s/1055669-1new.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-2524e51a60a8-0.jpg",
+        "sha256": "6ed99415fafa707714f02df7bc9d175c01e88f0e2d326e56d4d71347d78d9bcb",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/products/1055669/gupisone-20mg-tablets-pack-of-40s/1055669-2new.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-2524e51a60a8-1.jpg",
+        "sha256": "7b923a30217b50177835fb98702b6425c4b282171abf4b905302390c0c995773",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/shop-with-confidence.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-2524e51a60a8-2.jpg",
+        "sha256": "9bbe4787e2a6fba23b36743713ac9851cab2c1d8e773ebc39b0ec974126007bf",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/quality.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-2524e51a60a8-3.jpg",
+        "sha256": "310555326f6e31264b7e69f75a4eee510b842308ffcd313457826ed916e0ac63",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-764e4d0db998",
+    "source_url": "https://www.myaster.com/en/online-pharmacy/p/spedifen-400mg-tablets-pack-of-24-s/1045852",
+    "checked_at": "2026-10-11T15:58:41.869428+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.myaster.com/en/online-pharmacy/p/spedifen-400mg-tablets-pack-of-24-s/1045852",
+    "page_sha256": "c7bb84f5338faa0844418fd3cc2a87a5f54ac02061788aad96ea21cf033c4df7",
+    "source_name": "Spedifen 400mg Tablets, Pack of 24's",
+    "source_sku": "1045852",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Spedifen"
+    },
+    "offer": {
+      "@type": "Offer",
+      "url": "https://www.myaster.com/en/online-pharmacy/p/spedifen-400mg-tablets-pack-of-24-s/1045852",
+      "priceCurrency": "AED",
+      "price": "28.50",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": "myAster"
+      }
+    },
+    "vat_inclusive_text_present": false,
+    "images": [
+      {
+        "source_url": "https://media.myaster.com/images/products/1045852/spedifen-400mg-tablets-pack-of-24s/1045852_1.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-764e4d0db998-0.jpg",
+        "sha256": "7652fa41fb32ccbfbcd47f432d26af56d2745ae4157f4b7570ad139e90a294ff",
+        "dimensions": [
+          1000,
+          1000
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/products/1045852/spedifen-400mg-tablets-pack-of-24s/1045852_2.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-764e4d0db998-1.jpg",
+        "sha256": "070bf35c4d72bb65167d5067da34f58953290f8a9e57a829cbd139813db565ed",
+        "dimensions": [
+          1000,
+          1000
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/shop-with-confidence.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-764e4d0db998-2.jpg",
+        "sha256": "9bbe4787e2a6fba23b36743713ac9851cab2c1d8e773ebc39b0ec974126007bf",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/quality.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-764e4d0db998-3.jpg",
+        "sha256": "310555326f6e31264b7e69f75a4eee510b842308ffcd313457826ed916e0ac63",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-907534527424",
+    "source_url": "https://www.myaster.com/en/online-pharmacy/p/zovirax-400mg-tablets-pack-of-25s/1025938",
+    "checked_at": "2026-10-11T15:59:22.241339+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.myaster.com/en/online-pharmacy/p/zovirax-400mg-tablets-pack-of-25s/1025938",
+    "page_sha256": "65427c515e83dd7c955be8bdb8f7fb8cd48c7a09fd42396f6a401fa7d1fa544b",
+    "source_name": "Zovirax 400mg Tablets, Pack of 25's",
+    "source_sku": "1025938",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Zovirax"
+    },
+    "offer": {
+      "@type": "Offer",
+      "url": "https://www.myaster.com/en/online-pharmacy/p/zovirax-400mg-tablets-pack-of-25s/1025938",
+      "priceCurrency": "AED",
+      "price": "139.00",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": "myAster"
+      }
+    },
+    "vat_inclusive_text_present": false,
+    "images": [
+      {
+        "source_url": "https://media.myaster.com/images/products/1025938/zovirax-400mg-tablets-pack-of-25s/1025938_1.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-907534527424-0.jpg",
+        "sha256": "e78bcd842d5f968f01789573516fc66f15beab7ca5bd7cf75d40ee83525884b7",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/products/1025938/zovirax-400mg-tablets-pack-of-25s/1025938_2.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-907534527424-1.jpg",
+        "sha256": "914b6bd9b0fc8a99374f16bdda4a4053048ed2bef7479ec557f1661f77620ffd",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/shop-with-confidence.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-907534527424-2.jpg",
+        "sha256": "9bbe4787e2a6fba23b36743713ac9851cab2c1d8e773ebc39b0ec974126007bf",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/quality.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-907534527424-3.jpg",
+        "sha256": "310555326f6e31264b7e69f75a4eee510b842308ffcd313457826ed916e0ac63",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-0dec19acea05",
+    "source_url": "https://www.binsina.ae/en/buy-aldomet-250-mg-30-tablets.html",
+    "checked_at": "2026-10-11T15:59:22.248746+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieval_error": "HTTP Error 405: Not allowed!"
+  },
+  {
+    "local_option_id": "local-acorus-ae309306c236",
+    "source_url": "https://www.nahdionline.com/en-ae/azomycin-250-mg-capsule-6pcs/pdp/100007664",
+    "checked_at": "2026-10-11T15:59:22.263641+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.nahdionline.com/en-ae/azomycin-250-mg-capsule-6pcs/pdp/100007664",
+    "page_sha256": "122147b6f37804f70e03dc4943ad2729179cccb207f364593004172bb9678411",
+    "source_name": "Azomycin 250 mg Capsule 6pcs",
+    "source_sku": "100007664",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Azomycin"
+    },
+    "offer": {
+      "@type": "Offer",
+      "url": "https://www.nahdionline.com/en-ae/azomycin-250-mg-capsule-6pcs/pdp/100007664",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "priceCurrency": "AED",
+      "price": 56.5,
+      "priceValidUntil": "2026-12-31",
+      "seller": {
+        "@type": "Organization",
+        "name": "Nahdi Pharmacy"
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 12,
+          "currency": "AED"
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      }
+    },
+    "vat_inclusive_text_present": false,
+    "images": [
+      {
+        "source_url": "https://ecombe.nahdionline.com/media/catalog/product/1/0/100007664_1.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-ae309306c236-0.jpg",
+        "sha256": "a46b967b6e91e5e098d09c2fc30d3a882d8ba3edeb0d7a0d19cdb540f3cb1e2a",
+        "dimensions": [
+          3394,
+          3394
+        ]
+      },
+      {
+        "source_url": "https://ecombe.nahdionline.com/media/catalog/product/1/0/100007664_0_1.jpg",
+        "file": "staging/catalogue-batch33/medicine-followon-20261011/local-acorus-ae309306c236-1.jpg",
+        "sha256": "73f43cf3c5beb8ba7cf8769fb565417c4cd3288f1b3b9dffc11e1aec1ed017fc",
+        "dimensions": [
+          1200,
+          1200
+        ]
+      }
+    ]
+  }
+]

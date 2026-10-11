@@ -1,0 +1,659 @@
+[
+  {
+    "local_option_id": "local-acorus-4d6c5f1f73f7",
+    "source_url": "https://www.lifepharmacy.com/product/betaserc-8mg-tab-100s-25s-blister-x-4",
+    "checked_at": "2026-10-11T15:56:18.745047+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/betaserc-8mg-tab-100s-25s-blister-x-4",
+    "page_sha256": "bc0b987dd20305446c02be3ba62ada4ac9dd2de9b690ae207bd95e0276e273ee",
+    "source_name": "BETASERC 8MG TAB 100S (25S BLISTER X 4)",
+    "source_sku": "107647",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/betaserc-8mg-tab-100s-25s-blister-x-4",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 100,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/betaserc-8mg-tab-100s-25s-blister-x-4/107647-1.png",
+        "file": "staging/catalogue-batch33/listing-followon-20261011/local-acorus-4d6c5f1f73f7-0.png",
+        "sha256": "049d664604e1d2d9c525bd70bc744f1cef91a57f5a54c8485f5d62dfbc044ae5",
+        "dimensions": [
+          700,
+          700
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-a5018581b24c",
+    "source_url": "https://www.lifepharmacy.com/product/livazo-2mg-tab-28s-14s-blister-x-2",
+    "checked_at": "2026-10-11T15:56:18.746347+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/livazo-2mg-tab-28s-14s-blister-x-2",
+    "page_sha256": "1ddeb7617fa0a90e8a6f1ae755865869bd8b779796e1017193151c06b167dd32",
+    "source_name": "LIVAZO 2MG TAB 28S (14S BLISTER X 2)",
+    "source_sku": "107917",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/livazo-2mg-tab-28s-14s-blister-x-2",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 106,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/livazo-2mg-tab-28s-14s-blister-x-2/107917-1.png",
+        "file": "staging/catalogue-batch33/listing-followon-20261011/local-acorus-a5018581b24c-0.png",
+        "sha256": "29ccb4952d15617ac473217013cee53f2789fa03a51234412355ed1bc475a24e",
+        "dimensions": [
+          700,
+          700
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-98520485e956",
+    "source_url": "https://www.lifepharmacy.com/product/livazo-4mg-tab-28s-14s-blister-x-2",
+    "checked_at": "2026-10-11T15:56:18.747236+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/livazo-4mg-tab-28s-14s-blister-x-2",
+    "page_sha256": "8b64a7443eafb2c3692c0f9df687ccaf434e7396e79d66b62a551dc0a1f3a42e",
+    "source_name": "LIVAZO 4MG TAB 28S (14S BLISTER X 2)",
+    "source_sku": "107918",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/livazo-4mg-tab-28s-14s-blister-x-2",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 125,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/livazo-4mg-tab-28s-14s-blister-x-2/107918-1.png",
+        "file": "staging/catalogue-batch33/listing-followon-20261011/local-acorus-98520485e956-0.png",
+        "sha256": "c50176bb5f4ccdeba1b54b6da834b87a32c946a8d28ad2caec78c29c7ea8da74",
+        "dimensions": [
+          700,
+          700
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-579df1ae3909",
+    "source_url": "https://www.lifepharmacy.com/product/femoston-2-10-tab-28s-bl-14orange-tab-14-yellow-tab",
+    "checked_at": "2026-10-11T15:56:18.749228+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/femoston-2-10-tab-28s-bl-14orange-tab-14-yellow-tab",
+    "page_sha256": "05485f3fcc6c752c585f5cf4202c69b9b23a21b2fe806fbfe28d60df926d23a4",
+    "source_name": "FEMOSTON 2/10 TAB 28S BL (14ORANGE TAB + 14 YELLOW TAB)",
+    "source_sku": "116542",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/femoston-2-10-tab-28s-bl-14orange-tab-14-yellow-tab",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 50.5,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/femoston-2-10-tab-28s-bl-14orange-tab-14-yellow-tab/116542-1.png",
+        "file": "staging/catalogue-batch33/listing-followon-20261011/local-acorus-579df1ae3909-0.png",
+        "sha256": "74c8bf0e32149bee7da386e78153a65b22e24c3b7f2ba39115aeb79a637319e5",
+        "dimensions": [
+          700,
+          700
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-7e0e1d8d4182",
+    "source_url": "https://www.lifepharmacy.com/product/femoston-conti-1-5-tab-28s-calendar-pack-blister",
+    "checked_at": "2026-10-11T15:56:39.665723+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/femoston-conti-1-5-tab-28s-calendar-pack-blister",
+    "page_sha256": "aee17a91383597d5a264aac9a00be7d70045fdb3bdf3f24304479f171059d58c",
+    "source_name": "FEMOSTON CONTI 1/5 TAB 28S CALENDAR PACK BLISTER",
+    "source_sku": "116543",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/femoston-conti-1-5-tab-28s-calendar-pack-blister",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 50.5,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/femoston-conti-1-5-tab-28s-calendar-pack-blister/116543-1.png",
+        "file": "staging/catalogue-batch33/listing-followon-20261011/local-acorus-7e0e1d8d4182-0.png",
+        "sha256": "974183eb61325a004dff37eecfcc708782d93349c62ea718104fb90faeba238c",
+        "dimensions": [
+          700,
+          700
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-fd2beb73a834",
+    "source_url": "https://www.lifepharmacy.com/product/urispas-200mg-tab-30s-10s-blister-x-3",
+    "checked_at": "2026-10-11T15:56:39.666256+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/urispas-200mg-tab-30s-10s-blister-x-3",
+    "page_sha256": "2aad542a3a809fd77150af83d3256d08a5e56813625164a92cbe7450ac411bff",
+    "source_name": "URISPAS 200MG TAB 30S (10S BLISTER X 3)",
+    "source_sku": "107931",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/urispas-200mg-tab-30s-10s-blister-x-3",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 31,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/urispas-200mg-tab-30s-10s-blister-x-3/107931-1.png",
+        "file": "staging/catalogue-batch33/listing-followon-20261011/local-acorus-fd2beb73a834-0.png",
+        "sha256": "e49ae88bcc6444357e1ac4d3694fea2c28121664e89c11a42e2bc29fb308835c",
+        "dimensions": [
+          700,
+          700
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-8291a039f14f",
+    "source_url": "https://www.lifepharmacy.com/product/brn-thermoscan-7-age-precision-ear-thermometer-irt-6525",
+    "checked_at": "2026-10-11T15:56:39.682477+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/brn-thermoscan-7-age-precision-ear-thermometer-irt-6525",
+    "page_sha256": "f6f8a01624f859ad71fc4fca63a6f5afcc5d89d234479c578263a647f9e080d3",
+    "source_name": "Braun Thermoscan 7+ Age Precision Ear Thermometer IRT6525",
+    "source_sku": "133898",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "BRAUN",
+      "url": "https://www.lifepharmacy.com/brand/braun"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/brn-thermoscan-7-age-precision-ear-thermometer-irt-6525",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 264.6,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/brn-thermoscan-7-age-precision-ear-thermometer-irt-6525/133898-1.jpg",
+        "file": "staging/catalogue-batch33/listing-followon-20261011/local-acorus-8291a039f14f-0.jpg",
+        "sha256": "0a189a167b621604e5efdb359e9ba468f6343746904c7bd37226cfd0f01dba3e",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-d3d58af8dbdc",
+    "source_url": "https://www.lifepharmacy.com/product/nestle-nan-1-optipro-hmo-400-g",
+    "checked_at": "2026-10-11T15:56:39.720376+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/nestle-nan-1-optipro-hmo-400-g",
+    "page_sha256": "519eb27c661c54fca1ed1377820fc246462587cf20f29871fd0133c735b7028b",
+    "source_name": "Nestle Nan 1 Optipro 400 g",
+    "source_sku": "124216",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "NAN",
+      "url": "https://www.lifepharmacy.com/brand/nan"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/nestle-nan-1-optipro-hmo-400-g",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 53.11,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/nestle-nan-1-optipro-hmo-400-g/124216-1.jpg",
+        "file": "staging/catalogue-batch33/listing-followon-20261011/local-acorus-d3d58af8dbdc-0.jpg",
+        "sha256": "59ba39d1a94d3e67ce424b810f0a7bfbf2d35859656331441832218c7739b2d5",
+        "dimensions": [
+          1000,
+          1000
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-6703b683d432",
+    "source_url": "https://www.lifepharmacy.com/product/nestle-nan-1-optipro-hmo-800-g",
+    "checked_at": "2026-10-11T15:56:55.318561+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/nestle-nan-1-optipro-hmo-800-g",
+    "page_sha256": "63aa1d9bffd1b136c6f4653701404b9350aae4b0be39449574470d9414a1eec7",
+    "source_name": "Nestle Nan 1 Optipro 800 g",
+    "source_sku": "124217",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "NAN",
+      "url": "https://www.lifepharmacy.com/brand/nan"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/nestle-nan-1-optipro-hmo-800-g",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 104.48,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/nestle-nan-1-optipro-hmo-800-g/124217-1.jpg",
+        "file": "staging/catalogue-batch33/listing-followon-20261011/local-acorus-6703b683d432-0.jpg",
+        "sha256": "767eb478292fb7ebe2e75351ff259abe2b6b8d3bda79b8b1ea2a70bd4c6835d2",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "source_images": 150,
+  "source_manifest_sha256": "113c0d753de811282e10d5044f2282e991731c15c2fb78ae2590cbadae6e522b",
+  "local_options": 193,
+  "database_options": 719,
+  "local_candidate_links": 147,
+  "database_candidate_links": 0,
+  "existing_master_local_links": 68,
+  "new_to_master_local_links": 79,
+  "source_pack_uncertain": 31,
+  "retrieved_retail_benchmarks": 3,
+  "approved_images": 0,
+  "approved_prices": 0,
+  "production_changed": false
+}
