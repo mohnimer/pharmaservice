@@ -1,5 +1,11 @@
 # Pharma Service catalogue repair — new-chat handover
 
+## Updated checkpoint — homepage reference refinement
+
+User subsequently requested the homepage body follow their attached one-pager, retaining existing header, footer and functionality. This authorizes the homepage refinement despite the earlier no-redesign scope below. Runtime change d38f9ebf5973906d5bd511014b067c1f28305ccd reduces the body to hero, catalogue search/six categories, repeat-supply flow and buying-visibility strip. Current collage/category assets, navigation, search hooks and procurement behavior remain intact. No catalogue evidence or backend modifications in this batch. See docs/homepage-reference-refinement-20261011.md.
+
+Browser test head 23af09ee78956da4b6583225aebee49cc0f34382 corrects new search assertions to the existing interpretation behavior: submission clears the input and retains the phrase in “You said”. Earlier homepage runs 38143401100 and 38143669802 failed only that incorrect new assertion; the mobile screenshot was reviewed. Run 38143881081 passed at 23af09ee78956da4b6583225aebee49cc0f34382, including homepage search interpretation/results, navigation, no overflow and all nine variant checks at 390/1440 px. Artifact 11703663344 contains 76 screenshots; both homepage captures were visually reviewed. Desktop retains the three-column category grid and six-stage horizontal flow; mobile stacks cards and wraps the flow. This final checkpoint changes documentation only; inspect its actual newest head/run. Keep the PR draft and production unchanged. The reconciliation/evidence holds documented below remain unresolved.
+
 ## Updated checkpoint — reference reconciliation continuation
 
 This section supersedes the dated checkpoints below without deleting them. Runtime/evidence head 869946efac2b5d1918368fd0d2f062d20c71f923 passed Actions run 38141484081. All nine candidates passed at 390/1440 px, including readable option text, exact matching presentation, visible images, descriptions, qualified benchmarks, local request IDs, multiselect and no overflow. Artifact 11702987084 contains 56 screenshots, expires 25 October. Representative desktop/mobile dialog/card/selected/multiselect images were visually reviewed. This is not whole-catalogue release approval.
