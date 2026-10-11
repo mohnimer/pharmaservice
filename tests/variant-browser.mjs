@@ -154,7 +154,7 @@ try{
   assert.equal(await card.locator('.productMainImage').getAttribute('src'),variant.photo);
   assert((await card.locator('.pack').innerText()).includes(variant.pack));
   assert((await card.locator('.pscPricePreview').innerText()).includes('UAE retail benchmark'));
-  assert((await card.locator('.pscPricePreview').innerText()).includes(String(variant.price)));
+  assert((await card.locator('.pscPricePreview').innerText()).replace(/,/g,'').includes(String(variant.price)));
   await card.scrollIntoViewIfNeeded();
   await card.locator('.productMainImage').evaluate(async img=>{img.loading='eager';await img.decode();});
   assert.equal(await card.locator('.productMainImage').evaluate(img=>img.naturalWidth),variant.imageWidth||1024);
@@ -165,7 +165,7 @@ try{
   assert.equal(await preview.getAttribute('src'),variant.photo);
   await page.waitForFunction(expected=>{const img=document.querySelector('.pscFamilyPreview img');return img?.complete&&img.naturalWidth===expected;},variant.imageWidth||1024);
   assert((await page.locator('.detailImageMeta').innerText()).includes(variant.pack));
-  assert((await page.locator('.detailImageMeta').innerText()).includes(String(variant.price)));
+  assert((await page.locator('.detailImageMeta').innerText()).replace(/,/g,'').includes(String(variant.price)));
   // Medicine families require a presentation as well as an exact option.
   // Assert a new event so a blocked submission cannot reuse a prior variant.
   const exactPresentation=await page.locator('[data-family-option="'+optionId+'"]').evaluate(el=>{const o=window.PS_CATALOGUE_REFRESH.approvedOptions.find(o=>o.product_option_id===el.dataset.familyOption);return o?.presentation||'';});
