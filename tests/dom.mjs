@@ -57,7 +57,8 @@ try {
   assert(w.document.querySelector('#psHomeCommand[data-cat-q]'));
   assert(w.document.querySelector('main.publicLanding > .publicHeader'));
   assert(w.document.querySelector('main.publicLanding > .publicFooter'));
-  assert.match(w.document.querySelector('.h47Hero h1').textContent,/review quotations, track orders/);
+  assert.equal(w.document.querySelector('.h47Hero h1').textContent,'From requirement to replenishment. All in one place.');
+  assert.equal(w.document.querySelector('.h47Hero .h47HeroBody').textContent,'Shop our comprehensive catalogue of healthcare products, with visibility and compliance throughout.');
   await w.happyDOM.close();
   // The current home body is installed after bind(); exercise its actual CTAs.
   for(const [selector,destination] of [
