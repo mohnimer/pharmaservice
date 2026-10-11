@@ -155,6 +155,9 @@ try{
   assert((await card.locator('.pack').innerText()).includes(variant.pack));
   assert((await card.locator('.pscPricePreview').innerText()).includes('UAE retail benchmark'));
   assert((await card.locator('.pscPricePreview').innerText()).includes(String(variant.price)));
+  await card.scrollIntoViewIfNeeded();
+  await card.locator('.productMainImage').evaluate(async img=>{img.loading='eager';await img.decode();});
+  assert.equal(await card.locator('.productMainImage').evaluate(img=>img.naturalWidth),variant.imageWidth||1024);
   await card.screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-card.png'});
   await card.locator('.productVisual').click();
   await page.locator('.pscBrandTick:has([data-family-option="'+optionId+'"])').click();
@@ -174,6 +177,7 @@ try{
   const optionText=page.locator('.pscBrandTick:has([data-family-option="'+optionId+'"]) > span:not(.pscOptionPrice)');
   assert((await optionText.boundingBox()).width>=140,'exact option text must retain a readable column');
   await page.locator('.pscBrandTick:has([data-family-option="'+optionId+'"])').screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-option.png'});
+  await page.locator('.detailImagePane').scrollIntoViewIfNeeded();
   await page.locator('.detailImagePane').screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-selected.png'});
   await page.screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-dialog.png'});
   const requestCount=await page.evaluate(()=>window.__variantRequests.length);
