@@ -32,4 +32,9 @@
 .pscSelectedVariantRow .pscOptionPrice{display:block;margin-top:5px}
 .pscFamilyPreview .catalogueImageEmpty{display:flex;align-items:center;justify-content:center;min-height:140px;padding:20px;text-align:center;font-size:12px;color:#6d7673}
 .pscFamilyProductSheet .detailImageMeta small{display:block;margin-top:5px;line-height:1.45}
+/* Keep exact names and qualified prices readable within the detail column. */
+.pscFamilyPreferenceBlock .pscBrandTickGrid{grid-template-columns:1fr}
+.pscFamilyPreferenceBlock .pscBrandTick{flex-wrap:wrap}
+.pscFamilyPreferenceBlock .pscBrandTick>span:not(.pscOptionPrice){flex:1 1 140px}
+.pscFamilyPreferenceBlock .pscBrandTick .pscOptionPrice{flex:1 0 100%;max-width:none;text-align:left;margin-left:0}
 @media(max-width:720px){.pscSelectedVariantRow img{width:68px;height:68px;flex-basis:68px}.pscSelectedVariantRow{padding:9px;gap:9px}}

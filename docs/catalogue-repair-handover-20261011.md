@@ -1,5 +1,18 @@
 # Pharma Service catalogue repair — new-chat handover
 
+## Updated checkpoint — 11 October 2026, after b5c1747
+
+This section supersedes dated status below; retain the original history. Latest verified runtime/evidence commit is b5c1747a1fa93744bdb694e61dec3d5194589267. Actions run 38140330487 passed all checks, including nine real candidates at 390/1440 px. Original requested run 38138752128 failed because the Imodium test submitted without required presentation and reused the preceding request. Commit 90e8bd0 fixed event-count/presentation assertions; run 38139237059 passed. Run 38139890586 then exposed a genuine hidden image pane; b5c1747 fixed the legacy enhancement that hid selected photos and overwrote exact descriptions.
+
+- Shared listing/detail notice: “Retail prices shown are for reference. Wholesale prices are provided in your quotation.” Added at the user's request. These values are qualified benchmarks; do not claim undiscounted standard prices or PSC-approved wholesale prices.
+- Nine verified previews now: original seven plus Panadol Night 24 caplets (AED 25) and Avamys 27.5 micrograms/spray, 120 sprays (AED 63). Exact photo/checksum/source/description/retail qualifications are in docs/verified-preview-variant-register.json. Manufacturer sources support descriptions; regional leaflets do not prove UAE registration.
+- Fresh read-only Supabase checks are saved separately in docs/current-option-identity-verification-20261011.json and docs/current-catalogue-option-counts-20261011.json. Six exact identity pairs verified against current records; commercial approval/automatic merging remain false. Current count: 719 active options, zero customer selectable. No database writes. Historical snapshots remain unchanged. tools/verify-current-option-identities.py replays the dated evidence, not a fresh live query.
+- CI screenshot artifact 11702891413 from run 38140330487 contains 56 images, expires 25 October. Mobile exact preview images, descriptions, qualified prices, notice and separate Nexium multiselect were inspected. Desktop review found compressed brand-selector text; the next commit changes selector cards to one readable column with qualified price below and adds a >=140 px text-width assertion. Its CI must be checked before claiming final visual approval.
+- Search index regenerated after the new evidence; preserve it. Production unchanged, PR remains draft, release HOLD. Original 150 photos and three image-quality holds remain. Additional retailer alternatives and rejection decisions are saved in staging/catalogue-batch33/alternate-source-review-20261011/review.json.
+- Current workspace: /workspace/scratch/69bd7e1b2f0c/pharmaservice. Read docs/catalogue-repair-progress-20261011-retail-notice.md as well as this handover.
+
+Next: inspect Actions at actual branch head and review updated desktop screenshots. Then test real read-only public reference-view descriptors mixed with local overlays: the view includes active VERIFY/APPROVE descriptors regardless of customer_selectable. Check exact duplicate/pack handling and request provenance using isolated fixtures, preserving non-selectable/commercial boundaries. Do not promote snapshot UUIDs or perform production writes. Continue unresolved sharp exact-pack photo sourcing and remaining evidence audit. Keep the user informed before a chat limit and provide a continuation prompt referencing this handover and actual latest head/run.
+
 Checkpoint: 11 October 2026, approximately 16:20 UAE time.
 Repository: https://github.com/mohnimer/pharmaservice
 Draft PR: https://github.com/mohnimer/pharmaservice/pull/20
