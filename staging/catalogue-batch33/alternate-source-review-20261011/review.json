@@ -1,0 +1,97 @@
+{
+  "scope": "Visual review of alternate sources; no release or price approval",
+  "records": [
+    {
+      "path": "staging/catalogue-batch33/alternate-source-review-20261011/imodium-2mg-60-capsules-0.jpg",
+      "source_url": "https://cdn.shopify.com/s/files/1/0902/9143/7912/files/7002088.jpg?v=1788325143",
+      "listing_url": "https://www.chemistwarehouse.ae/products/imodium-2mg-60-capsules",
+      "sha256": "006f9c8d67378c51489f3d44d1af1573e4bb2712478aa15b6fa4cf9d162ea894",
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "decision": "QUALITY_HOLD",
+      "reason": "Exact 60 capsule pack visible but softened text and edges despite 1200 pixel canvas; no clear quality improvement.",
+      "reviewed_at": "2026-10-11"
+    },
+    {
+      "path": "staging/catalogue-batch33/alternate-source-review-20261011/imodium-instants-2mg-6-tablets-1.jpg",
+      "source_url": "https://cdn.shopify.com/s/files/1/0902/9143/7912/files/1171_2FPRODUCT_IMAGE_2FDA01761789_2FIM15216286.jpg?v=1759413273",
+      "listing_url": "https://www.chemistwarehouse.ae/products/imodium-instants-2mg-6-tablets",
+      "sha256": "9c294c769a75e23d92c0e5e717a16916137416138c7584fd33832f56b2029d61",
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "decision": "REJECT_FOR_PREVIEW",
+      "reason": "Promotional illustration, not an exact-pack photograph.",
+      "reviewed_at": "2026-10-11"
+    },
+    {
+      "path": "staging/catalogue-batch33/alternate-source-review-20261011/imodium-instants-2mg-6-tablets-2.jpg",
+      "source_url": "https://cdn.shopify.com/s/files/1/0902/9143/7912/files/1171_2FPRODUCT_IMAGE_2FDA01761789_2FIM15216288.jpg?v=1759413273",
+      "listing_url": "https://www.chemistwarehouse.ae/products/imodium-instants-2mg-6-tablets",
+      "sha256": "07c8b241e2f03dc7b0a146c2eb507e2cc4640da65aa950d10f4fe29235114dd5",
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "decision": "REJECT_FOR_PREVIEW",
+      "reason": "Promotional illustration, not an exact-pack photograph.",
+      "reviewed_at": "2026-10-11"
+    },
+    {
+      "path": "staging/catalogue-batch33/alternate-source-review-20261011/panadol-advance.png",
+      "source_url": "https://cdn.lifepharmacy.com/EcomApp/products/Siddhu/111396-11.png",
+      "listing_url": "https://www.lifepharmacy.com/product/panadol-advance-tablets-24-s",
+      "sha256": "608892425f3f69f887d95d710c452f34c3d100278590a145adafa199e55e4a3b",
+      "dimensions": [
+        700,
+        700
+      ],
+      "decision": "QUALITY_HOLD",
+      "reason": "Exact 500 mg/24 tablets front pack but 700 pixel original; seek sharper original.",
+      "reviewed_at": "2026-10-11"
+    },
+    {
+      "path": "staging/catalogue-batch33/alternate-source-review-20261011/panadol-extra.png",
+      "source_url": "https://cdn.lifepharmacy.com/EcomApp/products/Siddhu/111403-1.png",
+      "listing_url": "https://www.lifepharmacy.com/product/panadol-extra-optizorb-24-s",
+      "sha256": "506fcad260f61ac2845e94f59748f7fd92e9164f2a4e2b52384041684227cfbd",
+      "dimensions": [
+        700,
+        700
+      ],
+      "decision": "QUALITY_HOLD",
+      "reason": "Exact Extra with Optizorb/24 tablets front pack but 700 pixel original; verify formulation against controlled SKU and obtain sharper original.",
+      "reviewed_at": "2026-10-11"
+    },
+    {
+      "path": "staging/catalogue-batch33/alternate-source-review-20261011/panadol-advance-gallery2.jpg",
+      "source_url": "https://cdn.lifepharmacy.com/images/products/111396-2-1024x1024.jpg",
+      "listing_url": "https://www.lifepharmacy.com/product/panadol-advance-tablets-24-s",
+      "sha256": "4eb02251cf865c19e947ce5e9d1928f07b8b3db27781793092c855df929b59a5",
+      "dimensions": [
+        700,
+        700
+      ],
+      "decision": "REJECT_FOR_PREVIEW",
+      "reason": "Promotional absorption diagram, not a product photograph.",
+      "reviewed_at": "2026-10-11"
+    },
+    {
+      "path": "staging/catalogue-batch33/alternate-source-review-20261011/panadol-extra-gallery2.jpg",
+      "source_url": "https://cdn.lifepharmacy.com/images/products/111403-2-1024x1024.jpg",
+      "listing_url": "https://www.lifepharmacy.com/product/panadol-extra-optizorb-24-s",
+      "sha256": "5295b4cf5070329a8973ed7ae4d239366bc864671f87249c95f4c2ff25a0063e",
+      "dimensions": [
+        700,
+        700
+      ],
+      "decision": "REJECT_FOR_PREVIEW",
+      "reason": "Promotional layout with box; not a clean photograph.",
+      "reviewed_at": "2026-10-11"
+    }
+  ],
+  "retrieval_limit": "myAster Zyrtec drops page blocked direct retrieval with HTTP 403; no image approval inferred."
+}

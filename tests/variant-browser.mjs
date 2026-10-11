@@ -1,5 +1,5 @@
 // Transport-isolated fixtures test UI identity propagation, not real product evidence.
-import {readFileSync} from 'node:fs';
+import {readFileSync, mkdirSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {createServer} from '../tools/serve.mjs';
@@ -13,6 +13,7 @@ const evidence=options.map((o,i)=>({...o,description:'Fixture exact pack '+o.pac
  price_unit:o.pack,price_source:'Test fixture only',price_checked_at:'2026-10-11',
  release_status:'APPROVED'}));
 const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
+mkdirSync('test-results/variant-visual-review',{recursive:true});
 const browser=await chromium.launch({args:['--no-sandbox']});
 try{
  for(const width of [390,1440]){
@@ -78,17 +79,23 @@ try{
 {"route": "patient-care", "sku": "PSC-MED-130", "optionId": "local-acorus-4a24ef48aa96", "photo": "/assets/products/verified-20261011/imodium-2mg-6-capsules.jpg", "pack": "6 capsules", "price": 6.5, "description": "Imodium loperamide hydrochloride 2 mg capsules, pack of 6 capsules."},
 {"route": "breathing", "sku": "PSC-MED-003", "optionId": "local-acorus-f8356dfd8db2", "photo": "/assets/products/verified-20261011/zyrtec-10mg-20-tablets.jpg", "pack": "20 tablets", "price": 39.5, "description": "Zyrtec cetirizine dihydrochloride 10 mg film-coated tablets, pack of 20 tablets.", "descriptionSource": "https://assets.gskstatic.com/pharma/PM-PI_portal/Lebanon/zyrtec_oral_drops_pil_lb.pdf"},
 {"route": "breathing", "sku": "PSC-MED-102", "optionId": "local-acorus-9d511aa6c569", "photo": "/assets/products/verified-20261011/zyrtec-1mgml-75ml.jpg", "pack": "75 ml", "price": 17.5, "description": "Zyrtec cetirizine dihydrochloride 1 mg/ml oral solution, 75 ml bottle.", "descriptionSource": "https://assets.gskstatic.com/pharma/PM-PI_portal/Lebanon/zyrtec_oral_drops_pil_lb.pdf"}
+,
+{"route": "medicines", "sku": "PSC-MED-126", "optionId": "local-acorus-d226ac6267ee", "photo": "/assets/products/verified-20261011/panadol-night-24-caplets.jpg", "pack": "24 film-coated tablets", "price": 25, "description": "Panadol Night paracetamol 500 mg and diphenhydramine hydrochloride 25 mg film-coated caplets, pack of 24.", "descriptionSource": "https://www.panadol.com/en-me/adult-products/panadol-night/"}
   ]) {
   await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/'+variant.route);
   const {sku,optionId}=variant;
+  assert.equal(await page.locator('.psSearchResults .pscRetailPriceNotice').count(),1);
+  assert((await page.locator('.psSearchResults .pscRetailPriceNotice').innerText()).includes('Wholesale prices are provided in your quotation.'));
   const card=page.locator('.productCard:has([data-product-view="'+sku+'"])');
   await card.waitFor();
   assert.equal(await card.locator('.productMainImage').getAttribute('src'),variant.photo);
   assert((await card.locator('.pack').innerText()).includes(variant.pack));
   assert((await card.locator('.pscPricePreview').innerText()).includes('UAE retail benchmark'));
   assert((await card.locator('.pscPricePreview').innerText()).includes(String(variant.price)));
+  await card.screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-card.png'});
   await card.locator('.productVisual').click();
   await page.locator('.pscBrandTick:has([data-family-option="'+optionId+'"])').click();
+  assert.equal(await page.locator('.pscFamilyProductSheet .pscRetailPriceNotice').count(),1);
   assert.equal(await preview.getAttribute('src'),variant.photo);
   await page.waitForFunction(()=>{const img=document.querySelector('.pscFamilyPreview img');return img?.complete&&img.naturalWidth===1024;});
   assert((await page.locator('.detailImageMeta').innerText()).includes(variant.pack));
@@ -97,6 +104,8 @@ try{
   // Assert a new event so a blocked submission cannot reuse a prior variant.
   const presentationChoice=page.locator('[data-family-presentation]').first();
   if(await presentationChoice.count())await presentationChoice.click();
+  await page.locator('.detailImagePane').screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-selected.png'});
+  await page.screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-dialog.png'});
   const requestCount=await page.evaluate(()=>window.__variantRequests.length);
   await page.locator('[data-family-quote]').click();
   assert.equal(await page.evaluate(()=>window.__variantRequests.length),requestCount+1,
@@ -124,6 +133,7 @@ try{
   assert.equal(await preview.count(),0);
   const gallery=await page.locator('.pscSelectedVariantRow img').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('src')).sort());
   assert.deepEqual(gallery,['/assets/products/verified-20261011/nexium-20mg-14-tablets.jpg','/assets/products/verified-20261011/nexium-40mg-14-tablets.jpg']);
+  await page.locator('.pscSelectedVariantGallery').screenshot({path:'test-results/variant-visual-review/'+width+'-nexium-multiple.png'});
   const multiplePresentation=page.locator('[data-family-presentation]').first();
   if(await multiplePresentation.count())await multiplePresentation.click();
   const multipleRequestCount=await page.evaluate(()=>window.__variantRequests.length);
@@ -140,6 +150,6 @@ try{
   }
   assert.deepEqual(errors,[]);
   assert.deepEqual(await page.evaluate(()=>window.__backendCalls.filter(c=>c.rpc||c.action!=='select')),[]);
-  await context.close();console.log(width+'px: fixture selection and seven real variants, Nexium strength multiselect, VAT/source request snapshots and no overflow passed');
+  await context.close();console.log(width+'px: fixture selection and eight real variants, Nexium strength multiselect, VAT/source request snapshots and no overflow passed');
  }
 }finally{await browser.close();await new Promise(r=>server.close(r));}

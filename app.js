@@ -1859,7 +1859,7 @@
       <section class="publicSection publicCatalogueControls catalogue16Controls">
         <div class="filterBar"><div class="searchInput"><span>${icon('search')}</span><input type="search" aria-label="Search catalogue" data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search families, products, packs or specifications…">${ui.catalogueQuery?'<button type="button" class="catalogueSearchClear" data-catalogue-clear aria-label="Clear search">×</button>':''}</div><select data-cat-filter="category"><option>All product types</option>${types.map(t=>`<option ${ui.catalogueCat===t?'selected':''}>${esc(t)}</option>`).join('')}</select></div>
       </section>
-      <section class="publicSection publicCatalogueResults catalogue16Results"><div class="publicCatalogueCount"><b>${filtered.length}</b><span>${needId==='all'?'published institutional lines':'published lines in this category'}</span></div>${filtered.length?`<div class="publicCatalogueGrid">${filtered.map(publicCatalogueCard).join('')}</div>`:'<div class="emptyState"><h3>No matching published lines</h3><p>Try another clinical need or send the requirement to Pharma Service.</p><button class="button primary" data-go="contact">Request sourcing</button></div>'}</section>
+      <section class="publicSection publicCatalogueResults catalogue16Results">${catalogueRetailPriceNotice()}<div class="publicCatalogueCount"><b>${filtered.length}</b><span>${needId==='all'?'published institutional lines':'published lines in this category'}</span></div>${filtered.length?`<div class="publicCatalogueGrid">${filtered.map(publicCatalogueCard).join('')}</div>`:'<div class="emptyState"><h3>No matching published lines</h3><p>Try another clinical need or send the requirement to Pharma Service.</p><button class="button primary" data-go="contact">Request sourcing</button></div>'}</section>
       <section class="publicCta"><div><span class="kicker">HAVE A LIST ALREADY?</span><h2>Send the requirement instead of rebuilding it here.</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="start">Send a list / RFQ</button><button class="button primary large" data-go="login">Open Clinic Portal</button></div></section>
       ${publicFooter()}
     </main>`;
@@ -2283,9 +2283,14 @@
     });
     return {allProducts,filtered,types,searching};
   }
+  function catalogueRetailPriceNotice(){
+    return '<p class="pscRetailPriceNotice" role="note"><span>Retail prices shown are for reference.</span> <strong>Wholesale prices are provided in your quotation.</strong></p>';
+  }
+  window.PSC_RETAIL_PRICE_NOTICE_HTML=catalogueRetailPriceNotice;
+
   function catalogueSearchResults(needId='all',landing=false){
     const {filtered,searching}=catalogueFilterProducts(needId);const visible=!landing||ui.catalogueQuery||intelligent.action;
-    return `<section class="psSearchResults" data-ps-search-results ${visible?'':'hidden'}><div class="catalogueMeta"><span data-ps-result-count role="status" aria-live="polite" aria-atomic="true">${filtered.length} ${searching?'matching products':'products'}</span></div>${filtered.some(p=>p.dhaMapped)?`<p class="pscDhaLegend"><img src="${DHA_ICON}" alt="DHA requirement mapping"><span>The DHA logo at the top right identifies a product mapped to a DHA clinic requirement. Conditional requirements and alternatives apply; exact specifications and suitability are checked before quotation.</span></p>`:''}<div class="productGrid v25ProductGrid">${visible?filtered.map(productCard).join(''):''}</div><p class="psSearchEmpty" ${filtered.length?'hidden':''}>${esc(window.PS_INTELLIGENT_SEARCH.outcome(window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'' ,productSearchContext())||{terms:''},filtered).message)} Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button></p></section>`;
+    return `<section class="psSearchResults" data-ps-search-results ${visible?'':'hidden'}><div class="catalogueMeta"><span data-ps-result-count role="status" aria-live="polite" aria-atomic="true">${filtered.length} ${searching?'matching products':'products'}</span></div>${filtered.some(p=>p.dhaMapped)?`<p class="pscDhaLegend"><img src="${DHA_ICON}" alt="DHA requirement mapping"><span>The DHA logo at the top right identifies a product mapped to a DHA clinic requirement. Conditional requirements and alternatives apply; exact specifications and suitability are checked before quotation.</span></p>`:''}${catalogueRetailPriceNotice()}<div class="productGrid v25ProductGrid">${visible?filtered.map(productCard).join(''):''}</div><p class="psSearchEmpty" ${filtered.length?'hidden':''}>${esc(window.PS_INTELLIGENT_SEARCH.outcome(window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'' ,productSearchContext())||{terms:''},filtered).message)} Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button></p></section>`;
   }
   function updateCatalogueResults(){
     const area=document.querySelector('[data-ps-search-results]');if(!area)return;
@@ -2972,6 +2977,7 @@
       <div class="productDetailGrid fluidProductGrid">
         <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).map(m=>`<img src="${esc(m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
         <div class="detailContentPane fluidDetailContent">
+          ${catalogueRetailPriceNotice()}
           <div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to DHA clinic requirement</b></div>`:''}</div>
           <div class="productDisclosureList">
             <details open><summary><span>Specification</span><i>+</i></summary><div><p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
@@ -3001,6 +3007,7 @@
       <div class="productDetailGrid fluidProductGrid">
         <div class="detailImagePane fluidImagePane">${imageUrl?`<div class="detailProductImageWrap"><img src="${esc(imageUrl)}" alt="${esc(displayName)}" onerror="this.onerror=null;this.src='${esc(fallback)}'"></div>`:`<div class="detailProductImageWrap"><div class="detailNeedVisual" style="--need-bg:${primary.bg};--need-ink:${primary.ink}"></div></div>`}<div class="detailImageMeta"><b>${esc(displayName)}</b><span>${esc(pack)}</span>${catalogueImageNote(p)}</div></div>
         <div class="detailContentPane fluidDetailContent">
+          ${catalogueRetailPriceNotice()}
           <div class="productDisclosureList publicProductDisclosure">
             <details open><summary><span>Product specification</span><i>+</i></summary><div><p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
             ${p.dhaMapped?`<details><summary><span>Requirement mapping</span><i>+</i></summary><div><p>Mapped to the applicable DHA clinic requirement. Exact model suitability remains subject to specification verification.</p></div></details>`:''}

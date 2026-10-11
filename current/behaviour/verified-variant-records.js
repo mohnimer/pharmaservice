@@ -135,6 +135,29 @@
     "price_source": "https://www.lifepharmacy.com/ae-ar/product/zyrtec-1mg-ml-oral-sol-75ml-bot",
     "price_checked_at": "2026-10-11",
     "release_status": "APPROVED"
+},
+{
+    "family_id": "PSC-IS-134",
+    "product_option_id": "local-acorus-d226ac6267ee",
+    "psc_sku": "PSC-MED-126",
+    "exact_product_name": "PANADOL NIGHT - 24 FILM-COATED TABLETS",
+    "brand": "Panadol",
+    "pack": "24 film-coated tablets",
+    "description": "Panadol Night paracetamol 500 mg and diphenhydramine hydrochloride 25 mg film-coated caplets, pack of 24.",
+    "description_source": "https://www.panadol.com/en-me/adult-products/panadol-night/",
+    "image_url": "/assets/products/verified-20261011/panadol-night-24-caplets.jpg",
+    "image_source": "https://cdn.lifepharmacy.com/products/panadol-night-tablets-24-s/111406-1.jpg",
+    "image_verified": true,
+    "description_verified": true,
+    "price_verified": true,
+    "price_aed": 25,
+    "price_type": "PUBLIC_RETAIL_BENCHMARK",
+    "price_unit": "24 film-coated tablets",
+    "price_vat_basis": "Inclusive of VAT as displayed by retailer",
+    "price_source": "https://www.lifepharmacy.com/product/panadol-night-tablets-24-s",
+    "price_checked_at": "2026-10-11",
+    "price_note": "Retailer shows a free-voucher promotion; benchmark excludes any voucher value. Stock and PSC supply terms require confirmation.",
+    "release_status": "APPROVED"
 }
   ];
   const norm = value => String(value || '').normalize('NFKC').trim().replace(/\s+/g,' ').toUpperCase();
