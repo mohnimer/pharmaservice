@@ -17,7 +17,7 @@ const seenFiles=new Set(), seenImages=new Set();
 const outcome=[];
 for(const row of rows){
   const publicPath=String(row.website_image_path||'');
-  if(!publicPath.startsWith('/assets/acorus-batch-33/') || !/^[a-z0-9_]+[.]webp$/.test(path.basename(publicPath)))
+  if(!/^[a-z0-9_]+[.]webp$/.test(path.basename(publicPath)) || publicPath!=='/assets/acorus-batch-33/'+path.basename(publicPath))
     fail('unsafe or noncanonical image path for '+row.product_name);
   const name=path.basename(publicPath);
   if(seenFiles.has(name)||!names.includes(name))fail('missing or duplicate '+name);
