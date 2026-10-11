@@ -155,7 +155,7 @@
     // Controlled local/reference descriptors can carry a more exact presentation
     // than the family's generic scaffold. Keep those choices reachable without
     // rewriting their identities or relaxing incompatible-selection clearing.
-    if(state.family) state.family={...state.family,presentations:[...new Set([
+    if(state.family?.presentations?.some(Boolean)) state.family={...state.family,presentations:[...new Set([
       ...(Array.isArray(state.family.presentations)?state.family.presentations:[]),
       ...state.options.map(o=>o.presentation).filter(meaningfulPresentation)
     ])]};
