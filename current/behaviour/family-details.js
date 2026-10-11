@@ -152,6 +152,13 @@
     if(!state.family) state.family=fallbackFamily(id);
     state.options=window.PS_CATALOGUE_REFRESH?.mergeOptions(state.options,id)||state.options;
     state.options=window.PSC_VARIANT_APPLY_OPTIONS?.(state.options,id)||state.options;
+    // Controlled local/reference descriptors can carry a more exact presentation
+    // than the family's generic scaffold. Keep those choices reachable without
+    // rewriting their identities or relaxing incompatible-selection clearing.
+    if(state.family) state.family={...state.family,presentations:[...new Set([
+      ...(Array.isArray(state.family.presentations)?state.family.presentations:[]),
+      ...state.options.map(o=>o.presentation).filter(meaningfulPresentation)
+    ])]};
     state.loading=false;
   }
 

@@ -43,6 +43,16 @@ try{
   assert(snapshot);assert.equal(snapshot.product_option_id,null);assert.equal(snapshot.verified_price_aed,price);
   assert(snapshot.verified_description);assert(snapshot.verified_price_source);assert.equal(snapshot.reference_product_option_id,null);
  }
+ // Exact local presentations must be reachable even under a generic family.
+ const spedifen=w.PS_CATALOGUE_REFRESH.approvedOptions.find(o=>o.product_option_id==='local-acorus-764e4d0db998');
+ await w.PSC_OPEN_FAMILY_DETAIL(spedifen.family_id);await pause();
+ await click('[data-family-option="'+spedifen.product_option_id+'"]');
+ await click('[data-family-presentation="'+spedifen.presentation+'"]');
+ assert(w.document.querySelector('[data-family-option="'+spedifen.product_option_id+'"]').checked);
+ assert.match(w.document.querySelector('.detailImageMeta').textContent,/Spedifen/);
+ await click('[data-family-quote]');
+ assert.equal(requests.at(-1).requestedProductOptions[0].local_product_option_id,spedifen.product_option_id);
+ assert.equal(requests.at(-1).requestedProductOptions[0].verified_price_aed,28.5);
  // A matching textual pack must also preserve both provenance identities.
  const row=review.rows[0],local=w.PS_CATALOGUE_REFRESH.approvedOptions.find(o=>o.product_option_id===pairs[3].local_id);
  const merged=w.PS_CATALOGUE_REFRESH.mergeOptions([{...row,pack:local.pack,reference_only:true}],row.family_id);

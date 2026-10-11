@@ -1,0 +1,215 @@
+[
+  {
+    "local_option_id": "local-acorus-77936b1c484c",
+    "source_url": "https://www.lifepharmacy.com/product/gloclav-1gm-tabs-14s-7s-blistersx-2",
+    "checked_at": "2026-10-11T16:16:21.364799+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/gloclav-1gm-tabs-14s-7s-blistersx-2",
+    "page_sha256": "21bdd1c4ecf4f3e43d5ecf5ee7056845106df8dcb342a007def601a2c2d198e1",
+    "source_name": "GLOCLAV 1GM TABS 14S (7S BLISTERSX 2)",
+    "source_sku": "111247",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/gloclav-1gm-tabs-14s-7s-blistersx-2",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 85.5,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/gloclav-1gm-tabs-14s-7s-blistersx-2/111247-1.jpg",
+        "file": "staging/catalogue-batch33/gloclav-followon-20261011/local-acorus-77936b1c484c-0.jpg",
+        "sha256": "65e8b07a75c062351a65bf0ede7fdf393128f1649c4b67f9835d0b5a4c04d5de",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-22b20fd5de67",
+    "source_url": "https://www.lifepharmacy.com/product/gloclav-625-tab-20s-10s-blister-x-2",
+    "checked_at": "2026-10-11T16:16:21.365864+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/gloclav-625-tab-20s-10s-blister-x-2",
+    "page_sha256": "44c806e732deb974da05ddab1fcc52b786048be4b7ca76b4cf5f8c11b245c070",
+    "source_name": "GLOCLAV 625 TAB 20S  (10S BLISTER X 2)",
+    "source_sku": "111249",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/gloclav-625-tab-20s-10s-blister-x-2",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 58.5,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/gloclav-625-tab-20s-10s-blister-x-2/111249-1.jpg",
+        "file": "staging/catalogue-batch33/gloclav-followon-20261011/local-acorus-22b20fd5de67-0.jpg",
+        "sha256": "54abb875fa78cc0e91d27368ee411caf9bd909cda251f4d6b53ff1b6b5d135d8",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-fe9b988eff75",
+    "source_url": "https://www.myaster.com/en/online-pharmacy/p/gloclav-228mg5ml-powder-for-oral-suspension-70ml/1004823",
+    "checked_at": "2026-10-11T16:16:21.366448+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.myaster.com/en/online-pharmacy/p/gloclav-228mg5ml-powder-for-oral-suspension-70ml/1004823",
+    "page_sha256": "a6d74277a8c6afa00e926ab2a846eb88e417301910d42640d849be208f320a83",
+    "source_name": "Gloclav 228mg/5ml Powder For Oral Suspension 70ml",
+    "source_sku": "1004823",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Gloclav"
+    },
+    "offer": {
+      "@type": "Offer",
+      "url": "https://www.myaster.com/en/online-pharmacy/p/gloclav-228mg5ml-powder-for-oral-suspension-70ml/1004823",
+      "priceCurrency": "AED",
+      "price": "12.00",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": "myAster"
+      }
+    },
+    "vat_inclusive_text_present": false,
+    "images": [
+      {
+        "source_url": "https://media.myaster.com/images/products/1004823/gloclav-228mg-5ml-powder-for-oral-suspension-70ml/1004823_1.jpg",
+        "file": "staging/catalogue-batch33/gloclav-followon-20261011/local-acorus-fe9b988eff75-0.jpg",
+        "sha256": "4bd417e7420d7047c1090b603b820a721e83787d85a5f372680e026cbe43df8d",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/products/1004823/gloclav-228mg-5ml-powder-for-oral-suspension-70ml/1004823_2.jpg",
+        "file": "staging/catalogue-batch33/gloclav-followon-20261011/local-acorus-fe9b988eff75-1.jpg",
+        "sha256": "1ab275ac2448c83f50d543776778055afd9be2510dc143983fde79ab5ccd4a8c",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/shop-with-confidence.jpg",
+        "file": "staging/catalogue-batch33/gloclav-followon-20261011/local-acorus-fe9b988eff75-2.jpg",
+        "sha256": "9bbe4787e2a6fba23b36743713ac9851cab2c1d8e773ebc39b0ec974126007bf",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/quality.jpg",
+        "file": "staging/catalogue-batch33/gloclav-followon-20261011/local-acorus-fe9b988eff75-3.jpg",
+        "sha256": "310555326f6e31264b7e69f75a4eee510b842308ffcd313457826ed916e0ac63",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      }
+    ]
+  }
+]
