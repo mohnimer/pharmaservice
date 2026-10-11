@@ -93,7 +93,14 @@ try{
   await page.waitForFunction(()=>{const img=document.querySelector('.pscFamilyPreview img');return img?.complete&&img.naturalWidth===1024;});
   assert((await page.locator('.detailImageMeta').innerText()).includes(variant.pack));
   assert((await page.locator('.detailImageMeta').innerText()).includes(String(variant.price)));
+  // Medicine families require a presentation as well as an exact option.
+  // Assert a new event so a blocked submission cannot reuse a prior variant.
+  const presentationChoice=page.locator('[data-family-presentation]').first();
+  if(await presentationChoice.count())await presentationChoice.click();
+  const requestCount=await page.evaluate(()=>window.__variantRequests.length);
   await page.locator('[data-family-quote]').click();
+  assert.equal(await page.evaluate(()=>window.__variantRequests.length),requestCount+1,
+   variant.optionId+' must emit its own request');
   const actual=await page.evaluate(()=>window.__variantRequests.at(-1).requestedProductOptions[0]);
   assert.equal(actual.local_product_option_id,optionId);
   assert.equal(actual.product_option_id,null);
@@ -117,7 +124,11 @@ try{
   assert.equal(await preview.count(),0);
   const gallery=await page.locator('.pscSelectedVariantRow img').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('src')).sort());
   assert.deepEqual(gallery,['/assets/products/verified-20261011/nexium-20mg-14-tablets.jpg','/assets/products/verified-20261011/nexium-40mg-14-tablets.jpg']);
+  const multiplePresentation=page.locator('[data-family-presentation]').first();
+  if(await multiplePresentation.count())await multiplePresentation.click();
+  const multipleRequestCount=await page.evaluate(()=>window.__variantRequests.length);
   await page.locator('[data-family-quote]').click();
+  assert.equal(await page.evaluate(()=>window.__variantRequests.length),multipleRequestCount+1);
   const multiple=await page.evaluate(()=>window.__variantRequests.at(-1).requestedProductOptions);
   assert.equal(multiple.length,2);
   for(const [id,price,photo] of [
