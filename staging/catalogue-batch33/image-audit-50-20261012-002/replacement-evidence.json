@@ -1,0 +1,560 @@
+[
+  {
+    "batch_index": 3,
+    "source_url": "https://www.lifepharmacy.com/product/nan-comfort-1-800-gm",
+    "checked_at": "2026-10-12",
+    "images": [
+      {
+        "file": "replacement-3-0.jpg",
+        "source_url": "https://cdn.lifepharmacy.com/products/nan-comfort-1-800-gm/132809-1.jpg",
+        "dimensions": [
+          1024,
+          1024
+        ],
+        "sha256": "566c4d82b8b0c2c75f48b16b9de5f1968ecc2eb110c4effa29a4189bda6cdee4",
+        "unchanged": true,
+        "image_identity_verified": false,
+        "image_quality_approved": false,
+        "release_status": "HOLD"
+      }
+    ],
+    "release_status": "HOLD",
+    "final_url": "https://www.lifepharmacy.com/product/nan-comfort-1-800-gm",
+    "product_facts": {
+      "name": "Nan Comfort 1 800 Gm",
+      "sku": "132809",
+      "brand": {
+        "@type": "Brand",
+        "name": "NAN",
+        "url": "https://www.lifepharmacy.com/brand/nan"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.lifepharmacy.com/product/nan-comfort-1-800-gm",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": 114.98,
+        "priceCurrency": "AED",
+        "priceValidUntil": "2027-12-30T00:00:00.000Z",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": 0,
+            "currency": "AED"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            }
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "AE"
+          }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "AE",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 3,
+          "returnFees": "https://schema.org/FreeReturn",
+          "returnMethod": "https://schema.org/ReturnByMail"
+        }
+      }
+    },
+    "visual_review_status": "QUALITY_CANDIDATE_PACK_GUARD_PENDING",
+    "visual_review_note": "Clean native NAN Comfort 1 800 g front; exact local supplier-pack guard remains pending."
+  },
+  {
+    "batch_index": 4,
+    "source_url": "https://medicinaonline.ae/products/nan-comfort-2-400-gm-dubai-uae",
+    "checked_at": "2026-10-12",
+    "images": [
+      {
+        "file": "replacement-4-0.jpg",
+        "source_url": "https://medicinaonline.ae/cdn/shop/files/22222500-1_small.avif?v=1786623664",
+        "dimensions": [
+          100,
+          100
+        ],
+        "sha256": "b11a22de3ee8570fb6717e593d3bb6e9de92a2c232a9881495e169cafe44a0a1",
+        "unchanged": true,
+        "image_identity_verified": false,
+        "image_quality_approved": false,
+        "release_status": "HOLD"
+      }
+    ],
+    "release_status": "HOLD",
+    "final_url": "https://medicinaonline.ae/products/nan-comfort-2-400-gm-dubai-uae",
+    "product_facts": {
+      "name": "Nestl\u00e9 NAN Comfort 2 Follow-On Formula 400g",
+      "sku": "33322909",
+      "brand": {
+        "@type": "Brand",
+        "name": "Nan"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "AED",
+        "price": "68.75",
+        "itemCondition": "http://schema.org/NewCondition",
+        "availability": "http://schema.org/InStock",
+        "url": "https://medicinaonline.ae/products/nan-comfort-2-400-gm-dubai-uae?variant=14281220718641",
+        "image": "https://medicinaonline.ae/cdn/shop/files/22222500-1_small.avif?v=1786623664",
+        "name": "Nestl\u00e9 NAN Comfort 2 Follow-On Formula 400g",
+        "gtin13": 7613035279254,
+        "sku": "33322909",
+        "description": "Nestl\u00e9 NAN Comfort 2 is a specially developed follow-on formula for babies aged 6 to 12 months who experience colic, constipation or digestive discomfort. Its balanced cow\u2019s-milk-based formula contains L. reuteri active probiotic cultures, beneficial bacteria that help support healthy intestinal flora, bowel movement regularity and digestive comfort. It also provides DHA, essential vitamins and minerals to complement a varied diet and support normal growth and development.Key Benefits:Suitable for babies aged 6\u201312 monthsSpecially formulated for colic and constipationContains L. reuteri active probiotic culturesHelps support digestive comfortSupports healthy intestinal flora and bowel regularityProvides DHAContains essential vitamins and mineralsComplements a varied and balanced weaning dietCountry of Origin: FranceNet Weight: 400gHow to Use:Prepare according to the feeding instructions provided on the packaging. Always use the supplied measuring scoop and follow the recommended water-to-powder ratio. Prepare one feed at a time and use the prepared formula within the period stated on the label.Important Notice:Nestl\u00e9 NAN Comfort 2 is intended for infants from 6 months of age as part of a varied and balanced diet and should not be used as a substitute for breast milk during the first 6 months of life. Consult a healthcare professional if your baby has persistent colic, constipation or other digestive concerns.Storage:Store in a cool, dry place and keep the container tightly closed after each use. Follow the preparation and storage instructions stated on the packaging.",
+        "priceValidUntil": "2027-10-12"
+      }
+    },
+    "visual_review_status": "REJECT_THUMBNAIL",
+    "visual_review_note": "100 px thumbnail rejected; advertised 828 px original retained separately."
+  },
+  {
+    "batch_index": 5,
+    "source_url": "https://www.lifepharmacy.com/product/nan-comfort-2-800-gm",
+    "checked_at": "2026-10-12",
+    "images": [
+      {
+        "file": "replacement-5-0.jpg",
+        "source_url": "https://cdn.lifepharmacy.com/products/nan-comfort-2-800-gm/132810-1.jpg",
+        "dimensions": [
+          1024,
+          1024
+        ],
+        "sha256": "3bd995e025dad59c5e93188988334f4fbbf3ab406166394d475f946468574f6e",
+        "unchanged": true,
+        "image_identity_verified": false,
+        "image_quality_approved": false,
+        "release_status": "HOLD"
+      }
+    ],
+    "release_status": "HOLD",
+    "final_url": "https://www.lifepharmacy.com/product/nan-comfort-2-800-gm",
+    "product_facts": {
+      "name": "Nan Comfort 2 800g",
+      "sku": "132810",
+      "brand": {
+        "@type": "Brand",
+        "name": "NAN",
+        "url": "https://www.lifepharmacy.com/brand/nan"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.lifepharmacy.com/product/nan-comfort-2-800-gm",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": 114.98,
+        "priceCurrency": "AED",
+        "priceValidUntil": "2027-12-30T00:00:00.000Z",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": 0,
+            "currency": "AED"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            }
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "AE"
+          }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "AE",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 3,
+          "returnFees": "https://schema.org/FreeReturn",
+          "returnMethod": "https://schema.org/ReturnByMail"
+        }
+      }
+    },
+    "visual_review_status": "QUALITY_CANDIDATE_PACK_GUARD_PENDING",
+    "visual_review_note": "Clean native NAN Comfort 2 800 g front; exact local supplier-pack guard remains pending."
+  },
+  {
+    "batch_index": 13,
+    "source_url": "https://www.lifepharmacy.com/product/nolvadex-10-mg-tab-30s-3-blis",
+    "checked_at": "2026-10-12",
+    "images": [
+      {
+        "file": "replacement-13-0.jpg",
+        "source_url": "https://cdn.lifepharmacy.com/products/nolvadex-10-mg-tab-30s-3-blis/108171-1.jpg",
+        "dimensions": [
+          1024,
+          1024
+        ],
+        "sha256": "2fa7acca3c8a7beb842ea886e7c58e8a1ce0acb26e961f8cb08ef8595bc15579",
+        "unchanged": true,
+        "image_identity_verified": false,
+        "image_quality_approved": false,
+        "release_status": "HOLD"
+      }
+    ],
+    "release_status": "HOLD",
+    "final_url": "https://www.lifepharmacy.com/product/nolvadex-10-mg-tab-30s-3-blis",
+    "product_facts": {
+      "name": "NOLVADEX 10 MG TAB 30S 3 BLIS",
+      "sku": "108171",
+      "brand": {
+        "@type": "Brand",
+        "name": "Generic",
+        "url": "https://www.lifepharmacy.com/brand/"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.lifepharmacy.com/product/nolvadex-10-mg-tab-30s-3-blis",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": 49.5,
+        "priceCurrency": "AED",
+        "priceValidUntil": "2027-12-30T00:00:00.000Z",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": 0,
+            "currency": "AED"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            }
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "AE"
+          }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "AE",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 3,
+          "returnFees": "https://schema.org/FreeReturn",
+          "returnMethod": "https://schema.org/ReturnByMail"
+        }
+      }
+    },
+    "visual_review_status": "EXACT_PACK_CANDIDATE_INTEGRATION_PENDING",
+    "visual_review_note": "Clear native Nolvadex 10 mg 30-tablet carton matches photographed original; not integrated or deployed."
+  },
+  {
+    "batch_index": 14,
+    "source_url": "https://dawapharmacy.ae/products/nolvadex-d-tab-20mg-30s",
+    "checked_at": "2026-10-12",
+    "images": [
+      {
+        "file": "replacement-14-0.jpg",
+        "source_url": "https://dawapharmacy.ae/cdn/shop/files/logo_89f6a3da-9098-40a4-9ca9-02c646583541_1080x.jpg?v=1778932782",
+        "dimensions": [
+          1080,
+          1044
+        ],
+        "sha256": "6005af444d93943c95d457bb49b395a1babc874759385eeb8534e894322bda53",
+        "unchanged": true,
+        "image_identity_verified": false,
+        "image_quality_approved": false,
+        "release_status": "HOLD"
+      }
+    ],
+    "release_status": "HOLD",
+    "final_url": "https://dawapharmacy.ae/products/nolvadex-d-tab-20mg-30s",
+    "product_facts": {
+      "name": "NOLVADEX-D TAB 20MG 30'S",
+      "sku": "",
+      "brand": {
+        "@type": "Brand",
+        "name": "Bait Al Dawaa"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "price": "68.00",
+          "priceCurrency": "AED",
+          "itemCondition": "https://schema.org/NewCondition",
+          "url": "https://dawapharmacy.ae/products/nolvadex-d-tab-20mg-30s?variant=44780116246699",
+          "sku": "",
+          "mpn": "",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-11-11",
+          "gtin14": "",
+          "seller": {
+            "@type": "Organization",
+            "name": "Bait Al Dawaa Pharmacy L.L.C.SP"
+          }
+        }
+      ]
+    },
+    "visual_review_status": "REJECT_PLACEHOLDER",
+    "visual_review_note": "Generic prescription illustration is not a Nolvadex photograph."
+  },
+  {
+    "batch_index": 15,
+    "source_url": "https://www.lifepharmacy.com/product/ozempic-0-25mg-1-5ml-sol-for-inj-pf-pen",
+    "checked_at": "2026-10-12",
+    "images": [
+      {
+        "file": "replacement-15-0.png",
+        "source_url": "https://cdn.lifepharmacy.com/EcomApp/products/Niyas/Artboard%202%20copy%202.png",
+        "dimensions": [
+          1001,
+          1001
+        ],
+        "sha256": "44870f2b8ae2d1054d0013e9486349900bbcad59ae57d3006651c6efd2c36175",
+        "unchanged": true,
+        "image_identity_verified": false,
+        "image_quality_approved": false,
+        "release_status": "HOLD"
+      }
+    ],
+    "release_status": "HOLD",
+    "final_url": "https://www.lifepharmacy.com/product/ozempic-0-25mg-1-5ml-sol-for-inj-pf-pen",
+    "product_facts": {
+      "name": "Ozempic 0.25mg/1.5ml Sol For Inj Pf Pen",
+      "sku": "129651",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ozempic",
+        "url": "https://www.lifepharmacy.com/brand/ozempic"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.lifepharmacy.com/product/ozempic-0-25mg-1-5ml-sol-for-inj-pf-pen",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": 743.5,
+        "priceCurrency": "AED",
+        "priceValidUntil": "2027-12-30T00:00:00.000Z",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": 0,
+            "currency": "AED"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            }
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "AE"
+          }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "AE",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 3,
+          "returnFees": "https://schema.org/FreeReturn",
+          "returnMethod": "https://schema.org/ReturnByMail"
+        }
+      }
+    },
+    "visual_review_status": "REJECT_PROMOTIONAL_COMPOSITE",
+    "visual_review_note": "Hero contains promotional overlays; clean gallery retained but soft and not approved."
+  },
+  {
+    "batch_index": 17,
+    "source_url": "https://www.lifepharmacy.com/product/ozempic-1mg-3ml-4prefilled-pen-needles",
+    "checked_at": "2026-10-12",
+    "images": [
+      {
+        "file": "replacement-17-0.png",
+        "source_url": "https://cdn.lifepharmacy.com/EcomApp/products/Niyas/Artboard%202.png",
+        "dimensions": [
+          1001,
+          1001
+        ],
+        "sha256": "7b7a4bdbee96b85490c1b572f511012b678eb939e69146d7570cf2c1ef8dc1d0",
+        "unchanged": true,
+        "image_identity_verified": false,
+        "image_quality_approved": false,
+        "release_status": "HOLD"
+      }
+    ],
+    "release_status": "HOLD",
+    "final_url": "https://www.lifepharmacy.com/product/ozempic-1mg-3ml-4prefilled-pen-needles",
+    "product_facts": {
+      "name": "Ozempic 1mg (3ml + 1 Prefilled Pen +4 Needles)",
+      "sku": "129736",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ozempic",
+        "url": "https://www.lifepharmacy.com/brand/ozempic"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.lifepharmacy.com/product/ozempic-1mg-3ml-4prefilled-pen-needles",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": 1146,
+        "priceCurrency": "AED",
+        "priceValidUntil": "2027-12-30T00:00:00.000Z",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": 0,
+            "currency": "AED"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            }
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "AE"
+          }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "AE",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 3,
+          "returnFees": "https://schema.org/FreeReturn",
+          "returnMethod": "https://schema.org/ReturnByMail"
+        }
+      }
+    },
+    "visual_review_status": "REJECT_PROMOTIONAL_COMPOSITE",
+    "visual_review_note": "Hero contains promotional overlays; alternatives retained and reviewed separately."
+  },
+  {
+    "batch_index": 18,
+    "source_url": "https://www.lifepharmacy.com/product/pediavit-multi-oral-drops-50-ml",
+    "checked_at": "2026-10-12",
+    "images": [
+      {
+        "file": "replacement-18-0.jpg",
+        "source_url": "https://cdn.lifepharmacy.com/products/pediavit-multi-oral-drops-50-ml/122601-1.jpg",
+        "dimensions": [
+          1024,
+          1024
+        ],
+        "sha256": "8b0da2ccb7afb5ab4a6999267eb044334f8f2ea1d8b9151ef3d48fa674b54c44",
+        "unchanged": true,
+        "image_identity_verified": false,
+        "image_quality_approved": false,
+        "release_status": "HOLD"
+      }
+    ],
+    "release_status": "HOLD",
+    "final_url": "https://www.lifepharmacy.com/product/pediavit-multi-oral-drops-50-ml",
+    "product_facts": {
+      "name": "Pediavit Multi Oral Drops 50 ml",
+      "sku": "122601",
+      "brand": {
+        "@type": "Brand",
+        "name": "Generic",
+        "url": "https://www.lifepharmacy.com/brand/"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.lifepharmacy.com/product/pediavit-multi-oral-drops-50-ml",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": 38,
+        "priceCurrency": "AED",
+        "priceValidUntil": "2027-12-30T00:00:00.000Z",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": 0,
+            "currency": "AED"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            }
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "AE"
+          }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "AE",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 3,
+          "returnFees": "https://schema.org/FreeReturn",
+          "returnMethod": "https://schema.org/ReturnByMail"
+        }
+      }
+    },
+    "visual_review_status": "QUALITY_HOLD",
+    "visual_review_note": "Correct PediaVit Multi 50 ml front but visibly soft artwork; sharper replacement required."
+  }
+]
