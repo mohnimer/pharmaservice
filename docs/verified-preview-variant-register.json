@@ -1599,5 +1599,37 @@
     "browser_route": "medicines",
     "quality_review": "Unchanged native retailer photograph visually reviewed against exact local name and source pack; product area readable. Supplier originals, historical holds and rejected alternatives retained. No enlargement, cropping, background removal or generation.",
     "price_note": "Dated public UAE retail reference, not a regulatory MRP or PSC approved selling price. Retailer availability does not establish PSC stock; quotation confirms supply and commercial terms."
+  },
+  {
+    "family_id": "PSC-IS-188",
+    "product_option_id": "local-acorus-e0a6920e38dc",
+    "psc_sku": "PS-AC-E0A6920E38DC",
+    "product_name": "PediaVIT Multi 50 ml",
+    "brand": "PediaVIT",
+    "pack": "50 ml",
+    "image_path": "/assets/products/verified-20261012/local-acorus-e0a6920e38dc.jpg",
+    "sha256": "39a7c98e1ace03c0dbe7fe4a4960de720bdaa145ec7626538f922b9f34fc5818",
+    "dimensions": [
+      888,
+      1320
+    ],
+    "image_source_url": "https://ecombe.nahdionline.com/media/catalog/product/1/0/102592641.jpg",
+    "listing_source_url": "https://www.nahdionline.com/en-ae/pediavit-multi-oral-drops-50-ml/pdp/102592641",
+    "checked_at": "2026-10-12",
+    "price_aed": 38.0,
+    "price_type": "PUBLIC_RETAIL_BENCHMARK",
+    "price_unit": "50 ml",
+    "vat_basis": "VAT basis not specified in retrieved retailer evidence",
+    "description": "PediaVIT Multi cherry-flavoured multivitamin oral solution, 50 ml bottle with dispenser.",
+    "description_source": "https://www.nahdionline.com/en-ae/pediavit-multi-oral-drops-50-ml/pdp/102592641",
+    "image_identity_verified": true,
+    "image_quality_approved": true,
+    "description_verified": true,
+    "psc_sell_price_approved": false,
+    "overall_release_status": "HOLD",
+    "variant_evidence_status": "VERIFIED_PREVIEW_CANDIDATE",
+    "browser_route": "patient-care",
+    "quality_review": "Unchanged native retailer photograph visually reviewed against exact local name and source pack; product area readable. Supplier originals, historical holds and rejected alternatives retained. No enlargement, cropping, background removal or generation.",
+    "price_note": "Dated public UAE retail reference, not a regulatory MRP or PSC approved selling price. Retailer availability does not establish PSC stock; quotation confirms supply and commercial terms."
   }
 ]

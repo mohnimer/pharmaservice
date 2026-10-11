@@ -4,10 +4,10 @@
   "production_changed": false,
   "counts": {
     "cards": 613,
-    "verified_cards": 51,
-    "cards_pending": 562,
+    "verified_cards": 52,
+    "cards_pending": 561,
     "local_options": 193,
-    "verified_local_options": 51
+    "verified_local_options": 52
   },
   "cards": [
     {
@@ -8274,16 +8274,11 @@
       "sku": "PS-AC-E0A6920E38DC",
       "name": "PediaVIT Multi 50 ml",
       "family_id": "PSC-IS-188",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-e0a6920e38dc.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-e0a6920e38dc",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-BAD79542E340",
@@ -9832,7 +9827,7 @@
       "local_option_id": "local-acorus-e0a6920e38dc",
       "family_id": "PSC-IS-188",
       "name": "PediaVIT Multi 50 ml",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-bad79542e340",

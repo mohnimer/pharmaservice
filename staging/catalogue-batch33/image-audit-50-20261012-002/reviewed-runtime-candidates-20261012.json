@@ -389,5 +389,28 @@
     "price_checked_at": "2026-10-12",
     "price_note": "Dated public UAE retail reference, not a regulatory MRP or PSC approved selling price. Retailer availability does not establish PSC stock; quotation confirms supply and commercial terms.",
     "release_status": "APPROVED"
+  },
+  {
+    "family_id": "PSC-IS-188",
+    "product_option_id": "local-acorus-e0a6920e38dc",
+    "psc_sku": "PS-AC-E0A6920E38DC",
+    "exact_product_name": "PediaVIT Multi 50 ml",
+    "brand": "PediaVIT",
+    "pack": "50 ml",
+    "description": "PediaVIT Multi cherry-flavoured multivitamin oral solution, 50 ml bottle with dispenser.",
+    "description_source": "https://www.nahdionline.com/en-ae/pediavit-multi-oral-drops-50-ml/pdp/102592641",
+    "image_url": "/assets/products/verified-20261012/local-acorus-e0a6920e38dc.jpg",
+    "image_source": "https://ecombe.nahdionline.com/media/catalog/product/1/0/102592641.jpg",
+    "image_verified": true,
+    "description_verified": true,
+    "price_verified": true,
+    "price_aed": 38.0,
+    "price_type": "PUBLIC_RETAIL_BENCHMARK",
+    "price_unit": "50 ml",
+    "price_vat_basis": "VAT basis not specified in retrieved retailer evidence",
+    "price_source": "https://www.nahdionline.com/en-ae/pediavit-multi-oral-drops-50-ml/pdp/102592641",
+    "price_checked_at": "2026-10-12",
+    "price_note": "Dated public UAE retail reference, not a regulatory MRP or PSC approved selling price. Retailer availability does not establish PSC stock; quotation confirms supply and commercial terms.",
+    "release_status": "APPROVED"
   }
 ]
