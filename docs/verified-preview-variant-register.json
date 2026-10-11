@@ -50,5 +50,61 @@
     "psc_sell_price_approved": false,
     "overall_release_status": "HOLD",
     "variant_evidence_status": "VERIFIED_PREVIEW_CANDIDATE"
+  },
+  {
+    "family_id": "PSC-IS-151",
+    "product_option_id": "local-acorus-56cb26fe529b",
+    "psc_sku": "PS-AC-56CB26FE529B",
+    "product_name": "Nexium 20 mg \u2014 14 Tablets",
+    "pack": "14 tablets",
+    "image_path": "/assets/products/verified-20261011/nexium-20mg-14-tablets.jpg",
+    "sha256": "8fd2ef6cfe982a56330d2d6070be61d97ee2f704e917fd566c37157d07f6e6a4",
+    "dimensions": [
+      1024,
+      1024
+    ],
+    "image_source_url": "https://cdn.lifepharmacy.com/products/nexium-20mg-tab-14s-7s-blister-x-2/108166-1.jpg",
+    "listing_source_url": "https://www.lifepharmacy.com/ae-ar/product/nexium-20mg-tab-14s-7s-blister-x-2",
+    "checked_at": "2026-10-11",
+    "price_aed": 78.5,
+    "price_type": "PUBLIC_RETAIL_BENCHMARK",
+    "price_unit": "14 tablets",
+    "vat_basis": "Retailer displays inclusive of VAT",
+    "image_identity_verified": true,
+    "image_quality_approved": true,
+    "description_verified": true,
+    "psc_sell_price_approved": false,
+    "overall_release_status": "HOLD",
+    "variant_evidence_status": "VERIFIED_PREVIEW_CANDIDATE",
+    "description": "Nexium esomeprazole 20 mg tablets, pack of 14 tablets.",
+    "description_source": "https://www.lifepharmacy.com/ae-ar/product/nexium-20mg-tab-14s-7s-blister-x-2"
+  },
+  {
+    "family_id": "PSC-IS-151",
+    "product_option_id": "local-acorus-5ed2ff06e0af",
+    "psc_sku": "PS-AC-5ED2FF06E0AF",
+    "product_name": "Nexium 40 mg \u2014 14 Tablets",
+    "pack": "14 tablets",
+    "image_path": "/assets/products/verified-20261011/nexium-40mg-14-tablets.jpg",
+    "sha256": "20dc278b42c16a9383d2e16ab451299642fb359574764715da2d34ed9b1d2660",
+    "dimensions": [
+      1024,
+      1024
+    ],
+    "image_source_url": "https://cdn.lifepharmacy.com/products/nexium-40mg-tab-14s-7s-blister-x-2/108168-1.jpg",
+    "listing_source_url": "https://www.lifepharmacy.com/product/nexium-40mg-tab-14s-7s-blister-x-2",
+    "checked_at": "2026-10-11",
+    "price_aed": 110,
+    "price_type": "PUBLIC_RETAIL_BENCHMARK",
+    "price_unit": "14 tablets",
+    "vat_basis": "Retailer displays inclusive of VAT",
+    "image_identity_verified": true,
+    "image_quality_approved": true,
+    "description_verified": true,
+    "psc_sell_price_approved": false,
+    "overall_release_status": "HOLD",
+    "variant_evidence_status": "VERIFIED_PREVIEW_CANDIDATE",
+    "description": "Nexium esomeprazole 40 mg tablets, pack of 14 tablets.",
+    "description_source": "https://www.lifepharmacy.com/product/nexium-40mg-tab-14s-7s-blister-x-2"
   }
 ]

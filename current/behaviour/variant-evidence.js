@@ -28,9 +28,12 @@
       const r=window.PSC_VARIANT_EVIDENCE_FOR(o,familyId);
       if (!r) return o;
       return {...o, image_url:r.image_url, image_source:r.image_source,
-        verified_description:r.description, verified_price_aed:Number(r.price_aed),
+        verified_description:r.description, verified_description_source:r.description_source||r.price_source,
+        verified_price_aed:Number(r.price_aed),
         verified_price_type:r.price_type, verified_price_unit:r.price_unit,
-        verified_price_source:r.price_source, verified_price_checked_at:r.price_checked_at};
+        verified_price_source:r.price_source, verified_price_checked_at:r.price_checked_at,
+        verified_price_vat_basis:r.price_vat_basis||'VAT basis not supplied',
+        verified_price_note:r.price_note||''};
     });
   window.PSC_VARIANT_EVIDENCE_STATUS = Object.freeze({
     supplied:records.length, approved:approved.size, rejected:records.length-approved.size, collisions:collisions.size

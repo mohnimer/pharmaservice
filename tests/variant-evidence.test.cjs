@@ -37,3 +37,39 @@ test('brand and product-name mismatches cannot borrow a price',()=>{
  assert.equal(w.PSC_VARIANT_EVIDENCE_FOR({...option,brand:'Dettol'},'PSC-SC-D02'),null);
  assert.equal(w.PSC_VARIANT_EVIDENCE_FOR({...option,exact_product_name:'Betadine 500ml'},'PSC-SC-D02'),null);
 });
+
+test('request options retain description source, VAT basis and promotional qualification',()=>{
+ const record={...base,description_source:'Exact source listing',price_vat_basis:'Inclusive of VAT',price_note:'Discounted public retailer price'};
+ const out=setup([record]).PSC_VARIANT_APPLY_OPTIONS([option],base.family_id)[0];
+ assert.equal(out.verified_description_source,record.description_source);
+ assert.equal(out.verified_price_source,record.price_source);
+ assert.equal(out.verified_price_checked_at,record.price_checked_at);
+ assert.equal(out.verified_price_vat_basis,record.price_vat_basis);
+ assert.equal(out.verified_price_note,record.price_note);
+});
+
+test('checked-in preview register agrees with exact local identities and image bytes',()=>{
+ const crypto=require('node:crypto');
+ const root=path.join(__dirname,'..');
+ const context={window:{PSC_DATA:{products:[]}}};
+ vm.runInNewContext(fs.readFileSync(path.join(root,'current/behaviour/catalogue-refresh-data.js'),'utf8'),context);
+ context.window.PSC_DATA.products=context.window.PS_CATALOGUE_REFRESH.products.map(p=>({...p}));
+ vm.runInNewContext(fs.readFileSync(path.join(root,'current/behaviour/verified-variant-records.js'),'utf8'),context);
+ vm.runInNewContext(script,context);
+ const register=JSON.parse(fs.readFileSync(path.join(root,'docs/verified-preview-variant-register.json'),'utf8'));
+ assert.equal(register.length,context.window.PSC_VARIANT_EVIDENCE_STATUS.approved);
+ for(const row of register){
+  const options=context.window.PS_CATALOGUE_REFRESH.approvedOptions.filter(o=>o.product_option_id===row.product_option_id);
+  assert.equal(options.length,1);
+  const record=context.window.PSC_VARIANT_EVIDENCE_FOR(options[0],row.family_id);assert(record);
+  assert.equal(record.exact_product_name,row.product_name);assert.equal(record.pack,row.pack);
+  assert.equal(record.image_url,row.image_path);assert.equal(record.price_aed,row.price_aed);
+  assert.equal(record.price_source,row.listing_source_url);assert.equal(record.price_checked_at,row.checked_at);
+  assert.equal(row.psc_sell_price_approved,false);assert.equal(row.overall_release_status,'HOLD');
+  const bytes=fs.readFileSync(path.join(root,row.image_path));
+  assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),row.sha256);
+  const card=context.window.PSC_DATA.products.find(p=>p.pscSku===row.psc_sku);assert(card);
+  assert.equal(card.product_option_id,row.product_option_id);assert.equal(card.pack,row.pack);
+  assert.equal(card.currentImageUrl,row.image_path);assert.equal(card.verified_description,record.description);
+ }
+});

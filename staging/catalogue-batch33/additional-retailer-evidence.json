@@ -20,5 +20,82 @@
     "psc_sell_price_approved": false,
     "release_status": "HOLD",
     "hold_reason": "Front photograph does not visibly confirm 5 mg strength; no public variant replacement."
+  },
+  {
+    "product_option_id": "local-acorus-8500ef9636bd",
+    "family_id": "PSC-IS-111",
+    "exact_product_name": "Bepanthen Moisturizing Cream \u2014 30 g",
+    "listing_source": "https://www.lifepharmacy.com/product/bepanthen-5-cream-30-g-tube",
+    "retailer_sku": "108415",
+    "checked_at": "2026-10-11",
+    "price_aed": 23.95,
+    "retailer_comparison_price_aed": 35,
+    "price_note": "Discounted retailer price; comparison price is not verified as regulated MRP",
+    "price_type": "PUBLIC_RETAIL_BENCHMARK",
+    "vat_basis": "Inclusive of VAT as displayed by retailer",
+    "image_source": "https://cdn.lifepharmacy.com/products/bepanthen-5-cream-30-g-tube/108415-1.jpg",
+    "gallery_sources": [
+      "https://cdn.lifepharmacy.com/images/products/108415-1-1024x1024.jpg",
+      "https://cdn.lifepharmacy.com/images/products/108415-2-1024x1024.jpg",
+      "https://cdn.lifepharmacy.com/images/products/108415-3-1024x1024.jpg"
+    ],
+    "images": [
+      {
+        "file": "staging/catalogue-batch33/bepanthen30-retailer.jpg",
+        "sha256": "e71617d972c4d62463013f6c2dac78d94e431c61e7349a627388ac4309202a81",
+        "dimensions": [
+          700,
+          700
+        ],
+        "quality_approved": false
+      },
+      {
+        "file": "staging/catalogue-batch33/bepanthen30-gallery1.jpg",
+        "sha256": "f45b91375cdc43df7fd8e8122e8ac601c9b5ea2e6414e179a1d4290f37134190",
+        "dimensions": [
+          700,
+          700
+        ],
+        "quality_approved": false
+      },
+      {
+        "file": "staging/catalogue-batch33/bepanthen30-gallery2.jpg",
+        "sha256": "08522f5d56c5c59612178c698ff9b76da3c8b9be09a6cfc46584819055bbaf37",
+        "dimensions": [
+          700,
+          700
+        ],
+        "quality_approved": false
+      },
+      {
+        "file": "staging/catalogue-batch33/bepanthen30-gallery3.jpg",
+        "sha256": "cd225ca73e016808831251e8797932d7d0c1170aa9a4a207c2f742f4febb28d4",
+        "dimensions": [
+          700,
+          700
+        ],
+        "quality_approved": false
+      }
+    ],
+    "image_verified": false,
+    "psc_sell_price_approved": false,
+    "release_status": "HOLD",
+    "hold_reason": "Product occupies too little of 700px primary photograph; gallery contains promotional lifestyle illustrations rather than exact pack photographs."
+  },
+  {
+    "product_option_id": "local-acorus-4d6c5f1f73f7",
+    "family_id": "PSC-IS-142",
+    "exact_product_name": "Betaserc 8 mg \u2014 100 Tablets",
+    "listing_source": "https://uae.tdawi.com/en-ae/betaserc-8-mg-100-tablets",
+    "retailer_sku": "43536714",
+    "checked_at": "2026-10-11",
+    "price_aed": 81.27,
+    "price_type": "PUBLIC_RETAIL_BENCHMARK",
+    "vat_basis": "Not explicit in retrieved listing",
+    "image_source": "https://uae.tdawi.com/media/catalog/product/cache/0daeb07bb1d294c1f281fab47369d56a/b/e/betaserc_8_mg_2__k0wwmtrkixtlzwai.jpg",
+    "image_verified": false,
+    "psc_sell_price_approved": false,
+    "release_status": "HOLD",
+    "hold_reason": "Image download returned HTTP error; retailer brand field is Generic; front-pack identity and quality not verified."
   }
 ]

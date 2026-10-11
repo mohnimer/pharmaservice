@@ -67,7 +67,13 @@ try{
     description:'Prospan cough syrup with ivy leaf dry extract, 100 ml bottle.'},
    {route:'patient-care',sku:'PS-AC-82EEFFA2D41B',optionId:'local-acorus-82eeffa2d41b',
     photo:'/assets/products/verified-20261011/bepanthen-baby-ointment-100g.jpg',pack:'100 g',price:59,
-    description:'Bepanthen Protective Baby Ointment, 100 g pack for external use.'}
+    description:'Bepanthen Protective Baby Ointment, 100 g pack for external use.'},
+   {route:'patient-care',sku:'PS-AC-56CB26FE529B',optionId:'local-acorus-56cb26fe529b',
+    photo:'/assets/products/verified-20261011/nexium-20mg-14-tablets.jpg',pack:'14 tablets',price:78.5,
+    description:'Nexium esomeprazole 20 mg tablets, pack of 14 tablets.'},
+   {route:'patient-care',sku:'PS-AC-5ED2FF06E0AF',optionId:'local-acorus-5ed2ff06e0af',
+    photo:'/assets/products/verified-20261011/nexium-40mg-14-tablets.jpg',pack:'14 tablets',price:110,
+    description:'Nexium esomeprazole 40 mg tablets, pack of 14 tablets.'}
   ]) {
   await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/'+variant.route);
   const {sku,optionId}=variant;
@@ -92,9 +98,32 @@ try{
   assert.equal(actual.verified_price_aed,variant.price);
   assert.equal(actual.verified_price_type,'PUBLIC_RETAIL_BENCHMARK');
   assert.equal(actual.verified_description,variant.description);
+  assert.equal(actual.verified_price_vat_basis,'Inclusive of VAT as displayed by retailer');
+  assert.equal(actual.verified_description_source,actual.verified_price_source);
+  assert.equal(actual.verified_price_checked_at,'2026-10-11');
+  assert((await page.locator('body').evaluate(el=>el.scrollWidth))<=width+1,'catalogue must not overflow horizontally');
+  }
+  // Real same-brand/same-pack strengths must stay distinct under multiple selection.
+  const nexiumCard=page.locator('.productCard:has([data-product-view="PS-AC-56CB26FE529B"])');
+  await nexiumCard.locator('.productVisual').click();
+  for(const id of ['local-acorus-56cb26fe529b','local-acorus-5ed2ff06e0af'])
+   await page.locator('.pscBrandTick:has([data-family-option="'+id+'"])').click();
+  assert.equal(await page.locator('.pscSelectedVariantRow').count(),2);
+  assert.equal(await preview.count(),0);
+  const gallery=await page.locator('.pscSelectedVariantRow img').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('src')).sort());
+  assert.deepEqual(gallery,['/assets/products/verified-20261011/nexium-20mg-14-tablets.jpg','/assets/products/verified-20261011/nexium-40mg-14-tablets.jpg']);
+  await page.locator('[data-family-quote]').click();
+  const multiple=await page.evaluate(()=>window.__variantRequests.at(-1).requestedProductOptions);
+  assert.equal(multiple.length,2);
+  for(const [id,price,photo] of [
+   ['local-acorus-56cb26fe529b',78.5,'nexium-20mg-14-tablets.jpg'],
+   ['local-acorus-5ed2ff06e0af',110,'nexium-40mg-14-tablets.jpg']]) {
+   const option=multiple.find(o=>o.local_product_option_id===id);assert(option);
+   assert.equal(option.verified_price_aed,price);
+   assert.equal(option.image_url,'/assets/products/verified-20261011/'+photo);
   }
   assert.deepEqual(errors,[]);
   assert.deepEqual(await page.evaluate(()=>window.__backendCalls.filter(c=>c.rpc||c.action!=='select')),[]);
-  await context.close();console.log(width+'px: fixture selection and real Prospan and Bepanthen card/pack/photo/benchmark/local option requests passed');
+  await context.close();console.log(width+'px: fixture selection and four real variants, Nexium strength multiselect, VAT/source request snapshots and no overflow passed');
  }
 }finally{await browser.close();await new Promise(r=>server.close(r));}

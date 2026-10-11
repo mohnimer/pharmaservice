@@ -73,3 +73,29 @@ looked for Prospan in the breathing category. The source catalogue assigns
 that SKU to medicines. The test now follows the actual medicines route;
 production categorization was not changed to accommodate the test. The
 resulting expanded test run still must pass before preview verification.
+
+## Nexium exact strength pair and procurement price qualifications
+
+Two unchanged, visually checked 1024×1024 Life Pharmacy pack photos show
+Nexium 20 mg / 14 tablets and 40 mg / 14 tablets separately. Exact option IDs
+`local-acorus-56cb26fe529b` and `local-acorus-5ed2ff06e0af` remain under
+`PSC-IS-151`. The UAE benchmarks are AED 78.50 and AED 110 respectively,
+VAT-inclusive as displayed, checked 2026-10-11. Descriptions state only the
+brand, esomeprazole strength, formulation and 14-tablet pack. These four total
+verified preview candidates do not approve other strengths or packs.
+
+Verified request snapshots now retain description source, price VAT basis and
+any promotional note in addition to source/date/unit/type. The selected detail
+shows VAT qualification and evidence date. Actual browser checks exercise all
+four candidates at 390 and 1440 px, plus simultaneous selection of the two
+same-brand/same-pack Nexium strengths, separate gallery images and separate
+request prices. Horizontal overflow is also checked.
+
+Bepanthen cream 30 g remains HOLD: the unchanged 700×700 pack photo has too
+much surrounding space, and three retrieved gallery images are promotional
+illustrations. Its AED 23.95 discounted benchmark and AED 35 comparison price
+are retained privately; the comparison is not asserted as a regulated MRP.
+Betaserc 8 mg / 100 tablets has a retrieved AED 81.27 retailer benchmark,
+but image download failed and the retailer's brand field says Generic. Both
+remain unapproved, with source URLs and hold reasons in the additional
+retailer evidence register. No PSC prices or production changes are approved.

@@ -98,7 +98,7 @@
     const verified=window.PSC_VARIANT_EVIDENCE_FOR?.(o,state.familyId);
     if(verified){
       const basis=verified.price_type==='PUBLIC_RETAIL_BENCHMARK'?'UAE retail benchmark':'PSC customer price';
-      return `<span class="pscOptionPrice"><b>${esc(aed(Number(verified.price_aed)))}</b><small>${esc(basis)} · ${esc(verified.price_unit)}</small></span>`;
+      return `<span class="pscOptionPrice"><b>${esc(aed(Number(verified.price_aed)))}</b><small>${esc(basis)} · ${esc(verified.price_unit)} · ${esc(verified.price_vat_basis||'VAT basis not supplied')} · checked ${esc(verified.price_checked_at)}${verified.price_note?' · '+esc(verified.price_note):''}</small></span>`;
     }
     const fixed=(state.prices||[]).find(p=>p.product_option_id && String(p.product_option_id)===String(o.product_option_id) && (!p.price_valid_to || Date.parse(p.price_valid_to)>=Date.now()));
     if(Number(fixed?.public_sell_price_ex_vat)>0) return `<span class="pscOptionPrice"><b>${esc(aed(Number(fixed.public_sell_price_ex_vat)))}</b><small>PSC price · ex VAT · quotation confirms</small></span>`;
