@@ -1,0 +1,24 @@
+[
+  {
+    "product_option_id": "local-acorus-8e9fe3b9bbc4",
+    "family_id": "PSC-IS-147",
+    "exact_product_name": "Dora Desloratadine 5 mg \u2014 30 Tablets",
+    "listing_source": "https://www.lifepharmacy.com/product/dora-5-mg-tablet-30-s",
+    "retailer_sku": "125264",
+    "image_source": "https://cdn.lifepharmacy.com/products/dora-5-mg-tablet-30-s/125264-1.png",
+    "image_file": "staging/catalogue-batch33/dora-retailer.png",
+    "image_sha256": "dc46bf09e6ba897029ac98a119146e56823ffd55c7f3bb5b3a8ab8324208c2d5",
+    "dimensions": [
+      700,
+      700
+    ],
+    "checked_at": "2026-10-11",
+    "price_aed": 34.5,
+    "price_type": "PUBLIC_RETAIL_BENCHMARK",
+    "vat_basis": "Inclusive of VAT as displayed by retailer",
+    "image_verified": false,
+    "psc_sell_price_approved": false,
+    "release_status": "HOLD",
+    "hold_reason": "Front photograph does not visibly confirm 5 mg strength; no public variant replacement."
+  }
+]

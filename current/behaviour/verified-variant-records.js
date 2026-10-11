@@ -13,6 +13,18 @@
     price_vat_basis:'Inclusive of VAT as displayed by retailer',
     price_source:'https://www.lifepharmacy.com/product/prospan-syrup-100-ml-bottle/',
     price_checked_at:'2026-10-11', release_status:'APPROVED'
+  }, {
+    family_id:'PSC-IS-148', product_option_id:'local-acorus-82eeffa2d41b',
+    psc_sku:'PS-AC-82EEFFA2D41B', exact_product_name:'Bepanthen Protective Baby Ointment — 100 g',
+    brand:'Bepanthen', pack:'100 g',
+    description:'Bepanthen Protective Baby Ointment, 100 g pack for external use.',
+    image_url:'/assets/products/verified-20261011/bepanthen-baby-ointment-100g.jpg',
+    image_source:'https://cdn.lifepharmacy.com/products/bepanthen-ointment-100-g/121567-1.jpg',
+    image_verified:true, description_verified:true, price_verified:true,
+    price_aed:59, price_type:'PUBLIC_RETAIL_BENCHMARK', price_unit:'100 g',
+    price_vat_basis:'Inclusive of VAT as displayed by retailer',
+    price_source:'https://www.lifepharmacy.com/product/bepanthen-ointment-100-g',
+    price_checked_at:'2026-10-11', release_status:'APPROVED'
   }];
   const norm = value => String(value || '').normalize('NFKC').trim().replace(/\s+/g,' ').toUpperCase();
   const eligible = (option, record) => option.product_option_id === record.product_option_id &&

@@ -61,31 +61,40 @@ try{
   assert.equal(selected[0].verified_price_aed,12);
   assert.equal(selected[0].verified_description,'Fixture exact pack 20 pieces');
   // Real checked-in variant evidence must agree from card through request.
-  await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/breathing');
-  const sku='PS-AC-AD974C05853F', optionId='local-acorus-ad974c05853f';
+  for (const variant of [
+   {route:'medicines',sku:'PS-AC-AD974C05853F',optionId:'local-acorus-ad974c05853f',
+    photo:'/assets/products/verified-20261011/prospan-100ml.jpg',pack:'100 ml bottle',price:42,
+    description:'Prospan cough syrup with ivy leaf dry extract, 100 ml bottle.'},
+   {route:'patient-care',sku:'PS-AC-82EEFFA2D41B',optionId:'local-acorus-82eeffa2d41b',
+    photo:'/assets/products/verified-20261011/bepanthen-baby-ointment-100g.jpg',pack:'100 g',price:59,
+    description:'Bepanthen Protective Baby Ointment, 100 g pack for external use.'}
+  ]) {
+  await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/'+variant.route);
+  const {sku,optionId}=variant;
   const card=page.locator('.productCard:has([data-product-view="'+sku+'"])');
   await card.waitFor();
-  assert.equal(await card.locator('.productMainImage').getAttribute('src'),'/assets/products/verified-20261011/prospan-100ml.jpg');
-  assert((await card.locator('.pack').innerText()).includes('100 ml bottle'));
+  assert.equal(await card.locator('.productMainImage').getAttribute('src'),variant.photo);
+  assert((await card.locator('.pack').innerText()).includes(variant.pack));
   assert((await card.locator('.pscPricePreview').innerText()).includes('UAE retail benchmark'));
-  assert((await card.locator('.pscPricePreview').innerText()).includes('42'));
+  assert((await card.locator('.pscPricePreview').innerText()).includes(String(variant.price)));
   await card.locator('.productVisual').click();
   await page.locator('.pscBrandTick:has([data-family-option="'+optionId+'"])').click();
-  assert.equal(await preview.getAttribute('src'),'/assets/products/verified-20261011/prospan-100ml.jpg');
+  assert.equal(await preview.getAttribute('src'),variant.photo);
   await page.waitForFunction(()=>{const img=document.querySelector('.pscFamilyPreview img');return img?.complete&&img.naturalWidth===1024;});
-  assert((await page.locator('.detailImageMeta').innerText()).includes('100 ml bottle'));
-  assert((await page.locator('.detailImageMeta').innerText()).includes('42'));
+  assert((await page.locator('.detailImageMeta').innerText()).includes(variant.pack));
+  assert((await page.locator('.detailImageMeta').innerText()).includes(String(variant.price)));
   await page.locator('[data-family-quote]').click();
   const actual=await page.evaluate(()=>window.__variantRequests.at(-1).requestedProductOptions[0]);
   assert.equal(actual.local_product_option_id,optionId);
   assert.equal(actual.product_option_id,null);
-  assert.equal(actual.pack,'100 ml bottle');
-  assert.equal(actual.image_url,'/assets/products/verified-20261011/prospan-100ml.jpg');
-  assert.equal(actual.verified_price_aed,42);
+  assert.equal(actual.pack,variant.pack);
+  assert.equal(actual.image_url,variant.photo);
+  assert.equal(actual.verified_price_aed,variant.price);
   assert.equal(actual.verified_price_type,'PUBLIC_RETAIL_BENCHMARK');
-  assert.equal(actual.verified_description,'Prospan cough syrup with ivy leaf dry extract, 100 ml bottle.');
+  assert.equal(actual.verified_description,variant.description);
+  }
   assert.deepEqual(errors,[]);
   assert.deepEqual(await page.evaluate(()=>window.__backendCalls.filter(c=>c.rpc||c.action!=='select')),[]);
-  await context.close();console.log(width+'px: fixture selection and real Prospan card/pack/photo/benchmark/local option request passed');
+  await context.close();console.log(width+'px: fixture selection and real Prospan and Bepanthen card/pack/photo/benchmark/local option requests passed');
  }
 }finally{await browser.close();await new Promise(r=>server.close(r));}

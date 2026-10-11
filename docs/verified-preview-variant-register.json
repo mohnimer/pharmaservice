@@ -24,5 +24,31 @@
     "psc_sell_price_approved": false,
     "overall_release_status": "HOLD",
     "variant_evidence_status": "VERIFIED_PREVIEW_CANDIDATE"
+  },
+  {
+    "family_id": "PSC-IS-148",
+    "product_option_id": "local-acorus-82eeffa2d41b",
+    "psc_sku": "PS-AC-82EEFFA2D41B",
+    "product_name": "Bepanthen Protective Baby Ointment \u2014 100 g",
+    "pack": "100 g",
+    "image_path": "/assets/products/verified-20261011/bepanthen-baby-ointment-100g.jpg",
+    "sha256": "4b2540291cd1a2f808a74dd5841b1a549b6cdcb3510a52180c343c5bb0da8c30",
+    "dimensions": [
+      1024,
+      1024
+    ],
+    "image_source_url": "https://cdn.lifepharmacy.com/products/bepanthen-ointment-100-g/121567-1.jpg",
+    "listing_source_url": "https://www.lifepharmacy.com/product/bepanthen-ointment-100-g",
+    "checked_at": "2026-10-11",
+    "price_aed": 59,
+    "price_type": "PUBLIC_RETAIL_BENCHMARK",
+    "price_unit": "100 g",
+    "vat_basis": "Retailer displays inclusive of VAT",
+    "image_identity_verified": true,
+    "image_quality_approved": true,
+    "description_verified": true,
+    "psc_sell_price_approved": false,
+    "overall_release_status": "HOLD",
+    "variant_evidence_status": "VERIFIED_PREVIEW_CANDIDATE"
   }
 ]
