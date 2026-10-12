@@ -22,3 +22,8 @@ Gloclav three variants are integrated into34. Read docs/gloclav-listing-batch-20
 Preserve optional request flows: append exact presentation choices only in families already requiring presentation selection. All31 variants passed at390/1440 in run38155318574; artifact11708611763 contains252 screenshots with representative reviews and documented focused-capture limitations. Head1fc0aeb also passed38155823309. Server snapshot-clearing trigger remains unresolved; frontend/basket success does not prove actual submission persistence. No unverified database changes, identity merging or commercial approvals. Use existing CI screenshots when browser skill unavailable. Warn before context runs low and save another continuation prompt.
 
 Follow-on runtime d3e42055be61e4b22c8afd65aed3f2c66b764bd8 normalizes Aster raw price “12.00” to number12, matching request snapshots. Check run38161741788 for final34 desktop/mobile approval. Earlier run38161384148 passed desktop row geometry then failed only the raw string/number mismatch; its artifact11710547525 is historical, not final approval.
+
+
+## Superseding release checkpoint12October2026
+
+PR23 merged and deployed19 exact corrections, original34 preserved. Batch002 now19/50 LIVE, remains unfinished with31 unresolved. Read docs/catalogue-repair-continuation-prompt-20261012.md and docs/catalogue-repair-handover-20261012.md, plus updated batch002 release-progress.json and release-qa evidence before continuing. Do not start another50.
