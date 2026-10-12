@@ -1,0 +1,12 @@
+.pscFamilyVariantList{margin:12px 0 0;border-top:1px solid #e6e9e8;padding-top:10px}
+.pscFamilyVariantList summary{cursor:pointer;font-weight:600;font-size:13px;padding:7px 0}
+.pscFamilyVariantList ul{list-style:none;padding:0;margin:5px 0}
+.pscFamilyVariantList li{border-top:1px solid #edf0ef;padding:9px 0;display:flex;gap:8px;justify-content:space-between;align-items:flex-start;font-size:12px}
+.pscFamilyVariantList button{text-align:left;background:none;border:0;padding:0;color:inherit;cursor:pointer;min-width:0;line-height:1.45}
+.pscFamilyVariantList .pscVariantPrice{flex:none;max-width:100px;text-align:right;line-height:1.4}
+.pscFamilyRepresentative{font-size:11px;line-height:1.4;color:#61706b;margin:4px 0 7px}
+.pscFamilyStockMeta{display:block;font-size:11px;color:#61706b;margin-top:4px}
+.pscFamilyNoPhoto .productVisual,.pscFamilyNoPhoto .publicCatalogueVisual{display:none}
+.pscFamilyNoPhoto .canvaCardBody{padding-top:20px}
+.pscFamilyVariantList[open]{max-height:280px;overflow:auto}
+@media(max-width:480px){.pscFamilyVariantList li{font-size:12px}.pscFamilyVariantList .pscVariantPrice{max-width:90px}}

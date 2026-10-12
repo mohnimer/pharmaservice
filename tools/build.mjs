@@ -1,3 +1,4 @@
+import './build-catalogue-stock.mjs';
 import {buildProductIndex} from './build-product-index.mjs';
 import { readFile, writeFile, mkdir, rm, copyFile, cp, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';

@@ -1826,15 +1826,23 @@
     return `<section class="schoolWorkshopStrip"><div><span class="kicker">USEFUL IN YOUR CLINIC</span><h2>The Workshop</h2></div><div>${slugs.map(slug=>{const g=workshopGuideBySlug(slug);return g?`<button data-go="workshop/${g.slug}"><span>${esc(workshopFormatLabel(g.format))}</span><b>${esc(g.title)}</b></button>`:''}).join('')}</div></section>`;
   }
 
+  function catalogueCardRows(rows){ return window.PS_CATALOGUE_STOCK?.groups(rows)||rows; }
+  function catalogueFamilyVariants(p){
+    const group=p._familyGroup;if(!group)return '';
+    return `<details class="pscFamilyVariantList"><summary>${group.members.length} product ${group.members.length===1?'option':'options'}</summary><ul>${group.members.map(member=>{
+      const record=window.PS_CATALOGUE_STOCK?.forProduct(member),price=record?.acorus_managed?window.PS_CATALOGUE_STOCK.price(record):null;
+      return `<li><button type="button" data-product-view="${esc(member.pscSku)}"><b>${esc(member.name)}</b><br><small>${esc(member.cataloguePack||member.pack||'Exact pack to confirm')}</small></button><span class="pscVariantPrice">${price?`${money(price)}<small class="pscFamilyStockMeta">Retail MRP · in stock</small>`:'Request quotation'}</span></li>`;
+    }).join('')}</ul></details>`;
+  }
   function publicCatalogueCard(p){
     const need=clinicalNeedMeta(clinicalNeedIds(p)[0]||'all');
-    const displayName=p.catalogueDisplayName||p.name;
+    const displayName=p._familyGroup?.name||p.catalogueDisplayName||p.name;
     const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
-    const imageUrl=productDisplayImageUrl(p);
+    const imageUrl=p._familyGroup&&!window.PS_CATALOGUE_STOCK?.realPhoto(p)?null:productDisplayImageUrl(p);
     const workshop=workshopForProduct(p,1)[0];
-    return `<article class="publicCatalogueCard">
+    return `<article class="publicCatalogueCard ${p._familyGroup?'pscFamilyCard':''} ${!imageUrl?'pscFamilyNoPhoto':''}" data-family-listing="${esc(p._familyGroup?.id||'')}">
       <button class="publicCatalogueVisual publicProductView" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-public-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details">${imageUrl?`<img src="${esc(imageUrl)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'">`:`<span>${esc(need.label)}</span>`}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>
-      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount" data-catalogue-brand-sku="${esc(p.pscSku)}">Brands Available: ${catalogueBrandCount(p)}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(pack)}</p>${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
+      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount" data-catalogue-brand-sku="${esc(p.pscSku)}">Brands Available: ${catalogueBrandCount(p)}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(pack)}</p>${p._familyGroup?`<p class="pscFamilyRepresentative">Pictured: ${esc(p.name)}</p>`:''}${cataloguePricePreview(p)}${catalogueFamilyVariants(p)}${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
       <button class="button outline full" data-go="contact">Request institutional quote</button>
     </article>`;
   }
@@ -1859,7 +1867,7 @@
       <section class="publicSection publicCatalogueControls catalogue16Controls">
         <div class="filterBar"><div class="searchInput"><span>${icon('search')}</span><input type="search" aria-label="Search catalogue" data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search families, products, packs or specifications…">${ui.catalogueQuery?'<button type="button" class="catalogueSearchClear" data-catalogue-clear aria-label="Clear search">×</button>':''}</div><select data-cat-filter="category"><option>All product types</option>${types.map(t=>`<option ${ui.catalogueCat===t?'selected':''}>${esc(t)}</option>`).join('')}</select></div>
       </section>
-      <section class="publicSection publicCatalogueResults catalogue16Results">${catalogueRetailPriceNotice()}<div class="publicCatalogueCount"><b>${filtered.length}</b><span>${needId==='all'?'published institutional lines':'published lines in this category'}</span></div>${filtered.length?`<div class="publicCatalogueGrid">${filtered.map(publicCatalogueCard).join('')}</div>`:'<div class="emptyState"><h3>No matching published lines</h3><p>Try another clinical need or send the requirement to Pharma Service.</p><button class="button primary" data-go="contact">Request sourcing</button></div>'}</section>
+      <section class="publicSection publicCatalogueResults catalogue16Results">${catalogueRetailPriceNotice()}<div class="publicCatalogueCount"><b>${filtered.length}</b><span>${needId==='all'?'published institutional lines':'published lines in this category'}</span></div>${filtered.length?`<div class="publicCatalogueGrid">${catalogueCardRows(filtered).map(publicCatalogueCard).join('')}</div>`:'<div class="emptyState"><h3>No matching published lines</h3><p>Try another clinical need or send the requirement to Pharma Service.</p><button class="button primary" data-go="contact">Request sourcing</button></div>'}</section>
       <section class="publicCta"><div><span class="kicker">HAVE A LIST ALREADY?</span><h2>Send the requirement instead of rebuilding it here.</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="start">Send a list / RFQ</button><button class="button primary large" data-go="login">Open Clinic Portal</button></div></section>
       ${publicFooter()}
     </main>`;
@@ -2267,7 +2275,10 @@
   }
 
   function catalogueProducts(){
-    return products().filter(p=>p.catalogueVisible!==false);
+    return products().filter(p=>{
+      const controlled=window.PS_CATALOGUE_STOCK?.forProduct(p);
+      return controlled?controlled.catalogue_visible:p.catalogueVisible!==false;
+    });
   }
 
   function catalogueFilterProducts(needId='all'){
@@ -2290,7 +2301,7 @@
 
   function catalogueSearchResults(needId='all',landing=false){
     const {filtered,searching}=catalogueFilterProducts(needId);const visible=!landing||ui.catalogueQuery||intelligent.action;
-    return `<section class="psSearchResults" data-ps-search-results ${visible?'':'hidden'}><div class="catalogueMeta"><span data-ps-result-count role="status" aria-live="polite" aria-atomic="true">${filtered.length} ${searching?'matching products':'products'}</span></div>${filtered.some(p=>p.dhaMapped)?`<p class="pscDhaLegend"><img src="${DHA_ICON}" alt="DHA requirement mapping"><span>The DHA logo at the top right identifies a product mapped to a DHA clinic requirement. Conditional requirements and alternatives apply; exact specifications and suitability are checked before quotation.</span></p>`:''}${catalogueRetailPriceNotice()}<div class="productGrid v25ProductGrid">${visible?filtered.map(productCard).join(''):''}</div><p class="psSearchEmpty" ${filtered.length?'hidden':''}>${esc(window.PS_INTELLIGENT_SEARCH.outcome(window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'' ,productSearchContext())||{terms:''},filtered).message)} Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button></p></section>`;
+    return `<section class="psSearchResults" data-ps-search-results ${visible?'':'hidden'}><div class="catalogueMeta"><span data-ps-result-count role="status" aria-live="polite" aria-atomic="true">${filtered.length} ${searching?'matching products':'products'}</span></div>${filtered.some(p=>p.dhaMapped)?`<p class="pscDhaLegend"><img src="${DHA_ICON}" alt="DHA requirement mapping"><span>The DHA logo at the top right identifies a product mapped to a DHA clinic requirement. Conditional requirements and alternatives apply; exact specifications and suitability are checked before quotation.</span></p>`:''}${catalogueRetailPriceNotice()}<div class="productGrid v25ProductGrid">${visible?catalogueCardRows(filtered).map(productCard).join(''):''}</div><p class="psSearchEmpty" ${filtered.length?'hidden':''}>${esc(window.PS_INTELLIGENT_SEARCH.outcome(window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'' ,productSearchContext())||{terms:''},filtered).message)} Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button></p></section>`;
   }
   function updateCatalogueResults(){
     const area=document.querySelector('[data-ps-search-results]');if(!area)return;
@@ -2298,7 +2309,7 @@
     if(landing&&ui.catalogueQuery){ui.catalogueCat='All product types';ui.catalogueFilter='All lines';}
     const {filtered,searching}=catalogueFilterProducts(need);
     area.hidden=landing&&!ui.catalogueQuery&&!intelligent.action;
-    const grid=area.querySelector('.productGrid');grid.innerHTML=area.hidden?'':filtered.map(productCard).join('');
+    const grid=area.querySelector('.productGrid');grid.innerHTML=area.hidden?'':catalogueCardRows(filtered).map(productCard).join('');
     area.querySelector('[data-ps-result-count]').textContent=`${filtered.length} ${searching?'matching products':'products'}`;
     const heroCount=document.querySelector('.categoryHeroCount b');if(heroCount)heroCount.textContent=filtered.length;
     const heroLabel=document.querySelector('.categoryHeroCount span');if(heroLabel)heroLabel.textContent=searching?'matching products':'products';
@@ -2419,6 +2430,13 @@
     document.querySelectorAll('[data-brand-row]').forEach(row=>{const p=product(row.dataset.brandRow);if(p)row.outerHTML=catalogueBrandChoices(p);});
   });
   function cataloguePricePreview(p){
+    const stock=window.PS_CATALOGUE_STOCK?.forProduct(p);
+    if(stock?.acorus_managed){
+      const mrp=window.PS_CATALOGUE_STOCK.price(stock);
+      return mrp?`<div class="pscPricePreview"><b>${money(mrp)}</b><span>Retail MRP</span><small>In stock · stock report ${esc(window.PS_CATALOGUE_STOCK.stockDate)} · wholesale quotation separate</small></div>`:'<div class="pscPricePreview"><b>Request quotation</b><small>Current stocked retail MRP not confirmed</small></div>';
+    }
+    if(stock?.source_kind==='product'&&p.storefrontPriceMode!=='show_price')return '<div class="pscPricePreview"><b>Request quotation</b><small>Supplier availability and quotation to confirm</small></div>';
+
     const evidence=window.PSC_VARIANT_EVIDENCE_FOR?.({
       product_option_id:p.product_option_id,exact_product_name:p.name,brand:p.brand,pack:p.pack
     },p.catalogueParentId||p.catalogueReferenceFamilyId||p.pscSku);
@@ -2443,23 +2461,23 @@
   function productCard(p){
     const needId=clinicalNeedIds(p)[0]||'all';
     const need=clinicalNeedMeta(needId);
-    const displayName=p.catalogueDisplayName||p.name;
+    const displayName=p._familyGroup?.name||p.catalogueDisplayName||p.name;
     const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
     const fallback=legacyProductImageUrl(p);
     const dhaMark=p.dhaMapped?`<span class="pscRequirementBadge" title="Mapped DHA clinic requirement"><img class="dhaRequirementIcon cardDhaIcon" src="${DHA_ICON}" alt="Mapped DHA clinic requirement"></span>`:'';
-    const displayImage=productDisplayImageUrl(p);
+    const displayImage=p._familyGroup&&!window.PS_CATALOGUE_STOCK?.realPhoto(p)?null:productDisplayImageUrl(p);
     const visual=displayImage
-      ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img class="productMainImage" src="${esc(displayImage)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.style.visibility='hidden'">${dhaMark}</button>`
+      ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img class="productMainImage" src="${esc(displayImage)}" alt="${esc(p.name)}" loading="lazy" onerror="this.onerror=null;this.style.visibility='hidden'">${dhaMark}</button>`
       : `<button class="productVisual productNeedVisual productVisualButton" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)}">${dhaMark}</button>`;
 
-    return `<article class="productCard v25ProductCard v261ProductCard v262ProductCard canvaProductCard exactCanvaCard pscEditorialCard">
+    return `<article data-family-listing="${esc(p._familyGroup?.id||'')}" class="productCard ${p._familyGroup?'pscFamilyCard':''} ${!displayImage?'pscFamilyNoPhoto':''} v25ProductCard v261ProductCard v262ProductCard canvaProductCard exactCanvaCard pscEditorialCard">
       ${visual}
       ${catalogueBrandChoices(p)}
       <div class="canvaCardBody exactCanvaBody">
         <button class="productTitleButton" data-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button>
         <p class="pack">${esc(pack)}</p>${catalogueImageNote(p)||'<small class="catalogueImageNote catalogueImageNoteEmpty" aria-hidden="true"></small>'}
         <div class="productNeedTags">${esc(need.id==='all'?(p.productType||p.category||'Institutional supplies'):need.label)}</div>
-        ${cataloguePricePreview(p)}
+        ${p._familyGroup&&displayImage?`<p class="pscFamilyRepresentative">Pictured: ${esc(p.name)}</p>`:''}${cataloguePricePreview(p)}${catalogueFamilyVariants(p)}
         ${currentRoute().startsWith('portal/catalogue/dha-')&&p.dhaMapped?`<small class="pscDhaStatus">${esc(p.dhaStatus==='Strict'?'Required category':p.dhaStatus||'Mapped requirement')}${p.dhaReference?` · ${esc(p.dhaReference)}`:''}${p.dhaStatus==='Conditional'&&p.dhaCondition?`<br>${esc(p.dhaCondition)}`:''}</small>`:''}
       </div>
       <div class="canvaCardActions exactCanvaActions">
@@ -2973,7 +2991,7 @@
       <div class="productDetailGrid fluidProductGrid">
         <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).map(m=>`<img src="${esc(m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
         <div class="detailContentPane fluidDetailContent">
-          ${catalogueRetailPriceNotice()}
+          ${catalogueRetailPriceNotice()}${cataloguePricePreview(p)}
           <div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to DHA clinic requirement</b></div>`:''}</div>
           <div class="productDisclosureList">
             <details open><summary><span>Specification</span><i>+</i></summary><div><p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
@@ -3003,7 +3021,7 @@
       <div class="productDetailGrid fluidProductGrid">
         <div class="detailImagePane fluidImagePane">${imageUrl?`<div class="detailProductImageWrap"><img src="${esc(imageUrl)}" alt="${esc(displayName)}" onerror="this.onerror=null;this.src='${esc(fallback)}'"></div>`:`<div class="detailProductImageWrap"><div class="detailNeedVisual" style="--need-bg:${primary.bg};--need-ink:${primary.ink}"></div></div>`}<div class="detailImageMeta"><b>${esc(displayName)}</b><span>${esc(pack)}</span>${catalogueImageNote(p)}</div></div>
         <div class="detailContentPane fluidDetailContent">
-          ${catalogueRetailPriceNotice()}
+          ${catalogueRetailPriceNotice()}${cataloguePricePreview(p)}
           <div class="productDisclosureList publicProductDisclosure">
             <details open><summary><span>Product specification</span><i>+</i></summary><div><p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
             ${p.dhaMapped?`<details><summary><span>Requirement mapping</span><i>+</i></summary><div><p>Mapped to the applicable DHA clinic requirement. Exact model suitability remains subject to specification verification.</p></div></details>`:''}

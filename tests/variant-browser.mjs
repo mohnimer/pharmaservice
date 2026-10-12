@@ -4,6 +4,8 @@ import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {createServer} from '../tools/serve.mjs';
 const family='PSC-SC-C01';
+const stockControl=JSON.parse(readFileSync('data/catalogue-public.json','utf8'));
+const stockPrice=sku=>{const r=stockControl.products.find(r=>r.sku===sku);return r?.acorus_managed?(r.in_stock===true&&r.mrp_aed>0&&(!r.expiry_date||r.expiry_date>=stockControl.stock_date)?r.mrp_aed:null):undefined;};
 const followonVariants=JSON.parse(readFileSync('docs/verified-preview-variant-register.json','utf8'))
  .filter(row=>row.browser_route).map(row=>({route:row.browser_route,sku:row.psc_sku,
   optionId:row.product_option_id,photo:row.image_path,pack:row.pack,price:row.price_aed,
@@ -151,13 +153,21 @@ try{
   assert((await page.locator('.psSearchResults .pscRetailPriceNotice').innerText()).includes('Wholesale prices are provided in your quotation.'));
   const card=page.locator('.productCard:has([data-product-view="'+sku+'"])');
   await card.waitFor();
-  assert.equal(await card.locator('.productMainImage').getAttribute('src'),variant.photo);
-  assert((await card.locator('.pack').innerText()).includes(variant.pack));
-  assert((await card.locator('.pscPricePreview').innerText()).includes('UAE retail benchmark'));
-  assert((await card.locator('.pscPricePreview').innerText()).replace(/,/g,'').includes(String(variant.price)));
+  const representative=await card.locator('.productVisual').getAttribute('data-product-view');
+  const represented=await page.evaluate(sku=>window.PSC_DATA.products.find(p=>p.pscSku===sku),representative);
+  assert.equal(await card.locator('.productMainImage').getAttribute('src'),represented.currentImageUrl);
+  assert((await card.locator('.pscFamilyRepresentative').innerText()).includes(represented.name));
+  const variantRow=card.locator('.pscFamilyVariantList li').filter({has:page.locator('[data-product-view="'+sku+'"]')});
+  assert((await variantRow.textContent()).includes(variant.pack));
+  const expectedPrice=stockPrice(sku);
+  const expectedRepresentativePrice=stockPrice(representative);
+  if(expectedRepresentativePrice!==undefined){
+   const text=(await card.locator('.pscPricePreview').innerText()).replace(/,/g,'');
+   assert(text.includes(expectedRepresentativePrice===null?'Request quotation':String(expectedRepresentativePrice)));
+  }
   await card.scrollIntoViewIfNeeded();
   await card.locator('.productMainImage').evaluate(async img=>{img.loading='eager';await img.decode();});
-  assert.equal(await card.locator('.productMainImage').evaluate(img=>img.naturalWidth),variant.imageWidth||1024);
+  assert((await card.locator('.productMainImage').evaluate(img=>img.naturalWidth))>=430,'family representative must be a real retained photograph');
   // A taller capture keeps the existing sticky search header from covering the pack.
   await page.setViewportSize({width,height:1500});
   await card.evaluate(el=>{const y=el.getBoundingClientRect().top+window.scrollY;window.scrollTo(0,Math.max(0,y-320));});
@@ -169,7 +179,7 @@ try{
   assert.equal(await preview.getAttribute('src'),variant.photo);
   await page.waitForFunction(expected=>{const img=document.querySelector('.pscFamilyPreview img');return img?.complete&&img.naturalWidth===expected;},variant.imageWidth||1024);
   assert((await page.locator('.detailImageMeta').innerText()).includes(variant.pack));
-  assert((await page.locator('.detailImageMeta').innerText()).replace(/,/g,'').includes(String(variant.price)));
+  assert((await page.locator('.detailImageMeta').innerText()).replace(/,/g,'').includes(expectedPrice===null?'Request quotation':String(expectedPrice??variant.price)));
   // Medicine families require a presentation as well as an exact option.
   // Assert a new event so a blocked submission cannot reuse a prior variant.
   const exactPresentation=await page.locator('[data-family-option="'+optionId+'"]').evaluate(el=>{const o=window.PS_CATALOGUE_REFRESH.approvedOptions.find(o=>o.product_option_id===el.dataset.familyOption);return o?.presentation||'';});
@@ -193,13 +203,13 @@ try{
   assert.equal(actual.product_option_id,null);
   assert.equal(actual.pack,variant.pack);
   assert.equal(actual.image_url,variant.photo);
-  assert.equal(actual.verified_price_aed,variant.price);
-  assert.equal(actual.verified_price_type,'PUBLIC_RETAIL_BENCHMARK');
+  assert.equal(actual.verified_price_aed,expectedPrice===undefined?variant.price:expectedPrice);
+  assert.equal(actual.verified_price_type,expectedPrice===undefined?'PUBLIC_RETAIL_BENCHMARK':expectedPrice===null?null:'SUPPLIER_RETAIL_MRP');
   assert.equal(actual.verified_description,variant.description);
-  assert.equal(actual.verified_price_vat_basis,variant.vatBasis||'Inclusive of VAT as displayed by retailer');
+  assert.equal(actual.verified_price_vat_basis,expectedPrice===undefined?(variant.vatBasis||'Inclusive of VAT as displayed by retailer'):'VAT basis not supplied in stock report');
   assert.equal(actual.verified_description_source,variant.descriptionSource || actual.verified_price_source);
-  assert.equal(actual.verified_price_checked_at,variant.checkedAt || '2026-10-11');
-  if(variant.priceNote)assert.equal(actual.verified_price_note,variant.priceNote);
+  assert.equal(actual.verified_price_checked_at,expectedPrice===undefined?(variant.checkedAt || '2026-10-11'):expectedPrice===null?null:stockControl.stock_date);
+  if(expectedPrice===undefined&&variant.priceNote)assert.equal(actual.verified_price_note,variant.priceNote);
   assert((await page.locator('body').evaluate(el=>el.scrollWidth))<=width+1,'catalogue must not overflow horizontally');
   }
   // Real same-brand/same-pack strengths must stay distinct under multiple selection.
@@ -225,7 +235,8 @@ try{
    ['local-acorus-56cb26fe529b',78.5,'nexium-20mg-14-tablets.jpg'],
    ['local-acorus-5ed2ff06e0af',110,'nexium-40mg-14-tablets.jpg']]) {
    const option=multiple.find(o=>o.local_product_option_id===id);assert(option);
-   assert.equal(option.verified_price_aed,price);
+   const sku=stockControl.products.find(r=>r.name===option.exact_product_name&&r.pack===option.pack)?.sku;
+   assert.equal(option.verified_price_aed,stockPrice(sku)??price);
    assert.equal(option.image_url,'/assets/products/verified-20261011/'+photo);
   }
   assert.deepEqual(errors,[]);
