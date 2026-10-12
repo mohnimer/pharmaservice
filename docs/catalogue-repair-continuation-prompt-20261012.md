@@ -1,5 +1,13 @@
 # Continue current batch002 — 19/50 LIVE, 31 unresolved
 
+## Latest continuation check
+
+Remote recovery f9f58e3 was confirmed. Newer local checkpoint352542b and all110 changed evidence/screenshot files are now preserved remotely in26b3d182fbadc991eb8b37328c95b34e15df00fb. Its tree987216323a3cbe01a588612c604b4b8db923c2e2 matches the local checkpoint exactly; both current production and the recovered research checkpoint are ancestors. Read the actual remote head before editing.
+
+Fresh read-only live recheck on12October passed56/56SHA256 checks:53 verified image assets and three frontend files. See live-recheck-20261012-continued.json. No new runtime or database corrections this continuation; current batch remains19/50. Local rebuild in the research checkout could not run because happy-dom is unavailable; do not call that a passed new test. The prior tested production build was used for the live comparison.
+
+Remaining work is evidence-blocked:27 size-less Sebamed options require supplier SKU/barcode or readable quantity photos; Moven7.5mg/10capsules, Nasaflex exact combination/volume, Nokamen30tablets and ProRise20mg/30capsules require exact native photographs and identity evidence as detailed below. Public searches did not bind these supplier records to an exact pack. Never force a pack, strength or identity. No next batch until50/50live.
+
 Repository mohnimer/pharmaservice. Original checkpoint c0fc23274259bbf11a3025e2d8f896c5f8cc1fc5 was absent remotely;33 files recovered as f9f58e3eca13eb5d3b80bfbc626e9613dbfc5bf7 with IDENTICAL treeff507fdc8ede6ebbc0457580bcf4de14cf3f485e. Original branch catalogue-evidence-repair-20261010 will carry this release-evidence checkpoint; inspect its actual remote head before continuing.
 
 PR23 merged: https://github.com/mohnimer/pharmaservice/pull/23. Tested head6c8ccc9cbda1ab37dab9ab28a7c24695e2bbc0eb; synthetic CI merge1b86f43ce050645abcd416e872584a0c5777b89e; production merge9dd0659898848a86118a29a74ff32eeddc2e4769. GitHub Actions38179839514 success,53 exact variants exercised at1440px and390px with own quote-request assertions, original34 preserved. Vercel production status success for the correct Pharma Service project: https://vercel.com/mohameds-projects-9022ad5a/pharmaservice/4aycxvJbAf81cN3pCDh17Eh5w9zk.
