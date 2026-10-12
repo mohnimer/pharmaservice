@@ -1,8 +1,9 @@
 import {createClient} from 'https://esm.sh/@supabase/supabase-js@2.57.4'
+export const SENDER='mohamed@pharmaservice.ae'
 export const MAILBOX='info@pharmaservice.ae'
 export const SCOPES=['https://www.googleapis.com/auth/gmail.send','https://www.googleapis.com/auth/gmail.readonly']
 export const CALLBACK='https://ewewkojlsgqvcqarmpgr.supabase.co/functions/v1/psc-gmail-oauth'
-export const cors={'Access-Control-Allow-Origin':'https://pharmaservice.ae','Access-Control-Allow-Headers':'authorization,apikey,content-type,x-client-info','Access-Control-Allow-Methods':'POST,OPTIONS','Vary':'Origin'}
+export const cors={'Access-Control-Allow-Origin':'https://pharmaservice.ae','Access-Control-Allow-Headers':'authorization,apikey,content-type,x-client-info,x-supabase-api-version,x-supabase-client-platform,x-supabase-client-platform-version,x-supabase-client-runtime,x-supabase-client-runtime-version,traceparent,tracestate,baggage','Access-Control-Allow-Methods':'POST,OPTIONS','Vary':'Origin'}
 export const json=(body:unknown,status=200)=>new Response(JSON.stringify(body),{status,headers:{...cors,'content-type':'application/json','Cache-Control':'no-store'}})
 export class MailError extends Error {constructor(public code:string,public uncertain=false){super(code)}}
 export const safeCode=(e:unknown)=>e instanceof MailError?e.code:'mail_operation_failed'
@@ -44,7 +45,7 @@ export async function gmail(token:string,path:string,options:RequestInit={}){
 export function mime({to,subject,text,html,id,pdf}:{to:string,subject:string,text?:string,html?:string,id:string,pdf?:Uint8Array}){
  if(!email(to)||/[\r\n]/.test(subject)||subject.length>300)throw new MailError('invalid_message_headers')
  const boundary='psc-'+id.replace(/[^a-z0-9-]/gi,''),encoded='=?UTF-8?B?'+b64(new TextEncoder().encode(subject))+'?=';
- const headers=[`From: Pharma Service <${MAILBOX}>`,`Reply-To: ${MAILBOX}`,`To: ${to}`,`Subject: ${encoded}`,`Message-ID: <psc-${id}@pharmaservice.ae>`,'MIME-Version: 1.0'];
+ const headers=[`From: Mohamed | Pharma Service <${SENDER}>`,`Reply-To: ${SENDER}`,`To: ${to}`,`Subject: ${encoded}`,`Message-ID: <psc-${id}@pharmaservice.ae>`,'MIME-Version: 1.0'];
  const bodyType=html?'text/html':'text/plain',body=b64(new TextEncoder().encode(html||text||'')).match(/.{1,76}/g)?.join('\r\n')||'';
  if(!pdf)return headers.concat([`Content-Type: ${bodyType}; charset=UTF-8`,'Content-Transfer-Encoding: base64','','',body]).join('\r\n');
  return headers.concat([`Content-Type: multipart/mixed; boundary="${boundary}"`,'','',`--${boundary}`,`Content-Type: ${bodyType}; charset=UTF-8`,'Content-Transfer-Encoding: base64','',body,`--${boundary}`,'Content-Type: application/pdf','Content-Disposition: attachment; filename="PSC-quotation.pdf"','Content-Transfer-Encoding: base64','',b64(pdf).match(/.{1,76}/g)!.join('\r\n'),`--${boundary}--`]).join('\r\n')

@@ -1,5 +1,5 @@
 import {MAILBOX,MailError,email,gmail,mime} from './psc-mail.ts'
-export const OUTREACH='outreach@pharmaservice.ae'
+export const OUTREACH='mohamed@pharmaservice.ae'
 export const eligible=(c:any)=>c?.status==='active'&&!c.unsubscribed_at&&['manual_permission','requested_updates'].includes(c.marketing_basis)
 export async function verifyAlias(token:string){const data=await gmail(token,'settings/sendAs');if(!data.sendAs?.some((s:any)=>s.sendAsEmail?.toLowerCase()===OUTREACH&&s.verificationStatus==='accepted'))throw new MailError('outreach_alias_not_ready')}
 const esc=(s:unknown)=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!))

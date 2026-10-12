@@ -1,7 +1,7 @@
 (() => {
  'use strict';
  const sb=window.PSC_SUPABASE,esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const senderFor=d=>({rfq:'procurement@pharmaservice.ae',quotation:'sales@pharmaservice.ae',followup:'sales@pharmaservice.ae',test:'info@pharmaservice.ae'}[d.kind]||'Unsupported workflow');
+ const senderFor=d=>({rfq:'mohamed@pharmaservice.ae',quotation:'mohamed@pharmaservice.ae',followup:'mohamed@pharmaservice.ae',test:'mohamed@pharmaservice.ae'}[d.kind]||'Unsupported workflow');
  async function call(name,body){const r=await sb.functions.invoke(name,{body});if(r.error||r.data?.error){let code=r.data?.error;try{code=code||(await r.error.context.json()).error}catch{}throw new Error(code||'Mail operation unavailable');}return r.data;}
  async function load(host){
   if(!sb||host.dataset.noMail||host.dataset.mailMounted||window.PSC_IS_DEMO_ACCOUNT?.())return;
@@ -23,7 +23,7 @@
     const queue=[...panel.querySelectorAll('details')].find(d=>d.querySelector('summary')?.textContent.startsWith('Review queue'));if(queue)panel.insertBefore(queue,panel.querySelector('.commercialExports'));
     const feedback=panel.querySelector('[data-mail-feedback]');
     if(host.dataset.mailSettings){
-     const aliases=document.createElement('section');aliases.innerHTML='<h3>Outgoing addresses</h3><p>Suppliers: procurement@pharmaservice.ae<br>Customers: sales@pharmaservice.ae<br>Marketing: outreach@pharmaservice.ae</p><p>Create sales and procurement as aliases of info@pharmaservice.ae and add them in Gmail Send mail as. Each alias must be verified before sending.</p><button class="button outline" type="button">Check sales & procurement aliases</button><p role="status"></p>';
+     const aliases=document.createElement('section');aliases.innerHTML='<h3>Outgoing sender</h3><p>mohamed@pharmaservice.ae</p><p>This address must be the connected Gmail account or a verified Send mail as address on that account.</p><button class="button outline" type="button">Check sender</button><p role="status"></p>';
      panel.insertBefore(aliases,feedback);
      aliases.querySelector('button').onclick=async()=>{const out=aliases.querySelector('[role=status]');out.textContent='Checking Google aliases…';try{const r=await call('procurement-mail',{action:'sender_status'});out.textContent=r.senders.map(s=>s.address+': '+(s.ready?'Ready':'Not ready — add and verify in Gmail')).join(' · ');}catch(e){out.textContent=e.message;}};
     }
@@ -38,7 +38,7 @@
      if(host.dataset.orderId){panel.querySelector('[data-mail-order]').value=host.dataset.orderId;panel.querySelector('[data-mail-order]').hidden=true;}
     }
     if(host.dataset.mailSettings){panel.querySelector('h2').textContent='Mailbox connection';queue.hidden=true;quoteSection.hidden=true;}
-    async function run(fn){try{feedback.textContent='Working…';await fn();await refresh();}catch(e){feedback.textContent=({sales_alias_not_ready:'Add and verify sales@pharmaservice.ae in Gmail before sending customer emails.',procurement_alias_not_ready:'Add and verify procurement@pharmaservice.ae in Gmail before sending supplier emails.'}[e.message])||window.PSC_MAIL_ERROR?.(e.message)||e.message;}}
+    async function run(fn){try{feedback.textContent='Working…';await fn();await refresh();}catch(e){feedback.textContent=({sales_alias_not_ready:'Add and verify mohamed@pharmaservice.ae in Gmail before sending customer emails.',procurement_alias_not_ready:'Add and verify mohamed@pharmaservice.ae in Gmail before sending supplier emails.'}[e.message])||window.PSC_MAIL_ERROR?.(e.message)||e.message;}}
     panel.querySelector('[data-mail-refresh]').onclick=refresh;
     panel.querySelector('[data-mail-connect]').onclick=()=>run(async()=>{const r=await call('psc-gmail-oauth',{action:'connect'});location.assign(r.authorization_url);});
     panel.querySelector('[data-mail-disconnect]').onclick=()=>{if(confirm('Disconnect PSC Gmail and revoke this OAuth grant?'))run(()=>call('psc-gmail-oauth',{action:'disconnect'}));};
