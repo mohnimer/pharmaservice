@@ -3,9 +3,9 @@
   "whole_catalogue_release": "HOLD",
   "production_changed": false,
   "counts": {
-    "cards": 615,
+    "cards": 613,
     "verified_cards": 54,
-    "cards_pending": 561,
+    "cards_pending": 559,
     "local_options": 193,
     "verified_local_options": 54
   },
@@ -105,36 +105,6 @@
       "name": "ACCU-CHEK Guide Test Strips 50s",
       "family_id": "PSC-IS-021",
       "image": "/assets/products/acorus-2026-10/retained-psc-dbt-002.jpg",
-      "image_status": "EXISTING PRODUCT PHOTOGRAPH",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
-    },
-    {
-      "sku": "PSC-DBT-003",
-      "name": "ACCU-CHEK Instant Glucose Monitor + Strips 50s",
-      "family_id": null,
-      "image": "/assets/products/acorus-2026-10/retained-psc-dbt-003.jpg",
-      "image_status": "EXISTING PRODUCT PHOTOGRAPH",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
-    },
-    {
-      "sku": "PSC-DBT-004",
-      "name": "ACCU-CHEK Instant Test Strips 50s",
-      "family_id": null,
-      "image": "/assets/products/acorus-2026-10/retained-psc-dbt-004.jpg",
       "image_status": "EXISTING PRODUCT PHOTOGRAPH",
       "evidence_option_id": null,
       "status": "HOLD",
@@ -5757,7 +5727,7 @@
     },
     {
       "sku": "PS-AC-417F1BC9E425",
-      "name": "HERPESAN GEL SGM",
+      "name": "Herpesan Gel 5 g",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/271-herpesan-gel-sgm.jpg",
       "image_status": "PRODUCT IMAGE",
