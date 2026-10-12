@@ -6,7 +6,8 @@ import {createServer} from '../tools/serve.mjs';
 const family='PSC-SC-C01';
 const stockControl=JSON.parse(readFileSync('data/catalogue-public.json','utf8'));
 const stockPrice=sku=>{const r=stockControl.products.find(r=>r.sku===sku);return r?.acorus_managed?(r.in_stock===true&&r.mrp_aed>0&&(!r.expiry_date||r.expiry_date>=stockControl.stock_date)?r.mrp_aed:null):undefined;};
-const followonVariants=JSON.parse(readFileSync('docs/verified-preview-variant-register.json','utf8'))
+const retainedEvidence=JSON.parse(readFileSync('docs/verified-preview-variant-register.json','utf8'));
+const followonVariants=retainedEvidence
  .filter(row=>row.browser_route).map(row=>({route:row.browser_route,sku:row.psc_sku,
   optionId:row.product_option_id,photo:row.image_path,pack:row.pack,price:row.price_aed,
   description:row.description,descriptionSource:row.description_source,
@@ -207,7 +208,8 @@ try{
   assert.equal(actual.verified_price_type,expectedPrice===undefined?'PUBLIC_RETAIL_BENCHMARK':expectedPrice===null?null:'SUPPLIER_RETAIL_MRP');
   assert.equal(actual.verified_description,variant.description);
   assert.equal(actual.verified_price_vat_basis,expectedPrice===undefined?(variant.vatBasis||'Inclusive of VAT as displayed by retailer'):'VAT basis not supplied in stock report');
-  assert.equal(actual.verified_description_source,variant.descriptionSource || actual.verified_price_source);
+  const descriptionEvidence=retainedEvidence.find(row=>row.product_option_id===optionId);
+  assert.equal(actual.verified_description_source,variant.descriptionSource || descriptionEvidence.description_source || descriptionEvidence.listing_source_url);
   assert.equal(actual.verified_price_checked_at,expectedPrice===undefined?(variant.checkedAt || '2026-10-11'):expectedPrice===null?null:stockControl.stock_date);
   if(expectedPrice===undefined&&variant.priceNote)assert.equal(actual.verified_price_note,variant.priceNote);
   assert((await page.locator('body').evaluate(el=>el.scrollWidth))<=width+1,'catalogue must not overflow horizontally');
@@ -236,7 +238,8 @@ try{
    ['local-acorus-5ed2ff06e0af',110,'nexium-40mg-14-tablets.jpg']]) {
    const option=multiple.find(o=>o.local_product_option_id===id);assert(option);
    const sku=stockControl.products.find(r=>r.name===option.exact_product_name&&r.pack===option.pack)?.sku;
-   assert.equal(option.verified_price_aed,stockPrice(sku)??price);
+   const currentPrice=stockPrice(sku);
+   assert.equal(option.verified_price_aed,currentPrice===undefined?price:currentPrice);
    assert.equal(option.image_url,'/assets/products/verified-20261011/'+photo);
   }
   assert.deepEqual(errors,[]);
