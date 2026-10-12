@@ -78,12 +78,12 @@ try{
   await page.evaluate(()=>document.fonts.ready);
   const layout=await page.locator('.productCard.pscEditorialCard').evaluateAll(cards=>cards.map(card=>{
    const r=card.getBoundingClientRect(),v=card.querySelector('.productVisual').getBoundingClientRect(),a=card.querySelector('.exactCanvaActions').getBoundingClientRect();
-   return {top:r.top,bottom:r.bottom,imageTop:v.top,imageHeight:v.height,actionsTop:a.top,span:getComputedStyle(card).gridRow,sku:card.querySelector('[data-product-view]')?.dataset.productView};
+   return {top:r.top,bottom:r.bottom,imageTop:v.top,imageHeight:v.height,actionsTop:a.top,span:getComputedStyle(card).gridRow,sku:card.querySelector('[data-product-view]')?.dataset.productView,members:[...card.querySelectorAll('.pscFamilyVariantList [data-product-view]')].map(el=>el.dataset.productView)};
   }));
   await page.screenshot({path:'test-results/variant-visual-review/'+width+'-sports-level-grid.png',fullPage:true});
   console.log(width+'px sports row geometry: '+JSON.stringify(layout));
-  assert(layout.some(c=>c.sku==='PS-AC-A819E3E83997'),'Baby cooling-sheet regression card exists');
-  assert(layout.some(c=>c.sku==='PS-AC-2F1516E65F2A'),'Child cooling-sheet regression card exists');
+  assert(layout.some(c=>c.members.includes('PS-AC-A819E3E83997')),'Baby cooling-sheet exact variant remains in its family card');
+  assert(layout.some(c=>c.members.includes('PS-AC-2F1516E65F2A')),'Child cooling-sheet exact variant remains in its family card');
   for(const card of layout){
    assert.equal(card.span,'auto','Editorial cards occupy one grid row');
    const peers=layout.filter(c=>Math.abs(c.top-card.top)<1);
