@@ -5,6 +5,12 @@ on:
   pull_request:
     paths:
       - 'current/behaviour/variant-evidence.js'
+      - 'current/behaviour/catalogue-stock*.js'
+      - 'current/styles/catalogue-stock.css'
+      - 'data/catalogue*.json'
+      - 'tools/build-catalogue-stock.mjs'
+      - 'tests/catalogue-stock.test.cjs'
+      - 'app.js'
       - 'current/behaviour/family-details.js'
       - 'tests/variant-evidence.test.cjs'
       - 'current/manifest.json'
@@ -26,7 +32,7 @@ jobs:
           cache: npm
       - run: node --check tools/stage-batch33-images.mjs
       - run: npm ci
-      - run: node --test tests/variant-evidence.test.cjs
+      - run: node --test tests/variant-evidence.test.cjs tests/catalogue-stock.test.cjs
       - run: node --test tests/catalogue-refresh-identity.test.cjs
       - run: python3 tools/verify-current-option-identities.py
       - run: npm run build

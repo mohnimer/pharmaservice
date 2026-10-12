@@ -46,7 +46,7 @@
     return raw || '/assets/products/clinic-basics.jpg';
   }
   function familyPreview(f){
-    const rows=familyCatalogueProducts(f).sort((a,b)=>Number(!!b.currentImageUrl)-Number(!!a.currentImageUrl)), primary=rows[0]||null, image=familyProductImage(primary);
+    const rows=familyCatalogueProducts(f), primary=window.PS_CATALOGUE_STOCK?.representative(rows)||rows[0]||null, image=primary&&window.PS_CATALOGUE_STOCK&&!window.PS_CATALOGUE_STOCK.realPhoto(primary)?'':familyProductImage(primary);
     return {image,title:String(f?.family_name||primary?.catalogueDisplayName||primary?.name||'Catalogue family'),pack:String(f?.order_pack_basis||primary?.cataloguePack||primary?.pack||'Pack / unit to confirm'),gallery:rows.filter(x=>familyProductImage(x)).slice(0,5).map(x=>({url:familyProductImage(x),alt:String(x?.catalogueDisplayName||x?.name||f?.family_name||'Catalogue preview')}))};
   }
   function fallbackFamily(id){
@@ -94,6 +94,12 @@
     return parts.join(' · ') || 'Exact variant confirmed in quotation';
   }
   function optionPrice(o){
+    const stock=window.PS_CATALOGUE_STOCK?.forOption(o,state.familyId);
+    if(stock?.acorus_managed){
+      const mrp=window.PS_CATALOGUE_STOCK.price(stock);
+      return mrp?`<span class="pscOptionPrice"><b>${esc(aed(mrp))}</b><small>Retail MRP · in stock · report ${esc(window.PS_CATALOGUE_STOCK.stockDate)} · wholesale quotation separate</small></span>`:'<span class="pscOptionPrice"><b>Request quotation</b><small>Current stocked MRP not confirmed</small></span>';
+    }
+
     // Price must be keyed by the selected option ID, not a family or brand.
     const verified=window.PSC_VARIANT_EVIDENCE_FOR?.(o,state.familyId);
     if(verified){
@@ -152,6 +158,7 @@
     if(!state.family) state.family=fallbackFamily(id);
     state.options=window.PS_CATALOGUE_REFRESH?.mergeOptions(state.options,id)||state.options;
     state.options=window.PSC_VARIANT_APPLY_OPTIONS?.(state.options,id)||state.options;
+    state.options=window.PS_CATALOGUE_STOCK?.optionsForFamily(state.options,id)||state.options;
     // Controlled local/reference descriptors can carry a more exact presentation
     // than the family's generic scaffold. Keep those choices reachable without
     // rewriting their identities or relaxing incompatible-selection clearing.
