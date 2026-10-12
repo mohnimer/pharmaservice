@@ -699,7 +699,7 @@
   window.addEventListener('psc-contacts-changed',()=>{mailDesk.loaded=false;window.PSC_REFRESH_MAIL()});
   window.PSC_MAIL_ADD_CONTACT=()=>{
     const d=document.createElement('dialog');d.className='wsDialog';
-    d.innerHTML='<div class="wsDialogHead"><h2>Add contact</h2><button type="button" data-close aria-label="Close">×</button></div><p>One shared contact record for Customers and Outreach. Marketing permission is separate.</p>'+new DOMParser().parseFromString(adminMailContacts(),'text/html').querySelector('form').outerHTML+'<p role="status" data-contact-error></p>';
+    d.innerHTML='<div class="wsDialogHead"><h2>Add contact</h2><button type="button" data-close aria-label="Close">×</button></div><p>Save the contact once and use it for your business emails.</p>'+new DOMParser().parseFromString(adminMailContacts(),'text/html').querySelector('form').outerHTML+'<p role="status" data-contact-error></p>';
     document.body.append(d);d.querySelector('[data-close]').onclick=()=>d.close();d.onclose=()=>d.remove();
     d.querySelector('form').onsubmit=async e=>{e.preventDefault();const b=d.querySelector('[type=submit]');b.disabled=true;try{if(await addMailContact(e.target,true))d.close();}finally{if(b.isConnected)b.disabled=false}};d.showModal();
   };
