@@ -1206,6 +1206,30 @@
   "price_note": "Dated public UAE retail reference, not a regulatory MRP or PSC approved selling price. Retailer availability does not establish PSC stock; quotation confirms supply and commercial terms.",
   "release_status": "APPROVED"
 }
+,
+{
+  "family_id": "PSC-IS-167",
+  "product_option_id": "local-acorus-83090d95f22b",
+  "psc_sku": "PS-AC-83090D95F22B",
+  "exact_product_name": "Nasaflex Mometasone Furoate Nasal Spray",
+  "brand": "Nasaflex",
+  "pack": "18 ml bottle",
+  "description": "Nasaflex nasal spray containing mometasone furoate and azelastine hydrochloride, 18 ml bottle.",
+  "description_source": "https://pharma1ds.com/nasaflex-nasal-spray/",
+  "image_url": "/assets/products/verified-20261012/local-acorus-83090d95f22b.png",
+  "image_source": "https://pharma1ds.com/wp-content/uploads/2024/07/Nasaflex-Nasal-Spray.png",
+  "image_verified": true,
+  "description_verified": true,
+  "price_verified": true,
+  "price_aed": 116,
+  "price_type": "PUBLIC_RETAIL_BENCHMARK",
+  "price_unit": "18 ml bottle",
+  "price_vat_basis": "VAT basis not specified in retrieved retailer evidence",
+  "price_source": "https://www.myaster.com/en/online-pharmacy/p/nasaflex-nasal-spray-18ml-180-doses/1063520",
+  "price_checked_at": "2026-10-12",
+  "price_note": "Dated public UAE retail reference, not a regulatory MRP or PSC approved selling price. Retailer availability does not establish PSC stock; quotation confirms supply and commercial terms.",
+  "release_status": "APPROVED"
+}
   ];
   const norm = value => String(value || '').normalize('NFKC').trim().replace(/\s+/g,' ').toUpperCase();
   const eligible = (option, record) => option.product_option_id === record.product_option_id &&

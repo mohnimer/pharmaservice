@@ -1,0 +1,820 @@
+{
+  "ci_head": "6c8ccc9cbda1ab37dab9ab28a7c24695e2bbc0eb",
+  "tested_merge_commit": "1b86f43ce050645abcd416e872584a0c5777b89e",
+  "deployed_commit": "9dd0659898848a86118a29a74ff32eeddc2e4769",
+  "ci_run": 38179839514,
+  "ci_result": "success",
+  "artifact_id": 11717274062,
+  "artifact_sha256": "282dc83aaf6bed0317447b555381b6d3277c6c1c0c82f3bb4e53bc4b20531566",
+  "native_artifact_screenshot_count": 430,
+  "preserved_screenshots": [
+    {
+      "file": "1440-PS-AC-13A292D3B033-card.png",
+      "sha256": "326fa8faddd8f4c5f37a8ebea94a6ea5061a3420a02a1c8e4ac08f3f92d1931f",
+      "width": 1440,
+      "product_option_id": "local-acorus-13a292d3b033",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-13A292D3B033-option.png",
+      "sha256": "3b17663f7e01c47a617275959d754d31155ab3549d22ac98c259c78374c20f9d",
+      "width": 1440,
+      "product_option_id": "local-acorus-13a292d3b033",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-13A292D3B033-card.png",
+      "sha256": "f8eac19e2aabbe23ca983afefacb4044cb1dbf037167a48149e16cad06e3d08f",
+      "width": 390,
+      "product_option_id": "local-acorus-13a292d3b033",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-13A292D3B033-option.png",
+      "sha256": "eafb1bc9ee27620142ad4b2282feba9162ea0b3ffc28b1e70abd40c58d52cc98",
+      "width": 390,
+      "product_option_id": "local-acorus-13a292d3b033",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-13A292D3B033-selected.png",
+      "sha256": "1867bef993fb56a9e7b7d6eb5b30596ee3ff0633ebfd1c1ceb7f2ae0967bdfcc",
+      "width": 390,
+      "product_option_id": "local-acorus-13a292d3b033",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-6E59A30EF053-card.png",
+      "sha256": "272418e330388036a2ade6acb1ac1889522b0af38f83cf53610d4bc575f38ba3",
+      "width": 1440,
+      "product_option_id": "local-acorus-6e59a30ef053",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-6E59A30EF053-option.png",
+      "sha256": "aa0da4e7c521e4e0344b347464029d3a86e01fd91a5017db364aefdd3418ea86",
+      "width": 1440,
+      "product_option_id": "local-acorus-6e59a30ef053",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-6E59A30EF053-card.png",
+      "sha256": "79f802f457f58c46331ff16e44f1c5e3b42810ad87083360a29f1abbd315cb34",
+      "width": 390,
+      "product_option_id": "local-acorus-6e59a30ef053",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-6E59A30EF053-option.png",
+      "sha256": "fa3aa5e8d75bf08ee1e4fd35aa782ee3ebfb48b5c4e1616e5d7715e6df93f34f",
+      "width": 390,
+      "product_option_id": "local-acorus-6e59a30ef053",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-6E59A30EF053-selected.png",
+      "sha256": "0d7028cb06ff1459403d9f03abd300775d18a50dc98d75ad909bbf03e3fb86ce",
+      "width": 390,
+      "product_option_id": "local-acorus-6e59a30ef053",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-5B958D72413A-card.png",
+      "sha256": "1e07a76f786e8bca33109d3ef7e826d17fc28b5e07619cab2f95beb216d08418",
+      "width": 1440,
+      "product_option_id": "local-acorus-5b958d72413a",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-5B958D72413A-option.png",
+      "sha256": "9f7a76b04a684f0563bec868c208c66d3d52603b40dcfa6c44fcc820f8f0ba27",
+      "width": 1440,
+      "product_option_id": "local-acorus-5b958d72413a",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-5B958D72413A-card.png",
+      "sha256": "7f6a1f8473b27c32bbec6fa980221ffabfd195dfcb328a716b9d25bcfa5ea15f",
+      "width": 390,
+      "product_option_id": "local-acorus-5b958d72413a",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-5B958D72413A-option.png",
+      "sha256": "21b6c951f02fb1c7e3f34a5cbc1231cf2131ba658c705cc72a058bc9a4d359f7",
+      "width": 390,
+      "product_option_id": "local-acorus-5b958d72413a",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-5B958D72413A-selected.png",
+      "sha256": "9a8cd2837095b98f6175d4262da5cbcbc5be0f5092dc3fa6f1d3d61c68957f74",
+      "width": 390,
+      "product_option_id": "local-acorus-5b958d72413a",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-C7DB4FA9ACC4-card.png",
+      "sha256": "c0fad34d5d232970999b7b115d7c8096748a783d2ecbf3132c47975c4d6770f0",
+      "width": 1440,
+      "product_option_id": "local-acorus-c7db4fa9acc4",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-C7DB4FA9ACC4-option.png",
+      "sha256": "c0a3851299a803a8039214b73f648a41f3481a6f32da3eea4c2dcfb43b98764c",
+      "width": 1440,
+      "product_option_id": "local-acorus-c7db4fa9acc4",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-C7DB4FA9ACC4-card.png",
+      "sha256": "d92f3843674480d889381b5b790d37a553f138014d844e4123c6919a743dbcc8",
+      "width": 390,
+      "product_option_id": "local-acorus-c7db4fa9acc4",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-C7DB4FA9ACC4-option.png",
+      "sha256": "d35ae9efa738407278b2213969911dcd5e75ff08975ba19cf70f21710b6d8b40",
+      "width": 390,
+      "product_option_id": "local-acorus-c7db4fa9acc4",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-C7DB4FA9ACC4-selected.png",
+      "sha256": "b8bdbcf677f743a1c58e7e2aaa4fa6f29fc760a945ca06c4da62dcffcdb42bbe",
+      "width": 390,
+      "product_option_id": "local-acorus-c7db4fa9acc4",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-B8F2CFFCEF03-card.png",
+      "sha256": "6406824dc53ea330e4b4f251cd66755260398f9f2a3d9ebfa5930880e403b27f",
+      "width": 1440,
+      "product_option_id": "local-acorus-b8f2cffcef03",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-B8F2CFFCEF03-option.png",
+      "sha256": "546e4885e30d7acf0a6d57aac6afe1f30219e2d971712b1b293bc5f6d68e86b9",
+      "width": 1440,
+      "product_option_id": "local-acorus-b8f2cffcef03",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-B8F2CFFCEF03-card.png",
+      "sha256": "5a3a50c88ecd57839c5ba3d4e52a359b1646ff8130430b2475b34bb10aa5ca96",
+      "width": 390,
+      "product_option_id": "local-acorus-b8f2cffcef03",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-B8F2CFFCEF03-option.png",
+      "sha256": "c1e2ef42ca6558ce1234fe5f002f633eca7d3eaeceec86dade7cc7551b14c712",
+      "width": 390,
+      "product_option_id": "local-acorus-b8f2cffcef03",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-B8F2CFFCEF03-selected.png",
+      "sha256": "9fdb7c3072dbb0f3642fa95ec26117a686671bd0953d4ef6d8665281c6a2c00c",
+      "width": 390,
+      "product_option_id": "local-acorus-b8f2cffcef03",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-09BDD311CA5A-card.png",
+      "sha256": "202bf1de1cff8a1a6052a3bed90a35a6d60b2ddb3c2712eea08c60debc3ab769",
+      "width": 1440,
+      "product_option_id": "local-acorus-09bdd311ca5a",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-09BDD311CA5A-option.png",
+      "sha256": "985c1865b5256b1b7f7a3ef24f953e313803df1274d9920759e4e4a1a9679a85",
+      "width": 1440,
+      "product_option_id": "local-acorus-09bdd311ca5a",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-09BDD311CA5A-card.png",
+      "sha256": "5a1df8a6f20be934439371790cc22d23cb2ac8da28835d6cd5bf161c8b70488c",
+      "width": 390,
+      "product_option_id": "local-acorus-09bdd311ca5a",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-09BDD311CA5A-option.png",
+      "sha256": "d6945dacb5030d1df1f2ec674ae95e48269319c4aec0f8ec11994ff67f52f61d",
+      "width": 390,
+      "product_option_id": "local-acorus-09bdd311ca5a",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-09BDD311CA5A-selected.png",
+      "sha256": "143faa0dba7852a45e9691fee7cdf12b3a9001b1edacc1abd7d022946c0c9c88",
+      "width": 390,
+      "product_option_id": "local-acorus-09bdd311ca5a",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-D45D30F1493E-card.png",
+      "sha256": "bc6059efab391acd1428bd5f54cc586912b581464122bd11baeba05a0e61b07b",
+      "width": 1440,
+      "product_option_id": "local-acorus-d45d30f1493e",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-D45D30F1493E-option.png",
+      "sha256": "50857af10b460c924da77614fe22843877fece61bced4566ff438e8e6d911edb",
+      "width": 1440,
+      "product_option_id": "local-acorus-d45d30f1493e",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-D45D30F1493E-card.png",
+      "sha256": "b36a17b754c3303ef5a1551ea88d0973300871c23fec6b7295748b3d35bfe0d6",
+      "width": 390,
+      "product_option_id": "local-acorus-d45d30f1493e",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-D45D30F1493E-option.png",
+      "sha256": "144ad1cc0ec3aa270b545ae35b82420f45cca6a0dd38b7bbe5fb69499f2b6f0e",
+      "width": 390,
+      "product_option_id": "local-acorus-d45d30f1493e",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-D45D30F1493E-selected.png",
+      "sha256": "f3f774f59916e5f31edc20720262367a1505cfd08da19968d4786672562d8802",
+      "width": 390,
+      "product_option_id": "local-acorus-d45d30f1493e",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-98DBA85B5A1D-card.png",
+      "sha256": "bafadff8c09506d9a4378e35be9095a6ecde0340cbbaaec31f76addb3d8e9e7d",
+      "width": 1440,
+      "product_option_id": "local-acorus-98dba85b5a1d",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-98DBA85B5A1D-option.png",
+      "sha256": "0f0f0978a2f02a3575b81c5779062f4fd3993b7f13d1e4a8931265cb08902b3e",
+      "width": 1440,
+      "product_option_id": "local-acorus-98dba85b5a1d",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-98DBA85B5A1D-card.png",
+      "sha256": "0ea9e6f7bba66e56a342d603186175f161c82b95ccef3dea1381c75bd13ea200",
+      "width": 390,
+      "product_option_id": "local-acorus-98dba85b5a1d",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-98DBA85B5A1D-option.png",
+      "sha256": "d812032b018260384a88cdd7b4838df83f38659b61945d96a5c92457fe32a00c",
+      "width": 390,
+      "product_option_id": "local-acorus-98dba85b5a1d",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-98DBA85B5A1D-selected.png",
+      "sha256": "5ed7914db83619055380a9234a2b7238e47da3651e70082d7be8777d0b068802",
+      "width": 390,
+      "product_option_id": "local-acorus-98dba85b5a1d",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-05FCD107C286-card.png",
+      "sha256": "25a7cc2e85ff4a892d23abf25f8ed83ceee526de1c67c4ec88ca5900d60dc501",
+      "width": 1440,
+      "product_option_id": "local-acorus-05fcd107c286",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-05FCD107C286-option.png",
+      "sha256": "5f53b16d7be3e55b02181a2b011e34779885d4b311ffc690b38507bbc722e826",
+      "width": 1440,
+      "product_option_id": "local-acorus-05fcd107c286",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-05FCD107C286-card.png",
+      "sha256": "be0781eaaa0c9beefaadb2c3d9c8bbfb0d30c2e1efd2b7d58573972094693c4a",
+      "width": 390,
+      "product_option_id": "local-acorus-05fcd107c286",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-05FCD107C286-option.png",
+      "sha256": "eafd1524eff5d27fe89a51ea655213e3abe7556d88d77ab9727284adb22ab738",
+      "width": 390,
+      "product_option_id": "local-acorus-05fcd107c286",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-05FCD107C286-selected.png",
+      "sha256": "eba207e0c45925bdb9ce65829b80b084ac47f38af8a19305f413389c5993b575",
+      "width": 390,
+      "product_option_id": "local-acorus-05fcd107c286",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-DBD40D8389AC-card.png",
+      "sha256": "d309a6f41d5c5c38e9a5e6ca5b385e5b2e3550f7ce2b19ae8ef7bf59604e9780",
+      "width": 1440,
+      "product_option_id": "local-acorus-dbd40d8389ac",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-DBD40D8389AC-option.png",
+      "sha256": "5f08242cc60077c1155c94d5579c4b4bbf3e733fab36e1c232d6aa6d4c6d3a1e",
+      "width": 1440,
+      "product_option_id": "local-acorus-dbd40d8389ac",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-DBD40D8389AC-card.png",
+      "sha256": "0fb352dcae64c7d2b8bc72db6eff519c24d01178e42148f504a82f1a2809a665",
+      "width": 390,
+      "product_option_id": "local-acorus-dbd40d8389ac",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-DBD40D8389AC-option.png",
+      "sha256": "d345763b34ee6c277768d9be2c55c5afe6fae43afb609549f99c811944433491",
+      "width": 390,
+      "product_option_id": "local-acorus-dbd40d8389ac",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-DBD40D8389AC-selected.png",
+      "sha256": "2fbba4382799e2c914ec774d849b883f933723dddb9d3fadb0525dab94f1dd62",
+      "width": 390,
+      "product_option_id": "local-acorus-dbd40d8389ac",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-11702595F8A6-card.png",
+      "sha256": "1e3bd2f462065700197bc6caf2f1bfadf59ebf0296c42ae2f95c87b36090799d",
+      "width": 1440,
+      "product_option_id": "local-acorus-11702595f8a6",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-11702595F8A6-option.png",
+      "sha256": "985b6b43ad15b769506f5fc18714afb5aa143d0ccbb38c7bbe8412c7d7de1fa8",
+      "width": 1440,
+      "product_option_id": "local-acorus-11702595f8a6",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-11702595F8A6-card.png",
+      "sha256": "c7645d13c3672537625257813343d46484b690303aae3e697360b4dbb61d8ef0",
+      "width": 390,
+      "product_option_id": "local-acorus-11702595f8a6",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-11702595F8A6-option.png",
+      "sha256": "83b89f35c820ad910da0f2f5ccec5be4b10df4f6e8d873104fd52466107534e6",
+      "width": 390,
+      "product_option_id": "local-acorus-11702595f8a6",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-11702595F8A6-selected.png",
+      "sha256": "3ff8cf0b307303045fb4ce3ebf49aa91702a2ec729f64e517c32273231d93e2a",
+      "width": 390,
+      "product_option_id": "local-acorus-11702595f8a6",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-17E4DAD608DF-card.png",
+      "sha256": "ee5149195a93745dd0af0d34b0e2063e5d2dd2e6826b226511475eeff5b66a04",
+      "width": 1440,
+      "product_option_id": "local-acorus-17e4dad608df",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-17E4DAD608DF-option.png",
+      "sha256": "aa9caa7a43b37d57b119e48f192e0d91d708ffd5b31cd9413168494f7550bbb9",
+      "width": 1440,
+      "product_option_id": "local-acorus-17e4dad608df",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-17E4DAD608DF-card.png",
+      "sha256": "ccdcf0259d51148d820811dccf72bc4be793a73073b26d4ca6861bc0a6159cea",
+      "width": 390,
+      "product_option_id": "local-acorus-17e4dad608df",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-17E4DAD608DF-option.png",
+      "sha256": "c8ead8a412ad7a5db5734ef6ab0d9378138685116a60418f5cc1878a6a55f37d",
+      "width": 390,
+      "product_option_id": "local-acorus-17e4dad608df",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-17E4DAD608DF-selected.png",
+      "sha256": "35b128ca69178725adcd306ef61520cffdd469b302a2770fcd52d8897693078d",
+      "width": 390,
+      "product_option_id": "local-acorus-17e4dad608df",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-126D63A7FB1A-card.png",
+      "sha256": "4eb577d8bb253ad37abe3251355551b64bc54721ca7508d28c31f6d24cb8a691",
+      "width": 1440,
+      "product_option_id": "local-acorus-126d63a7fb1a",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-126D63A7FB1A-option.png",
+      "sha256": "51a4575ed3677dadb463772547b00a3f09857beec25522cdcf485fcbe76e2a06",
+      "width": 1440,
+      "product_option_id": "local-acorus-126d63a7fb1a",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-126D63A7FB1A-card.png",
+      "sha256": "170e7980af9da72be4aeffbcead3b6a0dad54dfa16a31a7e3cb0c8212d036bbf",
+      "width": 390,
+      "product_option_id": "local-acorus-126d63a7fb1a",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-126D63A7FB1A-option.png",
+      "sha256": "7586615bda9dfd614caef8bbfe827e91bd385646fcc6335b7b2543bba71b5186",
+      "width": 390,
+      "product_option_id": "local-acorus-126d63a7fb1a",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-126D63A7FB1A-selected.png",
+      "sha256": "f10069be206063862625d335221c0fbeeec6ea82480400da6b446047bd507145",
+      "width": 390,
+      "product_option_id": "local-acorus-126d63a7fb1a",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-BAD79542E340-card.png",
+      "sha256": "e820d61f32722572f8dac40fd08481b789194e651c708bcab959745599004d3c",
+      "width": 1440,
+      "product_option_id": "local-acorus-bad79542e340",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-BAD79542E340-option.png",
+      "sha256": "71555e786f1dc984e0ca30b6c971c0ceaa87335ea1e31083cda3245de720b0a4",
+      "width": 1440,
+      "product_option_id": "local-acorus-bad79542e340",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-BAD79542E340-card.png",
+      "sha256": "72c3d98e60002154487f7a596833ee8408320de737129004027e467f5ec4df54",
+      "width": 390,
+      "product_option_id": "local-acorus-bad79542e340",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-BAD79542E340-option.png",
+      "sha256": "ef46ac5b5b5f38bcbec29e4cd3b4fc0fc6a1c854765436996e70b3352e34de6a",
+      "width": 390,
+      "product_option_id": "local-acorus-bad79542e340",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-BAD79542E340-selected.png",
+      "sha256": "9e8b22835be62cb1867f572dbc70f4dc317fee516b786d04631140d4ea3e64e1",
+      "width": 390,
+      "product_option_id": "local-acorus-bad79542e340",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-382E97B1A135-card.png",
+      "sha256": "81f14cb4c5afc54735f2ac10cad8a8d6c3fbf98da7f0bcc75f2a66b06e7c9dc8",
+      "width": 1440,
+      "product_option_id": "local-acorus-382e97b1a135",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-382E97B1A135-option.png",
+      "sha256": "8b8f95757f2944ddd3075babaf95d0b122d0e6db6426d478d89e56fc124ccc0c",
+      "width": 1440,
+      "product_option_id": "local-acorus-382e97b1a135",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-382E97B1A135-card.png",
+      "sha256": "f37a6a463d1dccaf7d14bea55ec6e0fd76ac85d1fd2338b089f1a5b503de2a60",
+      "width": 390,
+      "product_option_id": "local-acorus-382e97b1a135",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-382E97B1A135-option.png",
+      "sha256": "06c124267b57cf1ddfc6064aec1d7fb4f43e6f8f10dabd6e971e23c41ddcca58",
+      "width": 390,
+      "product_option_id": "local-acorus-382e97b1a135",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-382E97B1A135-selected.png",
+      "sha256": "ec9845e34426ea7e97fe7b5e17381ff2695b27410941f3ba04cb14d1e6523c30",
+      "width": 390,
+      "product_option_id": "local-acorus-382e97b1a135",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-971A2F43B366-card.png",
+      "sha256": "69fd1728fa592cd0aef500c7669f3be62e80015642866b314d1b4a7216e20dcd",
+      "width": 1440,
+      "product_option_id": "local-acorus-971a2f43b366",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-971A2F43B366-option.png",
+      "sha256": "d85ab55808742526f98568d72f8b51d89538fbeaeae0053ad7a074991842b136",
+      "width": 1440,
+      "product_option_id": "local-acorus-971a2f43b366",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-971A2F43B366-card.png",
+      "sha256": "f6a8dd7367c38071f08fd31588075a67caf2547dbfd5e2e6a048c72db058882e",
+      "width": 390,
+      "product_option_id": "local-acorus-971a2f43b366",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-971A2F43B366-option.png",
+      "sha256": "bc3e3137b3b52941a04e3927b9c9e65ebdcda3ed665ca242f0ef8c43f2b4c61b",
+      "width": 390,
+      "product_option_id": "local-acorus-971a2f43b366",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-971A2F43B366-selected.png",
+      "sha256": "2f2b293debeadbeb87dea43513dab4691c3109fdfb36cd44f4575465e3247763",
+      "width": 390,
+      "product_option_id": "local-acorus-971a2f43b366",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-E5BA62DEAF28-card.png",
+      "sha256": "16f266e88bac6de535df24c5872b15d7bad922ad322e69adde625ca3016909b6",
+      "width": 1440,
+      "product_option_id": "local-acorus-e5ba62deaf28",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-E5BA62DEAF28-option.png",
+      "sha256": "fff400ecebdb721cd025d77e2f434675a810f0086ddaa033b302aea80268a1f3",
+      "width": 1440,
+      "product_option_id": "local-acorus-e5ba62deaf28",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-E5BA62DEAF28-card.png",
+      "sha256": "a84cc0f98e8b3bd12ded5c333e7c9ec550ba565c05063d99f2804f0760111f24",
+      "width": 390,
+      "product_option_id": "local-acorus-e5ba62deaf28",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-E5BA62DEAF28-option.png",
+      "sha256": "14128ec6d874f3f68abd04e82de89fbec64f6187814a17641832619ebbc50b6e",
+      "width": 390,
+      "product_option_id": "local-acorus-e5ba62deaf28",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-E5BA62DEAF28-selected.png",
+      "sha256": "fcaa81040dd81273c3faede83ccecbc69ca382a65093ce54e5781cdd7781fd2d",
+      "width": 390,
+      "product_option_id": "local-acorus-e5ba62deaf28",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-E0A6920E38DC-card.png",
+      "sha256": "2a9db6e0e9721975910a04d2e4b0c5235c5e1e3aa25e07476bdaae7e974fef7e",
+      "width": 1440,
+      "product_option_id": "local-acorus-e0a6920e38dc",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-E0A6920E38DC-option.png",
+      "sha256": "53900e94a2c2a88767a18f74cfe80c901a32b93e51ed20da84f59c80a2768746",
+      "width": 1440,
+      "product_option_id": "local-acorus-e0a6920e38dc",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-E0A6920E38DC-card.png",
+      "sha256": "ca0ed544615e4e83eac9a0e2c57973267e479613c38725aeceab2512d151f72e",
+      "width": 390,
+      "product_option_id": "local-acorus-e0a6920e38dc",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-E0A6920E38DC-option.png",
+      "sha256": "1fff96c4c996bdcfeb53abd11c2e3e36088114646f08482288a48c5b2c520ce5",
+      "width": 390,
+      "product_option_id": "local-acorus-e0a6920e38dc",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-E0A6920E38DC-selected.png",
+      "sha256": "ecec4ee7baf5e2834e3a6a8a82deae9b18f2070c0188913b64a4202623358f75",
+      "width": 390,
+      "product_option_id": "local-acorus-e0a6920e38dc",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-A0A3EF8669FA-card.png",
+      "sha256": "7609b9e618a1b96916f1e979f48a063cab395c347b62b21ede77e70f4dd05421",
+      "width": 1440,
+      "product_option_id": "local-acorus-a0a3ef8669fa",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "1440-PS-AC-A0A3EF8669FA-option.png",
+      "sha256": "ea11859db9757f4a503a5c3b2da6cd40168c77075ab370944b4ab2ffbac6dbf9",
+      "width": 1440,
+      "product_option_id": "local-acorus-a0a3ef8669fa",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-A0A3EF8669FA-card.png",
+      "sha256": "f720fea594c0fd63f3d497829247ffd5eb57c4ef3a3c304ecdf38dd6d93a15a3",
+      "width": 390,
+      "product_option_id": "local-acorus-a0a3ef8669fa",
+      "kind": "card",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-A0A3EF8669FA-option.png",
+      "sha256": "bc429ddbc5c85a1626f956189a4e14b8d853d9e26af4620f6fa6b63ed49f00eb",
+      "width": 390,
+      "product_option_id": "local-acorus-a0a3ef8669fa",
+      "kind": "option",
+      "reviewed": true
+    },
+    {
+      "file": "390-PS-AC-A0A3EF8669FA-selected.png",
+      "sha256": "011cd2f517c3ec343fb0ad7765b2f8ed8d5d05e73d956667765dcc230612855c",
+      "width": 390,
+      "product_option_id": "local-acorus-a0a3ef8669fa",
+      "kind": "selected",
+      "reviewed": true
+    },
+    {
+      "file": "1440-homepage.png",
+      "sha256": "28142fbec09b10f5f4fd935b0c58e354cc5460347d7d457354099aa2eb67988d",
+      "width": 1440,
+      "kind": "homepage",
+      "reviewed": true
+    },
+    {
+      "file": "1440-sports-level-grid.png",
+      "sha256": "8f5bda7cd18f25b11e60d73c1949b5028516e05b99a6521a40c15737a1c3045f",
+      "width": 1440,
+      "kind": "sports-level-grid",
+      "reviewed": true
+    },
+    {
+      "file": "1440-nexium-multiple.png",
+      "sha256": "8a5fe2a42bf7f45ffe311c778e669e0515396b196e0b6c129afa8a2ec83d698e",
+      "width": 1440,
+      "kind": "nexium-multiple",
+      "reviewed": false
+    },
+    {
+      "file": "390-homepage.png",
+      "sha256": "a2d060322d41b3c7033d0d52d45fa80ee2c698056baa9cb735209d9e55f62e98",
+      "width": 390,
+      "kind": "homepage",
+      "reviewed": true
+    },
+    {
+      "file": "390-sports-level-grid.png",
+      "sha256": "20611adff2178d5df4b36dd998f1de4bcb88751bf2ee0edea716be8268c7141d",
+      "width": 390,
+      "kind": "sports-level-grid",
+      "reviewed": true
+    },
+    {
+      "file": "390-nexium-multiple.png",
+      "sha256": "34f0b07f3dfb0f56bea917eb7aeaa9cc0e7bfbd8bf0a5b5e308d2992bd377aaa",
+      "width": 390,
+      "kind": "nexium-multiple",
+      "reviewed": false
+    }
+  ],
+  "desktop_review": true,
+  "mobile_review": true,
+  "limitations": [
+    "Direct cloud-browser live inspection timed out. Actual production HTML/JS/CSS and53 native assets matched tested build byte-for-byte. Browser screenshots/test assertions run on the built release with transport-isolated read-only fixtures; no production request was submitted.",
+    "Some desktop selected-pane captures scroll the preview out of view; they are not approved photo-review proof. Native listing cards and option captures at both widths, plus390px selected-preview images, are preserved."
+  ]
+}
