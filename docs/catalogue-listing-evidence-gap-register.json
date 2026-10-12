@@ -4,10 +4,10 @@
   "production_changed": false,
   "counts": {
     "cards": 613,
-    "verified_cards": 53,
-    "cards_pending": 560,
+    "verified_cards": 54,
+    "cards_pending": 559,
     "local_options": 193,
-    "verified_local_options": 53
+    "verified_local_options": 54
   },
   "cards": [
     {
@@ -8194,16 +8194,11 @@
       "sku": "PS-AC-83090D95F22B",
       "name": "Nasaflex Mometasone Furoate Nasal Spray",
       "family_id": "PSC-IS-167",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-83090d95f22b.png",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-83090d95f22b",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-5ED2FF06E0AF",
@@ -9780,7 +9775,7 @@
       "local_option_id": "local-acorus-83090d95f22b",
       "family_id": "PSC-IS-167",
       "name": "Nasaflex Mometasone Furoate Nasal Spray",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-5ed2ff06e0af",
