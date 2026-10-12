@@ -71,6 +71,18 @@ try{
   await page.locator('.psInterpretation').waitFor();
   assert((await page.locator('.psInterpretation').innerText()).includes('sterile gauze'));
   assert(await page.locator('.psSearchResults .productCard').count()>0);
+  await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/medicines');
+  const herpesan=page.locator('.productCard:has([data-product-view="PS-AC-417F1BC9E425"])');
+  await herpesan.waitFor();
+  assert((await herpesan.innerText()).includes('Herpesan Gel 5 g'));
+  assert((await herpesan.locator('.pscPricePreview').innerText()).includes('18.50'));
+  await herpesan.locator('.productVisual').click();
+  const herpesanModal=page.locator('.productDetailModal');
+  await herpesanModal.waitFor();
+  assert((await herpesanModal.innerText()).includes('5 g tube'));
+  assert((await herpesanModal.innerText()).includes('18.50'));
+  assert(!(await herpesanModal.innerText()).includes('SGM'));
+  await page.screenshot({path:'test-results/variant-visual-review/'+width+'-herpesan-stock.png',fullPage:true});
   await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/sports');
   await page.locator('.productCard.pscEditorialCard').first().waitFor();
   await page.locator('.productCard.pscEditorialCard img.productMainImage').evaluateAll(async images=>{
