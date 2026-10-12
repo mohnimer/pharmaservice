@@ -1,0 +1,20 @@
+[
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": "Al Hadi Pharmacy",
+    "logo": "https://alhadipharmacy.ae/cdn/shop/files/Al_Hadi_Pharmacy_Logo-removebg-preview_2.png?v=1781495142&width=500",
+    "sameAs": [
+      "",
+      "https://www.facebook.com/alhadipharmacy.ae",
+      "",
+      "https://www.instagram.com/alhadi_pharmacy/",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "url": "https://alhadipharmacy.ae"
+  }
+]

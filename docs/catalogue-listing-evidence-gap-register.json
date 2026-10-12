@@ -4,10 +4,10 @@
   "production_changed": false,
   "counts": {
     "cards": 613,
-    "verified_cards": 34,
-    "cards_pending": 579,
+    "verified_cards": 53,
+    "cards_pending": 560,
     "local_options": 193,
-    "verified_local_options": 34
+    "verified_local_options": 53
   },
   "cards": [
     {
@@ -360,7 +360,7 @@
       "name": "ZYRTEC 10MG TAB 20'S",
       "family_id": "PSC-IS-073",
       "image": "/assets/products/verified-20261011/zyrtec-10mg-20-tablets.jpg",
-      "image_status": "EXISTING PRODUCT PHOTOGRAPH",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-f8356dfd8db2",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -1030,7 +1030,7 @@
       "name": "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
       "family_id": "PSC-IS-073",
       "image": "/assets/products/verified-20261011/zyrtec-1mgml-75ml.jpg",
-      "image_status": "EXISTING PRODUCT PHOTOGRAPH",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-9d511aa6c569",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -1460,7 +1460,7 @@
       "name": "PANADOL NIGHT - 24 FILM-COATED TABLETS",
       "family_id": "PSC-IS-134",
       "image": "/assets/products/verified-20261011/panadol-night-24-caplets.jpg",
-      "image_status": "EXISTING PRODUCT PHOTOGRAPH",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-d226ac6267ee",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -1515,7 +1515,7 @@
       "name": "IMODIUM 2MG CAP 6'S",
       "family_id": "PSC-IS-098",
       "image": "/assets/products/verified-20261011/imodium-2mg-6-capsules.jpg",
-      "image_status": "EXISTING PRODUCT PHOTOGRAPH",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-4a24ef48aa96",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -3880,7 +3880,7 @@
       "name": "Alicoxa 200 mg — 20 Capsules",
       "family_id": "PSC-IS-144",
       "image": "/assets/products/verified-20261011/local-acorus-fa9568435322.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-fa9568435322",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -4205,7 +4205,7 @@
       "name": "Azomycin 200 mg/5 ml Oral Suspension — 30 ml",
       "family_id": "PSC-IS-139",
       "image": "/assets/products/verified-20261011/local-acorus-d6f2bf1d5bc2.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-d6f2bf1d5bc2",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -4215,7 +4215,7 @@
       "name": "Azomycin 250 mg — 6 Capsules",
       "family_id": "PSC-IS-139",
       "image": "/assets/products/verified-20261011/local-acorus-ae309306c236.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-ae309306c236",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -4270,7 +4270,7 @@
       "name": "Braun Manual Nasal Aspirator",
       "family_id": "PSC-IS-163",
       "image": "/assets/products/verified-20261011/local-acorus-e0a3afba003e.png",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-e0a3afba003e",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -4355,7 +4355,7 @@
       "name": "Braun ThermoScan Hygiene Caps — 40",
       "family_id": "PSC-SC-C12",
       "image": "/assets/products/verified-20261011/local-acorus-94b60f8eaf61.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-94b60f8eaf61",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -4365,7 +4365,7 @@
       "name": "Braun ThermoScan 7 IRT 6520",
       "family_id": "PSC-SC-B23",
       "image": "/assets/products/verified-20261011/local-acorus-48939d08ef0a.png",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-48939d08ef0a",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -4375,7 +4375,7 @@
       "name": "Braun ThermoScan 7+ IRT 6525",
       "family_id": "PSC-SC-B23",
       "image": "/assets/products/verified-20261011/local-acorus-8291a039f14f.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-8291a039f14f",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -5495,7 +5495,7 @@
       "name": "Gloclav 1 g — 14 Tablets",
       "family_id": "PSC-IS-138",
       "image": "/assets/products/verified-20261011/local-acorus-77936b1c484c.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-77936b1c484c",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -5505,7 +5505,7 @@
       "name": "Gloclav 228 mg/5 ml Oral Suspension — 70 ml",
       "family_id": "PSC-IS-138",
       "image": "/assets/products/verified-20261011/local-acorus-fe9b988eff75.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-fe9b988eff75",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -5530,7 +5530,7 @@
       "name": "Gloclav 625 mg — 20 Tablets",
       "family_id": "PSC-IS-138",
       "image": "/assets/products/verified-20261011/local-acorus-22b20fd5de67.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-22b20fd5de67",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -5630,7 +5630,7 @@
       "name": "Gupisone Prednisolone 20 mg — 40 Tablets",
       "family_id": "PSC-IS-175",
       "image": "/assets/products/verified-20261011/local-acorus-2524e51a60a8.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-2524e51a60a8",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -6180,7 +6180,7 @@
       "name": "Livazo 2 mg — 28 Tablets",
       "family_id": "PSC-IS-174",
       "image": "/assets/products/verified-20261011/local-acorus-a5018581b24c.png",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-a5018581b24c",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -6190,7 +6190,7 @@
       "name": "Livazo 4 mg — 28 Tablets",
       "family_id": "PSC-IS-174",
       "image": "/assets/products/verified-20261011/local-acorus-98520485e956.png",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-98520485e956",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -6560,7 +6560,7 @@
       "name": "NAN Optipro 1 — 400 g",
       "family_id": "PSC-IS-159",
       "image": "/assets/products/verified-20261011/local-acorus-d3d58af8dbdc.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-d3d58af8dbdc",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -6570,7 +6570,7 @@
       "name": "NAN Optipro 1 — 800 g",
       "family_id": "PSC-IS-159",
       "image": "/assets/products/verified-20261011/local-acorus-6703b683d432.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-6703b683d432",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -6579,16 +6579,11 @@
       "sku": "PS-AC-D45D30F1493E",
       "name": "NAN Optipro 3 — 400 g",
       "family_id": "PSC-IS-159",
-      "image": "/assets/products/acorus-2026-10/201-nan-3-optipro-400gm.jpg",
-      "image_status": "PRODUCT IMAGE",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-d45d30f1493e.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-d45d30f1493e",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-C4D2B178E5A1",
@@ -6609,76 +6604,51 @@
       "sku": "PS-AC-6E59A30EF053",
       "name": "NAN Comfort 1 — 800 g",
       "family_id": "PSC-IS-159",
-      "image": "/assets/products/acorus-2026-10/203-nan-comfort-1-800gm.jpg",
-      "image_status": "PRODUCT IMAGE",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-6e59a30ef053.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-6e59a30ef053",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-5B958D72413A",
       "name": "NAN Comfort 2 — 400 g",
       "family_id": "PSC-IS-159",
-      "image": "/assets/products/acorus-2026-10/204-nan-comfort-2-400gm.jpg",
-      "image_status": "PRODUCT IMAGE",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-5b958d72413a.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-5b958d72413a",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-C7DB4FA9ACC4",
       "name": "NAN Comfort 2 — 800 g",
       "family_id": "PSC-IS-159",
-      "image": "/assets/products/acorus-2026-10/205-nan-comfort-2-800gm.jpg",
-      "image_status": "PRODUCT IMAGE",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-c7db4fa9acc4.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-c7db4fa9acc4",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-B8F2CFFCEF03",
       "name": "NAN Comfort 3 — 800 g",
       "family_id": "PSC-IS-159",
-      "image": "/assets/products/acorus-2026-10/206-nan-comfort-3-800gm.jpg",
-      "image_status": "PRODUCT IMAGE",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-b8f2cffcef03.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-b8f2cffcef03",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-09BDD311CA5A",
       "name": "NAN Lactose Free — 400 g",
       "family_id": "PSC-IS-159",
-      "image": "/assets/products/acorus-2026-10/207-nan-lf-400gm-lactose-free.jpg",
-      "image_status": "PRODUCT IMAGE",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-09bdd311ca5a.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-09bdd311ca5a",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-780FB37E98DC",
@@ -6699,16 +6669,11 @@
       "sku": "PS-AC-98DBA85B5A1D",
       "name": "NAN SupremePro 2 — 400 g",
       "family_id": "PSC-IS-159",
-      "image": null,
-      "image_status": "REFERENCE TILE — VERIFIED PACKSHOT NEEDED",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-98dba85b5a1d.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-98dba85b5a1d",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-D27B69D89DD9",
@@ -6729,16 +6694,11 @@
       "sku": "PS-AC-05FCD107C286",
       "name": "NAN SupremePro 3 — 800 g",
       "family_id": "PSC-IS-159",
-      "image": "/assets/products/acorus-2026-10/211-nan-pro-3-supreme-800g-806116.jpg",
-      "image_status": "PRODUCT IMAGE",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-05fcd107c286.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-05fcd107c286",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-40F211EAC614",
@@ -6910,7 +6870,7 @@
       "name": "Nexium 20 mg — 14 Tablets",
       "family_id": "PSC-IS-151",
       "image": "/assets/products/verified-20261011/nexium-20mg-14-tablets.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-56cb26fe529b",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -7040,7 +7000,7 @@
       "name": "Oral-B Vitality 100 3D White Pink D100",
       "family_id": "PSC-IS-150",
       "image": "/assets/products/verified-20261011/local-acorus-19495a4b8eb2.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-19495a4b8eb2",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -7050,7 +7010,7 @@
       "name": "Oral-B Vitality 100 CrossAction White D100",
       "family_id": "PSC-IS-150",
       "image": "/assets/products/verified-20261011/local-acorus-f50a5698bd58.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-f50a5698bd58",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -7179,23 +7139,18 @@
       "sku": "PS-AC-382E97B1A135",
       "name": "ProRise 40 mg — 30 Capsules",
       "family_id": "PSC-IS-171",
-      "image": "/assets/products/acorus-2026-10/222-prorise-40mg-cap-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-382e97b1a135.png",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-382e97b1a135",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-AD974C05853F",
       "name": "Prospan Cough Syrup — 100 ml",
       "family_id": "PSC-IS-126",
       "image": "/assets/products/verified-20261011/prospan-100ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-ad974c05853f",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -7384,31 +7339,21 @@
       "sku": "PS-AC-971A2F43B366",
       "name": "Ruset 20/10 mg — 30 Tablets",
       "family_id": "PSC-IS-178",
-      "image": "/assets/products/acorus-2026-10/225-ruset-20mg-10mg-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-971a2f43b366.png",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-971a2f43b366",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-E5BA62DEAF28",
       "name": "Ruset 5/10 mg — 30 Tablets",
       "family_id": "PSC-IS-178",
-      "image": "/assets/products/acorus-2026-10/226-ruset-5mg-10mg-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-e5ba62deaf28.png",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-e5ba62deaf28",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-05C04F2C3976",
@@ -7715,7 +7660,7 @@
       "name": "Urispas 200 mg — 30 Tablets",
       "family_id": "PSC-IS-153",
       "image": "/assets/products/verified-20261011/local-acorus-fd2beb73a834.png",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-fd2beb73a834",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -7920,7 +7865,7 @@
       "name": "Avamys Fluticasone Furoate Nasal Spray — 120 Sprays",
       "family_id": "PSC-IS-154",
       "image": "/assets/products/verified-20261011/avamys-275mcg-120-sprays.jpg",
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-f28fe7b861a0",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -7975,7 +7920,7 @@
       "name": "Bepanthen Protective Baby Ointment — 100 g",
       "family_id": "PSC-IS-148",
       "image": "/assets/products/verified-20261011/bepanthen-baby-ointment-100g.jpg",
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-82eeffa2d41b",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -7985,7 +7930,7 @@
       "name": "Betaserc 8 mg — 100 Tablets",
       "family_id": "PSC-IS-142",
       "image": "/assets/products/verified-20261011/local-acorus-4d6c5f1f73f7.png",
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-4d6c5f1f73f7",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -8160,7 +8105,7 @@
       "name": "Femoston 2/10 mg — 28 Tablets",
       "family_id": "PSC-IS-158",
       "image": "/assets/products/verified-20261011/local-acorus-579df1ae3909.png",
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-579df1ae3909",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -8170,7 +8115,7 @@
       "name": "Femoston Conti 1/5 mg — 28 Tablets",
       "family_id": "PSC-IS-158",
       "image": "/assets/products/verified-20261011/local-acorus-7e0e1d8d4182.png",
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-7e0e1d8d4182",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -8224,16 +8169,11 @@
       "sku": "PS-AC-13A292D3B033",
       "name": "Moven Meloxicam 15 mg — 10 Capsules",
       "family_id": "PSC-IS-164",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-13a292d3b033.png",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-13a292d3b033",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-7249B30E2D1F",
@@ -8270,7 +8210,7 @@
       "name": "Nexium 40 mg — 14 Tablets",
       "family_id": "PSC-IS-151",
       "image": "/assets/products/verified-20261011/nexium-40mg-14-tablets.jpg",
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-5ed2ff06e0af",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -8279,106 +8219,71 @@
       "sku": "PS-AC-DBD40D8389AC",
       "name": "Nolvadex Tamoxifen 10 mg — 30 Tablets",
       "family_id": "PSC-IS-182",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-dbd40d8389ac.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-dbd40d8389ac",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-11702595F8A6",
       "name": "Nolvadex-D Tamoxifen 20 mg — 30 Tablets",
       "family_id": "PSC-IS-182",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-11702595f8a6.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-11702595f8a6",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-A0A3EF8669FA",
       "name": "Ozempic Semaglutide 0.25 mg Prefilled Pen",
       "family_id": "PSC-IS-179",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-a0a3ef8669fa.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-a0a3ef8669fa",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-17E4DAD608DF",
       "name": "Ozempic Semaglutide 0.5 mg Prefilled Pen",
       "family_id": "PSC-IS-179",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-17e4dad608df.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-17e4dad608df",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-126D63A7FB1A",
       "name": "Ozempic Semaglutide 1 mg Prefilled Pen",
       "family_id": "PSC-IS-179",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-126d63a7fb1a.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-126d63a7fb1a",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-E0A6920E38DC",
       "name": "PediaVIT Multi 50 ml",
       "family_id": "PSC-IS-188",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-e0a6920e38dc.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-e0a6920e38dc",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-BAD79542E340",
       "name": "ProLifer Prebiotic + Probiotic + L-Glutamate — 30 Softgels",
       "family_id": "PSC-IS-176",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
-      "evidence_option_id": null,
-      "status": "HOLD",
-      "gaps": [
-        "EXACT_IMAGE_EVIDENCE",
-        "EXACT_DESCRIPTION_EVIDENCE",
-        "EXACT_PACK_EVIDENCE",
-        "DATED_UAE_RETAIL_EVIDENCE"
-      ]
+      "image": "/assets/products/verified-20261012/local-acorus-bad79542e340.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "evidence_option_id": "local-acorus-bad79542e340",
+      "status": "VERIFIED_PREVIEW_CANDIDATE",
+      "gaps": []
     },
     {
       "sku": "PS-AC-81356E98EBBB",
@@ -8490,7 +8395,7 @@
       "name": "Sebamed Baby Cleansing Bar Value Pack — 2 x 150 g",
       "family_id": "PSC-IS-180",
       "image": "/assets/products/verified-20261011/local-acorus-23f413c882d9.jpg",
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-23f413c882d9",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -8500,7 +8405,7 @@
       "name": "Sebamed Baby Cleansing Wipes — 25 Wipes",
       "family_id": "PSC-IS-049",
       "image": "/assets/products/verified-20261011/local-acorus-2757418e4121.jpg",
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-2757418e4121",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -8900,7 +8805,7 @@
       "name": "Spedifen Ibuprofen 400 mg — 24 Tablets",
       "family_id": "PSC-IS-091",
       "image": "/assets/products/verified-20261011/local-acorus-764e4d0db998.jpg",
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-764e4d0db998",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -9015,7 +8920,7 @@
       "name": "Zovirax Aciclovir 400 mg — 25 Tablets",
       "family_id": "PSC-IS-137",
       "image": "/assets/products/verified-20261011/local-acorus-907534527424.jpg",
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
       "evidence_option_id": "local-acorus-907534527424",
       "status": "VERIFIED_PREVIEW_CANDIDATE",
       "gaps": []
@@ -9431,49 +9336,49 @@
       "local_option_id": "local-acorus-d45d30f1493e",
       "family_id": "PSC-IS-159",
       "name": "NAN Optipro 3 — 400 g",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-6e59a30ef053",
       "family_id": "PSC-IS-159",
       "name": "NAN Comfort 1 — 800 g",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-5b958d72413a",
       "family_id": "PSC-IS-159",
       "name": "NAN Comfort 2 — 400 g",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-c7db4fa9acc4",
       "family_id": "PSC-IS-159",
       "name": "NAN Comfort 2 — 800 g",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-b8f2cffcef03",
       "family_id": "PSC-IS-159",
       "name": "NAN Comfort 3 — 800 g",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-09bdd311ca5a",
       "family_id": "PSC-IS-159",
       "name": "NAN Lactose Free — 400 g",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-98dba85b5a1d",
       "family_id": "PSC-IS-159",
       "name": "NAN SupremePro 2 — 400 g",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-05fcd107c286",
       "family_id": "PSC-IS-159",
       "name": "NAN SupremePro 3 — 800 g",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-56cb26fe529b",
@@ -9581,7 +9486,7 @@
       "local_option_id": "local-acorus-382e97b1a135",
       "family_id": "PSC-IS-171",
       "name": "ProRise 40 mg — 30 Capsules",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-ad974c05853f",
@@ -9611,13 +9516,13 @@
       "local_option_id": "local-acorus-971a2f43b366",
       "family_id": "PSC-IS-178",
       "name": "Ruset 20/10 mg — 30 Tablets",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-e5ba62deaf28",
       "family_id": "PSC-IS-178",
       "name": "Ruset 5/10 mg — 30 Tablets",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-b121e76ab9fe",
@@ -9863,7 +9768,7 @@
       "local_option_id": "local-acorus-13a292d3b033",
       "family_id": "PSC-IS-164",
       "name": "Moven Meloxicam 15 mg — 10 Capsules",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-7249b30e2d1f",
@@ -9887,43 +9792,43 @@
       "local_option_id": "local-acorus-dbd40d8389ac",
       "family_id": "PSC-IS-182",
       "name": "Nolvadex Tamoxifen 10 mg — 30 Tablets",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-11702595f8a6",
       "family_id": "PSC-IS-182",
       "name": "Nolvadex-D Tamoxifen 20 mg — 30 Tablets",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-a0a3ef8669fa",
       "family_id": "PSC-IS-179",
       "name": "Ozempic Semaglutide 0.25 mg Prefilled Pen",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-17e4dad608df",
       "family_id": "PSC-IS-179",
       "name": "Ozempic Semaglutide 0.5 mg Prefilled Pen",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-126d63a7fb1a",
       "family_id": "PSC-IS-179",
       "name": "Ozempic Semaglutide 1 mg Prefilled Pen",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-e0a6920e38dc",
       "family_id": "PSC-IS-188",
       "name": "PediaVIT Multi 50 ml",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-bad79542e340",
       "family_id": "PSC-IS-176",
       "name": "ProLifer Prebiotic + Probiotic + L-Glutamate — 30 Softgels",
-      "status": "HOLD"
+      "status": "VERIFIED_PREVIEW_CANDIDATE"
     },
     {
       "local_option_id": "local-acorus-81356e98ebbb",

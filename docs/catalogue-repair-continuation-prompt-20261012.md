@@ -1,0 +1,17 @@
+# Continue batch002 — unfinished, no new products live yet
+
+Repository mohnimer/pharmaservice. Original branch catalogue-evidence-repair-20261010 recovered interrupted checkpoint c0fc232 as f9f58e3 with identical tree ff507fdc8ede6ebbc0457580bcf4de14cf3f485e. Remote verified.
+
+Current draft PR23 https://github.com/mohnimer/pharmaservice/pull/23 branch catalogue-batch002-live-20261012. Latest repair head964f304 (full SHA via git ls-remote). 19 exact native photos integrated, original34 preserved, total53 verified candidates. Batch002 remains0/50 newly LIVE; no merge/deploy yet. Do not start another batch or claim completion.
+
+Read docs/catalogue-batch002-runtime-progress-20261012.md and staging/catalogue-batch33/image-audit-50-20261012-002/release-progress.json, continuation-decisions-20261012.json, remaining-31-requirements-20261012.json. 27 Sebamed supplier photos omit net quantities; source workbook has75 candidate packs, require supplier SKU/barcode/side/back evidence. Four other holds: Moven7.5 quality, Nasaflex identity/formulation, Nokamen source, ProRise20 wrong40mg photo. Never substitute.
+
+CI first failed browser because exact NAN photo retained reference-tile flag; fixed after exact identity eligibility only. Next CI failed freshness because generated files were corrupted by oversized shell output uploads. Latest964f304 restores product-knowledge-index.js and gap register through12000-byte base64 chunks; fetched remote byte equality verified. Await fresh CI, review final desktop/mobile screenshots of19 new entries; only then mark PR ready, merge and verify actual production deployment and all53 assets. tools/verify-live-variant-assets.py provides read-only hash verification (56 files including frontend); currently untracked local file, must commit.
+
+Existing worktree /workspace/scratch/01150efddb9c/pharmaservice local branch catalogue-batch002-review-20261012 HEAD7067, tracked modifications match latest remote. Untracked remaining evidence and live verifier need preservation. Synthetic PR worktree /workspace/scratch/be6a91659771/pr23-merge currently older merge2047696 with regenerated gap file, node_modules symlink. Initial failed browser artifacts at /workspace/scratch/be6a91659771/initial-browser-review. Do not install a browser; use existing GitHub Actions Playwright workflow and artifacts. Production pharmaservice.ae unchanged so far.
+
+Publishing tested frontend changes authorized. No production DB writes, identity merges, price approval, homepage/layout changes or original photo deletion. User requires completed batch=50 exact corrected products live. If physical supplier evidence blocks31, accurately report19/50 after verifying those19 live; keep batch unfinished and do not start next50.
+
+Additional evidence: PediaVIT Multi50ml native Nahdi photo888x1320 approved after full inspection. Saved source HTML and retrieval in continuation-pediavit-nahdi-20261012. Header formula confirms Multi; do not copy Nahdi generic minerals prose. Price38AED public benchmark VAT unspecified. Stronger browser capture waits for decode/naturalWidth and scrolls selected pane into view. Latest runtime head will be updated after this checkpoint.
+
+Ozempic0.25mg resolved by advertised native1100x1100 Nahdi photo with readable1pen+4needles; source page1.5ml and UAE manufacturer API agree. CurrentCI source head will include19 corrections; await all tests/screenshots and live verification. Finalholds31=27Sebamed+Moven7.5/Nasaflex/Nokamen/ProRise20.

@@ -1,0 +1,114 @@
+[
+  {
+    "batch_index": 4,
+    "source_url": "https://medicinaonline.ae/cdn/shop/files/22222500-1.avif?v=1786623664",
+    "release_status": "HOLD",
+    "file": "gallery-4-768b42ca.jpg",
+    "dimensions": [
+      828,
+      828
+    ],
+    "sha256": "bd9a9242c76a863dc79f9a54c6551d29865758e2f130a1e5e8eda9cae1859ec6",
+    "unchanged": true,
+    "visual_review_status": "QUALITY_CANDIDATE_PACK_GUARD_PENDING",
+    "visual_review_note": "Advertised native 828 px Comfort 2 400 g packshot; exact local guard pending.",
+    "image_identity_verified": false,
+    "image_quality_approved": false
+  },
+  {
+    "batch_index": 4,
+    "source_url": "https://cdn.shopify.com/s/files/1/2270/7227/files/22222500-1.avif?v=1786623664",
+    "release_status": "HOLD",
+    "file": "gallery-4-a286e02a.jpg",
+    "dimensions": [
+      828,
+      828
+    ],
+    "sha256": "bd9a9242c76a863dc79f9a54c6551d29865758e2f130a1e5e8eda9cae1859ec6",
+    "unchanged": true,
+    "visual_review_status": "QUALITY_CANDIDATE_PACK_GUARD_PENDING",
+    "visual_review_note": "Advertised native 828 px Comfort 2 400 g packshot; exact local guard pending.",
+    "image_identity_verified": false,
+    "image_quality_approved": false
+  },
+  {
+    "batch_index": 15,
+    "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/ozempic-0-25mg-1-5ml-sol-for-inj-pf-pen/129651-2.png",
+    "release_status": "HOLD",
+    "file": "gallery-15-54e90d9b.png",
+    "dimensions": [
+      700,
+      700
+    ],
+    "sha256": "93e8f75a8c7ec4979dd792c4805afd7173d50b68e5135a0d0387ca5a1b8d353b",
+    "unchanged": true,
+    "visual_review_status": "QUALITY_HOLD",
+    "visual_review_note": "Pen-only image does not show complete sale pack; soft small product region.",
+    "image_identity_verified": false,
+    "image_quality_approved": false
+  },
+  {
+    "batch_index": 15,
+    "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/ozempic-0-25mg-1-5ml-sol-for-inj-pf-pen/129651-3.png",
+    "release_status": "HOLD",
+    "file": "gallery-15-b69cc440.png",
+    "dimensions": [
+      700,
+      700
+    ],
+    "sha256": "a805f05ab7783b6165082c7f39888025bbf7dd7260739f8b559489398b4554ba",
+    "unchanged": true,
+    "visual_review_status": "QUALITY_HOLD",
+    "visual_review_note": "Native image reviewed; soft or incomplete exact-pack identification; not approved.",
+    "image_identity_verified": false,
+    "image_quality_approved": false
+  },
+  {
+    "batch_index": 17,
+    "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/ozempic-1mg-3ml-4prefilled-pen-needles/129736-2.jpg",
+    "release_status": "HOLD",
+    "file": "gallery-17-40cea9fd.jpg",
+    "dimensions": [
+      722,
+      722
+    ],
+    "sha256": "33daa7558fbae14c7a51bdc8cba4a4368b434fce1f6c9c1336a2899cc438b83d",
+    "unchanged": true,
+    "visual_review_status": "QUALITY_HOLD",
+    "visual_review_note": "Box and pen photograph; needle count/volume obscured, soft image, exact sale pack unconfirmed.",
+    "image_identity_verified": false,
+    "image_quality_approved": false
+  },
+  {
+    "batch_index": 17,
+    "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/ozempic-1mg-3ml-4prefilled-pen-needles/129736-2.png",
+    "release_status": "HOLD",
+    "file": "gallery-17-f674fbf5.png",
+    "dimensions": [
+      700,
+      700
+    ],
+    "sha256": "9722519d96402964258115c55a96fc5122002df256620966cb65c1adc963a900",
+    "unchanged": true,
+    "visual_review_status": "QUALITY_HOLD",
+    "visual_review_note": "Native image reviewed; soft or incomplete exact-pack identification; not approved.",
+    "image_identity_verified": false,
+    "image_quality_approved": false
+  },
+  {
+    "batch_index": 17,
+    "source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/ozempic-1mg-3ml-4prefilled-pen-needles/129736-3.png",
+    "release_status": "HOLD",
+    "file": "gallery-17-b9cb76d2.png",
+    "dimensions": [
+      700,
+      700
+    ],
+    "sha256": "e0af4556cd1da5099b9046325e4bb191d85e97f820d8967138f09fa4693c916c",
+    "unchanged": true,
+    "visual_review_status": "REJECT_PROMOTIONAL_COMPOSITE",
+    "visual_review_note": "Promotional treatment/dosing graphic; not a clean product photograph.",
+    "image_identity_verified": false,
+    "image_quality_approved": false
+  }
+]

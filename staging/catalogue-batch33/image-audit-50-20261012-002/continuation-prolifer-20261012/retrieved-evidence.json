@@ -1,0 +1,14 @@
+[
+  {
+    "local_option_id": "local-acorus-bad79542e340",
+    "batch_index": 19,
+    "source_url": "https://alhadipharmacy.ae/products/zenith-prolifer-proliferates-intestinal-flora-softgels-30-softgels",
+    "checked_at": "2026-10-11T21:47:26.096441+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://alhadipharmacy.ae/products/zenith-prolifer-proliferates-intestinal-flora-softgels-30-softgels",
+    "page_sha256": "903616e7bfb07870153bb6c08ec74a5cd70671493c3e2673f173d5837b4c4338",
+    "retrieval_error": "Expecting ',' delimiter: line 15 column 43 (char 955)"
+  }
+]

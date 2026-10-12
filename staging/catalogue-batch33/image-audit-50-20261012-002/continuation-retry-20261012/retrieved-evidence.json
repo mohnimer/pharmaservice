@@ -1,0 +1,446 @@
+[
+  {
+    "local_option_id": "local-acorus-c7db4fa9acc4",
+    "batch_index": 5,
+    "source_url": "https://www.lifepharmacy.com/product/nan-comfort-2-800-gm",
+    "checked_at": "2026-10-11T21:45:57.976197+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/nan-comfort-2-800-gm",
+    "page_sha256": "a0a10a221ad5b89c21bae5d4e0a9ecc3d6fcacba0ade7658b3c50c1b87033063",
+    "source_name": "Nan Comfort 2 800g",
+    "source_sku": "132810",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "NAN",
+      "url": "https://www.lifepharmacy.com/brand/nan"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/nan-comfort-2-800-gm",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 114.98,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/nan-comfort-2-800-gm/132810-1.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-retry-20261012/local-acorus-c7db4fa9acc4-0.jpg",
+        "sha256": "3bd995e025dad59c5e93188988334f4fbbf3ab406166394d475f946468574f6e",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-e35706fb3a4e",
+    "batch_index": 20,
+    "source_url": "https://www.lifepharmacy.com/product/prorise-20mg-cap-30s",
+    "checked_at": "2026-10-11T21:45:57.976841+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/prorise-20mg-cap-30s",
+    "page_sha256": "81490d84be0e151977882b933271ccee8541f64c04cd1a69a630496dbceddd05",
+    "retrieval_error": "Expected one primary structured product, found 0"
+  },
+  {
+    "local_option_id": "local-acorus-382e97b1a135",
+    "batch_index": 21,
+    "source_url": "https://www.lifepharmacy.com/product/prorise-40mg-cap-30s",
+    "checked_at": "2026-10-11T21:45:57.977455+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/prorise-40mg-cap-30s",
+    "page_sha256": "ddfed5dd38be118294aa68f4ba02bfbc168d730b7fad0695fec38e9907ba512f",
+    "source_name": "ProRise 40MG/1100MG Cap 30s",
+    "source_sku": "134157",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/prorise-40mg-cap-30s",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 100.5,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/prorise-40mg-cap-30s/134157-1.png",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-retry-20261012/local-acorus-382e97b1a135-0.png",
+        "sha256": "908fd3f0d46fdd4000cc1eb21df1a92ff5aff5c6f988d3d888205ef5d6b088f6",
+        "dimensions": [
+          700,
+          700
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-971a2f43b366",
+    "batch_index": 22,
+    "source_url": "https://www.lifepharmacy.com/product/ruset-20mg-10mg-film-coated-tab-30s",
+    "checked_at": "2026-10-11T21:45:57.978059+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/ruset-20mg-10mg-film-coated-tab-30s",
+    "page_sha256": "747fe5c449698499fda3a35a77592e57f9fb132218dae7dfda7e67940d3eb951",
+    "source_name": "Ruset 20MG/10MG Film Coated Tab 30s",
+    "source_sku": "140301",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/ruset-20mg-10mg-film-coated-tab-30s",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 75,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/ruset-20mg-10mg-film-coated-tab-30s/140301-1.png",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-retry-20261012/local-acorus-971a2f43b366-0.png",
+        "sha256": "74aae7000c6c1fb8b1aa83c1cd8f4f7fa1b7a4e0b80e61bd795918c65041a3dd",
+        "dimensions": [
+          700,
+          700
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-e5ba62deaf28",
+    "batch_index": 23,
+    "source_url": "https://www.lifepharmacy.com/product/ruset-5mg-10mg-film-coated-tab-30s",
+    "checked_at": "2026-10-11T21:46:06.616810+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/ruset-5mg-10mg-film-coated-tab-30s",
+    "page_sha256": "260ff171b4afd8952c3c4ae38ad4745ec6a225f48c406400c441d05f68efc2f8",
+    "source_name": "Ruset 5MG/10MG Film Coated Tab 30s",
+    "source_sku": "140299",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Generic",
+      "url": "https://www.lifepharmacy.com/brand/"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/ruset-5mg-10mg-film-coated-tab-30s",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 37,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/ruset-5mg-10mg-film-coated-tab-30s/140299-1.png",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-retry-20261012/local-acorus-e5ba62deaf28-0.png",
+        "sha256": "b3078119f215ff3e01c1945043a6a692b7c02ac4ed348d1a23cb68ef61d46193",
+        "dimensions": [
+          700,
+          700
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-17e4dad608df",
+    "batch_index": 16,
+    "source_url": "https://www.myaster.com/en/online-pharmacy/p/ozempic-0-5mg-pre-filled-pen-1-5ml/1038379",
+    "checked_at": "2026-10-11T21:46:10.110472+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.myaster.com/en/online-pharmacy/p/ozempic-0-5mg-pre-filled-pen-1-5ml/1038379",
+    "page_sha256": "d27c5fd12e0af8f50aac982f192c6777b70274952b44250918190f7aae393547",
+    "source_name": "Ozempic 0.5mg Pre-Filled Pen 1.5ml",
+    "source_sku": "1038379",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Ozempic"
+    },
+    "offer": {
+      "@type": "Offer",
+      "url": "https://www.myaster.com/en/online-pharmacy/p/ozempic-0-5mg-pre-filled-pen-1-5ml/1038379",
+      "priceCurrency": "AED",
+      "price": "743.50",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": "myAster"
+      }
+    },
+    "vat_inclusive_text_present": false,
+    "images": [
+      {
+        "source_url": "https://media.myaster.com/images/products/1038379/ozempic-0-5mg-pre-filled-pen-1-5ml/1038379_1.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-retry-20261012/local-acorus-17e4dad608df-0.jpg",
+        "sha256": "5a7d0310a93b91c184baa7f27e9a081d7788de7c6c76828913a3b9bfa1892e10",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/products/1038379/ozempic-0-5mg-pre-filled-pen-1-5ml/1038379_2.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-retry-20261012/local-acorus-17e4dad608df-1.jpg",
+        "sha256": "559349bd9c9bfa26e61a6a23e871d7f9f074d153e9d08240215f9f228d6576ca",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/1038379-3.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-retry-20261012/local-acorus-17e4dad608df-2.jpg",
+        "sha256": "caf8f3fc495731fa8b67c6aa02ed86d690aa7c2f881ca2b24c4dc2b86d52da0d",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/shop-with-confidence.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-retry-20261012/local-acorus-17e4dad608df-3.jpg",
+        "sha256": "9bbe4787e2a6fba23b36743713ac9851cab2c1d8e773ebc39b0ec974126007bf",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-126d63a7fb1a",
+    "batch_index": 17,
+    "source_url": "https://www.myaster.com/en/online-pharmacy/p/ozempic-1mg-pre-filled-pen-3ml-4-needles/1038380",
+    "checked_at": "2026-10-11T21:46:10.180227+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.myaster.com/en/online-pharmacy/p/ozempic-1mg-pre-filled-pen-3ml-4-needles/1038380",
+    "page_sha256": "812f66ff3dddef4ff9536b84c7880c12fbaa8926d1f17535bf7012d6d559ca38",
+    "source_name": "Ozempic 1mg Pre-Filled Pen 3ml + 4 Needles",
+    "source_sku": "1038380",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Ozempic"
+    },
+    "offer": {
+      "@type": "Offer",
+      "url": "https://www.myaster.com/en/online-pharmacy/p/ozempic-1mg-pre-filled-pen-3ml-4-needles/1038380",
+      "priceCurrency": "AED",
+      "price": "1146.00",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": "myAster"
+      }
+    },
+    "vat_inclusive_text_present": false,
+    "images": [
+      {
+        "source_url": "https://media.myaster.com/images/products/1038380/ozempic-1mg-pre-filled-pen-3ml-4-needles/1038380_1.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-retry-20261012/local-acorus-126d63a7fb1a-0.jpg",
+        "sha256": "42fc7676eba875ba3c462407668abf389db7489f22dfe894b13aebde6c05bcb3",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/products/1038380/ozempic-1mg-pre-filled-pen-3ml-4-needles/1038380_2.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-retry-20261012/local-acorus-126d63a7fb1a-1.jpg",
+        "sha256": "9d4111e0c8409c2381651487ee2b076178e89ef759e223dc346a2bc181088a1b",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/1038380-3.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-retry-20261012/local-acorus-126d63a7fb1a-2.jpg",
+        "sha256": "a97c0ec39ab1f2fcf6057a1cc9c33a3827d573ef673495fedf987c1350e4f45f",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/assets/shop-with-confidence.jpg",
+        "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-retry-20261012/local-acorus-126d63a7fb1a-3.jpg",
+        "sha256": "9bbe4787e2a6fba23b36743713ac9851cab2c1d8e773ebc39b0ec974126007bf",
+        "dimensions": [
+          1040,
+          1040
+        ]
+      }
+    ]
+  }
+]

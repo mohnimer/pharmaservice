@@ -1,0 +1,220 @@
+[
+  {
+    "batch_index": 1,
+    "source_url": "https://www.lifepharmacy.com/product/acure-gripe-water-130ml",
+    "checked_at": "2026-10-12",
+    "images": [
+      {
+        "file": "replacement-1-0.jpg",
+        "source_url": "https://cdn.lifepharmacy.com/products/acure-gripe-water-130ml/121778-1.jpg",
+        "dimensions": [
+          1000,
+          1000
+        ],
+        "sha256": "e1eeca62a1da3ebe96087d226bdfaa4485f9cbb7a890bb0c2fa565bccfdd7021",
+        "unchanged": true,
+        "image_identity_verified": false,
+        "image_quality_approved": true
+      }
+    ],
+    "release_status": "HOLD",
+    "final_url": "https://www.lifepharmacy.com/product/acure-gripe-water-130ml",
+    "product_facts": {
+      "name": "Acure Gripe Water 130ml",
+      "sku": "121778",
+      "brand": {
+        "@type": "Brand",
+        "name": "Generic",
+        "url": "https://www.lifepharmacy.com/brand/"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.lifepharmacy.com/product/acure-gripe-water-130ml",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": 9.5,
+        "priceCurrency": "AED",
+        "priceValidUntil": "2027-12-30T00:00:00.000Z",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": 0,
+            "currency": "AED"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            }
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "AE"
+          }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "AE",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 3,
+          "returnFees": "https://schema.org/FreeReturn",
+          "returnMethod": "https://schema.org/ReturnByMail"
+        }
+      }
+    },
+    "visual_review": "COMPLETED",
+    "review_note": "Clear native 1000-square isolated Acure carton, 130 ml printed; suitable image candidate. Local exact pack guard remains pending. Raw offer is a promotional retail price, not standard MRP or wholesale cost."
+  },
+  {
+    "batch_index": 2,
+    "source_url": "https://www.myaster.com/en/online-pharmacy/p/aldomet-250mg-tablets-pack-of-30-s/1000422",
+    "checked_at": "2026-10-12",
+    "images": [],
+    "release_status": "HOLD",
+    "error": "HTTP Error 403: Forbidden",
+    "visual_review": "NO_IMAGE_RETRIEVED"
+  },
+  {
+    "batch_index": 4,
+    "source_url": "https://medononline.com/product/zenith-b-vitamin-b-complex-energy-support-softgels-30s-4728",
+    "checked_at": "2026-10-12",
+    "images": [],
+    "release_status": "HOLD",
+    "error": "HTTP Error 403: Forbidden",
+    "visual_review": "NO_IMAGE_RETRIEVED"
+  },
+  {
+    "batch_index": 5,
+    "source_url": "https://medononline.com/product/zenith-beauty-plus-skin-hair-and-nails-supplement-softgels-30s-4729",
+    "checked_at": "2026-10-12",
+    "images": [],
+    "release_status": "HOLD",
+    "error": "HTTP Error 403: Forbidden",
+    "visual_review": "NO_IMAGE_RETRIEVED"
+  },
+  {
+    "batch_index": 6,
+    "source_url": "https://www.myaster.com/en/online-pharmacy/p/bepanthen-moisturizing-cream-for-dry-damaged-irritated-skin-30g/1001138",
+    "checked_at": "2026-10-12",
+    "images": [],
+    "release_status": "HOLD",
+    "error": "HTTP Error 403: Forbidden",
+    "visual_review": "NO_IMAGE_RETRIEVED"
+  },
+  {
+    "batch_index": 7,
+    "source_url": "https://www.lifepharmacy.com/product/blink-intensive-eye-drops-10ml",
+    "checked_at": "2026-10-12",
+    "images": [
+      {
+        "file": "replacement-7-0.jpg",
+        "source_url": "https://cdn.lifepharmacy.com/products/blink-intensive-eye-drops-10ml/130512-1.jpg",
+        "dimensions": [
+          1000,
+          1000
+        ],
+        "sha256": "7bca24724228ca9dcc8f326e729333aa94e6bfe3788a9a14b86dcfd33574a4eb",
+        "unchanged": true,
+        "image_identity_verified": false,
+        "image_quality_approved": false
+      }
+    ],
+    "release_status": "HOLD",
+    "final_url": "https://www.lifepharmacy.com/product/blink-intensive-eye-drops-10ml",
+    "product_facts": {
+      "name": "Blink Intensive Eye Drops 10ml",
+      "sku": "130512",
+      "brand": {
+        "@type": "Brand",
+        "name": "Generic",
+        "url": "https://www.lifepharmacy.com/brand/"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.lifepharmacy.com/product/blink-intensive-eye-drops-10ml",
+        "itemCondition": "https://schema.org/NewCondition",
+        "price": 46.5,
+        "priceCurrency": "AED",
+        "priceValidUntil": "2027-12-30T00:00:00.000Z",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": 0,
+            "currency": "AED"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            }
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "AE"
+          }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "AE",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 3,
+          "returnFees": "https://schema.org/FreeReturn",
+          "returnMethod": "https://schema.org/ReturnByMail"
+        }
+      }
+    },
+    "visual_review": "COMPLETED",
+    "review_note": "Correct Blink intensive soothing-eye-drops family and retail listing 10 ml; native 1000-square image is visibly softened with apparent low-resolution content. Do not approve quality or infer the original local volume."
+  },
+  {
+    "batch_index": 38,
+    "source_url": "https://800pharmacy.ae/?c=products&id=36370&m=productdetails",
+    "checked_at": "2026-10-12",
+    "images": [
+      {
+        "source_url": "https://dashboard.800pharmacy.ae/image/catalog/Products/114441.jpg",
+        "error": "HTTP Error 403: Forbidden"
+      }
+    ],
+    "release_status": "HOLD",
+    "final_url": "https://800pharmacy.ae/?c=products&id=36370&m=productdetails",
+    "product_facts": {},
+    "visual_review": "NO_IMAGE_RETRIEVED"
+  },
+  {
+    "batch_index": 39,
+    "source_url": "https://800pharmacy.ae/?c=products&id=37322&m=productdetails",
+    "checked_at": "2026-10-12",
+    "images": [
+      {
+        "source_url": "https://dashboard.800pharmacy.ae/image/",
+        "error": "HTTP Error 403: Forbidden"
+      }
+    ],
+    "release_status": "HOLD",
+    "final_url": "https://800pharmacy.ae/?c=products&id=37322&m=productdetails",
+    "product_facts": {},
+    "visual_review": "NO_IMAGE_RETRIEVED"
+  }
+]

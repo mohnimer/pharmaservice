@@ -1,0 +1,261 @@
+[
+  {
+    "path": "/assets/products/verified-20261011/prospan-100ml.jpg",
+    "status": 200,
+    "expected_sha256": "3fe3911e2526a0246c890d1d1ff4e06af3f0ed266ab0f549fe285dee19705e0d",
+    "actual_sha256": "3fe3911e2526a0246c890d1d1ff4e06af3f0ed266ab0f549fe285dee19705e0d",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/bepanthen-baby-ointment-100g.jpg",
+    "status": 200,
+    "expected_sha256": "4b2540291cd1a2f808a74dd5841b1a549b6cdcb3510a52180c343c5bb0da8c30",
+    "actual_sha256": "4b2540291cd1a2f808a74dd5841b1a549b6cdcb3510a52180c343c5bb0da8c30",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/nexium-20mg-14-tablets.jpg",
+    "status": 200,
+    "expected_sha256": "8fd2ef6cfe982a56330d2d6070be61d97ee2f704e917fd566c37157d07f6e6a4",
+    "actual_sha256": "8fd2ef6cfe982a56330d2d6070be61d97ee2f704e917fd566c37157d07f6e6a4",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/nexium-40mg-14-tablets.jpg",
+    "status": 200,
+    "expected_sha256": "20dc278b42c16a9383d2e16ab451299642fb359574764715da2d34ed9b1d2660",
+    "actual_sha256": "20dc278b42c16a9383d2e16ab451299642fb359574764715da2d34ed9b1d2660",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/imodium-2mg-6-capsules.jpg",
+    "status": 200,
+    "expected_sha256": "2f6dbefa6b3184cc5f95cc8f0614cecb232594ce430c724f06995dd574433945",
+    "actual_sha256": "2f6dbefa6b3184cc5f95cc8f0614cecb232594ce430c724f06995dd574433945",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/zyrtec-10mg-20-tablets.jpg",
+    "status": 200,
+    "expected_sha256": "41768cd8c2e63a93eb3208b75f5d6b077ea1111f19ad4ec9e8bd786f4bf2b846",
+    "actual_sha256": "41768cd8c2e63a93eb3208b75f5d6b077ea1111f19ad4ec9e8bd786f4bf2b846",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/zyrtec-1mgml-75ml.jpg",
+    "status": 200,
+    "expected_sha256": "7d412400b8322b22d81497b4d202750dd0b7188d3e45201740c8542cec11a2b2",
+    "actual_sha256": "7d412400b8322b22d81497b4d202750dd0b7188d3e45201740c8542cec11a2b2",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/panadol-night-24-caplets.jpg",
+    "status": 200,
+    "expected_sha256": "9c63f69bb3efe3a17b7b79a1a5ae56bfec018a4a8fbded84597e01bd0d43248f",
+    "actual_sha256": "9c63f69bb3efe3a17b7b79a1a5ae56bfec018a4a8fbded84597e01bd0d43248f",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/avamys-275mcg-120-sprays.jpg",
+    "status": 200,
+    "expected_sha256": "082de3ffd8e738bdc12d77945c75286bee3164324c83cca8e77d6b2d37050596",
+    "actual_sha256": "082de3ffd8e738bdc12d77945c75286bee3164324c83cca8e77d6b2d37050596",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-4d6c5f1f73f7.png",
+    "status": 200,
+    "expected_sha256": "049d664604e1d2d9c525bd70bc744f1cef91a57f5a54c8485f5d62dfbc044ae5",
+    "actual_sha256": "049d664604e1d2d9c525bd70bc744f1cef91a57f5a54c8485f5d62dfbc044ae5",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-a5018581b24c.png",
+    "status": 200,
+    "expected_sha256": "29ccb4952d15617ac473217013cee53f2789fa03a51234412355ed1bc475a24e",
+    "actual_sha256": "29ccb4952d15617ac473217013cee53f2789fa03a51234412355ed1bc475a24e",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-98520485e956.png",
+    "status": 200,
+    "expected_sha256": "c50176bb5f4ccdeba1b54b6da834b87a32c946a8d28ad2caec78c29c7ea8da74",
+    "actual_sha256": "c50176bb5f4ccdeba1b54b6da834b87a32c946a8d28ad2caec78c29c7ea8da74",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-579df1ae3909.png",
+    "status": 200,
+    "expected_sha256": "74c8bf0e32149bee7da386e78153a65b22e24c3b7f2ba39115aeb79a637319e5",
+    "actual_sha256": "74c8bf0e32149bee7da386e78153a65b22e24c3b7f2ba39115aeb79a637319e5",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-7e0e1d8d4182.png",
+    "status": 200,
+    "expected_sha256": "974183eb61325a004dff37eecfcc708782d93349c62ea718104fb90faeba238c",
+    "actual_sha256": "974183eb61325a004dff37eecfcc708782d93349c62ea718104fb90faeba238c",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-fd2beb73a834.png",
+    "status": 200,
+    "expected_sha256": "e49ae88bcc6444357e1ac4d3694fea2c28121664e89c11a42e2bc29fb308835c",
+    "actual_sha256": "e49ae88bcc6444357e1ac4d3694fea2c28121664e89c11a42e2bc29fb308835c",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-8291a039f14f.jpg",
+    "status": 200,
+    "expected_sha256": "0a189a167b621604e5efdb359e9ba468f6343746904c7bd37226cfd0f01dba3e",
+    "actual_sha256": "0a189a167b621604e5efdb359e9ba468f6343746904c7bd37226cfd0f01dba3e",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-d3d58af8dbdc.jpg",
+    "status": 200,
+    "expected_sha256": "59ba39d1a94d3e67ce424b810f0a7bfbf2d35859656331441832218c7739b2d5",
+    "actual_sha256": "59ba39d1a94d3e67ce424b810f0a7bfbf2d35859656331441832218c7739b2d5",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-6703b683d432.jpg",
+    "status": 200,
+    "expected_sha256": "767eb478292fb7ebe2e75351ff259abe2b6b8d3bda79b8b1ea2a70bd4c6835d2",
+    "actual_sha256": "767eb478292fb7ebe2e75351ff259abe2b6b8d3bda79b8b1ea2a70bd4c6835d2",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-fa9568435322.jpg",
+    "status": 200,
+    "expected_sha256": "7c9b3c79fe20c63afe09d6b980e8ac876d1c1c2b226f05d3715b371d14443bc5",
+    "actual_sha256": "7c9b3c79fe20c63afe09d6b980e8ac876d1c1c2b226f05d3715b371d14443bc5",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-d6f2bf1d5bc2.jpg",
+    "status": 200,
+    "expected_sha256": "b801b29153e798fb7ed64c006306a4ff421ea1640868537009ac60de84d7d58c",
+    "actual_sha256": "b801b29153e798fb7ed64c006306a4ff421ea1640868537009ac60de84d7d58c",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-ae309306c236.jpg",
+    "status": 200,
+    "expected_sha256": "fd88270522f3e7fa645552a011556f4675494e70f4fa3ee29380edb888b3be4b",
+    "actual_sha256": "fd88270522f3e7fa645552a011556f4675494e70f4fa3ee29380edb888b3be4b",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-2524e51a60a8.jpg",
+    "status": 200,
+    "expected_sha256": "6ed99415fafa707714f02df7bc9d175c01e88f0e2d326e56d4d71347d78d9bcb",
+    "actual_sha256": "6ed99415fafa707714f02df7bc9d175c01e88f0e2d326e56d4d71347d78d9bcb",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-764e4d0db998.jpg",
+    "status": 200,
+    "expected_sha256": "be1c4912a5a4ebd2222a819f0f490c675381208f78e366202ea9f7dc39f3c50f",
+    "actual_sha256": "be1c4912a5a4ebd2222a819f0f490c675381208f78e366202ea9f7dc39f3c50f",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-907534527424.jpg",
+    "status": 200,
+    "expected_sha256": "72db19d3539ebfd4e9f39f4bc0d988ef7789aa49149efec24a07a84f8f7f793e",
+    "actual_sha256": "72db19d3539ebfd4e9f39f4bc0d988ef7789aa49149efec24a07a84f8f7f793e",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-48939d08ef0a.png",
+    "status": 200,
+    "expected_sha256": "c1edd34cdb68714abb537612485d0eb231d723ef4902b492db7f34b513d1e54c",
+    "actual_sha256": "c1edd34cdb68714abb537612485d0eb231d723ef4902b492db7f34b513d1e54c",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-e0a3afba003e.png",
+    "status": 200,
+    "expected_sha256": "ce83741357cfb091c3d1f94bb06b3772ca4ba558b2c9e9d8db388a638fd215a5",
+    "actual_sha256": "ce83741357cfb091c3d1f94bb06b3772ca4ba558b2c9e9d8db388a638fd215a5",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-f50a5698bd58.jpg",
+    "status": 200,
+    "expected_sha256": "3a28712ae1418bcfe87cbee976195f68994c77670dbe5e147888d0526e8bbd60",
+    "actual_sha256": "3a28712ae1418bcfe87cbee976195f68994c77670dbe5e147888d0526e8bbd60",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-19495a4b8eb2.jpg",
+    "status": 200,
+    "expected_sha256": "cda9f629679632c8789d774896918b4e28a8d42ed2af0fa04e2e3f43110f7246",
+    "actual_sha256": "cda9f629679632c8789d774896918b4e28a8d42ed2af0fa04e2e3f43110f7246",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-94b60f8eaf61.jpg",
+    "status": 200,
+    "expected_sha256": "e64553fcf09b76ff07791f8d108db2041c1fad669f4dbae2566d03f7cecac818",
+    "actual_sha256": "e64553fcf09b76ff07791f8d108db2041c1fad669f4dbae2566d03f7cecac818",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-2757418e4121.jpg",
+    "status": 200,
+    "expected_sha256": "9cef4e361a0d67fcc59027ce03913996e0680cf285af24882308d073442b78fa",
+    "actual_sha256": "9cef4e361a0d67fcc59027ce03913996e0680cf285af24882308d073442b78fa",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-23f413c882d9.jpg",
+    "status": 200,
+    "expected_sha256": "9156738f07d000d11be583f4a751377d1d322abd4ce27b0e1d439cfd8cfe2d82",
+    "actual_sha256": "9156738f07d000d11be583f4a751377d1d322abd4ce27b0e1d439cfd8cfe2d82",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-77936b1c484c.jpg",
+    "status": 200,
+    "expected_sha256": "65e8b07a75c062351a65bf0ede7fdf393128f1649c4b67f9835d0b5a4c04d5de",
+    "actual_sha256": "65e8b07a75c062351a65bf0ede7fdf393128f1649c4b67f9835d0b5a4c04d5de",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-22b20fd5de67.jpg",
+    "status": 200,
+    "expected_sha256": "54abb875fa78cc0e91d27368ee411caf9bd909cda251f4d6b53ff1b6b5d135d8",
+    "actual_sha256": "54abb875fa78cc0e91d27368ee411caf9bd909cda251f4d6b53ff1b6b5d135d8",
+    "match": true
+  },
+  {
+    "path": "/assets/products/verified-20261011/local-acorus-fe9b988eff75.jpg",
+    "status": 200,
+    "expected_sha256": "4bd417e7420d7047c1090b603b820a721e83787d85a5f372680e026cbe43df8d",
+    "actual_sha256": "4bd417e7420d7047c1090b603b820a721e83787d85a5f372680e026cbe43df8d",
+    "match": true
+  },
+  {
+    "path": "/current.js",
+    "status": 200,
+    "expected_sha256": "fa2a40af8cd3751cff6e060b8bf32c066fdc367044bb0c8baed84468a541606d",
+    "actual_sha256": "fa2a40af8cd3751cff6e060b8bf32c066fdc367044bb0c8baed84468a541606d",
+    "match": true
+  },
+  {
+    "path": "/current.css",
+    "status": 200,
+    "expected_sha256": "24b3c3e2de503000074eb46c50da60ef086457a96470db9706ae7107b58cb9ca",
+    "actual_sha256": "24b3c3e2de503000074eb46c50da60ef086457a96470db9706ae7107b58cb9ca",
+    "match": true
+  },
+  {
+    "path": "/index.html",
+    "status": 200,
+    "expected_sha256": "ab4316d361eff187549819e7b4dc5025dc3003ad2c7c33384a4e05fbffb5ca2b",
+    "actual_sha256": "ab4316d361eff187549819e7b4dc5025dc3003ad2c7c33384a4e05fbffb5ca2b",
+    "match": true
+  }
+]

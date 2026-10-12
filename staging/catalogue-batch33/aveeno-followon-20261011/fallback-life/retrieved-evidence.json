@@ -1,0 +1,75 @@
+[
+  {
+    "local_option_id": "local-acorus-204ebc87709b",
+    "source_url": "https://www.lifepharmacy.com/product/aveeno-daily-moisturizing-lotion-300ml",
+    "checked_at": "2026-10-11T18:00:02.883235+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/aveeno-daily-moisturizing-lotion-300ml",
+    "page_sha256": "11a38eda27fc1acf25d0901d86c196e22a6ecb0d6ea3a1afb32a2a8c9a5603b2",
+    "source_name": "Aveeno Daily Moisturizing Lotion 300ml",
+    "source_sku": "143287",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "AVEENO",
+      "url": "https://www.lifepharmacy.com/brand/aveeno"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/aveeno-daily-moisturizing-lotion-300ml",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 47.25,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/aveeno-daily-moisturizing-lotion-300ml/143287-1.jpg",
+        "file": "staging/catalogue-batch33/aveeno-followon-20261011/fallback-life/local-acorus-204ebc87709b-0.jpg",
+        "sha256": "27c7e046571dbcc62848f10dafdfd96a474d53c324f801fb887f1219c4ed1a98",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  }
+]

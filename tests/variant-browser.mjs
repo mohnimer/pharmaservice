@@ -8,7 +8,7 @@ const followonVariants=JSON.parse(readFileSync('docs/verified-preview-variant-re
  .filter(row=>row.browser_route).map(row=>({route:row.browser_route,sku:row.psc_sku,
   optionId:row.product_option_id,photo:row.image_path,pack:row.pack,price:row.price_aed,
   description:row.description,descriptionSource:row.description_source,
-  imageWidth:row.dimensions[0],priceNote:row.price_note,vatBasis:row.vat_basis}));
+  imageWidth:row.dimensions[0],priceNote:row.price_note,vatBasis:row.vat_basis,checkedAt:row.checked_at}));
 const options=[10,20].map(n=>({family_id:family,product_option_id:'fixture-'+n,
  exact_product_name:'TEST ONLY dressing '+n,brand:'Fixture Brand',pack:n+' pieces',
  presentation:'',image_url:'/__variant-fixture/'+n+'.svg'}));
@@ -154,15 +154,22 @@ try{
   assert.equal(await card.locator('.productMainImage').getAttribute('src'),variant.photo);
   assert((await card.locator('.pack').innerText()).includes(variant.pack));
   assert((await card.locator('.pscPricePreview').innerText()).includes('UAE retail benchmark'));
-  assert((await card.locator('.pscPricePreview').innerText()).includes(String(variant.price)));
+  assert((await card.locator('.pscPricePreview').innerText()).replace(/,/g,'').includes(String(variant.price)));
+  await card.scrollIntoViewIfNeeded();
+  await card.locator('.productMainImage').evaluate(async img=>{img.loading='eager';await img.decode();});
+  assert.equal(await card.locator('.productMainImage').evaluate(img=>img.naturalWidth),variant.imageWidth||1024);
+  // A taller capture keeps the existing sticky search header from covering the pack.
+  await page.setViewportSize({width,height:1500});
+  await card.evaluate(el=>{const y=el.getBoundingClientRect().top+window.scrollY;window.scrollTo(0,Math.max(0,y-320));});
   await card.screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-card.png'});
+  await page.setViewportSize({width,height:900});
   await card.locator('.productVisual').click();
   await page.locator('.pscBrandTick:has([data-family-option="'+optionId+'"])').click();
   assert.equal(await page.locator('.pscFamilyProductSheet .pscRetailPriceNotice').count(),1);
   assert.equal(await preview.getAttribute('src'),variant.photo);
   await page.waitForFunction(expected=>{const img=document.querySelector('.pscFamilyPreview img');return img?.complete&&img.naturalWidth===expected;},variant.imageWidth||1024);
   assert((await page.locator('.detailImageMeta').innerText()).includes(variant.pack));
-  assert((await page.locator('.detailImageMeta').innerText()).includes(String(variant.price)));
+  assert((await page.locator('.detailImageMeta').innerText()).replace(/,/g,'').includes(String(variant.price)));
   // Medicine families require a presentation as well as an exact option.
   // Assert a new event so a blocked submission cannot reuse a prior variant.
   const exactPresentation=await page.locator('[data-family-option="'+optionId+'"]').evaluate(el=>{const o=window.PS_CATALOGUE_REFRESH.approvedOptions.find(o=>o.product_option_id===el.dataset.familyOption);return o?.presentation||'';});
@@ -174,6 +181,7 @@ try{
   const optionText=page.locator('.pscBrandTick:has([data-family-option="'+optionId+'"]) > span:not(.pscOptionPrice)');
   assert((await optionText.boundingBox()).width>=140,'exact option text must retain a readable column');
   await page.locator('.pscBrandTick:has([data-family-option="'+optionId+'"])').screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-option.png'});
+  await page.locator('.detailImagePane').scrollIntoViewIfNeeded();
   await page.locator('.detailImagePane').screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-selected.png'});
   await page.screenshot({path:'test-results/variant-visual-review/'+width+'-'+sku+'-dialog.png'});
   const requestCount=await page.evaluate(()=>window.__variantRequests.length);
@@ -190,7 +198,7 @@ try{
   assert.equal(actual.verified_description,variant.description);
   assert.equal(actual.verified_price_vat_basis,variant.vatBasis||'Inclusive of VAT as displayed by retailer');
   assert.equal(actual.verified_description_source,variant.descriptionSource || actual.verified_price_source);
-  assert.equal(actual.verified_price_checked_at,'2026-10-11');
+  assert.equal(actual.verified_price_checked_at,variant.checkedAt || '2026-10-11');
   if(variant.priceNote)assert.equal(actual.verified_price_note,variant.priceNote);
   assert((await page.locator('body').evaluate(el=>el.scrollWidth))<=width+1,'catalogue must not overflow horizontally');
   }

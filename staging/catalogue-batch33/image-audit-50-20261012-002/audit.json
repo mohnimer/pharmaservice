@@ -1,0 +1,2168 @@
+{
+  "batch_size": 50,
+  "records": [
+    {
+      "source_name": "Moven Meloxicam 15 mg \u2014 10 Capsules",
+      "family_id": "PSC-IS-164",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/moven_meloxicam_15_mg_10_capsules.jpg",
+      "sha256": "2acd108d021fb8dd992306e4003a3ef662124948dbd17494d5aafb92d781fed8",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-13a292d3b033"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 1,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        207,
+        818,
+        992
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Moven meloxicam 15 mg carton; 10 capsules appears on lower front. Distinct purple strength panel from 7.5 mg.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "FRONT_LABEL_CONSISTENT",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Moven Meloxicam 7.5 mg \u2014 10 Capsules",
+      "family_id": "PSC-IS-164",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/moven_meloxicam_7_5_mg_10_capsules.jpg",
+      "sha256": "9bb29b19b193492f5b02f18d3c9f0bfd21ab507adad4e84a363e60da8576dac6",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-7249b30e2d1f"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 2,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        818,
+        860
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Moven meloxicam 7.5 mg carton; 10 capsules appears on lower front. Distinct pink strength panel from 15 mg.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "FRONT_LABEL_CONSISTENT",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "NAN Comfort 1 \u2014 800 g",
+      "family_id": "PSC-IS-159",
+      "existing_master_product": "NAN COMFORT 1 800GM",
+      "file": "staging/catalogue-batch33/originals/nan_comfort_1_800_g.jpg",
+      "sha256": "7eb44f7cc939361298fb625643797edcb60e5867875737c9bba4f040ba252f12",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-6e59a30ef053"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 3,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        342,
+        816,
+        858
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "NAN Comfort stage1 green can; exact 800 g weight not reliably legible. Do not substitute stage1 400 g.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "NAN Comfort 2 \u2014 400 g",
+      "family_id": "PSC-IS-159",
+      "existing_master_product": "NAN COMFORT 2 400GM",
+      "file": "staging/catalogue-batch33/originals/nan_comfort_2_400_g.jpg",
+      "sha256": "fe8690665bd25c575fd78eb2ed8a9743dc0e172ab1a918bff5777f8965c759f3",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-5b958d72413a"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 4,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        342,
+        816,
+        858
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "NAN Comfort stage2 green can; exact 400 g weight not reliably legible. Do not use the 800 g image.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "NAN Comfort 2 \u2014 800 g",
+      "family_id": "PSC-IS-159",
+      "existing_master_product": "NAN COMFORT 2 800GM",
+      "file": "staging/catalogue-batch33/originals/nan_comfort_2_800_g.jpg",
+      "sha256": "fa6cdc0eafab560e0597e418bc63fbebfa25f86bb8ce99eea42729a237d4fb55",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-c7db4fa9acc4"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 5,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        818,
+        843
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "NAN Comfort stage2 green can; exact 800 g weight not reliably legible. Keep separate from 400 g.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "NAN Comfort 3 \u2014 800 g",
+      "family_id": "PSC-IS-159",
+      "existing_master_product": "NAN COMFORT 3 800GM",
+      "file": "staging/catalogue-batch33/originals/nan_comfort_3_800_g.jpg",
+      "sha256": "4798d0521dae2bf7140e9bdcb1f1e878845c55cf0395b315eaef36d473273703",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-b8f2cffcef03"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 6,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        342,
+        816,
+        858
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "NAN Comfort stage3 green can; exact 800 g weight not reliably legible. Regional formula/artwork must match.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "NAN Lactose Free \u2014 400 g",
+      "family_id": "PSC-IS-159",
+      "existing_master_product": "NAN LF 400GM (LACTOSE FREE)",
+      "file": "staging/catalogue-batch33/originals/nan_lactose_free_400_g.jpg",
+      "sha256": "206a25614669a60a33031722c73206d373b8e3d717fa51cde2400c1afbb4e9a4",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-09bdd311ca5a"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 7,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        210,
+        816,
+        989
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "NAN Lactose Free blue-panel can; exact 400 g weight not reliably legible. Not a standard Optipro formula.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "NAN Optipro 3 \u2014 400 g",
+      "family_id": "PSC-IS-159",
+      "existing_master_product": "NAN 3 OPTIPRO 400GM",
+      "file": "staging/catalogue-batch33/originals/nan_optipro_3_400_g.jpg",
+      "sha256": "b80056ff40ee621eb6d49804e7fa859f8b83acc74c87e1d6e4902034d9d1b0d3",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-d45d30f1493e"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 8,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        207,
+        818,
+        988
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "NAN Optipro stage3 blue can; exact 400 g weight not reliably legible. Keep distinct from Comfort3/SupremePro3.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "NAN SupremePro 2 \u2014 400 g",
+      "family_id": "PSC-IS-159",
+      "existing_master_product": "NAN PRO 2 SUPREME 400GM",
+      "file": "staging/catalogue-batch33/originals/nan_supremepro_2_400_g.jpg",
+      "sha256": "56e05daea271ee5dd43a5d7b57a6193e2f0c14afd9138ac6dd2bf2aa8f2e574e",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-98dba85b5a1d"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 9,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        818,
+        756
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "NAN SupremePro stage2 gold can; individual full-original review did not resolve tiny weight label. Do not infer 400 g from can shape.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "NAN SupremePro 3 \u2014 800 g",
+      "family_id": "PSC-IS-159",
+      "existing_master_product": "NAN PRO 3 SUPREME 800G (806116)",
+      "file": "staging/catalogue-batch33/originals/nan_supremepro_3_800_g.jpg",
+      "sha256": "ae1ccf4d487b672030b4a484c18bc18ded7f84c6979838aa3be7f407e4c27d56",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-05fcd107c286"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 10,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        818,
+        860
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "NAN SupremePro stage3 gold can; individual full-original review did not resolve tiny weight label. Do not infer 800 g from can shape.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Nasaflex Mometasone Furoate Nasal Spray",
+      "family_id": "PSC-IS-167",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/nasaflex_mometasone_furoate_nasal_spray.jpg",
+      "sha256": "8cce21cae20656b0f14f22593e640ec3931ae59e0f8eb0c98abc1a731d0f75bf",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; EXACT PACK/PRESENTATION NEEDS VERIFICATION",
+      "local_option_ids": [
+        "local-acorus-83090d95f22b"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 11,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        396,
+        816,
+        803
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Nasaflex nasal spray carton; 18 ml/bottle appears on front, but local name omits volume/strength. Exact supplier presentation reconciliation required.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Nokamen \u2014 30 Tablets",
+      "family_id": "PSC-IS-157",
+      "existing_master_product": "NOKAMEN TAB 30S",
+      "file": "staging/catalogue-batch33/originals/nokamen_30_tablets.jpg",
+      "sha256": "4c4ccc48f22636499a7a89c2ee475618130e3a2a2bdaa5fe0c54cc1729e8bc74",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-ba1ba46ab93c"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 12,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        386,
+        378,
+        814,
+        822
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Nokamen carton, 30 tablets visible. Product front does not establish ingredient, strength or clinical approval.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "FRONT_LABEL_CONSISTENT",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Nolvadex Tamoxifen 10 mg \u2014 30 Tablets",
+      "family_id": "PSC-IS-182",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/nolvadex_tamoxifen_10_mg_30_tablets.jpg",
+      "sha256": "9b8e94ce72e83dcf2fde52d43e4aa1315111442729d28eb29d315449e56ddc26",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-dbd40d8389ac"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 13,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        341,
+        816,
+        858
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Nolvadex tamoxifen 10 mg carton, 30 tablets visible. Separate from Nolvadex-D 20 mg.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "FRONT_LABEL_CONSISTENT",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Nolvadex-D Tamoxifen 20 mg \u2014 30 Tablets",
+      "family_id": "PSC-IS-182",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/nolvadex_d_tamoxifen_20_mg_30_tablets.jpg",
+      "sha256": "a28447489f0a9067bf72d36bf0821305c7e4070abeade09c29180787b532d8ee",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-11702595f8a6"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 14,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        816,
+        860
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Nolvadex-D tamoxifen 20 mg carton, 30 tablets visible. Separate from Nolvadex 10 mg.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "FRONT_LABEL_CONSISTENT",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Ozempic Semaglutide 0.25 mg Prefilled Pen",
+      "family_id": "PSC-IS-179",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/ozempic_semaglutide_0_25_mg_prefilled_pen.jpg",
+      "sha256": "ef57688c5cfa76d0374edb99adb02e5f6ae1b7a4c64a922e3b775007d7e0460d",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-a0a3ef8669fa"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 15,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        369,
+        410,
+        830,
+        790
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Ozempic semaglutide 0.25 mg carton, 1 pen and4 disposable needles printed. Full-original review confirms dose; pen volume not reliably legible. Do not infer multi-dose content from headline strength.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Ozempic Semaglutide 0.5 mg Prefilled Pen",
+      "family_id": "PSC-IS-179",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/ozempic_semaglutide_0_5_mg_prefilled_pen.jpg",
+      "sha256": "7fc63c5d7c686ac514701218378b697cc9d4bd646e043e2157afc7741db15aac",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-17e4dad608df"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 16,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        395,
+        410,
+        804,
+        790
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Ozempic semaglutide 0.5 mg carton, 1 pen and4 disposable needles printed. Exact pen volume/presentation remains pending.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Ozempic Semaglutide 1 mg Prefilled Pen",
+      "family_id": "PSC-IS-179",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/ozempic_semaglutide_1_mg_prefilled_pen.jpg",
+      "sha256": "cc62992a462156e7fc35d855f720bfb3d0dff02bee0cd8ca8b24cfdcde6b7dc3",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-126d63a7fb1a"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 17,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        369,
+        407,
+        830,
+        793
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Ozempic semaglutide 1 mg carton, 1 pen and4 disposable needles printed. Full-original review confirms dose; exact pen volume remains pending.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "PediaVIT Multi 50 ml",
+      "family_id": "PSC-IS-188",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/pediavit_multi_50_ml.jpg",
+      "sha256": "64dbab3876733fb2123791c65a13c170e6bf9562f6bb6e4bad69d1da721c1280",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-e0a6920e38dc"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 18,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        208,
+        817,
+        991
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "PediaVIT Multi carton, 50 ml visible; do not borrow Vitamin D-only or Fortified product images.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "FRONT_LABEL_CONSISTENT",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "ProLifer Prebiotic + Probiotic + L-Glutamate \u2014 30 Softgels",
+      "family_id": "PSC-IS-176",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/prolifer_prebiotic_plus_probiotic_plus_l_glutamate_30_softgels.jpg",
+      "sha256": "7c7999a05b4aafb117569bd27c403a08790eb09ef18e95914dadb1c3b2c4d29e",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-bad79542e340"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 19,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        208,
+        817,
+        991
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Zenith ProLifer carton explicitly reads Prebiotic, Probiotic & L-glutamate and30 softgels. Full original confirms L-glutamate wording; do not silently replace with L-glutamine.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "FRONT_LABEL_CONSISTENT",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "ProRise 20 mg \u2014 30 Capsules",
+      "family_id": "PSC-IS-171",
+      "existing_master_product": "PRORISE 20MG CAP 30'S",
+      "file": "staging/catalogue-batch33/originals/prorise_20_mg_30_capsules.jpg",
+      "sha256": "8e70f7886ac2fcfc4635086faeb45c5be46b885adf9124fcd397fa2a0c121814",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-e35706fb3a4e"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 20,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        341,
+        817,
+        858
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "ProRise 20 mg carton, 30 hard-gelatin capsules visible. Distinct from 40 mg presentation.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "FRONT_LABEL_CONSISTENT",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "ProRise 40 mg \u2014 30 Capsules",
+      "family_id": "PSC-IS-171",
+      "existing_master_product": "PRORISE 40MG CAP 30'S",
+      "file": "staging/catalogue-batch33/originals/prorise_40_mg_30_capsules.jpg",
+      "sha256": "54f2003a5fc17f50b3b961b24495548b758a4805ff9fee2058238b3464ec0f88",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-382e97b1a135"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 21,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        381,
+        207,
+        818,
+        993
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "ProRise 40 mg carton, 30 hard-gelatin capsules visible. Distinct from 20 mg presentation.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "FRONT_LABEL_CONSISTENT",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Ruset 20/10 mg \u2014 30 Tablets",
+      "family_id": "PSC-IS-178",
+      "existing_master_product": "RUSET 20MG/10MG TAB 30'S",
+      "file": "staging/catalogue-batch33/originals/ruset_20_10_mg_30_tablets.jpg",
+      "sha256": "603851063b195851cfc3761361587313b5218eda68868b9803e35f05e1e813b2",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-971a2f43b366"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 22,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        340,
+        817,
+        859
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Ruset rosuvastatin/ezetimibe 20 mg/10 mg carton, 30 film-coated tablets visible. Preserve ingredient-order strengths.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "FRONT_LABEL_CONSISTENT",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Ruset 5/10 mg \u2014 30 Tablets",
+      "family_id": "PSC-IS-178",
+      "existing_master_product": "RUSET 5MG/10MG TAB 30'S",
+      "file": "staging/catalogue-batch33/originals/ruset_5_10_mg_30_tablets.jpg",
+      "sha256": "8e419df49bba0d9208058c09a0b46b1a50739a133e4b66a74dc97b84ed2b4ebc",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-e5ba62deaf28"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 23,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        385,
+        343,
+        815,
+        857
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Ruset rosuvastatin/ezetimibe 5 mg/10 mg carton, 30 film-coated tablets visible. Preserve ingredient-order strengths.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "FRONT_LABEL_CONSISTENT",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Anti-Dandruff Shampoo",
+      "family_id": "PSC-IS-115",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_anti_dandruff_shampoo.jpg",
+      "sha256": "e2fd71d38787f9cae922743de89fb606baa841ab8e6fc7158d6b4c6ec8d1d9b6",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-81356e98ebbb"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 24,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        341,
+        816,
+        859
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Anti-Dandruff Shampoo front matches product line; net volume absent/unreadable. pH5.5 is not volume.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Anti-Hairloss Shampoo",
+      "family_id": "PSC-IS-156",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_anti_hairloss_shampoo.jpg",
+      "sha256": "766dcdc8658014f1ddefee308272cb5db100286baae639ed60314f650fddc32c",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-2c36d93e590e"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 25,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        341,
+        816,
+        858
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Anti-Hairloss Shampoo front matches line; net volume absent/unreadable. Do not infer200 ml from retailer listing.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Anti-Stretch Mark Cream",
+      "family_id": "PSC-IS-181",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_anti_stretch_mark_cream.jpg",
+      "sha256": "1b9fc9adb096f198e83a401a176a0d8c174ceb6593809e996c4d67afd876c8ae",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-375459036d52"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 26,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        818,
+        860
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Anti-Stretch Mark Cream carton matches line; net weight/volume absent/unreadable.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Body Lotion with Camomile",
+      "family_id": "PSC-IS-111",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_body_lotion_with_camomile.jpg",
+      "sha256": "23f474f63ebebbeb890edb0d627e6a8cb84eadb9c430a08bbf6197ad31a36c1b",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-bca4c20a407a"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 27,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        341,
+        817,
+        752
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Body Lotion with Camomile carton matches line; net volume absent/unreadable. Keep distinct from Baby Body Milk.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Body Milk",
+      "family_id": "PSC-IS-111",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_body_milk.jpg",
+      "sha256": "7f2d8346af47a629f06230bc76a0e8e8f7e2fc34964863697e66e4c7ba9675d4",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-a7e10bc19b2e"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 28,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        341,
+        817,
+        860
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Body Milk with Panthenol carton matches line; net volume absent/unreadable. Previous pack hold preserved.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Bubble Bath with Camomile",
+      "family_id": "PSC-IS-131",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_bubble_bath_with_camomile.jpg",
+      "sha256": "fe2ce992e061284d1033642d39ef24e900fc2444f9df6e52f4ea03bf415e886a",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-bc5797476cd0"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 29,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        208,
+        816,
+        991
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Bubble Bath with Camomile carton matches line; net volume absent/unreadable. Do not borrow Gentle Wash.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Cleansing Bar",
+      "family_id": "PSC-IS-180",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_cleansing_bar.jpg",
+      "sha256": "b0e1724703d62574c1eb175b2bb97e90965a042976ada041e9578b982e26df05",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-33236ab32b6c"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 30,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        340,
+        817,
+        860
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Cleansing Bar single carton; net weight absent/unreadable. Do not borrow verified2x150 g value pack.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Cream Extra Soft",
+      "family_id": "PSC-IS-111",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_cream_extra_soft.jpg",
+      "sha256": "d98a2f83bd7ff5db14b0c6603a45fad9e1cdf17631d4783da5f96ea04dc0efde",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-11057618863a"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 31,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        209,
+        816,
+        991
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Cream Extra Soft tube matches line; net weight absent/unreadable.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Detangling Shampoo with Bisabolol",
+      "family_id": "PSC-IS-156",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_detangling_shampoo_with_bisabolol.jpg",
+      "sha256": "c0ea7ddaadb17d0c30b1d01909525b510cedf2070aeb1167b3a972697f4a7b96",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-7a9f0b81f0ac"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 32,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        380,
+        340,
+        818,
+        860
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Detangling Shampoo with Bisabolol carton matches line; net volume absent/unreadable. Distinct from camomile shampoo.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Diaper Rash Cream",
+      "family_id": "PSC-IS-148",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_diaper_rash_cream.jpg",
+      "sha256": "9dca476b8627e8ca38d48bba5e201cdeb3b2f24a33efe050234e80517bc73ee6",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-7db9b5951968"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 33,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        341,
+        817,
+        801
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Diaper Rash Cream with Panthenol carton matches line; net weight absent/unreadable.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Eau de Cologne",
+      "family_id": "PSC-IS-140",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_eau_de_cologne.jpg",
+      "sha256": "4baa3f240348572b701caa3bc2d350c7313e5e8553179d9c906784d0b001f9e4",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-c53213d441f5"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 34,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        208,
+        817,
+        904
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Eau de Cologne with Hydrolyzed Silk carton matches line; net volume absent/unreadable.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Face & Body Wash Foam",
+      "family_id": "PSC-IS-131",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_face_and_body_wash_foam.jpg",
+      "sha256": "cdab3449d1809527db8e964ba00eb72595e737f7dc85e2e431716575ec3ef27a",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-541065052372"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 35,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        342,
+        815,
+        763
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Face & Body Wash Foam pump bottle matches line; net volume absent/unreadable. Distinct pump presentation.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Gentle Wash with Allantoin",
+      "family_id": "PSC-IS-131",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_gentle_wash_with_allantoin.jpg",
+      "sha256": "40593c8cadd457d6524d8edf037d51b7e1b6c78d166c40fd15f699f009bf93e2",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-fc0e90234c62"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 36,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        207,
+        817,
+        992
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Gentle Wash with Allantoin carton matches line; net volume absent/unreadable. Distinct from Calendula wash.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Gentle Wash with Calendula",
+      "family_id": "PSC-IS-131",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_gentle_wash_with_calendula.jpg",
+      "sha256": "980d1a46f9a136c661878611a03f38377a58bdf89c063328c25cf1b85d8ccc76",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-7becd2db56a1"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 37,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        208,
+        816,
+        991
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Gentle Wash with Calendula yellow-label carton matches line; net volume absent/unreadable. Distinct from Allantoin wash.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Lip Balm",
+      "family_id": "PSC-IS-162",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_lip_balm.jpg",
+      "sha256": "6e674b46060991ec227824fefd0ba49a681f07557f7519c3de36d1638d0d1456",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-c24e6eff64e5"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 38,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        380,
+        340,
+        818,
+        860
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Lip Balm blister matches line; net weight absent/unreadable. Previous hold preserved.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Massage Oil",
+      "family_id": "PSC-IS-111",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_massage_oil.jpg",
+      "sha256": "ac5609c31ffe1aca6e69b47019f1f9aacd06d256d92cb5c4dbecebadf85525cc",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-616aa1152228"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 39,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        341,
+        816,
+        859
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Massage Oil carton matches line; net volume absent/unreadable. Distinct from Skin Care Oil.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Powder with Olive Oil",
+      "family_id": "PSC-IS-141",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_powder_with_olive_oil.jpg",
+      "sha256": "e4384f927c4b4bcf50c862010642a192b298dde57d11287a981b52fbcc7e3b95",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-3ee243ee9ad4"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 40,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        341,
+        817,
+        859
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Powder with Olive Oil bottle matches line; net weight absent/unreadable. Previous hold preserved.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Shampoo with Camomile",
+      "family_id": "PSC-IS-131",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_shampoo_with_camomile.jpg",
+      "sha256": "808009004368f0423e0aac30821ba68de2d2d645c12b59d68c564aaedd21be3e",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-dd458ae96334"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 41,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        208,
+        816,
+        992
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Shampoo with Camomile carton matches line; net volume absent/unreadable. Previous hold preserved.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Baby Skin Care Oil",
+      "family_id": "PSC-IS-111",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_baby_skin_care_oil.jpg",
+      "sha256": "abe2f2051d87aa1270b8f91d8e4f87d9403715784eaa42fd1e8e4c64cbb6bad2",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-779d958f18b0"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 42,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        382,
+        208,
+        818,
+        992
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Baby Skin Care Oil with natural oils carton matches line; net volume absent/unreadable. Distinct from Massage Oil.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Clear Face Antibacterial Cleansing Foam",
+      "family_id": "PSC-IS-152",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_clear_face_antibacterial_cleansing_foam.jpg",
+      "sha256": "633860f29c94f923978ea4edeabba94f36dad7b86d016eb1ac72f10c7057be7d",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-26f075753c6d"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 43,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        341,
+        817,
+        858
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Clear Face Antibacterial Cleansing Foam carton matches line; net volume absent/unreadable. Not Gentle Facial Cleanser.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Everyday Shampoo",
+      "family_id": "PSC-IS-156",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_everyday_shampoo.jpg",
+      "sha256": "6e7f631855289f1049db62178e46f0750685c7f263b35a5733f8e37c3083fd3c",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-add6ae257643"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 44,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        342,
+        815,
+        858
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Everyday Shampoo carton matches line; net volume absent/unreadable. Distinct from Anti-Dandruff/Anti-Hairloss.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Extreme Dry Skin Relief Shampoo 5% Urea",
+      "family_id": "PSC-IS-115",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_extreme_dry_skin_relief_shampoo_5_urea.jpg",
+      "sha256": "b9a445d165b3a7f44c4a624fa6f6ed56a129cd5b151f717921f15c18a1df7c56",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-4f24389acd4a"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 45,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        208,
+        817,
+        878
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Extreme Dry Skin Relief Shampoo carton visibly5% Urea; ingredient percentage is not net volume. Previous hold preserved.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Fresh Classic Roll-On Deodorant",
+      "family_id": "PSC-IS-146",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_fresh_classic_roll_on_deodorant.jpg",
+      "sha256": "92bed619200814dc48571c9c7a646e70e319c2cea47577af3f52718aacf19ef3",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-7cb34745b16f"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 46,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        384,
+        342,
+        815,
+        857
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Fresh Classic roll-on bottle matches deodorant type; net volume absent/unreadable. Alcohol/free claims or colour alone do not prove exact size.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Gentle Facial Cleanser",
+      "family_id": "PSC-IS-152",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_gentle_facial_cleanser.jpg",
+      "sha256": "23c0ecc628407f52f07238d6123db7c38932112585e27d64a5479c84ca63bfe9",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "PRODUCT ID CONFIRMED; PACK SIZE NOT VISIBLE \u2014 VERIFY BEFORE QUOTATION",
+      "local_option_ids": [
+        "local-acorus-4f230bd47c18"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 47,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        342,
+        816,
+        859
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Gentle Facial Cleanser carton matches line; net volume absent/unreadable. Distinct from Clear Face antibacterial foam.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Intimate Wash Foam pH 3.8",
+      "family_id": "PSC-IS-160",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_intimate_wash_foam_ph_3_8.jpg",
+      "sha256": "e461e396a6aa3dfbb818a93aab80b09b9168f9e56d3da1c7c50de451c6ae5365",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-d62fdc588e1a"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 48,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        341,
+        816,
+        859
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Intimate Wash Foam pH3.8 carton matches foam line; pH is not net volume. Previous hold preserved.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Intimate Wash pH 3.8 \u2014 Women 15\u201350",
+      "family_id": "PSC-IS-160",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_intimate_wash_ph_3_8_women_15_50.jpg",
+      "sha256": "f1b8d2f6c903246bce77d03dcf45ec430d33bbdb8f84ed1595e1a2020d8e0e27",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-e5c59ffa9071"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 49,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        380,
+        340,
+        818,
+        860
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Intimate Wash pH3.8 carton says women15-50; age bracket/pH are not net volume. Distinct from foam and pH6.8.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    },
+    {
+      "source_name": "Sebamed Intimate Wash pH 6.8 \u2014 Women 50+",
+      "family_id": "PSC-IS-160",
+      "existing_master_product": "",
+      "file": "staging/catalogue-batch33/originals/sebamed_intimate_wash_ph_6_8_women_50plus.jpg",
+      "sha256": "95a65837cef539359fbb41d3ad6b2ded3b30a2902fffe3668c12d3d9a86b9da0",
+      "width": 1200,
+      "height": 1200,
+      "source_pack_claim": "CONFIRMED FROM FRONT PACK / EXISTING SOURCE",
+      "local_option_ids": [
+        "local-acorus-76ad982e8388"
+      ],
+      "database_option_ids": [],
+      "release_status": "HOLD",
+      "image_verified": false,
+      "price_verified": false,
+      "batch_index": 50,
+      "original_checksum_verified": true,
+      "actual_dimensions": [
+        1200,
+        1200
+      ],
+      "foreground_bbox": [
+        383,
+        341,
+        817,
+        857
+      ],
+      "visual_review": "COMPLETED",
+      "image_identity_verified": false,
+      "image_quality_approved": false,
+      "audit_date": "2026-10-12",
+      "visual_observations": "Sebamed Intimate Wash pH6.8 carton says women50+; age bracket/pH are not net volume. Distinct from pH3.8.",
+      "review_method": "Labelled native-content contact sheets for all50; NAN SupremePro2/3, all3 Ozempic presentations and ProLifer additionally inspected individually at full original size.",
+      "quality_decision": "REPLACEMENT_REQUIRED",
+      "quality_reasons": [
+        "Small source photograph padded into1200-square canvas",
+        "Supplier wallpaper/tabletop/reflections remain",
+        "Effective product detail below required native retailer-packshot standard"
+      ],
+      "supplier_visual_identity_status": "EXACT_PACK_OR_PRESENTATION_UNRESOLVED",
+      "next_action": "Retrieve native exact-pack photograph; preserve original/local IDs and resolve net quantity/presentation before runtime release"
+    }
+  ],
+  "batch_id": "image-audit-50-20261012-002",
+  "batch_status": "IN_PROGRESS_AUDIT_COMPLETE_REPLACEMENTS_PENDING",
+  "production_changed": false,
+  "existing_verified_variants_preserved": 34,
+  "original_sources_unchanged": true,
+  "counts": {
+    "audited": 50,
+    "original_source_images_approved_for_release": 0,
+    "replacement_required": 50,
+    "front_label_consistent": 11,
+    "pack_or_presentation_unresolved": 39
+  },
+  "scope": "50 image audits completed; zero corrected live products from this batch. User now requires 50 corrected/tested/deployed listings before calling a batch finished."
+}

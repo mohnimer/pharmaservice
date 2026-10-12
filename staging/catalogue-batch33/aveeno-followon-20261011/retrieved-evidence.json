@@ -1,0 +1,151 @@
+[
+  {
+    "local_option_id": "local-acorus-aefa5893c7b0",
+    "source_url": "https://www.lifepharmacy.com/product/aveeno-baby-calming-comfort-bath-wash-250ml",
+    "checked_at": "2026-10-11T17:58:44.005840+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.lifepharmacy.com/product/aveeno-baby-calming-comfort-bath-wash-250ml",
+    "page_sha256": "2f9f7fd1d3bab6b8bebba48b323e229cf0d1ec43905226083641e9ec1855d143",
+    "source_name": "Aveeno Baby Calming Comfort Bath & Wash Lavender and Soothing Bedtime Cleanser for Delicate Skin, 250ml",
+    "source_sku": "143271",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "AVEENO",
+      "url": "https://www.lifepharmacy.com/brand/aveeno"
+    },
+    "offer": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.lifepharmacy.com/product/aveeno-baby-calming-comfort-bath-wash-250ml",
+      "itemCondition": "https://schema.org/NewCondition",
+      "price": 68.25,
+      "priceCurrency": "AED",
+      "priceValidUntil": "2027-12-30T00:00:00.000Z",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AED"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          }
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "AE"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 3,
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    },
+    "vat_inclusive_text_present": true,
+    "images": [
+      {
+        "source_url": "https://cdn.lifepharmacy.com/products/aveeno-baby-calming-comfort-bath-wash-250ml/143271-1.jpg",
+        "file": "staging/catalogue-batch33/aveeno-followon-20261011/local-acorus-aefa5893c7b0-0.jpg",
+        "sha256": "b363ce8aefcf97ee36e03d8253ae81fac07a3179ab95fde3007668c7bb74e2c5",
+        "dimensions": [
+          700,
+          700
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-20546fca57de",
+    "source_url": "https://www.myaster.com/en/online-pharmacy/p/aveeno-baby-daily-care-moisturizing-lotion-150ml/1026813",
+    "checked_at": "2026-10-11T17:58:44.007581+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieved_url": "https://www.myaster.com/en/online-pharmacy/p/aveeno-baby-daily-care-moisturizing-lotion-150ml/1026813",
+    "page_sha256": "fe4dd03474a26c3565ad606cad17081a2c9c655964a476caed8c0aaf6dc8bc3f",
+    "source_name": "Aveeno Baby Daily Care Moisturizing Lotion - 150ml",
+    "source_sku": "1026813",
+    "source_brand": {
+      "@type": "Brand",
+      "name": "Aveeno"
+    },
+    "offer": {
+      "@type": "Offer",
+      "url": "https://www.myaster.com/en/online-pharmacy/p/aveeno-baby-daily-care-moisturizing-lotion-150ml/1026813",
+      "priceCurrency": "AED",
+      "price": "22.05",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": "myAster"
+      }
+    },
+    "vat_inclusive_text_present": false,
+    "images": [
+      {
+        "source_url": "https://media.myaster.com/images/products/1026813/aveeno-baby-daily-care-face-body-moisturizing-lotion-150ml/1026813_1_1.jpg",
+        "file": "staging/catalogue-batch33/aveeno-followon-20261011/local-acorus-20546fca57de-0.jpg",
+        "sha256": "e84bd3efe5b849fc3ae7464334f9f6401d46816c68595ea8644c842d3ebbcb48",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/products/1026813/aveeno-baby-daily-care-face-body-moisturizing-lotion-150ml/1026813_5_1.jpg",
+        "file": "staging/catalogue-batch33/aveeno-followon-20261011/local-acorus-20546fca57de-1.jpg",
+        "sha256": "6a206e42ed3c7447d45dfd9939611643a44f9c6b3208b25fa3ea98dfb47fdf5e",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/products/1026813/aveeno-baby-daily-care-face-body-moisturizing-lotion-150ml/1026813_3_1.jpg",
+        "file": "staging/catalogue-batch33/aveeno-followon-20261011/local-acorus-20546fca57de-2.jpg",
+        "sha256": "c633a6958988a9110638fe85fcb94f2d25fb6e46e45a05c8a860d90283d82e63",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "source_url": "https://media.myaster.com/images/products/1026813/aveeno-baby-daily-care-face-body-moisturizing-lotion-150ml/1026813_2_1.jpg",
+        "file": "staging/catalogue-batch33/aveeno-followon-20261011/local-acorus-20546fca57de-3.jpg",
+        "sha256": "15c5b39f96789afb1ea6c26eb00df3653b8d04f144aada2462a06f60cbb1ec1c",
+        "dimensions": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  {
+    "local_option_id": "local-acorus-204ebc87709b",
+    "source_url": "https://www.myaster.com/en/online-pharmacy/p/aveeno-daily-moisturizing-lotion-300-ml/1026807",
+    "checked_at": "2026-10-11T17:58:44.008540+00:00",
+    "release_status": "HOLD",
+    "image_verified": false,
+    "price_verified": false,
+    "retrieval_error": "HTTP Error 522: <none>"
+  }
+]
