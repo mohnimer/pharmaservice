@@ -4,7 +4,7 @@ import {join} from 'node:path';
 import {spawnSync} from 'node:child_process';
 // Keep production source intact; replace only external adapters in isolated tests.
 const root=mkdtempSync(join(tmpdir(),'psc-mail-test-'));
-for(const path of ['_shared/onboarding.ts','_shared/mail-senders.ts','_shared/outreach.ts','_shared/mail-intake.ts','_shared/psc-mail.ts','_shared/quote-pdf.ts','dispatch-notification/index.ts','psc-gmail-oauth/index.ts','poll-procurement-mail/index.ts','procurement-mail/index.ts','send-mail-campaign/index.ts','mail-unsubscribe/index.ts']){
+for(const path of ['_shared/business-email.js','_shared/onboarding.ts','_shared/mail-senders.ts','_shared/outreach.ts','_shared/mail-intake.ts','_shared/psc-mail.ts','_shared/quote-pdf.ts','dispatch-notification/index.ts','psc-gmail-oauth/index.ts','poll-procurement-mail/index.ts','procurement-mail/index.ts','send-mail-campaign/index.ts','mail-unsubscribe/index.ts']){
  const file=join(root,path);mkdirSync(join(file,'..'),{recursive:true});
  writeFileSync(file,readFileSync('supabase/functions/'+path,'utf8').replace(/import \{\s*createClient\s*\} from 'https:\/\/esm.sh\/[^']+'/g,'const createClient:any=()=> (globalThis as any).testService').replace(/import \{PDFDocument,StandardFonts,rgb\} from '[^']+'/,'const PDFDocument:any={},StandardFonts:any={},rgb:any=()=>({})'));
 }
@@ -56,7 +56,7 @@ Deno.test('individual business email accepts a non-subscriber only after approva
 Deno.test('sales introductions allow non-subscribers without pretending there is an existing conversation',async()=>{
  set(svc({draft:{}}));writes=0;
  const r=await procurement(request({action:'contact_draft',audience:'prospect',purpose:'sales_introduction',contact_id:'test-contact',subject:'Introduction',body_text:'Hello',confirm_transactional:false}));
- const d=await r.json();assert(r.status===200);assert(d.communication_purpose==='sales_introduction');assert(d.kind==='followup');assert(d.body_text.includes('reply to let us know'));assert(writes===1);
+ const d=await r.json();assert(r.status===200);assert(d.communication_purpose==='sales_introduction');assert(d.kind==='followup');assert(d.body_text==='Hello');assert(writes===1);
 });
 Deno.test('sales opt-outs block drafting and sending before any transport or writes',async()=>{
  for(const contact of [{id:'c',email:'buyer@example.com',status:'unsubscribed'},{id:'c',email:'buyer@example.com',status:'active',unsubscribed_at:'today'},{id:'c',email:'buyer@example.com',status:'bounced'}]){

@@ -4,8 +4,8 @@ import {service,admin,json,MAILBOX,check,accessToken,gmail,mime,send,hash,noDemo
 import {quotePdf} from '../_shared/quote-pdf.ts'
 import {onboardingAction,onboardingTick,validateOnboardingSend} from '../_shared/onboarding.ts'
 import {worker} from '../_shared/psc-mail.ts'
-const htmlEscape=(s:string)=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
-function businessHtml(text:string){return `<!doctype html><html><body style="margin:0;background:#f7f8f5;color:#183b3a;font-family:Arial,sans-serif"><div style="max-width:620px;margin:auto;padding:36px 24px"><p style="font-size:12px;letter-spacing:2px">PHARMA SERVICE · DUBAI</p><div style="font-size:16px;line-height:1.7;white-space:pre-line">${htmlEscape(text)}</div><p style="margin-top:28px"><a href="https://pharmaservice.ae/#our-model" style="display:inline-block;background:#102f31;color:white;padding:15px 22px;border-radius:12px;text-decoration:none;margin:0 10px 10px 0">Explore our model</a><a href="mailto:mohamed@pharmaservice.ae" style="display:inline-block;border:1px solid #bfc7c0;color:#183b3a;padding:15px 22px;border-radius:12px;text-decoration:none">Reach out</a></p></div></body></html>`}
+import '../_shared/business-email.js'
+const businessHtml=(text:string)=>(globalThis as any).PSC_BUSINESS_EMAIL_HTML(text)
 async function directContact(svc:any,id:string,purpose?:string){
  const c=check(await svc.from('mail_contacts').select('*').eq('id',id).single());
  if(!c||!email(c.email)||c.status==='bounced')throw new MailError('contact_not_available');
@@ -31,8 +31,8 @@ Deno.serve(async req=>{
    if(!sales&&(b.confirm_transactional!==true||!['customer','supplier'].includes(b.audience)||!['request_response','account_followup'].includes(b.purpose)))throw new MailError('transactional_context_required');
    if(typeof b.subject!=='string'||!b.subject.trim()||/[\r\n]/.test(b.subject)||b.subject.length>300||typeof b.body_text!=='string'||!b.body_text.trim()||b.body_text.length>30000)throw new MailError('invalid_draft');
    const c=await directContact(svc,b.contact_id,b.purpose);
-   const optout=sales?'\n\nPharma Service Co. L.L.C. · Dubai, UAE\nIf you would prefer no further sales emails, reply to let us know.'+(c.unsubscribe_token?'\nStop sales and marketing emails: https://pharmaservice.ae/?token='+c.unsubscribe_token+'#unsubscribe':''):'';
-   return json(check(await svc.from('psc_mail_drafts').insert({kind:b.audience==='supplier'?'rfq':'followup',contact_id:c.id,communication_purpose:b.purpose,recipient:c.email,subject:b.subject.trim(),body_text:b.body_text+optout,created_by:user.id}).select('*').single()));
+
+   return json(check(await svc.from('psc_mail_drafts').insert({kind:b.audience==='supplier'?'rfq':'followup',contact_id:c.id,communication_purpose:b.purpose,recipient:c.email,subject:b.subject.trim(),body_text:b.body_text,created_by:user.id}).select('*').single()));
   }
   if(['intake_source','intake_save','intake_rfq'].includes(b.action))return json(await intakeAction(svc,user,b));
   if(b.action==='link'){
@@ -96,7 +96,7 @@ Deno.serve(async req=>{
   const token=await accessToken(svc),sender=draftSender(draft.kind);await verifySender(token,sender);
   const claimed=draft.onboarding_id?check(await svc.rpc('psc_claim_onboarding_draft',{p_draft:draft.id,p_updated_at:draft.updated_at,p_user:user.id})):draft.intake_message_id?check(await svc.rpc('psc_claim_intake_draft',{p_draft:draft.id,p_updated_at:draft.updated_at,p_user:user.id})):check(await svc.from('psc_mail_drafts').update({status:'sending',approved_by:user.id,approved_at:new Date().toISOString(),updated_at:new Date().toISOString()}).eq('id',draft.id).eq('status','draft').eq('updated_at',draft.updated_at).select('*').maybeSingle());if(!claimed)throw new MailError('draft_changed_or_claimed')
   draft=Array.isArray(claimed)?claimed[0]:claimed;if(!draft?.id)throw new MailError('draft_changed_or_claimed');await logAttempt(svc,null,draft.id,'started');attemptedSend=true;
-  const result=await send(token,routedMime(sender,{to:draft.recipient,subject:draft.subject,text:draft.body_text,html:draft.contact_id?businessHtml(draft.body_text):undefined,id:'draft-'+draft.id,pdf}));
+  const result=await send(token,routedMime(sender,{to:draft.recipient,subject:draft.subject,text:draft.contact_id?(globalThis as any).PSC_BUSINESS_EMAIL_TEXT(draft.body_text):draft.body_text,html:draft.contact_id?businessHtml(draft.body_text):undefined,id:'draft-'+draft.id,pdf}));
   check(await svc.from('psc_mail_drafts').update({status:'accepted',provider_message_id:result.id,accepted_at:new Date().toISOString(),last_error:null}).eq('id',draft.id));
   await logAttempt(svc,null,draft.id,'gmail_accepted',null,result.id);
   check(await svc.from('psc_mail_messages').upsert({gmail_message_id:result.id,gmail_thread_id:result.threadId||result.id,direction:'outbound',kind:draft.kind,order_id:draft.order_id,sender,recipient:draft.recipient,subject:draft.subject,body_text:draft.body_text,received_at:new Date().toISOString(),review_status:'linked',attachments:draft.attachment_path?[{object_path:draft.attachment_path,file_name:'PSC-quotation.pdf'}]:[]}));
