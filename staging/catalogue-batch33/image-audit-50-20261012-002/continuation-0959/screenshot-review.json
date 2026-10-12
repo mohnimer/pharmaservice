@@ -1,0 +1,45 @@
+{
+  "tested_commit": "d4a3f9b7ddaac3383c8708dbb74dbdbd601a54da",
+  "production_commit": "c58d2ca47e2c940ef4bf6de61d8f1e7607fc9f4c",
+  "ci_run": 38211748884,
+  "ci_status": "success",
+  "artifact_id": 11730470300,
+  "artifact_sha256": "3ba0a65c5abadd3bd86da1dad871a655073323d0a0408959acdfeaad01d6fa50",
+  "desktop_review": true,
+  "mobile_review": true,
+  "review_basis": "Desktop and mobile listing cards, mobile selected preview and full desktop dialog visually reviewed. Correct18ml photograph and combination description visible. Desktop selected-crop alone was not used as image approval. Existing54 variants passed browser/request assertions.",
+  "screenshots": [
+    {
+      "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-0959/reviewed-screenshots/390-PS-AC-83090D95F22B-dialog.png",
+      "sha256": "901cdaad7cf6190dd47bd25b6c44186e695ba98ea22a0f27bda44a646164bcf5"
+    },
+    {
+      "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-0959/reviewed-screenshots/1440-PS-AC-83090D95F22B-dialog.png",
+      "sha256": "e60ed261b26f6949dfb40a436b42f9c9d681e665699e088546951772e73bc582"
+    },
+    {
+      "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-0959/reviewed-screenshots/390-PS-AC-83090D95F22B-card.png",
+      "sha256": "d0b6612268f483023f16b185c2ce97968ec49f160c5829b0b4caf013bdbf3d38"
+    },
+    {
+      "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-0959/reviewed-screenshots/1440-PS-AC-83090D95F22B-card.png",
+      "sha256": "eed0f1637804d373fdd60b7bee779109d505b59a7270c026922273ca1f0e1196"
+    },
+    {
+      "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-0959/reviewed-screenshots/390-PS-AC-83090D95F22B-option.png",
+      "sha256": "3aea556b70632b3cbf813a5d80e4cb26aa7a1eeeee50d29fefd1364533f1329f"
+    },
+    {
+      "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-0959/reviewed-screenshots/1440-PS-AC-83090D95F22B-option.png",
+      "sha256": "d9608b0c8a7dc9964382004c4f7edbae5408eb537884e855127d57e4c30034f1"
+    },
+    {
+      "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-0959/reviewed-screenshots/1440-PS-AC-83090D95F22B-selected.png",
+      "sha256": "7a3a1c740e8b430ab300eb7d1a54b9e934c2f6bb52fde26543b15fe05d1cba48"
+    },
+    {
+      "file": "staging/catalogue-batch33/image-audit-50-20261012-002/continuation-0959/reviewed-screenshots/390-PS-AC-83090D95F22B-selected.png",
+      "sha256": "3b586dc7be75df39fec9d3b64255499394959398f0963fd7b177f4122488b39a"
+    }
+  ]
+}

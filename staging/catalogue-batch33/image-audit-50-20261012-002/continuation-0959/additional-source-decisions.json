@@ -1,0 +1,19 @@
+[
+  {
+    "batch_index": 12,
+    "source_url": "https://anantamedicare.in/assets/cache/images/deit-dobavki/eng_nokamen-x-ffd.png",
+    "decision": "REJECT_WRONG_PACK",
+    "reason": "Native manufacturer image visibly120Tablets and USA distributor, not exact30Tablets."
+  },
+  {
+    "batch_index": 2,
+    "source_url": "https://muna.dawatech.com/shop/product/moven-7-5-mg-10-cap-4563",
+    "decision": "HOLD_SOURCE_UNAVAILABLE",
+    "reason": "Jordan exact10capsule listing product request502; alternative image30capsules rejected."
+  },
+  {
+    "batch_index": 20,
+    "decision": "HOLD_EXACT_IMAGE",
+    "reason": "Further search returns40mg imagery or manufacturer20mg formulation without exact30capsule image. Prior wrong40mg rejection retained."
+  }
+]

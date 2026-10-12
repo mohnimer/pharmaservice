@@ -1,3 +1,11 @@
+# Latest continuation:20/50 LIVE;30 evidence holds
+
+Final production check passed57/57SHA256 matches (54photos and HTML/JS/CSS). Current batch20/50live; preserve original34 and all20new corrections. Remaining30 are listed in staging/catalogue-batch33/image-audit-50-20261012-002/remaining-30-requirements-20261012.json. No next batch until50/50live.
+
+PR24 merged as c58d2ca47e2c940ef4bf6de61d8f1e7607fc9f4c. Tested correction d4a3f9b7ddaac3383c8708dbb74dbdbd601a54da passed full CI38211748884; screenshots from artifact11730470300 reviewed at1440/390px. Exact native Nasaflex18ml supplier/distributor identity resolved; local IDs and originals preserved. Existing Breathing route is retained.
+
+Production includes independently merged Sales outreach changes; do not revert them. Initial repair-branch byte comparison passed all54photos and HTML/CSS but JavaScript differed because of those separate app.js/direct-correspondence changes. Compare actual production commit c58d2ca when verifying frontend bytes. No production database writes or email sends were performed by this image-repair continuation.
+
 # Continue current batch002 — 19/50 LIVE, 31 unresolved
 
 ## Latest continuation check
@@ -31,3 +39,5 @@ Preserve homepage copy/layout, level cards, all150 original photos, source/rejec
 Existing workspace release checkout /workspace/scratch/be6a91659771/batch002-release is production9dd with release-evidence edits. Original research checkout /workspace/scratch/01150efddb9c/pharmaservice has earlier tracked edits/untracked files; preserve it. Use git fetch with explicit tracking refspec. Shell git push lacks credentials; GitHub blob/tree/commit/update_ref APIs work. Upload large files in12000-byte base64 chunks, validate each encoded length, verify fetched remote bytes; oversized shell output corrupted generated files earlier and CI caught it. API commits differ from local SHAs if timestamps differ; compare trees.
 
 Do not install browsers in this managed environment. Existing CI workflow provides Playwright. Direct cloud browser hung during tab creation; avoid repeating. tools/verify-live-variant-assets.py is read-only. Any new runtime correction requires full existing CI, desktop/mobile review, authorized deploy and actual live frontend+asset verification before increasing batch count.
+
+Current local checkout: /workspace/scratch/f585a470b5a7/pharmaservice. Earlier be6a91659771 scratch checkout is no longer available; all completed checkpoint files are recoverable remotely. Read actual remote branch state before editing. The full screenshot ZIP is /workspace/scratch/f585a470b5a7/nasaflex-qa/screenshots.zip; eight Nasaflex captures are saved in continuation-0959/reviewed-screenshots. Manufacturer Nokamen120-tablet image retained as rejected, not a30-tablet substitute.

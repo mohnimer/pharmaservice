@@ -1,0 +1,242 @@
+[
+  {
+    "batch_index": 2,
+    "product_name": "Moven Meloxicam 7.5 mg \u2014 10 Capsules",
+    "local_option_ids": [
+      "local-acorus-7249b30e2d1f"
+    ],
+    "required_evidence": "Clearer exact 7.5mg/10 capsule native photo needed."
+  },
+  {
+    "batch_index": 12,
+    "product_name": "Nokamen \u2014 30 Tablets",
+    "local_option_ids": [
+      "local-acorus-ba1ba46ab93c"
+    ],
+    "required_evidence": "Exact 30-tablet English/UAE pack photo and current UAE retail reference missing."
+  },
+  {
+    "batch_index": 20,
+    "product_name": "ProRise 20 mg \u2014 30 Capsules",
+    "local_option_ids": [
+      "local-acorus-e35706fb3a4e"
+    ],
+    "required_evidence": "Retailer20mg page serves40mg photo. Correct20mg/30 capsule native photo needed."
+  },
+  {
+    "batch_index": 24,
+    "product_name": "Sebamed Anti-Dandruff Shampoo",
+    "local_option_ids": [
+      "local-acorus-81356e98ebbb"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 25,
+    "product_name": "Sebamed Anti-Hairloss Shampoo",
+    "local_option_ids": [
+      "local-acorus-2c36d93e590e"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 26,
+    "product_name": "Sebamed Anti-Stretch Mark Cream",
+    "local_option_ids": [
+      "local-acorus-375459036d52"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 27,
+    "product_name": "Sebamed Baby Body Lotion with Camomile",
+    "local_option_ids": [
+      "local-acorus-bca4c20a407a"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 28,
+    "product_name": "Sebamed Baby Body Milk",
+    "local_option_ids": [
+      "local-acorus-a7e10bc19b2e"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 29,
+    "product_name": "Sebamed Baby Bubble Bath with Camomile",
+    "local_option_ids": [
+      "local-acorus-bc5797476cd0"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 30,
+    "product_name": "Sebamed Baby Cleansing Bar",
+    "local_option_ids": [
+      "local-acorus-33236ab32b6c"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 31,
+    "product_name": "Sebamed Baby Cream Extra Soft",
+    "local_option_ids": [
+      "local-acorus-11057618863a"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 32,
+    "product_name": "Sebamed Baby Detangling Shampoo with Bisabolol",
+    "local_option_ids": [
+      "local-acorus-7a9f0b81f0ac"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 33,
+    "product_name": "Sebamed Baby Diaper Rash Cream",
+    "local_option_ids": [
+      "local-acorus-7db9b5951968"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 34,
+    "product_name": "Sebamed Baby Eau de Cologne",
+    "local_option_ids": [
+      "local-acorus-c53213d441f5"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 35,
+    "product_name": "Sebamed Baby Face & Body Wash Foam",
+    "local_option_ids": [
+      "local-acorus-541065052372"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 36,
+    "product_name": "Sebamed Baby Gentle Wash with Allantoin",
+    "local_option_ids": [
+      "local-acorus-fc0e90234c62"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 37,
+    "product_name": "Sebamed Baby Gentle Wash with Calendula",
+    "local_option_ids": [
+      "local-acorus-7becd2db56a1"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 38,
+    "product_name": "Sebamed Baby Lip Balm",
+    "local_option_ids": [
+      "local-acorus-c24e6eff64e5"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 39,
+    "product_name": "Sebamed Baby Massage Oil",
+    "local_option_ids": [
+      "local-acorus-616aa1152228"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 40,
+    "product_name": "Sebamed Baby Powder with Olive Oil",
+    "local_option_ids": [
+      "local-acorus-3ee243ee9ad4"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 41,
+    "product_name": "Sebamed Baby Shampoo with Camomile",
+    "local_option_ids": [
+      "local-acorus-dd458ae96334"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 42,
+    "product_name": "Sebamed Baby Skin Care Oil",
+    "local_option_ids": [
+      "local-acorus-779d958f18b0"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 43,
+    "product_name": "Sebamed Clear Face Antibacterial Cleansing Foam",
+    "local_option_ids": [
+      "local-acorus-26f075753c6d"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 44,
+    "product_name": "Sebamed Everyday Shampoo",
+    "local_option_ids": [
+      "local-acorus-add6ae257643"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 45,
+    "product_name": "Sebamed Extreme Dry Skin Relief Shampoo 5% Urea",
+    "local_option_ids": [
+      "local-acorus-4f24389acd4a"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 46,
+    "product_name": "Sebamed Fresh Classic Roll-On Deodorant",
+    "local_option_ids": [
+      "local-acorus-7cb34745b16f"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 47,
+    "product_name": "Sebamed Gentle Facial Cleanser",
+    "local_option_ids": [
+      "local-acorus-4f230bd47c18"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 48,
+    "product_name": "Sebamed Intimate Wash Foam pH 3.8",
+    "local_option_ids": [
+      "local-acorus-d62fdc588e1a"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 49,
+    "product_name": "Sebamed Intimate Wash pH 3.8 \u2014 Women 15\u201350",
+    "local_option_ids": [
+      "local-acorus-e5c59ffa9071"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  },
+  {
+    "batch_index": 50,
+    "product_name": "Sebamed Intimate Wash pH 6.8 \u2014 Women 50+",
+    "local_option_ids": [
+      "local-acorus-76ad982e8388"
+    ],
+    "required_evidence": "Supplier SKU/barcode or side/back photograph showing exact net quantity needed; historical workbook packs are candidates, not bindings."
+  }
+]

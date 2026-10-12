@@ -2,21 +2,23 @@
   "batch_id": "image-audit-50-20261012-002",
   "required_count": 50,
   "user_requirement": "A finished batch has 50 corrected exact-product images present on the live listings page, with desktop/mobile review and deployment verification. Audit completion alone does not complete a batch.",
-  "status": "IN_PROGRESS_19_OF_50_LIVE",
-  "corrected_live_count": 19,
+  "status": "IN_PROGRESS_20_OF_50_LIVE",
+  "corrected_live_count": 20,
   "deployment": {
-    "deployed_commit": "9dd0659898848a86118a29a74ff32eeddc2e4769",
-    "tested_commit": "6c8ccc9cbda1ab37dab9ab28a7c24695e2bbc0eb",
-    "ci_run": 38179839514,
-    "pull_request": 23,
+    "deployed_commit": "c58d2ca47e2c940ef4bf6de61d8f1e7607fc9f4c",
+    "tested_commit": "d4a3f9b7ddaac3383c8708dbb74dbdbd601a54da",
+    "ci_run": 38211748884,
+    "pull_request": 24,
     "origin": "https://pharmaservice.ae",
-    "verified_at": "2026-10-12T04:40:40.786549+00:00",
-    "live_byte_matches": 56,
-    "live_byte_checks": 56,
+    "verified_at": "2026-10-12T07:42:15.298935+00:00",
+    "live_byte_matches": 57,
+    "live_byte_checks": 57,
     "previous_verified_variants_preserved": 34,
-    "total_verified_live_variants": 53,
-    "visual_review": "release-qa-20261012/review.json",
-    "direct_live_browser_review": "UNAVAILABLE_CLOUD_BROWSER_TIMEOUT"
+    "total_verified_live_variants": 54,
+    "visual_review": "continuation-0959/screenshot-review.json",
+    "direct_live_browser_review": "UNAVAILABLE_CLOUD_BROWSER_TIMEOUT",
+    "live_verification": "continuation-0959/live-production-verification.json",
+    "frontend_comparison_note": "Production commit includes separately merged Sales outreach changes. All57bytes match the production build; catalogue correction passed full existing CI before merge."
   },
   "products": [
     {
@@ -174,13 +176,14 @@
       "local_option_ids": [
         "local-acorus-83090d95f22b"
       ],
-      "status": "PENDING_REPLACEMENT_AND_EXACT_PACK_GUARD",
-      "tested_commit": null,
-      "deployed_commit": null,
-      "live_image_url": null,
-      "live_image_sha256": null,
-      "desktop_review": false,
-      "mobile_review": false
+      "status": "LIVE_VERIFIED_EXACT_IMAGE",
+      "tested_commit": "d4a3f9b7ddaac3383c8708dbb74dbdbd601a54da",
+      "deployed_commit": "c58d2ca47e2c940ef4bf6de61d8f1e7607fc9f4c",
+      "live_image_url": "https://pharmaservice.ae/assets/products/verified-20261012/local-acorus-83090d95f22b.png",
+      "live_image_sha256": "771e1521e981ecdba21f3e7aa95f936e3f6cf801a8768b45fcbe4304b03d376f",
+      "desktop_review": true,
+      "mobile_review": true,
+      "live_verified_at": "2026-10-12T07:42:15.298935+00:00"
     },
     {
       "batch_index": 12,
@@ -737,6 +740,22 @@
       "live_image_sha256": null,
       "desktop_review": false,
       "mobile_review": false
+    }
+  ],
+  "deployment_history": [
+    {
+      "deployed_commit": "9dd0659898848a86118a29a74ff32eeddc2e4769",
+      "tested_commit": "6c8ccc9cbda1ab37dab9ab28a7c24695e2bbc0eb",
+      "ci_run": 38179839514,
+      "pull_request": 23,
+      "origin": "https://pharmaservice.ae",
+      "verified_at": "2026-10-12T04:40:40.786549+00:00",
+      "live_byte_matches": 56,
+      "live_byte_checks": 56,
+      "previous_verified_variants_preserved": 34,
+      "total_verified_live_variants": 53,
+      "visual_review": "release-qa-20261012/review.json",
+      "direct_live_browser_review": "UNAVAILABLE_CLOUD_BROWSER_TIMEOUT"
     }
   ]
 }
