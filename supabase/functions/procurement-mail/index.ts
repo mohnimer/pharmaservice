@@ -4,9 +4,10 @@ import {service,admin,json,MAILBOX,check,accessToken,gmail,mime,send,hash,noDemo
 import {quotePdf} from '../_shared/quote-pdf.ts'
 import {onboardingAction,onboardingTick,validateOnboardingSend} from '../_shared/onboarding.ts'
 import {worker} from '../_shared/psc-mail.ts'
-async function directContact(svc:any,id:string){
+async function directContact(svc:any,id:string,purpose?:string){
  const c=check(await svc.from('mail_contacts').select('*').eq('id',id).single());
  if(!c||!email(c.email)||c.status==='bounced')throw new MailError('contact_not_available');
+ if(purpose==='sales_introduction'&&(c.unsubscribed_at||!['active','paused'].includes(c.status)))throw new MailError('contact_opted_out');
  if(c.school_id){const s=check(await svc.from('schools').select('account_groups(slug)').eq('id',c.school_id).single());if(s.account_groups?.slug==='psc-demo-group')throw new MailError('demo_mail_disabled');}
  return c;
 }
@@ -24,10 +25,12 @@ Deno.serve(async req=>{
   if(String(b.action).startsWith('onboarding_'))return json(await onboardingAction(svc,user,b));
   if(b.action==='sender_status')return json({senders:await senderStatus(await accessToken(svc))});
   if(b.action==='contact_draft'){
-   if(b.confirm_transactional!==true||!['customer','supplier'].includes(b.audience)||!['request_response','account_followup'].includes(b.purpose))throw new MailError('transactional_context_required');
+   const sales=b.purpose==='sales_introduction'&&b.audience==='prospect';
+   if(!sales&&(b.confirm_transactional!==true||!['customer','supplier'].includes(b.audience)||!['request_response','account_followup'].includes(b.purpose)))throw new MailError('transactional_context_required');
    if(typeof b.subject!=='string'||!b.subject.trim()||/[\r\n]/.test(b.subject)||b.subject.length>300||typeof b.body_text!=='string'||!b.body_text.trim()||b.body_text.length>30000)throw new MailError('invalid_draft');
-   const c=await directContact(svc,b.contact_id);
-   return json(check(await svc.from('psc_mail_drafts').insert({kind:b.audience==='supplier'?'rfq':'followup',contact_id:c.id,communication_purpose:b.purpose,recipient:c.email,subject:b.subject.trim(),body_text:b.body_text,created_by:user.id}).select('*').single()));
+   const c=await directContact(svc,b.contact_id,b.purpose);
+   const optout=sales?'\n\nPharma Service Co. L.L.C. · Dubai, UAE\nIf you would prefer no further sales emails, reply to let us know.'+(c.unsubscribe_token?'\nStop sales and marketing emails: https://pharmaservice.ae/?token='+c.unsubscribe_token+'#unsubscribe':''):'';
+   return json(check(await svc.from('psc_mail_drafts').insert({kind:b.audience==='supplier'?'rfq':'followup',contact_id:c.id,communication_purpose:b.purpose,recipient:c.email,subject:b.subject.trim(),body_text:b.body_text+optout,created_by:user.id}).select('*').single()));
   }
   if(['intake_source','intake_save','intake_rfq'].includes(b.action))return json(await intakeAction(svc,user,b));
   if(b.action==='link'){
@@ -74,8 +77,9 @@ Deno.serve(async req=>{
   draft=check(await svc.from('psc_mail_drafts').select('*').eq('id',b.draft_id).single());if(draft.status!=='draft')throw new MailError('draft_locked')
   if(draft.kind==='test'&&draft.recipient!==MAILBOX)throw new MailError('test_recipient_locked')
   if(draft.contact_id){
-   if(!['rfq','followup'].includes(draft.kind)||!['request_response','account_followup'].includes(draft.communication_purpose)||draft.attachment_path||draft.order_id)throw new MailError('invalid_contact_draft');
-   const c=await directContact(svc,draft.contact_id);if(c.email.toLowerCase()!==draft.recipient.toLowerCase())throw new MailError('customer_recipient_changed');
+   if(!['rfq','followup'].includes(draft.kind)||!['request_response','account_followup','sales_introduction'].includes(draft.communication_purpose)||draft.attachment_path||draft.order_id)throw new MailError('invalid_contact_draft');
+   if(draft.communication_purpose==='sales_introduction'&&draft.kind!=='followup')throw new MailError('invalid_contact_draft');
+   const c=await directContact(svc,draft.contact_id,draft.communication_purpose);if(c.email.toLowerCase()!==draft.recipient.toLowerCase())throw new MailError('customer_recipient_changed');
   }
   else if(draft.intake_message_id)await checkIntakeSend(svc,draft);
   else if(['rfq','followup'].includes(draft.kind))await noDemoOrder(svc,draft.order_id)
