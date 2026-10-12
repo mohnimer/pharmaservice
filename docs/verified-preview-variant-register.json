@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 23539)
+Total output lines: 1699
+
 [
   {
     "family_id": "PSC-IS-126",
@@ -836,109 +839,7 @@
     "family_id": "PSC-IS-150",
     "product_option_id": "local-acorus-19495a4b8eb2",
     "psc_sku": "PS-AC-19495A4B8EB2",
-    "product_name": "Oral-B Vitality 100 3D White Pink D100",
-    "brand": "Oral-B",
-    "pack": "1 rechargeable toothbrush",
-    "image_path": "/assets/products/verified-20261011/local-acorus-19495a4b8eb2.jpg",
-    "sha256": "cda9f629679632c8789d774896918b4e28a8d42ed2af0fa04e2e3f43110f7246",
-    "dimensions": [
-      900,
-      900
-    ],
-    "image_source_url": "https://lifeadmin-store.s3.ap-south-1.amazonaws.com/products/braun-oral-b-vitality-100-3d-white-rechargeable-toothbrush-d100-413-1-pink/131057-3.jpg",
-    "listing_source_url": "https://www.lifepharmacy.com/product/braun-oral-b-vitality-100-3d-white-rechargeable-toothbrush-d100-413-1-pink",
-    "checked_at": "2026-10-11",
-    "price_aed": 179,
-    "price_type": "PUBLIC_RETAIL_BENCHMARK",
-    "price_unit": "1 rechargeable toothbrush",
-    "vat_basis": "Inclusive of VAT as displayed by retailer",
-    "description": "Oral-B Vitality 100 D100.413.1 rechargeable electric toothbrush, pink, with 3D White brush head and timer. Single toothbrush.",
-    "description_source": "https://www.lifepharmacy.com/product/braun-oral-b-vitality-100-3d-white-rechargeable-toothbrush-d100-413-1-pink",
-    "image_identity_verified": true,
-    "image_quality_approved": true,
-    "description_verified": true,
-    "psc_sell_price_approved": false,
-    "overall_release_status": "HOLD",
-    "variant_evidence_status": "VERIFIED_PREVIEW_CANDIDATE",
-    "browser_route": "patient-care",
-    "quality_review": "Own exact product gallery3 carton visibly Vitality100 3DWHITE, pink handle/purple polishing head. Slight softness but identifying text legible. Main131057 image instead CROSSACTION and rejected. The sharp1024 image under Life white131055 page also visually pink3DWHITE but is not selected to avoid cross-page asset substitution.",
-    "price_note": "Public UAE retailer benchmark, not regulated MRP or PSC selling price. Retailer stock does not establish PSC stock. Member price excluded."
-  },
-  {
-    "family_id": "PSC-SC-C12",
-    "product_option_id": "local-acorus-94b60f8eaf61",
-    "psc_sku": "PS-AC-94B60F8EAF61",
-    "product_name": "Braun ThermoScan Hygiene Caps \u2014 40",
-    "brand": "Braun",
-    "pack": "40 disposable probe covers",
-    "image_path": "/assets/products/verified-20261011/local-acorus-94b60f8eaf61.jpg",
-    "sha256": "e64553fcf09b76ff07791f8d108db2041c1fad669f4dbae2566d03f7cecac818",
-    "dimensions": [
-      1000,
-      1000
-    ],
-    "image_source_url": "https://cdn.lifepharmacy.com/products/braun-lens-filter-refills-for-thermoscan-lf-40/109215-1.jpg",
-    "listing_source_url": "https://www.lifepharmacy.com/product/braun-lens-filter-refills-for-thermoscan-lf-40/",
-    "checked_at": "2026-10-11",
-    "price_aed": 39.9,
-    "price_type": "PUBLIC_RETAIL_BENCHMARK",
-    "price_unit": "40 disposable probe covers",
-    "vat_basis": "Inclusive of VAT as displayed by retailer",
-    "description": "Braun ThermoScan LF40 single-use ear thermometer hygiene caps. Pack of 40 disposable probe covers for compatible Braun ThermoScan ear thermometers.",
-    "description_source": "https://www.lifepharmacy.com/product/braun-lens-filter-refills-for-thermoscan-lf-40/",
-    "image_identity_verified": true,
-    "image_quality_approved": true,
-    "description_verified": true,
-    "psc_sell_price_approved": false,
-    "overall_release_status": "HOLD",
-    "variant_evidence_status": "VERIFIED_PREVIEW_CANDIDATE",
-    "browser_route": "vitals",
-    "quality_review": "Native carton plainly Braun ThermoScan Hygiene cap, 40x, ear thermometer cover. Exact Life title LF40 and40s agree. Aster/MedX downloads403, no bypass; accepted Life source unaffected.",
-    "price_note": "Public UAE retailer benchmark, not regulated MRP or PSC selling price. Retailer stock does not establish PSC stock. Member price excluded."
-  },
-  {
-    "family_id": "PSC-IS-049",
-    "product_option_id": "local-acorus-2757418e4121",
-    "psc_sku": "PS-AC-2757418E4121",
-    "product_name": "Sebamed Baby Cleansing Wipes \u2014 25 Wipes",
-    "brand": "Sebamed",
-    "pack": "25 wipes",
-    "image_path": "/assets/products/verified-20261011/local-acorus-2757418e4121.jpg",
-    "sha256": "9cef4e361a0d67fcc59027ce03913996e0680cf285af24882308d073442b78fa",
-    "dimensions": [
-      1024,
-      1024
-    ],
-    "image_source_url": "https://media.myaster.com/images/products/1010115/sebamed-baby-cleansing-wipes-pack-of-25s/1010115_1_1.jpg",
-    "listing_source_url": "https://www.myaster.com/en/online-pharmacy/p/sebamed-baby-cleansing-wipes-pack-of-25s/1010115",
-    "checked_at": "2026-10-11",
-    "price_aed": 12.25,
-    "price_type": "PUBLIC_RETAIL_BENCHMARK",
-    "price_unit": "25 wipes",
-    "vat_basis": "Inclusive of VAT as displayed by retailer",
-    "description": "Extra-soft baby cleansing wipes with camomile and panthenol; pH 5.5 lotion formula. Pack of 25 wipes.",
-    "description_source": "https://www.myaster.com/en/online-pharmacy/p/sebamed-baby-cleansing-wipes-pack-of-25s/1010115",
-    "image_identity_verified": true,
-    "image_quality_approved": true,
-    "description_verified": true,
-    "psc_sell_price_approved": false,
-    "overall_release_status": "HOLD",
-    "variant_evidence_status": "VERIFIED_PREVIEW_CANDIDATE",
-    "browser_route": "patient-care",
-    "quality_review": "Exact 25-count pack clearly printed. Native clear packshot, substantial product area, white background; matches original supplier product. Main agent confirmed exact printed count/weight, useful occupancy and legibility; no image modifications.",
-    "price_note": "Listed regular retail reference; page also displays promotional AED11.64. Not a regulatory MRP or PSC approved selling price. Retailer availability does not establish PSC stock."
-  },
-  {
-    "family_id": "PSC-IS-180",
-    "product_option_id": "local-acorus-23f413c882d9",
-    "psc_sku": "PS-AC-23F413C882D9",
-    "product_name": "Sebamed Baby Cleansing Bar Value Pack \u2014 2 x 150 g",
-    "brand": "Sebamed",
-    "pack": "2 x 150 g",
-    "image_path": "/assets/products/verified-20261011/local-acorus-23f413c882d9.jpg",
-    "sha256": "9156738f07d000d11be583f4a751377d1d322abd4ce27b0e1d439cfd8cfe2d82",
-    "dimensions": [
-      1920,
+    "product_name…1539 tokens truncated…
       1920
     ],
     "image_source_url": "https://bf1af2.akinoncloudcdn.com/products/2024/09/11/81380/88d23a92-8686-48f4-a15d-095c58151f6f_size1920x1920.jpg",
@@ -1692,7 +1593,7 @@
     "psc_sell_price_approved": false,
     "overall_release_status": "HOLD",
     "variant_evidence_status": "VERIFIED_PREVIEW_CANDIDATE",
-    "browser_route": "medicines",
+    "browser_route": "breathing",
     "quality_review": "Unchanged native distributor1000x1000 photograph. Original supplier front visibly identifies18ml/bottle and both ingredients; matching Nasaflex/Hanlim artwork. The abbreviated local identity is preserved; verified description supplies both ingredients. Exact quantity comes from original supplier photo, not a guessed retailer size.",
     "price_note": "Dated public UAE retail reference, not a regulatory MRP or PSC approved selling price. Retailer availability does not establish PSC stock; quotation confirms supply and commercial terms."
   }
