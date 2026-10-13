@@ -824,9 +824,7 @@
   }
 
   function adminMail(){
-    const tabs=[['sales','Write email'],['contacts','Contacts'],['settings','Sender']];
-    const body=ui.mailTab==='sales'?'<div data-direct-correspondence data-mode="sales"></div>':ui.mailTab==='direct'?'<div data-direct-correspondence></div>':ui.mailTab==='contacts'?adminMailContacts():ui.mailTab==='history'?adminMailHistory():ui.mailTab==='settings'?adminMailSettings():'<div data-direct-correspondence data-mode="sales"></div>';
-    return shell(`<div class="pageHeader mailDeskHeader"><div><span class="eyebrow">CUSTOMER COMMUNICATIONS</span><h1>Outreach</h1><p>Choose a stage, write your message and send.</p></div><div class="mailIdentityCard"><span>${icon('mail')}</span><div><small>FROM</small><b>mohamed@pharmaservice.ae</b></div></div></div><div class="mailTabs">${tabs.map(([id,label])=>`<button class="${ui.mailTab===id?'active':''}" data-mail-tab="${id}">${label}</button>`).join('')}</div>${body}`,true);
+    return shell(`<div class="pageHeader mailDeskHeader"><div><span class="eyebrow">EMAIL</span><h1>Inbox</h1><p>Read, reply, write an email or turn a message into a task.</p></div></div><div data-inbox-workspace></div>`,true);
   }
 
   async function addMailContact(form,selectNew=false){
@@ -1298,7 +1296,7 @@
     ['portal/stock','Stock & expiry','stock'],
     ['portal/assets','Clinic assets','assets']
   ];
-  const adminNav=[['admin/dashboard','Today','home'],['admin/requests','Requests','checklist'],['admin/customers','Customers & contacts','users'],['admin/tasks','Tasks & calendar','calendar'],['admin/mail','Outreach','mail'],['admin/resources','Products & suppliers','boxes'],['admin/settings','Settings','settings']];
+  const adminNav=[['admin/dashboard','Today','home'],['admin/requests','Requests','checklist'],['admin/customers','Customers & contacts','users'],['admin/tasks','Tasks & calendar','calendar'],['admin/mail','Inbox','mail'],['admin/resources','Products & suppliers','boxes'],['admin/settings','Settings','settings']];
 
   function shell(content, admin=false){
     const route=currentRoute();

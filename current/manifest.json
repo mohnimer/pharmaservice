@@ -107,7 +107,8 @@
     "current/styles/workstation.css",
     "current/styles/portal-home.css",
     "current/styles/product-editorial.css",
-    "current/styles/catalogue-stock.css"
+    "current/styles/catalogue-stock.css",
+    "current/styles/mail-workspace.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",

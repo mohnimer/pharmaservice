@@ -52,6 +52,7 @@ try {
   }
   report.push('Homepage, Start and trailing slash, About, Our Model, Contact, login and direct Workshop deep routes render actual shell scripts');
   w=await setup('/');
+  for(let n=0;!w.document.querySelector('.home47')&&n<20;n++)await pause();
   assert.deepEqual([...w.document.querySelector('.home47').children].map(el=>el.className),['h47Hero','h47Catalogue','h47Journey','h47Visibility']);
   assert.equal(w.document.querySelectorAll('.h47Category').length,6);
   assert(w.document.querySelector('#psHomeCommand[data-cat-q]'));

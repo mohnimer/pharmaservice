@@ -8,6 +8,7 @@
  onboarding:{label:'Onboarding overview',subject:'Getting started with Pharma Service',text:'Hello,\n\nHere is a quick overview of working with Pharma Service.\n\n1. Send us your clinic or healthcare requirements, including quantities, locations and your required delivery date.\n2. We clarify specifications and confirm suitable supply options.\n3. You receive one quotation covering the selected products and commercial terms.\n4. Once approved and payment terms are agreed, we coordinate supply and delivery.\n5. We keep your account history to make repeat ordering and replenishment easier.\n\nPlease reply with your first requirement and your organization’s purchasing contact. We’ll guide you through the next steps.'},
  workshop:{label:'Workshop email',subject:'Practical guidance for your clinic supply planning',text:'Hello,\n\nOur Workshop shares practical guidance to help institutions plan healthcare supplies, understand product specifications, and prepare clearer purchasing requirements.\n\nYou can visit it at https://pharmaservice.ae/workshop.\n\nIf there is a supply question or an upcoming requirement you would like us to help with, please reply. We can turn it into a practical next step for your organization.'}
  };
+ window.PSC_MAIL_TEMPLATES=templates;
  let greetingName='[Name]';
  const state={contact_id:'',stage:'intro',subject:templates.intro.subject,body_text:templates.intro.text+signature};
  const eligible=c=>c.status!=='bounced'&&c.status!=='unsubscribed'&&!c.unsubscribed_at;

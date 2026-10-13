@@ -4,17 +4,21 @@ import {join} from 'node:path';
 import {spawnSync} from 'node:child_process';
 // Keep production source intact; replace only external adapters in isolated tests.
 const root=mkdtempSync(join(tmpdir(),'psc-mail-test-'));
-for(const path of ['_shared/business-email.js','_shared/onboarding.ts','_shared/mail-senders.ts','_shared/outreach.ts','_shared/mail-intake.ts','_shared/psc-mail.ts','_shared/quote-pdf.ts','dispatch-notification/index.ts','psc-gmail-oauth/index.ts','poll-procurement-mail/index.ts','procurement-mail/index.ts','send-mail-campaign/index.ts','mail-unsubscribe/index.ts']){
+for(const path of ['_shared/mailbox-compose.ts','_shared/business-email.js','_shared/onboarding.ts','_shared/mail-senders.ts','_shared/outreach.ts','_shared/mail-intake.ts','_shared/psc-mail.ts','_shared/quote-pdf.ts','dispatch-notification/index.ts','psc-gmail-oauth/index.ts','poll-procurement-mail/index.ts','procurement-mail/index.ts','mailbox/index.ts','send-mail-campaign/index.ts','mail-unsubscribe/index.ts']){
  const file=join(root,path);mkdirSync(join(file,'..'),{recursive:true});
  writeFileSync(file,readFileSync('supabase/functions/'+path,'utf8').replace(/import \{\s*createClient\s*\} from 'https:\/\/esm.sh\/[^']+'/g,'const createClient:any=()=> (globalThis as any).testService').replace(/import \{PDFDocument,StandardFonts,rgb\} from '[^']+'/,'const PDFDocument:any={},StandardFonts:any={},rgb:any=()=>({})'));
 }
 writeFileSync(join(root,'security_test.ts'),String.raw`
 import {draftSender,notificationSender,verifySender,routedMime,SALES,PROCUREMENT} from './_shared/mail-senders.ts';
 import {initialItems,validateItems,canActivate,reminderBody,businessDate,detectReply,onboardingAction} from './_shared/onboarding.ts';
+import {addresses,composerFields,composerMime,sourceContext} from './_shared/mailbox-compose.ts';
 import {admin,accessToken,gmail,mime,MailError,safeCode,cors,b64,unb64} from './_shared/psc-mail.ts';
 import {validateIntake,checkIntakeSend,intakeAction} from './_shared/mail-intake.ts';
 import {marketingMime,verifyAlias,eligible,OUTREACH} from './_shared/outreach.ts';
 function assert(v:unknown,label='assertion failed'){if(!v)throw new Error(label)}
+Deno.test('composer accepts typed To/Cc/Bcc and only approved aliases',()=>{const d=composerFields({compose_mode:'normal',sender_alias:'info@pharmaservice.ae',to_recipients:'buyer@example.com',cc_recipients:'accounts@example.com',bcc_recipients:'private@example.com',subject:'Clinic request',body_text:'Hello'});assert(d.cc_recipients.length===1&&d.bcc_recipients.length===1);const raw=mime({to:d.recipient,from:d.sender_alias,cc:d.cc_recipients,bcc:d.bcc_recipients,subject:d.subject,text:d.body_text,id:'composer'});assert(raw.includes('From: Mohamed | Pharma Service <info@pharmaservice.ae>'));assert(raw.includes('Cc: accounts@example.com')&&raw.includes('Bcc: private@example.com'));let bad=false;try{composerFields({...d,to_recipients:'buyer@example.com\r\nBcc: leak@example.com'});}catch{bad=true;}assert(bad);bad=false;try{mime({to:'buyer@example.com',from:'attacker@example.com',subject:'Test',text:'Hi',id:'x'});}catch{bad=true;}assert(bad);});
+Deno.test('forwarded attachment is encoded with a safe filename and bounded size',()=>{const raw=mime({to:'buyer@example.com',subject:'Forward',text:'Details',id:'fwd',attachments:[{name:'document\r\nBcc: other@example.com.pdf',type:'application/pdf',bytes:new Uint8Array([1,2,3])}]});assert(raw.includes('filename*=UTF-8'));assert(!raw.includes('\r\nBcc: other'));assert(raw.includes('AQID'));});
+
 Deno.test('multi-megabyte MIME decoding preserves bytes without a per-character array',()=>{const input=new Uint8Array(2*1024*1024);for(let i=0;i<input.length;i++)input[i]=i%251;const output=unb64(b64(input));assert(output.length===input.length);for(let i=0;i<input.length;i++)assert(output[i]===input[i]);});
 let handler:any;Deno.serve=((fn:any)=>{handler=fn;return {}}) as any;
 const {replyContext}=await import('./procurement-mail/index.ts');const procurement=handler;
@@ -23,6 +27,7 @@ await import('./dispatch-notification/index.ts');const dispatch=handler;
 const {messageText}=await import('./poll-procurement-mail/index.ts');const poll=handler;
 await import('./mail-unsubscribe/index.ts');const unsubscribe=handler;
 await import('./send-mail-campaign/index.ts');const campaigns=handler;
+await import('./mailbox/index.ts');const mailbox=handler;
 
 Deno.test('HTML-only inbox text is readable without executing embedded content',()=>{const data=btoa('<style>secret</style><p>Hello &amp; welcome</p><script>evil()</script><p>Please call me.</p>');const text=messageText({mimeType:'text/html',body:{data}});assert(text.includes('Hello & welcome'));assert(text.includes('Please call me.'));assert(!text.includes('evil')&&!text.includes('secret'));});
 Deno.test('reply sends in the original thread using current Reply-To and RFC headers',async()=>{const original=fetch,draft={id:'reply',status:'draft',kind:'followup',reply_message_id:'source',recipient:'reply@example.com',subject:'Re: Request',body_text:'Thank you',updated_at:'test'};set(svc({draft,message:{id:'source',direction:'inbound',gmail_message_id:'abc123',gmail_thread_id:'thread1'}}));let sent:any;
@@ -113,7 +118,7 @@ function svc(options:any={}){
 }
 const set=(v:any)=>(globalThis as any).testService=v;
 Deno.env.set('PSC_GOOGLE_OAUTH_CLIENT_ID','test-client');Deno.env.set('PSC_GOOGLE_OAUTH_CLIENT_SECRET','test-secret');
-Deno.test('all sending, reading and account endpoints reject anonymous calls without writes',async()=>{set(svc());writes=0;for(const fn of [procurement,oauth,dispatch,poll,campaigns]){const r=await fn(request({action:'send',approve:true},false));assert(r.status===401,'anonymous endpoint accepted');}assert(writes===0,'anonymous call mutated records');});
+Deno.test('all sending, reading and account endpoints reject anonymous calls without writes',async()=>{set(svc());writes=0;for(const fn of [procurement,oauth,dispatch,poll,campaigns,mailbox]){const r=await fn(request({action:'send',approve:true},false));assert(r.status===401,'anonymous endpoint accepted');}assert(writes===0,'anonymous call mutated records');});
 Deno.test('campaign worker rejects caller without worker secret; setup and test require explicit approval',async()=>{set(svc());writes=0;const tick=await campaigns(request({action:'tick'}));assert(tick.status===401);const test=await campaigns(request({action:'test'}));assert((await test.json()).error==='explicit_test_approval_required');const enable=await campaigns(request({action:'enable'}));assert((await enable.json()).error==='setup_confirmation_required');assert(writes===0)});
 Deno.test('one-click unsubscribe supports form POST without opening website',async()=>{set(svc());writes=0;const r=await unsubscribe(new Request('https://example.test?token=11111111-1111-4111-8111-111111111111',{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded'},body:'List-Unsubscribe=One-Click'}));assert((await r.json()).ok===true);assert(writes===1)});
 Deno.test('ordinary user and demo administrator cannot send',async()=>{for(const opts of [{admin:false},{demo:true}]){let rejected=false;try{await admin(request({}),svc(opts))}catch(e){rejected=['forbidden','demo_mail_disabled'].includes(safeCode(e))}assert(rejected);}});

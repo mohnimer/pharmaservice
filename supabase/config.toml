@@ -16,3 +16,7 @@ verify_jwt = false
 # the Supabase session server-side, and all administration requires PSC admin auth.
 [functions.customer-invitations]
 verify_jwt = false
+
+[functions.mailbox]
+# Every action uses the existing server-side PSC administrator/session guard.
+verify_jwt = false
