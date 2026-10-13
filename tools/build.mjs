@@ -1,4 +1,5 @@
 import './build-catalogue-stock.mjs';
+import {createHash} from 'node:crypto';
 import {buildProductIndex} from './build-product-index.mjs';
 import { readFile, writeFile, mkdir, rm, copyFile, cp, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
@@ -14,18 +15,21 @@ const files = new Set(['index.html', 'robots.txt', 'sitemap.xml']);
 for (const match of shell.matchAll(/(?:src|href)="(\/[^"?#]+)(?:[?#][^"]*)?"/g)) {
   files.add(match[1].slice(1));
 }
+const assetVersions={};
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 for (const [type, name] of [['javascript', 'current.js'], ['stylesheets', 'current.css']]) {
   const sources = await Promise.all(manifest[type].map(file => readFile(path.join(root, file), 'utf8')));
   const content = sources.join(type === 'javascript' ? '\n;\n' : '\n');
   await writeFile(path.join(output, name), content);
+  assetVersions[name]=createHash('sha256').update(content).digest('hex').slice(0,16);
 }
 for (const name of files) {
   if (name === 'current.js' || name === 'current.css') continue;
   await mkdir(path.dirname(path.join(output, name)), { recursive: true });
   await copyFile(path.join(root, name), path.join(output, name));
 }
+await writeFile(path.join(output,'index.html'),shell.replace(/(\/current\.(?:js|css))\?v=[^"']+/g,(_,asset)=>asset+'?v='+assetVersions[asset.slice(1)]));
 // Product images and other dynamically referenced visual assets remain available.
 // Historical scripts in assets are deliberately excluded from the published tree.
 await cp(path.join(root, 'assets'), path.join(output, 'assets'), {

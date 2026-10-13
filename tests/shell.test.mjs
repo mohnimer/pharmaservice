@@ -11,7 +11,7 @@ test('runtime contains one HTML shell and no historical patch or alternate entry
   assert.deepEqual(files.filter(f => f.endsWith('.html')), ['dist/index.html']);
   assert(!files.some(f => /history|workshop-v50-block|apply_v50|v45-workshop/.test(f)));
   assert(!shell.includes('v45-workshop-modules-gate'));
-  assert(shell.includes('/current.js?v=5009'));
+  const emitted=readFileSync('dist/index.html','utf8');assert(/\/current\.js\?v=[a-f0-9]{16}/.test(emitted));assert(!emitted.includes('/current.js?v=5009'));
   const manifest=JSON.parse(readFileSync('current/manifest.json','utf8'));
   assert(manifest.javascript.includes('current/behaviour/catalogue-stock-data.js'),'Stock projection must load in the application');
   assert(manifest.javascript.includes('current/behaviour/catalogue-stock.js'),'Stock and family controls must load in the application');
@@ -34,7 +34,7 @@ test('deep routes serve the same shell, legacy pages redirect and archived files
   const base = `http://127.0.0.1:${server.address().port}`;
   try {
     for (const route of ['/', '/start', '/start/', '/workshop', '/workshop/product-basics', '/workshop/which-glove-should-i-actually-wear']) {
-      const response = await fetch(base + route); assert.equal(response.status, 200); assert.equal(await response.text(), shell);
+      const response = await fetch(base + route); assert.equal(response.status, 200); assert.equal(await response.text(), readFileSync('dist/index.html','utf8'));
     }
     const legacy = await fetch(base + '/catalogue.html', { redirect: 'manual' });
     assert.equal(legacy.status, 308); assert.equal(legacy.headers.get('location'), '/#catalogue');
