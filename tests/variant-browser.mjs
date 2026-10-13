@@ -70,7 +70,7 @@ try{
   await page.locator('.psInterpretation').waitFor();
   assert((await page.locator('.psInterpretation').innerText()).includes('sterile gauze'));
   assert(await page.locator('.psSearchResults .productCard').count()>0);
-  await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/medicines');
+  await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/allergy');
   const herpesan=page.locator('.productCard:has([data-product-view="PS-AC-417F1BC9E425"])');
   await herpesan.waitFor();
   assert((await herpesan.innerText()).includes('Herpesan Gel 5 g'));
