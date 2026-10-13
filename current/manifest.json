@@ -25,6 +25,7 @@
     "current/behaviour/variant-evidence.js",
     "current/behaviour/catalogue-stock-data.js",
     "current/behaviour/catalogue-stock.js",
+    "current/behaviour/dha-family-photographs.js",
     "app.js",
     "current/behaviour/catalogue-families.js",
     "current/behaviour/family-details.js",

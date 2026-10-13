@@ -26,8 +26,8 @@ Deno.serve(async req=>{
    let context:any=null,source:any=null;if(['reply','reply_all','forward'].includes(fields.compose_mode)){const m=check(await svc.from('psc_mail_messages').select('*').eq('id',d.reply_message_id).single());if(m.order_id)await noDemoOrder(svc,m.order_id);source=m;context=await sourceContext(m,token,fields.compose_mode);}
    claimed=check(await svc.from('psc_mail_drafts').update({status:'sending',approved_by:user.id,approved_at:new Date().toISOString()}).eq('id',d.id).eq('status','draft').select('*').single());
    const attachments=[];if(fields.compose_mode==='forward')for(const a of source?.attachments||[]){if(!a.object_path)continue;if(a.size>10*1024*1024||attachments.reduce((n,x)=>n+x.bytes.length,0)+Number(a.size||0)>15*1024*1024)throw new MailError('forward_attachments_too_large');const file=await svc.storage.from('psc-correspondence').download(a.object_path);if(file.error||!file.data)throw new MailError('forward_attachment_unavailable');attachments.push({name:a.file_name,type:a.mime_type||'application/octet-stream',bytes:new Uint8Array(await file.data.arrayBuffer())});}
-   const raw=composerMime(d,fields.compose_mode==='forward'?null:context,attachments);attempted=true;
-   const result=await send(token,raw,fields.compose_mode==='forward'?undefined:context?.threadId);accepted=true;
+   const raw=composerMime({...d,...fields},fields.compose_mode==='forward'?null:context,attachments);attempted=true;
+   const result=await send(token,raw,fields.compose_mode==='forward'||fields.subject!==context?.subject?undefined:context?.threadId);accepted=true;
    check(await svc.from('psc_mail_drafts').update({status:'accepted',provider_message_id:result.id,accepted_at:new Date().toISOString(),last_error:null}).eq('id',d.id).eq('status','sending'));await logAttempt(svc,null,d.id,'gmail_accepted',null,result.id);return json({accepted_by_gmail:true});
   }
   if(b.action==='retry'){check(await svc.from('psc_mail_drafts').update({status:'draft',last_error:null}).eq('id',b.draft_id).eq('status','failed').not('compose_mode','is',null).select('id').single());return json({saved:true});}

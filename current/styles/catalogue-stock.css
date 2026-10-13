@@ -10,3 +10,4 @@
 .pscFamilyNoPhoto .canvaCardBody{padding-top:20px}
 .pscFamilyVariantList[open]{max-height:280px;overflow:auto}
 @media(max-width:480px){.pscFamilyVariantList li{font-size:12px}.pscFamilyVariantList .pscVariantPrice{max-width:90px}}
+.pscFamilyRepresentative small{display:block;margin-top:3px;font-size:inherit;line-height:1.4}

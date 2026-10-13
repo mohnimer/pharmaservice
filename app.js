@@ -1122,6 +1122,7 @@
     return '/assets/products/clinic-basics.jpg';
   }
   function productDisplayImageUrl(p){
+    if(window.PSC_DHA_FAMILY_PHOTOS?.isMixedPhoto(p)) return null;
     if(/^REFERENCE TILE/i.test(p?.imageStatus||'')) return null;
     if(p?.currentImageUrl) return p.currentImageUrl;
     if(p?.localCatalogueRefresh) return null;
@@ -1140,6 +1141,7 @@
     return label?`<small class="catalogueImageNote">${esc(label)}</small>`:'';
   }
   function controlledProductImageUrl(p){
+    if(window.PSC_DHA_FAMILY_PHOTOS?.isMixedPhoto(p)) return null;
     if(/^REFERENCE TILE/i.test(p?.imageStatus||'')) return null;
     if(p?.currentImageUrl) return p.currentImageUrl;
     if(p?.localCatalogueRefresh) return null;
@@ -1836,11 +1838,12 @@
     const need=clinicalNeedMeta(clinicalNeedIds(p)[0]||'all');
     const displayName=p._familyGroup?.name||p.catalogueDisplayName||p.name;
     const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
-    const imageUrl=p._familyGroup&&!window.PS_CATALOGUE_STOCK?.realPhoto(p)?null:productDisplayImageUrl(p);
+    const familyPhoto=window.PSC_DHA_FAMILY_PHOTOS?.forListing(p);
+    const imageUrl=familyPhoto?.path||(p._familyGroup&&!window.PS_CATALOGUE_STOCK?.realPhoto(p)?null:productDisplayImageUrl(p));
     const workshop=workshopForProduct(p,1)[0];
     return `<article class="publicCatalogueCard ${p._familyGroup?'pscFamilyCard':''} ${!imageUrl?'pscFamilyNoPhoto':''}" data-family-listing="${esc(p._familyGroup?.id||'')}">
-      <button class="publicCatalogueVisual publicProductView" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-public-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details">${imageUrl?`<img src="${esc(imageUrl)}" alt="${esc(displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'">`:`<span>${esc(need.label)}</span>`}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>
-      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount" data-catalogue-brand-sku="${esc(p.pscSku)}">Brands Available: ${catalogueBrandCount(p)}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(pack)}</p>${p._familyGroup?`<p class="pscFamilyRepresentative">Pictured: ${esc(p.name)}</p>`:''}${cataloguePricePreview(p)}${catalogueFamilyVariants(p)}${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
+      <button class="publicCatalogueVisual publicProductView" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-public-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details">${imageUrl?`<img data-family-example="${familyPhoto?'true':'false'}" src="${esc(imageUrl)}" alt="${esc(familyPhoto?.label||displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'">`:`<span>${esc(need.label)}</span>`}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>
+      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount" data-catalogue-brand-sku="${esc(p.pscSku)}">Brands Available: ${catalogueBrandCount(p)}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(pack)}</p>${p._familyGroup?`<p class="pscFamilyRepresentative">Pictured: ${esc(familyPhoto?.label||p.name)}${familyPhoto?'<small>Product example · model and specification confirmed in quotation.</small>':''}</p>`:''}${cataloguePricePreview(p)}${catalogueFamilyVariants(p)}${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
       <button class="button outline full" data-go="contact">Request institutional quote</button>
     </article>`;
   }
@@ -2463,9 +2466,10 @@
     const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
     const fallback=legacyProductImageUrl(p);
     const dhaMark=p.dhaMapped?`<span class="pscRequirementBadge" title="Mapped DHA clinic requirement"><img class="dhaRequirementIcon cardDhaIcon" src="${DHA_ICON}" alt="Mapped DHA clinic requirement"></span>`:'';
-    const displayImage=p._familyGroup&&!window.PS_CATALOGUE_STOCK?.realPhoto(p)?null:productDisplayImageUrl(p);
+    const familyPhoto=window.PSC_DHA_FAMILY_PHOTOS?.forListing(p);
+    const displayImage=familyPhoto?.path||(p._familyGroup&&!window.PS_CATALOGUE_STOCK?.realPhoto(p)?null:productDisplayImageUrl(p));
     const visual=displayImage
-      ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img class="productMainImage" src="${esc(displayImage)}" alt="${esc(p.name)}" loading="lazy" onerror="this.onerror=null;this.style.visibility='hidden'">${dhaMark}</button>`
+      ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img class="productMainImage" data-family-example="${familyPhoto?'true':'false'}" src="${esc(displayImage)}" alt="${esc(familyPhoto?.label||p.name)}" loading="lazy" onerror="this.onerror=null;this.style.visibility='hidden'">${dhaMark}</button>`
       : `<button class="productVisual productNeedVisual productVisualButton" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)}">${dhaMark}</button>`;
 
     return `<article data-family-listing="${esc(p._familyGroup?.id||'')}" class="productCard ${p._familyGroup?'pscFamilyCard':''} ${!displayImage?'pscFamilyNoPhoto':''} v25ProductCard v261ProductCard v262ProductCard canvaProductCard exactCanvaCard pscEditorialCard">
@@ -2475,7 +2479,7 @@
         <button class="productTitleButton" data-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button>
         <p class="pack">${esc(pack)}</p>${catalogueImageNote(p)||'<small class="catalogueImageNote catalogueImageNoteEmpty" aria-hidden="true"></small>'}
         <div class="productNeedTags">${esc(need.id==='all'?(p.productType||p.category||'Institutional supplies'):need.label)}</div>
-        ${p._familyGroup&&displayImage?`<p class="pscFamilyRepresentative">Pictured: ${esc(p.name)}</p>`:''}${cataloguePricePreview(p)}${catalogueFamilyVariants(p)}
+        ${p._familyGroup&&displayImage?`<p class="pscFamilyRepresentative">Pictured: ${esc(familyPhoto?.label||p.name)}${familyPhoto?'<small>Product example · model and specification confirmed in quotation.</small>':''}</p>`:''}${cataloguePricePreview(p)}${catalogueFamilyVariants(p)}
         ${currentRoute().startsWith('portal/catalogue/dha-')&&p.dhaMapped?`<small class="pscDhaStatus">${esc(p.dhaStatus==='Strict'?'Required category':p.dhaStatus||'Mapped requirement')}${p.dhaReference?` · ${esc(p.dhaReference)}`:''}${p.dhaStatus==='Conditional'&&p.dhaCondition?`<br>${esc(p.dhaCondition)}`:''}</small>`:''}
       </div>
       <div class="canvaCardActions exactCanvaActions">
