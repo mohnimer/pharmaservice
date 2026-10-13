@@ -1,0 +1,79 @@
+{
+  "status": "draft_only_not_installed_not_sent",
+  "approval_mode": "email",
+  "customer_account_model": "One existing school account; clinic and accounts email identities share school-scoped requests and quotations.",
+  "permissions": "school_user: catalogue, create/save/submit supply requests and estimates, view school quotations. No management approval, credit approval or automatic purchase order authority.",
+  "invitations": [
+    {
+      "school_id": "01345d1f-b4ce-4355-9763-1ab23d365ff0",
+      "school": "NFPS Main",
+      "name": "Reim Hassan",
+      "email": "clinic@nfps.ae",
+      "role": "school_clinic_user"
+    },
+    {
+      "school_id": "01345d1f-b4ce-4355-9763-1ab23d365ff0",
+      "school": "NFPS Main",
+      "name": "Rubylyn A. Casalme",
+      "email": "accounts@nfps.ae",
+      "role": "school_clinic_user"
+    },
+    {
+      "school_id": "6e18980e-293b-4d2c-abda-4f4eafb266f2",
+      "school": "NFPS RAK",
+      "name": "Clinic NFPS Rak",
+      "email": "clinic@nfpsrak.ae",
+      "role": "school_clinic_user"
+    },
+    {
+      "school_id": "6e18980e-293b-4d2c-abda-4f4eafb266f2",
+      "school": "NFPS RAK",
+      "name": "NFPS RAK Accounts",
+      "email": "accounts@nfpsrak.ae",
+      "role": "school_clinic_user"
+    },
+    {
+      "school_id": "af5b06a4-cdfc-412f-8d68-15337c66ab94",
+      "school": "UPS Al Ain",
+      "name": "UPS Accounts",
+      "email": "accounts@universalphilippine.school",
+      "role": "school_clinic_user"
+    }
+  ],
+  "pending_scope_confirmation": [
+    {
+      "name": "Jhonelyn Salandanan",
+      "email": "clinic@feps.ae",
+      "paired_accounts": "accounts@feps.ae",
+      "question": "Confirm Shahba or Halwan before drafting addressed invitation"
+    },
+    {
+      "name": "Ancyamma Philip",
+      "email": "clinic.branch@feps.ae",
+      "paired_accounts": "accounts.branch@feps.ae",
+      "question": "Confirm Shahba or Halwan before drafting addressed invitation"
+    }
+  ],
+  "email_approval_contacts_only": [
+    {
+      "name": "AEG School Management",
+      "email": "management@aeg.education"
+    },
+    {
+      "name": "Richard Zulueta | VP - NFPS, School Operations Manager",
+      "email": "r.zulueta@nfps.ae"
+    }
+  ],
+  "other_contacts_not_invited": [
+    {
+      "name": "NFPS Cashier",
+      "email": "cashier@nfps.ae",
+      "reason": "No cashier portal access requested"
+    }
+  ],
+  "missing": [
+    "UPS clinic email",
+    "FEPS campus-to-email mapping"
+  ],
+  "send_authorized": false
+}

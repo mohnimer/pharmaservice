@@ -1152,11 +1152,11 @@
   function products(){ return D.products.map(p=>product(p.pscSku)); }
   function currentRoute(){
     const path=location.pathname.replace(/\/+$/,'');
-    if(location.hash && location.hash!=='#home') return location.hash.slice(1);
+    if(location.hash && location.hash!=='#home') return location.hash.slice(1).split('?')[0];
     if(path==='/start') return 'start';
     if(path==='/workshop') return 'workshop';
     if(path.startsWith('/workshop/')) return `workshop/${decodeURIComponent(path.split('/')[2]||'')}`;
-    if(location.hash) return location.hash.slice(1);
+    if(location.hash) return location.hash.slice(1).split('?')[0];
     return 'home';
   }
   let catalogueSearchRoute = null;
@@ -2581,7 +2581,7 @@
     const q=calcQuote(r), label=friendlyStatus(r.status), first=r.lines[0]||null, p=first?.sku?product(first.sku):null, extra=Math.max(0,r.lines.length-1);
     const delivery=['Authorized','Procurement','Delivery'].includes(r.status)?expectedDeliveryLabel(r):'';
     const archiveDate=r.status==='Cancelled'&&r.cancelledAt?addDaysLabel(r.cancelledAt,30):'';
-    return `<article class="customerOrderCard statusCard-${r.status.toLowerCase()}"><div class="orderCardHead"><div><span class="eyebrow">${esc(r.quoteRef||'ORDER UNDER REVIEW')}</span><h3 class="mono">${r.id}</h3><p>${date(r.createdAt)} · ${r.lines.length} lines</p></div>${customerStatusPill(r.status)}</div><div class="orderCardProduct"><div><b>${first?`${first.qty} × ${esc(lineDisplayName(first,p))}`:'Order items'}</b>${extra?`<span>+ ${extra} more line${extra>1?'s':''}</span>`:''}</div>${q.hasSell&&r.quoteRef?`<strong>${money(q.total)}</strong>`:''}</div>${r.status==='Drafting'?`<div class="orderMessage">Under review. Your quotation will be sent to <strong>${esc(accountEmailLabel())}</strong>.</div>`:''}${r.status==='Sent'?`<div class="orderMessage quoteReady">Quotation sent to <strong>${esc(accountEmailLabel())}</strong>. Confirm or cancel below.</div>`:''}${delivery?`<div class="deliveryPromise"><span>TRACK</span><b>${delivery}</b></div>`:''}${r.status==='Accepted'?`<div class="orderMessage deliveredMsg">Delivered ${date(r.deliveredAt||r.createdAt)}. These items are now available on Replenish.</div>`:''}${r.status==='Cancelled'?`<div class="orderMessage cancelledMsg">Cancelled. This will move to Archive after ${archiveDate}.</div>`:''}<div class="orderCardActions"><button class="button light small" data-request-view="${r.id}">View</button>${r.status==='Sent'?`<button class="button primary small" data-confirm-quote="${r.id}">Confirm quote</button><button class="button quietDanger small" data-cancel-quote="${r.id}">Cancel</button>`:''}${['Authorized','Procurement','Delivery'].includes(r.status)?`<button class="button dark small" data-request-view="${r.id}">Track</button>`:''}${r.status==='Accepted'?`<button class="button dark small" data-reorder-order="${r.id}">Replenish order</button>`:''}</div></article>`;
+    return `<article class="customerOrderCard statusCard-${r.status.toLowerCase()}"><div class="orderCardHead"><div><span class="eyebrow">${esc(r.quoteRef||'ORDER UNDER REVIEW')}</span><h3 class="mono">${r.id}</h3><p>${date(r.createdAt)} · ${r.lines.length} lines</p></div>${customerStatusPill(r.status)}</div><div class="orderCardProduct"><div><b>${first?`${first.qty} × ${esc(lineDisplayName(first,p))}`:'Order items'}</b>${extra?`<span>+ ${extra} more line${extra>1?'s':''}</span>`:''}</div>${q.hasSell&&r.quoteRef?`<strong>${money(q.total)}</strong>`:''}</div>${r.status==='Drafting'?`<div class="orderMessage">${authContext?.group?.slug==='aeg-education'?'Under review. PS prepares the formal quotation for the agreed AEG Management approval process.':`Under review. Your quotation will be sent to <strong>${esc(accountEmailLabel())}</strong>.`}</div>`:''}${r.quote?.management_decision?`<div class="orderMessage">Management decision: ${esc(r.quote.management_decision)}. Customer PO and PSC release checks remain separate.</div>`:''}${r.status==='Sent'?`<div class="orderMessage quoteReady">${authContext?.group?.slug==='aeg-education'?(r.quote?.management_decision?'Management decision recorded. Customer PO and PS commercial release checks remain required.':'Quotation issued for AEG Management review. An authorized approver must record the decision.'):`Quotation sent to <strong>${esc(accountEmailLabel())}</strong>. Confirm or cancel below.`}</div>`:''}${delivery?`<div class="deliveryPromise"><span>TRACK</span><b>${delivery}</b></div>`:''}${r.status==='Accepted'?`<div class="orderMessage deliveredMsg">Delivered ${date(r.deliveredAt||r.createdAt)}. These items are now available on Replenish.</div>`:''}${r.status==='Cancelled'?`<div class="orderMessage cancelledMsg">Cancelled. This will move to Archive after ${archiveDate}.</div>`:''}<div class="orderCardActions"><button class="button light small" data-request-view="${r.id}">View</button>${r.status==='Sent'?`<button class="button primary small" data-confirm-quote="${r.id}">Confirm quote</button><button class="button quietDanger small" data-cancel-quote="${r.id}">Cancel</button>`:''}${['Authorized','Procurement','Delivery'].includes(r.status)?`<button class="button dark small" data-request-view="${r.id}">Track</button>`:''}${r.status==='Accepted'?`<button class="button dark small" data-reorder-order="${r.id}">Replenish order</button>`:''}</div></article>`;
   }
 
   function archivePage(){
@@ -2676,7 +2676,7 @@
         return `<div class="basketLine requestLine"><div class="productGlyph small">Rx</div><div class="basketInfo"><b>${esc(lineDisplayName(l,p))}</b><span>${esc(linePackLabel(l,p))} · ${esc(lineReference(l))}</span><small>${esc(lineBrandPreferenceLabel(l))} · Price confirmed in quotation</small></div><div class="qty"><button data-family-basket-delta="${index}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-family-basket-delta="${index}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
       }
       const imageUrl=productDisplayImageUrl(p);return `<div class="basketLine requestLine">${imageUrl?`<div class="requestLineImage"><img src="${esc(imageUrl)}" alt="" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'"></div>`:`<div class="productGlyph small">${esc((p.brand||'PS').slice(0,2).toUpperCase())}</div>`}<div class="basketInfo"><b>${esc(p.catalogueDisplayName||p.name)}</b><span>${esc(p.cataloguePack||p.pack||'Pack to confirm')} · ${p.pscSku}</span><small>${p.contractPrice?money(p.contractPrice)+' indicative account price':'Price confirmed in quotation'}</small></div><div class="qty"><button data-basket-delta="${p.pscSku}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-basket-delta="${p.pscSku}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-basket-remove="${p.pscSku}">Remove</button></div>`
-    }).join(''):`<div class="emptyState requestEmpty"><h3>Your request is empty</h3><p>Browse the catalogue and add the products you want PS to quote.</p><button class="button dark" data-go="portal/catalogue">Browse catalogue</button></div>`}</div>${lines.length?`<div class="drawerFooter requestDrawerFooter">${scopeNote()?`<div class="psRequestScopeReview"><b>Request scope</b><p>${esc(scopeNote()).replace(/\n/g,'<br>')}</p></div>`:''}<label class="fieldLabel">Request note <span>optional</span></label><textarea class="textarea" id="basketNote" placeholder="Delivery timing, preferred brand, clinic note…"></textarea><div class="totals"><span>Indicative priced lines</span><b>${money(indicative)}</b></div><div class="checkoutPromise requestNextStep"><span>WHAT HAPPENS NEXT</span><p>PS reviews the request and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. Nothing is procured until the required customer approval is in place.</p></div><button class="button primary full submitRequestButton" data-submit-request>Submit request</button></div>`:''}</aside></div>`;
+    }).join(''):`<div class="emptyState requestEmpty"><h3>Your request is empty</h3><p>Browse the catalogue and add the products you want PS to quote.</p><button class="button dark" data-go="portal/catalogue">Browse catalogue</button></div>`}</div>${lines.length?`<div class="drawerFooter requestDrawerFooter">${scopeNote()?`<div class="psRequestScopeReview"><b>Request scope</b><p>${esc(scopeNote()).replace(/\n/g,'<br>')}</p></div>`:''}<label class="fieldLabel">Request note <span>optional</span></label><textarea class="textarea" id="basketNote" placeholder="Delivery timing, preferred brand, clinic note…"></textarea><div class="totals"><span>Indicative priced lines</span><b>${money(indicative)}</b></div><div class="checkoutPromise requestNextStep"><span>WHAT HAPPENS NEXT</span><p>${authContext?.group?.slug==='aeg-education'?'PS reviews the request and prepares the formal quotation for AEG Management review. Customer PO and PS commercial release checks remain required.':`PS reviews the request and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. Nothing is procured until the required customer approval is in place.`}</p></div><button class="button primary full submitRequestButton" data-submit-request>Submit request</button></div>`:''}</aside></div>`;
   }
 
 
@@ -2704,7 +2704,7 @@
 
   function schoolQuote(r,q,canApprove){
     const delivery=['Authorized','Procurement','Delivery'].includes(r.status)?expectedDeliveryLabel(r):'';
-    return `<div class="schoolQuoteBox"><div class="quoteCustomerTop"><div><span class="eyebrow">${r.quoteRef||'ORDER UNDER REVIEW'}</span><h3>${friendlyStatus(r.status)}</h3></div>${customerStatusPill(r.status)}</div>${r.status==='Drafting'?`<div class="quoteStatePanel"><b>PS is reviewing this order.</b><p>Your formal quotation will be sent to ${esc(accountEmailLabel())}.</p></div>`:''}${r.quoteRef?`<div class="tableWrap"><table class="dataTable"><thead><tr><th>ITEM</th><th>PACK</th><th>QTY</th><th>UNIT EX VAT</th><th>LINE EX VAT</th><th>VAT</th></tr></thead><tbody>${q.rows.map(x=>`<tr><td><b>${esc(lineDisplayName(x.l,x.p))}</b><div class="sub mono">${esc(lineReference(x.l))}</div>${isFamilyLine(x.l)?`<div class="sub">${esc(lineBrandPreferenceLabel(x.l))}</div>`:''}</td><td>${esc(linePackLabel(x.l,x.p))}</td><td>${x.l.qty}</td><td>${x.sell!==null?money(x.sell):'Pending'}</td><td>${x.sell!==null?money(x.sell*x.l.qty):'Pending'}</td><td>${x.vatRate===null?'Review':x.vatRate+'%'}</td></tr>`).join('')}</tbody></table></div><div class="quoteSummary"><div><span>SUBTOTAL EX VAT</span><b>${q.hasSell?money(q.subtotal):'Pending'}</b></div><div><span>VAT</span><b>${q.taxResolved?money(q.vat):'Review'}</b></div><div><span>TOTAL</span><b>${q.hasSell&&q.taxResolved?money(q.total):'Pending'}</b></div><div><span>VALIDITY</span><b>${esc(r.quote?.validity||'Pending')}</b></div></div>`:''}${r.status==='Sent'?`<div class="modalQuoteActions"><button class="button primary" data-confirm-quote="${r.id}">Confirm quotation</button><button class="button quietDanger" data-cancel-quote="${r.id}">Cancel quotation</button></div>`:''}${delivery?`<div class="deliveryPromise large"><span>TRACK ORDER</span><b>${delivery}</b><small>Delivery timing is shown only when PS has recorded it for this order.</small></div>`:''}${r.status==='Accepted'?`<div class="quoteStatePanel delivered"><b>Delivered.</b><p>This order is now part of your purchase history and its items can be repeated from Replenish.</p></div>`:''}${r.status==='Cancelled'?`<div class="quoteStatePanel cancelled"><b>Cancelled.</b><p>${isArchived(r)?'This quotation is now in Archive.':`It will move to Archive on ${addDaysLabel(r.cancelledAt||r.createdAt,30)}.`}</p></div>`:''}</div>`;
+    return `<div class="schoolQuoteBox"><div class="quoteCustomerTop"><div><span class="eyebrow">${r.quoteRef||'ORDER UNDER REVIEW'}</span><h3>${friendlyStatus(r.status)}</h3></div>${customerStatusPill(r.status)}</div>${r.status==='Drafting'?`<div class="quoteStatePanel"><b>PS is reviewing this order.</b><p>${authContext?.group?.slug==='aeg-education'?'Your formal quotation will follow the agreed AEG Management approval process.':`Your formal quotation will be sent to ${esc(accountEmailLabel())}.`}</p></div>`:''}${r.quoteRef?`<div class="tableWrap"><table class="dataTable"><thead><tr><th>ITEM</th><th>PACK</th><th>QTY</th><th>UNIT EX VAT</th><th>LINE EX VAT</th><th>VAT</th></tr></thead><tbody>${q.rows.map(x=>`<tr><td><b>${esc(lineDisplayName(x.l,x.p))}</b><div class="sub mono">${esc(lineReference(x.l))}</div>${isFamilyLine(x.l)?`<div class="sub">${esc(lineBrandPreferenceLabel(x.l))}</div>`:''}</td><td>${esc(linePackLabel(x.l,x.p))}</td><td>${x.l.qty}</td><td>${x.sell!==null?money(x.sell):'Pending'}</td><td>${x.sell!==null?money(x.sell*x.l.qty):'Pending'}</td><td>${x.vatRate===null?'Review':x.vatRate+'%'}</td></tr>`).join('')}</tbody></table></div><div class="quoteSummary"><div><span>SUBTOTAL EX VAT</span><b>${q.hasSell?money(q.subtotal):'Pending'}</b></div><div><span>VAT</span><b>${q.taxResolved?money(q.vat):'Review'}</b></div><div><span>TOTAL</span><b>${q.hasSell&&q.taxResolved?money(q.total):'Pending'}</b></div><div><span>VALIDITY</span><b>${esc(r.quote?.validity||'Pending')}</b></div></div>`:''}${r.status==='Sent'?`<div class="modalQuoteActions"><button class="button primary" data-confirm-quote="${r.id}">Confirm quotation</button><button class="button quietDanger" data-cancel-quote="${r.id}">Cancel quotation</button></div>`:''}${delivery?`<div class="deliveryPromise large"><span>TRACK ORDER</span><b>${delivery}</b><small>Delivery timing is shown only when PS has recorded it for this order.</small></div>`:''}${r.status==='Accepted'?`<div class="quoteStatePanel delivered"><b>Delivered.</b><p>This order is now part of your purchase history and its items can be repeated from Replenish.</p></div>`:''}${r.status==='Cancelled'?`<div class="quoteStatePanel cancelled"><b>Cancelled.</b><p>${isArchived(r)?'This quotation is now in Archive.':`It will move to Archive on ${addDaysLabel(r.cancelledAt||r.createdAt,30)}.`}</p></div>`:''}</div>`;
   }
 
   function adminQuoteBuilder(r,q){
@@ -3126,7 +3126,9 @@
     if(profileError) console.warn('Profile lookup:',profileError.message);
     if(membershipError) throw membershipError;
 
+    const verified=!!session.user.email_confirmed_at;
     const isPscAdmin=!!profile?.is_psc_admin;
+    if(!isPscAdmin&&!verified)throw new Error('Verify your account email before opening the portal.');
     const membership=(memberships||[])[0]||null;
     let group=null, school=null, schools=[];
 
@@ -3135,24 +3137,13 @@
       if(e) throw e;
       group=g;
 
-      if(membership.school_id){
-        const {data:sc,error:se}=await sb.from('schools')
-          .select('id,name,campus_name,group_id,active')
-          .eq('id',membership.school_id)
-          .eq('active',true)
-          .single();
-        if(se) throw se;
-        schools=sc?[sc]:[];
-      } else {
-        const {data:scs,error:se}=await sb.from('schools')
-          .select('id,name,campus_name,group_id,active')
-          .eq('group_id',membership.group_id)
-          .eq('active',true)
-          .order('name',{ascending:true})
-          .order('campus_name',{ascending:true});
-        if(se) throw se;
-        schools=scs||[];
-      }
+      const scope=(memberships||[]).filter(m=>m.group_id===membership.group_id);
+      const groupWide=scope.some(m=>!m.school_id&&['group_admin','psc_admin'].includes(m.role));
+      const ids=[...new Set(scope.map(m=>m.school_id).filter(Boolean))];
+      let query=sb.from('schools').select('id,name,campus_name,group_id,active').eq('group_id',membership.group_id).eq('active',true);
+      if(!groupWide)query=query.in('id',ids);
+      const {data:scs,error:se}=await query.order('name',{ascending:true}).order('campus_name',{ascending:true});
+      if(se)throw se;schools=scs||[];
 
       school=schools.find(sc=>sc.id===state.activeSchoolId)
         || schools.find(sc=>schoolLabel(sc)===state.campus)
@@ -3165,6 +3156,7 @@
       email:session.user.email||'',
       fullName:profile?.full_name||'',
       isPscAdmin,
+      memberships:memberships||[],
       role:membership?.role||(isPscAdmin?'psc_admin':''),
       group,
       school,
@@ -3259,6 +3251,7 @@
     const schoolMap=Object.fromEntries((schools||[]).filter(Boolean).map(x=>[x.id,x]));
     const groupMap=Object.fromEntries((groups||[]).filter(Boolean).map(x=>[x.id,x]));
     const quoteMap=Object.fromEntries((quotes||[]).map(q=>[q.order_id,q]));
+    let managementDecisions=[];if(authContext?.group?.slug==='aeg-education'&&(quotes||[]).length){const decisions=await sb.from('psc_management_decisions').select('*').in('quote_id',quotes.map(q=>q.id));if(decisions.error)throw decisions.error;managementDecisions=decisions.data||[];}
     const docsByOrder=(documents||[]).reduce((acc,d)=>{ (acc[d.order_id]||(acc[d.order_id]=[])).push(d); return acc; },{});
     state.requests=(orders||[]).map(o=>{
       const sc=schoolMap[o.school_id]||authContext?.school||{};
@@ -3292,10 +3285,14 @@
         quoteRef:o.quote_ref||q?.quote_number||'',
         note:o.note||'',
         lines:mappedLines,
-        quote:q?{validity:q.validity_days?`${q.validity_days} calendar days`:'',delivery:q.delivery_terms||'',terms:q.payment_terms||'',lines:qLines}:{lines:qLines}
+        quote:q?{management_decision:managementDecisions.find(d=>d.quote_id===q.id&&d.revision===q.current_revision)?.decision||null,validity:q.validity_days?`${q.validity_days} calendar days`:'',delivery:q.delivery_terms||'',terms:q.payment_terms||'',lines:qLines}:{lines:qLines}
       };
     });
   }
+
+  window.PSC_REFRESH_ACCOUNT=async()=>{const r=await sb.auth.getSession();session=r.data?.session||null;if(session)await hydrateAccount();render();};
+  window.PSC_ACCOUNT_CONTEXT=()=>authContext;
+  window.PSC_CUSTOMER_REQUESTS=()=>state.requests;
 
   async function signIn(){
     if(!sb){ toast('<strong>Login unavailable.</strong><br>Supabase did not load.'); return; }
@@ -3328,14 +3325,13 @@
     const {data,error}=await sb.auth.getSession();
     if(error) console.warn(error.message);
     session=data?.session||null;
-    if(session){ try{ await hydrateAccount(); }catch(e){ console.error('Account hydration failed',e); } }
+    if(session){ try{ await hydrateAccount(); }catch(e){ console.error('Account hydration failed',e);authContext=null;state.requests=[]; } }
     authReady=true;
     render();
-    sb.auth.onAuthStateChange(async (_event,newSession)=>{
+    sb.auth.onAuthStateChange((_event,newSession)=>{
       session=newSession;
-      if(session){ try{ await hydrateAccount(); }catch(e){ console.error(e); } }
-      else { authContext=null; }
-      render();
+      if(_event==='PASSWORD_RECOVERY')location.hash='reset-password';
+      setTimeout(async()=>{if(session){try{await hydrateAccount();}catch(e){console.error(e);authContext=null;state.requests=[];}}else authContext=null;if(!['activate-account','reset-password'].includes(currentRoute()))render();},0);
     });
   }
 
@@ -3402,6 +3398,13 @@
     }
 
     if(!r.dbId) return;
+    if(authContext?.group?.slug==='aeg-education'){
+      const canApprove=authContext.memberships?.some(m=>m.school_id===authContext.school?.id&&m.role==='management_approver');
+      if(!canApprove)throw new Error('AEG management approval is required.');
+      const q=await sb.from('quotes').select('id,current_revision').eq('order_id',r.dbId).single();if(q.error)throw q.error;
+      const decision=await sb.rpc('psc_record_management_decision',{p_quote:q.data.id,p_revision:q.data.current_revision,p_decision:action==='confirm'?'approved':'rejected',p_note:''});if(decision.error)throw decision.error;
+      await loadOrdersFromDatabase();save();render();return;
+    }
     const dbStatus=action==='confirm'?'confirmed':'cancelled';
     const update={status:dbStatus}; if(action==='cancel') update.cancelled_at=new Date().toISOString();
     const {error}=await sb.from('orders').update(update).eq('id',r.dbId); if(error) throw error;
@@ -3479,6 +3482,7 @@
     if(protectedRoute(r)){
       if(!authReady){ $app.innerHTML='<main class="publicPage"><section class="publicPageHero"><span class="kicker">PHARMA SERVICE</span><h1>Opening secure account…</h1></section></main>'; return; }
       if(!session){ if(r!=='login') location.hash='login'; return; }
+      if(r.startsWith('portal/')&&!authContext?.isPscAdmin&&!authContext?.school?.id){location.hash='login';return;}
       if(r.startsWith('admin/') && (!authContext?.isPscAdmin || isDemoAccount())){ location.hash='portal/dashboard'; return; }
     }
     let html;
@@ -3511,6 +3515,8 @@
       case 'careers': html=careersPage();break;
       case 'media': html=mediaPage();break;
       case 'contact': html=contactPage();break;
+      case 'activate-account': html='<main class="publicPage"><section class="loginWrap"><div class="loginCard" data-customer-activation></div></section></main>';break;
+      case 'reset-password': html='<main class="publicPage"><section class="loginWrap"><div class="loginCard" data-customer-password-reset></div></section></main>';break;
       case 'login': html=loginPage();break;
       case 'portal/dashboard': html=portalDashboard();break;
       case 'portal/catalogue': html=catalogue();break;
@@ -3685,8 +3691,8 @@
 
     document.querySelectorAll('[data-replenish]').forEach(el=>el.addEventListener('click',()=>{const [sku,q]=el.dataset.replenish.split('|');addBasket(sku,Math.max(1,Number(q)||1));toast('<strong>Added to request.</strong><br>Previous delivered quantity restored.')}));
     document.querySelectorAll('[data-reorder-order]').forEach(el=>el.addEventListener('click',()=>reorderRequest(el.dataset.reorderOrder)));
-    document.querySelectorAll('[data-confirm-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.confirmQuote,'confirm');toast('<strong>Quotation confirmed.</strong><br>PS will confirm the fulfilment and delivery timing for this order.')}catch(e){console.error(e);toast('<strong>Could not confirm quotation.</strong>')}}));
-    document.querySelectorAll('[data-cancel-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.cancelQuote,'cancel');toast('<strong>Quotation cancelled.</strong><br>It will remain visible for 30 days before moving to Archive.')}catch(e){console.error(e);toast('<strong>Could not cancel quotation.</strong>')}}));
+    document.querySelectorAll('[data-confirm-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.confirmQuote,'confirm');toast(authContext?.group?.slug==='aeg-education'?'<strong>Management approval recorded.</strong><br>Customer PO and PSC commercial release checks remain required.':'<strong>Quotation confirmed.</strong><br>PS will confirm the fulfilment and delivery timing for this order.')}catch(e){console.error(e);toast('<strong>Could not confirm quotation.</strong>')}}));
+    document.querySelectorAll('[data-cancel-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.cancelQuote,'cancel');toast(authContext?.group?.slug==='aeg-education'?'<strong>Management rejection recorded.</strong><br>PS can review and revise the quotation.':'<strong>Quotation cancelled.</strong><br>It will remain visible for 30 days before moving to Archive.')}catch(e){console.error(e);toast('<strong>Could not cancel quotation.</strong>')}}));
     document.querySelectorAll('[data-reorder-last]').forEach(el=>el.addEventListener('click',()=>{const r=state.requests.find(x=>x.campus===state.campus);if(r)reorderRequest(r.id)}));
     document.querySelectorAll('[data-request-view]').forEach(el=>el.addEventListener('click',()=>{ui.modal={type:'request',id:el.dataset.requestView,admin:false};render()}));
     document.querySelectorAll('[data-admin-request]').forEach(el=>el.addEventListener('click',()=>{ui.modal={type:'request',id:el.dataset.adminRequest,admin:true};render()}));
@@ -3721,7 +3727,7 @@
     document.querySelectorAll('[data-quote-meta]').forEach(el=>el.addEventListener('change',e=>{const[id,field]=el.dataset.quoteMeta.split('|');const r=state.requests.find(x=>x.id===id);r.quote=r.quote||{lines:{}};r.quote[field]=e.target.value;audit('Quote terms updated',`${id} ${field}`);save()}));
     document.querySelectorAll('[data-request-status]').forEach(el=>el.addEventListener('change',e=>{if(!window.PSC_IS_DEMO_ACCOUNT?.())return;const r=state.requests.find(x=>x.id===el.dataset.requestStatus);r.status=e.target.value;if(r.status==='Sent'&&!r.quoteRef)r.quoteRef=`PSC-Q-${new Date().getFullYear()}-${String(state.requests.indexOf(r)+1001).padStart(4,'0')}`;audit('Request status changed',`${r.id} → ${r.status}`);save();render()}));
     document.querySelectorAll('[data-quote-ref]').forEach(el=>el.addEventListener('change',e=>{const r=state.requests.find(x=>x.id===el.dataset.quoteRef);r.quoteRef=e.target.value;audit('Quote reference updated',r.id);save()}));
-    document.querySelectorAll('[data-approve-quote]').forEach(el=>el.addEventListener('click',()=>{const r=state.requests.find(x=>x.id===el.dataset.approveQuote);r.status='Authorized';audit('Quotation confirmed by demo account user',r.id);save();render();toast('<strong>Quotation confirmed.</strong><br>PS will confirm the fulfilment and delivery timing for this order.')}));
+    document.querySelectorAll('[data-approve-quote]').forEach(el=>el.addEventListener('click',()=>{const r=state.requests.find(x=>x.id===el.dataset.approveQuote);r.status='Authorized';audit('Quotation confirmed by demo account user',r.id);save();render();toast(authContext?.group?.slug==='aeg-education'?'<strong>Management approval recorded.</strong><br>Customer PO and PSC commercial release checks remain required.':'<strong>Quotation confirmed.</strong><br>PS will confirm the fulfilment and delivery timing for this order.')}));
     document.querySelectorAll('[data-export-products]').forEach(el=>el.addEventListener('click',exportProducts));
 
     const optionSearch=document.querySelector('[data-option-search]'); if(optionSearch)optionSearch.addEventListener('input',e=>{ui.optionSearch=e.target.value;renderUi({preserveScroll:true,focusSelector:'[data-option-search]',cursor:e.target.selectionStart,transition:false})});

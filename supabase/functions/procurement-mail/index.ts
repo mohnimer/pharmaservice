@@ -6,6 +6,17 @@ import {onboardingAction,onboardingTick,validateOnboardingSend} from '../_shared
 import {worker} from '../_shared/psc-mail.ts'
 import '../_shared/business-email.js'
 const businessHtml=(text:string)=>(globalThis as any).PSC_BUSINESS_EMAIL_HTML(text)
+export async function replyContext(source:any,token:string){
+ if(!source||source.direction!=='inbound'||!/^[a-zA-Z0-9_-]+$/.test(source.gmail_message_id))throw new MailError('invalid_reply_source');
+ if(source.order_id)await noDemoOrder(service(),source.order_id);
+ const original=await gmail(token,'messages/'+source.gmail_message_id+'?format=metadata&metadataHeaders=From&metadataHeaders=Reply-To&metadataHeaders=Subject&metadataHeaders=Message-ID&metadataHeaders=References');
+ const h=(name:string)=>original.payload?.headers?.find((x:any)=>x.name.toLowerCase()===name.toLowerCase())?.value||'';
+ const address=(s:string)=>s.match(/^[^<>]*<([^<>]+)>$/)?.[1]||s;
+ const to=address(h('Reply-To')||h('From')).trim(),subject=h('Subject'),inReplyTo=h('Message-ID').trim();
+ if(!email(to)||/[\r\n]/.test(subject)||subject.length>296||!/^<[^<>\s]+>$/.test(inReplyTo))throw new MailError('invalid_reply_headers');
+ const ids=(h('References').match(/<[^<>\s]+>/g)||[]).slice(-15);ids.push(inReplyTo);
+ return {to,subject:/^re:/i.test(subject)?subject:'Re: '+subject,inReplyTo,references:ids.join(' '),threadId:original.threadId||source.gmail_thread_id};
+}
 async function directContact(svc:any,id:string,purpose?:string){
  const c=check(await svc.from('mail_contacts').select('*').eq('id',id).single());
  if(!c||!email(c.email)||c.status==='bounced')throw new MailError('contact_not_available');
@@ -19,13 +30,19 @@ function currentSnapshot(q:any,s:any,fp:string){return s?.commercial_fingerprint
 Deno.serve(async req=>{
  if(req.method==='OPTIONS')return json({})
  if(req.method!=='POST')return json({error:'method_not_allowed'},405)
- const svc=service();let draft:any=null,attemptedSend=false;
+ const svc=service();let draft:any=null,attemptedSend=false,acceptedSend=false;
  try{
   const b=await req.json();
   if(b.action==='onboarding_tick'){if(!await worker(req,svc))throw new MailError('unauthorized');return json(await onboardingTick(svc));}
   const user=await admin(req,svc);
   if(String(b.action).startsWith('onboarding_'))return json(await onboardingAction(svc,user,b));
   if(b.action==='sender_status')return json({senders:await senderStatus(await accessToken(svc))});
+  if(b.action==='reply_draft'){
+   if(typeof b.body_text!=='string'||!b.body_text.trim()||b.body_text.length>30000)throw new MailError('invalid_draft');
+   const source=check(await svc.from('psc_mail_messages').select('*').eq('id',b.message_id).single());
+   const reply=await replyContext(source,await accessToken(svc));
+   return json(check(await svc.from('psc_mail_drafts').insert({kind:'followup',reply_message_id:source.id,communication_purpose:'request_response',recipient:reply.to,subject:reply.subject,body_text:b.body_text,created_by:user.id}).select('*').single()));
+  }
   if(b.action==='contact_draft'){
    const sales=b.purpose==='sales_introduction'&&b.audience==='prospect';
    if(!sales&&(b.confirm_transactional!==true||!['customer','supplier'].includes(b.audience)||!['request_response','account_followup'].includes(b.purpose)))throw new MailError('transactional_context_required');
@@ -78,7 +95,12 @@ Deno.serve(async req=>{
   if(b.action!=='send'||b.approve!==true)throw new MailError('explicit_send_approval_required')
   draft=check(await svc.from('psc_mail_drafts').select('*').eq('id',b.draft_id).single());if(draft.status!=='draft')throw new MailError('draft_locked')
   if(draft.kind==='test'&&draft.recipient!==MAILBOX)throw new MailError('test_recipient_locked')
-  if(draft.contact_id){
+  let reply:any=null;
+  if(draft.reply_message_id){
+   const source=check(await svc.from('psc_mail_messages').select('*').eq('id',draft.reply_message_id).single());reply=await replyContext(source,await accessToken(svc));
+   if(draft.kind!=='followup'||draft.contact_id||draft.order_id||draft.intake_message_id||draft.attachment_path||draft.recipient.toLowerCase()!==reply.to.toLowerCase()||draft.subject!==reply.subject)throw new MailError('reply_context_changed');
+  }
+  else if(draft.contact_id){
    if(!['rfq','followup'].includes(draft.kind)||!['request_response','account_followup','sales_introduction'].includes(draft.communication_purpose)||draft.attachment_path||draft.order_id)throw new MailError('invalid_contact_draft');
    if(draft.communication_purpose==='sales_introduction'&&draft.kind!=='followup')throw new MailError('invalid_contact_draft');
    const c=await directContact(svc,draft.contact_id,draft.communication_purpose);if(c.email.toLowerCase()!==draft.recipient.toLowerCase())throw new MailError('customer_recipient_changed');
@@ -96,7 +118,7 @@ Deno.serve(async req=>{
   const token=await accessToken(svc),sender=draftSender(draft.kind);await verifySender(token,sender);
   const claimed=draft.onboarding_id?check(await svc.rpc('psc_claim_onboarding_draft',{p_draft:draft.id,p_updated_at:draft.updated_at,p_user:user.id})):draft.intake_message_id?check(await svc.rpc('psc_claim_intake_draft',{p_draft:draft.id,p_updated_at:draft.updated_at,p_user:user.id})):check(await svc.from('psc_mail_drafts').update({status:'sending',approved_by:user.id,approved_at:new Date().toISOString(),updated_at:new Date().toISOString()}).eq('id',draft.id).eq('status','draft').eq('updated_at',draft.updated_at).select('*').maybeSingle());if(!claimed)throw new MailError('draft_changed_or_claimed')
   draft=Array.isArray(claimed)?claimed[0]:claimed;if(!draft?.id)throw new MailError('draft_changed_or_claimed');await logAttempt(svc,null,draft.id,'started');attemptedSend=true;
-  const result=await send(token,routedMime(sender,{to:draft.recipient,subject:draft.subject,text:draft.contact_id?(globalThis as any).PSC_BUSINESS_EMAIL_TEXT(draft.body_text):draft.body_text,html:draft.contact_id?businessHtml(draft.body_text):undefined,id:'draft-'+draft.id,pdf}));
+  const result=await send(token,routedMime(sender,{to:draft.recipient,subject:draft.subject,text:(globalThis as any).PSC_BUSINESS_EMAIL_SIGNED_TEXT(draft.body_text),html:businessHtml(draft.body_text),id:'draft-'+draft.id,pdf,...(reply?{inReplyTo:reply.inReplyTo,references:reply.references}:{})}),reply?.threadId);acceptedSend=true;
   check(await svc.from('psc_mail_drafts').update({status:'accepted',provider_message_id:result.id,accepted_at:new Date().toISOString(),last_error:null}).eq('id',draft.id));
   await logAttempt(svc,null,draft.id,'gmail_accepted',null,result.id);
   check(await svc.from('psc_mail_messages').upsert({gmail_message_id:result.id,gmail_thread_id:result.threadId||result.id,direction:'outbound',kind:draft.kind,order_id:draft.order_id,sender,recipient:draft.recipient,subject:draft.subject,body_text:draft.body_text,received_at:new Date().toISOString(),review_status:'linked',attachments:draft.attachment_path?[{object_path:draft.attachment_path,file_name:'PSC-quotation.pdf'}]:[]}));
@@ -104,7 +126,7 @@ Deno.serve(async req=>{
   if(draft.kind==='quotation')await svc.from('notification_outbox').update({status:'blocked',last_error:'Superseded by approved quotation email',next_attempt_at:null}).eq('entity_id',draft.quote_id).eq('event_type','quote_sent').in('status',['queued','held','failed']);
   return json({accepted_by_gmail:true,delivery_confirmed:false})
  }catch(e){
-  const code=safeCode(e);if(draft?.status==='sending'){const unknown=e instanceof MailError?e.uncertain:attemptedSend;await svc.from('psc_mail_drafts').update({status:unknown?'uncertain':'failed',last_error:code}).eq('id',draft.id).eq('status','sending');await logAttempt(svc,null,draft.id,unknown?'uncertain':'failed',code).catch(()=>{})}
+  const code=safeCode(e);if(draft?.status==='sending'){const unknown=acceptedSend||(e instanceof MailError?e.uncertain:attemptedSend);await svc.from('psc_mail_drafts').update({status:unknown?'uncertain':'failed',last_error:code}).eq('id',draft.id).eq('status','sending');await logAttempt(svc,null,draft.id,unknown?'uncertain':'failed',code).catch(()=>{})}
   return json({error:code},code==='unauthorized'?401:code==='forbidden'?403:400)
  }
 })

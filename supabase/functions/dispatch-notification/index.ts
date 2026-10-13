@@ -1,3 +1,4 @@
+import '../_shared/business-email.js'
 import {SALES,notificationSender,verifySender,routedMime} from '../_shared/mail-senders.ts'
 import {service,admin,worker,accessToken,mime,send,check,logAttempt,noDemoOrder,safeCode,MailError,json} from '../_shared/psc-mail.ts'
 
@@ -27,7 +28,7 @@ function shell(kicker:string,title:string,body:string,ctaLabel?:string,ctaUrl?:s
   const cta=ctaLabel&&ctaUrl
     ? `<a href="${esc(ctaUrl)}" style="display:inline-block;margin-top:22px;background:#10211f;color:#fff;text-decoration:none;padding:13px 18px;border-radius:10px;font-size:13px;font-weight:700">${esc(ctaLabel)}</a>`
     : ''
-  return `<!doctype html><html><body style="margin:0;background:#f2f4f3;font-family:Arial,Helvetica,sans-serif;color:#17211f"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f2f4f3;padding:28px 12px"><tr><td align="center"><table role="presentation" width="620" cellspacing="0" cellpadding="0" style="max-width:620px;width:100%;background:#fbfaf5;border:1px solid #dfe4e2;border-radius:18px;overflow:hidden"><tr><td style="padding:28px 34px 30px"><div style="font-size:12px;font-weight:800;letter-spacing:.12em;color:#15978f">${esc(kicker)}</div><div style="height:1px;background:#d9d4cb;margin:18px 0 26px"></div><h1 style="font-size:32px;line-height:1.05;letter-spacing:-1px;margin:0 0 18px">${esc(title)}</h1>${body}${cta}<div style="height:1px;background:#d9d4cb;margin:34px 0 18px"></div><div style="font-size:12px;font-weight:700">Pharma Service Co. L.L.C.</div><div style="font-size:11px;line-height:1.55;color:#75807d;margin-top:5px">Institutional healthcare supply · Dubai, UAE<br>${esc(replyTo)}</div></td></tr></table></td></tr></table></body></html>`
+  return (globalThis as any).PSC_BUSINESS_EMAIL_FRAME(`<small>${esc(kicker)}</small><h2 style="font-size:24px;line-height:1.3">${esc(title)}</h2>${body}${cta}<p style="margin-top:24px;font-size:16px;line-height:1.7">Kind regards,<br><br>Mohamed Hassan Al Nimer<br>Managing Director | Pharma Service Co. L.L.C.<br>Dubai, UAE</p>`)
 }
 
 function row(label:string,value:unknown){
@@ -163,7 +164,7 @@ async function buildMessage(svc:any,notification:any){
 Deno.serve(async req=>{
  if(req.method==='OPTIONS')return json({})
  if(req.method!=='POST')return json({error:'method_not_allowed'},405)
- const svc=service();let claimed:any=null,pending:any=null;let attemptedSend=false;
+ const svc=service();let claimed:any=null,pending:any=null;let attemptedSend=false,acceptedSend=false;
  try{
   if(!await worker(req,svc))await admin(req,svc)
   const body=await req.json(),id=body.notification_id;
@@ -187,13 +188,13 @@ Deno.serve(async req=>{
   const message=await buildMessage(svc,claimed);if(!validEmail(message.recipientEmail))throw new MailError('invalid_recipient')
   await logAttempt(svc,id,null,'started')
   attemptedSend=true;
-  const result=await send(token,routedMime(sender,{to:message.recipientEmail,subject:message.subject,html:message.html,id:'notification-'+id}))
+  const result=await send(token,routedMime(sender,{to:message.recipientEmail,subject:message.subject,html:message.html,id:'notification-'+id}));acceptedSend=true;
   check(await svc.from('notification_outbox').update({status:'sent',recipient_email:message.recipientEmail,recipient_name:message.recipientName,subject:message.subject,provider_message_id:result.id,accepted_at:new Date().toISOString(),sent_at:new Date().toISOString(),last_error:null}).eq('id',id))
   await logAttempt(svc,id,null,'gmail_accepted',null,result.id)
   check(await svc.from('psc_mail_messages').upsert({gmail_message_id:result.id,gmail_thread_id:result.threadId||result.id,direction:'outbound',kind:'notification',order_id:claimed.entity_type==='order'?claimed.entity_id:claimed.payload?.order_id||null,enquiry_id:claimed.entity_type==='enquiry'?claimed.entity_id:null,sender,recipient:message.recipientEmail,subject:message.subject,received_at:new Date().toISOString(),review_status:'linked'}))
   return json({accepted_by_gmail:true,delivery_confirmed:false})
  }catch(e){
-  const code=safeCode(e),unknown=e instanceof MailError?e.uncertain:attemptedSend;
+  const code=safeCode(e),unknown=acceptedSend||(e instanceof MailError?e.uncertain:attemptedSend);
   if(claimed){await svc.from('notification_outbox').update({status:unknown?'uncertain':'failed',last_error:code,next_attempt_at:unknown?null:new Date(Date.now()+5*60000).toISOString()}).eq('id',claimed.id).eq('status','sending');await logAttempt(svc,claimed.id,null,unknown?'uncertain':'failed',code).catch(()=>{})}
   else if(pending)await svc.from('notification_outbox').update({last_error:code}).eq('id',pending.id).in('status',['queued','failed']);
   return json({error:code},code==='unauthorized'?401:code==='forbidden'?403:503)

@@ -499,7 +499,7 @@
     if(window.PSC_IS_DEMO_ACCOUNT?.()) return;
     if (!orderNumber) return;
     const order = await findOrder(orderNumber);
-    if (!order) return;
+    if (!order || window.PSC_ACCOUNT_CONTEXT?.()?.group?.slug==='aeg-education') return;
 
     const { data: quote, error } = await sb
       .from('quotes')

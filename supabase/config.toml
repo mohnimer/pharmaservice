@@ -11,3 +11,8 @@ verify_jwt = false
 verify_jwt = false
 [functions.mail-unsubscribe]
 verify_jwt = false
+
+# Public activation inspection requires the application secret; activation validates
+# the Supabase session server-side, and all administration requires PSC admin auth.
+[functions.customer-invitations]
+verify_jwt = false
