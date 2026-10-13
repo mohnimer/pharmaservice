@@ -76,6 +76,10 @@ try{
   await herpesan.waitFor();
   assert((await herpesan.innerText()).includes('Herpesan Gel 5 g'));
   assert((await herpesan.locator('.pscPricePreview').innerText()).includes('18.50'));
+  const herpesanPhoto=herpesan.locator('.productMainImage');
+  await herpesanPhoto.evaluate(async img=>{img.loading='eager';await img.decode();});
+  assert((await herpesanPhoto.getAttribute('src')).endsWith('271-herpesan-gel-sgm.jpg'));
+  assert((await herpesanPhoto.evaluate(img=>img.naturalWidth))>0);
   await herpesan.locator('.productVisual').click();
   const herpesanModal=page.locator('.productDetailModal');
   await herpesanModal.waitFor();
