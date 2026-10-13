@@ -11,9 +11,13 @@
     "test:catalogue-browser": "node tests/catalogue-browser.mjs",
     "test:intelligent-search": "node --test tests/intelligent-search.test.mjs && node tests/intelligent-search-browser.mjs",
     "test:search-quality": "node tests/search-quality.mjs",
-    "test:search-acceptance-browser": "node tests/search-acceptance-browser.mjs"
+    "test:search-acceptance-browser": "node tests/search-acceptance-browser.mjs",
+    "test:customer-accounts": "node tests/customer-invitation-rls.mjs && node tests/customer-invitation-functions.mjs",
+    "test:customer-accounts-browser": "node tests/customer-account-browser.mjs",
+    "test:mail-safety": "node tests/gmail-security.mjs"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.3.14",
     "happy-dom": "20.14.5",
     "playwright": "1.62.1"
   },

@@ -24,6 +24,7 @@
     select() { return this; } order() { return this; } range(start,end) { this.bounds=[start,end];return this; } limit(n) { this.rowLimit=n;return this; }
     eq(key, value) { this.filters.push(row => row[key] === value); return this; }
     or(expression) { const options=expression.split(',').map(x=>x.match(/^(\w+)\.ilike\.%(.+)%$/));if(options.some(x=>!x))throw new Error('Unsupported test OR query');this.filters.push(row=>options.some(x=>String(row[x[1]]||'').toLowerCase().includes(x[2].toLowerCase())));return this; }
+    not(key,op,value){if(op!=='is'||value!==null)throw new Error('Unsupported test NOT query');this.filters.push(row=>row[key]!=null);return this;}
     in(key, values) { this.filters.push(row => values.includes(row[key])); return this; }
     single() { this.one = true; return this; } maybeSingle() { this.one = true; return this; }
     insert(value) { this.action = 'insert'; this.value = value; return this; }
@@ -51,7 +52,7 @@
     }
   }
   let signedIn=role!=='anonymous';
-  const getSession=()=>signedIn?{access_token:window.__testAccessToken,user:{id:'u1',email:'test@example.invalid'}}:null;
+  const getSession=()=>signedIn?{access_token:window.__testAccessToken,user:{id:'u1',email:'test@example.invalid',email_confirmed_at:'2026-01-01T00:00:00Z'}}:null;
   const client = {
     from: table => new Query(table),
     auth: {
