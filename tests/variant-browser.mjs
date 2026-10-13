@@ -86,6 +86,8 @@ try{
   assert((await herpesanModal.innerText()).includes('18.50'));
   assert(!(await herpesanModal.innerText()).includes('SGM'));
   await page.screenshot({path:'test-results/variant-visual-review/'+width+'-herpesan-stock.png',fullPage:true});
+  // Export a small fixture-only review image when artifact byte downloads are unavailable.
+  console.log('PSC_REVIEW_JPEG:'+width+':'+(await page.screenshot({type:'jpeg',quality:45})).toString('base64'));
   await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/sports');
   await page.locator('.productCard.pscEditorialCard').first().waitFor();
   await page.locator('.productCard.pscEditorialCard img.productMainImage').evaluateAll(async images=>{
