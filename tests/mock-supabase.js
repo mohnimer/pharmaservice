@@ -21,8 +21,9 @@
   window.__tables = tables;
   class Query {
     constructor(table) { this.table = table; this.filters = []; this.action = 'select'; }
-    select() { return this; } order() { return this; } range(start,end) { this.bounds=[start,end];return this; } limit() { return this; }
+    select() { return this; } order() { return this; } range(start,end) { this.bounds=[start,end];return this; } limit(n) { this.rowLimit=n;return this; }
     eq(key, value) { this.filters.push(row => row[key] === value); return this; }
+    or(expression) { const options=expression.split(',').map(x=>x.match(/^(\w+)\.ilike\.%(.+)%$/));if(options.some(x=>!x))throw new Error('Unsupported test OR query');this.filters.push(row=>options.some(x=>String(row[x[1]]||'').toLowerCase().includes(x[2].toLowerCase())));return this; }
     in(key, values) { this.filters.push(row => values.includes(row[key])); return this; }
     single() { this.one = true; return this; } maybeSingle() { this.one = true; return this; }
     insert(value) { this.action = 'insert'; this.value = value; return this; }
@@ -42,6 +43,7 @@
           const values=Array.isArray(this.value)?this.value:[this.value];tables[this.table]??=[];
           rows=values.map(value=>{const old=tables[this.table].find(r=>this.table==='order_commercial_controls'?r.order_id===value.order_id:r.entity_type===value.entity_type&&r.entity_id===value.entity_id);if(old){Object.assign(old,value);return old;}tables[this.table].push(structuredClone(value));return value;});
         }
+        if(this.rowLimit)rows=rows.slice(0,this.rowLimit);
         if(this.bounds)rows=rows.slice(this.bounds[0],this.bounds[1]+1);
         if (this.action === 'update') rows.forEach(row => Object.assign(row, this.value));
         return { data: this.one ? rows[0] || null : structuredClone(rows), error: null };
