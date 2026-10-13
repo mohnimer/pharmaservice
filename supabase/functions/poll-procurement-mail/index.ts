@@ -27,8 +27,10 @@ Deno.serve(async req=>{
    const previous=check(await svc.from('psc_mail_messages').select('order_id,enquiry_id,kind').eq('gmail_thread_id',item.threadId).eq('review_status','linked').limit(101))||[]
    const links=new Set(previous.filter((x:any)=>x.order_id||x.enquiry_id).map((x:any)=>String(x.order_id||x.enquiry_id)));const linked=links.size===1&&previous.length<101?previous.find((x:any)=>x.order_id||x.enquiry_id):null;
    // The administrator has enabled the full connected business mailbox.
-   const message=await gmail(token,'messages/'+item.id+'?format=full'),raw=await gmail(token,'messages/'+item.id+'?format=raw');
-   const rawBytes=unb64(raw.raw);const storeRaw=rawBytes.length<=10*1024*1024
+   const message=await gmail(token,'messages/'+item.id+'?format=full');
+   // Avoid downloading/decoding oversized raw MIME; preserve the message and bounded attachments.
+   const raw=Number(metadata.sizeEstimate||message.sizeEstimate||0)<=10*1024*1024?await gmail(token,'messages/'+item.id+'?format=raw'):null;
+   const rawBytes=raw?.raw&&raw.raw.length<=Math.ceil(10*1024*1024*4/3)+16?unb64(raw.raw):new Uint8Array();const storeRaw=rawBytes.length>0&&rawBytes.length<=10*1024*1024
    const root='inbound/'+item.id,rawPath=root+'/original.eml';if(storeRaw)check(await svc.storage.from('psc-correspondence').upload(rawPath,rawBytes,{contentType:'message/rfc822',upsert:true}))
    const attachments=[];for(const [i,part] of attachmentParts(message.payload).entries()){
     if(part.body?.size>10*1024*1024){attachments.push({file_name:part.filename,error:'attachment_size_exceeded'});continue}

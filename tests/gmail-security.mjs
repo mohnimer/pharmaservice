@@ -11,10 +11,11 @@ for(const path of ['_shared/business-email.js','_shared/onboarding.ts','_shared/
 writeFileSync(join(root,'security_test.ts'),String.raw`
 import {draftSender,notificationSender,verifySender,routedMime,SALES,PROCUREMENT} from './_shared/mail-senders.ts';
 import {initialItems,validateItems,canActivate,reminderBody,businessDate,detectReply,onboardingAction} from './_shared/onboarding.ts';
-import {admin,accessToken,gmail,mime,MailError,safeCode,cors} from './_shared/psc-mail.ts';
+import {admin,accessToken,gmail,mime,MailError,safeCode,cors,b64,unb64} from './_shared/psc-mail.ts';
 import {validateIntake,checkIntakeSend,intakeAction} from './_shared/mail-intake.ts';
 import {marketingMime,verifyAlias,eligible,OUTREACH} from './_shared/outreach.ts';
 function assert(v:unknown,label='assertion failed'){if(!v)throw new Error(label)}
+Deno.test('multi-megabyte MIME decoding preserves bytes without a per-character array',()=>{const input=new Uint8Array(2*1024*1024);for(let i=0;i<input.length;i++)input[i]=i%251;const output=unb64(b64(input));assert(output.length===input.length);for(let i=0;i<input.length;i++)assert(output[i]===input[i]);});
 let handler:any;Deno.serve=((fn:any)=>{handler=fn;return {}}) as any;
 const {replyContext}=await import('./procurement-mail/index.ts');const procurement=handler;
 await import('./psc-gmail-oauth/index.ts');const oauth=handler;

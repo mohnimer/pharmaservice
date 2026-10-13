@@ -22,7 +22,7 @@ export async function worker(req:Request,svc:any){const token=req.headers.get('x
 export const email=(s:unknown)=>typeof s==='string'&&s.length<=254&&/^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(s)
 export function b64(bytes:Uint8Array){let s='';for(let i=0;i<bytes.length;i+=8192)s+=String.fromCharCode(...bytes.subarray(i,i+8192));return btoa(s)}
 export const b64url=(s:string)=>b64(new TextEncoder().encode(s)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')
-export const unb64=(s:string)=>Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0))
+export function unb64(s:string){const decoded=atob(s.replace(/-/g,'+').replace(/_/g,'/'));const bytes=new Uint8Array(decoded.length);for(let i=0;i<decoded.length;i++)bytes[i]=decoded.charCodeAt(i);return bytes}
 export async function hash(s:string|Uint8Array){const out=await crypto.subtle.digest('SHA-256',typeof s==='string'?new TextEncoder().encode(s):new Uint8Array(s).buffer);return Array.from(new Uint8Array(out),b=>b.toString(16).padStart(2,'0')).join('')}
 export function config(){const clientId=Deno.env.get('PSC_GOOGLE_OAUTH_CLIENT_ID'),clientSecret=Deno.env.get('PSC_GOOGLE_OAUTH_CLIENT_SECRET');if(!clientId||!clientSecret)throw new MailError('oauth_configuration_required');return {clientId,clientSecret}}
 export async function exchange(params:Record<string,string>){
