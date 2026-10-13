@@ -1298,7 +1298,7 @@
     ['portal/stock','Stock & expiry','stock'],
     ['portal/assets','Clinic assets','assets']
   ];
-  const adminNav=[['admin/dashboard','Today','home'],['admin/requests','Requests','checklist'],['admin/customers','Customers & contacts','users'],['admin/tasks','Tasks & calendar','calendar'],['admin/mail','Inbox','mail'],['admin/resources','Products & suppliers','boxes'],['admin/settings','Settings','settings']];
+  const adminNav=[['admin/dashboard','Today','home'],['admin/sales','Sales','repeat'],['admin/mail','Inbox','mail'],['admin/requests','Orders & quotations','checklist'],['admin/customers','Accounts','users'],['admin/tasks','Tasks','calendar'],['admin/resources','Products & suppliers','boxes'],['admin/settings','Settings','settings'],['admin/onboarding','Account setup','users']];
 
   function shell(content, admin=false){
     const route=currentRoute();
@@ -1306,14 +1306,15 @@
     if(admin&&resourceRoutes.includes(route))content=`<button class="button outline" data-go="admin/resources">← Products & suppliers</button>`+content;
     if(admin&&route==='admin/fulfilment')content=`<button class="button outline" data-go="admin/settings">← Settings</button>`+content;
     const liveCustomerNav=schoolNav.filter(([href])=>isDemoAccount() || !['portal/stock','portal/assets'].includes(href));
-    const links=admin?adminNav:liveCustomerNav;
+    const links=admin?adminNav.filter(([href])=>!['admin/resources','admin/settings','admin/onboarding'].includes(href)):liveCustomerNav;
     const searchValue=esc(ui.globalSearch||'');
-    return `<div class="appShell v4Shell v7Shell v7bShell v26Shell v37Shell v38Shell v381Shell ${admin?'adminShell':'customerShell'}">
+    return `<div class="appShell v4Shell v7Shell v7bShell v26Shell v37Shell v38Shell v381Shell pscOperatingShell ${admin?'adminShell':'customerShell'}">
       <div class="mobileOverlay ${ui.mobile?'show':''}" data-mobile-close></div>
       <aside class="sidebar ${ui.mobile?'sidebarOpen':''}">
-        <div class="sidebarTop">${brand()}<button class="iconBtn mobileClose" data-mobile-close aria-label="Close menu">${icon('close')}</button></div>
+        <div class="sidebarTop">${brand()}<span class="psWorkspaceCaption">${admin?'SUPPLY WORKSPACE':'CLINIC ACCOUNT'}</span><button class="iconBtn mobileClose" data-mobile-close aria-label="Close menu">${icon('close')}</button></div>
         <nav class="iconNav">${links.map(([href,label,ico])=>`<button class="navLink iconOnly ${(route===href || (href==='portal/catalogue' && route.startsWith('portal/catalogue/')))?'active':''}" data-go="${href}" aria-label="${label}"><span class="navIcon">${admin?icon(ico):portalSidebarIcon(href,ico)}</span><span class="navLabel">${label}</span></button>`).join('')}</nav>
         <div class="sidebarFooter compactFooter">
+          ${admin?`<button class="navLink" data-go="admin/resources"><span class="navIcon">${icon('boxes')}</span><span class="navLabel">Products & suppliers</span></button><button class="navLink" data-go="admin/settings"><span class="navIcon">${icon('settings')}</span><span class="navLabel">Settings</span></button>`:''}
           ${admin?`<button class="navLink iconOnly" data-go="portal/dashboard" aria-label="Client portal"><span class="navIcon">${icon('home')}</span><span class="navLabel">Client portal</span></button>`:(authContext?.isPscAdmin?`<button class="navLink iconOnly" data-go="admin/dashboard" aria-label="PS admin"><span class="navIcon">${icon('home')}</span><span class="navLabel">PS admin</span></button>`:'')}
           <button class="navLink iconOnly" data-signout aria-label="Sign out"><span class="navIcon">${admin?icon('logout'):portalUtilityIcon('logout')}</span><span class="navLabel">Sign out</span></button>
         </div>
@@ -2066,19 +2067,13 @@
     const workshopPreview=WORKSHOP.filter(g=>g.status==='published').slice(0,2);
 
     return shell(`
-      <section class="v26HomeHero">
-        <div><span class="eyebrow">YOUR CLINIC, CONNECTED</span><h1>A little more ready.<br>Every day.</h1><p>Your place to find supplies, plan the next refill and keep things moving.${isDemoAccount()?' You’re exploring a demo account.':''}</p>${intelligentSearchField()}</div>
-      </section>
+      <section class="psPortalWelcome"><div><span class="eyebrow">YOUR CLINIC ACCOUNT</span><h1>What does your clinic need?</h1><p>Choose products or send your requirement. Pharma Service will clarify the details and prepare a formal quotation.</p><div class="wsActions"><button class="button primary" data-go="portal/catalogue">Browse & prepare a request</button><button class="button outline" data-go="portal/requests">View requests & quotations${awaiting?' · '+awaiting+' to review':''}</button></div></div><aside><span>HOW SUPPLY WORKS</span><ol><li><b>01</b> Prepare your requirement</li><li><b>02</b> Review the PSC quotation</li><li><b>03</b> Confirm through your purchasing process</li><li><b>04</b> Supply, documents and easy repeat</li></ol><p>Submitting a request does not place a purchase order. Final approvals follow your organization’s agreed process.</p></aside></section>
+      <section class="psPortalAttention"><div class="psSectionHead"><h2>${awaiting?'Quotations to review':'Your current requests'}</h2><button class="button outline" data-go="portal/requests">View all →</button></div>${active.slice(0,3).map(orderMiniRow).join('')||'<div class="psFirstRequest"><p>Start your first request from the catalogue. If you already have a list, send it to us as it is.</p><a class="button outline" href="mailto:mohamed@pharmaservice.ae">Send your requirement</a></div>'}</section>
 
-      <section class="v26QuickActions">
-        <button class="v26ActionCard coral" data-go="portal/catalogue"><span class="v26ActionIcon">${icon('inventory')}</span><small>01</small><h2>Shop catalogue</h2><p>Browse by clinical need and find the right institutional products faster.</p><i>→</i></button>
-        <button class="v26ActionCard blue" data-go="portal/replenish"><span class="v26ActionIcon">${icon('repeat')}</span><small>02</small><h2>Repeat an order</h2><p>Restore previously supplied items from the same account history.</p><i>→</i></button>
-        <button class="v26ActionCard mint" data-go="portal/requests"><span class="v26ActionIcon">${icon('request')}</span><small>03</small><h2>Orders & quotations</h2><p>Follow requests, quotation decisions, delivery and completed orders.</p><i>→</i></button>
-        <button class="v26ActionCard sand" data-go="portal/catalogue/all"><span class="v26ActionIcon">${icon('search')}</span><small>04</small><h2>Find anything</h2><p>Search the full institutional catalogue or submit a sourcing request.</p><i>→</i></button>
-      </section>
+
 
       <section class="pscHomeBrowse" aria-labelledby="psc-browse-title">
-        <div class="v26SectionHead"><div><span class="eyebrow">FIND YOUR STARTING POINT</span><h2 id="psc-browse-title">What does your clinic need?</h2></div><button data-go="portal/catalogue">Browse all categories →</button></div>
+        <div class="v26SectionHead"><div><span class="eyebrow">FIND YOUR STARTING POINT</span><h2 id="psc-browse-title">Browse by clinical need.</h2></div><button data-go="portal/catalogue">Browse all categories →</button></div>
         <div class="pscHomeCategoryColumns">
           <section><h3>By clinical need</h3><p>Start with the care you provide.</p>${homeCategory('wounds')}${homeCategory('breathing')}${homeCategory('vitals')}<button class="pscHomeAll" data-go="portal/catalogue">All therapeutic & clinical categories →</button></section>
           <section><h3>Clinic essentials</h3><p>Your DHA requirement list, organised.</p>${homeCategory('dha-medicines','Medicines','Medicines mapped to the clinic requirements')}${homeCategory('dha-equipment','Equipment','Required equipment, diagnostics & furniture')}${homeCategory('dha-consumables','Consumables','Required disposables, wound care & PPE')}<small class="pscHomeScopeNote">Based on the catalogue’s DHA educational clinic mapping. Conditional items and required alternatives are identified; exact product suitability is checked before quotation.</small></section>
@@ -2090,17 +2085,9 @@
         <div class="pscHomeWorkshopGuides">${workshopPreview.map((g,i)=>`<button class="pscHomeGuide" data-go="workshop/${esc(g.slug)}"><span class="pscHomeGuideArt" aria-hidden="true">${clinicalNeedIcon(i?'vitals':'infection')}</span><small>${esc(g.category)} · ${esc(g.read_time||'Guide')}</small><h3>${esc(g.title)}</h3><p>${esc(g.excerpt||g.subtitle||'')}</p><b>Read the guide</b></button>`).join('')}</div>
       </section>
 
-      <div class="v26OperationsStrip">
-        <div><span>ACTIVE</span><b>${active.length}</b><small>Orders & requests</small></div>
-        <div><span>QUOTE READY</span><b>${awaiting}</b><small>Awaiting your decision</small></div>
-        <div><span>IN PROCESS</span><b>${processing}</b><small>${processing?'Open order for delivery timing':'No deliveries due'}</small></div>
-        <div><span>REPLENISH</span><b>${deliveredSkus.size}</b><small>Previously delivered items</small></div>
-      </div>
 
-      <div class="customerHomeGrid v26HomeGrid">
-        <section class="panel v26ActivityPanel"><div class="panelHeader"><h2>Current activity</h2><button data-go="portal/requests">View all →</button></div><div class="homeActivity">${active.slice(0,4).map(r=>orderMiniRow(r)).join('')||'<div class="emptyState"><h3>No active orders</h3><p>New requests and quotations will appear here.</p></div>'}</div></section>
-        <section class="customerActionPanel v26RepeatPanel"><span class="eyebrow">QUICK REPEAT</span><h2>Need the same items again?</h2><p>Replenish from products already supplied to this account.</p><button class="button dark" data-go="portal/replenish">Open Replenish →</button></section>
-      </div>
+
+      <section class="psPortalRepeat"><div><span class="eyebrow">AFTER YOUR FIRST SUPPLY</span><h2>Repeat ordering, without starting over.</h2><p>Return to the products already delivered to this school, prepare the next quantities and send a fresh request.</p></div><button class="button outline" data-go="portal/replenish">Open Replenish</button><button class="button outline" data-go="portal/documents">View account documents</button></section>
 
     `);
   }
@@ -3530,6 +3517,8 @@
       case 'portal/insights': html=insightsPage();break;
       case 'portal/archive': html=archivePage();break;
       case 'admin/dashboard': html=workspacePage('today');break;
+      case 'admin/sales': html=workspacePage('sales');break;
+      case 'admin/onboarding': html=workspacePage('onboarding');break;
       case 'admin/customers': html=workspacePage('customers');break;
       case 'admin/tasks': html=workspacePage('tasks');break;
       case 'admin/resources': html=workspacePage('resources');break;
