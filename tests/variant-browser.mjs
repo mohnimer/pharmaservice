@@ -44,10 +44,9 @@ try{
   const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto('http://127.0.0.1:'+server.address().port+'/');
   await page.locator('.home47.h47Compact').waitFor();
-  assert.equal(await page.locator('.h47Hero h1').innerText(),'From requirement to replenishment. All in one place.');
+  assert.equal(await page.locator('.h47Hero h1').innerText(),'Healthcare procurement for institutions.');
   assert.equal(await page.locator('.h47Hero h1 em').count(),0);
-  assert.equal(await page.locator('.h47HeroClosing').evaluate(el=>getComputedStyle(el).whiteSpace),'nowrap');
-  assert.equal(await page.locator('.h47Hero .h47HeroBody').innerText(),'Shop our comprehensive catalogue of healthcare products, with visibility and compliance throughout.');
+  assert.equal(await page.locator('.h47Hero .h47HeroBody').innerText(),'Documented supply at wholesale prices, with one accountable partner from first order to repeat.');
   assert.equal(await page.locator('.home47 > section').count(),4);
   assert.equal(await page.locator('.h47Category').count(),6);
   assert.equal(await page.locator('main.publicLanding > .publicHeader').count(),1);
