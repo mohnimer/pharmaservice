@@ -44,10 +44,9 @@ try{
   const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto('http://127.0.0.1:'+server.address().port+'/');
   await page.locator('.home47.h47Compact').waitFor();
-  assert.equal(await page.locator('.h47Hero h1').innerText(),'From requirement to replenishment. All in one place.');
+  assert.equal(await page.locator('.h47Hero h1').innerText(),'Healthcare procurement for institutions.');
   assert.equal(await page.locator('.h47Hero h1 em').count(),0);
-  assert.equal(await page.locator('.h47HeroClosing').evaluate(el=>getComputedStyle(el).whiteSpace),'nowrap');
-  assert.equal(await page.locator('.h47Hero .h47HeroBody').innerText(),'Shop our comprehensive catalogue of healthcare products, with visibility and compliance throughout.');
+  assert.equal(await page.locator('.h47Hero .h47HeroBody').innerText(),'Documented supply at wholesale prices, with one accountable partner from first order to repeat.');
   assert.equal(await page.locator('.home47 > section').count(),4);
   assert.equal(await page.locator('.h47Category').count(),6);
   assert.equal(await page.locator('main.publicLanding > .publicHeader').count(),1);
@@ -71,6 +70,24 @@ try{
   await page.locator('.psInterpretation').waitFor();
   assert((await page.locator('.psInterpretation').innerText()).includes('sterile gauze'));
   assert(await page.locator('.psSearchResults .productCard').count()>0);
+  await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/allergy');
+  const herpesan=page.locator('.productCard:has([data-product-view="PS-AC-417F1BC9E425"])');
+  await herpesan.waitFor();
+  assert((await herpesan.innerText()).includes('Herpesan Gel 5 g'));
+  assert((await herpesan.locator('.pscPricePreview').innerText()).includes('18.50'));
+  const herpesanPhoto=herpesan.locator('.productMainImage');
+  await herpesanPhoto.evaluate(async img=>{img.loading='eager';await img.decode();});
+  assert((await herpesanPhoto.getAttribute('src')).endsWith('271-herpesan-gel-sgm.jpg'));
+  assert((await herpesanPhoto.evaluate(img=>img.naturalWidth))>0);
+  await herpesan.locator('.productVisual').click();
+  const herpesanModal=page.locator('.productDetailModal');
+  await herpesanModal.waitFor();
+  assert((await herpesanModal.innerText()).includes('5 g tube'));
+  assert((await herpesanModal.innerText()).includes('18.50'));
+  assert(!(await herpesanModal.innerText()).includes('SGM'));
+  await page.screenshot({path:'test-results/variant-visual-review/'+width+'-herpesan-stock.png',fullPage:true});
+  // Export a small fixture-only review image when artifact byte downloads are unavailable.
+  console.log('PSC_REVIEW_JPEG:'+width+':'+(await page.screenshot({type:'jpeg',quality:45})).toString('base64'));
   await page.goto('http://127.0.0.1:'+server.address().port+'/#portal/catalogue/sports');
   await page.locator('.productCard.pscEditorialCard').first().waitFor();
   await page.locator('.productCard.pscEditorialCard img.productMainImage').evaluateAll(async images=>{

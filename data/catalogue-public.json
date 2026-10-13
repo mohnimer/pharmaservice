@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": "PSC-20261012-STOCK-001",
+  "revision": "PSC-20261012-STOCK-002",
   "stock_date": "2026-10-12",
   "report_name": "ACORUS WH STOCK LIST AS ON 12-10-2026.xlsx",
   "products": [
@@ -2762,16 +2762,16 @@
     },
     {
       "sku": "PS-AC-417F1BC9E425",
-      "name": "HERPESAN GEL SGM",
+      "name": "Herpesan Gel 5 g",
       "brand": "Herpesan",
-      "pack": "Exact pack to confirm",
+      "pack": "5 g tube",
       "family_id": "PS-AC-417F1BC9E425",
-      "family_name": "HERPESAN GEL SGM",
+      "family_name": "Herpesan Gel 5 g",
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": false,
-      "mrp_aed": null
+      "in_stock": true,
+      "mrp_aed": 18.5
     },
     {
       "sku": "PS-AC-EF89A3D78DE4",

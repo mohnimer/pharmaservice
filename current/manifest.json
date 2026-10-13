@@ -23,6 +23,8 @@
     "current/behaviour/payment-instructions.js",
     "current/behaviour/verified-variant-records.js",
     "current/behaviour/variant-evidence.js",
+    "current/behaviour/catalogue-stock-data.js",
+    "current/behaviour/catalogue-stock.js",
     "app.js",
     "current/behaviour/catalogue-families.js",
     "current/behaviour/family-details.js",
@@ -101,7 +103,8 @@
     "current/styles/admin-interface.css",
     "current/styles/workstation.css",
     "current/styles/portal-home.css",
-    "current/styles/product-editorial.css"
+    "current/styles/product-editorial.css",
+    "current/styles/catalogue-stock.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",

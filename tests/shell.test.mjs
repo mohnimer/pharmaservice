@@ -12,6 +12,10 @@ test('runtime contains one HTML shell and no historical patch or alternate entry
   assert(!files.some(f => /history|workshop-v50-block|apply_v50|v45-workshop/.test(f)));
   assert(!shell.includes('v45-workshop-modules-gate'));
   const emitted=readFileSync('dist/index.html','utf8');assert(/\/current\.js\?v=[a-f0-9]{16}/.test(emitted));assert(!emitted.includes('/current.js?v=5009'));
+  const manifest=JSON.parse(readFileSync('current/manifest.json','utf8'));
+  assert(manifest.javascript.includes('current/behaviour/catalogue-stock-data.js'),'Stock projection must load in the application');
+  assert(manifest.javascript.includes('current/behaviour/catalogue-stock.js'),'Stock and family controls must load in the application');
+  assert(manifest.stylesheets.includes('current/styles/catalogue-stock.css'),'Family card styles must load in the application');
   const scripts = [...shell.matchAll(/<script src="([^"]+)"/g)].map(m => m[1].split('?')[0]);
   assert.equal(new Set(scripts).size, scripts.length);
   assert.equal(scripts.at(-1), '/current.js');
