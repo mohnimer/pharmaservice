@@ -142,14 +142,11 @@ create or replace function public.psc_record_management_decision(p_quote uuid,p_
 $$;
 revoke all on function public.psc_record_management_decision(uuid,integer,text,text) from public,anon;
 grant execute on function public.psc_record_management_decision(uuid,integer,text,text) to authenticated;
-create or replace function private.check_aeg_management_release() returns trigger language plpgsql security definer set search_path='' as $$
-begin
- if new.status in ('confirmed','under_process','out_for_delivery','delivered') and new.status is distinct from old.status and exists(select 1 from public.account_groups where id=new.group_id and slug='aeg-education') and not exists(
-  select 1 from public.quotes q join public.psc_management_decisions d on d.quote_id=q.id and d.revision=q.current_revision where q.order_id=new.id and d.decision='approved' and d.commercial_fingerprint=public.psc_mail_quote_fingerprint(new.id)) then raise exception 'Current AEG management approval required before commercial release';end if;
- return new;
-end $$;
-revoke all on function private.check_aeg_management_release() from public,anon,authenticated;
-create trigger aeg_management_release before update of status on public.orders for each row execute function private.check_aeg_management_release();
+-- Initial rollout uses management approval by email. Do not install an additional
+-- portal-decision gate before AEG has identified its named approvers. The existing
+-- psc_check_commercial_release trigger still requires a current commercial
+-- fingerprint, customer PO/written approval reference, funding and supplier evidence.
+-- Management approval alone never creates a PO or authorizes PSC procurement.
 
 create table public.psc_credit_accounts (
  id uuid primary key default gen_random_uuid(),group_id uuid not null references public.account_groups(id), school_ids uuid[] not null default '{}',

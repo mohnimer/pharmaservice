@@ -71,4 +71,5 @@ for(let n=0;n<5;n++){
  const scoped=await rows('select id from schools');assert.equal(scoped.length,1);assert.equal(scoped[0].id,sid);
  await db.exec('reset role;');
 }
+assert.equal((await db.query("select count(*)::int as n from pg_trigger where tgname='aeg_management_release'")).rows[0].n,0,'Email approvals must not require an unassigned portal approver');
 await db.close();console.log('PostgreSQL RLS: five idempotent drafts, cross-school denial, Loai visibility, explicit revision approval, expired/mismatched/reused token denial, existing membership preservation, private credit documents and no automatic credit PASS');
