@@ -72,4 +72,27 @@ for(let n=0;n<5;n++){
  await db.exec('reset role;');
 }
 assert.equal((await db.query("select count(*)::int as n from pg_trigger where tgname='aeg_management_release'")).rows[0].n,0,'Email approvals must not require an unassigned portal approver');
+// Sales intentions are private admin records and cannot authorize existing orders.
+await db.exec(`reset role;
+create table mail_contacts(id uuid primary key);
+create table psc_crm_tasks(id uuid default gen_random_uuid(),order_id uuid,source_rule text);
+insert into mail_contacts values('${ids.invite}');
+grant select on mail_contacts to authenticated;
+`);
+await db.exec(readFileSync('supabase/migrations/20261013203436_sales_opportunities.sql','utf8'));
+const ordersBefore=await rows('select * from orders order by id');
+const saleValues=`contact_id,title,next_action,next_action_due,school_id,order_id`;
+const saleData=`'${ids.invite}','Clinic supply','Discuss specifications',current_date,'${ids.s1}','${ids.o1}'`;
+for(const actor of ['a','loai','demo','unverified']){await user(actor);assert.equal((await rows('select * from psc_sales_opportunities')).length,0);await rejected(()=>db.query(`insert into psc_sales_opportunities(${saleValues}) values(${saleData})`));}
+await user('psc');
+await rejected(()=>db.query(`insert into psc_sales_opportunities(contact_id,title) values('${ids.invite}','Missing next action')`));
+await rejected(()=>db.query(`insert into psc_sales_opportunities(${saleValues},estimated_value_ex_vat) values(${saleData},-1)`));
+await rejected(()=>db.query(`insert into psc_sales_opportunities(${saleValues},stage) values(${saleData},'closed_won')`));
+await rejected(()=>db.query(`insert into psc_sales_opportunities(${saleValues}) values('${ids.invite}','Wrong campus','Review',current_date,'${ids.s2}','${ids.o1}')`));
+const sale=(await rows(`insert into psc_sales_opportunities(${saleValues}) values(${saleData}) returning id,stage`))[0];assert.equal(sale.stage,'prospect');
+await db.query(`update psc_sales_opportunities set stage='proceeding',decision_note='Customer email requests next steps',updated_by='${ids.psc}' where id='${sale.id}'`);
+assert.deepEqual(await rows('select * from orders order by id'),ordersBefore,'Pipeline stages cannot change quotation or order authorization');
+await user('a');assert.equal((await rows('select * from psc_sales_opportunities')).length,0);assert.equal((await rows(`update psc_sales_opportunities set title='Unauthorized' where id='${sale.id}' returning id`)).length,0);
+await db.exec('reset role;set role anon;');await rejected(()=>db.query('select * from psc_sales_opportunities'));await db.exec('reset role;');
+console.log('Sales RLS: anonymous/customer/group/demo/unverified denied, admin validation and campus scope enforced, no order side effects PASS');
 await db.close();console.log('PostgreSQL RLS: five idempotent drafts, cross-school denial, Loai visibility, explicit revision approval, expired/mismatched/reused token denial, existing membership preservation, private credit documents and no automatic credit PASS');

@@ -5,6 +5,10 @@ on:
       - 'app.js'
       - 'current/behaviour/customer-*.js'
       - 'current/behaviour/mail-workspace.js'
+      - 'current/behaviour/workstation.js'
+      - 'current/behaviour/business-workspace-model.js'
+      - 'current/styles/operating-system.css'
+      - 'tests/business-workspace*'
       - 'current/manifest.json'
       - 'supabase/**'
       - 'tests/customer-*.mjs'
@@ -27,8 +31,12 @@ jobs:
       - run: npm run test:mail-safety
       - run: npx playwright install --with-deps chromium
       - run: npm run test:customer-accounts-browser
+      - run: node --test tests/business-workspace-model.test.cjs
+      - run: node tests/business-workspace-browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: customer-account-browser-evidence
-          path: test-results/customer-accounts
+          path: |
+            test-results/customer-accounts
+            test-results/business-workspace
