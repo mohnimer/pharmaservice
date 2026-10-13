@@ -5,8 +5,8 @@
     <div class="home47 h47Compact">
       <section class="h47Hero">
         <div class="h47HeroCopy h47Reveal">
-          <h1>From requirement to replenishment. <span class="h47HeroClosing">All in one place.</span></h1>
-          <p class="h47HeroBody">Shop our comprehensive catalogue of healthcare products, with visibility and compliance throughout.</p>
+          <h1>Healthcare procurement for institutions.</h1>
+          <p class="h47HeroBody">Documented supply at wholesale prices, with one accountable partner from first order to repeat.</p>
           <div class="h47HeroActions">
             <button class="button primary" data-go="our-model">Explore our model</button>
             <button class="button outline" data-go="contact">Reach out</button>
