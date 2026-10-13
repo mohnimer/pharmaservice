@@ -25,6 +25,7 @@
     "current/behaviour/variant-evidence.js",
     "current/behaviour/catalogue-stock-data.js",
     "current/behaviour/catalogue-stock.js",
+    "current/behaviour/dha-family-photographs.js",
     "app.js",
     "current/behaviour/catalogue-families.js",
     "current/behaviour/family-details.js",
@@ -107,7 +108,8 @@
     "current/styles/workstation.css",
     "current/styles/portal-home.css",
     "current/styles/product-editorial.css",
-    "current/styles/catalogue-stock.css"
+    "current/styles/catalogue-stock.css",
+    "current/styles/mail-workspace.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",

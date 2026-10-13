@@ -102,12 +102,13 @@
   }
 
   function imageForSku(sku) {
-    return realImages.get(clean(sku).toUpperCase()) || '';
+    const photo=realImages.get(clean(sku).toUpperCase()) || '';
+    return window.PSC_DHA_FAMILY_PHOTOS?.isMixedPhoto({currentImageUrl:photo})?'':photo;
   }
 
   function setRealImage(img, sku) {
     const real = imageForSku(sku);
-    if (!img || !real) return;
+    if (!img || !real || img.dataset.familyExample==='true') return;
 
     const current = clean(img.getAttribute('src'));
     if (current === real) return;
