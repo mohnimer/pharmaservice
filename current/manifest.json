@@ -111,7 +111,8 @@
     "current/styles/product-editorial.css",
     "current/styles/catalogue-stock.css",
     "current/styles/mail-workspace.css",
-    "current/styles/operating-system.css"
+    "current/styles/operating-system.css",
+    "current/styles/workshop-refinement.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",

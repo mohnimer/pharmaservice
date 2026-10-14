@@ -1,0 +1,19 @@
+import {readFileSync,mkdirSync} from 'node:fs';
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {createServer} from '../tools/serve.mjs';
+const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
+const browser=await chromium.launch({executablePath:process.env.PSC_CHROME,args:['--no-sandbox','--disable-dev-shm-usage']});
+mkdirSync('test-results/workshop-layout',{recursive:true});
+try {for(const width of [390,980,1440,1920]) {
+ const ctx=await browser.newContext({viewport:{width,height:1080}});await ctx.addInitScript(()=>window.__testRole='school');
+ await ctx.route('**/*',r=>{const u=new URL(r.request().url());if(u.hostname==='127.0.0.1')return r.continue();if(u.hostname==='cdn.jsdelivr.net')return r.fulfill({contentType:'text/javascript',body:readFileSync('tests/mock-supabase.js','utf8')+";window.__tables.memberships[0].school_id='s1';window.__tables.memberships[0].role='clinic_user';"});return r.fulfill({status:200,body:''});});
+ const p=await ctx.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));const base=`http://127.0.0.1:${server.address().port}`;
+ await p.goto(base+'/#portal/dashboard');await p.locator('.psPortalWorkshopGrid').waitFor();assert.equal(await p.locator('.psPortalWorkshopGrid .workshopModuleCardV50').count(),7);
+ const routes=await p.locator('.psPortalWorkshopGrid [data-go]').evaluateAll(nodes=>nodes.map(n=>n.dataset.go));assert.equal(new Set(routes).size,7);assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));assert((await p.locator('.mainArea').boundingBox()).y<100);
+ await p.locator('.psPortalWorkshop').scrollIntoViewIfNeeded();await p.screenshot({path:`test-results/workshop-layout/${width}-portal.png`});
+ for(const route of routes){await p.goto(base+'/#'+route);await p.locator('.workshopModuleHeroV50 h1').waitFor();assert(await p.locator('.workshopModuleHeroV50 h1').isVisible());}
+ await p.goto(base+'/#workshop');await p.locator('.workshopModuleGridV50').waitFor();assert.equal(await p.locator('.workshopModuleCardV50').count(),7);assert.deepEqual(await p.locator('.workshopModuleGridV50 [data-go]').evaluateAll(nodes=>nodes.map(n=>n.dataset.go)),routes);
+ const sizes=await p.evaluate(()=>Object.fromEntries(['.workshopHeroGridV50 h1','.workshopSectionHeadV50 h2','.workshopModuleCopyV50 strong','.workshopModuleCopyV50 small','.workshopModuleTopV50>b'].map(sel=>[sel,getComputedStyle(document.querySelector(sel)).fontSize])));assert.equal(sizes['.workshopHeroGridV50 h1'],width<=760?'36px':'56px');assert.equal(sizes['.workshopSectionHeadV50 h2'],width<=760?'28px':'32px');assert.equal(sizes['.workshopModuleCopyV50 strong'],'22px');assert.equal(sizes['.workshopModuleCopyV50 small'],'16px');assert.equal(sizes['.workshopModuleTopV50>b'],'12px');assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.evaluate(()=>scrollTo(0,0));await p.screenshot({path:`test-results/workshop-layout/${width}-workshop.png`});
+ await p.locator('.workshopPrincipleV50').scrollIntoViewIfNeeded();const box=await p.locator('.workshopPrincipleV50 h2').boundingBox(),section=await p.locator('.workshopPrincipleV50').boundingBox();if(width>760){assert(box.width>section.width*.35);assert(box.height<160);}else assert(box.height<200);await p.screenshot({path:`test-results/workshop-layout/${width}-principle.png`});assert.deepEqual(errors,[]);await ctx.close();console.log(`${width}px: seven shared modules, all destinations, type scale, readable principle and portal layout PASS`);
+}} finally {await browser.close();server.close();}

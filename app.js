@@ -1756,7 +1756,7 @@
         ${filtered.length?`<div class="workshopGuideGridV50">${featured.map(workshopGuideCard).join('')}</div>${rest.length?`<details class="workshopAllGuidesV50"><summary><span>View all guides</span><b>${filtered.length} published</b></summary><div class="workshopGuideGridV50 workshopGuideGridRestV50">${rest.map(workshopGuideCard).join('')}</div></details>`:''}`:`<div class="workshopEmptyV50"><b>Nothing on the bench for that search yet.</b><p>Try a product name, a broader term or one of the seven Modules above.</p><button class="button outline" data-workshop-clear>Clear search</button></div>`}
       </section>
 
-      <section class="workshopPrincipleV50"><span>THE RULE</span><h2>Useful product knowledge belongs next to the product.</h2><p>The Workshop exists to make specifications, compatibility, readiness and replenishment easier to understand before the next order. Education first; commerce second.</p></section>
+      <section class="workshopPrincipleV50"><h2>Useful product knowledge belongs next to the product.</h2><p>The Workshop exists to make specifications, compatibility, readiness and replenishment easier to understand before the next order. Education first; commerce second.</p></section>
       ${publicFooter()}
     </main>`;
   }
@@ -2064,7 +2064,6 @@
     const delivered=state.requests.filter(r=>r.campus===state.campus&&r.status==='Accepted');
     const deliveredSkus=new Set(delivered.flatMap(r=>r.lines.map(l=>l.sku)));
     const homeCategory=(id,label,note)=>{const c=clinicalNeedMeta(id);return `<button class="pscHomeCategory" style="--category-tint:${c.bg}" data-go="portal/catalogue/${id}"><span class="pscHomeCategoryIcon" aria-hidden="true">${clinicalNeedIcon(c.icon)}</span><span><b>${esc(label||c.label)}</b><small>${esc(note||c.note)}</small></span>${id.startsWith('dha-')?`<img class="pscHomeDha" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>`;};
-    const workshopPreview=WORKSHOP.filter(g=>g.status==='published').slice(0,2);
 
     return shell(`
       <section class="psPortalWelcome"><div><span class="eyebrow">YOUR CLINIC ACCOUNT</span><h1>What does your clinic need?</h1><p>Choose products or send your requirement. Pharma Service will clarify the details and prepare a formal quotation.</p><div class="wsActions"><button class="button primary" data-go="portal/catalogue">Browse & prepare a request</button><button class="button outline" data-go="portal/requests">View requests & quotations${awaiting?' · '+awaiting+' to review':''}</button></div></div><aside><span>HOW SUPPLY WORKS</span><ol><li><b>01</b> Prepare your requirement</li><li><b>02</b> Review the PSC quotation</li><li><b>03</b> Confirm through your purchasing process</li><li><b>04</b> Supply, documents and easy repeat</li></ol><p>Submitting a request does not place a purchase order. Final approvals follow your organization’s agreed process.</p></aside></section>
@@ -2080,9 +2079,9 @@
         </div>
       </section>
 
-      <section class="pscHomeWorkshop" aria-labelledby="psc-workshop-title">
-        <div class="pscHomeWorkshopIntro"><span class="eyebrow">THE WORKSHOP</span><h2 id="psc-workshop-title">A little know-how.<br>A more confident clinic.</h2><p>Practical reads on the products, equipment and everyday details you work with.</p><button class="button dark" data-go="workshop">Explore the Workshop</button></div>
-        <div class="pscHomeWorkshopGuides">${workshopPreview.map((g,i)=>`<button class="pscHomeGuide" data-go="workshop/${esc(g.slug)}"><span class="pscHomeGuideArt" aria-hidden="true">${clinicalNeedIcon(i?'vitals':'infection')}</span><small>${esc(g.category)} · ${esc(g.read_time||'Guide')}</small><h3>${esc(g.title)}</h3><p>${esc(g.excerpt||g.subtitle||'')}</p><b>Read the guide</b></button>`).join('')}</div>
+      <section class="pscHomeWorkshop psPortalWorkshop" aria-labelledby="psc-workshop-title">
+        <div class="psPortalWorkshopHead"><div><h2 id="psc-workshop-title">The Workshop</h2><p>Practical product knowledge for a more confident clinic. Choose what you need to figure out.</p></div><button class="button outline" data-go="workshop">Explore all guides →</button></div>
+        <div class="workshopModuleGridV50 psPortalWorkshopGrid">${WORKSHOP_MODULES.map(workshopModuleCard).join('')}</div>
       </section>
 
 
