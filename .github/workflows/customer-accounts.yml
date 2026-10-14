@@ -5,6 +5,10 @@ on:
       - 'app.js'
       - 'current/behaviour/customer-*.js'
       - 'current/behaviour/mail-workspace.js'
+      - 'current/behaviour/direct-correspondence.js'
+      - 'current/behaviour/procurement-mail.js'
+      - 'current/behaviour/onboarding.js'
+      - 'tests/unified-email-browser.mjs'
       - 'current/behaviour/workstation.js'
       - 'current/behaviour/business-workspace-model.js'
       - 'current/styles/operating-system.css'
@@ -33,6 +37,7 @@ jobs:
       - run: npm run test:customer-accounts-browser
       - run: node --test tests/business-workspace-model.test.cjs
       - run: node tests/business-workspace-browser.mjs
+      - run: node tests/unified-email-browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -40,3 +45,4 @@ jobs:
           path: |
             test-results/customer-accounts
             test-results/business-workspace
+            test-results/unified-email

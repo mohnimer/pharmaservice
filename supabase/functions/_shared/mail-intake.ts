@@ -31,4 +31,4 @@ export async function intakeAction(svc:any,user:any,b:any){
  }
  return null;
 }
-export async function checkIntakeSend(svc:any,d:any){const i=check(await svc.from('psc_mail_intakes').select('revision,reviewed,is_test').eq('message_id',d.intake_message_id).single());if(!i.reviewed||i.revision!==d.intake_revision)throw new MailError('intake_changed_prepare_new_draft');if(i.is_test&&d.recipient.toLowerCase()!==MAILBOX)throw new MailError('test_recipient_locked')}
+export async function checkIntakeSend(svc:any,d:any){const i=check(await svc.from('psc_mail_intakes').select('revision,reviewed,is_test').eq('message_id',d.intake_message_id).single());if(!i.reviewed||i.revision!==d.intake_revision)throw new MailError('intake_changed_prepare_new_draft');if(i.is_test&&d.recipient.toLowerCase()!==MAILBOX)throw new MailError('test_recipient_locked');return i;}

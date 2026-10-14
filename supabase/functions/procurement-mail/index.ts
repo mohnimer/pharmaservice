@@ -1,3 +1,4 @@
+import {composerFields} from '../_shared/mailbox-compose.ts'
 import {draftSender,senderStatus,verifySender,routedMime} from '../_shared/mail-senders.ts'
 import {intakeAction,checkIntakeSend} from '../_shared/mail-intake.ts'
 import {service,admin,json,MAILBOX,check,accessToken,gmail,mime,send,hash,noDemoOrder,email,logAttempt,safeCode,MailError} from '../_shared/psc-mail.ts'
@@ -80,13 +81,16 @@ Deno.serve(async req=>{
    const o=await noDemoOrder(svc,b.order_id),{q,fp}=await currentQuote(svc,o.id),contact=await recipient(svc,o);
    const snapshot=check(await svc.from('quote_snapshots').select('*').eq('quote_id',q.id).eq('revision_no',q.current_revision).eq('snapshot_kind','issued').single());if(!currentSnapshot(q,snapshot,fp))throw new MailError('current_issued_snapshot_required');
    const pdf=await quotePdf(snapshot,contact.name),id=crypto.randomUUID(),path='drafts/'+id+'/quotation.pdf';check(await svc.storage.from('psc-correspondence').upload(path,pdf,{contentType:'application/pdf'}));
-   const body=`Hello,\n\nPlease find attached Pharma Service quotation ${q.quote_number}, revision ${q.current_revision}, for ${contact.name}.\n\nTotal: ${q.currency||'AED'} ${Number(q.total).toFixed(2)} including applicable VAT.\nPayment terms: ${q.payment_terms||'As recorded in the quotation'}.\nDelivery terms: ${q.delivery_terms||'Subject to PSC confirmation'}.\nValidity: ${q.validity_days} calendar days.\n\nPlease review the quotation and confirm your requirements and written approval. Procurement release remains subject to the agreed funding and supply checks.\n\nRegards,\nPharma Service Co. L.L.C.\nsales@pharmaservice.ae`;
+   const body=`Hello,\n\nPlease find attached Pharma Service quotation ${q.quote_number}, revision ${q.current_revision}, for ${contact.name}.\n\nTotal: ${q.currency||'AED'} ${Number(q.total).toFixed(2)} including applicable VAT.\nPayment terms: ${q.payment_terms||'As recorded in the quotation'}.\nDelivery terms: ${q.delivery_terms||'Subject to PSC confirmation'}.\nValidity: ${q.validity_days} calendar days.\n\nPlease review the quotation and confirm your requirements and written approval. Procurement release remains subject to the agreed funding and supply checks.\n\nRegards,\nPharma Service Co. L.L.C.\nmohamed@pharmaservice.ae`;
    const data=check(await svc.from('psc_mail_drafts').insert({id,order_id:o.id,quote_id:q.id,quote_snapshot_id:snapshot.id,quote_fingerprint:fp,kind:'quotation',recipient:contact.to,subject:'Quotation '+q.quote_number+' - Pharma Service',body_text:body,attachment_path:path,attachment_sha256:await hash(pdf),created_by:user.id}).select('id').single());return json(data)
   }
   if(b.action==='test_draft')return json(check(await svc.from('psc_mail_drafts').insert({kind:'test',recipient:MAILBOX,subject:'PSC controlled Gmail connection test',body_text:'Approved internal integration test. No customer order or commercial commitment.',created_by:user.id}).select('id').single()))
   if(b.action==='save'){
-   if(typeof b.subject!=='string'||/[\r\n]/.test(b.subject)||b.subject.length>300||typeof b.body_text!=='string'||b.body_text.length>30000)throw new MailError('invalid_draft');
-   const saved=check(await svc.from('psc_mail_drafts').update({subject:b.subject,body_text:b.body_text,updated_at:new Date().toISOString()}).eq('id',b.draft_id).eq('status','draft').select('id').maybeSingle());if(!saved)throw new MailError('draft_locked');return json({saved:true})
+   if(typeof b.subject!=='string'||!b.subject.trim()||/[\r\n]/.test(b.subject)||b.subject.length>300||typeof b.body_text!=='string'||!b.body_text.trim()||b.body_text.length>30000)throw new MailError('invalid_draft');
+   const old=check(await svc.from('psc_mail_drafts').select('*').eq('id',b.draft_id).single());if(old.status!=='draft')throw new MailError('draft_locked');
+   let payload:any={subject:b.subject,body_text:b.body_text,updated_at:new Date().toISOString()};
+   if(b.to_recipients!==undefined){const {compose_mode,...fields}=composerFields({...b,compose_mode:'normal'});payload={...payload,...fields,source_recipient:old.source_recipient||old.recipient};}
+   const saved=check(await svc.from('psc_mail_drafts').update(payload).eq('id',old.id).eq('status','draft').eq('updated_at',old.updated_at).select('*').maybeSingle());if(!saved)throw new MailError('draft_locked');return json({...saved,saved:true});
   }
   if(b.action==='reconcile'){
    draft=check(await svc.from('psc_mail_drafts').select('*').eq('id',b.draft_id).eq('status','uncertain').single());const token=await accessToken(svc);const result=await gmail(token,'messages?'+new URLSearchParams({q:'in:sent rfc822msgid:psc-draft-'+draft.id+'@pharmaservice.ae',maxResults:'2'}));
@@ -94,31 +98,33 @@ Deno.serve(async req=>{
   }
   if(b.action!=='send'||b.approve!==true)throw new MailError('explicit_send_approval_required')
   draft=check(await svc.from('psc_mail_drafts').select('*').eq('id',b.draft_id).single());if(draft.status!=='draft')throw new MailError('draft_locked')
-  if(draft.kind==='test'&&draft.recipient!==MAILBOX)throw new MailError('test_recipient_locked')
+  const originalRecipient=draft.source_recipient||draft.recipient;
+  const envelope=draft.source_recipient?composerFields({...draft,compose_mode:'normal'}):{recipient:draft.recipient,to_recipients:[draft.recipient],cc_recipients:[],bcc_recipients:[],sender_alias:draftSender(draft.kind)};
+  if(draft.kind==='test'&&(envelope.recipient!==MAILBOX||envelope.cc_recipients.length||envelope.bcc_recipients.length))throw new MailError('test_recipient_locked')
   let reply:any=null;
   if(draft.reply_message_id){
    const source=check(await svc.from('psc_mail_messages').select('*').eq('id',draft.reply_message_id).single());reply=await replyContext(source,await accessToken(svc));
-   if(draft.kind!=='followup'||draft.contact_id||draft.order_id||draft.intake_message_id||draft.attachment_path||draft.recipient.toLowerCase()!==reply.to.toLowerCase()||draft.subject!==reply.subject)throw new MailError('reply_context_changed');
+   if(draft.kind!=='followup'||draft.contact_id||draft.order_id||draft.intake_message_id||draft.attachment_path||originalRecipient.toLowerCase()!==reply.to.toLowerCase()||!draft.source_recipient&&draft.subject!==reply.subject)throw new MailError('reply_context_changed');
   }
   else if(draft.contact_id){
    if(!['rfq','followup'].includes(draft.kind)||!['request_response','account_followup','sales_introduction'].includes(draft.communication_purpose)||draft.attachment_path||draft.order_id)throw new MailError('invalid_contact_draft');
    if(draft.communication_purpose==='sales_introduction'&&draft.kind!=='followup')throw new MailError('invalid_contact_draft');
-   const c=await directContact(svc,draft.contact_id,draft.communication_purpose);if(c.email.toLowerCase()!==draft.recipient.toLowerCase())throw new MailError('customer_recipient_changed');
+   const c=await directContact(svc,draft.contact_id,draft.communication_purpose);if(c.email.toLowerCase()!==originalRecipient.toLowerCase())throw new MailError('customer_recipient_changed');
   }
-  else if(draft.intake_message_id)await checkIntakeSend(svc,draft);
+  else if(draft.intake_message_id){const intake=await checkIntakeSend(svc,draft);if(intake.is_test&&(envelope.recipient!==MAILBOX||envelope.cc_recipients.length||envelope.bcc_recipients.length))throw new MailError('test_recipient_locked');}
   else if(['rfq','followup'].includes(draft.kind))await noDemoOrder(svc,draft.order_id)
   let pdf:Uint8Array|undefined;
   if(draft.kind==='quotation'){
    const {q,fp}=await currentQuote(svc,draft.order_id);if(fp!==draft.quote_fingerprint)throw new MailError('obsolete_quotation');
    const snap=check(await svc.from('quote_snapshots').select('*').eq('id',draft.quote_snapshot_id).single());if(!currentSnapshot(q,snap,fp))throw new MailError('obsolete_quotation');
-   const c=await recipient(svc,await noDemoOrder(svc,draft.order_id));if(c.to.toLowerCase()!==draft.recipient.toLowerCase())throw new MailError('customer_recipient_changed');
+   const c=await recipient(svc,await noDemoOrder(svc,draft.order_id));if(c.to.toLowerCase()!==originalRecipient.toLowerCase())throw new MailError('customer_recipient_changed');
    const file=check(await svc.storage.from('psc-correspondence').download(draft.attachment_path));pdf=new Uint8Array(await file.arrayBuffer());if(await hash(pdf)!==draft.attachment_sha256)throw new MailError('quotation_attachment_changed')
   }
   if(draft.onboarding_id)await validateOnboardingSend(svc,draft);
-  const token=await accessToken(svc),sender=draftSender(draft.kind);await verifySender(token,sender);
+  const token=await accessToken(svc),sender=envelope.sender_alias;await verifySender(token,sender);
   const claimed=draft.onboarding_id?check(await svc.rpc('psc_claim_onboarding_draft',{p_draft:draft.id,p_updated_at:draft.updated_at,p_user:user.id})):draft.intake_message_id?check(await svc.rpc('psc_claim_intake_draft',{p_draft:draft.id,p_updated_at:draft.updated_at,p_user:user.id})):check(await svc.from('psc_mail_drafts').update({status:'sending',approved_by:user.id,approved_at:new Date().toISOString(),updated_at:new Date().toISOString()}).eq('id',draft.id).eq('status','draft').eq('updated_at',draft.updated_at).select('*').maybeSingle());if(!claimed)throw new MailError('draft_changed_or_claimed')
   draft=Array.isArray(claimed)?claimed[0]:claimed;if(!draft?.id)throw new MailError('draft_changed_or_claimed');await logAttempt(svc,null,draft.id,'started');attemptedSend=true;
-  const result=await send(token,routedMime(sender,{to:draft.recipient,subject:draft.subject,text:(globalThis as any).PSC_BUSINESS_EMAIL_SIGNED_TEXT(draft.body_text),html:businessHtml(draft.body_text),id:'draft-'+draft.id,pdf,...(reply?{inReplyTo:reply.inReplyTo,references:reply.references}:{})}),reply?.threadId);acceptedSend=true;
+  const result=await send(token,routedMime(sender,{to:envelope.recipient,cc:envelope.cc_recipients,bcc:envelope.bcc_recipients,subject:draft.subject,text:(globalThis as any).PSC_BUSINESS_EMAIL_SIGNED_TEXT(draft.body_text),html:businessHtml(draft.body_text),id:'draft-'+draft.id,pdf,...(reply?{inReplyTo:reply.inReplyTo,references:reply.references}:{})}),draft.subject===reply?.subject?reply?.threadId:undefined);acceptedSend=true;
   check(await svc.from('psc_mail_drafts').update({status:'accepted',provider_message_id:result.id,accepted_at:new Date().toISOString(),last_error:null}).eq('id',draft.id));
   await logAttempt(svc,null,draft.id,'gmail_accepted',null,result.id);
   check(await svc.from('psc_mail_messages').upsert({gmail_message_id:result.id,gmail_thread_id:result.threadId||result.id,direction:'outbound',kind:draft.kind,order_id:draft.order_id,sender,recipient:draft.recipient,subject:draft.subject,body_text:draft.body_text,received_at:new Date().toISOString(),review_status:'linked',attachments:draft.attachment_path?[{object_path:draft.attachment_path,file_name:'PSC-quotation.pdf'}]:[]}));

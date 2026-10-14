@@ -80,6 +80,8 @@ insert into mail_contacts values('${ids.invite}');
 grant select on mail_contacts to authenticated;
 `);
 await db.exec(readFileSync('supabase/migrations/20261013203436_sales_opportunities.sql','utf8'));
+await db.exec('create table public.psc_mail_drafts(id uuid primary key);');
+await db.exec(readFileSync('supabase/migrations/20261014062251_unified_email_composition.sql','utf8'));
 const ordersBefore=await rows('select * from orders order by id');
 const saleValues=`contact_id,title,next_action,next_action_due,school_id,order_id`;
 const saleData=`'${ids.invite}','Clinic supply','Discuss specifications',current_date,'${ids.s1}','${ids.o1}'`;
