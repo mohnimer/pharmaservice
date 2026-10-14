@@ -53,6 +53,7 @@ jobs:
       - run: node tests/workshop-layout-browser.mjs
       - run: node tests/catalogue-image-policy.test.mjs
       - run: node tests/catalogue-photo-standard-browser.mjs
+      - run: node tests/sports-photographs-browser.mjs
       - run: node tests/catalogue-photo-upload-browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
@@ -63,6 +64,7 @@ jobs:
             test-results/business-workspace
             test-results/unified-email
             test-results/photo-standard
+            test-results/sports-photos
             test-results/control-alignment
             test-results/portal-layout
             test-results/workshop-layout

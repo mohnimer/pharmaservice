@@ -12,7 +12,7 @@
 #app .publicCatalogueCard .publicCatalogueVisual::before,
 #app .detailProductImageWrap::before,
 [data-psc-family-detail-root] .detailProductImageWrap::before{
- content:""!important;display:block!important;position:absolute;inset:8px;border:1px solid #badbd5;border-radius:10px;pointer-events:none;z-index:2;
+ content:""!important;display:block!important;position:absolute!important;inset:8px!important;width:auto!important;height:auto!important;max-width:none!important;max-height:none!important;transform:none!important;margin:0!important;box-sizing:border-box!important;background:transparent!important;border:1px solid #badbd5;border-radius:10px;pointer-events:none;z-index:2;
 }
 #app .customerShell .productCard.pscEditorialCard .productVisual>img.productMainImage,
 #app .publicCatalogueCard .publicCatalogueVisual>img:not(.publicDhaMark),
@@ -29,6 +29,8 @@
 #app .customerShell .pscEditorialCard .pscBrandChoices{padding:12px 0 4px!important}
 #app .customerShell .pscEditorialCard .exactCanvaActions{padding:10px 0 0!important}
 #app .pscFamilyRepresentative{display:none!important}
+#app .customerShell .productCard.pscEditorialCard.pscFamilyNoPhoto .productVisual,
+#app .publicCatalogueCard.pscFamilyNoPhoto .publicCatalogueVisual{display:none!important}
 [data-psc-family-detail-root] .detailImagePane{display:block!important;min-width:0!important}
 [data-psc-family-detail-root] .pscFamilyProductSheet .fluidProductGrid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important}
 .cmsImageReview{display:grid;gap:12px;margin:12px 0 20px;font-size:13px;line-height:1.5}.cmsImageReview label{display:flex;gap:10px;align-items:flex-start}.cmsImageReview input{width:18px;flex:0 0 18px;min-height:18px!important}.cmsImageReview p{margin:0!important}
