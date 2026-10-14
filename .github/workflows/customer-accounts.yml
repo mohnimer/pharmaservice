@@ -43,11 +43,14 @@ jobs:
       - run: npm test
       - run: npm run test:customer-accounts
       - run: npm run test:mail-safety
+      - run: node tests/email-schedules-rls.mjs
+      - run: node tests/email-schedules-functions.mjs
       - run: npx playwright install --with-deps chromium
       - run: npm run test:customer-accounts-browser
       - run: node --test tests/business-workspace-model.test.cjs
       - run: node tests/business-workspace-browser.mjs
       - run: node tests/unified-email-browser.mjs
+      - run: node tests/email-send-feedback-browser.mjs
       - run: node tests/portal-layout-regression.mjs
       - run: node tests/control-alignment-browser.mjs
       - run: node tests/workshop-layout-browser.mjs
@@ -63,6 +66,7 @@ jobs:
             test-results/customer-accounts
             test-results/business-workspace
             test-results/unified-email
+            test-results/email-feedback
             test-results/photo-standard
             test-results/sports-photos
             test-results/control-alignment

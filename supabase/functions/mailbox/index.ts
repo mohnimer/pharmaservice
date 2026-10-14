@@ -1,3 +1,4 @@
+import {scheduledSendUser} from '../_shared/email-schedules.ts'
 import {service,admin,json,check,accessToken,gmail,send,noDemoOrder,logAttempt,safeCode,MailError} from '../_shared/psc-mail.ts'
 import {composerFields,aliasStatus,sourceContext,composerMime} from '../_shared/mailbox-compose.ts'
 import '../_shared/business-email.js'
@@ -5,7 +6,7 @@ Deno.serve(async req=>{
  if(req.method==='OPTIONS')return json({});if(req.method!=='POST')return json({error:'method_not_allowed'},405);
  const svc=service();let claimed:any=null,attempted=false,accepted=false;
  try{
-  const user=await admin(req,svc),b=await req.json();
+  const b=await req.json(),user=await scheduledSendUser(svc,req,b,'mailbox')||await admin(req,svc);
   if(b.action==='aliases')return json({senders:await aliasStatus(await accessToken(svc))});
   if(b.action==='prepare'){
    const m=check(await svc.from('psc_mail_messages').select('*').eq('id',b.message_id).single());if(m.order_id)await noDemoOrder(svc,m.order_id);

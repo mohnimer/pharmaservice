@@ -4,7 +4,7 @@ import {join} from 'node:path';
 import {spawnSync} from 'node:child_process';
 // Keep production source intact; replace only external adapters in isolated tests.
 const root=mkdtempSync(join(tmpdir(),'psc-mail-test-'));
-for(const path of ['_shared/mailbox-compose.ts','_shared/business-email.js','_shared/onboarding.ts','_shared/mail-senders.ts','_shared/outreach.ts','_shared/mail-intake.ts','_shared/psc-mail.ts','_shared/quote-pdf.ts','dispatch-notification/index.ts','psc-gmail-oauth/index.ts','poll-procurement-mail/index.ts','procurement-mail/index.ts','mailbox/index.ts','send-mail-campaign/index.ts','mail-unsubscribe/index.ts']){
+for(const path of ['_shared/email-schedules.ts','_shared/mailbox-compose.ts','_shared/business-email.js','_shared/onboarding.ts','_shared/mail-senders.ts','_shared/outreach.ts','_shared/mail-intake.ts','_shared/psc-mail.ts','_shared/quote-pdf.ts','dispatch-notification/index.ts','psc-gmail-oauth/index.ts','poll-procurement-mail/index.ts','procurement-mail/index.ts','mailbox/index.ts','send-mail-campaign/index.ts','mail-unsubscribe/index.ts']){
  const file=join(root,path);mkdirSync(join(file,'..'),{recursive:true});
  writeFileSync(file,readFileSync('supabase/functions/'+path,'utf8').replace(/import \{\s*createClient\s*\} from 'https:\/\/esm.sh\/[^']+'/g,'const createClient:any=()=> (globalThis as any).testService').replace(/import \{PDFDocument,StandardFonts,rgb\} from '[^']+'/,'const PDFDocument:any={},StandardFonts:any={},rgb:any=()=>({})'));
 }
