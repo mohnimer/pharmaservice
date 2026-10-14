@@ -661,10 +661,43 @@
     "height": 1500,
     "sha256": "09074835c6df03cf6e26897fd082e2c0386eba7a210a039d5909a6524d34d6df",
     "role": "FAMILY_REPRESENTATIVE_ONLY"
-  }
+  } ,
+{
+  "family_id": "PSC-IS-039",
+  "label": "HypaBand non-woven triangular bandage 90 \u00d7 90 \u00d7 127 cm",
+  "source": "https://www.medisave.co.uk/products/triangular-bandages",
+  "source_image": "https://cdn.shopify.com/s/files/1/0715/4896/1051/products/D3936PK6.jpg?v=1684321723",
+  "path": "/assets/products/sports-20261014/triangular-bandage.jpg",
+  "width": 780,
+  "height": 780,
+  "sha256": "1a11fe0a00f63cfc9411857a1801b171b853d9c5993f09218dbc989813101cc3",
+  "role": "FAMILY_REPRESENTATIVE_ONLY"
+},
+{
+  "family_id": "PSC-IS-041",
+  "label": "Crest Medical cohesive support bandage, application photograph",
+  "source": "https://www.medisave.co.uk/products/cohesive-bandage-6cmx4m",
+  "source_image": "https://cdn.shopify.com/s/files/1/0715/4896/1051/products/cohesive-bandages.jpg?v=1680576376",
+  "path": "/assets/products/sports-20261014/cohesive-bandage.jpg",
+  "width": 688,
+  "height": 688,
+  "sha256": "68b966063c69679d2971f9b5c52453391d4c3f86ce780fc7e793b3545ecfc345",
+  "role": "FAMILY_REPRESENTATIVE_ONLY"
+},
+{
+  "family_id": "PSC-IS-043",
+  "label": "Reusable hot/cold comfort pack with protective cloth sleeve, large",
+  "source": "https://pharmazone.com/en-ae/products/hot-or-cold-gell-bag-larger-pack-61040",
+  "source_image": "https://cdn.shopify.com/s/files/1/0740/5325/5468/files/21715-Hot_ColdPackWithSleeve-LFrontSide.webp?v=1757832376",
+  "path": "/assets/products/sports-20261014/reusable-cold-pack.webp",
+  "width": 1080,
+  "height": 1080,
+  "sha256": "5d9c7be1847e3231c3363ba1f5cb3cde537e3abdde9239141d3f17bbe4019a75",
+  "role": "FAMILY_REPRESENTATIVE_ONLY"
+}
 ];
  const mixedPhotos=new Set(["/assets/products/acorus-2026-10/retained-psc-ppe-001.jpg", "/assets/products/acorus-2026-10/retained-psc-ppe-003.jpg", "/assets/products/acorus-2026-10/retained-psc-dsp-002.jpg", "/assets/products/acorus-2026-10/retained-psc-dsp-004.jpg", "/assets/products/acorus-2026-10/retained-psc-dsp-005.jpg", "/assets/products/acorus-2026-10/retained-psc-dsp-006.jpg", "/assets/products/acorus-2026-10/retained-psc-dsp-007.jpg", "/assets/products/acorus-2026-10/retained-psc-dsp-008.jpg"]);
  const isMixedPhoto=p=>mixedPhotos.has(p?.currentImageUrl);
  const byId=new Map(rows.map(r=>[r.family_id,Object.freeze(r)]));
- window.PSC_DHA_FAMILY_PHOTOS=Object.freeze({rows:Object.freeze(rows),isMixedPhoto,forListing:p=>p?.dhaMapped&&p?._familyGroup&&(!window.PS_CATALOGUE_STOCK?.realPhoto(p)||isMixedPhoto(p))?byId.get(p._familyGroup.id)||null:null});
+ window.PSC_DHA_FAMILY_PHOTOS=Object.freeze({rows:Object.freeze(rows),isMixedPhoto,forListing:p=>p?._familyGroup&&(!window.PS_CATALOGUE_STOCK?.realPhoto(p)||isMixedPhoto(p))?byId.get(p._familyGroup.id)||null:null});
 })();
