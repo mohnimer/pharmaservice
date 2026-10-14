@@ -106,7 +106,7 @@
     if(!grid||!pane) return;
     // The family renderer owns exact option identity, photos and descriptions.
     // Its first catalogue child's brand cannot represent other selected variants.
-    const keep=['single','multiple'].includes(pane.dataset.pscPreviewMode);
+    const keep=true; // Keep the listing photograph visible before a variant is selected.
     pane.hidden=!keep;
     grid.classList.toggle('v452NoBrandImage',!keep);
   }
