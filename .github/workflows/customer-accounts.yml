@@ -12,6 +12,7 @@ on:
       - 'tests/portal-layout-regression.mjs'
       - 'tests/workshop-layout-browser.mjs'
       - 'current/styles/workshop-refinement.css'
+      - 'current/styles/catalogue-category-titles.css'
       - 'current/behaviour/workstation.js'
       - 'current/behaviour/business-workspace-model.js'
       - 'current/styles/operating-system.css'
