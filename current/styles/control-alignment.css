@@ -1,0 +1,34 @@
+/* Composite controls own their border; inner fields must never become a second box. */
+:is(.publicPage,.publicLanding,.appShell) :is(.topbarSearch,.mobileSearchInput,.searchInput,.workshopSearch){box-sizing:border-box;min-width:0;align-items:center!important;gap:12px!important}
+.appShell.pscOperatingShell.v381Shell :is(.topbarSearch,.mobileSearchInput,.searchInput,.workshopSearch) input:not([type=checkbox]):not([type=radio]),
+:is(.publicPage,.publicLanding) :is(.searchInput,.workshopSearch) input{
+  flex:1 1 0!important;width:100%!important;min-width:0!important;max-width:100%!important;
+  border:0!important;border-radius:0!important;background:transparent!important;
+  box-shadow:none!important;outline:none!important;margin:0!important;padding:0!important;
+  height:100%!important;min-height:0!important;align-self:center!important;box-sizing:border-box;
+}
+:is(.publicPage,.publicLanding,.appShell) :is(.topbarSearch,.mobileSearchInput,.searchInput,.workshopSearch):focus-within{
+  border-color:#7ca7a1!important;box-shadow:0 0 0 3px rgba(21,125,119,.12)!important;
+}
+.appShell.pscOperatingShell.v381Shell .topbarSearch{height:48px!important;min-height:48px!important;padding:0 16px!important;flex:1 1 280px;min-width:0!important}
+.appShell.pscOperatingShell.v381Shell .mobileSearchInput{height:44px!important;min-height:44px!important;padding:0 14px!important;overflow:hidden}
+.appShell.pscOperatingShell.v381Shell :is(.topbarSearch,.mobileSearchInput) input{font-size:16px!important;line-height:1.4!important}
+:is(.topbarSearch,.mobileSearchInput,.searchInput,.workshopSearch) :is(.searchIcon,>span:first-child){flex-shrink:0}
+.appShell.pscOperatingShell.v381Shell .topbarActions{display:flex!important;align-items:center!important;gap:12px!important;flex-shrink:0}
+.appShell.pscOperatingShell.v381Shell .accountSwitcherButton{box-sizing:border-box;align-items:center!important;line-height:1.3!important}
+.appShell.pscOperatingShell.v381Shell :is(.avatarDot,.mobileAccountDot){flex-shrink:0;line-height:1!important}
+/* Allow shared grid/card/form children to shrink instead of escaping their column. */
+:is(.publicPage,.publicLanding,.appShell) :is(.filterBar,.headerActions,.panelHeader,.wsActions){gap:12px;min-width:0}
+:is(.publicPage,.publicLanding,.appShell) :is(.filterBar,.headerActions,.panelHeader,.wsActions)>*{min-width:0;box-sizing:border-box}
+:is(.publicPage,.appShell) :is(.panel,.wsPanel,.contactCard,.psSetupCard){box-sizing:border-box;min-width:0}
+:is(.publicPage,.appShell) :is(input,select,textarea){box-sizing:border-box;max-width:100%}
+@media(max-width:980px){
+ .appShell.pscOperatingShell.v381Shell .portalHeaderBar .accountSwitcherButton{
+   width:44px!important;min-width:44px!important;max-width:44px!important;
+   height:44px!important;min-height:44px!important;padding:0!important;gap:0!important;
+   border:0!important;border-radius:50%!important;background:transparent!important;
+   display:flex!important;align-items:center!important;justify-content:center!important;
+ }
+ .appShell.pscOperatingShell.v381Shell .portalHeaderBar .mobileAccountDot{width:38px!important;height:38px!important;margin:0!important;font-size:12px!important}
+ .appShell.pscOperatingShell.v381Shell .mobileCartButton{height:44px!important;min-height:44px!important;display:inline-flex;align-items:center;justify-content:center}
+}

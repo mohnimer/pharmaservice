@@ -10,6 +10,8 @@ on:
       - 'current/behaviour/onboarding.js'
       - 'tests/unified-email-browser.mjs'
       - 'tests/portal-layout-regression.mjs'
+      - 'tests/control-alignment-browser.mjs'
+      - 'current/styles/control-alignment.css'
       - 'tests/workshop-layout-browser.mjs'
       - 'current/styles/workshop-refinement.css'
       - 'current/styles/catalogue-category-titles.css'
@@ -43,6 +45,7 @@ jobs:
       - run: node tests/business-workspace-browser.mjs
       - run: node tests/unified-email-browser.mjs
       - run: node tests/portal-layout-regression.mjs
+      - run: node tests/control-alignment-browser.mjs
       - run: node tests/workshop-layout-browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
@@ -52,5 +55,6 @@ jobs:
             test-results/customer-accounts
             test-results/business-workspace
             test-results/unified-email
+            test-results/control-alignment
             test-results/portal-layout
             test-results/workshop-layout
