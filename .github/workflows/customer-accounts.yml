@@ -9,6 +9,7 @@ on:
       - 'current/behaviour/procurement-mail.js'
       - 'current/behaviour/onboarding.js'
       - 'tests/unified-email-browser.mjs'
+      - 'tests/portal-layout-regression.mjs'
       - 'current/behaviour/workstation.js'
       - 'current/behaviour/business-workspace-model.js'
       - 'current/styles/operating-system.css'
@@ -38,6 +39,7 @@ jobs:
       - run: node --test tests/business-workspace-model.test.cjs
       - run: node tests/business-workspace-browser.mjs
       - run: node tests/unified-email-browser.mjs
+      - run: node tests/portal-layout-regression.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -46,3 +48,4 @@ jobs:
             test-results/customer-accounts
             test-results/business-workspace
             test-results/unified-email
+            test-results/portal-layout
