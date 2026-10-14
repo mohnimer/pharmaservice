@@ -20,3 +20,7 @@ verify_jwt = false
 [functions.mailbox]
 # Every action uses the existing server-side PSC administrator/session guard.
 verify_jwt = false
+
+[functions.email-schedules]
+# PSC administrator sessions or the private worker credential are required in code.
+verify_jwt = false

@@ -1,6 +1,6 @@
 import {readFileSync,writeFileSync,mkdirSync,mkdtempSync,rmSync} from 'node:fs';import {tmpdir} from 'node:os';import {join} from 'node:path';import {spawnSync} from 'node:child_process';
 const root=mkdtempSync(join(tmpdir(),'psc-invitation-test-'));
-for(const p of ['_shared/psc-mail.ts','_shared/mail-senders.ts','_shared/business-email.js','_shared/mailbox-compose.ts','_shared/invitation-email.ts','customer-invitations/index.ts']){const f=join(root,p);mkdirSync(join(f,'..'),{recursive:true});writeFileSync(f,readFileSync('supabase/functions/'+p,'utf8').replace(/import \{createClient\} from '[^']+'/,'const createClient:any=()=> (globalThis as any).testService'));}
+for(const p of ['_shared/email-schedules.ts','_shared/psc-mail.ts','_shared/mail-senders.ts','_shared/business-email.js','_shared/mailbox-compose.ts','_shared/invitation-email.ts','customer-invitations/index.ts']){const f=join(root,p);mkdirSync(join(f,'..'),{recursive:true});writeFileSync(f,readFileSync('supabase/functions/'+p,'utf8').replace(/import \{createClient\} from '[^']+'/,'const createClient:any=()=> (globalThis as any).testService'));}
 writeFileSync(join(root,'invitation_test.ts'),String.raw`
 import {hash} from './_shared/psc-mail.ts';
 let handler:any;Deno.serve=((h:any)=>{handler=h;return {}}) as any;await import('./customer-invitations/index.ts');

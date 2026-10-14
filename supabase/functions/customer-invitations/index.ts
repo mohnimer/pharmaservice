@@ -1,3 +1,4 @@
+import {scheduledSendUser} from '../_shared/email-schedules.ts'
 import {service,admin,json,check,email,hash,MailError,safeCode,accessToken,send,mime,SENDER} from '../_shared/psc-mail.ts'
 import {verifySender} from '../_shared/mail-senders.ts'
 import '../_shared/business-email.js'
@@ -29,7 +30,7 @@ Deno.serve(async req=>{
    const i=await candidate(svc,b.id,b.token),u=r.data.user;if(u.id!==i.auth_user_id||u.email?.toLowerCase()!==i.recipient_email)throw new MailError('invitation_identity_mismatch');
    return json(check(await svc.rpc('psc_activate_customer_invitation',{p_id:i.id,p_hash:await hash(b.token),p_user:u.id})));
   }
-  const user=await admin(req,svc);
+  const user=await scheduledSendUser(svc,req,b,'customer-invitations')||await admin(req,svc);
   if(b.action==='prepare_email'||b.action==='save_email'){
    const i=check(await svc.from('psc_customer_invitations').select('*').eq('id',b.id).single()),s=await scope(svc,i);if(i.status!=='draft')throw new MailError('invitation_locked');
    if(b.action==='prepare_email')return json(invitationEmailDraft(i,s));

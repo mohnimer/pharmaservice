@@ -1,3 +1,4 @@
+import {scheduledSendUser} from '../_shared/email-schedules.ts'
 import {composerFields} from '../_shared/mailbox-compose.ts'
 import {draftSender,senderStatus,verifySender,routedMime} from '../_shared/mail-senders.ts'
 import {intakeAction,checkIntakeSend} from '../_shared/mail-intake.ts'
@@ -35,7 +36,7 @@ Deno.serve(async req=>{
  try{
   const b=await req.json();
   if(b.action==='onboarding_tick'){if(!await worker(req,svc))throw new MailError('unauthorized');return json(await onboardingTick(svc));}
-  const user=await admin(req,svc);
+  const user=await scheduledSendUser(svc,req,b,'procurement-mail')||await admin(req,svc);
   if(String(b.action).startsWith('onboarding_'))return json(await onboardingAction(svc,user,b));
   if(b.action==='sender_status')return json({senders:await senderStatus(await accessToken(svc))});
   if(b.action==='reply_draft'){

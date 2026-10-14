@@ -7,7 +7,7 @@
 
  window.PSC_OPEN_INVITATION_EMAIL=async(id,onChange=()=>{})=>{
   const draft=await call({action:'prepare_email',id});
-  return window.PSC_OPEN_EMAIL_COMPOSER({kind:'invitation',label:'School activation email',draft,onChange,
+  return window.PSC_OPEN_EMAIL_COMPOSER({scheduleTarget:'customer-invitations',kind:'invitation',label:'School activation email',draft,onChange,
    notice:'The first To address is the account email. Additional To, Cc and Bcc recipients receive an information copy without the private activation link.',
    preview:fields=>{const body=fields.body_text.includes('[Activation Link]')?fields.body_text:fields.body_text+'\n\nActivate your account: [Activation Link]';return window.PSC_BUSINESS_EMAIL_HTML(body).replaceAll('[Activation Link]','<span style="display:inline-block;background:#122f31;color:#fff;padding:14px 20px;border-radius:12px">Activate your account</span>');},
    copyPreview:fields=>{const primary=(String(fields.to_recipients).match(/[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)||[])[0]||'the account holder';return window.PSC_BUSINESS_EMAIL_HTML('Information copy — activation instructions have been sent privately to '+primary+'.\n\n'+fields.body_text.replaceAll('[Activation Link]','Activation link sent privately to '+primary+'.'));},
