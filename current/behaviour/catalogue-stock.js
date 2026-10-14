@@ -32,7 +32,7 @@
   const rows=[...(options||[])];
   for(const p of products().filter(p=>id(p)===family&&forProduct(p)?.source_kind==='product'&&forProduct(p)?.catalogue_visible)){
    if(rows.some(o=>norm(o.exact_product_name)===norm(p.name)&&norm(o.brand)===norm(p.brand)&&norm(o.pack)===norm(p.pack)))continue;
-   rows.push({product_option_id:p.product_option_id||'local-catalogue-'+p.pscSku,family_id:family,exact_product_name:p.name,brand:p.brand||'',pack:p.pack||'',presentation:'',sku:p.pscSku,local_reference:true,image_url:/VERIFIED EXACT/.test(p.imageStatus||'')?p.currentImageUrl:null,image_pending:!/VERIFIED EXACT/.test(p.imageStatus||'')});
+   rows.push({product_option_id:p.product_option_id||'local-catalogue-'+p.pscSku,family_id:family,exact_product_name:p.name,brand:p.brand||'',pack:p.pack||'',presentation:'',sku:p.pscSku,local_reference:true,image_url:realPhoto(p)?p.currentImageUrl:null,image_pending:!realPhoto(p)});
   }
   return rows.map(o=>{
    const r=forOption(o,family);if(!r?.acorus_managed)return o;

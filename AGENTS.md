@@ -18,3 +18,7 @@ These rules implement Moe's instructions of 12 October 2026.
 - Uploaded reports initiate this project workflow. Do not claim an unattended Library-upload trigger is installed unless the automation platform explicitly supports it and confirms creation.
 
 - Keep supplier quantities, exact batch/expiry balances, source workbooks, research evidence and internal commercial fields outside the public GitHub repository. The public projection may contain only the user-authorized listing identity, availability flag and retail MRP. Do not publish raw supplier reports or internal analysis.
+
+## Image release instruction — 14 October 2026
+
+- Release available matching product photographs with brief identity/form/strength/pack checks and file decoding. Do not block image-only publication on price research, replacement photography for cosmetic quality, full-catalogue browser sweeps or historical image-evidence gates. Preserve known pack conflicts, existing verified photos, catalogue identities, prices and procurement behaviour.
