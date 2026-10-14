@@ -97,4 +97,11 @@ assert.deepEqual(await rows('select * from orders order by id'),ordersBefore,'Pi
 await user('a');assert.equal((await rows('select * from psc_sales_opportunities')).length,0);assert.equal((await rows(`update psc_sales_opportunities set title='Unauthorized' where id='${sale.id}' returning id`)).length,0);
 await db.exec('reset role;set role anon;');await rejected(()=>db.query('select * from psc_sales_opportunities'));await db.exec('reset role;');
 console.log('Sales RLS: anonymous/customer/group/demo/unverified denied, admin validation and campus scope enforced, no order side effects PASS');
+// Persistent links keep the same identity/password/scope checks without a time limit.
+await db.exec(`create table public.psc_email_schedules(target text,status text,snapshot jsonb);`);
+await db.exec(readFileSync('supabase/migrations/20261014155805_persistent_invitation_links.sql','utf8'));
+await db.exec(`update psc_customer_invitations set status='pending_activation',persistent_link=true,token_hash='persistent-proof',expires_at=null where id='${ids.invite}'`);
+await rejected(()=>internal(`select psc_activate_customer_invitation('${ids.invite}','wrong','${ids.b}')`));
+await internal(`select psc_activate_customer_invitation('${ids.invite}','persistent-proof','${ids.b}')`);
+await rejected(()=>internal(`select psc_activate_customer_invitation('${ids.invite}','persistent-proof','${ids.b}')`));
 await db.close();console.log('PostgreSQL RLS: five idempotent drafts, cross-school denial, Loai visibility, explicit revision approval, expired/mismatched/reused token denial, existing membership preservation, private credit documents and no automatic credit PASS');
