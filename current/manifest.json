@@ -12,6 +12,7 @@
     "current/behaviour/family-data.js",
     "current/behaviour/catalogue-architecture.js",
     "current/behaviour/catalogue-refresh-data.js",
+    "current/behaviour/catalogue-image-release.js",
     "current/behaviour/catalogue-refresh.js",
     "current/behaviour/medicine-evidence.js",
     "current/behaviour/medicine-knowledge.js",
