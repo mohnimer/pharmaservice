@@ -64,3 +64,10 @@
 .appShell.pscOperatingShell.v381Shell .psPortalWorkshopGrid .workshopModuleCopyV50 strong {min-height:2.5em}
 .publicPage.workshopPage .workshopModuleFootV50,
 .appShell.pscOperatingShell.v381Shell .psPortalWorkshopGrid .workshopModuleFootV50 {margin-top:auto}
+
+/* Match the Workshop's white grid-paper backing in the clinic dashboard. */
+.appShell.pscOperatingShell.v381Shell .psPortalWorkshop {
+ background-color:#fff!important;
+ background-image:linear-gradient(rgba(35,35,30,.032) 1px,transparent 1px),linear-gradient(90deg,rgba(35,35,30,.032) 1px,transparent 1px)!important;
+ background-size:24px 24px!important;
+}

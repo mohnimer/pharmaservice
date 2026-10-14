@@ -15,13 +15,36 @@ export function composerFields(b:any){
  return {compose_mode:b.compose_mode,sender_alias:b.sender_alias,to_recipients:to,cc_recipients:cc,bcc_recipients:bcc,recipient:to.join(', '),subject:b.subject.trim(),body_text:b.body_text};
 }
 export async function aliasStatus(token:string){const data=await gmail(token,'settings/sendAs');return ALIASES.map(address=>({address,ready:!!data.sendAs?.some((s:any)=>s.sendAsEmail?.toLowerCase()===address&&s.verificationStatus==='accepted')}));}
+// Gmail metadata uses RFC mailbox headers, including folded lines and display names.
+// Typed composer envelopes remain strict and reject all newline input.
+export function headerAddresses(value:string):string[]{
+ const raw=value.replace(/\r?\n[ \t]+/g,' ');
+ if(/[\r\n]/.test(raw)||raw.length>64000)throw new MailError('invalid_recipient_headers');
+ const out:string[]=[];let part='',quoted=false,escaped=false,comment=0,angle=false;
+ const flush=()=>{const text=part.trim();part='';if(!text)return;const found=text.match(/<([^<>]+)>/);const address=(found?.[1]||text).trim().toLowerCase();if(!email(address))throw new MailError('invalid_recipient_headers');out.push(address);};
+ for(const char of raw){
+  if(escaped){if(!comment)part+=char;escaped=false;continue;}
+  if(char==='\\'&&(quoted||comment)){if(!comment)part+=char;escaped=true;continue;}
+  if(comment){if(char==='(')comment++;else if(char===')')comment--;continue;}
+  if(char==='"'){quoted=!quoted;part+=char;continue;}
+  if(!quoted&&char==='('){comment=1;continue;}
+  if(!quoted&&char==='<')angle=true;else if(!quoted&&char==='>')angle=false;
+  if(!quoted&&!angle&&char===':'&&!part.includes('@')){part='';continue;}
+  if(!quoted&&!angle&&(char===','||char===';')){
+   // A comma inside an unquoted display name is not an address separator.
+   if(part.includes('>')||email(part.trim())||char===';')flush();else part+=char;
+  }else part+=char;
+ }
+ if(quoted||comment||angle||escaped)throw new MailError('invalid_recipient_headers');flush();
+ return [...new Set(out)];
+}
 export async function sourceContext(source:any,token:string,mode:string){
  if(!source||!/^[\w-]+$/.test(source.gmail_message_id))throw new MailError('invalid_source_email');
  const m=await gmail(token,'messages/'+source.gmail_message_id+'?format=metadata&metadataHeaders=From&metadataHeaders=Reply-To&metadataHeaders=To&metadataHeaders=Cc&metadataHeaders=Subject&metadataHeaders=Message-ID&metadataHeaders=References');
- const h=(name:string)=>m.payload?.headers?.find((x:any)=>x.name.toLowerCase()===name.toLowerCase())?.value||'';
+ const h=(name:string)=>(m.payload?.headers||[]).filter((x:any)=>x.name?.toLowerCase()===name.toLowerCase()).map((x:any)=>x.value||'').join(', ');
  const own=(xs:string[])=>xs.filter(x=>!ALIASES.includes(x));
- const to=own(addresses(source.direction==='outbound'?h('To'):h('Reply-To')||h('From')));
- const cc=mode==='reply_all'?own([...addresses(h('To')), ...addresses(h('Cc'))]).filter(x=>!to.includes(x)):[];
+ const to=own(headerAddresses(source.direction==='outbound'?h('To'):h('Reply-To')||h('From')));
+ const cc=mode==='reply_all'?own([...headerAddresses(h('To')), ...headerAddresses(h('Cc'))]).filter(x=>!to.includes(x)):[];
  const subject=source.subject||h('Subject');if(/[\r\n]/.test(subject))throw new MailError('invalid_source_email');
  const id=h('Message-ID').trim(),references=[...(h('References').match(/<[^<>\s]+>/g)||[]).slice(-15),id].join(' ');
  return {to_recipients:mode==='forward'?[]:to,cc_recipients:cc,bcc_recipients:[],subject:(mode==='forward'?(/^fwd:/i.test(subject)?subject:'Fwd: '+subject):(/^re:/i.test(subject)?subject:'Re: '+subject)).slice(0,300),threadId:m.threadId||source.gmail_thread_id,inReplyTo:/^<[^<>\s]+>$/.test(id)?id:null,references};
