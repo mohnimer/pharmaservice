@@ -1,0 +1,66 @@
+/* Shared Workshop module cards and a consistent editorial type scale.
+   Kept after the V50 styles so earlier presentation rules cannot compress text. */
+.publicPage.workshopPage {
+  --workshop-title:56px;
+  --workshop-heading:32px;
+  --workshop-card:22px;
+  --workshop-body:16px;
+  --workshop-meta:12px;
+}
+.publicPage.workshopPage :is(.workshopHeroGridV50,.workshopModuleHeroV50,.workshopArticleHeaderV50) h1 {
+  font-size:var(--workshop-title)!important;line-height:1.08!important;letter-spacing:-.045em!important;font-weight:550!important;
+}
+.publicPage.workshopPage :is(.workshopHeroGridV50,.workshopSectionHeadV50,.workshopPrincipleV50,.workshopArticleBody) h2 {
+  font-size:var(--workshop-heading)!important;line-height:1.2!important;letter-spacing:-.035em!important;font-weight:550!important;
+}
+.publicPage.workshopPage :is(.workshopGuideCardV50 h3,.workshopModuleCopyV50 strong) {
+  font-size:var(--workshop-card)!important;line-height:1.25!important;letter-spacing:-.025em!important;font-weight:600!important;
+}
+.publicPage.workshopPage :is(.workshopHeroGridV50 p,.workshopSectionHeadV50>p,.workshopPrincipleV50 p,.workshopModuleHeroV50 p,.workshopModuleCopyV50 small,.workshopGuideCardV50 p,.workshopArticleHeaderV50 p,.workshopArticleBody p,.workshopArticleBody li,.workshopArticleRailV50>p,.workshopSignatureV50 p) {
+  font-size:var(--workshop-body)!important;line-height:1.6!important;
+}
+.publicPage.workshopPage :is(.workshopHeroRuleV50>span,.workshopHeroRuleV50>small,.workshopSectionHeadV50 span,.workshopModuleTopV50>b,.workshopModuleFootV50,.workshopGuideMetaV50 b,.workshopGuideMetaV50 small,.workshopGuideFootV50,.workshopSearchStripV50>div:last-child,.workshopAllGuidesV50>summary,.workshopAllGuidesV50>summary b,.workshopArticleToplineV50 button,.workshopArticleToplineV50 b,.workshopArticleLeadV50>aside,.workshopArticleActions button,.workshopArticleRailV50>span,.workshopArticleRailV50>button,.workshopSignatureV50 span,.workshopMedicalNote) {
+  font-size:var(--workshop-meta)!important;line-height:1.45!important;
+}
+.publicPage.workshopPage .workshopHeroGridV50 {grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center}
+.publicPage.workshopPage .workshopPrincipleV50 {grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:48px!important;align-items:start!important;padding:32px 0!important}
+.publicPage.workshopPage .workshopPrincipleV50 h2 {max-width:none!important;margin:0!important;text-wrap:balance}
+.publicPage.workshopPage .workshopPrincipleV50 p {grid-column:auto!important;max-width:58ch!important;margin:0!important}
+.publicPage.workshopPage .workshopModuleCopyV50 :is(strong,small) {max-width:none}
+.publicPage.workshopPage .workshopModuleCardV50 {gap:20px;min-height:230px}
+/* The customer dashboard uses the same seven modules and the same native routes. */
+.appShell.pscOperatingShell.v381Shell .psPortalWorkshop {display:block!important;padding:28px!important}
+.appShell.pscOperatingShell.v381Shell .psPortalWorkshopHead {display:flex;align-items:center;justify-content:space-between;gap:28px;margin-bottom:24px}
+.appShell.pscOperatingShell.v381Shell .psPortalWorkshopHead h2 {margin:0 0 8px!important}
+.appShell.pscOperatingShell.v381Shell .psPortalWorkshopHead p {font-size:16px!important;max-width:64ch;margin:0!important}
+.appShell.pscOperatingShell.v381Shell .psPortalWorkshopHead>button {flex-shrink:0}
+.appShell.pscOperatingShell.v381Shell .psPortalWorkshopGrid {display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.appShell.pscOperatingShell.v381Shell .psPortalWorkshopGrid .workshopModuleCardV50 {padding:22px;min-height:230px;gap:20px}
+.appShell.pscOperatingShell.v381Shell .psPortalWorkshopGrid .workshopModuleCopyV50 strong {font-size:22px!important;line-height:1.25!important;max-width:none;font-weight:600;letter-spacing:-.025em}
+.appShell.pscOperatingShell.v381Shell .psPortalWorkshopGrid .workshopModuleCopyV50 small {font-size:16px!important;line-height:1.6!important;max-width:none}
+.appShell.pscOperatingShell.v381Shell .psPortalWorkshopGrid :is(.workshopModuleTopV50>b,.workshopModuleFootV50) {font-size:12px!important;line-height:1.45!important}
+@media(max-width:1200px) {
+  .appShell.pscOperatingShell.v381Shell .psPortalWorkshopGrid {grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:1050px) {
+  .publicPage.workshopPage .workshopHeroGridV50 {grid-template-columns:1fr;gap:24px}
+}
+@media(max-width:760px) {
+  .publicPage.workshopPage {--workshop-title:36px;--workshop-heading:28px}
+  .publicPage.workshopPage .workshopPrincipleV50 {grid-template-columns:1fr!important;gap:20px!important}
+  .publicPage.workshopPage .workshopPrincipleV50 h2 {max-width:none!important}
+  .appShell.pscOperatingShell.v381Shell .psPortalWorkshopHead {display:block}
+  .appShell.pscOperatingShell.v381Shell .psPortalWorkshopHead>button {margin-top:18px}
+}
+@media(max-width:600px) {
+  .appShell.pscOperatingShell.v381Shell .psPortalWorkshop {padding:20px!important}
+  .appShell.pscOperatingShell.v381Shell .psPortalWorkshopGrid {grid-template-columns:1fr}
+  .appShell.pscOperatingShell.v381Shell .psPortalWorkshopGrid .workshopModuleCardV50 {min-height:200px}
+}
+/* Keep titles and descriptions aligned across module rows. */
+.publicPage.workshopPage .workshopModuleCopyV50,
+.appShell.pscOperatingShell.v381Shell .psPortalWorkshopGrid .workshopModuleCopyV50 {margin-top:0!important;flex:1}
+.publicPage.workshopPage .workshopModuleCopyV50 strong,
+.appShell.pscOperatingShell.v381Shell .psPortalWorkshopGrid .workshopModuleCopyV50 strong {min-height:2.5em}
+.publicPage.workshopPage .workshopModuleFootV50,
+.appShell.pscOperatingShell.v381Shell .psPortalWorkshopGrid .workshopModuleFootV50 {margin-top:auto}

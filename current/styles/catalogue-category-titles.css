@@ -1,0 +1,6 @@
+/* Clinical category names use the full card width below the artwork. */
+.appShell.pscOperatingShell.v381Shell .v26CatalogueLanding .clinicNeedRail {grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))!important}
+.appShell.pscOperatingShell.v381Shell .v26CatalogueLanding .clinicNeedCardIllustrated {min-height:190px!important}
+.appShell.pscOperatingShell.v381Shell .v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedCopy {left:20px!important;right:20px!important;top:auto!important;bottom:22px!important;max-width:none!important;width:auto!important}
+.appShell.pscOperatingShell.v381Shell .v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedCopy b {display:-webkit-box!important;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden!important;max-width:none!important;width:100%!important;font-size:20px!important;line-height:1.2!important;min-height:2.4em;text-wrap:balance}
+.appShell.pscOperatingShell.v381Shell .v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedIcon {width:76px!important;height:76px!important;top:16px!important;right:16px!important}
