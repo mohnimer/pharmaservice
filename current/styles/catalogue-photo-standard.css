@@ -1,0 +1,39 @@
+/* One quiet, white double frame for listing and detail photography. */
+#app .customerShell .productCard.pscEditorialCard .productVisual,
+#app .publicCatalogueCard .publicCatalogueVisual,
+#app .detailProductImageWrap,
+[data-psc-family-detail-root] .detailProductImageWrap{
+ position:relative!important;display:block!important;background:#fff!important;
+ border:1px solid #badbd5!important;border-radius:14px!important;
+ padding:0!important;box-sizing:border-box!important;overflow:hidden!important;
+ width:100%!important;aspect-ratio:4/3!important;height:auto!important;min-height:0!important;max-height:none!important;
+}
+#app .customerShell .productCard.pscEditorialCard .productVisual::before,
+#app .publicCatalogueCard .publicCatalogueVisual::before,
+#app .detailProductImageWrap::before,
+[data-psc-family-detail-root] .detailProductImageWrap::before{
+ content:""!important;display:block!important;position:absolute;inset:8px;border:1px solid #badbd5;border-radius:10px;pointer-events:none;z-index:2;
+}
+#app .customerShell .productCard.pscEditorialCard .productVisual>img.productMainImage,
+#app .publicCatalogueCard .publicCatalogueVisual>img:not(.publicDhaMark),
+#app .detailProductImageWrap>img:not(.detailDhaIcon),
+[data-psc-family-detail-root] .detailProductImageWrap>img{
+ position:absolute!important;inset:14%!important;width:72%!important;height:72%!important;
+ min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;
+ display:block!important;margin:0!important;padding:0!important;border:0!important;
+ object-fit:contain!important;object-position:center!important;aspect-ratio:auto!important;
+ transform:var(--photo-fit,none)!important;filter:none!important;mix-blend-mode:normal!important;background:#fff!important;
+}
+#app .customerShell .v25ProductGrid:has(.pscEditorialCard){column-gap:20px!important;row-gap:28px!important;width:100%!important;max-width:100%!important;margin-left:0!important;margin-right:0!important}
+#app .customerShell .pscEditorialCard .exactCanvaBody{padding:10px 0 12px!important}
+#app .customerShell .pscEditorialCard .pscBrandChoices{padding:12px 0 4px!important}
+#app .customerShell .pscEditorialCard .exactCanvaActions{padding:10px 0 0!important}
+#app .pscFamilyRepresentative{display:none!important}
+[data-psc-family-detail-root] .detailImagePane{display:block!important;min-width:0!important}
+[data-psc-family-detail-root] .pscFamilyProductSheet .fluidProductGrid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important}
+.cmsImageReview{display:grid;gap:12px;margin:12px 0 20px;font-size:13px;line-height:1.5}.cmsImageReview label{display:flex;gap:10px;align-items:flex-start}.cmsImageReview input{width:18px;flex:0 0 18px;min-height:18px!important}.cmsImageReview p{margin:0!important}
+@media(max-width:720px){
+ [data-psc-family-detail-root] .pscFamilyProductSheet .fluidProductGrid{grid-template-columns:minmax(0,1fr)!important}
+ #app .customerShell .v25ProductGrid:has(.pscEditorialCard){column-gap:14px!important;row-gap:24px!important}
+ [data-psc-family-detail-root] .detailImagePane{width:100%!important}
+}

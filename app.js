@@ -906,6 +906,9 @@
     if(!/^image\//.test(file.type)){ toast('<strong>Image files only.</strong>'); return; }
     if(file.size>10*1024*1024){ toast('<strong>Image too large.</strong><br>Maximum 10 MB.'); return; }
 
+    const review=document.querySelector(`[data-cms-image-review="${productId}"]`);
+    if(!review||!Array.from(review.querySelectorAll('input[type=checkbox]')).every(x=>x.checked)){toast('<strong>Review the photograph first.</strong><br>Confirm the exact product and a clean background with no supplier logo.');return;}
+    try{await window.PSC_IMAGE_POLICY.checkFile(file);}catch(error){toast(`<strong>Image not accepted.</strong><br>${esc(error.message)}`);return;}
     const ext=(file.name.split('.').pop()||'jpg').toLowerCase();
     if(!['jpg','jpeg','png','webp','gif'].includes(ext)){ toast('<strong>Unsupported image type.</strong>'); return; }
     const path=`${productId}/${Date.now()}-${safeFileName(file.name.replace(/\.[^.]+$/,''))}.${ext}`;
@@ -1041,6 +1044,8 @@
 
     const primary=cmsProductMedia(productId).find(x=>x.is_primary)||null;
     const primaryUrl=primary?.public_url || p.image_url || null;
+    if(primaryUrl && !document.querySelector('[data-cms-publish-image-review]')?.checked)throw new Error('Review the primary photograph and confirm exact identity and no supplier branding before publication.');
+    if(primaryUrl && window.PSC_IMAGE_POLICY?.isBlocked(primaryUrl))throw new Error('This supplier-branded photograph is blocked from customer publication.');
     const payload={
       ...meta,
       ...Object.fromEntries(Object.entries(draft).filter(([key])=>key!=='clinical_needs')),
@@ -1106,7 +1111,7 @@
   const PRODUCT_ASSET_RELEASE='3777';
   function legacyProductImageUrl(p){
     const raw=(p?.imageUrl||p?.image_url||'').trim();
-    if(raw){
+    if(raw && !window.PSC_IMAGE_POLICY?.isBlocked(raw)){
       const lower=raw.toLowerCase();
       const genericBrandAsset =
         lower.includes('dha-requirement') ||
@@ -1124,7 +1129,7 @@
   function productDisplayImageUrl(p){
     if(window.PSC_DHA_FAMILY_PHOTOS?.isMixedPhoto(p)) return null;
     if(/^REFERENCE TILE/i.test(p?.imageStatus||'')) return null;
-    if(p?.currentImageUrl) return p.currentImageUrl;
+    if(p?.currentImageUrl) return window.PSC_IMAGE_POLICY?.resolve(p.currentImageUrl)||(!window.PSC_IMAGE_POLICY?p.currentImageUrl:null);
     if(p?.localCatalogueRefresh) return null;
     const sku=institutionalImageSku(p);
     if(sku) return `/assets/products/${sku.toLowerCase()}.webp?v=${PRODUCT_ASSET_RELEASE}`;
@@ -1133,7 +1138,7 @@
     const lower=raw.toLowerCase();
     const looksLikeStandaloneDhaAsset = lower.includes('dha-requirement') || lower.endsWith('/pharmaservice.png') || lower.endsWith('pharmaservice.png');
     if(p?.dhaMapped && looksLikeStandaloneDhaAsset) return null;
-    return raw;
+    return window.PSC_IMAGE_POLICY?.resolve(raw)??raw;
   }
   function catalogueImageNote(p){
     if(!p?.localCatalogueRefresh) return '';
@@ -1143,11 +1148,11 @@
   function controlledProductImageUrl(p){
     if(window.PSC_DHA_FAMILY_PHOTOS?.isMixedPhoto(p)) return null;
     if(/^REFERENCE TILE/i.test(p?.imageStatus||'')) return null;
-    if(p?.currentImageUrl) return p.currentImageUrl;
+    if(p?.currentImageUrl) return window.PSC_IMAGE_POLICY?.resolve(p.currentImageUrl)||(!window.PSC_IMAGE_POLICY?p.currentImageUrl:null);
     if(p?.localCatalogueRefresh) return null;
     const sku=institutionalImageSku(p);
     if(sku) return `/assets/products/${sku.toLowerCase()}.webp?v=${PRODUCT_ASSET_RELEASE}`;
-    return (p?.image_url||p?.imageUrl||'').trim() || null;
+    return window.PSC_IMAGE_POLICY?.resolve((p?.image_url||p?.imageUrl||'').trim())||(!window.PSC_IMAGE_POLICY?(p?.image_url||p?.imageUrl||'').trim():null);
   }
   function products(){ return D.products.map(p=>product(p.pscSku)); }
   function currentRoute(){
@@ -1844,7 +1849,7 @@
     const workshop=workshopForProduct(p,1)[0];
     return `<article class="publicCatalogueCard ${p._familyGroup?'pscFamilyCard':''} ${!imageUrl?'pscFamilyNoPhoto':''}" data-family-listing="${esc(p._familyGroup?.id||'')}">
       <button class="publicCatalogueVisual publicProductView" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-public-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details">${imageUrl?`<img data-family-example="${familyPhoto?'true':'false'}" src="${esc(imageUrl)}" alt="${esc(familyPhoto?.label||displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'">`:`<span>${esc(need.label)}</span>`}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>
-      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount" data-catalogue-brand-sku="${esc(p.pscSku)}">Brands Available: ${catalogueBrandCount(p)}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(pack)}</p>${p._familyGroup?`<p class="pscFamilyRepresentative">Pictured: ${esc(familyPhoto?.label||p.name)}${familyPhoto?'<small>Product example · model and specification confirmed in quotation.</small>':''}</p>`:''}${cataloguePricePreview(p)}${catalogueFamilyVariants(p)}${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
+      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount" data-catalogue-brand-sku="${esc(p.pscSku)}">Brands Available: ${catalogueBrandCount(p)}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(pack)}</p>${cataloguePricePreview(p)}${catalogueFamilyVariants(p)}${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
       <button class="button outline full" data-go="contact">Request institutional quote</button>
     </article>`;
   }
@@ -2465,7 +2470,7 @@
         <button class="productTitleButton" data-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button>
         <p class="pack">${esc(pack)}</p>${catalogueImageNote(p)||'<small class="catalogueImageNote catalogueImageNoteEmpty" aria-hidden="true"></small>'}
         <div class="productNeedTags">${esc(need.id==='all'?(p.productType||p.category||'Institutional supplies'):need.label)}</div>
-        ${p._familyGroup&&displayImage?`<p class="pscFamilyRepresentative">Pictured: ${esc(familyPhoto?.label||p.name)}${familyPhoto?'<small>Product example · model and specification confirmed in quotation.</small>':''}</p>`:''}${cataloguePricePreview(p)}${catalogueFamilyVariants(p)}
+        ${cataloguePricePreview(p)}${catalogueFamilyVariants(p)}
         ${currentRoute().startsWith('portal/catalogue/dha-')&&p.dhaMapped?`<small class="pscDhaStatus">${esc(p.dhaStatus==='Strict'?'Required category':p.dhaStatus||'Mapped requirement')}${p.dhaReference?` · ${esc(p.dhaReference)}`:''}${p.dhaStatus==='Conditional'&&p.dhaCondition?`<br>${esc(p.dhaCondition)}`:''}</small>`:''}
       </div>
       <div class="canvaCardActions exactCanvaActions">
@@ -2872,8 +2877,8 @@
         <aside class="cmsEditorSide">
           <section class="panel cmsMediaPanel">
             <div class="panelHeader"><div><span class="eyebrow">MEDIA</span><h2>Product images</h2></div></div>
-            <label class="cmsUploadDrop"><input type="file" accept="image/jpeg,image/png,image/webp,image/gif" data-cms-image-upload="${p.id}"><b>Upload image</b><small>JPG, PNG, WebP or GIF · max 10 MB · publish to go live</small></label>
-            <div class="cmsMediaGrid">${media.length?media.map(m=>`<article class="${m.is_primary?'primary':''}"><img src="${esc(m.public_url)}" alt="${esc(m.alt_text||'Product image')}"><div><span>${m.is_primary?'PRIMARY':'GALLERY'}</span><div><button data-cms-primary="${p.id}|${m.id}">Set primary</button><button class="danger" data-cms-delete-media="${p.id}|${m.id}">Remove</button></div></div></article>`).join(''):'<div class="cmsNoMedia">No uploaded media yet.</div>'}</div>
+            <div class="cmsImageReview" data-cms-image-review="${p.id}"><p><b>Product photo standard</b><br>Use a clear product-only photo on white or transparent background. No Acorus logo, supplier backdrop or watermark.</p><label><input type="checkbox">I checked the exact brand, model, strength and pack.</label><label><input type="checkbox">I checked that the background has no supplier branding and the product is clear.</label></div><label class="cmsUploadDrop"><input type="file" accept="image/jpeg,image/png,image/webp,image/gif" data-cms-image-upload="${p.id}"><b>Choose photograph</b><small>Preview and review before upload · JPG, PNG or WebP · max 10 MB</small></label><div class="cmsPhotoDraft" data-cms-photo-draft="${p.id}" hidden><div class="detailProductImageWrap"><img alt="Selected product photograph preview"></div><button class="button outline" type="button" data-cms-image-save="${p.id}">Upload reviewed photo as draft</button></div>
+            <label class="cmsImageReview"><span><input type="checkbox" data-cms-publish-image-review> I visually approve the primary photo: exact product, clean background, no supplier branding.</span></label><div class="cmsMediaGrid">${media.length?media.map(m=>`<article class="${m.is_primary?'primary':''}"><img src="${esc(m.public_url)}" alt="${esc(m.alt_text||'Product image')}"><div><span>${m.is_primary?'PRIMARY':'GALLERY'}</span><div><button data-cms-primary="${p.id}|${m.id}">Set primary</button><button class="danger" data-cms-delete-media="${p.id}|${m.id}">Remove</button></div></div></article>`).join(''):'<div class="cmsNoMedia">No uploaded media yet.</div>'}</div>
           </section>
 
           <section class="panel cmsPublishPanel">
@@ -2977,7 +2982,7 @@
     return `<div class="productDetailModal fluidProductDetail">
       <div class="modalHeader fluidProductHeader"><button class="productBackButton" data-modal-close aria-label="Back to catalogue">←</button><div><span class="eyebrow">${esc(primary.label)}</span><h2>${esc(displayName)}</h2><div class="smallMuted mono">${esc(p.pscSku)}</div></div><span class="productRequestCount">${inRequest?`${inRequest} in request`:''}</span></div>
       <div class="productDetailGrid fluidProductGrid">
-        <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).map(m=>`<img src="${esc(m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
+        <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).filter(m=>window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url).map(m=>`<img src="${esc(window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
         <div class="detailContentPane fluidDetailContent">
           ${catalogueRetailPriceNotice()}${cataloguePricePreview(p)}
           <div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to DHA clinic requirement</b></div>`:''}</div>
@@ -3731,7 +3736,8 @@
     document.querySelectorAll('[data-save-storefront]').forEach(el=>el.addEventListener('click',async()=>{try{await saveStorefrontConfig(el.dataset.saveStorefront)}catch(e){console.error(e);toast('<strong>Could not save storefront.</strong>')}}));
     document.querySelectorAll('[data-cms-save]').forEach(el=>el.addEventListener('click',async()=>{try{await saveCmsProduct(el.dataset.cmsSave,false)}catch(e){console.error(e);toast('<strong>Could not save product.</strong>')}}));
     document.querySelectorAll('[data-cms-publish]').forEach(el=>el.addEventListener('click',async()=>{try{await saveCmsProduct(el.dataset.cmsPublish,true)}catch(e){console.error(e);toast('<strong>Could not publish product.</strong>')}}));
-    document.querySelectorAll('[data-cms-image-upload]').forEach(el=>el.addEventListener('change',async e=>{try{const file=e.target.files?.[0];if(file)await uploadCmsImage(el.dataset.cmsImageUpload,file)}catch(err){console.error(err);toast('<strong>Image upload failed.</strong>')}}));
+    document.querySelectorAll('[data-cms-image-upload]').forEach(el=>el.addEventListener('change',e=>{const draft=document.querySelector(`[data-cms-photo-draft="${el.dataset.cmsImageUpload}"]`),file=e.target.files?.[0];if(!draft)return;const img=draft.querySelector('img');if(img.dataset.previewUrl)URL.revokeObjectURL(img.dataset.previewUrl);draft.hidden=!file;if(file){const url=URL.createObjectURL(file);img.src=url;img.dataset.previewUrl=url;}document.querySelector(`[data-cms-image-review="${el.dataset.cmsImageUpload}"]`)?.querySelectorAll('input').forEach(x=>x.checked=false);}));
+    document.querySelectorAll('[data-cms-image-save]').forEach(el=>el.addEventListener('click',async()=>{try{const input=document.querySelector(`[data-cms-image-upload="${el.dataset.cmsImageSave}"]`),file=input?.files?.[0];if(file)await uploadCmsImage(el.dataset.cmsImageSave,file);}catch(err){console.error(err);toast('<strong>Image upload failed.</strong>')}}));
     document.querySelectorAll('[data-cms-primary]').forEach(el=>el.addEventListener('click',async()=>{try{const[p,m]=el.dataset.cmsPrimary.split('|');await setCmsPrimaryImage(p,m)}catch(err){console.error(err);toast('<strong>Could not update image.</strong>')}}));
     document.querySelectorAll('[data-cms-delete-media]').forEach(el=>el.addEventListener('click',async()=>{try{const[p,m]=el.dataset.cmsDeleteMedia.split('|');await deleteCmsImage(p,m)}catch(err){console.error(err);toast('<strong>Could not remove image.</strong>')}}));
 

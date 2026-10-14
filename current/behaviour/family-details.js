@@ -3,7 +3,7 @@
 
   const DRAFT_KEY='pscFamilyQuoteDraftV1';
   const DHA_ICON='/assets/dha-requirement.png';
-  const state={familyId:'',family:null,options:[],prices:[],availability:null,optionAvailability:[],presentation:'',selectedOptionIds:[],selectedFallbackBrands:[],otherBrandActive:false,otherBrand:'',open:false,loading:false};
+  const state={familyId:'',family:null,options:[],prices:[],availability:null,optionAvailability:[],presentation:'',selectedOptionIds:[],selectedFallbackBrands:[],otherBrandActive:false,otherBrand:'',listingPreview:null,open:false,loading:false};
   const esc=(v='')=>String(v).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':'&quot;'}[c]));
   const upper=v=>String(v||'').trim().toUpperCase();
   const aed=v=>`AED ${Number(v).toLocaleString('en-AE',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
@@ -38,16 +38,19 @@
     });
   }
   function familyProductImage(p){
-    if(p?.currentImageUrl) return p.currentImageUrl;
+    if(p?.currentImageUrl) return window.PSC_IMAGE_POLICY?.resolve(p.currentImageUrl)||(!window.PSC_IMAGE_POLICY?p.currentImageUrl:'');
     if(p?.localCatalogueRefresh) return '';
     const tx=String(p?.catalogueTransactionId||p?.pscSku||'').trim().toLowerCase();
     if(/^inst-\d{4}$/.test(tx)) return `/assets/products/${tx}.webp?v=${ASSET_RELEASE}`;
     const raw=String(p?.imageUrl||p?.image_url||'').trim();
-    return raw || '/assets/products/clinic-basics.jpg';
+    return window.PSC_IMAGE_POLICY?.resolve(raw)||(!window.PSC_IMAGE_POLICY?raw:'');
   }
   function familyPreview(f){
-    const rows=familyCatalogueProducts(f), primary=window.PS_CATALOGUE_STOCK?.representative(rows)||rows[0]||null, image=primary&&window.PS_CATALOGUE_STOCK&&!window.PS_CATALOGUE_STOCK.realPhoto(primary)?'':familyProductImage(primary);
-    return {image,title:String(f?.family_name||primary?.catalogueDisplayName||primary?.name||'Catalogue family'),pack:String(f?.order_pack_basis||primary?.cataloguePack||primary?.pack||'Pack / unit to confirm'),gallery:rows.filter(x=>familyProductImage(x)).slice(0,5).map(x=>({url:familyProductImage(x),alt:String(x?.catalogueDisplayName||x?.name||f?.family_name||'Catalogue preview')}))};
+    const rows=familyCatalogueProducts(f), primary=window.PS_CATALOGUE_STOCK?.representative(rows)||rows[0]||null;
+    const example=window.PSC_DHA_FAMILY_PHOTOS?.forListing({...primary,dhaMapped:isDhaMapped(f),_familyGroup:{id:f.family_id}});
+    const photo=example?.path||(primary&&window.PS_CATALOGUE_STOCK&&!window.PS_CATALOGUE_STOCK.realPhoto(primary)?'':familyProductImage(primary));
+    const image=state.listingPreview?.image||photo;
+    return {image,title:state.listingPreview?.title||example?.label||String(primary?.name||f?.family_name||'Catalogue family'),pack:String(f?.order_pack_basis||primary?.cataloguePack||primary?.pack||'Pack / unit to confirm'),gallery:[]};
   }
   function fallbackFamily(id){
     const rows=window.PSC_FAMILY_CATALOGUE_V39?.families||[], r=rows.find(x=>x.familyId===id); if(!r) return null;
@@ -183,7 +186,7 @@
     return `<section class="pscFamilyDetailBlock pscFamilyPreferenceBlock">
       <span class="pscFamilyDetailLabel">Product preference</span>
       <label class="pscBrandChoice pscBrandNoPreference ${noPreference?'active':''}"><input type="checkbox" data-family-no-preference ${noPreference?'checked':''}><span><b>No brand preference</b><small>PS can quote a suitable product that meets the family specification.</small></span></label>
-      ${refs.length?`<div class="pscBrandTickGrid">${refs.map(o=>{const key=optionKey(o),brand=normalizedBrand(o.brand)||String(o.exact_product_name||'Product option');return `<label class="pscBrandTick ${state.selectedOptionIds.includes(key)?'active':''}"><input type="checkbox" data-family-option="${esc(key)}" ${state.selectedOptionIds.includes(key)?'checked':''}>${o.image_url?`<img class="catalogueOptionImage" src="${esc(o.image_url)}" alt="${esc(o.exact_product_name)}" loading="lazy">`:''}<span><b>${esc(brand)}</b><small>${esc(optionDescriptor(o,f))}</small>${!o.image_url?'<small>Exact variant photograph pending verification</small>':''}${o.reference_only?'<small>Catalogue reference · exact supply approval pending</small>':''}</span>${optionPrice(o)}</label>`;}).join('')}</div>`:''}
+      ${refs.length?`<div class="pscBrandTickGrid">${refs.map(o=>{const key=optionKey(o),brand=normalizedBrand(o.brand)||String(o.exact_product_name||'Product option');return `<label class="pscBrandTick ${state.selectedOptionIds.includes(key)?'active':''}"><input type="checkbox" data-family-option="${esc(key)}" ${state.selectedOptionIds.includes(key)?'checked':''}>${(window.PSC_IMAGE_POLICY?.resolve(o.image_url)??o.image_url)?`<img class="catalogueOptionImage" src="${esc(window.PSC_IMAGE_POLICY?.resolve(o.image_url)??o.image_url)}" alt="${esc(o.exact_product_name)}" loading="lazy">`:''}<span><b>${esc(brand)}</b><small>${esc(optionDescriptor(o,f))}</small>${!o.image_url?'<small>Exact variant photograph pending verification</small>':''}${o.reference_only?'<small>Catalogue reference · exact supply approval pending</small>':''}</span>${optionPrice(o)}</label>`;}).join('')}</div>`:''}
       ${fallbacks.length?`<div class="pscBrandTickGrid pscFallbackBrandGrid">${fallbacks.map(brand=>`<label class="pscBrandTick ${state.selectedFallbackBrands.includes(brand)?'active':''}"><input type="checkbox" data-family-fallback-brand="${esc(brand)}" ${state.selectedFallbackBrands.includes(brand)?'checked':''}><span><b>${esc(brand)}</b><small>${esc(fallbackBrandDescriptor(f))}</small><small>Requested brand only · exact variant, photo and price to confirm</small></span></label>`).join('')}</div>`:''}
       <p class="pscBrandPreferenceNote">Tick one or more exact product options you are happy for PS to quote. Where more than one SKU exists under the same brand, each SKU is shown separately. Final availability and commercial terms are confirmed in the quotation.</p>
       <label class="pscBrandChoice ${state.otherBrandActive?'active':''}"><input type="checkbox" data-family-other-toggle ${state.otherBrandActive?'checked':''}><span><b>Other brand / manufacturer required</b><small>Specify another brand, manufacturer, model or pack.</small></span></label>
@@ -194,7 +197,7 @@
   function variantPreview(f){
     const chosen=selectedOptions();
     if(chosen.length===1){
-      const o=chosen[0], verified=window.PSC_VARIANT_EVIDENCE_FOR?.(o,state.familyId);
+      const o={...chosen[0],image_url:window.PSC_IMAGE_POLICY?.resolve(chosen[0].image_url)??chosen[0].image_url}, verified=window.PSC_VARIANT_EVIDENCE_FOR?.(o,state.familyId);
       return {image:String(o.image_url||''),title:String(o.exact_product_name||'Selected product'),
         pack:String(o.pack||o.presentation||'Pack to confirm'),gallery:[],
         description:String(o.verified_description||optionDescriptor(o,f)),
@@ -203,7 +206,7 @@
     }
     if(chosen.length>1){
       return {image:'',title:`${chosen.length} variants selected`,pack:'Each product is quoted separately',
-        gallery:chosen.map(o=>({url:String(o.image_url||''),alt:String(o.exact_product_name||'Selected product'),
+        gallery:chosen.map(o=>({url:String(window.PSC_IMAGE_POLICY?.resolve(o.image_url)??o.image_url??''),alt:String(o.exact_product_name||'Selected product'),
           pack:String(o.pack||'Pack to confirm'),price:optionPrice(o)})),
         description:'Review each selected variant below. No single family photograph represents all selected products.',
         evidence:'Exact product photos and prices are shown per variant where available',
@@ -234,7 +237,7 @@
 
   function draw(){ document.querySelector('[data-psc-family-detail-root]')?.remove(); if(!state.open) return; const root=document.createElement('div');root.dataset.pscFamilyDetailRoot='';root.innerHTML=detailHtml();document.body.appendChild(root);document.documentElement.classList.add('pscFamilyDetailOpen');bindDetail(root); }
   function close(){state.open=false;document.documentElement.classList.remove('pscFamilyDetailOpen');document.querySelector('[data-psc-family-detail-root]')?.remove();}
-  async function open(id){if(!id)return;resetSelection();state.open=true;state.openRoute=window.PSC_CURRENT_ROUTE();await loadDetail(id);draw();}
+  async function open(id,listingPreview=null){if(!id)return;state.listingPreview=listingPreview;resetSelection();state.open=true;state.openRoute=window.PSC_CURRENT_ROUTE();await loadDetail(id);draw();}
   function quoteSummary(){
     const f=state.family||fallbackFamily(state.familyId),kind=familyKind(f),preference=preferenceSummary(),chosen=selectedOptions();
     const brands=[...new Set([...chosen.map(o=>normalizedBrand(o.brand)).filter(Boolean),...state.selectedFallbackBrands])];
@@ -278,7 +281,8 @@
     if(familyTrigger){
       e.preventDefault();
       e.stopImmediatePropagation();
-      open(familyTrigger.dataset.pscFamilyOpen||'');
+      const card=familyTrigger.closest('article,.productCard,.publicCatalogueCard'),img=card?.querySelector('.productMainImage,.publicCatalogueVisual>img:not(.publicDhaMark)');
+      open(familyTrigger.dataset.pscFamilyOpen||'',img?{image:window.PSC_IMAGE_POLICY?.resolve(img.getAttribute('src'))??img.getAttribute('src'),title:img.alt}:null);
       return;
     }
     if(e.target.closest?.('[data-psc-family-detail-root]')) return;
@@ -292,7 +296,8 @@
     // from bypassing the brand/SKU preference controls.
     e.preventDefault();
     e.stopImmediatePropagation();
-    open(familyId);
+    const card=productTrigger.closest('article,.productCard,.publicCatalogueCard'),img=card?.querySelector('.productMainImage,.publicCatalogueVisual>img:not(.publicDhaMark)');
+    open(familyId,img?{image:window.PSC_IMAGE_POLICY?.resolve(img.getAttribute('src'))??img.getAttribute('src'),title:img.alt}:null);
   },true);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.open)close();});
   const closeOnNavigation=()=>{if(state.open&&state.openRoute!==window.PSC_CURRENT_ROUTE())close();};

@@ -22,3 +22,13 @@ These rules implement Moe's instructions of 12 October 2026.
 ## Image release instruction — 14 October 2026
 
 - Release available matching product photographs with brief identity/form/strength/pack checks and file decoding. Do not block image-only publication on price research, replacement photography for cosmetic quality, full-catalogue browser sweeps or historical image-evidence gates. Preserve known pack conflicts, existing verified photos, catalogue identities, prices and procurement behaviour.
+
+## Product image standard — 14 October 2026
+
+- Never publish an image containing Acorus branding, supplier logos, supplier backdrops or watermarks. Product/manufacturer branding on the actual pack is retained.
+- Every catalogue image uses the shared white double frame, contained product and generous whitespace. Use transparent cutouts or clean white-background photographs when available. Never crop off product or pack identity.
+- Cards omit Pictured / Product example paragraphs. Preserve photo identity and representative-versus-exact status in image alt text, image records and the detailed product view.
+- A listing's photo remains visible when its detail view opens. Exact variant selection keeps its own photo identity; never silently borrow another variant's photograph.
+- `data/catalogue-image-policy.json` blocks rejected asset paths and hashes from the public build, including renamed copies. OCR is supplementary: human visual review is required because logo-only and blurred supplier branding may be missed.
+- Image-only changes must preserve IDs, specs, prices, stock and ordering. Release checks must cover card/detail photo continuity, framing, branding rejection and requests on desktop/mobile.
+- New images follow: exact identity → source/photo review → no-supplier-branding check → white/transparent preparation → decode/resolution → variant binding → card/detail preview → publish. An uploaded photo is a draft until reviewed and explicitly published.

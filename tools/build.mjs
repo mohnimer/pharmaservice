@@ -9,6 +9,9 @@ await buildProductIndex();
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = path.join(root, 'dist');
 const shell = await readFile(path.join(root, 'index.html'), 'utf8');
+const imagePolicy=JSON.parse(await readFile(path.join(root,'data/catalogue-image-policy.json'),'utf8'));
+const rejectedImagePaths=new Set(imagePolicy.blocked_paths.map(p=>p.replace(/^\//,'')));
+const rejectedImageHashes=new Set(imagePolicy.blocked_sha256);
 const manifest = JSON.parse(await readFile(path.join(root, 'current/manifest.json'), 'utf8'));
 // The shell is the runtime manifest. Preserve script and stylesheet execution order.
 const files = new Set(['index.html', 'robots.txt', 'sitemap.xml']);
@@ -33,7 +36,11 @@ await writeFile(path.join(output,'index.html'),shell.replace(/(\/current\.(?:js|
 // Product images and other dynamically referenced visual assets remain available.
 // Historical scripts in assets are deliberately excluded from the published tree.
 await cp(path.join(root, 'assets'), path.join(output, 'assets'), {
-  recursive: true, filter: source => !/\.(?:html|js|css|txt|md)$/i.test(source)
+  recursive: true, filter: async source => {
+    if(/\.(?:html|js|css|txt|md)$/i.test(source)||rejectedImagePaths.has(path.relative(root,source)))return false;
+    if(/\.(?:png|webp|jpg|jpeg|gif)$/i.test(source)){const hash=createHash('sha256').update(await readFile(source)).digest('hex');if(rejectedImageHashes.has(hash))return false;}
+    return true;
+  }
 });
 for (const name of await readdir(root)) {
   if (/\.(?:png|webp|jpg|jpeg|svg|gif|ico|woff2?)$/i.test(name)) {

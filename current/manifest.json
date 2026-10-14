@@ -12,6 +12,7 @@
     "current/behaviour/family-data.js",
     "current/behaviour/catalogue-architecture.js",
     "current/behaviour/catalogue-refresh-data.js",
+    "current/behaviour/catalogue-image-policy.js",
     "current/behaviour/catalogue-image-release.js",
     "current/behaviour/catalogue-refresh.js",
     "current/behaviour/medicine-evidence.js",
@@ -115,7 +116,8 @@
     "current/styles/operating-system.css",
     "current/styles/workshop-refinement.css",
     "current/styles/catalogue-category-titles.css",
-    "current/styles/control-alignment.css"
+    "current/styles/control-alignment.css",
+    "current/styles/catalogue-photo-standard.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",

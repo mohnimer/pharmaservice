@@ -23,7 +23,7 @@
 
   function isGeneratedOrGeneric(url) {
     const s = clean(url).toLowerCase();
-    if (!s) return true;
+    if (!s || window.PSC_IMAGE_POLICY?.isBlocked(s)) return true;
     return (
       /\/assets\/products\/inst-\d{4}\.webp(?:\?|$)/i.test(s) ||
       s.includes('clinic-basics.jpg') ||
@@ -135,7 +135,7 @@
 
   function scan() {
     restoreData();
-    document.querySelectorAll('.productMainImage, .publicCatalogueVisual > img:not(.publicDhaMark)').forEach(img => {
+    document.querySelectorAll('.productMainImage, .publicCatalogueVisual > img:not(.publicDhaMark), .detailProductImageWrap > img:not(.detailDhaIcon)').forEach(img => {
       const fit=window.PS_PHOTO_FRAMING?.[img.getAttribute('src')?.split('?')[0]];
       if(fit) img.style.setProperty('--photo-fit', `scale(${fit.scale}) translate(${fit.x}%, ${fit.y}%)`);
     });

@@ -22,7 +22,7 @@ const evidence=options.map((o,i)=>({...o,description:'Fixture exact pack '+o.pac
  release_status:'APPROVED'}));
 const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
 mkdirSync('test-results/variant-visual-review',{recursive:true});
-const browser=await chromium.launch({args:['--no-sandbox']});
+const browser=await chromium.launch({executablePath:process.env.PSC_CHROME,args:['--no-sandbox','--disable-dev-shm-usage']});
 try{
  for(const width of [1440,390]){
   const context=await browser.newContext({viewport:{width,height:900}});
@@ -174,7 +174,8 @@ try{
   const representative=await card.locator('.productVisual').getAttribute('data-product-view');
   const represented=await page.evaluate(sku=>window.PSC_DATA.products.find(p=>p.pscSku===sku),representative);
   assert.equal(await card.locator('.productMainImage').getAttribute('src'),represented.currentImageUrl);
-  assert((await card.locator('.pscFamilyRepresentative').innerText()).includes(represented.name));
+  assert.equal(await card.locator('.pscFamilyRepresentative').count(),0);
+  assert((await card.locator('.productMainImage').getAttribute('alt')).includes(represented.name));
   const variantRow=card.locator('.pscFamilyVariantList li').filter({has:page.locator('[data-product-view="'+sku+'"]')});
   assert((await variantRow.textContent()).includes(variant.pack));
   const expectedPrice=stockPrice(sku);

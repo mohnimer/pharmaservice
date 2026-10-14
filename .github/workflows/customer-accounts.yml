@@ -12,6 +12,10 @@ on:
       - 'tests/portal-layout-regression.mjs'
       - 'tests/control-alignment-browser.mjs'
       - 'current/styles/control-alignment.css'
+      - 'current/styles/catalogue-photo-standard.css'
+      - 'current/behaviour/catalogue-image-policy.js'
+      - 'tests/catalogue-photo-standard-browser.mjs'
+      - 'tests/catalogue-photo-upload-browser.mjs'
       - 'tests/workshop-layout-browser.mjs'
       - 'current/styles/workshop-refinement.css'
       - 'current/styles/catalogue-category-titles.css'
@@ -47,6 +51,9 @@ jobs:
       - run: node tests/portal-layout-regression.mjs
       - run: node tests/control-alignment-browser.mjs
       - run: node tests/workshop-layout-browser.mjs
+      - run: node tests/catalogue-image-policy.test.mjs
+      - run: node tests/catalogue-photo-standard-browser.mjs
+      - run: node tests/catalogue-photo-upload-browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -55,6 +62,7 @@ jobs:
             test-results/customer-accounts
             test-results/business-workspace
             test-results/unified-email
+            test-results/photo-standard
             test-results/control-alignment
             test-results/portal-layout
             test-results/workshop-layout

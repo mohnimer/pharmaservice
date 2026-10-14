@@ -1806,11 +1806,13 @@
  const refresh=window.PS_CATALOGUE_REFRESH;
  if(!refresh)return;
  for(const r of rows){
+  const image=window.PSC_IMAGE_POLICY?.resolve(r.image_url)??r.image_url;
+  if(!image)continue;
   const p=refresh.products.find(p=>p.pscSku===r.sku&&p.name===r.name&&String(p.catalogueParentId||p.catalogueReferenceFamilyId||'')===r.family_id);
   if(!p||/VERIFIED EXACT/.test(p.imageStatus||''))continue;
-  Object.assign(p,{currentImageUrl:r.image_url,imageUrl:r.image_url,image_url:r.image_url,imageStatus:'SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED',imageIdentityReviewed:true,imageSource:r.source,imageVerification:r.review});
+  Object.assign(p,{currentImageUrl:image,imageUrl:image,image_url:image,imageStatus:'SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED',imageIdentityReviewed:true,imageSource:window.PSC_IMAGE_POLICY?.replacement_sources?.[image]||r.source,imageVerification:r.review});
   for(const o of refresh.approvedOptions){
-   if(o.sku===r.sku&&o.exact_product_name===r.name&&o.family_id===r.family_id){o.image_url=r.image_url;o.image_status=p.imageStatus;o.image_pending=false;}
+   if(o.sku===r.sku&&o.exact_product_name===r.name&&o.family_id===r.family_id){o.image_url=image;o.image_status=p.imageStatus;o.image_pending=false;}
   }
  }
  window.PSC_IMAGE_RELEASE=Object.freeze({date:'2026-10-14',rows:Object.freeze(rows)});
