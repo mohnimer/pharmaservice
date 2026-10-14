@@ -14,7 +14,7 @@ async function scope(svc:any,b:any){
 async function candidate(svc:any,id:string,secret:string){
  if(!validUuid(id)||!/^([a-f0-9]{64})$/.test(secret||''))throw new MailError('invalid_activation_link');
  const i=check(await svc.from('psc_customer_invitations').select('*').eq('id',id).single());
- if(!['sent','pending_activation'].includes(i.status)||!i.expires_at||Date.parse(i.expires_at)<=Date.now()||i.token_hash!==await hash(secret))throw new MailError('invitation_expired_revoked_or_used');return i;
+ if(!['sent','pending_activation'].includes(i.status)||(!i.persistent_link&&(!i.expires_at||Date.parse(i.expires_at)<=Date.now()))||i.token_hash!==await hash(secret))throw new MailError('invitation_expired_revoked_or_used');return i;
 }
 Deno.serve(async req=>{
  if(req.method==='OPTIONS')return json({});if(req.method!=='POST')return json({error:'method_not_allowed'},405);
@@ -23,7 +23,16 @@ Deno.serve(async req=>{
   const b=await req.json();
   if(b.action==='inspect'){
    if(!check(await svc.rpc('psc_mail_rate',{p_key:'invitation-inspect:'+await hash(b.id||''),p_limit:20,p_seconds:60})))throw new MailError('rate_limited');
-   const i=await candidate(svc,b.id,b.token),s=await scope(svc,i);return json({email:i.recipient_email,full_name:i.full_name,schools:s.schools.map((x:any)=>[x.name,x.campus_name].filter(Boolean).join(' — '))});
+   const i=await candidate(svc,b.id,b.token),s=await scope(svc,i);return json({email:i.recipient_email,full_name:i.full_name,persistent_link:i.persistent_link===true,schools:s.schools.map((x:any)=>[x.name,x.campus_name].filter(Boolean).join(' — '))});
+  }
+  if(b.action==='begin_activation'){
+   if(!check(await svc.rpc('psc_mail_rate',{p_key:'invitation-verify:'+await hash(b.id||''),p_limit:5,p_seconds:300})))throw new MailError('rate_limited');
+   const i=await candidate(svc,b.id,b.token);await scope(svc,i);if(!i.persistent_link)throw new MailError('use_original_activation_link');
+   const generated=await svc.auth.admin.generateLink({type:'magiclink',email:i.recipient_email});
+   if(generated.error||!generated.data?.properties?.hashed_token||generated.data?.user?.id!==i.auth_user_id)throw new MailError('auth_activation_link_unavailable');
+   // The emailed capability stays valid until activation/revocation. Auth OTPs are
+   // prepared only on an explicit click and exchanged immediately in this browser.
+   return json({token_hash:generated.data.properties.hashed_token,type:'magiclink'});
   }
   if(b.action==='activate'){
    const jwt=(req.headers.get('authorization')||'').replace(/^Bearer\s+/i,''),r=await svc.auth.getUser(jwt);if(r.error||!r.data?.user?.email_confirmed_at)throw new MailError('verified_identity_required');
@@ -48,8 +57,8 @@ Deno.serve(async req=>{
    const i=check(await svc.from('psc_customer_invitations').update({status:'revoked',revoked_at:new Date().toISOString(),token_hash:null,updated_at:new Date().toISOString()}).eq('id',b.id).in('status',['draft','sent','pending_activation','failed']).select('id').maybeSingle());if(!i)throw new MailError('invitation_locked');check(await svc.from('psc_invitation_events').insert({invitation_id:i.id,event:'revoked',actor:user.id}));return json({revoked:true});
   }
   if(b.action==='return_to_draft'){
-   const i=check(await svc.from('psc_customer_invitations').select('*').eq('id',b.id).single());if(i.status!=='failed'&&(!['sent','pending_activation'].includes(i.status)||Date.parse(i.expires_at)>Date.now()))throw new MailError('only_expired_or_failed_invitation_can_be_reissued');
-   const saved=check(await svc.from('psc_customer_invitations').update({status:'draft',token_hash:null,auth_user_id:null,updated_at:new Date().toISOString()}).eq('id',i.id).eq('updated_at',i.updated_at).select('id').maybeSingle());if(!saved)throw new MailError('invitation_changed');return json({draft:true});
+   const i=check(await svc.from('psc_customer_invitations').select('*').eq('id',b.id).single());if(i.status!=='failed'&&(!['sent','pending_activation'].includes(i.status)||(i.persistent_link||Date.parse(i.expires_at)>Date.now())))throw new MailError('only_expired_or_failed_invitation_can_be_reissued');
+   const saved=check(await svc.from('psc_customer_invitations').update({status:'draft',token_hash:null,auth_user_id:null,expires_at:null,copy_status:(i.email_composition?.to_recipients?.length||1)+(i.email_composition?.cc_recipients?.length||0)+(i.email_composition?.bcc_recipients?.length||0)>1?'pending':'not_requested',copy_last_error:null,updated_at:new Date().toISOString()}).eq('id',i.id).eq('updated_at',i.updated_at).select('id').maybeSingle());if(!saved)throw new MailError('invitation_changed');return json({draft:true});
   }
   if(b.action==='reconcile'){
    const i=check(await svc.from('psc_customer_invitations').select('*').eq('id',b.id).eq('status','uncertain').single()),token=await accessToken(svc);
@@ -68,9 +77,9 @@ Deno.serve(async req=>{
   const token=await accessToken(svc);await verifySender(token,composition.sender_alias);
   const nonce=crypto.randomUUID();claimed=check(await svc.from('psc_customer_invitations').update({status:'sending',approved_by:user.id,approved_at:new Date().toISOString(),send_nonce:nonce,updated_at:new Date().toISOString()}).eq('id',i.id).eq('status','draft').eq('updated_at',i.updated_at).select('*').maybeSingle());if(!claimed)throw new MailError('invitation_changed_or_claimed');
   const generated=await svc.auth.admin.generateLink({type:existing?'magiclink':'invite',email:i.recipient_email,options:{redirectTo:origin+'/#activate-account'}});if(generated.error||!generated.data?.properties?.hashed_token||!generated.data?.user?.id)throw new MailError('auth_activation_link_unavailable');
-  const secret=Array.from(crypto.getRandomValues(new Uint8Array(32)),x=>x.toString(16).padStart(2,'0')).join(''),expires=new Date(Date.now()+3600000).toISOString();
-  check(await svc.from('psc_customer_invitations').update({token_hash:await hash(secret),auth_user_id:generated.data.user.id,expires_at:expires}).eq('id',i.id).eq('status','sending'));
-  const params=new URLSearchParams({id:i.id,token:secret,token_hash:generated.data.properties.hashed_token,type:existing?'magiclink':'invite'}),link=origin+'/#activate-account?'+params;
+  const secret=Array.from(crypto.getRandomValues(new Uint8Array(32)),x=>x.toString(16).padStart(2,'0')).join('');
+  check(await svc.from('psc_customer_invitations').update({token_hash:await hash(secret),auth_user_id:generated.data.user.id,expires_at:null,persistent_link:true}).eq('id',i.id).eq('status','sending'));
+  const params=new URLSearchParams({id:i.id,token:secret}),link=origin+'/#activate-account?'+params;
   const body=invitationBodies(composition,link).privateBody;
   const html=(globalThis as any).PSC_BUSINESS_EMAIL_HTML(body).replace((globalThis as any).PSC_EMAIL_ESC(link),'<a href="'+(globalThis as any).PSC_EMAIL_ESC(link)+'" style="display:inline-block;background:#122f31;color:#fff;padding:14px 20px;border-radius:12px;text-decoration:none">Activate your account</a>');
   attempted=true;const result=await send(token,mime({to:i.recipient_email,from:composition.sender_alias,subject:composition.subject,text:body,html,id:'invitation-'+i.id+'-'+nonce}));accepted=true;
