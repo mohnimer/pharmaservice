@@ -4,8 +4,8 @@
   "production_changed": false,
   "counts": {
     "cards": 615,
-    "verified_cards": 54,
-    "cards_pending": 561,
+    "verified_cards": 52,
+    "cards_pending": 563,
     "local_options": 193,
     "verified_local_options": 54
   },
@@ -1014,8 +1014,8 @@
       "sku": "PSC-DSP-010",
       "name": "XL Disposable Underpads 90 × 180 cm",
       "family_id": "PSC-IS-047",
-      "image": "/assets/products/acorus-2026-10/retained-psc-dsp-010.jpg",
-      "image_status": "EXISTING PRODUCT PHOTOGRAPH",
+      "image": "/assets/products/verified-20261015/b0091261ed582099.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT PHOTOGRAPH",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -1459,8 +1459,8 @@
       "sku": "PSC-MED-124",
       "name": "ZOMIG 2.5 MG - ZOLMITRIPTAN - 6 TABLETS",
       "family_id": "PSC-IS-133",
-      "image": "/assets/products/acorus-2026-10/retained-psc-med-124.jpg",
-      "image_status": "EXISTING PRODUCT PHOTOGRAPH",
+      "image": "/assets/products/verified-20261015/44a1bc0408f6bff4.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT PHOTOGRAPH",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -1554,8 +1554,8 @@
       "sku": "PSC-MED-131",
       "name": "IMODIUM 2MG CAP 60'S",
       "family_id": "PSC-IS-098",
-      "image": "/assets/products/acorus-2026-10/retained-psc-med-131.jpg",
-      "image_status": "EXISTING PRODUCT PHOTOGRAPH",
+      "image": "/assets/products/verified-20261015/006f9c8d67378c51.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT PHOTOGRAPH",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -3835,7 +3835,7 @@
       "name": "ACC LONG EFF 600MG TAB 10's",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/260-acc-long-eff-600mg-tab-10-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -3865,7 +3865,7 @@
       "name": "AGIOLAX GRANULES 250GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/263-agiolax-granules-250gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -3880,7 +3880,7 @@
       "name": "ALCETA PLUS TAB 24'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/256-alceta-plus-tab-24-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -3895,7 +3895,7 @@
       "name": "ALCETA TAB 12'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/115-alceta-tab-12-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -3919,8 +3919,8 @@
       "sku": "PS-AC-0DEC19ACEA05",
       "name": "Aldomet 250 mg — 30 Tablets",
       "family_id": "PSC-IS-166",
-      "image": "/assets/products/acorus-2026-10/128-aldomet-250mg-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/supplier-20261014/aldomet_250_mg_30_tablets.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4039,8 +4039,8 @@
       "sku": "PS-AC-1F1A9E6B4FC8",
       "name": "Apex 400 mg — 6 Capsules",
       "family_id": "PSC-IS-143",
-      "image": "/assets/products/acorus-2026-10/091-apex-400mg-cap-6-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/supplier-20261014/apex_400_mg_6_capsules.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4055,7 +4055,7 @@
       "name": "ARTELAC ADVANCE 0.5ML 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/264-artelac-advance-0-5ml-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4070,7 +4070,7 @@
       "name": "ATSTAT 20MG TAB 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/044-atstat-20mg-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4085,7 +4085,7 @@
       "name": "AVOCAINE SPRAY 50ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/092-avocaine-spray-50ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4100,7 +4100,7 @@
       "name": "AVOCOM NASAL SPRAY 0.05%",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/093-avocom-nasal-spray-0-05.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4115,7 +4115,7 @@
       "name": "AVOCOM-M CREAM 30GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/094-avocom-m-cream-30gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4130,7 +4130,7 @@
       "name": "AYURHOIDS CAP 60'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/240-ayurhoids-cap-60-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4145,7 +4145,7 @@
       "name": "AYURIN PLUS CAP 60'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/241-ayurin-plus-cap-60-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4160,7 +4160,7 @@
       "name": "AYUVIGO FORTE CAP 60\"S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/242-ayuvigo-forte-cap-60-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4175,7 +4175,7 @@
       "name": "AZI-ONCE 250MG CAP 6'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/011-azi-once-250mg-cap-6-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4190,7 +4190,7 @@
       "name": "AZIJUB 250MG TAB 6\"S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/014-azijub-250mg-tab-6-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4220,7 +4220,7 @@
       "name": "AZIJUB 500MG TAB 6\"S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/023-azijub-500mg-tab-6-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4255,7 +4255,7 @@
       "name": "BACTALL 500MG TAB 10S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/008-bactall-500mg-tab-10s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4270,7 +4270,7 @@
       "name": "BETAZOL CREAM 30GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/087-betazol-cream-30gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4285,7 +4285,7 @@
       "name": "Braun Beard Trimmer BT-5060",
       "family_id": "PSC-IS-173",
       "image": "/assets/products/acorus-2026-10/137-braun-beard-trimmer-bt-5060.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4310,7 +4310,7 @@
       "name": "BRAUN HAIR BRUSH BR 710",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/139-braun-hair-brush-br-710.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4355,7 +4355,7 @@
       "name": "BRAUN SATIN HAIR 5 STRAIGHTENER ST510",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/142-braun-satin-hair-5-straightener-st510.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4415,7 +4415,7 @@
       "name": "BREXIN 20MG TAB 20'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/147-brexin-20mg-tab-20-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4430,7 +4430,7 @@
       "name": "BRILINTA 90MG TAB 56'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/148-brilinta-90mg-tab-56-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4445,7 +4445,7 @@
       "name": "BRONCOF HERBAL COUGH SYRUP 150ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/024-broncof-herbal-cough-syrup-150ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4460,7 +4460,7 @@
       "name": "BUTAFYL 1% CREAM 15GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/103-butafyl-1-cream-15gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4489,8 +4489,8 @@
       "sku": "PS-AC-95CA6F7BE1D9",
       "name": "CANESTEN 1% CREAM 20GM",
       "family_id": null,
-      "image": "/assets/products/acorus-2026-10/267-canesten-1-cream-20gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/verified-20261015/ccc228026e4495f2.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT PHOTOGRAPH",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4505,7 +4505,7 @@
       "name": "CANESTEN 1% SOLUTION 20ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/268-canesten-1-solution-20ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4535,7 +4535,7 @@
       "name": "CEFIX 100MG/5ML SUSPENSION 30ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/055-cefix-100mg-5ml-suspension-30ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4550,7 +4550,7 @@
       "name": "CEFIX 200MG CAP 8'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/056-cefix-200mg-cap-8-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4580,7 +4580,7 @@
       "name": "CEFIX 400MG CAP 6'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/058-cefix-400mg-cap-6-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4595,7 +4595,7 @@
       "name": "CEFUTIL 500MG TAB 10'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/015-cefutil-500mg-tab-10-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4609,8 +4609,8 @@
       "sku": "PS-AC-49C544EA6E0C",
       "name": "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
       "family_id": "PSC-IS-073",
-      "image": "/assets/products/acorus-2026-10/150-cetralon-5mg-syrup-75ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/supplier-20261014/cetralon_cetirizine_5_mg_5_ml_syrup_75_ml.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4640,7 +4640,7 @@
       "name": "CIDOCOMB CREAM 30G (AVALON)",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/104-cidocomb-cream-30g-avalon.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4670,7 +4670,7 @@
       "name": "CLARITINE 10MG TAB 10'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/269-claritine-10mg-tab-10-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4685,7 +4685,7 @@
       "name": "CLINIJEL GEL 82GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/151-clinijel-gel-82gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4699,8 +4699,8 @@
       "sku": "PS-AC-3F16D478897A",
       "name": "Clozac Acne Face Wash — 60 ml",
       "family_id": "PSC-IS-152",
-      "image": "/assets/products/acorus-2026-10/152-clozac-acne-face-wash-60ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/supplier-20261014/clozac_acne_face_wash_60_ml.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4714,8 +4714,8 @@
       "sku": "PS-AC-0BC7A350ED13",
       "name": "Clozac Acne Facial Gel — 50 g",
       "family_id": "PSC-IS-152",
-      "image": "/assets/products/acorus-2026-10/153-clozac-acne-facial-gel-50gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/supplier-20261014/clozac_acne_facial_gel_50_g.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4745,7 +4745,7 @@
       "name": "COXIB 200MG CAPSULES 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/067-coxib-200mg-capsules-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4760,7 +4760,7 @@
       "name": "CYPRO-VITA TAB 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/154-cypro-vita-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4775,7 +4775,7 @@
       "name": "DECADRON ELIXIR SYRUP 100ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/155-decadron-elixir-syrup-100ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4790,7 +4790,7 @@
       "name": "DELOR 0.05% CREAM 25GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/078-delor-0-05-cream-25gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4865,7 +4865,7 @@
       "name": "DICLOPID 50MG TAB 20'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/025-diclopid-50mg-tab-20-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4880,7 +4880,7 @@
       "name": "DIOCLAV 1GM TAB 14'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/030-dioclav-1gm-tab-14-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4895,7 +4895,7 @@
       "name": "DIOCLAV 625MG TAB 20'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/026-dioclav-625mg-tab-20-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4909,8 +4909,8 @@
       "sku": "PS-AC-A60A93407A6D",
       "name": "Dolvic-K Diclofenac Potassium 50 mg — 20 Tablets",
       "family_id": "PSC-IS-149",
-      "image": "/assets/products/acorus-2026-10/003-dolvic-k-50mg-tab-20-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/supplier-20261014/dolvic_k_diclofenac_potassium_50_mg_20_tablets.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4940,7 +4940,7 @@
       "name": "DOXIPROCT OINTMENT 30GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/278-doxiproct-ointment-30gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4955,7 +4955,7 @@
       "name": "DOXIPROCT PLUS OINTMENT 20GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/279-doxiproct-plus-ointment-20gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -4970,7 +4970,7 @@
       "name": "DOXYLAG 100MG CAP 10'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/116-doxylag-100mg-cap-10-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5000,7 +5000,7 @@
       "name": "DUPHALAC SYRUP 300ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/265-duphalac-syrup-300ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5015,7 +5015,7 @@
       "name": "ELEGANT DERMOLITE CERAMIDE CREAM 100GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/157-elegant-dermolite-ceramide-cream-100gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5030,7 +5030,7 @@
       "name": "ELICA CREAM 30GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/095-elica-cream-30gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5045,7 +5045,7 @@
       "name": "ELICA-M CREAM 30GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/096-elica-m-cream-30gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5059,8 +5059,8 @@
       "sku": "PS-AC-E50487D58B2A",
       "name": "Emidol Paracetamol 500 mg — 24 Tablets",
       "family_id": "PSC-IS-090",
-      "image": "/assets/products/acorus-2026-10/158-emidol-500mg-tab-24-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/supplier-20261014/emidol_paracetamol_500_mg_24_tablets.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5105,7 +5105,7 @@
       "name": "ENTEROGERMINA SUSP 5ML 20'S VIAL",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/257-enterogermina-susp-5ml-20-s-vial.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5150,7 +5150,7 @@
       "name": "ETORIGEN 90MG TAB 28'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/105-etorigen-90mg-tab-28-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5195,7 +5195,7 @@
       "name": "FAST-FLAM 50MG TAB 20'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/031-fast-flam-50mg-tab-20-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5210,7 +5210,7 @@
       "name": "FASTUM GEL DISP 100GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/248-fastum-gel-disp-100gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5240,7 +5240,7 @@
       "name": "FINALLERG 10MG TAB 10’S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/045-finallerg-10mg-tab-10s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5255,7 +5255,7 @@
       "name": "FINALLERG 10MG TAB 20'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/046-finallerg-10mg-tab-20-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5270,7 +5270,7 @@
       "name": "FINALLERG 1MG/ML ORAL SOLUTION 100ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/047-finallerg-1mg-ml-oral-solution-100ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5315,7 +5315,7 @@
       "name": "FUDION CREAM 2% 15GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/079-fudion-cream-2-15gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5345,7 +5345,7 @@
       "name": "FUNZOL 150MG CAP 1'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/038-funzol-150mg-cap-1-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5360,7 +5360,7 @@
       "name": "GASTREX 42MG TAB 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/107-gastrex-42mg-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5375,7 +5375,7 @@
       "name": "GEMCAL CAP 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/243-gemcal-cap-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5420,7 +5420,7 @@
       "name": "GLENCET 5MG TAB 10'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/051-glencet-5mg-tab-10-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5435,7 +5435,7 @@
       "name": "GLENCET 5MG TAB 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/052-glencet-5mg-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5450,7 +5450,7 @@
       "name": "GLENCIN T SOLUTION 30ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/261-glencin-t-solution-30ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5480,7 +5480,7 @@
       "name": "GLIM 2MG TAB 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/250-glim-2mg-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5545,7 +5545,7 @@
       "name": "GLOCLAV 375MG TAB 20'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/165-gloclav-375mg-tab-20-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5570,7 +5570,7 @@
       "name": "GLOMOX 1000MG TAB 14'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/166-glomox-1000mg-tab-14-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5615,7 +5615,7 @@
       "name": "GLOZIMAX 250MG CAP 6'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/032-glozimax-250mg-cap-6-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5630,7 +5630,7 @@
       "name": "GLYCILAX ADULT SUPPO 12\"S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/169-glycilax-adult-suppo-12-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5670,7 +5670,7 @@
       "name": "HAIRCILLIUM MAN TABLET 60'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/171-haircillium-man-tablet-60-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5715,7 +5715,7 @@
       "name": "HAIRGAINE SOLN 2% WOMEN 60ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/069-hairgaine-soln-2-women-60ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5730,7 +5730,7 @@
       "name": "HAIRGAINE SOLN 5% MEN 60ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/070-hairgaine-soln-5-men-60ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5745,7 +5745,7 @@
       "name": "HALLSEPT SPRAY 30ML (MOUTH&THROAT)",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/173-hallsept-spray-30ml-mouth-throat.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5774,8 +5774,8 @@
       "sku": "PS-AC-EF89A3D78DE4",
       "name": "HY+AI Oral Gel — 12 g",
       "family_id": "PSC-IS-168",
-      "image": "/assets/products/acorus-2026-10/174-hy-ai-gel-12gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/supplier-20261014/hyplusai_oral_gel_12_g.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5805,7 +5805,7 @@
       "name": "HYCOM 10MG TAB 20'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/080-hycom-10mg-tab-20-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5820,7 +5820,7 @@
       "name": "HYPOSEC 20MG CAP 14'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/081-hyposec-20mg-cap-14-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5865,7 +5865,7 @@
       "name": "IFICIPRO 500MG TAB 10'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/033-ificipro-500mg-tab-10-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5894,8 +5894,8 @@
       "sku": "PS-AC-7DE9E565CE7F",
       "name": "Isomar Daily Hygiene Spray Nose & Ear — 100 ml",
       "family_id": "PSC-IS-106",
-      "image": "/assets/products/acorus-2026-10/177-isomar-daily-hygiene-spray-nose-ear-100ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/supplier-20261014/isomar_daily_hygiene_spray_nose_and_ear_100_ml.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5910,7 +5910,7 @@
       "name": "Isomar Daily Hygiene Vials Nose & Eyes — 20 x 5 ml",
       "family_id": "PSC-IS-106",
       "image": "/assets/products/acorus-2026-10/178-isomar-daily-hygiene-vial-nose-eyes-20x5ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5940,7 +5940,7 @@
       "name": "IVYLIN COUGH SYRUP 100ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/071-ivylin-cough-syrup-100ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5955,7 +5955,7 @@
       "name": "JOFLAM 50MG TAB 20'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/012-joflam-50mg-tab-20-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -5970,7 +5970,7 @@
       "name": "K-FLAM 50MG TAB 20'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/034-k-flam-50mg-tab-20-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6015,7 +6015,7 @@
       "name": "KLARFAST 10MG TAB 10'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/018-klarfast-10mg-tab-10-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6045,7 +6045,7 @@
       "name": "KOFOL SYRUP 100ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/073-kofol-syrup-100ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6060,7 +6060,7 @@
       "name": "Kool Temp Cooling Gel Sheets — Baby — 6 Pieces",
       "family_id": "PSC-IS-042",
       "image": "/assets/products/acorus-2026-10/182-kool-temp-patches-6-s-baby.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6075,7 +6075,7 @@
       "name": "Kool Temp Cooling Gel Sheets — Child — 6 Pieces",
       "family_id": "PSC-IS-042",
       "image": "/assets/products/acorus-2026-10/183-kool-temp-patches-6-s-child.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6120,7 +6120,7 @@
       "name": "LEJAM 30MG TAB 4'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/258-lejam-30mg-tab-4-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6135,7 +6135,7 @@
       "name": "LEJAM 60MG TAB 4'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/259-lejam-60mg-tab-4-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6230,7 +6230,7 @@
       "name": "LOFLAM 100MG TAB 20’S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/097-loflam-100mg-tab-20s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6245,7 +6245,7 @@
       "name": "LOFLAM BLISTER 100MG TAB 30's",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/098-loflam-blister-100mg-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6260,7 +6260,7 @@
       "name": "LOHIST 10MG TAB 10'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/027-lohist-10mg-tab-10-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6275,7 +6275,7 @@
       "name": "LOHIST 5MG/5ML SYRUP 100ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/048-lohist-5mg-5ml-syrup-100ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6289,8 +6289,8 @@
       "sku": "PS-AC-D0757B6AB503",
       "name": "Lomexin 200 mg — 3 Ovules",
       "family_id": "PSC-IS-186",
-      "image": "/assets/products/acorus-2026-10/187-lomexin-200mg-ovules-3-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/supplier-20261014/lomexin_200_mg_3_ovules.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6304,8 +6304,8 @@
       "sku": "PS-AC-7F7266B6E568",
       "name": "Lomexin T 1000 mg — 1 Ovule",
       "family_id": "PSC-IS-186",
-      "image": "/assets/products/acorus-2026-10/188-lomexin-t-1000mg-ovules-1-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/supplier-20261014/lomexin_t_1000_mg_1_ovule.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6319,8 +6319,8 @@
       "sku": "PS-AC-7A8FA3726BCE",
       "name": "LOMIDEX 2MG CAP 60'S",
       "family_id": null,
-      "image": null,
-      "image_status": "REFERENCE TILE — VERIFIED PACKSHOT NEEDED",
+      "image": "/assets/products/verified-20261015/af3fbd5a80b45bf1.png",
+      "image_status": "VERIFIED EXACT PRODUCT PHOTOGRAPH",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6349,8 +6349,8 @@
       "sku": "PS-AC-4D0091180AB9",
       "name": "Lozaty Ginger — 24 Lozenges",
       "family_id": "PSC-IS-121",
-      "image": "/assets/products/acorus-2026-10/190-lozaty-lozenges-ginger-24-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/supplier-20261014/lozaty_ginger_24_lozenges.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6365,7 +6365,7 @@
       "name": "LOZATY LOZENGES HONEY&LEMON 24'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/191-lozaty-lozenges-honey-lemon-24-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6395,7 +6395,7 @@
       "name": "LOZATY LOZENGES PROPOLIS 16'S (SUGAR FREE)",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/193-lozaty-lozenges-propolis-16-s-sugar-free.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6440,7 +6440,7 @@
       "name": "MACROMAX 500MG TAB 3'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/039-macromax-500mg-tab-3-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6455,7 +6455,7 @@
       "name": "Manforce Epic Desire Super Thin Silk Chocolate — 3 Condoms",
       "family_id": "PSC-IS-145",
       "image": "/assets/products/acorus-2026-10/194-manforce-epic-desire-super-thin-condoms-silk-choc-3-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6470,7 +6470,7 @@
       "name": "Manforce Epic Passion Extra Dotted Fruit Punch — 10 Condoms",
       "family_id": "PSC-IS-145",
       "image": "/assets/products/acorus-2026-10/195-manforce-epic-passion-extra-dotted-condems-fruit-punch-10-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6500,7 +6500,7 @@
       "name": "Manforce Epic Pleasure Long Lasting Raspberry — 3 Condoms",
       "family_id": "PSC-IS-145",
       "image": "/assets/products/acorus-2026-10/197-manforce-epic-pleasure-long-lasting-condems-raspberry-3-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6515,7 +6515,7 @@
       "name": "METROLAG 250MG TAB 20’S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/119-metrolag-250mg-tab-20s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6530,7 +6530,7 @@
       "name": "METROLAG 500MG TAB 24'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/120-metrolag-500mg-tab-24-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6575,7 +6575,7 @@
       "name": "MUGEL MOUTH ULCER GEL 15GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/198-mugel-mouth-ulcer-gel-15gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6589,11 +6589,13 @@
       "sku": "PS-AC-D3D58AF8DBDC",
       "name": "NAN Optipro 1 — 400 g",
       "family_id": "PSC-IS-159",
-      "image": "/assets/products/verified-20261011/local-acorus-d3d58af8dbdc.jpg",
-      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "image": "/assets/products/verified-20261015/04c0d2c6344f89ea.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT PHOTOGRAPH",
       "evidence_option_id": "local-acorus-d3d58af8dbdc",
-      "status": "VERIFIED_PREVIEW_CANDIDATE",
-      "gaps": []
+      "status": "HOLD",
+      "gaps": [
+        "RUNTIME_IMAGE_MISMATCH"
+      ]
     },
     {
       "sku": "PS-AC-6703B683D432",
@@ -6735,7 +6737,7 @@
       "name": "NAROX 500MG TAB 10'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/074-narox-500mg-tab-10-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6765,7 +6767,7 @@
       "name": "NEOCLAV 1G TAB 14'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/005-neoclav-1g-tab-14-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6795,7 +6797,7 @@
       "name": "NEOCOFF ADULT SYRUP14MG/5ML,125ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/088-neocoff-adult-syrup14mg-5ml-125ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6824,8 +6826,8 @@
       "sku": "PS-AC-0E39ED2763A1",
       "name": "NEOMOL 500MG TAB 20'S",
       "family_id": null,
-      "image": null,
-      "image_status": "REFERENCE TILE — VERIFIED PACKSHOT NEEDED",
+      "image": "/assets/products/verified-20261015/39422e246b0a7a59.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT PHOTOGRAPH",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6854,8 +6856,8 @@
       "sku": "PS-AC-F09A440C147E",
       "name": "NEUROBION INJECTION 3ML 6'S",
       "family_id": null,
-      "image": "/assets/products/acorus-2026-10/253-neurobion-injection-3ml-6-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/verified-20261015/3db8bcac7b5498ee.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT PHOTOGRAPH",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6870,7 +6872,7 @@
       "name": "NEUROBION SC TAB 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/254-neurobion-sc-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6910,7 +6912,7 @@
       "name": "NO RHYNO NASAL SPRAY 120MD",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/212-no-rhyno-nasal-spray-120md.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6924,8 +6926,8 @@
       "sku": "PS-AC-BA1BA46AB93C",
       "name": "Nokamen — 30 Tablets",
       "family_id": "PSC-IS-157",
-      "image": "/assets/products/acorus-2026-10/213-nokamen-tab-30s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/supplier-20261014/nokamen_30_tablets.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6940,7 +6942,7 @@
       "name": "NOVIRAX CREAM 15GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/111-novirax-cream-15gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6970,7 +6972,7 @@
       "name": "OCIUM FORTE TAB 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/121-ocium-forte-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -6985,7 +6987,7 @@
       "name": "OMACILLIN 500MG CAP 20S (AMOXYCILLIN)",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/040-omacillin-500mg-cap-20s-amoxycillin.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7000,7 +7002,7 @@
       "name": "OMAPRO 20MG CAP 14'S (OMEPRAZOLE)",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/036-omapro-20mg-cap-14-s-omeprazole.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7065,7 +7067,7 @@
       "name": "PIC CLASSIC FIX FABRIC SPOOL PLASTER 2.5CMX5M",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/219-pic-classic-fix-fabric-spool-plaster-2-5cmx5m.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7080,7 +7082,7 @@
       "name": "PRE NAN STAGE 1 400GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/220-pre-nan-stage-1-400gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7095,7 +7097,7 @@
       "name": "PROCID GR 20MG 28'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/076-procid-gr-20mg-28-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7140,7 +7142,7 @@
       "name": "PROLIDERM PERMETHRIN 5% CREAM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/122-proliderm-permethrin-5-cream.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7154,8 +7156,8 @@
       "sku": "PS-AC-E35706FB3A4E",
       "name": "ProRise 20 mg — 30 Capsules",
       "family_id": "PSC-IS-171",
-      "image": "/assets/products/acorus-2026-10/221-prorise-20mg-cap-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image": "/assets/products/supplier-20261014/prorise_20_mg_30_capsules.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7189,8 +7191,8 @@
       "sku": "PS-AC-18507F14285A",
       "name": "PROSPAN COUGH SYRUP 200ML",
       "family_id": null,
-      "image": null,
-      "image_status": "REFERENCE TILE — VERIFIED PACKSHOT NEEDED",
+      "image": "/assets/products/verified-20261015/f422236f7dd09a64.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT PHOTOGRAPH",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7205,7 +7207,7 @@
       "name": "PULMICORT 0.25MG/ML SUSP 20'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/273-pulmicort-0-25mg-ml-susp-20-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7220,7 +7222,7 @@
       "name": "PULMICORT 0.5MG/ML SUSP 20'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/274-pulmicort-0-5mg-ml-susp-20-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7235,7 +7237,7 @@
       "name": "PUMPINOX 40MG TAB 14'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/037-pumpinox-40mg-tab-14-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7280,7 +7282,7 @@
       "name": "REME D- 50, 000 IU S/G CAP 16'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/061-reme-d-50-000-iu-s-g-cap-16-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7295,7 +7297,7 @@
       "name": "REVERA ALOEVERA&MOISTURIZING CREAM 100GM",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/223-revera-aloevera-moisturizing-cream-100gm.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7310,7 +7312,7 @@
       "name": "RINOCLENIL 100MCG NASAL SPRAY",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/224-rinoclenil-100mcg-nasal-spray.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7340,7 +7342,7 @@
       "name": "ROZOVAS 10MG TAB 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/112-rozovas-10mg-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7355,7 +7357,7 @@
       "name": "ROZOVAS 20MG TAB 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/113-rozovas-20mg-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7405,7 +7407,7 @@
       "name": "SEFARIN 300MG CAP 10'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/090-sefarin-300mg-cap-10-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7420,7 +7422,7 @@
       "name": "SILOSIN 8MG CAP 30S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/228-silosin-8mg-cap-30s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7450,7 +7452,7 @@
       "name": "SNAFI 5MG TAB 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/262-snafi-5mg-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7465,7 +7467,7 @@
       "name": "STOPKOF SYRUP 100ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/083-stopkof-syrup-100ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7510,7 +7512,7 @@
       "name": "SYMBICORT TURBUHALER 160/4.5MCG 120 DOSE",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/275-symbicort-turbuhaler-160-4-5mcg-120-dose.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7525,7 +7527,7 @@
       "name": "TANTUM VERDE 0.15% M/WASH 125ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/123-tantum-verde-0-15-m-wash-125ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7540,7 +7542,7 @@
       "name": "TELFAST 120MG TAB 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/276-telfast-120mg-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7555,7 +7557,7 @@
       "name": "TELFAST 180MG TAB 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/277-telfast-180mg-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7570,7 +7572,7 @@
       "name": "TRILAGAVIT TAB 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/124-trilagavit-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7585,7 +7587,7 @@
       "name": "TRIOPAN SYRUP 100ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/010-triopan-syrup-100ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7600,7 +7602,7 @@
       "name": "TYOTOCIN EAR DROPS",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/229-tyotocin-ear-drops.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7615,7 +7617,7 @@
       "name": "UNI-Z 500MG TAB 3'S (AZITHROMYCIN)",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/013-uni-z-500mg-tab-3-s-azithromycin.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7689,11 +7691,13 @@
       "sku": "PS-AC-FD2BEB73A834",
       "name": "Urispas 200 mg — 30 Tablets",
       "family_id": "PSC-IS-153",
-      "image": "/assets/products/verified-20261011/local-acorus-fd2beb73a834.png",
-      "image_status": "VERIFIED EXACT PRODUCT IMAGE",
+      "image": "/assets/products/verified-20261015/149cba7844f545cc.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT PHOTOGRAPH",
       "evidence_option_id": "local-acorus-fd2beb73a834",
-      "status": "VERIFIED_PREVIEW_CANDIDATE",
-      "gaps": []
+      "status": "HOLD",
+      "gaps": [
+        "RUNTIME_IMAGE_MISMATCH"
+      ]
     },
     {
       "sku": "PS-AC-8F7C2BB1306B",
@@ -7715,7 +7719,7 @@
       "name": "VASTOR 40MG TAB 30'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/064-vastor-40mg-tab-30-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7730,7 +7734,7 @@
       "name": "VICKS SINUS INHALER VH200E1",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/234-vicks-sinus-inhaler-vh200e1.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7745,7 +7749,7 @@
       "name": "VICKS VAPOPADS MENTHOL",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/235-vicks-vapopads-menthol.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7775,7 +7779,7 @@
       "name": "VICKS VUL525 HUMUDIFIER MINI COOLMIST",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/237-vicks-vul525-humudifier-mini-coolmist.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7790,7 +7794,7 @@
       "name": "VITIFECT SYRUP 120ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/238-vitifect-syrup-120ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7805,7 +7809,7 @@
       "name": "XYLOLIN PLUS ADULT NASAL SPRAY 10ML",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/239-xylolin-plus-adult-nasal-spray-10ml.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7835,7 +7839,7 @@
       "name": "ZETOP 10MG TAB 10S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/019-zetop-10mg-tab-10s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7865,7 +7869,7 @@
       "name": "ZYGREL 75MG TAB 28'S",
       "family_id": null,
       "image": "/assets/products/acorus-2026-10/125-zygrel-75mg-tab-28-s.jpg",
-      "image_status": "PRODUCT IMAGE",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7879,8 +7883,8 @@
       "sku": "PS-AC-59DB0A861342",
       "name": "Acure Gripe Water",
       "family_id": "PSC-IS-155",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/3d4f12ff1bbdd097.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7904,8 +7908,8 @@
       "sku": "PS-AC-FC78AF3CB44F",
       "name": "B+ Vitamin B Complex — 30 Softgels",
       "family_id": "PSC-IS-188",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/supplier-20261014/bplus_vitamin_b_complex_30_softgels.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7919,8 +7923,8 @@
       "sku": "PS-AC-C4B46B23533F",
       "name": "Beauty Plus Hair Skin & Nails — 30 Softgels",
       "family_id": "PSC-IS-188",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/supplier-20261014/beauty_plus_hair_skin_and_nails_30_softgels.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7934,8 +7938,8 @@
       "sku": "PS-AC-8500EF9636BD",
       "name": "Bepanthen Moisturizing Cream — 30 g",
       "family_id": "PSC-IS-111",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/supplier-20261014/bepanthen_moisturizing_cream_30_g.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7969,8 +7973,8 @@
       "sku": "PS-AC-99FA1184061D",
       "name": "Blink Intensive Soothing Eye Drops",
       "family_id": "PSC-IS-102",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/2a8e5f96752d0421.png",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -7984,8 +7988,8 @@
       "sku": "PS-AC-D0FA94CC5CCD",
       "name": "Calvit D3 Calcium + Magnesium + Vitamins — 30 Tablets",
       "family_id": "PSC-IS-188",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/supplier-20261014/calvit_d3_calcium_plus_magnesium_plus_vitamins_30_tablets.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8014,8 +8018,8 @@
       "sku": "PS-AC-0CE987FECF69",
       "name": "CorDx Influenza A/B + COVID-19 + RSV Combo Ag Self-Test",
       "family_id": "PSC-IS-177",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/clean-20261014/cordx-flu-covid-rsv-self-test.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8029,8 +8033,8 @@
       "sku": "PS-AC-A1C278062616",
       "name": "Creon 10000 Pancreatin 150 mg — 20 Capsules",
       "family_id": "PSC-IS-172",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/supplier-20261014/creon_10000_pancreatin_150_mg_20_capsules.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8089,8 +8093,8 @@
       "sku": "PS-AC-FBBA279D40A7",
       "name": "Dibase Vitamin D3 50,000 IU/2.5 ml Oral Solution",
       "family_id": "PSC-IS-187",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/32bfe0e45a0eed2e.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT PHOTOGRAPH",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8104,8 +8108,8 @@
       "sku": "PS-AC-6F0697D8906B",
       "name": "Duphalac Double Action",
       "family_id": "PSC-IS-100",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/supplier-20261014/duphalac_double_action.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8119,8 +8123,8 @@
       "sku": "PS-AC-75531F59FDD5",
       "name": "Duphalac Fruit Lactulose 667 mg/ml — 200 ml",
       "family_id": "PSC-IS-100",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/supplier-20261014/duphalac_fruit_lactulose_667_mg_ml_200_ml.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8154,8 +8158,8 @@
       "sku": "PS-AC-28E43B7879F6",
       "name": "Gevhart 20 mg — 30 Tablets",
       "family_id": "PSC-IS-170",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/supplier-20261014/gevhart_20_mg_30_tablets.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8169,8 +8173,8 @@
       "sku": "PS-AC-27ED37EEE993",
       "name": "Lomidex Loperamide 2 mg — 10 Capsules",
       "family_id": "PSC-IS-098",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/supplier-20261014/lomidex_loperamide_2_mg_10_capsules.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8314,8 +8318,8 @@
       "sku": "PS-AC-81356E98EBBB",
       "name": "Sebamed Anti-Dandruff Shampoo",
       "family_id": "PSC-IS-115",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/e698e39893029d53.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8329,8 +8333,8 @@
       "sku": "PS-AC-2C36D93E590E",
       "name": "Sebamed Anti-Hairloss Shampoo",
       "family_id": "PSC-IS-156",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/36305df576164860.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8344,8 +8348,8 @@
       "sku": "PS-AC-375459036D52",
       "name": "Sebamed Anti-Stretch Mark Cream",
       "family_id": "PSC-IS-181",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/e800ecb494603c41.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8359,8 +8363,8 @@
       "sku": "PS-AC-BCA4C20A407A",
       "name": "Sebamed Baby Body Lotion with Camomile",
       "family_id": "PSC-IS-111",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/82c1c2125f8b14aa.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8374,8 +8378,8 @@
       "sku": "PS-AC-A7E10BC19B2E",
       "name": "Sebamed Baby Body Milk",
       "family_id": "PSC-IS-111",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/6407c351e2ac9c98.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8389,8 +8393,8 @@
       "sku": "PS-AC-BC5797476CD0",
       "name": "Sebamed Baby Bubble Bath with Camomile",
       "family_id": "PSC-IS-131",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/67adae5586ecbc57.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8439,8 +8443,8 @@
       "sku": "PS-AC-11057618863A",
       "name": "Sebamed Baby Cream Extra Soft",
       "family_id": "PSC-IS-111",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/68e6e787240b4055.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8454,8 +8458,8 @@
       "sku": "PS-AC-7A9F0B81F0AC",
       "name": "Sebamed Baby Detangling Shampoo with Bisabolol",
       "family_id": "PSC-IS-156",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/d5702fd7febf968f.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8469,8 +8473,8 @@
       "sku": "PS-AC-7DB9B5951968",
       "name": "Sebamed Baby Diaper Rash Cream",
       "family_id": "PSC-IS-148",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/4a48605aa0a7a92a.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8484,8 +8488,8 @@
       "sku": "PS-AC-C53213D441F5",
       "name": "Sebamed Baby Eau de Cologne",
       "family_id": "PSC-IS-140",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/30197a73c970a985.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8499,8 +8503,8 @@
       "sku": "PS-AC-541065052372",
       "name": "Sebamed Baby Face & Body Wash Foam",
       "family_id": "PSC-IS-131",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/17c8c32a81752b75.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8514,8 +8518,8 @@
       "sku": "PS-AC-FC0E90234C62",
       "name": "Sebamed Baby Gentle Wash with Allantoin",
       "family_id": "PSC-IS-131",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/f956da3a63adb583.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8529,8 +8533,8 @@
       "sku": "PS-AC-7BECD2DB56A1",
       "name": "Sebamed Baby Gentle Wash with Calendula",
       "family_id": "PSC-IS-131",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/e3490158b5042345.png",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8544,8 +8548,8 @@
       "sku": "PS-AC-C24E6EFF64E5",
       "name": "Sebamed Baby Lip Balm",
       "family_id": "PSC-IS-162",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/eab01951d9551364.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8559,8 +8563,8 @@
       "sku": "PS-AC-616AA1152228",
       "name": "Sebamed Baby Massage Oil",
       "family_id": "PSC-IS-111",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/aebcd6a5b881b4c6.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8574,8 +8578,8 @@
       "sku": "PS-AC-3EE243EE9AD4",
       "name": "Sebamed Baby Powder with Olive Oil",
       "family_id": "PSC-IS-141",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/b930bd6851b4b1ee.png",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8589,8 +8593,8 @@
       "sku": "PS-AC-DD458AE96334",
       "name": "Sebamed Baby Shampoo with Camomile",
       "family_id": "PSC-IS-131",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/4f9492ad345f85b7.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8604,8 +8608,8 @@
       "sku": "PS-AC-779D958F18B0",
       "name": "Sebamed Baby Skin Care Oil",
       "family_id": "PSC-IS-111",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/35342a9bbe7d3e06.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8619,8 +8623,8 @@
       "sku": "PS-AC-26F075753C6D",
       "name": "Sebamed Clear Face Antibacterial Cleansing Foam",
       "family_id": "PSC-IS-152",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/89124e915443c33e.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8634,8 +8638,8 @@
       "sku": "PS-AC-ADD6AE257643",
       "name": "Sebamed Everyday Shampoo",
       "family_id": "PSC-IS-156",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/1f49184649d6148a.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8649,8 +8653,8 @@
       "sku": "PS-AC-4F24389ACD4A",
       "name": "Sebamed Extreme Dry Skin Relief Shampoo 5% Urea",
       "family_id": "PSC-IS-115",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/6ae80fa9be1564e7.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT PHOTOGRAPH",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8664,8 +8668,8 @@
       "sku": "PS-AC-7CB34745B16F",
       "name": "Sebamed Fresh Classic Roll-On Deodorant",
       "family_id": "PSC-IS-146",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/0ce7aca3c81ca00d.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8709,8 +8713,8 @@
       "sku": "PS-AC-E5C59FFA9071",
       "name": "Sebamed Intimate Wash pH 3.8 — Women 15–50",
       "family_id": "PSC-IS-160",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/f387d4e330a56114.png",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8724,8 +8728,8 @@
       "sku": "PS-AC-76AD982E8388",
       "name": "Sebamed Intimate Wash pH 6.8 — Women 50+",
       "family_id": "PSC-IS-160",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/49a6f194c95638b4.jpg",
+      "image_status": "VERIFIED EXACT PRODUCT PHOTOGRAPH",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8754,8 +8758,8 @@
       "sku": "PS-AC-A2C365842B5E",
       "name": "Sebamed Moisturizing Body Lotion",
       "family_id": "PSC-IS-111",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/00692bbba567d490.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8769,8 +8773,8 @@
       "sku": "PS-AC-162F00E6E627",
       "name": "Sebamed Multi Protect Sun Cream SPF 50+",
       "family_id": "PSC-IS-087",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/489f8cff0ef6ff6f.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8799,8 +8803,8 @@
       "sku": "PS-AC-CC054B5F47B0",
       "name": "Sebamed Sensitive Skin Cleansing Bar",
       "family_id": "PSC-IS-180",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/cf4d028a6f991b3c.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8814,8 +8818,8 @@
       "sku": "PS-AC-9400698FA1D2",
       "name": "Sebamed Sensitive Skin Liquid Face & Body Wash",
       "family_id": "PSC-IS-180",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/08873c27be081fae.jpg",
+      "image_status": "REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8854,8 +8858,8 @@
       "sku": "PS-AC-E204E9A3DB72",
       "name": "Wegovy Semaglutide 0.25 mg Prefilled Pen",
       "family_id": "PSC-IS-179",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/supplier-20261014/wegovy_semaglutide_0_25_mg_prefilled_pen.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8869,8 +8873,8 @@
       "sku": "PS-AC-C78EE225849D",
       "name": "Wegovy Semaglutide 0.5 mg Prefilled Pen",
       "family_id": "PSC-IS-179",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/supplier-20261014/wegovy_semaglutide_0_5_mg_prefilled_pen.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8884,8 +8888,8 @@
       "sku": "PS-AC-0EFF9E2AC288",
       "name": "Wegovy Semaglutide 1 mg Prefilled Pen",
       "family_id": "PSC-IS-179",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/supplier-20261014/wegovy_semaglutide_1_mg_prefilled_pen.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8899,8 +8903,8 @@
       "sku": "PS-AC-1739D7036B10",
       "name": "Wegovy Semaglutide 1.7 mg Prefilled Pen",
       "family_id": "PSC-IS-179",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/supplier-20261014/wegovy_semaglutide_1_7_mg_prefilled_pen.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8914,8 +8918,8 @@
       "sku": "PS-AC-643A0525B55C",
       "name": "Wegovy Semaglutide 2.4 mg Prefilled Pen",
       "family_id": "PSC-IS-179",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/supplier-20261014/wegovy_semaglutide_2_4_mg_prefilled_pen.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8929,8 +8933,8 @@
       "sku": "PS-AC-E015B822E20F",
       "name": "Zecuf Herbal Cough Remedy — 100 ml",
       "family_id": "PSC-IS-126",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/supplier-20261014/zecuf_herbal_cough_remedy_100_ml.jpg",
+      "image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
@@ -8954,8 +8958,8 @@
       "sku": "PS-AC-D5D8299CC052",
       "name": "Zyme Nasal Spray 30 ml with Lysozyme",
       "family_id": "PSC-IS-169",
-      "image": null,
-      "image_status": "VERIFIED PHOTOGRAPH NEEDED",
+      "image": "/assets/products/verified-20261015/b563dca8ae8403c0.png",
+      "image_status": "VERIFIED EXACT PRODUCT PHOTOGRAPH",
       "evidence_option_id": null,
       "status": "HOLD",
       "gaps": [
