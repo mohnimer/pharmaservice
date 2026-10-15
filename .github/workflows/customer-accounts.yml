@@ -14,6 +14,10 @@ on:
       - 'current/styles/control-alignment.css'
       - 'current/styles/catalogue-photo-standard.css'
       - 'current/behaviour/catalogue-image-policy.js'
+      - 'current/behaviour/variant-photographs*.js'
+      - 'data/variant-photographs.json'
+      - 'tools/build-variant-photographs.mjs'
+      - 'tests/variant-photographs*.mjs'
       - 'tests/catalogue-photo-standard-browser.mjs'
       - 'tests/catalogue-photo-upload-browser.mjs'
       - 'tests/workshop-layout-browser.mjs'
@@ -57,12 +61,15 @@ jobs:
       - run: node tests/catalogue-image-policy.test.mjs
       - run: node tests/catalogue-photo-standard-browser.mjs
       - run: node tests/sports-photographs-browser.mjs
+      - run: node tests/variant-photographs.mjs
+      - run: node tests/variant-photographs-browser.mjs
       - run: node tests/catalogue-photo-upload-browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: customer-account-browser-evidence
           path: |
+            test-results/variant-photographs/
             test-results/customer-accounts
             test-results/business-workspace
             test-results/unified-email
