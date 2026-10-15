@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-14-image-standard-1",
+  "version": "2026-10-15-image-review-2",
   "blocked_paths": [
     "/assets/products/acorus-2026-10/016-gloclav-1gm-tab-14-s.jpg",
     "/assets/products/acorus-2026-10/017-gloclav-625mg-tab-20-s.jpg",
@@ -98,7 +98,10 @@
     "/assets/products/supplier-20261014/unident_pharma_ortho_smile_care_toothpaste_75_ml.jpg",
     "/assets/products/supplier-20261014/unident_pharma_perio_care_toothpaste_75_ml.jpg",
     "/assets/products/supplier-20261014/vitane_liquid_vitamins_plus_minerals_200_ml.jpg",
-    "/assets/products/supplier-20261014/zyme_nasal_spray_30_ml_with_lysozyme.jpg"
+    "/assets/products/supplier-20261014/zyme_nasal_spray_30_ml_with_lysozyme.jpg",
+    "/assets/products/acorus-2026-10/267-canesten-1-cream-20gm.jpg",
+    "/assets/products/acorus-2026-10/retained-psc-dia-011.jpg",
+    "/assets/products/acorus-2026-10/retained-psc-dsp-011.jpg"
   ],
   "blocked_sha256": [
     "019da16521c9aaaf0ed5c3192e8c8052f58dcd760c96ee6082014e63f1e2bf2f",
@@ -198,7 +201,10 @@
     "fb87003444fa46994ab0397f8cf41295f107645fa5ee1ddd2989b36cf3327782",
     "fe10ebb873722a68ed08f40ce1794644fd6cc3eaee385baa999d3f8e3553e44a",
     "fe2ce992e061284d1033642d39ef24e900fc2444f9df6e52f4ea03bf415e886a",
-    "ffa6a9068f4baa5ab9816ec850869a5a1925fe3372a441d4811692000a80ff8f"
+    "ffa6a9068f4baa5ab9816ec850869a5a1925fe3372a441d4811692000a80ff8f",
+    "6c68fa96b2534b909f057b8e164f0c72d7f8c49f99bb4879cd411e4b2874bf58",
+    "3f85d282175c0059da233fa3e7797b9fc3aa05e1d24d4ac3cbda05bb74d68e2b",
+    "a713e18950535eaec642023a46b8e5406e1d50e5993a48c3b75229c3bd98f516"
   ],
   "replacements": {
     "/assets/products/supplier-20261014/braun_beard_trimmer_bt_5060.jpg": "/assets/products/acorus-2026-10/137-braun-beard-trimmer-bt-5060.jpg",
@@ -208,7 +214,8 @@
     "/assets/products/supplier-20261014/manforce_epic_desire_super_thin_silk_chocolate_3_condoms.jpg": "/assets/products/acorus-2026-10/194-manforce-epic-desire-super-thin-condoms-silk-choc-3-s.jpg",
     "/assets/products/supplier-20261014/manforce_epic_passion_extra_dotted_fruit_punch_10_condoms.jpg": "/assets/products/acorus-2026-10/195-manforce-epic-passion-extra-dotted-condems-fruit-punch-10-s.jpg",
     "/assets/products/supplier-20261014/manforce_epic_pleasure_long_lasting_raspberry_3_condoms.jpg": "/assets/products/acorus-2026-10/197-manforce-epic-pleasure-long-lasting-condems-raspberry-3-s.jpg",
-    "/assets/products/supplier-20261014/cordx_influenza_a_b_plus_covid_19_plus_rsv_combo_ag_self_test.jpg": "/assets/products/clean-20261014/cordx-flu-covid-rsv-self-test.jpg"
+    "/assets/products/supplier-20261014/cordx_influenza_a_b_plus_covid_19_plus_rsv_combo_ag_self_test.jpg": "/assets/products/clean-20261014/cordx-flu-covid-rsv-self-test.jpg",
+    "/assets/products/acorus-2026-10/267-canesten-1-cream-20gm.jpg": "/assets/products/verified-20261015/ccc228026e4495f2.jpg"
   },
   "review_rule": "Exact product identity, no supplier branding, clean background and comfortable framing; human visual review required. OCR is supplementary.",
   "replacement_sources": {

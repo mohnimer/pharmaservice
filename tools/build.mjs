@@ -1,4 +1,5 @@
 import './build-catalogue-stock.mjs';
+import './build-variant-photographs.mjs';
 import {createHash} from 'node:crypto';
 import {buildProductIndex} from './build-product-index.mjs';
 import { readFile, writeFile, mkdir, rm, copyFile, cp, readdir } from 'node:fs/promises';

@@ -197,11 +197,11 @@
   function variantPreview(f){
     const chosen=selectedOptions();
     if(chosen.length===1){
-      const o={...chosen[0],image_url:window.PSC_IMAGE_POLICY?.resolve(chosen[0].image_url)??chosen[0].image_url}, verified=window.PSC_VARIANT_EVIDENCE_FOR?.(o,state.familyId);
+      const o={...chosen[0],image_url:window.PSC_IMAGE_POLICY?.resolve(chosen[0].image_url)??chosen[0].image_url}, verified=window.PSC_VARIANT_PHOTO_FOR?.(o,state.familyId)||window.PSC_VARIANT_EVIDENCE_FOR?.(o,state.familyId);
       return {image:String(o.image_url||''),title:String(o.exact_product_name||'Selected product'),
         pack:String(o.pack||o.presentation||'Pack to confirm'),gallery:[],
         description:String(o.verified_description||optionDescriptor(o,f)),
-        evidence:verified?'Verified variant photograph':'Variant image / pack requires verification',
+        evidence:verified?(verified.pack_confirmed===false?'Verified product photograph · exact pack to confirm':'Verified variant photograph'):'Variant image / pack requires verification',
         pricing:optionPrice(o),selected:true,multiple:false};
     }
     if(chosen.length>1){
