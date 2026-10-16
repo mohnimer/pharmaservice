@@ -39,3 +39,29 @@
  #app .customerShell .v25ProductGrid:has(.pscEditorialCard){column-gap:14px!important;row-gap:24px!important}
  [data-psc-family-detail-root] .detailImagePane{width:100%!important}
 }
+
+/* Family detail cleanup: one identity, no empty preview, compact brand-first flow. */
+[data-psc-family-detail-root] .pscFamilyProductSheet .fluidProductGrid[data-psc-has-photo="false"]{
+ grid-template-columns:minmax(0,1fr)!important;
+ max-width:780px;
+ margin-inline:auto;
+}
+[data-psc-family-detail-root] .pscFamilyProductSheet .pscFamilyPreferenceBlock{
+ margin:0 0 18px!important;
+}
+[data-psc-family-detail-root] .pscFamilyProductSheet .professionalCommercial{
+ padding:0 0 12px!important;
+}
+[data-psc-family-detail-root] .pscFamilyProductSheet .professionalCommercial .professionalAvailability{
+ margin:6px 0 4px!important;
+}
+[data-psc-family-detail-root] .pscFamilyProductSheet .pscFamilyReference{
+ margin:22px 0 4px;
+ font-size:12px;
+ line-height:1.5;
+ color:var(--ps-ui-muted,#626864);
+}
+[data-psc-family-detail-root] .pscFamilyProductSheet .pscFamilyReference .mono{
+ font-size:inherit;
+ letter-spacing:0;
+}

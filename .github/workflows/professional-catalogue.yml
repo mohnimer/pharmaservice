@@ -25,6 +25,7 @@ jobs:
       - run: npm test
       - run: npx playwright install --with-deps chromium
       - run: node tests/professional-navigation-browser.mjs
+      - run: node tests/professional-family-detail-browser.mjs
       - run: node --test tests/variant-evidence.test.cjs tests/catalogue-stock.test.cjs tests/catalogue-refresh-identity.test.cjs tests/intelligent-search.test.mjs
       - run: node tests/professional-wishlist.mjs
       - run: node tests/professional-catalogue.mjs

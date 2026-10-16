@@ -52,7 +52,7 @@ try{
  await choose(spedifen.product_option_id);
 
  assert.equal(w.document.querySelector('[data-family-variant]').value,spedifen.product_option_id);
- assert.match(w.document.querySelector('.detailImageMeta').textContent,/Spedifen/);
+ assert.match(w.document.querySelector('.pscFamilyProductSheet #pscFamilyTitle').textContent,/Spedifen/);
  await click('[data-family-quote]');
  assert.equal(requests.at(-1).requestedProductOptions[0].local_product_option_id,spedifen.product_option_id);
  assert.equal(requests.at(-1).requestedProductOptions[0].verified_price_aed,expectedMrp(spedifen.sku));
@@ -66,7 +66,7 @@ try{
  assert.equal(w.document.querySelector('[data-family-variant]').value,'local-acorus-9d511aa6c569');
  await choose('');
  assert.equal(w.document.querySelector('[data-family-variant]').value,'');
- assert.equal(w.document.querySelector('[data-psc-preview-mode]').dataset.pscPreviewMode,'family');
+ assert.equal(w.document.querySelector('[data-psc-preview-mode="single"]'),null,'Returning to specification must clear the exact product photograph');
  const stored=w.localStorage.getItem('pscClinicPortalStateV12_1');
  assert(stored,'actual basket must retain reference provenance');
  const basket=JSON.parse(stored).basket;
