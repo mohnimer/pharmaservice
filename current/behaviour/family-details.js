@@ -261,9 +261,56 @@
     </section></div></div>`;
   }
 
-  function draw(){ document.querySelector('[data-psc-family-detail-root]')?.remove(); if(!state.open) return; const root=document.createElement('div');root.dataset.pscFamilyDetailRoot='';root.innerHTML=detailHtml();document.body.appendChild(root);document.documentElement.classList.add('pscFamilyDetailOpen');bindDetail(root); }
-  function close(){state.open=false;document.documentElement.classList.remove('pscFamilyDetailOpen');document.querySelector('[data-psc-family-detail-root]')?.remove();}
-  async function open(id,listingPreview=null){if(!id)return;state.listingPreview=listingPreview;resetSelection();state.open=true;state.openRoute=window.PSC_CURRENT_ROUTE();await loadDetail(id);if(state.familyId!==id||!state.open)return;const only=state.options.length===1?state.options[0]:null;if(only&&(window.PSC_VARIANT_PHOTO_FOR?.(only,id)||window.PSC_VARIANT_EVIDENCE_FOR?.(only,id))){state.selectedOptionIds=[optionKey(only)];state.presentation=only.presentation||'';}draw();}
+  let familyOpener=null;
+  function draw(){
+    if(!state.open)return;
+    let root=document.querySelector('[data-psc-family-detail-root]');
+    const saved=window.PSC_MOTION?.capture();
+    const existing=!!root;
+    const expanded=[...(root?.querySelectorAll('details')||[])].map(el=>el.open);
+    if(!root){root=document.createElement('div');root.dataset.pscFamilyDetailRoot='';document.body.appendChild(root);}
+    if(existing&&root.querySelector('.pscFamilyModalShell')){
+      const template=document.createElement('template');template.innerHTML=detailHtml();
+      root.querySelector('.pscFamilyModalShell').replaceChildren(...template.content.querySelector('.pscFamilyModalShell').childNodes);
+    }else root.innerHTML=detailHtml();
+    document.documentElement.classList.add('pscFamilyDetailOpen');bindDetail(root);
+    if(existing){
+      root.querySelectorAll('details').forEach((el,i)=>el.open=!!expanded[i]);
+      window.PSC_MOTION?.restore(saved);
+      const image=root.querySelector('.pscFamilyPreview img');
+      if(image){const src=image.src;const reveal=()=>{if(image.isConnected&&image.src===src)window.PSC_MOTION?.animate(image,[{opacity:.35},{opacity:1}],180);};if(image.complete)reveal();else image.addEventListener('load',reveal,{once:true});}
+      window.PSC_MOTION?.animate(root.querySelector('.professionalPurchaseIdentity'),[{opacity:.5},{opacity:1}],180);
+    }else root.querySelector('.productBackButton')?.focus({preventScroll:true});
+  }
+  function close(){
+    state.open=false;state.openToken=null;state.loadVersion=(state.loadVersion||0)+1;
+    const root=document.querySelector('[data-psc-family-detail-root]');
+    window.PSC_MOTION?.exit(root?.firstElementChild);
+    document.documentElement.classList.remove('pscFamilyDetailOpen');root?.remove();
+    if(familyOpener)window.PSC_MOTION?.restore({focus:familyOpener,scroll:[],overlays:[]});
+  }
+  async function open(id,listingPreview=null){
+    if(!id)return;
+    window.PSC_MOTION?.finishExits();
+    familyOpener=window.PSC_MOTION?.capture()?.focus;
+    state.listingPreview=listingPreview;resetSelection();state.open=true;state.openRoute=window.PSC_CURRENT_ROUTE();
+    const opening=Symbol();state.openToken=opening;
+    const loading=loadDetail(id);
+    // A delayed placeholder avoids a flash on cache hits, while making slow reads visible.
+    const loadingTimer=setTimeout(()=>{
+      if(!state.open||state.openToken!==opening||state.familyId!==id||!state.loading)return;
+      document.querySelector('[data-psc-family-detail-root]')?.remove();
+      const root=document.createElement('div');root.dataset.pscFamilyDetailRoot='';
+      root.innerHTML='<div class="modalBackdrop fluidOverlay pscFamilyDetailBackdrop"><div class="modal productModalShell fluidProductShell pscFamilyModalShell" role="dialog" aria-modal="true" aria-label="Loading product"><button class="productBackButton" data-family-detail-close aria-label="Back to catalogue">←</button><div class="pscProductLoading" role="status" aria-busy="true"><span>Loading product details…</span><div class="pscSkeletonImage"></div><div class="pscSkeletonLine"></div><div class="pscSkeletonLine"></div></div></div></div>';
+      document.body.appendChild(root);document.documentElement.classList.add('pscFamilyDetailOpen');
+      root.querySelector('button').addEventListener('click',close);root.querySelector('button').focus({preventScroll:true});
+    },180);
+    await loading;clearTimeout(loadingTimer);
+    if(state.openToken!==opening||state.familyId!==id||!state.open)return;
+    const only=state.options.length===1?state.options[0]:null;
+    if(only&&(window.PSC_VARIANT_PHOTO_FOR?.(only,id)||window.PSC_VARIANT_EVIDENCE_FOR?.(only,id))){state.selectedOptionIds=[optionKey(only)];state.presentation=only.presentation||'';}
+    draw();
+  }
   function quoteSummary(){
     const f=state.family||fallbackFamily(state.familyId),kind=familyKind(f),preference=preferenceSummary(),chosen=selectedOptions();
     const brands=[...new Set([...chosen.map(o=>normalizedBrand(o.brand)).filter(Boolean),...state.selectedFallbackBrands])];
@@ -300,7 +347,6 @@
     window.PSC_PRODUCT_PRESENTATION.bindQuantity(root,value=>state.qty=value);
     root.querySelector('[data-family-quote]')?.addEventListener('click',goToQuote);
     root.querySelector('[data-family-view-request]')?.addEventListener('click',()=>{close();window.dispatchEvent(new Event('psc:view-request'));});
-    root.querySelector('.productBackButton')?.focus({preventScroll:true});
   }
   window.PSC_OPEN_FAMILY_DETAIL=open;
   window.addEventListener('psc:open-family',e=>open(e.detail?.familyId||''));

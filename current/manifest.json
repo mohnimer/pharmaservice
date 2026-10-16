@@ -88,7 +88,6 @@
     "current/styles/model-walkthrough.css",
     "current/styles/contact-and-editorial-data.css",
     "current/styles/contact-form.css",
-    "current/styles/interaction-feedback.css",
     "current/styles/home-community.css",
     "current/styles/model-headings.css",
     "current/styles/procurement-interface.css",
@@ -120,6 +119,7 @@
     "current/styles/catalogue-category-titles.css",
     "current/styles/control-alignment.css",
     "current/styles/product-editorial.css",
+    "current/styles/interaction-feedback.css",
     "current/styles/catalogue-photo-standard.css"
   ],
   "absorbed": {

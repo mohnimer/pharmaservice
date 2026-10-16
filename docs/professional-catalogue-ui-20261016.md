@@ -31,3 +31,13 @@ Vercel preview: https://pharmaservice-git-feature-pro-6b0123-mohameds-projects-9
 Draft review: https://github.com/mohnimer/pharmaservice/pull/42.
 
 Desktop, tablet and mobile product screenshots have been inspected. The corrected tablet scroll container keeps the request action visible. The existing customer-account/mailbox workflow passed, including portal/admin/Workshop layout checks, photo framing, sports photographs and the 194-binding photograph suite. The new tests additionally exercise exact-SKU merging across entry points, actual submission payloads against an isolated transport, and saved-request rehydration/reorder. Final per-commit CI results are attached to PR #42. No production release or workbook/data synchronization is part of this change.
+
+## Refined interaction system
+
+The existing interaction-feedback module now owns shared 150–240 ms response timing, non-bouncy easing, cancellable opacity/transform effects and live reduced-motion preference handling. Local ordering updates render synchronously; they do not use asynchronous View Transition callbacks. Route changes fade the content without introducing a router or page reload.
+
+Variant changes retain the family sheet shell, scroll, expanded disclosures and selector focus. Images fade only after their own resource loads. Slow family reads show a delayed, labelled skeleton; cancelled or superseded reads cannot reopen a sheet. Overlay exits use short, inert visual snapshots so logical teardown, focus restoration and rapid reopening never wait for motion. Snapshots are removed when a new overlay opens.
+
+Request confirmation comes from successful basket mutation events, including quantities and totals; rejected additions emit no success event. Quantity, focus and drawer scroll survive ordering rerenders, which suppress repeated entrance animations. Toasts announce success accessibly. Keyboard Tab stays within the active sheet and Escape closes it. Async controls retain their label geometry.
+
+Browser verification: `tests/professional-motion-browser.mjs` covers desktop/mobile, normal/reduced motion, two same-task exact additions, rejected additions, quantity retention, variant shell/scroll/focus continuity, keyboard trapping, closing, and cancelled slow reads. The professional catalogue workflow runs this against the built application and saves screenshots.

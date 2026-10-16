@@ -1187,8 +1187,10 @@
   };
   function renderUi({preserveScroll=true,focusSelector=null,cursor=null,transition=true}={}){
     const y=window.scrollY;
+    const motionState=window.PSC_MOTION?.capture();
     const draw=()=>{
       render();
+      window.PSC_MOTION?.restore(motionState);
       // Restore focus synchronously: a keystroke before the next animation frame
       // must not land on a detached input or lose the editing caret.
       if(preserveScroll) window.scrollTo({top:y,behavior:'instant'});
@@ -1197,12 +1199,14 @@
         if(target){ target.focus({preventScroll:true}); if(Number.isInteger(cursor)&&target.setSelectionRange) target.setSelectionRange(cursor,cursor); }
       }
     };
-    if(transition && !focusSelector && document.startViewTransition){
-      try{ document.startViewTransition(draw); return; }catch{}
-    }
     draw();
   }
+  let overlayOpener=null;
+  function rememberOverlayOpener(){if(!document.activeElement?.closest('.fluidOverlay,.requestDrawerBackdrop'))overlayOpener=window.PSC_MOTION?.capture()?.focus;}
+  function restoreOverlayOpener(){if(overlayOpener)window.PSC_MOTION?.restore({focus:overlayOpener,scroll:[],overlays:[]});}
   function openProductOverlay(sku,publicMode=false){
+    window.PSC_MOTION?.finishExits();
+    rememberOverlayOpener();
     if(!publicMode)productSearchMemory().selectedSku=sku;
     ui.overlayScroll=window.scrollY;
     ui.modal={type:publicMode?'public-product':'product',sku};
@@ -1210,11 +1214,14 @@
   }
   function closeModalOverlay(){
     const y=Number.isFinite(ui.overlayScroll)?ui.overlayScroll:window.scrollY;
+    window.PSC_MOTION?.exit(document.querySelector('.fluidOverlay'));
     ui.modal=null;
-    render();
+    render();restoreOverlayOpener();
     requestAnimationFrame(()=>window.scrollTo({top:y,behavior:'instant'}));
   }
   function openBasketOverlay(){
+    window.PSC_MOTION?.finishExits();
+    rememberOverlayOpener();
     ui.overlayScroll=window.scrollY;
     ui.modal=null;
     ui.basket=true;
@@ -1222,13 +1229,14 @@
   }
   function closeBasketOverlay(){
     const y=Number.isFinite(ui.overlayScroll)?ui.overlayScroll:window.scrollY;
+    window.PSC_MOTION?.exit(document.querySelector('.requestDrawerBackdrop'));
     ui.basket=false;
-    render();
+    render();restoreOverlayOpener();
     requestAnimationFrame(()=>window.scrollTo({top:y,behavior:'instant'}));
   }
 
   function audit(action, detail){ state.audit.unshift({at:new Date().toISOString(),actor:'Demo user',action,detail}); state.audit=state.audit.slice(0,50); save(); }
-  function toast(msg){ const old=document.querySelector('.toast'); if(old)old.remove(); const d=document.createElement('div');d.className='toast';d.innerHTML=msg;$app.appendChild(d);setTimeout(()=>d.remove(),2800); }
+  function toast(msg){ const old=document.querySelector('.toast'); if(old)old.remove(); const d=document.createElement('div');d.className='toast';d.setAttribute('role','status');d.setAttribute('aria-live','polite');d.innerHTML=msg;$app.appendChild(d);setTimeout(()=>d.remove(),2800); }
 
   function brand(landing=false){ return landing
     ? `<button class="brand brandButton ${landing?'landingBrand':''}" data-go="home" aria-label="Pharma Service home"><img class="brandImage brandImageLight" src="${PSC_LOGO}" alt="Pharma Service"><span class="brandMeta"><b>INSTITUTIONAL HEALTHCARE SUPPLY</b><small>Dubai, United Arab Emirates</small></span></button>`
@@ -2659,6 +2667,7 @@
     save();
     renderUi({preserveScroll:true,transition:false});
     toast(`<strong>${line.qty} × ${esc(lineDisplayName(line))}</strong> added · ${basketQty()} units in Supply Request`);
+    document.dispatchEvent(new CustomEvent('psc:request-added',{detail:{qty:line.qty,total:basketQty()}}));
     return true;
   }
   window.addEventListener('psc:view-request',openBasketOverlay);
@@ -2673,6 +2682,7 @@
     if(prior+qty>10000){toast('Keep requested quantity at or below 10,000 per line');return;}
     if(f)f.qty+=qty;else state.basket.push({sku,qty});
     save();renderUi({preserveScroll:true,transition:false});
+    document.dispatchEvent(new CustomEvent('psc:request-added',{detail:{sku,qty,total:basketQty()}}));
     toast(`<strong>${qty} × ${esc(p.catalogueDisplayName||p.name)}</strong> added · ${prior+qty} of this product in request`);
   }
   function reorderRequest(id){
