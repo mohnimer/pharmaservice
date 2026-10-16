@@ -60,12 +60,19 @@
   function exit(node){
     if(!node || reduced() || !node.animate)return;
     const rect=node.getBoundingClientRect(),ghost=node.cloneNode(true);
+    const appearance=getComputedStyle(node);
+    // Exit artwork must not keep the live document's :has() scroll lock active.
+    Object.assign(ghost.style,{background:appearance.background,backdropFilter:appearance.backdropFilter});
+    ghost.classList.remove('fluidOverlay','requestDrawerBackdrop');
     ghost.inert=true;ghost.setAttribute('aria-hidden','true');ghost.dataset.motionGhost='';
     ghost.querySelectorAll('*').forEach(el=>{for(const attr of el.getAttributeNames())if(attr.startsWith('data-')||attr==='role'||attr.startsWith('on'))el.removeAttribute(attr);});
     ghost.removeAttribute('id');ghost.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
     Object.assign(ghost.style,{position:'fixed',inset:'auto',left:rect.left+'px',top:rect.top+'px',width:rect.width+'px',height:rect.height+'px',margin:'0',pointerEvents:'none',zIndex:'10001',animation:'none'});
     ghost.querySelectorAll('*').forEach(el=>el.style.animation='none');
+    for(const property of ['display','padding','box-sizing','align-items','justify-content'])ghost.style.setProperty(property,appearance.getPropertyValue(property),'important');
     document.body.appendChild(ghost);
+    const originalNodes=[node,...node.querySelectorAll('*')],clones=[ghost,...ghost.querySelectorAll('*')];
+    clones.forEach((el,i)=>{el.scrollTop=originalNodes[i].scrollTop;el.scrollLeft=originalNodes[i].scrollLeft;});
     const panel=ghost.querySelector(surfaces);
     if(panel)animate(panel,[{transform:'translate(0,0)'},{transform:panel.matches('.requestDrawer')&&innerWidth>720?'translateX(10px)':'translateY(6px)'}],160);
     const animation=animate(ghost,[{opacity:1},{opacity:0}],160);
@@ -181,7 +188,7 @@
     if(event.target.matches?.('.productDisclosureList details[open]'))
       animate(event.target.querySelector(':scope > div'),[{opacity:0,transform:'translateY(-3px)'},{opacity:1,transform:'translateY(0)'}],180);
   },true);
-  document.addEventListener('ps:search-results-updated',()=>{
+  window.addEventListener('ps:search-results-updated',()=>{
     animate(document.querySelector('.v25ProductGrid'),[{opacity:.7},{opacity:1}],160);
   });
   // Keep Tab inside the active sheet; exiting snapshots cannot receive focus.

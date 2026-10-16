@@ -269,7 +269,7 @@
     const existing=!!root;
     const expanded=[...(root?.querySelectorAll('details')||[])].map(el=>el.open);
     if(!root){root=document.createElement('div');root.dataset.pscFamilyDetailRoot='';document.body.appendChild(root);}
-    if(existing&&root.querySelector('.pscFamilyModalShell')){
+    if(existing&&root.querySelector('.pscFamilyModalShell')&&!root.querySelector('.pscProductLoading')){
       const template=document.createElement('template');template.innerHTML=detailHtml();
       root.querySelector('.pscFamilyModalShell').replaceChildren(...template.content.querySelector('.pscFamilyModalShell').childNodes);
     }else root.innerHTML=detailHtml();
@@ -301,9 +301,9 @@
       if(!state.open||state.openToken!==opening||state.familyId!==id||!state.loading)return;
       document.querySelector('[data-psc-family-detail-root]')?.remove();
       const root=document.createElement('div');root.dataset.pscFamilyDetailRoot='';
-      root.innerHTML='<div class="modalBackdrop fluidOverlay pscFamilyDetailBackdrop"><div class="modal productModalShell fluidProductShell pscFamilyModalShell" role="dialog" aria-modal="true" aria-label="Loading product"><button class="productBackButton" data-family-detail-close aria-label="Back to catalogue">←</button><div class="pscProductLoading" role="status" aria-busy="true"><span>Loading product details…</span><div class="pscSkeletonImage"></div><div class="pscSkeletonLine"></div><div class="pscSkeletonLine"></div></div></div></div>';
+      root.innerHTML='<div class="modalBackdrop fluidOverlay pscFamilyDetailBackdrop" data-family-detail-close><div class="modal productModalShell fluidProductShell pscFamilyModalShell" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-label="Loading product"><button class="productBackButton" data-family-detail-close aria-label="Back to catalogue">←</button><div class="pscProductLoading" role="status" aria-busy="true"><span>Loading product details…</span><div class="pscSkeletonImage"></div><div class="pscSkeletonLine"></div><div class="pscSkeletonLine"></div></div></div></div>';
       document.body.appendChild(root);document.documentElement.classList.add('pscFamilyDetailOpen');
-      root.querySelector('button').addEventListener('click',close);root.querySelector('button').focus({preventScroll:true});
+      root.querySelectorAll('[data-family-detail-close]').forEach(el=>{el.onclick=event=>{if(el.tagName==='BUTTON'||event.target===el)close();};});root.querySelector('button').focus({preventScroll:true});
     },180);
     await loading;clearTimeout(loadingTimer);
     if(state.openToken!==opening||state.familyId!==id||!state.open)return;
@@ -334,7 +334,7 @@
   function bindDetail(root){
     const selector=root.querySelector('[data-family-variant]');
     if(selector)selector.value=state.selectedOptionIds[0]||(state.otherBrandActive?'other':state.selectedFallbackBrands[0]?'brand:'+state.selectedFallbackBrands[0]:'');
-    root.querySelectorAll('[data-family-detail-close]').forEach(el=>el.addEventListener('click',event=>{if(el.tagName==='BUTTON'||event.target===el)close();}));
+    root.querySelectorAll('[data-family-detail-close]').forEach(el=>{el.onclick=event=>{if(el.tagName==='BUTTON'||event.target===el)close();};});
     root.querySelector('[data-family-variant]')?.addEventListener('change',e=>{
       const value=e.target.value;state.selectedOptionIds=[];state.selectedFallbackBrands=[];state.otherBrandActive=false;state.otherBrand='';state.presentation='';
       if(value==='other')state.otherBrandActive=true;

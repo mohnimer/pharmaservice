@@ -27,7 +27,14 @@ try{for(const width of [1440,390])for(const reducedMotion of ['no-preference','r
  assert.equal(await page.locator('.toast[role="status"]').count(),1);
  await page.locator('[data-request-quantity]').fill('10000');await page.locator('.requestAddButton').click();
  assert.equal(await page.evaluate(()=>window.__adds.length),2,'Rejected add must never confirm');
- await page.keyboard.press('Escape');await settle(page);
+ const exitState=await page.evaluate(()=>{
+  const image=document.querySelector('.detailProductImageWrap img'),before=image?.getBoundingClientRect();
+  document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
+  const ghost=document.querySelector('[data-motion-ghost]'),after=ghost?.querySelector('.detailProductImageWrap img')?.getBoundingClientRect();
+  return {unlocked:getComputedStyle(document.body).overflow!=='hidden',inert:!ghost||ghost.inert,photoStable:!after||Math.abs(after.width-before.width)<1&&Math.abs(after.height-before.height)<1};
+ });
+ assert(exitState.unlocked&&exitState.inert&&exitState.photoStable,JSON.stringify(exitState));
+ await settle(page);
  assert.equal(await page.locator('.fluidOverlay').count(),0);
  assert.equal(await page.evaluate(()=>document.activeElement?.dataset.productView),'PS-AC-417F1BC9E425');
  await page.locator('[data-basket]:visible').first().click();
@@ -61,6 +68,8 @@ try{for(const width of [1440,390])for(const reducedMotion of ['no-preference','r
  await page.locator('.pscProductLoading').waitFor();await page.keyboard.press('Escape');
  await page.waitForTimeout(500);await settle(page);
  assert.equal(await page.locator('[data-psc-family-detail-root]').count(),0,'A late read cannot reopen a closed dialog');
- await page.evaluate(()=>window.PSC_SUPABASE=window.__originalSb);
+ await page.evaluate(()=>{window.PSC_SUPABASE=window.__originalSb;window.__navigationMarker=true;window.PSC_NAVIGATE('portal/dashboard');});
+ await page.waitForFunction(()=>window.PSC_CURRENT_ROUTE()==='portal/dashboard');
+ assert.equal(await page.evaluate(()=>window.__navigationMarker),true,'Portal navigation retains the document');
  assert.deepEqual(errors,[]);await context.close();console.log(`${width}px ${reducedMotion}: rapid exact additions, truthful feedback, stable variant shell/scroll, keyboard focus, exit, slow read PASS`);
 }}finally{await browser.close();server.close();}

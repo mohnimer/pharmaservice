@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'app.js'
+      - 'styles.css'
       - 'current/behaviour/family-details.js'
       - 'current/behaviour/product-presentation.js'
       - 'current/styles/product-editorial.css'

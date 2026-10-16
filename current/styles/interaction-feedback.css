@@ -55,3 +55,10 @@ details>summary{cursor:pointer}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+/* Modern engines interpolate disclosure height; native details remains the fallback. */
+@supports(interpolate-size:allow-keywords){
+  .productDisclosureList details{interpolate-size:allow-keywords}
+  .productDisclosureList details::details-content{block-size:0;overflow:clip;transition:block-size 200ms var(--ux32-ease),content-visibility 200ms allow-discrete}
+  .productDisclosureList details[open]::details-content{block-size:auto}
+}

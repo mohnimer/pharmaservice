@@ -2,7 +2,7 @@
 #app .customerShell .productCard.pscEditorialCard .productVisual,
 #app .publicCatalogueCard .publicCatalogueVisual,
 #app .detailProductImageWrap,
-[data-psc-family-detail-root] .detailProductImageWrap{
+:is([data-psc-family-detail-root],[data-motion-ghost]) .detailProductImageWrap{
  position:relative!important;display:block!important;background:#fff!important;
  border:1px solid #badbd5!important;border-radius:14px!important;
  padding:0!important;box-sizing:border-box!important;overflow:hidden!important;
@@ -11,13 +11,13 @@
 #app .customerShell .productCard.pscEditorialCard .productVisual::before,
 #app .publicCatalogueCard .publicCatalogueVisual::before,
 #app .detailProductImageWrap::before,
-[data-psc-family-detail-root] .detailProductImageWrap::before{
+:is([data-psc-family-detail-root],[data-motion-ghost]) .detailProductImageWrap::before{
  content:""!important;display:block!important;position:absolute!important;inset:8px!important;width:auto!important;height:auto!important;max-width:none!important;max-height:none!important;transform:none!important;margin:0!important;box-sizing:border-box!important;background:transparent!important;border:1px solid #badbd5;border-radius:10px;pointer-events:none;z-index:2;
 }
 #app .customerShell .productCard.pscEditorialCard .productVisual>img.productMainImage,
 #app .publicCatalogueCard .publicCatalogueVisual>img:not(.publicDhaMark),
 #app .detailProductImageWrap>img:not(.detailDhaIcon),
-[data-psc-family-detail-root] .detailProductImageWrap>img{
+:is([data-psc-family-detail-root],[data-motion-ghost]) .detailProductImageWrap>img{
  position:absolute!important;inset:14%!important;width:72%!important;height:72%!important;
  min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;
  display:block!important;margin:0!important;padding:0!important;border:0!important;

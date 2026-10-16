@@ -6805,13 +6805,13 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
   background:rgba(9,18,18,.42)!important;
   backdrop-filter:blur(7px);
   -webkit-backdrop-filter:blur(7px);
-  animation:pscOverlayIn .18s ease-out both;
+
 }
 .fluidProductShell{
   overflow:hidden!important;
   display:flex;
   flex-direction:column;
-  animation:pscProductIn .24s cubic-bezier(.22,.78,.24,1) both;
+
 }
 .fluidProductDetail{
   min-height:0;
@@ -6907,8 +6907,7 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
 .publicProductSheet .fluidDetailContent{align-self:start;width:100%}
 
 /* Request basket: drawer on desktop, sheet on mobile. */
-.requestDrawerBackdrop{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:pscOverlayIn .16s ease-out both}
-.requestDrawer{animation:pscDrawerIn .22s cubic-bezier(.22,.78,.24,1) both}
+.requestDrawerBackdrop{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
 .drawerHandle{display:none}
 .drawerHeader small{display:block;margin-top:5px;font-size:10px;color:#7b8583}
 .requestLine{grid-template-columns:48px minmax(0,1fr) auto!important;gap:11px!important;padding:15px 0!important}
@@ -6920,16 +6919,13 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
 .requestEmpty .button{margin-top:14px}
 
 /* Small movement only. The UI should feel fast, not animated. */
-@keyframes pscOverlayIn{from{opacity:0}to{opacity:1}}
-@keyframes pscProductIn{from{opacity:.4;transform:translateY(12px) scale(.992)}to{opacity:1;transform:none}}
-@keyframes pscDrawerIn{from{transform:translateX(26px);opacity:.65}to{transform:none;opacity:1}}
 @keyframes pscDisclosureIn{from{opacity:.35;transform:translateY(-3px)}to{opacity:1;transform:none}}
 
 @media(max-width:820px){
   .fluidOverlay{padding:0!important;align-items:flex-end!important;place-items:end stretch!important}
   .fluidProductShell{
     width:100vw!important;max-width:100vw!important;height:auto!important;max-height:94dvh!important;
-    border-radius:24px 24px 0 0!important;animation:pscSheetUp .24s cubic-bezier(.2,.82,.24,1) both!important;
+    border-radius:24px 24px 0 0!important;
   }
   .fluidProductDetail{max-height:94dvh!important}
   .fluidProductHeader{padding:14px 16px 12px!important}
@@ -6956,7 +6952,7 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
   .requestDrawerBackdrop{align-items:flex-end!important;justify-content:stretch!important;background:rgba(9,18,18,.42)!important}
   .requestDrawer{
     width:100vw!important;max-width:100vw!important;height:auto!important;max-height:92dvh!important;
-    border-radius:24px 24px 0 0!important;animation:pscSheetUp .24s cubic-bezier(.2,.82,.24,1) both!important;
+    border-radius:24px 24px 0 0!important;
   }
   .drawerHandle{display:block;width:42px;height:4px;border-radius:999px;background:#d4dbd9;margin:8px auto 0}
   .drawerHeader{padding:12px 16px 14px!important}
@@ -6974,7 +6970,6 @@ body:has(.fluidOverlay),body:has(.requestDrawerBackdrop){overflow:hidden}
   .productStickyBar{grid-template-columns:96px 1fr}
 }
 
-@keyframes pscSheetUp{from{transform:translateY(28px);opacity:.55}to{transform:none;opacity:1}}
 
 @media(prefers-reduced-motion:reduce){
   .fluidOverlay,.fluidProductShell,.requestDrawer,.productDisclosureList details>div{animation:none!important}

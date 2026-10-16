@@ -19,15 +19,15 @@
 #app .customerShell .pscEditorialCard .pscRequirementBadge{position:absolute!important;top:12px!important;right:12px!important;bottom:auto!important;left:auto!important;padding:0!important;background:white!important;transform:none!important;z-index:3!important;border-radius:0!important}
 #app .customerShell .pscEditorialCard .pscRequirementBadge .cardDhaIcon{position:static!important;width:32px!important;height:32px!important;object-fit:contain!important;padding:0!important;max-width:none!important;max-height:none!important}
 .pscHomeDha{width:36px;height:36px;object-fit:contain;flex-shrink:0}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail{color:var(--ps-ui-ink);background:white!important;font-size:14px;line-height:1.6}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .fluidProductHeader{padding:20px 28px!important;border-bottom:1px solid var(--ps-ui-line)!important;background:white!important;gap:16px!important}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .fluidProductHeader h2{white-space:normal!important;overflow:visible!important;font-size:20px!important;line-height:1.35!important;letter-spacing:-.025em!important;font-weight:500!important;max-width:760px}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .eyebrow{display:block!important;font-size:11px!important;line-height:1.5!important;font-weight:500!important;letter-spacing:.04em!important;color:var(--ps-ui-muted)!important}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .fluidProductGrid{display:grid!important;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)!important;gap:40px!important;padding:28px!important;align-items:start!important}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .detailContentPane{padding:0!important;min-width:0!important;background:none!important;border:0!important;box-shadow:none!important}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .detailImagePane{padding:0!important;min-width:0!important;border:0!important;background:none!important}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .detailImageMeta{padding:14px 0!important;background:none!important;border:0!important;box-shadow:none!important;font-size:13px!important;line-height:1.6!important}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .detailImageMeta :is(span,small){font-size:12px!important;line-height:1.6!important;color:var(--ps-ui-muted)!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail{color:var(--ps-ui-ink);background:white!important;font-size:14px;line-height:1.6}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .fluidProductHeader{padding:20px 28px!important;border-bottom:1px solid var(--ps-ui-line)!important;background:white!important;gap:16px!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .fluidProductHeader h2{white-space:normal!important;overflow:visible!important;font-size:20px!important;line-height:1.35!important;letter-spacing:-.025em!important;font-weight:500!important;max-width:760px}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .eyebrow{display:block!important;font-size:11px!important;line-height:1.5!important;font-weight:500!important;letter-spacing:.04em!important;color:var(--ps-ui-muted)!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .fluidProductGrid{display:grid!important;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)!important;gap:40px!important;padding:28px!important;align-items:start!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .detailContentPane{padding:0!important;min-width:0!important;background:none!important;border:0!important;box-shadow:none!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .detailImagePane{padding:0!important;min-width:0!important;border:0!important;background:none!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .detailImageMeta{padding:14px 0!important;background:none!important;border:0!important;box-shadow:none!important;font-size:13px!important;line-height:1.6!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .detailImageMeta :is(span,small){font-size:12px!important;line-height:1.6!important;color:var(--ps-ui-muted)!important}
 .professionalPurchaseIdentity h3{font-size:24px;line-height:1.3;letter-spacing:-.025em;font-weight:500;margin:6px 0 10px}
 .professionalPurchaseIdentity p{font-size:14px;line-height:1.6;margin:0 0 20px;color:var(--ps-ui-muted)}
 .professionalSelector{display:grid;gap:8px;margin:20px 0 24px}
@@ -37,33 +37,33 @@
 .professionalSelectionNote{font-size:12px;line-height:1.6;color:var(--ps-ui-muted);margin:0}
 .professionalAvailability{font-size:13px;line-height:1.6;color:var(--ps-ui-muted);margin:10px 0}
 .professionalCommercial{padding:0 0 18px;border-bottom:1px solid var(--ps-ui-line)}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .pscRetailPriceNotice{border:0!important;background:var(--ps-ui-soft)!important;padding:12px!important;font-size:12px!important;line-height:1.6!important;border-radius:6px!important;margin:16px 0!important;box-shadow:none!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .pscRetailPriceNotice{border:0!important;background:var(--ps-ui-soft)!important;padding:12px!important;font-size:12px!important;line-height:1.6!important;border-radius:6px!important;margin:16px 0!important;box-shadow:none!important}
 .professionalFacts{margin:24px 0}
 .professionalFacts h3{font-size:14px;font-weight:600;margin:0 0 12px}
 .professionalFacts dl{margin:0;display:grid;gap:8px}
 .professionalFacts dl>div{display:grid;grid-template-columns:minmax(100px,.8fr) minmax(0,1.2fr);gap:20px;font-size:13px;line-height:1.6}
 .professionalFacts dt{color:var(--ps-ui-muted)}
 .professionalFacts dd{margin:0;font-weight:500;overflow-wrap:anywhere}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productQuickFacts{display:flex!important;flex-wrap:wrap;gap:16px!important;padding:0!important;margin:20px 0!important;background:none!important;border:0!important;box-shadow:none!important}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productQuickFacts>div{padding:0!important;background:none!important;border:0!important;box-shadow:none!important}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productQuickFacts span{font-size:11px!important}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productQuickFacts b{font-size:13px!important;font-weight:500!important;line-height:1.5!important}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productDisclosureList{background:none!important;border:0!important;padding:0!important;margin-top:24px!important}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productDisclosureList details{border:0!important;border-top:1px solid var(--ps-ui-line)!important;border-radius:0!important;background:none!important;box-shadow:none!important;margin:0!important;padding:0!important}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productDisclosureList summary{font-size:14px!important;font-weight:500!important;padding:17px 0!important;line-height:1.5!important}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productDisclosureList details>div{padding:0 0 18px!important;font-size:13px!important;line-height:1.7!important}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productStickyBar.professionalRequestBar{position:sticky!important;bottom:0!important;display:flex!important;align-items:end!important;gap:16px!important;padding:16px 28px max(16px,env(safe-area-inset-bottom))!important;background:white!important;border-top:1px solid var(--ps-ui-line)!important;box-shadow:none!important;z-index:5!important;flex-wrap:wrap}
-:is(#app,[data-psc-family-detail-root]) .professionalRequestBar .button{border-radius:var(--ps-ui-radius)!important;font-size:14px!important;min-height:46px!important;line-height:1.4!important;padding:12px 18px!important;white-space:normal!important}
-:is(#app,[data-psc-family-detail-root]) .professionalRequestBar .button.primary{background:var(--ps-ui-accent)!important;flex:1!important;max-width:320px!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .productQuickFacts{display:flex!important;flex-wrap:wrap;gap:16px!important;padding:0!important;margin:20px 0!important;background:none!important;border:0!important;box-shadow:none!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .productQuickFacts>div{padding:0!important;background:none!important;border:0!important;box-shadow:none!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .productQuickFacts span{font-size:11px!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .productQuickFacts b{font-size:13px!important;font-weight:500!important;line-height:1.5!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .productDisclosureList{background:none!important;border:0!important;padding:0!important;margin-top:24px!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .productDisclosureList details{border:0!important;border-top:1px solid var(--ps-ui-line)!important;border-radius:0!important;background:none!important;box-shadow:none!important;margin:0!important;padding:0!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .productDisclosureList summary{font-size:14px!important;font-weight:500!important;padding:17px 0!important;line-height:1.5!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .productDisclosureList details>div{padding:0 0 18px!important;font-size:13px!important;line-height:1.7!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .productStickyBar.professionalRequestBar{position:sticky!important;bottom:0!important;display:flex!important;align-items:end!important;gap:16px!important;padding:16px 28px max(16px,env(safe-area-inset-bottom))!important;background:white!important;border-top:1px solid var(--ps-ui-line)!important;box-shadow:none!important;z-index:5!important;flex-wrap:wrap}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalRequestBar .button{border-radius:var(--ps-ui-radius)!important;font-size:14px!important;min-height:46px!important;line-height:1.4!important;padding:12px 18px!important;white-space:normal!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalRequestBar .button.primary{background:var(--ps-ui-accent)!important;flex:1!important;max-width:320px!important}
 .requestQuantity{margin-left:auto;min-width:130px;max-width:300px;flex:0 1 auto}
 .requestQuantity label{display:block;font-size:12px!important;line-height:1.4!important;font-weight:500}
 .requestQuantity label>small{font-size:11px!important;color:var(--ps-ui-muted);display:block;margin:2px 0 6px;line-height:1.4!important;max-width:240px;overflow-wrap:anywhere}
 .quantityStepper{display:flex;align-items:center;border:1px solid #a8bcb4;border-radius:var(--ps-ui-radius);overflow:hidden;background:white;height:46px;box-sizing:border-box}
-:is(#app,[data-psc-family-detail-root]) .quantityStepper :is(button,input){border:0!important;background:white!important;box-shadow:none!important;padding:0!important;margin:0!important;min-height:44px!important;height:44px!important;font:500 16px/1.5 'DM Sans',Arial,sans-serif!important;color:var(--ps-ui-ink)!important;box-sizing:border-box}
-:is(#app,[data-psc-family-detail-root]) .quantityStepper button{width:42px!important;min-width:42px!important;cursor:pointer}
-:is(#app,[data-psc-family-detail-root]) .quantityStepper input{width:64px!important;min-width:0!important;text-align:center!important;-moz-appearance:textfield}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .quantityStepper :is(button,input){border:0!important;background:white!important;box-shadow:none!important;padding:0!important;margin:0!important;min-height:44px!important;height:44px!important;font:500 16px/1.5 'DM Sans',Arial,sans-serif!important;color:var(--ps-ui-ink)!important;box-sizing:border-box}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .quantityStepper button{width:42px!important;min-width:42px!important;cursor:pointer}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .quantityStepper input{width:64px!important;min-width:0!important;text-align:center!important;-moz-appearance:textfield}
 .quantityStepper input::-webkit-inner-spin-button{appearance:none}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail :is(button,select,textarea,input):focus-visible{outline:2px solid var(--ps-ui-accent)!important;outline-offset:3px}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail :is(button,select,textarea,input):focus-visible{outline:2px solid var(--ps-ui-accent)!important;outline-offset:3px}
 .pscFamilyHeaderDha{width:38px;height:38px;object-fit:contain;flex-shrink:0}
 .pscFamilyRegulatoryTitle{display:flex;align-items:center;gap:12px}
 .pscFamilyRegulatoryTitle img{width:36px;height:36px;object-fit:contain;flex-shrink:0}
@@ -78,10 +78,10 @@
 #app .requestDrawer .basketInfo :is(span,small){font-size:12px!important}
 @media(max-width:1100px){#app .customerShell .v25ProductGrid:has(.pscEditorialCard){grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:720px){
- :is(#app,[data-psc-family-detail-root]) .professionalProductDetail .fluidProductGrid{grid-template-columns:minmax(0,1fr)!important;padding:20px!important;gap:24px!important}
- :is(#app,[data-psc-family-detail-root]) .professionalProductDetail .fluidProductHeader{padding:16px 20px!important}
- :is(#app,[data-psc-family-detail-root]) .professionalProductDetail .fluidProductHeader h2{font-size:18px!important}
- :is(#app,[data-psc-family-detail-root]) .professionalProductDetail .professionalRequestBar{gap:12px!important;padding:12px 16px max(12px,env(safe-area-inset-bottom))!important}
+ :is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .fluidProductGrid{grid-template-columns:minmax(0,1fr)!important;padding:20px!important;gap:24px!important}
+ :is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .fluidProductHeader{padding:16px 20px!important}
+ :is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .fluidProductHeader h2{font-size:18px!important}
+ :is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .professionalRequestBar{gap:12px!important;padding:12px 16px max(12px,env(safe-area-inset-bottom))!important}
  .professionalRequestBar>.button.light{display:none!important}
  .professionalRequestBar .requestQuantity{margin-left:0;max-width:50%;min-width:130px}
  .professionalPurchaseIdentity h3{font-size:22px}
@@ -91,13 +91,13 @@
 @media(max-width:420px){#app .customerShell .v25ProductGrid:has(.pscEditorialCard){grid-template-columns:minmax(0,1fr)!important}}
 /* One constrained scroll surface: historical mobile overlay rules must not push
    the sticky request action below the viewport on tablet-sized screens. */
-:is(#app,[data-psc-family-detail-root]) .fluidOverlay:has(.professionalProductDetail){display:flex!important;align-items:center!important;justify-content:center!important;padding:24px!important;box-sizing:border-box!important}
-:is(#app,[data-psc-family-detail-root]) .fluidProductShell:has(.professionalProductDetail){width:min(1120px,100%)!important;max-width:100%!important;max-height:calc(100dvh - 48px)!important;padding:0!important;margin:0!important;box-sizing:border-box!important;overflow:hidden!important}
-:is(#app,[data-psc-family-detail-root]) .professionalProductDetail{max-height:calc(100dvh - 48px)!important;min-height:0!important;flex:1 1 auto!important;overflow:auto!important;box-sizing:border-box!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .fluidOverlay:has(.professionalProductDetail){display:flex!important;align-items:center!important;justify-content:center!important;padding:24px!important;box-sizing:border-box!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .fluidProductShell:has(.professionalProductDetail){width:min(1120px,100%)!important;max-width:100%!important;max-height:calc(100dvh - 48px)!important;padding:0!important;margin:0!important;box-sizing:border-box!important;overflow:hidden!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail{max-height:calc(100dvh - 48px)!important;min-height:0!important;flex:1 1 auto!important;overflow:auto!important;box-sizing:border-box!important}
 @media(max-width:720px){
- :is(#app,[data-psc-family-detail-root]) .fluidOverlay:has(.professionalProductDetail){padding:0!important}
- :is(#app,[data-psc-family-detail-root]) .fluidProductShell:has(.professionalProductDetail){width:100%!important;max-width:100%!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important}
- :is(#app,[data-psc-family-detail-root]) .professionalProductDetail{max-height:100dvh!important}
+ :is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .fluidOverlay:has(.professionalProductDetail){padding:0!important}
+ :is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .fluidProductShell:has(.professionalProductDetail){width:100%!important;max-width:100%!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important}
+ :is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail{max-height:100dvh!important}
 }
 .professionalCommercial>.pscOptionPrice{display:flex;flex-direction:column;gap:5px}
 .professionalCommercial>.pscOptionPrice b{font-size:18px;font-weight:600;line-height:1.5}
