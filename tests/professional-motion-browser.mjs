@@ -21,6 +21,7 @@ try{for(const width of [1440,390])for(const reducedMotion of ['no-preference','r
  await page.locator('[data-request-quantity]').fill('10');
  // Two additions in the same JS task: no animation lock, stale input or lost quantity.
  await page.evaluate(()=>{document.querySelector('.requestAddButton').click();document.querySelector('.requestAddButton').click();});
+ await page.waitForFunction(()=>getComputedStyle(document.querySelector('.requestAddButton')).backgroundColor==='rgb(229, 245, 241)');
  assert.equal(await page.evaluate(()=>window.__adds.length),2);
  assert.equal(await page.locator('[data-request-quantity]').inputValue(),'10');
  assert.equal(await page.evaluate(()=>window.__adds.at(-1).total),20);

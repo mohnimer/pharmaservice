@@ -55,6 +55,7 @@
 :is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .productStickyBar.professionalRequestBar{position:sticky!important;bottom:0!important;display:flex!important;align-items:end!important;gap:16px!important;padding:16px 28px max(16px,env(safe-area-inset-bottom))!important;background:white!important;border-top:1px solid var(--ps-ui-line)!important;box-shadow:none!important;z-index:5!important;flex-wrap:wrap}
 :is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalRequestBar .button{border-radius:var(--ps-ui-radius)!important;font-size:14px!important;min-height:46px!important;line-height:1.4!important;padding:12px 18px!important;white-space:normal!important}
 :is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalRequestBar .button.primary{background:var(--ps-ui-accent)!important;flex:1!important;max-width:320px!important}
+:is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalRequestBar .button.primary.ux32-confirmed{background:#e5f5f1!important;color:#0a766f!important;border-color:#9bd8d1!important}
 .requestQuantity{margin-left:auto;min-width:130px;max-width:300px;flex:0 1 auto}
 .requestQuantity label{display:block;font-size:12px!important;line-height:1.4!important;font-weight:500}
 .requestQuantity label>small{font-size:11px!important;color:var(--ps-ui-muted);display:block;margin:2px 0 6px;line-height:1.4!important;max-width:240px;overflow-wrap:anywhere}
@@ -71,11 +72,11 @@
 /* Shared operational controls: visual changes only, including administrative screens. */
 #app .appShell :is(.panel,.wsPanel){box-shadow:none!important;border-color:var(--ps-ui-line)!important;border-radius:var(--ps-ui-radius)!important}
 #app .appShell :is(.filterBar,.panelHeader){background:transparent!important;box-shadow:none!important}
-#app .requestDrawer :is(.qty button,.removeLink){min-height:44px;min-width:38px}
-#app .requestDrawer .requestLine{border:0!important;border-bottom:1px solid var(--ps-ui-line)!important;border-radius:0!important;box-shadow:none!important;padding:18px 0!important;background:none!important}
-#app .requestDrawer .basketInfo :is(b,span,small){line-height:1.5!important}
-#app .requestDrawer .basketInfo b{font-size:14px!important}
-#app .requestDrawer .basketInfo :is(span,small){font-size:12px!important}
+:is(#app,[data-motion-ghost]) .requestDrawer :is(.qty button,.removeLink){min-height:44px;min-width:38px}
+:is(#app,[data-motion-ghost]) .requestDrawer .requestLine{border:0!important;border-bottom:1px solid var(--ps-ui-line)!important;border-radius:0!important;box-shadow:none!important;padding:18px 0!important;background:none!important}
+:is(#app,[data-motion-ghost]) .requestDrawer .basketInfo :is(b,span,small){line-height:1.5!important}
+:is(#app,[data-motion-ghost]) .requestDrawer .basketInfo b{font-size:14px!important}
+:is(#app,[data-motion-ghost]) .requestDrawer .basketInfo :is(span,small){font-size:12px!important}
 @media(max-width:1100px){#app .customerShell .v25ProductGrid:has(.pscEditorialCard){grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:720px){
  :is(#app,[data-psc-family-detail-root],[data-motion-ghost]) .professionalProductDetail .fluidProductGrid{grid-template-columns:minmax(0,1fr)!important;padding:20px!important;gap:24px!important}
