@@ -1335,6 +1335,7 @@
         </div>
       </aside>
       <main class="mainArea v7MainArea v7bMainArea">
+        <div class="psAdaptiveHeader" data-ps-scroll-header>
         <header class="topbar sleekTopbar v7Topbar v7bTopbar portalHeaderBar">
           <button class="iconBtn mobileMenu" data-mobile-open aria-label="Open menu">${icon('menu')}</button>
           <div class="topbarBrandSlot plainLogo"><img src="${PSC_LOGO}" alt="Pharma Service"></div>
@@ -1362,6 +1363,7 @@
           </div>
         </header>
         ${!admin?`<div class="mobileSearchRow"><div class="mobileSearchInput"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search catalogue…" aria-label="Search institutional catalogue"></div><button class="mobileCartButton" data-basket aria-label="Supply Request, ${basketQty()} requested units">Request <b>${basketQty()}</b></button></div>`:''}
+        </div>
         ${!admin&&isDemoAccount()?`<div class="demoAccountBanner"><b>DEMO ACCOUNT</b><span>Sample institutional data · Explore freely · Actions are simulated and reset on refresh.</span></div>`:''}
         <div class="contentWrap v7ContentWrap">${content}</div>
       </main>
@@ -1378,7 +1380,7 @@
     ['contact','Contact']
   ];
   function publicHeader(active='home'){
-    return `<header class="publicHeader v37PublicHeader">
+    return `<header class="publicHeader v37PublicHeader" data-ps-scroll-header>
       <button class="publicLogo" data-go="home" aria-label="Pharma Service home"><img src="${PSC_LOGO}" alt="Pharma Service"></button>
       <button class="publicMenuButton" data-public-menu aria-label="Open website menu" aria-expanded="${ui.publicMenu?'true':'false'}">${ui.publicMenu?icon('close'):icon('menu')}</button>
       <nav class="publicNav ${ui.publicMenu?'open':''}">${publicNav.map(([r,l])=>`<button class="publicNavLink ${active===r?'active':''}" data-go="${r}">${l}</button>`).join('')}<button class="publicNavLink mobileClinicPortalLink" data-go="login"><span>Clinic Portal</span><b>→</b></button></nav>
@@ -3053,9 +3055,9 @@
         <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).filter(m=>window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url).map(m=>`<img src="${esc(window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
         <div class="detailContentPane fluidDetailContent">
           <div class="professionalPurchaseIdentity"><h3>${esc(displayName)}</h3><p>${esc(pack)}</p></div>${wishlistControl(p)}${productVariantSelector(p)}${cataloguePricePreview(p)}${catalogueRetailPriceNotice()}
-          ${window.PSC_PRODUCT_PRESENTATION.factsHtml(p)}${window.PSC_PRODUCT_PRESENTATION.documentsHtml(p)}<div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to the applicable DHA clinic requirement.</b></div>`:''}</div>
+          ${window.PSC_PRODUCT_PRESENTATION.documentsHtml(p)}<div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to the applicable DHA clinic requirement.</b></div>`:''}</div>
           <div class="productDisclosureList">
-            <details open><summary><span>Specification</span><i>+</i></summary><div><p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
+            <details open><summary><span>Details</span><i>+</i></summary><div>${window.PSC_PRODUCT_PRESENTATION.factsHtml(p,{heading:false})}<p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
             ${mapped?`<details><summary><span>Requirement mapping</span><i>+</i></summary><div><p><strong>${esc(p.dhaRequirement||'Mapped requirement')}</strong></p><p>${esc(p.dhaReference||'DHA requirement')} · ${esc(p.dhaStatus||'Status to verify')}</p>${p.dhaCondition?`<small>${esc(p.dhaCondition)}</small>`:''}<p class="disclosureFinePrint">Mapped to the applicable DHA clinic requirement. This is not a DHA product endorsement or product approval.</p></div></details>`:''}
             <details><summary><span>Supply & compatibility</span><i>+</i></summary><div><p>${p.regulated?'Availability and supply remain subject to applicable UAE licensing, recipient authorization, product registration, storage, batch/expiry and professional controls.':'PS confirms the exact specification, current availability and commercial terms before quotation.'}</p></div></details>
             ${workshop?`<details><summary><span>From The Workshop</span><i>+</i></summary><div><button class="productWorkshopInline" data-go="workshop/${esc(workshop.slug)}"><small>${esc(workshopFormatLabel(workshop.format))}</small><b>${esc(workshop.title)}</b></button></div></details>`:''}
@@ -3447,33 +3449,9 @@
   }
 
 
-  let publicHeaderLastY = 0;
-  let publicHeaderRaf = 0;
-  function syncPublicHeader(){
-    const header = document.querySelector('.publicHeader');
-    const y = Math.max(0, window.scrollY || window.pageYOffset || 0);
-    if(!header){ publicHeaderLastY = y; return; }
-
-    if(y <= 18){
-      header.classList.remove('headerHidden','headerScrolled');
-      publicHeaderLastY = y;
-      return;
-    }
-
-    header.classList.add('headerScrolled');
-    const delta = y - publicHeaderLastY;
-    if(delta > 5) header.classList.add('headerHidden');
-    else if(delta < -5) header.classList.remove('headerHidden');
-    publicHeaderLastY = y;
-  }
-  function onPublicHeaderScroll(){
-    if(publicHeaderRaf) return;
-    publicHeaderRaf = requestAnimationFrame(()=>{
-      publicHeaderRaf = 0;
-      syncPublicHeader();
-    });
-  }
-
+  // Shared scroll controller extends the original public-header listener to the portal.
+  function syncPublicHeader(){ window.PSC_NAVIGATION_CHROME?.sync(); }
+  function onPublicHeaderScroll(){ window.PSC_NAVIGATION_CHROME?.onScroll(); }
 
   function syncRouteMeta(route){
     const publicMeta={
@@ -3580,7 +3558,13 @@
       case 'admin/supplier-feed': html=adminFeed();break;
       default: html=landing();
     }
-    $app.innerHTML=html + (ui.modal?.type==='public-product'?modalHtml(ui.modal):''); syncRouteMeta(r); bind(); syncPublicHeader();
+    $app.innerHTML=html + (ui.modal?.type==='public-product'?modalHtml(ui.modal):'') + (!r.startsWith('admin/')?whatsappShortcut():''); syncRouteMeta(r); bind(); syncPublicHeader();
+  }
+
+  function whatsappShortcut(){
+    // Existing published PS WhatsApp contact. Do not transmit account/patient data.
+    const message=encodeURIComponent('Hello Pharma Service, I have a question about an institutional supply enquiry.');
+    return `<a class="psWhatsAppShortcut" href="https://wa.me/971553511335?text=${message}" target="_blank" rel="noopener noreferrer" aria-label="Ask Pharma Service on WhatsApp (opens a new window)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.8 7.3L3 20l1.2-4.7a8.5 8.5 0 1 1 16.3-3.8Z"/><path d="M8.3 7.5c-.7.3-.9 1.1-.6 2.2.7 2.7 2.8 4.8 5.5 5.5 1.1.3 1.9.1 2.2-.6l.4-1-2.3-1.1-.8.8a8.2 8.2 0 0 1-2.9-2.9l.8-.8-1.1-2.3Z"/></svg><span>WhatsApp PS</span></a>`;
   }
 
 

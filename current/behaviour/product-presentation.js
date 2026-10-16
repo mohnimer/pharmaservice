@@ -33,9 +33,9 @@
     }
     return {kind:view.kind,label:view.label,rows:out};
   }
-  function factsHtml(p){
+  function factsHtml(p,{heading=true}={}){
     const f=facts(p);
-    return `<section class="professionalFacts" data-product-experience="${f.kind}" aria-label="${esc(f.label)}"><h3>${esc(f.label)}</h3><dl>${f.rows.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>`;
+    return `<section class="professionalFacts" data-product-experience="${f.kind}" aria-label="${esc(heading?f.label:'Details')}">${heading?`<h3>${esc(f.label)}</h3>`:''}<dl>${f.rows.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>`;
   }
   function documentsHtml(p){
     const info=profile(p).info;

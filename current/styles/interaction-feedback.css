@@ -25,7 +25,7 @@
 :where(.requestRow,.catalogueFamilyRow,.adminTable tbody tr){transition:background-color var(--psc-motion-fast) var(--ux32-ease)}
 details>summary{cursor:pointer}
 .productDisclosureList summary :where(i,.icon){transition:transform 180ms var(--ux32-ease)}
-.productDisclosureList details[open]>summary :where(i,.icon){transform:rotate(45deg)}
+.productDisclosureList details[open]>summary :where(i,.icon){transform:none}
 /* A single entrance per overlay opening; rerenders suppress it through PSC_MOTION.restore. */
 .modalOverlay,.modalBackdrop,.fluidOverlay,.requestDrawerBackdrop{animation:ux32FadeIn 180ms var(--ux32-ease) both}
 .modalShell,.productModalShell,.fluidProductShell{animation:ux32ModalIn 220ms var(--ux32-ease) both}
@@ -67,3 +67,12 @@ details>summary{cursor:pointer}
 /* Use the count/chevron's existing space for the transient glyph in compact controls. */
 :is(.mobileCartButton,.pillBasket).ux32-responding b,.accountSwitcherButton.ux32-responding .accountChevron{visibility:hidden}
 :is(.mobileCartButton,.pillBasket).ux32-responding::after{right:14px}
+
+/* Closed teasers are visual only; native details keeps the full content inaccessible until opened. */
+.psDisclosure>summary{display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;align-items:center;list-style:none}
+.psDisclosure>summary::-webkit-details-marker{display:none}
+.psDisclosure>summary>i{grid-column:2;grid-row:1;transform:none!important;font-style:normal}
+.psDisclosure>summary>.psDisclosurePreview{grid-column:1/-1;display:block;max-height:1.5em;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;filter:blur(2px);opacity:.3;font-size:12px;font-weight:400;line-height:1.5;pointer-events:none;user-select:none}
+.psDisclosure[open]>summary>.psDisclosurePreview{display:none}
+.productDisclosureList .professionalFacts{margin:0 0 18px}
+@media(prefers-reduced-motion:reduce){.psDisclosure>summary>.psDisclosurePreview{filter:none;opacity:.5}}

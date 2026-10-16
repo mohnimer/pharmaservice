@@ -202,10 +202,23 @@
     const page=document.querySelector('#app main,#app .mainContent,#app .publicPage');
     animate(page,[{opacity:.65,transform:'translateY(4px)'},{opacity:1,transform:'translateY(0)'}],220);
   }
-  // Native details stays keyboard accessible. Animate the body only, never the summary.
+  // Native disclosure semantics remain authoritative. Previews contain existing text only.
+  function enhanceDisclosures(root){
+    root?.querySelectorAll('details').forEach(detail=>{
+      const summary=detail.querySelector(':scope > summary');if(!summary)return;
+      if(!detail.classList.contains('psDisclosure'))detail.classList.add('psDisclosure');
+      if(!summary.querySelector(':scope > i,:scope > .psDisclosurePlus')){const plus=document.createElement('i');plus.className='psDisclosurePlus';plus.textContent='+';plus.setAttribute('aria-hidden','true');summary.appendChild(plus);}
+      const text=[...detail.children].filter(el=>el!==summary).map(el=>el.textContent.trim()).join(' ').replace(/\s+/g,' ').slice(0,110);
+      let preview=summary.querySelector(':scope > .psDisclosurePreview');
+      if(text&&!preview){preview=document.createElement('span');preview.className='psDisclosurePreview';preview.setAttribute('aria-hidden','true');summary.appendChild(preview);}
+      if(preview&&preview.textContent!==text)preview.textContent=text;
+    });
+  }
+  window.PSC_DISCLOSURES={enhance:enhanceDisclosures};
+  // Animate actual content, not a duplicate or the summary. State changes never wait.
   document.addEventListener('toggle',event=>{
-    if(event.target.matches?.('.productDisclosureList details[open]'))
-      animate(event.target.querySelector(':scope > div'),[{opacity:0,transform:'translateY(-3px)'},{opacity:1,transform:'translateY(0)'}],180);
+    if(!event.target.matches?.('details.psDisclosure[open]'))return;
+    [...event.target.children].filter(el=>el.tagName!=='SUMMARY').forEach(el=>animate(el,[{opacity:.15,filter:'blur(3px)',transform:'translateY(4px)'},{opacity:1,filter:'blur(0px)',transform:'translateY(0)'}],280));
   },true);
   window.addEventListener('ps:search-results-updated',()=>{
     animate(document.querySelector('.v25ProductGrid'),[{opacity:.7},{opacity:1}],160);
@@ -223,7 +236,35 @@
   });
 
   let feedbackCount = 0;
+  // One real header, kept in document flow. No duplicated menus or scroll jumps.
+  let chrome=null, chromeRoute=null, lastY=Math.max(0,window.scrollY), direction=0, travel=0, scrollFrame=0;
+  function revealChrome(){
+    chrome?.classList.remove('psChromeHidden');
+    if(chrome)chrome.inert=false;
+  }
+  function syncChrome(){
+    const next=document.querySelector('#app [data-ps-scroll-header]'),route=window.PSC_CURRENT_ROUTE?.();
+    if(next!==chrome){chrome=next;if(route!==chromeRoute)revealChrome();chromeRoute=route;lastY=Math.max(0,window.scrollY);travel=0;direction=0;}
+    if(chrome?.querySelector('[aria-expanded="true"],.publicNav.open')||document.querySelector('.mobileOverlay.show')||chrome?.querySelector(':focus-visible,input:focus,textarea:focus,select:focus'))revealChrome();
+  }
+  function scrollChrome(){
+    scrollFrame=0;
+    const y=Math.max(0,Math.min(window.scrollY,document.documentElement.scrollHeight-window.innerHeight)),delta=y-lastY;lastY=y;
+    if(!chrome||Math.abs(delta)<2)return;
+    const nextDirection=delta>0?1:-1;
+    if(nextDirection!==direction){travel=0;direction=nextDirection;}
+    travel+=Math.abs(delta);
+    const pinned=chrome.querySelector(':focus-visible,input:focus,textarea:focus,select:focus')||chrome.querySelector('[aria-expanded="true"],.publicNav.open')||document.querySelector('.mobileOverlay.show');
+    if(y<chrome.offsetHeight+40||pinned||(direction<0&&travel>=12))revealChrome();
+    else if(direction>0&&travel>=24){chrome.classList.add('psChromeHidden');chrome.inert=true;}
+  }
+  window.PSC_NAVIGATION_CHROME={sync:syncChrome,onScroll(){if(!scrollFrame)scrollFrame=requestAnimationFrame(scrollChrome);}};
+  document.addEventListener('keydown',event=>{if(event.key==='Tab')revealChrome();},true);
+  document.addEventListener('focusin',event=>{if(chrome?.contains(event.target))revealChrome();});
+  window.addEventListener('resize',()=>{lastY=Math.max(0,window.scrollY);travel=0;revealChrome();},{passive:true});
   function inspectFeedback(){
+    syncChrome();
+    enhanceDisclosures(document.getElementById('app'));
     enhanceDisabledBusyStates();
     applyRouteEntrance();
     applyActionResponse();

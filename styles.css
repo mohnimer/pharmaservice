@@ -4190,8 +4190,9 @@ button[data-cancel-quote]:hover{
 
 /* ---------- V37 PORTAL MOBILE AUTHORITY ---------- */
 @media(max-width:900px){
-  html,body,#app{max-width:100%;overflow-x:hidden}
-  .v37Shell{display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;overflow-x:hidden!important}
+  /* Clip horizontal spill without creating a non-scrolling ancestor that traps sticky navigation. */
+  html,body,#app{max-width:100%;overflow-x:clip}
+  .v37Shell{display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;overflow-x:clip!important}
   .v37Shell .mainArea,.v37Shell .v7MainArea,.v37Shell .v7bMainArea{margin-left:0!important;margin-right:0!important;width:100%!important;max-width:100%!important;min-width:0!important;padding:0!important;overflow:visible!important}
   .v37Shell .sidebar{position:fixed!important;z-index:130!important;left:0!important;top:0!important;bottom:0!important;width:min(84vw,310px)!important;max-width:310px!important;height:100dvh!important;transform:translateX(-105%)!important;transition:transform .22s ease!important;overflow-y:auto!important;padding:14px!important;box-sizing:border-box!important}
   .v37Shell .sidebar.sidebarOpen{transform:translateX(0)!important}

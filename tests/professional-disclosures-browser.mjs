@@ -1,0 +1,34 @@
+import {readFileSync,mkdirSync} from 'node:fs';
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {createServer} from '../tools/serve.mjs';
+const records=JSON.parse(readFileSync('docs/verified-preview-variant-register.json'));
+const chosen=records.find(r=>r.product_option_id);
+const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
+const browser=await chromium.launch({args:['--no-sandbox','--disable-dev-shm-usage']});
+mkdirSync('test-results/disclosures',{recursive:true});
+try{for(const [width,motion] of [[320,'no-preference'],[1440,'no-preference'],[390,'reduce']]){
+ const ctx=await browser.newContext({viewport:{width,height:950},reducedMotion:motion});
+ await ctx.addInitScript(()=>window.__testRole='demo');
+ await ctx.route('**/*',r=>{const host=new URL(r.request().url()).hostname;if(host==='127.0.0.1')return r.continue();return r.fulfill({contentType:host==='cdn.jsdelivr.net'?'text/javascript':'text/plain',body:host==='cdn.jsdelivr.net'?readFileSync('tests/mock-supabase.js','utf8'):''});});
+ const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(`http://127.0.0.1:${server.address().port}/#portal/catalogue/all`);await page.locator('.pscEditorialCard').first().waitFor();
+ await page.evaluate(id=>window.PSC_OPEN_FAMILY_DETAIL(id),chosen.family_id);await page.locator('[data-family-variant]').selectOption(chosen.product_option_id);
+ const sheet=page.locator('.pscFamilyProductSheet'),details=sheet.locator('.productDisclosureList details').first(),summary=details.locator('summary');
+ assert.equal(await summary.locator(':scope > span').first().innerText(),'Details');assert.equal(await sheet.locator('.professionalFacts h3').count(),0,'Facts and specification must not retain competing headings');
+ assert.equal(await details.locator('.professionalFacts dl').count(),1);assert(await details.locator(':scope > div p').count()>0,'Original specification text is retained');
+ assert.equal(await summary.locator('.psDisclosurePreview').getAttribute('aria-hidden'),'true');assert((await summary.locator('.psDisclosurePreview').innerText()).length>0);
+ assert.equal(await details.locator(':scope > div').isVisible(),false,'Closed body must remain semantically collapsed');
+ assert.equal(await summary.locator('i').innerText(),'+');assert.equal(await summary.locator('i').evaluate(el=>getComputedStyle(el).transform),'none');
+ const previewFilter=await summary.locator('.psDisclosurePreview').evaluate(el=>getComputedStyle(el).filter);assert.equal(previewFilter,motion==='reduce'?'none':'blur(2px)');
+ await summary.scrollIntoViewIfNeeded();await page.screenshot({animations:'disabled',path:`test-results/disclosures/${width}-${motion}-closed.png`});
+ await summary.click();assert(await details.evaluate(el=>el.open));
+ if(motion!=='reduce')await page.waitForFunction(()=>{const body=document.querySelector('.pscFamilyDisclosureList details > div');return body.getAnimations().some(a=>a.effect.getKeyframes().some(f=>f.filter==='blur(3px)'));});
+ await page.waitForTimeout(330);assert.equal(await details.locator(':scope > div').evaluate(el=>getComputedStyle(el).filter),'none');assert.equal(await summary.locator('i').evaluate(el=>getComputedStyle(el).transform),'none');assert.equal(await summary.locator('.psDisclosurePreview').isVisible(),false);
+ const supply=sheet.locator('summary').filter({hasText:'Supply & documentation'});await supply.click();await page.waitForTimeout(330);assert.equal(await supply.locator('i').innerText(),'+');
+ await page.screenshot({animations:'disabled',path:`test-results/disclosures/${width}-${motion}-open.png`});
+ await summary.focus();await page.keyboard.press('Enter');assert.equal(await details.evaluate(el=>el.open),false);await page.keyboard.press('Enter');assert.equal(await details.evaluate(el=>el.open),true,'Native keyboard toggling remains immediate');
+ await page.evaluate(()=>{document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));const fixture=document.createElement('details');fixture.id='disclosureFixture';fixture.innerHTML='<summary>Fixture section</summary><p>Existing fixture text for shared disclosure testing.</p>';document.querySelector('.contentWrap').prepend(fixture);});
+ await page.locator('#disclosureFixture.psDisclosure').waitFor();const generic=page.locator('#disclosureFixture summary');assert.equal(await generic.locator('i').innerText(),'+');await generic.focus();await page.keyboard.press('Enter');assert(await generic.evaluate(el=>el.parentElement.open));
+ assert.deepEqual(errors,[]);await ctx.close();console.log(`${width}/${motion}: merged Details, retained facts/specification, blurred teaser, clear reveal, persistent + and native keyboard PASS`);
+}}finally{await browser.close();server.close();}
