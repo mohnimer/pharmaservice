@@ -35,6 +35,7 @@ try{
  w.PSC_NAVIGATE('portal/catalogue/allergy');await pause();
  await click('[data-product-view="'+p.pscSku+'"]');
  assert((await ready('.professionalPurchaseIdentity')).textContent.includes(p.name));
+ assert.equal(w.document.querySelectorAll('.productDetailModal .psWhatsAppShortcut').length,1,'Exact products share the compact enquiry link');
  await setQty(0);assert.equal(w.document.querySelector('[data-request-quantity]').value,'1');
  await click('[data-quantity-delta="-1"]');assert.equal(w.document.querySelector('[data-request-quantity]').value,'1');
  await setQty(10);await click('.requestAddButton');

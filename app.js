@@ -3054,7 +3054,7 @@
       <div class="productDetailGrid fluidProductGrid">
         <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).filter(m=>window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url).map(m=>`<img src="${esc(window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
         <div class="detailContentPane fluidDetailContent">
-          <div class="professionalPurchaseIdentity"><h3>${esc(displayName)}</h3><p>${esc(pack)}</p></div>${wishlistControl(p)}${productVariantSelector(p)}${cataloguePricePreview(p)}${catalogueRetailPriceNotice()}
+          <div class="professionalPurchaseIdentity"><h3>${esc(displayName)}</h3><p>${esc(pack)}</p></div>${wishlistControl(p)}${productVariantSelector(p)}${cataloguePricePreview(p)}${catalogueRetailPriceNotice()}${window.PSC_PRODUCT_PRESENTATION.whatsappHtml()}
           ${window.PSC_PRODUCT_PRESENTATION.documentsHtml(p)}<div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to the applicable DHA clinic requirement.</b></div>`:''}</div>
           <div class="productDisclosureList">
             <details open><summary><span>Details</span><i>+</i></summary><div>${window.PSC_PRODUCT_PRESENTATION.factsHtml(p,{heading:false})}<p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
@@ -3558,15 +3558,8 @@
       case 'admin/supplier-feed': html=adminFeed();break;
       default: html=landing();
     }
-    $app.innerHTML=html + (ui.modal?.type==='public-product'?modalHtml(ui.modal):'') + (!r.startsWith('admin/')?whatsappShortcut():''); syncRouteMeta(r); bind(); syncPublicHeader();
+    $app.innerHTML=html + (ui.modal?.type==='public-product'?modalHtml(ui.modal):''); syncRouteMeta(r); bind(); syncPublicHeader();
   }
-
-  function whatsappShortcut(){
-    // Existing published PS WhatsApp contact. Do not transmit account/patient data.
-    const message=encodeURIComponent('Hello Pharma Service, I have a question about an institutional supply enquiry.');
-    return `<a class="psWhatsAppShortcut" href="https://wa.me/971553511335?text=${message}" target="_blank" rel="noopener noreferrer" aria-label="Ask Pharma Service on WhatsApp (opens a new window)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.8 7.3L3 20l1.2-4.7a8.5 8.5 0 1 1 16.3-3.8Z"/><path d="M8.3 7.5c-.7.3-.9 1.1-.6 2.2.7 2.7 2.8 4.8 5.5 5.5 1.1.3 1.9.1 2.2-.6l.4-1-2.3-1.1-.8.8a8.2 8.2 0 0 1-2.9-2.9l.8-.8-1.1-2.3Z"/></svg><span>WhatsApp PS</span></a>`;
-  }
-
 
   async function submitPublicEnquiry(event){
     event.preventDefault();
