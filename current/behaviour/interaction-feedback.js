@@ -223,7 +223,34 @@
   });
 
   let feedbackCount = 0;
+  // One real header, kept in document flow. No duplicated menus or scroll jumps.
+  let chrome=null, chromeRoute=null, lastY=Math.max(0,window.scrollY), direction=0, travel=0, scrollFrame=0;
+  function revealChrome(){
+    chrome?.classList.remove('psChromeHidden');
+    if(chrome)chrome.inert=false;
+  }
+  function syncChrome(){
+    const next=document.querySelector('#app [data-ps-scroll-header]'),route=window.PSC_CURRENT_ROUTE?.();
+    if(next!==chrome){chrome=next;if(route!==chromeRoute)revealChrome();chromeRoute=route;lastY=Math.max(0,window.scrollY);travel=0;direction=0;}
+    if(chrome?.querySelector('[aria-expanded="true"],.publicNav.open')||document.querySelector('.mobileOverlay.show')||chrome?.querySelector(':focus-visible,input:focus,textarea:focus,select:focus'))revealChrome();
+  }
+  function scrollChrome(){
+    scrollFrame=0;
+    const y=Math.max(0,Math.min(window.scrollY,document.documentElement.scrollHeight-window.innerHeight)),delta=y-lastY;lastY=y;
+    if(!chrome||Math.abs(delta)<2)return;
+    const nextDirection=delta>0?1:-1;
+    if(nextDirection!==direction){travel=0;direction=nextDirection;}
+    travel+=Math.abs(delta);
+    const pinned=chrome.querySelector(':focus-visible,input:focus,textarea:focus,select:focus')||chrome.querySelector('[aria-expanded="true"],.publicNav.open')||document.querySelector('.mobileOverlay.show');
+    if(y<chrome.offsetHeight+40||pinned||(direction<0&&travel>=12))revealChrome();
+    else if(direction>0&&travel>=24){chrome.classList.add('psChromeHidden');chrome.inert=true;}
+  }
+  window.PSC_NAVIGATION_CHROME={sync:syncChrome,onScroll(){if(!scrollFrame)scrollFrame=requestAnimationFrame(scrollChrome);}};
+  document.addEventListener('keydown',event=>{if(event.key==='Tab')revealChrome();},true);
+  document.addEventListener('focusin',event=>{if(chrome?.contains(event.target))revealChrome();});
+  window.addEventListener('resize',()=>{lastY=Math.max(0,window.scrollY);travel=0;revealChrome();},{passive:true});
   function inspectFeedback(){
+    syncChrome();
     enhanceDisabledBusyStates();
     applyRouteEntrance();
     applyActionResponse();

@@ -31,6 +31,7 @@ jobs:
       - run: npm run test:catalogue
       - run: node tests/reference-overlay.mjs
       - run: npx playwright install --with-deps chromium
+      - run: node tests/professional-navigation-browser.mjs
       - run: node tests/professional-cohesion-browser.mjs
       - run: node tests/professional-motion-browser.mjs
       - run: node tests/variant-browser.mjs

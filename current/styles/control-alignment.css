@@ -43,3 +43,21 @@
 
 #app .adminShell .portalHeaderBar .avatarDot{display:none!important}
 #app .adminShell .portalHeaderBar .userPill>span:last-child{display:block!important}
+
+/* Direction-aware navigation retains its original space and the real controls. */
+#app [data-ps-scroll-header]{position:sticky!important;top:0!important;z-index:1000!important;align-self:start;transform:translateY(0);background:var(--v48-bg,#f6f7f6)!important;transition:transform 180ms cubic-bezier(.22,.75,.2,1);will-change:transform}
+#app .psAdaptiveHeader .portalHeaderBar{position:static!important;top:auto!important}
+#app [data-ps-scroll-header].psChromeHidden{transform:translateY(calc(-100% - 2px));pointer-events:none}
+#app [data-ps-scroll-header]:focus-within{transform:translateY(0);pointer-events:auto}
+#app .psWhatsAppShortcut{position:fixed;right:24px;bottom:calc(24px + env(safe-area-inset-bottom));z-index:900;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;max-width:calc(100vw - 36px);padding:10px 14px;box-sizing:border-box;border:1px solid #dfe2e0;border-radius:8px;background:white;color:#1b1d1c;font:500 13px/1.4 'DM Sans',Arial,sans-serif;text-decoration:none;box-shadow:0 3px 14px rgba(27,29,28,.07)}
+#app .psWhatsAppShortcut svg{width:22px;height:22px;flex-shrink:0}
+#app .psWhatsAppShortcut:hover{background:#eef1ee}
+#app .psWhatsAppShortcut:focus-visible{outline:2px solid #087d75;outline-offset:3px}
+body:has(.fluidOverlay,.requestDrawerBackdrop,[data-psc-family-detail-root] [role="dialog"],dialog[open],.mobileOverlay.show,.publicNav.open) #app .psWhatsAppShortcut{display:none}
+@media(max-width:1100px){
+ #app .psWhatsAppShortcut{right:18px;bottom:calc(18px + env(safe-area-inset-bottom))}
+ body:has(.psScopeMobileSummary) #app .psWhatsAppShortcut{bottom:calc(82px + env(safe-area-inset-bottom))}
+ #app:has(input:not([type="checkbox"]):not([type="radio"]):focus,textarea:focus,select:focus) .psWhatsAppShortcut{display:none}
+}
+@media(prefers-reduced-motion:reduce){#app [data-ps-scroll-header]{transition:none}}
+@media print{#app .psWhatsAppShortcut{display:none!important}#app [data-ps-scroll-header]{position:static!important;transform:none!important}}
