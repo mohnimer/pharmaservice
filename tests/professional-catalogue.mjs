@@ -52,9 +52,21 @@ try{
  w.__tables.catalogue_family_option_reference_public=[10,20].map(n=>({family_id:family,product_option_id:'fixture-'+n,exact_product_name:'Fixture dressing '+n,brand:'Fixture',presentation:'',pack:n+' pieces',image_url:'/unverified.jpg'}));
  const requests=[];w.addEventListener('psc:add-family-line',e=>requests.push(e.detail));
  await w.PSC_OPEN_FAMILY_DETAIL(family);await pause();
+ const familySheet=await ready('.pscFamilyProductSheet');
+ assert.equal(familySheet.querySelector('label[for="professionalVariant"]').textContent,'Choose your brand');
+ assert.equal(familySheet.querySelector('[data-family-variant] option[value=""]').textContent,'No brand preference');
+ assert(!familySheet.querySelector('.professionalPurchaseIdentity'),'No duplicate title or unit block');
+ assert(!familySheet.querySelector('.detailImageMeta'),'No family preview caption');
+ assert(!familySheet.querySelector('.professionalFacts'),'No redundant generic Product details');
+ assert(!familySheet.textContent.includes('Product specification'),'No generic specification accordion');
+ assert(!familySheet.querySelector('.pscRetailPriceNotice'),'No duplicate retail-pricing notice in family details');
+ assert(!familySheet.querySelector('.fluidProductHeader .mono'),'Product code no longer clutters heading');
+ assert.equal(familySheet.querySelector('.pscFamilyReference .mono').textContent,family);
+ assert.deepEqual([...familySheet.querySelectorAll('.pscFamilyDisclosureList summary')].map(el=>el.textContent.replace('+','').trim()),['Requirement mapping','Supply & documentation']);
  await choose('[data-family-variant]','fixture-10');
  assert(!w.document.querySelector('.pscFamilyPreview img'),'Unverified exact photo must not borrow representative image');
- assert((await ready('.professionalPurchaseIdentity')).textContent.includes('Fixture dressing 10'));
+ assert((await ready('#pscFamilyTitle')).textContent.includes('Fixture dressing 10'));
+ assert(!w.document.querySelector('.pscFamilyProductSheet .professionalPurchaseIdentity'));
  await setQty(10);await click('[data-family-quote]');
  assert.equal(requests.at(-1).qty,10);assert.equal(requests.at(-1).productOption.product_option_id,null);
  assert.equal(requests.at(-1).productOption.reference_product_option_id,'fixture-10');
@@ -73,7 +85,8 @@ try{
  await w.PSC_OPEN_FAMILY_DETAIL(family);
  assert(w.document.querySelector('.pscFamilyHeaderDha'));
  assert(w.document.body.textContent.includes('Mapped to the applicable DHA clinic requirement.'));
- assert(w.document.querySelector('.pscRetailPriceNotice'));
+ assert(!w.document.querySelector('.pscFamilyProductSheet .pscRetailPriceNotice'));
+ assert(w.document.querySelector('.pscRetailPriceNotice'),'Retail notice still exists in catalogue/search and other appropriate surfaces');
  assert.equal(errors.length,0,errors.join(';'));
- console.log('PASS professional catalogue: five profiles, conservative facts, quantity bounds, exact additions, reference identity, distinct packs, unresolved specification, shared basket, DHA and MRP notice');
+ console.log('PASS professional catalogue: five profiles, conservative facts, quantity bounds, exact additions, reference identity, distinct packs, unresolved specification, shared basket, DHA, brand-first family details and catalogue MRP notice');
 }finally{await w.happyDOM.close();}
