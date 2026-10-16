@@ -13,6 +13,15 @@ try{for(const [width,motion] of [[320,'no-preference'],[1440,'no-preference'],[3
  await ctx.route('**/*',r=>{const host=new URL(r.request().url()).hostname;if(host==='127.0.0.1')return r.continue();return r.fulfill({contentType:host==='cdn.jsdelivr.net'?'text/javascript':'text/plain',body:host==='cdn.jsdelivr.net'?readFileSync('tests/mock-supabase.js','utf8'):''});});
  const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(`http://127.0.0.1:${server.address().port}/#portal/catalogue/all`);await page.locator('.pscEditorialCard').first().waitFor();
+ await page.evaluate(()=>window.PSC_OPEN_FAMILY_DETAIL('PSC-SC-B19'));
+ const familySheet=page.locator('.pscFamilyProductSheet');await familySheet.waitFor();
+ assert.equal(await familySheet.locator('.detailImageMeta small').count(),0,'Photo evidence belongs in Details');
+ assert.equal(await familySheet.locator('.professionalPurchaseIdentity .eyebrow').count(),0);
+ assert.equal(await familySheet.locator('.professionalCommercial .pscOptionPrice,.professionalCommercial .professionalAvailability').count(),0,'Unselected family avoids repeated quotation headings');
+ assert((await familySheet.locator('.detailImageMeta b').innerText()).length>0,'Pictured identity remains visible');
+ assert((await familySheet.locator('.pscFamilyDisclosureList details').first().textContent()).includes('Representative family preview only'),'Representative evidence remains in Details');
+ assert.equal(await familySheet.locator('.pscRetailPriceNotice').count(),1);
+ await page.screenshot({animations:'disabled',path:`test-results/disclosures/${width}-${motion}-family-cleanup.png`});
  await page.evaluate(id=>window.PSC_OPEN_FAMILY_DETAIL(id),chosen.family_id);await page.locator('[data-family-variant]').selectOption(chosen.product_option_id);
  const sheet=page.locator('.pscFamilyProductSheet'),details=sheet.locator('.productDisclosureList details').first(),summary=details.locator('summary');
  assert.equal(await summary.locator(':scope > span').first().innerText(),'Details');assert.equal(await sheet.locator('.professionalFacts h3').count(),0,'Facts and specification must not retain competing headings');
@@ -24,7 +33,7 @@ try{for(const [width,motion] of [[320,'no-preference'],[1440,'no-preference'],[3
  await summary.scrollIntoViewIfNeeded();await page.screenshot({animations:'disabled',path:`test-results/disclosures/${width}-${motion}-closed.png`});
  await summary.click();assert(await details.evaluate(el=>el.open));
  if(motion!=='reduce')await page.waitForFunction(()=>{const body=document.querySelector('.pscFamilyDisclosureList details > div');return body.getAnimations().some(a=>a.effect.getKeyframes().some(f=>f.filter==='blur(3px)'));});
- await page.waitForTimeout(330);assert.equal(await details.locator(':scope > div').evaluate(el=>getComputedStyle(el).filter),'none');assert.equal(await summary.locator('i').evaluate(el=>getComputedStyle(el).transform),'none');assert.equal(await summary.locator('.psDisclosurePreview').isVisible(),false);
+ await page.waitForFunction(()=>getComputedStyle(document.querySelector('.pscFamilyDisclosureList details > div')).filter==='none');assert.equal(await details.locator(':scope > div').evaluate(el=>getComputedStyle(el).filter),'none');assert.equal(await summary.locator('i').evaluate(el=>getComputedStyle(el).transform),'none');assert.equal(await summary.locator('.psDisclosurePreview').isVisible(),false);
  const supply=sheet.locator('summary').filter({hasText:'Supply & documentation'});await supply.click();await page.waitForTimeout(330);assert.equal(await supply.locator('i').innerText(),'+');
  await page.screenshot({animations:'disabled',path:`test-results/disclosures/${width}-${motion}-open.png`});
  await summary.focus();await page.keyboard.press('Enter');assert.equal(await details.evaluate(el=>el.open),false);await page.keyboard.press('Enter');assert.equal(await details.evaluate(el=>el.open),true,'Native keyboard toggling remains immediate');
