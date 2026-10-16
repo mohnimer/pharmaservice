@@ -30,7 +30,7 @@ try{
   await sheet.waitFor();
   assert.equal((await sheet.locator('#pscFamilyTitle').innerText()).trim(),'Stainless steel dressing trolley (2 layer with castor wheels)');
   assert.equal(await sheet.locator('label[for="professionalVariant"]').innerText(),'Choose your brand');
-  assert.equal((await sheet.locator('select[data-family-variant] option:first-child').innerText()).trim(),'No brand preference');
+  assert.equal((await sheet.locator('select[data-family-variant] > option[value=""]').innerText()).trim(),'No brand preference');
   assert.equal((await sheet.locator('select[data-family-variant] option[value="other"]').innerText()).trim(),'Specify preferred brand or model');
   assert.equal(await sheet.locator('.professionalPurchaseIdentity,.detailImageMeta,.professionalFacts,.pscRetailPriceNotice').count(),0);
   assert.equal(await sheet.locator('.pscFamilyDisclosureList summary').count(),2);
