@@ -13,3 +13,13 @@ The user approved the catalogue direction and requested a coherent treatment of 
 No product research, product-data synchronization, pricing, stock, schema or procurement change is included. Homepage/Workshop copy, structure and routes are retained; shared presentation is refined.
 
 Verification: existing shell, DOM, account/site isolation, request submission, catalogue/variant/photography, portal-layout and control-alignment checks; new bundled-browser coverage for Account menus, response/loading geometry, single-site permissions, mobile toolbar alignment and revised card framing. Screenshots cover public pages, portal and admin routes through the existing control-alignment workflow.
+
+## Additional visual reference
+
+The supplied mobile commerce reference clarifies the desired public-facing direction: light neutral canvas, white surfaces, black primary actions, simple controls, larger areas of whitespace and intentional typography. These qualities inform the shared palette and geometry while retaining the existing institutional Supply Request/quotation flow, approved content, medical-product evidence and healthcare readability. The supplied attachment is a still, so its animation timing is not claimed to have been reproduced. Existing approved motion remains the basis.
+
+## Wishlist
+
+Added user-requested save hearts to the listing action row, physically outside the image and DHA mark; exact detail views also offer Save. The client sidebar has a Wishlist route using the same catalogue cards, detail/variant flow and Supply Request. Saved family IDs remain family choices; exact saved SKUs remain exact IDs. No stock/price snapshots or basket lines are fabricated. Removed listings show a removable unavailable record.
+
+Storage is explicitly browser-local, scoped to signed-in user ID plus clinic ID, with a visible storage explanation. It persists reloads on this device and does not claim cross-device sync. No database/schema changes or privileged metadata writes. Storage failures produce feedback. Browser verification covers save/remove/reload, clinic isolation, no basket changes and no DHA overlap.

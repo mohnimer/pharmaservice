@@ -12,13 +12,13 @@ try{for(const width of [390,1440]){
  const url=`http://127.0.0.1:${server.address().port}/#portal/catalogue/sports`;
  await page.goto(url);await page.locator('[data-family-listing="PSC-IS-039"] .productMainImage').waitFor();await page.waitForTimeout(300);
  await page.locator('.productMainImage').evaluateAll(async images=>{await Promise.all(images.map(async img=>{img.loading='eager';await img.decode();}));});
- const checks=await page.locator('.productCard[data-family-listing]').evaluateAll(es=>es.map(e=>{const v=e.querySelector('.productVisual'),i=v.querySelector('.productMainImage'),b=getComputedStyle(v,'::before'),r=v.getBoundingClientRect();return {id:e.dataset.familyListing,loaded:i?.complete&&i?.naturalWidth>=200,hidden:getComputedStyle(v).display==='none',innerWidth:parseFloat(b.width),innerHeight:parseFloat(b.height),width:r.width,height:r.height,blocked:i&&window.PSC_IMAGE_POLICY.isBlocked(i.src)};}));
- console.log(width,JSON.stringify(checks));assert(checks.length>=7);assert(checks.filter(c=>c.loaded).length>=6);assert(checks.every(c=>c.hidden||(c.loaded&&!c.blocked&&Math.abs(c.innerWidth-(c.width-18))<2&&Math.abs(c.innerHeight-(c.height-18))<2)));
+ const checks=await page.locator('.productCard[data-family-listing]').evaluateAll(es=>es.map(e=>{const v=e.querySelector('.productVisual'),i=v.querySelector('.productMainImage'),b=getComputedStyle(v,'::before'),r=v.getBoundingClientRect();return {id:e.dataset.familyListing,loaded:i?.complete&&i?.naturalWidth>=200,hidden:getComputedStyle(v).display==='none',insetVisible:b.display!=='none',cardBorder:getComputedStyle(e).borderTopWidth,imageBorder:getComputedStyle(v).borderTopWidth,width:r.width,height:r.height,blocked:i&&window.PSC_IMAGE_POLICY.isBlocked(i.src)};}));
+ console.log(width,JSON.stringify(checks));assert(checks.length>=7);assert(checks.filter(c=>c.loaded).length>=6);assert(checks.every(c=>c.hidden||(c.loaded&&!c.blocked&&!c.insetVisible&&c.cardBorder==='1px'&&c.imageBorder==='1px')));
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
  await page.locator('[data-family-listing="PSC-IS-039"]').scrollIntoViewIfNeeded();await page.screenshot({path:`test-results/sports-photos/${width}-cards.png`});
  for(const id of ['PSC-IS-039','PSC-IS-041','PSC-IS-043']){
  await page.goto(url);const card=page.locator(`[data-family-listing="${id}"]`);await card.waitFor();const src=await card.locator('.productMainImage').getAttribute('src');await card.locator('[data-product-view]').first().click();
  const detail=page.locator('[data-psc-family-detail-root]');await detail.locator('.pscFamilyProductSheet').waitFor();const photo=detail.locator('.pscFamilyPreview>img');await photo.waitFor();assert.equal(await photo.getAttribute('src'),src);await page.waitForTimeout(150);assert(await photo.evaluate(i=>i.complete&&i.naturalWidth>=200));await page.keyboard.press('Escape');await detail.waitFor({state:'detached'});
  }
- assert.deepEqual(errors,[]);await context.close();console.log(`${width}px sports photos, full inset frames and detail continuity PASS`);
+ assert.deepEqual(errors,[]);await context.close();console.log(`${width}px sports photos, single photo/card borders and detail continuity PASS`);
 }}finally{await browser.close();server.close();}

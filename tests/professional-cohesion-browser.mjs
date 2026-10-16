@@ -30,8 +30,27 @@ try{for(const [width,role,reducedMotion] of [[320,'demo','no-preference'],[768,'
  const framing=await card.evaluate(el=>({card:getComputedStyle(el).borderTopWidth,image:getComputedStyle(el.querySelector('.productVisual')).borderTopWidth,inset:getComputedStyle(el.querySelector('.productVisual'),'::before').display}));assert.deepEqual(framing,{card:'1px',image:'1px',inset:'none'});
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
  await page.screenshot({animations:'disabled',path:`test-results/cohesion/${role}-${width}-catalogue.png`});
+ // Save outside the image, retain identity after reload, and isolate clinic preferences.
+ const heart=card.locator('[data-wishlist-toggle]'),savedKey=await heart.getAttribute('data-wishlist-toggle');
+ const badge=card.locator('.cardDhaIcon');
+ assert.equal(await heart.evaluate(el=>!!el.closest('.productVisual')),false,'Heart must never sit over the photograph/DHA mark');
+ if(await badge.count()){const h=await heart.boundingBox(),d=await badge.boundingBox();assert(h.y>=d.y+d.height||h.x>=d.x+d.width||h.x+h.width<=d.x||h.y+h.height<=d.y,'DHA mark cannot overlap the save control');}
+ await heart.click();assert.equal(await heart.getAttribute('aria-pressed'),'true');
+ const requestBefore=await page.locator('.mobileCartButton b').innerText();
+ await page.evaluate(()=>window.PSC_NAVIGATE('portal/wishlist'));await page.locator('.wishlistGrid').waitFor();
+ assert.equal(await page.locator('[data-wishlist-toggle]').count(),1);assert.equal(await page.locator('[data-wishlist-toggle]').getAttribute('data-wishlist-toggle'),savedKey);
+ await page.reload();await page.locator('.wishlistGrid').waitFor();assert.equal(await page.locator('[data-wishlist-toggle]').getAttribute('aria-pressed'),'true');
+ assert.equal(await page.locator('.mobileCartButton b').innerText(),requestBefore,'Saving never adds an order line');
+ if(role==='demo'){
+   await page.locator('[data-account-switcher]').click();await page.locator('[data-school-select="s1"]').click();
+   assert.equal(await page.locator('.wishlistGrid').count(),0,'Another clinic must not inherit saved products');
+   await page.locator('[data-account-switcher]').click();await page.locator('[data-school-select="s2"]').click();await page.locator('.wishlistGrid').waitFor();
+ }
+ await page.screenshot({animations:'disabled',path:`test-results/cohesion/${role}-${width}-wishlist.png`});
+ await page.locator('[data-wishlist-toggle]').click();assert.equal(await page.locator('.wishlistGrid').count(),0);
+ await page.evaluate(()=>window.PSC_NAVIGATE('portal/catalogue/sports'));await page.locator('.pscEditorialCard').first().waitFor();
  // Feedback fixture: pending work must preserve the label and physical width.
- await page.evaluate(()=>{const b=document.createElement('button');b.type='button';b.className='button primary';b.dataset.mailTest='';b.textContent='Pending action fixture';b.id='pendingFeedbackFixture';document.getElementById('app').appendChild(b);});
+ await page.evaluate(()=>{const b=document.createElement('button');b.type='button';b.className='button primary';b.dataset.mailTest='';b.textContent='Pending action fixture';b.id='pendingFeedbackFixture';document.querySelector('.contentWrap').prepend(b);});
  const pending=page.locator('#pendingFeedbackFixture'),size=await pending.boundingBox();await pending.click();assert.equal(await pending.getAttribute('aria-busy'),'true');assert.equal(await pending.innerText(),'Pending action fixture');
  const pendingStyle=await pending.evaluate(el=>({width:el.getBoundingClientRect().width,animation:getComputedStyle(el,'::after').animationName}));assert.equal(pendingStyle.width,size.width);assert.equal(pendingStyle.animation,'ux32Spin');
  await page.evaluate(()=>{const t=document.createElement('div');t.className='toast';t.textContent='Fixture completion';document.getElementById('app').appendChild(t);});await page.waitForFunction(()=>!document.getElementById('pendingFeedbackFixture').hasAttribute('aria-busy'));
