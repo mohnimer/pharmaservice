@@ -41,10 +41,11 @@ details>summary{cursor:pointer}
 }
 .fluidProductShell,.requestDrawer{overscroll-behavior:contain;scrollbar-gutter:stable}
 [data-motion-ghost]{pointer-events:none!important}
-.ux32-loading,.ux32-native-loading{position:relative!important;pointer-events:none!important;cursor:progress!important;opacity:.8!important}
-/* No added padding or label replacement: asynchronous feedback keeps its geometry. */
-.ux32-loading::after,.ux32-native-loading::after{content:"";position:absolute;inset:auto 12px 5px;height:2px;border-radius:2px;background:var(--ux32-teal);animation:ux32Busy 900ms ease-in-out infinite alternate;transform-origin:left}
-@keyframes ux32Busy{from{opacity:.35;transform:scaleX(.3)}to{opacity:1;transform:scaleX(1)}}
+.ux32-loading,.ux32-native-loading{position:relative!important;pointer-events:none!important;cursor:progress!important}
+.ux32-responding{position:relative}
+/* A small in-button circle: no label replacement, extra padding or ordering delay. */
+:is(.ux32-loading,.ux32-native-loading,.ux32-responding)::after{content:"";position:absolute;right:7px;top:50%;width:10px;height:10px;margin-top:-5px;border:1.5px solid currentColor;border-right-color:transparent;border-radius:50%;box-sizing:border-box;pointer-events:none;animation:ux32Spin 650ms linear infinite;opacity:.7}
+@keyframes ux32Spin{to{transform:rotate(360deg)}}
 .ux32-confirmed{background:#e5f5f1!important;color:#0a766f!important;border-color:#9bd8d1!important}
 .pscProductLoading{padding:32px;min-height:400px;color:#687875;font-size:14px}
 .pscSkeletonImage,.pscSkeletonLine{background:#f0f4f3;border-radius:8px;margin-top:20px}
@@ -62,3 +63,7 @@ details>summary{cursor:pointer}
   .productDisclosureList details::details-content{block-size:0;overflow:clip;transition:block-size 200ms var(--ux32-ease),content-visibility 200ms allow-discrete}
   .productDisclosureList details[open]::details-content{block-size:auto}
 }
+
+/* Use the count/chevron's existing space for the transient glyph in compact controls. */
+:is(.mobileCartButton,.pillBasket).ux32-responding b,.accountSwitcherButton.ux32-responding .accountChevron{visibility:hidden}
+:is(.mobileCartButton,.pillBasket).ux32-responding::after{right:14px}

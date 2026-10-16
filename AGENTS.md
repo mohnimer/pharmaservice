@@ -26,7 +26,7 @@ These rules implement Moe's instructions of 12 October 2026.
 ## Product image standard — 14 October 2026
 
 - Never publish an image containing Acorus branding, supplier logos, supplier backdrops or watermarks. Product/manufacturer branding on the actual pack is retained.
-- Every catalogue image uses the shared white double frame, contained product and generous whitespace. Use transparent cutouts or clean white-background photographs when available. Never crop off product or pack identity.
+- Per the approved 16 October 2026 revision, catalogue listings use one border around the white photograph area and one around the complete listing card. Product details use one photograph border. Preserve the contained product and generous whitespace; do not add an inset second photograph frame. Use transparent cutouts or clean white-background photographs when available. Never crop off product or pack identity.
 - Cards omit Pictured / Product example paragraphs. Preserve photo identity and representative-versus-exact status in image alt text, image records and the detailed product view.
 - A listing's photo remains visible when its detail view opens. Exact variant selection keeps its own photo identity; never silently borrow another variant's photograph.
 - `data/catalogue-image-policy.json` blocks rejected asset paths and hashes from the public build, including renamed copies. OCR is supplementary: human visual review is required because logo-only and blurred supplier branding may be missed.

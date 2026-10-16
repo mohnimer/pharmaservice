@@ -1340,26 +1340,26 @@
           <div class="topbarActions topbarActionsV4">
             ${admin?`<span class="userPill compactUser"><span class="avatarDot">MH</span><span><b>Mohamed</b><small>PS admin</small></span></span>`:`
             <div class="accountSwitcherWrap">
-              <button class="campusPill accountSwitcherButton ${canSwitchSchools()?'switchable':''}" ${canSwitchSchools()?'data-account-switcher':''} aria-expanded="${ui.accountMenu?'true':'false'}">
-                <span class="mobileAccountDot" aria-hidden="true">${esc((state.groupName||'A').slice(0,2).toUpperCase())}</span>
+              <button class="campusPill accountSwitcherButton ${canSwitchSchools()?'switchable':''}" data-account-switcher aria-label="Account: ${esc(state.groupName||'Institutional account')} · ${esc(schoolLabel(authContext?.school)||state.campus||'Current site')}" aria-controls="psAccountMenu" aria-expanded="${ui.accountMenu?'true':'false'}">
+                <span class="accountControlLabel">Account</span>
                 <span class="campusPillMain">
                   <small class="accountGroupName">${esc(state.groupName||'Institutional account')}</small>
                   <b>${esc(schoolLabel(authContext?.school)||state.campus)}</b>
                 </span>
-                ${canSwitchSchools()?'<span class="accountChevron">⌄</span>':''}
+                <span class="accountChevron" aria-hidden="true">⌄</span>
               </button>
-              ${ui.accountMenu&&canSwitchSchools()?`<div class="accountSwitcherMenu">
-                <div class="accountMenuHead"><span>SWITCH ACCOUNT</span><b>${esc(state.groupName||'Account group')}</b></div>
-                <div class="accountMenuList">${availableSchools().map(sc=>`<button class="accountSchoolOption ${sc.id===authContext?.school?.id?'active':''}" data-school-select="${sc.id}">
+              ${ui.accountMenu?`<div class="accountSwitcherMenu" id="psAccountMenu" aria-label="Account and sites">
+                <div class="accountMenuHead"><span>${canSwitchSchools()?'SWITCH ACCOUNT':'CURRENT ACCOUNT'}</span><b>${esc(state.groupName||'Account group')}</b></div>
+                <div class="accountMenuList">${canSwitchSchools()?availableSchools().map(sc=>`<button class="accountSchoolOption ${sc.id===authContext?.school?.id?'active':''}" data-school-select="${sc.id}">
                   <span><b>${esc(sc.name)}</b><small>${esc(sc.campus_name||'Main account')}</small></span>
                   ${sc.id===authContext?.school?.id?'<em>Current</em>':''}
-                </button>`).join('')}</div>
+                </button>`).join(''):`<p class="accountCurrentSite">${esc(schoolLabel(authContext?.school)||state.campus||'Current site')}</p>`}</div><button type="button" class="accountSignOut" data-signout>Sign out</button>
               </div>`:''}
             </div>
-            <button class="button dark pillBasket" data-basket>Request <b>${basketQty()}</b></button>`}
+            <button class="button dark pillBasket" data-basket aria-label="Supply Request, ${basketQty()} requested units">Request <b>${basketQty()}</b></button>`}
           </div>
         </header>
-        ${!admin?`<div class="mobileSearchRow"><div class="mobileSearchInput"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search catalogue…" aria-label="Search institutional catalogue"></div><button class="mobileCartButton" data-basket>Request <b>${basketQty()}</b></button></div>`:''}
+        ${!admin?`<div class="mobileSearchRow"><div class="mobileSearchInput"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search catalogue…" aria-label="Search institutional catalogue"></div><button class="mobileCartButton" data-basket aria-label="Supply Request, ${basketQty()} requested units">Request <b>${basketQty()}</b></button></div>`:''}
         ${!admin&&isDemoAccount()?`<div class="demoAccountBanner"><b>DEMO ACCOUNT</b><span>Sample institutional data · Explore freely · Actions are simulated and reset on refresh.</span></div>`:''}
         <div class="contentWrap v7ContentWrap">${content}</div>
       </main>
@@ -3655,7 +3655,7 @@
     document.querySelectorAll('[data-mobile-open]').forEach(el=>el.addEventListener('click',()=>{ui.mobile=true;render()}));
     document.querySelectorAll('[data-mobile-close]').forEach(el=>el.addEventListener('click',()=>{ui.mobile=false;render()}));
     document.querySelectorAll('[data-campus]').forEach(el=>el.addEventListener('change',e=>{state.campus=e.target.value;save();render()}));
-    document.querySelectorAll('[data-account-switcher]').forEach(el=>el.addEventListener('click',()=>{ui.accountMenu=!ui.accountMenu;render()}));
+    document.querySelectorAll('[data-account-switcher]').forEach(el=>el.addEventListener('click',()=>{ui.accountMenu=!ui.accountMenu;renderUi({focusSelector:ui.accountMenu?'#psAccountMenu [data-school-select],#psAccountMenu [data-signout]':'[data-account-switcher]',transition:false})}));
     document.querySelectorAll('[data-school-select]').forEach(el=>el.addEventListener('click',async()=>{await switchInstitutionAccount(el.dataset.schoolSelect)}));
     document.querySelectorAll('[data-basket]').forEach(el=>el.addEventListener('click',openBasketOverlay));
     document.querySelectorAll('[data-close-basket]').forEach(el=>el.addEventListener('click',e=>{if(el.tagName==='BUTTON'||e.target===el)closeBasketOverlay();}));

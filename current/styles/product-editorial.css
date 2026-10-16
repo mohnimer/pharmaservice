@@ -2,7 +2,7 @@
    photograph standard remains the sole owner of image framing. */
 :root{--ps-ui-ink:#1b1d1c;--ps-ui-muted:#626864;--ps-ui-line:#dfe2e0;--ps-ui-soft:#f5f6f5;--ps-ui-accent:#087d75;--ps-ui-action:#191b1a;--ps-ui-control:48px;--ps-ui-radius:8px}
 #app .customerShell .v25ProductGrid:has(.pscEditorialCard){display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:32px 24px!important;align-items:stretch!important}
-#app .customerShell .productCard.pscEditorialCard{display:flex!important;flex-direction:column!important;min-width:0!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;padding:0!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;overflow:visible!important;grid-column:auto!important;grid-row:auto!important}
+#app .customerShell .productCard.pscEditorialCard{display:flex!important;flex-direction:column!important;min-width:0!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;padding:14px!important;margin:0!important;border:1px solid var(--ps-ui-line)!important;border-radius:var(--ps-ui-radius)!important;box-shadow:none!important;background:white!important;overflow:visible!important;grid-column:auto!important;grid-row:auto!important}
 #app .customerShell .pscEditorialCard .exactCanvaBody{display:block!important;flex:1!important;min-height:0!important;padding:8px 0 12px!important;border:0!important;background:transparent!important}
 #app .customerShell .pscEditorialCard .productTitleButton{display:block!important;width:100%!important;height:auto!important;min-height:0!important;text-align:left!important;padding:0!important;margin:0!important;background:none!important;border:0!important;background:transparent!important}
 #app .customerShell .pscEditorialCard .productTitleButton h3{margin:0!important;font-size:17px!important;line-height:1.4!important;font-weight:600!important;color:var(--ps-ui-ink)!important;min-height:0!important}
@@ -138,3 +138,7 @@
  :is(#app,[data-psc-family-detail-root]) .professionalRequestBar .button.primary:not(.ux32-confirmed):hover{background:#303332!important;border-color:#303332!important;color:white!important}
 }
 #app .appShell .professionalRequestBar .button.primary.ux32-confirmed{background:#e5f5f1!important;color:#0a766f!important;border-color:#9bd8d1!important}
+
+/* Public listings share the same single card and single photograph frame. */
+#app .publicCatalogueCard{padding:14px!important;border:1px solid var(--ps-ui-line)!important;border-radius:var(--ps-ui-radius)!important;background:white!important;box-shadow:none!important;box-sizing:border-box}
+#app .publicCatalogueCard .publicCatalogueBody{padding:14px 0 0!important;border:0!important;background:transparent!important}
