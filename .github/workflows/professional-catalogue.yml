@@ -6,9 +6,8 @@ on:
       - 'styles.css'
       - 'current/behaviour/family-details.js'
       - 'current/behaviour/product-presentation.js'
-      - 'current/styles/product-editorial.css'
+      - 'current/styles/**'
       - 'current/behaviour/interaction-feedback.js'
-      - 'current/styles/interaction-feedback.css'
       - 'current/manifest.json'
       - 'tests/professional-*.mjs'
       - '.github/workflows/professional-catalogue.yml'
@@ -25,12 +24,14 @@ jobs:
       - run: npm run build
       - run: npm test
       - run: node --test tests/variant-evidence.test.cjs tests/catalogue-stock.test.cjs tests/catalogue-refresh-identity.test.cjs tests/intelligent-search.test.mjs
+      - run: node tests/professional-wishlist.mjs
       - run: node tests/professional-catalogue.mjs
       - run: node tests/professional-submission.mjs
       - run: npm run test:dom
       - run: npm run test:catalogue
       - run: node tests/reference-overlay.mjs
       - run: npx playwright install --with-deps chromium
+      - run: node tests/professional-cohesion-browser.mjs
       - run: node tests/professional-motion-browser.mjs
       - run: node tests/variant-browser.mjs
       - run: node tests/catalogue-photo-standard-browser.mjs

@@ -44,8 +44,8 @@
   padding:30px!important;
   box-sizing:border-box!important;
   background:#fff!important;
-  border:1px solid #e2e3dd!important;
-  border-radius:24px!important;
+  border:0!important;
+  border-radius:0!important;
 }
 
 .v3927ContactForm .prospectField{
@@ -202,7 +202,7 @@
     width:100%!important;
     max-width:none!important;
     padding:18px!important;
-    border-radius:20px!important;
+    border-radius:0!important;
   }
   .v3927ContactForm .prospectFieldWide,
   .v3927ContactForm .prospectSubmitRow{

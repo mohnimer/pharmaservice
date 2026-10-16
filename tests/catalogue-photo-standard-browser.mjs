@@ -12,8 +12,8 @@ try{for(const width of [390,768,1440]){
  for(const area of ['equipment','consumables','medicines']){
  await page.goto(`http://127.0.0.1:${server.address().port}/#portal/catalogue/dha-${area}`);await page.locator('.productMainImage').first().waitFor();await page.waitForTimeout(250);
  assert.equal(await page.locator('.pscFamilyRepresentative').count(),0);
- const checks=await page.locator('.productVisual:has(.productMainImage)').evaluateAll(elements=>elements.map(e=>{const style=getComputedStyle(e),before=getComputedStyle(e,'::before'),r=e.getBoundingClientRect(),i=e.querySelector('.productMainImage'),ir=i.getBoundingClientRect();return {white:style.backgroundColor==='rgb(255, 255, 255)',border:style.borderTopWidth,inner:before.borderTopWidth,innerVisible:before.display!=='none',space:parseFloat(getComputedStyle(i).left)>r.width*.1,noBrand:!window.PSC_IMAGE_POLICY.isBlocked(i.src)};}));
- assert(checks.length);assert(checks.every(c=>c.white&&c.border==='1px'&&c.inner==='1px'&&c.innerVisible&&c.space&&c.noBrand),JSON.stringify(checks));
+ const checks=await page.locator('.productVisual:has(.productMainImage)').evaluateAll(elements=>elements.map(e=>{const style=getComputedStyle(e),before=getComputedStyle(e,'::before'),r=e.getBoundingClientRect(),i=e.querySelector('.productMainImage'),ir=i.getBoundingClientRect();return {white:style.backgroundColor==='rgb(255, 255, 255)',border:style.borderTopWidth,inner:before.borderTopWidth,innerVisible:before.display!=='none',cardBorder:getComputedStyle(e.closest('.productCard')).borderTopWidth,space:parseFloat(getComputedStyle(i).left)>r.width*.1,noBrand:!window.PSC_IMAGE_POLICY.isBlocked(i.src)};}));
+ assert(checks.length);assert(checks.every(c=>c.white&&c.border==='1px'&&!c.innerVisible&&c.cardBorder==='1px'&&c.space&&c.noBrand),JSON.stringify(checks));
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
  await page.locator('.productCard[data-family-listing]').first().scrollIntoViewIfNeeded();await page.screenshot({path:`test-results/photo-standard/${width}-${area}.png`,fullPage:false});
  }
@@ -22,5 +22,5 @@ try{for(const width of [390,768,1440]){
  assert(await detail.locator('.detailImagePane').isVisible());assert.equal(await detail.locator('.pscFamilyPreview>img').getAttribute('src'),src);
  await detail.locator('.pscFamilyPreview>img').evaluate(img=>{if(!img.complete||img.naturalWidth<200)throw Error('Detail photo did not load');});
  await page.screenshot({path:`test-results/photo-standard/${width}-glucagon-detail.png`,fullPage:false});
- assert.deepEqual(errors,[]);await context.close();console.log(`${width}px: double white frames, padding, no supplier branding, no card captions and Glucagon photo continuity PASS`);
+ assert.deepEqual(errors,[]);await context.close();console.log(`${width}px: single photograph border plus card border, padding, no supplier branding, no card captions and Glucagon photo continuity PASS`);
 }}finally{await browser.close();server.close();}

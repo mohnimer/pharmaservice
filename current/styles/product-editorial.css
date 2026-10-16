@@ -1,16 +1,16 @@
 /* Professional catalogue presentation. Component rules live here; the shared
    photograph standard remains the sole owner of image framing. */
-:root{--ps-ui-ink:#1b1d1c;--ps-ui-muted:#626864;--ps-ui-line:#dfe2e0;--ps-ui-soft:#f5f6f5;--ps-ui-accent:#087d75;--ps-ui-action:#191b1a;--ps-ui-control:48px;--ps-ui-radius:8px}
+:root{--ps-ui-ink:#1b1d1c;--ps-ui-muted:#626864;--ps-ui-line:#e0e4e1;--ps-ui-soft:#f5f6f5;--ps-ui-accent:#087d75;--ps-ui-action:#191b1a;--ps-ui-control:48px;--ps-ui-radius:8px}
 #app .customerShell .v25ProductGrid:has(.pscEditorialCard){display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:32px 24px!important;align-items:stretch!important}
-#app .customerShell .productCard.pscEditorialCard{display:flex!important;flex-direction:column!important;min-width:0!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;padding:0!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;overflow:visible!important;grid-column:auto!important;grid-row:auto!important}
+#app .customerShell .productCard.pscEditorialCard{display:flex!important;flex-direction:column!important;min-width:0!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;padding:14px!important;margin:0!important;border:1px solid var(--ps-ui-line)!important;border-radius:var(--ps-ui-radius)!important;box-shadow:none!important;background:white!important;overflow:visible!important;grid-column:auto!important;grid-row:auto!important}
 #app .customerShell .pscEditorialCard .exactCanvaBody{display:block!important;flex:1!important;min-height:0!important;padding:8px 0 12px!important;border:0!important;background:transparent!important}
 #app .customerShell .pscEditorialCard .productTitleButton{display:block!important;width:100%!important;height:auto!important;min-height:0!important;text-align:left!important;padding:0!important;margin:0!important;background:none!important;border:0!important;background:transparent!important}
 #app .customerShell .pscEditorialCard .productTitleButton h3{margin:0!important;font-size:17px!important;line-height:1.4!important;font-weight:600!important;color:var(--ps-ui-ink)!important;min-height:0!important}
 #app .customerShell .pscEditorialCard .pack{margin:8px 0!important;font-size:13px!important;line-height:1.5!important;color:var(--ps-ui-muted)!important}
 .catalogueIdentityLine{min-height:20px;margin-top:14px;font-size:12px;line-height:1.5;color:var(--ps-ui-muted)}
 .catalogueOptionCount{display:block;font-size:12px;line-height:1.5;color:var(--ps-ui-muted);margin-top:8px}
-#app .customerShell .pscEditorialCard .exactCanvaActions{margin-top:auto!important;padding:8px 0 0!important;border:0!important;display:block!important;background:none!important}
-#app .customerShell .pscEditorialCard .canvaDetails{display:flex!important;align-items:center!important;justify-content:space-between!important;width:100%!important;min-height:44px!important;padding:10px 0!important;border:0!important;border-top:1px solid var(--ps-ui-line)!important;border-radius:0!important;background:none!important;font:500 14px/1.5 'DM Sans',Arial,sans-serif!important;color:var(--ps-ui-ink)!important;text-align:left!important}
+#app .customerShell .pscEditorialCard .exactCanvaActions{margin-top:auto!important;padding:8px 0 0!important;border:0!important;border-top:1px solid var(--ps-ui-line)!important;display:flex!important;align-items:center!important;gap:12px!important;background:none!important}
+#app .customerShell .pscEditorialCard .canvaDetails{display:flex!important;align-items:center!important;justify-content:space-between!important;flex:1!important;width:auto!important;min-width:0!important;gap:10px!important;min-height:44px!important;padding:10px 0!important;border:0!important;border-radius:0!important;background:none!important;font:500 14px/1.5 'DM Sans',Arial,sans-serif!important;color:var(--ps-ui-ink)!important;text-align:left!important}
 .pscPricePreview{display:flex;flex-direction:column;gap:4px;margin:12px 0 0}
 .pscPricePreview b{font-size:16px;line-height:1.4;font-weight:600}
 .pscPricePreview :is(span,small){font-size:12px;line-height:1.5;color:var(--ps-ui-muted)}
@@ -138,3 +138,17 @@
  :is(#app,[data-psc-family-detail-root]) .professionalRequestBar .button.primary:not(.ux32-confirmed):hover{background:#303332!important;border-color:#303332!important;color:white!important}
 }
 #app .appShell .professionalRequestBar .button.primary.ux32-confirmed{background:#e5f5f1!important;color:#0a766f!important;border-color:#9bd8d1!important}
+
+/* Public listings share the same single card and single photograph frame. */
+#app .publicCatalogueCard{padding:14px!important;border:1px solid var(--ps-ui-line)!important;border-radius:var(--ps-ui-radius)!important;background:white!important;box-shadow:none!important;box-sizing:border-box}
+#app .publicCatalogueCard .publicCatalogueBody{padding:14px 0 0!important;border:0!important;background:transparent!important}
+
+/* Save lives in the action row, never over product photography or DHA marks. */
+#app .wishlistToggle{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;position:static!important;min-width:44px!important;min-height:44px!important;padding:8px!important;border:0!important;border-radius:8px!important;background:transparent!important;color:var(--ps-ui-ink)!important;font:500 12px/1.5 'DM Sans',Arial,sans-serif!important;box-shadow:none!important;flex-shrink:0}
+#app .wishlistToggle svg{width:20px!important;height:20px!important;fill:none;stroke:currentColor;stroke-width:1.6;transition:fill 160ms ease}
+#app .wishlistToggle[aria-pressed="true"] svg{fill:currentColor}
+#app .wishlistToggle:hover{background:var(--ps-ui-soft)!important}
+#app .wishlistToggle:focus-visible{outline:2px solid var(--ps-ui-accent)!important;outline-offset:2px}
+#app .wishlistUnavailable{padding:24px;background:white;border-radius:8px}
+#app .wishlistGrid{margin-top:28px!important}
+@media(prefers-reduced-motion:reduce){#app .wishlistToggle svg{transition:none}}

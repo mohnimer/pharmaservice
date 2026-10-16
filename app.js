@@ -1247,6 +1247,7 @@
     const map={
       users:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6M18 15a5 5 0 0 1 3 5"/></svg>`,
       calendar:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6M17 2v6M3 11h18M7 15h3M14 15h3"/></svg>`,
+      heart:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.4 5.4 0 0 0-7.6 0L12 5.8l-1.2-1.2a5.4 5.4 0 0 0-7.6 7.6L12 21l8.8-8.8a5.4 5.4 0 0 0 0-7.6Z"/></svg>`,
       dashboard:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="6" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/></svg>`,
       overview:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="6" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/></svg>`,
       home:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5"/><path d="M6.5 9.5V20h4.5v-5h2v5h4.5V9.5"/></svg>`,
@@ -1305,6 +1306,7 @@
   const schoolNav=[
     ['portal/dashboard','Home','dashboard'],
     ['portal/catalogue','Shop','boxes'],
+    ['portal/wishlist','Wishlist','heart'],
     ['portal/requests','Orders & Requests','edit'],
     ['portal/replenish','Replenish','repeat'],
     ['portal/documents','Documents','resource'],
@@ -1340,26 +1342,26 @@
           <div class="topbarActions topbarActionsV4">
             ${admin?`<span class="userPill compactUser"><span class="avatarDot">MH</span><span><b>Mohamed</b><small>PS admin</small></span></span>`:`
             <div class="accountSwitcherWrap">
-              <button class="campusPill accountSwitcherButton ${canSwitchSchools()?'switchable':''}" ${canSwitchSchools()?'data-account-switcher':''} aria-expanded="${ui.accountMenu?'true':'false'}">
-                <span class="mobileAccountDot" aria-hidden="true">${esc((state.groupName||'A').slice(0,2).toUpperCase())}</span>
+              <button class="campusPill accountSwitcherButton ${canSwitchSchools()?'switchable':''}" data-account-switcher aria-label="Account: ${esc(state.groupName||'Institutional account')} · ${esc(schoolLabel(authContext?.school)||state.campus||'Current site')}" aria-controls="psAccountMenu" aria-expanded="${ui.accountMenu?'true':'false'}">
+                <span class="accountControlLabel">Account</span>
                 <span class="campusPillMain">
                   <small class="accountGroupName">${esc(state.groupName||'Institutional account')}</small>
                   <b>${esc(schoolLabel(authContext?.school)||state.campus)}</b>
                 </span>
-                ${canSwitchSchools()?'<span class="accountChevron">⌄</span>':''}
+                <span class="accountChevron" aria-hidden="true">⌄</span>
               </button>
-              ${ui.accountMenu&&canSwitchSchools()?`<div class="accountSwitcherMenu">
-                <div class="accountMenuHead"><span>SWITCH ACCOUNT</span><b>${esc(state.groupName||'Account group')}</b></div>
-                <div class="accountMenuList">${availableSchools().map(sc=>`<button class="accountSchoolOption ${sc.id===authContext?.school?.id?'active':''}" data-school-select="${sc.id}">
+              ${ui.accountMenu?`<div class="accountSwitcherMenu" id="psAccountMenu" aria-label="Account and sites">
+                <div class="accountMenuHead"><span>${canSwitchSchools()?'SWITCH ACCOUNT':'CURRENT ACCOUNT'}</span><b>${esc(state.groupName||'Account group')}</b></div>
+                <div class="accountMenuList">${canSwitchSchools()?availableSchools().map(sc=>`<button class="accountSchoolOption ${sc.id===authContext?.school?.id?'active':''}" data-school-select="${sc.id}">
                   <span><b>${esc(sc.name)}</b><small>${esc(sc.campus_name||'Main account')}</small></span>
                   ${sc.id===authContext?.school?.id?'<em>Current</em>':''}
-                </button>`).join('')}</div>
+                </button>`).join(''):`<p class="accountCurrentSite">${esc(schoolLabel(authContext?.school)||state.campus||'Current site')}</p>`}</div><button type="button" class="accountSignOut" data-signout>Sign out</button>
               </div>`:''}
             </div>
-            <button class="button dark pillBasket" data-basket>Request <b>${basketQty()}</b></button>`}
+            <button class="button dark pillBasket" data-basket aria-label="Supply Request, ${basketQty()} requested units">Request <b>${basketQty()}</b></button>`}
           </div>
         </header>
-        ${!admin?`<div class="mobileSearchRow"><div class="mobileSearchInput"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search catalogue…" aria-label="Search institutional catalogue"></div><button class="mobileCartButton" data-basket>Request <b>${basketQty()}</b></button></div>`:''}
+        ${!admin?`<div class="mobileSearchRow"><div class="mobileSearchInput"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search catalogue…" aria-label="Search institutional catalogue"></div><button class="mobileCartButton" data-basket aria-label="Supply Request, ${basketQty()} requested units">Request <b>${basketQty()}</b></button></div>`:''}
         ${!admin&&isDemoAccount()?`<div class="demoAccountBanner"><b>DEMO ACCOUNT</b><span>Sample institutional data · Explore freely · Actions are simulated and reset on refresh.</span></div>`:''}
         <div class="contentWrap v7ContentWrap">${content}</div>
       </main>
@@ -2458,6 +2460,35 @@
     const brands=[...new Set((familyBrands.length&&!p.localCatalogueRefresh?familyBrands:[exactBrand,...familyBrands]).filter(real))];
     return brands.length?`<div class="pscBrandChoices" data-brand-row="${esc(p.pscSku)}" aria-label="Brand options">${brands.map(b=>p.localCatalogueRefresh&&b===exactBrand?`<button type="button" class="selected" data-product-view="${esc(p.pscSku)}" aria-label="View ${esc(b)} product">${esc(b)}</button>`:`<button type="button" data-psc-family-open="${esc(familyId)}" aria-label="Review ${esc(b)} options and specifications">${esc(b)}</button>`).join('')}</div>`:`<div class="pscBrandChoices" data-brand-row="${esc(p.pscSku)}"><small>Brand confirmed at quotation</small></div>`;
   }
+  // Browser-local preferences only: no catalogue copies, new schema or order writes.
+  function wishlistStorageKey(){
+    return session?.user?.id&&authContext?.school?.id
+      ? `psc-wishlist-v1:${encodeURIComponent(session.user.id)}:${encodeURIComponent(authContext.school.id)}` : null;
+  }
+  function wishlistKeys(){
+    try{const value=JSON.parse(localStorage.getItem(wishlistStorageKey())||'[]');return new Set(Array.isArray(value)?value.filter(v=>typeof v==='string'&&/^(family|sku):/.test(v)).slice(0,1000):[]);}catch{return new Set();}
+  }
+  function wishlistProductKey(p){return p._familyGroup?`family:${p._familyGroup.id}`:`sku:${p.pscSku}`;}
+  function wishlistControl(p){
+    if(!wishlistStorageKey())return '';
+    const key=wishlistProductKey(p),saved=wishlistKeys().has(key),name=p._familyGroup?.name||p.catalogueDisplayName||p.name;
+    return `<button type="button" class="wishlistToggle" data-wishlist-toggle="${esc(key)}" aria-pressed="${saved}" aria-label="${saved?'Remove':'Save'} ${esc(name)} ${saved?'from':'to'} Wishlist" title="${saved?'Remove from Wishlist':'Save to Wishlist'}">${icon('heart')}<span class="wishlistLabel">${saved?'Saved':'Save'}</span></button>`;
+  }
+  function wishlistPage(){
+    const all=catalogueProducts(),groups=catalogueCardRows(all),saved=[...wishlistKeys()];
+    const rows=saved.map(key=>key.startsWith('family:')?groups.find(p=>p._familyGroup&&wishlistProductKey(p)===key):all.find(p=>`sku:${p.pscSku}`===key));
+    return shell(`<div class="pageHeader customerSimpleHeader"><div><h1>Wishlist</h1><p>Keep useful products together for your next requirement.</p><small class="smallMuted">Saved on this device for this signed-in user and clinic. Review the exact product and pack in Details before adding to your Supply Request.</small></div><button class="button primary" data-go="portal/catalogue">Browse catalogue</button></div>${saved.length?`<div class="v25ProductGrid wishlistGrid">${rows.map((p,i)=>p?productCard(p):`<article class="wishlistUnavailable"><h3>Saved listing unavailable</h3><p>This listing is no longer in the current catalogue.</p><button type="button" class="button outline" data-wishlist-toggle="${esc(saved[i])}">Remove saved listing</button></article>`).join('')}</div>`:'<div class="emptyState"><h2>Your Wishlist is ready</h2><p>Use the heart beside View details to save a product. Saving does not add it to a request.</p></div>'}`);
+  }
+  function toggleWishlist(control){
+    const storageKey=wishlistStorageKey();if(!storageKey)return;
+    const key=control.dataset.wishlistToggle,saved=wishlistKeys(),removing=saved.has(key);
+    if(removing)saved.delete(key);else{if(saved.size>=1000){toast('<strong>Wishlist is full.</strong><br>Remove a saved item first.');return;}saved.add(key);}
+    try{localStorage.setItem(storageKey,JSON.stringify([...saved]));}catch{toast('<strong>Could not save Wishlist.</strong><br>Device storage is unavailable.');return;}
+    if(currentRoute()==='portal/wishlist')renderUi({focusSelector:'[data-wishlist-toggle], [data-go="portal/catalogue"]',transition:false});
+    else document.querySelectorAll('[data-wishlist-toggle]').forEach(button=>{if(button.dataset.wishlistToggle!==key)return;button.setAttribute('aria-pressed',String(!removing));const label=button.querySelector('.wishlistLabel');if(label)label.textContent=removing?'Save':'Saved';button.setAttribute('aria-label',button.getAttribute('aria-label').replace(/^(Save|Remove) /,removing?'Save ':'Remove ').replace(/ (to|from) Wishlist$/,removing?' to Wishlist':' from Wishlist'));button.title=removing?'Save to Wishlist':'Remove from Wishlist';});
+    toast(removing?'<strong>Removed from Wishlist.</strong>':'<strong>Saved to Wishlist.</strong>');
+  }
+
   function productCard(p){
     const needId=clinicalNeedIds(p)[0]||'all';
     const need=clinicalNeedMeta(needId);
@@ -2482,7 +2513,7 @@
         ${currentRoute().startsWith('portal/catalogue/dha-')&&p.dhaMapped?`<small class="pscDhaStatus">${esc(p.dhaStatus==='Strict'?'Required category':p.dhaStatus||'Mapped requirement')}${p.dhaReference?` · ${esc(p.dhaReference)}`:''}${p.dhaStatus==='Conditional'&&p.dhaCondition?`<br>${esc(p.dhaCondition)}`:''}</small>`:''}
       </div>
       <div class="canvaCardActions exactCanvaActions">
-        <button class="canvaDetails" data-product-view="${p.pscSku}">View details <span aria-hidden="true">→</span></button>
+        <button class="canvaDetails" data-product-view="${p.pscSku}">View details <span aria-hidden="true">→</span></button>${wishlistControl(p)}
       </div>
     </article>`;
   }
@@ -3021,7 +3052,7 @@
       <div class="productDetailGrid fluidProductGrid">
         <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).filter(m=>window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url).map(m=>`<img src="${esc(window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
         <div class="detailContentPane fluidDetailContent">
-          <div class="professionalPurchaseIdentity"><h3>${esc(displayName)}</h3><p>${esc(pack)}</p></div>${productVariantSelector(p)}${cataloguePricePreview(p)}${catalogueRetailPriceNotice()}
+          <div class="professionalPurchaseIdentity"><h3>${esc(displayName)}</h3><p>${esc(pack)}</p></div>${wishlistControl(p)}${productVariantSelector(p)}${cataloguePricePreview(p)}${catalogueRetailPriceNotice()}
           ${window.PSC_PRODUCT_PRESENTATION.factsHtml(p)}${window.PSC_PRODUCT_PRESENTATION.documentsHtml(p)}<div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to the applicable DHA clinic requirement.</b></div>`:''}</div>
           <div class="productDisclosureList">
             <details open><summary><span>Specification</span><i>+</i></summary><div><p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
@@ -3524,6 +3555,7 @@
       case 'login': html=loginPage();break;
       case 'portal/dashboard': html=portalDashboard();break;
       case 'portal/catalogue': html=catalogue();break;
+      case 'portal/wishlist': html=wishlistPage();break;
       case 'portal/requests': html=requestsPage();break;
       case 'portal/replenish': html=replenishPage();break;
       case 'portal/documents': html=documentsPage();break;
@@ -3620,6 +3652,8 @@
 
   // Delegation includes current feature content inserted after the shell render.
   document.addEventListener('click',event=>{
+    const saved=event.target.closest?.('[data-wishlist-toggle]');
+    if(saved&&document.getElementById('app')?.contains(saved)){event.preventDefault();toggleWishlist(saved);return;}
     const control=event.target.closest?.('[data-go]');
     if(!control || event.defaultPrevented || control.disabled || !document.getElementById('app')?.contains(control)) return;
     event.preventDefault();
@@ -3655,7 +3689,7 @@
     document.querySelectorAll('[data-mobile-open]').forEach(el=>el.addEventListener('click',()=>{ui.mobile=true;render()}));
     document.querySelectorAll('[data-mobile-close]').forEach(el=>el.addEventListener('click',()=>{ui.mobile=false;render()}));
     document.querySelectorAll('[data-campus]').forEach(el=>el.addEventListener('change',e=>{state.campus=e.target.value;save();render()}));
-    document.querySelectorAll('[data-account-switcher]').forEach(el=>el.addEventListener('click',()=>{ui.accountMenu=!ui.accountMenu;render()}));
+    document.querySelectorAll('[data-account-switcher]').forEach(el=>el.addEventListener('click',()=>{ui.accountMenu=!ui.accountMenu;renderUi({focusSelector:ui.accountMenu?'#psAccountMenu [data-school-select],#psAccountMenu [data-signout]':'[data-account-switcher]',transition:false})}));
     document.querySelectorAll('[data-school-select]').forEach(el=>el.addEventListener('click',async()=>{await switchInstitutionAccount(el.dataset.schoolSelect)}));
     document.querySelectorAll('[data-basket]').forEach(el=>el.addEventListener('click',openBasketOverlay));
     document.querySelectorAll('[data-close-basket]').forEach(el=>el.addEventListener('click',e=>{if(el.tagName==='BUTTON'||e.target===el)closeBasketOverlay();}));

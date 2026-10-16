@@ -17,7 +17,9 @@
     '[data-option-review]',
     '[data-save-storefront]',
     '[data-workshop-save]',
-    '[data-approve-quote]'
+    '[data-approve-quote]',
+    '[data-signout]',
+    '[data-school-select]'
   ].join(',');
 
   // Motion never schedules a business action. All state changes remain synchronous.
@@ -87,6 +89,23 @@
     return target.closest('button,.button,[role="button"]');
   }
 
+  // A brief response glyph acknowledges instant actions without holding them up.
+  // aria-busy is reserved for real asynchronous work, below.
+  let response=null;
+  const responseAttributes=['data-go','data-basket','data-add','data-family-quote','data-product-view','data-public-product-view','data-account-switcher','data-ps-prepare'];
+  function applyActionResponse(){
+    if(!response||Date.now()>response.until)return;
+    const current=[...document.querySelectorAll('['+response.attr+']')].find(el=>el.getAttribute(response.attr)===response.value&&!el.disabled&&el.getClientRects().length);
+    current?.classList.add('ux32-responding');
+  }
+  function respond(button){
+    const attr=responseAttributes.find(name=>button.hasAttribute(name));if(!attr)return;
+    const next={attr,value:button.getAttribute(attr),until:Date.now()+240};response=next;
+    button.classList.add('ux32-responding');
+    requestAnimationFrame(applyActionResponse);
+    setTimeout(()=>{if(response!==next)return;response=null;document.querySelectorAll('.ux32-responding').forEach(el=>el.classList.remove('ux32-responding'));},260);
+  }
+
   function startBusy(button){
     if(!button || button.classList.contains('ux32-loading')) return;
     button.classList.add('ux32-loading');
@@ -146,7 +165,7 @@
 
     if(button.matches(ASYNC_CLICK_SELECTORS)){
       startBusy(button);
-    }
+    }else{respond(button);}
 
   }, true);
 
@@ -193,7 +212,7 @@
   });
   // Keep Tab inside the active sheet; exiting snapshots cannot receive focus.
   document.addEventListener('keydown',event=>{
-    if(event.key==='Escape'){document.querySelector('#app [data-close-basket],#app button[data-modal-close]')?.click();return;}
+    if(event.key==='Escape'){const account=document.querySelector('[data-account-switcher][aria-expanded="true"]');if(account){account.click();return;}document.querySelector('#app [data-close-basket],#app button[data-modal-close]')?.click();return;}
     if(event.key!=='Tab')return;
     const panel=document.querySelector('[data-psc-family-detail-root] [role="dialog"],#app .requestDrawer,#app .fluidProductShell');
     if(!panel)return;
@@ -207,6 +226,7 @@
   function inspectFeedback(){
     enhanceDisabledBusyStates();
     applyRouteEntrance();
+    applyActionResponse();
 
     const toasts = document.querySelectorAll('.toast');
     if(toasts.length > feedbackCount){

@@ -125,8 +125,8 @@ main.workshopPage{
   min-width:0;
   min-height:172px;
   padding:26px;
-  border:1px solid rgba(20,20,18,.12);
-  border-radius:16px;
+  border:0;
+  border-radius:8px;
   display:flex;
   flex-direction:column;
   gap:15px;
@@ -143,7 +143,7 @@ main.workshopPage{
 .workshopModuleTopV50{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .workshopModuleTopV50>b{font-size:9px;letter-spacing:.11em;color:#6c6861;font-weight:700}
 .workshopModuleTopV50>i{
-  width:34px;height:34px;border:1px solid rgba(20,20,18,.12);border-radius:50%;
+  width:34px;height:34px;border:0;border-radius:0;
   display:grid;place-items:center;background:rgba(255,255,255,.42)
 }
 .workshopModuleTopV50 svg{width:16px;height:16px;fill:none;stroke:#20211e;stroke-width:1.4}
@@ -223,8 +223,8 @@ main.workshopPage{
 .workshopGuideCardV50{
   min-width:0;
   min-height:280px;
-  border:1px solid rgba(20,20,18,.11);
-  border-radius:17px;
+  border:0;
+  border-radius:8px;
   overflow:hidden;
   box-shadow:none;
   background:rgba(255,254,250,.92)!important;
@@ -272,7 +272,7 @@ main.workshopPage{
   color:#5c5953;
   font-size:9px;
 }
-.workshopGuideFootV50 i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.35)}
+.workshopGuideFootV50 i{width:26px;height:26px;border-radius:0;display:grid;place-items:center;background:rgba(255,255,255,.35)}
 .workshopGuideFootV50 svg{width:14px;height:14px;fill:none;stroke:#22231f;stroke-width:1.35}
 .workshopGuideCardV50:hover{border-color:rgba(10,151,148,.34)}
 
@@ -404,7 +404,7 @@ main.workshopPage{
 }
 .workshopArticleLeadV50>aside{padding-bottom:3px;display:grid;gap:7px;color:#757068;font-size:10px}
 .workshopArticleActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-.workshopArticleActions button{border:1px solid #d2ccc1;background:rgba(255,255,255,.55);border-radius:999px;padding:7px 10px;color:#403d38;font-size:9px;font-weight:700}
+.workshopArticleActions button{border:1px solid #d2ccc1;background:rgba(255,255,255,.55);border-radius:8px;padding:7px 10px;color:#403d38;font-size:9px;font-weight:700}
 .workshopArticleActions button:hover{border-color:#8fc9c6;color:#0a7774}
 
 .workshopDoNowV50,
@@ -413,7 +413,7 @@ main.workshopPage{
   margin:24px auto 0;
 }
 .workshopDoNowV50{padding:12px 0;border-top:1px solid var(--ws50-line);border-bottom:1px solid var(--ws50-line);font-size:9px;letter-spacing:.12em;color:#65615a;font-weight:750}
-.workshopReadinessChainV50{padding:16px 18px;border:1px solid var(--ws50-line);border-radius:14px;background:rgba(255,255,255,.54)}
+.workshopReadinessChainV50{padding:16px 18px;border:1px solid var(--ws50-line);border-radius:8px;background:rgba(255,255,255,.54)}
 .workshopReadinessChainV50>span{font-size:9px;letter-spacing:.12em;color:#6d6860;font-weight:750}
 .workshopReadinessChainV50>div{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:11px}
 .workshopReadinessChainV50 b{font-size:12px}.workshopReadinessChainV50 i{font-style:normal;color:var(--ws50-teal)}
@@ -469,7 +469,7 @@ main.workshopPage{
   gap:10px;
   margin-top:22px;
 }
-.workshopSignatureV50 article{padding:16px;border:1px solid var(--ws50-line);border-radius:14px;background:rgba(255,255,255,.56)}
+.workshopSignatureV50 article{padding:16px;border:1px solid var(--ws50-line);border-radius:8px;background:rgba(255,255,255,.56)}
 .workshopSignatureV50 span{display:block;margin-bottom:9px;font-size:9px;letter-spacing:.1em;color:#0a7e7a;font-weight:800}
 .workshopSignatureV50 p{margin:0;color:#57534d;font-size:11px;line-height:1.52}
 .workshopRelatedV50{margin-top:42px;padding-top:22px;border-top:1px solid var(--ws50-line)}
