@@ -9,3 +9,7 @@ A restrained rectangular WhatsApp PS link uses the already published +971 55 351
 Browser verification covers mobile/desktop, public and client pages, reduced motion, direction reveal at deep scroll, stable content position, menu-to-Wishlist navigation, request overlay and search focus, correct WhatsApp destination, no request-button overlap and no horizontal overflow. Existing identity/image/price/account/request regression suites remain release gates.
 
 Base production commit: eb369030184f177819b3688ce5afc487bf3c9457. This change is prepared for preview and verification; no additional production release is assumed.
+
+## 17 October follow-up and release approval
+
+Moe approved deployment with an additional refinement: combine professional facts and product specification into one native Details section, and use a blurred/faded existing-text teaser for disclosure openers with a gentle blur-to-clear reveal. The + remains a + when open. Facts/specification copy, exact variant identity, documentation and requirement distinctions are retained. Previews are aria-hidden, contain no invented copy, and closed content remains natively collapsed. Reduced-motion mode removes blur/reveal animation. The existing lifecycle observer and motion helper are reused. Release remains gated on full CI and live verification.

@@ -249,9 +249,9 @@
           <div class="professionalPurchaseIdentity"><span class="eyebrow">${selected?'Selected product':'Request by specification'}</span><h3>${esc(selected?.exact_product_name||f.family_name)}</h3><p>${esc(pack)}</p></div>
           ${preferenceBlock(f)}
           <div class="professionalCommercial">${selected?optionPrice(selected):'<span class="pscOptionPrice"><b>Request quotation</b></span>'}<p class="professionalAvailability">${esc(familyAvailabilityLabel(f))}</p>${window.PSC_RETAIL_PRICE_NOTICE_HTML?.()||''}</div>
-          ${window.PSC_PRODUCT_PRESENTATION.factsHtml(factRecord)}${window.PSC_PRODUCT_PRESENTATION.documentsHtml(factRecord)}
+          ${window.PSC_PRODUCT_PRESENTATION.documentsHtml(factRecord)}
           <div class="productDisclosureList pscFamilyDisclosureList">
-            <details><summary><span>Product specification</span><i>+</i></summary><div>${selected?.verified_description?`<p>${esc(selected.verified_description)}</p>`:''}<p>${esc(f.commercial_specification||'Exact specification confirmed in quotation.')}</p><small>Family specification; the selected exact product and pack remain separate.</small></div></details>
+            <details><summary><span>Details</span><i>+</i></summary><div>${window.PSC_PRODUCT_PRESENTATION.factsHtml(factRecord,{heading:false})}${selected?.verified_description?`<p>${esc(selected.verified_description)}</p>`:''}<p>${esc(f.commercial_specification||'Exact specification confirmed in quotation.')}</p><small>Family specification; the selected exact product and pack remain separate.</small></div></details>
             ${dha?`<details><summary><span>Requirement mapping</span><i>+</i></summary><div class="pscFamilyRegulatoryDisclosure"><div class="pscFamilyRegulatoryTitle"><img src="${DHA_ICON}" alt="DHA requirement"><strong>Mapped to the applicable DHA clinic requirement.</strong></div><p>${esc(f.requirement_reference||'DHA requirement')} · ${esc(f.dha_status||'Status to verify')}</p>${f.exact_controlled_wording?`<p>${esc(f.exact_controlled_wording)}</p>`:''}<small>Conditional requirements and alternatives retain their source conditions. Requirement mapping is not DHA product approval.</small></div></details>`:''}
             <details><summary><span>Supply & documentation</span><i>+</i></summary><div><p>${kind==='medicine'?'Licensed supply route, registration, storage, batch/expiry and recipient authorization are confirmed before commitment.':'Exact specification, included components, compatibility, delivery and applicable warranty are confirmed in quotation.'}</p><p>Manufacturer documentation is provided when verified for the selected exact product.</p></div></details>
           </div>
@@ -273,7 +273,7 @@
       const template=document.createElement('template');template.innerHTML=detailHtml();
       root.querySelector('.pscFamilyModalShell').replaceChildren(...template.content.querySelector('.pscFamilyModalShell').childNodes);
     }else root.innerHTML=detailHtml();
-    document.documentElement.classList.add('pscFamilyDetailOpen');bindDetail(root);
+    document.documentElement.classList.add('pscFamilyDetailOpen');bindDetail(root);window.PSC_DISCLOSURES?.enhance(root);
     if(existing){
       root.querySelectorAll('details').forEach((el,i)=>el.open=!!expanded[i]);
       window.PSC_MOTION?.restore(saved);
