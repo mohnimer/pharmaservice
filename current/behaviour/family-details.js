@@ -249,6 +249,7 @@
           <div class="professionalPurchaseIdentity"><h3>${esc(selected?.exact_product_name||f.family_name)}</h3><p>${esc(pack)}</p></div>
           ${preferenceBlock(f)}
           <div class="professionalCommercial">${selected?optionPrice(selected):''}${selected&&availability!=='Availability confirmed at quotation'?`<p class="professionalAvailability">${esc(availability)}</p>`:''}${window.PSC_RETAIL_PRICE_NOTICE_HTML?.()||''}</div>
+          ${window.PSC_PRODUCT_PRESENTATION.whatsappHtml()}
           ${window.PSC_PRODUCT_PRESENTATION.documentsHtml(factRecord)}
           <div class="productDisclosureList pscFamilyDisclosureList">
             <details><summary><span>Details</span><i>+</i></summary><div>${window.PSC_PRODUCT_PRESENTATION.factsHtml(factRecord,{heading:false})}${selected?.verified_description?`<p>${esc(selected.verified_description)}</p>`:''}<p>${esc(f.commercial_specification||'Exact specification confirmed in quotation.')}</p><small>Family specification; the selected exact product and pack remain separate.</small><p class="smallMuted">${esc(preview.evidence)}</p></div></details>

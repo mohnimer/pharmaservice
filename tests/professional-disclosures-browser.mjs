@@ -13,6 +13,10 @@ try{for(const [width,motion] of [[320,'no-preference'],[1440,'no-preference'],[3
  await ctx.route('**/*',r=>{const host=new URL(r.request().url()).hostname;if(host==='127.0.0.1')return r.continue();return r.fulfill({contentType:host==='cdn.jsdelivr.net'?'text/javascript':'text/plain',body:host==='cdn.jsdelivr.net'?readFileSync('tests/mock-supabase.js','utf8'):''});});
  const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(`http://127.0.0.1:${server.address().port}/#portal/catalogue/all`);await page.locator('.pscEditorialCard').first().waitFor();
+
+ const multiCard=page.locator('.pscFamilyCard').filter({has:page.locator('.catalogueIdentityLine',{hasText:'2 variants'})}).first();await multiCard.waitFor();
+ assert.equal(await multiCard.locator('.pack').count(),0);assert.equal(await multiCard.locator('.catalogueIdentityLine').innerText(),'2 variants');
+ await multiCard.scrollIntoViewIfNeeded();await page.screenshot({animations:'disabled',path:`test-results/disclosures/${width}-${motion}-variant-card.png`});
  await page.evaluate(()=>window.PSC_OPEN_FAMILY_DETAIL('PSC-SC-B19'));
  const familySheet=page.locator('.pscFamilyProductSheet');await familySheet.waitFor();
  assert.equal(await familySheet.locator('.detailImageMeta small').count(),0,'Photo evidence belongs in Details');
@@ -21,6 +25,12 @@ try{for(const [width,motion] of [[320,'no-preference'],[1440,'no-preference'],[3
  assert((await familySheet.locator('.detailImageMeta b').innerText()).length>0,'Pictured identity remains visible');
  assert((await familySheet.locator('.pscFamilyDisclosureList details').first().textContent()).includes('Representative family preview only'),'Representative evidence remains in Details');
  assert.equal(await familySheet.locator('.pscRetailPriceNotice').count(),1);
+ const contact=familySheet.locator('.psWhatsAppShortcut');assert.equal(await contact.count(),1);await contact.scrollIntoViewIfNeeded();
+ const contactUrl=new URL(await contact.getAttribute('href'));assert.equal(contactUrl.hostname,'wa.me');assert.equal(contactUrl.pathname,'/971553511335');assert.equal(contactUrl.searchParams.get('text'),'Hello Pharma Service, I have a question about an institutional supply enquiry.');assert.equal(await contact.getAttribute('target'),'_blank');assert((await contact.getAttribute('rel')).includes('noopener'));
+ assert.equal(await contact.innerText(),'Ask on WhatsApp');assert.equal(await contact.evaluate(el=>getComputedStyle(el).position),'static','Product enquiry stays in content flow');
+ const contactBox=await contact.boundingBox();assert(contactBox.height>=44&&contactBox.width<200,'Compact visual with an accessible tap area');
+ assert(await contact.evaluate(el=>el.previousElementSibling.classList.contains('professionalCommercial')),'Enquiry belongs below purchasing information');
+
  await page.screenshot({animations:'disabled',path:`test-results/disclosures/${width}-${motion}-family-cleanup.png`});
  await page.evaluate(id=>window.PSC_OPEN_FAMILY_DETAIL(id),chosen.family_id);await page.locator('[data-family-variant]').selectOption(chosen.product_option_id);
  const sheet=page.locator('.pscFamilyProductSheet'),details=sheet.locator('.productDisclosureList details').first(),summary=details.locator('summary');

@@ -18,6 +18,9 @@ async function setQty(value){const e=await ready('[data-request-quantity]');e.va
 function stored(){return JSON.parse(w.sessionStorage.getItem('pscClinicPortalDemoStateV12_1')||w.localStorage.getItem('pscClinicPortalStateV12_1')||'{}');}
 try{
  await ready('.productCard');
+ const grouped=[...w.document.querySelectorAll('.pscFamilyCard')];assert(grouped.length>0);
+ for(const card of grouped){const text=card.querySelector('.catalogueIdentityLine').textContent;assert(/^\d+ variants?$/.test(text),'Family card uses a plain variant count');if(!text.startsWith('1 '))assert.equal(card.querySelector('.pack'),null,'Multi-variant cards do not imply a common pack');}
+
  const presentation=w.PSC_PRODUCT_PRESENTATION;
  assert.equal(presentation.quantity(-3),1);assert.equal(presentation.quantity(0),1);assert.equal(presentation.quantity(''),1);assert.equal(presentation.quantity(Infinity),1);assert.equal(presentation.quantity(2.9),2);
  for(const category of ['pharmaceuticals','supplements','consumables','devices','capital']){
@@ -35,6 +38,7 @@ try{
  w.PSC_NAVIGATE('portal/catalogue/allergy');await pause();
  await click('[data-product-view="'+p.pscSku+'"]');
  assert((await ready('.professionalPurchaseIdentity')).textContent.includes(p.name));
+ assert.equal(w.document.querySelectorAll('.productDetailModal .psWhatsAppShortcut').length,1,'Exact products share the compact enquiry link');
  await setQty(0);assert.equal(w.document.querySelector('[data-request-quantity]').value,'1');
  await click('[data-quantity-delta="-1"]');assert.equal(w.document.querySelector('[data-request-quantity]').value,'1');
  await setQty(10);await click('.requestAddButton');
