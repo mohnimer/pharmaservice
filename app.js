@@ -1861,7 +1861,7 @@
     const workshop=workshopForProduct(p,1)[0];
     return `<article class="publicCatalogueCard ${p._familyGroup?'pscFamilyCard':''} ${!imageUrl?'pscFamilyNoPhoto':''}" data-family-listing="${esc(p._familyGroup?.id||'')}">
       <button class="publicCatalogueVisual publicProductView" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-public-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details">${imageUrl?`<img data-family-example="${familyPhoto?'true':'false'}" src="${esc(imageUrl)}" alt="${esc(familyPhoto?.label||displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'">`:`<span>${esc(need.label)}</span>`}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>
-      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount" data-catalogue-brand-sku="${esc(p.pscSku)}">Brands Available: ${catalogueBrandCount(p)}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(pack)}</p>${cataloguePricePreview(p)}<small class="catalogueOptionCount">${p._familyGroup&&p._familyGroup.members.length>1?'Select exact product and pack in Details':''}</small>${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
+      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount" data-catalogue-brand-sku="${esc(p.pscSku)}">Brands Available: ${catalogueBrandCount(p)}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(pack)}</p>${cataloguePricePreview(p)}${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
       <button class="button outline full" data-public-product-view="${p.pscSku}">View details</button>
     </article>`;
   }
@@ -2506,12 +2506,12 @@
 
     return `<article data-family-listing="${esc(p._familyGroup?.id||'')}" class="productCard ${p._familyGroup?'pscFamilyCard':''} ${!displayImage?'pscFamilyNoPhoto':''} v25ProductCard v261ProductCard v262ProductCard canvaProductCard exactCanvaCard pscEditorialCard">
       ${visual}
-      <div class="catalogueIdentityLine">${esc(p._familyGroup?`${p.name} · ${p._familyGroup.members.length} options`:p.brand||'')}</div>
+      <div class="catalogueIdentityLine">${esc(p._familyGroup?`${p._familyGroup.members.length} ${p._familyGroup.members.length===1?'variant':'variants'}`:p.brand||'')}</div>
       <div class="canvaCardBody exactCanvaBody">
         <button class="productTitleButton" data-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button>
-        <p class="pack">${esc(pack)}</p>${catalogueImageNote(p)||'<small class="catalogueImageNote catalogueImageNoteEmpty" aria-hidden="true"></small>'}
+        ${p._familyGroup?.members.length>1?'':`<p class="pack">${esc(pack)}</p>`}${catalogueImageNote(p)||'<small class="catalogueImageNote catalogueImageNoteEmpty" aria-hidden="true"></small>'}
 
-        ${cataloguePricePreview(p)}<small class="catalogueOptionCount">${p._familyGroup&&p._familyGroup.members.length>1?'Select exact product and pack in Details':''}</small>
+        ${cataloguePricePreview(p)}
         ${currentRoute().startsWith('portal/catalogue/dha-')&&p.dhaMapped?`<small class="pscDhaStatus">${esc(p.dhaStatus==='Strict'?'Required category':p.dhaStatus||'Mapped requirement')}${p.dhaReference?` · ${esc(p.dhaReference)}`:''}${p.dhaStatus==='Conditional'&&p.dhaCondition?`<br>${esc(p.dhaCondition)}`:''}</small>`:''}
       </div>
       <div class="canvaCardActions exactCanvaActions">

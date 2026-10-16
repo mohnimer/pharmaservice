@@ -13,6 +13,10 @@ try{for(const [width,motion] of [[320,'no-preference'],[1440,'no-preference'],[3
  await ctx.route('**/*',r=>{const host=new URL(r.request().url()).hostname;if(host==='127.0.0.1')return r.continue();return r.fulfill({contentType:host==='cdn.jsdelivr.net'?'text/javascript':'text/plain',body:host==='cdn.jsdelivr.net'?readFileSync('tests/mock-supabase.js','utf8'):''});});
  const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(`http://127.0.0.1:${server.address().port}/#portal/catalogue/all`);await page.locator('.pscEditorialCard').first().waitFor();
+
+ const multiCard=page.locator('.pscFamilyCard').filter({has:page.locator('.catalogueIdentityLine',{hasText:'2 variants'})}).first();await multiCard.waitFor();
+ assert.equal(await multiCard.locator('.pack').count(),0);assert.equal(await multiCard.locator('.catalogueIdentityLine').innerText(),'2 variants');
+ await multiCard.scrollIntoViewIfNeeded();await page.screenshot({animations:'disabled',path:`test-results/disclosures/${width}-${motion}-variant-card.png`});
  await page.evaluate(()=>window.PSC_OPEN_FAMILY_DETAIL('PSC-SC-B19'));
  const familySheet=page.locator('.pscFamilyProductSheet');await familySheet.waitFor();
  assert.equal(await familySheet.locator('.detailImageMeta small').count(),0,'Photo evidence belongs in Details');
