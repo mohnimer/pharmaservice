@@ -277,7 +277,7 @@
       window.PSC_MOTION?.restore(saved);
       const image=root.querySelector('.pscFamilyPreview img');
       if(image){const src=image.src;const reveal=()=>{if(image.isConnected&&image.src===src)window.PSC_MOTION?.animate(image,[{opacity:.35},{opacity:1}],180);};if(image.complete)reveal();else image.addEventListener('load',reveal,{once:true});}
-      window.PSC_MOTION?.animate(root.querySelector('.professionalPurchaseIdentity'),[{opacity:.5},{opacity:1}],180);
+      window.PSC_MOTION?.animate(root.querySelector('#pscFamilyTitle'),[{opacity:.5},{opacity:1}],180);
     }else root.querySelector('.productBackButton')?.focus({preventScroll:true});
   }
   function close(){
