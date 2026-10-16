@@ -24,3 +24,10 @@ Local: repeatable production build; shell checks; exact identity/evidence/stock/
 The dedicated GitHub workflow runs the same isolated checks plus Playwright at 1440, 768 and 390 px, checking exact photographs, pack/request identity, quantity 10, sticky action visibility, grid columns and horizontal overflow. Existing photo-standard checks remain. Artifacts: `professional-catalogue-review` and the existing variant visual review. Local browser QA is unavailable in this environment because its supported browser-control skill is absent; rendered screenshots must be reviewed from CI before production approval.
 
 Production is not authorized. Preview deployment and subsequent production approval remain separate.
+
+## Preview and review record
+
+Vercel preview: https://pharmaservice-git-feature-pro-6b0123-mohameds-projects-9022ad5a.vercel.app (existing Vercel authentication remains enabled).
+Draft review: https://github.com/mohnimer/pharmaservice/pull/42.
+
+Desktop, tablet and mobile product screenshots have been inspected. The corrected tablet scroll container keeps the request action visible. The existing customer-account/mailbox workflow passed, including portal/admin/Workshop layout checks, photo framing, sports photographs and the 194-binding photograph suite. The new tests additionally exercise exact-SKU merging across entry points, actual submission payloads against an isolated transport, and saved-request rehydration/reorder. Final per-commit CI results are attached to PR #42. No production release or workbook/data synchronization is part of this change.

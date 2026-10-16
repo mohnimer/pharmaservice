@@ -21,12 +21,13 @@
   }
   function facts(p={}){
     const view=profile(p), out=[];
-    const values={brand:p.brand,model:p.model,pack:p.cataloguePack||p.pack,...(view.info?.fields||{})};
+    const values={model:p.model,...(view.info?.fields||{}),brand:p.brand,pack:p.cataloguePack||p.pack};
     if(values.brand&&!/^(specification-led|institutional range|generic|unbranded|various|none|n\/?a|PS|PSC)$/i.test(values.brand))out.push(['Brand',values.brand]);
     for(const [key,label] of view.fields){
       let value=values[key];
       // Newly supplied structured fields need explicit field-level source verification.
       if(view.info?.fields?.[key]!==undefined&&!(view.info.verifiedFields||[]).includes(key))value=key==='pack'?(p.cataloguePack||p.pack):key==='model'?p.model:null;
+      if(Array.isArray(value)&&value.every(x=>typeof x==='string'))value=value.join(key==='activeIngredients'?' + ':'; ');
       if(value===null||value===undefined||value===''||typeof value==='object')continue;
       out.push([label,String(value)]);
     }

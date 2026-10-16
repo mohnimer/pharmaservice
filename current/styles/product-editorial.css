@@ -3,8 +3,8 @@
 :root{--ps-ui-ink:#203932;--ps-ui-muted:#61736d;--ps-ui-line:#dce5e1;--ps-ui-soft:#f4f7f5;--ps-ui-accent:#087d75;--ps-ui-radius:8px}
 #app .customerShell .v25ProductGrid:has(.pscEditorialCard){display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:32px 24px!important;align-items:stretch!important}
 #app .customerShell .productCard.pscEditorialCard{display:flex!important;flex-direction:column!important;min-width:0!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;padding:0!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;overflow:visible!important;grid-column:auto!important;grid-row:auto!important}
-#app .customerShell .pscEditorialCard .exactCanvaBody{display:block!important;flex:1!important;min-height:0!important;padding:8px 0 12px!important;border:0!important}
-#app .customerShell .pscEditorialCard .productTitleButton{display:block!important;width:100%!important;height:auto!important;min-height:0!important;text-align:left!important;padding:0!important;margin:0!important;background:none!important;border:0!important}
+#app .customerShell .pscEditorialCard .exactCanvaBody{display:block!important;flex:1!important;min-height:0!important;padding:8px 0 12px!important;border:0!important;background:transparent!important}
+#app .customerShell .pscEditorialCard .productTitleButton{display:block!important;width:100%!important;height:auto!important;min-height:0!important;text-align:left!important;padding:0!important;margin:0!important;background:none!important;border:0!important;background:transparent!important}
 #app .customerShell .pscEditorialCard .productTitleButton h3{margin:0!important;font-size:17px!important;line-height:1.4!important;font-weight:600!important;color:var(--ps-ui-ink)!important;min-height:0!important}
 #app .customerShell .pscEditorialCard .pack{margin:8px 0!important;font-size:13px!important;line-height:1.5!important;color:var(--ps-ui-muted)!important}
 .catalogueIdentityLine{min-height:20px;margin-top:14px;font-size:12px;line-height:1.5;color:var(--ps-ui-muted)}
@@ -33,7 +33,7 @@
 .professionalSelector{display:grid;gap:8px;margin:20px 0 24px}
 .professionalSelector label{font-size:13px;font-weight:600;color:var(--ps-ui-ink)}
 .professionalSelector :is(select,textarea){display:block;width:100%;max-width:100%;box-sizing:border-box;min-height:48px;border:1px solid #a8bcb4;border-radius:var(--ps-ui-radius);background:white;padding:12px;font:400 15px/1.5 'DM Sans',Arial,sans-serif;color:var(--ps-ui-ink)}
-.professionalSelector select{white-space:normal;text-overflow:ellipsis}
+.professionalSelector select{white-space:nowrap;text-overflow:ellipsis}
 .professionalSelectionNote{font-size:12px;line-height:1.6;color:var(--ps-ui-muted);margin:0}
 .professionalAvailability{font-size:13px;line-height:1.6;color:var(--ps-ui-muted);margin:10px 0}
 .professionalCommercial{padding:0 0 18px;border-bottom:1px solid var(--ps-ui-line)}

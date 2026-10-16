@@ -26,6 +26,8 @@ try{
  }
  assert.equal(presentation.facts({category:'Consumables'}).kind,'generic','Broad source category must not imply a verified clinical product class');
  assert(!presentation.factsHtml({professionalInformation:{status:'VERIFIED',source:'Fixture',category:'pharmaceuticals',fields:{strength:'999 mg'},verifiedFields:[]}}).includes('999 mg'));
+ const identity={brand:'Controlled brand',pack:'10 tablets',professionalInformation:{status:'VERIFIED',source:'Fixture',category:'pharmaceuticals',fields:{brand:'Unverified brand',pack:'50 tablets',activeIngredients:['Ingredient A','Ingredient B']},verifiedFields:['pack','activeIngredients']}};
+ const exactFacts=presentation.factsHtml(identity);assert(exactFacts.includes('Controlled brand'));assert(exactFacts.includes('10 tablets'));assert(!exactFacts.includes('50 tablets'));assert(!exactFacts.includes('Unverified brand'));assert(exactFacts.includes('Ingredient A + Ingredient B'));
  assert(!presentation.documentsHtml({professionalInformation:{status:'VERIFIED',source:'Fixture',documents:[{url:'javascript:alert(1)',verified:true,source:'Fixture'}]}}));
  assert(!w.document.querySelector('.productCard [data-add]'),'Cards have one details CTA rather than an unqualified add');
  // Exact local product: quantity 10, repeat addition, and same-family SKU separation.

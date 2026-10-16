@@ -52,7 +52,8 @@ try{for(const width of [1440,768,390]){
  await page.goto(base+'/#portal/catalogue/allergy');
  await page.locator('[data-product-view="PS-AC-417F1BC9E425"]').first().click();
  await page.locator('[data-request-quantity]').fill('10');await page.locator('.requestAddButton').click();
- await page.locator('.requestViewButton').click();
+ if(await page.locator('.requestViewButton').isVisible())await page.locator('.requestViewButton').click();
+ else{await page.locator('.productBackButton[data-modal-close]').click();await page.locator('[data-basket]:visible').first().click();}
  assert((await page.locator('.requestDrawer').innerText()).includes('Herpesan'));
  assert.equal(await page.locator('[data-basket-delta="PS-AC-417F1BC9E425|1"]').evaluate(e=>e.previousElementSibling.textContent),'10');
  await page.screenshot({path:`test-results/variant-visual-review/${width}-shared-request.png`});
