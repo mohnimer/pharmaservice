@@ -31,6 +31,7 @@ try{
   assert.equal((await sheet.locator('#pscFamilyTitle').innerText()).trim(),'Stainless steel dressing trolley (2 layer with castor wheels)');
   assert.equal(await sheet.locator('label[for="professionalVariant"]').innerText(),'Choose your brand');
   assert.equal((await sheet.locator('select[data-family-variant] option:first-child').innerText()).trim(),'No brand preference');
+  assert.equal((await sheet.locator('select[data-family-variant] option[value="other"]').innerText()).trim(),'Specify preferred brand or model');
   assert.equal(await sheet.locator('.professionalPurchaseIdentity,.detailImageMeta,.professionalFacts,.pscRetailPriceNotice').count(),0);
   assert.equal(await sheet.locator('.pscFamilyDisclosureList summary').count(),2);
   assert.equal(await sheet.locator('.pscFamilyReference .mono').innerText(),'PSC-SC-A18');
@@ -46,6 +47,7 @@ try{
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1),true);
   await page.screenshot({animations:'disabled',path:'test-results/family-detail/'+width+'-default.png'});
   await sheet.locator('[data-family-variant]').selectOption('other');
+  assert.equal(await sheet.locator('label[for="professionalSpecification"]').innerText(),'Preferred brand / model');
   await sheet.locator('[data-family-other-brand]').fill('Preferred model: stainless steel, 2 shelves');
   await sheet.locator('[data-request-quantity]').fill('3');
   await sheet.locator('[data-request-quantity]').blur();
