@@ -53,7 +53,9 @@
 #app .psWhatsAppShortcut svg{width:22px;height:22px;flex-shrink:0}
 #app .psWhatsAppShortcut:hover{background:#eef1ee}
 #app .psWhatsAppShortcut:focus-visible{outline:2px solid #087d75;outline-offset:3px}
-body:has(.fluidOverlay,.requestDrawerBackdrop,[data-psc-family-detail-root] [role="dialog"],dialog[open],.mobileOverlay.show,.publicNav.open) #app .psWhatsAppShortcut{display:none}
+body:has(.fluidOverlay,.requestDrawerBackdrop,[data-psc-family-detail-root] [role="dialog"],dialog[open],.mobileOverlay.show,.publicNav.open,.psLiveRequest.isOpen) #app .psWhatsAppShortcut{display:none}
+/* Keep the existing 310px desktop request column and its controls unobstructed. */
+@media(min-width:1101px){body:has(.psLiveRequest) #app .psWhatsAppShortcut{right:370px}}
 @media(max-width:1100px){
  #app .psWhatsAppShortcut{right:18px;bottom:calc(18px + env(safe-area-inset-bottom))}
  body:has(.psScopeMobileSummary) #app .psWhatsAppShortcut{bottom:calc(82px + env(safe-area-inset-bottom))}

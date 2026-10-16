@@ -24,7 +24,8 @@ try{for(const [width,role,motion] of [[390,'demo','no-preference'],[1440,'demo',
  if(motion==='reduce')assert.equal(await header.evaluate(el=>getComputedStyle(el).transitionDuration),'0s');
  assert(await contact.isVisible());
  if(role==='demo'){
-  if(width<=980){const action=page.locator('.psScopeMobileSummary');if(await action.isVisible()){const a=await action.boundingBox(),w=await contact.boundingBox();assert(w.y+w.height<=a.y-4,'WhatsApp must clear the request summary');}
+  if(width>1100){const panel=await page.locator('.psLiveRequest').boundingBox(),w=await contact.boundingBox();assert(w.x+w.width<=panel.x-4,'WhatsApp must stay outside the desktop request panel');}
+  if(width<=980){const action=page.locator('.psScopeMobileSummary');if(await action.isVisible()){const a=await action.boundingBox(),w=await contact.boundingBox();assert(w.y+w.height<=a.y-4,'WhatsApp must clear the request summary');await action.click();await page.locator('.psLiveRequest.isOpen').waitFor();assert.equal(await contact.isVisible(),false);await page.locator('[data-ps-sheet-close]').click();await page.waitForTimeout(250);assert(await contact.isVisible());}
    await page.locator('[data-mobile-open]').click();await page.locator('.mobileOverlay.show').waitFor();assert.equal(await contact.isVisible(),false);
    await page.locator('.sidebar [data-go="portal/wishlist"]').click();await page.locator('.customerSimpleHeader h1').waitFor();assert.equal(await page.locator('.customerSimpleHeader h1').innerText(),'Wishlist');
    await page.evaluate(()=>window.PSC_NAVIGATE('portal/catalogue/all'));await page.locator('.pscEditorialCard').first().waitFor();
