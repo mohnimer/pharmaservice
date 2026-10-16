@@ -20,41 +20,71 @@
     '[data-approve-quote]'
   ].join(',');
 
-  const BUSY_LABELS = new Map([
-    ['data-submit-request','Submitting…'],
-    ['data-submit-custom','Sending…'],
-    ['data-confirm-quote','Confirming…'],
-    ['data-cancel-quote','Cancelling…'],
-    ['data-mvp-login','Signing in…'],
-    ['data-mail-save-draft','Saving…'],
-    ['data-mail-test','Sending test…'],
-    ['data-mail-send','Sending…'],
-    ['data-cms-save','Saving…'],
-    ['data-cms-publish','Publishing…'],
-    ['data-cms-delete-media','Removing…'],
-    ['data-option-save','Saving…'],
-    ['data-option-review','Updating…'],
-    ['data-save-storefront','Saving…'],
-    ['data-workshop-save','Saving…'],
-    ['data-approve-quote','Approving…']
-  ]);
-
-  const CONFIRM_SELECTORS = [
-    '[data-add]',
-    '[data-quick-add]',
-    '[data-replenish]'
-  ].join(',');
+  // Motion never schedules a business action. All state changes remain synchronous.
+  const motionPreference=window.matchMedia?.('(prefers-reduced-motion: reduce)');
+  const reduced = () => !!motionPreference?.matches;
+  motionPreference?.addEventListener('change',event=>{if(event.matches){document.getAnimations?.().forEach(animation=>animation.cancel());document.querySelectorAll('[data-motion-ghost]').forEach(el=>el.remove());}});
+  const ease = 'cubic-bezier(.22,.75,.2,1)';
+  const running = new WeakMap();
+  function animate(node, frames, duration=200){
+    if(!node || reduced() || !node.animate) return null;
+    running.get(node)?.cancel();
+    const animation=node.animate(frames,{duration,easing:ease});
+    running.set(node,animation);
+    animation.finished.catch(()=>{});
+    return animation;
+  }
+  const surfaces='.requestDrawer,.fluidProductShell,.professionalProductDetail,.drawerBody';
+  function capture(){
+    const active=document.activeElement;
+    const attr=active?.getAttributeNames?.().find(n=>n.startsWith('data-')&&!n.startsWith('data-ux'));
+    return {quantity:document.querySelector('[data-request-quantity]')?.value,focus:attr?{attr,value:active.getAttribute(attr)}:null,
+      scroll:[...document.querySelectorAll(surfaces)].filter(el=>!el.closest('[data-motion-ghost]')).map(el=>({selector:['requestDrawer','fluidProductShell','professionalProductDetail','drawerBody'].filter(name=>el.classList.contains(name)).map(name=>'.'+name).join(''),top:el.scrollTop})),
+      overlays:[...document.querySelectorAll('.fluidOverlay,.requestDrawerBackdrop')].filter(el=>!el.closest('[data-motion-ghost]')).map(el=>el.className)};
+  }
+  function restore(saved){
+    if(!saved)return;
+    const quantity=document.querySelector('[data-request-quantity]');
+    if(quantity&&saved.quantity&&saved.overlays.length)quantity.value=saved.quantity;
+    for(const item of saved.scroll){const el=document.querySelector(item.selector);if(el)el.scrollTop=item.top;}
+    for(const el of document.querySelectorAll('.fluidOverlay,.requestDrawerBackdrop')){
+      if(saved.overlays.includes(el.className)){
+        el.style.animation='none';el.querySelectorAll(surfaces).forEach(n=>n.style.animation='none');
+      }
+    }
+    const opened=document.querySelector('#app .requestDrawer,#app .fluidProductShell,[data-psc-family-detail-root] .fluidProductShell');
+    if(opened&&!saved.overlays.length){opened.querySelector('button')?.focus({preventScroll:true});return;}
+    if(saved.focus){const {attr,value}=saved.focus;const el=[...document.querySelectorAll('['+attr+']')].find(n=>n.getAttribute(attr)===value);el?.focus({preventScroll:true});}
+  }
+  // Exit snapshots are inert and never delay removal, focus restoration or a rapid reopen.
+  function exit(node){
+    if(!node || reduced() || !node.animate)return;
+    const rect=node.getBoundingClientRect(),ghost=node.cloneNode(true);
+    const appearance=getComputedStyle(node);
+    // Exit artwork must not keep the live document's :has() scroll lock active.
+    Object.assign(ghost.style,{background:appearance.background,backdropFilter:appearance.backdropFilter});
+    ghost.classList.remove('fluidOverlay','requestDrawerBackdrop');
+    ghost.inert=true;ghost.setAttribute('aria-hidden','true');ghost.dataset.motionGhost='';
+    ghost.querySelectorAll('*').forEach(el=>{for(const attr of el.getAttributeNames())if(attr.startsWith('data-')||attr==='role'||attr.startsWith('on'))el.removeAttribute(attr);});
+    ghost.removeAttribute('id');ghost.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
+    Object.assign(ghost.style,{position:'fixed',inset:'auto',left:rect.left+'px',top:rect.top+'px',width:rect.width+'px',height:rect.height+'px',margin:'0',pointerEvents:'none',zIndex:'10001',animation:'none'});
+    ghost.querySelectorAll('*').forEach(el=>el.style.animation='none');
+    for(const property of ['display','padding','box-sizing','align-items','justify-content'])ghost.style.setProperty(property,appearance.getPropertyValue(property),'important');
+    document.body.appendChild(ghost);
+    const originalNodes=[node,...node.querySelectorAll('*')],clones=[ghost,...ghost.querySelectorAll('*')];
+    clones.forEach((el,i)=>{el.scrollTop=originalNodes[i].scrollTop;el.scrollLeft=originalNodes[i].scrollLeft;});
+    const panel=ghost.querySelector(surfaces);
+    if(panel)animate(panel,[{transform:'translate(0,0)'},{transform:panel.matches('.requestDrawer')&&innerWidth>720?'translateX(10px)':'translateY(6px)'}],160);
+    const animation=animate(ghost,[{opacity:1},{opacity:0}],160);
+    animation?.finished.then(()=>ghost.remove(),()=>ghost.remove());
+    if(!animation)ghost.remove();
+  }
+  const finishExits=()=>document.querySelectorAll('[data-motion-ghost]').forEach(el=>el.remove());
+  window.PSC_MOTION={animate,capture,restore,exit,reduced,finishExits};
 
   function nearestAction(target){
     if(!(target instanceof Element)) return null;
     return target.closest('button,.button,[role="button"]');
-  }
-
-  function loadingLabel(button){
-    for(const [attr,label] of BUSY_LABELS){
-      if(button.hasAttribute(attr)) return label;
-    }
-    return null;
   }
 
   function startBusy(button){
@@ -62,13 +92,6 @@
     button.classList.add('ux32-loading');
     button.setAttribute('aria-busy','true');
     button.dataset.ux32Started = String(Date.now());
-
-    const label = loadingLabel(button);
-    if(label && !button.dataset.ux32OriginalHtml){
-      button.dataset.ux32OriginalHtml = button.innerHTML;
-      button.dataset.ux32BusyLabel = label;
-      button.textContent = label;
-    }
 
     window.setTimeout(() => stopBusy(button), 14000);
   }
@@ -85,17 +108,17 @@
     delete button.dataset.ux32Started;
   }
 
-  function flashConfirmed(button, label='Added'){
-    if(!button || !button.isConnected) return;
-    const original = button.innerHTML;
-    button.classList.add('ux32-confirmed');
-    button.innerHTML = `<span class="ux32-check" aria-hidden="true">✓</span><span>${label}</span>`;
-    window.setTimeout(() => {
-      if(!button.isConnected) return;
-      button.classList.remove('ux32-confirmed');
-      button.innerHTML = original;
-    }, 900);
-  }
+  document.addEventListener('psc:request-added',event=>{
+    const sku=event.detail?.sku;
+    const button=[...document.querySelectorAll('[data-add]')].find(n=>n.dataset.add===sku);
+    if(button){
+      button.classList.add('ux32-confirmed');
+      // Keep the label and width stable; repeated additions remain available.
+      animate(button,[{boxShadow:'0 0 0 0 rgba(22,166,157,.2)'},{boxShadow:'0 0 0 5px rgba(22,166,157,0)'}],260);
+      setTimeout(()=>button.classList.remove('ux32-confirmed'),650);
+    }
+    document.querySelectorAll('[data-basket] b').forEach(node=>animate(node,[{opacity:.4,transform:'translateY(3px)'},{opacity:1,transform:'translateY(0)'}]));
+  });
 
   function enhanceDisabledBusyStates(){
     const candidates = document.querySelectorAll('button:disabled,.button[aria-disabled="true"]');
@@ -125,10 +148,6 @@
       startBusy(button);
     }
 
-    const confirm = button.closest(CONFIRM_SELECTORS);
-    if(confirm){
-      window.setTimeout(() => flashConfirmed(confirm, 'Added'), 70);
-    }
   }, true);
 
   document.addEventListener('submit', event => {
@@ -155,24 +174,34 @@
     }
   }, true);
 
-  /* Actual route changes get a tiny fade/settle. Search/filter rerenders do not. */
-  let routeEntrancePending = false;
-  window.addEventListener('hashchange', () => {
-    routeEntrancePending = true;
-    clearBusyOnFeedback();
-  });
-
+  /* pushState navigation and browser back/forward share one route response. */
+  let lastRoute=window.PSC_CURRENT_ROUTE?.();
   function applyRouteEntrance(){
-    if(!routeEntrancePending) return;
-    const app = document.getElementById('app');
-    const page = app?.firstElementChild;
-    if(!page) return;
-    routeEntrancePending = false;
-    page.classList.remove('ux32-page-enter');
-    void page.offsetWidth;
-    page.classList.add('ux32-page-enter');
-    window.setTimeout(() => page.classList.remove('ux32-page-enter'), 360);
+    const route=window.PSC_CURRENT_ROUTE?.();
+    if(route===lastRoute)return;
+    lastRoute=route;clearBusyOnFeedback();
+    const page=document.querySelector('#app main,#app .mainContent,#app .publicPage');
+    animate(page,[{opacity:.65,transform:'translateY(4px)'},{opacity:1,transform:'translateY(0)'}],220);
   }
+  // Native details stays keyboard accessible. Animate the body only, never the summary.
+  document.addEventListener('toggle',event=>{
+    if(event.target.matches?.('.productDisclosureList details[open]'))
+      animate(event.target.querySelector(':scope > div'),[{opacity:0,transform:'translateY(-3px)'},{opacity:1,transform:'translateY(0)'}],180);
+  },true);
+  window.addEventListener('ps:search-results-updated',()=>{
+    animate(document.querySelector('.v25ProductGrid'),[{opacity:.7},{opacity:1}],160);
+  });
+  // Keep Tab inside the active sheet; exiting snapshots cannot receive focus.
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape'){document.querySelector('#app [data-close-basket],#app button[data-modal-close]')?.click();return;}
+    if(event.key!=='Tab')return;
+    const panel=document.querySelector('[data-psc-family-detail-root] [role="dialog"],#app .requestDrawer,#app .fluidProductShell');
+    if(!panel)return;
+    const items=[...panel.querySelectorAll('button,a[href],input,select,textarea,summary,[tabindex="0"]')].filter(el=>!el.disabled&&el.getClientRects().length);
+    const first=items[0],last=items.at(-1);if(!first)return;
+    if(event.shiftKey&&(document.activeElement===first||!panel.contains(document.activeElement))){event.preventDefault();last.focus();}
+    else if(!event.shiftKey&&(document.activeElement===last||!panel.contains(document.activeElement))){event.preventDefault();first.focus();}
+  });
 
   let feedbackCount = 0;
   function inspectFeedback(){

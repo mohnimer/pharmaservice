@@ -11,6 +11,7 @@ try{for(const width of [390,1440]){
  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  const url=`http://127.0.0.1:${server.address().port}/#portal/catalogue/sports`;
  await page.goto(url);await page.locator('[data-family-listing="PSC-IS-039"] .productMainImage').waitFor();await page.waitForTimeout(300);
+ await page.locator('.productMainImage').evaluateAll(async images=>{await Promise.all(images.map(async img=>{img.loading='eager';await img.decode();}));});
  const checks=await page.locator('.productCard[data-family-listing]').evaluateAll(es=>es.map(e=>{const v=e.querySelector('.productVisual'),i=v.querySelector('.productMainImage'),b=getComputedStyle(v,'::before'),r=v.getBoundingClientRect();return {id:e.dataset.familyListing,loaded:i?.complete&&i?.naturalWidth>=200,hidden:getComputedStyle(v).display==='none',innerWidth:parseFloat(b.width),innerHeight:parseFloat(b.height),width:r.width,height:r.height,blocked:i&&window.PSC_IMAGE_POLICY.isBlocked(i.src)};}));
  console.log(width,JSON.stringify(checks));assert(checks.length>=7);assert(checks.filter(c=>c.loaded).length>=6);assert(checks.every(c=>c.hidden||(c.loaded&&!c.blocked&&Math.abs(c.innerWidth-(c.width-18))<2&&Math.abs(c.innerHeight-(c.height-18))<2)));
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));

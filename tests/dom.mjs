@@ -119,8 +119,8 @@ try {
   const liveStorage=JSON.stringify({groupName:'Preserved live account',activeSchoolId:'live-site',basket:[{sku:'PSC-PPE-001',qty:3}],requests:[]});
   w = await setup('/#portal/dashboard', 'demo',liveStorage);
   await click(w, '[data-account-switcher]'); await click(w, '[data-school-select="s2"]'); assert.match(text(w), /Site Two/);
-  await route(w, '/#portal/catalogue/all'); assert(w.document.querySelector('[data-add]'));
-  await click(w, '[data-add="PSC-DIA-001"]');
+  await route(w, '/#portal/catalogue/all'); assert(w.document.querySelector('[data-product-view]'));
+  await click(w, '[data-product-view="PSC-DIA-001"]');
   assert(w.document.querySelector('[data-psc-family-detail-root]'));
   await click(w, '[data-family-quote]');
   await click(w, '[data-basket]');

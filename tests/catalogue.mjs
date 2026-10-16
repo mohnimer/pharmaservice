@@ -13,7 +13,7 @@ assert.equal(refresh.products.filter(p=>p.workbookDecision==='ENQUIRY ONLY').len
 for(const product of refresh.products){
   assert(!('contractPrice' in product || 'retailBenchmark' in product || 'buyCost' in product));
   if(product.workbookDecision==='ENQUIRY ONLY')assert.equal(product.catalogueParentId,null);
-  if(product.currentImageUrl)assert(existsSync('dist'+product.currentImageUrl));
+  if(product.currentImageUrl){const blocked=JSON.parse(readFileSync('data/catalogue-image-policy.json')).blocked_paths.includes(product.currentImageUrl);assert.equal(existsSync('dist'+product.currentImageUrl),!blocked,product.currentImageUrl);}
 }
 assert.equal(new Set(refresh.products.map(p=>p.pscSku)).size,405);
 const pause=()=>new Promise(r=>setTimeout(r,100));
@@ -27,6 +27,7 @@ w.__tables.storefronts=[{channel:'institutional',catalogue_initialized:true}];
 w.__tables.published_storefront_catalogue=[{channel:'institutional',psc_sku:'PSC-MED-126',product_id:'old-db-id',name:'Obsolete CMS name',image_url:'https://example.invalid/old.jpg',clinical_needs:['medicines']}];
 w.__tables.catalogue_family_public=[{family_id:'PSC-SC-B19',family_name:'Database pulse oximeter',clinical_need:'Vitals & Clinical Assessment',page_type:'QUOTE-LED PRODUCT FAMILY',presentations:[],website_price_treatment:'Request quote'}];
 async function click(selector){for(let i=0;i<20;i++){const e=w.document.querySelector(selector);if(e){e.click();await pause();return;}await pause();}throw Error('Missing '+selector);}
+async function choose(value){const e=w.document.querySelector('[data-family-variant]');assert(e);e.value=value;e.dispatchEvent(new w.Event('change',{bubbles:true}));await pause();}
 async function navigate(hash){w.PSC_NAVIGATE(hash);await pause();}
 try{
   w.eval(readFileSync('dist/current.js','utf8'));w.document.dispatchEvent(new w.Event('DOMContentLoaded'));await pause();
@@ -48,7 +49,7 @@ try{
   const option=refresh.approvedOptions.find(o=>o.sku===nexium.pscSku);
   let familyRequest;
   w.addEventListener('psc:add-family-line',event=>{familyRequest=event.detail;});
-  await click(`[data-family-option="${option.product_option_id}"]`);
+  await choose(option.product_option_id);
   await click('[data-family-quote]');await click('[data-basket]');
   assert.equal(familyRequest.localFamily,true);
   assert.equal(familyRequest.requestedProductOptions[0].product_option_id,null);
@@ -61,31 +62,13 @@ try{
   await navigate('portal/catalogue/sports');
   const fastum=w.PSC_DATA.products.find(p=>p.pscSku==='PSC-MED-101');
   assert(fastum);
-  // The modern catalogue uses a brand-choice row rather than the removed
-  // "Brands Available" label. Verify actual rendered choices.
-  const brandRow=()=>w.document.querySelector(`[data-brand-row="${fastum.pscSku}"]`);
-  assert(brandRow(), 'Fastum must render its brand-choice row in sports');
-  assert.deepEqual([...brandRow().querySelectorAll('button')].map(b=>b.textContent.trim()),['Fastum']);
-  // A second product in the category does not create a Fastum brand choice.
-  w.PSC_DATA.products.push({...fastum,pscSku:'TEST-OTHER-BRAND',brand:'Other brand'});
-  await navigate('portal/catalogue/sports');
-  assert.deepEqual([...brandRow().querySelectorAll('button')].map(b=>b.textContent.trim()),['Fastum']);
-  fastum.brand='Specification-led';
-  w.PS_FAMILY_BRAND_OPTIONS=()=>[
-    {family_id:fastum.catalogueParentId,brand:'Fastum'},
-    {family_id:fastum.catalogueParentId,brand:' fastum '},
-    {family_id:fastum.catalogueParentId,brand:'Other brand'},
-    {family_id:'UNRELATED-FAMILY',brand:'Unrelated'},
-    {family_id:fastum.catalogueParentId,brand:'Generic'}
-  ];
-  await navigate('portal/catalogue/sports');
-  const choices=[...brandRow().querySelectorAll('button')].map(b=>b.textContent.trim());
-  assert(choices.includes('Fastum'));
-  assert(choices.includes('Other brand'));
-  assert(!choices.includes('Unrelated')&&!choices.includes('Generic'));
-  fastum.brand='Fastum';
-  w.dispatchEvent(new w.Event('ps:catalogue-brands-ready'));
-  assert(brandRow().textContent.includes('Fastum'));
+  const familyId=fastum.catalogueParentId||fastum.catalogueReferenceFamilyId||fastum.pscSku;
+  const fastumCard=w.document.querySelector('[data-family-listing="'+familyId+'"]');assert(fastumCard);
+  assert(fastumCard.querySelector('.catalogueIdentityLine'));
+  assert(!fastumCard.querySelector('.pscBrandChoices'),'Brand choice moves into Details');
+  await w.PSC_OPEN_FAMILY_DETAIL(familyId);await pause();
+  assert.match(w.document.querySelector('[data-family-variant]').textContent,/Fastum/i);
+  await click('[data-family-detail-close] .productBackButton');
   await navigate('portal/catalogue/medicines');
   const q=w.document.querySelector('[data-global-search]');q.value='CEBACT';q.dispatchEvent(new w.Event('input',{bubbles:true}));await pause();
   assert(w.document.querySelector(`[data-product-view="${enquiry.pscSku}"]`));

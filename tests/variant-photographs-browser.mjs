@@ -25,18 +25,18 @@ try{for(const width of [390,1440]){
  for(const family of [...new Set(data.records.filter(r=>!r.runtime_only).map(r=>r.family_id))]){
   await page.evaluate(id=>window.PSC_OPEN_FAMILY_DETAIL(id),family);
   for(const row of data.records.filter(r=>r.family_id===family&&!r.runtime_only)){
-   const input=page.locator(`[data-family-option="${row.product_option_id}"]`);
-   await input.waitFor();await input.check();
+   const input=page.locator('[data-family-variant]');
+   await input.waitFor();await input.selectOption(row.product_option_id);
    const photo=page.locator('.pscFamilyPreview>img');await photo.waitFor();assert.equal(await photo.getAttribute('src'),row.image_url);
    await photo.evaluate(i=>i.decode());assert(await photo.evaluate(i=>i.naturalWidth>0),row.exact_product_name);
    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
-   await input.uncheck();checked++;
+   await input.selectOption('');checked++;
   }
   if(family==='PSC-SC-D02'){
    const row=data.records.find(r=>r.family_id===family&&r.exact_product_name==='BETADINE ANTISEPTIC SLN 120ML');
-   await page.locator(`[data-family-option="${row.product_option_id}"]`).check();
+   await page.locator('[data-family-variant]').selectOption(row.product_option_id);
    await page.waitForTimeout(300);await page.screenshot({path:`test-results/variant-photographs/${width}-betadine.png`});
-   const presentation=page.locator('[data-family-presentation]').first();if(await presentation.count())await presentation.click();
+
    await page.locator('[data-family-quote]').click();
    const request=await page.evaluate(()=>window.__photoRequests.at(-1));assert(request.requestedProductOptions.some(o=>o.reference_product_option_id===row.product_option_id));
   }else await page.keyboard.press('Escape');

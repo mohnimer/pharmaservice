@@ -1187,8 +1187,10 @@
   };
   function renderUi({preserveScroll=true,focusSelector=null,cursor=null,transition=true}={}){
     const y=window.scrollY;
+    const motionState=window.PSC_MOTION?.capture();
     const draw=()=>{
       render();
+      window.PSC_MOTION?.restore(motionState);
       // Restore focus synchronously: a keystroke before the next animation frame
       // must not land on a detached input or lose the editing caret.
       if(preserveScroll) window.scrollTo({top:y,behavior:'instant'});
@@ -1197,12 +1199,14 @@
         if(target){ target.focus({preventScroll:true}); if(Number.isInteger(cursor)&&target.setSelectionRange) target.setSelectionRange(cursor,cursor); }
       }
     };
-    if(transition && !focusSelector && document.startViewTransition){
-      try{ document.startViewTransition(draw); return; }catch{}
-    }
     draw();
   }
+  let overlayOpener=null;
+  function rememberOverlayOpener(){if(!document.activeElement?.closest('.fluidOverlay,.requestDrawerBackdrop'))overlayOpener=window.PSC_MOTION?.capture()?.focus;}
+  function restoreOverlayOpener(){if(overlayOpener)window.PSC_MOTION?.restore({focus:overlayOpener,scroll:[],overlays:[]});}
   function openProductOverlay(sku,publicMode=false){
+    window.PSC_MOTION?.finishExits();
+    rememberOverlayOpener();
     if(!publicMode)productSearchMemory().selectedSku=sku;
     ui.overlayScroll=window.scrollY;
     ui.modal={type:publicMode?'public-product':'product',sku};
@@ -1210,11 +1214,14 @@
   }
   function closeModalOverlay(){
     const y=Number.isFinite(ui.overlayScroll)?ui.overlayScroll:window.scrollY;
+    window.PSC_MOTION?.exit(document.querySelector('.fluidOverlay'));
     ui.modal=null;
-    render();
+    render();restoreOverlayOpener();
     requestAnimationFrame(()=>window.scrollTo({top:y,behavior:'instant'}));
   }
   function openBasketOverlay(){
+    window.PSC_MOTION?.finishExits();
+    rememberOverlayOpener();
     ui.overlayScroll=window.scrollY;
     ui.modal=null;
     ui.basket=true;
@@ -1222,13 +1229,14 @@
   }
   function closeBasketOverlay(){
     const y=Number.isFinite(ui.overlayScroll)?ui.overlayScroll:window.scrollY;
+    window.PSC_MOTION?.exit(document.querySelector('.requestDrawerBackdrop'));
     ui.basket=false;
-    render();
+    render();restoreOverlayOpener();
     requestAnimationFrame(()=>window.scrollTo({top:y,behavior:'instant'}));
   }
 
   function audit(action, detail){ state.audit.unshift({at:new Date().toISOString(),actor:'Demo user',action,detail}); state.audit=state.audit.slice(0,50); save(); }
-  function toast(msg){ const old=document.querySelector('.toast'); if(old)old.remove(); const d=document.createElement('div');d.className='toast';d.innerHTML=msg;$app.appendChild(d);setTimeout(()=>d.remove(),2800); }
+  function toast(msg){ const old=document.querySelector('.toast'); if(old)old.remove(); const d=document.createElement('div');d.className='toast';d.setAttribute('role','status');d.setAttribute('aria-live','polite');d.innerHTML=msg;$app.appendChild(d);setTimeout(()=>d.remove(),2800); }
 
   function brand(landing=false){ return landing
     ? `<button class="brand brandButton ${landing?'landingBrand':''}" data-go="home" aria-label="Pharma Service home"><img class="brandImage brandImageLight" src="${PSC_LOGO}" alt="Pharma Service"><span class="brandMeta"><b>INSTITUTIONAL HEALTHCARE SUPPLY</b><small>Dubai, United Arab Emirates</small></span></button>`
@@ -1849,8 +1857,8 @@
     const workshop=workshopForProduct(p,1)[0];
     return `<article class="publicCatalogueCard ${p._familyGroup?'pscFamilyCard':''} ${!imageUrl?'pscFamilyNoPhoto':''}" data-family-listing="${esc(p._familyGroup?.id||'')}">
       <button class="publicCatalogueVisual publicProductView" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-public-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details">${imageUrl?`<img data-family-example="${familyPhoto?'true':'false'}" src="${esc(imageUrl)}" alt="${esc(familyPhoto?.label||displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'">`:`<span>${esc(need.label)}</span>`}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>
-      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount" data-catalogue-brand-sku="${esc(p.pscSku)}">Brands Available: ${catalogueBrandCount(p)}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(pack)}</p>${cataloguePricePreview(p)}${catalogueFamilyVariants(p)}${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
-      <button class="button outline full" data-go="contact">Request institutional quote</button>
+      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount" data-catalogue-brand-sku="${esc(p.pscSku)}">Brands Available: ${catalogueBrandCount(p)}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(pack)}</p>${cataloguePricePreview(p)}<small class="catalogueOptionCount">${p._familyGroup&&p._familyGroup.members.length>1?'Select exact product and pack in Details':''}</small>${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
+      <button class="button outline full" data-public-product-view="${p.pscSku}">View details</button>
     </article>`;
   }
 
@@ -2240,7 +2248,7 @@
         const selected=action.reference?catalogueProducts().find(p=>p.pscSku===referenceSku):matches.find(p=>p.pscSku===intelligent.selected)||matches[0];
         if(matches.length>1&&!action.reference&&!matches.some(p=>p.pscSku===intelligent.confirmed)){intelligent.choices=matches.slice(0,12);intelligent.message='Choose an existing catalogue line before adding';save();ui.catalogueQuery='';ui.globalSearch='';renderUi({preserveScroll:true,transition:false});return;}
         intelligent.confirmed='';
-        if(selected){const prior=state.basket.find(l=>l.sku===selected.pscSku);if((prior?.qty||0)+(action.quantity||1)>10000){intelligent.message='Keep requested quantity at or below 10,000';ui.catalogueQuery='';ui.globalSearch='';save();renderUi({preserveScroll:true,transition:false});return;}const l=state.basket.find(l=>l.sku===selected.pscSku);if(l){l.qty+=action.quantity||1;if(action.unit)l.requestUnit=action.unit;}else state.basket.push({sku:selected.pscSku,qty:action.quantity||1,requestUnit:action.unit});window.PS_SEARCH_ANALYTICS?.record('added',{query:text,productId:selected.pscSku,intent:action.intent});intelligent.selected=selected.pscSku;memory.selectedSku=selected.pscSku;intelligent.message=`${selected.catalogueDisplayName||selected.name} × ${action.quantity||1} — needs PS verification`;}
+        if(selected){const prior=state.basket.find(l=>lineKey(l)===selected.pscSku);if((prior?.qty||0)+(action.quantity||1)>10000){intelligent.message='Keep requested quantity at or below 10,000';ui.catalogueQuery='';ui.globalSearch='';save();renderUi({preserveScroll:true,transition:false});return;}const l=state.basket.find(l=>lineKey(l)===selected.pscSku);if(l){l.qty+=action.quantity||1;if(action.unit)l.requestUnit=action.unit;}else state.basket.push({sku:selected.pscSku,qty:action.quantity||1,requestUnit:action.unit});window.PS_SEARCH_ANALYTICS?.record('added',{query:text,productId:selected.pscSku,intent:action.intent});intelligent.selected=selected.pscSku;memory.selectedSku=selected.pscSku;intelligent.message=`${selected.catalogueDisplayName||selected.name} × ${action.quantity||1} — needs PS verification`;}
         else intelligent.message=window.PS_INTELLIGENT_SEARCH.outcome(action,matches).message;
       }else if(action.intent==='replace')intelligent.message='Choose the replacement product, then remove the old line; no items changed';
       else if(!matches.length)intelligent.message=window.PS_INTELLIGENT_SEARCH.outcome(action,matches).message;
@@ -2314,7 +2322,7 @@
   function bindUnlistedRequirement(root){root.querySelectorAll('[data-ps-unlisted]').forEach(button=>button.addEventListener('click',()=>{const description=String(ui.catalogueQuery||intelligent.said||'').trim().slice(0,400);if(!description)return;state.basket.push({kind:'unlisted',requestId:'unlisted-'+crypto.randomUUID(),description,qty:1});window.PS_SEARCH_ANALYTICS?.record('unlisted',{query:description});ui.catalogueQuery='';intelligent.said='';intelligent.message='Unlisted item — requires PS review';save();renderUi({preserveScroll:true,transition:false});}));}
   function bindCatalogueResultCards(root){
     root.querySelectorAll('[data-product-view]').forEach(el=>el.addEventListener('click',()=>{window.PS_SEARCH_ANALYTICS?.record('clicked',{productId:el.dataset.productView});productSearchMemory().selectedSku=el.dataset.productView;openProductOverlay(el.dataset.productView,false);}));
-    root.querySelectorAll('[data-add]').forEach(el=>el.addEventListener('click',()=>addBasket(el.dataset.add,1)));
+    root.querySelectorAll('[data-add]').forEach(el=>el.addEventListener('click',()=>addBasket(el.dataset.add,el.closest('.productDetailModal')?.querySelector('[data-request-quantity]')?.value||1)));
     root.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>go(el.dataset.go)));
   }
 
@@ -2438,7 +2446,7 @@
     const record=packKey(saved.pack)===packKey(p.cataloguePack||p.pack)?saved:{};
     const indicative=p.storefrontPriceMode==='show_price'&&Number(p.contractPrice)>0?Number(p.contractPrice):record.indicative;
     const retail=record.retail;
-    if(!indicative&&!retail) return '<div class="pscPricePreview"><b>AED -</b><small>Price on request</small></div>';
+    if(!indicative&&!retail) return '<div class="pscPricePreview"><b>Request quotation</b></div>';
     return `<div class="pscPricePreview">${indicative?`<b>${money(indicative)}</b><span>Indicative PSC price</span>`:`<b>${money(retail)}</b><span>Recorded retail benchmark</span>`}${indicative&&retail?`<small>Retail benchmark: ${money(retail)}</small>`:''}<small>Reference only · final price & VAT confirmed in quotation${record.checked?`<br>Record checked ${esc(record.checked)}`:''}</small></div>`;
   }
   function catalogueBrandChoices(p){
@@ -2465,17 +2473,16 @@
 
     return `<article data-family-listing="${esc(p._familyGroup?.id||'')}" class="productCard ${p._familyGroup?'pscFamilyCard':''} ${!displayImage?'pscFamilyNoPhoto':''} v25ProductCard v261ProductCard v262ProductCard canvaProductCard exactCanvaCard pscEditorialCard">
       ${visual}
-      ${catalogueBrandChoices(p)}
+      <div class="catalogueIdentityLine">${esc(p._familyGroup?`${p.name} · ${p._familyGroup.members.length} options`:p.brand||'')}</div>
       <div class="canvaCardBody exactCanvaBody">
         <button class="productTitleButton" data-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button>
         <p class="pack">${esc(pack)}</p>${catalogueImageNote(p)||'<small class="catalogueImageNote catalogueImageNoteEmpty" aria-hidden="true"></small>'}
-        <div class="productNeedTags">${esc(need.id==='all'?(p.productType||p.category||'Institutional supplies'):need.label)}</div>
-        ${cataloguePricePreview(p)}${catalogueFamilyVariants(p)}
+
+        ${cataloguePricePreview(p)}<small class="catalogueOptionCount">${p._familyGroup&&p._familyGroup.members.length>1?'Select exact product and pack in Details':''}</small>
         ${currentRoute().startsWith('portal/catalogue/dha-')&&p.dhaMapped?`<small class="pscDhaStatus">${esc(p.dhaStatus==='Strict'?'Required category':p.dhaStatus||'Mapped requirement')}${p.dhaReference?` · ${esc(p.dhaReference)}`:''}${p.dhaStatus==='Conditional'&&p.dhaCondition?`<br>${esc(p.dhaCondition)}`:''}</small>`:''}
       </div>
       <div class="canvaCardActions exactCanvaActions">
-        <button class="canvaDetails" data-product-view="${p.pscSku}">Details</button>
-        <button class="canvaRequest" data-add="${p.pscSku}" aria-label="Request ${esc(displayName)}">Request</button>
+        <button class="canvaDetails" data-product-view="${p.pscSku}">View details <span aria-hidden="true">→</span></button>
       </div>
     </article>`;
   }
@@ -2591,21 +2598,31 @@
   }
 
   function isFamilyLine(l){ return !!(l&&l.familyId); }
+  function exactSkuForLine(l){
+    if(!isFamilyLine(l))return l?.sku||'';
+    const o=l.productOptionSnapshot;
+    if(!o?.sku||!o.pack||!o.exact_product_name)return '';
+    const p=product(o.sku);
+    if(!p||p.name!==o.exact_product_name||String(p.brand||'')!==String(o.brand||'')||String(p.pack||'')!==String(o.pack))return '';
+    return (p.catalogueParentId||p.catalogueReferenceFamilyId||p.pscSku)===l.familyId?p.pscSku:'';
+  }
   function lineKey(l){
     if(l?.kind==='unlisted')return l.requestId;
+    const exactSku=exactSkuForLine(l);if(exactSku)return exactSku;
     if(isFamilyLine(l)){
       const mode=l.brandPreferenceMode||'no_preference';
       const choice=mode==='specific_option'?(l.productOptionId||''):mode==='other_brand'?String(l.requestedBrand||'').trim().toLowerCase():'no-preference';
+      const refs=(l.requestedProductOptions||[]).map(o=>o.product_option_id||o.local_product_option_id||o.reference_product_option_id||'').sort().join('|');
       const safe=v=>encodeURIComponent(String(v||''));
-      return `family:${safe(l.familyId)}:${safe(l.presentation||'')}:${mode}:${safe(choice)}`;
+      return `family:${safe(l.familyId)}:${safe(l.presentation||'')}:${mode}:${safe(choice)}:${safe(refs)}`;
     }
     return l?.sku||'';
   }
-  function lineDisplayName(l,p=null){ if(l?.kind==='unlisted')return l.description;return isFamilyLine(l)?(l.familyName||l.familyId||'Catalogue family'):(p?.catalogueDisplayName||p?.name||l?.sku||'Order item'); }
+  function lineDisplayName(l,p=null){ if(l?.kind==='unlisted')return l.description;return isFamilyLine(l)?(l.productOptionSnapshot?.exact_product_name||l.familyName||l.familyId||'Catalogue family'):(p?.catalogueDisplayName||p?.name||l?.sku||'Order item'); }
   function lineReference(l){ if(l?.kind==='unlisted')return 'Unlisted item — requires PS review';return isFamilyLine(l)?l.familyId:(l?.sku||''); }
   function linePackLabel(l,p=null){
     if(l?.kind==='unlisted')return l.requestUnit||'Unit to confirm';
-    if(isFamilyLine(l)) return l.productOptionSnapshot?.pack||l.presentation||l.orderPackBasis||'Pack / scope to confirm';
+    if(isFamilyLine(l)) return l.productOptionSnapshot?.exact_product_name?(l.productOptionSnapshot.pack||'Pack / unit to confirm'):(l.orderPackBasis||'Pack / scope to confirm');
     return p?.cataloguePack||p?.pack||'Pack to confirm';
   }
   function lineBrandPreferenceLabel(l){
@@ -2633,7 +2650,7 @@
       requestedProductOptions:Array.isArray(detail?.requestedProductOptions)?structuredClone(detail.requestedProductOptions):[],
       productOptionSnapshot:option?structuredClone(option):null,
       regulated:!!detail?.regulated,
-      qty:Math.max(1,Number(detail?.qty||1))
+      qty:window.PSC_PRODUCT_PRESENTATION.quantity(detail?.qty)
     };
   }
   function addFamilyBasketLine(detail){
@@ -2644,17 +2661,30 @@
     productSearchMemory().selectedSku=line.familyId;
     const key=lineKey(line);
     const existing=state.basket.find(x=>lineKey(x)===key);
-    if(existing) existing.qty+=line.qty;
+    if(existing&&existing.qty+line.qty>10000){toast('Keep requested quantity at or below 10,000 per line');return false;}
+    if(existing){const qty=existing.qty+line.qty;Object.assign(existing,line,{qty});}
     else state.basket.push(line);
     save();
     renderUi({preserveScroll:true,transition:false});
-    toast(`<strong>${esc(line.familyName)}</strong> added to Supply Request`);
+    toast(`<strong>${line.qty} × ${esc(lineDisplayName(line))}</strong> added · ${basketQty()} units in Supply Request`);
+    document.dispatchEvent(new CustomEvent('psc:request-added',{detail:{qty:line.qty,total:basketQty()}}));
     return true;
   }
+  window.addEventListener('psc:view-request',openBasketOverlay);
   window.addEventListener('psc:add-family-line',e=>{ try{ addFamilyBasketLine(e.detail||{}); }catch(err){ console.error('Family request add failed',err); } });
 
   function basketQty(){ return state.basket.reduce((a,b)=>a+Number(b.qty||0),0); }
-  function addBasket(sku,qty=1){ window.PS_SEARCH_ANALYTICS?.record('added',{productId:sku}); productSearchMemory().selectedSku=sku;const f=state.basket.find(x=>x.sku===sku); if(f)f.qty+=qty; else state.basket.push({sku,qty}); save(); renderUi({preserveScroll:true,transition:false}); toast(`<strong>Added</strong> to Supply Request`); }
+  function addBasket(sku,qty=1){
+    const p=product(sku);if(!p)return;
+    qty=window.PSC_PRODUCT_PRESENTATION.quantity(qty);
+    window.PS_SEARCH_ANALYTICS?.record('added',{productId:sku});productSearchMemory().selectedSku=sku;
+    const f=state.basket.find(x=>lineKey(x)===sku);const prior=Number(f?.qty||0);
+    if(prior+qty>10000){toast('Keep requested quantity at or below 10,000 per line');return;}
+    if(f)f.qty+=qty;else state.basket.push({sku,qty});
+    save();renderUi({preserveScroll:true,transition:false});
+    document.dispatchEvent(new CustomEvent('psc:request-added',{detail:{sku,qty,total:basketQty()}}));
+    toast(`<strong>${qty} × ${esc(p.catalogueDisplayName||p.name)}</strong> added · ${prior+qty} of this product in request`);
+  }
   function reorderRequest(id){
     const r=state.requests.find(x=>x.id===id); if(!r)return;
     r.lines.forEach(l=>{const key=lineKey(l);const f=state.basket.find(x=>lineKey(x)===key);if(f)f.qty+=l.qty;else state.basket.push(JSON.parse(JSON.stringify(l)))});
@@ -2961,6 +2991,13 @@
     return `<button class="relatedProductMini" ${attr}="${p.pscSku}"><span class="relatedProductVisual" style="--need-bg:${need.bg};--need-ink:${need.ink}">${imageUrl?`<img src="${esc(imageUrl)}" alt="" loading="lazy" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'">`:`<i>${esc((p.brand||need.label||'PS').slice(0,2).toUpperCase())}</i>`}</span><span class="relatedProductCopy"><small>${esc(need.label)}</small><b>${esc(displayName)}</b><em>${esc(p.cataloguePack||p.pack||'Pack to confirm')}</em></span></button>`;
   }
 
+  function productVariantSelector(p){
+    const id=p.catalogueParentId||p.catalogueReferenceFamilyId||p.pscSku;
+    const variants=catalogueProducts().filter(x=>(x.catalogueParentId||x.catalogueReferenceFamilyId||x.pscSku)===id);
+    if(variants.length<2)return '';
+    return `<div class="professionalSelector"><label for="productExactVariant">Exact product & pack</label><select id="productExactVariant" data-detail-variant>${variants.map(x=>`<option value="${esc(x.pscSku)}" ${x.pscSku===p.pscSku?'selected':''}>${esc(x.catalogueDisplayName||x.name)} · ${esc(x.cataloguePack||x.pack||'Pack to confirm')}</option>`).join('')}</select><p class="professionalSelectionNote">Each option keeps its own identity, photograph and pricing evidence.</p></div>`;
+  }
+
   function productModal(sku){
     const p=product(sku); if(!p)return '';
     const mapped=!!p.dhaMapped;
@@ -2977,15 +3014,15 @@
       : `<div class="detailProductImageWrap"><div class="detailNeedVisual" style="--need-bg:${primary.bg};--need-ink:${primary.ink}"></div>${detailDhaMark}</div>`;
     const workshop=workshopForProduct(p,1)[0];
     const related=relatedProductsFor(p,6);
-    const inRequest=state.basket.find(x=>x.sku===p.pscSku)?.qty||0;
+    const inRequest=state.basket.find(x=>lineKey(x)===p.pscSku)?.qty||0;
 
-    return `<div class="productDetailModal fluidProductDetail">
+    return `<div class="productDetailModal fluidProductDetail professionalProductDetail" role="dialog" aria-modal="true" aria-label="${esc(displayName)}" data-product-experience="${window.PSC_PRODUCT_PRESENTATION.profile(p).kind}">
       <div class="modalHeader fluidProductHeader"><button class="productBackButton" data-modal-close aria-label="Back to catalogue">←</button><div><span class="eyebrow">${esc(primary.label)}</span><h2>${esc(displayName)}</h2><div class="smallMuted mono">${esc(p.pscSku)}</div></div><span class="productRequestCount">${inRequest?`${inRequest} in request`:''}</span></div>
       <div class="productDetailGrid fluidProductGrid">
         <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).filter(m=>window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url).map(m=>`<img src="${esc(window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
         <div class="detailContentPane fluidDetailContent">
-          ${catalogueRetailPriceNotice()}${cataloguePricePreview(p)}
-          <div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to DHA clinic requirement</b></div>`:''}</div>
+          <div class="professionalPurchaseIdentity"><h3>${esc(displayName)}</h3><p>${esc(pack)}</p></div>${productVariantSelector(p)}${cataloguePricePreview(p)}${catalogueRetailPriceNotice()}
+          ${window.PSC_PRODUCT_PRESENTATION.factsHtml(p)}${window.PSC_PRODUCT_PRESENTATION.documentsHtml(p)}<div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to the applicable DHA clinic requirement.</b></div>`:''}</div>
           <div class="productDisclosureList">
             <details open><summary><span>Specification</span><i>+</i></summary><div><p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
             ${mapped?`<details><summary><span>Requirement mapping</span><i>+</i></summary><div><p><strong>${esc(p.dhaRequirement||'Mapped requirement')}</strong></p><p>${esc(p.dhaReference||'DHA requirement')} · ${esc(p.dhaStatus||'Status to verify')}</p>${p.dhaCondition?`<small>${esc(p.dhaCondition)}</small>`:''}<p class="disclosureFinePrint">Mapped to the applicable DHA clinic requirement. This is not a DHA product endorsement or product approval.</p></div></details>`:''}
@@ -2995,38 +3032,11 @@
         </div>
       </div>
       ${related.length?`<section class="productRelatedSection"><div class="productRelatedHead"><span>Related clinic supplies</span><small>Same clinical area or product family</small></div><div class="productRelatedRail">${related.map(x=>relatedProductRailCard(x,false)).join('')}</div></section>`:''}
-      <div class="productStickyBar"><button class="button light requestViewButton" data-basket>View request <b>${basketQty()}</b></button><button class="button primary requestAddButton" data-add="${p.pscSku}">${inRequest?'Add another':'Add to request'}</button></div>
+      <div class="productStickyBar professionalRequestBar"><button class="button light requestViewButton" data-basket>View request <b>${basketQty()}</b></button>${window.PSC_PRODUCT_PRESENTATION.quantityHtml(1,pack)}<button class="button primary requestAddButton" data-add="${p.pscSku}">Add to Supply Request</button></div>
     </div>`;
   }
 
-  function publicProductModal(sku){
-    const p=product(sku); if(!p)return '';
-    const displayName=p.catalogueDisplayName||p.name;
-    const pack=p.cataloguePack||p.pack||'Pack / unit to confirm';
-    const needs=clinicalNeedIds(p);
-    const primary=clinicalNeedMeta(needs[0]||'all');
-    const imageUrl=productDisplayImageUrl(p);
-    const fallback=legacyProductImageUrl(p);
-    const workshop=workshopForProduct(p,1)[0];
-    const related=relatedProductsFor(p,5);
-    return `<div class="productDetailModal fluidProductDetail publicProductSheet">
-      <div class="modalHeader fluidProductHeader"><button class="productBackButton" data-modal-close aria-label="Back to catalogue">←</button><div><span class="eyebrow">${esc(primary.label)}</span><h2>${esc(displayName)}</h2><div class="smallMuted mono">${esc(p.pscSku)}</div></div></div>
-      <div class="productDetailGrid fluidProductGrid">
-        <div class="detailImagePane fluidImagePane">${imageUrl?`<div class="detailProductImageWrap"><img src="${esc(imageUrl)}" alt="${esc(displayName)}" onerror="this.onerror=null;this.src='${esc(fallback)}'"></div>`:`<div class="detailProductImageWrap"><div class="detailNeedVisual" style="--need-bg:${primary.bg};--need-ink:${primary.ink}"></div></div>`}<div class="detailImageMeta"><b>${esc(displayName)}</b><span>${esc(pack)}</span>${catalogueImageNote(p)}</div></div>
-        <div class="detailContentPane fluidDetailContent">
-          ${catalogueRetailPriceNotice()}${cataloguePricePreview(p)}
-          <div class="productDisclosureList publicProductDisclosure">
-            <details open><summary><span>Product specification</span><i>+</i></summary><div><p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
-            ${p.dhaMapped?`<details><summary><span>Requirement mapping</span><i>+</i></summary><div><p>Mapped to the applicable DHA clinic requirement. Exact model suitability remains subject to specification verification.</p></div></details>`:''}
-            <details><summary><span>Availability & quotation</span><i>+</i></summary><div><p>Availability, current commercial terms and any regulated supply route are confirmed for the account and transaction before commitment.</p></div></details>
-            ${workshop?`<details><summary><span>From The Workshop</span><i>+</i></summary><div><button class="productWorkshopInline" data-go="workshop/${esc(workshop.slug)}"><small>${esc(workshopFormatLabel(workshop.format))}</small><b>${esc(workshop.title)}</b></button></div></details>`:''}
-          </div>
-        </div>
-      </div>
-      ${related.length?`<section class="productRelatedSection"><div class="productRelatedHead"><span>Related clinic supplies</span><small>Browse without losing your place</small></div><div class="productRelatedRail">${related.map(x=>relatedProductRailCard(x,true)).join('')}</div></section>`:''}
-      <div class="productStickyBar publicProductSticky"><button class="button light" data-modal-close>Continue browsing</button><button class="button primary" data-go="contact">Request quotation</button></div>
-    </div>`;
-  }
+  function publicProductModal(sku){ return productModal(sku); }
 
   function modalHtml(meta){
     const body=meta.type==='request'?requestModal(meta.id,!!meta.admin):meta.type==='product'?productModal(meta.sku):meta.type==='public-product'?publicProductModal(meta.sku):'';
@@ -3254,10 +3264,12 @@
       const qLines={};
       const mappedLines=orderLines.map(l=>{
         const mapped=l.family_id||l.family_name_snapshot?{
-          type:'family', localFamily:!l.family_id, familyId:l.family_id||(window.PSC_FAMILY_CATALOGUE_V39?.families||[]).find(f=>f.familyName===l.family_name_snapshot)?.familyId||l.family_name_snapshot, familyName:l.family_name_snapshot||l.line_description||l.family_id,
+          type:'family', localFamily:!l.family_id, familyId:l.family_id||l.product_option_snapshot?.requested_family_id||(window.PSC_FAMILY_CATALOGUE_V39?.families||[]).find(f=>f.familyName===l.family_name_snapshot)?.familyId||l.family_name_snapshot, familyName:l.family_name_snapshot||l.line_description||l.family_id,
           presentation:l.requested_presentation||'', orderPackBasis:l.pack_snapshot||'', brandPreferenceMode:l.brand_preference_mode||'no_preference',
           requestedBrand:l.requested_brand||'', productOptionId:l.product_option_id||'', productOptionSnapshot:l.product_option_snapshot||null,
-          regulated:true, qty:Number(l.quantity)
+          requestedProductOptions:l.product_option_snapshot?.requested_product_options||[],
+          familyPageType:l.product_option_snapshot?.requested_family_page_type||'',
+          regulated:l.product_option_snapshot?.regulated??true, qty:Number(l.quantity)
         }:!l.psc_sku_snapshot&&!l.product_id&&l.line_description?{kind:'unlisted',requestId:'unlisted-'+l.id,description:l.line_description,requestUnit:l.pack_snapshot==='Unlisted item — requires PS review'?'':l.pack_snapshot||'',qty:Number(l.quantity)}:{sku:l.psc_sku_snapshot||'',qty:Number(l.quantity)};
         const key=lineKey(mapped);
         if(key) qLines[key]={sell:l.unit_price===null?undefined:Number(l.unit_price),vat:l.vat_rate===null?undefined:Number(l.vat_rate)};
@@ -3334,12 +3346,11 @@
     const dbLines=lines.map(l=>{
       if(l.kind==='unlisted')return {product_id:null,psc_sku_snapshot:null,line_description:l.description,brand_model_snapshot:null,pack_snapshot:l.requestUnit||'Unlisted item — requires PS review',quantity:l.qty};
       if(isFamilyLine(l)){
-        // Frontend-only families are requirements, not invented database family IDs.
-        if(l.localFamily)return {product_id:null,psc_sku_snapshot:null,
-          line_description:[l.familyName||l.familyId,l.presentation,l.requestedBrand?`Requested brand: ${l.requestedBrand}`:''].filter(Boolean).join(' · '),
-          brand_model_snapshot:null,pack_snapshot:l.orderPackBasis||l.presentation||'Unlisted item — requires PS review',quantity:l.qty};
+        const snapshot={...(l.productOptionSnapshot||{}),requested_family_id:l.familyId,
+          requested_family_page_type:l.familyPageType||'',regulated:!!l.regulated,
+          requested_product_options:l.requestedProductOptions||[]};
         return {
-          product_id:null, psc_sku_snapshot:null,
+          product_id:null, psc_sku_snapshot:exactSkuForLine(l)||null,
           family_id:l.localFamily?null:l.familyId, family_name_snapshot:l.familyName,
           line_description:l.familyName||l.familyId,
           brand_model_snapshot:l.brandPreferenceMode==='specific_option'?(l.productOptionSnapshot?.exact_product_name||l.requestedBrand||null):(l.brandPreferenceMode==='other_brand'?l.requestedBrand:'No preference'),
@@ -3348,7 +3359,7 @@
           requested_presentation:l.presentation||null,
           brand_preference_mode:l.brandPreferenceMode||'no_preference',
           requested_brand:l.brandPreferenceMode==='other_brand'?(l.requestedBrand||null):(l.brandPreferenceMode==='specific_option'?(l.productOptionSnapshot?.brand||l.requestedBrand||null):null),
-          product_option_snapshot:l.brandPreferenceMode==='specific_option'?(l.productOptionSnapshot||null):null
+          product_option_snapshot:snapshot
         };
       }
       const p=product(l.sku);
@@ -3647,13 +3658,15 @@
     document.querySelectorAll('[data-account-switcher]').forEach(el=>el.addEventListener('click',()=>{ui.accountMenu=!ui.accountMenu;render()}));
     document.querySelectorAll('[data-school-select]').forEach(el=>el.addEventListener('click',async()=>{await switchInstitutionAccount(el.dataset.schoolSelect)}));
     document.querySelectorAll('[data-basket]').forEach(el=>el.addEventListener('click',openBasketOverlay));
-    document.querySelectorAll('[data-close-basket]').forEach(el=>el.addEventListener('click',closeBasketOverlay));
+    document.querySelectorAll('[data-close-basket]').forEach(el=>el.addEventListener('click',e=>{if(el.tagName==='BUTTON'||e.target===el)closeBasketOverlay();}));
     document.querySelectorAll('[data-product-view]').forEach(el=>el.addEventListener('click',()=>openProductOverlay(el.dataset.productView,false)));
     document.querySelectorAll('[data-public-product-view]').forEach(el=>el.addEventListener('click',()=>openProductOverlay(el.dataset.publicProductView,true)));
-    document.querySelectorAll('[data-add]').forEach(el=>el.addEventListener('click',()=>addBasket(el.dataset.add,1)));
-    document.querySelectorAll('[data-basket-delta]').forEach(el=>el.addEventListener('click',()=>{const [sku,d]=el.dataset.basketDelta.split('|');const line=state.basket.find(x=>x.sku===sku);if(!line)return;line.qty+=Number(d);if(line.qty<=0)state.basket=state.basket.filter(x=>x.sku!==sku);save();renderUi({preserveScroll:true,transition:false})}));
+    document.querySelectorAll('[data-detail-variant]').forEach(el=>el.addEventListener('change',()=>openProductOverlay(el.value,false)));
+    document.querySelectorAll('.productDetailModal').forEach(root=>window.PSC_PRODUCT_PRESENTATION.bindQuantity(root));
+    document.querySelectorAll('[data-add]').forEach(el=>el.addEventListener('click',()=>addBasket(el.dataset.add,el.closest('.productDetailModal')?.querySelector('[data-request-quantity]')?.value||1)));
+    document.querySelectorAll('[data-basket-delta]').forEach(el=>el.addEventListener('click',()=>{const [sku,d]=el.dataset.basketDelta.split('|');const line=state.basket.find(x=>x.sku===sku);if(!line)return;line.qty=window.PSC_PRODUCT_PRESENTATION.quantity(line.qty+Number(d));save();renderUi({preserveScroll:true,transition:false})}));
     document.querySelectorAll('[data-basket-remove]').forEach(el=>el.addEventListener('click',()=>{state.basket=state.basket.filter(x=>x.sku!==el.dataset.basketRemove);save();renderUi({preserveScroll:true,transition:false})}));
-    document.querySelectorAll('[data-family-basket-delta]').forEach(el=>el.addEventListener('click',()=>{const[i,d]=el.dataset.familyBasketDelta.split('|');const line=state.basket[Number(i)];if(!line||!isFamilyLine(line))return;line.qty+=Number(d);if(line.qty<=0)state.basket.splice(Number(i),1);save();renderUi({preserveScroll:true,transition:false})}));
+    document.querySelectorAll('[data-family-basket-delta]').forEach(el=>el.addEventListener('click',()=>{const[i,d]=el.dataset.familyBasketDelta.split('|');const line=state.basket[Number(i)];if(!line||!isFamilyLine(line))return;line.qty=window.PSC_PRODUCT_PRESENTATION.quantity(line.qty+Number(d));save();renderUi({preserveScroll:true,transition:false})}));
     document.querySelectorAll('[data-family-basket-remove]').forEach(el=>el.addEventListener('click',()=>{const i=Number(el.dataset.familyBasketRemove);if(Number.isInteger(i)&&state.basket[i]&&isFamilyLine(state.basket[i]))state.basket.splice(i,1);save();renderUi({preserveScroll:true,transition:false})}));
     document.querySelectorAll('[data-submit-request]').forEach(el=>el.addEventListener('click',submitRequest));
     document.querySelectorAll('[data-submit-custom]').forEach(el=>el.addEventListener('click',submitCustomRequest));
@@ -3691,7 +3704,7 @@
     document.querySelectorAll('[data-reorder-last]').forEach(el=>el.addEventListener('click',()=>{const r=state.requests.find(x=>x.campus===state.campus);if(r)reorderRequest(r.id)}));
     document.querySelectorAll('[data-request-view]').forEach(el=>el.addEventListener('click',()=>{ui.modal={type:'request',id:el.dataset.requestView,admin:false};render()}));
     document.querySelectorAll('[data-admin-request]').forEach(el=>el.addEventListener('click',()=>{ui.modal={type:'request',id:el.dataset.adminRequest,admin:true};render()}));
-    document.querySelectorAll('[data-modal-close]').forEach(el=>el.addEventListener('click',closeModalOverlay));
+    document.querySelectorAll('[data-modal-close]').forEach(el=>el.addEventListener('click',e=>{if(el.tagName==='BUTTON'||e.target===el)closeModalOverlay();}));
     document.querySelectorAll('[data-document-open]').forEach(el=>el.addEventListener('click',()=>openOrderDocument(el.dataset.documentOpen)));
     document.querySelectorAll('[data-document-upload]').forEach(el=>el.addEventListener('change',async e=>{const file=e.target.files?.[0];if(file)await uploadOrderDocument(el.dataset.documentUpload,file);}));
     bindUnlistedRequirement(document);
