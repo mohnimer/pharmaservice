@@ -39,11 +39,14 @@ try{for(const [width,role,reducedMotion] of [[320,'demo','no-preference'],[768,'
  const requestBefore=await page.locator('.mobileCartButton b').innerText();
  await page.evaluate(()=>window.PSC_NAVIGATE('portal/wishlist'));await page.locator('.wishlistGrid').waitFor();
  assert.equal(await page.locator('[data-wishlist-toggle]').count(),1);assert.equal(await page.locator('[data-wishlist-toggle]').getAttribute('data-wishlist-toggle'),savedKey);
- await page.reload();await page.locator('.wishlistGrid').waitFor();assert.equal(await page.locator('[data-wishlist-toggle]').getAttribute('aria-pressed'),'true');
+ await page.reload();await page.locator('[data-account-switcher]').waitFor();
+ // Demo clinic selection intentionally resets on refresh; saved preferences stay scoped.
+ if(role==='demo'){assert.equal(await page.locator('.wishlistGrid').count(),0);await page.locator('[data-account-switcher]').click();await page.locator('[data-school-select="s2"]').click();}
+ await page.locator('.wishlistGrid').waitFor();assert.equal(await page.locator('[data-wishlist-toggle]').getAttribute('aria-pressed'),'true');
  assert.equal(await page.locator('.mobileCartButton b').innerText(),requestBefore,'Saving never adds an order line');
  if(role==='demo'){
    await page.locator('[data-account-switcher]').click();await page.locator('[data-school-select="s1"]').click();
-   assert.equal(await page.locator('.wishlistGrid').count(),0,'Another clinic must not inherit saved products');
+   await page.locator('.wishlistGrid').waitFor({state:'detached'});assert.equal(await page.locator('.wishlistGrid').count(),0,'Another clinic must not inherit saved products');
    await page.locator('[data-account-switcher]').click();await page.locator('[data-school-select="s2"]').click();await page.locator('.wishlistGrid').waitFor();
  }
  await page.screenshot({animations:'disabled',path:`test-results/cohesion/${role}-${width}-wishlist.png`});

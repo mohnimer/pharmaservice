@@ -24,6 +24,7 @@ jobs:
       - run: npm run build
       - run: npm test
       - run: node --test tests/variant-evidence.test.cjs tests/catalogue-stock.test.cjs tests/catalogue-refresh-identity.test.cjs tests/intelligent-search.test.mjs
+      - run: node tests/professional-wishlist.mjs
       - run: node tests/professional-catalogue.mjs
       - run: node tests/professional-submission.mjs
       - run: npm run test:dom
