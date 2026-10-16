@@ -19,8 +19,8 @@ try{for(const width of [1440,390,320])for(const reducedMotion of ['no-preference
  await page.goto(base+'/#portal/catalogue/allergy');await page.locator('.productCard').first().waitFor();
  await page.locator('[data-product-view="PS-AC-417F1BC9E425"]').first().click();
  await page.evaluate(()=>Promise.all(document.getAnimations().filter(a=>a.effect?.getTiming().iterations!==Infinity).map(a=>a.finished.catch(()=>{}))));
- const controls=await page.locator('.professionalRequestBar').evaluate(el=>{const q=el.querySelector('.quantityStepper').getBoundingClientRect(),b=el.querySelector('.requestAddButton').getBoundingClientRect();return {quantity:q.height,action:b.height,bottom:b.bottom,right:b.right};});
- assert(Math.abs(controls.quantity-controls.action)<=1&&controls.bottom<=950&&controls.right<=width,JSON.stringify(controls));
+ const controls=await page.locator('.professionalRequestBar').evaluate(el=>{const q=el.querySelector('.quantityStepper').getBoundingClientRect(),b=el.querySelector('.requestAddButton').getBoundingClientRect();return {quantity:q.height,action:b.height,bottom:b.bottom,right:b.right,quantityWidth:q.width,overflow:el.scrollWidth-el.clientWidth};});
+ assert(Math.abs(controls.quantity-controls.action)<=1&&controls.bottom<=950&&controls.right<=width&&controls.quantityWidth>=141&&controls.overflow<=1,JSON.stringify(controls));
  await page.locator('[data-request-quantity]').fill('10');
  // Two additions in the same JS task: no animation lock, stale input or lost quantity.
  await page.evaluate(()=>{document.querySelector('.requestAddButton').click();document.querySelector('.requestAddButton').click();});
