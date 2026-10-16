@@ -1,0 +1,35 @@
+name: Professional catalogue experience
+on:
+  push:
+    branches: [feature/professional-catalogue-ui-20261016]
+  pull_request:
+    paths:
+      - 'current/behaviour/product-presentation.js'
+      - 'current/styles/product-editorial.css'
+      - 'tests/professional-catalogue.mjs'
+jobs:
+  request-and-layout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: node --test tests/variant-evidence.test.cjs tests/catalogue-stock.test.cjs tests/catalogue-refresh-identity.test.cjs tests/intelligent-search.test.mjs
+      - run: node tests/professional-catalogue.mjs
+      - run: npm run test:dom
+      - run: npm run test:catalogue
+      - run: node tests/reference-overlay.mjs
+      - run: npx playwright install --with-deps chromium
+      - run: node tests/variant-browser.mjs
+      - run: node tests/catalogue-photo-standard-browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: professional-catalogue-review
+          path: test-results/
+          retention-days: 14

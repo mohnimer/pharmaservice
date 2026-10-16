@@ -1,53 +1,91 @@
+/* Professional catalogue presentation. Component rules live here; the shared
+   photograph standard remains the sole owner of image framing. */
+:root{--ps-ui-ink:#203932;--ps-ui-muted:#61736d;--ps-ui-line:#dce5e1;--ps-ui-soft:#f4f7f5;--ps-ui-accent:#087d75;--ps-ui-radius:8px}
+#app .customerShell .v25ProductGrid:has(.pscEditorialCard){display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:32px 24px!important;align-items:stretch!important}
+#app .customerShell .productCard.pscEditorialCard{display:flex!important;flex-direction:column!important;min-width:0!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;padding:0!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;overflow:visible!important;grid-column:auto!important;grid-row:auto!important}
+#app .customerShell .pscEditorialCard .exactCanvaBody{display:block!important;flex:1!important;min-height:0!important;padding:8px 0 12px!important;border:0!important}
+#app .customerShell .pscEditorialCard .productTitleButton{display:block!important;width:100%!important;height:auto!important;min-height:0!important;text-align:left!important;padding:0!important;margin:0!important;background:none!important;border:0!important}
+#app .customerShell .pscEditorialCard .productTitleButton h3{margin:0!important;font-size:17px!important;line-height:1.4!important;font-weight:600!important;color:var(--ps-ui-ink)!important;min-height:0!important}
+#app .customerShell .pscEditorialCard .pack{margin:8px 0!important;font-size:13px!important;line-height:1.5!important;color:var(--ps-ui-muted)!important}
+.catalogueIdentityLine{min-height:20px;margin-top:14px;font-size:12px;line-height:1.5;color:var(--ps-ui-muted)}
+.catalogueOptionCount{display:block;font-size:12px;line-height:1.5;color:var(--ps-ui-muted);margin-top:8px}
+#app .customerShell .pscEditorialCard .exactCanvaActions{margin-top:auto!important;padding:8px 0 0!important;border:0!important;display:block!important;background:none!important}
+#app .customerShell .pscEditorialCard .canvaDetails{display:flex!important;align-items:center!important;justify-content:space-between!important;width:100%!important;min-height:44px!important;padding:10px 0!important;border:0!important;border-top:1px solid var(--ps-ui-line)!important;border-radius:0!important;background:none!important;font:500 14px/1.5 'DM Sans',Arial,sans-serif!important;color:var(--ps-ui-accent)!important;text-align:left!important}
+.pscPricePreview{display:flex;flex-direction:column;gap:4px;margin:12px 0 0}
+.pscPricePreview b{font-size:16px;line-height:1.4;font-weight:600}
+.pscPricePreview :is(span,small){font-size:12px;line-height:1.5;color:var(--ps-ui-muted)}
+.pscDhaLegend{display:flex;align-items:center;gap:12px;font-size:13px;line-height:1.6;color:var(--ps-ui-muted);margin:16px 0 24px}
+.pscDhaLegend img{width:36px;height:36px;object-fit:contain;flex-shrink:0}
+#app .customerShell .pscEditorialCard .pscRequirementBadge{position:absolute!important;top:12px!important;right:12px!important;bottom:auto!important;left:auto!important;padding:0!important;background:white!important;transform:none!important;z-index:3!important;border-radius:0!important}
+#app .customerShell .pscEditorialCard .pscRequirementBadge .cardDhaIcon{position:static!important;width:32px!important;height:32px!important;object-fit:contain!important;padding:0!important;max-width:none!important;max-height:none!important}
 .pscHomeDha{width:36px;height:36px;object-fit:contain;flex-shrink:0}
-#app .customerShell .productCard.pscEditorialCard{border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;overflow:visible!important;display:flex!important;flex-direction:column!important}
-.customerShell .pscEditorialCard .productVisual{position:relative!important;border:0!important;border-radius:0!important;background:#fff!important;padding:18px!important;height:auto!important;min-height:0!important;aspect-ratio:1/1!important;width:100%!important}
-.customerShell .pscEditorialCard .productVisual .productMainImage{width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important}
-.customerShell .pscEditorialCard .pscRequirementBadge{position:absolute!important;top:auto!important;right:auto!important;bottom:12px!important;left:12px!important;display:flex!important;align-items:center;gap:6px;background:#fff!important;padding:6px 9px!important;border-radius:3px!important;color:#263c37!important;font-size:11px!important;max-width:calc(100% - 24px)!important;transform:none!important}
-.customerShell .pscEditorialCard .pscRequirementBadge>span{font:400 11px/1.2 Arial,sans-serif!important;letter-spacing:0!important;text-transform:none!important;position:static!important;white-space:nowrap!important;color:#263c37!important}
-.customerShell .pscEditorialCard .pscRequirementBadge .cardDhaIcon{position:static!important;width:22px!important;height:22px!important;max-width:none!important;max-height:none!important;padding:0!important;object-fit:contain!important}
-#app .customerShell .pscEditorialCard .exactCanvaBody{display:block!important;padding:8px 0 12px!important;min-height:0!important;border:0!important;flex:1}
-#app .customerShell .pscEditorialCard .productTitleButton{display:block!important;position:static!important;height:auto!important;min-height:0!important;width:100%!important;text-align:left!important;margin:0!important;padding:0!important}
-.customerShell .pscEditorialCard .productTitleButton h3{font-size:18px!important;line-height:1.35!important;min-height:0!important;margin:0!important;color:#172320!important}
-.customerShell .pscEditorialCard .pack{font-size:13px!important;margin:8px 0!important}
-.customerShell .pscEditorialCard .productNeedTags{font-size:12px!important;color:#747a75!important;margin:8px 0!important}
-.customerShell .pscEditorialCard .catalogueImageNoteEmpty{display:none!important}
-.customerShell .pscEditorialCard .productVisual{order:1!important}
-.customerShell .pscEditorialCard .pscBrandChoices{order:2!important;position:static!important;display:flex!important;visibility:visible!important;opacity:1!important;gap:6px;overflow-x:auto;padding:12px 0 4px;scrollbar-width:thin;transform:none!important;min-height:42px;flex-shrink:0}
-.customerShell .pscEditorialCard .exactCanvaBody{order:3!important}
-.customerShell .pscEditorialCard .exactCanvaActions{order:4!important}
-.customerShell .pscEditorialCard .pscBrandChoices button{display:block!important;position:static!important;opacity:1!important;visibility:visible!important;border:1px solid #d7d9d4!important;border-radius:3px!important;background:transparent!important;color:#43534c!important;font:400 12px/1.3 Arial,sans-serif!important;white-space:nowrap;padding:7px 10px!important;cursor:pointer;width:auto!important;min-height:30px!important;transform:none!important}
-.pscBrandChoices button.selected{border-color:#263e35;color:#172320}
-.pscBrandChoices button:focus-visible{outline:2px solid #258c7e;outline-offset:2px}
-.pscBrandChoices small{font-size:12px;color:#747a75}
-.pscPricePreview{display:flex;flex-direction:column;gap:5px;margin:12px 0 0}
-.pscPricePreview>b{font-size:21px;color:#172320;font-weight:650}
-.pscPricePreview>span{font-size:12px;color:#43534c}
-.pscPricePreview>small{font-size:11px;color:#72786f;line-height:1.5}
-.customerShell .pscEditorialCard .exactCanvaActions{padding:10px 0 0!important;border:0!important;display:flex!important;gap:8px!important}
-.customerShell .pscEditorialCard .exactCanvaActions button{min-height:40px!important;font-size:13px!important;border-radius:4px!important;flex:1}
-.customerShell .v25ProductGrid:has(.pscEditorialCard){grid-template-columns:repeat(auto-fill,minmax(220px,1fr))!important;gap:32px 22px!important}
-@media(max-width:600px){.customerShell .v25ProductGrid:has(.pscEditorialCard){grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:28px 14px!important}.customerShell .pscEditorialCard .productVisual{padding:10px!important}.customerShell .pscEditorialCard .productTitleButton h3{font-size:15px!important}.customerShell .pscEditorialCard .pscRequirementBadge{bottom:6px;left:5px;font-size:9px;padding:4px}.customerShell .pscEditorialCard .pscRequirementBadge .cardDhaIcon{width:16px!important;height:16px!important}.pscPricePreview>b{font-size:19px}.customerShell .pscEditorialCard .exactCanvaActions{flex-wrap:wrap}.customerShell .pscEditorialCard .exactCanvaActions button{min-width:60px}}
-#app .customerShell .v25ProductGrid:has(.pscEditorialCard){column-gap:0!important}
-#app .customerShell .pscEditorialCard .productVisual{padding:0!important;margin:0!important}
-#app .customerShell .pscEditorialCard .exactCanvaBody,
-#app .customerShell .pscEditorialCard .productTitleButton,
-#app .customerShell .pscEditorialCard .productTitleButton h3,
-#app .customerShell .pscEditorialCard .pack,
-#app .customerShell .pscEditorialCard .productNeedTags,
-#app .customerShell .pscEditorialCard .pscPricePreview,
-#app .customerShell .pscEditorialCard .pscDhaStatus{background:transparent!important;box-shadow:none!important}
-#app .customerShell .pscEditorialCard .exactCanvaBody{padding:8px 12px 12px!important}
-#app .customerShell .pscEditorialCard .pscBrandChoices{padding:12px 12px 4px!important}
-#app .customerShell .pscEditorialCard .exactCanvaActions{padding:10px 12px 0!important}
-#app .customerShell .mobileSearchInput,#app .customerShell .mobileSearchInput input,#app .customerShell .searchInput,#app .customerShell .searchInput input,#app .customerShell #psCommand{background:#ffffff!important}
-.pscDhaLegend{display:flex;align-items:center;gap:12px;font-size:12px;line-height:1.5;color:#53665e;margin:12px 0 22px}
-.pscDhaLegend img{width:28px;height:28px;object-fit:contain;flex-shrink:0}
-#app .customerShell .pscEditorialCard .pscRequirementBadge{top:10px!important;right:10px!important;bottom:auto!important;left:auto!important;padding:4px!important;background:transparent!important}
-#app .customerShell .pscEditorialCard .pscRequirementBadge .cardDhaIcon{width:26px!important;height:26px!important}
-#app .customerShell .pscEditorialCard .productVisual .productMainImage{display:block!important;margin:0!important;padding:0!important}
-@media(max-width:600px){#app .customerShell .v25ProductGrid:has(.pscEditorialCard){width:100vw!important;max-width:none!important;margin-left:calc(50% - 50vw)!important;margin-right:0!important}#app .customerShell .pscEditorialCard .productVisual{overflow:hidden!important}}
-#app .customerShell .productCard.pscEditorialCard{width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;min-width:0!important;box-sizing:border-box!important;grid-row:auto!important;grid-column:auto!important;align-self:stretch!important}
-#app .customerShell .v25ProductGrid:has(.pscEditorialCard){grid-auto-flow:row!important;grid-auto-rows:auto!important;align-items:stretch!important}
-#app .customerShell .pscEditorialCard .productVisual{flex:0 0 auto!important;box-sizing:border-box!important}
-#app .customerShell .pscEditorialCard .exactCanvaBody{flex:1 0 auto!important}
-#app .customerShell .pscEditorialCard .exactCanvaActions{flex:0 0 auto!important;margin-top:auto!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail{color:var(--ps-ui-ink);background:white!important;font-size:14px;line-height:1.6}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .fluidProductHeader{padding:20px 28px!important;border-bottom:1px solid var(--ps-ui-line)!important;background:white!important;gap:16px!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .fluidProductHeader h2{white-space:normal!important;overflow:visible!important;font-size:20px!important;line-height:1.35!important;letter-spacing:-.025em!important;font-weight:500!important;max-width:760px}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .eyebrow{display:block!important;font-size:11px!important;line-height:1.5!important;font-weight:500!important;letter-spacing:.04em!important;color:var(--ps-ui-muted)!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .fluidProductGrid{display:grid!important;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)!important;gap:40px!important;padding:28px!important;align-items:start!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .detailContentPane{padding:0!important;min-width:0!important;background:none!important;border:0!important;box-shadow:none!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .detailImagePane{padding:0!important;min-width:0!important;border:0!important;background:none!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .detailImageMeta{padding:14px 0!important;background:none!important;border:0!important;box-shadow:none!important;font-size:13px!important;line-height:1.6!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .detailImageMeta :is(span,small){font-size:12px!important;line-height:1.6!important;color:var(--ps-ui-muted)!important}
+.professionalPurchaseIdentity h3{font-size:24px;line-height:1.3;letter-spacing:-.025em;font-weight:500;margin:6px 0 10px}
+.professionalPurchaseIdentity p{font-size:14px;line-height:1.6;margin:0 0 20px;color:var(--ps-ui-muted)}
+.professionalSelector{display:grid;gap:8px;margin:20px 0 24px}
+.professionalSelector label{font-size:13px;font-weight:600;color:var(--ps-ui-ink)}
+.professionalSelector :is(select,textarea){display:block;width:100%;max-width:100%;box-sizing:border-box;min-height:48px;border:1px solid #a8bcb4;border-radius:var(--ps-ui-radius);background:white;padding:12px;font:400 15px/1.5 'DM Sans',Arial,sans-serif;color:var(--ps-ui-ink)}
+.professionalSelector select{white-space:normal;text-overflow:ellipsis}
+.professionalSelectionNote{font-size:12px;line-height:1.6;color:var(--ps-ui-muted);margin:0}
+.professionalAvailability{font-size:13px;line-height:1.6;color:var(--ps-ui-muted);margin:10px 0}
+.professionalCommercial{padding:0 0 18px;border-bottom:1px solid var(--ps-ui-line)}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .pscRetailPriceNotice{border:0!important;background:var(--ps-ui-soft)!important;padding:12px!important;font-size:12px!important;line-height:1.6!important;border-radius:6px!important;margin:16px 0!important;box-shadow:none!important}
+.professionalFacts{margin:24px 0}
+.professionalFacts h3{font-size:14px;font-weight:600;margin:0 0 12px}
+.professionalFacts dl{margin:0;display:grid;gap:8px}
+.professionalFacts dl>div{display:grid;grid-template-columns:minmax(100px,.8fr) minmax(0,1.2fr);gap:20px;font-size:13px;line-height:1.6}
+.professionalFacts dt{color:var(--ps-ui-muted)}
+.professionalFacts dd{margin:0;font-weight:500;overflow-wrap:anywhere}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productQuickFacts{display:flex!important;flex-wrap:wrap;gap:16px!important;padding:0!important;margin:20px 0!important;background:none!important;border:0!important;box-shadow:none!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productQuickFacts>div{padding:0!important;background:none!important;border:0!important;box-shadow:none!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productQuickFacts span{font-size:11px!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productQuickFacts b{font-size:13px!important;font-weight:500!important;line-height:1.5!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productDisclosureList{background:none!important;border:0!important;padding:0!important;margin-top:24px!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productDisclosureList details{border:0!important;border-top:1px solid var(--ps-ui-line)!important;border-radius:0!important;background:none!important;box-shadow:none!important;margin:0!important;padding:0!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productDisclosureList summary{font-size:14px!important;font-weight:500!important;padding:17px 0!important;line-height:1.5!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productDisclosureList details>div{padding:0 0 18px!important;font-size:13px!important;line-height:1.7!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail .productStickyBar.professionalRequestBar{position:sticky!important;bottom:0!important;display:flex!important;align-items:end!important;gap:16px!important;padding:16px 28px max(16px,env(safe-area-inset-bottom))!important;background:white!important;border-top:1px solid var(--ps-ui-line)!important;box-shadow:none!important;z-index:5!important;flex-wrap:wrap}
+:is(#app,[data-psc-family-detail-root]) .professionalRequestBar .button{border-radius:var(--ps-ui-radius)!important;font-size:14px!important;min-height:46px!important;line-height:1.4!important;padding:12px 18px!important;white-space:normal!important}
+:is(#app,[data-psc-family-detail-root]) .professionalRequestBar .button.primary{background:var(--ps-ui-accent)!important;flex:1!important;max-width:320px!important}
+.requestQuantity{margin-left:auto;min-width:130px;max-width:300px;flex:0 1 auto}
+.requestQuantity label{display:block;font-size:12px!important;line-height:1.4!important;font-weight:500}
+.requestQuantity label>small{font-size:11px!important;color:var(--ps-ui-muted);display:block;margin:2px 0 6px;line-height:1.4!important;max-width:240px;overflow-wrap:anywhere}
+.quantityStepper{display:flex;align-items:center;border:1px solid #a8bcb4;border-radius:var(--ps-ui-radius);overflow:hidden;background:white;height:46px;box-sizing:border-box}
+:is(#app,[data-psc-family-detail-root]) .quantityStepper :is(button,input){border:0!important;background:white!important;box-shadow:none!important;padding:0!important;margin:0!important;min-height:44px!important;height:44px!important;font:500 16px/1.5 'DM Sans',Arial,sans-serif!important;color:var(--ps-ui-ink)!important;box-sizing:border-box}
+:is(#app,[data-psc-family-detail-root]) .quantityStepper button{width:42px!important;min-width:42px!important;cursor:pointer}
+:is(#app,[data-psc-family-detail-root]) .quantityStepper input{width:64px!important;min-width:0!important;text-align:center!important;-moz-appearance:textfield}
+.quantityStepper input::-webkit-inner-spin-button{appearance:none}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail :is(button,select,textarea,input):focus-visible{outline:2px solid var(--ps-ui-accent)!important;outline-offset:3px}
+.pscFamilyHeaderDha{width:38px;height:38px;object-fit:contain;flex-shrink:0}
+.pscFamilyRegulatoryTitle{display:flex;align-items:center;gap:12px}
+.pscFamilyRegulatoryTitle img{width:36px;height:36px;object-fit:contain;flex-shrink:0}
+.pscFamilyPreview .catalogueImageEmpty{display:flex;justify-content:center;align-items:center;min-height:220px;padding:30px;box-sizing:border-box;font-size:14px;line-height:1.6;text-align:center;color:var(--ps-ui-muted)}
+/* Shared operational controls: visual changes only, including administrative screens. */
+#app .appShell :is(.panel,.wsPanel){box-shadow:none!important;border-color:var(--ps-ui-line)!important;border-radius:var(--ps-ui-radius)!important}
+#app .appShell :is(.filterBar,.panelHeader){background:transparent!important;box-shadow:none!important}
+#app .requestDrawer :is(.qty button,.removeLink){min-height:44px;min-width:38px}
+#app .requestDrawer .requestLine{border:0!important;border-bottom:1px solid var(--ps-ui-line)!important;border-radius:0!important;box-shadow:none!important;padding:18px 0!important;background:none!important}
+#app .requestDrawer .basketInfo :is(b,span,small){line-height:1.5!important}
+#app .requestDrawer .basketInfo b{font-size:14px!important}
+#app .requestDrawer .basketInfo :is(span,small){font-size:12px!important}
+@media(max-width:1100px){#app .customerShell .v25ProductGrid:has(.pscEditorialCard){grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:720px){
+ :is(#app,[data-psc-family-detail-root]) .professionalProductDetail .fluidProductGrid{grid-template-columns:minmax(0,1fr)!important;padding:20px!important;gap:24px!important}
+ :is(#app,[data-psc-family-detail-root]) .professionalProductDetail .fluidProductHeader{padding:16px 20px!important}
+ :is(#app,[data-psc-family-detail-root]) .professionalProductDetail .fluidProductHeader h2{font-size:18px!important}
+ :is(#app,[data-psc-family-detail-root]) .professionalProductDetail .professionalRequestBar{gap:12px!important;padding:12px 16px max(12px,env(safe-area-inset-bottom))!important}
+ .professionalRequestBar>.button.light{display:none!important}
+ .professionalRequestBar .requestQuantity{margin-left:0;max-width:50%;min-width:130px}
+ .professionalPurchaseIdentity h3{font-size:22px}
+ .professionalFacts dl>div{gap:12px}
+ #app .customerShell .pscEditorialCard .productTitleButton h3{font-size:15px!important}
+}
+@media(max-width:420px){#app .customerShell .v25ProductGrid:has(.pscEditorialCard){grid-template-columns:minmax(0,1fr)!important}}

@@ -31,6 +31,7 @@
     "current/behaviour/variant-photographs.js",
     "current/behaviour/dha-family-photographs.js",
     "current/behaviour/business-workspace-model.js",
+    "current/behaviour/product-presentation.js",
     "app.js",
     "current/behaviour/catalogue-families.js",
     "current/behaviour/family-details.js",
@@ -112,13 +113,13 @@
     "current/styles/admin-interface.css",
     "current/styles/workstation.css",
     "current/styles/portal-home.css",
-    "current/styles/product-editorial.css",
     "current/styles/catalogue-stock.css",
     "current/styles/mail-workspace.css",
     "current/styles/operating-system.css",
     "current/styles/workshop-refinement.css",
     "current/styles/catalogue-category-titles.css",
     "current/styles/control-alignment.css",
+    "current/styles/product-editorial.css",
     "current/styles/catalogue-photo-standard.css"
   ],
   "absorbed": {
