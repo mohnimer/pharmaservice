@@ -19,7 +19,7 @@ try{for(const [width,role,motion] of [[390,'demo','no-preference'],[1440,'demo',
  await scroll(1600);await page.waitForFunction(()=>document.querySelector('[data-ps-scroll-header]').classList.contains('psChromeHidden'));assert(await header.evaluate(el=>el.inert));
  const y=await page.evaluate(()=>scrollY);await scroll(y-40);
  assert.equal(await header.evaluate(el=>el.classList.contains('psChromeHidden')),false);assert.equal(await header.evaluate(el=>el.inert),false);
- const box=await header.boundingBox();assert(Math.abs(box.y)<2,'Actual header must return to viewport top, not merely animate in its off-screen original position');
+ const box=await header.boundingBox();await page.screenshot({animations:'disabled',path:`test-results/navigation/${role}-${width}-${motion}-returned.png`});assert(Math.abs(box.y)<2,'Actual header must return to viewport top, not merely animate in its off-screen original position');
  assert(Math.abs(await page.evaluate(()=>scrollY)-(y-40))<2,'Revealing navigation must not move content');
  if(motion==='reduce')assert.equal(await header.evaluate(el=>getComputedStyle(el).transitionDuration),'0s');
  assert(await contact.isVisible());
@@ -29,7 +29,7 @@ try{for(const [width,role,motion] of [[390,'demo','no-preference'],[1440,'demo',
    await page.locator('.sidebar [data-go="portal/wishlist"]').click();await page.locator('.customerSimpleHeader h1').waitFor();assert.equal(await page.locator('.customerSimpleHeader h1').innerText(),'Wishlist');
    await page.evaluate(()=>window.PSC_NAVIGATE('portal/catalogue/all'));await page.locator('.pscEditorialCard').first().waitFor();
   }
-  const basket=page.locator(width<=980?'.mobileCartButton':'.pillBasket');await basket.click();await page.locator('.requestDrawer').waitFor();assert.equal(await contact.isVisible(),false);await page.locator('[data-close-basket]').click();await page.waitForTimeout(250);assert(await contact.isVisible());
+  const basket=page.locator(width<=980?'.mobileCartButton':'.pillBasket');await basket.click();await page.locator('.requestDrawer').waitFor();assert.equal(await page.evaluate(()=>!!document.elementFromPoint(innerWidth-40,30)?.closest('[data-ps-scroll-header]')),false,'Sticky navigation stays below the request overlay');assert.equal(await contact.isVisible(),false);await page.locator('[data-close-basket]').click();await page.waitForTimeout(250);assert(await contact.isVisible());
   const search=page.locator(width<=980?'.mobileSearchInput input':'.topbarSearch input');await search.focus();if(width<=1100)assert.equal(await contact.isVisible(),false);await page.evaluate(()=>document.activeElement.blur());
  }else{await page.locator('[data-public-menu]').click();assert.equal(await contact.isVisible(),false);await page.locator('[data-public-menu]').click();}
  await page.evaluate(()=>document.activeElement.blur());await scroll(1600);await page.keyboard.press('Tab');assert.equal(await header.evaluate(el=>el.inert),false,'Tab must reveal navigation before focus moves');
