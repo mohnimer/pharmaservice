@@ -33,6 +33,7 @@ try{for(const [width,role,reducedMotion] of [[320,'demo','no-preference'],[768,'
  // Save outside the image, retain identity after reload, and isolate clinic preferences.
  const heart=card.locator('[data-wishlist-toggle]'),savedKey=await heart.getAttribute('data-wishlist-toggle');
  const badge=card.locator('.cardDhaIcon');
+ const detailsBox=await card.locator('.canvaDetails').boundingBox(),heartBox=await heart.boundingBox();assert(Math.abs(detailsBox.y-heartBox.y)<1,'Save and View details share one aligned action row');
  assert.equal(await heart.evaluate(el=>!!el.closest('.productVisual')),false,'Heart must never sit over the photograph/DHA mark');
  if(await badge.count()){const h=await heart.boundingBox(),d=await badge.boundingBox();assert(h.y>=d.y+d.height||h.x>=d.x+d.width||h.x+h.width<=d.x||h.y+h.height<=d.y,'DHA mark cannot overlap the save control');}
  await heart.click();assert.equal(await heart.getAttribute('aria-pressed'),'true');

@@ -21,7 +21,9 @@ const search=document.querySelector('.mobileSearchInput'),request=document.query
 if(search&&request&&visible(search)&&visible(request)){const a=search.getBoundingClientRect(),b=request.getBoundingClientRect();toolbar={searchHeight:a.height,requestHeight:b.height,searchRadius:getComputedStyle(search).borderRadius,requestRadius:getComputedStyle(request).borderRadius,countBackground:getComputedStyle(request.querySelector('b')).backgroundColor};}
 const panels=[...document.querySelectorAll('.appShell .panel,.appShell .wsPanel')].filter(visible).map(el=>getComputedStyle(el).borderTopWidth);
 
-return {overflow:document.documentElement.scrollWidth>innerWidth,controls,account,toolbar,panels};});
+const form=document.querySelector('.v3927ContactForm'),formFrame=form?{border:getComputedStyle(form).borderTopWidth,radius:getComputedStyle(form).borderRadius,shadow:getComputedStyle(form).boxShadow}:null;
+return {overflow:document.documentElement.scrollWidth>innerWidth,controls,account,toolbar,panels,formFrame};});
+if(report.formFrame)assert.deepEqual(report.formFrame,{border:'0px',radius:'0px',shadow:'none'},'Contact form should be an open surface');
 assert.equal(report.overflow,false,`${route}/${width}: page overflow`);
 for(const c of report.controls){assert.equal(c.border,'0px',`${route}/${width}: double border`);assert(c.contained,`${route}/${width}: input escaping container`);}
 if(report.account){assert(report.account.w>=100&&report.account.h>=44);assert.equal(report.account.radius,'8px');assert.equal(report.account.label,'Account');}
