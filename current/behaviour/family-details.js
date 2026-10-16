@@ -199,16 +199,15 @@
   function preferenceBlock(f){
     const chosen=selectedOptions()[0], fallback=state.selectedFallbackBrands[0];
     return `<section class="pscFamilyPreferenceBlock professionalSelector">
-      <label for="professionalVariant">${state.options.length?'Select exact product & pack':'Product specification'}</label>
+      <label for="professionalVariant">Choose your brand</label>
       <select id="professionalVariant" data-family-variant>
-        <option value="" ${!chosen&&!fallback&&!state.otherBrandActive?'selected':''}>No brand preference — request by specification</option>
+        <option value="" ${!chosen&&!fallback&&!state.otherBrandActive?'selected':''}>No brand preference</option>
         ${state.options.length?`<optgroup label="Exact catalogue options">${state.options.map(o=>`<option value="${esc(optionKey(o))}" ${chosen&&optionKey(chosen)===optionKey(o)?'selected':''}>${esc(selectionLabel(o))}${o.reference_only||o.local_reference?' · quotation reference':''}</option>`).join('')}</optgroup>`:''}
         ${familyBrandFallbacks(f).length?`<optgroup label="Sourcing preferences — exact SKU to confirm">${familyBrandFallbacks(f).map(brand=>`<option value="brand:${esc(brand)}" ${fallback===brand?'selected':''}>${esc(brand)} — specification to confirm</option>`).join('')}</optgroup>`:''}
         <option value="other" ${state.otherBrandActive?'selected':''}>Specify another exact requirement</option>
       </select>
       ${!chosen&&(f.presentations||[]).length?`<label for="professionalPresentation">Presentation / format</label><select id="professionalPresentation" data-family-format><option value="">Confirm in quotation</option>${f.presentations.filter(meaningfulPresentation).map(x=>`<option ${state.presentation===x?'selected':''}>${esc(x)}</option>`).join('')}</select>`:''}
       ${state.otherBrandActive?`<label for="professionalSpecification">Exact requirement</label><textarea id="professionalSpecification" class="pscOtherBrandInput" data-family-other-brand placeholder="Brand, strength, form, model, pack or configuration required" maxlength="1000">${esc(state.otherBrand)}</textarea>`:''}
-      <p class="professionalSelectionNote">${chosen?'This exact selection is retained in your request. Availability and supply approval are confirmed in quotation.':'Request by specification. PS confirms the exact product before supply.'}</p>
     </section>`;
   }
 
@@ -242,19 +241,18 @@
     const exactRecord=selected?.sku?catalogueProductForSku(selected.sku):null;
     const factRecord=selected?{...exactRecord,...selected,name:selected.exact_product_name,page_type:f.page_type,professionalInformation:selected.professionalInformation||exactRecord?.professionalInformation}:{page_type:f.page_type,pack:f.order_pack_basis};
     return `<div class="modalBackdrop fluidOverlay pscFamilyDetailBackdrop" data-family-detail-close><div class="modal productModalShell fluidProductShell pscFamilyModalShell" onclick="event.stopPropagation()"><section class="productDetailModal fluidProductDetail professionalProductDetail publicProductSheet pscFamilyProductSheet" role="dialog" aria-modal="true" aria-labelledby="pscFamilyTitle">
-      <div class="modalHeader fluidProductHeader"><button class="productBackButton" type="button" data-family-detail-close aria-label="Back to catalogue">←</button><div><span class="eyebrow">Product family</span><h2 id="pscFamilyTitle">${esc(f.family_name)}</h2><div class="smallMuted mono">${esc(f.family_id)}</div></div>${dha?`<img class="pscFamilyHeaderDha" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</div>
-      <div class="productDetailGrid fluidProductGrid">
-        <div class="detailImagePane fluidImagePane" data-psc-preview-mode="${selected?'single':'family'}"><div class="detailProductImageWrap pscFamilyPreview">${preview.image?`<img src="${esc(preview.image)}" alt="${esc(preview.title)} · ${esc(preview.evidence)}" onerror="this.style.display='none'">`:`<span class="catalogueImageEmpty">${selected?'Exact variant photograph pending verification':'Select an exact product to view its photograph'}</span>`}</div><div class="detailImageMeta"><b>${esc(preview.title)}</b><small>${esc(preview.evidence)}</small></div></div>
+      <div class="modalHeader fluidProductHeader"><button class="productBackButton" type="button" data-family-detail-close aria-label="Back to catalogue">←</button><div><span class="eyebrow">${selected?'Selected product':'Product family'}</span><h2 id="pscFamilyTitle">${esc(selected?.exact_product_name||f.family_name)}</h2></div>${dha?`<img class="pscFamilyHeaderDha" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</div>
+      <div class="productDetailGrid fluidProductGrid" data-psc-has-photo="${preview.image?'true':'false'}">
+        ${preview.image?`<div class="detailImagePane fluidImagePane" data-psc-preview-mode="${selected?'single':'family'}"><div class="detailProductImageWrap pscFamilyPreview"><img src="${esc(preview.image)}" alt="${esc(preview.title)} · ${esc(preview.evidence)}" onerror="this.style.display='none'"></div></div>`:''}
         <div class="detailContentPane fluidDetailContent">
-          <div class="professionalPurchaseIdentity"><span class="eyebrow">${selected?'Selected product':'Request by specification'}</span><h3>${esc(selected?.exact_product_name||f.family_name)}</h3><p>${esc(pack)}</p></div>
           ${preferenceBlock(f)}
-          <div class="professionalCommercial">${selected?optionPrice(selected):'<span class="pscOptionPrice"><b>Request quotation</b></span>'}<p class="professionalAvailability">${esc(familyAvailabilityLabel(f))}</p>${window.PSC_RETAIL_PRICE_NOTICE_HTML?.()||''}</div>
-          ${window.PSC_PRODUCT_PRESENTATION.factsHtml(factRecord)}${window.PSC_PRODUCT_PRESENTATION.documentsHtml(factRecord)}
+          <div class="professionalCommercial">${selected?optionPrice(selected):''}<p class="professionalAvailability">${esc(familyAvailabilityLabel(f))}</p></div>
+          ${selected&&factRecord.professionalInformation?.status==='VERIFIED'&&window.PSC_PRODUCT_PRESENTATION.profile(factRecord).kind!=='generic'?window.PSC_PRODUCT_PRESENTATION.factsHtml(factRecord):''}${selected?window.PSC_PRODUCT_PRESENTATION.documentsHtml(factRecord):''}
           <div class="productDisclosureList pscFamilyDisclosureList">
-            <details><summary><span>Product specification</span><i>+</i></summary><div>${selected?.verified_description?`<p>${esc(selected.verified_description)}</p>`:''}<p>${esc(f.commercial_specification||'Exact specification confirmed in quotation.')}</p><small>Family specification; the selected exact product and pack remain separate.</small></div></details>
             ${dha?`<details><summary><span>Requirement mapping</span><i>+</i></summary><div class="pscFamilyRegulatoryDisclosure"><div class="pscFamilyRegulatoryTitle"><img src="${DHA_ICON}" alt="DHA requirement"><strong>Mapped to the applicable DHA clinic requirement.</strong></div><p>${esc(f.requirement_reference||'DHA requirement')} · ${esc(f.dha_status||'Status to verify')}</p>${f.exact_controlled_wording?`<p>${esc(f.exact_controlled_wording)}</p>`:''}<small>Conditional requirements and alternatives retain their source conditions. Requirement mapping is not DHA product approval.</small></div></details>`:''}
             <details><summary><span>Supply & documentation</span><i>+</i></summary><div><p>${kind==='medicine'?'Licensed supply route, registration, storage, batch/expiry and recipient authorization are confirmed before commitment.':'Exact specification, included components, compatibility, delivery and applicable warranty are confirmed in quotation.'}</p><p>Manufacturer documentation is provided when verified for the selected exact product.</p></div></details>
           </div>
+          <p class="pscFamilyReference">Product code: <span class="mono">${esc(f.family_id)}</span></p>
         </div>
       </div>
       <div class="productStickyBar publicProductSticky pscFamilyStickyBar professionalRequestBar"><button type="button" class="button light" data-family-view-request>View request</button>${window.PSC_PRODUCT_PRESENTATION.quantityHtml(state.qty,pack)}<button type="button" class="button primary" data-family-quote>Add to Supply Request</button></div>
