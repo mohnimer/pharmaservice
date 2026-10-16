@@ -204,10 +204,10 @@
         <option value="" ${!chosen&&!fallback&&!state.otherBrandActive?'selected':''}>No brand preference</option>
         ${state.options.length?`<optgroup label="Exact catalogue options">${state.options.map(o=>`<option value="${esc(optionKey(o))}" ${chosen&&optionKey(chosen)===optionKey(o)?'selected':''}>${esc(selectionLabel(o))}${o.reference_only||o.local_reference?' · quotation reference':''}</option>`).join('')}</optgroup>`:''}
         ${familyBrandFallbacks(f).length?`<optgroup label="Sourcing preferences — exact SKU to confirm">${familyBrandFallbacks(f).map(brand=>`<option value="brand:${esc(brand)}" ${fallback===brand?'selected':''}>${esc(brand)} — specification to confirm</option>`).join('')}</optgroup>`:''}
-        <option value="other" ${state.otherBrandActive?'selected':''}>Specify another exact requirement</option>
+        <option value="other" ${state.otherBrandActive?'selected':''}>${familyKind(f)==='equipment'?'Specify preferred brand or model':'Specify another exact requirement'}</option>
       </select>
       ${!chosen&&(f.presentations||[]).length?`<label for="professionalPresentation">Presentation / format</label><select id="professionalPresentation" data-family-format><option value="">Confirm in quotation</option>${f.presentations.filter(meaningfulPresentation).map(x=>`<option ${state.presentation===x?'selected':''}>${esc(x)}</option>`).join('')}</select>`:''}
-      ${state.otherBrandActive?`<label for="professionalSpecification">Exact requirement</label><textarea id="professionalSpecification" class="pscOtherBrandInput" data-family-other-brand placeholder="Brand, strength, form, model, pack or configuration required" maxlength="1000">${esc(state.otherBrand)}</textarea>`:''}
+      ${state.otherBrandActive?`<label for="professionalSpecification">${familyKind(f)==='equipment'?'Preferred brand / model':'Exact requirement'}</label><textarea id="professionalSpecification" class="pscOtherBrandInput" data-family-other-brand placeholder="${familyKind(f)==='equipment'?'Enter your preferred brand, model or configuration':'Brand, strength, form, model, pack or configuration required'}" maxlength="1000">${esc(state.otherBrand)}</textarea>`:''}
     </section>`;
   }
 
