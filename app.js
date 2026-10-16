@@ -2614,7 +2614,7 @@
   function lineReference(l){ if(l?.kind==='unlisted')return 'Unlisted item — requires PS review';return isFamilyLine(l)?l.familyId:(l?.sku||''); }
   function linePackLabel(l,p=null){
     if(l?.kind==='unlisted')return l.requestUnit||'Unit to confirm';
-    if(isFamilyLine(l)) return l.productOptionSnapshot?(l.productOptionSnapshot.pack||'Pack / unit to confirm'):(l.orderPackBasis||'Pack / scope to confirm');
+    if(isFamilyLine(l)) return l.productOptionSnapshot?.exact_product_name?(l.productOptionSnapshot.pack||'Pack / unit to confirm'):(l.orderPackBasis||'Pack / scope to confirm');
     return p?.cataloguePack||p?.pack||'Pack to confirm';
   }
   function lineBrandPreferenceLabel(l){

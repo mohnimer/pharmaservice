@@ -32,5 +32,20 @@ try{
  const input=w.document.querySelector('[data-family-other-brand]');input.value='Custom exact pack to source';input.dispatchEvent(new w.Event('input',{bubbles:true}));await qty(3);await click('[data-family-quote]');await click('[data-basket]');await click('[data-submit-request]');await pause();
  rpc=w.__backendCalls.filter(c=>c.rpc==='psc_submit_institutional_request').at(-1);
  const custom=rpc.args.p_lines[0];assert.equal(custom.psc_sku_snapshot,null);assert.equal(custom.product_option_id,null);assert.equal(custom.quantity,3);assert.equal(custom.product_option_snapshot.requested_family_id,family);assert.equal(custom.requested_brand,'Other: Custom exact pack to source');
+ // No-preference requests keep their selling basis after snapshot hydration.
+ await w.PSC_OPEN_FAMILY_DETAIL(family);await choose('');await qty(1);await click('[data-family-quote]');await click('[data-basket]');
+ const before=w.document.querySelector('.requestLine .basketInfo span').textContent;
+ await click('[data-submit-request]');await pause();
+ const finalOrder=w.__tables.orders.at(-1);finalOrder.status='delivered';
+ const refreshed=new Window({url:'https://example.invalid/#portal/requests',settings:{disableCSSFileLoading:true,disableJavaScriptFileLoading:true,disableComputedStyleRendering:true}});
+ try{
+  refreshed.document.body.innerHTML='<div id="app"></div>';refreshed.structuredClone=structuredClone;refreshed.__testRole='member';
+  refreshed.eval(readFileSync('tests/mock-supabase.js','utf8'));
+  refreshed.__tables.orders=structuredClone(w.__tables.orders);refreshed.__tables.order_lines=structuredClone(w.__tables.order_lines);
+  refreshed.eval(readFileSync('dist/current.js','utf8'));refreshed.document.dispatchEvent(new refreshed.Event('DOMContentLoaded'));await pause();
+  const reorder=refreshed.document.querySelector('[data-reorder-order="'+finalOrder.order_number+'"]');assert(reorder,'Reloaded delivered request supports existing reorder flow');reorder.click();await pause();
+  const restored=JSON.parse(refreshed.localStorage.getItem('pscClinicPortalStateV12_1')).basket.find(l=>l.familyId===family&&l.brandPreferenceMode==='no_preference');
+  assert(restored);assert(restored.orderPackBasis);assert(before.includes(restored.orderPackBasis));assert.equal(restored.productOptionSnapshot.requested_family_id,family);
+ }finally{await refreshed.happyDOM.close();}
  console.log('PASS isolated submission: exact SKU merges across product/family, saved reference IDs and family/pack snapshots, unknown specification remains no-SKU, existing RPC only');
 }finally{await w.happyDOM.close();}

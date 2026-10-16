@@ -1,7 +1,13 @@
 name: Professional catalogue experience
 on:
-  push:
-    branches: [feature/professional-catalogue-ui-20261016]
+  pull_request:
+    paths:
+      - 'app.js'
+      - 'current/behaviour/family-details.js'
+      - 'current/behaviour/product-presentation.js'
+      - 'current/styles/product-editorial.css'
+      - 'tests/professional-*.mjs'
+      - '.github/workflows/professional-catalogue.yml'
 jobs:
   request-and-layout:
     runs-on: ubuntu-latest
