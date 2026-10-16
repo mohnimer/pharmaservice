@@ -32,8 +32,8 @@ try{for(const width of [1440,768,390]){
   const image=detail.locator('.pscFamilyPreview>img');await image.waitFor();
   assert.equal(await image.getAttribute('src'),expectedPhoto);
   await image.evaluate(img=>img.decode());assert(await image.evaluate(img=>img.naturalWidth>0));
-  assert((await detail.locator('.professionalPurchaseIdentity').innerText()).includes(row.pack));
-  assert((await detail.locator('.pscRetailPriceNotice').innerText()).includes('Wholesale prices are provided in your quotation.'));
+  assert((await detail.locator('[data-family-variant] option:checked').innerText()).includes(row.pack),'Exact pack stays visible in the brand/variant selection');
+  assert.equal(await detail.locator('.professionalPurchaseIdentity,.pscRetailPriceNotice').count(),0,'Generic duplicate details and retail notice stay removed');
   assert.equal(await detail.locator('[data-request-quantity]').inputValue(),'1');
   await detail.locator('[data-quantity-delta="-1"]').click();assert.equal(await detail.locator('[data-request-quantity]').inputValue(),'1');
   await detail.locator('[data-request-quantity]').fill('10');
