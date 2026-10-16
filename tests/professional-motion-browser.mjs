@@ -10,7 +10,7 @@ const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r))
 const browser=await chromium.launch({args:['--no-sandbox','--disable-dev-shm-usage']});
 mkdirSync('test-results/motion',{recursive:true});
 const settle=page=>page.waitForFunction(()=>!document.querySelector('[data-motion-ghost]'));
-try{for(const width of [1440,390])for(const reducedMotion of ['no-preference','reduce']){
+try{for(const width of [1440,390,320])for(const reducedMotion of ['no-preference','reduce']){
  const context=await browser.newContext({viewport:{width,height:950},reducedMotion});
  await context.addInitScript(()=>{window.__testRole='demo';window.__adds=[];document.addEventListener('psc:request-added',e=>window.__adds.push(e.detail));});
  await context.route('**/*',r=>{const host=new URL(r.request().url()).hostname;return host==='127.0.0.1'?r.continue():r.fulfill({contentType:host==='cdn.jsdelivr.net'?'text/javascript':'text/plain',body:host==='cdn.jsdelivr.net'?readFileSync('tests/mock-supabase.js','utf8'):''});});
@@ -18,6 +18,9 @@ try{for(const width of [1440,390])for(const reducedMotion of ['no-preference','r
  const base=`http://127.0.0.1:${server.address().port}`;
  await page.goto(base+'/#portal/catalogue/allergy');await page.locator('.productCard').first().waitFor();
  await page.locator('[data-product-view="PS-AC-417F1BC9E425"]').first().click();
+ await page.evaluate(()=>Promise.all(document.getAnimations().filter(a=>a.effect?.getTiming().iterations!==Infinity).map(a=>a.finished.catch(()=>{}))));
+ const controls=await page.locator('.professionalRequestBar').evaluate(el=>{const q=el.querySelector('.quantityStepper').getBoundingClientRect(),b=el.querySelector('.requestAddButton').getBoundingClientRect();return {quantity:q.height,action:b.height,bottom:b.bottom,right:b.right};});
+ assert(Math.abs(controls.quantity-controls.action)<=1&&controls.bottom<=950&&controls.right<=width,JSON.stringify(controls));
  await page.locator('[data-request-quantity]').fill('10');
  // Two additions in the same JS task: no animation lock, stale input or lost quantity.
  await page.evaluate(()=>{document.querySelector('.requestAddButton').click();document.querySelector('.requestAddButton').click();});
@@ -62,7 +65,7 @@ try{for(const width of [1440,390])for(const reducedMotion of ['no-preference','r
   assert.equal(await page.evaluate(()=>document.getAnimations().filter(a=>a.effect?.getTiming().duration>1).length),0);
  }
  await page.locator('.pscFamilyPreview img').evaluate(img=>img.decode());
- await page.screenshot({path:`test-results/motion/${width}-${reducedMotion}.png`});
+ await page.screenshot({animations:'disabled',path:`test-results/motion/${width}-${reducedMotion}.png`});
  await page.keyboard.press('Escape');await settle(page);
  // Slow reads show a truthful placeholder and closing cancels the pending presentation.
  await page.evaluate(id=>{const original=window.PSC_SUPABASE;window.__originalSb=original;window.PSC_SUPABASE={from(){const query=new Proxy({}, {get:(_,key)=>key==='then'?(resolve=>setTimeout(()=>resolve({data:null,error:null}),450)):(()=>query)});return query;}};window.PSC_OPEN_FAMILY_DETAIL(id);},family.family_id);

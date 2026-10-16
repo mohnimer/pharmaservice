@@ -41,3 +41,9 @@ Variant changes retain the family sheet shell, scroll, expanded disclosures and 
 Request confirmation comes from successful basket mutation events, including quantities and totals; rejected additions emit no success event. Quantity, focus and drawer scroll survive ordering rerenders, which suppress repeated entrance animations. Toasts announce success accessibly. Keyboard Tab stays within the active sheet and Escape closes it. Async controls retain their label geometry.
 
 Browser verification: `tests/professional-motion-browser.mjs` covers desktop/mobile, normal/reduced motion, two same-task exact additions, rejected additions, quantity retention, variant shell/scroll/focus continuity, keyboard trapping, closing, and cancelled slow reads. The professional catalogue workflow runs this against the built application and saves screenshots.
+
+## Action size and information hierarchy refinement
+
+Primary catalogue, portal and administrative actions now use neutral near-black, with green retained for brand accents, focus and success feedback. Common filled and outlined actions share a 48 px minimum height, 14 px label and 8 px radius; icon controls retain a 44 px target. The purchasing bar uses shared grid rows so quantity and Add controls have equal heights even when the Add label wraps. Selling-unit copy occupies a separate full-width caption on mobile.
+
+All copy is retained. Product identity, exact selection, price, availability, verified facts and supporting notes have distinct weight, spacing and contrast. Retail-versus-wholesale notices remain visible; metadata uses a quieter but readable treatment. The approved card layout and photo framing remain intact. No homepage or Workshop copy/structure, product data, stock, pricing or procurement logic is changed. Browser regressions measure paired controls at desktop/tablet/mobile widths and exercise narrow 320 px screens.

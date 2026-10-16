@@ -21,7 +21,7 @@ try{for(const width of [1440,768,390]){
  const columns=await page.locator('.v25ProductGrid').first().evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length);
  assert.equal(columns,width===1440?3:width===768?2:1);
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
- await page.locator('.productCard').first().scrollIntoViewIfNeeded();await page.screenshot({path:`test-results/variant-visual-review/${width}-catalogue.png`});
+ await page.locator('.productCard').first().scrollIntoViewIfNeeded();await page.screenshot({animations:'disabled',path:`test-results/variant-visual-review/${width}-catalogue.png`});
  // Every released exact preview retains its own photo/pack/evidence in the new selector.
  for(const [i,row] of records.entries()){
   await page.evaluate(id=>window.PSC_OPEN_FAMILY_DETAIL(id),row.family_id);
@@ -38,9 +38,9 @@ try{for(const width of [1440,768,390]){
   await detail.locator('[data-quantity-delta="-1"]').click();assert.equal(await detail.locator('[data-request-quantity]').inputValue(),'1');
   await detail.locator('[data-request-quantity]').fill('10');
   await detail.locator('[data-request-quantity]').blur();
-  const geometry=await detail.evaluate(el=>{const g=el.querySelector('.fluidProductGrid'),cs=getComputedStyle(g),r=g.getBoundingClientRect(),b=el.querySelector('.professionalRequestBar').getBoundingClientRect();return {columns:cs.gridTemplateColumns.split(' ').length,gridWidth:r.width,viewport:innerWidth,buttonVisible:b.bottom<=innerHeight+2};});
-  assert.equal(geometry.columns,width>720?2:1);assert(geometry.gridWidth<=width+1);if(!geometry.buttonVisible)await page.screenshot({path:`test-results/variant-visual-review/${width}-sticky-failure.png`});assert(geometry.buttonVisible,JSON.stringify(geometry));
-  if(i<3)await page.screenshot({path:`test-results/variant-visual-review/${width}-${row.psc_sku}-detail.png`});
+  const geometry=await detail.evaluate(el=>{const g=el.querySelector('.fluidProductGrid'),cs=getComputedStyle(g),r=g.getBoundingClientRect(),b=el.querySelector('.professionalRequestBar').getBoundingClientRect();return {columns:cs.gridTemplateColumns.split(' ').length,gridWidth:r.width,viewport:innerWidth,buttonVisible:b.bottom<=innerHeight+2,stepperHeight:el.querySelector('.quantityStepper').getBoundingClientRect().height,actionHeight:el.querySelector('[data-family-quote]').getBoundingClientRect().height,actionColor:getComputedStyle(el.querySelector('[data-family-quote]')).backgroundColor};});
+  assert(Math.abs(geometry.stepperHeight-geometry.actionHeight)<=1,'Quantity and action heights must match: '+JSON.stringify(geometry));const channels=geometry.actionColor.match(/\d+/g).slice(0,3).map(Number);assert(Math.max(...channels)<60&&Math.max(...channels)-Math.min(...channels)<5,'Primary action must be neutral near-black');assert.equal(geometry.columns,width>720?2:1);assert(geometry.gridWidth<=width+1);if(!geometry.buttonVisible)await page.screenshot({animations:'disabled',path:`test-results/variant-visual-review/${width}-sticky-failure.png`});assert(geometry.buttonVisible,JSON.stringify(geometry));
+  if(i<3)await page.screenshot({animations:'disabled',path:`test-results/variant-visual-review/${width}-${row.psc_sku}-detail.png`});
   await detail.locator('[data-family-quote]').click();
   const request=await page.evaluate(()=>window.__variantRequests.at(-1));
   assert.equal(request.qty,10);assert.equal(request.familyId,row.family_id);
@@ -56,6 +56,6 @@ try{for(const width of [1440,768,390]){
  else{await page.locator('.productBackButton[data-modal-close]').click();await page.locator('[data-basket]:visible').first().click();}
  assert((await page.locator('.requestDrawer').innerText()).includes('Herpesan'));
  assert.equal(await page.locator('[data-basket-delta="PS-AC-417F1BC9E425|1"]').evaluate(e=>e.previousElementSibling.textContent),'10');
- await page.screenshot({path:`test-results/variant-visual-review/${width}-shared-request.png`});
+ await page.screenshot({animations:'disabled',path:`test-results/variant-visual-review/${width}-shared-request.png`});
  assert.deepEqual(errors,[]);await context.close();console.log(`${width}px: ${records.length} exact variants, quantity 10, shared request, responsive columns and photograph identity PASS`);
 }}finally{await browser.close();server.close();}
