@@ -2240,7 +2240,7 @@
         const selected=action.reference?catalogueProducts().find(p=>p.pscSku===referenceSku):matches.find(p=>p.pscSku===intelligent.selected)||matches[0];
         if(matches.length>1&&!action.reference&&!matches.some(p=>p.pscSku===intelligent.confirmed)){intelligent.choices=matches.slice(0,12);intelligent.message='Choose an existing catalogue line before adding';save();ui.catalogueQuery='';ui.globalSearch='';renderUi({preserveScroll:true,transition:false});return;}
         intelligent.confirmed='';
-        if(selected){const prior=state.basket.find(l=>l.sku===selected.pscSku);if((prior?.qty||0)+(action.quantity||1)>10000){intelligent.message='Keep requested quantity at or below 10,000';ui.catalogueQuery='';ui.globalSearch='';save();renderUi({preserveScroll:true,transition:false});return;}const l=state.basket.find(l=>l.sku===selected.pscSku);if(l){l.qty+=action.quantity||1;if(action.unit)l.requestUnit=action.unit;}else state.basket.push({sku:selected.pscSku,qty:action.quantity||1,requestUnit:action.unit});window.PS_SEARCH_ANALYTICS?.record('added',{query:text,productId:selected.pscSku,intent:action.intent});intelligent.selected=selected.pscSku;memory.selectedSku=selected.pscSku;intelligent.message=`${selected.catalogueDisplayName||selected.name} × ${action.quantity||1} — needs PS verification`;}
+        if(selected){const prior=state.basket.find(l=>lineKey(l)===selected.pscSku);if((prior?.qty||0)+(action.quantity||1)>10000){intelligent.message='Keep requested quantity at or below 10,000';ui.catalogueQuery='';ui.globalSearch='';save();renderUi({preserveScroll:true,transition:false});return;}const l=state.basket.find(l=>lineKey(l)===selected.pscSku);if(l){l.qty+=action.quantity||1;if(action.unit)l.requestUnit=action.unit;}else state.basket.push({sku:selected.pscSku,qty:action.quantity||1,requestUnit:action.unit});window.PS_SEARCH_ANALYTICS?.record('added',{query:text,productId:selected.pscSku,intent:action.intent});intelligent.selected=selected.pscSku;memory.selectedSku=selected.pscSku;intelligent.message=`${selected.catalogueDisplayName||selected.name} × ${action.quantity||1} — needs PS verification`;}
         else intelligent.message=window.PS_INTELLIGENT_SEARCH.outcome(action,matches).message;
       }else if(action.intent==='replace')intelligent.message='Choose the replacement product, then remove the old line; no items changed';
       else if(!matches.length)intelligent.message=window.PS_INTELLIGENT_SEARCH.outcome(action,matches).message;
@@ -2590,8 +2590,17 @@
   }
 
   function isFamilyLine(l){ return !!(l&&l.familyId); }
+  function exactSkuForLine(l){
+    if(!isFamilyLine(l))return l?.sku||'';
+    const o=l.productOptionSnapshot;
+    if(!o?.sku||!o.pack||!o.exact_product_name)return '';
+    const p=product(o.sku);
+    if(!p||p.name!==o.exact_product_name||String(p.brand||'')!==String(o.brand||'')||String(p.pack||'')!==String(o.pack))return '';
+    return (p.catalogueParentId||p.catalogueReferenceFamilyId||p.pscSku)===l.familyId?p.pscSku:'';
+  }
   function lineKey(l){
     if(l?.kind==='unlisted')return l.requestId;
+    const exactSku=exactSkuForLine(l);if(exactSku)return exactSku;
     if(isFamilyLine(l)){
       const mode=l.brandPreferenceMode||'no_preference';
       const choice=mode==='specific_option'?(l.productOptionId||''):mode==='other_brand'?String(l.requestedBrand||'').trim().toLowerCase():'no-preference';
@@ -2645,7 +2654,7 @@
     const key=lineKey(line);
     const existing=state.basket.find(x=>lineKey(x)===key);
     if(existing&&existing.qty+line.qty>10000){toast('Keep requested quantity at or below 10,000 per line');return false;}
-    if(existing) existing.qty+=line.qty;
+    if(existing){const qty=existing.qty+line.qty;Object.assign(existing,line,{qty});}
     else state.basket.push(line);
     save();
     renderUi({preserveScroll:true,transition:false});
@@ -2660,7 +2669,7 @@
     const p=product(sku);if(!p)return;
     qty=window.PSC_PRODUCT_PRESENTATION.quantity(qty);
     window.PS_SEARCH_ANALYTICS?.record('added',{productId:sku});productSearchMemory().selectedSku=sku;
-    const f=state.basket.find(x=>x.sku===sku);const prior=Number(f?.qty||0);
+    const f=state.basket.find(x=>lineKey(x)===sku);const prior=Number(f?.qty||0);
     if(prior+qty>10000){toast('Keep requested quantity at or below 10,000 per line');return;}
     if(f)f.qty+=qty;else state.basket.push({sku,qty});
     save();renderUi({preserveScroll:true,transition:false});
@@ -2995,9 +3004,9 @@
       : `<div class="detailProductImageWrap"><div class="detailNeedVisual" style="--need-bg:${primary.bg};--need-ink:${primary.ink}"></div>${detailDhaMark}</div>`;
     const workshop=workshopForProduct(p,1)[0];
     const related=relatedProductsFor(p,6);
-    const inRequest=state.basket.find(x=>x.sku===p.pscSku)?.qty||0;
+    const inRequest=state.basket.find(x=>lineKey(x)===p.pscSku)?.qty||0;
 
-    return `<div class="productDetailModal fluidProductDetail professionalProductDetail" data-product-experience="${window.PSC_PRODUCT_PRESENTATION.profile(p).kind}">
+    return `<div class="productDetailModal fluidProductDetail professionalProductDetail" role="dialog" aria-modal="true" aria-label="${esc(displayName)}" data-product-experience="${window.PSC_PRODUCT_PRESENTATION.profile(p).kind}">
       <div class="modalHeader fluidProductHeader"><button class="productBackButton" data-modal-close aria-label="Back to catalogue">←</button><div><span class="eyebrow">${esc(primary.label)}</span><h2>${esc(displayName)}</h2><div class="smallMuted mono">${esc(p.pscSku)}</div></div><span class="productRequestCount">${inRequest?`${inRequest} in request`:''}</span></div>
       <div class="productDetailGrid fluidProductGrid">
         <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).filter(m=>window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url).map(m=>`<img src="${esc(window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
@@ -3245,10 +3254,12 @@
       const qLines={};
       const mappedLines=orderLines.map(l=>{
         const mapped=l.family_id||l.family_name_snapshot?{
-          type:'family', localFamily:!l.family_id, familyId:l.family_id||(window.PSC_FAMILY_CATALOGUE_V39?.families||[]).find(f=>f.familyName===l.family_name_snapshot)?.familyId||l.family_name_snapshot, familyName:l.family_name_snapshot||l.line_description||l.family_id,
+          type:'family', localFamily:!l.family_id, familyId:l.family_id||l.product_option_snapshot?.requested_family_id||(window.PSC_FAMILY_CATALOGUE_V39?.families||[]).find(f=>f.familyName===l.family_name_snapshot)?.familyId||l.family_name_snapshot, familyName:l.family_name_snapshot||l.line_description||l.family_id,
           presentation:l.requested_presentation||'', orderPackBasis:l.pack_snapshot||'', brandPreferenceMode:l.brand_preference_mode||'no_preference',
           requestedBrand:l.requested_brand||'', productOptionId:l.product_option_id||'', productOptionSnapshot:l.product_option_snapshot||null,
-          regulated:true, qty:Number(l.quantity)
+          requestedProductOptions:l.product_option_snapshot?.requested_product_options||[],
+          familyPageType:l.product_option_snapshot?.requested_family_page_type||'',
+          regulated:l.product_option_snapshot?.regulated??true, qty:Number(l.quantity)
         }:!l.psc_sku_snapshot&&!l.product_id&&l.line_description?{kind:'unlisted',requestId:'unlisted-'+l.id,description:l.line_description,requestUnit:l.pack_snapshot==='Unlisted item — requires PS review'?'':l.pack_snapshot||'',qty:Number(l.quantity)}:{sku:l.psc_sku_snapshot||'',qty:Number(l.quantity)};
         const key=lineKey(mapped);
         if(key) qLines[key]={sell:l.unit_price===null?undefined:Number(l.unit_price),vat:l.vat_rate===null?undefined:Number(l.vat_rate)};
@@ -3325,12 +3336,11 @@
     const dbLines=lines.map(l=>{
       if(l.kind==='unlisted')return {product_id:null,psc_sku_snapshot:null,line_description:l.description,brand_model_snapshot:null,pack_snapshot:l.requestUnit||'Unlisted item — requires PS review',quantity:l.qty};
       if(isFamilyLine(l)){
-        // Frontend-only families are requirements, not invented database family IDs.
-        if(l.localFamily)return {product_id:null,psc_sku_snapshot:null,
-          line_description:[l.familyName||l.familyId,l.presentation,l.requestedBrand?`Requested brand: ${l.requestedBrand}`:''].filter(Boolean).join(' · '),
-          brand_model_snapshot:null,pack_snapshot:l.orderPackBasis||l.presentation||'Unlisted item — requires PS review',quantity:l.qty};
+        const snapshot={...(l.productOptionSnapshot||{}),requested_family_id:l.familyId,
+          requested_family_page_type:l.familyPageType||'',regulated:!!l.regulated,
+          requested_product_options:l.requestedProductOptions||[]};
         return {
-          product_id:null, psc_sku_snapshot:null,
+          product_id:null, psc_sku_snapshot:exactSkuForLine(l)||null,
           family_id:l.localFamily?null:l.familyId, family_name_snapshot:l.familyName,
           line_description:l.familyName||l.familyId,
           brand_model_snapshot:l.brandPreferenceMode==='specific_option'?(l.productOptionSnapshot?.exact_product_name||l.requestedBrand||null):(l.brandPreferenceMode==='other_brand'?l.requestedBrand:'No preference'),
@@ -3339,7 +3349,7 @@
           requested_presentation:l.presentation||null,
           brand_preference_mode:l.brandPreferenceMode||'no_preference',
           requested_brand:l.brandPreferenceMode==='other_brand'?(l.requestedBrand||null):(l.brandPreferenceMode==='specific_option'?(l.productOptionSnapshot?.brand||l.requestedBrand||null):null),
-          product_option_snapshot:l.brandPreferenceMode==='specific_option'?(l.productOptionSnapshot||null):null
+          product_option_snapshot:snapshot
         };
       }
       const p=product(l.sku);

@@ -21,7 +21,7 @@ try{for(const width of [1440,768,390]){
  const columns=await page.locator('.v25ProductGrid').first().evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length);
  assert.equal(columns,width===1440?3:width===768?2:1);
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
- await page.screenshot({path:`test-results/variant-visual-review/${width}-catalogue.png`});
+ await page.locator('.productCard').first().scrollIntoViewIfNeeded();await page.screenshot({path:`test-results/variant-visual-review/${width}-catalogue.png`});
  // Every released exact preview retains its own photo/pack/evidence in the new selector.
  for(const [i,row] of records.entries()){
   await page.evaluate(id=>window.PSC_OPEN_FAMILY_DETAIL(id),row.family_id);
@@ -39,7 +39,7 @@ try{for(const width of [1440,768,390]){
   await detail.locator('[data-request-quantity]').fill('10');
   await detail.locator('[data-request-quantity]').blur();
   const geometry=await detail.evaluate(el=>{const g=el.querySelector('.fluidProductGrid'),cs=getComputedStyle(g),r=g.getBoundingClientRect(),b=el.querySelector('.professionalRequestBar').getBoundingClientRect();return {columns:cs.gridTemplateColumns.split(' ').length,gridWidth:r.width,viewport:innerWidth,buttonVisible:b.bottom<=innerHeight+2};});
-  assert.equal(geometry.columns,width>720?2:1);assert(geometry.gridWidth<=width+1);assert(geometry.buttonVisible);
+  assert.equal(geometry.columns,width>720?2:1);assert(geometry.gridWidth<=width+1);if(!geometry.buttonVisible)await page.screenshot({path:`test-results/variant-visual-review/${width}-sticky-failure.png`});assert(geometry.buttonVisible,JSON.stringify(geometry));
   if(i<3)await page.screenshot({path:`test-results/variant-visual-review/${width}-${row.psc_sku}-detail.png`});
   await detail.locator('[data-family-quote]').click();
   const request=await page.evaluate(()=>window.__variantRequests.at(-1));

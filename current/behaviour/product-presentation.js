@@ -43,7 +43,7 @@
     return `<details class="professionalDocuments"><summary>Manufacturer documentation</summary><ul>${documents.map(d=>`<li><a href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">${esc(d.label||'Manufacturer document')}</a></li>`).join('')}</ul></details>`;
   }
   function quantityHtml(value=1,unit='Pack / unit to confirm'){
-    return `<div class="requestQuantity"><label>Quantity <small>${esc(unit)}</small><span class="quantityStepper"><button type="button" data-quantity-delta="-1" aria-label="Decrease requested quantity">−</button><input type="number" data-request-quantity aria-label="Requested quantity" min="1" max="10000" step="1" inputmode="numeric" value="${quantity(value)}"><button type="button" data-quantity-delta="1" aria-label="Increase requested quantity">+</button></span></label></div>`;
+    return `<div class="requestQuantity"><label>Quantity <small>Per requested unit: ${esc(unit)}</small><span class="quantityStepper"><button type="button" data-quantity-delta="-1" aria-label="Decrease requested quantity">−</button><input type="number" data-request-quantity aria-label="Requested quantity" min="1" max="10000" step="1" inputmode="numeric" value="${quantity(value)}"><button type="button" data-quantity-delta="1" aria-label="Increase requested quantity">+</button></span></label></div>`;
   }
   function bindQuantity(root,onChange=()=>{}){
     const input=root.querySelector('[data-request-quantity]');if(!input)return;

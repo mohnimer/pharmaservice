@@ -89,3 +89,21 @@
  #app .customerShell .pscEditorialCard .productTitleButton h3{font-size:15px!important}
 }
 @media(max-width:420px){#app .customerShell .v25ProductGrid:has(.pscEditorialCard){grid-template-columns:minmax(0,1fr)!important}}
+/* One constrained scroll surface: historical mobile overlay rules must not push
+   the sticky request action below the viewport on tablet-sized screens. */
+:is(#app,[data-psc-family-detail-root]) .fluidOverlay:has(.professionalProductDetail){display:flex!important;align-items:center!important;justify-content:center!important;padding:24px!important;box-sizing:border-box!important}
+:is(#app,[data-psc-family-detail-root]) .fluidProductShell:has(.professionalProductDetail){width:min(1120px,100%)!important;max-width:100%!important;max-height:calc(100dvh - 48px)!important;padding:0!important;margin:0!important;box-sizing:border-box!important;overflow:hidden!important}
+:is(#app,[data-psc-family-detail-root]) .professionalProductDetail{max-height:calc(100dvh - 48px)!important;min-height:0!important;flex:1 1 auto!important;overflow:auto!important;box-sizing:border-box!important}
+@media(max-width:720px){
+ :is(#app,[data-psc-family-detail-root]) .fluidOverlay:has(.professionalProductDetail){padding:0!important}
+ :is(#app,[data-psc-family-detail-root]) .fluidProductShell:has(.professionalProductDetail){width:100%!important;max-width:100%!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important}
+ :is(#app,[data-psc-family-detail-root]) .professionalProductDetail{max-height:100dvh!important}
+}
+.professionalCommercial>.pscOptionPrice{display:flex;flex-direction:column;gap:5px}
+.professionalCommercial>.pscOptionPrice b{font-size:18px;font-weight:600;line-height:1.5}
+.professionalCommercial>.pscOptionPrice small{font-size:12px;line-height:1.6;color:var(--ps-ui-muted)}
+/* Let the existing search and request tools sit on the page without nested boxes. */
+#app .customerShell :is(.psIntelligentSearch,.psLiveRequest){border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;padding:20px 0!important}
+#app .customerShell .psLiveRequest{border-left:1px solid var(--ps-ui-line)!important;padding-left:24px!important}
+#app .customerShell :is(.categoryHero,.pscFamilyShelf){box-shadow:none!important;background:transparent!important}
+@media(max-width:980px){#app .customerShell .psLiveRequest{border-left:0!important;padding-left:16px!important;padding-right:16px!important;background:white!important}}

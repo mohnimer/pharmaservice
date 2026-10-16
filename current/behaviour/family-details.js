@@ -191,13 +191,18 @@
     if(state.otherBrandActive&&state.otherBrand.trim()) parts.push(`Other: ${state.otherBrand.trim()}`);
     return parts.length?parts.join(' · '):'No brand preference';
   }
+  function selectionLabel(o){
+    const exact=String(o.exact_product_name||''),brand=normalizedBrand(o.brand);
+    return [brand&&!exact.toLowerCase().includes(brand.toLowerCase())?brand:'',exact,
+      o.presentation&&!exact.toLowerCase().includes(String(o.presentation).toLowerCase())?o.presentation:'',o.pack].filter(Boolean).join(' · ');
+  }
   function preferenceBlock(f){
     const chosen=selectedOptions()[0], fallback=state.selectedFallbackBrands[0];
     return `<section class="pscFamilyPreferenceBlock professionalSelector">
       <label for="professionalVariant">${state.options.length?'Select exact product & pack':'Product specification'}</label>
       <select id="professionalVariant" data-family-variant>
         <option value="" ${!chosen&&!fallback&&!state.otherBrandActive?'selected':''}>No brand preference — request by specification</option>
-        ${state.options.length?`<optgroup label="Exact catalogue options">${state.options.map(o=>`<option value="${esc(optionKey(o))}" ${chosen&&optionKey(chosen)===optionKey(o)?'selected':''}>${esc([normalizedBrand(o.brand),o.exact_product_name,o.presentation,o.pack].filter(Boolean).filter((x,i,all)=>all.indexOf(x)===i).join(' · '))}${o.reference_only||o.local_reference?' · quotation reference':''}</option>`).join('')}</optgroup>`:''}
+        ${state.options.length?`<optgroup label="Exact catalogue options">${state.options.map(o=>`<option value="${esc(optionKey(o))}" ${chosen&&optionKey(chosen)===optionKey(o)?'selected':''}>${esc(selectionLabel(o))}${o.reference_only||o.local_reference?' · quotation reference':''}</option>`).join('')}</optgroup>`:''}
         ${familyBrandFallbacks(f).length?`<optgroup label="Sourcing preferences — exact SKU to confirm">${familyBrandFallbacks(f).map(brand=>`<option value="brand:${esc(brand)}" ${fallback===brand?'selected':''}>${esc(brand)} — specification to confirm</option>`).join('')}</optgroup>`:''}
         <option value="other" ${state.otherBrandActive?'selected':''}>Specify another exact requirement</option>
       </select>

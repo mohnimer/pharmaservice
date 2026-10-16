@@ -67,7 +67,7 @@ try{
   assert(fastumCard.querySelector('.catalogueIdentityLine'));
   assert(!fastumCard.querySelector('.pscBrandChoices'),'Brand choice moves into Details');
   await w.PSC_OPEN_FAMILY_DETAIL(familyId);await pause();
-  assert(w.document.querySelector('[data-family-variant]').textContent.includes('Fastum'));
+  assert.match(w.document.querySelector('[data-family-variant]').textContent,/Fastum/i);
   await click('[data-family-detail-close] .productBackButton');
   await navigate('portal/catalogue/medicines');
   const q=w.document.querySelector('[data-global-search]');q.value='CEBACT';q.dispatchEvent(new w.Event('input',{bubbles:true}));await pause();
