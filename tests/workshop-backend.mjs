@@ -28,6 +28,21 @@ try {
  const proposed=await call(db,'propose',{school_id:sid,report_id:report.id,issue_id:gap.id,quantity:10,product:mapping});assert.equal(proposed.quantity,10);
  await asUser(db,'manager');const rfq=await call(db,'rfq',{school_id:sid,report_id:report.id});const retry=await call(db,'rfq',{school_id:sid,report_id:report.id});assert.equal(retry.id,rfq.id);
  await db.exec('reset role');assert.equal((await db.query('select * from orders')).rows.length,1);assert.equal((await db.query('select quantity from order_lines')).rows[0].quantity,'10');
+
+ await db.exec('reset role');await db.query("insert into memberships(user_id,group_id,school_id,role) values($1,$2,$3,'management_approver')",[ids.otherManager,ids.group,sid]);
+ await asUser(db,'otherManager');await deny(()=>call(db,'configure',{...config,revision:1}));await deny(()=>call(db,'rfq',{school_id:sid,report_id:report.id}));
+ await asUser(db,'nurse');
+ const draft=await call(db,'quiz_save',{school_id:sid,module_id:'consumables',module_version:1,revision:0,responses:{'consumables-q1':[1]}});
+ assert.equal((await call(db,'overview')).quiz_drafts.length,1);
+ await deny(()=>call(db,'quiz_save',{school_id:sid,module_id:'consumables',module_version:1,revision:0,responses:{}}));
+ await db.exec('reset role');await db.query("update ps_readiness_reports set week_start=week_start-14 where id=$1",[report.id]);
+ await asUser(db,'nurse');let next=await call(db,'start',{school_id:sid});assert.equal(next.kind,'weekly');
+ const yes=Object.fromEntries(next.bank_snapshot.questions.map(q=>[q.id,{value:'yes'}]));
+ next=await call(db,'submit',{school_id:sid,report_id:next.id,revision:next.revision,answers:yes,reviewed:true});assert.equal(next.result.score,100);assert(next.result.open_critical>0,'An old critical concern remains visible despite a high score');assert.equal(next.result.previous_score,null,'Baseline and weekly scores are not silently compared');
+ await db.exec('reset role');await db.query("update ps_readiness_reports set week_start=week_start-7 where id=$1",[next.id]);
+ await asUser(db,'nurse');let final=await call(db,'start',{school_id:sid});
+ final=await call(db,'submit',{school_id:sid,report_id:final.id,revision:final.revision,answers:yes,reviewed:true,resolutions:overview.issues.map(i=>({id:i.id,note:'Explicitly checked and resolved.'}))});assert.equal(final.result.open_issues,0);assert.equal(final.result.change,0);
+ await db.exec('reset role');assert.deepEqual((await db.query('select result from ps_readiness_reports where id=$1',[report.id])).rows[0].result,report.result,'Earlier submitted findings remain immutable');
  // Unknown/missing are never compliant; incomplete results have no score/grade.
  const bank=report.bank_snapshot;
  const incomplete=(await db.query('select private.ps_score($1,$2,$3,$4) result',[bank,{},report.context_snapshot,'weekly'])).rows[0].result;
@@ -47,7 +62,7 @@ try {
  await db.exec('set role service_role');const claimed=(await db.query("select ps_readiness_email('claim') result")).rows[0].result;assert(claimed.email.endsWith('@example.invalid'));await db.exec('reset role');
  await db.query('delete from memberships where user_id=$1',[ids.manager]);await db.exec('set role service_role');assert.equal((await db.query("select ps_readiness_email('recheck',$1) result",[claimed.id])).rows[0].result,null);await db.exec('reset role');
  await asUser(db,'manager');assert.equal((await call(db,'overview')).reports.length,0,'Permission revocation applies immediately');
- console.log('PASS scoring bands, incomplete suppression, exact SKU/pack/quantity, RFQ replay, Dubai schedule dedupe, delivery permission recheck');
+ console.log('PASS carry-forward, explicit resolution, comparable history, quiz draft conflicts, delegated reviewer denial; scoring bands, incomplete suppression, exact SKU/pack/quantity, RFQ replay, Dubai schedule dedupe, delivery permission recheck');
  await db.exec("reset role;select set_config('request.jwt.claim.sub','',false);set role anon");await deny(()=>call(db,'overview'));
  console.log('PASS real Postgres: tenant isolation, role guards, persistence/revisions, immutable submissions, grades, critical/unknown, notification recipient, training and replay');
 }finally{await db.close();}

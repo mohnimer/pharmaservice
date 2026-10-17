@@ -42,7 +42,7 @@ Historical reports snapshot answers, bank/scoring versions, applicability, owner
 
 All results remain PS pilot, never official compliance grades. Weight/grade bands are stored in immutable bank versions. Unknown earns no credit. Missing answers cannot submit and have no grade/score. Optional N/A and confirmed-false conditional questions leave the denominator; unknown applicability earns no credit. Completeness is separate. Critical concerns and older unresolved critical issues trigger an independent warning.
 
-Bands: A+97, A93, A−90, B80, C70, D60, F below60. Comparison requires same bank ID/version and jurisdiction; otherwise no prior comparable score. Missed checks show Not submitted/Overdue, never F.
+Bands: A+97, A93, A−90, B80, C70, D60, F below60. Comparison requires same bank ID/version, assessment kind and jurisdiction; otherwise no prior comparable score. Missed checks show Not submitted/Overdue, never F.
 
 ## Scheduling and notifications
 
@@ -67,7 +67,7 @@ Vercel Git integration creates the preview. No production promotion or merge wit
 
 ## Replenishment
 
-Reuse existing psc_submit_institutional_request after manager review. Report locking/unique link prevents duplicate RFQs. Existing order IDs link assessment→issue→proposal→RFQ; quotation/order authority remains unchanged. No supplier PO, charge, procurement authorization or automatic issue closure.
+Reuse existing psc_submit_institutional_request after review by the explicitly configured purchasing reviewer. Group administrators configure assignments; delegated management approvers cannot change settings. Report locking/unique link prevents duplicate RFQs. Existing order IDs link assessment→issue→proposal→RFQ; quotation/order authority remains unchanged. No supplier PO, charge, procurement authorization or automatic issue closure.
 
 Four initial source catalogue bindings are provisional first-aid/glove requirements. Existing records have unresolved identity/pack details, so no exact saleable variant is inferred. RFQ psc_sku_snapshot is null for these; original catalogue ID remains a reference snapshot. No prices/stock copied. Future verified mappings can preserve exact SKU/pack. Changed/disabled mappings block RFQ for re-review. This small mapping allowlist is not a product master.
 

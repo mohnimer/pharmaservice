@@ -51,5 +51,24 @@ try{for(const width of [390,1440]){
  await page.pdf({path:'test-results/workshop/'+width+'-report.pdf',format:'A4',printBackground:true});
  await page.locator('.wsIssue').filter({hasText:'first-aid supplies'}).locator('[data-ws="recommend"]').click();await page.locator('#wsSku').selectOption({index:1});await page.locator('#wsQty').fill('10');await page.locator('[data-ws="propose"]').click();await page.locator('.wsProposal').waitFor();assert.equal(await page.locator('[data-ws-proposal]').inputValue(),'10');assert.equal(await page.locator('[data-ws="rfq"]').count(),0);
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
- assert.deepEqual(errors,[]);await ctx.close();await db.close();console.log(width+': real Postgres journey, guides, resume, quiz, conditional weekly check, critical report, PDF and provisional request PASS');
+ assert.deepEqual(errors,[]);await ctx.close();
+ const managerCtx=await browser.newContext({viewport:{width,height:1000}});
+ await managerCtx.addInitScript(()=>window.__testRole='school');
+ const managerMock=mock.replaceAll(ids.nurse,ids.manager).replace("role='school_user'","role='group_admin'");
+ await managerCtx.route('**/*',async req=>{
+  const url=new URL(req.request().url());
+  if(url.pathname==='/__ws_test'){
+   const args=req.request().postDataJSON();const job=chain.then(async()=>{try{await asUser(db,'manager');return {data:await call(db,args.p_action,args.p_payload),error:null};}catch(e){return {data:null,error:{message:e.message}};}});chain=job.catch(()=>{});
+   return req.fulfill({contentType:'application/json',body:JSON.stringify(await job)});
+  }
+  if(url.hostname==='127.0.0.1')return req.continue();return req.fulfill({contentType:url.hostname==='cdn.jsdelivr.net'?'text/javascript':'text/plain',body:url.hostname==='cdn.jsdelivr.net'?managerMock:''});
+ });
+ await asUser(db,'manager');const submitted=(await call(db,'overview')).reports.find(r=>r.status!=='draft');
+ const mp=await managerCtx.newPage();mp.on('pageerror',e=>errors.push(e.message));
+ await mp.goto(base+'/#portal/report-card');await mp.locator('.wsTableWrap').waitFor();await mp.screenshot({path:'test-results/workshop/'+width+'-manager-dashboard.png'});
+ await mp.goto(base+'/#portal/report-card/'+submitted.id);await mp.locator('.wsProposal').waitFor();
+ const qty=mp.locator('[data-ws-proposal]');await qty.fill('12');await Promise.all([mp.waitForResponse(r=>r.url().endsWith('/__ws_test')&&r.request().postDataJSON().p_action==='proposal_edit'),qty.press('Tab')]);
+ await mp.locator('[data-ws="review"]').click();await mp.locator('[data-ws="rfq"]').waitFor();await mp.locator('[data-ws="rfq"]').click();await mp.getByText('Linked RFQ:',{exact:false}).waitFor();
+ await db.exec('reset role');const orders=(await db.query('select * from orders')).rows;assert.equal(orders.length,1);assert.equal((await db.query('select quantity from order_lines')).rows[0].quantity,'12');
+ assert.deepEqual(errors,[]);await managerCtx.close();await db.close();console.log(width+': real Postgres journey, guides, resume, quiz, conditional weekly check, critical report, PDF and provisional request PASS');
 }}finally{await browser.close();server.close();}

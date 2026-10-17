@@ -23,7 +23,7 @@ create table public.ps_learning_attempts(
  created_at timestamptz not null default now(),foreign key(module_id,module_version) references public.ps_learning_modules(id,version));
 create table public.ps_readiness_settings(
  school_id uuid primary key references public.schools(id), assigned_user uuid references auth.users(id),
- recipient_user uuid references auth.users(id), jurisdiction text not null default 'Not confirmed',
+ recipient_user uuid references auth.users(id), purchasing_user uuid references auth.users(id), jurisdiction text not null default 'Not confirmed',
  clinic_type text not null default 'educational',bank_id text not null default 'ps-readiness-pilot',conditions jsonb not null default '{"oxygen":"unknown","aed":"unknown"}',
  weekday integer not null default 1 check(weekday between 0 and 6),reminder_time time not null default '09:00',
  reminders boolean not null default true, email_enabled boolean not null default false,
@@ -163,7 +163,7 @@ begin
   return jsonb_build_object('saved',true);
  end if;
  if p_action='overview' then
-  return jsonb_build_object('banks',(select coalesce(jsonb_agg(document),'[]') from public.ps_readiness_banks),'modules',(select coalesce(jsonb_agg(document),'[]') from public.ps_learning_modules),'catalogue',(select coalesce(jsonb_agg(to_jsonb(c)),'[]') from public.ps_readiness_catalogue c where active),'links',(select coalesce(jsonb_agg(to_jsonb(l)),'[]') from public.ps_readiness_rfq_links l where private.ps_read_issue(l.school_id)),'sites',(select coalesce(jsonb_agg(jsonb_build_object('id',s.id,'name',s.name,'campus_name',s.campus_name,'manager',private.ps_manager(s.id),'nurse',private.ps_nurse(s.id))),'[]') from public.schools s where private.ps_member(s.id) or private.ps_ps_access(s.id)),
+  return jsonb_build_object('banks',(select coalesce(jsonb_agg(document),'[]') from public.ps_readiness_banks),'modules',(select coalesce(jsonb_agg(document),'[]') from public.ps_learning_modules),'catalogue',(select coalesce(jsonb_agg(to_jsonb(c)),'[]') from public.ps_readiness_catalogue c where active),'links',(select coalesce(jsonb_agg(to_jsonb(l)),'[]') from public.ps_readiness_rfq_links l where private.ps_read_issue(l.school_id)),'sites',(select coalesce(jsonb_agg(jsonb_build_object('id',s.id,'name',s.name,'campus_name',s.campus_name,'manager',private.ps_manager(s.id),'can_configure',private.ps_manager(s.id) and exists(select 1 from public.memberships m where m.user_id=uid and m.group_id=s.group_id and m.role='group_admin' and (m.school_id is null or m.school_id=s.id)),'nurse',private.ps_nurse(s.id))),'[]') from public.schools s where private.ps_member(s.id) or private.ps_ps_access(s.id)),
    'reports',(select coalesce(jsonb_agg(to_jsonb(r) order by r.week_start desc),'[]') from public.ps_readiness_reports r where private.ps_read_report(r.school_id,r.owner_id,r.status)),
    'issues',(select coalesce(jsonb_agg(to_jsonb(i)),'[]') from public.ps_readiness_issues i where private.ps_read_issue(i.school_id)),
    'proposals',(select coalesce(jsonb_agg(to_jsonb(x)),'[]') from public.ps_readiness_proposals x where private.ps_read_issue(x.school_id)),
@@ -215,15 +215,15 @@ begin
  end if;
  select * into cfg from public.ps_readiness_settings where school_id=sid;
  if p_action='configure' then
-  if not private.ps_manager(sid) then raise exception 'School administrator required';end if;
-  if not private.ps_nurse(sid,(p->>'assigned_user')::uuid) or not private.ps_manager(sid,(p->>'recipient_user')::uuid) then raise exception 'Assignee and recipient must have current campus authorization';end if;
+  if not private.ps_manager(sid) or not exists(select 1 from public.memberships m join public.schools s on s.group_id=m.group_id where s.id=sid and m.user_id=uid and m.role='group_admin' and (m.school_id=sid or m.school_id is null)) then raise exception 'School administrator required';end if;
+  if not private.ps_nurse(sid,(p->>'assigned_user')::uuid) or not private.ps_manager(sid,coalesce(p->>'purchasing_user',p->>'recipient_user')::uuid) or not private.ps_manager(sid,(p->>'recipient_user')::uuid) then raise exception 'Assignee and recipient must have current campus authorization';end if;
   select * into b from public.ps_readiness_banks where id=coalesce(p->>'bank_id','ps-readiness-pilot') order by version desc limit 1;
   if not found or b.document->>'clinic_type' is distinct from p->>'clinic_type' or not (b.document->'jurisdictions' ? (p->>'jurisdiction')) then raise exception 'Unsupported clinic context';end if;
   if (p->'conditions'->>'oxygen') not in ('yes','no','unknown') or (p->'conditions'->>'aed') not in ('yes','no','unknown') then raise exception 'Conditions must be confirmed or unknown';end if;
   if cfg.school_id is not null and cfg.revision<>(p->>'revision')::integer then raise exception 'Settings changed; reload';end if;
-  insert into public.ps_readiness_settings(school_id,assigned_user,recipient_user,jurisdiction,clinic_type,bank_id,conditions,weekday,reminder_time,reminders,email_enabled,ps_share)
-  values(sid,(p->>'assigned_user')::uuid,(p->>'recipient_user')::uuid,p->>'jurisdiction',p->>'clinic_type',b.id,p->'conditions',(p->>'weekday')::integer,(p->>'reminder_time')::time,(p->>'reminders')::boolean,(p->>'email_enabled')::boolean,(p->>'ps_share')::boolean)
-  on conflict(school_id) do update set assigned_user=excluded.assigned_user,recipient_user=excluded.recipient_user,jurisdiction=excluded.jurisdiction,clinic_type=excluded.clinic_type,bank_id=excluded.bank_id,conditions=excluded.conditions,weekday=excluded.weekday,reminder_time=excluded.reminder_time,reminders=excluded.reminders,email_enabled=excluded.email_enabled,ps_share=excluded.ps_share,revision=ps_readiness_settings.revision+1,updated_at=now()
+  insert into public.ps_readiness_settings(school_id,assigned_user,recipient_user,purchasing_user,jurisdiction,clinic_type,bank_id,conditions,weekday,reminder_time,reminders,email_enabled,ps_share)
+  values(sid,(p->>'assigned_user')::uuid,(p->>'recipient_user')::uuid,coalesce(p->>'purchasing_user',p->>'recipient_user')::uuid,p->>'jurisdiction',p->>'clinic_type',b.id,p->'conditions',(p->>'weekday')::integer,(p->>'reminder_time')::time,(p->>'reminders')::boolean,(p->>'email_enabled')::boolean,(p->>'ps_share')::boolean)
+  on conflict(school_id) do update set assigned_user=excluded.assigned_user,recipient_user=excluded.recipient_user,purchasing_user=excluded.purchasing_user,jurisdiction=excluded.jurisdiction,clinic_type=excluded.clinic_type,bank_id=excluded.bank_id,conditions=excluded.conditions,weekday=excluded.weekday,reminder_time=excluded.reminder_time,reminders=excluded.reminders,email_enabled=excluded.email_enabled,ps_share=excluded.ps_share,revision=ps_readiness_settings.revision+1,updated_at=now()
   returning to_jsonb(ps_readiness_settings.*) into rowdata;
   -- Draft reassignment preserves answers and invalidates stale editor revisions. Submitted snapshots are immutable.
   update public.ps_readiness_reports set owner_id=(p->>'assigned_user')::uuid,owner_name=coalesce((select full_name from public.profiles where user_id=(p->>'assigned_user')::uuid),'Clinic user'),revision=revision+1 where school_id=sid and status='draft';
@@ -270,7 +270,7 @@ begin
    values(sid,rep.id,item->>'id',item->>'label',(item->>'critical')::boolean,item->>'category',item->>'family_id',item->>'purchase_kind',case when p->'answers'->(item->>'id')->>'value'='no' then nullif(p->'answers'->(item->>'id')->>'quantity','')::numeric end)
    on conflict(school_id,question_id) where status='open' do update set quantity=excluded.quantity,critical=ps_readiness_issues.critical or excluded.critical;
   end loop;
-  select r.result into prior from public.ps_readiness_reports r where r.school_id=sid and r.status<>'draft' and r.week_start<rep.week_start and r.bank_id=rep.bank_id and r.bank_version=rep.bank_version and r.context_snapshot->>'jurisdiction'=rep.context_snapshot->>'jurisdiction' order by r.week_start desc limit 1;
+  select r.result into prior from public.ps_readiness_reports r where r.school_id=sid and r.status<>'draft' and r.week_start<rep.week_start and r.bank_id=rep.bank_id and r.bank_version=rep.bank_version and r.kind=rep.kind and r.context_snapshot->>'jurisdiction'=rep.context_snapshot->>'jurisdiction' order by r.week_start desc limit 1;
   result:=result||jsonb_build_object('previous_score',prior->'score','change',case when prior->>'score' is not null then (result->>'score')::integer-(prior->>'score')::integer else null end,
    'open_issues',(select count(*) from public.ps_readiness_issues where school_id=sid and status='open'),
    'open_critical',(select count(*) from public.ps_readiness_issues where school_id=sid and status='open' and critical),
@@ -307,7 +307,7 @@ begin
   update public.ps_readiness_proposals set quantity=qty,status=case when p_action='proposal_remove' then 'removed' else status end,updated_at=now() where id=(p->>'id')::uuid and report_id=rep.id and status='proposed' returning to_jsonb(ps_readiness_proposals.*) into rowdata;return rowdata;
  end if;
  if p_action='rfq' then
-  if not private.ps_manager(sid) or rep.status='draft' then raise exception 'Purchasing review authority required';end if;
+  if not private.ps_manager(sid) or cfg.purchasing_user is distinct from uid or rep.status<>'reviewed' or rep.reviewed_by is distinct from uid then raise exception 'Configured purchasing reviewer must review this report before requesting a quotation';end if;
   select jsonb_build_object('id',o.id,'order_number',o.order_number,'replayed',true) into outcome from public.ps_readiness_rfq_links l join public.orders o on o.id=l.order_id where l.report_id=rep.id;
   if outcome is not null then return outcome;end if;
   select coalesce(jsonb_agg(jsonb_build_object('psc_sku_snapshot',case when c.exact_verified then x.sku else null end,'line_description',x.product_snapshot->>'name','brand_model_snapshot',x.product_snapshot->>'brand','pack_snapshot',x.product_snapshot->>'pack','quantity',x.quantity,'product_option_snapshot',x.product_snapshot||jsonb_build_object('reference_catalogue_id',x.sku,'exact_verified',c.exact_verified,'readiness_report',rep.id,'readiness_issue',x.issue_id))),'[]') into lines
