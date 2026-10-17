@@ -63,6 +63,8 @@ try {
  await db.query('delete from memberships where user_id=$1',[ids.manager]);await db.exec('set role service_role');assert.equal((await db.query("select ps_readiness_email('recheck',$1) result",[claimed.id])).rows[0].result,null);await db.exec('reset role');
  await asUser(db,'manager');assert.equal((await call(db,'overview')).reports.length,0,'Permission revocation applies immediately');
  console.log('PASS carry-forward, explicit resolution, comparable history, quiz draft conflicts, delegated reviewer denial; scoring bands, incomplete suppression, exact SKU/pack/quantity, RFQ replay, Dubai schedule dedupe, delivery permission recheck');
+ await asUser(db,'nurse');await deny(()=>call(db,'mapping_update',{sku:mapping.sku,revision:1,active:false,question_ids:['firstaid']}));
+ await asUser(db,'ps');const changed=await call(db,'mapping_update',{sku:mapping.sku,revision:1,active:false,question_ids:['firstaid']});assert.equal(changed.active,false);assert.equal(changed.exact_verified,false);await deny(()=>call(db,'mapping_update',{sku:mapping.sku,revision:1,active:true,question_ids:['firstaid']}));
  await asUser(db,'ps');await deny(()=>call(db,'publish_content',{kind:'module',document:{...m,id:'bad-content',version:2,minutes:'<img onerror=alert(1)>'}}));
  await call(db,'publish_content',{kind:'module',document:{...m,version:2}});
  await deny(()=>call(db,'publish_content',{kind:'module',document:{...m,version:2}}));

@@ -23,7 +23,7 @@ Preview: https://pharmaservice-git-feature-wor-5f9ba4-mohameds-projects-9022ad5a
 | /#portal/report-card/<id> | Immutable grade/findings/answers, critical warning, delivery state, proposals, review/RFQ and print/PDF |
 | /#portal/report-card/settings | Authorized campus assignments, recipient, jurisdiction, bank, conditions, schedule/preferences/consent |
 | /#admin/readiness | Customer-authorized readiness/supply follow-up |
-| /#admin/workshop-content | Publish new immutable content versions |
+| /#admin/workshop-content | Publish new immutable content versions and maintain existing provisional catalogue mappings |
 
 The existing V50 router and shells remain authoritative. Original workshop-data.js is unchanged. No second catalogue, inventory system, ERP or account master.
 
@@ -69,7 +69,7 @@ Vercel Git integration creates the preview. No production promotion or merge wit
 
 Reuse existing psc_submit_institutional_request after review by the explicitly configured purchasing reviewer. Group administrators configure assignments; delegated management approvers cannot change settings. Report locking/unique link prevents duplicate RFQs. Existing order IDs link assessment→issue→proposal→RFQ; quotation/order authority remains unchanged. No supplier PO, charge, procurement authorization or automatic issue closure.
 
-Four initial source catalogue bindings are provisional first-aid/glove requirements. Existing records have unresolved identity/pack details, so no exact saleable variant is inferred. RFQ psc_sku_snapshot is null for these; original catalogue ID remains a reference snapshot. No prices/stock copied. Future verified mappings can preserve exact SKU/pack. Changed/disabled mappings block RFQ for re-review. This small mapping allowlist is not a product master.
+Four initial source catalogue bindings are provisional first-aid/glove requirements. Existing records have unresolved identity/pack details, so no exact saleable variant is inferred. RFQ psc_sku_snapshot is null for these; original catalogue ID remains a reference snapshot. No prices/stock copied. PS administrators can enable/disable existing bindings and edit purchasing-question associations with revision checks. Identity/provisional status cannot be silently promoted through that editor. Future source-reviewed mappings can preserve exact SKU/pack. Changed/disabled mappings block RFQ for re-review. This small mapping allowlist is not a product master.
 
 Procedural/documentation/training issues cannot become shopping items. Restricted/unclassified products cannot use the shortcut. Unknown answers/quantities do not auto-generate purchases. Full existing catalogue remains available.
 

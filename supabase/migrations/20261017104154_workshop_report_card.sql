@@ -84,7 +84,7 @@ create function private.ps_nurse(p_school uuid,p_user uuid default auth.uid()) r
  where s.id=p_school and m.user_id=p_user and m.role in ('school_user','group_admin') and (m.school_id=s.id or (m.school_id is null and m.role='group_admin')));
 $$;
 create function private.ps_ps_access(p_school uuid) returns boolean language sql stable security definer set search_path='' as $$
- select private.is_psc_admin() and exists(select 1 from public.ps_readiness_settings where school_id=p_school and ps_share);
+ select private.is_psc_admin() and exists(select 1 from public.ps_readiness_settings c join public.schools s on s.id=c.school_id join public.account_groups g on g.id=s.group_id where c.school_id=p_school and c.ps_share and s.active and g.active and g.slug<>'psc-demo-group');
 $$;
 create function private.ps_read_report(p_school uuid,p_owner uuid,p_status text) returns boolean language sql stable security definer set search_path='' as $$
  select (private.ps_member(p_school) and (p_owner=auth.uid() or (p_status<>'draft' and private.ps_member(p_school))))
@@ -182,8 +182,18 @@ begin
   elsif p->>'kind'='bank' then insert into public.ps_readiness_banks values(doc->>'id',(doc->>'version')::integer,doc,now());else raise exception 'Unknown content type';end if;
   return jsonb_build_object('saved',true);
  end if;
+ if p_action='mapping_update' then
+  if not private.is_psc_admin() then raise exception 'PS administrator required';end if;
+  if jsonb_typeof(p->'question_ids')<>'array' or jsonb_array_length(p->'question_ids')>20 then raise exception 'Invalid mapping';end if;
+  for a in select value from jsonb_array_elements(p->'question_ids') loop
+   if not exists(select 1 from public.ps_readiness_banks bank_src cross join lateral jsonb_array_elements(bank_src.document->'questions') mapped where mapped->>'id'=a#>>'{}' and mapped->>'category' in ('supplies','equipment')) then raise exception 'Mapping needs a purchasing-related question';end if;
+  end loop;
+  update public.ps_readiness_catalogue set active=(p->>'active')::boolean,question_ids=array(select jsonb_array_elements_text(p->'question_ids')),revision=revision+1
+  where sku=p->>'sku' and revision=(p->>'revision')::integer returning to_jsonb(ps_readiness_catalogue.*) into rowdata;
+  if rowdata is null then raise exception 'Mapping changed or unavailable';end if;return rowdata;
+ end if;
  if p_action='overview' then
-  return jsonb_build_object('banks',(select coalesce(jsonb_agg(document),'[]') from public.ps_readiness_banks),'modules',(select coalesce(jsonb_agg(document),'[]') from public.ps_learning_modules),'catalogue',(select coalesce(jsonb_agg(to_jsonb(c)),'[]') from public.ps_readiness_catalogue c where active),'links',(select coalesce(jsonb_agg(to_jsonb(l)),'[]') from public.ps_readiness_rfq_links l where private.ps_read_issue(l.school_id)),'sites',(select coalesce(jsonb_agg(jsonb_build_object('id',s.id,'name',s.name,'campus_name',s.campus_name,'manager',private.ps_manager(s.id),'can_configure',private.ps_manager(s.id) and exists(select 1 from public.memberships m where m.user_id=uid and m.group_id=s.group_id and m.role='group_admin' and (m.school_id is null or m.school_id=s.id)),'nurse',private.ps_nurse(s.id))),'[]') from public.schools s where private.ps_member(s.id) or private.ps_ps_access(s.id)),
+  return jsonb_build_object('banks',(select coalesce(jsonb_agg(document),'[]') from public.ps_readiness_banks),'modules',(select coalesce(jsonb_agg(document),'[]') from public.ps_learning_modules),'catalogue',(select coalesce(jsonb_agg(to_jsonb(c)),'[]') from public.ps_readiness_catalogue c where active or private.is_psc_admin()),'links',(select coalesce(jsonb_agg(to_jsonb(l)),'[]') from public.ps_readiness_rfq_links l where private.ps_read_issue(l.school_id)),'sites',(select coalesce(jsonb_agg(jsonb_build_object('id',s.id,'name',s.name,'campus_name',s.campus_name,'manager',private.ps_manager(s.id),'can_configure',private.ps_manager(s.id) and exists(select 1 from public.memberships m where m.user_id=uid and m.group_id=s.group_id and m.role='group_admin' and (m.school_id is null or m.school_id=s.id)),'nurse',private.ps_nurse(s.id))),'[]') from public.schools s where private.ps_member(s.id) or private.ps_ps_access(s.id)),
    'reports',(select coalesce(jsonb_agg(to_jsonb(r) order by r.week_start desc),'[]') from public.ps_readiness_reports r where private.ps_read_report(r.school_id,r.owner_id,r.status)),
    'issues',(select coalesce(jsonb_agg(to_jsonb(i)),'[]') from public.ps_readiness_issues i where private.ps_read_issue(i.school_id)),
    'proposals',(select coalesce(jsonb_agg(to_jsonb(x)),'[]') from public.ps_readiness_proposals x where private.ps_read_issue(x.school_id)),
@@ -346,7 +356,7 @@ end $$;
 -- Reuses identifiers from the authoritative catalogue; this is an allowlist, not a product master.
 create table public.ps_readiness_catalogue(
  sku text primary key,family_id text,name text not null,brand text,pack text not null,
- question_ids text[] not null default '{}',regulated boolean not null default true,active boolean not null default true,exact_verified boolean not null default false,source_revision text not null);
+ question_ids text[] not null default '{}',regulated boolean not null default true,active boolean not null default true,exact_verified boolean not null default false,source_revision text not null,revision integer not null default 1);
 alter table public.ps_readiness_catalogue enable row level security;
 create policy readiness_catalogue on public.ps_readiness_catalogue for select to authenticated using(private.is_psc_admin() or exists(select 1 from public.schools s where private.ps_member(s.id)));
 grant select on public.ps_readiness_catalogue to authenticated;
