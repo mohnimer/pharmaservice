@@ -1307,13 +1307,15 @@
     ['portal/dashboard','Home','dashboard'],
     ['portal/catalogue','Shop','boxes'],
     ['portal/wishlist','Wishlist','heart'],
+    ['workshop','Workshop','resource'],
+    ['portal/report-card','PS Report Card','checklist'],
     ['portal/requests','Orders & Requests','edit'],
     ['portal/replenish','Replenish','repeat'],
     ['portal/documents','Documents','resource'],
     ['portal/stock','Stock & expiry','stock'],
     ['portal/assets','Clinic assets','assets']
   ];
-  const adminNav=[['admin/dashboard','Today','home'],['admin/sales','Sales','repeat'],['admin/mail','Inbox','mail'],['admin/requests','Orders & quotations','checklist'],['admin/customers','Accounts','users'],['admin/tasks','Tasks','calendar'],['admin/resources','Products & suppliers','boxes'],['admin/settings','Settings','settings'],['admin/onboarding','Account setup','users']];
+  const adminNav=[['admin/readiness','Report Cards','checklist'],['admin/workshop-content','Workshop content','resource'],['admin/dashboard','Today','home'],['admin/sales','Sales','repeat'],['admin/mail','Inbox','mail'],['admin/requests','Orders & quotations','checklist'],['admin/customers','Accounts','users'],['admin/tasks','Tasks','calendar'],['admin/resources','Products & suppliers','boxes'],['admin/settings','Settings','settings'],['admin/onboarding','Account setup','users']];
 
   function shell(content, admin=false){
     const route=currentRoute();
@@ -1742,12 +1744,13 @@
     const q=(ui.workshopQuery||'').trim().toLowerCase();
     return WORKSHOP.filter(g=>{
       if(g.status!=='published')return false;
+      if(ui.workshopCategory&&ui.workshopCategory!=='All'&&g.category!==ui.workshopCategory)return false;
       if(!q)return true;
       const hay=[g.title,g.subtitle,g.excerpt,g.category,g.format,...(g.tags||[]),...(g.product_match_terms||[]),...(g.clinic_check_topics||[])].join(' ').toLowerCase();
       return hay.includes(q);
     });
   }
-  function workshopLandingPage(){
+  function workshopGuidesPage(){
     const filtered=workshopFiltered();
     const searching=!!(ui.workshopQuery||'').trim();
     const featuredSlugs=['which-glove-should-i-actually-wear','oxygen-cylinder-is-not-an-oxygen-system','aed-has-expiring-parts-too'];
@@ -1757,18 +1760,18 @@
       <section class="workshopHeroV50">
         <div class="workshopHeroRuleV50"><span>THE WORKSHOP</span><i></i><small>PRODUCT INTELLIGENCE · FIELD MANUAL</small></div>
         <div class="workshopHeroGridV50">
-          <div><h1>Practical product intelligence.</h1></div>
+          <div><h1>Helpful Guides</h1></div>
           <div><h2>For people who run clinics.</h2><p>The product details, compatibility questions, readiness checks and ordering specifications that are easy to miss — until they matter.</p></div>
         </div>
       </section>
 
       <section class="workshopModuleIndexV50">
-        <div class="workshopSectionHeadV50"><div><span>07 MODULES</span><h2>Start with what you need to figure out.</h2></div><p>No courses. No progress bars. Just practical guidance organised around the decisions clinics and buyers actually make.</p></div>
+        <div class="workshopSectionHeadV50"><div><span>07 MODULES</span><h2>Start with what you need to figure out.</h2></div><p>Practical guidance organised around the decisions clinics and buyers actually make.</p></div>
         <div class="workshopModuleGridV50">${WORKSHOP_MODULES.map(workshopModuleCard).join('')}</div>
       </section>
 
       <section class="workshopGuideIndexV50">
-        <div class="workshopSearchStripV50"><div class="workshopSearchV50"><span>${icon('search')}</span><input data-workshop-q value="${esc(ui.workshopQuery)}" placeholder="Search a product, question or clinic check…" aria-label="Search The Workshop"></div><div><span>${searching?'SEARCH RESULTS':'PUBLISHED GUIDES'}</span><b>${filtered.length}</b>${searching?'<button data-workshop-clear>Clear</button>':''}</div></div>
+        <div class="wsGuideFilter"><label>Guide category <select data-workshop-filter><option>All</option>${[...new Set(WORKSHOP.map(g=>g.category))].map(c=>`<option ${ui.workshopCategory===c?'selected':''}>${esc(c)}</option>`).join('')}</select></label><button class="button light" data-go="workshop">← Workshop</button></div><div class="workshopSearchStripV50"><div class="workshopSearchV50"><span>${icon('search')}</span><input data-workshop-q value="${esc(ui.workshopQuery)}" placeholder="Search a product, question or clinic check…" aria-label="Search The Workshop"></div><div><span>${searching?'SEARCH RESULTS':'PUBLISHED GUIDES'}</span><b>${filtered.length}</b>${searching?'<button data-workshop-clear>Clear</button>':''}</div></div>
         <div class="workshopSectionHeadV50 workshopGuidesHeadV50"><div><span>${searching?'MATCHING GUIDES':'ON THE BENCH NOW'}</span><h2>${searching?'What matches your search.':'Useful things to know before the next order.'}</h2></div><p>${searching?'Search works across titles, products, questions and clinic-check topics.':'Three strong guides up front. Open the full index only when you want it.'}</p></div>
         ${filtered.length?`<div class="workshopGuideGridV50">${featured.map(workshopGuideCard).join('')}</div>${rest.length?`<details class="workshopAllGuidesV50"><summary><span>View all guides</span><b>${filtered.length} published</b></summary><div class="workshopGuideGridV50 workshopGuideGridRestV50">${rest.map(workshopGuideCard).join('')}</div></details>`:''}`:`<div class="workshopEmptyV50"><b>Nothing on the bench for that search yet.</b><p>Try a product name, a broader term or one of the seven Modules above.</p><button class="button outline" data-workshop-clear>Clear search</button></div>`}
       </section>
@@ -1833,7 +1836,7 @@
       </article>${publicFooter()}
     </main>`;
   }
-  function workshopRoutePage(slug){ return workshopModuleBySlug(slug)?workshopModulePage(slug):workshopGuidePage(slug); }
+  function workshopRoutePage(slug){ if(slug==='guides')return workshopGuidesPage();return workshopModuleBySlug(slug)?workshopModulePage(slug):workshopGuidePage(slug); }
   function workshopTeaser(){
     const slugs=['which-glove-should-i-actually-wear','oxygen-cylinder-is-not-an-oxygen-system','aed-has-expiring-parts-too'];
     const items=slugs.map(workshopGuideBySlug).filter(Boolean);
@@ -3498,8 +3501,10 @@
       if(r.startsWith('portal/')&&!authContext?.isPscAdmin&&!authContext?.school?.id){location.hash='login';return;}
       if(r.startsWith('admin/') && (!authContext?.isPscAdmin || isDemoAccount())){ location.hash='portal/dashboard'; return; }
     }
+    window.PS_WORKSHOP_APP?.configure({shell,publicHeader,publicFooter,redraw:()=>renderUi({preserveScroll:true,transition:false}),toast});
     let html;
-    if(r.startsWith('portal/catalogue/')){
+    if(window.PS_WORKSHOP_APP?.handles(r)){html=window.PS_WORKSHOP_APP.render(r);}
+    else if(r.startsWith('portal/catalogue/')){
       const needId=r.split('/')[2]||'all';
       html=catalogueCategory(needId);
     } else if(r.startsWith('catalogue/')){
@@ -3521,7 +3526,7 @@
       case 'what-we-supply': html=ourModelPage();break;
       case 'how-it-works': html=ourModelPage();break;
       case 'catalogue': html=publicCataloguePage('all');break;
-      case 'workshop': html=workshopLandingPage();break;
+      case 'workshop': html=window.PS_WORKSHOP_APP.render(r);break;
       case 'wholesale': html=wholesalePage();break;
       case 'max': location.hash='services'; return;
       case 'demo': html=publicDemoPage();break;
@@ -3645,6 +3650,8 @@
   });
 
   function bind(){
+    window.PS_WORKSHOP_APP?.bind();
+    document.querySelector('[data-workshop-filter]')?.addEventListener('change',e=>{ui.workshopCategory=e.target.value;render();});
     document.querySelectorAll('[data-ps-undo]').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();undoDraftChange();}));
     document.querySelectorAll('[data-start-scroll]').forEach(el=>el.addEventListener('click',()=>document.getElementById('start-send')?.scrollIntoView({behavior:'smooth',block:'start'})));
     if(document.querySelector('[data-unsubscribe-state]')) processMailUnsubscribe();

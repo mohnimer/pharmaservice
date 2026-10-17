@@ -1,0 +1,795 @@
+{
+  "sources": [
+    {
+      "id": "dha-4.1",
+      "title": "DHA educational and academic clinic standards \u2014 Version 4.1 circular",
+      "url": "https://services.dha.gov.ae/sheryan/wps/portal/home/circular-details?circularRefNo=CIR-2025-00000098&fromHome=true&isPublicCircular=1",
+      "authority": "DHA",
+      "jurisdiction": "Dubai",
+      "version": "4.1 / CIR-2025-00000098",
+      "checked": "2026-10-17",
+      "status": "Circular verified; question-level clinical/regulatory mapping pending"
+    },
+    {
+      "id": "cdc-standard",
+      "title": "CDC Standard Precautions for All Patient Care",
+      "url": "https://www.cdc.gov/infection-control/hcp/basics/standard-precautions.html",
+      "checked": "2026-10-17",
+      "status": "Source reviewed; PS lesson clinical review pending"
+    },
+    {
+      "id": "cdc-hands",
+      "title": "CDC Clinical Safety: Hand Hygiene for Healthcare Workers",
+      "url": "https://www.cdc.gov/clean-hands/hcp/clinical-safety/index.html",
+      "checked": "2026-10-17",
+      "status": "Source reviewed; PS lesson clinical review pending"
+    },
+    {
+      "id": "ps-process",
+      "title": "PS portal workflow and pilot assessment methodology",
+      "url": "/#workshop",
+      "checked": "2026-10-17",
+      "status": "PS product rules; not a regulatory standard"
+    }
+  ],
+  "modules": [
+    {
+      "id": "readiness",
+      "version": 1,
+      "title": "Clinic Readiness & Applicable Standards",
+      "description": "Separate local requirements, reported readiness and learning results.",
+      "minutes": 4,
+      "status": "pilot",
+      "review": "Editorial pilot \u00b7 technical review pending",
+      "objectives": [
+        "Separate local requirements, reported readiness and learning results.",
+        "Distinguish a corrective action from a purchasing recommendation."
+      ],
+      "sources": [
+        "dha-4.1"
+      ],
+      "slides": [
+        {
+          "title": "Start with your setting",
+          "bullets": [
+            "Confirm your clinic type and licensing jurisdiction.",
+            "A Dubai source does not establish requirements for every UAE school."
+          ],
+          "example": "Jurisdiction \u2192 applicable source \u2192 local review"
+        },
+        {
+          "title": "Evidence has a date",
+          "bullets": [
+            "Review current observations each week.",
+            "An older positive answer is not proof of current readiness."
+          ],
+          "example": "Observe \u2192 date \u2192 report"
+        },
+        {
+          "title": "Three different results",
+          "bullets": [
+            "A quiz measures learning within this module.",
+            "A Report Card summarizes self-reported readiness.",
+            "Neither is official certification."
+          ],
+          "example": "Learn / Assess / Report"
+        },
+        {
+          "title": "Before submitting",
+          "bullets": [
+            "Review every answer, including unknowns.",
+            "Keep unresolved issues open until someone explicitly confirms resolution."
+          ],
+          "example": "Example: last week\u2019s shortage stays open until checked."
+        }
+      ],
+      "quiz": [
+        {
+          "id": "readiness-q1",
+          "prompt": "Which approach best matches this lesson?",
+          "multiple": false,
+          "options": [
+            "Assume an earlier result is still current.",
+            "Review the current observation and record uncertainty honestly.",
+            "Order automatically when unsure."
+          ],
+          "correct": [
+            1
+          ],
+          "explanation": "Review current observations. Unknown information remains unresolved and does not authorize a purchase."
+        },
+        {
+          "id": "readiness-q2",
+          "prompt": "Which statements are correct? Select all that apply.",
+          "multiple": true,
+          "options": [
+            "A learning score is separate from clinic readiness.",
+            "A recommendation is a purchase order.",
+            "An unresolved issue needs explicit follow-up."
+          ],
+          "correct": [
+            0,
+            2
+          ],
+          "explanation": "Learning, readiness and purchasing authority are separate. Issues stay open until explicitly resolved."
+        }
+      ],
+      "pass_mark": 80
+    },
+    {
+      "id": "emergency",
+      "version": 1,
+      "title": "Emergency Equipment & Preparedness",
+      "description": "Recognise and escalate reported readiness concerns.",
+      "minutes": 4,
+      "status": "pilot",
+      "review": "Editorial pilot \u00b7 technical review pending",
+      "objectives": [
+        "Recognise and escalate reported readiness concerns.",
+        "Distinguish a corrective action from a purchasing recommendation."
+      ],
+      "sources": [
+        "ps-process"
+      ],
+      "slides": [
+        {
+          "title": "Check, do not assume",
+          "bullets": [
+            "Review the emergency equipment relevant to your clinic.",
+            "Use your approved local emergency plan and manufacturer instructions."
+          ],
+          "example": "Plan \u2192 equipment \u2192 review"
+        },
+        {
+          "title": "Condition matters",
+          "bullets": [
+            "An item being present does not establish that it is ready to use.",
+            "Report a concern about condition separately from a supply shortage."
+          ],
+          "example": "Present \u2260 ready"
+        },
+        {
+          "title": "Escalate critical concerns",
+          "bullets": [
+            "Use your institution\u2019s immediate escalation procedure.",
+            "A high overall score does not cancel a critical issue."
+          ],
+          "example": "Safety action first"
+        },
+        {
+          "title": "Request with care",
+          "bullets": [
+            "Equipment may be an opening or capital need.",
+            "Restricted medicines and medical gases require the licensed route."
+          ],
+          "example": "No automatic purchase order"
+        }
+      ],
+      "quiz": [
+        {
+          "id": "emergency-q1",
+          "prompt": "Which approach best matches this lesson?",
+          "multiple": false,
+          "options": [
+            "Assume an earlier result is still current.",
+            "Review the current observation and record uncertainty honestly.",
+            "Order automatically when unsure."
+          ],
+          "correct": [
+            1
+          ],
+          "explanation": "Review current observations. Unknown information remains unresolved and does not authorize a purchase."
+        },
+        {
+          "id": "emergency-q2",
+          "prompt": "Which statements are correct? Select all that apply.",
+          "multiple": true,
+          "options": [
+            "A learning score is separate from clinic readiness.",
+            "A recommendation is a purchase order.",
+            "An unresolved issue needs explicit follow-up."
+          ],
+          "correct": [
+            0,
+            2
+          ],
+          "explanation": "Learning, readiness and purchasing authority are separate. Issues stay open until explicitly resolved."
+        }
+      ],
+      "pass_mark": 80
+    },
+    {
+      "id": "devices",
+      "version": 1,
+      "title": "Medical Equipment & Diagnostics",
+      "description": "Capture exact model and compatibility needs before requesting.",
+      "minutes": 4,
+      "status": "pilot",
+      "review": "Editorial pilot \u00b7 technical review pending",
+      "objectives": [
+        "Capture exact model and compatibility needs before requesting.",
+        "Distinguish a corrective action from a purchasing recommendation."
+      ],
+      "sources": [
+        "ps-process"
+      ],
+      "slides": [
+        {
+          "title": "Identify the device",
+          "bullets": [
+            "Record the exact device or model when known.",
+            "Avoid choosing a look-alike product as a substitute."
+          ],
+          "example": "Brand \u2192 model \u2192 configuration"
+        },
+        {
+          "title": "Check related supplies",
+          "bullets": [
+            "Confirm compatibility from a verified source.",
+            "If uncertain, request specification review rather than inventing a match."
+          ],
+          "example": "Device \u2194 verified consumable"
+        },
+        {
+          "title": "Report condition",
+          "bullets": [
+            "Separate availability, condition and servicing questions.",
+            "Follow approved local and manufacturer procedures."
+          ],
+          "example": "A condition issue may require service, not a purchase."
+        },
+        {
+          "title": "Confirm the request",
+          "bullets": [
+            "Review the exact pack, unit and quantity.",
+            "A recommendation becomes an RFQ only through the authorized workflow."
+          ],
+          "example": "Review \u2192 approve RFQ \u2192 quotation"
+        }
+      ],
+      "quiz": [
+        {
+          "id": "devices-q1",
+          "prompt": "Which approach best matches this lesson?",
+          "multiple": false,
+          "options": [
+            "Assume an earlier result is still current.",
+            "Review the current observation and record uncertainty honestly.",
+            "Order automatically when unsure."
+          ],
+          "correct": [
+            1
+          ],
+          "explanation": "Review current observations. Unknown information remains unresolved and does not authorize a purchase."
+        },
+        {
+          "id": "devices-q2",
+          "prompt": "Which statements are correct? Select all that apply.",
+          "multiple": true,
+          "options": [
+            "A learning score is separate from clinic readiness.",
+            "A recommendation is a purchase order.",
+            "An unresolved issue needs explicit follow-up."
+          ],
+          "correct": [
+            0,
+            2
+          ],
+          "explanation": "Learning, readiness and purchasing authority are separate. Issues stay open until explicitly resolved."
+        }
+      ],
+      "pass_mark": 80
+    },
+    {
+      "id": "consumables",
+      "version": 1,
+      "title": "Medical Consumables & Replenishment",
+      "description": "Turn a reported shortage into an exact, reviewable request.",
+      "minutes": 4,
+      "status": "pilot",
+      "review": "Editorial pilot \u00b7 technical review pending",
+      "objectives": [
+        "Turn a reported shortage into an exact, reviewable request.",
+        "Distinguish a corrective action from a purchasing recommendation."
+      ],
+      "sources": [
+        "ps-process"
+      ],
+      "slides": [
+        {
+          "title": "Review what is needed",
+          "bullets": [
+            "Review quantity, suitability, condition and relevant expiry dates.",
+            "This check does not require a complete inventory exercise."
+          ],
+          "example": "A small review, not a stocktake"
+        },
+        {
+          "title": "Name the gap",
+          "bullets": [
+            "Choose the supply type that needs attention.",
+            "Unknown quantities stay unresolved; they do not create purchases."
+          ],
+          "example": "Dressings / gloves / other supplies"
+        },
+        {
+          "title": "Pack versus piece",
+          "bullets": [
+            "10 boxes is different from 10 pieces.",
+            "Select the exact product and selling unit before requesting."
+          ],
+          "example": "10 \u00d7 selected selling unit"
+        },
+        {
+          "title": "Keep one request",
+          "bullets": [
+            "Review the proposed items and quantities together.",
+            "Issuing a quotation does not resolve the shortage."
+          ],
+          "example": "Report \u2192 RFQ \u2192 quotation \u2192 authorized order \u2192 delivery \u2192 recheck"
+        }
+      ],
+      "quiz": [
+        {
+          "id": "consumables-q1",
+          "prompt": "What should you review in first-aid supplies?",
+          "multiple": false,
+          "options": [
+            "Quantity only.",
+            "Quantity, suitability, condition and relevant expiry dates.",
+            "The supplier name only."
+          ],
+          "correct": [
+            1
+          ],
+          "explanation": "Review all four dimensions; quantity alone does not establish suitability or readiness."
+        },
+        {
+          "id": "consumables-q2",
+          "prompt": "Which statements are correct? Select all that apply.",
+          "multiple": true,
+          "options": [
+            "A learning score is separate from clinic readiness.",
+            "A recommendation is a purchase order.",
+            "An unresolved issue needs explicit follow-up."
+          ],
+          "correct": [
+            0,
+            2
+          ],
+          "explanation": "Learning, readiness and purchasing authority are separate. Issues stay open until explicitly resolved."
+        }
+      ],
+      "pass_mark": 80
+    },
+    {
+      "id": "infection",
+      "version": 1,
+      "title": "Infection Prevention & PPE",
+      "description": "Review source-based hand hygiene and PPE principles.",
+      "minutes": 4,
+      "status": "pilot",
+      "review": "Editorial pilot \u00b7 technical review pending",
+      "objectives": [
+        "Review source-based hand hygiene and PPE principles.",
+        "Distinguish a corrective action from a purchasing recommendation."
+      ],
+      "sources": [
+        "cdc-standard",
+        "cdc-hands"
+      ],
+      "slides": [
+        {
+          "title": "Start with the exposure",
+          "bullets": [
+            "Standard Precautions apply across patient care.",
+            "Select PPE based on the anticipated exposure and approved procedure."
+          ],
+          "example": "Risk assessment \u2192 appropriate PPE"
+        },
+        {
+          "title": "Gloves and hands",
+          "bullets": [
+            "Gloves do not replace hand hygiene.",
+            "CDC recommends hand hygiene immediately after glove removal."
+          ],
+          "example": "Gloves + hand hygiene"
+        },
+        {
+          "title": "Equipment and environment",
+          "bullets": [
+            "Appropriate cleaning of equipment and the environment supports infection prevention.",
+            "Follow the relevant procedure and manufacturer instructions."
+          ],
+          "example": "Clean \u2192 follow procedure \u2192 review"
+        },
+        {
+          "title": "Report the right action",
+          "bullets": [
+            "A PPE shortage may need replenishment.",
+            "A missing procedure or training gap needs a corrective action."
+          ],
+          "example": "Training gap \u2260 shopping item"
+        }
+      ],
+      "quiz": [
+        {
+          "id": "infection-q1",
+          "prompt": "Do gloves replace hand hygiene?",
+          "multiple": false,
+          "options": [
+            "Yes, for every task.",
+            "No. Hand hygiene is still required.",
+            "Only when supplies are low."
+          ],
+          "correct": [
+            1
+          ],
+          "explanation": "CDC states that gloves do not replace hand hygiene and recommends cleaning hands immediately after glove removal."
+        },
+        {
+          "id": "infection-q2",
+          "prompt": "Which statements are correct? Select all that apply.",
+          "multiple": true,
+          "options": [
+            "A learning score is separate from clinic readiness.",
+            "A recommendation is a purchase order.",
+            "An unresolved issue needs explicit follow-up."
+          ],
+          "correct": [
+            0,
+            2
+          ],
+          "explanation": "Learning, readiness and purchasing authority are separate. Issues stay open until explicitly resolved."
+        }
+      ],
+      "pass_mark": 80
+    },
+    {
+      "id": "documentation",
+      "version": 1,
+      "title": "Documentation, Expiry Awareness & Safety",
+      "description": "Keep reported issues, dates and decisions traceable.",
+      "minutes": 4,
+      "status": "pilot",
+      "review": "Editorial pilot \u00b7 technical review pending",
+      "objectives": [
+        "Keep reported issues, dates and decisions traceable.",
+        "Distinguish a corrective action from a purchasing recommendation."
+      ],
+      "sources": [
+        "ps-process"
+      ],
+      "slides": [
+        {
+          "title": "Document observations",
+          "bullets": [
+            "Use concise operational observations.",
+            "Do not enter patient or student medical information."
+          ],
+          "example": "Date / issue / owner / action"
+        },
+        {
+          "title": "Review expiry concerns",
+          "bullets": [
+            "Report relevant expiry concerns using the product\u2019s approved instructions and local process.",
+            "Do not infer shelf life from a photograph or similar product."
+          ],
+          "example": "Exact item \u2192 check \u2192 action"
+        },
+        {
+          "title": "Separate authority",
+          "bullets": [
+            "A nurse can propose supplies.",
+            "The configured administrator reviews purchasing recommendations.",
+            "An RFQ is not authority to procure."
+          ],
+          "example": "Proposal \u2192 RFQ \u2192 quotation \u2192 customer authorization"
+        },
+        {
+          "title": "Close the loop",
+          "bullets": [
+            "A delivery or quote does not automatically close a deficiency.",
+            "The next review asks whether the underlying issue was resolved."
+          ],
+          "example": "Delivered \u2192 nurse recheck \u2192 explicit resolution"
+        }
+      ],
+      "quiz": [
+        {
+          "id": "documentation-q1",
+          "prompt": "Which approach best matches this lesson?",
+          "multiple": false,
+          "options": [
+            "Assume an earlier result is still current.",
+            "Review the current observation and record uncertainty honestly.",
+            "Order automatically when unsure."
+          ],
+          "correct": [
+            1
+          ],
+          "explanation": "Review current observations. Unknown information remains unresolved and does not authorize a purchase."
+        },
+        {
+          "id": "documentation-q2",
+          "prompt": "Which statements are correct? Select all that apply.",
+          "multiple": true,
+          "options": [
+            "A learning score is separate from clinic readiness.",
+            "A recommendation is a purchase order.",
+            "An unresolved issue needs explicit follow-up."
+          ],
+          "correct": [
+            0,
+            2
+          ],
+          "explanation": "Learning, readiness and purchasing authority are separate. Issues stay open until explicitly resolved."
+        }
+      ],
+      "pass_mark": 80
+    }
+  ],
+  "bank": {
+    "id": "ps-readiness-pilot",
+    "version": 1,
+    "scoring_version": "ps-weighted-v1",
+    "status": "pilot",
+    "title": "Weekly Clinic Check",
+    "jurisdictions": [
+      "Dubai",
+      "Abu Dhabi",
+      "Sharjah",
+      "Other",
+      "Not confirmed"
+    ],
+    "clinic_type": "educational",
+    "regulatory_status": "No validated regulatory score. DHA 4.1 is a Dubai source reference only. Other jurisdiction mapping pending.",
+    "sources": [
+      {
+        "id": "dha-4.1",
+        "title": "DHA educational and academic clinic standards \u2014 Version 4.1 circular",
+        "url": "https://services.dha.gov.ae/sheryan/wps/portal/home/circular-details?circularRefNo=CIR-2025-00000098&fromHome=true&isPublicCircular=1",
+        "authority": "DHA",
+        "jurisdiction": "Dubai",
+        "version": "4.1 / CIR-2025-00000098",
+        "checked": "2026-10-17",
+        "status": "Circular verified; question-level clinical/regulatory mapping pending"
+      },
+      {
+        "id": "cdc-standard",
+        "title": "CDC Standard Precautions for All Patient Care",
+        "url": "https://www.cdc.gov/infection-control/hcp/basics/standard-precautions.html",
+        "checked": "2026-10-17",
+        "status": "Source reviewed; PS lesson clinical review pending"
+      },
+      {
+        "id": "cdc-hands",
+        "title": "CDC Clinical Safety: Hand Hygiene for Healthcare Workers",
+        "url": "https://www.cdc.gov/clean-hands/hcp/clinical-safety/index.html",
+        "checked": "2026-10-17",
+        "status": "Source reviewed; PS lesson clinical review pending"
+      },
+      {
+        "id": "ps-process",
+        "title": "PS portal workflow and pilot assessment methodology",
+        "url": "/#workshop",
+        "checked": "2026-10-17",
+        "status": "PS product rules; not a regulatory standard"
+      }
+    ],
+    "questions": [
+      {
+        "id": "emergency",
+        "label": "Is the emergency equipment identified in your local plan available and reported ready?",
+        "weight": 3,
+        "critical": true,
+        "category": "equipment",
+        "family_id": null,
+        "purchase_kind": "capital",
+        "requirement": "mandatory",
+        "condition": null,
+        "baseline_only": false,
+        "source": "ps-process",
+        "action": "Review locally and agree an appropriate corrective action."
+      },
+      {
+        "id": "firstaid",
+        "label": "Are first-aid supplies sufficient, suitable and in usable condition?",
+        "weight": 2,
+        "critical": false,
+        "category": "supplies",
+        "family_id": "PSC-SC-C23",
+        "purchase_kind": "recurring",
+        "requirement": "mandatory",
+        "condition": null,
+        "baseline_only": false,
+        "source": "ps-process",
+        "action": "Review the exact product, pack and quantity before proposing a quotation request."
+      },
+      {
+        "id": "gloves",
+        "label": "Are appropriate examination gloves sufficient for current needs?",
+        "weight": 2,
+        "critical": false,
+        "category": "supplies",
+        "family_id": null,
+        "purchase_kind": "recurring",
+        "requirement": "mandatory",
+        "condition": null,
+        "baseline_only": false,
+        "source": "ps-process",
+        "action": "Review locally and agree an appropriate corrective action."
+      },
+      {
+        "id": "infection",
+        "label": "Are the clinic\u2019s hand hygiene and infection-prevention supplies and processes ready?",
+        "weight": 2,
+        "critical": false,
+        "category": "procedure",
+        "family_id": null,
+        "purchase_kind": null,
+        "requirement": "mandatory",
+        "condition": null,
+        "baseline_only": false,
+        "source": "ps-process",
+        "action": "Review locally and agree an appropriate corrective action."
+      },
+      {
+        "id": "expiry",
+        "label": "Have relevant expiry concerns been checked and addressed?",
+        "weight": 2,
+        "critical": false,
+        "category": "procedure",
+        "family_id": null,
+        "purchase_kind": null,
+        "requirement": "mandatory",
+        "condition": null,
+        "baseline_only": false,
+        "source": "ps-process",
+        "action": "Review locally and agree an appropriate corrective action."
+      },
+      {
+        "id": "documentation",
+        "label": "Are required local records and procedures available for the clinic team?",
+        "weight": 1,
+        "critical": false,
+        "category": "documentation",
+        "family_id": null,
+        "purchase_kind": null,
+        "requirement": "mandatory",
+        "condition": null,
+        "baseline_only": false,
+        "source": "ps-process",
+        "action": "Review locally and agree an appropriate corrective action."
+      },
+      {
+        "id": "equipment",
+        "label": "Is routine assessment equipment available and reported usable?",
+        "weight": 2,
+        "critical": false,
+        "category": "equipment",
+        "family_id": null,
+        "purchase_kind": "capital",
+        "requirement": "mandatory",
+        "condition": null,
+        "baseline_only": false,
+        "source": "ps-process",
+        "action": "Review locally and agree an appropriate corrective action."
+      },
+      {
+        "id": "escalation",
+        "label": "Does the team know how to escalate an urgent clinic concern?",
+        "weight": 3,
+        "critical": true,
+        "category": "procedure",
+        "family_id": null,
+        "purchase_kind": null,
+        "requirement": "mandatory",
+        "condition": null,
+        "baseline_only": false,
+        "source": "ps-process",
+        "action": "Review locally and agree an appropriate corrective action."
+      },
+      {
+        "id": "oxygen",
+        "label": "Where your clinic uses oxygen, has its readiness been reviewed under the approved local procedure?",
+        "weight": 3,
+        "critical": true,
+        "category": "restricted",
+        "family_id": null,
+        "purchase_kind": "licensed",
+        "requirement": "conditional",
+        "condition": "oxygen",
+        "baseline_only": false,
+        "source": "ps-process",
+        "action": "Review locally and agree an appropriate corrective action."
+      },
+      {
+        "id": "aed",
+        "label": "Where an AED is part of the clinic plan, has its readiness been reviewed?",
+        "weight": 3,
+        "critical": true,
+        "category": "equipment",
+        "family_id": null,
+        "purchase_kind": "capital",
+        "requirement": "conditional",
+        "condition": "aed",
+        "baseline_only": false,
+        "source": "ps-process",
+        "action": "Review locally and agree an appropriate corrective action."
+      },
+      {
+        "id": "baseline-plan",
+        "label": "Has the initial clinic readiness responsibility and review process been agreed?",
+        "weight": 1,
+        "critical": false,
+        "category": "procedure",
+        "family_id": null,
+        "purchase_kind": null,
+        "requirement": "mandatory",
+        "condition": null,
+        "baseline_only": true,
+        "source": "ps-process",
+        "action": "Review locally and agree an appropriate corrective action."
+      },
+      {
+        "id": "baseline-spec",
+        "label": "Have the clinic\u2019s starting equipment and supply requirements been reviewed?",
+        "weight": 1,
+        "critical": false,
+        "category": "equipment",
+        "family_id": null,
+        "purchase_kind": null,
+        "requirement": "mandatory",
+        "condition": null,
+        "baseline_only": true,
+        "source": "ps-process",
+        "action": "Review locally and agree an appropriate corrective action."
+      },
+      {
+        "id": "optional-improvement",
+        "label": "Are any optional workflow improvements ready for use?",
+        "weight": 1,
+        "critical": false,
+        "category": "procedure",
+        "family_id": null,
+        "purchase_kind": null,
+        "requirement": "optional",
+        "condition": null,
+        "baseline_only": false,
+        "source": "ps-process",
+        "action": "Review locally and agree an appropriate corrective action."
+      }
+    ],
+    "grade_bands": [
+      [
+        97,
+        "A+"
+      ],
+      [
+        93,
+        "A"
+      ],
+      [
+        90,
+        "A\u2212"
+      ],
+      [
+        80,
+        "B"
+      ],
+      [
+        70,
+        "C"
+      ],
+      [
+        60,
+        "D"
+      ],
+      [
+        0,
+        "F"
+      ]
+    ]
+  }
+}

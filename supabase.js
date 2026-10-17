@@ -1,8 +1,8 @@
 (() => {
   'use strict';
 
-  const SUPABASE_URL = 'https://ewewkojlsgqvcqarmpgr.supabase.co';
-  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_sy9aBzGOMKQO2CZJyGxD-Q_TyzP4mOb';
+  const SUPABASE_URL = window.PSC_RUNTIME_SUPABASE?.url || 'https://ewewkojlsgqvcqarmpgr.supabase.co';
+  const SUPABASE_PUBLISHABLE_KEY = window.PSC_RUNTIME_SUPABASE?.key || 'sb_publishable_sy9aBzGOMKQO2CZJyGxD-Q_TyzP4mOb';
 
   if (!window.supabase || typeof window.supabase.createClient !== 'function') {
     console.error('Supabase client library did not load.');

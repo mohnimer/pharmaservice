@@ -1,0 +1,14 @@
+create role anon;create role authenticated;create role service_role bypassrls;
+create schema auth;create schema private;
+create table auth.users(id uuid primary key,email text,email_confirmed_at timestamptz,banned_until timestamptz);
+create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
+grant usage on schema public,auth,private to authenticated,service_role;
+create table account_groups(id uuid primary key,name text,slug text,active boolean default true);
+create table schools(id uuid primary key,group_id uuid references account_groups,name text,campus_name text,active boolean default true);
+create table profiles(user_id uuid primary key,full_name text,is_psc_admin boolean default false);
+create table memberships(id uuid default gen_random_uuid(),user_id uuid,group_id uuid,school_id uuid,role text);
+create table orders(id uuid primary key default gen_random_uuid(),order_number text,group_id uuid,school_id uuid,requested_by uuid,status text,note text,channel text,submission_key uuid,submission_fingerprint text,created_at timestamptz default now());
+create table order_lines(id uuid primary key default gen_random_uuid(),order_id uuid,product_id uuid,psc_sku_snapshot text,line_description text,brand_model_snapshot text,pack_snapshot text,quantity numeric,family_id text,family_name_snapshot text,product_option_id uuid,requested_presentation text,brand_preference_mode text,requested_brand text,product_option_snapshot jsonb);
+create function private.is_psc_admin() returns boolean language sql stable security definer set search_path='' as $$select coalesce((select is_psc_admin from public.profiles where user_id=auth.uid()),false)$$;
+create function private.can_access_school(sid uuid) returns boolean language sql stable security definer set search_path='' as $$select exists(select 1 from public.memberships m join public.schools s on s.group_id=m.group_id where m.user_id=auth.uid() and s.id=sid and (m.school_id=s.id or m.school_id is null))$$;
+grant select on memberships,schools,profiles,orders,order_lines to authenticated;

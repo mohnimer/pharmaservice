@@ -24,7 +24,7 @@ async function setup(role = 'anonymous', mobile = false) {
 }
 try {
   let { context, page } = await setup();
-  await page.goto(base + '/workshop');
+  await page.goto(base + '/workshop/guides');
   await page.locator('.workshopModuleCardV50').first().waitFor();
   assert.equal(await page.locator('.workshopModuleCardV50').count(), 7);
   assert.equal(await page.locator('.workshopGuideGridV50').first().locator('article').count(), 3);
