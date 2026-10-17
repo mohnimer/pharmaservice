@@ -24,3 +24,7 @@ verify_jwt = false
 [functions.email-schedules]
 # PSC administrator sessions or the private worker credential are required in code.
 verify_jwt = false
+
+[functions.workshop-notifications]
+# Private existing worker credential checked in code. Do not enable on production for preview.
+verify_jwt = false

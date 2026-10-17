@@ -24,7 +24,7 @@ async function click(w, selector) { let e = w.document.querySelector(selector); 
 async function fill(w, selector, value) { const e = w.document.querySelector(selector); assert(e, `Missing ${selector}`); e.value = value; e.dispatchEvent(new w.Event('input', { bubbles: true })); await pause(); }
 let w;
 try {
-  w = await setup('/workshop');
+  w = await setup('/workshop/guides');
   assert.equal(w.document.querySelectorAll('.workshopModuleCardV50').length, 7);
   assert.equal(w.document.querySelector('.workshopGuideGridV50').children.length, 3);
   await fill(w, '[data-workshop-q]', 'zzzznotfound'); assert(w.document.querySelector('.workshopEmptyV50'));
@@ -44,7 +44,7 @@ try {
   for (const [path, selector] of [
     ['/', '.publicLanding'], ['/start', '.start16Page'], ['/start/', '.start16Page'],
     ['/#about', 'main'], ['/#our-model', 'main'], ['/#contact', 'main'], ['/#login', '.loginPublicPage'],
-    ['/workshop/', '.workshopHubV50'], ['/workshop/stock-expiry', '.workshopModulePageV50'],
+    ['/workshop/', '.wsDestinations'], ['/workshop/stock-expiry', '.workshopModulePageV50'],
     ['/workshop/aed-has-expiring-parts-too/', '.workshopArticleV50']
   ]) {
     w = await setup(path); assert(w.document.querySelector(selector), `${path} missing ${selector}`);

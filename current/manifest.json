@@ -32,6 +32,8 @@
     "current/behaviour/dha-family-photographs.js",
     "current/behaviour/business-workspace-model.js",
     "current/behaviour/product-presentation.js",
+    "current/workshop/content.js",
+    "current/workshop/app.js",
     "app.js",
     "current/behaviour/catalogue-families.js",
     "current/behaviour/family-details.js",
@@ -120,7 +122,8 @@
     "current/styles/control-alignment.css",
     "current/styles/product-editorial.css",
     "current/styles/interaction-feedback.css",
-    "current/styles/catalogue-photo-standard.css"
+    "current/styles/catalogue-photo-standard.css",
+    "current/workshop/styles.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",

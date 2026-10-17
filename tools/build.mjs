@@ -19,12 +19,17 @@ const files = new Set(['index.html', 'robots.txt', 'sitemap.xml']);
 for (const match of shell.matchAll(/(?:src|href)="(\/[^"?#]+)(?:[?#][^"]*)?"/g)) {
   files.add(match[1].slice(1));
 }
+const previewUrl=process.env.PS_PREVIEW_SUPABASE_URL;
+const previewKey=process.env.PS_PREVIEW_SUPABASE_PUBLISHABLE_KEY;
+if(Boolean(previewUrl)!==Boolean(previewKey))throw new Error('Both isolated preview Supabase settings are required');
+if(previewUrl&&(process.env.VERCEL_ENV==='production'||!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(previewUrl)||!/^sb_publishable_[A-Za-z0-9_-]+$/.test(previewKey)))throw new Error('Invalid isolated preview database configuration');
+const runtimePrefix=previewUrl?'window.PSC_RUNTIME_SUPABASE='+JSON.stringify({url:previewUrl,key:previewKey})+';\n':'';
 const assetVersions={};
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 for (const [type, name] of [['javascript', 'current.js'], ['stylesheets', 'current.css']]) {
   const sources = await Promise.all(manifest[type].map(file => readFile(path.join(root, file), 'utf8')));
-  const content = sources.join(type === 'javascript' ? '\n;\n' : '\n');
+  const content = (type==='javascript'?runtimePrefix:'')+sources.join(type === 'javascript' ? '\n;\n' : '\n');
   await writeFile(path.join(output, name), content);
   assetVersions[name]=createHash('sha256').update(content).digest('hex').slice(0,16);
 }

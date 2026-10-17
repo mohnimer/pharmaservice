@@ -1,0 +1,58 @@
+[
+  {
+    "sku": "PSC-WND-001",
+    "family_id": null,
+    "name": "Gauze Swab Non-Sterile 5 × 5 cm",
+    "brand": "WOLAID",
+    "pack": "Pack / selling unit to confirm",
+    "question_ids": [
+      "firstaid"
+    ],
+    "regulated": false,
+    "active": true,
+    "exact_verified": false,
+    "source_revision": "PSC-20261012-STOCK-002"
+  },
+  {
+    "sku": "PSC-WND-002",
+    "family_id": null,
+    "name": "Gauze Swabs ETO Sterile 10 × 10 cm 12-ply",
+    "brand": "WOLAID",
+    "pack": "Pack / selling unit to confirm",
+    "question_ids": [
+      "firstaid"
+    ],
+    "regulated": false,
+    "active": true,
+    "exact_verified": false,
+    "source_revision": "PSC-20261012-STOCK-002"
+  },
+  {
+    "sku": "PSC-PPE-001",
+    "family_id": null,
+    "name": "Nitrile Examination Gloves",
+    "brand": "Specification-led",
+    "pack": "Pack / selling unit to confirm",
+    "question_ids": [
+      "gloves"
+    ],
+    "regulated": false,
+    "active": true,
+    "exact_verified": false,
+    "source_revision": "PSC-20261012-STOCK-002"
+  },
+  {
+    "sku": "PSC-PPE-002",
+    "family_id": null,
+    "name": "Vinyl Examination Gloves",
+    "brand": "Specification-led",
+    "pack": "Pack / selling unit to confirm",
+    "question_ids": [
+      "gloves"
+    ],
+    "regulated": false,
+    "active": true,
+    "exact_verified": false,
+    "source_revision": "PSC-20261012-STOCK-002"
+  }
+]
