@@ -24,7 +24,7 @@ create table public.ps_learning_attempts(
 create table public.ps_readiness_settings(
  school_id uuid primary key references public.schools(id), assigned_user uuid references auth.users(id),
  recipient_user uuid references auth.users(id), jurisdiction text not null default 'Not confirmed',
- clinic_type text not null default 'educational',conditions jsonb not null default '{"oxygen":"unknown","aed":"unknown"}',
+ clinic_type text not null default 'educational',bank_id text not null default 'ps-readiness-pilot',conditions jsonb not null default '{"oxygen":"unknown","aed":"unknown"}',
  weekday integer not null default 1 check(weekday between 0 and 6),reminder_time time not null default '09:00',
  reminders boolean not null default true, email_enabled boolean not null default false,
  ps_share boolean not null default false, revision integer not null default 1,updated_at timestamptz not null default now());
@@ -87,7 +87,7 @@ create function private.ps_ps_access(p_school uuid) returns boolean language sql
  select private.is_psc_admin() and exists(select 1 from public.ps_readiness_settings where school_id=p_school and ps_share);
 $$;
 create function private.ps_read_report(p_school uuid,p_owner uuid,p_status text) returns boolean language sql stable security definer set search_path='' as $$
- select (private.ps_member(p_school) and (p_owner=auth.uid() or (p_status<>'draft' and private.ps_manager(p_school))))
+ select (private.ps_member(p_school) and (p_owner=auth.uid() or (p_status<>'draft' and private.ps_member(p_school))))
  or (p_status<>'draft' and private.ps_ps_access(p_school));
 $$;
 create function private.ps_read_issue(p_school uuid) returns boolean language sql stable security definer set search_path='' as $$
@@ -141,7 +141,9 @@ begin
   end if;
  end loop;
  score:=case when total>0 then floor(100*earned/total)::integer else null end;
- if answered=n and n>0 then grade:=case when score>=97 then 'A+' when score>=93 then 'A' when score>=90 then 'A−' when score>=80 then 'B' when score>=70 then 'C' when score>=60 then 'D' else 'F' end;end if;
+ if answered=n and n>0 then
+ select band->>1 into grade from jsonb_array_elements(coalesce(p_bank->'grade_bands','[[97,"A+"],[93,"A"],[90,"A−"],[80,"B"],[70,"C"],[60,"D"],[0,"F"]]'::jsonb)) band where score>=(band->>0)::numeric order by (band->>0)::numeric desc limit 1;
+ end if;
  return jsonb_build_object('score',case when answered=n then score else null end,'grade',grade,'complete',answered=n and n>0,'completeness',case when n>0 then floor(100.0*answered/n) else 0 end,'answered',answered,'applicable',n,'unknown',unknown,'critical',critical,'gaps',gaps,'excluded',na,'scoring_version',p_bank->>'scoring_version','pilot',true);
 end $$;
 revoke all on function private.ps_score(jsonb,jsonb,jsonb,text) from public,anon,authenticated;
@@ -161,7 +163,7 @@ begin
   return jsonb_build_object('saved',true);
  end if;
  if p_action='overview' then
-  return jsonb_build_object('modules',(select coalesce(jsonb_agg(document),'[]') from public.ps_learning_modules),'catalogue',(select coalesce(jsonb_agg(to_jsonb(c)),'[]') from public.ps_readiness_catalogue c where active),'links',(select coalesce(jsonb_agg(to_jsonb(l)),'[]') from public.ps_readiness_rfq_links l where private.ps_read_issue(l.school_id)),'sites',(select coalesce(jsonb_agg(jsonb_build_object('id',s.id,'name',s.name,'campus_name',s.campus_name,'manager',private.ps_manager(s.id),'nurse',private.ps_nurse(s.id))),'[]') from public.schools s where private.ps_member(s.id) or private.ps_ps_access(s.id)),
+  return jsonb_build_object('banks',(select coalesce(jsonb_agg(document),'[]') from public.ps_readiness_banks),'modules',(select coalesce(jsonb_agg(document),'[]') from public.ps_learning_modules),'catalogue',(select coalesce(jsonb_agg(to_jsonb(c)),'[]') from public.ps_readiness_catalogue c where active),'links',(select coalesce(jsonb_agg(to_jsonb(l)),'[]') from public.ps_readiness_rfq_links l where private.ps_read_issue(l.school_id)),'sites',(select coalesce(jsonb_agg(jsonb_build_object('id',s.id,'name',s.name,'campus_name',s.campus_name,'manager',private.ps_manager(s.id),'nurse',private.ps_nurse(s.id))),'[]') from public.schools s where private.ps_member(s.id) or private.ps_ps_access(s.id)),
    'reports',(select coalesce(jsonb_agg(to_jsonb(r) order by r.week_start desc),'[]') from public.ps_readiness_reports r where private.ps_read_report(r.school_id,r.owner_id,r.status)),
    'issues',(select coalesce(jsonb_agg(to_jsonb(i)),'[]') from public.ps_readiness_issues i where private.ps_read_issue(i.school_id)),
    'proposals',(select coalesce(jsonb_agg(to_jsonb(x)),'[]') from public.ps_readiness_proposals x where private.ps_read_issue(x.school_id)),
@@ -169,6 +171,7 @@ begin
    'training',(select coalesce(jsonb_agg(to_jsonb(t)),'[]') from public.ps_learning_attempts t where private.ps_member(t.school_id) and (t.user_id=uid or private.ps_manager(t.school_id))),
    'progress',(select coalesce(jsonb_agg(to_jsonb(t)),'[]') from public.ps_learning_progress t where private.ps_member(t.school_id) and (t.user_id=uid or private.ps_manager(t.school_id))),
    'settings',(select coalesce(jsonb_agg(to_jsonb(c)),'[]') from public.ps_readiness_settings c where private.ps_member(c.school_id)),
+   'delivery',(select coalesce(jsonb_agg(jsonb_build_object('report_id',n.report_id,'kind',n.kind,'email_state',n.email_state)),'[]') from public.ps_readiness_notifications n join public.ps_readiness_reports r on r.id=n.report_id where private.ps_read_report(r.school_id,r.owner_id,r.status)),
    'notifications',(select coalesce(jsonb_agg(to_jsonb(n)),'[]') from public.ps_readiness_notifications n where n.recipient_user=uid and private.ps_member(n.school_id) and (n.kind<>'report' or private.ps_manager(n.school_id))),
    'members',(select coalesce(jsonb_agg(distinct jsonb_build_object('school_id',s.id,'user_id',m.user_id,'name',coalesce(pr.full_name,'Portal user'),'role',m.role)),'[]') from public.memberships m join public.schools s on s.group_id=m.group_id left join public.profiles pr on pr.user_id=m.user_id where private.ps_manager(s.id) and (m.school_id=s.id or (m.school_id is null and m.role='group_admin'))));
  end if;
@@ -214,12 +217,13 @@ begin
  if p_action='configure' then
   if not private.ps_manager(sid) then raise exception 'School administrator required';end if;
   if not private.ps_nurse(sid,(p->>'assigned_user')::uuid) or not private.ps_manager(sid,(p->>'recipient_user')::uuid) then raise exception 'Assignee and recipient must have current campus authorization';end if;
-  if p->>'jurisdiction' not in ('Dubai','Abu Dhabi','Sharjah','Other','Not confirmed') or p->>'clinic_type'<>'educational' then raise exception 'Unsupported clinic context';end if;
+  select * into b from public.ps_readiness_banks where id=coalesce(p->>'bank_id','ps-readiness-pilot') order by version desc limit 1;
+  if not found or b.document->>'clinic_type' is distinct from p->>'clinic_type' or not (b.document->'jurisdictions' ? (p->>'jurisdiction')) then raise exception 'Unsupported clinic context';end if;
   if (p->'conditions'->>'oxygen') not in ('yes','no','unknown') or (p->'conditions'->>'aed') not in ('yes','no','unknown') then raise exception 'Conditions must be confirmed or unknown';end if;
   if cfg.school_id is not null and cfg.revision<>(p->>'revision')::integer then raise exception 'Settings changed; reload';end if;
-  insert into public.ps_readiness_settings(school_id,assigned_user,recipient_user,jurisdiction,clinic_type,conditions,weekday,reminder_time,reminders,email_enabled,ps_share)
-  values(sid,(p->>'assigned_user')::uuid,(p->>'recipient_user')::uuid,p->>'jurisdiction','educational',p->'conditions',(p->>'weekday')::integer,(p->>'reminder_time')::time,(p->>'reminders')::boolean,(p->>'email_enabled')::boolean,(p->>'ps_share')::boolean)
-  on conflict(school_id) do update set assigned_user=excluded.assigned_user,recipient_user=excluded.recipient_user,jurisdiction=excluded.jurisdiction,conditions=excluded.conditions,weekday=excluded.weekday,reminder_time=excluded.reminder_time,reminders=excluded.reminders,email_enabled=excluded.email_enabled,ps_share=excluded.ps_share,revision=ps_readiness_settings.revision+1,updated_at=now()
+  insert into public.ps_readiness_settings(school_id,assigned_user,recipient_user,jurisdiction,clinic_type,bank_id,conditions,weekday,reminder_time,reminders,email_enabled,ps_share)
+  values(sid,(p->>'assigned_user')::uuid,(p->>'recipient_user')::uuid,p->>'jurisdiction',p->>'clinic_type',b.id,p->'conditions',(p->>'weekday')::integer,(p->>'reminder_time')::time,(p->>'reminders')::boolean,(p->>'email_enabled')::boolean,(p->>'ps_share')::boolean)
+  on conflict(school_id) do update set assigned_user=excluded.assigned_user,recipient_user=excluded.recipient_user,jurisdiction=excluded.jurisdiction,clinic_type=excluded.clinic_type,bank_id=excluded.bank_id,conditions=excluded.conditions,weekday=excluded.weekday,reminder_time=excluded.reminder_time,reminders=excluded.reminders,email_enabled=excluded.email_enabled,ps_share=excluded.ps_share,revision=ps_readiness_settings.revision+1,updated_at=now()
   returning to_jsonb(ps_readiness_settings.*) into rowdata;
   -- Draft reassignment preserves answers and invalidates stale editor revisions. Submitted snapshots are immutable.
   update public.ps_readiness_reports set owner_id=(p->>'assigned_user')::uuid,owner_name=coalesce((select full_name from public.profiles where user_id=(p->>'assigned_user')::uuid),'Clinic user'),revision=revision+1 where school_id=sid and status='draft';
@@ -229,7 +233,7 @@ begin
  if p_action='start' then
   if cfg.assigned_user is distinct from uid then raise exception 'An administrator must assign this clinic check to you';end if;
   week:=date_trunc('week',now() at time zone 'Asia/Dubai')::date;
-  select * into b from public.ps_readiness_banks where id='ps-readiness-pilot' order by version desc limit 1;if not found then raise exception 'Question bank not installed';end if;
+  select * into b from public.ps_readiness_banks where id=cfg.bank_id order by version desc limit 1;if not found then raise exception 'Question bank not installed';end if;
   select name||case when coalesce(campus_name,'')<>'' then ' · '||campus_name else '' end into sid_name from public.schools where id=sid;
   select full_name into owner_name from public.profiles where user_id=uid;
   insert into public.ps_readiness_reports(school_id,owner_id,week_start,kind,bank_id,bank_version,bank_snapshot,context_snapshot,site_name,owner_name)
@@ -264,7 +268,7 @@ begin
   for item in select value from jsonb_array_elements(result->'gaps') loop
    insert into public.ps_readiness_issues(school_id,report_id,question_id,label,critical,category,family_id,purchase_kind,quantity)
    values(sid,rep.id,item->>'id',item->>'label',(item->>'critical')::boolean,item->>'category',item->>'family_id',item->>'purchase_kind',case when p->'answers'->(item->>'id')->>'value'='no' then nullif(p->'answers'->(item->>'id')->>'quantity','')::numeric end)
-   on conflict(school_id,question_id) where status='open' do nothing;
+   on conflict(school_id,question_id) where status='open' do update set quantity=excluded.quantity,critical=ps_readiness_issues.critical or excluded.critical;
   end loop;
   select r.result into prior from public.ps_readiness_reports r where r.school_id=sid and r.status<>'draft' and r.week_start<rep.week_start and r.bank_id=rep.bank_id and r.bank_version=rep.bank_version and r.context_snapshot->>'jurisdiction'=rep.context_snapshot->>'jurisdiction' order by r.week_start desc limit 1;
   result:=result||jsonb_build_object('previous_score',prior->'score','change',case when prior->>'score' is not null then (result->>'score')::integer-(prior->>'score')::integer else null end,
@@ -336,10 +340,9 @@ grant execute on function public.ps_workshop(text,jsonb) to authenticated;
 create function private.ps_readiness_tick(p_now timestamptz default now()) returns integer language plpgsql security definer set search_path='' as $$
 declare c public.ps_readiness_settings%rowtype;r public.ps_readiness_reports%rowtype;local_now timestamp:=p_now at time zone 'Asia/Dubai';wk date:=date_trunc('week',local_now)::date;due timestamp;kind text;n integer:=0;rid uuid;b public.ps_readiness_banks%rowtype;
 begin
- select * into b from public.ps_readiness_banks where id='ps-readiness-pilot' order by version desc limit 1;
- if not found then return 0;end if;
  for c in select * from public.ps_readiness_settings where reminders loop
   if not private.ps_nurse(c.school_id,c.assigned_user) then continue;end if;
+  select * into b from public.ps_readiness_banks where id=c.bank_id order by version desc limit 1;if not found then continue;end if;
   due:=wk+((c.weekday+6)%7)+c.reminder_time;
   if local_now<due then continue;end if;
   insert into public.ps_readiness_reports(school_id,owner_id,week_start,kind,bank_id,bank_version,bank_snapshot,context_snapshot,site_name,owner_name)

@@ -3497,7 +3497,7 @@
     if(catalogueSearchRoute!==r){ resetIntelligentSearch(); ui.globalSearch=''; ui.catalogueQuery=''; ui.modal=null; ui.basket=false; ui.accountMenu=false; ui.mobile=false; ui.publicMenu=false; catalogueSearchRoute=r; }
     if(protectedRoute(r)){
       if(!authReady){ $app.innerHTML='<main class="publicPage"><section class="publicPageHero"><span class="kicker">PHARMA SERVICE</span><h1>Opening secure account…</h1></section></main>'; return; }
-      if(!session){ if(r!=='login') location.hash='login'; return; }
+      if(!session){ if(window.PS_WORKSHOP_APP?.handles(r))try{sessionStorage.setItem('pscPendingRoute',r);}catch{} if(r!=='login') location.hash='login'; return; }
       if(r.startsWith('portal/')&&!authContext?.isPscAdmin&&!authContext?.school?.id){location.hash='login';return;}
       if(r.startsWith('admin/') && (!authContext?.isPscAdmin || isDemoAccount())){ location.hash='portal/dashboard'; return; }
     }
