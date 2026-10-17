@@ -23,7 +23,7 @@ const previewUrl=process.env.PS_PREVIEW_SUPABASE_URL;
 const previewKey=process.env.PS_PREVIEW_SUPABASE_PUBLISHABLE_KEY;
 if(Boolean(previewUrl)!==Boolean(previewKey))throw new Error('Both isolated preview Supabase settings are required');
 if(previewUrl&&(process.env.VERCEL_ENV==='production'||!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(previewUrl)||!/^sb_publishable_[A-Za-z0-9_-]+$/.test(previewKey)))throw new Error('Invalid isolated preview database configuration');
-const runtimePrefix=previewUrl?'window.PSC_RUNTIME_SUPABASE='+JSON.stringify({url:previewUrl,key:previewKey})+';\\n':'';
+const runtimePrefix=previewUrl?'window.PSC_RUNTIME_SUPABASE='+JSON.stringify({url:previewUrl,key:previewKey})+';\n':'';
 const assetVersions={};
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });

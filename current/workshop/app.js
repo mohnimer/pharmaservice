@@ -1,7 +1,7 @@
 (() => {
 'use strict';
 const C=window.PS_WORKSHOP_CONTENT,E=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let A,D,key='',loading=false,error='',busy=false,R=null,index=0,review=false,dirty=false,resolve={},course='',slide=0,qi=0,qa={},attempt=null,attemptKey=null,recommend=null,feedback={},quizLoaded='',quizDraft=null,edit=0,saveChain=Promise.resolve(),autoTimer=null;
+let A,D,key='',loading=false,error='',busy=false,R=null,index=0,review=false,dirty=false,resolve={},course='',slide=0,qi=0,qa={},attempt=null,attemptKey=null,recommend=null,feedback={},quizLoaded='',quizDraft=null,edit=0,saveChain=Promise.resolve(),quizChain=Promise.resolve(),autoTimer=null;
 const context=()=>window.PSC_ACCOUNT_CONTEXT?.(),site=()=>context()?.school?.id,route=()=>window.PSC_CURRENT_ROUTE();
 const link=(t,r)=>`<button class="button light" data-go="${E(r)}">${E(t)}</button>`;
 const act=(t,a,attrs='')=>`<button type="button" class="button primary" data-ws="${a}" ${attrs} ${busy?'disabled':''}>${E(t)}</button>`;
@@ -53,7 +53,7 @@ async function save(){
  saveChain=saveChain.catch(()=>{}).then(async()=>{if(!R||!dirty)return;const before=edit,old=R,answers=JSON.parse(JSON.stringify(R.answers));const saved=await rpc('save',{school_id:old.school_id,report_id:old.id,revision:old.revision,answers});if(R?.id===old.id){const currentAnswers=R.answers;R=saved;if(edit!==before)R.answers=currentAnswers;dirty=edit!==before;}});return saveChain;
 }
 function autoSave(){clearTimeout(autoTimer);autoTimer=setTimeout(()=>{if(dirty&&!busy)save().catch(e=>A.toast(E(e.message)));},800);}
-async function saveQuiz(){const m=mod(course);quizDraft=await rpc('quiz_save',{school_id:site(),module_id:course,module_version:m.version,responses:qa,revision:quizDraft?.revision||0});}
+async function saveQuiz(){quizChain=quizChain.catch(()=>{}).then(async()=>{const m=mod(course);quizDraft=await rpc('quiz_save',{school_id:site(),module_id:course,module_version:m.version,responses:JSON.parse(JSON.stringify(qa)),revision:quizDraft?.revision||0});});return quizChain;}
 
 const focus=()=>requestAnimationFrame(()=>document.querySelector('#wsFocus')?.focus());
 async function run(el){
@@ -79,7 +79,7 @@ else if(a==='publish_content'){const f=new FormData(document.querySelector('#wsC
 function bind(){
 if(!handles(route()))return;document.querySelectorAll('[data-ws]').forEach(el=>el.addEventListener('click',()=>{if(!busy)run(el);}));
 document.querySelectorAll('[data-ws-quiz]').forEach(el=>el.addEventListener('change',()=>{feedback[qi]=false;qa[el.dataset.wsQuiz]=[...document.querySelectorAll('[data-ws-quiz="'+el.dataset.wsQuiz+'"]:checked')].map(e=>Number(e.value));attemptKey=null;clearTimeout(autoTimer);autoTimer=setTimeout(()=>{if(!busy)saveQuiz().catch(e=>A.toast(E(e.message)));},800);}));
-document.querySelectorAll('[data-ws-answer]').forEach(el=>el.addEventListener('change',()=>{R.answers[el.dataset.wsAnswer]={...(R.answers[el.dataset.wsAnswer]||{}),value:el.value};dirty=true;edit++;autoSave();A.redraw();}));
+document.querySelectorAll('[data-ws-answer]').forEach(el=>el.addEventListener('change',()=>{R.answers[el.dataset.wsAnswer]={...(R.answers[el.dataset.wsAnswer]||{}),value:el.value};dirty=true;edit++;autoSave();A.redraw();requestAnimationFrame(()=>document.querySelector('[data-ws-answer="'+el.dataset.wsAnswer+'"][value="'+el.value+'"]')?.focus({preventScroll:true}));}));
 document.querySelectorAll('[data-ws-field]').forEach(el=>el.addEventListener('input',()=>{const a=R.answers[el.dataset.question]||{};a[el.dataset.wsField]=el.dataset.wsField==='quantity'?(el.value?Number(el.value):null):el.value;R.answers[el.dataset.question]=a;dirty=true;edit++;autoSave();}));
 document.querySelectorAll('[data-ws-resolve]').forEach(el=>el.addEventListener('change',()=>resolve[el.dataset.wsResolve]=el.checked));
 document.querySelectorAll('[data-ws-proposal]').forEach(el=>el.addEventListener('change',async()=>{const p=D.proposals.find(p=>p.id===el.dataset.wsProposal);try{await rpc('proposal_edit',{school_id:p.school_id,report_id:p.report_id,id:p.id,quantity:Number(el.value)});await refresh();}catch(e){A.toast(E(e.message));}}));

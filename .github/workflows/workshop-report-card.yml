@@ -23,7 +23,8 @@ jobs:
       - run: npm run build
       - run: npm test
       - run: node tests/workshop-backend.mjs
-      - run: node tests/workshop-dom.mjs\n      - run: node tests/workshop-persistence.mjs
+      - run: node tests/workshop-dom.mjs
+      - run: node tests/workshop-persistence.mjs
       - run: npm run test:dom
       - run: npx playwright install --with-deps chromium
       - run: node tests/workshop-browser.mjs
