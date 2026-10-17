@@ -63,6 +63,9 @@ try {
  await db.query('delete from memberships where user_id=$1',[ids.manager]);await db.exec('set role service_role');assert.equal((await db.query("select ps_readiness_email('recheck',$1) result",[claimed.id])).rows[0].result,null);await db.exec('reset role');
  await asUser(db,'manager');assert.equal((await call(db,'overview')).reports.length,0,'Permission revocation applies immediately');
  console.log('PASS carry-forward, explicit resolution, comparable history, quiz draft conflicts, delegated reviewer denial; scoring bands, incomplete suppression, exact SKU/pack/quantity, RFQ replay, Dubai schedule dedupe, delivery permission recheck');
+ await asUser(db,'ps');await deny(()=>call(db,'publish_content',{kind:'module',document:{...m,id:'bad-content',version:2,minutes:'<img onerror=alert(1)>'}}));
+ await call(db,'publish_content',{kind:'module',document:{...m,version:2}});
+ await deny(()=>call(db,'publish_content',{kind:'module',document:{...m,version:2}}));
  await db.exec("reset role;select set_config('request.jwt.claim.sub','',false);set role anon");await deny(()=>call(db,'overview'));
  console.log('PASS real Postgres: tenant isolation, role guards, persistence/revisions, immutable submissions, grades, critical/unknown, notification recipient, training and replay');
 }finally{await db.close();}

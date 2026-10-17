@@ -158,6 +158,26 @@ begin
  if p_action='publish_content' then
   if not private.is_psc_admin() then raise exception 'PS administrator required';end if;
   doc:=p->'document';if octet_length(doc::text)>250000 or doc->>'status' not in ('pilot','reviewed') or char_length(doc->>'title') not between 1 and 200 then raise exception 'Invalid content';end if;
+  if coalesce(doc->>'id','') !~ '^[a-z][a-z0-9-]{1,79}$' then raise exception 'Invalid content identifier';end if;
+  if p->>'kind'='module' then
+   if jsonb_typeof(doc->'slides')<>'array' or jsonb_typeof(doc->'quiz')<>'array' or jsonb_array_length(doc->'slides') not between 1 and 50 or jsonb_array_length(doc->'quiz') not between 1 and 50 or jsonb_typeof(doc->'minutes')<>'number' or (doc->>'minutes')::numeric not between 1 and 120 or (doc->>'pass_mark')::numeric not between 0 and 100 then raise exception 'Invalid lesson or assessment structure';end if;
+   items:=doc->'quiz';
+   for q in select value from jsonb_array_elements(items) loop
+    if jsonb_typeof(q->'options')<>'array' or jsonb_array_length(q->'options') not between 2 and 8 or jsonb_typeof(q->'correct')<>'array' or jsonb_array_length(q->'correct')=0 then raise exception 'Invalid quiz question';end if;
+    for a in select value from jsonb_array_elements(q->'correct') loop
+     if jsonb_typeof(a)<>'number' or a::text !~ '^[0-7]$' or (a::text)::integer>=jsonb_array_length(q->'options') then raise exception 'Invalid correct answer';end if;
+    end loop;
+   end loop;
+  elsif p->>'kind'='bank' then
+   if jsonb_typeof(doc->'questions')<>'array' or jsonb_array_length(doc->'questions') not between 1 and 100 then raise exception 'Invalid question bank';end if;
+   items:=doc->'questions';
+   for q in select value from jsonb_array_elements(items) loop
+    if jsonb_typeof(q->'weight')<>'number' or (q->>'weight')::numeric not between 1 and 10 or q->>'requirement' not in ('mandatory','conditional','optional') then raise exception 'Invalid readiness rule';end if;
+   end loop;
+  end if;
+  for q in select value from jsonb_array_elements(items) loop
+   if coalesce(q->>'id','') !~ '^[a-z][a-z0-9-]{1,79}$' or (select count(*) from jsonb_array_elements(items) x where x->>'id'=q->>'id')<>1 then raise exception 'Question identifiers must be unique and stable';end if;
+  end loop;
   if p->>'kind'='module' then insert into public.ps_learning_modules values(doc->>'id',(doc->>'version')::integer,doc,now());
   elsif p->>'kind'='bank' then insert into public.ps_readiness_banks values(doc->>'id',(doc->>'version')::integer,doc,now());else raise exception 'Unknown content type';end if;
   return jsonb_build_object('saved',true);

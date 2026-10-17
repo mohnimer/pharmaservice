@@ -4,3 +4,5 @@
 @media print{body:has(#psReportPrint) *{visibility:hidden!important}body:has(#psReportPrint) #psReportPrint,body:has(#psReportPrint) #psReportPrint *{visibility:visible!important}#psReportPrint{position:absolute;left:0;top:0;width:100%;max-width:none;padding:16px;box-sizing:border-box}#psReportPrint .wsNoPrint,#psReportPrint .wsNoPrint *{display:none!important}.wsReport article{break-inside:avoid}.wsGrade>strong{font-size:64px}}
 
 .wsFlow{display:flex;flex-wrap:wrap;gap:10px 18px;list-style:none!important;padding:0!important;margin:10px 0!important;font-size:15px!important}.wsFlow li{margin:0!important;display:flex;align-items:center;gap:18px}.wsFlow li:not(:last-child):after{content:"→";color:#7a867e;font-weight:400}#app .wsApp .wsTabs .button:hover{background:#edf1ed!important}
+
+@media print{#psReportPrint button{display:none!important}}
