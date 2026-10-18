@@ -49,7 +49,8 @@ try{
   const option=refresh.approvedOptions.find(o=>o.sku===nexium.pscSku);
   let familyRequest;
   w.addEventListener('psc:add-family-line',event=>{familyRequest=event.detail;});
-  await choose(option.product_option_id);
+  if(w.document.querySelector('[data-family-variant]'))await choose(option.product_option_id);
+  else assert(root.querySelector('.professionalPurchaseIdentity').textContent.includes(nexium.name),'Single exact product opens already selected');
   await click('[data-family-quote]');await click('[data-basket]');
   assert.equal(familyRequest.localFamily,true);
   assert.equal(familyRequest.requestedProductOptions[0].product_option_id,null);
@@ -58,12 +59,13 @@ try{
   await click('[data-submit-request]');
   await navigate('portal/catalogue/patient-care');
   // A new family remains present even when the database returns only an older family.
-  assert(w.document.querySelector('[data-psc-family-open="PSC-IS-151"]'));
+  assert(w.document.querySelector(`[data-product-view="${nexium.pscSku}"]`));
+  assert.equal(w.document.querySelector('[data-psc-family-layer]'),null,'No family-first browsing step');
   await navigate('portal/catalogue/sports');
   const fastum=w.PSC_DATA.products.find(p=>p.pscSku==='PSC-MED-101');
   assert(fastum);
   const familyId=fastum.catalogueParentId||fastum.catalogueReferenceFamilyId||fastum.pscSku;
-  const fastumCard=w.document.querySelector('[data-family-listing="'+familyId+'"]');assert(fastumCard);
+  const fastumCard=w.document.querySelector(`[data-product-view="${fastum.pscSku}"]`)?.closest('.productCard');assert(fastumCard);
   assert(fastumCard.querySelector('.catalogueIdentityLine'));
   assert(!fastumCard.querySelector('.pscBrandChoices'),'Brand choice moves into Details');
   await w.PSC_OPEN_FAMILY_DETAIL(familyId);await pause();

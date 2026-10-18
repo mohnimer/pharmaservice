@@ -56,3 +56,4 @@
 .professionalProductDetail .psWhatsAppShortcut:focus-visible{outline:2px solid #087d75;outline-offset:3px}
 @media(prefers-reduced-motion:reduce){#app [data-ps-scroll-header]{transition:none!important}}
 @media print{.psWhatsAppShortcut{display:none!important}#app [data-ps-scroll-header]{position:static!important;transform:none!important}}
+#app .customerShell .psIntelligentSearch input[data-cat-q]{font-size:16px!important}

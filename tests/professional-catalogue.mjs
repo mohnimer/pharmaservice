@@ -19,7 +19,7 @@ function stored(){return JSON.parse(w.sessionStorage.getItem('pscClinicPortalDem
 try{
  await ready('.productCard');
  const grouped=[...w.document.querySelectorAll('.pscFamilyCard')];assert(grouped.length>0);
- for(const card of grouped){const text=card.querySelector('.catalogueIdentityLine').textContent;assert(/^\d+ variants?$/.test(text),'Family card uses a plain variant count');if(!text.startsWith('1 '))assert.equal(card.querySelector('.pack'),null,'Multi-variant cards do not imply a common pack');}
+ for(const card of grouped){const ids=JSON.parse(card.dataset.matchingSkus),text=card.querySelector('.catalogueIdentityLine').textContent;if(ids.length>1){assert.equal(text,ids.length+' packs');assert.equal(card.querySelector('.pack'),null,'Multi-pack cards do not imply a common pack');}else assert(!/^\d+ variants?$/.test(text),'Single listings identify the brand or specification');}
 
  const presentation=w.PSC_PRODUCT_PRESENTATION;
  assert.equal(presentation.quantity(-3),1);assert.equal(presentation.quantity(0),1);assert.equal(presentation.quantity(''),1);assert.equal(presentation.quantity(Infinity),1);assert.equal(presentation.quantity(2.9),2);

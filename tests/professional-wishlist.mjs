@@ -12,6 +12,10 @@ try{
  const heart=await ready('.pscEditorialCard [data-wishlist-toggle]'),key=heart.dataset.wishlistToggle;heart.click();await pause();assert.equal(heart.getAttribute('aria-pressed'),'true');
  w.PSC_NAVIGATE('portal/wishlist');await ready('.wishlistGrid');assert.equal(w.document.querySelectorAll('.wishlistGrid [data-wishlist-toggle]').length,1);assert.equal(w.document.querySelector('[data-wishlist-toggle]').dataset.wishlistToggle,key);
  const storedKey=Object.keys(w.localStorage).find(k=>k.startsWith('psc-wishlist-'));assert(storedKey);
+ w.localStorage.setItem(storedKey,JSON.stringify(['family:PSC-IS-173']));await refreshWishlist();
+ assert.equal(w.document.querySelectorAll('.wishlistGrid .productCard').length,2,'Legacy broad-family bookmarks preserve both distinct products');
+ assert([...w.document.querySelectorAll('.wishlistGrid [data-wishlist-toggle]')].every(x=>x.dataset.wishlistToggle==='family:PSC-IS-173'));
+ w.document.querySelector('.wishlistGrid [data-wishlist-toggle]').click();await pause();assert.deepEqual(JSON.parse(w.localStorage.getItem(storedKey)),[]);
  const data=w.PSC_DATA.products,a=data.find(p=>p.catalogueParentId&&data.some(x=>x.pscSku!==p.pscSku&&x.catalogueParentId===p.catalogueParentId)),b=data.find(x=>x.pscSku!==a.pscSku&&x.catalogueParentId===a.catalogueParentId);assert(b);
  w.localStorage.setItem(storedKey,JSON.stringify(['sku:'+a.pscSku,'sku:'+b.pscSku]));await refreshWishlist();
  const controls=[...w.document.querySelectorAll('.wishlistGrid [data-wishlist-toggle]')];assert.deepEqual(controls.map(x=>x.dataset.wishlistToggle),['sku:'+a.pscSku,'sku:'+b.pscSku]);controls[0].click();await pause();assert.equal(w.document.querySelectorAll('.wishlistGrid [data-wishlist-toggle]').length,1);assert.equal(w.document.querySelector('.wishlistGrid [data-wishlist-toggle]').dataset.wishlistToggle,'sku:'+b.pscSku);

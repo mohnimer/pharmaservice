@@ -699,5 +699,5 @@
  const mixedPhotos=new Set(["/assets/products/acorus-2026-10/retained-psc-ppe-001.jpg", "/assets/products/acorus-2026-10/retained-psc-ppe-003.jpg", "/assets/products/acorus-2026-10/retained-psc-dsp-002.jpg", "/assets/products/acorus-2026-10/retained-psc-dsp-004.jpg", "/assets/products/acorus-2026-10/retained-psc-dsp-005.jpg", "/assets/products/acorus-2026-10/retained-psc-dsp-006.jpg", "/assets/products/acorus-2026-10/retained-psc-dsp-007.jpg", "/assets/products/acorus-2026-10/retained-psc-dsp-008.jpg"]);
  const isMixedPhoto=p=>mixedPhotos.has(p?.currentImageUrl);
  const byId=new Map(rows.map(r=>[r.family_id,Object.freeze(r)]));
- window.PSC_DHA_FAMILY_PHOTOS=Object.freeze({rows:Object.freeze(rows),isMixedPhoto,forListing:p=>p?._familyGroup&&(!window.PS_CATALOGUE_STOCK?.realPhoto(p)||isMixedPhoto(p))?byId.get(p._familyGroup.id)||null:null});
+ window.PSC_DHA_FAMILY_PHOTOS=Object.freeze({rows:Object.freeze(rows),isMixedPhoto,forListing:p=>p?._familyGroup&&(!p._familyGroup.storefront||p._familyGroup.sourceKind==='requirement')&&(!window.PS_CATALOGUE_STOCK?.realPhoto(p)||isMixedPhoto(p))?byId.get(p._familyGroup.parentFamilyId||p._familyGroup.id)||null:null});
 })();

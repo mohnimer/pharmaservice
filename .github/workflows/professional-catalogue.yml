@@ -6,10 +6,16 @@ on:
       - 'styles.css'
       - 'current/behaviour/family-details.js'
       - 'current/behaviour/product-presentation.js'
+      - 'current/behaviour/storefront-*.js'
       - 'current/styles/**'
       - 'current/behaviour/interaction-feedback.js'
       - 'current/manifest.json'
       - 'tests/professional-*.mjs'
+      - 'tests/catalogue-enquiry-context.mjs'
+      - 'tests/intelligent-search-browser.mjs'
+      - 'tests/search-acceptance-browser.mjs'
+      - 'tests/operating-journey-browser.mjs'
+      - 'tests/account-continuity-browser.mjs'
       - '.github/workflows/professional-catalogue.yml'
 jobs:
   request-and-layout:
@@ -27,7 +33,14 @@ jobs:
       - run: node tests/professional-category-grid-browser.mjs
       - run: node tests/professional-disclosures-browser.mjs
       - run: node tests/professional-navigation-browser.mjs
+      - run: node tests/catalogue-enquiry-context.mjs
+      - run: node tests/search-acceptance-browser.mjs
+      - run: node tests/intelligent-search-browser.mjs
+      - run: node tests/operating-journey-browser.mjs
+      - run: node tests/account-continuity-browser.mjs
       - run: node --test tests/variant-evidence.test.cjs tests/catalogue-stock.test.cjs tests/catalogue-refresh-identity.test.cjs tests/intelligent-search.test.mjs
+      - run: node --test tests/storefront-groups.test.cjs
+      - run: node tests/storefront-groups-browser.mjs
       - run: node tests/professional-wishlist.mjs
       - run: node tests/professional-catalogue.mjs
       - run: node tests/professional-submission.mjs
