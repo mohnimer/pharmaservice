@@ -2,6 +2,13 @@ import {readFileSync,mkdirSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {createServer} from '../tools/serve.mjs';
+import index from '../current/behaviour/product-knowledge-index.js';
+const assertMatchedConcept=async(page,concept)=>{
+ const ids=await page.locator('.productGrid .productCard').evaluateAll(nodes=>nodes.flatMap(n=>JSON.parse(n.dataset.matchingSkus)));
+ assert(ids.length>0,'search must retain exact matched records');
+ assert.equal(new Set(ids).size,ids.length,'matched records must not be duplicated');
+ assert(ids.every(id=>index.records.find(r=>r.id===id)?.concepts.includes(concept)),`every exact matched member must have concept ${concept}`);
+};
 const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const base=`http://127.0.0.1:${server.address().port}`;
 const browser=await chromium.launch({executablePath:process.env.PSC_CHROME,args:['--no-sandbox']});
@@ -41,8 +48,10 @@ const command=async text=>{await page.locator('[data-cat-q]').fill(text);await p
 const request=()=>page.locator('.psLiveRequest');
 await command('we need a wheelchair');assert.match(await page.locator('.productGrid').innerText(),/wheel ?chair/i);
 await command('add 2 wheelchairs');assert.match(await request().textContent(),/wheel ?chair/i);assert.equal(await request().locator('[data-ps-line-qty]').inputValue(),'2');
-await command('we need big gauze');assert.match(await page.locator('.productGrid').innerText(),/gauze/i); // Only ask when several real large sizes exist.
-await command('10 x 10');assert.match(await page.locator('.productGrid').innerText(),/10.*10/);
+await command('we need big gauze');await assertMatchedConcept(page,'gauze');await assertMatchedConcept(page,'large'); // Labels retain the actual product identity.
+await command('10 x 10');
+const sizeMatches=await page.locator('.productGrid .productCard').evaluateAll(nodes=>nodes.flatMap(n=>JSON.parse(n.dataset.matchingSkus)).map(id=>{const p=window.PSC_DATA.products.find(p=>p.pscSku===id);return p.catalogueDisplayName||p.name;}));
+assert(sizeMatches.length>0&&sizeMatches.every(name=>/10\s*[×x]\s*10/i.test(name)),'size follow-up must retain only exact 10×10 members behind the compact family cards');
 await command('add 5 boxes');assert.match(await request().textContent(),/Sterile gauze — 10 × 10 cm/);assert.equal(await request().locator('[data-ps-line-qty]').count(),2);assert.equal(await request().locator('[data-ps-line-qty]').nth(1).inputValue(),'5');
 await command('deliver this to Sharjah');assert.match(await request().locator('[data-ps-scope="location"]').inputValue(),/sharjah/i);
 await command('this is for 3 clinics');assert.equal(await request().locator('[data-ps-scope="sites"]').inputValue(),'3');assert.equal(await request().locator('[data-ps-line-qty]').first().inputValue(),'2');
@@ -56,7 +65,7 @@ const closeDrawer=page.locator('.requestDrawer [data-close-basket]');
 await page.locator('.requestDrawer').waitFor({state:'visible'});await page.waitForTimeout(750);
 const drawerHit=await closeDrawer.evaluate(el=>{const r=el.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {uncovered:el.contains(hit),hit:hit?.tagName+' '+hit?.className,z:getComputedStyle(el.closest('.drawerBackdrop')).zIndex};});
 assert(drawerHit.uncovered,`request close button must not be covered by the portal header: ${JSON.stringify(drawerHit)}`);
-await closeDrawer.click();assert.equal(await page.locator('.requestDrawer').count(),0);
+await closeDrawer.click();await page.locator('.requestDrawer').waitFor({state:'detached'});assert.equal(await page.locator('.requestDrawer').count(),0);
 if(width===390){await page.locator('[data-ps-sheet-open]').click();assert.equal(await request().isVisible(),true);await page.locator('[data-ps-sheet-close]').click();assert.equal(await request().isVisible(),false);await page.locator('[data-ps-sheet-open]').click();}
 await page.locator('[data-ps-prepare]').click();assert.match(await page.locator('.psRequestScopeReview').textContent(),/sharjah/i);assert.match(await page.locator('.psRequestScopeReview').textContent(),/Existing \/ retain/);await page.locator('[data-submit-request]').click();assert.match(await page.locator('body').innerText(),/simulated request/i);
 assert.deepEqual(await page.evaluate(()=>window.__backendCalls.filter(c=>c.rpc||c.action!=='select')),[]);
@@ -64,7 +73,9 @@ await page.reload();await page.locator('[data-cat-q]').waitFor();assert.equal(aw
 await command('PSC-DBT-001');
 await command('add 1 glucometer');
 await command('we need another 3 of those');assert.equal(await request().locator('[data-ps-line-qty]').first().inputValue(),'4');
-await command('strips for this');assert.match(await page.locator('.productCard').first().innerText(),/glucometer strips/i);
+await command('strips for this');await assertMatchedConcept(page,'glucose-strips');
+const compatibleStripIds=await page.locator('.productGrid .productCard').evaluateAll(nodes=>nodes.flatMap(n=>JSON.parse(n.dataset.matchingSkus)));
+assert(index.records.find(r=>r.id===compatibleStripIds[0]).compatibleIds.includes('PSC-DBT-001'),'the first compatible strip result must retain the indexed compatibility evidence');
 await command('and needles');assert.match(await page.locator('.productCard').first().innerText(),/lancet/i);
 await command('we need another 3 of those');assert.equal(await request().locator('[data-ps-line-qty]').last().inputValue(),'3');
 await command('remove the first one');assert.equal(await request().locator('[data-ps-line-qty]').count(),1);
@@ -82,9 +93,9 @@ await page.locator('[data-cat-q]').fill('unfamiliar description');await page.loc
 await page.waitForFunction(()=>document.querySelector('.productCard')?.textContent.match(/wheel ?chair/i));
 assert.equal(await page.locator('[data-product-view="invented-product"]').count(),0);
 assert.equal(await page.locator('.productCard').count(),1,'ranked IDs must exclude the remaining catalogue even without model terms');
-assert.equal(await page.locator('[data-ps-result-count]').innerText(),'1 matching products');
+assert.equal(await page.locator('[data-ps-result-count]').innerText(),'1 matching listings');
 await page.locator('[data-cat-q]').fill('different unfamiliar description');await page.locator('[data-cat-q]').press('Enter');
 await Promise.race([secondRequest,new Promise((_,reject)=>setTimeout(()=>reject(new Error('second model request did not start')),5000))]);await page.locator('[data-cat-q]').fill('gauze');await page.waitForTimeout(650);
-assert.equal(await page.locator('[data-cat-q]').inputValue(),'gauze');assert.match(await page.locator('.productCard').first().innerText(),/gauze/i);assert.equal(calls,2);
+assert.equal(await page.locator('[data-cat-q]').inputValue(),'gauze');await assertMatchedConcept(page,'gauze');assert.equal(calls,2);
 assert.deepEqual(await page.evaluate(()=>window.__backendCalls.filter(c=>c.rpc||c.action!=='select')),[]);await context.close();console.log('PASS grounded asynchronous model ranking and stale-response isolation');
 }finally{await browser.close();server.close();}

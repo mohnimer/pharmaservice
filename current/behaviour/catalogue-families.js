@@ -116,6 +116,8 @@
     </section>`;
   }
   function install(){
+    // Families remain internal sourcing/information relationships, not a second browsing step.
+    if(window.PSC_STOREFRONT_GROUPS)return;
     if(!familyState.loaded) return;
     const need=currentNeed(); if(need===null || need==='all') return;
     if(document.querySelector('[data-psc-family-layer]')) return;

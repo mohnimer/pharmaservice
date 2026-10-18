@@ -14,8 +14,8 @@ try{for(const [width,motion] of [[320,'no-preference'],[1440,'no-preference'],[3
  const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(`http://127.0.0.1:${server.address().port}/#portal/catalogue/all`);await page.locator('.pscEditorialCard').first().waitFor();
 
- const multiCard=page.locator('.pscFamilyCard').filter({has:page.locator('.catalogueIdentityLine',{hasText:'2 variants'})}).first();await multiCard.waitFor();
- assert.equal(await multiCard.locator('.pack').count(),0);assert.equal(await multiCard.locator('.catalogueIdentityLine').innerText(),'2 variants');
+ const multiCard=page.locator('.pscFamilyCard').filter({has:page.locator('.catalogueIdentityLine',{hasText:'2 packs'})}).first();await multiCard.waitFor();
+ assert.equal(await multiCard.locator('.pack').count(),0);assert.equal(await multiCard.locator('.catalogueIdentityLine').innerText(),'2 packs');
  await multiCard.scrollIntoViewIfNeeded();await page.screenshot({animations:'disabled',path:`test-results/disclosures/${width}-${motion}-variant-card.png`});
  await page.evaluate(()=>window.PSC_OPEN_FAMILY_DETAIL('PSC-SC-B19'));
  const familySheet=page.locator('.pscFamilyProductSheet');await familySheet.waitFor();
@@ -26,7 +26,7 @@ try{for(const [width,motion] of [[320,'no-preference'],[1440,'no-preference'],[3
  assert((await familySheet.locator('.pscFamilyDisclosureList details').first().textContent()).includes('Representative family preview only'),'Representative evidence remains in Details');
  assert.equal(await familySheet.locator('.pscRetailPriceNotice').count(),1);
  const contact=familySheet.locator('.psWhatsAppShortcut');assert.equal(await contact.count(),1);await contact.scrollIntoViewIfNeeded();
- const contactUrl=new URL(await contact.getAttribute('href'));assert.equal(contactUrl.hostname,'wa.me');assert.equal(contactUrl.pathname,'/971553511335');assert.equal(contactUrl.searchParams.get('text'),'Hello Pharma Service, I have a question about an institutional supply enquiry.');assert.equal(await contact.getAttribute('target'),'_blank');assert((await contact.getAttribute('rel')).includes('noopener'));
+ const contactUrl=new URL(await contact.getAttribute('href'));assert.equal(contactUrl.hostname,'wa.me');assert.equal(contactUrl.pathname,'/971553511335');assert.equal(contactUrl.searchParams.get('text'),'Hello Pharma Service, I have a question about Portable Pulse Oximeter · Reference: PSC-SC-B19 · 1 unit.');assert.equal(await contact.getAttribute('target'),'_blank');assert((await contact.getAttribute('rel')).includes('noopener'));
  assert.equal(await contact.innerText(),'Have a question?');assert.equal(await contact.evaluate(el=>getComputedStyle(el).position),'static','Product enquiry stays in content flow');
  const contactBox=await contact.boundingBox();assert(contactBox.height>=44&&contactBox.width<200,'Compact visual with an accessible tap area');
  assert(await contact.evaluate(el=>el.previousElementSibling.classList.contains('professionalCommercial')),'Enquiry belongs below purchasing information');

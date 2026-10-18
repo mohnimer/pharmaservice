@@ -1861,7 +1861,7 @@
     const workshop=workshopForProduct(p,1)[0];
     return `<article class="publicCatalogueCard ${p._familyGroup?'pscFamilyCard':''} ${!imageUrl?'pscFamilyNoPhoto':''}" data-family-listing="${esc(p._familyGroup?.id||'')}">
       <button class="publicCatalogueVisual publicProductView" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-public-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details">${imageUrl?`<img data-family-example="${familyPhoto?'true':'false'}" src="${esc(imageUrl)}" alt="${esc(familyPhoto?.label||displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'">`:`<span>${esc(need.label)}</span>`}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>
-      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount" data-catalogue-brand-sku="${esc(p.pscSku)}">Brands Available: ${catalogueBrandCount(p)}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(pack)}</p>${cataloguePricePreview(p)}${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
+      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount">${esc(window.PSC_STOREFRONT_GROUPS?.realBrand(p.brand)?p.brand:"Request by specification")}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(p._familyGroup?.members.length>1?p._familyGroup.members.length+" pack options":pack)}</p>${cataloguePricePreview(p)}${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
       <button class="button outline full" data-public-product-view="${p.pscSku}">View details</button>
     </article>`;
   }
@@ -1876,7 +1876,7 @@
       <i aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 18 18 6M6 6h12v12"/></svg></i>
     </button>`).join('');
     const heroTitle=needId==='all'?'Start with the clinical area.':esc(meta.label);
-    const heroLead=needId==='all'?'Choose a category to see the controlled product families behind it. Or keep scrolling to browse the published product catalogue.':`Product families for ${esc(meta.label)} appear below, followed by the published catalogue lines in this clinical area.`;
+    const heroLead=needId==='all'?'Choose a category or search for a product, brand, model or pack.':`Browse products and sourcing requirements for ${esc(meta.label)}.`;
     return `<main class="publicPage publicCataloguePage catalogue16Page">${publicHeader('catalogue')}
       <section class="publicPageHero cataloguePublicHero catalogue16Hero"><span class="kicker">INSTITUTIONAL CATALOGUE</span><h1>${heroTitle}</h1><p>${heroLead}</p></section>
       <section class="publicSection publicCatalogueJourney16">
@@ -1884,9 +1884,9 @@
         <div class="publicCategoryGrid16">${categoryCards}</div>
       </section>
       <section class="publicSection publicCatalogueControls catalogue16Controls">
-        <div class="filterBar"><div class="searchInput"><span>${icon('search')}</span><input type="search" aria-label="Search catalogue" data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search families, products, packs or specifications…">${ui.catalogueQuery?'<button type="button" class="catalogueSearchClear" data-catalogue-clear aria-label="Clear search">×</button>':''}</div><select data-cat-filter="category"><option>All product types</option>${types.map(t=>`<option ${ui.catalogueCat===t?'selected':''}>${esc(t)}</option>`).join('')}</select></div>
+        <div class="filterBar"><div class="searchInput"><span>${icon('search')}</span><input type="search" aria-label="Search catalogue" data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search products, brands, packs or specifications…">${ui.catalogueQuery?'<button type="button" class="catalogueSearchClear" data-catalogue-clear aria-label="Clear search">×</button>':''}</div><select data-cat-filter="category"><option>All product types</option>${types.map(t=>`<option ${ui.catalogueCat===t?'selected':''}>${esc(t)}</option>`).join('')}</select></div>
       </section>
-      <section class="publicSection publicCatalogueResults catalogue16Results">${catalogueRetailPriceNotice()}<div class="publicCatalogueCount"><b>${filtered.length}</b><span>${needId==='all'?'published institutional lines':'published lines in this category'}</span></div>${filtered.length?`<div class="publicCatalogueGrid">${catalogueCardRows(filtered).map(publicCatalogueCard).join('')}</div>`:'<div class="emptyState"><h3>No matching published lines</h3><p>Try another clinical need or send the requirement to Pharma Service.</p><button class="button primary" data-go="contact">Request sourcing</button></div>'}</section>
+      <section class="publicSection publicCatalogueResults catalogue16Results">${catalogueRetailPriceNotice()}<div class="publicCatalogueCount"><b>${catalogueCardRows(filtered).length}</b><span>${needId==='all'?'product listings':'listings in this category'}</span></div>${filtered.length?`<div class="publicCatalogueGrid">${catalogueCardRows(filtered).map(publicCatalogueCard).join('')}</div>`:'<div class="emptyState"><h3>No matching published lines</h3><p>Try another clinical need or send the requirement to Pharma Service.</p><button class="button primary" data-go="contact">Request sourcing</button></div>'}</section>
       <section class="publicCta"><div><span class="kicker">HAVE A LIST ALREADY?</span><h2>Send the requirement instead of rebuilding it here.</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="start">Send a list / RFQ</button><button class="button primary large" data-go="login">Open Clinic Portal</button></div></section>
       ${publicFooter()}
     </main>`;
@@ -2308,7 +2308,7 @@
 
   function catalogueSearchResults(needId='all',landing=false){
     const {filtered,searching}=catalogueFilterProducts(needId);const visible=!landing||ui.catalogueQuery||intelligent.action;
-    return `<section class="psSearchResults" data-ps-search-results ${visible?'':'hidden'}><div class="catalogueMeta"><span data-ps-result-count role="status" aria-live="polite" aria-atomic="true">${filtered.length} ${searching?'matching products':'products'}</span></div>${filtered.some(p=>p.dhaMapped)?`<p class="pscDhaLegend"><img src="${DHA_ICON}" alt="DHA requirement mapping"><span>The DHA logo at the top right identifies a product mapped to a DHA clinic requirement. Conditional requirements and alternatives apply; exact specifications and suitability are checked before quotation.</span></p>`:''}${catalogueRetailPriceNotice()}<div class="productGrid v25ProductGrid">${visible?catalogueCardRows(filtered).map(productCard).join(''):''}</div><p class="psSearchEmpty" ${filtered.length?'hidden':''}>${esc(window.PS_INTELLIGENT_SEARCH.outcome(window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'' ,productSearchContext())||{terms:''},filtered).message)} Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button></p></section>`;
+    return `<section class="psSearchResults" data-ps-search-results ${visible?'':'hidden'}><div class="catalogueMeta"><span data-ps-result-count role="status" aria-live="polite" aria-atomic="true">${catalogueCardRows(filtered).length} ${searching?'matching listings':'listings'}</span></div>${filtered.some(p=>p.dhaMapped)?`<p class="pscDhaLegend"><img src="${DHA_ICON}" alt="DHA requirement mapping"><span>The DHA logo at the top right identifies a product mapped to a DHA clinic requirement. Conditional requirements and alternatives apply; exact specifications and suitability are checked before quotation.</span></p>`:''}${catalogueRetailPriceNotice()}<div class="productGrid v25ProductGrid">${visible?catalogueCardRows(filtered).map(productCard).join(''):''}</div><p class="psSearchEmpty" ${filtered.length?'hidden':''}>${esc(window.PS_INTELLIGENT_SEARCH.outcome(window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'' ,productSearchContext())||{terms:''},filtered).message)} Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button></p></section>`;
   }
   function updateCatalogueResults(){
     const area=document.querySelector('[data-ps-search-results]');if(!area)return;
@@ -2317,9 +2317,9 @@
     const {filtered,searching}=catalogueFilterProducts(need);
     area.hidden=landing&&!ui.catalogueQuery&&!intelligent.action;
     const grid=area.querySelector('.productGrid');grid.innerHTML=area.hidden?'':catalogueCardRows(filtered).map(productCard).join('');
-    area.querySelector('[data-ps-result-count]').textContent=`${filtered.length} ${searching?'matching products':'products'}`;
-    const heroCount=document.querySelector('.categoryHeroCount b');if(heroCount)heroCount.textContent=filtered.length;
-    const heroLabel=document.querySelector('.categoryHeroCount span');if(heroLabel)heroLabel.textContent=searching?'matching products':'products';
+    area.querySelector('[data-ps-result-count]').textContent=`${catalogueCardRows(filtered).length} ${searching?'matching listings':'listings'}`;
+    const heroCount=document.querySelector('.categoryHeroCount b');if(heroCount)heroCount.textContent=catalogueCardRows(filtered).length;
+    const heroLabel=document.querySelector('.categoryHeroCount span');if(heroLabel)heroLabel.textContent=searching?'matching listings':'listings';
     const empty=area.querySelector('.psSearchEmpty');empty.hidden=filtered.length>0;const action=window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'',productSearchContext())||{terms:''};empty.innerHTML=esc(window.PS_INTELLIGENT_SEARCH.outcome(action,filtered).message)+' Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button>';bindUnlistedRequirement(empty);
     // Bind only newly rendered cards. Never replace or refocus the command input while typing.
     bindCatalogueResultCards(grid);
@@ -2377,7 +2377,7 @@
     return shell(`
       <section class="categoryHero" style="--need-bg:${selected.bg};--need-ink:${selected.ink}">
         <div class="categoryHeroCopy"><span class="eyebrow">INSTITUTIONAL CATALOGUE</span><h1>${esc(selected.label)}</h1><p>${esc(selected.note)}</p></div>
-        <div class="categoryHeroCount"><b>${filtered.length}</b><span>products</span></div>
+        <div class="categoryHeroCount"><b>${catalogueCardRows(filtered).length}</b><span>listings</span></div>
       </section>
 
       ${selected.id.startsWith('dha-')?`<nav class="needRibbon" aria-label="DHA clinic essentials">${DHA_ESSENTIAL_CATEGORIES.map(c=>`<button class="needRibbonChip ${c.id===selected.id?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}" aria-current="${c.id===selected.id?'page':'false'}"><b>${esc(c.label)}</b></button>`).join('')}<button class="needRibbonChip" data-go="portal/catalogue">Full catalogue →</button></nav>`:clinicalNeedRibbon(selected.id)}
@@ -2440,7 +2440,7 @@
     const stock=window.PS_CATALOGUE_STOCK?.forProduct(p);
     if(stock?.acorus_managed){
       const mrp=window.PS_CATALOGUE_STOCK.price(stock);
-      return mrp?`<div class="pscPricePreview"><b>${money(mrp)}</b><span>Retail MRP</span><small>In stock · stock report ${esc(window.PS_CATALOGUE_STOCK.stockDate)} · wholesale quotation separate</small></div>`:'<div class="pscPricePreview"><b>Request quotation</b><small>Current stocked retail MRP not confirmed</small></div>';
+      return mrp?`<div class="pscPricePreview"><b>${money(mrp)}</b><span>Retail MRP${p._familyGroup?.members.length>1?" · "+esc(p.cataloguePack||p.pack||"pictured pack"):""}</span><small>In stock · stock report ${esc(window.PS_CATALOGUE_STOCK.stockDate)} · wholesale quotation separate</small></div>`:'<div class="pscPricePreview"><b>Request quotation</b><small>Current stocked retail MRP not confirmed</small></div>';
     }
     if(stock?.source_kind==='product'&&p.storefrontPriceMode!=='show_price')return '<div class="pscPricePreview"><b>Request quotation</b><small>Supplier availability and quotation to confirm</small></div>';
 
@@ -2473,7 +2473,7 @@
   function wishlistKeys(){
     try{const value=JSON.parse(localStorage.getItem(wishlistStorageKey())||'[]');return new Set(Array.isArray(value)?value.filter(v=>typeof v==='string'&&/^(family|sku):/.test(v)).slice(0,1000):[]);}catch{return new Set();}
   }
-  function wishlistProductKey(p){return p._familyGroup?`family:${p._familyGroup.id}`:`sku:${p.pscSku}`;}
+  function wishlistProductKey(p){return p._savedWishlistKey||(p._familyGroup?`family:${p._familyGroup.id}`:`sku:${p.pscSku}`);}
   function wishlistControl(p){
     if(!wishlistStorageKey())return '';
     const key=wishlistProductKey(p),saved=wishlistKeys().has(key),name=p._familyGroup?.name||p.catalogueDisplayName||p.name;
@@ -2481,8 +2481,14 @@
   }
   function wishlistPage(){
     const all=catalogueProducts(),groups=catalogueCardRows(all),saved=[...wishlistKeys()];
-    const rows=saved.map(key=>key.startsWith('family:')?groups.find(p=>p._familyGroup&&wishlistProductKey(p)===key):all.find(p=>`sku:${p.pscSku}`===key));
-    return shell(`<div class="pageHeader customerSimpleHeader"><div><h1>Wishlist</h1><p>Keep useful products together for your next requirement.</p><small class="smallMuted">Saved on this device for this signed-in user and clinic. Review the exact product and pack in Details before adding to your Supply Request.</small></div><button class="button primary" data-go="portal/catalogue">Browse catalogue</button></div>${saved.length?`<div class="v25ProductGrid wishlistGrid">${rows.map((p,i)=>p?productCard(p):`<article class="wishlistUnavailable"><h3>Saved listing unavailable</h3><p>This listing is no longer in the current catalogue.</p><button type="button" class="button outline" data-wishlist-toggle="${esc(saved[i])}">Remove saved listing</button></article>`).join('')}</div>`:'<div class="emptyState"><h2>Your Wishlist is ready</h2><p>Use the heart beside View details to save a product. Saving does not add it to a request.</p></div>'}`);
+    // Old broad-family bookmarks expand to their current product listings; none silently pick one brand.
+    const rows=saved.flatMap(key=>{
+      if(!key.startsWith('family:'))return [{p:all.find(p=>`sku:${p.pscSku}`===key),key}];
+      const exact=groups.find(p=>p._familyGroup&&wishlistProductKey(p)===key);if(exact)return [{p:exact,key}];
+      const legacy=groups.filter(p=>p._familyGroup?.parentFamilyId===key.slice(7));
+      return legacy.length?legacy.map(p=>({p:{...p,_savedWishlistKey:key},key})): [{p:null,key}];
+    });
+    return shell(`<div class="pageHeader customerSimpleHeader"><div><h1>Wishlist</h1><p>Keep useful products together for your next requirement.</p><small class="smallMuted">Saved on this device for this signed-in user and clinic. Review the exact product and pack in Details before adding to your Supply Request.</small></div><button class="button primary" data-go="portal/catalogue">Browse catalogue</button></div>${saved.length?`<div class="v25ProductGrid wishlistGrid">${rows.map(({p,key})=>p?productCard(p):`<article class="wishlistUnavailable"><h3>Saved listing unavailable</h3><p>This listing is no longer in the current catalogue.</p><button type="button" class="button outline" data-wishlist-toggle="${esc(key)}">Remove saved listing</button></article>`).join('')}</div>`:'<div class="emptyState"><h2>Your Wishlist is ready</h2><p>Use the heart beside View details to save a product. Saving does not add it to a request.</p></div>'}`);
   }
   function toggleWishlist(control){
     const storageKey=wishlistStorageKey();if(!storageKey)return;
@@ -2507,9 +2513,9 @@
       ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img class="productMainImage" data-family-example="${familyPhoto?'true':'false'}" src="${esc(displayImage)}" alt="${esc(familyPhoto?.label||p.name)}" loading="lazy" onerror="this.onerror=null;this.style.visibility='hidden'">${dhaMark}</button>`
       : `<button class="productVisual productNeedVisual productVisualButton" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)}">${dhaMark}</button>`;
 
-    return `<article data-family-listing="${esc(p._familyGroup?.id||'')}" class="productCard ${p._familyGroup?'pscFamilyCard':''} ${!displayImage?'pscFamilyNoPhoto':''} v25ProductCard v261ProductCard v262ProductCard canvaProductCard exactCanvaCard pscEditorialCard">
+    return `<article data-matching-skus="${esc(JSON.stringify((p._familyGroup?.members||[p]).map(member=>member.pscSku)))}" data-family-listing="${esc(p._familyGroup?.id||'')}" class="productCard ${p._familyGroup?'pscFamilyCard':''} ${!displayImage?'pscFamilyNoPhoto':''} v25ProductCard v261ProductCard v262ProductCard canvaProductCard exactCanvaCard pscEditorialCard">
       ${visual}
-      <div class="catalogueIdentityLine">${esc(p._familyGroup?`${p._familyGroup.members.length} ${p._familyGroup.members.length===1?'variant':'variants'}`:p.brand||'')}</div>
+      <div class="catalogueIdentityLine">${esc(p._familyGroup?.members.length>1?`${p._familyGroup.members.length} packs`:window.PSC_STOREFRONT_GROUPS?.realBrand(p.brand)?p.brand:'Request by specification')}</div>
       <div class="canvaCardBody exactCanvaBody">
         <button class="productTitleButton" data-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button>
         ${p._familyGroup?.members.length>1?'':`<p class="pack">${esc(pack)}</p>`}${catalogueImageNote(p)||'<small class="catalogueImageNote catalogueImageNoteEmpty" aria-hidden="true"></small>'}
@@ -2650,15 +2656,15 @@
       const choice=mode==='specific_option'?(l.productOptionId||''):mode==='other_brand'?String(l.requestedBrand||'').trim().toLowerCase():'no-preference';
       const refs=(l.requestedProductOptions||[]).map(o=>o.product_option_id||o.local_product_option_id||o.reference_product_option_id||'').sort().join('|');
       const safe=v=>encodeURIComponent(String(v||''));
-      return `family:${safe(l.familyId)}:${safe(l.presentation||'')}:${mode}:${safe(choice)}:${safe(refs)}`;
+      return `family:${safe(l.familyId)}:${safe(l.presentation||'')}:${mode}:${safe(choice)}:${safe(refs)}${l.requirementSnapshot?.sku?':requirement:'+safe(l.requirementSnapshot.sku):''}`;
     }
     return l?.sku||'';
   }
-  function lineDisplayName(l,p=null){ if(l?.kind==='unlisted')return l.description;return isFamilyLine(l)?(l.productOptionSnapshot?.exact_product_name||l.familyName||l.familyId||'Catalogue family'):(p?.catalogueDisplayName||p?.name||l?.sku||'Order item'); }
-  function lineReference(l){ if(l?.kind==='unlisted')return 'Unlisted item — requires PS review';return isFamilyLine(l)?l.familyId:(l?.sku||''); }
+  function lineDisplayName(l,p=null){ if(l?.kind==='unlisted')return l.description;return isFamilyLine(l)?(l.productOptionSnapshot?.exact_product_name||l.requirementSnapshot?.name||l.familyName||l.familyId||'Catalogue family'):(p?.catalogueDisplayName||p?.name||l?.sku||'Order item'); }
+  function lineReference(l){ if(l?.kind==='unlisted')return 'Unlisted item — requires PS review';return isFamilyLine(l)?l.requirementSnapshot?.sku||l.familyId:(l?.sku||''); }
   function linePackLabel(l,p=null){
     if(l?.kind==='unlisted')return l.requestUnit||'Unit to confirm';
-    if(isFamilyLine(l)) return l.productOptionSnapshot?.exact_product_name?(l.productOptionSnapshot.pack||'Pack / unit to confirm'):(l.orderPackBasis||'Pack / scope to confirm');
+    if(isFamilyLine(l)) return l.productOptionSnapshot?.exact_product_name?(l.productOptionSnapshot.pack||'Pack / unit to confirm'):(l.requirementSnapshot?.pack||l.orderPackBasis||'Pack / scope to confirm');
     return p?.cataloguePack||p?.pack||'Pack to confirm';
   }
   function lineBrandPreferenceLabel(l){
@@ -2685,6 +2691,7 @@
       // Quotation-reference snapshots are not purchase-option foreign keys.
       requestedProductOptions:Array.isArray(detail?.requestedProductOptions)?structuredClone(detail.requestedProductOptions):[],
       productOptionSnapshot:option?structuredClone(option):null,
+      requirementSnapshot:detail?.requirementSnapshot?structuredClone(detail.requirementSnapshot):null,
       regulated:!!detail?.regulated,
       qty:window.PSC_PRODUCT_PRESENTATION.quantity(detail?.qty)
     };
@@ -3057,7 +3064,7 @@
       <div class="productDetailGrid fluidProductGrid">
         <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).filter(m=>window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url).map(m=>`<img src="${esc(window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
         <div class="detailContentPane fluidDetailContent">
-          <div class="professionalPurchaseIdentity"><h3>${esc(displayName)}</h3><p>${esc(pack)}</p></div>${wishlistControl(p)}${productVariantSelector(p)}${cataloguePricePreview(p)}${catalogueRetailPriceNotice()}${window.PSC_PRODUCT_PRESENTATION.whatsappHtml()}
+          <div class="professionalPurchaseIdentity"><h3>${esc(displayName)}</h3><p>${esc(pack)}</p></div>${wishlistControl(p)}${productVariantSelector(p)}${cataloguePricePreview(p)}${catalogueRetailPriceNotice()}${window.PSC_PRODUCT_PRESENTATION.whatsappHtml(p)}
           ${window.PSC_PRODUCT_PRESENTATION.documentsHtml(p)}<div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to the applicable DHA clinic requirement.</b></div>`:''}</div>
           <div class="productDisclosureList">
             <details open><summary><span>Details</span><i>+</i></summary><div>${window.PSC_PRODUCT_PRESENTATION.factsHtml(p,{heading:false})}<p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
@@ -3303,7 +3310,7 @@
           type:'family', localFamily:!l.family_id, familyId:l.family_id||l.product_option_snapshot?.requested_family_id||(window.PSC_FAMILY_CATALOGUE_V39?.families||[]).find(f=>f.familyName===l.family_name_snapshot)?.familyId||l.family_name_snapshot, familyName:l.family_name_snapshot||l.line_description||l.family_id,
           presentation:l.requested_presentation||'', orderPackBasis:l.pack_snapshot||'', brandPreferenceMode:l.brand_preference_mode||'no_preference',
           requestedBrand:l.requested_brand||'', productOptionId:l.product_option_id||'', productOptionSnapshot:l.product_option_snapshot||null,
-          requestedProductOptions:l.product_option_snapshot?.requested_product_options||[],
+          requestedProductOptions:l.product_option_snapshot?.requested_product_options||[],requirementSnapshot:l.product_option_snapshot?.requested_requirement||null,
           familyPageType:l.product_option_snapshot?.requested_family_page_type||'',
           regulated:l.product_option_snapshot?.regulated??true, qty:Number(l.quantity)
         }:!l.psc_sku_snapshot&&!l.product_id&&l.line_description?{kind:'unlisted',requestId:'unlisted-'+l.id,description:l.line_description,requestUnit:l.pack_snapshot==='Unlisted item — requires PS review'?'':l.pack_snapshot||'',qty:Number(l.quantity)}:{sku:l.psc_sku_snapshot||'',qty:Number(l.quantity)};
@@ -3384,7 +3391,7 @@
       if(isFamilyLine(l)){
         const snapshot={...(l.productOptionSnapshot||{}),requested_family_id:l.familyId,
           requested_family_page_type:l.familyPageType||'',regulated:!!l.regulated,
-          requested_product_options:l.requestedProductOptions||[]};
+          requested_product_options:l.requestedProductOptions||[],requested_requirement:l.requirementSnapshot||null};
         return {
           product_id:null, psc_sku_snapshot:exactSkuForLine(l)||null,
           family_id:l.localFamily?null:l.familyId, family_name_snapshot:l.familyName,

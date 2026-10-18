@@ -19,11 +19,14 @@ try {for(const width of [320,390,1440]){
  for(const query of ['antihistamine','anti histamine','antihistamin','cetirizine','allergy medicine','whelchair','oxygen thing with meter','machine to check pressure','sugar machine','big gauze','stethscope']){
   await page.goto(`http://127.0.0.1:${server.address().port}/#portal/catalogue`);await page.locator('[data-cat-q]').waitFor();
   await command(query);
-  const cards=await page.locator('.productGrid .productCard').evaluateAll(nodes=>nodes.map(n=>({id:n.querySelector('[data-product-view]')?.dataset.productView,name:n.querySelector('h3')?.textContent||''})));
-  const ids=cards.map(c=>c.id);
-  assert.equal(new Set(ids).size,cards.length,'one rendered card per real ID');
+  const cards=await page.locator('.productGrid .productCard').evaluateAll(nodes=>nodes.map(n=>({id:n.querySelector('[data-product-view]')?.dataset.productView,ids:JSON.parse(n.dataset.matchingSkus),family:n.dataset.familyListing,name:n.querySelector('h3')?.textContent||''})));
+  const ids=cards.flatMap(c=>c.ids);
+  assert.equal(new Set(ids).size,ids.length,'each exact matched ID belongs to one family listing');
+  assert.equal(new Set(cards.map(c=>c.family||c.id)).size,cards.length,'one card per family listing');
+  assert(cards.every(c=>c.ids.includes(c.id)),'card details must open an exact matched member');
   assert(ids.every(id=>index.records.some(r=>r.visible&&r.id===id)));
-  assert.equal(await page.locator('[data-ps-result-count]').innerText(),`${ids.length} matching products`);
+  assert.equal(await page.locator('[data-ps-result-count]').innerText(),`${cards.length} matching listings`);
+  assert.equal(await page.locator('.categoryHeroCount b').innerText(),String(cards.length));
   if(['antihistamine','anti histamine','antihistamin'].includes(query))assert.deepEqual([...ids].sort(),expected,query+' must render only all verified antihistamine IDs');
   if(query==='cetirizine')assert(ids.every(id=>index.records.find(r=>r.id===id).medicine?.activeIngredients.includes('cetirizine')));
   if(query==='allergy medicine')assert(ids.every(id=>expected.includes(id)));

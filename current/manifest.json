@@ -26,6 +26,8 @@
     "current/behaviour/verified-variant-records.js",
     "current/behaviour/variant-evidence.js",
     "current/behaviour/catalogue-stock-data.js",
+    "current/behaviour/storefront-groups.js",
+    "current/behaviour/storefront-brand-choices.js",
     "current/behaviour/catalogue-stock.js",
     "current/behaviour/variant-photographs-data.js",
     "current/behaviour/variant-photographs.js",

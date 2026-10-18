@@ -17,10 +17,14 @@
   return matches.length===1?matches[0]:null;
  }
  const hasFamily=family=>control.products.some(r=>r.family_id===family&&r.acorus_managed);
- const realPhoto=p=>!!(window.PSC_IMAGE_POLICY?.resolve(p?.currentImageUrl)??p?.currentImageUrl)&&(p.imageIdentityReviewed===true||/VERIFIED EXACT|SOURCE IMAGE AVAILABLE|EXISTING PRODUCT PHOTOGRAPH/.test(p.imageStatus||''))&&!/reference|clinical-icons|clinic-basics|inst-\d+|pill/i.test(p.currentImageUrl);
+ const realPhoto=p=>!window.PSC_DHA_FAMILY_PHOTOS?.isMixedPhoto(p)&&!!(window.PSC_IMAGE_POLICY?.resolve(p?.currentImageUrl)??p?.currentImageUrl)&&(p.imageIdentityReviewed===true||/VERIFIED EXACT|SOURCE IMAGE AVAILABLE|EXISTING PRODUCT PHOTOGRAPH/.test(p.imageStatus||''))&&!/reference|clinical-icons|clinic-basics|inst-\d+|pill/i.test(p.currentImageUrl);
  const rank=p=>Number(/VERIFIED EXACT/.test(p.imageStatus||''))*100+Number(realPhoto(p))*20+Number(current(forProduct(p)))*10;
  function representative(rows){return [...rows].sort((a,b)=>rank(b)-rank(a)||String(a.pscSku).localeCompare(String(b.pscSku)))[0]||null;}
  function groups(rows){
+  if(window.PSC_STOREFRONT_GROUPS){
+   const curated=window.PSC_STOREFRONT_GROUPS.curate(rows,window.PSC_STOREFRONT_BRAND_CHOICES||[]);
+   return window.PSC_STOREFRONT_GROUPS.groups(curated,forProduct,representative);
+  }
   const map=new Map();
   for(const p of rows||[]){const key=id(p);if(!map.has(key))map.set(key,[]);map.get(key).push(p);}
   return [...map].map(([family,members])=>{
@@ -28,6 +32,10 @@
    return {...hero,_familyGroup:{id:family,name,members,representativeSku:hero.pscSku}};
   });
  }
+ const groupForProduct=p=>{
+  const key=window.PSC_STOREFRONT_GROUPS?.identity(p,forProduct(p)||p).key;
+  return key?groups(products()).find(g=>g._familyGroup.id===key)||null:null;
+ };
  function optionsForFamily(options,family){
   const rows=[...(options||[])];
   for(const p of products().filter(p=>id(p)===family&&forProduct(p)?.source_kind==='product'&&forProduct(p)?.catalogue_visible)){
@@ -48,5 +56,5 @@
   p.catalogueVisible=r.catalogue_visible;
   if(r.acorus_managed){p.acorusStockDate=control.stock_date;p.acorusStockAvailable=current(r);p.acorusMrp=price(r);}
  }
- window.PS_CATALOGUE_STOCK=Object.freeze({revision:control.revision,stockDate:control.stock_date,reportName:control.report_name,forProduct,forOption,current,price,hasFamily,realPhoto,representative,groups,optionsForFamily});
+ window.PS_CATALOGUE_STOCK=Object.freeze({revision:control.revision,stockDate:control.stock_date,reportName:control.report_name,forProduct,forOption,current,price,hasFamily,realPhoto,representative,groups,groupForProduct,optionsForFamily});
 })();
