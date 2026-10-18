@@ -32,6 +32,12 @@
   max-width:none!important;
   width:100%!important;
   margin:0!important;
+  padding:0!important;
+}
+.appShell.pscOperatingShell.v381Shell .v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedIcon img {
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
 }
 .appShell.pscOperatingShell.v381Shell .v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedCopy b {
   display:block!important;

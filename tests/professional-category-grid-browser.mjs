@@ -28,13 +28,15 @@ try {
         return {x:bounds.x,y:bounds.y,height:bounds.height,width:bounds.width,labelBottom:label.bottom,bottom:bounds.bottom,labelTop:label.top,artBottom:art.bottom,overflow:card.scrollWidth>card.clientWidth+1};
       })
     }));
+    await grid.scrollIntoViewIfNeeded();
+    await page.screenshot({path:`test-results/category-grid/${width}.png`,animations:'disabled'});
     assert.equal(layout.columns,3,`${width}px: three category columns`);
     assert.equal(layout.cards.length,14,'All existing destinations remain available');
     assert.equal(layout.cards[0].y,layout.cards[2].y);
     assert(layout.cards[3].y>layout.cards[0].y);
     for(const card of layout.cards) {
       assert(card.width>=44&&card.height>=44,'Touch target remains usable');
-      assert(card.height<=160,'Categories remain compact');
+      assert(card.height<=160,`${width}px: categories remain compact (${card.height}px)`);
       assert(card.labelBottom<=card.bottom&&card.labelTop>=card.artBottom,'Full labels stay inside tiles, below artwork');
       assert.equal(card.overflow,false,'No clipped category content');
     }
