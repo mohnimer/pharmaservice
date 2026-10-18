@@ -17,7 +17,7 @@ try{for(const width of [390,768,1440]){
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
  await page.locator('.productCard[data-family-listing]').first().scrollIntoViewIfNeeded();await page.screenshot({path:`test-results/photo-standard/${width}-${area}.png`,fullPage:false});
  }
- const card=page.locator('[data-family-listing="PSC-SC-D04"]');await card.waitFor();const src=await card.locator('.productMainImage').getAttribute('src');
+ const card=page.locator('.productCard').filter({has:page.locator('[data-product-view="INST-0106"]')});await card.waitFor();const src=await card.locator('.productMainImage').getAttribute('src');
  await card.locator('[data-product-view]').first().click();const detail=page.locator('[data-psc-family-detail-root]');await detail.waitFor({state:'attached'});await detail.locator('.pscFamilyProductSheet').waitFor();await page.waitForTimeout(300);
  assert(await detail.locator('.detailImagePane').isVisible());assert.equal(await detail.locator('.pscFamilyPreview>img').getAttribute('src'),src);
  await detail.locator('.pscFamilyPreview>img').evaluate(img=>{if(!img.complete||img.naturalWidth<200)throw Error('Detail photo did not load');});
