@@ -49,6 +49,41 @@ try {
     await page.keyboard.press('Enter');
     await page.waitForFunction(destination=>location.hash==='#'+destination,destination);
     await page.locator('.pscEditorialCard').first().waitFor();
+    await page.goto(`http://127.0.0.1:${server.address().port}/#portal/dashboard`);
+    await page.locator('.pscHomeCategoryGrid').first().waitFor();
+    assert.equal(await page.locator('.psPortalWelcome aside').count(),0,'Redundant supply explainer removed');
+    assert.match(await page.locator('.psPortalApprovalNote').innerText(),/Submitting a request does not place a purchase order/,'Purchase approval safeguard preserved');
+    const dashboardGrids=page.locator('.pscHomeCategoryGrid');
+    assert.equal(await dashboardGrids.count(),2);
+    for(const tiles of await dashboardGrids.all()) {
+      const geometry=await tiles.evaluate(element=>({columns:getComputedStyle(element).gridTemplateColumns.split(' ').length,cards:[...element.children].map(card=>{const b=card.getBoundingClientRect(),text=card.querySelector('b').getBoundingClientRect(),art=card.querySelector('.pscHomeCategoryArt').getBoundingClientRect();return {y:b.y,height:b.height,width:b.width,contained:text.bottom<=b.bottom&&text.left>=b.left&&text.right<=b.right&&art.left>=b.left&&art.right<=b.right,overflow:card.scrollWidth>card.clientWidth+1};})}));
+      assert.equal(geometry.columns,3,'Dashboard shortcuts also use three columns');
+      assert.equal(geometry.cards.length,3);
+      assert.equal(geometry.cards[0].y,geometry.cards[2].y);
+      for(const card of geometry.cards){assert(card.height<=150&&card.width>=44,'Compact dashboard tap targets');assert(card.contained&&!card.overflow,'Full label and artwork fit the tile');}
+    }
+    const marks=page.locator('.pscHomeCategoryGrid .pscHomeDha');
+    assert.equal(await marks.count(),3,'All three Clinic essentials DHA marks retained');
+    for(const mark of await marks.all()) {
+      assert(await mark.isVisible(),'DHA mark remains visible');
+      assert.equal(await mark.getAttribute('alt'),'DHA requirement mapping');
+      const b=await mark.boundingBox();assert(b.width>=28&&b.height>=28);
+    }
+    const guides=page.locator('.pscHomeCategoryGuide');
+    assert.equal(await guides.count(),2);
+    assert.equal(await guides.locator('dd').count(),6,'All original category descriptions preserved');
+    await guides.first().locator('summary').focus();await page.keyboard.press('Enter');
+    assert.equal(await guides.first().getAttribute('open'),'');
+    assert(await guides.first().getByText('Dressings, antiseptics, gauze, closure and wound protection',{exact:true}).isVisible());
+    assert.equal(await guides.first().locator('summary .psDisclosurePlus').innerText(),'+','Reuse existing disclosure response');
+    await guides.first().locator('summary').click();
+    assert.equal(await guides.first().getAttribute('open'),null);
+    await page.locator('.pscHomeBrowse').scrollIntoViewIfNeeded();
+    await page.screenshot({path:`test-results/category-grid/${width}-dashboard.png`,animations:'disabled',fullPage:true});
+    const destinations=await page.locator('.pscHomeCategoryGrid [data-go]').evaluateAll(nodes=>nodes.map(node=>node.dataset.go));
+    assert.deepEqual(destinations,['portal/catalogue/wounds','portal/catalogue/breathing','portal/catalogue/vitals','portal/catalogue/dha-medicines','portal/catalogue/dha-equipment','portal/catalogue/dha-consumables']);
+    for(const target of destinations){await page.goto(`http://127.0.0.1:${server.address().port}/#portal/dashboard`);await page.locator(`.pscHomeCategoryGrid [data-go="${target}"]`).click();await page.waitForFunction(target=>location.hash==='#'+target,target);}
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
     assert.deepEqual(errors,[]);
     await context.close();
     console.log(`${width}px: compact three-column categories, complete labels and keyboard navigation PASS`);
