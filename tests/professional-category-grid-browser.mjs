@@ -21,6 +21,7 @@ try {
     await page.goto(`http://127.0.0.1:${server.address().port}/#portal/catalogue`);
     const grid=page.locator('.clinicNeedRail');
     await grid.waitFor();
+    assert.equal(await grid.locator('[data-go$="/vitals"] .clinicNeedIcon').evaluate(element=>getComputedStyle(element).visibility),'visible','Approved Vitals artwork stays visible in its compact slot');
     const layout=await grid.evaluate(element=>({
       columns:getComputedStyle(element).gridTemplateColumns.split(' ').length,
       cards:[...element.querySelectorAll('.clinicNeedCard')].map(card=>{

@@ -39,6 +39,14 @@
   height:100%!important;
   object-fit:contain!important;
 }
+/* The old Vitals artwork used an absolute pseudo-element. Keep the approved
+   artwork in the same in-flow icon slot as the other compact categories. */
+.appShell.pscOperatingShell.v381Shell .v26CatalogueLanding .clinicNeedCardIllustrated[data-go$="/vitals"] .clinicNeedIcon {
+  visibility:visible!important;
+}
+.appShell.pscOperatingShell.v381Shell .v26CatalogueLanding .clinicNeedCardIllustrated[data-go$="/vitals"] .clinicNeedIcon img {
+  content:url('/assets/clinical-icons/vitals-assessment-exact.png?v=4550')!important;
+}
 .appShell.pscOperatingShell.v381Shell .v26CatalogueLanding .clinicNeedCardIllustrated .clinicNeedCopy b {
   display:block!important;
   -webkit-line-clamp:unset;
