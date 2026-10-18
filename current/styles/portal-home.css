@@ -17,7 +17,7 @@
 .pscHomeCategoryArt{display:flex;align-items:center;justify-content:center;gap:6px;min-height:32px}
 .appShell.pscOperatingShell.v381Shell .pscHomeCategoryArt .pscHomeCategoryIcon{display:grid;place-items:center;flex:0 0 26px;width:26px;height:32px}
 .pscHomeCategoryIcon svg,.pscHomeGuideArt svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.appShell.pscOperatingShell.v381Shell .pscHomeCategoryArt .pscHomeDha{position:static!important;width:28px;height:28px;object-fit:contain;flex:0 0 28px}
+.appShell.pscOperatingShell.v381Shell .pscHomeCategoryArt .pscHomeDha{position:static!important;width:36px;height:36px;object-fit:contain;flex:0 0 36px}
 .pscHomeCategoryGuide{margin-top:10px;color:#616761;font-size:13px}
 .pscHomeCategoryGuide>summary{min-height:44px;padding:8px 0;cursor:pointer;color:#394c45}
 .pscHomeCategoryGuide>summary:focus-visible{outline:3px solid #258c7e;outline-offset:3px}

@@ -67,7 +67,7 @@ try {
     for(const mark of await marks.all()) {
       assert(await mark.isVisible(),'DHA mark remains visible');
       assert.equal(await mark.getAttribute('alt'),'DHA requirement mapping');
-      const b=await mark.boundingBox();assert(b.width>=28&&b.height>=28);
+      const b=await mark.boundingBox();assert(b.width>=36&&b.height>=36,'Do not shrink the established DHA mark');
     }
     const guides=page.locator('.pscHomeCategoryGuide');
     assert.equal(await guides.count(),2);
