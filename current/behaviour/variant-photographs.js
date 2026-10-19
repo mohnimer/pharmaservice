@@ -6,7 +6,7 @@
  const local=new Map(data.records.filter(r=>r.sku).map(r=>[r.sku,r]));
  const rejected=new Map((data.rejected||[]).map(r=>[r.sku,r]));
  const same=(r,o)=>r&&norm(r.exact_product_name)===norm(o.exact_product_name)&&norm(r.brand)===norm(o.brand)&&norm(r.pack)===norm(o.pack);
- const image=r=>window.PSC_IMAGE_POLICY?.resolve(r.image_url)??r.image_url;
+ const image=r=>window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(r.image_url):r.image_url;
  function forOption(o,family){
   const r=records.get(family+'|'+o?.product_option_id);
   return same(r,o)&&r.reviewed&&image(r)?r:null;
@@ -17,12 +17,15 @@
   const bad=rejected.get(sku);
   if(bad&&norm(bad.name)===norm(o.exact_product_name))return {...o,image_url:null,image_pending:true,image_identity_reviewed:false};
   const p=local.get(sku);
-  return p?.family_id===family&&same(p,o)?{...o,image_url:image(p),image_source:p.source,image_pending:false,image_identity_reviewed:true}:o;
+  if(p?.family_id===family&&same(p,o)&&image(p))return {...o,image_url:image(p),image_source:p.source,image_pending:false,image_identity_reviewed:true};
+  if(o.image_url&&window.PSC_IMAGE_POLICY&&!window.PSC_IMAGE_POLICY.resolve(o.image_url))return {...o,image_url:null,image_pending:true,image_identity_reviewed:false};
+  return o;
  });}
  for(const p of window.PSC_DATA?.products||[]){
   const r=local.get(p.pscSku);
   if(r&&same(r,{exact_product_name:p.name,brand:p.brand,pack:p.pack})){
-   Object.assign(p,{currentImageUrl:image(r),imageUrl:image(r),imageSource:r.source,imageIdentityReviewed:true,imageStatus:r.pack_confirmed?'VERIFIED EXACT PRODUCT PHOTOGRAPH':'REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM'});
+   const photo=image(r);
+   Object.assign(p,{currentImageUrl:photo,imageUrl:photo,imageSource:r.source,imageIdentityReviewed:!!photo,imageStatus:!photo?'PHOTO WITHDRAWN: IMAGE POLICY':r.pack_confirmed?'VERIFIED EXACT PRODUCT PHOTOGRAPH':'REVIEWED PRODUCT PHOTOGRAPH; PACK TO CONFIRM'});
   }else if(rejected.has(p.pscSku)&&norm(rejected.get(p.pscSku).name)===norm(p.name)){
    Object.assign(p,{currentImageUrl:null,imageUrl:null,imageIdentityReviewed:false,imageStatus:'PHOTO WITHDRAWN: PRODUCT OR PACK MISMATCH'});
   }

@@ -1,5 +1,5 @@
 {
-  "revision": "2026-10-15-reviewed-images-1",
+  "revision": "2026-10-19-image-only-1",
   "records": [
     {
       "family_id": "PSC-SC-A21",
@@ -1463,7 +1463,7 @@
       "product_option_id": "4848ea2d-acbc-42df-b940-1ea4d359cd40",
       "exact_product_name": "ZYRTEC 10MG/ML ORAL DROPS 10ML",
       "brand": "Zyrtec",
-      "pack": "10 mg/ml \u00b7 10 ml",
+      "pack": "10 mg/ml · 10 ml",
       "image_url": "/assets/products/verified-20261015/af004e8d7a3e9a35.jpg",
       "sha256": "af004e8d7a3e9a3558dbcf813e7a51b9d8302f55376f5f5ad04fb54374d8c51d",
       "source": "https://orianaonline.com/products/zyrtec-10mg-drop-10ml",
@@ -2098,20 +2098,32 @@
       "brand": "Sebamed",
       "pack": "Exact pack to confirm",
       "sku": "PS-AC-7CB34745B16F",
-      "image_url": "/assets/products/verified-20261015/0ce7aca3c81ca00d.jpg",
-      "sha256": "0ce7aca3c81ca00deeb5d3b1146684d319ae179ddb28a461fd80e14c462d90c2",
-      "source": "https://www.chemistwarehouse.ae/products/sebamed-sensitive-skin-deodorant-roll-on-fresh-50ml",
-      "source_image": "https://cdn.shopify.com/s/files/1/0902/9143/7912/files/1171_2FPRODUCT_IMAGE_2FDA01760122_2FIM14783424.jpg?v=1756651355",
-      "width": 1200,
-      "height": 1200,
+      "image_url": "/assets/products/verified-20261019/d41f2a78dcebb9ff5df0.png",
+      "sha256": "d41f2a78dcebb9ff5df01134cd1d1d47c7384f4394d0453677013f2a9ea7ad10",
+      "source": "https://www.lifepharmacy.com/sa-en/product/sebamed-deo-roll-on-fresh-unisex-50ml",
+      "source_image": "https://cdn.lifepharmacy.com/products/sebamed-deo-roll-on-fresh-unisex-50ml/116335-1.png",
+      "width": 700,
+      "height": 700,
       "reviewed": true,
-      "reviewed_at": "2026-10-15",
-      "pack_confirmed": false
+      "reviewed_at": "2026-10-19",
+      "pack_confirmed": false,
+      "previous_photographs": [
+        {
+          "image_url": "/assets/products/verified-20261015/0ce7aca3c81ca00d.jpg",
+          "sha256": "0ce7aca3c81ca00deeb5d3b1146684d319ae179ddb28a461fd80e14c462d90c2",
+          "source": "https://www.chemistwarehouse.ae/products/sebamed-sensitive-skin-deodorant-roll-on-fresh-50ml",
+          "source_image": "https://cdn.shopify.com/s/files/1/0902/9143/7912/files/1171_2FPRODUCT_IMAGE_2FDA01760122_2FIM14783424.jpg?v=1756651355",
+          "width": 1200,
+          "height": 1200,
+          "reviewed_at": "2026-10-15"
+        }
+      ],
+      "review_note": "Image-only visual/source review. Whole bottle retained; source pack remains unconfirmed. No commercial or regulatory approval."
     },
     {
       "family_id": "PSC-IS-160",
       "product_option_id": "local-acorus-76ad982e8388",
-      "exact_product_name": "Sebamed Intimate Wash pH 6.8 \u2014 Women 50+",
+      "exact_product_name": "Sebamed Intimate Wash pH 6.8 — Women 50+",
       "brand": "Sebamed",
       "pack": "Exact pack to confirm",
       "sku": "PS-AC-76AD982E8388",
@@ -2160,7 +2172,7 @@
     {
       "family_id": "PSC-IS-047",
       "product_option_id": "local-catalogue-PSC-DSP-010",
-      "exact_product_name": "XL Disposable Underpads 90 \u00d7 180 cm",
+      "exact_product_name": "XL Disposable Underpads 90 × 180 cm",
       "brand": "NIMED",
       "pack": "20 sheets / bag",
       "sku": "PSC-DSP-010",
@@ -2197,7 +2209,7 @@
       "product_option_id": "16b29d43-b6d6-43ba-8013-300a977ea732",
       "exact_product_name": "ZYRTEC 1MG/ML ORAL SOLUTION 75ML",
       "brand": "Zyrtec",
-      "pack": "1 mg/ml \u00b7 75 ml",
+      "pack": "1 mg/ml · 75 ml",
       "image_url": "/assets/products/verified-20261011/zyrtec-1mgml-75ml.jpg",
       "sha256": "7d412400b8322b22d81497b4d202750dd0b7188d3e45201740c8542cec11a2b2",
       "source": "Existing PSC photograph",
@@ -2277,7 +2289,7 @@
     {
       "family_id": "PSC-IS-153",
       "product_option_id": "local-acorus-fd2beb73a834",
-      "exact_product_name": "Urispas 200 mg \u2014 30 Tablets",
+      "exact_product_name": "Urispas 200 mg — 30 Tablets",
       "brand": "Urispas",
       "pack": "30 tablets",
       "sku": "PS-AC-FD2BEB73A834",
@@ -2294,7 +2306,7 @@
     {
       "family_id": "PSC-IS-159",
       "product_option_id": "local-acorus-d3d58af8dbdc",
-      "exact_product_name": "NAN Optipro 1 \u2014 400 g",
+      "exact_product_name": "NAN Optipro 1 — 400 g",
       "brand": "NAN",
       "pack": "400 g",
       "sku": "PS-AC-D3D58AF8DBDC",
@@ -3138,7 +3150,7 @@
     {
       "family_id": "PSC-IS-160",
       "product_option_id": "local-acorus-e5c59ffa9071",
-      "exact_product_name": "Sebamed Intimate Wash pH 3.8 \u2014 Women 15\u201350",
+      "exact_product_name": "Sebamed Intimate Wash pH 3.8 — Women 15–50",
       "brand": "Sebamed",
       "pack": "Exact pack to confirm",
       "sku": "PS-AC-E5C59FFA9071",
@@ -3161,7 +3173,7 @@
     },
     {
       "sku": "PSC-DSP-011",
-      "name": "Sterile Saline Solution 0.9% \u2014 2.5 ml",
+      "name": "Sterile Saline Solution 0.9% — 2.5 ml",
       "reason": "Photograph shows a different product or pack"
     }
   ]

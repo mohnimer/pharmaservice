@@ -1138,7 +1138,7 @@
     const lower=raw.toLowerCase();
     const looksLikeStandaloneDhaAsset = lower.includes('dha-requirement') || lower.endsWith('/pharmaservice.png') || lower.endsWith('pharmaservice.png');
     if(p?.dhaMapped && looksLikeStandaloneDhaAsset) return null;
-    return window.PSC_IMAGE_POLICY?.resolve(raw)??raw;
+    return window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(raw):raw;
   }
   function catalogueImageNote(p){
     if(!p?.localCatalogueRefresh) return '';
@@ -2510,7 +2510,7 @@
     const familyPhoto=window.PSC_DHA_FAMILY_PHOTOS?.forListing(p);
     const displayImage=familyPhoto?.path||(p._familyGroup&&!window.PS_CATALOGUE_STOCK?.realPhoto(p)?null:productDisplayImageUrl(p));
     const visual=displayImage
-      ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img class="productMainImage" data-family-example="${familyPhoto?'true':'false'}" src="${esc(displayImage)}" alt="${esc(familyPhoto?.label||p.name)}" loading="lazy" onerror="this.onerror=null;this.style.visibility='hidden'">${dhaMark}</button>`
+      ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img class="productMainImage" data-family-example="${familyPhoto?'true':'false'}" src="${esc(displayImage)}" alt="${esc(familyPhoto?.label||(p.imageRole==='SPECIFICATION_REFERENCE_ONLY'?p.imageReferenceLabel+' · illustrative product; exact model and compatibility confirmed in quotation':p.name))}" loading="lazy" onerror="this.onerror=null;this.style.visibility='hidden'">${dhaMark}</button>`
       : `<button class="productVisual productNeedVisual productVisualButton" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)}">${dhaMark}</button>`;
 
     return `<article data-matching-skus="${esc(JSON.stringify((p._familyGroup?.members||[p]).map(member=>member.pscSku)))}" data-family-listing="${esc(p._familyGroup?.id||'')}" class="productCard ${p._familyGroup?'pscFamilyCard':''} ${!displayImage?'pscFamilyNoPhoto':''} v25ProductCard v261ProductCard v262ProductCard canvaProductCard exactCanvaCard pscEditorialCard">
@@ -3062,7 +3062,7 @@
     return `<div class="productDetailModal fluidProductDetail professionalProductDetail" role="dialog" aria-modal="true" aria-label="${esc(displayName)}" data-product-experience="${window.PSC_PRODUCT_PRESENTATION.profile(p).kind}">
       <div class="modalHeader fluidProductHeader"><button class="productBackButton" data-modal-close aria-label="Back to catalogue">←</button><div><span class="eyebrow">${esc(primary.label)}</span><h2>${esc(displayName)}</h2><div class="smallMuted mono">${esc(p.pscSku)}</div></div><span class="productRequestCount">${inRequest?`${inRequest} in request`:''}</span></div>
       <div class="productDetailGrid fluidProductGrid">
-        <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).filter(m=>window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url).map(m=>`<img src="${esc(window.PSC_IMAGE_POLICY?.resolve(m.url)??m.url)}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
+        <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).filter(m=>(window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(m.url):m.url)).map(m=>`<img src="${esc((window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(m.url):m.url))}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
         <div class="detailContentPane fluidDetailContent">
           <div class="professionalPurchaseIdentity"><h3>${esc(displayName)}</h3><p>${esc(pack)}</p></div>${wishlistControl(p)}${productVariantSelector(p)}${cataloguePricePreview(p)}${catalogueRetailPriceNotice()}${window.PSC_PRODUCT_PRESENTATION.whatsappHtml(p)}
           ${window.PSC_PRODUCT_PRESENTATION.documentsHtml(p)}<div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to the applicable DHA clinic requirement.</b></div>`:''}</div>

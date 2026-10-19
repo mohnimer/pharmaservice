@@ -49,8 +49,8 @@
     const rows=familyCatalogueProducts(f), primary=window.PS_CATALOGUE_STOCK?.representative(rows)||rows[0]||null;
     const example=window.PSC_DHA_FAMILY_PHOTOS?.forListing({...primary,dhaMapped:isDhaMapped(f),_familyGroup:{id:f.family_id}});
     const photo=example?.path||(primary&&window.PS_CATALOGUE_STOCK&&!window.PS_CATALOGUE_STOCK.realPhoto(primary)?'':familyProductImage(primary));
-    const image=state.listingPreview?.image||photo;
-    return {image,title:state.listingPreview?.title||example?.label||String(primary?.name||f?.family_name||'Catalogue family'),pack:String(f?.order_pack_basis||primary?.cataloguePack||primary?.pack||'Pack / unit to confirm'),gallery:[]};
+    const image=state.listingPreview&&Object.hasOwn(state.listingPreview,'image')?state.listingPreview.image:photo;
+    return {image,title:state.listingPreview?.title||example?.label||String(primary?.name||f?.family_name||'Catalogue family'),reference:state.listingPreview?.imageReference||primary?.imageRole==='SPECIFICATION_REFERENCE_ONLY',pack:String(f?.order_pack_basis||primary?.cataloguePack||primary?.pack||'Pack / unit to confirm'),gallery:[]};
   }
   function fallbackFamily(id){
     const rows=window.PSC_FAMILY_CATALOGUE_V39?.families||[], r=rows.find(x=>x.familyId===id); if(!r) return null;
@@ -229,18 +229,19 @@
   function variantPreview(f){
     const chosen=selectedOptions();
     if(chosen.length===1){
-      const o={...chosen[0],image_url:window.PSC_IMAGE_POLICY?.resolve(chosen[0].image_url)??chosen[0].image_url}, verified=window.PSC_VARIANT_PHOTO_FOR?.(o,state.familyId)||window.PSC_VARIANT_EVIDENCE_FOR?.(o,state.familyId);
+      const o={...chosen[0],image_url:(window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(chosen[0].image_url):chosen[0].image_url)}, verified=window.PSC_VARIANT_PHOTO_FOR?.(o,state.familyId)||window.PSC_VARIANT_EVIDENCE_FOR?.(o,state.familyId);
       const bound=window.PS_CATALOGUE_STOCK?.forOption(o,state.familyId),exact=bound&&catalogueProductForSku(bound.sku);
       const retained=exact&&window.PS_CATALOGUE_STOCK.realPhoto(exact)?familyProductImage(exact):'';
       return {image:verified?String(window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(verified.image_url||o.image_url)||'':verified.image_url||o.image_url||''):retained,title:String(o.exact_product_name||'Selected product'),
         pack:String(o.pack||'Pack / unit to confirm'),gallery:[],
         description:String(o.verified_description||optionDescriptor(o,f)),
-        evidence:verified?(verified.pack_confirmed===false?'Verified product photograph · exact pack to confirm':'Verified variant photograph'):retained?'Existing product photograph · exact pack subject to label confirmation':'Variant image / pack requires verification',
+        reference:exact?.imageRole==='SPECIFICATION_REFERENCE_ONLY',
+        evidence:exact?.imageRole==='SPECIFICATION_REFERENCE_ONLY'?'Illustrative product; exact model and compatibility confirmed in quotation':verified?(verified.pack_confirmed===false?'Verified product photograph · exact pack to confirm':'Verified variant photograph'):retained?'Existing product photograph · exact pack subject to label confirmation':'Variant image / pack requires verification',
         pricing:optionPrice(o),selected:true,multiple:false};
     }
     if(chosen.length>1){
       return {image:'',title:`${chosen.length} variants selected`,pack:'Each product is quoted separately',
-        gallery:chosen.map(o=>({url:String(window.PSC_IMAGE_POLICY?.resolve(o.image_url)??o.image_url??''),alt:String(o.exact_product_name||'Selected product'),
+        gallery:chosen.map(o=>({url:String((window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(o.image_url):o.image_url)||''),alt:String(o.exact_product_name||'Selected product'),
           pack:String(o.pack||'Pack to confirm'),price:optionPrice(o)})),
         description:'Review each selected variant below. No single family photograph represents all selected products.',
         evidence:'Exact product photos and prices are shown per variant where available',
@@ -260,7 +261,7 @@
     return `<div class="modalBackdrop fluidOverlay pscFamilyDetailBackdrop" data-family-detail-close><div class="modal productModalShell fluidProductShell pscFamilyModalShell" onclick="event.stopPropagation()"><section class="productDetailModal fluidProductDetail professionalProductDetail publicProductSheet pscFamilyProductSheet" role="dialog" aria-modal="true" aria-labelledby="pscFamilyTitle">
       <div class="modalHeader fluidProductHeader"><button class="productBackButton" type="button" data-family-detail-close aria-label="Back to catalogue">←</button><div><span class="eyebrow">${state.listingSku?'Product':'Product specification'}</span><h2 id="pscFamilyTitle">${esc(state.listingSku?selected?.exact_product_name||catalogueProductForSku(state.listingSku)?.name:f.family_name)}</h2><div class="smallMuted mono">${esc(state.listingSku||f.family_id)}</div></div>${dha?`<img class="pscFamilyHeaderDha" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</div>
       <div class="productDetailGrid fluidProductGrid">
-        <div class="detailImagePane fluidImagePane" data-psc-preview-mode="${selected?'single':'family'}"><div class="detailProductImageWrap pscFamilyPreview">${preview.image?`<img src="${esc(preview.image)}" alt="${esc(preview.title)} · ${esc(preview.evidence)}" onerror="this.style.display='none'">`:`<span class="catalogueImageEmpty">${selected?'Exact variant photograph pending verification':'Select an exact product to view its photograph'}</span>`}</div><div class="detailImageMeta"><b>${esc(preview.title)}</b></div></div>
+        <div class="detailImagePane fluidImagePane" data-psc-preview-mode="${selected?'single':'family'}"><div class="detailProductImageWrap pscFamilyPreview">${preview.image?`<img src="${esc(preview.image)}" alt="${esc(preview.title)} · ${esc(preview.evidence)}" onerror="this.style.display='none'">`:`<span class="catalogueImageEmpty">${selected?'Exact variant photograph pending verification':'Select an exact product to view its photograph'}</span>`}</div><div class="detailImageMeta"><b>${esc(preview.title)}</b>${preview.reference?'<p class="smallMuted">Illustrative product. Exact model and compatibility confirmed in quotation.</p>':''}</div></div>
         <div class="detailContentPane fluidDetailContent">
           <div class="professionalPurchaseIdentity"><h3>${esc(selected?.exact_product_name||f.family_name)}</h3><p>${esc(pack)}</p></div>
           ${preferenceBlock(f)}
@@ -379,7 +380,7 @@
       e.preventDefault();
       e.stopImmediatePropagation();
       const card=familyTrigger.closest('article,.productCard,.publicCatalogueCard'),img=card?.querySelector('.productMainImage,.publicCatalogueVisual>img:not(.publicDhaMark)');
-      open(familyTrigger.dataset.pscFamilyOpen||'',img?{image:window.PSC_IMAGE_POLICY?.resolve(img.getAttribute('src'))??img.getAttribute('src'),title:img.alt}:null);
+      open(familyTrigger.dataset.pscFamilyOpen||'',img?{image:(window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(img.getAttribute('src')):img.getAttribute('src')),title:img.alt}:null);
       return;
     }
     if(e.target.closest?.('[data-psc-family-detail-root]')) return;
@@ -393,7 +394,7 @@
     e.stopImmediatePropagation();
     const card=productTrigger.closest('article,.productCard,.publicCatalogueCard'),img=card?.querySelector('.productMainImage,.publicCatalogueVisual>img:not(.publicDhaMark)');
     const exact=window.PS_CATALOGUE_STOCK?.forProduct(sku)?.source_kind==='product';
-    open(familyId,{...(img?{image:window.PSC_IMAGE_POLICY?.resolve(img.getAttribute('src'))??img.getAttribute('src'),title:img.alt}:{}),...(exact?{sku}:{specificationRequest:true,requirementSku:sku})});
+    open(familyId,{image:img?(window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(img.getAttribute('src')):img.getAttribute('src')):'',title:img?.alt||catalogueProductForSku(sku)?.name||'',imageReference:catalogueProductForSku(sku)?.imageRole==='SPECIFICATION_REFERENCE_ONLY',...(exact?{sku}:{specificationRequest:true,requirementSku:sku})});
   },true);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.open)close();});
   const closeOnNavigation=()=>{if(state.open&&state.openRoute!==window.PSC_CURRENT_ROUTE())close();};

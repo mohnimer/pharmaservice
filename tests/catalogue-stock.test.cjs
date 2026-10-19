@@ -12,3 +12,12 @@ test('option matching preserves exact pack, brand and family',()=>{const{api}=lo
 test('product grouping keeps exact packs and identifies its photographed representative',()=>{const{api,products}=load();const groups=api.groups(products);assert.equal(groups.length,1);assert.equal(groups[0].pscSku,'A');assert.equal(groups[0]._familyGroup.members.length,2);assert.equal(groups[0]._familyGroup.name,'BRAND 10 MG TABLET');assert.equal(groups[0]._familyGroup.parentFamilyId,'F');});
 test('non-Acorus option prices are not overwritten by supplier projection',()=>{const{api,non}=load();const o={sku:'OTHER',exact_product_name:non.name,brand:non.brand,pack:non.pack,verified_price_aed:99};const projected=api.optionsForFamily([o],'F').find(x=>x.sku==='OTHER');assert.equal(projected.verified_price_aed,99);});
 test('known mixed category photographs never become exact product photos',()=>{const{api,products,window}=load();assert(api.realPhoto(products[0]));window.PSC_DHA_FAMILY_PHOTOS={isMixedPhoto:p=>p.pscSku==='A'};assert.equal(api.realPhoto(products[0]),false);});
+
+test('an image-policy rejection never falls back to the rejected original URL',()=>{
+ const {api,products,window}=load();window.PSC_IMAGE_POLICY={resolve:()=>null};assert.equal(api.realPhoto(products[0]),false);
+ const p=products[0],r={sku:p.pscSku,family_id:'F',product_option_id:'O',exact_product_name:p.name,brand:p.brand,pack:p.pack,image_url:p.currentImageUrl,reviewed:true,pack_confirmed:true};
+ window.PSC_VARIANT_PHOTOGRAPHS={records:[r],rejected:[]};
+ vm.runInNewContext(fs.readFileSync('current/behaviour/variant-photographs.js','utf8'),{window});
+ assert.equal(window.PSC_VARIANT_PHOTO_FOR(r,'F'),null);assert.equal(p.currentImageUrl,null);assert.equal(p.imageIdentityReviewed,false);
+ const result=window.PSC_VARIANT_PHOTO_APPLY([r],'F')[0];assert.equal(result.image_url,null);assert.equal(result.image_pending,true);assert.equal(result.image_identity_reviewed,false);
+});

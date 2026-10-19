@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-15-image-review-2",
+  "version": "2026-10-19-photo-review-1",
   "blocked_paths": [
     "/assets/products/acorus-2026-10/016-gloclav-1gm-tab-14-s.jpg",
     "/assets/products/acorus-2026-10/017-gloclav-625mg-tab-20-s.jpg",
@@ -101,7 +101,14 @@
     "/assets/products/supplier-20261014/zyme_nasal_spray_30_ml_with_lysozyme.jpg",
     "/assets/products/acorus-2026-10/267-canesten-1-cream-20gm.jpg",
     "/assets/products/acorus-2026-10/retained-psc-dia-011.jpg",
-    "/assets/products/acorus-2026-10/retained-psc-dsp-011.jpg"
+    "/assets/products/acorus-2026-10/retained-psc-dsp-011.jpg",
+    "/assets/products/supplier-20261014/creon_10000_pancreatin_150_mg_20_capsules.jpg",
+    "/assets/products/acorus-2026-10/retained-psc-ppe-002.jpg",
+    "/assets/products/acorus-2026-10/retained-psc-res-005.jpg",
+    "/assets/products/acorus-2026-10/retained-psc-wnd-014.jpg",
+    "/assets/products/acorus-2026-10/retained-psc-wst-001.jpg",
+    "/assets/products/acorus-2026-10/retained-psc-dsp-009.jpg",
+    "/assets/products/acorus-2026-10/051-glencet-5mg-tab-10-s.jpg"
   ],
   "blocked_sha256": [
     "019da16521c9aaaf0ed5c3192e8c8052f58dcd760c96ee6082014e63f1e2bf2f",
@@ -204,7 +211,14 @@
     "ffa6a9068f4baa5ab9816ec850869a5a1925fe3372a441d4811692000a80ff8f",
     "6c68fa96b2534b909f057b8e164f0c72d7f8c49f99bb4879cd411e4b2874bf58",
     "3f85d282175c0059da233fa3e7797b9fc3aa05e1d24d4ac3cbda05bb74d68e2b",
-    "a713e18950535eaec642023a46b8e5406e1d50e5993a48c3b75229c3bd98f516"
+    "a713e18950535eaec642023a46b8e5406e1d50e5993a48c3b75229c3bd98f516",
+    "273d31807cd9508396ad5404c9aa0fbb357a23b39bfb9239952160fd35f8b0ea",
+    "8c2fd356da0453a32eb28a4980123111782251294d5d5ffac49149e39f0e2013",
+    "0bd9c3f37e1fa51a5c00e9ca785a28f91c17fd20618bb8831e80082b62a14d9e",
+    "54da18d71c97f32acff3652790efc47e02c7308fc2b42cfaa19d1e326817d369",
+    "180b174a41346a360b5693b88df83f3cb576852449daa1df6a0fda3c346794b5",
+    "d9adafd39bb7aeddb4903c49c4515b2597e6ac773ee66a64231d0882e0595750",
+    "5dfe6442e46d2144631f36cc4f1f0d8a92392a79542b517969aaacda0aac5a76"
   ],
   "replacements": {
     "/assets/products/supplier-20261014/braun_beard_trimmer_bt_5060.jpg": "/assets/products/acorus-2026-10/137-braun-beard-trimmer-bt-5060.jpg",
@@ -215,10 +229,86 @@
     "/assets/products/supplier-20261014/manforce_epic_passion_extra_dotted_fruit_punch_10_condoms.jpg": "/assets/products/acorus-2026-10/195-manforce-epic-passion-extra-dotted-condems-fruit-punch-10-s.jpg",
     "/assets/products/supplier-20261014/manforce_epic_pleasure_long_lasting_raspberry_3_condoms.jpg": "/assets/products/acorus-2026-10/197-manforce-epic-pleasure-long-lasting-condems-raspberry-3-s.jpg",
     "/assets/products/supplier-20261014/cordx_influenza_a_b_plus_covid_19_plus_rsv_combo_ag_self_test.jpg": "/assets/products/clean-20261014/cordx-flu-covid-rsv-self-test.jpg",
-    "/assets/products/acorus-2026-10/267-canesten-1-cream-20gm.jpg": "/assets/products/verified-20261015/ccc228026e4495f2.jpg"
+    "/assets/products/acorus-2026-10/267-canesten-1-cream-20gm.jpg": "/assets/products/verified-20261015/ccc228026e4495f2.jpg",
+    "/assets/products/acorus-2026-10/141-braun-hair-dryer-hd-2-2-2200w-91721.jpg": "/assets/products/verified-20261019/decde9ed95b82543e25a.jpg",
+    "/assets/products/acorus-2026-10/156-dora-5mg-tab-30-s.jpg": "/assets/products/verified-20261019/fee5d6e0b84bea9d7fec.jpg",
+    "/assets/products/acorus-2026-10/167-glotrizine-5mg-5ml-syrup-100ml.jpg": "/assets/products/verified-20261019/5148c61c992d065d5970.jpg",
+    "/assets/products/acorus-2026-10/168-glozal-5mg-tab-20-s.jpg": "/assets/products/verified-20261019/ddda9f392e5677761754.jpg",
+    "/assets/products/acorus-2026-10/176-isomar-baby-no-gas-spray-30ml.jpg": "/assets/products/verified-20261019/29066a8307ad2f8e9a22.jpg",
+    "/assets/products/acorus-2026-10/179-isomar-nose-decongestant-vial-20x5ml.jpg": "/assets/products/verified-20261019/32270a87c58a806a3809.jpg",
+    "/assets/products/acorus-2026-10/192-lozaty-lozenges-orange-24-s.jpg": "/assets/products/verified-20261019/5c7353c69d48d56a5ce2.jpg",
+    "/assets/products/acorus-2026-10/230-unident-kids-childrens-1000-ppm-toothpaste-50ml.jpg": "/assets/products/verified-20261019/24c5ca9a157075068b82.jpg",
+    "/assets/products/acorus-2026-10/231-unident-pharma-ortho-smile-care-toothpaste-75ml.jpg": "/assets/products/verified-20261019/e064238f7fdc1269211b.jpg",
+    "/assets/products/acorus-2026-10/232-unident-pharma-perio-care-toothpaste-75ml.jpg": "/assets/products/verified-20261019/6f1096a54ae65eac782d.webp",
+    "/assets/products/acorus-2026-10/161-ergonomic-toothbrush-black-medium.jpg": "/assets/products/verified-20261019/c634ca60c61d7e6ea48b.jpg",
+    "/assets/products/acorus-2026-10/162-ergonomic-toothbrush-purple-medium.jpg": "/assets/products/verified-20261019/dfd2d78e874fad97f670.jpg",
+    "/assets/products/acorus-2026-10/160-emivanz-500-5mg-tab-30-s.jpg": "/assets/products/verified-20261019/140fa5eebd2d34bac361.jpg"
   },
   "review_rule": "Exact product identity, no supplier branding, clean background and comfortable framing; human visual review required. OCR is supplementary.",
   "replacement_sources": {
-    "/assets/products/clean-20261014/cordx-flu-covid-rsv-self-test.jpg": "https://www.pharm24.gr/cordx-influenza-ab-covid19rsv-combo-ag-self-test-1-temaxio-p-64648.html"
-  }
+    "/assets/products/clean-20261014/cordx-flu-covid-rsv-self-test.jpg": "https://www.pharm24.gr/cordx-influenza-ab-covid19rsv-combo-ag-self-test-1-temaxio-p-64648.html",
+    "/assets/products/verified-20261019/decde9ed95b82543e25a.jpg": "https://www.waitrose.ae/en/products/braun-hair-dryer-hd22-black-2200w_61662/",
+    "/assets/products/verified-20261019/fee5d6e0b84bea9d7fec.jpg": "https://www.myaster.com/ar/online-pharmacy/p/dora-5mg-film-coated-tablets-pack-of-30s/1025093",
+    "/assets/products/verified-20261019/5148c61c992d065d5970.jpg": "https://www.myaster.com/en/online-pharmacy/p/glotrizine-5mg5ml-syrup-100ml/1004831",
+    "/assets/products/verified-20261019/ddda9f392e5677761754.jpg": "https://www.nasserpharmacy.com/index.php?product_id=37206&route=product%2Fproduct",
+    "/assets/products/verified-20261019/29066a8307ad2f8e9a22.jpg": "https://www.myaster.com/en/online-pharmacy/p/isomar-nose-no-gas-baby-spray-30ml/1005345",
+    "/assets/products/verified-20261019/32270a87c58a806a3809.jpg": "https://www.myaster.com/en/online-pharmacy/p/isomar-nose-decongestant-vials-pack-of-5ml-x-20s/1057481?srsltid=AfmBOorMp7E43CxvBp7TQNZEP8us6mObyDHfWHr-kDVArbQrsXuJ4tzs",
+    "/assets/products/verified-20261019/5c7353c69d48d56a5ce2.jpg": "https://www.alosraonline.com/lozaty-throat-lozenges-orange-flavor-24-s.html",
+    "/assets/products/verified-20261019/24c5ca9a157075068b82.jpg": "https://alainpharmacy.ae/intermed-unident-kids-tooth-paste-1000-ppm-50-ml.html?srsltid=AfmBOoqXi2kqOk-irFM5QRHlp-X0_NkcqLqSOcPE4OvE45UhSrXjlj0u",
+    "/assets/products/verified-20261019/e064238f7fdc1269211b.jpg": "https://www.noon.com/qatar-en/intermed-unident-ortho-smile-care-t-p-75ml/ZA1573C0B77B2E8CC63BEZ/p/",
+    "/assets/products/verified-20261019/6f1096a54ae65eac782d.webp": "https://epharmadora.com/vendors/intermed/intermed-unident-pharma-perio-care-toothpaste-75ml.htm",
+    "/assets/products/verified-20261019/c634ca60c61d7e6ea48b.jpg": "https://www.pharmacy295.gr/catalog/stomatiki-ygieini/odontovoyrtses/product/intermed-professional-ergonomic-odontovoyrtsa-medium-mayro-1tem--5205152011477",
+    "/assets/products/verified-20261019/dfd2d78e874fad97f670.jpg": "https://avismed.az/intermed-professional-ergonomic-medium-3270-dis-fircasi-b%C9%99novs%C9%99yi",
+    "/assets/products/verified-20261019/140fa5eebd2d34bac361.jpg": "https://www.myaster.com/en/online-pharmacy/p/emivanz-500mg5mg-tablets-pack-of-30s/1003851"
+  },
+  "additional_rejections_20261019": [
+    {
+      "sku": "PS-AC-A1C278062616",
+      "path": "/assets/products/supplier-20261014/creon_10000_pancreatin_150_mg_20_capsules.jpg",
+      "sha256": "273d31807cd9508396ad5404c9aa0fbb357a23b39bfb9239952160fd35f8b0ea",
+      "reason": "Pictured pack100 capsules; controlled listing20 capsules",
+      "review_date": "2026-10-19",
+      "action": "Withhold photograph only; preserve listing and exact controlled identity."
+    }
+  ],
+  "mixed_category_rejections_20261019": [
+    {
+      "sku": "PSC-PPE-002",
+      "path": "/assets/products/acorus-2026-10/retained-psc-ppe-002.jpg",
+      "sha256": "8c2fd356da0453a32eb28a4980123111782251294d5d5ffac49149e39f0e2013",
+      "reason": "Mixed category collage cannot identify an individual listing. Exact replacement where reviewed; otherwise photograph withheld without changing identity."
+    },
+    {
+      "sku": "PSC-RES-005",
+      "path": "/assets/products/acorus-2026-10/retained-psc-res-005.jpg",
+      "sha256": "0bd9c3f37e1fa51a5c00e9ca785a28f91c17fd20618bb8831e80082b62a14d9e",
+      "reason": "Mixed category collage cannot identify an individual listing. Exact replacement where reviewed; otherwise photograph withheld without changing identity."
+    },
+    {
+      "sku": "PSC-WND-014",
+      "path": "/assets/products/acorus-2026-10/retained-psc-wnd-014.jpg",
+      "sha256": "54da18d71c97f32acff3652790efc47e02c7308fc2b42cfaa19d1e326817d369",
+      "reason": "Mixed category collage cannot identify an individual listing. Exact replacement where reviewed; otherwise photograph withheld without changing identity."
+    },
+    {
+      "sku": "PSC-WST-001",
+      "path": "/assets/products/acorus-2026-10/retained-psc-wst-001.jpg",
+      "sha256": "180b174a41346a360b5693b88df83f3cb576852449daa1df6a0fda3c346794b5",
+      "reason": "Mixed category collage cannot identify an individual listing. Exact replacement where reviewed; otherwise photograph withheld without changing identity."
+    },
+    {
+      "sku": "PSC-DSP-009",
+      "path": "/assets/products/acorus-2026-10/retained-psc-dsp-009.jpg",
+      "sha256": "d9adafd39bb7aeddb4903c49c4515b2597e6ac773ee66a64231d0882e0595750",
+      "reason": "Mixed category collage cannot identify an individual listing. Exact replacement where reviewed; otherwise photograph withheld without changing identity."
+    }
+  ],
+  "supplier_label_rejections_20261019": [
+    {
+      "sku": "PS-AC-64F829D7DBF1",
+      "path": "/assets/products/acorus-2026-10/051-glencet-5mg-tab-10-s.jpg",
+      "sha256": "5dfe6442e46d2144631f36cc4f1f0d8a92392a79542b517969aaacda0aac5a76",
+      "reason": "Visible Gulf Drug distributor logo/price sticker on the photographed pack. Identity/count matches; clean exact10-tablet photo is still required. Do not fabricate or relabel the occluded pack area."
+    }
+  ]
 }

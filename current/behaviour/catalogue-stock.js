@@ -17,7 +17,7 @@
   return matches.length===1?matches[0]:null;
  }
  const hasFamily=family=>control.products.some(r=>r.family_id===family&&r.acorus_managed);
- const realPhoto=p=>!window.PSC_DHA_FAMILY_PHOTOS?.isMixedPhoto(p)&&!!(window.PSC_IMAGE_POLICY?.resolve(p?.currentImageUrl)??p?.currentImageUrl)&&(p.imageIdentityReviewed===true||/VERIFIED EXACT|SOURCE IMAGE AVAILABLE|EXISTING PRODUCT PHOTOGRAPH/.test(p.imageStatus||''))&&!/reference|clinical-icons|clinic-basics|inst-\d+|pill/i.test(p.currentImageUrl);
+ const realPhoto=p=>!window.PSC_DHA_FAMILY_PHOTOS?.isMixedPhoto(p)&&!!(window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(p?.currentImageUrl):p?.currentImageUrl)&&(p.imageIdentityReviewed===true||/VERIFIED EXACT|SOURCE IMAGE AVAILABLE|EXISTING PRODUCT PHOTOGRAPH/.test(p.imageStatus||''))&&!/reference|clinical-icons|clinic-basics|inst-\d+|pill/i.test(p.currentImageUrl);
  const rank=p=>Number(/VERIFIED EXACT/.test(p.imageStatus||''))*100+Number(realPhoto(p))*20+Number(current(forProduct(p)))*10;
  function representative(rows){return [...rows].sort((a,b)=>rank(b)-rank(a)||String(a.pscSku).localeCompare(String(b.pscSku)))[0]||null;}
  function groups(rows){
