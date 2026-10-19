@@ -7,40 +7,62 @@ window.PS_SCHOOL_BASKETS = {
   "historicalScope": "First school 17-line quotation is a partial equipment scope only; delivery and payment must not be assumed",
   "opening": [
     {
+      "id": "premises",
+      "title": "Rooms, isolation & site readiness",
+      "description": "Facilities and layout checks based on DHA sections 5–7; specialist service scope, not default cart products. Authority and site design must be confirmed.",
+      "transactions": [],
+      "scopeChecklist": [
+        "Clinic, waiting, consultation and treatment areas sized for the school population",
+        "Access, circulation and suitable patient accommodation",
+        "Isolation room and safely located isolation patient area, where required by applicable standard",
+        "Hand-wash basin, soap and towel facilities",
+        "Appropriate separate storage, medical waste and sharps arrangements",
+        "Emergency exit signage, evacuation information and emergency communication",
+        "Ventilation, electrical supply and emergency-readiness provisions",
+        "Appropriately licensed clinical staffing and facility authorization"
+      ]
+    },
+    {
       "id": "furniture",
-      "title": "Clinic rooms & furniture",
-      "description": "Examination and observation spaces, safe storage, privacy, hygiene and accessibility.",
+      "title": "Furniture & clinical fixtures",
+      "description": "Full Appendix 3(A) planning schedule: examination and observation beds, privacy, storage, hygiene and mobility; preserve alternatives and conditional items.",
       "transactions": [
         "INST-0001",
         "INST-0002",
         "INST-0003",
         "INST-0004",
         "INST-0005",
+        "INST-0006",
         "INST-0007",
         "INST-0008",
         "INST-0009",
         "INST-0010",
         "INST-0011",
         "INST-0012",
+        "INST-0013",
         "INST-0014",
         "INST-0015",
         "INST-0016",
         "INST-0017",
         "INST-0018",
+        "INST-0019",
         "INST-0020",
         "INST-0021",
         "INST-0022",
+        "INST-0023",
         "INST-0024"
       ]
     },
     {
       "id": "diagnostics",
-      "title": "Diagnostics & clinical assessment",
-      "description": "Vitals, assessments and core small equipment; exact device model and compatible accessories are checked at quotation.",
+      "title": "Diagnostics & assessment equipment",
+      "description": "Full Appendix 3(B) clinical equipment excluding the separately grouped emergency equipment. Autoclave remains 'if required'.",
       "transactions": [
         "INST-0025",
+        "INST-0026",
         "INST-0028",
         "INST-0029",
+        "INST-0030",
         "INST-0031",
         "INST-0032",
         "INST-0033",
@@ -60,10 +82,9 @@ window.PS_SCHOOL_BASKETS = {
     },
     {
       "id": "emergency",
-      "title": "Emergency equipment & first response",
-      "description": "AED, oxygen support, stretcher, first aid, nebuliser and sharps safety, subject to competent installation and clinical approval.",
+      "title": "Emergency & response equipment",
+      "description": "AED, nebuliser, oxygen set including regulator and flowmeter, clinic first aid kit and sharps disposal. Qualified support where required.",
       "transactions": [
-        "INST-0008",
         "INST-0027",
         "INST-0034",
         "INST-0039",
@@ -72,13 +93,23 @@ window.PS_SCHOOL_BASKETS = {
       ]
     },
     {
-      "id": "opening-stock",
-      "title": "First clinical stock",
-      "description": "Gloves, plasters, dressings, PPE, syringes, respiratory accessories and disposables; practical packs chosen with the school nurse.",
+      "id": "dressings",
+      "title": "Opening stock · wound care & hygiene",
+      "description": "Appendix 3(C) items 1–12: wound dressings, PPE, hygiene, nebuliser/oxygen masks and compatible disposables.",
       "transactions": [
         "INST-0050",
+        "INST-0051",
+        "INST-0052",
+        "INST-0053",
         "INST-0054",
+        "INST-0055",
+        "INST-0056",
         "INST-0057",
+        "INST-0058",
+        "INST-0059",
+        "INST-0060",
+        "INST-0061",
+        "INST-0062",
         "INST-0063",
         "INST-0064",
         "INST-0065",
@@ -86,25 +117,55 @@ window.PS_SCHOOL_BASKETS = {
         "INST-0067",
         "INST-0068",
         "INST-0069",
+        "INST-0070",
+        "INST-0071",
+        "INST-0072",
         "INST-0073",
-        "INST-0074",
+        "INST-0074"
+      ]
+    },
+    {
+      "id": "disposables",
+      "title": "Opening stock · clinical procedures",
+      "description": "Appendix 3(C) items 13–24: consumables and multiple gauges/sizes; pack size and clinical scope must be verified.",
+      "transactions": [
         "INST-0075",
         "INST-0076",
+        "INST-0077",
+        "INST-0078",
         "INST-0079",
+        "INST-0080",
+        "INST-0081",
         "INST-0082",
+        "INST-0083",
+        "INST-0084",
+        "INST-0085",
         "INST-0086",
+        "INST-0087",
+        "INST-0088",
+        "INST-0089",
         "INST-0090",
+        "INST-0091",
+        "INST-0092",
+        "INST-0093",
+        "INST-0094",
+        "INST-0095",
         "INST-0096",
-        "INST-0098"
+        "INST-0097",
+        "INST-0098",
+        "INST-0099",
+        "INST-0100",
+        "INST-0101"
       ]
     },
     {
       "id": "medicines",
-      "title": "Medicines & clinical solutions — licensed route",
-      "description": "DHA Appendix 3 medicines and solutions are a separate professional approval and licensed procurement schedule, never auto-added to a school supply request.",
+      "title": "Medicines & solutions · licensed route",
+      "description": "Appendix 3(D) medication and solution records; clinician-selected and authorized separately, no unattended general-access kit stock.",
       "transactions": [
         "INST-0102",
         "INST-0103",
+        "INST-0104",
         "INST-0105",
         "INST-0106",
         "INST-0107",
@@ -501,5 +562,14 @@ window.PS_SCHOOL_BASKETS = {
         ]
       ]
     }
-  ]
+  ],
+  "sourceCoverage": {
+    "authorityLinkedVariantRecords": 113,
+    "uniqueAppendix3Subsections": 79,
+    "appendixA": 24,
+    "appendixB": 25,
+    "appendixC": 52,
+    "appendixD": 12,
+    "note": "Multiple commercial variant records can map to one regulatory requirement or an alternative; do not treat line count as number of mandatory purchases."
+  }
 };
