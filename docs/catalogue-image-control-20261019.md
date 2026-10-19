@@ -13,3 +13,11 @@ The canonical variant-photo register retains all 194 identity records. One deodo
 The final runtime photo authority, decoded files, exact card-to-Details continuity, reference labels, uncovered photo panels, request preservation and absence of writes are checked at mobile and desktop sizes. The legacy product overlay is raised above the sidebar so the full photograph and Back control remain visible. CI includes the image release browser checks and policy-rejection regression. Deployment and final QA receipts are tracked separately from this source review.
 
 Earlier thumbnail suspicions concerning Finallerg 10 tablets and Gevhart 20 mg/30 tablets were cleared by enlarged original-label inspection. Their correct photographs are retained. Image work does not close the separately assigned manual catalogue/DHA mapping decisions.
+
+## Oxygen photograph correction — 19 October 2026
+
+Customer visual review found unrelated red-bag and yellow-bin fragments beneath the oxygen cylinder in the retained historical montage. Earlier decoding/bounds checks missed this composition defect. The montage is now replaced by a clean 1200×1200 original showing a complete cylinder, trolley and regulator/gauge configuration. Both old source paths and hashes are excluded from the public build and redirected to the clean image. Historical originals remain in source control. A diagnostic crop of the old source was inspected privately and superseded before release.
+
+This additional binding makes 227 documented image bindings (129 illustrative references). The new image is an illustrative configuration, with exact equipment, connections, flow range, fill status and supplied accessories determined in quotation. It establishes no selected brand/model or UAE approval. The existing Specialist route record is eligible only for the explicitly reference-labelled overlay; brand, pack and all other controlled fields stay unchanged.
+
+Mobile and desktop checks cover the actual card and Details rendering, matching photo identity, reference wording, complete unit framing and exact request identity. No source-master, SKU, pack, price, stock, DHA wording or database edits accompany this correction.

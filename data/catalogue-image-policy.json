@@ -108,7 +108,9 @@
     "/assets/products/acorus-2026-10/retained-psc-wnd-014.jpg",
     "/assets/products/acorus-2026-10/retained-psc-wst-001.jpg",
     "/assets/products/acorus-2026-10/retained-psc-dsp-009.jpg",
-    "/assets/products/acorus-2026-10/051-glencet-5mg-tab-10-s.jpg"
+    "/assets/products/acorus-2026-10/051-glencet-5mg-tab-10-s.jpg",
+    "/assets/products/acorus-2026-10/retained-psc-oxy-001.jpg",
+    "/assets/products/oxygen-cylinder.jpg"
   ],
   "blocked_sha256": [
     "019da16521c9aaaf0ed5c3192e8c8052f58dcd760c96ee6082014e63f1e2bf2f",
@@ -218,7 +220,9 @@
     "54da18d71c97f32acff3652790efc47e02c7308fc2b42cfaa19d1e326817d369",
     "180b174a41346a360b5693b88df83f3cb576852449daa1df6a0fda3c346794b5",
     "d9adafd39bb7aeddb4903c49c4515b2597e6ac773ee66a64231d0882e0595750",
-    "5dfe6442e46d2144631f36cc4f1f0d8a92392a79542b517969aaacda0aac5a76"
+    "5dfe6442e46d2144631f36cc4f1f0d8a92392a79542b517969aaacda0aac5a76",
+    "bdf73c2c184af081376a228a77bbd91bdeca680496b4d0595da7b895f90e4a56",
+    "ba147d33b6831c766755497a1fe1542298c0464d24ad21adce53716a78e6fd27"
   ],
   "replacements": {
     "/assets/products/supplier-20261014/braun_beard_trimmer_bt_5060.jpg": "/assets/products/acorus-2026-10/137-braun-beard-trimmer-bt-5060.jpg",
@@ -242,7 +246,9 @@
     "/assets/products/acorus-2026-10/232-unident-pharma-perio-care-toothpaste-75ml.jpg": "/assets/products/verified-20261019/6f1096a54ae65eac782d.webp",
     "/assets/products/acorus-2026-10/161-ergonomic-toothbrush-black-medium.jpg": "/assets/products/verified-20261019/c634ca60c61d7e6ea48b.jpg",
     "/assets/products/acorus-2026-10/162-ergonomic-toothbrush-purple-medium.jpg": "/assets/products/verified-20261019/dfd2d78e874fad97f670.jpg",
-    "/assets/products/acorus-2026-10/160-emivanz-500-5mg-tab-30-s.jpg": "/assets/products/verified-20261019/140fa5eebd2d34bac361.jpg"
+    "/assets/products/acorus-2026-10/160-emivanz-500-5mg-tab-30-s.jpg": "/assets/products/verified-20261019/140fa5eebd2d34bac361.jpg",
+    "/assets/products/acorus-2026-10/retained-psc-oxy-001.jpg": "/assets/products/verified-20261019/40d14a423e3342754e3b.jpg",
+    "/assets/products/oxygen-cylinder.jpg": "/assets/products/verified-20261019/40d14a423e3342754e3b.jpg"
   },
   "review_rule": "Exact product identity, no supplier branding, clean background and comfortable framing; human visual review required. OCR is supplementary.",
   "replacement_sources": {
@@ -259,7 +265,8 @@
     "/assets/products/verified-20261019/6f1096a54ae65eac782d.webp": "https://epharmadora.com/vendors/intermed/intermed-unident-pharma-perio-care-toothpaste-75ml.htm",
     "/assets/products/verified-20261019/c634ca60c61d7e6ea48b.jpg": "https://www.pharmacy295.gr/catalog/stomatiki-ygieini/odontovoyrtses/product/intermed-professional-ergonomic-odontovoyrtsa-medium-mayro-1tem--5205152011477",
     "/assets/products/verified-20261019/dfd2d78e874fad97f670.jpg": "https://avismed.az/intermed-professional-ergonomic-medium-3270-dis-fircasi-b%C9%99novs%C9%99yi",
-    "/assets/products/verified-20261019/140fa5eebd2d34bac361.jpg": "https://www.myaster.com/en/online-pharmacy/p/emivanz-500mg5mg-tablets-pack-of-30s/1003851"
+    "/assets/products/verified-20261019/140fa5eebd2d34bac361.jpg": "https://www.myaster.com/en/online-pharmacy/p/emivanz-500mg5mg-tablets-pack-of-30s/1003851",
+    "/assets/products/verified-20261019/40d14a423e3342754e3b.jpg": "https://tecnomedica.com.co/cilindros-reguladores/"
   },
   "additional_rejections_20261019": [
     {
@@ -309,6 +316,20 @@
       "path": "/assets/products/acorus-2026-10/051-glencet-5mg-tab-10-s.jpg",
       "sha256": "5dfe6442e46d2144631f36cc4f1f0d8a92392a79542b517969aaacda0aac5a76",
       "reason": "Visible Gulf Drug distributor logo/price sticker on the photographed pack. Identity/count matches; clean exact10-tablet photo is still required. Do not fabricate or relabel the occluded pack area."
+    }
+  ],
+  "composition_rejections_20261019": [
+    {
+      "sku": "PSC-OXY-001",
+      "path": "/assets/products/acorus-2026-10/retained-psc-oxy-001.jpg",
+      "sha256": "bdf73c2c184af081376a228a77bbd91bdeca680496b4d0595da7b895f90e4a56",
+      "reason": "Historical montage contains clipped unrelated red-bag and yellow-bin fragments; clean full product configuration replaces it."
+    },
+    {
+      "sku": "PSC-OXY-001",
+      "path": "/assets/products/oxygen-cylinder.jpg",
+      "sha256": "ba147d33b6831c766755497a1fe1542298c0464d24ad21adce53716a78e6fd27",
+      "reason": "Historical montage contains clipped unrelated red-bag and yellow-bin fragments; clean full product configuration replaces it."
     }
   ]
 }

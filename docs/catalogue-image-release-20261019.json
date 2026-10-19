@@ -5264,6 +5264,28 @@
       "previous_image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "previous_rendered_image": "/assets/products/supplier-20261014/calvit_d3_calcium_plus_magnesium_plus_vitamins_30_tablets.jpg",
       "release_scope": "Image-only; protected catalogue identities and all commercial authority unchanged."
+    },
+    {
+      "sku": "PSC-OXY-001",
+      "name": "Oxygen Support Set",
+      "family_id": "PSC-SC-B16",
+      "image_url": "/assets/products/verified-20261019/40d14a423e3342754e3b.jpg",
+      "source": "https://tecnomedica.com.co/cilindros-reguladores/",
+      "role": "SPECIFICATION_REFERENCE_ONLY",
+      "label": "Oxygen cylinder, trolley and regulator configuration",
+      "review": "Codex full-size visual review 2026-10-19: complete oxygen cylinder, wheeled trolley and regulator/gauge configuration on clean white background, no supplier logo, backdrop, watermark or unrelated montage fragments. Illustrative product type only; exact brand/model, connection, flow range, fill status and accessories remain quotation-controlled. Original source pixels unchanged. No UAE compatibility, registration, stock or suitability approval.",
+      "sha256": "40d14a423e3342754e3b1a0dfb3099ea00c22c4ed8347948accf274c9c1d458e",
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "source_image": "https://admin.tecnomedica.com.co/backend/admin/backend/web/archivosDelCliente/categorias/images/20241219151905-OXIGENOTERAPIA-CILINDROS-REGULADORES17346395452820.jpg",
+      "review_status": "VISUALLY_REVIEWED_SPECIFICATION_REFERENCE",
+      "identity_scope": "Illustrative configuration only; no selected equipment/model implied.",
+      "market_limit": "Foreign reference photo; no UAE compatibility, stock or registration assertion.",
+      "previous_image": "/assets/products/acorus-2026-10/retained-psc-oxy-001.jpg",
+      "previous_image_status": "EXISTING PRODUCT PHOTOGRAPH",
+      "release_scope": "Image-only replacement; identities/packs/prices/stock/DHA unchanged."
     }
   ]
 }

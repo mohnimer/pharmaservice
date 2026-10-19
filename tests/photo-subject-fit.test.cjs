@@ -14,3 +14,15 @@ test('reviewed photo viewports account for object-fit letterboxing without modif
  assert.equal(fit.calculate(m).clip,'polygon(37.50000% 25.00000%, 62.50000% 25.00000%, 62.50000% 75.00000%, 37.50000% 75.00000%)');
  assert.equal(fit.calculate({...m,displayCrop:false}).clip,null);
 });
+
+test('oxygen montage paths and renamed bytes stay blocked behind the clean reference',()=>{
+ const policy=JSON.parse(fs.readFileSync('data/catalogue-image-policy.json','utf8'));
+ const rows=JSON.parse(fs.readFileSync('docs/catalogue-image-release-20261019.json','utf8')).records;
+ const r=rows.find(r=>r.sku==='PSC-OXY-001');assert(r);assert.equal(r.role,'SPECIFICATION_REFERENCE_ONLY');
+ for(const src of ['/assets/products/acorus-2026-10/retained-psc-oxy-001.jpg','/assets/products/oxygen-cylinder.jpg']){
+  assert(policy.blocked_paths.includes(src));assert.equal(policy.replacements[src],r.image_url);
+  assert(policy.blocked_sha256.includes(require('node:crypto').createHash('sha256').update(fs.readFileSync('.'+src)).digest('hex')));
+ }
+ assert.equal(require('node:crypto').createHash('sha256').update(fs.readFileSync('.'+r.image_url)).digest('hex'),r.sha256);
+ assert.deepEqual(Array.from(context.window.PSC_PHOTO_SUBJECTS[r.image_url].bounds),[490,12,791,1192]);
+});
