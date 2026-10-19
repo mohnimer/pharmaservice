@@ -3503,6 +3503,54 @@
   "role": "SPECIFICATION_REFERENCE_ONLY",
   "label": "Oxygen cylinder, trolley and regulator configuration",
   "review": "Codex full-size visual review 2026-10-19: complete oxygen cylinder, wheeled trolley and regulator/gauge configuration on clean white background, no supplier logo, backdrop, watermark or unrelated montage fragments. Illustrative product type only; exact brand/model, connection, flow range, fill status and accessories remain quotation-controlled. Original source pixels unchanged. No UAE compatibility, registration, stock or suitability approval."
+},
+{
+  "sku": "PS-AC-64F829D7DBF1",
+  "name": "GLENCET 5MG TAB 10'S",
+  "family_id": "",
+  "image_url": "/assets/products/verified-20261019/663ab871a09fe316ecda.jpg",
+  "source": "https://www.myaster.com/en/online-pharmacy/p/glencet-5mg-tablets-pack-of-10-s/1026409",
+  "review": "Codex full-size visual review 2026-10-19: Clean Glenmark GLENCET5mg 1x10 front; exact pack label visible, no Gulf Drug sticker. No supplier backdrop/logo/watermark. Original complete source pixels retained. Image-only identity check; no product facts, UAE registration, price, stock or source-master approval."
+},
+{
+  "sku": "PSC-WND-006",
+  "name": "Long Plastic Bandage 19.75 mm",
+  "family_id": "PSC-SC-C01",
+  "image_url": "/assets/products/verified-20261019/344e4ee7f8e76c065ca0.jpg",
+  "source": "https://www.binsina.ae/ar/buy-wolaid-sterilized-adhesive-plastic-bandages-strips-100s.html",
+  "review": "Codex full-size visual review 2026-10-19: WOLAID long plastic strips100. Preserve raw19.75mm wording; Aster describes19x75mm, no dimension correction authorized. No supplier backdrop/logo/watermark. Original complete source pixels retained. Image-only identity check; no product facts, UAE registration, price, stock or source-master approval."
+},
+{
+  "sku": "PS-AC-3F16D478897A",
+  "name": "Clozac Acne Face Wash — 60 ml",
+  "family_id": "PSC-IS-152",
+  "image_url": "/assets/products/verified-20261019/2244f012fd4825e31efc.png",
+  "source": "https://aloevera.com.ua/zasib-dlia-vmyvannia-z-salitsylovoiu-kyslotoiu-elegant-clozac-anti-acne-face-wash-60-ml/",
+  "review": "Codex full-size visual review 2026-10-19: Clean Elegant Clozac Face Wash box+tube; primary Elegant page independently identifies60ml. Primary2000px asset has a stray graphic fragment, so retain the clean retailer original instead. No supplier backdrop/logo/watermark. Original complete source pixels retained. Image-only identity check; no product facts, UAE registration, price, stock or source-master approval."
+},
+{
+  "sku": "PS-AC-FF88CB6488F5",
+  "name": "Livatrum — 30 Tablets",
+  "family_id": "PSC-IS-188",
+  "image_url": "/assets/products/verified-20261019/3eb8668f6487baf0cf7e.jpg",
+  "source": "https://www.noon.com/uae-en/livatrum-tablet-30-s/Z1965B2E14E52E79578B7Z/p/",
+  "review": "Codex full-size visual review 2026-10-19: Complete clean Livatrum front/side photograph,30TABLETS label visible. Pack marketing text is not independently approved product facts. No supplier backdrop/logo/watermark. Original complete source pixels retained. Image-only identity check; no product facts, UAE registration, price, stock or source-master approval."
+},
+{
+  "sku": "PS-AC-1F1A9E6B4FC8",
+  "name": "Apex 400 mg — 6 Capsules",
+  "family_id": "PSC-IS-143",
+  "image_url": "/assets/products/verified-20261019/4415d8affab53e2c3394.png",
+  "source": "https://retajpharma.com/",
+  "review": "Codex full-size visual review 2026-10-19: Retaj manufacturer gallery explicitly separates Apex400/5 from6 capsules and Iconir125/40/60/80ml. This source shows the exact Apex400/6-capsule pack. Only the decorative shadow outside the complete carton is excluded by the reviewed display viewport. Original manufacturer pixels unchanged.2021 upload path is historical packaging evidence, not current UAE registration, supply or approved product facts."
+},
+{
+  "sku": "PS-AC-6504A9E9D933",
+  "name": "ICONIR 125MG SUSPENSION 80ML",
+  "family_id": "",
+  "image_url": "/assets/products/verified-20261019/55bc2cf1b977a29c39da.png",
+  "source": "https://retajpharma.com/",
+  "review": "Codex full-size visual review 2026-10-19: Retaj manufacturer gallery explicitly separates Apex400/5 from6 capsules and Iconir125/40/60/80ml. This source shows the exact Iconir125/80ml carton; full pack retained. Original manufacturer pixels unchanged.2021 upload path is historical packaging evidence, not current UAE registration, supply or approved product facts."
 }
 ];
  const refresh=window.PS_CATALOGUE_REFRESH;
