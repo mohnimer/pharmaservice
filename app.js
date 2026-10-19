@@ -2660,7 +2660,7 @@
     }
     return l?.sku||'';
   }
-  function lineDisplayName(l,p=null){ if(l?.kind==='unlisted')return l.description;return isFamilyLine(l)?(l.productOptionSnapshot?.exact_product_name||l.requirementSnapshot?.name||l.familyName||l.familyId||'Catalogue family'):(p?.name||p?.catalogueDisplayName||l?.sku||'Order item'); }
+  function lineDisplayName(l,p=null){ if(l?.kind==='unlisted')return l.description;return isFamilyLine(l)?(l.productOptionSnapshot?.exact_product_name||l.requirementSnapshot?.name||l.familyName||l.familyId||'Catalogue family'):(p?.catalogueDisplayName||p?.name||l?.sku||'Order item'); }
   function lineReference(l){ if(l?.kind==='unlisted')return 'Unlisted item — requires PS review';return isFamilyLine(l)?l.requirementSnapshot?.sku||l.familyId:(l?.sku||''); }
   function linePackLabel(l,p=null){
     if(l?.kind==='unlisted')return l.requestUnit||'Unit to confirm';

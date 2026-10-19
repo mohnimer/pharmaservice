@@ -14,9 +14,9 @@ try{for(const width of [1440,768,390]){
  await context.route('**/*',r=>{const host=new URL(r.request().url()).hostname;if(host==='127.0.0.1')return r.continue();return r.fulfill({contentType:host==='cdn.jsdelivr.net'?'text/javascript':'text/plain',body:host==='cdn.jsdelivr.net'?readFileSync('tests/mock-supabase.js','utf8'):''});});
  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  const base=`http://127.0.0.1:${server.address().port}`;
- await page.goto(base);await page.locator('.home47').waitFor();
- assert.equal(await page.locator('.h47Hero h1').innerText(),'Healthcare procurement for institutions.');
- assert.equal(await page.locator('.home47 > section').count(),4);assert.equal(await page.locator('.h47Category').count(),6);
+ await page.goto(base);await page.locator('.psHome').waitFor();
+ assert.equal(await page.locator('.psHeroCopy h1').innerText(),'From requirement\nto replenishment.');
+ assert.equal(await page.locator('.psHome > section').count(),5);assert.equal(await page.locator('.psClinicalTile').count(),6);
  await page.goto(base+'/#portal/catalogue/sports');await page.locator('.productCard').first().waitFor();
  const columns=await page.locator('.v25ProductGrid').first().evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length);
  assert.equal(columns,width===1440?3:width===768?2:1);
