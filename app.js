@@ -1280,6 +1280,7 @@
     return map[name]||'';
   }
 
+  window.PSC_UI_ICON=icon;
   function portalSidebarIcon(href, fallbackIcon){
     const map={
       'portal/dashboard':'my-account',
@@ -1314,7 +1315,7 @@
     ['portal/stock','Stock & expiry','stock'],
     ['portal/assets','Clinic assets','assets']
   ];
-  const adminNav=[['admin/dashboard','Today','home'],['admin/sales','Sales','repeat'],['admin/mail','Inbox','mail'],['admin/requests','Orders & quotations','checklist'],['admin/customers','Accounts','users'],['admin/tasks','Tasks','calendar'],['admin/resources','Products & suppliers','boxes'],['admin/settings','Settings','settings'],['admin/onboarding','Account setup','users']];
+  const adminNav=[['admin/dashboard','Today','home'],['admin/sales','Sales','reports'],['admin/mail','Inbox','mail'],['admin/requests','Orders & quotations','checklist'],['admin/customers','Accounts','users'],['admin/tasks','Tasks','calendar'],['admin/resources','Products & suppliers','boxes'],['admin/settings','Settings','settings'],['admin/onboarding','Account setup','users']];
 
   function shell(content, admin=false){
     const route=currentRoute();
@@ -1327,7 +1328,7 @@
     return `<div class="appShell v4Shell v7Shell v7bShell v26Shell v37Shell v38Shell v381Shell pscOperatingShell ${admin?'adminShell':'customerShell'} ${!admin&&route==='portal/dashboard'?'psPortalHomeShell':''}">
       <div class="mobileOverlay ${ui.mobile?'show':''}" data-mobile-close></div>
       <aside class="sidebar ${ui.mobile?'sidebarOpen':''}">
-        <div class="sidebarTop">${brand()}<span class="psWorkspaceCaption">${admin?'SUPPLY WORKSPACE':'CLINIC ACCOUNT'}</span><button class="iconBtn mobileClose" data-mobile-close aria-label="Close menu">${icon('close')}</button></div>
+        <div class="sidebarTop">${admin?`<button class="adminBrand" data-go="admin/dashboard" aria-label="Pharma Service workspace"><img src="${PSC_LOGO}" alt="Pharma Service"></button>`:brand()}<span class="psWorkspaceCaption">${admin?'SUPPLY WORKSPACE':'CLINIC ACCOUNT'}</span><button class="iconBtn mobileClose" data-mobile-close aria-label="Close menu">${icon('close')}</button></div>
         <nav class="iconNav">${links.map(([href,label,ico])=>`<button class="navLink iconOnly ${(route===href || (href==='portal/catalogue' && route.startsWith('portal/catalogue/')))?'active':''}" data-go="${href}" aria-label="${label}"><span class="navIcon">${admin?icon(ico):portalSidebarIcon(href,ico)}</span><span class="navLabel">${label}</span></button>`).join('')}</nav>
         <div class="sidebarFooter compactFooter">
           ${admin?`<button class="navLink" data-go="admin/resources"><span class="navIcon">${icon('boxes')}</span><span class="navLabel">Products & suppliers</span></button><button class="navLink" data-go="admin/settings"><span class="navIcon">${icon('settings')}</span><span class="navLabel">Settings</span></button>`:''}
@@ -2104,7 +2105,7 @@
         <div class="psPortalAccountLinks"><button data-go="portal/replenish"><span aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/orders.webp" alt=""></span><span><h3>Order again</h3><p>${deliveredSkus.size?`${deliveredSkus.size} previously supplied product${deliveredSkus.size===1?'':'s'}. Choose your next quantities.`:'Return to previously supplied items after your first completed order.'}</p></span></button><button data-go="portal/documents"><span aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/downloads.webp" alt=""></span><span><h3>Your documents</h3><p>${documentCount?`${documentCount} account document${documentCount===1?'':'s'} in one place.`:'Quotations, approvals and delivery records, when available.'}</p></span></button></div>
       </div>
       <section class="psPortalBaskets" aria-labelledby="psPortalBasketsTitle"><div class="psPortalSectionHead"><div><h2 id="psPortalBasketsTitle">Start with the whole task.</h2><p>Opening, restocking or refilling? Review a basket preview.</p></div><button class="psTextLink" data-go="portal/baskets">All ready baskets</button></div><div class="psPortalBasketGrid">${window.PSC_READY_BASKETS?.compactCards()||'<button class="button outline" data-go="portal/baskets">Explore basket previews</button>'}</div></section>
-      <section class="pscHomeBrowse" aria-labelledby="psc-browse-title"><div class="psPortalSectionHead"><h2 id="psc-browse-title">Find your clinical area.</h2><button class="psTextLink" data-go="portal/catalogue">All categories</button></div><div class="pscHomeCategoryColumns"><section><h3>By clinical need</h3><div class="pscHomeCategoryGrid" role="group" aria-label="By clinical need">${clinicalStarts.map(args=>homeCategory(...args)).join('')}</div>${guide(clinicalStarts)}</section><section><h3>Clinic requirement mapping</h3><div class="pscHomeCategoryGrid" role="group" aria-label="Clinic essentials">${essentialStarts.map(args=>homeCategory(...args)).join('')}</div>${guide(essentialStarts)}<small class="pscHomeScopeNote">DHA educational clinic mapping. Required alternatives and conditional items retain their original conditions; suitability is checked before quotation.</small></section></div></section>
+      <div class="pscHomeBrowse pscHomeBrowseSeparated"><div class="pscHomeCategoryColumns"><section class="pscClinicalBrowse" aria-labelledby="psc-browse-title"><div class="psPortalSectionHead"><div><h2 id="psc-browse-title">Browse by clinical need</h2><p>Find products for the task in front of you.</p></div><button class="psTextLink" data-go="portal/catalogue">All categories</button></div><div class="pscHomeCategoryGrid" role="group" aria-label="By clinical need">${clinicalStarts.map(args=>homeCategory(...args)).join('')}</div>${guide(clinicalStarts)}</section><section class="pscRequirementBrowse" aria-labelledby="psc-requirement-title"><div class="psPortalSectionHead"><div><h2 id="psc-requirement-title">Clinic requirement mapping</h2><p>Explore the mapped medicines, equipment and consumables.</p></div></div><div class="pscHomeCategoryGrid" role="group" aria-label="Clinic essentials">${essentialStarts.map(args=>homeCategory(...args)).join('')}</div>${guide(essentialStarts)}<small class="pscHomeScopeNote">DHA educational clinic mapping. Required alternatives and conditional items retain their original conditions; suitability is checked before quotation.</small></section></div></div>
       <section class="psPortalHelp" aria-label="Product and purchasing guidance"><div><h2>A little clarity before you order.</h2><p>Practical product and specification guidance from The Workshop.</p></div><div><button class="psTextLink" data-go="workshop/product-basics">Product basics</button><button class="psTextLink" data-go="workshop/ordering-specifications">Preparing a specification</button><button class="psTextLink" data-go="workshop">All guides</button></div></section><p class="psPortalApprovalNote">Submitting a request does not place a purchase order. Final approvals follow your organisation’s agreed process.</p>
     </div>`);
   }
@@ -2858,7 +2859,7 @@
     return shell(`
       <div class="pageHeader cmsPageHeader">
         <div><span class="eyebrow">PS STOREFRONT CONTROL</span><h1>Storefront manager</h1><p>One controlled product master, two customer-facing presentations. Institutional and wholesale can use different copy, categories, visibility and commercial display without duplicating the SKU.</p></div>
-        <button class="button light" data-go="${channel==='institutional'?'portal/catalogue':'wholesale'}">${channel==='institutional'?'Open institutional catalogue':'Open wholesale storefront'} →</button>
+        <button class="button light" data-go="${channel==='institutional'?'portal/catalogue':'wholesale'}">${channel==='institutional'?'Open institutional catalogue':'Open wholesale storefront'}</button>
       </div>
 
       <div class="cmsChannelTabs">
@@ -2886,7 +2887,7 @@
       </div>
 
       <section class="panel cmsPreviewPanel">
-        <div class="panelHeader"><div><span class="eyebrow">LIVE PREVIEW</span><h2>${esc(sf.display_name||'Storefront')}</h2></div><button data-go="admin/products">Manage products →</button></div>
+        <div class="panelHeader"><div><span class="eyebrow">LIVE PREVIEW</span><h2>${esc(sf.display_name||'Storefront')}</h2></div><button data-go="admin/products">Manage products</button></div>
         ${preview.length?`<div class="cmsPreviewGrid">${preview.map(r=>`<article><div class="cmsPreviewImage">${controlledProductImageUrl(r)?`<img src="${esc(controlledProductImageUrl(r))}" alt="">`:'<span>NO IMAGE</span>'}</div><small>${esc(r.brand||r.category||'')}</small><b>${esc(r.name)}</b><p>${esc(r.short_description||r.pack||'')}</p></article>`).join('')}</div>`:`<div class="emptyState"><h3>No published products yet</h3><p>${channel==='wholesale'?'Open Product Master, switch to Wholesale and publish the lines you want trade customers to see.':'The institutional catalogue will appear here after the current master is initialised.'}</p></div>`}
       </section>
     `,true);
@@ -2902,7 +2903,7 @@
     return shell(`
       <div class="pageHeader cmsPageHeader">
         <div><span class="eyebrow">CONTROLLED PRODUCT MASTER</span><h1>Products & media</h1><p>Edit the controlled SKU once, then publish a separate Institutional or Wholesale presentation. Supplier, cost, evidence and internal notes remain restricted to PS admin.</p></div>
-        <button class="button light" data-go="admin/storefront">Storefront manager →</button>
+        <button class="button light" data-go="admin/storefront">Storefront manager</button>
       </div>
 
       <div class="filterBar cmsMasterFilter"><div class="searchInput"><span>⌕</span><input data-cms-search value="${esc(ui.cmsSearch)}" placeholder="Search product, PS SKU, brand, supplier or category…"></div><div class="cmsMasterCount">${rows.length} / ${activeMaster.length}</div></div>
@@ -3016,7 +3017,7 @@
             <p>Save Draft preserves the currently published channel. Publish applies this channel's presentation and approved images to the customer storefront.</p>
             <button class="button light full" data-cms-save="${p.id}">Save draft</button>
             <button class="button primary full" data-cms-publish="${p.id}">Publish to ${channel}</button>
-            <button class="textAction" data-go="${channel==='institutional'?'portal/catalogue':'wholesale'}">Open storefront preview →</button>
+            <button class="textAction" data-go="${channel==='institutional'?'portal/catalogue':'wholesale'}">Open storefront preview</button>
           </section>
         </aside>
       </div>
