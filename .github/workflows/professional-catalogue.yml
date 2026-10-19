@@ -52,6 +52,8 @@ jobs:
       - run: node tests/professional-submission.mjs
       - run: node tests/ready-baskets.mjs
       - run: node tests/professional-experience-browser.mjs
+      - run: node tests/portal-home-journey-browser.mjs
+      - run: node tests/portal-layout-regression.mjs
       - run: npm run test:dom
       - run: npm run test:catalogue
       - run: node tests/reference-overlay.mjs

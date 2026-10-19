@@ -1324,7 +1324,7 @@
     const liveCustomerNav=schoolNav.filter(([href])=>isDemoAccount() || !['portal/stock','portal/assets'].includes(href));
     const links=admin?adminNav.filter(([href])=>!['admin/resources','admin/settings','admin/onboarding'].includes(href)):liveCustomerNav;
     const searchValue=esc(ui.globalSearch||'');
-    return `<div class="appShell v4Shell v7Shell v7bShell v26Shell v37Shell v38Shell v381Shell pscOperatingShell ${admin?'adminShell':'customerShell'}">
+    return `<div class="appShell v4Shell v7Shell v7bShell v26Shell v37Shell v38Shell v381Shell pscOperatingShell ${admin?'adminShell':'customerShell'} ${!admin&&route==='portal/dashboard'?'psPortalHomeShell':''}">
       <div class="mobileOverlay ${ui.mobile?'show':''}" data-mobile-close></div>
       <aside class="sidebar ${ui.mobile?'sidebarOpen':''}">
         <div class="sidebarTop">${brand()}<span class="psWorkspaceCaption">${admin?'SUPPLY WORKSPACE':'CLINIC ACCOUNT'}</span><button class="iconBtn mobileClose" data-mobile-close aria-label="Close menu">${icon('close')}</button></div>
@@ -2076,39 +2076,35 @@
   function portalDashboard(){
     const visible=customerVisibleRequests();
     const active=visible.filter(r=>!['Accepted','Cancelled'].includes(r.status));
-    const awaiting=visible.filter(r=>r.status==='Sent').length;
-    const processing=visible.filter(r=>['Authorized','Procurement','Delivery'].includes(r.status)).length;
-    const delivered=state.requests.filter(r=>r.campus===state.campus&&r.status==='Accepted');
-    const deliveredSkus=new Set(delivered.flatMap(r=>r.lines.map(l=>l.sku)));
+    const awaiting=active.filter(r=>r.status==='Sent'&&!r.quote?.management_decision);
+    const delivered=visible.filter(r=>r.status==='Accepted');
+    const deliveredSkus=new Set(delivered.flatMap(r=>r.lines.map(l=>l.sku)).filter(sku=>sku&&product(sku)));
+    const documentCount=visible.reduce((n,r)=>n+(r.documents||[]).length,0);
+    const priority=r=>r.status==='Sent'&&!r.quote?.management_decision?0:r.status==='Delivery'?1:['Authorized','Procurement'].includes(r.status)?2:3;
+    const recent=[...active].sort((a,b)=>priority(a)-priority(b)||(new Date(b.createdAt).getTime()||0)-(new Date(a.createdAt).getTime()||0)).slice(0,3);
     const clinicalStarts=[['wounds'],['breathing'],['vitals']];
     const essentialStarts=[['dha-medicines','Medicines','Medicines mapped to the clinic requirements'],['dha-equipment','Equipment','Required equipment, diagnostics & furniture'],['dha-consumables','Consumables','Required disposables, wound care & PPE']];
     const homeCategory=(id,label)=>{const c=clinicalNeedMeta(id);return `<button class="pscHomeCategory" style="--category-tint:${c.bg}" data-go="portal/catalogue/${id}" aria-describedby="psc-home-note-${id}"><span class="pscHomeCategoryArt"><span class="pscHomeCategoryIcon" aria-hidden="true">${clinicalNeedIcon(c.icon)}</span>${id.startsWith('dha-')?`<img class="pscHomeDha" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</span><span><b>${esc(label||c.label)}</b></span></button>`;};
-    const homeCategoryGuide=items=>`<details class="pscHomeCategoryGuide psDisclosure"><summary>About these categories</summary><dl>${items.map(([id,label,note])=>{const c=clinicalNeedMeta(id);return `<dt>${esc(label||c.label)}</dt><dd id="psc-home-note-${id}">${esc(note||c.note)}</dd>`;}).join('')}</dl></details>`;
-
-    return shell(`
-      <section class="psPortalWelcome"><div><span class="eyebrow">YOUR CLINIC ACCOUNT</span><h1>What does your clinic need?</h1><p>Choose products or send your requirement. Pharma Service will clarify the details and prepare a formal quotation.</p><div class="wsActions"><button class="button primary" data-go="portal/catalogue">Browse & prepare a request</button><button class="button outline" data-go="portal/requests">View requests & quotations${awaiting?' · '+awaiting+' to review':''}</button></div><p class="psPortalApprovalNote">Submitting a request does not place a purchase order. Final approvals follow your organization’s agreed process.</p></div></section>
-      <section class="psPortalAttention"><div class="psSectionHead"><h2>${awaiting?'Quotations to review':'Your current requests'}</h2><button class="button outline" data-go="portal/requests">View all →</button></div>${active.slice(0,3).map(orderMiniRow).join('')||'<div class="psFirstRequest"><p>Start your first request from the catalogue. If you already have a list, send it to us as it is.</p><a class="button outline" href="mailto:mohamed@pharmaservice.ae">Send your requirement</a></div>'}</section>
-
-
-
-      <section class="pscHomeBrowse" aria-labelledby="psc-browse-title">
-        <div class="v26SectionHead"><div><span class="eyebrow">FIND YOUR STARTING POINT</span><h2 id="psc-browse-title">Browse by clinical need.</h2></div><button data-go="portal/catalogue">Browse all categories →</button></div>
-        <div class="pscHomeCategoryColumns">
-          <section><h3>By clinical need</h3><p>Start with the care you provide.</p><div class="pscHomeCategoryGrid" role="group" aria-label="By clinical need">${clinicalStarts.map(args=>homeCategory(...args)).join('')}</div>${homeCategoryGuide(clinicalStarts)}<button class="pscHomeAll" data-go="portal/catalogue">All therapeutic & clinical categories →</button></section>
-          <section><h3>Clinic essentials</h3><p>Your DHA requirement list, organised.</p><div class="pscHomeCategoryGrid" role="group" aria-label="Clinic essentials">${essentialStarts.map(args=>homeCategory(...args)).join('')}</div>${homeCategoryGuide(essentialStarts)}<small class="pscHomeScopeNote">Based on the catalogue’s DHA educational clinic mapping. Conditional items and required alternatives are identified; exact product suitability is checked before quotation.</small></section>
+    const guide=items=>`<details class="pscHomeCategoryGuide psDisclosure"><summary>About these categories</summary><dl>${items.map(([id,label,note])=>{const c=clinicalNeedMeta(id);return `<dt>${esc(label||c.label)}</dt><dd id="psc-home-note-${id}">${esc(note||c.note)}</dd>`;}).join('')}</dl></details>`;
+    const row=r=>`<button class="psPortalActivity" data-request-view="${esc(r.id)}"><span><b>${esc(r.quoteRef||r.id)}</b><small>${date(r.createdAt)} · ${r.lines.length} request line${r.lines.length===1?'':'s'}</small></span><span>${customerStatusPill(r.status)}<small>${r.status==='Sent'?(r.quote?.management_decision?'View recorded decision':'Review quotation'):['Authorized','Procurement','Delivery'].includes(r.status)?'View progress':'View request'} <i aria-hidden="true">→</i></small></span></button>`;
+    const draft=state.basket;
+    return shell(`<div class="psExperience psPortalHome">
+      <section class="psPortalWelcome" aria-labelledby="psPortalTitle">
+        <div class="psPortalSearchCopy"><h1 id="psPortalTitle">What do you need today?</h1><p>Find the right products. Build your request. We’ll take care of the sourcing.</p>
+          <form class="psPortalSearch" data-ps-command-form role="search"><label class="srOnly" for="psPortalCommand">Search your institutional catalogue</label><span aria-hidden="true">${icon('search')}</span><input id="psPortalCommand" data-cat-q type="search" aria-label="Search catalogue" placeholder="Product, brand or describe what you need…" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Search <span aria-hidden="true">→</span></button></form>
+          <div class="psPortalSearchExamples"><span>Try</span>${['Sterile gauze','Digital thermometer','Examination gloves'].map(q=>`<button type="button" data-portal-query="${esc(q)}">${esc(q)}</button>`).join('')}</div>
+          <button class="psTextLink" data-go="portal/catalogue">Browse the catalogue <span aria-hidden="true">↗</span></button>
         </div>
+        <div class="psPortalDraft ${draft.length?'hasDraft':''}" aria-label="${draft.length?'Saved supply request':'Send an existing list'}">${draft.length?`<h2>Pick up where you left off.</h2><p>${draft.length} request line${draft.length===1?'':'s'} · ${basketQty()} requested units</p><ul>${draft.slice(0,2).map(l=>{const p=l.sku?product(l.sku):null;return `<li><span>${esc(p?.name||lineDisplayName(l,p))}</span><small>${l.qty} × ${esc(linePackLabel(l,p))}</small></li>`;}).join('')}</ul>${draft.length>2?`<small>+ ${draft.length-2} more line${draft.length===3?'':'s'}</small>`:''}<button class="button dark" data-basket>Continue your request <span aria-hidden="true">→</span></button><small>Saved for this site. Review before submitting.</small>`:`<span class="psPortalListIcon" aria-hidden="true">${icon('edit')}</span><h2>Already have a list?</h2><p>Send your RFQ, spreadsheet or existing product list. Start with what you have.</p><button class="button outline" data-go="start">Upload your list <span aria-hidden="true">↗</span></button>`}</div>
       </section>
-
-      <section class="pscHomeWorkshop psPortalWorkshop" aria-labelledby="psc-workshop-title">
-        <div class="psPortalWorkshopHead"><div><h2 id="psc-workshop-title">The Workshop</h2><p>Practical product knowledge for a more confident clinic. Choose what you need to figure out.</p></div><button class="button outline" data-go="workshop">Explore all guides →</button></div>
-        <div class="workshopModuleGridV50 psPortalWorkshopGrid">${WORKSHOP_MODULES.map(workshopModuleCard).join('')}</div>
-      </section>
-
-
-
-      <section class="psPortalRepeat"><div><span class="eyebrow">AFTER YOUR FIRST SUPPLY</span><h2>Repeat ordering, without starting over.</h2><p>Return to the products already delivered to this school, prepare the next quantities and send a fresh request.</p></div><button class="button outline" data-go="portal/replenish">Open Replenish</button><button class="button outline" data-go="portal/documents">View account documents</button></section>
-
-    `);
+      <div class="psPortalWork">
+        <section class="psPortalAttention" aria-labelledby="psPortalActivityTitle"><div class="psPortalSectionHead"><div><h2 id="psPortalActivityTitle">${awaiting.length?'Your quotations are ready.':'Your requests, moving forward.'}</h2><p>${awaiting.length?`${awaiting.length} quotation${awaiting.length===1?'':'s'} available to review.`:active.length?`${active.length} request${active.length===1?'':'s'} in progress.`:'A clear view of what happens after you request.'}</p></div><button class="psTextLink" data-go="portal/requests">View all <span aria-hidden="true">↗</span></button></div><div class="psPortalActivityList">${recent.map(row).join('')||`<div class="psPortalNoActivity"><span aria-hidden="true">${icon('checklist')}</span><div><h3>No requests in progress.</h3><p>${delivered.length?'Your previous orders are ready to revisit whenever you need them.':'Your quotations and order updates will appear here after your first request.'}</p></div></div>`}</div></section>
+        <div class="psPortalAccountLinks"><button data-go="portal/replenish"><span aria-hidden="true">${icon('repeat')}</span><span><h3>Order again</h3><p>${deliveredSkus.size?`${deliveredSkus.size} previously supplied product${deliveredSkus.size===1?'':'s'}. Choose your next quantities.`:'Return to previously supplied items after your first completed order.'}</p></span><i aria-hidden="true">↗</i></button><button data-go="portal/documents"><span aria-hidden="true">${icon('resource')}</span><span><h3>Your documents</h3><p>${documentCount?`${documentCount} account document${documentCount===1?'':'s'} in one place.`:'Quotations, approvals and delivery records, when available.'}</p></span><i aria-hidden="true">↗</i></button></div>
+      </div>
+      <section class="psPortalBaskets" aria-labelledby="psPortalBasketsTitle"><div class="psPortalSectionHead"><div><h2 id="psPortalBasketsTitle">Start with the whole task.</h2><p>Opening, restocking or refilling? Review a basket preview.</p></div><button class="psTextLink" data-go="portal/baskets">All ready baskets <span aria-hidden="true">↗</span></button></div><div class="psPortalBasketGrid">${window.PSC_READY_BASKETS?.compactCards()||'<button class="button outline" data-go="portal/baskets">Explore basket previews</button>'}</div></section>
+      <section class="pscHomeBrowse" aria-labelledby="psc-browse-title"><div class="psPortalSectionHead"><h2 id="psc-browse-title">Find your clinical area.</h2><button class="psTextLink" data-go="portal/catalogue">All categories <span aria-hidden="true">↗</span></button></div><div class="pscHomeCategoryColumns"><section><h3>By clinical need</h3><div class="pscHomeCategoryGrid" role="group" aria-label="By clinical need">${clinicalStarts.map(args=>homeCategory(...args)).join('')}</div>${guide(clinicalStarts)}</section><section><h3>Clinic requirement mapping</h3><div class="pscHomeCategoryGrid" role="group" aria-label="Clinic essentials">${essentialStarts.map(args=>homeCategory(...args)).join('')}</div>${guide(essentialStarts)}<small class="pscHomeScopeNote">DHA educational clinic mapping. Required alternatives and conditional items retain their original conditions; suitability is checked before quotation.</small></section></div></section>
+      <section class="psPortalHelp" aria-label="Product and purchasing guidance"><div><h2>A little clarity before you order.</h2><p>Practical product and specification guidance from The Workshop.</p></div><div><button class="psTextLink" data-go="workshop/product-basics">Product basics ↗</button><button class="psTextLink" data-go="workshop/ordering-specifications">Preparing a specification ↗</button><button class="psTextLink" data-go="workshop">All guides ↗</button></div></section><p class="psPortalApprovalNote">Submitting a request does not place a purchase order. Final approvals follow your organisation’s agreed process.</p>
+    </div>`);
   }
 
   function orderMiniRow(r){
@@ -3707,6 +3703,7 @@
       el.addEventListener('input',e=>{ui.globalSearch=e.target.value;});
       el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();window.PS_SEARCH_CATALOGUE(e.target.value);}});
     });
+    document.querySelectorAll('[data-portal-query]').forEach(el=>el.addEventListener('click',()=>applyIntelligentCommand(el.dataset.portalQuery)));
     document.querySelectorAll('[data-tour-next]').forEach(el=>el.addEventListener('click',()=>{ui.tourStep=Math.min(5,(ui.tourStep||0)+1);render()}));
     document.querySelectorAll('[data-tour-prev]').forEach(el=>el.addEventListener('click',()=>{ui.tourStep=Math.max(0,(ui.tourStep||0)-1);render()}));
     document.querySelectorAll('[data-tour-jump]').forEach(el=>el.addEventListener('click',()=>{ui.tourStep=Number(el.dataset.tourJump)||0;render()}));

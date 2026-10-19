@@ -127,7 +127,8 @@
     "current/styles/product-editorial.css",
     "current/styles/interaction-feedback.css",
     "current/styles/catalogue-photo-standard.css",
-    "current/styles/professional-experience.css"
+    "current/styles/professional-experience.css",
+    "current/styles/portal-dashboard.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",

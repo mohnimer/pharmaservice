@@ -30,3 +30,13 @@ No source master, product/price projection, photo binding, DHA asset/mapping, da
 - Historical pre-revision validation: existing professional catalogue/submission, category grid, navigation, disclosures, photo framing, account continuity, operating journey, intelligent search and search acceptance checks passed. Real backend writes and customer/supplier sends are not part of these tests.
 
 The rejected earlier design and its screenshots are preserved as historical versions. Revised desktop/mobile captures and QA are retained in the private execution package; CI uploads test screenshots as review artifacts. The feature continues on `feature/professional-catalogue-ui-20261016` from current main, retaining the newer navigation, disclosure hierarchy, storefront identities and image corrections.
+
+## Customer portal home redesign
+
+The signed-in home now leads with the native intelligent catalogue search and an existing-list/RFQ entry. Its next-action section prioritises available quotations before newer delivery/processing updates, using only the current site's real visible records. It offers view/review links without creating new approval powers. Empty accounts display an honest empty state.
+
+A saved request replaces the RFQ panel with exact current draft lines/packs, requested units and a Continue your request action. Existing site-specific draft persistence remains authoritative. Reorder and Documents show real account context or explain when records become available. The current account/site remains visible on mobile; there is one prominent search surface on this route, with the native header request and account controls retained.
+
+The three existing basket previews reuse the same registry, image assets, approval gates and atomic adapter in compact cards. Both clinical-category groups and all three DHA marks/conditional descriptions remain. Seven Workshop modules have been removed from the portal home and replaced by three compact guidance links; the full Workshop and all seven modules retain their existing routes.
+
+Before/after real-font captures show the live-like fixture at1440px reduced from2134px to1797px total height, and390px from4354px to2374px. These are repeatable viewport measurements, not a guarantee for accounts with different data. New journey tests cover active/empty accounts at320/390/768/1440, quote priority, exact saved drafts, switching sites, request details, RFQ entry, search, baskets, reorder, documents and guidance, with zero backend writes. Existing category/DHA/disclosure, account/navigation and16 role/viewport layout checks pass. No new backend schema, source data, pricing or production deployment is included.
