@@ -3493,7 +3493,17 @@
     "image_url": "/assets/products/verified-20261019/8acf810d15e36c059d81.jpg",
     "source": "https://www.noon.com/uae-en/calvit-d3-tablets-30-s-calcium-vitamin-d3-supplement-bone-strength-joint-health-support-vitamin-d-deficiency-osteoporosis-support-formula/ZDEB5304A849A0632678AZ/p/",
     "review": "Codex full-size visual review 2026-10-19: Calvit D3 calcium/magnesium/vitamins and30-tablet pack label match. Original complete pack pixels retained; plain photo background, no supplier branding/watermark. Image-only review; no product, price, stock or regulator approval."
-  }
+  },
+{
+  "sku": "PSC-OXY-001",
+  "name": "Oxygen Support Set",
+  "family_id": "PSC-SC-B16",
+  "image_url": "/assets/products/verified-20261019/40d14a423e3342754e3b.jpg",
+  "source": "https://tecnomedica.com.co/cilindros-reguladores/",
+  "role": "SPECIFICATION_REFERENCE_ONLY",
+  "label": "Oxygen cylinder, trolley and regulator configuration",
+  "review": "Codex full-size visual review 2026-10-19: complete oxygen cylinder, wheeled trolley and regulator/gauge configuration on clean white background, no supplier logo, backdrop, watermark or unrelated montage fragments. Illustrative product type only; exact brand/model, connection, flow range, fill status and accessories remain quotation-controlled. Original source pixels unchanged. No UAE compatibility, registration, stock or suitability approval."
+}
 ];
  const refresh=window.PS_CATALOGUE_REFRESH;
  if(!refresh)return;
@@ -3503,7 +3513,7 @@
   if(!image)continue;
   const p=targets.find(p=>p.pscSku===r.sku&&p.name===r.name&&String(p.catalogueParentId||p.catalogueReferenceFamilyId||'')===r.family_id);
   if(!p||/VERIFIED EXACT/.test(p.imageStatus||''))continue;
-  if(r.role==='SPECIFICATION_REFERENCE_ONLY'&&!/^(Specification-led|General \/ model TBC)$/i.test(p.brand||'')&&!(r.allowUnbrandedReference===true&&!String(p.brand||'').trim()))continue;
+  if(r.role==='SPECIFICATION_REFERENCE_ONLY'&&!/^(Specification-led|General \/ model TBC|Specialist route)$/i.test(p.brand||'')&&!(r.allowUnbrandedReference===true&&!String(p.brand||'').trim()))continue;
   Object.assign(p,{currentImageUrl:image,imageUrl:image,image_url:image,imageStatus:'SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED',imageIdentityReviewed:true,imageSource:window.PSC_IMAGE_POLICY?.replacement_sources?.[image]||r.source,imageVerification:r.review});
   if(r.role==='SPECIFICATION_REFERENCE_ONLY')Object.assign(p,{imageRole:r.role,imageReferenceLabel:r.label||r.name,imageStatus:'SOURCE IMAGE AVAILABLE — SPECIFICATION REFERENCE ONLY'});
   for(const o of refresh.approvedOptions){
