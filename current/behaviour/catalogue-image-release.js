@@ -35,14 +35,6 @@
     "review": "Supplier-mapped product identity and visible brand/form reviewed; quotation confirms exact pack"
   },
   {
-    "sku": "PS-AC-D0FA94CC5CCD",
-    "name": "Calvit D3 Calcium + Magnesium + Vitamins — 30 Tablets",
-    "family_id": "PSC-IS-188",
-    "image_url": "/assets/products/supplier-20261014/calvit_d3_calcium_plus_magnesium_plus_vitamins_30_tablets.jpg",
-    "source": "Supplier product photograph; supplied 6 October 2026",
-    "review": "Supplier-mapped product identity and visible brand/form reviewed; quotation confirms exact pack"
-  },
-  {
     "sku": "PS-AC-3F16D478897A",
     "name": "Clozac Acne Face Wash — 60 ml",
     "family_id": "PSC-IS-152",
@@ -3138,14 +3130,6 @@
     "review": "Codex visual review 2026-10-19: representative product type/function only. Exact model, size, pack, compatibility, supplied accessories and licensed supply confirmed in quotation. No supplier branding/backdrop. No product or regulatory approval."
   },
   {
-    "sku": "PS-AC-7FA52A9BCF9F",
-    "name": "LDNIL 10MG TAB 30'S (ROSUVASTATIN)",
-    "family_id": "PSC-IS-119",
-    "image_url": "/assets/products/verified-20261019/06f0199e9a0107081de0.png",
-    "source": "https://medsgo.ph/prescription-medicines/dyslipidemic-agents/ldnil-rosuvastatin-10mg-film-coated-tablet-1s/",
-    "review": "Codex visual review 2026-10-19: brand/product/form/strength and stated pack checked where specified; no supplier backdrop/watermark. Original source bytes preserved. No price, stock, registration or regulatory approval."
-  },
-  {
     "sku": "PS-AC-E204E9A3DB72",
     "name": "Wegovy Semaglutide 0.25 mg Prefilled Pen",
     "family_id": "PSC-IS-179",
@@ -3493,6 +3477,22 @@
     "image_url": "/assets/products/verified-20261019/a823e04eb5d9cd09a093.jpg",
     "source": "https://www.myaster.com/en/online-pharmacy/p/intermed-hy-al-oral-gel-for-mouth-ulcer-12g/1062439",
     "review": "Codex full-size visual review 2026-10-19: exact Aldomet250mg/30-tablet or Hy+Al12g pack label checked; complete original pack, no supplier branding/backdrop/watermark. Original bytes retained. Image-only review; no approval of price, stock, product facts or regulatory status."
+  },
+  {
+    "sku": "PS-AC-7FA52A9BCF9F",
+    "name": "LDNIL 10MG TAB 30'S (ROSUVASTATIN)",
+    "family_id": "PSC-IS-119",
+    "image_url": "/assets/products/verified-20261019/06f0199e9a0107081de0.png",
+    "source": "https://medsgo.ph/prescription-medicines/dyslipidemic-agents/ldnil-rosuvastatin-10mg-film-coated-tablet-1s/",
+    "review": "Codex visual review 2026-10-19: brand/product/form/strength and stated pack checked where specified; no supplier backdrop/watermark. Original source bytes preserved. No price, stock, registration or regulatory approval."
+  },
+  {
+    "sku": "PS-AC-D0FA94CC5CCD",
+    "name": "Calvit D3 Calcium + Magnesium + Vitamins — 30 Tablets",
+    "family_id": "PSC-IS-188",
+    "image_url": "/assets/products/verified-20261019/8acf810d15e36c059d81.jpg",
+    "source": "https://www.noon.com/uae-en/calvit-d3-tablets-30-s-calcium-vitamin-d3-supplement-bone-strength-joint-health-support-vitamin-d-deficiency-osteoporosis-support-formula/ZDEB5304A849A0632678AZ/p/",
+    "review": "Codex full-size visual review 2026-10-19: Calvit D3 calcium/magnesium/vitamins and30-tablet pack label match. Original complete pack pixels retained; plain photo background, no supplier branding/watermark. Image-only review; no product, price, stock or regulator approval."
   }
 ];
  const refresh=window.PS_CATALOGUE_REFRESH;

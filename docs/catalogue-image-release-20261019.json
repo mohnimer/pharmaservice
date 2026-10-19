@@ -5243,6 +5243,27 @@
       "previous_image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
       "previous_rendered_image": "/assets/products/supplier-20261014/hyplusai_oral_gel_12_g.jpg",
       "release_scope": "Photograph/presentation only; raw identity, stock, price, DHA mapping/conditions and field approvals unchanged."
+    },
+    {
+      "sku": "PS-AC-D0FA94CC5CCD",
+      "name": "Calvit D3 Calcium + Magnesium + Vitamins — 30 Tablets",
+      "family_id": "PSC-IS-188",
+      "image_url": "/assets/products/verified-20261019/8acf810d15e36c059d81.jpg",
+      "source": "https://www.noon.com/uae-en/calvit-d3-tablets-30-s-calcium-vitamin-d3-supplement-bone-strength-joint-health-support-vitamin-d-deficiency-osteoporosis-support-formula/ZDEB5304A849A0632678AZ/p/",
+      "review": "Codex full-size visual review 2026-10-19: Calvit D3 calcium/magnesium/vitamins and30-tablet pack label match. Original complete pack pixels retained; plain photo background, no supplier branding/watermark. Image-only review; no product, price, stock or regulator approval.",
+      "sha256": "8acf810d15e36c059d81b0b0aca00ff3b4620010798b30b73be1bab48eaff234",
+      "dimensions": [
+        660,
+        900
+      ],
+      "source_image": "https://f.nooncdn.com/p/pzsku/ZDEB5304A849A0632678AZ/45/_/1771512930/f21098b2-5637-480e-b047-41ef91a44815.jpg",
+      "review_status": "VISUALLY_REVIEWED_SOURCE_PHOTOGRAPH",
+      "identity_scope": "Exact visible product type and30-tablet pack checked for image identity only. Unknown controlled pack field remains unknown.",
+      "market_limit": "UAE marketplace seller photo; no product/regulator approval, price, acquisition cost or stock inferred.",
+      "previous_image": "/assets/products/supplier-20261014/calvit_d3_calcium_plus_magnesium_plus_vitamins_30_tablets.jpg",
+      "previous_image_status": "SOURCE IMAGE AVAILABLE — PRODUCT PHOTO REVIEWED",
+      "previous_rendered_image": "/assets/products/supplier-20261014/calvit_d3_calcium_plus_magnesium_plus_vitamins_30_tablets.jpg",
+      "release_scope": "Image-only; protected catalogue identities and all commercial authority unchanged."
     }
   ]
 }
