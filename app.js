@@ -1879,6 +1879,7 @@
     const heroLead=needId==='all'?'Choose a category or search for a product, brand, model or pack.':`Browse products and sourcing requirements for ${esc(meta.label)}.`;
     return `<main class="publicPage publicCataloguePage catalogue16Page">${publicHeader('catalogue')}
       <section class="publicPageHero cataloguePublicHero catalogue16Hero"><span class="kicker">INSTITUTIONAL CATALOGUE</span><h1>${heroTitle}</h1><p>${heroLead}</p></section>
+      ${schoolBasketSection()}
       <section class="publicSection publicCatalogueJourney16">
         <div class="publicCatalogueJourneyHead16"><div><span class="kicker">CLINICAL NEEDS</span><h2>Where do you want to start?</h2></div>${needId!=='all'?'<button class="textAction" data-go="catalogue">View all categories</button>':''}</div>
         <div class="publicCategoryGrid16">${categoryCards}</div>
@@ -2336,6 +2337,29 @@
     return `<nav class="needRibbon" aria-label="Clinical needs">${home}<div class="needRibbonTrack">${items}</div></nav>`;
   }
 
+  function schoolBasketSection(){
+  const b=window.PS_SCHOOL_BASKETS;
+  if(!b) return '';
+  const selected=ui.schoolCollection||'';
+  const isPortal=currentRoute().startsWith('portal/');
+  const available=catalogueProducts();
+  const match=id=>available.find(p=>p.pscSku===id)||available.find(p=>p.catalogueTransactionId===id)||null;
+  const view=(p)=>p?`<button type="button" ${isPortal?'data-product-view':'data-public-product-view'}="${esc(p.pscSku)}">View details</button>`:'<span class="psSchoolSourceNote">Source on request</span>';
+  const row=(label,p,pack='')=>`<li><span>${esc(label)}${pack?` <small>· ${esc(pack)}</small>`:''}</span>${view(p)}</li>`;
+  const options=[['opening','Complete clinic setup','Furniture, emergency equipment & opening stock'],['replenishment','Clinic refills','Wound care, hygiene, testing & disposables'],['kits','First-aid points','Gym, laboratory, canteen, trips & campus']];
+  let content='';
+  if(selected==='opening'){
+    content=`<h3>Complete clinic opening and setup</h3><p>A grouped starting specification for a new clinic. Existing facilities and technical approval determine the final site quantities. Site works and medicines remain separate.</p><div class="psSchoolGroupGrid">`+b.opening.map(g=>`<details class="psSchoolGroup"><summary>${esc(g.title)} <span>${g.scopeChecklist?.length||g.transactions.length} ${g.scopeChecklist?'site checks':'requirement lines'}</span></summary><p>${esc(g.description)}</p><ul class="psSchoolLines">${g.transactions.map(id=>{const p=match(id);return row(p?.catalogueDisplayName||p?.name||id,p)}).join('')+(g.scopeChecklist||[]).map(item=>row(item,null)).join('')}</ul></details>`).join('')+`</div><div class="psSchoolPanelActions">${isPortal?'<button class="button dark" type="button" data-school-opening-request>Prepare complete setup request</button>':'<button class="button dark" type="button" data-go="start">Request a clinic setup quotation</button>'}</div><p class="psSchoolFinePrint">DHA version 4.1 Appendix 3 reference for DHA-licensed Dubai educational clinics. The site plan, treatment/isolation rooms, water and waste facilities, professional authorization and local authority are checked separately. A listed catalogue line is not a verified compliant model.</p>`;
+  }else if(selected==='replenishment'){
+    content=`<h3>Clinic consumables & replenishment</h3><p>Practical clinic-sized packs where offered, instead of a wholesaler-size cart by default. Only actual quoted unit packs and observed school needs determine quantities.</p><div class="psSchoolGroupGrid">`+b.replenishment.map(g=>{const selections=g.skus.map(match).filter(p=>p&&!p.regulated);return `<details class="psSchoolGroup"><summary>${esc(g.title)} <span>${selections.length} selections</span></summary><p>${esc(g.description)}</p><ul class="psSchoolLines">${selections.map(p=>row(p.catalogueDisplayName||p.name,p,p.cataloguePack||p.pack||'Pack to confirm')).join('')}</ul></details>`;}).join('')+`</div><p class="psSchoolFinePrint">Select exact sizes, brands and device-compatible test strips after reviewing Details. Refill quantities are requested, not auto-purchased. Check pack sizes, expiry and current supplier availability before quotation.</p>`;
+  }else if(selected==='kits'){
+    const kit=b.kits.find(k=>k.id===ui.schoolKit)||b.kits[0];
+    content=`<h3>Location-specific first-aid points</h3><p>Packaged kit concepts with independently refillable components. The school's nurse and safety lead approve the final contents, quantity, site and custody.</p><div class="psSchoolKitSelector">${b.kits.map(k=>`<button type="button" data-school-kit="${esc(k.id)}" aria-pressed="${k.id===kit.id?'true':'false'}">${esc(k.accent)}</button>`).join('')}</div><div class="psSchoolKitBody"><h3>${esc(kit.title)}</h3><p><strong>${esc(kit.where)}</strong> · ${esc(kit.details)}</p><ul class="psSchoolLines">${kit.contents.map(([label,id,pack])=>row(label,id?match(id):null,'Proposed quantity: '+pack)).join('')}</ul><div class="psSchoolPanelActions">${isPortal?`<button type="button" class="button dark" data-school-kit-request="${esc(kit.id)}">Add this kit to request</button>`:'<button type="button" class="button dark" data-go="start">Enquire about this kit</button>'}</div></div><p class="psSchoolFinePrint">PS-designed kit contents are a risk-informed commercial proposal, not a prescribed DHA first-aid kit bill of materials. Dedicated laboratory emergency eyewash and safety facilities must be evaluated independently. Medicines and injectable treatments are not included in general-access kits.</p>`;
+  }
+  const label=`<div class="psSchoolHead"><div><h2>School clinic supply collections</h2><p>From opening a clinic to refilling first-aid points across campus.</p></div></div>`;
+  return `<section class="psSchoolBaskets" aria-label="School clinic supply collections">${label}<div class="psSchoolCollectionGrid">${options.map(([id,title,subtitle])=>`<button type="button" class="psSchoolCollectionTile" data-school-collection="${id}" aria-pressed="${selected===id?'true':'false'}"><small>${id==='opening'?'01 · SETUP':id==='replenishment'?'02 · RESTOCK':'03 · FIRST AID'}</small><strong>${title}</strong><span>${subtitle}</span></button>`).join('')}</div>${selected?`<div class="psSchoolCollectionPanel">${content}</div>`:''}</section>`;
+}
+
   function catalogue(){
     const allProducts=catalogueProducts();
     const dhaCount=allProducts.filter(p=>p.dhaMapped).length;
@@ -2353,6 +2377,7 @@
         <div class="catalogueDepthPill"><b>${allProducts.length}</b><span>catalogue lines</span><small>${dhaCount} lines mapped to DHA requirements</small></div>
       </div>
 
+      ${schoolBasketSection()}
       <section class="clinicNeedSection v25NeedJourney v26CatalogueLanding">
         <div class="clinicNeedHeading"><div><span class="eyebrow">CLINICAL NEEDS</span><h2>Where do you want to start?</h2><p>Choose the clinical context first. Once inside, use the product and requirement filters to narrow the catalogue.</p></div></div>
         <div class="clinicNeedRail">${needCards}</div>
@@ -3779,6 +3804,25 @@
       renderUi({preserveScroll:true,focusSelector:'[data-cat-q]',cursor:0,transition:false});
     }));
     const cq=document.querySelector('[data-cat-q]'); if(cq)cq.addEventListener('input',e=>{intelligent.sequence++;ui.catalogueQuery=e.target.value;ui.globalSearch=e.target.value;clearTimeout(searchTypingTimer);if(!e.target.value){resetIntelligentSearch();updateCatalogueResults();return;}searchTypingTimer=setTimeout(updateCatalogueResults,140);});
+    document.querySelectorAll('[data-school-collection]').forEach(el=>el.addEventListener('click',()=>{
+      ui.schoolCollection=el.dataset.schoolCollection;
+      if(!/^catalogue(?:\/|$)/.test(currentRoute())&&!currentRoute().startsWith('portal/catalogue'))go('catalogue');
+      else renderUi({preserveScroll:true,transition:false});
+    }));
+    document.querySelectorAll('[data-school-kit]').forEach(el=>el.addEventListener('click',()=>{
+      ui.schoolKit=el.dataset.schoolKit;renderUi({preserveScroll:true,transition:false});
+    }));
+    document.querySelectorAll('[data-school-opening-request]').forEach(el=>el.addEventListener('click',()=>{
+      state.basket.push({kind:'unlisted',requestId:'unlisted-'+crypto.randomUUID(),description:'Complete new school clinic setup quotation: room furniture, diagnostics, emergency equipment and opening consumables. Site population and authority requirements to confirm. Medicines and facilities need separate approved scopes.',qty:1});
+      save();ui.basket=true;renderUi({preserveScroll:true,transition:false});
+    }));
+    document.querySelectorAll('[data-school-kit-request]').forEach(el=>el.addEventListener('click',()=>{
+      const kit=window.PS_SCHOOL_BASKETS?.kits?.find(k=>k.id===el.dataset.schoolKitRequest);
+      if(!kit)return;
+      const contents=kit.contents.map(([label,id,pack])=>`${label}${id?' ['+id+']':''} — ${pack}`).join('; ');
+      state.basket.push({kind:'unlisted',requestId:'unlisted-'+crypto.randomUUID(),description:kit.title+' | location: '+kit.where+' | PS proposed contents to be reviewed with the school nurse and site risk lead. Request a fully itemized kit quotation and practical refill packs. Proposed contents snapshot ('+window.PS_SCHOOL_BASKETS.version+'): '+contents,qty:1});
+      save();ui.basket=true;renderUi({preserveScroll:true,transition:false});
+    }));
     document.querySelectorAll('[data-clinic-need]').forEach(el=>el.addEventListener('click',()=>{ui.catalogueNeed=el.dataset.clinicNeed||'all';render()}));
     document.querySelectorAll('[data-cat-filter]').forEach(el=>el.addEventListener('change',e=>{if(el.dataset.catFilter==='category')ui.catalogueCat=e.target.value;else ui.catalogueFilter=e.target.value;renderUi({preserveScroll:true,transition:false})}));
     const pq=document.querySelector('[data-prod-q]'); if(pq)pq.addEventListener('input',e=>{ui.productQuery=e.target.value;render()});

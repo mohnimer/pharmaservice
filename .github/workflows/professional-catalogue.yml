@@ -16,6 +16,8 @@ on:
       - 'tests/professional-*.mjs'
       - 'tests/ready-baskets.mjs'
       - 'current/behaviour/ready-baskets*.js'
+      - 'current/behaviour/school-baskets.js'
+      - 'tests/school-baskets*.mjs'
       - 'current/behaviour/home-layout.js'
       - 'tests/catalogue-enquiry-context.mjs'
       - 'tests/intelligent-search-browser.mjs'
@@ -51,6 +53,7 @@ jobs:
       - run: node tests/professional-catalogue.mjs
       - run: node tests/professional-submission.mjs
       - run: node tests/ready-baskets.mjs
+      - run: node tests/school-baskets-browser.mjs
       - run: node tests/professional-experience-browser.mjs
       - run: node tests/portal-home-journey-browser.mjs
       - run: node tests/portal-layout-regression.mjs
