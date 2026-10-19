@@ -48,3 +48,15 @@
 @media(max-width:850px){.pscHomeWorkshop{grid-template-columns:1fr}.pscHomeCategoryColumns{gap:16px}.pscHomeCategoryColumns>section{padding:18px}.pscHomeCategory{gap:10px;padding:12px}.pscHomeCategoryIcon{flex-basis:40px;height:40px}}
 @media(max-width:600px){.pscHomeCategoryColumns{grid-template-columns:1fr}.pscHomeWorkshop{padding:22px;border-radius:8px}.pscHomeWorkshopGuides{grid-template-columns:1fr}.pscHomeGuideArt{height:110px}.pscHomeBrowse .v26SectionHead{align-items:flex-start;gap:14px;flex-direction:column}}
 @media(max-width:600px){.v26QuickActions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important}.v26QuickActions .v26ActionCard{padding:16px;min-height:108px}.v26QuickActions .v26ActionCard h2{font-size:17px}.v26QuickActions .v26ActionCard p{display:none}.v26HomeHero h1{font-size:36px!important}}
+
+/* Clinical browsing and requirement mapping are independent customer journeys. */
+#app .customerShell .psPortalHome .pscHomeBrowseSeparated{background:none!important;padding:0!important;border:0!important;border-radius:0!important}
+#app .customerShell .pscHomeBrowseSeparated .pscHomeCategoryColumns{display:grid;grid-template-columns:1fr;gap:28px;margin:0}
+#app .customerShell .pscHomeBrowseSeparated .pscHomeCategoryColumns>section{padding:30px!important;border-radius:12px!important;background:#edf3e9!important}
+#app .customerShell .pscHomeBrowseSeparated .pscHomeCategoryColumns>.pscRequirementBrowse{background:#f5f2e9!important}
+#app .customerShell .pscHomeBrowseSeparated .psPortalSectionHead{margin-bottom:24px}
+#app .customerShell .pscHomeBrowseSeparated .psPortalSectionHead h2{margin:0;font-size:26px!important;font-weight:450!important}
+#app .customerShell .pscHomeBrowseSeparated .psPortalSectionHead p{margin:8px 0 0;font-size:14px;color:#56695d}
+#app .customerShell .pscHomeBrowseSeparated .pscHomeCategoryGrid{gap:12px}
+#app .customerShell .pscHomeBrowseSeparated .pscHomeCategory{min-height:136px!important;background:#fff!important}
+@media(max-width:600px){#app .customerShell .pscHomeBrowseSeparated .pscHomeCategoryColumns{gap:24px}#app .customerShell .pscHomeBrowseSeparated .pscHomeCategoryColumns>section{padding:22px 18px!important}#app .customerShell .pscHomeBrowseSeparated .psPortalSectionHead{flex-wrap:wrap;gap:14px}#app .customerShell .pscHomeBrowseSeparated .psPortalSectionHead h2{font-size:23px!important}#app .customerShell .pscHomeBrowseSeparated .pscHomeCategoryGrid{gap:8px}#app .customerShell .pscHomeBrowseSeparated .pscHomeCategory{min-height:132px!important}}

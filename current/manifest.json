@@ -79,7 +79,8 @@
     "current/behaviour/ready-baskets.js",
     "current/behaviour/home-layout.js",
     "current/behaviour/system-theme.js",
-    "current/behaviour/catalogue-access.js"
+    "current/behaviour/catalogue-access.js",
+    "current/behaviour/admin-interface.js"
   ],
   "stylesheets": [
     "styles.css",

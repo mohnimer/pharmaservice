@@ -1,159 +1,199 @@
-/* One admin presentation layer. Reuses the customer catalogue's tokens;
-   no customer selectors, operating state, release gates or data authority. */
-#app .adminShell{--ps-paper:#fcfdfb;background:var(--ps-paper)!important;color:var(--ps-ui-ink);font:400 14px/1.6 "DM Sans",Arial,sans-serif}
+/* Admin component system. Customer styling and business state remain separate. */
+#app .adminShell{--admin-ink:#172f2a;--admin-muted:#52655c;--admin-meta:#617269;--admin-line:#dce4dd;--admin-surface:#fff;--ps-paper:#f8faf7;background:var(--ps-paper)!important;color:var(--admin-ink);font:400 14px/1.6 "DM Sans",Arial,sans-serif}
 #app .adminShell :is(.mainArea,.contentWrap){background:var(--ps-paper)!important;min-width:0}
 #app .adminShell .mainArea{margin-left:224px!important;width:calc(100% - 224px)!important}
-#app .adminShell .contentWrap{width:100%!important;max-width:1440px!important;margin-inline:auto;padding:34px 36px 64px!important}
-#app .adminShell h1{font-size:clamp(36px,3.6vw,50px)!important;line-height:1.13!important;font-weight:450!important;letter-spacing:-.05em!important;margin:0 0 15px!important;color:var(--ps-ui-ink)!important}
-#app .adminShell h2{font-size:24px!important;line-height:1.25!important;font-weight:450!important;letter-spacing:-.035em!important;color:var(--ps-ui-ink)!important}
-#app .adminShell h3{font-size:17px!important;line-height:1.4!important;font-weight:500!important;letter-spacing:-.02em!important;color:var(--ps-ui-ink)!important}
+#app .adminShell .contentWrap{width:100%!important;max-width:1440px!important;margin-inline:auto;padding:32px 36px 64px!important}
+#app .adminShell h1{display:flex;align-items:center;gap:16px;font-size:clamp(32px,3vw,40px)!important;line-height:1.2!important;font-weight:450!important;letter-spacing:-.04em!important;margin:0 0 12px!important;color:var(--admin-ink)!important}
+#app .adminShell h2{font-size:21px!important;line-height:1.3!important;font-weight:500!important;letter-spacing:-.025em!important;color:var(--admin-ink)!important}
+#app .adminShell h3{font-size:18px!important;line-height:1.4!important;font-weight:500!important;letter-spacing:-.015em!important;color:var(--admin-ink)!important}
 #app .adminShell :is(b,strong){font-weight:500}
-#app .adminShell p{font-size:14px;line-height:1.7!important;color:var(--ps-ui-muted)}
-#app .adminShell :is(.wsHeader,.pageHeader){display:flex;align-items:flex-start!important;justify-content:space-between;gap:28px;margin:0 0 32px!important;padding:0!important;border:0!important}
+#app .adminShell p{font-size:14px;line-height:1.65!important;color:var(--admin-muted)}
+#app .adminShell :is(.wsHeader,.pageHeader){display:flex;align-items:center!important;justify-content:space-between;gap:24px;margin:0 0 28px!important;padding:0!important;border:0!important}
 #app .adminShell :is(.wsHeader,.pageHeader)>div:first-child{min-width:0;flex:1}
-#app .adminShell :is(.wsHeader,.pageHeader)>div>p{max-width:65ch;margin:0!important;font-size:14px!important}
-#app .adminShell .wsHeader .wsActions{flex-shrink:0;margin:5px 0 0}
-#app .adminShell :is(.panelHeader,.psSectionHead){display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:24px!important;padding:0!important;border:0!important}
+#app .adminShell :is(.wsHeader,.pageHeader)>div>p{max-width:70ch;margin:0!important;font-size:14px!important}
+#app .adminShell .wsHeader .wsActions{flex-shrink:0;margin:0;gap:8px}
+#app .adminShell :is(.wsEyebrow,.psWorkspaceCaption){display:none!important}
+#app .adminShell :is(.panelHeader,.psSectionHead){display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px!important;padding:0 0 20px!important;border:0!important;border-bottom:1px solid var(--admin-line)!important}
 #app .adminShell :is(.panelHeader,.psSectionHead)>div{min-width:0;flex:1}
 #app .adminShell :is(.panelHeader,.psSectionHead) h2{margin:0!important}
 #app .adminShell :is(.panelHeader,.psSectionHead) p{margin:8px 0 0!important}
-#app .adminShell :is(.wsEyebrow,.psWorkspaceCaption){display:none!important}
-/* Native navigation, with the existing brand and direction-aware header. */
-#app .adminShell .sidebar{width:224px!important;padding:18px 12px!important;background:var(--ps-paper)!important;border-right:1px solid var(--ps-line)!important;box-shadow:none!important}
-#app .adminShell .sidebarTop{position:relative;min-height:86px!important;padding:8px 12px 20px!important;display:flex;align-items:center;justify-content:flex-start;border:0!important;background:none!important}
-#app .adminShell .adminBrand{display:inline-flex;align-items:center;padding:0;border:0;background:none;cursor:pointer}
+/* One icon vocabulary: existing PSC artwork for places, line icons for actions. */
+#app .adminShell :is(.adminPageArt,.adminSectionArt){display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+#app .adminShell .adminPageArt{width:56px;height:56px}
+#app .adminShell .adminPageArt img{width:56px;height:56px;object-fit:contain}
+#app .adminShell .adminSectionArt{width:44px;height:44px}
+#app .adminShell .adminSectionArt img{width:44px;height:44px;object-fit:contain}
+#app .adminShell .adminSectionTitle{display:flex;align-items:center;gap:12px;min-width:0}
+#app .adminShell .adminSectionTitle h2{font-size:20px!important}
+#app .adminShell :is(.adminInlineIcon,.adminHeadingIcon),body:has(.adminShell) .adminActionIcon{display:inline-flex;align-items:center;justify-content:center;flex:0 0 18px;width:18px;height:18px;color:inherit;pointer-events:none}
+#app .adminShell .adminHeadingIcon{margin-right:10px;vertical-align:-3px;color:#477361}
+#app .adminShell :is(.adminInlineIcon,.adminHeadingIcon) svg,body:has(.adminShell) .adminActionIcon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+/* Navigation keeps the same routes and the same icons used in the work areas. */
+#app .adminShell .sidebar{width:224px!important;padding:18px 12px!important;background:#fff!important;border-right:1px solid var(--admin-line)!important;box-shadow:none!important}
+#app .adminShell .sidebarTop{position:relative;min-height:86px!important;padding:8px 12px 20px!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;border:0!important;background:none!important}
+#app .adminShell .sidebarTop .adminBrand{display:inline-flex;align-items:center;width:118px!important;min-width:118px!important;flex:0 0 118px!important;margin:0!important;padding:0;border:0;background:none;cursor:pointer}
 #app .adminShell .adminBrand img{display:block;width:118px;height:52px;object-fit:contain}
 #app .adminShell .iconNav{gap:4px}
-#app .adminShell .navLink{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:12px!important;min-height:46px!important;padding:11px 14px!important;background:transparent!important;border:0!important;border-radius:8px!important;color:var(--ps-ui-muted)!important;box-shadow:none!important}
+#app .adminShell .navLink{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:12px!important;min-height:46px!important;padding:11px 14px!important;background:transparent!important;border:0!important;border-radius:8px!important;color:var(--admin-muted)!important;box-shadow:none!important}
 #app .adminShell .navLink .navLabel{position:static!important;font-size:13px!important;font-weight:450!important;line-height:1.45!important;letter-spacing:0!important;white-space:normal!important;opacity:1!important;visibility:visible!important;box-shadow:none!important}
 #app .adminShell .navLink .navIcon{color:inherit!important}
-#app .adminShell .navLink.active{color:var(--ps-ui-ink)!important;background:var(--ps-sage)!important}
-#app .adminShell .navLink:hover{background:#f0f4ee!important;color:var(--ps-ui-ink)!important}
-#app .adminShell .sidebarFooter{gap:4px;margin-top:auto!important;padding-top:18px!important;border-top:1px solid var(--ps-line)!important}
-#app .adminShell .topbar{min-height:76px!important;padding:14px 36px!important;gap:18px!important;background:rgba(252,253,251,.98)!important;border-bottom:1px solid var(--ps-line)!important}
+#app .adminShell .navLink.active{color:#174b3b!important;background:#e9f0e5!important}
+#app .adminShell .navLink:hover{background:#f0f4ee!important;color:var(--admin-ink)!important}
+#app .adminShell .sidebarFooter{gap:4px;margin-top:auto!important;padding-top:18px!important;border-top:1px solid var(--admin-line)!important}
+#app .adminShell .topbar{min-height:72px!important;padding:12px 36px!important;gap:16px!important;background:#fff!important;border-bottom:1px solid var(--admin-line)!important}
 #app .adminShell .topbarAdminTitle{display:flex;align-items:center;min-width:0;gap:0}
 #app .adminShell .topbarAdminTitle>span{display:none}
-#app .adminShell .topbarAdminTitle b{font-size:13px!important;font-weight:450!important;color:var(--ps-ui-muted)!important}
+#app .adminShell .topbarAdminTitle b{font-size:13px!important;font-weight:450!important;color:var(--admin-muted)!important}
 #app .adminShell .topbarActions{margin-left:auto;min-width:0}
-#app .adminShell .compactUser{display:flex;align-items:center;gap:10px!important;background:transparent!important;border:0!important;padding:0!important}
+#app .adminShell .portalHeaderBar .userPill.compactUser{display:flex;align-items:center;gap:10px!important;width:auto!important;min-width:0!important;max-width:150px!important;height:auto!important;flex:0 0 auto!important;background:none!important;border:0!important;padding:0!important}
 #app .adminShell .portalHeaderBar .userPill.compactUser>span:last-child{display:grid!important;gap:2px;min-width:0;flex:0 1 auto}
 #app .adminShell .compactUser b{font-size:12px!important;font-weight:500!important;line-height:1.35}
-#app .adminShell .compactUser small{font-size:10px!important;color:var(--ps-ui-muted);line-height:1.35}
-#app .adminShell .portalHeaderBar .userPill .avatarDot{display:grid!important;place-items:center;width:34px!important;height:34px!important;flex-shrink:0;border-radius:50%;background:var(--ps-sage)!important;color:var(--ps-ink)!important;font-size:10px!important;font-weight:500}
-#app .adminShell .portalHeaderBar .userPill.compactUser{width:auto!important;min-width:0!important;max-width:150px!important;height:auto!important;flex:0 0 auto!important}
-#app .adminShell .sidebarTop .adminBrand{width:118px!important;min-width:118px!important;flex:0 0 118px!important;margin:0!important}
-/* Quiet controls; semantic status and destructive actions retain their meaning. */
-#app .adminShell button:where(:not(.navLink,.iconBtn,.adminBrand,.pscInboxOpen)){min-height:44px;padding:10px 16px;border:1px solid var(--ps-ui-line)!important;border-radius:8px!important;background:#fff!important;color:var(--ps-ui-ink)!important;font:450 13px/1.45 "DM Sans",Arial,sans-serif!important;letter-spacing:0;box-shadow:none!important;white-space:normal;cursor:pointer}
-#app .adminShell button:where(:not(.navLink,.iconBtn,.adminBrand,.pscInboxOpen)):hover{background:#edf3e9!important;border-color:#b6c8b9!important}
-#app .adminShell button:is(.primary,.dark,.solid){background:var(--ps-ui-action)!important;color:#fff!important;border-color:var(--ps-ui-action)!important}
-#app .adminShell button:is(.primary,.dark,.solid):hover{background:#285547!important;border-color:#285547!important}
-#app .adminShell button.danger{background:#fff!important;color:#973f36!important;border-color:#e2c8c4!important}
+#app .adminShell .compactUser small{font-size:11px!important;color:var(--admin-meta);line-height:1.35}
+#app .adminShell .portalHeaderBar .userPill .avatarDot{display:grid!important;place-items:center;width:34px!important;height:34px!important;flex-shrink:0;border-radius:50%;background:#e9f0e5!important;color:#174b3b!important;font-size:10px!important;font-weight:500}
+/* Commands are always 44px high. Cards, navigation and calendar cells are distinct components. */
+#app .adminShell button.adminCommand,body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal) button.adminCommand{box-sizing:border-box!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;height:44px!important;min-height:44px!important;max-height:44px!important;width:auto;max-width:100%;padding:0 14px!important;margin:0;border:1px solid #cdd9d0!important;border-radius:8px!important;background:#fff!important;color:#254c3e!important;font:500 13px/20px "DM Sans",Arial,sans-serif!important;letter-spacing:0!important;white-space:nowrap!important;box-shadow:none!important;cursor:pointer;flex-shrink:0}
+#app .adminShell button.adminCommand:hover,body:has(.adminShell) .wsDialog button.adminCommand:hover{background:#edf3e9!important;border-color:#93af9d!important}
+#app .adminShell button.adminCommand:is(.primary,.dark,.solid),body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal) button.adminCommand.primary{background:#1d4939!important;color:#fff!important;border-color:#1d4939!important}
+#app .adminShell button.adminCommand:is(.primary,.dark,.solid):hover{background:#123e2d!important}
+#app .adminShell button.adminCommand.danger{color:#9c4038!important;border-color:#dbbfb9!important;background:#fff!important}
+#app .adminShell button.adminCommand.full{width:100%!important}
 #app .adminShell button:disabled{opacity:.48;cursor:default}
-#app .adminShell :is(button,a,input,select,textarea,summary):focus-visible{outline:2px solid var(--ps-ui-accent)!important;outline-offset:4px}
-#app .adminShell :is(input:not([type=checkbox]):not([type=radio]),select,textarea){min-width:0;max-width:100%;min-height:44px;padding:11px 13px!important;border:1px solid var(--ps-ui-line)!important;border-radius:8px!important;background:#fff!important;box-shadow:none!important;color:var(--ps-ui-ink)!important;font-size:14px!important;font-weight:400!important;line-height:1.5!important}
-#app .adminShell :is(.wsForm,label,.fieldLabel,.cmsFieldGrid label){font-weight:450!important;font-size:12px;line-height:1.55}
-#app .adminShell input[type=checkbox]{width:18px;height:18px;min-height:18px;accent-color:var(--ps-ui-accent);flex-shrink:0}
-#app .adminShell .wsToolbar{gap:12px;margin:0 0 24px;padding:0;background:none;border:0}
-#app .adminShell .wsToolbar input{flex:1 1 240px}
-#app .adminShell .wsToolbar select{min-width:180px}
-#app .adminShell :is(.wsActions,.commercialExports){gap:10px}
-#app .adminShell .filterBar .searchInput input{border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;min-width:0;flex:1}
-/* Surfaces indicate work areas, not a frame around every paragraph. */
-#app .adminShell :is(.panel,.wsPanel,.cmsProductMasterPanel,.cmsFormSection,.cmsMediaPanel,.cmsPublishPanel,.familyOptionCard,.fulfilCard){min-width:0;margin-bottom:24px;padding:26px!important;border:0!important;border-radius:12px!important;background:#f2f5ef!important;box-shadow:none!important}
-#app .adminShell :is(.panel,.wsPanel) :is(.panel,.wsPanel){padding:0!important;background:transparent!important;border-radius:0!important}
-#app .adminShell :is(.wsSuggestion,.wsEmpty){padding:20px!important;border:0!important;border-radius:8px!important;background:#f5f2e9!important;font-size:13px;line-height:1.7}
-#app .adminShell .wsEmpty:empty{display:none}
-#app .adminShell .psDisclosurePreview{display:none!important}
-#app .adminShell [data-ws-status]:empty{display:none}
-#app .adminShell .wsSplit{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:24px;align-items:start}
-#app .adminShell .wsSplit>.wsPanel{background:#f0f5f0!important}
-#app .adminShell .wsSplit>.wsPanel:first-child{background:#f5f6f2!important}
+body:has(.adminShell) .adminActionIcon *{pointer-events:none}
+#app .adminShell :is(button,a,input,select,textarea,summary):focus-visible{outline:2px solid #298369!important;outline-offset:3px}
+#app .adminShell :is(.wsActions,.commercialExports){gap:8px}
+#app .adminShell .wsActions>.adminCommand{flex:0 0 auto!important}
+#app .adminShell :is(input:not([type=checkbox]):not([type=radio]),select,textarea){min-width:0;max-width:100%;min-height:44px;padding:11px 13px!important;border:1px solid #cdd9d0!important;border-radius:8px!important;background:#fff!important;box-shadow:none!important;color:var(--admin-ink)!important;font-size:14px!important;font-weight:400!important;line-height:1.5!important}
+#app .adminShell :is(.wsForm,label,.fieldLabel,.cmsFieldGrid label){font-weight:500!important;font-size:12px;line-height:1.55}
+#app .adminShell input[type=checkbox]{width:18px;height:18px;min-height:18px;accent-color:#25745a;flex-shrink:0}
+#app .adminShell .wsToolbar{display:flex;gap:12px;margin:0 0 24px;padding:0;background:none;border:0}
+#app .adminShell .wsToolbar select{min-width:180px;width:auto}
+#app .adminShell .adminSearchField{display:flex;align-items:center;gap:10px;flex:1;min-width:0;min-height:44px;border:1px solid #cdd9d0;border-radius:8px;background:#fff;padding:0 13px}
+#app .adminShell .adminSearchField>.adminInlineIcon{color:#698172}
+#app .adminShell .wsToolbar .adminSearchField input,#app .adminShell .pscMailbox .adminSearchField input,#app .adminShell .adminSearchField input,#app .adminShell .filterBar .searchInput input{border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;min-width:0;flex:1;padding-inline:0!important;width:100%}
+/* Group boundaries belong to work areas. Record identity, action and metadata have separate rows. */
+#app .adminShell :is(.panel,.wsPanel,.cmsProductMasterPanel,.cmsFormSection,.cmsMediaPanel,.cmsPublishPanel,.familyOptionCard,.fulfilCard){min-width:0;margin-bottom:24px;padding:24px!important;border:1px solid #e1e7df!important;border-radius:12px!important;background:#fff!important;box-shadow:none!important}
+#app .adminShell :is(.panel,.wsPanel) :is(.panel,.wsPanel){padding:0!important;background:transparent!important;border:0!important;border-radius:0!important}
+#app .adminShell :is(.wsSuggestion,.wsEmpty){padding:18px!important;border:0!important;border-radius:8px!important;background:#f2f5ef!important;font-size:14px;line-height:1.6}
+#app .adminShell .wsEmpty:empty,#app .adminShell .psDisclosurePreview,#app .adminShell [data-ws-status]:empty{display:none!important}
+#app .adminShell .wsSplit{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:24px;align-items:start}
 #app .adminShell .wsPanel :is(h2,h3){margin-top:0}
-#app .adminShell .wsPill{background:#e6eee2!important;color:#40644b!important;border:0;border-radius:5px!important;font-size:11px!important;font-weight:450!important;line-height:1.5;padding:5px 9px!important}
-#app .adminShell :is(.wsCustomer,.wsResource){min-width:0;padding:24px!important;text-align:left;background:#f0f5f0!important;border:0!important;border-radius:10px!important}
-#app .adminShell :is(.wsCustomer,.wsResource):hover{background:#e6eee1!important}
-#app .adminShell :is(.wsCustomer,.wsResource) h2{font-size:21px!important;margin:15px 0 10px!important}
-#app .adminShell .wsResource h2{margin-top:0!important}
+#app .adminShell .wsPill{display:inline-flex;background:#eaf1e6!important;color:#395e42!important;border:0;border-radius:5px!important;font-size:11px!important;font-weight:500!important;line-height:1.5;padding:4px 8px!important}
+#app .adminShell .adminRecordMeta{display:flex;align-items:center;flex-wrap:wrap;gap:8px 18px;font-size:12px!important;line-height:1.5;color:var(--admin-meta);margin:14px 0}
+#app .adminShell .adminRecordMeta>span{display:inline-flex;align-items:center;gap:6px;min-width:0}
+#app .adminShell .adminRecordMeta .adminInlineIcon{flex-basis:14px;width:14px;height:14px}
+#app .adminShell .adminRecordMeta svg{width:14px;height:14px}
+#app .adminShell .adminRecordMeta .adminDueFlag{padding:3px 8px;background:#fbede4;color:#954d2d;border-radius:4px;font-size:11px;font-weight:500}
+#app .adminShell .adminRecordKind{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:#50685a}
+#app .adminShell .adminAccountLine{display:flex;align-items:center;gap:7px;font-size:13px!important;margin:8px 0 0!important}
+#app .adminShell .adminAccountLine .adminInlineIcon{color:#6b8373}
+#app .adminShell .wsStats{gap:14px;margin-bottom:28px}
+#app .adminShell .wsStats button{display:grid!important;grid-template-columns:1fr 44px;grid-template-rows:auto auto;gap:8px 12px!important;padding:20px!important;background:#edf2e9!important;border:0!important;border-radius:10px!important;text-align:left!important}
+#app .adminShell .wsStats button:nth-child(2){background:#edf2f4!important}
+#app .adminShell .wsStats button:nth-child(3){background:#f4f0e7!important}
+#app .adminShell .wsStats button:nth-child(4){background:#edf2ef!important}
+#app .adminShell .wsStats .adminSectionArt{grid-column:2;grid-row:1/3;align-self:start}
+#app .adminShell .wsStats b{grid-column:1;grid-row:1;font-size:34px;line-height:1.1;font-weight:450;color:var(--admin-ink)}
+#app .adminShell .wsStats button>span:last-child{grid-column:1/-1;grid-row:2;font-size:12px;line-height:1.5;color:#42594c;margin-top:8px}
+#app .adminShell .psDeal{display:block!important;padding:0 0 24px;margin:0 0 24px;border-bottom:1px solid var(--admin-line)}
+#app .adminShell .psDeal:has(+.psActionRow){border-bottom:0;padding-bottom:0}
+#app .adminShell .psDeal:last-child{margin-bottom:0;border:0;padding-bottom:0}
+#app .adminShell .adminDealHeading{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:start}
+#app .adminShell .psDeal h3{margin:10px 0 0!important}
+#app .adminShell .adminDealValue{text-align:right;display:grid;gap:4px;padding-top:3px}
+#app .adminShell .adminDealValue b{font-size:24px;font-weight:450;line-height:1.2;letter-spacing:-.025em;color:#174b3b}
+#app .adminShell .adminDealValue small{font-size:11px;color:var(--admin-meta)}
+#app .adminShell .psDealNext{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;margin:16px 0 0;background:#f3f6f0;border-radius:7px}
+#app .adminShell .psDealNext>.adminInlineIcon{color:#477361;margin-top:2px}
+#app .adminShell .psDealNext>div>span{font-size:11px;color:#597263;display:block;margin-bottom:4px}
+#app .adminShell .psDealNext p{font-size:14px!important;color:#223d31!important;margin:0!important;font-weight:450}
+#app .adminShell .psDealActions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;flex:initial!important;max-width:380px;margin:14px 0 0}
+#app .adminShell .psDealActions .adminCommand{width:100%!important;min-width:0}
+#app .adminShell .psActionRow{display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;padding:20px 0;border-top:1px solid var(--admin-line);border-bottom:0}
+#app .adminShell .psActionRow h3{margin:8px 0!important}
+#app .adminShell .psActionRow p{margin:0!important;font-size:14px!important}
+#app .adminShell .wsTask{display:block!important;padding:0 0 20px!important;margin:0 0 20px!important;border:0!important;border-bottom:1px solid var(--admin-line)!important}
+#app .adminShell .wsTask:last-child{margin:0!important;padding-bottom:0!important;border:0!important}
+#app .adminShell .wsTask>label{display:flex;align-items:flex-start;gap:12px;font-size:15px!important}
+#app .adminShell .wsTask>label>span{min-width:0}
+#app .adminShell .wsTask b{font-size:15px!important;font-weight:500;line-height:1.5;color:var(--admin-ink)}
+#app .adminShell .wsTask>label p{font-size:13px!important;font-weight:400!important;margin:6px 0 0}
+#app .adminShell .wsTask>.adminRecordMeta{margin:10px 0 14px 30px}
+#app .adminShell .wsTask .wsTaskActions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));flex:initial!important;max-width:330px!important;gap:8px;margin-left:30px;padding:0!important}
+#app .adminShell .wsTaskActions .adminCommand{width:100%!important;min-width:0}
+#app .adminShell .psQuietLinks{display:flex;flex-wrap:wrap;gap:10px;margin-top:0}
+#app .adminShell .psSalesLead{grid-template-columns:1fr 1.5fr 1.2fr;gap:28px;margin:0 0 28px;padding:24px;background:#edf2e9;border:0;border-radius:12px}
+#app .adminShell .psSalesLead small{font-size:12px;letter-spacing:0;color:#52695a}
+#app .adminShell .psSalesLead b{font-size:34px;font-weight:450;color:var(--admin-ink)}
+#app .adminShell .psSalesLead p{font-size:13px!important}
+#app .adminShell .psDealList{padding:24px;background:#fff;border:1px solid #e1e7df;border-radius:12px}
+#app .adminShell :is(.wsCustomerGrid,.wsResourceGrid,.psAccountGrid){gap:18px}
+#app .adminShell :is(.wsCustomer,.wsResource){min-width:0;padding:24px!important;text-align:left;background:#fff!important;border:1px solid #e1e7df!important;border-radius:10px!important}
+#app .adminShell :is(.wsCustomer,.wsResource):hover{background:#f0f5ec!important;border-color:#a9bfae!important}
+#app .adminShell :is(.wsCustomer,.wsResource)>.adminSectionArt{display:flex;margin-bottom:18px}
+#app .adminShell .wsCustomer>.wsPill{position:relative;float:right;margin-top:-51px}
+#app .adminShell :is(.wsCustomer,.wsResource) h2{font-size:19px!important;margin:0 0 10px!important}
 #app .adminShell :is(.wsCustomer,.wsResource) p{font-size:13px!important}
-#app .adminShell :is(.wsCustomerGrid,.wsResourceGrid,.psAccountGrid){gap:20px}
-#app .adminShell .wsRequest{min-width:0;padding:22px!important;gap:24px;background:#f1f5ef!important;border:0!important;border-radius:10px!important;text-align:left}
-#app .adminShell .wsRequest b{font-size:19px;font-weight:450;line-height:1.3;margin:8px 0}
-#app .adminShell .wsRequest p{font-size:13px!important;margin:8px 0 0}
-#app .adminShell .wsRequest small{font-size:11px;color:var(--ps-ui-muted)}
-#app .adminShell .wsRecordAction{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 13px;background:#fcfdfb;border:1px solid var(--ps-line);border-radius:7px;font-size:12px;font-weight:450}
+#app .adminShell .wsCustomer small{font-size:12px;color:var(--admin-meta)}
+#app .adminShell .wsRecordAction{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 14px;border:1px solid #cdd9d0;border-radius:7px;font-size:12px;font-weight:500;color:#254c3e;background:#fff}
 #app .adminShell .wsList{gap:12px}
-/* Today: concise priorities, visible queues and a distinct account-care section. */
-#app .adminShell [data-psc-workspace=today]>.psRoutine{display:none}
-#app .adminShell .wsStats{gap:14px;margin-bottom:30px}
-#app .adminShell .wsStats button{padding:22px!important;background:#edf2eb!important;border:0!important;border-radius:10px!important;gap:12px}
-#app .adminShell .wsStats button:nth-child(2){background:#edf2f5!important}
-#app .adminShell .wsStats button:nth-child(3){background:#f5f2e9!important}
-#app .adminShell .wsStats button:nth-child(4){background:#f1f3ef!important}
-#app .adminShell .wsStats b{font-size:40px;line-height:1.1;font-weight:450;color:var(--ps-ui-ink)}
-#app .adminShell .wsStats span{font-size:12px;line-height:1.5;color:var(--ps-ui-muted)}
-#app .adminShell [data-psc-workspace=today]>.wsPanel{background:#f5f2e9!important}
-#app .adminShell :is(.psDeal,.psActionRow){gap:24px;padding:22px 0;border-bottom:1px solid #dde5d9}
-#app .adminShell :is(.psDeal,.psActionRow):last-child{border-bottom:0;padding-bottom:0}
-#app .adminShell .psDeal h3{margin:12px 0 10px!important}
-#app .adminShell .psDeal p{margin:7px 0!important;font-size:13px!important}
-#app .adminShell .psDealNext b{text-transform:none;font-size:12px;font-weight:500;letter-spacing:0}
-#app .adminShell .psDealActions{flex:0 0 155px;gap:8px}
-#app .adminShell .psDealActions>b{font-size:22px;font-weight:450;color:var(--ps-ui-ink)}
-#app .adminShell :is(.psDeal small,.psActionRow small){font-size:11px;color:var(--ps-ui-muted);letter-spacing:0;text-transform:none}
-#app .adminShell .psQuietLinks{gap:12px;margin-top:6px}
-#app .adminShell .wsTask{gap:14px;padding:18px 0;border-color:#dce5d8}
-#app .adminShell .wsTask b{font-weight:500;font-size:14px;line-height:1.5}
-#app .adminShell .wsTask button{font-size:12px!important;margin:0 0 8px;min-height:40px;padding:8px 11px}
-#app .adminShell .wsTask .wsTaskActions{flex:0 0 112px;max-width:112px}
-#app .adminShell .wsTask.overdue small{color:#976143}
-#app .adminShell .psSalesLead{grid-template-columns:minmax(130px,.65fr) minmax(0,1.25fr) minmax(0,1fr);gap:28px;margin:0 0 28px;padding:26px;background:#edf2eb;border:0;border-radius:12px}
-#app .adminShell .psSalesLead small{font-size:11px;letter-spacing:0;color:var(--ps-ui-muted)}
-#app .adminShell .psSalesLead b{font-size:36px;font-weight:450;color:var(--ps-ui-ink)}
-#app .adminShell .psSalesLead p{font-size:12px!important}
+#app .adminShell .wsRequest{display:grid!important;grid-template-columns:minmax(0,1fr) 180px;padding:20px!important;gap:24px;background:#fff!important;border:1px solid #e1e7df!important;border-radius:10px!important;text-align:left}
+#app .adminShell .wsRequest>span:last-child{max-width:none;width:100%}#app .adminShell .wsRequest>span:last-child :is(small,.wsPill){white-space:nowrap}
+#app .adminShell .wsRequest:hover{background:#f3f7ef!important;border-color:#a9bfae!important}
+#app .adminShell .adminRequestIdentity{display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 16px;align-content:start}
+#app .adminShell .adminRecordArt{grid-column:1;grid-row:1/4}
+#app .adminShell .adminRequestIdentity>:not(.adminRecordArt){grid-column:2}
+#app .adminShell .wsRequest b{font-size:18px;font-weight:500;line-height:1.3;margin:2px 0}
+#app .adminShell .wsRequest p{font-size:13px!important;margin:4px 0 0}
+#app .adminShell .wsRequest small{font-size:12px;color:var(--admin-meta)}
 #app .adminShell .wsWeek{gap:10px}
-#app .adminShell .wsWeek button{background:#edf2eb!important;border:0!important;gap:8px;padding:16px 8px}
-#app .adminShell .wsWeek b{font-size:28px;font-weight:450}
-#app .adminShell .psRoutine{padding:16px 0;gap:16px 28px;border-color:var(--ps-line);font-size:13px}
+#app .adminShell .wsWeek button{background:#fff!important;border:1px solid #e1e7df!important;gap:8px;padding:16px 8px;border-radius:8px}
+#app .adminShell .wsWeek b{font-size:26px;font-weight:450}
+#app .adminShell .psRoutine{padding:16px 0;gap:16px 28px;border-color:var(--admin-line);font-size:13px}
 #app .adminShell .psSetupCard ol{margin:20px 0}
-#app .adminShell .psSetupCard li{gap:18px;padding:12px 0;border-color:var(--ps-line);font-size:13px}
-/* Email, commercial evidence and dense data share the same typography. */
-#app .adminShell .pscMailbox{padding:26px;background:#f2f5ef;border-radius:12px}
-#app .adminShell .pscInboxToolbar{margin-bottom:20px}
-#app .adminShell .pscMailbox>label{font-size:12px;line-height:1.6;color:var(--ps-ui-muted)}
-#app .adminShell .pscInboxRow{padding:24px 0;border-color:var(--ps-line)}
-#app .adminShell .pscInboxOpen{padding:0;background:none;border:0;min-height:44px;text-align:left;color:var(--ps-ui-ink)}
-#app .adminShell .pscInboxOpen b{font-size:20px;font-weight:450;line-height:1.4}
-#app .adminShell .pscInboxOpen p{font-size:13px;line-height:1.65}
-#app .adminShell .pscInboxOpen :is(span,small){font-size:12px;color:var(--ps-ui-muted)}
-#app .adminShell :is(.commercialInboxFilters,.commercialInboxCard,.quoteStatePanel,.notice){padding:22px;border:0!important;background:#f1f5ef!important;border-radius:10px!important;box-shadow:none!important}
+#app .adminShell .psSetupCard li{gap:18px;padding:12px 0;border-color:var(--admin-line);font-size:13px}
+/* Inbox is a list of correspondence, with toolbar, navigation and message actions separated. */
+#app .adminShell .pscMailbox{padding:24px!important;background:#fff!important;border:1px solid #e1e7df!important;border-radius:12px}
+#app .adminShell .pscInboxToolbar{margin-bottom:24px}
+#app .adminShell .pscInboxToolbar>.wsActions{margin:0 0 12px}
+#app .adminShell .pscInboxToolbar p{font-size:12px!important;margin:0;color:var(--admin-meta)}
+#app .adminShell .pscMailbox>.wsActions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));max-width:560px;padding-bottom:22px;margin-bottom:24px;border-bottom:1px solid var(--admin-line)}
+#app .adminShell .pscMailbox>.wsActions>.adminCommand{width:100%}
+#app .adminShell .pscMailbox>label{display:grid;gap:8px;font-size:12px;line-height:1.6;color:var(--admin-muted);margin-bottom:12px}
+#app .adminShell .pscInboxRow{padding:24px 0;border-color:var(--admin-line)}
+#app .adminShell .pscInboxOpen{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px 20px;padding:0;background:none;border:0;min-height:44px;text-align:left;color:var(--admin-ink);width:100%}
+#app .adminShell .pscInboxOpen b{grid-column:1;grid-row:1;font-size:18px;font-weight:500;line-height:1.4}
+#app .adminShell .pscInboxOpen span{grid-column:1;grid-row:2;font-size:12px;color:var(--admin-meta)}
+#app .adminShell .pscInboxOpen small{grid-column:2;grid-row:1/3;font-size:12px;color:var(--admin-meta)}
+#app .adminShell .pscInboxOpen p{grid-column:1/-1;font-size:14px;line-height:1.6;margin:6px 0 0}
+#app .adminShell .pscInboxRow>.wsActions{margin:16px 0 0}
+#app .adminShell :is(.commercialInboxFilters,.commercialInboxCard,.quoteStatePanel,.notice){padding:22px;border:1px solid #e1e7df!important;background:#fff!important;border-radius:10px!important;box-shadow:none!important}
 #app .adminShell .commercialInboxFilters{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:24px}
 #app .adminShell .commercialInboxFilters label{display:flex;align-items:center;gap:12px}
 #app .adminShell .commercialInboxCard{gap:24px;margin-bottom:20px}
 #app .adminShell .commercialInboxCard.overdue{border-left:3px solid #bd8b64!important}
-#app .adminShell .commercialInboxCard h3{font-size:20px!important;font-weight:450!important;margin:12px 0!important}
+#app .adminShell .commercialInboxCard h3{font-size:20px!important;font-weight:500!important;margin:12px 0!important}
 #app .adminShell .commercialInboxCard :is(p,label,summary){font-size:13px;line-height:1.65}
-#app .adminShell .commercialRecordStatus{font-size:11px;line-height:1.5;color:var(--ps-ui-accent)}
+#app .adminShell .commercialRecordStatus{font-size:12px;line-height:1.5;color:#395f49}
 #app .adminShell .tableWrap{max-width:100%;min-width:0;overflow:auto;overscroll-behavior-inline:contain;border-radius:8px;background:#fff}
-#app .adminShell .dataTable th{padding:13px 16px!important;font-size:11px!important;font-weight:500!important;letter-spacing:0!important;background:#edf2eb!important;color:var(--ps-ui-muted)!important}
+#app .adminShell .dataTable th{padding:13px 16px!important;font-size:11px!important;font-weight:500!important;letter-spacing:0!important;background:#f0f4ed!important;color:#526759!important}
 #app .adminShell .dataTable td{padding:17px 16px!important;font-size:13px!important;line-height:1.55;vertical-align:middle}
 #app .adminShell .dataTable :is(.sub,.mono){font-size:12px}
 #app .adminShell .dataTable tbody tr:hover{background:#f4f7f1}
-#app .adminShell .cmsEditorLayout{grid-template-columns:minmax(0,1fr) minmax(240px,.55fr);gap:24px}
+#app .adminShell .cmsEditorLayout{grid-template-columns:minmax(0,1fr) minmax(280px,.55fr);gap:24px}
 #app .adminShell :is(.cmsFieldGrid,.cmsStorefrontGrid){gap:20px}
 #app .adminShell .cmsPublishPanel{background:#f5f2e9!important}
 #app .adminShell :is(.cmsImageReview,.cmsImageProvenanceNote){font-size:12px;line-height:1.6}
-/* Native dialogs are outside #app. Keep business forms and preview/approval controls. */
-body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal){border:1px solid var(--ps-line)!important;border-radius:12px!important;padding:28px!important;background:var(--ps-paper)!important;color:var(--ps-ui-ink);box-shadow:0 18px 70px #143c2b18!important;max-width:calc(100vw - 32px);max-height:90dvh;overflow:auto}
+/* Native dialogs retain the exact forms, previews and approval controls. */
+body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal){border:1px solid #dce4dd!important;border-radius:12px!important;padding:28px!important;background:#fff!important;color:#172f2a;box-shadow:0 18px 70px #143c2b18!important;max-width:calc(100vw - 32px);max-height:90dvh;overflow:auto}
 body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal)::backdrop{background:#193f3540;backdrop-filter:blur(3px)}
-body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal) :is(h2,h3){font-weight:450!important;letter-spacing:-.03em;line-height:1.25}
+body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal) :is(h2,h3){font-weight:500!important;letter-spacing:-.025em;line-height:1.3}
 body:has(.adminShell) .wsDialogHead{margin-bottom:24px;gap:20px}
-body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal) :is(label,.fieldLabel){font-size:12px;font-weight:450;line-height:1.5}
-body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal) :is(input:not([type=checkbox]),select,textarea){min-width:0;max-width:100%;min-height:44px;padding:11px 13px!important;border:1px solid var(--ps-line)!important;border-radius:8px!important;font-size:14px!important;line-height:1.5!important;box-shadow:none!important;background:#fff!important}
-body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal) button{min-height:44px;padding:10px 16px;border:1px solid var(--ps-line);border-radius:8px;background:#fff;font-weight:450;line-height:1.45;color:var(--ps-ui-ink)}
-body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal) button.primary{background:var(--ps-ui-action)!important;color:#fff!important;border-color:var(--ps-ui-action)!important}
-body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal) :is(button,input,select,textarea):focus-visible{outline:2px solid var(--ps-ui-accent)!important;outline-offset:3px}
+body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal) :is(label,.fieldLabel){font-size:12px;font-weight:500;line-height:1.5}
+body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal) :is(input:not([type=checkbox]),select,textarea){min-width:0;max-width:100%;min-height:44px;padding:11px 13px!important;border:1px solid #cdd9d0!important;border-radius:8px!important;font-size:14px!important;line-height:1.5!important;box-shadow:none!important;background:#fff!important}
+body:has(.adminShell) .wsDialogHead button{display:grid!important;place-items:center;width:44px;height:44px;padding:0;border:1px solid #dce4dd;border-radius:8px;background:#fff;color:#244c3c;font-size:22px}
+body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal) :is(button,input,select,textarea):focus-visible{outline:2px solid #298369!important;outline-offset:3px}
 body:has(.adminShell) .wsDialog .wsColumns{gap:20px}
 @media(max-width:1200px){#app .adminShell .wsSplit{grid-template-columns:1fr}#app .adminShell .psSalesLead{grid-template-columns:1fr 1.5fr}#app .adminShell .psSalesLead>div:last-child{grid-column:1/-1}#app .adminShell .cmsEditorLayout{grid-template-columns:1fr}}
-@media(max-width:980px){#app .adminShell .sidebarTop .mobileClose{display:inline-flex!important;position:absolute;right:0;top:0;align-items:center;justify-content:center;min-width:44px;min-height:44px;background:transparent;border:0}#app .adminShell .sidebarTop .mobileClose svg{width:20px;height:20px}#app .adminShell .sidebar{width:min(290px,86vw)!important;transform:translateX(-100%)!important}#app .adminShell .sidebar.sidebarOpen{transform:translateX(0)!important}#app .adminShell .mainArea{margin-left:0!important;width:100%!important}#app .adminShell .topbar{padding:14px 24px!important}#app .adminShell .contentWrap{padding:30px 24px 48px!important}#app .adminShell :is(.wsHeader,.pageHeader){gap:22px;flex-wrap:wrap}#app .adminShell .wsHeader .wsActions{margin-top:0}#app .adminShell :is(.wsCustomerGrid,.wsResourceGrid){grid-template-columns:repeat(2,minmax(0,1fr))}#app .adminShell .commercialInboxCard{grid-template-columns:1fr}}
-@media(max-width:600px){#app .adminShell .contentWrap{padding:24px 18px 40px!important}#app .adminShell .topbar{min-height:72px!important;padding:12px 18px!important;gap:12px!important}#app .adminShell .topbarAdminTitle b{max-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#app .adminShell .compactUser>span:last-child{display:grid!important;max-width:94px}#app .adminShell .compactUser b{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}#app .adminShell h1{font-size:36px!important}#app .adminShell h2{font-size:23px!important}#app .adminShell :is(.wsHeader,.pageHeader){display:block;margin-bottom:28px!important}#app .adminShell :is(.wsHeader,.pageHeader)>div>p{font-size:13px!important}#app .adminShell .wsHeader .wsActions{display:flex;margin:20px 0 0;gap:10px}#app .adminShell .wsHeader .wsActions button{flex:0 1 auto}#app .adminShell .wsStats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:24px}#app .adminShell .wsStats button{padding:18px!important}#app .adminShell .wsStats b{font-size:34px}#app .adminShell :is(.panel,.wsPanel,.cmsProductMasterPanel,.cmsFormSection,.cmsMediaPanel,.cmsPublishPanel,.familyOptionCard,.fulfilCard){padding:20px!important;margin-bottom:20px}#app .adminShell :is(.panelHeader,.psSectionHead){flex-wrap:wrap;align-items:start;gap:14px}#app .adminShell .psSectionHead>button{margin-top:0}#app .adminShell :is(.psDeal,.psActionRow){display:block;padding:20px 0}#app .adminShell .psDealActions{display:flex;flex-wrap:wrap;flex-basis:auto;align-items:start;gap:8px;margin-top:20px}#app .adminShell .psDealActions>b,#app .adminShell .psDealActions>small{flex-basis:100%}#app .adminShell .psActionRow>button{margin-top:14px}#app .adminShell .wsTask{display:block}#app .adminShell .wsTask .wsTaskActions{display:flex;flex-wrap:wrap;max-width:none;gap:8px;margin-top:14px;padding-left:32px}#app .adminShell .wsTask button{margin:0}#app .adminShell :is(.wsCustomerGrid,.wsResourceGrid,.psAccountGrid,.cmsFieldGrid,.cmsStorefrontGrid,.wsColumns){grid-template-columns:1fr}#app .adminShell .wsRequest{padding:20px!important;gap:16px}#app .adminShell .wsRequest>span:last-child{max-width:110px}#app .adminShell .wsToolbar{display:flex;flex-wrap:wrap}#app .adminShell .wsToolbar :is(input,select){flex:1 1 100%;width:100%}#app .adminShell .psSalesLead{grid-template-columns:1fr;padding:22px;gap:24px}#app .adminShell .wsWeek{gap:4px}#app .adminShell .wsWeek button{padding:12px 2px;min-width:0;font-size:10px!important}#app .adminShell .wsWeek b{font-size:22px}#app .adminShell .pscMailbox{padding:20px}#app .adminShell .commercialInboxFilters label{width:100%;flex-wrap:wrap}#app .adminShell .commercialInboxFilters select{width:100%}body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal){padding:22px!important}body:has(.adminShell) .wsDialog .wsColumns{grid-template-columns:1fr}}
+@media(max-width:980px){#app .adminShell .sidebarTop .mobileClose{display:inline-flex!important;position:absolute;right:0;top:0;align-items:center;justify-content:center;min-width:44px;min-height:44px;background:transparent;border:0}#app .adminShell .sidebarTop .mobileClose svg{width:20px;height:20px}#app .adminShell .sidebar{width:min(290px,86vw)!important;transform:translateX(-100%)!important}#app .adminShell .sidebar.sidebarOpen{transform:translateX(0)!important}#app .adminShell .mainArea{margin-left:0!important;width:100%!important}#app .adminShell .topbar{padding:12px 24px!important}#app .adminShell .contentWrap{padding:28px 24px 48px!important}#app .adminShell :is(.wsHeader,.pageHeader){gap:22px;flex-wrap:wrap}#app .adminShell :is(.wsCustomerGrid,.wsResourceGrid){grid-template-columns:repeat(2,minmax(0,1fr))}#app .adminShell .commercialInboxCard{grid-template-columns:1fr}}
+@media(max-width:600px){#app .adminShell .psSectionHead:has(>div>p){display:block}#app .adminShell .psSectionHead:has(>div>p)>.adminCommand{margin-top:16px}#app .adminShell .contentWrap{padding:24px 18px 40px!important}#app .adminShell .topbar{min-height:72px!important;padding:12px 18px!important;gap:12px!important}#app .adminShell .topbarAdminTitle b{max-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#app .adminShell .compactUser b{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}#app .adminShell .compactUser>span:last-child{max-width:94px}#app .adminShell h1{font-size:32px!important;gap:12px}#app .adminShell .adminPageArt,#app .adminShell .adminPageArt img{width:44px;height:44px}#app .adminShell h2{font-size:20px!important}#app .adminShell :is(.wsHeader,.pageHeader){display:block;margin-bottom:24px!important}#app .adminShell :is(.wsHeader,.pageHeader)>div>p{font-size:13px!important}#app .adminShell .wsHeader .wsActions{display:flex;flex-wrap:wrap;margin:20px 0 0;gap:8px}#app .adminShell .wsStats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:24px}#app .adminShell .wsStats button{padding:16px!important;grid-template-columns:1fr 32px}#app .adminShell .wsStats .adminSectionArt,#app .adminShell .wsStats .adminSectionArt img{width:32px;height:32px}#app .adminShell .wsStats b{font-size:30px}#app .adminShell :is(.panel,.wsPanel,.cmsProductMasterPanel,.cmsFormSection,.cmsMediaPanel,.cmsPublishPanel,.familyOptionCard,.fulfilCard){padding:18px!important;margin-bottom:20px}#app .adminShell :is(.panelHeader,.psSectionHead){flex-wrap:wrap;align-items:center;gap:14px;padding-bottom:18px!important}#app .adminShell .adminSectionTitle h2{font-size:18px!important}#app .adminShell .adminDealHeading{grid-template-columns:1fr;gap:12px}#app .adminShell .adminDealValue{display:flex;align-items:baseline;gap:8px;text-align:left;padding:0}#app .adminShell .adminDealValue b{font-size:23px}#app .adminShell .psDealActions{grid-template-columns:1fr;max-width:none}#app .adminShell .psActionRow{grid-template-columns:1fr;gap:14px}#app .adminShell .psActionRow>.adminCommand{justify-self:start}#app .adminShell .wsTask>.adminRecordMeta,#app .adminShell .wsTask .wsTaskActions{margin-left:0}#app .adminShell .wsTask .wsTaskActions{max-width:none!important;grid-template-columns:repeat(2,minmax(0,1fr))}#app .adminShell .wsTaskActions .adminCommand{padding:0 8px!important;font-size:12px!important}#app .adminShell :is(.wsCustomerGrid,.wsResourceGrid,.psAccountGrid,.cmsFieldGrid,.cmsStorefrontGrid,.wsColumns){grid-template-columns:1fr}#app .adminShell .wsRequest{grid-template-columns:1fr;padding:18px!important;gap:16px}#app .adminShell .wsRequest>span:last-child{max-width:none;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;width:100%;gap:12px}#app .adminShell .wsRequest>span:last-child>.wsRecordAction{margin-left:auto}#app .adminShell .wsToolbar{display:flex;flex-wrap:wrap}#app .adminShell .wsToolbar :is(.adminSearchField,select){flex:1 1 100%;width:100%}#app .adminShell .psSalesLead{grid-template-columns:1fr;padding:22px;gap:24px}#app .adminShell .psDealList{padding:18px}#app .adminShell .wsWeek{gap:4px}#app .adminShell .wsWeek button{padding:12px 2px;min-width:0;font-size:10px!important}#app .adminShell .wsWeek b{font-size:22px}#app .adminShell .pscMailbox{padding:18px!important}#app .adminShell .pscInboxToolbar>.wsActions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}#app .adminShell .pscInboxToolbar>.wsActions>.adminCommand{width:100%;padding-inline:8px!important;font-size:12px!important}#app .adminShell .pscInboxToolbar>.wsActions>.adminCommand:last-child{grid-column:1/-1}#app .adminShell .pscMailbox>.wsActions{grid-template-columns:repeat(2,minmax(0,1fr))}#app .adminShell .pscInboxOpen{grid-template-columns:1fr;gap:6px}#app .adminShell .pscInboxOpen small{grid-column:1;grid-row:3}#app .adminShell .pscInboxOpen p{grid-row:4}#app .adminShell .pscInboxRow>.wsActions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}#app .adminShell .pscInboxRow>.wsActions>.adminCommand{width:100%}#app .adminShell .commercialInboxFilters label{width:100%;flex-wrap:wrap}#app .adminShell .commercialInboxFilters select{width:100%}body:has(.adminShell) :is(.wsDialog,.modalBackdrop .modal){padding:22px!important}body:has(.adminShell) .wsDialog .wsColumns{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){#app .adminShell *,body:has(.adminShell) .wsDialog *{transition:none!important;scroll-behavior:auto!important}}
