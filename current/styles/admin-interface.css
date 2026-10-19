@@ -71,7 +71,7 @@ body:has(.adminShell) .adminActionIcon *{pointer-events:none}
 #app .adminShell .adminSearchField>.adminInlineIcon{color:#698172}
 #app .adminShell .wsToolbar .adminSearchField input,#app .adminShell .pscMailbox .adminSearchField input,#app .adminShell .adminSearchField input,#app .adminShell .filterBar .searchInput input{border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;min-width:0;flex:1;padding-inline:0!important;width:100%}
 /* Group boundaries belong to work areas. Record identity, action and metadata have separate rows. */
-#app .adminShell :is(.panel,.wsPanel,.cmsProductMasterPanel,.cmsFormSection,.cmsMediaPanel,.cmsPublishPanel,.familyOptionCard,.fulfilCard){min-width:0;margin-bottom:24px;padding:24px!important;border:1px solid #e1e7df!important;border-radius:12px!important;background:#fff!important;box-shadow:none!important}
+#app .adminShell :is(.panel,.wsPanel,.cmsProductMasterPanel,.cmsFormSection,.cmsMediaPanel,.cmsPublishPanel,.familyOptionCard,.fulfilCard){min-width:0;margin-bottom:24px;padding:24px!important;border:0!important;border-radius:12px!important;background:#fff!important;box-shadow:none!important}
 #app .adminShell :is(.panel,.wsPanel) :is(.panel,.wsPanel){padding:0!important;background:transparent!important;border:0!important;border-radius:0!important}
 #app .adminShell :is(.wsSuggestion,.wsEmpty){padding:18px!important;border:0!important;border-radius:8px!important;background:#f2f5ef!important;font-size:14px;line-height:1.6}
 #app .adminShell .wsEmpty:empty,#app .adminShell .psDisclosurePreview,#app .adminShell [data-ws-status]:empty{display:none!important}
@@ -152,7 +152,7 @@ body:has(.adminShell) .adminActionIcon *{pointer-events:none}
 #app .adminShell .psSetupCard ol{margin:20px 0}
 #app .adminShell .psSetupCard li{gap:18px;padding:12px 0;border-color:var(--admin-line);font-size:13px}
 /* Inbox is a list of correspondence, with toolbar, navigation and message actions separated. */
-#app .adminShell .pscMailbox{padding:24px!important;background:#fff!important;border:1px solid #e1e7df!important;border-radius:12px}
+#app .adminShell .pscMailbox{padding:24px!important;background:#fff!important;border:0!important;border-radius:12px}
 #app .adminShell .pscInboxToolbar{margin-bottom:24px}
 #app .adminShell .pscInboxToolbar>.wsActions{margin:0 0 12px}
 #app .adminShell .pscInboxToolbar p{font-size:12px!important;margin:0;color:var(--admin-meta)}
