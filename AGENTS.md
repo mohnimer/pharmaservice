@@ -38,3 +38,5 @@ These rules implement Moe's instructions of 12 October 2026.
 - Do not add decorative eyebrow/kicker/pre-heading text. This applies across the homepage, catalogue and procurement basket UI. Preserve functional labels and approval/preview status in normal sentence case near the information they qualify.
 - The homepage hero uses the approved Healthcare procurement for institutions composition and original hero image. Do not replace it with isolated catalogue packshots.
 - Procurement baskets must address meaningful institutional purchasing tasks. Unapproved scopes remain previews; never describe them as complete clinic standards or approved kits.
+
+- Customer action links use restrained buttons without decorative arrow glyphs. Preserve functional back navigation and disclosure/dropdown controls.
