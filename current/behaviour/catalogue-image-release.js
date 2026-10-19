@@ -11,14 +11,6 @@
     "review": "Supplier-mapped product identity and visible brand/form reviewed; quotation confirms exact pack"
   },
   {
-    "sku": "PS-AC-0DEC19ACEA05",
-    "name": "Aldomet 250 mg — 30 Tablets",
-    "family_id": "PSC-IS-166",
-    "image_url": "/assets/products/supplier-20261014/aldomet_250_mg_30_tablets.jpg",
-    "source": "Supplier product photograph; supplied 6 October 2026",
-    "review": "Supplier-mapped product identity and visible brand/form reviewed; quotation confirms exact pack"
-  },
-  {
     "sku": "PS-AC-1F1A9E6B4FC8",
     "name": "Apex 400 mg — 6 Capsules",
     "family_id": "PSC-IS-143",
@@ -87,14 +79,6 @@
     "name": "Gevhart 20 mg — 30 Tablets",
     "family_id": "PSC-IS-170",
     "image_url": "/assets/products/supplier-20261014/gevhart_20_mg_30_tablets.jpg",
-    "source": "Supplier product photograph; supplied 6 October 2026",
-    "review": "Supplier-mapped product identity and visible brand/form reviewed; quotation confirms exact pack"
-  },
-  {
-    "sku": "PS-AC-EF89A3D78DE4",
-    "name": "HY+AI Oral Gel — 12 g",
-    "family_id": "PSC-IS-168",
-    "image_url": "/assets/products/supplier-20261014/hyplusai_oral_gel_12_g.jpg",
     "source": "Supplier product photograph; supplied 6 October 2026",
     "review": "Supplier-mapped product identity and visible brand/form reviewed; quotation confirms exact pack"
   },
@@ -3493,6 +3477,22 @@
     "image_url": "/assets/products/verified-20261019/acfc46e23b78b3c53f9b.jpg",
     "source": "https://www.zozopharmacy.com/products/k-flam-50mg-tab-20s",
     "review": "Codex visual review 2026-10-19: brand/product/form/strength and stated pack checked where specified; no supplier backdrop/watermark. Original source bytes preserved. No price, stock, registration or regulatory approval."
+  },
+  {
+    "sku": "PS-AC-0DEC19ACEA05",
+    "name": "Aldomet 250 mg — 30 Tablets",
+    "family_id": "PSC-IS-166",
+    "image_url": "/assets/products/verified-20261019/985e9dc0be3325c79a6d.jpg",
+    "source": "https://www.myaster.com/en/online-pharmacy/p/aldomet-250mg-tablets-pack-of-30s/1000422",
+    "review": "Codex full-size visual review 2026-10-19: exact Aldomet250mg/30-tablet or Hy+Al12g pack label checked; complete original pack, no supplier branding/backdrop/watermark. Original bytes retained. Image-only review; no approval of price, stock, product facts or regulatory status."
+  },
+  {
+    "sku": "PS-AC-EF89A3D78DE4",
+    "name": "HY+AI Oral Gel — 12 g",
+    "family_id": "PSC-IS-168",
+    "image_url": "/assets/products/verified-20261019/a823e04eb5d9cd09a093.jpg",
+    "source": "https://www.myaster.com/en/online-pharmacy/p/intermed-hy-al-oral-gel-for-mouth-ulcer-12g/1062439",
+    "review": "Codex full-size visual review 2026-10-19: exact Aldomet250mg/30-tablet or Hy+Al12g pack label checked; complete original pack, no supplier branding/backdrop/watermark. Original bytes retained. Image-only review; no approval of price, stock, product facts or regulatory status."
   }
 ];
  const refresh=window.PS_CATALOGUE_REFRESH;
