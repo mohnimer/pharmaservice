@@ -4,7 +4,7 @@ The approved homepage hero is restored with its original Healthcare procurement 
 
 No decorative eyebrow/kicker text is used. The previous global removal rule again applies to the new experience. Functional preview/approval labels remain near the information they qualify. The compact native public/mobile navigation and account routes are preserved.
 
-Procurement previews now address institutional purchasing tasks: Clinic opening & fit-out, Clinical consumables restock, and First-aid points & refills. Their discovery cards show useful scope information without single-product promotional photography. Exact product photographs remain on actual catalogue/detail and component lines. These previews do not promise complete clinic compliance or replace a site-specific requirement list.
+Procurement previews now address institutional purchasing tasks: Clinic opening & fit-out, Clinical consumables restock, and First-aid points & refills. Their discovery cards use a coherent series of AI-created editorial task scenes alongside useful scope information. Scene assets are separate from product photo bindings, retain their full 3:2 compositions, and explicitly illustrate a task rather than prove exact contents. No generated image is used as an exact SKU/component photograph. Exact product photographs remain on actual catalogue/detail and component lines. These previews do not promise complete clinic compliance or replace a site-specific requirement list.
 
 ## Ready basket contract
 
