@@ -413,9 +413,9 @@ window.PS_SCHOOL_BASKETS = {
           "1 card"
         ],
         [
-          "Saline irrigation, suitable container",
-          "INST-0112",
-          "1 suitable pack"
+          "Sealed eye-rinse provision (subject to laboratory risk review)",
+          "",
+          "Exact type and size subject to site risk approval"
         ],
         [
           "Protective goggles",
