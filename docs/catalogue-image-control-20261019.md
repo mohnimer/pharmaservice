@@ -21,3 +21,11 @@ Customer visual review found unrelated red-bag and yellow-bin fragments beneath 
 This additional binding makes 227 documented image bindings (129 illustrative references). The new image is an illustrative configuration, with exact equipment, connections, flow range, fill status and supplied accessories determined in quotation. It establishes no selected brand/model or UAE approval. The existing Specialist route record is eligible only for the explicitly reference-labelled overlay; brand, pack and all other controlled fields stay unchanged.
 
 Mobile and desktop checks cover the actual card and Details rendering, matching photo identity, reference wording, complete unit framing and exact request identity. No source-master, SKU, pack, price, stock, DHA wording or database edits accompany this correction.
+
+## Exact-pack gallery follow-up — 19 October 2026
+
+Four additional clean originals retain the original controlled records: Glencet5mg/10 tablets (clean manufacturer pack without the distributor sticker), Wolaid long-plastic100 strips, Elegant Clozac60ml face wash and Livatrum30 tablets. Full product galleries supplied the clean Glencet front. The Clozac manufacturer page identifies the60ml presentation; its separate high-resolution graphic has a stray fragment, so the clean full retailer photograph is used. No source labels or pack artwork are generated or altered.
+
+The controlled Wolaid name19.75mm is retained verbatim. A source dimension written19×75mm is not an authorized catalogue correction. Photo recognition of the100-strip long-plastic product does not close the separate identity/requirement decisions. Exact pack names/IDs and DHA conditional wording remain unchanged. Old Glencet supplier-sticker bytes stay blocked even though a new clean exact-pack photo is now available.
+
+The documented overlay now contains231 final image bindings:102 named-product photos and129 explicitly illustrative references. This increment fills three previously empty exact-product photos and replaces one soft source (Clozac). It does not approve product claims printed on the packs, facts, market registration, availability, prices or suitability. Historical files and previous release counts remain preserved above.

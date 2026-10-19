@@ -41,7 +41,7 @@ try{for(const width of [390,1440]){
   if(meta.crop){await page.screenshot({path:path.join(output,width+'-'+item.sku+'-detail.png')});framed.push(item.sku);}
   if(legacy)await detail.locator('button[data-modal-close]').click();else await page.keyboard.press('Escape');checked++;if(checked%25===0)console.log('Checked image/details',width,checked);
  }
- for(const sku of ['PS-AC-A1C278062616','PSC-WND-014','PS-AC-64F829D7DBF1']){
+ for(const sku of ['PS-AC-A1C278062616','PSC-WND-014']){
   const card=page.locator('.productGrid .productCard').filter({has:page.locator('[data-product-view="'+sku+'"]')});
   if(!await card.count())continue;
   assert.equal(await card.locator('.productMainImage').count(),0,sku+' rejected photo remains withheld');
