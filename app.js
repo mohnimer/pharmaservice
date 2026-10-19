@@ -1327,7 +1327,7 @@
     return `<div class="appShell v4Shell v7Shell v7bShell v26Shell v37Shell v38Shell v381Shell pscOperatingShell ${admin?'adminShell':'customerShell'} ${!admin&&route==='portal/dashboard'?'psPortalHomeShell':''}">
       <div class="mobileOverlay ${ui.mobile?'show':''}" data-mobile-close></div>
       <aside class="sidebar ${ui.mobile?'sidebarOpen':''}">
-        <div class="sidebarTop">${brand()}<span class="psWorkspaceCaption">${admin?'SUPPLY WORKSPACE':'CLINIC ACCOUNT'}</span><button class="iconBtn mobileClose" data-mobile-close aria-label="Close menu">${icon('close')}</button></div>
+        <div class="sidebarTop">${admin?`<button class="adminBrand" data-go="admin/dashboard" aria-label="Pharma Service workspace"><img src="${PSC_LOGO}" alt="Pharma Service"></button>`:brand()}<span class="psWorkspaceCaption">${admin?'SUPPLY WORKSPACE':'CLINIC ACCOUNT'}</span><button class="iconBtn mobileClose" data-mobile-close aria-label="Close menu">${icon('close')}</button></div>
         <nav class="iconNav">${links.map(([href,label,ico])=>`<button class="navLink iconOnly ${(route===href || (href==='portal/catalogue' && route.startsWith('portal/catalogue/')))?'active':''}" data-go="${href}" aria-label="${label}"><span class="navIcon">${admin?icon(ico):portalSidebarIcon(href,ico)}</span><span class="navLabel">${label}</span></button>`).join('')}</nav>
         <div class="sidebarFooter compactFooter">
           ${admin?`<button class="navLink" data-go="admin/resources"><span class="navIcon">${icon('boxes')}</span><span class="navLabel">Products & suppliers</span></button><button class="navLink" data-go="admin/settings"><span class="navIcon">${icon('settings')}</span><span class="navLabel">Settings</span></button>`:''}
@@ -2858,7 +2858,7 @@
     return shell(`
       <div class="pageHeader cmsPageHeader">
         <div><span class="eyebrow">PS STOREFRONT CONTROL</span><h1>Storefront manager</h1><p>One controlled product master, two customer-facing presentations. Institutional and wholesale can use different copy, categories, visibility and commercial display without duplicating the SKU.</p></div>
-        <button class="button light" data-go="${channel==='institutional'?'portal/catalogue':'wholesale'}">${channel==='institutional'?'Open institutional catalogue':'Open wholesale storefront'} →</button>
+        <button class="button light" data-go="${channel==='institutional'?'portal/catalogue':'wholesale'}">${channel==='institutional'?'Open institutional catalogue':'Open wholesale storefront'}</button>
       </div>
 
       <div class="cmsChannelTabs">
@@ -2886,7 +2886,7 @@
       </div>
 
       <section class="panel cmsPreviewPanel">
-        <div class="panelHeader"><div><span class="eyebrow">LIVE PREVIEW</span><h2>${esc(sf.display_name||'Storefront')}</h2></div><button data-go="admin/products">Manage products →</button></div>
+        <div class="panelHeader"><div><span class="eyebrow">LIVE PREVIEW</span><h2>${esc(sf.display_name||'Storefront')}</h2></div><button data-go="admin/products">Manage products</button></div>
         ${preview.length?`<div class="cmsPreviewGrid">${preview.map(r=>`<article><div class="cmsPreviewImage">${controlledProductImageUrl(r)?`<img src="${esc(controlledProductImageUrl(r))}" alt="">`:'<span>NO IMAGE</span>'}</div><small>${esc(r.brand||r.category||'')}</small><b>${esc(r.name)}</b><p>${esc(r.short_description||r.pack||'')}</p></article>`).join('')}</div>`:`<div class="emptyState"><h3>No published products yet</h3><p>${channel==='wholesale'?'Open Product Master, switch to Wholesale and publish the lines you want trade customers to see.':'The institutional catalogue will appear here after the current master is initialised.'}</p></div>`}
       </section>
     `,true);
@@ -2902,7 +2902,7 @@
     return shell(`
       <div class="pageHeader cmsPageHeader">
         <div><span class="eyebrow">CONTROLLED PRODUCT MASTER</span><h1>Products & media</h1><p>Edit the controlled SKU once, then publish a separate Institutional or Wholesale presentation. Supplier, cost, evidence and internal notes remain restricted to PS admin.</p></div>
-        <button class="button light" data-go="admin/storefront">Storefront manager →</button>
+        <button class="button light" data-go="admin/storefront">Storefront manager</button>
       </div>
 
       <div class="filterBar cmsMasterFilter"><div class="searchInput"><span>⌕</span><input data-cms-search value="${esc(ui.cmsSearch)}" placeholder="Search product, PS SKU, brand, supplier or category…"></div><div class="cmsMasterCount">${rows.length} / ${activeMaster.length}</div></div>
@@ -3016,7 +3016,7 @@
             <p>Save Draft preserves the currently published channel. Publish applies this channel's presentation and approved images to the customer storefront.</p>
             <button class="button light full" data-cms-save="${p.id}">Save draft</button>
             <button class="button primary full" data-cms-publish="${p.id}">Publish to ${channel}</button>
-            <button class="textAction" data-go="${channel==='institutional'?'portal/catalogue':'wholesale'}">Open storefront preview →</button>
+            <button class="textAction" data-go="${channel==='institutional'?'portal/catalogue':'wholesale'}">Open storefront preview</button>
           </section>
         </aside>
       </div>

@@ -116,7 +116,6 @@
     "current/styles/spacing.css",
     "current/styles/product-images.css",
     "current/styles/intelligent-search.css",
-    "current/styles/admin-interface.css",
     "current/styles/workstation.css",
     "current/styles/portal-home.css",
     "current/styles/catalogue-stock.css",
@@ -130,7 +129,8 @@
     "current/styles/catalogue-photo-standard.css",
     "current/styles/professional-experience.css",
     "current/styles/portal-dashboard.css",
-    "current/styles/school-baskets.css"
+    "current/styles/school-baskets.css",
+    "current/styles/admin-interface.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",
