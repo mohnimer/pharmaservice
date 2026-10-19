@@ -74,6 +74,8 @@
     "current/behaviour/home-vitals.js",
     "current/behaviour/interface-cleanup.js",
     "current/behaviour/model-story.js",
+    "current/behaviour/ready-baskets-data.js",
+    "current/behaviour/ready-baskets.js",
     "current/behaviour/home-layout.js",
     "current/behaviour/system-theme.js",
     "current/behaviour/catalogue-access.js"
@@ -124,7 +126,8 @@
     "current/styles/control-alignment.css",
     "current/styles/product-editorial.css",
     "current/styles/interaction-feedback.css",
-    "current/styles/catalogue-photo-standard.css"
+    "current/styles/catalogue-photo-standard.css",
+    "current/styles/professional-experience.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",

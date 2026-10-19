@@ -264,7 +264,7 @@
         <div class="detailImagePane fluidImagePane" data-psc-preview-mode="${selected?'single':'family'}"><div class="detailProductImageWrap pscFamilyPreview">${preview.image?`<img src="${esc(preview.image)}" alt="${esc(preview.title)} · ${esc(preview.evidence)}" onerror="this.style.display='none'">`:`<span class="catalogueImageEmpty">${selected?'Exact variant photograph pending verification':'Select an exact product to view its photograph'}</span>`}</div><div class="detailImageMeta"><b>${esc(preview.title)}</b>${preview.reference?'<p class="smallMuted">Illustrative product. Exact model and compatibility confirmed in quotation.</p>':''}</div></div>
         <div class="detailContentPane fluidDetailContent">
           <div class="professionalPurchaseIdentity"><h3>${esc(selected?.exact_product_name||f.family_name)}</h3><p>${esc(pack)}</p></div>
-          ${preferenceBlock(f)}
+          ${preferenceBlock(f)}${window.PSC_READY_BASKETS?.entryHtml(selected?.sku||state.listingSku)||''}
           <div class="professionalCommercial">${selected?optionPrice(selected):''}${selected&&availability!=='Availability confirmed at quotation'?`<p class="professionalAvailability">${esc(availability)}</p>`:''}${window.PSC_RETAIL_PRICE_NOTICE_HTML?.()||''}</div>
           ${window.PSC_PRODUCT_PRESENTATION.whatsappHtml(factRecord)}
           ${window.PSC_PRODUCT_PRESENTATION.documentsHtml(factRecord)}

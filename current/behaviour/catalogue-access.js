@@ -31,14 +31,14 @@
     if(hero){
       const h1=hero.querySelector('h1'),p=hero.querySelector('p');
       if(h1) h1.textContent='Find the clinical area.';
-      if(p) p.textContent='Browse what Pharma Service covers publicly. Exact products, brands, packs, availability and account-specific commercial detail sit inside the Clinic Portal.';
+      if(p) p.textContent='Equipment, consumables and clinical essentials. Choose a category to continue into your account.';
       hero.querySelectorAll('.kicker,.eyebrow').forEach(x=>x.remove());
     }
 
     const journey=main.querySelector('.publicCatalogueJourney16');
     if(journey){
       const head=journey.querySelector('.publicCatalogueJourneyHead16');
-      if(head) head.innerHTML='<div><h2>Browse by clinical need.</h2><p>Select a category to continue into the institutional catalogue.</p></div><span class="catalogueGateNoteV45">Clinic Portal access required</span>';
+      if(head) head.innerHTML='<span class="catalogueGateNoteV45">Select a category · Account access required for exact products</span>';
       journey.querySelectorAll('[data-go^="catalogue/"],[data-v45-gated-category],[data-v49-gated-category]').forEach(btn=>{
         const id=btn.dataset.v45GatedCategory||btn.dataset.v49GatedCategory||(btn.getAttribute('data-go')||'').split('/')[1]||'all';
         btn.removeAttribute('data-go');btn.removeAttribute('data-v45-gated-category');btn.removeAttribute('data-v49-gated-category');
@@ -48,7 +48,7 @@
         const band=document.createElement('section');
         band.className='catalogueGateBandV45';
         band.innerHTML=`
-          <div><h2>See the real catalogue inside your account.</h2><p>Product families, approved options, specifications, quotation requests and account history stay within the secure customer relationship.</p></div>
+          <div><h2>Your catalogue. Your purchasing history.</h2><p>Sign in to select exact products, build a request and return to previous orders.</p></div>
           <div class="catalogueGateActionsV45"><button class="button primary large" data-v50-go="login">Open Clinic Portal</button><button class="button outline large" data-v50-go="start">Send a requirement</button></div>`;
         journey.insertAdjacentElement('afterend',band);
       }

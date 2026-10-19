@@ -1305,10 +1305,11 @@
 
   const schoolNav=[
     ['portal/dashboard','Home','dashboard'],
-    ['portal/catalogue','Shop','boxes'],
+    ['portal/catalogue','Catalogue','boxes'],
+    ['portal/baskets','Ready baskets','checklist'],
     ['portal/wishlist','Wishlist','heart'],
     ['portal/requests','Orders & Requests','edit'],
-    ['portal/replenish','Replenish','repeat'],
+    ['portal/replenish','Reorder','repeat'],
     ['portal/documents','Documents','resource'],
     ['portal/stock','Stock & expiry','stock'],
     ['portal/assets','Clinic assets','assets']
@@ -1374,20 +1375,19 @@
 
 
   const publicNav=[
-    ['our-model','Our Model'],
     ['catalogue','Catalogue'],
-    ['workshop','The Workshop'],
-    ['contact','Contact']
+    ['ready-baskets','Ready baskets'],
+    ['our-model','How we work']
   ];
   function publicHeader(active='home'){
     return `<header class="publicHeader v37PublicHeader" data-ps-scroll-header>
       <button class="publicLogo" data-go="home" aria-label="Pharma Service home"><img src="${PSC_LOGO}" alt="Pharma Service"></button>
       <button class="publicMenuButton" data-public-menu aria-label="Open website menu" aria-expanded="${ui.publicMenu?'true':'false'}">${ui.publicMenu?icon('close'):icon('menu')}</button>
-      <nav class="publicNav ${ui.publicMenu?'open':''}">${publicNav.map(([r,l])=>`<button class="publicNavLink ${active===r?'active':''}" data-go="${r}">${l}</button>`).join('')}<button class="publicNavLink mobileClinicPortalLink" data-go="login"><span>Clinic Portal</span><b>→</b></button></nav>
-      <button class="button primary publicPortalBtn" data-go="login">Clinic Portal</button>
+      <nav aria-label="Main navigation" class="publicNav ${ui.publicMenu?'open':''}">${publicNav.map(([r,l])=>`<button class="publicNavLink ${active===r?'active':''}" data-go="${r}" ${active===r?'aria-current="page"':''}>${l}</button>`).join('')}<button class="publicNavLink mobileClinicPortalLink" data-go="start"><span>Send a requirement</span><b>↗</b></button><button class="publicNavLink mobileClinicPortalLink" data-go="portal/dashboard"><span>My account</span><b>→</b></button></nav>
+      <button class="button primary publicPortalBtn" data-go="portal/dashboard">My account <span aria-hidden="true">↗</span></button>
     </header>`;
   }
-  function publicFooter(){ return `<footer class="publicFooter v37PublicFooter"><div><img src="${PSC_LOGO}" alt="Pharma Service"><p>Institutional healthcare supply with one accountable Pharma Service relationship.</p></div><div class="publicFooterLinks"><button data-go="about">About</button><button data-go="careers">Careers</button><button data-go="media">Media & resources</button></div><div><span>Dubai, United Arab Emirates</span><a href="tel:+97143377004">+971 4 337 7004</a><a href="mailto:info@pharmaservice.ae">info@pharmaservice.ae</a></div></footer>`; }
+  function publicFooter(){ return `<footer class="publicFooter v37PublicFooter"><div><img src="${PSC_LOGO}" alt="Pharma Service"><p>Institutional healthcare supply.<br>One accountable partner.</p></div><div class="publicFooterLinks"><button data-go="start">Send a requirement</button><button data-go="workshop">The Workshop</button><button data-go="contact">Contact</button><button data-go="about">About</button><button data-go="careers">Careers</button><button data-go="media">Media & resources</button></div><div><span>Dubai, United Arab Emirates</span><a href="tel:+97143377004">+971 4 337 7004</a><a href="mailto:info@pharmaservice.ae">info@pharmaservice.ae</a></div></footer>`; }
   function publicPage(active,kicker,title,lead,body){ return `<main class="publicPage">${publicHeader(active)}<section class="publicPageHero"><span class="kicker">${kicker}</span><h1>${title}</h1><p>${lead}</p></section>${body}${publicFooter()}</main>`; }
 
 
@@ -2191,9 +2191,9 @@
     return state.scopesBySchool[key]||(state.scopesBySchool[key]=emptyScope());
   }
   function scopeNote(){
-    const scope=scopeDraft();
-    if(!scope.location&&!scope.sites&&!scope.retained.length&&!scope.orderType&&!scope.institution&&!state.basket.some(l=>l.requestUnit))return '';
-    return ['PS request scope',scope.institution&&`Institution / site: ${scope.institution}`,scope.location&&`Delivery location: ${scope.location}`,scope.sites&&`Sites: ${scope.sites} — ${scope.quantityConfirmation?'quantities require confirmation':'quantities are totals across all sites'}`,scope.orderType&&`Order type: ${scope.orderType}`,state.basket.some(l=>l.requestUnit)&&`Requested units: ${state.basket.filter(l=>l.requestUnit).map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty} ${l.requestUnit}`).join('; ')} — pack basis needs PS verification`,scope.retained.length&&`Existing / retain (excluded from supply): ${scope.retained.map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty}`).join('; ')}`,'Specifications, availability, pack basis and commercial terms need PS verification.'].filter(Boolean).join('\n');
+    const scope=scopeDraft(),basketReviews=[...new Set(state.basket.flatMap(l=>l.readyBasketReviews||[]))];
+    if(!basketReviews.length&&!scope.location&&!scope.sites&&!scope.retained.length&&!scope.orderType&&!scope.institution&&!state.basket.some(l=>l.requestUnit))return '';
+    return ['PS request scope',...basketReviews,scope.institution&&`Institution / site: ${scope.institution}`,scope.location&&`Delivery location: ${scope.location}`,scope.sites&&`Sites: ${scope.sites} — ${scope.quantityConfirmation?'quantities require confirmation':'quantities are totals across all sites'}`,scope.orderType&&`Order type: ${scope.orderType}`,state.basket.some(l=>l.requestUnit)&&`Requested units: ${state.basket.filter(l=>l.requestUnit).map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty} ${l.requestUnit}`).join('; ')} — pack basis needs PS verification`,scope.retained.length&&`Existing / retain (excluded from supply): ${scope.retained.map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty}`).join('; ')}`,'Specifications, availability, pack basis and commercial terms need PS verification.'].filter(Boolean).join('\n');
   }
   function intelligentSearchField(){
     return `<section class="psIntelligentSearch">${draftUndoControl()}<span class="sectionLabel">Search the catalogue</span><h2>Tell us what you need</h2><p>the way you’d normally say it</p><label for="psCommand">${state.basket.length?'Change this scope in plain language':'Search the catalogue'}</label><form data-ps-command-form><input id="psCommand" type="search" data-cat-q aria-label="Search catalogue" value="${esc(ui.catalogueQuery)}" placeholder="We need a wheelchair…" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Apply</button><button class="button outline" type="button" data-catalogue-clear ${!ui.catalogueQuery&&!intelligent.action?'disabled':''}>Clear</button></form>${intelligent.said?`<div class="psInterpretation" role="status"><span>You said: “${esc(intelligent.said)}”</span><b>PS understood: ${esc(intelligent.message)}</b></div>`:''}${intelligent.choices.length?`<div class="psClarification"><b>Which catalogue line should we add?</b>${intelligent.choices.map(p=>`<button type="button" class="button outline" data-ps-select-sku="${esc(p.pscSku)}">${esc(p.catalogueDisplayName||p.name)}</button>`).join('')}</div>`:''}${intelligent.pending?.kind==='product_type'?`<div class="psClarification"><b>Which type of mask did you mean?</b>${['nebulizer mask','oxygen mask','face mask'].map(q=>`<button type="button" class="button outline" data-ps-clarify-type="${q}">${q}</button>`).join('')}</div>`:''}${intelligent.pending&&intelligent.pending.kind!=='product_type'?`<div class="psClarification"><b>Which size did you mean?</b>${intelligent.pending.sizes.map(size=>`<button class="button outline" data-ps-clarify="${esc(size)}">${esc(size.replace('x',' × '))} cm</button>`).join('')}<button class="button outline" data-ps-clarify="both">Show both</button></div>`:''}</section>`;
@@ -2660,7 +2660,7 @@
     }
     return l?.sku||'';
   }
-  function lineDisplayName(l,p=null){ if(l?.kind==='unlisted')return l.description;return isFamilyLine(l)?(l.productOptionSnapshot?.exact_product_name||l.requirementSnapshot?.name||l.familyName||l.familyId||'Catalogue family'):(p?.catalogueDisplayName||p?.name||l?.sku||'Order item'); }
+  function lineDisplayName(l,p=null){ if(l?.kind==='unlisted')return l.description;return isFamilyLine(l)?(l.productOptionSnapshot?.exact_product_name||l.requirementSnapshot?.name||l.familyName||l.familyId||'Catalogue family'):(p?.name||p?.catalogueDisplayName||l?.sku||'Order item'); }
   function lineReference(l){ if(l?.kind==='unlisted')return 'Unlisted item — requires PS review';return isFamilyLine(l)?l.requirementSnapshot?.sku||l.familyId:(l?.sku||''); }
   function linePackLabel(l,p=null){
     if(l?.kind==='unlisted')return l.requestUnit||'Unit to confirm';
@@ -2728,6 +2728,40 @@
     document.dispatchEvent(new CustomEvent('psc:request-added',{detail:{sku,qty,total:basketQty()}}));
     toast(`<strong>${qty} × ${esc(p.catalogueDisplayName||p.name)}</strong> added · ${prior+qty} of this product in request`);
   }
+  // Validate the whole selection before one existing-draft mutation. No bundle SKU or order is created.
+  window.PSC_ADD_READY_SELECTION=function(selection){
+    if(!session||!currentRoute().startsWith('portal/'))return {ok:false,message:'Open your account before adding a basket.'};
+    const template=window.PSC_READY_BASKET_TEMPLATES?.find(t=>t.id===selection?.templateId);
+    if(!template||!['setup','replenishment'].includes(selection.mode)||!Array.isArray(selection.lines)||!selection.lines.length||new Set(selection.lines.map(l=>l.id)).size!==selection.lines.length)return {ok:false,message:'Select at least one component.'};
+    const next=structuredClone(state.basket);
+    const preview=!window.PSC_READY_BASKETS?.verified(template);
+    const review=`${template.name} · ${selection.mode==='replenishment'?'replenishment':'setup'} — ${preview?'planning preview; compatibility, kit contents and exact specifications require PS review before quotation':'approved template; availability and commercial terms require quotation'}.`;
+    for(const item of selection.lines){
+      const definition=template.lines.find(l=>l.id===item.id);
+      const qty=Number(item.quantity),p=item.sku?product(item.sku):null;
+      const variant=definition?.variants?.find(v=>v.sku===item.sku);
+      if(!definition||(selection.mode==='replenishment'&&definition.setupOnly)||(!p&&item.sku)||(!Number.isInteger(qty)||qty<1||qty>10000)||
+        (item.sku!==definition.sku&&!(variant&&window.PSC_READY_BASKETS?.compatible(variant,Object.fromEntries(selection.lines.map(l=>[l.id,{sku:l.sku}]))))))return {ok:false,message:'A component changed. Reopen the basket and review the exact selection.'};
+      if(p&&(p.catalogueVisible===false||p.regulated||window.PSC_PRODUCT_PRESENTATION.profile(p)?.kind==='pharmaceuticals'))return {ok:false,message:'This component needs a separate authorized request.'};
+      let line;
+      if(!p){
+        if(!definition.specification)return {ok:false,message:'Add an exact specification before requesting this component.'};
+        line={kind:'unlisted',requestId:`unlisted-ready-${template.id}-${definition.id}`,description:definition.specification,qty};
+      }else if(window.PS_CATALOGUE_STOCK?.forProduct(p)?.source_kind==='requirement'){
+        line=normalizeFamilyRequestLine({localFamily:true,familyId:p.catalogueParentId||p.catalogueReferenceFamilyId||p.pscSku,familyName:p.name,
+          orderPackBasis:p.pack,qty,requirementSnapshot:{sku:p.pscSku,name:p.name,pack:p.pack,reference:p.dhaReference||'',status:p.dhaStatus||'',condition:p.dhaCondition||''}});
+      }else line={sku:p.pscSku,qty};
+      const key=lineKey(line),existing=next.find(l=>lineKey(l)===key);
+      if(existing&&Number(existing.qty)+qty>10000)return {ok:false,message:'Keep the combined quantity at or below 10,000 per line.'};
+      const notes=[...new Set([...(existing?.readyBasketReviews||[]),review])];
+      if(existing){Object.assign(existing,line,{qty:Number(existing.qty)+qty,readyBasketReviews:notes});}
+      else next.push({...line,readyBasketReviews:notes});
+    }
+    draftCheckpoint();state.basket=next;save();renderUi({preserveScroll:true,transition:false});
+    document.dispatchEvent(new CustomEvent('psc:request-added',{detail:{total:basketQty()}}));
+    toast(`<strong>${selection.lines.length} components added to Supply Request.</strong><br>Review your request before submitting.`);
+    return {ok:true};
+  };
   function reorderRequest(id){
     const r=state.requests.find(x=>x.id===id); if(!r)return;
     r.lines.forEach(l=>{const key=lineKey(l);const f=state.basket.find(x=>lineKey(x)===key);if(f)f.qty+=l.qty;else state.basket.push(JSON.parse(JSON.stringify(l)))});
@@ -2737,12 +2771,12 @@
     const lines=state.basket.map((l,index)=>({l,p:l.sku?product(l.sku):null,index})).filter(x=>x.p||isFamilyLine(x.l)||x.l.kind==='unlisted');
     const indicative=lines.reduce((sum,x)=>sum+((x.p?.contractPrice)||0)*x.l.qty,0);
     return `<div class="drawerBackdrop requestDrawerBackdrop" data-close-basket><aside class="drawer requestDrawer" onclick="event.stopPropagation()"><div class="drawerHandle" aria-hidden="true"></div><div class="drawerHeader"><div><span class="eyebrow">PHARMA SERVICE</span><h2>Supply Request</h2><small>${lines.length?`${lines.length} line${lines.length===1?'':'s'} · ${basketQty()} item${basketQty()===1?'':'s'}`:'Build a request while you browse'}</small></div><button class="iconBtn" data-close-basket aria-label="Close request">×</button></div><div class="drawerBody">${draftUndoControl()}${lines.length?lines.map(({l,p,index})=>{
-      if(l.kind==='unlisted')return `<div class="basketLine requestLine"><div class="basketInfo"><b>${esc(l.description)}</b><span>Unlisted item — requires PS review</span></div><span>Qty ${l.qty}</span><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
+      if(l.kind==='unlisted')return `<div class="basketLine requestLine"><div class="basketInfo"><b>${esc(l.description)}</b><span>Unlisted item — requires PS review</span></div><div class="qty"><button data-family-basket-delta="${index}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-family-basket-delta="${index}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
       if(isFamilyLine(l)){
-        return `<div class="basketLine requestLine"><div class="productGlyph small">Rx</div><div class="basketInfo"><b>${esc(lineDisplayName(l,p))}</b><span>${esc(linePackLabel(l,p))} · ${esc(lineReference(l))}</span><small>${esc(lineBrandPreferenceLabel(l))} · Price confirmed in quotation</small></div><div class="qty"><button data-family-basket-delta="${index}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-family-basket-delta="${index}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
+        return `<div class="basketLine requestLine"><div class="productGlyph small">${l.regulated?'Rx':'PS'}</div><div class="basketInfo"><b>${esc(lineDisplayName(l,p))}</b><span>${esc(linePackLabel(l,p))} · ${esc(lineReference(l))}</span><small>${esc(lineBrandPreferenceLabel(l))} · Price confirmed in quotation</small></div><div class="qty"><button data-family-basket-delta="${index}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-family-basket-delta="${index}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
       }
-      const imageUrl=productDisplayImageUrl(p);return `<div class="basketLine requestLine">${imageUrl?`<div class="requestLineImage"><img src="${esc(imageUrl)}" alt="" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'"></div>`:`<div class="productGlyph small">${esc((p.brand||'PS').slice(0,2).toUpperCase())}</div>`}<div class="basketInfo"><b>${esc(p.catalogueDisplayName||p.name)}</b><span>${esc(p.cataloguePack||p.pack||'Pack to confirm')} · ${p.pscSku}</span><small>${p.contractPrice?money(p.contractPrice)+' indicative account price':'Price confirmed in quotation'}</small></div><div class="qty"><button data-basket-delta="${p.pscSku}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-basket-delta="${p.pscSku}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-basket-remove="${p.pscSku}">Remove</button></div>`
-    }).join(''):`<div class="emptyState requestEmpty"><h3>Your request is empty</h3><p>Browse the catalogue and add the products you want PS to quote.</p><button class="button dark" data-go="portal/catalogue">Browse catalogue</button></div>`}</div>${lines.length?`<div class="drawerFooter requestDrawerFooter">${scopeNote()?`<div class="psRequestScopeReview"><b>Request scope</b><p>${esc(scopeNote()).replace(/\n/g,'<br>')}</p></div>`:''}<label class="fieldLabel">Request note <span>optional</span></label><textarea class="textarea" id="basketNote" placeholder="Delivery timing, preferred brand, clinic note…"></textarea><div class="totals"><span>Indicative priced lines</span><b>${money(indicative)}</b></div><div class="checkoutPromise requestNextStep"><span>WHAT HAPPENS NEXT</span><p>${authContext?.group?.slug==='aeg-education'?'PS reviews the request and prepares the formal quotation for AEG Management review. Customer PO and PS commercial release checks remain required.':`PS reviews the request and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. Nothing is procured until the required customer approval is in place.`}</p></div><button class="button primary full submitRequestButton" data-submit-request>Submit request</button></div>`:''}</aside></div>`;
+      const imageUrl=productDisplayImageUrl(p);return `<div class="basketLine requestLine">${imageUrl?`<div class="requestLineImage"><img src="${esc(imageUrl)}" alt="" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'"></div>`:`<div class="productGlyph small">${esc((p.brand||'PS').slice(0,2).toUpperCase())}</div>`}<div class="basketInfo"><b>${esc(p.name||p.catalogueDisplayName)}</b><span>${esc(p.pack||p.cataloguePack||'Pack to confirm')} · ${p.pscSku}</span><small>${p.contractPrice?money(p.contractPrice)+' indicative account price':'Price confirmed in quotation'}</small></div><div class="qty"><button data-basket-delta="${p.pscSku}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-basket-delta="${p.pscSku}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-basket-remove="${p.pscSku}">Remove</button></div>`
+    }).join(''):`<div class="emptyState requestEmpty"><h3>Your request is empty</h3><p>Browse the catalogue and add the products you want PS to quote.</p><button class="button dark" data-go="portal/catalogue">Browse catalogue</button></div>`}${scopeNote()?`<div class="psRequestScopeReview"><b>Request scope</b><p>${esc(scopeNote()).replace(/\n/g,'<br>')}</p></div>`:''}</div>${lines.length?`<div class="drawerFooter requestDrawerFooter"><label class="fieldLabel">Request note <span>optional</span></label><textarea class="textarea" id="basketNote" placeholder="Delivery timing, preferred brand, clinic note…"></textarea><div class="totals"><span>Indicative priced lines</span><b>${money(indicative)}</b></div><div class="checkoutPromise requestNextStep"><span>WHAT HAPPENS NEXT</span><p>${authContext?.group?.slug==='aeg-education'?'PS reviews the request and prepares the formal quotation for AEG Management review. Customer PO and PS commercial release checks remain required.':`PS reviews the request and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. Nothing is procured until the required customer approval is in place.`}</p></div><button class="button primary full submitRequestButton" data-submit-request>Submit request</button></div>`:''}</aside></div>`;
   }
 
 
@@ -3064,7 +3098,7 @@
       <div class="productDetailGrid fluidProductGrid">
         <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).filter(m=>(window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(m.url):m.url)).map(m=>`<img src="${esc((window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(m.url):m.url))}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
         <div class="detailContentPane fluidDetailContent">
-          <div class="professionalPurchaseIdentity"><h3>${esc(displayName)}</h3><p>${esc(pack)}</p></div>${wishlistControl(p)}${productVariantSelector(p)}${cataloguePricePreview(p)}${catalogueRetailPriceNotice()}${window.PSC_PRODUCT_PRESENTATION.whatsappHtml(p)}
+          <div class="professionalPurchaseIdentity"><h3>${esc(displayName)}</h3><p>${esc(pack)}</p></div>${wishlistControl(p)}${productVariantSelector(p)}${cataloguePricePreview(p)}${catalogueRetailPriceNotice()}${window.PSC_PRODUCT_PRESENTATION.whatsappHtml(p)}${window.PSC_READY_BASKETS?.entryHtml(p.pscSku)||''}
           ${window.PSC_PRODUCT_PRESENTATION.documentsHtml(p)}<div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to the applicable DHA clinic requirement.</b></div>`:''}</div>
           <div class="productDisclosureList">
             <details open><summary><span>Details</span><i>+</i></summary><div>${window.PSC_PRODUCT_PRESENTATION.factsHtml(p,{heading:false})}<p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
@@ -3470,6 +3504,7 @@
       'who-we-supply':['Our Model | Pharma Service','How Pharma Service handles institutional healthcare supply: careful specifications, category-appropriate sourcing, regulated routes and repeat account service.','/our-model.html'],
       'what-we-supply':['Our Model | Pharma Service','How Pharma Service handles institutional healthcare supply: careful specifications, category-appropriate sourcing, regulated routes and repeat account service.','/our-model.html'],
       'how-it-works':['Our Model | Pharma Service','How Pharma Service handles institutional healthcare supply: careful specifications, category-appropriate sourcing, regulated routes and repeat account service.','/our-model.html'],
+      'ready-baskets':['Ready Procurement Baskets | Pharma Service','Explore preview procurement baskets for glucose monitoring, nebulizer setup and wound care. Specifications and compatibility require quotation review.','/#ready-baskets'],
       catalogue:['Institutional Healthcare Catalogue | Pharma Service','Browse the public read-only Pharma Service institutional healthcare catalogue by clinical need.','/catalogue.html'],
       contact:['Request Institutional Supply | Pharma Service','Send Pharma Service an institutional healthcare requirement or RFQ for sourcing and quotation.','/contact.html'],
       start:['Start Here | Pharma Service','Browse the Pharma Service institutional catalogue, send an RFQ or product list, or see how our institutional supply model works.','/start'],
@@ -3531,6 +3566,7 @@
       case 'what-we-supply': html=ourModelPage();break;
       case 'how-it-works': html=ourModelPage();break;
       case 'catalogue': html=publicCataloguePage('all');break;
+      case 'ready-baskets': html=`<main class="publicPage psReadyPublic">${publicHeader('ready-baskets')}<div data-ready-baskets-gallery></div>${publicFooter()}</main>`;break;
       case 'workshop': html=workshopLandingPage();break;
       case 'wholesale': html=wholesalePage();break;
       case 'max': location.hash='services'; return;
@@ -3543,6 +3579,7 @@
       case 'login': html=loginPage();break;
       case 'portal/dashboard': html=portalDashboard();break;
       case 'portal/catalogue': html=catalogue();break;
+      case 'portal/baskets': html=shell('<div data-ready-baskets-gallery></div>');break;
       case 'portal/wishlist': html=wishlistPage();break;
       case 'portal/requests': html=requestsPage();break;
       case 'portal/replenish': html=replenishPage();break;
