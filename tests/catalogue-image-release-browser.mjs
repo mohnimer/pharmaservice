@@ -9,7 +9,7 @@ const output=process.env.PSC_IMAGE_QA_OUTPUT||'test-results/image-release';mkdir
 const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const browser=await chromium.launch({executablePath:process.env.PSC_CHROME,args:['--no-sandbox']});const results=[];
 try{for(const width of [390,1440]){
- const ctx=await browser.newContext({viewport:{width,height:960}});await ctx.addInitScript(()=>window.__testRole='demo');
+ const ctx=await browser.newContext({viewport:{width,height:960},reducedMotion:'reduce'});await ctx.addInitScript(()=>window.__testRole='demo');
  const transport=readFileSync('tests/mock-supabase.js','utf8')+(snapshot?'\nwindow.__tables.storefronts='+JSON.stringify(snapshot.storefronts)+';window.__tables.published_storefront_catalogue='+JSON.stringify(snapshot.published)+';':'');
  await ctx.route('**/*',r=>{const u=new URL(r.request().url());if(u.hostname==='127.0.0.1'||(r.request().method()==='GET'&&u.hostname==='ewewkojlsgqvcqarmpgr.supabase.co'&&u.pathname.startsWith('/storage/v1/object/public/product-media/')))return r.continue();return r.fulfill({contentType:u.hostname==='cdn.jsdelivr.net'?'text/javascript':'text/plain',body:u.hostname==='cdn.jsdelivr.net'?transport:''});});
  const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));

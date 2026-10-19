@@ -49,7 +49,7 @@
     const rows=familyCatalogueProducts(f), primary=window.PS_CATALOGUE_STOCK?.representative(rows)||rows[0]||null;
     const example=window.PSC_DHA_FAMILY_PHOTOS?.forListing({...primary,dhaMapped:isDhaMapped(f),_familyGroup:{id:f.family_id}});
     const photo=example?.path||(primary&&window.PS_CATALOGUE_STOCK&&!window.PS_CATALOGUE_STOCK.realPhoto(primary)?'':familyProductImage(primary));
-    const image=state.listingPreview?.image||photo;
+    const image=state.listingPreview&&Object.hasOwn(state.listingPreview,'image')?state.listingPreview.image:photo;
     return {image,title:state.listingPreview?.title||example?.label||String(primary?.name||f?.family_name||'Catalogue family'),reference:state.listingPreview?.imageReference||primary?.imageRole==='SPECIFICATION_REFERENCE_ONLY',pack:String(f?.order_pack_basis||primary?.cataloguePack||primary?.pack||'Pack / unit to confirm'),gallery:[]};
   }
   function fallbackFamily(id){
@@ -394,7 +394,7 @@
     e.stopImmediatePropagation();
     const card=productTrigger.closest('article,.productCard,.publicCatalogueCard'),img=card?.querySelector('.productMainImage,.publicCatalogueVisual>img:not(.publicDhaMark)');
     const exact=window.PS_CATALOGUE_STOCK?.forProduct(sku)?.source_kind==='product';
-    open(familyId,{...(img?{image:(window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(img.getAttribute('src')):img.getAttribute('src')),title:img.alt}:{}),imageReference:catalogueProductForSku(sku)?.imageRole==='SPECIFICATION_REFERENCE_ONLY',...(exact?{sku}:{specificationRequest:true,requirementSku:sku})});
+    open(familyId,{image:img?(window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(img.getAttribute('src')):img.getAttribute('src')):'',title:img?.alt||catalogueProductForSku(sku)?.name||'',imageReference:catalogueProductForSku(sku)?.imageRole==='SPECIFICATION_REFERENCE_ONLY',...(exact?{sku}:{specificationRequest:true,requirementSku:sku})});
   },true);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.open)close();});
   const closeOnNavigation=()=>{if(state.open&&state.openRoute!==window.PSC_CURRENT_ROUTE())close();};
