@@ -54,3 +54,7 @@ School collections now use the established catalogue tokens, content gutters, li
 
 Focused validation: four-width public/portal collection and all-five-kit journeys, exact snapshot submission through isolated transport, five-width clinical categories/DHA/keyboard checks, shared basket/evidence tests and seven shell/registry/build checks pass. Desktop/mobile rendered metrics and before/after captures retained privately.
 
+## Quiet customer action buttons — 19 October 2026
+
+Replaced decorative arrow links with compact, softly outlined buttons across the portal home, public homepage and basket discovery. Shared actions use restrained 8px geometry, lighter labels and at least 44px targets; the dark guidance section uses light outlines. Account actions retain their existing icons, and native request, search, account and basket handlers are unchanged. Functional back/disclosure controls remain. No-arrow public/portal rendered checks, four-width portal home journeys, shared basket/evidence/submission tests and seven build/shell/registry checks pass. Preview-only continuation in PR57.
+
