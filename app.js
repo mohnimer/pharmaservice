@@ -1305,10 +1305,11 @@
 
   const schoolNav=[
     ['portal/dashboard','Home','dashboard'],
-    ['portal/catalogue','Shop','boxes'],
+    ['portal/catalogue','Catalogue','boxes'],
+    ['portal/baskets','Ready baskets','checklist'],
     ['portal/wishlist','Wishlist','heart'],
     ['portal/requests','Orders & Requests','edit'],
-    ['portal/replenish','Replenish','repeat'],
+    ['portal/replenish','Reorder','repeat'],
     ['portal/documents','Documents','resource'],
     ['portal/stock','Stock & expiry','stock'],
     ['portal/assets','Clinic assets','assets']
@@ -1323,7 +1324,7 @@
     const liveCustomerNav=schoolNav.filter(([href])=>isDemoAccount() || !['portal/stock','portal/assets'].includes(href));
     const links=admin?adminNav.filter(([href])=>!['admin/resources','admin/settings','admin/onboarding'].includes(href)):liveCustomerNav;
     const searchValue=esc(ui.globalSearch||'');
-    return `<div class="appShell v4Shell v7Shell v7bShell v26Shell v37Shell v38Shell v381Shell pscOperatingShell ${admin?'adminShell':'customerShell'}">
+    return `<div class="appShell v4Shell v7Shell v7bShell v26Shell v37Shell v38Shell v381Shell pscOperatingShell ${admin?'adminShell':'customerShell'} ${!admin&&route==='portal/dashboard'?'psPortalHomeShell':''}">
       <div class="mobileOverlay ${ui.mobile?'show':''}" data-mobile-close></div>
       <aside class="sidebar ${ui.mobile?'sidebarOpen':''}">
         <div class="sidebarTop">${brand()}<span class="psWorkspaceCaption">${admin?'SUPPLY WORKSPACE':'CLINIC ACCOUNT'}</span><button class="iconBtn mobileClose" data-mobile-close aria-label="Close menu">${icon('close')}</button></div>
@@ -1374,20 +1375,19 @@
 
 
   const publicNav=[
-    ['our-model','Our Model'],
     ['catalogue','Catalogue'],
-    ['workshop','The Workshop'],
-    ['contact','Contact']
+    ['ready-baskets','Ready baskets'],
+    ['our-model','How we work']
   ];
   function publicHeader(active='home'){
     return `<header class="publicHeader v37PublicHeader" data-ps-scroll-header>
       <button class="publicLogo" data-go="home" aria-label="Pharma Service home"><img src="${PSC_LOGO}" alt="Pharma Service"></button>
       <button class="publicMenuButton" data-public-menu aria-label="Open website menu" aria-expanded="${ui.publicMenu?'true':'false'}">${ui.publicMenu?icon('close'):icon('menu')}</button>
-      <nav class="publicNav ${ui.publicMenu?'open':''}">${publicNav.map(([r,l])=>`<button class="publicNavLink ${active===r?'active':''}" data-go="${r}">${l}</button>`).join('')}<button class="publicNavLink mobileClinicPortalLink" data-go="login"><span>Clinic Portal</span><b>→</b></button></nav>
-      <button class="button primary publicPortalBtn" data-go="login">Clinic Portal</button>
+      <nav aria-label="Main navigation" class="publicNav ${ui.publicMenu?'open':''}">${publicNav.map(([r,l])=>`<button class="publicNavLink ${active===r?'active':''}" data-go="${r}" ${active===r?'aria-current="page"':''}>${l}</button>`).join('')}<button class="publicNavLink mobileClinicPortalLink" data-go="start"><span>Send a requirement</span><b>↗</b></button><button class="publicNavLink mobileClinicPortalLink" data-go="portal/dashboard"><span>My account</span><b>→</b></button></nav>
+      <button class="button primary publicPortalBtn" data-go="portal/dashboard">My account <span aria-hidden="true">↗</span></button>
     </header>`;
   }
-  function publicFooter(){ return `<footer class="publicFooter v37PublicFooter"><div><img src="${PSC_LOGO}" alt="Pharma Service"><p>Institutional healthcare supply with one accountable Pharma Service relationship.</p></div><div class="publicFooterLinks"><button data-go="about">About</button><button data-go="careers">Careers</button><button data-go="media">Media & resources</button></div><div><span>Dubai, United Arab Emirates</span><a href="tel:+97143377004">+971 4 337 7004</a><a href="mailto:info@pharmaservice.ae">info@pharmaservice.ae</a></div></footer>`; }
+  function publicFooter(){ return `<footer class="publicFooter v37PublicFooter"><div><img src="${PSC_LOGO}" alt="Pharma Service"><p>Institutional healthcare supply.<br>One accountable partner.</p></div><div class="publicFooterLinks"><button data-go="start">Send a requirement</button><button data-go="workshop">The Workshop</button><button data-go="contact">Contact</button><button data-go="about">About</button><button data-go="careers">Careers</button><button data-go="media">Media & resources</button></div><div><span>Dubai, United Arab Emirates</span><a href="tel:+97143377004">+971 4 337 7004</a><a href="mailto:info@pharmaservice.ae">info@pharmaservice.ae</a></div></footer>`; }
   function publicPage(active,kicker,title,lead,body){ return `<main class="publicPage">${publicHeader(active)}<section class="publicPageHero"><span class="kicker">${kicker}</span><h1>${title}</h1><p>${lead}</p></section>${body}${publicFooter()}</main>`; }
 
 
@@ -1879,6 +1879,7 @@
     const heroLead=needId==='all'?'Choose a category or search for a product, brand, model or pack.':`Browse products and sourcing requirements for ${esc(meta.label)}.`;
     return `<main class="publicPage publicCataloguePage catalogue16Page">${publicHeader('catalogue')}
       <section class="publicPageHero cataloguePublicHero catalogue16Hero"><span class="kicker">INSTITUTIONAL CATALOGUE</span><h1>${heroTitle}</h1><p>${heroLead}</p></section>
+      ${schoolBasketSection()}
       <section class="publicSection publicCatalogueJourney16">
         <div class="publicCatalogueJourneyHead16"><div><span class="kicker">CLINICAL NEEDS</span><h2>Where do you want to start?</h2></div>${needId!=='all'?'<button class="textAction" data-go="catalogue">View all categories</button>':''}</div>
         <div class="publicCategoryGrid16">${categoryCards}</div>
@@ -2076,39 +2077,36 @@
   function portalDashboard(){
     const visible=customerVisibleRequests();
     const active=visible.filter(r=>!['Accepted','Cancelled'].includes(r.status));
-    const awaiting=visible.filter(r=>r.status==='Sent').length;
-    const processing=visible.filter(r=>['Authorized','Procurement','Delivery'].includes(r.status)).length;
-    const delivered=state.requests.filter(r=>r.campus===state.campus&&r.status==='Accepted');
-    const deliveredSkus=new Set(delivered.flatMap(r=>r.lines.map(l=>l.sku)));
+    const awaiting=active.filter(r=>r.status==='Sent'&&!r.quote?.management_decision);
+    const delivered=visible.filter(r=>r.status==='Accepted');
+    const deliveredSkus=new Set(delivered.flatMap(r=>r.lines.map(l=>l.sku)).filter(sku=>sku&&product(sku)));
+    const documentCount=visible.reduce((n,r)=>n+(r.documents||[]).length,0);
+    const priority=r=>r.status==='Sent'&&!r.quote?.management_decision?0:r.status==='Delivery'?1:['Authorized','Procurement'].includes(r.status)?2:3;
+    const recent=[...active].sort((a,b)=>priority(a)-priority(b)||(new Date(b.createdAt).getTime()||0)-(new Date(a.createdAt).getTime()||0)).slice(0,3);
     const clinicalStarts=[['wounds'],['breathing'],['vitals']];
     const essentialStarts=[['dha-medicines','Medicines','Medicines mapped to the clinic requirements'],['dha-equipment','Equipment','Required equipment, diagnostics & furniture'],['dha-consumables','Consumables','Required disposables, wound care & PPE']];
-    const homeCategory=(id,label)=>{const c=clinicalNeedMeta(id);return `<button class="pscHomeCategory" style="--category-tint:${c.bg}" data-go="portal/catalogue/${id}" aria-describedby="psc-home-note-${id}"><span class="pscHomeCategoryArt"><span class="pscHomeCategoryIcon" aria-hidden="true">${clinicalNeedIcon(c.icon)}</span>${id.startsWith('dha-')?`<img class="pscHomeDha" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</span><span><b>${esc(label||c.label)}</b></span></button>`;};
-    const homeCategoryGuide=items=>`<details class="pscHomeCategoryGuide psDisclosure"><summary>About these categories</summary><dl>${items.map(([id,label,note])=>{const c=clinicalNeedMeta(id);return `<dt>${esc(label||c.label)}</dt><dd id="psc-home-note-${id}">${esc(note||c.note)}</dd>`;}).join('')}</dl></details>`;
-
-    return shell(`
-      <section class="psPortalWelcome"><div><span class="eyebrow">YOUR CLINIC ACCOUNT</span><h1>What does your clinic need?</h1><p>Choose products or send your requirement. Pharma Service will clarify the details and prepare a formal quotation.</p><div class="wsActions"><button class="button primary" data-go="portal/catalogue">Browse & prepare a request</button><button class="button outline" data-go="portal/requests">View requests & quotations${awaiting?' · '+awaiting+' to review':''}</button></div><p class="psPortalApprovalNote">Submitting a request does not place a purchase order. Final approvals follow your organization’s agreed process.</p></div></section>
-      <section class="psPortalAttention"><div class="psSectionHead"><h2>${awaiting?'Quotations to review':'Your current requests'}</h2><button class="button outline" data-go="portal/requests">View all →</button></div>${active.slice(0,3).map(orderMiniRow).join('')||'<div class="psFirstRequest"><p>Start your first request from the catalogue. If you already have a list, send it to us as it is.</p><a class="button outline" href="mailto:mohamed@pharmaservice.ae">Send your requirement</a></div>'}</section>
-
-
-
-      <section class="pscHomeBrowse" aria-labelledby="psc-browse-title">
-        <div class="v26SectionHead"><div><span class="eyebrow">FIND YOUR STARTING POINT</span><h2 id="psc-browse-title">Browse by clinical need.</h2></div><button data-go="portal/catalogue">Browse all categories →</button></div>
-        <div class="pscHomeCategoryColumns">
-          <section><h3>By clinical need</h3><p>Start with the care you provide.</p><div class="pscHomeCategoryGrid" role="group" aria-label="By clinical need">${clinicalStarts.map(args=>homeCategory(...args)).join('')}</div>${homeCategoryGuide(clinicalStarts)}<button class="pscHomeAll" data-go="portal/catalogue">All therapeutic & clinical categories →</button></section>
-          <section><h3>Clinic essentials</h3><p>Your DHA requirement list, organised.</p><div class="pscHomeCategoryGrid" role="group" aria-label="Clinic essentials">${essentialStarts.map(args=>homeCategory(...args)).join('')}</div>${homeCategoryGuide(essentialStarts)}<small class="pscHomeScopeNote">Based on the catalogue’s DHA educational clinic mapping. Conditional items and required alternatives are identified; exact product suitability is checked before quotation.</small></section>
+    const homeArt={wounds:'wounds',breathing:'breathing',vitals:'vitals-assessment-exact','dha-medicines':'medicines','dha-equipment':'equipment','dha-consumables':'infection'};
+    const homeCategory=(id,label)=>{const c=clinicalNeedMeta(id);return `<button class="pscHomeCategory" style="--category-tint:${c.bg}" data-go="portal/catalogue/${id}" aria-describedby="psc-home-note-${id}"><span class="pscHomeCategoryArt"><span class="pscHomeCategoryIcon" aria-hidden="true"><img src="/assets/clinical-icons/${homeArt[id]}.png" alt="" loading="lazy" decoding="async"></span>${id.startsWith('dha-')?`<img class="pscHomeDha" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</span><span><b>${esc(label||c.label)}</b></span></button>`;};
+    const guide=items=>`<details class="pscHomeCategoryGuide psDisclosure"><summary>About these categories</summary><dl>${items.map(([id,label,note])=>{const c=clinicalNeedMeta(id);return `<dt>${esc(label||c.label)}</dt><dd id="psc-home-note-${id}">${esc(note||c.note)}</dd>`;}).join('')}</dl></details>`;
+    const row=r=>`<button class="psPortalActivity" data-request-view="${esc(r.id)}"><span><b>${esc(r.quoteRef||r.id)}</b><small>${date(r.createdAt)} · ${r.lines.length} request line${r.lines.length===1?'':'s'}</small></span><span>${customerStatusPill(r.status)}<small>${r.status==='Sent'?(r.quote?.management_decision?'View recorded decision':'Review quotation'):['Authorized','Procurement','Delivery'].includes(r.status)?'View progress':'View request'} <i aria-hidden="true">→</i></small></span></button>`;
+    const draft=state.basket;
+    return shell(`<div class="psExperience psPortalHome">
+      <section class="psPortalWelcome" aria-labelledby="psPortalTitle">
+        <div class="psPortalSearchCopy"><h1 id="psPortalTitle">What do you need today?</h1><p>Find the right products. Build your request. We’ll take care of the sourcing.</p>
+          <form class="psPortalSearch" data-ps-command-form role="search"><label class="srOnly" for="psPortalCommand">Search your institutional catalogue</label><span aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/search.webp" alt=""></span><input id="psPortalCommand" data-cat-q type="search" aria-label="Search catalogue" placeholder="Product, brand or describe what you need…" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Search <span aria-hidden="true">→</span></button></form>
+          <div class="psPortalSearchExamples"><span>Try</span>${['Sterile gauze','Digital thermometer','Examination gloves'].map(q=>`<button type="button" data-portal-query="${esc(q)}">${esc(q)}</button>`).join('')}</div>
+          <button class="psTextLink" data-go="portal/catalogue">Browse the catalogue <span aria-hidden="true">↗</span></button>
         </div>
+        <div class="psPortalDraft ${draft.length?'hasDraft':''}" aria-label="${draft.length?'Saved supply request':'Send an existing list'}">${draft.length?`<h2>Pick up where you left off.</h2><p>${draft.length} request line${draft.length===1?'':'s'} · ${basketQty()} requested units</p><ul>${draft.slice(0,2).map(l=>{const p=l.sku?product(l.sku):null;return `<li><span>${esc(p?.name||lineDisplayName(l,p))}</span><small>${l.qty} × ${esc(linePackLabel(l,p))}</small></li>`;}).join('')}</ul>${draft.length>2?`<small>+ ${draft.length-2} more line${draft.length===3?'':'s'}</small>`:''}<button class="button dark" data-basket>Continue your request <span aria-hidden="true">→</span></button><small>Saved for this site. Review before submitting.</small>`:`<span class="psPortalListIcon" aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/my-requests.webp" alt=""></span><h2>Already have a list?</h2><p>Send your RFQ, spreadsheet or existing product list. Start with what you have.</p><button class="button outline" data-go="start">Upload your list <span aria-hidden="true">↗</span></button>`}</div>
       </section>
-
-      <section class="pscHomeWorkshop psPortalWorkshop" aria-labelledby="psc-workshop-title">
-        <div class="psPortalWorkshopHead"><div><h2 id="psc-workshop-title">The Workshop</h2><p>Practical product knowledge for a more confident clinic. Choose what you need to figure out.</p></div><button class="button outline" data-go="workshop">Explore all guides →</button></div>
-        <div class="workshopModuleGridV50 psPortalWorkshopGrid">${WORKSHOP_MODULES.map(workshopModuleCard).join('')}</div>
-      </section>
-
-
-
-      <section class="psPortalRepeat"><div><span class="eyebrow">AFTER YOUR FIRST SUPPLY</span><h2>Repeat ordering, without starting over.</h2><p>Return to the products already delivered to this school, prepare the next quantities and send a fresh request.</p></div><button class="button outline" data-go="portal/replenish">Open Replenish</button><button class="button outline" data-go="portal/documents">View account documents</button></section>
-
-    `);
+      <div class="psPortalWork">
+        <section class="psPortalAttention" aria-labelledby="psPortalActivityTitle"><div class="psPortalSectionHead"><div><h2 id="psPortalActivityTitle">${awaiting.length?'Your quotations are ready.':'Your requests, moving forward.'}</h2><p>${awaiting.length?`${awaiting.length} quotation${awaiting.length===1?'':'s'} available to review.`:active.length?`${active.length} request${active.length===1?'':'s'} in progress.`:'A clear view of what happens after you request.'}</p></div><button class="psTextLink" data-go="portal/requests">View all <span aria-hidden="true">↗</span></button></div><div class="psPortalActivityList">${recent.map(row).join('')||`<div class="psPortalNoActivity"><span aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/my-requests.webp" alt=""></span><div><h3>No requests in progress.</h3><p>${delivered.length?'Your previous orders are ready to revisit whenever you need them.':'Your quotations and order updates will appear here after your first request.'}</p></div></div>`}</div></section>
+        <div class="psPortalAccountLinks"><button data-go="portal/replenish"><span aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/orders.webp" alt=""></span><span><h3>Order again</h3><p>${deliveredSkus.size?`${deliveredSkus.size} previously supplied product${deliveredSkus.size===1?'':'s'}. Choose your next quantities.`:'Return to previously supplied items after your first completed order.'}</p></span><i aria-hidden="true">↗</i></button><button data-go="portal/documents"><span aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/downloads.webp" alt=""></span><span><h3>Your documents</h3><p>${documentCount?`${documentCount} account document${documentCount===1?'':'s'} in one place.`:'Quotations, approvals and delivery records, when available.'}</p></span><i aria-hidden="true">↗</i></button></div>
+      </div>
+      <section class="psPortalBaskets" aria-labelledby="psPortalBasketsTitle"><div class="psPortalSectionHead"><div><h2 id="psPortalBasketsTitle">Start with the whole task.</h2><p>Opening, restocking or refilling? Review a basket preview.</p></div><button class="psTextLink" data-go="portal/baskets">All ready baskets <span aria-hidden="true">↗</span></button></div><div class="psPortalBasketGrid">${window.PSC_READY_BASKETS?.compactCards()||'<button class="button outline" data-go="portal/baskets">Explore basket previews</button>'}</div></section>
+      <section class="pscHomeBrowse" aria-labelledby="psc-browse-title"><div class="psPortalSectionHead"><h2 id="psc-browse-title">Find your clinical area.</h2><button class="psTextLink" data-go="portal/catalogue">All categories <span aria-hidden="true">↗</span></button></div><div class="pscHomeCategoryColumns"><section><h3>By clinical need</h3><div class="pscHomeCategoryGrid" role="group" aria-label="By clinical need">${clinicalStarts.map(args=>homeCategory(...args)).join('')}</div>${guide(clinicalStarts)}</section><section><h3>Clinic requirement mapping</h3><div class="pscHomeCategoryGrid" role="group" aria-label="Clinic essentials">${essentialStarts.map(args=>homeCategory(...args)).join('')}</div>${guide(essentialStarts)}<small class="pscHomeScopeNote">DHA educational clinic mapping. Required alternatives and conditional items retain their original conditions; suitability is checked before quotation.</small></section></div></section>
+      <section class="psPortalHelp" aria-label="Product and purchasing guidance"><div><h2>A little clarity before you order.</h2><p>Practical product and specification guidance from The Workshop.</p></div><div><button class="psTextLink" data-go="workshop/product-basics">Product basics ↗</button><button class="psTextLink" data-go="workshop/ordering-specifications">Preparing a specification ↗</button><button class="psTextLink" data-go="workshop">All guides ↗</button></div></section><p class="psPortalApprovalNote">Submitting a request does not place a purchase order. Final approvals follow your organisation’s agreed process.</p>
+    </div>`);
   }
 
   function orderMiniRow(r){
@@ -2191,9 +2189,9 @@
     return state.scopesBySchool[key]||(state.scopesBySchool[key]=emptyScope());
   }
   function scopeNote(){
-    const scope=scopeDraft();
-    if(!scope.location&&!scope.sites&&!scope.retained.length&&!scope.orderType&&!scope.institution&&!state.basket.some(l=>l.requestUnit))return '';
-    return ['PS request scope',scope.institution&&`Institution / site: ${scope.institution}`,scope.location&&`Delivery location: ${scope.location}`,scope.sites&&`Sites: ${scope.sites} — ${scope.quantityConfirmation?'quantities require confirmation':'quantities are totals across all sites'}`,scope.orderType&&`Order type: ${scope.orderType}`,state.basket.some(l=>l.requestUnit)&&`Requested units: ${state.basket.filter(l=>l.requestUnit).map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty} ${l.requestUnit}`).join('; ')} — pack basis needs PS verification`,scope.retained.length&&`Existing / retain (excluded from supply): ${scope.retained.map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty}`).join('; ')}`,'Specifications, availability, pack basis and commercial terms need PS verification.'].filter(Boolean).join('\n');
+    const scope=scopeDraft(),basketReviews=[...new Set(state.basket.flatMap(l=>l.readyBasketReviews||[]))];
+    if(!basketReviews.length&&!scope.location&&!scope.sites&&!scope.retained.length&&!scope.orderType&&!scope.institution&&!state.basket.some(l=>l.requestUnit))return '';
+    return ['PS request scope',...basketReviews,scope.institution&&`Institution / site: ${scope.institution}`,scope.location&&`Delivery location: ${scope.location}`,scope.sites&&`Sites: ${scope.sites} — ${scope.quantityConfirmation?'quantities require confirmation':'quantities are totals across all sites'}`,scope.orderType&&`Order type: ${scope.orderType}`,state.basket.some(l=>l.requestUnit)&&`Requested units: ${state.basket.filter(l=>l.requestUnit).map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty} ${l.requestUnit}`).join('; ')} — pack basis needs PS verification`,scope.retained.length&&`Existing / retain (excluded from supply): ${scope.retained.map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty}`).join('; ')}`,'Specifications, availability, pack basis and commercial terms need PS verification.'].filter(Boolean).join('\n');
   }
   function intelligentSearchField(){
     return `<section class="psIntelligentSearch">${draftUndoControl()}<span class="sectionLabel">Search the catalogue</span><h2>Tell us what you need</h2><p>the way you’d normally say it</p><label for="psCommand">${state.basket.length?'Change this scope in plain language':'Search the catalogue'}</label><form data-ps-command-form><input id="psCommand" type="search" data-cat-q aria-label="Search catalogue" value="${esc(ui.catalogueQuery)}" placeholder="We need a wheelchair…" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Apply</button><button class="button outline" type="button" data-catalogue-clear ${!ui.catalogueQuery&&!intelligent.action?'disabled':''}>Clear</button></form>${intelligent.said?`<div class="psInterpretation" role="status"><span>You said: “${esc(intelligent.said)}”</span><b>PS understood: ${esc(intelligent.message)}</b></div>`:''}${intelligent.choices.length?`<div class="psClarification"><b>Which catalogue line should we add?</b>${intelligent.choices.map(p=>`<button type="button" class="button outline" data-ps-select-sku="${esc(p.pscSku)}">${esc(p.catalogueDisplayName||p.name)}</button>`).join('')}</div>`:''}${intelligent.pending?.kind==='product_type'?`<div class="psClarification"><b>Which type of mask did you mean?</b>${['nebulizer mask','oxygen mask','face mask'].map(q=>`<button type="button" class="button outline" data-ps-clarify-type="${q}">${q}</button>`).join('')}</div>`:''}${intelligent.pending&&intelligent.pending.kind!=='product_type'?`<div class="psClarification"><b>Which size did you mean?</b>${intelligent.pending.sizes.map(size=>`<button class="button outline" data-ps-clarify="${esc(size)}">${esc(size.replace('x',' × '))} cm</button>`).join('')}<button class="button outline" data-ps-clarify="both">Show both</button></div>`:''}</section>`;
@@ -2339,6 +2337,29 @@
     return `<nav class="needRibbon" aria-label="Clinical needs">${home}<div class="needRibbonTrack">${items}</div></nav>`;
   }
 
+  function schoolBasketSection(){
+  const b=window.PS_SCHOOL_BASKETS;
+  if(!b) return '';
+  const selected=ui.schoolCollection||'';
+  const isPortal=currentRoute().startsWith('portal/');
+  const available=catalogueProducts();
+  const match=id=>available.find(p=>p.pscSku===id)||available.find(p=>p.catalogueTransactionId===id)||null;
+  const view=(p)=>p?`<button type="button" ${isPortal?'data-product-view':'data-public-product-view'}="${esc(p.pscSku)}">View details</button>`:'<span class="psSchoolSourceNote">Source on request</span>';
+  const row=(label,p,pack='')=>`<li><span>${esc(label)}${pack?` <small>· ${esc(pack)}</small>`:''}</span>${view(p)}</li>`;
+  const options=[['opening','Complete clinic setup','Furniture, emergency equipment & opening stock'],['replenishment','Clinic refills','Wound care, hygiene, testing & disposables'],['kits','First-aid points','Gym, laboratory, canteen, trips & campus']];
+  let content='';
+  if(selected==='opening'){
+    content=`<h3>Complete clinic opening and setup</h3><p>A grouped starting specification for a new clinic. Existing facilities and technical approval determine the final site quantities. Site works and medicines remain separate.</p><div class="psSchoolGroupGrid">`+b.opening.map(g=>`<details class="psSchoolGroup"><summary>${esc(g.title)} <span>${g.scopeChecklist?.length||g.transactions.length} ${g.scopeChecklist?'site checks':'requirement lines'}</span></summary><p>${esc(g.description)}</p><ul class="psSchoolLines">${g.transactions.map(id=>{const p=match(id);return row(p?.catalogueDisplayName||p?.name||id,p)}).join('')+(g.scopeChecklist||[]).map(item=>row(item,null)).join('')}</ul></details>`).join('')+`</div><div class="psSchoolPanelActions">${isPortal?'<button class="button dark" type="button" data-school-opening-request>Prepare complete setup request</button>':'<button class="button dark" type="button" data-go="start">Request a clinic setup quotation</button>'}</div><p class="psSchoolFinePrint">DHA version 4.1 Appendix 3 reference for DHA-licensed Dubai educational clinics. The site plan, treatment/isolation rooms, water and waste facilities, professional authorization and local authority are checked separately. A listed catalogue line is not a verified compliant model.</p>`;
+  }else if(selected==='replenishment'){
+    content=`<h3>Clinic consumables & replenishment</h3><p>Practical clinic-sized packs where offered, instead of a wholesaler-size cart by default. Only actual quoted unit packs and observed school needs determine quantities.</p><div class="psSchoolGroupGrid">`+b.replenishment.map(g=>{const selections=g.skus.map(match).filter(p=>p&&!p.regulated);return `<details class="psSchoolGroup"><summary>${esc(g.title)} <span>${selections.length} selections</span></summary><p>${esc(g.description)}</p><ul class="psSchoolLines">${selections.map(p=>row(p.catalogueDisplayName||p.name,p,p.cataloguePack||p.pack||'Pack to confirm')).join('')}</ul></details>`;}).join('')+`</div><p class="psSchoolFinePrint">Select exact sizes, brands and device-compatible test strips after reviewing Details. Refill quantities are requested, not auto-purchased. Check pack sizes, expiry and current supplier availability before quotation.</p>`;
+  }else if(selected==='kits'){
+    const kit=b.kits.find(k=>k.id===ui.schoolKit)||b.kits[0];
+    content=`<h3>Location-specific first-aid points</h3><p>Packaged kit concepts with independently refillable components. The school's nurse and safety lead approve the final contents, quantity, site and custody.</p><div class="psSchoolKitSelector">${b.kits.map(k=>`<button type="button" data-school-kit="${esc(k.id)}" aria-pressed="${k.id===kit.id?'true':'false'}">${esc(k.accent)}</button>`).join('')}</div><div class="psSchoolKitBody"><h3>${esc(kit.title)}</h3><p><strong>${esc(kit.where)}</strong> · ${esc(kit.details)}</p><ul class="psSchoolLines">${kit.contents.map(([label,id,pack])=>row(label,id?match(id):null,'Proposed quantity: '+pack)).join('')}</ul><div class="psSchoolPanelActions">${isPortal?`<button type="button" class="button dark" data-school-kit-request="${esc(kit.id)}">Add this kit to request</button>`:'<button type="button" class="button dark" data-go="start">Enquire about this kit</button>'}</div></div><p class="psSchoolFinePrint">PS-designed kit contents are a risk-informed commercial proposal, not a prescribed DHA first-aid kit bill of materials. Dedicated laboratory emergency eyewash and safety facilities must be evaluated independently. Medicines and injectable treatments are not included in general-access kits.</p>`;
+  }
+  const label=`<div class="psSchoolHead"><div><h2>School clinic supply collections</h2><p>From opening a clinic to refilling first-aid points across campus.</p></div></div>`;
+  return `<section class="psSchoolBaskets" aria-label="School clinic supply collections">${label}<div class="psSchoolCollectionGrid">${options.map(([id,title,subtitle])=>`<button type="button" class="psSchoolCollectionTile" data-school-collection="${id}" aria-pressed="${selected===id?'true':'false'}"><small>${id==='opening'?'01 · SETUP':id==='replenishment'?'02 · RESTOCK':'03 · FIRST AID'}</small><strong>${title}</strong><span>${subtitle}</span></button>`).join('')}</div>${selected?`<div class="psSchoolCollectionPanel">${content}</div>`:''}</section>`;
+}
+
   function catalogue(){
     const allProducts=catalogueProducts();
     const dhaCount=allProducts.filter(p=>p.dhaMapped).length;
@@ -2356,6 +2377,7 @@
         <div class="catalogueDepthPill"><b>${allProducts.length}</b><span>catalogue lines</span><small>${dhaCount} lines mapped to DHA requirements</small></div>
       </div>
 
+      ${schoolBasketSection()}
       <section class="clinicNeedSection v25NeedJourney v26CatalogueLanding">
         <div class="clinicNeedHeading"><div><span class="eyebrow">CLINICAL NEEDS</span><h2>Where do you want to start?</h2><p>Choose the clinical context first. Once inside, use the product and requirement filters to narrow the catalogue.</p></div></div>
         <div class="clinicNeedRail">${needCards}</div>
@@ -2728,6 +2750,40 @@
     document.dispatchEvent(new CustomEvent('psc:request-added',{detail:{sku,qty,total:basketQty()}}));
     toast(`<strong>${qty} × ${esc(p.catalogueDisplayName||p.name)}</strong> added · ${prior+qty} of this product in request`);
   }
+  // Validate the whole selection before one existing-draft mutation. No bundle SKU or order is created.
+  window.PSC_ADD_READY_SELECTION=function(selection){
+    if(!session||!currentRoute().startsWith('portal/'))return {ok:false,message:'Open your account before adding a basket.'};
+    const template=window.PSC_READY_BASKET_TEMPLATES?.find(t=>t.id===selection?.templateId);
+    if(!template||!['setup','replenishment'].includes(selection.mode)||!Array.isArray(selection.lines)||!selection.lines.length||new Set(selection.lines.map(l=>l.id)).size!==selection.lines.length)return {ok:false,message:'Select at least one component.'};
+    const next=structuredClone(state.basket);
+    const preview=!window.PSC_READY_BASKETS?.verified(template);
+    const review=`${template.name} · ${selection.mode==='replenishment'?'replenishment':'setup'} — ${preview?'planning preview; compatibility, kit contents and exact specifications require PS review before quotation':'approved template; availability and commercial terms require quotation'}.`;
+    for(const item of selection.lines){
+      const definition=template.lines.find(l=>l.id===item.id);
+      const qty=Number(item.quantity),p=item.sku?product(item.sku):null;
+      const variant=definition?.variants?.find(v=>v.sku===item.sku);
+      if(!definition||(selection.mode==='replenishment'&&definition.setupOnly)||(!p&&item.sku)||(!Number.isInteger(qty)||qty<1||qty>10000)||
+        (item.sku!==definition.sku&&!(variant&&window.PSC_READY_BASKETS?.compatible(variant,Object.fromEntries(selection.lines.map(l=>[l.id,{sku:l.sku}]))))))return {ok:false,message:'A component changed. Reopen the basket and review the exact selection.'};
+      if(p&&(p.catalogueVisible===false||p.regulated||window.PSC_PRODUCT_PRESENTATION.profile(p)?.kind==='pharmaceuticals'))return {ok:false,message:'This component needs a separate authorized request.'};
+      let line;
+      if(!p){
+        if(!definition.specification)return {ok:false,message:'Add an exact specification before requesting this component.'};
+        line={kind:'unlisted',requestId:`unlisted-ready-${template.id}-${definition.id}`,description:definition.specification,qty};
+      }else if(window.PS_CATALOGUE_STOCK?.forProduct(p)?.source_kind==='requirement'){
+        line=normalizeFamilyRequestLine({localFamily:true,familyId:p.catalogueParentId||p.catalogueReferenceFamilyId||p.pscSku,familyName:p.name,
+          orderPackBasis:p.pack,qty,requirementSnapshot:{sku:p.pscSku,name:p.name,pack:p.pack,reference:p.dhaReference||'',status:p.dhaStatus||'',condition:p.dhaCondition||''}});
+      }else line={sku:p.pscSku,qty};
+      const key=lineKey(line),existing=next.find(l=>lineKey(l)===key);
+      if(existing&&Number(existing.qty)+qty>10000)return {ok:false,message:'Keep the combined quantity at or below 10,000 per line.'};
+      const notes=[...new Set([...(existing?.readyBasketReviews||[]),review])];
+      if(existing){Object.assign(existing,line,{qty:Number(existing.qty)+qty,readyBasketReviews:notes});}
+      else next.push({...line,readyBasketReviews:notes});
+    }
+    draftCheckpoint();state.basket=next;save();renderUi({preserveScroll:true,transition:false});
+    document.dispatchEvent(new CustomEvent('psc:request-added',{detail:{total:basketQty()}}));
+    toast(`<strong>${selection.lines.length} components added to Supply Request.</strong><br>Review your request before submitting.`);
+    return {ok:true};
+  };
   function reorderRequest(id){
     const r=state.requests.find(x=>x.id===id); if(!r)return;
     r.lines.forEach(l=>{const key=lineKey(l);const f=state.basket.find(x=>lineKey(x)===key);if(f)f.qty+=l.qty;else state.basket.push(JSON.parse(JSON.stringify(l)))});
@@ -2737,12 +2793,12 @@
     const lines=state.basket.map((l,index)=>({l,p:l.sku?product(l.sku):null,index})).filter(x=>x.p||isFamilyLine(x.l)||x.l.kind==='unlisted');
     const indicative=lines.reduce((sum,x)=>sum+((x.p?.contractPrice)||0)*x.l.qty,0);
     return `<div class="drawerBackdrop requestDrawerBackdrop" data-close-basket><aside class="drawer requestDrawer" onclick="event.stopPropagation()"><div class="drawerHandle" aria-hidden="true"></div><div class="drawerHeader"><div><span class="eyebrow">PHARMA SERVICE</span><h2>Supply Request</h2><small>${lines.length?`${lines.length} line${lines.length===1?'':'s'} · ${basketQty()} item${basketQty()===1?'':'s'}`:'Build a request while you browse'}</small></div><button class="iconBtn" data-close-basket aria-label="Close request">×</button></div><div class="drawerBody">${draftUndoControl()}${lines.length?lines.map(({l,p,index})=>{
-      if(l.kind==='unlisted')return `<div class="basketLine requestLine"><div class="basketInfo"><b>${esc(l.description)}</b><span>Unlisted item — requires PS review</span></div><span>Qty ${l.qty}</span><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
+      if(l.kind==='unlisted')return `<div class="basketLine requestLine"><div class="basketInfo"><b>${esc(l.description)}</b><span>Unlisted item — requires PS review</span></div><div class="qty"><button data-family-basket-delta="${index}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-family-basket-delta="${index}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
       if(isFamilyLine(l)){
-        return `<div class="basketLine requestLine"><div class="productGlyph small">Rx</div><div class="basketInfo"><b>${esc(lineDisplayName(l,p))}</b><span>${esc(linePackLabel(l,p))} · ${esc(lineReference(l))}</span><small>${esc(lineBrandPreferenceLabel(l))} · Price confirmed in quotation</small></div><div class="qty"><button data-family-basket-delta="${index}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-family-basket-delta="${index}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
+        return `<div class="basketLine requestLine"><div class="productGlyph small">${l.regulated?'Rx':'PS'}</div><div class="basketInfo"><b>${esc(lineDisplayName(l,p))}</b><span>${esc(linePackLabel(l,p))} · ${esc(lineReference(l))}</span><small>${esc(lineBrandPreferenceLabel(l))} · Price confirmed in quotation</small></div><div class="qty"><button data-family-basket-delta="${index}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-family-basket-delta="${index}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
       }
-      const imageUrl=productDisplayImageUrl(p);return `<div class="basketLine requestLine">${imageUrl?`<div class="requestLineImage"><img src="${esc(imageUrl)}" alt="" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'"></div>`:`<div class="productGlyph small">${esc((p.brand||'PS').slice(0,2).toUpperCase())}</div>`}<div class="basketInfo"><b>${esc(p.catalogueDisplayName||p.name)}</b><span>${esc(p.cataloguePack||p.pack||'Pack to confirm')} · ${p.pscSku}</span><small>${p.contractPrice?money(p.contractPrice)+' indicative account price':'Price confirmed in quotation'}</small></div><div class="qty"><button data-basket-delta="${p.pscSku}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-basket-delta="${p.pscSku}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-basket-remove="${p.pscSku}">Remove</button></div>`
-    }).join(''):`<div class="emptyState requestEmpty"><h3>Your request is empty</h3><p>Browse the catalogue and add the products you want PS to quote.</p><button class="button dark" data-go="portal/catalogue">Browse catalogue</button></div>`}</div>${lines.length?`<div class="drawerFooter requestDrawerFooter">${scopeNote()?`<div class="psRequestScopeReview"><b>Request scope</b><p>${esc(scopeNote()).replace(/\n/g,'<br>')}</p></div>`:''}<label class="fieldLabel">Request note <span>optional</span></label><textarea class="textarea" id="basketNote" placeholder="Delivery timing, preferred brand, clinic note…"></textarea><div class="totals"><span>Indicative priced lines</span><b>${money(indicative)}</b></div><div class="checkoutPromise requestNextStep"><span>WHAT HAPPENS NEXT</span><p>${authContext?.group?.slug==='aeg-education'?'PS reviews the request and prepares the formal quotation for AEG Management review. Customer PO and PS commercial release checks remain required.':`PS reviews the request and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. Nothing is procured until the required customer approval is in place.`}</p></div><button class="button primary full submitRequestButton" data-submit-request>Submit request</button></div>`:''}</aside></div>`;
+      const imageUrl=productDisplayImageUrl(p);return `<div class="basketLine requestLine">${imageUrl?`<div class="requestLineImage"><img src="${esc(imageUrl)}" alt="" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'"></div>`:`<div class="productGlyph small">${esc((p.brand||'PS').slice(0,2).toUpperCase())}</div>`}<div class="basketInfo"><b>${esc(p.name||p.catalogueDisplayName)}</b><span>${esc(p.pack||p.cataloguePack||'Pack to confirm')} · ${p.pscSku}</span><small>${p.contractPrice?money(p.contractPrice)+' indicative account price':'Price confirmed in quotation'}</small></div><div class="qty"><button data-basket-delta="${p.pscSku}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-basket-delta="${p.pscSku}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-basket-remove="${p.pscSku}">Remove</button></div>`
+    }).join(''):`<div class="emptyState requestEmpty"><h3>Your request is empty</h3><p>Browse the catalogue and add the products you want PS to quote.</p><button class="button dark" data-go="portal/catalogue">Browse catalogue</button></div>`}${scopeNote()?`<div class="psRequestScopeReview"><b>Request scope</b><p>${esc(scopeNote()).replace(/\n/g,'<br>')}</p></div>`:''}</div>${lines.length?`<div class="drawerFooter requestDrawerFooter"><label class="fieldLabel">Request note <span>optional</span></label><textarea class="textarea" id="basketNote" placeholder="Delivery timing, preferred brand, clinic note…"></textarea><div class="totals"><span>Indicative priced lines</span><b>${money(indicative)}</b></div><div class="checkoutPromise requestNextStep"><span>WHAT HAPPENS NEXT</span><p>${authContext?.group?.slug==='aeg-education'?'PS reviews the request and prepares the formal quotation for AEG Management review. Customer PO and PS commercial release checks remain required.':`PS reviews the request and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. Nothing is procured until the required customer approval is in place.`}</p></div><button class="button primary full submitRequestButton" data-submit-request>Submit request</button></div>`:''}</aside></div>`;
   }
 
 
@@ -3064,7 +3120,7 @@
       <div class="productDetailGrid fluidProductGrid">
         <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).filter(m=>(window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(m.url):m.url)).map(m=>`<img src="${esc((window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(m.url):m.url))}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
         <div class="detailContentPane fluidDetailContent">
-          <div class="professionalPurchaseIdentity"><h3>${esc(displayName)}</h3><p>${esc(pack)}</p></div>${wishlistControl(p)}${productVariantSelector(p)}${cataloguePricePreview(p)}${catalogueRetailPriceNotice()}${window.PSC_PRODUCT_PRESENTATION.whatsappHtml(p)}
+          <div class="professionalPurchaseIdentity"><h3>${esc(displayName)}</h3><p>${esc(pack)}</p></div>${wishlistControl(p)}${productVariantSelector(p)}${cataloguePricePreview(p)}${catalogueRetailPriceNotice()}${window.PSC_PRODUCT_PRESENTATION.whatsappHtml(p)}${window.PSC_READY_BASKETS?.entryHtml(p.pscSku)||''}
           ${window.PSC_PRODUCT_PRESENTATION.documentsHtml(p)}<div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to the applicable DHA clinic requirement.</b></div>`:''}</div>
           <div class="productDisclosureList">
             <details open><summary><span>Details</span><i>+</i></summary><div>${window.PSC_PRODUCT_PRESENTATION.factsHtml(p,{heading:false})}<p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
@@ -3470,6 +3526,7 @@
       'who-we-supply':['Our Model | Pharma Service','How Pharma Service handles institutional healthcare supply: careful specifications, category-appropriate sourcing, regulated routes and repeat account service.','/our-model.html'],
       'what-we-supply':['Our Model | Pharma Service','How Pharma Service handles institutional healthcare supply: careful specifications, category-appropriate sourcing, regulated routes and repeat account service.','/our-model.html'],
       'how-it-works':['Our Model | Pharma Service','How Pharma Service handles institutional healthcare supply: careful specifications, category-appropriate sourcing, regulated routes and repeat account service.','/our-model.html'],
+      'ready-baskets':['Ready Procurement Baskets | Pharma Service','Explore preview procurement baskets for glucose monitoring, nebulizer setup and wound care. Specifications and compatibility require quotation review.','/#ready-baskets'],
       catalogue:['Institutional Healthcare Catalogue | Pharma Service','Browse the public read-only Pharma Service institutional healthcare catalogue by clinical need.','/catalogue.html'],
       contact:['Request Institutional Supply | Pharma Service','Send Pharma Service an institutional healthcare requirement or RFQ for sourcing and quotation.','/contact.html'],
       start:['Start Here | Pharma Service','Browse the Pharma Service institutional catalogue, send an RFQ or product list, or see how our institutional supply model works.','/start'],
@@ -3531,6 +3588,7 @@
       case 'what-we-supply': html=ourModelPage();break;
       case 'how-it-works': html=ourModelPage();break;
       case 'catalogue': html=publicCataloguePage('all');break;
+      case 'ready-baskets': html=`<main class="publicPage psReadyPublic">${publicHeader('ready-baskets')}<div data-ready-baskets-gallery></div>${publicFooter()}</main>`;break;
       case 'workshop': html=workshopLandingPage();break;
       case 'wholesale': html=wholesalePage();break;
       case 'max': location.hash='services'; return;
@@ -3543,6 +3601,7 @@
       case 'login': html=loginPage();break;
       case 'portal/dashboard': html=portalDashboard();break;
       case 'portal/catalogue': html=catalogue();break;
+      case 'portal/baskets': html=shell('<div data-ready-baskets-gallery></div>');break;
       case 'portal/wishlist': html=wishlistPage();break;
       case 'portal/requests': html=requestsPage();break;
       case 'portal/replenish': html=replenishPage();break;
@@ -3670,6 +3729,7 @@
       el.addEventListener('input',e=>{ui.globalSearch=e.target.value;});
       el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();window.PS_SEARCH_CATALOGUE(e.target.value);}});
     });
+    document.querySelectorAll('[data-portal-query]').forEach(el=>el.addEventListener('click',()=>applyIntelligentCommand(el.dataset.portalQuery)));
     document.querySelectorAll('[data-tour-next]').forEach(el=>el.addEventListener('click',()=>{ui.tourStep=Math.min(5,(ui.tourStep||0)+1);render()}));
     document.querySelectorAll('[data-tour-prev]').forEach(el=>el.addEventListener('click',()=>{ui.tourStep=Math.max(0,(ui.tourStep||0)-1);render()}));
     document.querySelectorAll('[data-tour-jump]').forEach(el=>el.addEventListener('click',()=>{ui.tourStep=Number(el.dataset.tourJump)||0;render()}));
@@ -3744,6 +3804,25 @@
       renderUi({preserveScroll:true,focusSelector:'[data-cat-q]',cursor:0,transition:false});
     }));
     const cq=document.querySelector('[data-cat-q]'); if(cq)cq.addEventListener('input',e=>{intelligent.sequence++;ui.catalogueQuery=e.target.value;ui.globalSearch=e.target.value;clearTimeout(searchTypingTimer);if(!e.target.value){resetIntelligentSearch();updateCatalogueResults();return;}searchTypingTimer=setTimeout(updateCatalogueResults,140);});
+    document.querySelectorAll('[data-school-collection]').forEach(el=>el.addEventListener('click',()=>{
+      ui.schoolCollection=el.dataset.schoolCollection;
+      if(!/^catalogue(?:\/|$)/.test(currentRoute())&&!currentRoute().startsWith('portal/catalogue'))go('catalogue');
+      else renderUi({preserveScroll:true,transition:false});
+    }));
+    document.querySelectorAll('[data-school-kit]').forEach(el=>el.addEventListener('click',()=>{
+      ui.schoolKit=el.dataset.schoolKit;renderUi({preserveScroll:true,transition:false});
+    }));
+    document.querySelectorAll('[data-school-opening-request]').forEach(el=>el.addEventListener('click',()=>{
+      state.basket.push({kind:'unlisted',requestId:'unlisted-'+crypto.randomUUID(),description:'Complete new school clinic setup quotation: room furniture, diagnostics, emergency equipment and opening consumables. Site population and authority requirements to confirm. Medicines and facilities need separate approved scopes.',qty:1});
+      save();ui.basket=true;renderUi({preserveScroll:true,transition:false});
+    }));
+    document.querySelectorAll('[data-school-kit-request]').forEach(el=>el.addEventListener('click',()=>{
+      const kit=window.PS_SCHOOL_BASKETS?.kits?.find(k=>k.id===el.dataset.schoolKitRequest);
+      if(!kit)return;
+      const contents=kit.contents.map(([label,id,pack])=>`${label}${id?' ['+id+']':''} — ${pack}`).join('; ');
+      state.basket.push({kind:'unlisted',requestId:'unlisted-'+crypto.randomUUID(),description:kit.title+' | location: '+kit.where+' | PS proposed contents to be reviewed with the school nurse and site risk lead. Request a fully itemized kit quotation and practical refill packs. Proposed contents snapshot ('+window.PS_SCHOOL_BASKETS.version+'): '+contents,qty:1});
+      save();ui.basket=true;renderUi({preserveScroll:true,transition:false});
+    }));
     document.querySelectorAll('[data-clinic-need]').forEach(el=>el.addEventListener('click',()=>{ui.catalogueNeed=el.dataset.clinicNeed||'all';render()}));
     document.querySelectorAll('[data-cat-filter]').forEach(el=>el.addEventListener('change',e=>{if(el.dataset.catFilter==='category')ui.catalogueCat=e.target.value;else ui.catalogueFilter=e.target.value;renderUi({preserveScroll:true,transition:false})}));
     const pq=document.querySelector('[data-prod-q]'); if(pq)pq.addEventListener('input',e=>{ui.productQuery=e.target.value;render()});

@@ -1,0 +1,33 @@
+
+/* Compact transactional school-clinic collections. Visual layer only; never a price/compliance source. */
+.psSchoolBaskets{margin:22px 0 28px;padding:22px;background:var(--surface,#fff);border:1px solid rgba(19,55,47,.13);border-radius:19px}
+.psSchoolBaskets .psSchoolHead{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:14px}
+.psSchoolHead h2{font-size:clamp(1.28rem,2vw,1.75rem);margin:4px 0 6px}
+.psSchoolHead p{font-size:.92rem;color:var(--ink-muted,#5d6a65);max-width:670px;margin:0}
+.psSchoolCollectionGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.psSchoolCollectionTile{display:flex;min-width:0;text-align:left;flex-direction:column;align-items:flex-start;gap:5px;padding:14px 13px;border:1px solid rgba(19,55,47,.15);border-radius:12px;background:#fff;color:#163d32;cursor:pointer;transition:background .18s,border-color .18s}
+.psSchoolCollectionTile:hover,.psSchoolCollectionTile:focus-visible{border-color:#285c49;background:#f5faf7}
+.psSchoolCollectionTile[aria-pressed="true"]{border-color:#285c49;background:#e9f4ee}
+.psSchoolCollectionTile small{font-size:.69rem;font-weight:750;letter-spacing:.045em}
+.psSchoolCollectionTile strong{font-size:1rem;line-height:1.2}
+.psSchoolCollectionTile span{font-size:.81rem;line-height:1.4;color:#556760}
+.psSchoolCollectionPanel{margin-top:16px;padding-top:17px;border-top:1px solid rgba(19,55,47,.15)}
+.psSchoolCollectionPanel h3{font-size:1.2rem;line-height:1.3;margin:0 0 5px}
+.psSchoolCollectionPanel p{font-size:.91rem;color:#51625a}
+.psSchoolPanelActions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:13px 0}
+.psSchoolFinePrint{font-size:.77rem;color:#576a61;margin-top:12px;line-height:1.5}
+.psSchoolGroupGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:15px 0}
+.psSchoolGroup{border:1px solid rgba(20,56,46,.14);padding:12px;border-radius:11px;min-width:0;background:#fff}
+.psSchoolGroup summary{cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:700}
+.psSchoolGroup summary span{font-size:.76rem;color:#62776e;white-space:nowrap}
+.psSchoolGroup p{font-size:.82rem;margin:8px 0;color:#5f6d65}
+.psSchoolLines{display:grid;grid-template-columns:1fr;gap:0;padding:0;margin:10px 0 0;list-style:none}
+.psSchoolLines li{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:38px;border-top:1px solid #edf1ed;font-size:.82rem}
+.psSchoolLines button{background:transparent;border:0;color:#205e48;text-decoration:underline;font-size:.78rem;cursor:pointer;white-space:nowrap}
+.psSchoolKitSelector{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.psSchoolKitSelector button{text-align:left;padding:11px;border:1px solid #d7e2dc;border-radius:10px;background:#fff;cursor:pointer;font-size:.87rem;font-weight:650}
+.psSchoolKitSelector button[aria-pressed="true"]{border-color:#255d48;background:#eaf4ee}
+.psSchoolKitBody{border-radius:12px;background:#fafcfb;border:1px solid #e0e8e2;padding:16px;margin-top:13px}
+.psSchoolKitBody .psSchoolLines li{padding:7px 0}
+.psSchoolKitBody .psSchoolLines b{font-size:.76rem;text-align:right;font-weight:500;color:#617069}
+@media(max-width:740px){.psSchoolBaskets{padding:14px;margin:14px 0}.psSchoolCollectionGrid,.psSchoolKitSelector{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.psSchoolCollectionTile{padding:10px 7px;gap:3px}.psSchoolCollectionTile small{font-size:.6rem}.psSchoolCollectionTile strong{font-size:.77rem}.psSchoolCollectionTile span{font-size:.68rem;line-height:1.3}.psSchoolGroupGrid{grid-template-columns:1fr}.psSchoolKitSelector button{font-size:.72rem;padding:8px 6px}.psSchoolKitBody{padding:10px}}

@@ -32,3 +32,9 @@ These rules implement Moe's instructions of 12 October 2026.
 - `data/catalogue-image-policy.json` blocks rejected asset paths and hashes from the public build, including renamed copies. OCR is supplementary: human visual review is required because logo-only and blurred supplier branding may be missed.
 - Image-only changes must preserve IDs, specs, prices, stock and ordering. Release checks must cover card/detail photo continuity, framing, branding rejection and requests on desktop/mobile.
 - New images follow: exact identity → source/photo review → no-supplier-branding check → white/transparent preparation → decode/resolution → variant binding → card/detail preview → publish. An uploaded photo is a draft until reviewed and explicitly published.
+
+## Homepage design instruction — 19 October 2026
+
+- Do not add decorative eyebrow/kicker/pre-heading text. This applies across the homepage, catalogue and procurement basket UI. Preserve functional labels and approval/preview status in normal sentence case near the information they qualify.
+- The homepage hero uses the approved Healthcare procurement for institutions composition and original hero image. Do not replace it with isolated catalogue packshots.
+- Procurement baskets must address meaningful institutional purchasing tasks. Unapproved scopes remain previews; never describe them as complete clinic standards or approved kits.

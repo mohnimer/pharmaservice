@@ -52,29 +52,31 @@ try {
   }
   report.push('Homepage, Start and trailing slash, About, Our Model, Contact, login and direct Workshop deep routes render actual shell scripts');
   w=await setup('/');
-  for(let n=0;!w.document.querySelector('.home47')&&n<20;n++)await pause();
-  assert.deepEqual([...w.document.querySelector('.home47').children].map(el=>el.className),['h47Hero','h47Catalogue','h47Journey','h47Visibility']);
-  assert.equal(w.document.querySelectorAll('.h47Category').length,6);
+  for(let n=0;!w.document.querySelector('.psHome')&&n<20;n++)await pause();
+  assert.deepEqual([...w.document.querySelector('.psHome').children].map(el=>el.className),['home47 h47Compact','psHomeFind psPageWidth','psHomeCategories psPageWidth','psHomeJourney psPageWidth','psHomeReturn psPageWidth']);
+  assert.equal(w.document.querySelectorAll('.psClinicalTile').length,6);
   assert(w.document.querySelector('#psHomeCommand[data-cat-q]'));
   assert(w.document.querySelector('main.publicLanding > .publicHeader'));
   assert(w.document.querySelector('main.publicLanding > .publicFooter'));
-  assert.equal(w.document.querySelector('.h47Hero h1').textContent,'Healthcare procurement for institutions.');
-  assert.equal(w.document.querySelector('.h47Hero .h47HeroBody').textContent,'Documented supply at wholesale prices, with one accountable partner from first order to repeat.');
+  assert.equal(w.document.querySelector('.h47HeroCopy h1').textContent,'Healthcare procurement for institutions.');
+  assert.equal(w.document.querySelectorAll('.psHome .psEyebrow').length,0);
+  assert.equal(w.document.querySelectorAll('.psHome .psBasketCard').length,0);
   await w.happyDOM.close();
   // The current home body is installed after bind(); exercise its actual CTAs.
   for(const [selector,destination] of [
-    ['.h47Hero [data-go="our-model"]','#our-model'],
-    ['.h47Hero [data-go="contact"]','#contact'],
-    ['.h47CatalogueFoot [data-go="catalogue"]','#catalogue'],
-    ['.h47CatalogueFoot [data-go="start"]','/start'],
-    ['.publicHeader [data-go="workshop"]','/workshop'],
-    ['.publicHeader [data-go="login"]','#login']
+    ['.psHomeJourney [data-go="our-model"]','#our-model'],
+    ['.publicFooter [data-go="contact"]','#contact'],
+    ['.psHomeCategories [data-go="catalogue"]','#catalogue'],
+    ['.psHeroSecondary [data-go="start"]','/start'],
+    ['.publicFooter [data-go="workshop"]','/workshop'],
+    ['.publicHeader [data-go="portal/dashboard"]','#login'],
+    ['.publicHeader [data-go="ready-baskets"]','#ready-baskets']
   ]){
     w=await setup('/');
     assert.equal(w.document.querySelectorAll('.h47PillarLink').length,0);
     await click(w,selector);
     assert.equal(destination.startsWith('#')?w.location.hash:w.location.pathname,destination);
-    assert(!w.document.querySelector('.home47'),'CTA opens destination rather than leaving homepage visible');
+    assert(!w.document.querySelector('.psHome'),'CTA opens destination rather than leaving homepage visible');
     await w.happyDOM.close();
   }
   w=await setup('/#contact');
