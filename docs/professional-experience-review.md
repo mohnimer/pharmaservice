@@ -48,3 +48,9 @@ Portal category shortcuts now reuse the existing public clinical artwork (wounds
 Repeated Preview/review-before-quotation card captions are removed from both full and compact basket discovery. The action is View basket. All template records remain PREVIEW, and contextual preview text, specification review and approval gates remain in the basket flow; no evidence status is promoted by removing repeated presentation copy.
 
 The portal distinguishes its tasks through a cool RFQ/draft panel, a pale green current-activity area, basket photography on white, warm clinical-category surfaces and a dark green guidance section. Styles remain scoped to the customer home. Original public hero, routes, account/site controls, exact request identities, prices, source masters and production remain unchanged. Eight active/empty account journeys, five-width category/DHA/keyboard checks and isolated basket tests pass. Desktop/mobile screenshots use isolated sample accounts.
+## School collection theme correction — 19 October 2026
+
+School collections now use the established catalogue tokens, content gutters, lighter heading weights, 8px controls and restrained surfaces. The independent outer panel and nested group/kit frames are removed. Opening groups use the shared disclosure glyph without duplicated icons or blurred previews; mobile collection choices use readable full-width rows. Packs and proposed quantities have their own quiet secondary line. No dataset, SKU/pack value, price, image, DHA rule or request snapshot changed.
+
+Focused validation: four-width public/portal collection and all-five-kit journeys, exact snapshot submission through isolated transport, five-width clinical categories/DHA/keyboard checks, shared basket/evidence tests and seven shell/registry/build checks pass. Desktop/mobile rendered metrics and before/after captures retained privately.
+
