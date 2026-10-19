@@ -16,7 +16,7 @@
   }
 
   function removeEyebrows(root=document){
-    root.querySelectorAll(EYEBROW_SELECTORS).forEach(el => {if(!el.closest('.psExperience'))el.remove();});
+    root.querySelectorAll(EYEBROW_SELECTORS).forEach(el => el.remove());
 
     /*
       Some older sections use an unclassed uppercase <span> immediately
@@ -25,7 +25,6 @@
       controls remain untouched.
     */
     root.querySelectorAll('span').forEach(span => {
-      if(span.closest('.psExperience'))return;
       const parent = span.parentElement;
       if(!parent) return;
 

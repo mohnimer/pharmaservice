@@ -53,14 +53,14 @@ try {
   report.push('Homepage, Start and trailing slash, About, Our Model, Contact, login and direct Workshop deep routes render actual shell scripts');
   w=await setup('/');
   for(let n=0;!w.document.querySelector('.psHome')&&n<20;n++)await pause();
-  assert.deepEqual([...w.document.querySelector('.psHome').children].map(el=>el.className),['psHomeHero psPageWidth','psHomeCategories psPageWidth','psHomeBaskets','psHomeJourney psPageWidth','psHomeReturn psPageWidth']);
+  assert.deepEqual([...w.document.querySelector('.psHome').children].map(el=>el.className),['home47 h47Compact','psHomeFind psPageWidth','psHomeCategories psPageWidth','psHomeJourney psPageWidth','psHomeReturn psPageWidth']);
   assert.equal(w.document.querySelectorAll('.psClinicalTile').length,6);
   assert(w.document.querySelector('#psHomeCommand[data-cat-q]'));
   assert(w.document.querySelector('main.publicLanding > .publicHeader'));
   assert(w.document.querySelector('main.publicLanding > .publicFooter'));
-  assert.equal(w.document.querySelector('.psHeroCopy h1').textContent,'From requirementto replenishment.');
-  assert.equal(w.document.querySelector('.psHeroLead').textContent,'All in one place.');
-  assert.equal(w.document.querySelectorAll('.psHome .psBasketCard').length,3);
+  assert.equal(w.document.querySelector('.h47HeroCopy h1').textContent,'Healthcare procurement for institutions.');
+  assert.equal(w.document.querySelectorAll('.psHome .psEyebrow').length,0);
+  assert.equal(w.document.querySelectorAll('.psHome .psBasketCard').length,0);
   await w.happyDOM.close();
   // The current home body is installed after bind(); exercise its actual CTAs.
   for(const [selector,destination] of [
