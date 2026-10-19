@@ -24,6 +24,9 @@ try{for(const width of [320,390,768,1440])for(const empty of [false,true]){
  assert(await p.locator('[data-account-switcher]').isVisible());assert(await p.locator('.campusPillMain b').isVisible(),'Current site remains visible');
  assert.equal(await p.locator('.psPortalHome .eyebrow,.psPortalHome .psEyebrow').count(),0);
  assert.equal(await p.locator('.psPortalBasketGrid [data-ready-basket]').count(),3);assert.equal(await p.locator('.pscHomeDha').count(),3);
+ assert.equal(await p.locator('.pscHomeCategoryIcon img').count(),6);assert.equal(await p.locator('.pscHomeCategoryIcon svg').count(),0);assert(!(await p.locator('.psPortalBasketGrid').innerText()).includes('Preview · review before quotation'));
+ for(const img of await p.locator('.pscHomeCategoryIcon img').all()){await img.scrollIntoViewIfNeeded();await img.evaluate(el=>el.decode());assert(await img.evaluate(el=>el.naturalWidth>0));}await p.evaluate(()=>scrollTo(0,0));
+
  assert.equal(await p.locator('.psPortalWorkshopGrid').count(),0,'Workshop is a compact help entry, not seven home modules');
  assert(!(await p.locator('.psPortalHome').innerText()).includes('OTHER-SITE'),'No other-site activity leaks');
  if(empty){assert.equal(await p.locator('.psPortalActivity').count(),0);assert.match(await p.locator('.psPortalNoActivity').innerText(),/No requests in progress/);assert(!(await p.locator('.psPortalAttention').innerText()).includes('ready.'));}
