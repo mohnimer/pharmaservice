@@ -5358,6 +5358,44 @@
       "identity_scope": "Named product, strength/form and stated pack only; no clinical or regulatory approval.",
       "market_limit": "Public pack photo, not evidence of UAE registration/stock/suitability.",
       "release_scope": "Photograph only; original identity, pack, prices, stock and DHA conditions retained."
+    },
+    {
+      "sku": "PS-AC-1F1A9E6B4FC8",
+      "name": "Apex 400 mg — 6 Capsules",
+      "family_id": "PSC-IS-143",
+      "image_url": "/assets/products/verified-20261019/4415d8affab53e2c3394.png",
+      "source": "https://retajpharma.com/",
+      "review": "Codex full-size visual review 2026-10-19: Retaj manufacturer gallery explicitly separates Apex400/5 from6 capsules and Iconir125/40/60/80ml. This source shows the exact Apex400/6-capsule pack. Only the decorative shadow outside the complete carton is excluded by the reviewed display viewport. Original manufacturer pixels unchanged.2021 upload path is historical packaging evidence, not current UAE registration, supply or approved product facts.",
+      "sha256": "4415d8affab53e2c3394b04a26b857cc5aac024122956664d4808b147cd71c27",
+      "dimensions": [
+        693,
+        694
+      ],
+      "source_image": "https://retajpharma.com/wp-content/uploads/2021/10/2.-APEX-400-6-Caps-F-382-UAE.png",
+      "review_status": "VISUALLY_REVIEWED_EXACT_MANUFACTURER_PACK",
+      "identity_scope": "Exact brand/strength/form and stated pack only. Controlled pack field remains unchanged.",
+      "market_limit": "Manufacturer2021 packaging evidence; no current UAE approval, stock or suitability assertion.",
+      "previous_image": "/assets/products/supplier-20261014/apex_400_mg_6_capsules.jpg",
+      "release_scope": "Image only; no identity, pack, price, stock, DHA or approval changes."
+    },
+    {
+      "sku": "PS-AC-6504A9E9D933",
+      "name": "ICONIR 125MG SUSPENSION 80ML",
+      "family_id": "",
+      "image_url": "/assets/products/verified-20261019/55bc2cf1b977a29c39da.png",
+      "source": "https://retajpharma.com/",
+      "review": "Codex full-size visual review 2026-10-19: Retaj manufacturer gallery explicitly separates Apex400/5 from6 capsules and Iconir125/40/60/80ml. This source shows the exact Iconir125/80ml carton; full pack retained. Original manufacturer pixels unchanged.2021 upload path is historical packaging evidence, not current UAE registration, supply or approved product facts.",
+      "sha256": "55bc2cf1b977a29c39da90df1d301520352379582e2c55af47d29bce607dbbd1",
+      "dimensions": [
+        700,
+        984
+      ],
+      "source_image": "https://retajpharma.com/wp-content/uploads/2021/10/5.-ICONIR-125-Jordan-80-ml-Box-EN_.png",
+      "review_status": "VISUALLY_REVIEWED_EXACT_MANUFACTURER_PACK",
+      "identity_scope": "Exact brand/strength/form and stated pack only. Controlled pack field remains unchanged.",
+      "market_limit": "Manufacturer2021 packaging evidence; no current UAE approval, stock or suitability assertion.",
+      "previous_image": null,
+      "release_scope": "Image only; no identity, pack, price, stock, DHA or approval changes."
     }
   ]
 }

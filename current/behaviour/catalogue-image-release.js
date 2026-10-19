@@ -3535,6 +3535,22 @@
   "image_url": "/assets/products/verified-20261019/3eb8668f6487baf0cf7e.jpg",
   "source": "https://www.noon.com/uae-en/livatrum-tablet-30-s/Z1965B2E14E52E79578B7Z/p/",
   "review": "Codex full-size visual review 2026-10-19: Complete clean Livatrum front/side photograph,30TABLETS label visible. Pack marketing text is not independently approved product facts. No supplier backdrop/logo/watermark. Original complete source pixels retained. Image-only identity check; no product facts, UAE registration, price, stock or source-master approval."
+},
+{
+  "sku": "PS-AC-1F1A9E6B4FC8",
+  "name": "Apex 400 mg — 6 Capsules",
+  "family_id": "PSC-IS-143",
+  "image_url": "/assets/products/verified-20261019/4415d8affab53e2c3394.png",
+  "source": "https://retajpharma.com/",
+  "review": "Codex full-size visual review 2026-10-19: Retaj manufacturer gallery explicitly separates Apex400/5 from6 capsules and Iconir125/40/60/80ml. This source shows the exact Apex400/6-capsule pack. Only the decorative shadow outside the complete carton is excluded by the reviewed display viewport. Original manufacturer pixels unchanged.2021 upload path is historical packaging evidence, not current UAE registration, supply or approved product facts."
+},
+{
+  "sku": "PS-AC-6504A9E9D933",
+  "name": "ICONIR 125MG SUSPENSION 80ML",
+  "family_id": "",
+  "image_url": "/assets/products/verified-20261019/55bc2cf1b977a29c39da.png",
+  "source": "https://retajpharma.com/",
+  "review": "Codex full-size visual review 2026-10-19: Retaj manufacturer gallery explicitly separates Apex400/5 from6 capsules and Iconir125/40/60/80ml. This source shows the exact Iconir125/80ml carton; full pack retained. Original manufacturer pixels unchanged.2021 upload path is historical packaging evidence, not current UAE registration, supply or approved product facts."
 }
 ];
  const refresh=window.PS_CATALOGUE_REFRESH;
