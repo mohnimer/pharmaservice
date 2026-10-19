@@ -39,12 +39,12 @@ await writeFile(path.join(output,'index.html'),shell.replace(/(\/current\.(?:js|
 await cp(path.join(root, 'assets'), path.join(output, 'assets'), {
   recursive: true, filter: async source => {
     if(/\.(?:html|js|css|txt|md)$/i.test(source)||rejectedImagePaths.has(path.relative(root,source)))return false;
-    if(/\.(?:png|webp|jpg|jpeg|gif)$/i.test(source)){const hash=createHash('sha256').update(await readFile(source)).digest('hex');if(rejectedImageHashes.has(hash))return false;}
+    if(/\.(?:png|webp|avif|jpg|jpeg|gif)$/i.test(source)){const hash=createHash('sha256').update(await readFile(source)).digest('hex');if(rejectedImageHashes.has(hash))return false;}
     return true;
   }
 });
 for (const name of await readdir(root)) {
-  if (/\.(?:png|webp|jpg|jpeg|svg|gif|ico|woff2?)$/i.test(name)) {
+  if (/\.(?:png|webp|avif|jpg|jpeg|svg|gif|ico|woff2?)$/i.test(name)) {
     await copyFile(path.join(root, name), path.join(output, name));
   }
 }

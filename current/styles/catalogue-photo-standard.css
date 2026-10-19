@@ -34,6 +34,8 @@
 [data-psc-family-detail-root] .detailImagePane{display:block!important;min-width:0!important}
 [data-psc-family-detail-root] .pscFamilyProductSheet .fluidProductGrid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important}
 .cmsImageReview{display:grid;gap:12px;margin:12px 0 20px;font-size:13px;line-height:1.5}.cmsImageReview label{display:flex;gap:10px;align-items:flex-start}.cmsImageReview input{width:18px;flex:0 0 18px;min-height:18px!important}.cmsImageReview p{margin:0!important}
+/* Legacy product sheets must keep the full photo and Back control above navigation. */
+#app .modalBackdrop.fluidOverlay:has(.productDetailModal){z-index:1100!important}
 @media(max-width:720px){
  [data-psc-family-detail-root] .pscFamilyProductSheet .fluidProductGrid{grid-template-columns:minmax(0,1fr)!important}
  #app .customerShell .v25ProductGrid:has(.pscEditorialCard){column-gap:14px!important;row-gap:24px!important}

@@ -136,8 +136,14 @@
   function scan() {
     restoreData();
     document.querySelectorAll('.productMainImage, .publicCatalogueVisual > img:not(.publicDhaMark), .detailProductImageWrap > img:not(.detailDhaIcon)').forEach(img => {
-      const fit=window.PS_PHOTO_FRAMING?.[img.getAttribute('src')?.split('?')[0]];
-      if(fit) img.style.setProperty('--photo-fit', `scale(${fit.scale}) translate(${fit.x}%, ${fit.y}%)`);
+      const source=img.getAttribute('src')?.split('?')[0];
+      const subject=window.PSC_PHOTO_SUBJECTS?.[source];
+      const measured=window.PSC_PHOTO_SUBJECT_FIT?.calculate(subject);
+      const fit=window.PS_PHOTO_FRAMING?.[source];
+      if(measured)img.style.setProperty('--photo-fit',measured.css);
+      else if(fit) img.style.setProperty('--photo-fit', `scale(${fit.scale}) translate(${fit.x}%, ${fit.y}%)`);
+      if(measured?.clip)img.style.clipPath=measured.clip;
+      else img.style.removeProperty('clip-path');
     });
 
     document.querySelectorAll('[data-product-view]').forEach(el => {
