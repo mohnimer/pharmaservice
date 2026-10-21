@@ -1823,12 +1823,12 @@
         ${isEquipment?'<section class="workshopReadinessChainV50"><span>THE READINESS CHAIN</span><div><b>Equipment</b><i>→</i><b>Accessory</b><i>→</i><b>Consumable</b><i>→</i><b>Replacement / expiry</b><i>→</i><b>Record</b></div></section>':''}
         <div class="workshopArticleLayoutV50">
           <div class="workshopArticleBody">${(g.body_sections||[]).map(workshopSectionHtml).join('')}</div>
-          <aside class="workshopArticleRailV50"><span>THIS GUIDE</span><b>${esc(g.category)}</b><p>${esc(g.excerpt)}</p><button data-go="workshop/${esc(m.slug)}">More in Module ${esc(m.n)} →</button></aside>
+          <aside class="workshopArticleRailV50"><span>THIS GUIDE</span><b>${esc(g.category)}</b><p>${esc(g.excerpt)}</p><button data-go="workshop/${esc(m.slug)}">More in ${esc(m.title)}</button></aside>
         </div>
         <section class="workshopSignature workshopSignatureV50">
-          <article><span>USE IT RIGHT</span><p>${esc(g.use_it_right)}</p></article>
-          <article><span>CHECK YOUR STOCK</span><p>${esc(g.check_your_stock)}</p></article>
-          <article><span>WHEN ORDERING</span><p>${esc(g.when_ordering)}</p></article>
+          <article><span>Use it right</span><p>${esc(g.use_it_right)}</p></article>
+          <article><span>Check your stock</span><p>${esc(g.check_your_stock)}</p></article>
+          <article><span>When ordering</span><p>${esc(g.when_ordering)}</p></article>
         </section>
         ${related.length?`<section class="workshopRelated workshopRelatedV50"><div class="workshopRelatedHead"><span>PRODUCTS USED IN THIS GUIDE</span><p>Only catalogue lines deliberately linked to this guide are shown.</p></div><div class="workshopRelatedList">${related.map(p=>{const n=clinicalNeedMeta(clinicalNeedIds(p)[0]||'all');return `<button data-go="catalogue/${n.id}"><span>${esc(p.pscSku||'PS')}</span><b>${esc(p.catalogueDisplayName||p.name)}</b><small>${esc(p.cataloguePack||p.pack||'Pack to confirm')}</small></button>`}).join('')}</div></section>`:''}
         <footer class="workshopMedicalNote">Workshop guides provide general product and supply information. Clinical decisions should follow product instructions, institutional procedures and applicable professional or regulatory requirements.</footer>
