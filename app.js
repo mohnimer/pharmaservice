@@ -1179,6 +1179,7 @@
     window.dispatchEvent(new PopStateEvent('popstate'));
   }
   window.PSC_NAVIGATE=go;
+  window.PSC_OPEN_SCHOOL_COLLECTION=openSchoolCollection;
   window.PSC_CURRENT_ROUTE=currentRoute;
   window.PS_SEARCH_CATALOGUE=query=>{
     go('portal/catalogue/all',{searchQuery:query});
@@ -2335,6 +2336,13 @@
     const home=`<button class="needRibbonHome" data-go="portal/catalogue" aria-label="Catalogue home"><span>Catalogue home</span></button>`;
     const items=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.map(c=>`<button class="needRibbonChip ${activeId===c.id?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}" aria-current="${activeId===c.id?'page':'false'}"><b>${esc(c.label)}</b></button>`).join('');
     return `<nav class="needRibbon" aria-label="Clinical needs">${home}<div class="needRibbonTrack">${items}</div></nav>`;
+  }
+
+  function openSchoolCollection(id){
+    if(!['opening','replenishment','kits'].includes(id))return;
+    ui.schoolCollection=id;
+    if(!/^catalogue(?:\/|$)/.test(currentRoute())&&!currentRoute().startsWith('portal/catalogue'))go('catalogue');
+    else renderUi({preserveScroll:true,transition:false});
   }
 
   function schoolBasketSection(){
@@ -3805,9 +3813,7 @@
     }));
     const cq=document.querySelector('[data-cat-q]'); if(cq)cq.addEventListener('input',e=>{intelligent.sequence++;ui.catalogueQuery=e.target.value;ui.globalSearch=e.target.value;clearTimeout(searchTypingTimer);if(!e.target.value){resetIntelligentSearch();updateCatalogueResults();return;}searchTypingTimer=setTimeout(updateCatalogueResults,140);});
     document.querySelectorAll('[data-school-collection]').forEach(el=>el.addEventListener('click',()=>{
-      ui.schoolCollection=el.dataset.schoolCollection;
-      if(!/^catalogue(?:\/|$)/.test(currentRoute())&&!currentRoute().startsWith('portal/catalogue'))go('catalogue');
-      else renderUi({preserveScroll:true,transition:false});
+      openSchoolCollection(el.dataset.schoolCollection);
     }));
     document.querySelectorAll('[data-school-kit]').forEach(el=>el.addEventListener('click',()=>{
       ui.schoolKit=el.dataset.schoolKit;renderUi({preserveScroll:true,transition:false});
