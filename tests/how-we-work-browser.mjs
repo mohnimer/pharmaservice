@@ -50,7 +50,9 @@ try{for(const width of [320,390,768,1440])for(const role of ['anonymous','member
  if(role==='anonymous'){
   await page.locator('.model46 [data-go="portal/documents"]').click();await page.locator('#mvpLoginEmail').waitFor();
   await page.locator('#mvpLoginEmail').fill('test@example.invalid');await page.locator('#mvpLoginPassword').fill('fixture-password');await page.locator('[data-mvp-login]').click();
-  await page.waitForFunction(()=>PSC_CURRENT_ROUTE()==='portal/documents');await page.locator('.appShell').waitFor();
+  try{await page.waitForFunction(()=>PSC_CURRENT_ROUTE()==='portal/documents');}catch(error){
+   console.error('Sign-in resume state',await page.evaluate(()=>({route:PSC_CURRENT_ROUTE(),pending:sessionStorage.getItem('pscPendingRoute'),accountReady:!!PSC_ACCOUNT_CONTEXT?.(),emailPresent:!!document.querySelector('#mvpLoginEmail')?.value,passwordPresent:!!document.querySelector('#mvpLoginPassword')?.value,feedback:document.querySelector('.toast')?.textContent,reads:__backendCalls.filter(c=>c.action==='select').length})));throw error;
+  }await page.locator('.appShell').waitFor();
   assert.equal(await page.evaluate(()=>sessionStorage.getItem('pscPendingRoute')),null,'Existing resume flow consumes the account intent');await model();
  }
  await page.locator('.m46Actions [data-go="start"]').click();await page.locator('[name="rfq_file"]').waitFor();await model();
