@@ -49,6 +49,8 @@ try{for(const width of [320,390,768,1440])for(const role of ['anonymous','member
  }
  if(role==='anonymous'){
   await page.locator('.model46 [data-go="portal/documents"]').click();await page.locator('#mvpLoginEmail').waitFor();
+  // The protected-route redirect queues a native hashchange render. Type only after it settles.
+  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
   await page.locator('#mvpLoginEmail').fill('test@example.invalid');await page.locator('#mvpLoginPassword').fill('fixture-password');await page.locator('[data-mvp-login]').click();
   try{await page.waitForFunction(()=>PSC_CURRENT_ROUTE()==='portal/documents');}catch(error){
    console.error('Sign-in resume state',await page.evaluate(()=>({route:PSC_CURRENT_ROUTE(),pending:sessionStorage.getItem('pscPendingRoute'),accountReady:!!PSC_ACCOUNT_CONTEXT?.(),emailPresent:!!document.querySelector('#mvpLoginEmail')?.value,passwordPresent:!!document.querySelector('#mvpLoginPassword')?.value,feedback:document.querySelector('.toast')?.textContent,reads:__backendCalls.filter(c=>c.action==='select').length})));throw error;
