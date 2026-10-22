@@ -5,8 +5,15 @@
  const bySku=new Map(control.products.map(r=>[r.sku,r]));
  const products=()=>window.PSC_DATA?.products||[];
  const id=p=>p?.catalogueParentId||p?.catalogueReferenceFamilyId||p?.pscSku;
- const current=r=>r&&r.in_stock===true&&(!r.expiry_date||r.expiry_date>=control.stock_date);
+ const current=r=>r&&r.in_stock===true&&(!r.availability_status||r.availability_status==='in_stock')&&(!r.expiry_date||r.expiry_date>=control.stock_date);
  const price=r=>current(r)&&Number(r.mrp_aed)>0?Number(r.mrp_aed):null;
+ const discount=Number(control.price_policy?.discount_rate);
+ const hasDiscount=control.price_policy?.basis==='CURRENT_EXACT_STOCK_MRP'&&Number.isFinite(discount)&&discount>0&&discount<1;
+ // Calculate in integer fils/basis points so .005 rounds identically to Excel ROUND.
+ const indicativePrice=r=>{const mrp=price(r);return mrp===null?null:hasDiscount?Math.round(Math.round(mrp*100)*Math.round((1-discount)*10000)/10000)/100:mrp;};
+ const status=r=>current(r)?'in_stock':r?.availability_status==='out_of_stock'||r?.expiry_date&&r.expiry_date<control.stock_date?'out_of_stock':'unconfirmed';
+ const statusLabel=r=>({in_stock:'In stock',out_of_stock:'Out of stock',unconfirmed:'Availability unconfirmed'})[status(r)];
+ const priceLabel=hasDiscount?'Approx. PSC price':'Retail MRP';
  const forProduct=p=>bySku.get(typeof p==='string'?p:p?.pscSku)||null;
  function forOption(o,family){
   if(o?.sku&&bySku.has(o.sku)){
@@ -44,17 +51,17 @@
   }
   return rows.map(o=>{
    const r=forOption(o,family);if(!r?.acorus_managed)return o;
-   return {...o,supplier_stock_date:control.stock_date,supplier_stock_status:current(r)?'In stock':'Quotation required',supplier_mrp_aed:price(r),supplier_mrp_source:control.report_name,
-    verified_price_aed:price(r),verified_price_type:price(r)?'SUPPLIER_RETAIL_MRP':null,
+   return {...o,supplier_stock_date:control.stock_date,supplier_stock_status:statusLabel(r),supplier_mrp_aed:price(r),supplier_mrp_source:control.report_name,
+    verified_price_aed:indicativePrice(r),verified_price_type:price(r)?(hasDiscount?'PSC_INDICATIVE_MRP_DISCOUNT':'SUPPLIER_RETAIL_MRP'):null,
     verified_price_source:price(r)?control.report_name:null,verified_price_checked_at:price(r)?control.stock_date:null,
     verified_price_vat_basis:'VAT basis not supplied in stock report',
-    verified_price_note:price(r)?'Retail MRP; wholesale quotation separate':'Request quotation; no current matched stocked MRP'};
+    verified_price_note:price(r)?(hasDiscount?'Approximate PSC price: 15% below MRP; final price and VAT confirmed in quotation':'Retail MRP; wholesale quotation separate'):'Request quotation; no current matched stocked MRP'};
   });
  }
  for(const p of products()){
   const r=forProduct(p);if(!r)continue;
   p.catalogueVisible=r.catalogue_visible;
-  if(r.acorus_managed){p.acorusStockDate=control.stock_date;p.acorusStockAvailable=current(r);p.acorusMrp=price(r);}
+  if(r.acorus_managed){p.acorusStockDate=control.stock_date;p.acorusStockAvailable=current(r);p.acorusMrp=price(r);p.acorusIndicativePrice=indicativePrice(r);p.acorusStockStatus=statusLabel(r);}
  }
- window.PS_CATALOGUE_STOCK=Object.freeze({revision:control.revision,stockDate:control.stock_date,reportName:control.report_name,forProduct,forOption,current,price,hasFamily,realPhoto,representative,groups,groupForProduct,optionsForFamily});
+ window.PS_CATALOGUE_STOCK=Object.freeze({revision:control.revision,stockDate:control.stock_date,reportName:control.report_name,forProduct,forOption,current,price,indicativePrice,status,statusLabel,hasDiscount,priceLabel,hasFamily,realPhoto,representative,groups,groupForProduct,optionsForFamily});
 })();
