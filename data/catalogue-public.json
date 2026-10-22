@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "revision": "PSC-20261012-STOCK-002",
-  "stock_date": "2026-10-12",
-  "report_name": "ACORUS WH STOCK LIST AS ON 12-10-2026.xlsx",
+  "revision": "PSC-20261022-STOCK-001",
+  "stock_date": "2026-10-22",
+  "report_name": "ACORUS WH STOCK LIST AS ON 22-10-2026.xlsx",
   "products": [
     {
       "sku": "PS-AC-D6F2BF1D5BC2",
-      "name": "Azomycin 200 mg/5 ml Oral Suspension \u2014 30 ml",
+      "name": "Azomycin 200 mg/5 ml Oral Suspension — 30 ml",
       "brand": "Azomycin",
       "pack": "30 ml bottle (when reconstituted)",
       "family_id": "PSC-IS-139",
@@ -15,11 +15,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 37.5
+      "mrp_aed": 37.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 31.88
     },
     {
       "sku": "PS-AC-AE309306C236",
-      "name": "Azomycin 250 mg \u2014 6 Capsules",
+      "name": "Azomycin 250 mg — 6 Capsules",
       "brand": "Azomycin",
       "pack": "6 capsules",
       "family_id": "PSC-IS-139",
@@ -28,7 +30,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 56.5
+      "mrp_aed": 56.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 48.03
     },
     {
       "sku": "PS-AC-E0A3AFBA003E",
@@ -40,8 +44,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": null
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-8291A039F14F",
@@ -53,12 +59,14 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": null
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-94B60F8EAF61",
-      "name": "Braun ThermoScan Hygiene Caps \u2014 40",
+      "name": "Braun ThermoScan Hygiene Caps — 40",
       "brand": "Braun",
       "pack": "40 disposable probe covers",
       "family_id": "PSC-SC-C12",
@@ -66,12 +74,14 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": null
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-77936B1C484C",
-      "name": "Gloclav 1 g \u2014 14 Tablets",
+      "name": "Gloclav 1 g — 14 Tablets",
       "brand": "Gloclav",
       "pack": "14 film-coated tablets",
       "family_id": "PSC-IS-138",
@@ -80,11 +90,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 85.5
+      "mrp_aed": 85.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 72.68
     },
     {
       "sku": "PS-AC-FE9B988EFF75",
-      "name": "Gloclav 228 mg/5 ml Oral Suspension \u2014 70 ml",
+      "name": "Gloclav 228 mg/5 ml Oral Suspension — 70 ml",
       "brand": "Gloclav",
       "pack": "70 ml when reconstituted",
       "family_id": "PSC-IS-138",
@@ -92,12 +104,14 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": 12.0
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-22B20FD5DE67",
-      "name": "Gloclav 625 mg \u2014 20 Tablets",
+      "name": "Gloclav 625 mg — 20 Tablets",
       "brand": "Gloclav",
       "pack": "20 film-coated tablets",
       "family_id": "PSC-IS-138",
@@ -106,11 +120,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 58.5
+      "mrp_aed": 58.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 49.73
     },
     {
       "sku": "PS-AC-2524E51A60A8",
-      "name": "Gupisone Prednisolone 20 mg \u2014 40 Tablets",
+      "name": "Gupisone Prednisolone 20 mg — 40 Tablets",
       "brand": "Gupisone",
       "pack": "40 tablets",
       "family_id": "PSC-IS-175",
@@ -119,7 +135,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 57.0
+      "mrp_aed": 57.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 48.45
     },
     {
       "sku": "PSC-MED-130",
@@ -132,11 +150,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 6.5
+      "mrp_aed": 6.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 5.53
     },
     {
       "sku": "PS-AC-A5018581B24C",
-      "name": "Livazo 2 mg \u2014 28 Tablets",
+      "name": "Livazo 2 mg — 28 Tablets",
       "brand": "Livazo",
       "pack": "28 tablets",
       "family_id": "PSC-IS-174",
@@ -144,12 +164,14 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": 106.0
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-98520485E956",
-      "name": "Livazo 4 mg \u2014 28 Tablets",
+      "name": "Livazo 4 mg — 28 Tablets",
       "brand": "Livazo",
       "pack": "28 tablets",
       "family_id": "PSC-IS-174",
@@ -157,12 +179,14 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": 125.0
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-13A292D3B033",
-      "name": "Moven Meloxicam 15 mg \u2014 10 Capsules",
+      "name": "Moven Meloxicam 15 mg — 10 Capsules",
       "brand": "Moven",
       "pack": "10 capsules",
       "family_id": "PSC-IS-164",
@@ -171,11 +195,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 14.0
+      "mrp_aed": 14.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 11.9
     },
     {
       "sku": "PS-AC-5B958D72413A",
-      "name": "NAN Comfort 2 \u2014 400 g",
+      "name": "NAN Comfort 2 — 400 g",
       "brand": "NAN",
       "pack": "400 g",
       "family_id": "PSC-IS-159",
@@ -184,11 +210,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-6703B683D432",
-      "name": "NAN Optipro 1 \u2014 800 g",
+      "name": "NAN Optipro 1 — 800 g",
       "brand": "NAN",
       "pack": "800 g",
       "family_id": "PSC-IS-159",
@@ -197,11 +225,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-D45D30F1493E",
-      "name": "NAN Optipro 3 \u2014 400 g",
+      "name": "NAN Optipro 3 — 400 g",
       "brand": "NAN",
       "pack": "400 g",
       "family_id": "PSC-IS-159",
@@ -209,12 +239,14 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": null
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-98DBA85B5A1D",
-      "name": "NAN SupremePro 2 \u2014 400 g",
+      "name": "NAN SupremePro 2 — 400 g",
       "brand": "NAN",
       "pack": "400 g",
       "family_id": "PSC-IS-159",
@@ -223,7 +255,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-83090D95F22B",
@@ -236,11 +270,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 116.0
+      "mrp_aed": 116.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 98.6
     },
     {
       "sku": "PS-AC-56CB26FE529B",
-      "name": "Nexium 20 mg \u2014 14 Tablets",
+      "name": "Nexium 20 mg — 14 Tablets",
       "brand": "Nexium",
       "pack": "14 tablets",
       "family_id": "PSC-IS-151",
@@ -249,11 +285,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 78.5
+      "mrp_aed": 78.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 66.73
     },
     {
       "sku": "PS-AC-382E97B1A135",
-      "name": "ProRise 40 mg \u2014 30 Capsules",
+      "name": "ProRise 40 mg — 30 Capsules",
       "brand": "ProRise",
       "pack": "30 hard gelatin capsules",
       "family_id": "PSC-IS-171",
@@ -262,11 +300,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 100.5
+      "mrp_aed": 100.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 85.43
     },
     {
       "sku": "PS-AC-AD974C05853F",
-      "name": "Prospan Cough Syrup \u2014 100 ml",
+      "name": "Prospan Cough Syrup — 100 ml",
       "brand": "Prospan",
       "pack": "100 ml bottle",
       "family_id": "PSC-IS-126",
@@ -275,11 +315,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 42.0
+      "mrp_aed": 42.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 35.7
     },
     {
       "sku": "PS-AC-971A2F43B366",
-      "name": "Ruset 20/10 mg \u2014 30 Tablets",
+      "name": "Ruset 20/10 mg — 30 Tablets",
       "brand": "Ruset",
       "pack": "30 film-coated tablets",
       "family_id": "PSC-IS-178",
@@ -288,11 +330,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 75.0
+      "mrp_aed": 75.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 63.75
     },
     {
       "sku": "PS-AC-E5BA62DEAF28",
-      "name": "Ruset 5/10 mg \u2014 30 Tablets",
+      "name": "Ruset 5/10 mg — 30 Tablets",
       "brand": "Ruset",
       "pack": "30 film-coated tablets",
       "family_id": "PSC-IS-178",
@@ -301,11 +345,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 37.0
+      "mrp_aed": 37.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 31.45
     },
     {
       "sku": "PS-AC-FD2BEB73A834",
-      "name": "Urispas 200 mg \u2014 30 Tablets",
+      "name": "Urispas 200 mg — 30 Tablets",
       "brand": "Urispas",
       "pack": "30 tablets",
       "family_id": "PSC-IS-153",
@@ -314,7 +360,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 31.0
+      "mrp_aed": 31.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 26.35
     },
     {
       "sku": "PSC-MED-003",
@@ -327,7 +375,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 39.5
+      "mrp_aed": 39.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 33.58
     },
     {
       "sku": "PS-AC-4F7D13C2D8F8",
@@ -339,8 +389,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": 16.5
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-DBT-001",
@@ -366,7 +418,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-DBT-005",
@@ -378,8 +432,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": null
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-001",
@@ -405,7 +461,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-002",
@@ -444,7 +502,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 46.0
+      "mrp_aed": 46.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 39.1
     },
     {
       "sku": "PSC-DIA-002",
@@ -470,7 +530,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 54.0
+      "mrp_aed": 54.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 45.9
     },
     {
       "sku": "PS-AC-4B7711EA87BC",
@@ -483,7 +545,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 11.0
+      "mrp_aed": 11.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 9.35
     },
     {
       "sku": "PS-AC-79F4D01168DD",
@@ -496,13 +560,15 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 6.5
+      "mrp_aed": 6.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 5.53
     },
     {
       "sku": "PSC-DSP-007",
       "name": "Alcohol Prep Pads",
       "brand": "Specification-led",
-      "pack": "Box \u2014 quantity to confirm",
+      "pack": "Box — quantity to confirm",
       "family_id": "PSC-SC-C02",
       "family_name": "Alcohol preps",
       "source_kind": "product",
@@ -513,7 +579,7 @@
     },
     {
       "sku": "PS-AC-0DEC19ACEA05",
-      "name": "Aldomet 250 mg \u2014 30 Tablets",
+      "name": "Aldomet 250 mg — 30 Tablets",
       "brand": "Aldomet",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-166",
@@ -522,11 +588,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 18.5
+      "mrp_aed": 18.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 15.73
     },
     {
       "sku": "PS-AC-FA9568435322",
-      "name": "Alicoxa 200 mg \u2014 20 Capsules",
+      "name": "Alicoxa 200 mg — 20 Capsules",
       "brand": "Alicoxa",
       "pack": "20 capsules",
       "family_id": "PSC-IS-144",
@@ -535,7 +603,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 32.5
+      "mrp_aed": 32.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 27.63
     },
     {
       "sku": "PS-AC-C6ED02C8C547",
@@ -548,7 +618,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-C4FA68E8A237",
@@ -561,7 +633,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-C0D906406901",
@@ -574,7 +648,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-DAC50A46146D",
@@ -587,7 +663,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-7A2EBE0480B8",
@@ -600,7 +678,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-FFDD0A92575D",
@@ -613,7 +693,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 25.0
+      "mrp_aed": 25.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 21.25
     },
     {
       "sku": "PSC-INF-001",
@@ -652,11 +734,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 18.0
+      "mrp_aed": 18.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 15.3
     },
     {
       "sku": "PS-AC-1F1A9E6B4FC8",
-      "name": "Apex 400 mg \u2014 6 Capsules",
+      "name": "Apex 400 mg — 6 Capsules",
       "brand": "Apex",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-143",
@@ -665,7 +749,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 33.0
+      "mrp_aed": 33.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 28.05
     },
     {
       "sku": "PS-AC-0D235D75BB71",
@@ -678,7 +764,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 60.5
+      "mrp_aed": 60.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 51.43
     },
     {
       "sku": "PS-AC-A89E4E416DFC",
@@ -691,11 +779,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 103.5
+      "mrp_aed": 103.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 87.98
     },
     {
       "sku": "PS-AC-F28FE7B861A0",
-      "name": "Avamys Fluticasone Furoate Nasal Spray \u2014 120 Sprays",
+      "name": "Avamys Fluticasone Furoate Nasal Spray — 120 Sprays",
       "brand": "Avamys",
       "pack": "120 sprays",
       "family_id": "PSC-IS-154",
@@ -704,7 +794,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-HYG-106",
@@ -717,7 +809,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 42.8
+      "mrp_aed": 42.8,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 36.38
     },
     {
       "sku": "PSC-HYG-101",
@@ -730,7 +824,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-HYG-105",
@@ -743,7 +839,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-F5A5263CFB9C",
@@ -756,7 +854,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 22.5
+      "mrp_aed": 22.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 19.13
     },
     {
       "sku": "PS-AC-3E00B3A1B51D",
@@ -769,7 +869,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 26.5
+      "mrp_aed": 26.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 22.53
     },
     {
       "sku": "PS-AC-9FFA1AF90326",
@@ -782,7 +884,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 15.5
+      "mrp_aed": 15.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 13.18
     },
     {
       "sku": "PS-AC-79C56A033917",
@@ -795,7 +899,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 38.0
+      "mrp_aed": 38.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 32.3
     },
     {
       "sku": "PS-AC-F28A56AD788B",
@@ -808,7 +914,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 38.0
+      "mrp_aed": 38.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 32.3
     },
     {
       "sku": "PS-AC-C59C9E168A8F",
@@ -821,7 +929,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 95.0
+      "mrp_aed": 95.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 80.75
     },
     {
       "sku": "PS-AC-1F9F933E5D61",
@@ -834,7 +944,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 32.5
+      "mrp_aed": 32.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 27.63
     },
     {
       "sku": "PS-AC-0B48B339F098",
@@ -847,7 +959,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 29.5
+      "mrp_aed": 29.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 25.08
     },
     {
       "sku": "PS-AC-9AB5840899A0",
@@ -860,7 +974,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 29.5
+      "mrp_aed": 29.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 25.08
     },
     {
       "sku": "PS-AC-458B5F70A507",
@@ -873,11 +989,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 49.0
+      "mrp_aed": 49.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 41.65
     },
     {
       "sku": "PS-AC-FC78AF3CB44F",
-      "name": "B+ Vitamin B Complex \u2014 30 Softgels",
+      "name": "B+ Vitamin B Complex — 30 Softgels",
       "brand": "B+",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-188",
@@ -886,7 +1004,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-4D322F3A00A3",
@@ -899,11 +1019,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 58.5
+      "mrp_aed": 58.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 49.73
     },
     {
       "sku": "PS-AC-C4B46B23533F",
-      "name": "Beauty Plus Hair Skin & Nails \u2014 30 Softgels",
+      "name": "Beauty Plus Hair Skin & Nails — 30 Softgels",
       "brand": "Beauty",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-188",
@@ -912,7 +1034,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-HYG-102",
@@ -925,11 +1049,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-8500EF9636BD",
-      "name": "Bepanthen Moisturizing Cream \u2014 30 g",
+      "name": "Bepanthen Moisturizing Cream — 30 g",
       "brand": "Bepanthen",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-111",
@@ -938,11 +1064,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-82EEFFA2D41B",
-      "name": "Bepanthen Protective Baby Ointment \u2014 100 g",
+      "name": "Bepanthen Protective Baby Ointment — 100 g",
       "brand": "Bepanthen",
       "pack": "100 g",
       "family_id": "PSC-IS-148",
@@ -951,11 +1079,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-4D6C5F1F73F7",
-      "name": "Betaserc 8 mg \u2014 100 Tablets",
+      "name": "Betaserc 8 mg — 100 Tablets",
       "brand": "Betaserc",
       "pack": "100 tablets",
       "family_id": "PSC-IS-142",
@@ -964,7 +1094,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 100.0
+      "mrp_aed": 100.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 85.0
     },
     {
       "sku": "PS-AC-51E0E1CA1E40",
@@ -977,7 +1109,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 16.5
+      "mrp_aed": 16.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 14.03
     },
     {
       "sku": "PS-AC-99FA1184061D",
@@ -990,7 +1124,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-0BBE53B55838",
@@ -1003,7 +1139,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-0B277B86665C",
@@ -1016,7 +1154,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-575B43FFAA5B",
@@ -1029,11 +1169,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-AD5D840073E9",
-      "name": "Braun Hair Dryer HD 2.2 \u2014 2200 W",
+      "name": "Braun Hair Dryer HD 2.2 — 2200 W",
       "brand": "Braun",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-173",
@@ -1042,7 +1184,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-0763FFE0C7A1",
@@ -1055,7 +1199,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-D955AED7D947",
@@ -1068,7 +1214,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-48939D08EF0A",
@@ -1081,7 +1229,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-AA887F12AE5A",
@@ -1094,7 +1244,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 23.5
+      "mrp_aed": 23.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 19.98
     },
     {
       "sku": "PS-AC-612FB5A92787",
@@ -1106,8 +1258,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": 438.5
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-8C5FCD903603",
@@ -1120,7 +1274,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 29.0
+      "mrp_aed": 29.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 24.65
     },
     {
       "sku": "PS-AC-4E794686D4FB",
@@ -1133,7 +1289,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 22.0
+      "mrp_aed": 22.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 18.7
     },
     {
       "sku": "PS-AC-A0C544D31E4D",
@@ -1146,11 +1304,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 15.75
+      "mrp_aed": 15.75,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 13.39
     },
     {
       "sku": "PS-AC-D0FA94CC5CCD",
-      "name": "Calvit D3 Calcium + Magnesium + Vitamins \u2014 30 Tablets",
+      "name": "Calvit D3 Calcium + Magnesium + Vitamins — 30 Tablets",
       "brand": "Calvit",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-188",
@@ -1159,7 +1319,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-95CA6F7BE1D9",
@@ -1171,8 +1333,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": false,
-      "mrp_aed": null
+      "in_stock": true,
+      "mrp_aed": 16.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 13.6
     },
     {
       "sku": "PS-AC-5776C8A88CCC",
@@ -1185,7 +1349,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 16.0
+      "mrp_aed": 16.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 13.6
     },
     {
       "sku": "PS-AC-EACE07E59B6B",
@@ -1198,7 +1364,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 47.0
+      "mrp_aed": 47.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 39.95
     },
     {
       "sku": "PS-AC-BA2A0DD15944",
@@ -1211,7 +1379,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-6B8E27CFD68C",
@@ -1224,7 +1394,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 47.0
+      "mrp_aed": 47.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 39.95
     },
     {
       "sku": "PS-AC-C1BF2DF19411",
@@ -1237,7 +1409,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 57.0
+      "mrp_aed": 57.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 48.45
     },
     {
       "sku": "PS-AC-43A6884BA71B",
@@ -1250,7 +1424,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 68.5
+      "mrp_aed": 68.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 58.23
     },
     {
       "sku": "PS-AC-C7726A1E6816",
@@ -1263,11 +1439,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 62.5
+      "mrp_aed": 62.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 53.13
     },
     {
       "sku": "PS-AC-49C544EA6E0C",
-      "name": "Cetralon Cetirizine 5 mg/5 ml Syrup \u2014 75 ml",
+      "name": "Cetralon Cetirizine 5 mg/5 ml Syrup — 75 ml",
       "brand": "Cetralon",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-073",
@@ -1276,7 +1454,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 12.5
+      "mrp_aed": 12.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 10.63
     },
     {
       "sku": "PS-AC-4B81ECCDD8AC",
@@ -1289,7 +1469,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 57.5
+      "mrp_aed": 57.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 48.88
     },
     {
       "sku": "PS-AC-7C1A057BC04A",
@@ -1302,7 +1484,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 19.5
+      "mrp_aed": 19.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 16.58
     },
     {
       "sku": "PS-AC-5EAB1268179D",
@@ -1315,7 +1499,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 47.0
+      "mrp_aed": 47.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 39.95
     },
     {
       "sku": "PS-AC-70BCF2EF8CA0",
@@ -1328,7 +1514,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 20.5
+      "mrp_aed": 20.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 17.43
     },
     {
       "sku": "PSC-DIA-008",
@@ -1367,11 +1555,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 30.0
+      "mrp_aed": 30.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 25.5
     },
     {
       "sku": "PS-AC-3F16D478897A",
-      "name": "Clozac Acne Face Wash \u2014 60 ml",
+      "name": "Clozac Acne Face Wash — 60 ml",
       "brand": "Clozac",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-152",
@@ -1380,11 +1570,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 42.0
+      "mrp_aed": 42.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 35.7
     },
     {
       "sku": "PS-AC-0BC7A350ED13",
-      "name": "Clozac Acne Facial Gel \u2014 50 g",
+      "name": "Clozac Acne Facial Gel — 50 g",
       "brand": "Clozac",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-152",
@@ -1393,7 +1585,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 36.75
+      "mrp_aed": 36.75,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 31.24
     },
     {
       "sku": "PSC-WND-014",
@@ -1410,7 +1604,7 @@
     },
     {
       "sku": "PSC-WND-003",
-      "name": "Conforming Bandage 7.5 cm \u00d7 4 m",
+      "name": "Conforming Bandage 7.5 cm × 4 m",
       "brand": "WOLAID",
       "pack": "12 rolls",
       "family_id": "PSC-SC-C15",
@@ -1423,7 +1617,7 @@
     },
     {
       "sku": "PS-AC-2D2C9351DF5B",
-      "name": "CorDx Flu A/B + COVID-19 3-in-1 Rapid Test \u2014 1 Test",
+      "name": "CorDx Flu A/B + COVID-19 3-in-1 Rapid Test — 1 Test",
       "brand": "CorDx",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-177",
@@ -1432,7 +1626,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-0CE987FECF69",
@@ -1445,7 +1641,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-113",
@@ -1458,7 +1656,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-F562BB176577",
@@ -1471,7 +1671,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 32.5
+      "mrp_aed": 32.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 27.63
     },
     {
       "sku": "PS-AC-BC3A03EFEC15",
@@ -1484,11 +1686,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 86.0
+      "mrp_aed": 86.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 73.1
     },
     {
       "sku": "PS-AC-A1C278062616",
-      "name": "Creon 10000 Pancreatin 150 mg \u2014 20 Capsules",
+      "name": "Creon 10000 Pancreatin 150 mg — 20 Capsules",
       "brand": "Creon",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-172",
@@ -1497,11 +1701,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-WND-004",
-      "name": "Crepe Bandage 5 cm \u00d7 4.5 m",
+      "name": "Crepe Bandage 5 cm × 4.5 m",
       "brand": "WOLAID",
       "pack": "12 rolls",
       "family_id": "PSC-SC-C14",
@@ -1523,11 +1729,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-6398358F2B96",
-      "name": "D-Cal Calcium + Vitamin D3 \u2014 30 Softgels",
+      "name": "D-Cal Calcium + Vitamin D3 — 30 Softgels",
       "brand": "D-Cal",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-188",
@@ -1536,7 +1744,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-6D3098C1D48F",
@@ -1549,7 +1759,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-ADAC0F763109",
@@ -1562,7 +1774,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 10.5
+      "mrp_aed": 10.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 8.93
     },
     {
       "sku": "PS-AC-058FD986906A",
@@ -1575,7 +1789,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 10.5
+      "mrp_aed": 10.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 8.93
     },
     {
       "sku": "PS-AC-8C060AE268F8",
@@ -1588,7 +1804,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 18.0
+      "mrp_aed": 18.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 15.3
     },
     {
       "sku": "PSC-HYG-103",
@@ -1601,7 +1819,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-106",
@@ -1614,7 +1834,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-6DA9BD2D93A2",
@@ -1627,7 +1849,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 12.0
+      "mrp_aed": 12.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 10.2
     },
     {
       "sku": "PS-AC-184DB35B4013",
@@ -1640,11 +1864,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-08126835B052",
-      "name": "Dibase Vitamin D3 300,000 IU/ml Injection \u2014 1 Ampoule",
+      "name": "Dibase Vitamin D3 300,000 IU/ml Injection — 1 Ampoule",
       "brand": "Dibase",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-117",
@@ -1653,7 +1879,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-FBBA279D40A7",
@@ -1666,7 +1894,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-B82D6965F7AB",
@@ -1679,7 +1909,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 34.0
+      "mrp_aed": 34.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 28.9
     },
     {
       "sku": "PS-AC-C35CD04F1EFF",
@@ -1692,7 +1924,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 21.5
+      "mrp_aed": 21.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 18.28
     },
     {
       "sku": "PSC-EQP-003",
@@ -1711,7 +1945,7 @@
       "sku": "PSC-BAS-003",
       "name": "Digital Thermometer Probe Covers",
       "brand": "Specification-led",
-      "pack": "Box \u2014 quantity to confirm",
+      "pack": "Box — quantity to confirm",
       "family_id": "PSC-SC-C12",
       "family_name": "Disposable thermometer sleeves/covers",
       "source_kind": "product",
@@ -1731,7 +1965,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 49.0
+      "mrp_aed": 49.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 41.65
     },
     {
       "sku": "PS-AC-E5E1AF7D2FE1",
@@ -1744,13 +1980,15 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 32.0
+      "mrp_aed": 32.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 27.2
     },
     {
       "sku": "PSC-PPE-006",
       "name": "Disposable Hair Covers",
       "brand": "Specification-led",
-      "pack": "Pack \u2014 quantity to confirm",
+      "pack": "Pack — quantity to confirm",
       "family_id": "PSC-SC-C10",
       "family_name": "Disposable Personal Protective Equipment (PPE)",
       "source_kind": "product",
@@ -1763,7 +2001,7 @@
       "sku": "PSC-BAS-002",
       "name": "Disposable Hand Towels",
       "brand": "Specification-led",
-      "pack": "Case \u2014 quantity to confirm",
+      "pack": "Case — quantity to confirm",
       "family_id": "PSC-SC-C06",
       "family_name": "Disposable hand towels",
       "source_kind": "product",
@@ -1774,9 +2012,9 @@
     },
     {
       "sku": "PSC-DSP-002",
-      "name": "Disposable Syringe 2\u20133 ml",
+      "name": "Disposable Syringe 2–3 ml",
       "brand": "Specification-led",
-      "pack": "Box \u2014 quantity to confirm",
+      "pack": "Box — quantity to confirm",
       "family_id": "PSC-SC-C24",
       "family_name": "Syringes",
       "source_kind": "product",
@@ -1789,7 +2027,7 @@
       "sku": "PSC-DSP-003",
       "name": "Disposable Syringe 5 ml",
       "brand": "Specification-led",
-      "pack": "Box \u2014 quantity to confirm",
+      "pack": "Box — quantity to confirm",
       "family_id": "PSC-SC-C24",
       "family_name": "Syringes",
       "source_kind": "product",
@@ -1800,7 +2038,7 @@
     },
     {
       "sku": "PS-AC-A60A93407A6D",
-      "name": "Dolvic-K Diclofenac Potassium 50 mg \u2014 20 Tablets",
+      "name": "Dolvic-K Diclofenac Potassium 50 mg — 20 Tablets",
       "brand": "Dolvic-K",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-149",
@@ -1809,11 +2047,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 26.5
+      "mrp_aed": 26.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 22.53
     },
     {
       "sku": "PS-AC-8E9FE3B9BBC4",
-      "name": "Dora Desloratadine 5 mg \u2014 30 Tablets",
+      "name": "Dora Desloratadine 5 mg — 30 Tablets",
       "brand": "Dora",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-147",
@@ -1822,7 +2062,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 34.5
+      "mrp_aed": 34.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 29.33
     },
     {
       "sku": "PSC-EQP-004",
@@ -1848,7 +2090,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 23.5
+      "mrp_aed": 23.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 19.98
     },
     {
       "sku": "PS-AC-A362227AAAF5",
@@ -1861,7 +2105,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 19.0
+      "mrp_aed": 19.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 16.15
     },
     {
       "sku": "PS-AC-66356772D8BC",
@@ -1874,7 +2120,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 36.0
+      "mrp_aed": 36.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 30.6
     },
     {
       "sku": "PS-AC-42EFBD298D1B",
@@ -1887,7 +2135,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 789.0
+      "mrp_aed": 789.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 670.65
     },
     {
       "sku": "PSC-WND-008",
@@ -1913,11 +2163,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-75531F59FDD5",
-      "name": "Duphalac Fruit Lactulose 667 mg/ml \u2014 200 ml",
+      "name": "Duphalac Fruit Lactulose 667 mg/ml — 200 ml",
       "brand": "Duphalac",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-100",
@@ -1926,7 +2178,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-BBDF382B00E6",
@@ -1939,7 +2193,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 24.5
+      "mrp_aed": 24.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 20.83
     },
     {
       "sku": "PSC-WND-007",
@@ -1965,7 +2221,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 73.5
+      "mrp_aed": 73.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 62.48
     },
     {
       "sku": "PS-AC-1C850D5C43B8",
@@ -1978,7 +2236,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 19.0
+      "mrp_aed": 19.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 16.15
     },
     {
       "sku": "PS-AC-B46ACC91E599",
@@ -1991,11 +2251,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 26.0
+      "mrp_aed": 26.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 22.1
     },
     {
       "sku": "PS-AC-E50487D58B2A",
-      "name": "Emidol Paracetamol 500 mg \u2014 24 Tablets",
+      "name": "Emidol Paracetamol 500 mg — 24 Tablets",
       "brand": "Emidol",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-090",
@@ -2004,7 +2266,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 7.5
+      "mrp_aed": 7.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 6.38
     },
     {
       "sku": "PS-AC-181B3BD5F4A8",
@@ -2017,11 +2281,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 10.5
+      "mrp_aed": 10.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 8.93
     },
     {
       "sku": "PS-AC-DC2A1FF485E5",
-      "name": "Emivanz 500/5 mg \u2014 30 Tablets",
+      "name": "Emivanz 500/5 mg — 30 Tablets",
       "brand": "Emivanz",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-165",
@@ -2030,7 +2296,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 17.5
+      "mrp_aed": 17.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 14.88
     },
     {
       "sku": "PS-AC-5DFC82FA18E9",
@@ -2042,12 +2310,14 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": false,
-      "mrp_aed": null
+      "in_stock": true,
+      "mrp_aed": 119.9,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 101.92
     },
     {
       "sku": "PS-AC-18B8322BF411",
-      "name": "Ergonomic Toothbrush Black \u2014 Medium",
+      "name": "Ergonomic Toothbrush Black — Medium",
       "brand": "Ergonomic",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-184",
@@ -2056,11 +2326,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 22.0
+      "mrp_aed": 22.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 18.7
     },
     {
       "sku": "PS-AC-E0C03159604A",
-      "name": "Ergonomic Toothbrush Purple \u2014 Medium",
+      "name": "Ergonomic Toothbrush Purple — Medium",
       "brand": "Ergonomic",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-184",
@@ -2069,7 +2341,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 22.0
+      "mrp_aed": 22.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 18.7
     },
     {
       "sku": "PSC-MED-107",
@@ -2082,7 +2356,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-673550EE9818",
@@ -2095,7 +2371,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 57.5
+      "mrp_aed": 57.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 48.88
     },
     {
       "sku": "PS-AC-22FF3938B7A7",
@@ -2108,7 +2386,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 101.0
+      "mrp_aed": 101.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 85.85
     },
     {
       "sku": "PS-AC-AA3857390E4C",
@@ -2121,7 +2401,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 61.5
+      "mrp_aed": 61.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 52.28
     },
     {
       "sku": "PSC-DIA-003",
@@ -2160,7 +2442,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 21.5
+      "mrp_aed": 21.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 18.28
     },
     {
       "sku": "PSC-MED-101",
@@ -2173,7 +2457,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-1B7429C8708D",
@@ -2186,11 +2472,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 52.0
+      "mrp_aed": 52.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 44.2
     },
     {
       "sku": "PS-AC-579DF1AE3909",
-      "name": "Femoston 2/10 mg \u2014 28 Tablets",
+      "name": "Femoston 2/10 mg — 28 Tablets",
       "brand": "Femoston",
       "pack": "28 tablets",
       "family_id": "PSC-IS-158",
@@ -2198,12 +2486,14 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": 50.5
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-7E0E1D8D4182",
-      "name": "Femoston Conti 1/5 mg \u2014 28 Tablets",
+      "name": "Femoston Conti 1/5 mg — 28 Tablets",
       "brand": "Femoston",
       "pack": "28 tablets",
       "family_id": "PSC-IS-158",
@@ -2212,7 +2502,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 50.5
+      "mrp_aed": 50.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 42.93
     },
     {
       "sku": "PS-AC-B481A33B8ADA",
@@ -2225,20 +2517,24 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 37.5
+      "mrp_aed": 37.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 31.88
     },
     {
       "sku": "PS-AC-CF2A59100FF8",
-      "name": "FINALLERG 10MG TAB 10\u2019S",
+      "name": "FINALLERG 10MG TAB 10’S",
       "brand": "Finallerg",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-073",
-      "family_name": "FINALLERG 10MG TAB 10\u2019S",
+      "family_name": "FINALLERG 10MG TAB 10’S",
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 13.5
+      "mrp_aed": 13.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 11.48
     },
     {
       "sku": "PS-AC-3E7CD6BDAB3C",
@@ -2251,7 +2547,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 25.0
+      "mrp_aed": 25.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 21.25
     },
     {
       "sku": "PS-AC-89836E13CEAE",
@@ -2264,7 +2562,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 13.0
+      "mrp_aed": 13.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 11.05
     },
     {
       "sku": "PSC-DIA-001",
@@ -2290,7 +2590,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-82737DADD811",
@@ -2303,7 +2605,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 259.5
+      "mrp_aed": 259.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 220.58
     },
     {
       "sku": "PS-AC-8B2ACDEDDF89",
@@ -2315,8 +2619,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": 17.0
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-59131A74068D",
@@ -2328,8 +2634,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": false,
-      "mrp_aed": null
+      "in_stock": true,
+      "mrp_aed": 10.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 8.5
     },
     {
       "sku": "PS-AC-30C266FA5150",
@@ -2342,7 +2650,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 20.5
+      "mrp_aed": 20.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 17.43
     },
     {
       "sku": "PS-AC-A6CA8E5ECFDF",
@@ -2355,7 +2665,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 25.0
+      "mrp_aed": 25.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 21.25
     },
     {
       "sku": "PS-AC-1AD5D12A6B00",
@@ -2368,11 +2680,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 21.0
+      "mrp_aed": 21.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 17.85
     },
     {
       "sku": "PSC-WND-001",
-      "name": "Gauze Swab Non-Sterile 5 \u00d7 5 cm",
+      "name": "Gauze Swab Non-Sterile 5 × 5 cm",
       "brand": "WOLAID",
       "pack": "100 swabs",
       "family_id": "PSC-SC-C15",
@@ -2385,7 +2699,7 @@
     },
     {
       "sku": "PSC-WND-002",
-      "name": "Gauze Swabs ETO Sterile 10 \u00d7 10 cm 12-ply",
+      "name": "Gauze Swabs ETO Sterile 10 × 10 cm 12-ply",
       "brand": "WOLAID",
       "pack": "20 swabs",
       "family_id": "PSC-SC-C23",
@@ -2407,7 +2721,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 23.0
+      "mrp_aed": 23.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 19.55
     },
     {
       "sku": "PS-AC-D8A801E0D1E8",
@@ -2420,11 +2736,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 27.0
+      "mrp_aed": 27.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 22.95
     },
     {
       "sku": "PS-AC-28E43B7879F6",
-      "name": "Gevhart 20 mg \u2014 30 Tablets",
+      "name": "Gevhart 20 mg — 30 Tablets",
       "brand": "Gevhart",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-170",
@@ -2433,7 +2751,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 40.0
+      "mrp_aed": 40.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 34.0
     },
     {
       "sku": "PS-AC-9AF06AD3680E",
@@ -2446,7 +2766,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 54.0
+      "mrp_aed": 54.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 45.9
     },
     {
       "sku": "PS-AC-64F829D7DBF1",
@@ -2459,7 +2781,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-BF133E39FDD1",
@@ -2472,7 +2796,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 16.0
+      "mrp_aed": 16.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 13.6
     },
     {
       "sku": "PS-AC-8396A068D791",
@@ -2485,7 +2811,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 23.5
+      "mrp_aed": 23.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 19.98
     },
     {
       "sku": "PS-AC-8DDB831FD6A5",
@@ -2498,7 +2826,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 16.0
+      "mrp_aed": 16.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 13.6
     },
     {
       "sku": "PS-AC-E7D418EDD17C",
@@ -2511,7 +2841,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 26.0
+      "mrp_aed": 26.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 22.1
     },
     {
       "sku": "PS-AC-10F136F531BC",
@@ -2524,7 +2856,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 73.0
+      "mrp_aed": 73.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 62.05
     },
     {
       "sku": "PS-AC-43A24DE60E39",
@@ -2537,7 +2871,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 99.5
+      "mrp_aed": 99.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 84.58
     },
     {
       "sku": "PS-AC-A8F5876D3083",
@@ -2550,7 +2886,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 37.5
+      "mrp_aed": 37.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 31.88
     },
     {
       "sku": "PS-AC-F8251FCFED2E",
@@ -2563,11 +2901,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 42.0
+      "mrp_aed": 42.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 35.7
     },
     {
       "sku": "PS-AC-B5F68F0EEF03",
-      "name": "Glotrizine 5 mg/5 ml Syrup \u2014 100 ml",
+      "name": "Glotrizine 5 mg/5 ml Syrup — 100 ml",
       "brand": "Glotrizine",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-073",
@@ -2576,11 +2916,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 14.5
+      "mrp_aed": 14.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 12.33
     },
     {
       "sku": "PS-AC-CA529915334B",
-      "name": "Glozal Levocetirizine 5 mg \u2014 20 Tablets",
+      "name": "Glozal Levocetirizine 5 mg — 20 Tablets",
       "brand": "Glozal",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-161",
@@ -2589,7 +2931,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 22.0
+      "mrp_aed": 22.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 18.7
     },
     {
       "sku": "PS-AC-55BFDC5900B8",
@@ -2602,7 +2946,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 46.5
+      "mrp_aed": 46.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 39.53
     },
     {
       "sku": "PS-AC-F7A2A57A50DD",
@@ -2615,7 +2961,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 15.5
+      "mrp_aed": 15.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 13.18
     },
     {
       "sku": "PS-AC-6430084923B0",
@@ -2628,7 +2976,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 48.0
+      "mrp_aed": 48.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 40.8
     },
     {
       "sku": "PS-AC-912652B1A536",
@@ -2641,7 +2991,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 157.5
+      "mrp_aed": 157.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 133.88
     },
     {
       "sku": "PS-AC-F823A5B66D12",
@@ -2654,7 +3006,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 131.25
+      "mrp_aed": 131.25,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 111.56
     },
     {
       "sku": "PS-AC-6E606628BF87",
@@ -2667,7 +3021,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 43.5
+      "mrp_aed": 43.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 36.98
     },
     {
       "sku": "PS-AC-47499A9BF8B7",
@@ -2680,7 +3036,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 61.5
+      "mrp_aed": 61.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 52.28
     },
     {
       "sku": "PS-AC-D8F2579CE23F",
@@ -2693,7 +3051,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 87.0
+      "mrp_aed": 87.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 73.95
     },
     {
       "sku": "PS-AC-5AABC115B986",
@@ -2706,7 +3066,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 47.0
+      "mrp_aed": 47.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 39.95
     },
     {
       "sku": "PSC-WND-009",
@@ -2732,7 +3094,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-WND-102",
@@ -2745,7 +3109,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-WND-101",
@@ -2758,7 +3124,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 96.0
+      "mrp_aed": 96.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 81.6
     },
     {
       "sku": "PS-AC-417F1BC9E425",
@@ -2771,11 +3139,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 18.5
+      "mrp_aed": 18.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 15.73
     },
     {
       "sku": "PS-AC-EF89A3D78DE4",
-      "name": "HY+AI Oral Gel \u2014 12 g",
+      "name": "HY+AI Oral Gel — 12 g",
       "brand": "HY+AI",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-168",
@@ -2784,11 +3154,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 40.0
+      "mrp_aed": 40.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 34.0
     },
     {
       "sku": "PS-AC-D96E047C2187",
-      "name": "HY+AI Oral Gel \u2014 30 g",
+      "name": "HY+AI Oral Gel — 30 g",
       "brand": "HY+AI",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-168",
@@ -2797,7 +3169,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 65.0
+      "mrp_aed": 65.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 55.25
     },
     {
       "sku": "PS-AC-4E9C08C332DD",
@@ -2810,15 +3184,17 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 7.5
+      "mrp_aed": 7.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 6.38
     },
     {
       "sku": "PSC-DSP-004",
-      "name": "Hypodermic Needles \u2014 Assorted Sizes",
+      "name": "Hypodermic Needles — Assorted Sizes",
       "brand": "Specification-led",
-      "pack": "Box \u2014 size/quantity to confirm",
+      "pack": "Box — size/quantity to confirm",
       "family_id": "PSC-SC-C16",
-      "family_name": "Hypodermic needles \u2013g.21, g.23 and g. 25",
+      "family_name": "Hypodermic needles –g.21, g.23 and g. 25",
       "source_kind": "product",
       "acorus_managed": false,
       "catalogue_visible": true,
@@ -2836,7 +3212,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 23.0
+      "mrp_aed": 23.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 19.55
     },
     {
       "sku": "PS-AC-72481ED45E70",
@@ -2849,7 +3227,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 14.5
+      "mrp_aed": 14.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 12.33
     },
     {
       "sku": "PS-AC-6504A9E9D933",
@@ -2862,7 +3242,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 51.0
+      "mrp_aed": 51.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 43.35
     },
     {
       "sku": "PS-AC-3F48EDEC7AB1",
@@ -2875,7 +3257,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 40.0
+      "mrp_aed": 40.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 34.0
     },
     {
       "sku": "PSC-DIA-006",
@@ -2901,7 +3285,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 48.0
+      "mrp_aed": 48.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 40.8
     },
     {
       "sku": "PSC-MED-114",
@@ -2913,12 +3299,14 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": 15.5
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-WND-005",
-      "name": "Instant Cold Pack 15 \u00d7 22 cm",
+      "name": "Instant Cold Pack 15 × 22 cm",
       "brand": "WOLAID",
       "pack": "1 pack",
       "family_id": "PSC-IS-042",
@@ -2931,7 +3319,7 @@
     },
     {
       "sku": "PS-AC-4D49E9D2478B",
-      "name": "Isomar Baby No Gas Spray \u2014 30 ml",
+      "name": "Isomar Baby No Gas Spray — 30 ml",
       "brand": "Isomar",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-106",
@@ -2940,11 +3328,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 39.0
+      "mrp_aed": 39.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 33.15
     },
     {
       "sku": "PS-AC-7DE9E565CE7F",
-      "name": "Isomar Daily Hygiene Spray Nose & Ear \u2014 100 ml",
+      "name": "Isomar Daily Hygiene Spray Nose & Ear — 100 ml",
       "brand": "Isomar",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-106",
@@ -2953,11 +3343,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 44.0
+      "mrp_aed": 44.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 37.4
     },
     {
       "sku": "PS-AC-308B2BDDE1D1",
-      "name": "Isomar Daily Hygiene Vials Nose & Eyes \u2014 20 x 5 ml",
+      "name": "Isomar Daily Hygiene Vials Nose & Eyes — 20 x 5 ml",
       "brand": "Isomar",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-106",
@@ -2966,11 +3358,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 47.0
+      "mrp_aed": 47.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 39.95
     },
     {
       "sku": "PS-AC-BAE369B8D77D",
-      "name": "Isomar Nose Decongestant Vials \u2014 20 x 5 ml",
+      "name": "Isomar Nose Decongestant Vials — 20 x 5 ml",
       "brand": "Isomar",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-106",
@@ -2979,13 +3373,15 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 53.3
+      "mrp_aed": 53.3,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 45.31
     },
     {
       "sku": "PSC-DSP-005",
-      "name": "IV Cannula \u2014 Assorted Gauges",
+      "name": "IV Cannula — Assorted Gauges",
       "brand": "Specification-led",
-      "pack": "Box \u2014 gauge/quantity to confirm",
+      "pack": "Box — gauge/quantity to confirm",
       "family_id": "PSC-SC-C18",
       "family_name": "IV cannulas /butterflies",
       "source_kind": "product",
@@ -2998,7 +3394,7 @@
       "sku": "PSC-DSP-006",
       "name": "IV Giving Set",
       "brand": "Specification-led",
-      "pack": "Box \u2014 quantity to confirm",
+      "pack": "Box — quantity to confirm",
       "family_id": "PSC-SC-C19",
       "family_name": "IV Infusion set",
       "source_kind": "product",
@@ -3031,7 +3427,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 20.0
+      "mrp_aed": 20.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 17.0
     },
     {
       "sku": "PS-AC-B0524E802B12",
@@ -3044,7 +3442,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 27.5
+      "mrp_aed": 27.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 23.38
     },
     {
       "sku": "PS-AC-02A4FF962422",
@@ -3057,7 +3457,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 23.0
+      "mrp_aed": 23.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 19.55
     },
     {
       "sku": "PS-AC-D33A7F440749",
@@ -3070,7 +3472,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 35.0
+      "mrp_aed": 35.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 29.75
     },
     {
       "sku": "PS-AC-EBF3E1C257CD",
@@ -3083,7 +3487,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 50.0
+      "mrp_aed": 50.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 42.5
     },
     {
       "sku": "PS-AC-938F720B960C",
@@ -3095,8 +3501,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": false,
-      "mrp_aed": null
+      "in_stock": true,
+      "mrp_aed": 12.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 10.2
     },
     {
       "sku": "PS-AC-175965B01376",
@@ -3109,7 +3517,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 97.0
+      "mrp_aed": 97.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 82.45
     },
     {
       "sku": "PS-AC-5E479CDB5CA0",
@@ -3122,24 +3532,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 15.0
+      "mrp_aed": 15.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 12.75
     },
     {
       "sku": "PS-AC-A819E3E83997",
-      "name": "Kool Temp Cooling Gel Sheets \u2014 Baby \u2014 6 Pieces",
-      "brand": "Kool Temp",
-      "pack": "Exact pack to confirm",
-      "family_id": "PSC-IS-042",
-      "family_name": "Instant cold packs",
-      "source_kind": "product",
-      "acorus_managed": true,
-      "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": 24.5
-    },
-    {
-      "sku": "PS-AC-2F1516E65F2A",
-      "name": "Kool Temp Cooling Gel Sheets \u2014 Child \u2014 6 Pieces",
+      "name": "Kool Temp Cooling Gel Sheets — Baby — 6 Pieces",
       "brand": "Kool Temp",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-042",
@@ -3148,7 +3547,24 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
+    },
+    {
+      "sku": "PS-AC-2F1516E65F2A",
+      "name": "Kool Temp Cooling Gel Sheets — Child — 6 Pieces",
+      "brand": "Kool Temp",
+      "pack": "Exact pack to confirm",
+      "family_id": "PSC-IS-042",
+      "family_name": "Instant cold packs",
+      "source_kind": "product",
+      "acorus_managed": true,
+      "catalogue_visible": true,
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-FFC2F71E9251",
@@ -3161,7 +3577,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 28.5
+      "mrp_aed": 28.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 24.23
     },
     {
       "sku": "PS-AC-7FA52A9BCF9F",
@@ -3174,7 +3592,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 51.5
+      "mrp_aed": 51.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 43.78
     },
     {
       "sku": "PS-AC-3C4A8C55FEF8",
@@ -3187,7 +3607,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 68.0
+      "mrp_aed": 68.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 57.8
     },
     {
       "sku": "PS-AC-598D26CADC3C",
@@ -3200,7 +3622,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 68.0
+      "mrp_aed": 68.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 57.8
     },
     {
       "sku": "PS-AC-C73771B2763A",
@@ -3213,7 +3637,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 49.0
+      "mrp_aed": 49.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 41.65
     },
     {
       "sku": "PS-AC-8487348609B6",
@@ -3226,7 +3652,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 33.5
+      "mrp_aed": 33.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 28.48
     },
     {
       "sku": "PS-AC-BCAEDEA727BF",
@@ -3239,7 +3667,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-HYG-104",
@@ -3252,7 +3682,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 30.9
+      "mrp_aed": 30.9,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 26.27
     },
     {
       "sku": "PSC-HYG-107",
@@ -3265,11 +3697,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-FF88CB6488F5",
-      "name": "Livatrum \u2014 30 Tablets",
+      "name": "Livatrum — 30 Tablets",
       "brand": "Livatrum",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-188",
@@ -3278,20 +3712,24 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 57.75
+      "mrp_aed": 57.75,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 49.09
     },
     {
       "sku": "PS-AC-400F2ABE665C",
-      "name": "LOFLAM 100MG TAB 20\u2019S",
+      "name": "LOFLAM 100MG TAB 20’S",
       "brand": "Loflam",
       "pack": "Exact pack to confirm",
       "family_id": "PS-AC-400F2ABE665C",
-      "family_name": "LOFLAM 100MG TAB 20\u2019S",
+      "family_name": "LOFLAM 100MG TAB 20’S",
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 44.0
+      "mrp_aed": 44.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 37.4
     },
     {
       "sku": "PS-AC-666A3B79FCEA",
@@ -3304,7 +3742,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 60.0
+      "mrp_aed": 60.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 51.0
     },
     {
       "sku": "PS-AC-8D861823242C",
@@ -3317,7 +3757,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 13.5
+      "mrp_aed": 13.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 11.48
     },
     {
       "sku": "PS-AC-A9F14BB5E5C6",
@@ -3330,11 +3772,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 16.0
+      "mrp_aed": 16.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 13.6
     },
     {
       "sku": "PS-AC-D0757B6AB503",
-      "name": "Lomexin 200 mg \u2014 3 Ovules",
+      "name": "Lomexin 200 mg — 3 Ovules",
       "brand": "Lomexin",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-186",
@@ -3343,11 +3787,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 21.5
+      "mrp_aed": 21.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 18.28
     },
     {
       "sku": "PS-AC-7F7266B6E568",
-      "name": "Lomexin T 1000 mg \u2014 1 Ovule",
+      "name": "Lomexin T 1000 mg — 1 Ovule",
       "brand": "Lomexin",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-186",
@@ -3356,7 +3802,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-7A8FA3726BCE",
@@ -3369,11 +3817,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 33.5
+      "mrp_aed": 33.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 28.48
     },
     {
       "sku": "PS-AC-27ED37EEE993",
-      "name": "Lomidex Loperamide 2 mg \u2014 10 Capsules",
+      "name": "Lomidex Loperamide 2 mg — 10 Capsules",
       "brand": "Lomidex",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-098",
@@ -3382,7 +3832,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-WND-006",
@@ -3408,11 +3860,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 30.5
+      "mrp_aed": 30.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 25.93
     },
     {
       "sku": "PS-AC-4D0091180AB9",
-      "name": "Lozaty Ginger \u2014 24 Lozenges",
+      "name": "Lozaty Ginger — 24 Lozenges",
       "brand": "Lozaty",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-121",
@@ -3421,7 +3875,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 19.0
+      "mrp_aed": 19.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 16.15
     },
     {
       "sku": "PS-AC-DC4B5D32EE85",
@@ -3434,7 +3890,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 19.0
+      "mrp_aed": 19.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 16.15
     },
     {
       "sku": "PS-AC-957F8551D9D2",
@@ -3447,11 +3905,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 19.0
+      "mrp_aed": 19.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 16.15
     },
     {
       "sku": "PS-AC-F8D8B1697F75",
-      "name": "Lozaty Orange \u2014 24 Lozenges",
+      "name": "Lozaty Orange — 24 Lozenges",
       "brand": "Lozaty",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-121",
@@ -3460,7 +3920,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 19.0
+      "mrp_aed": 19.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 16.15
     },
     {
       "sku": "PS-AC-4D0F59F8767D",
@@ -3473,7 +3935,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 52.0
+      "mrp_aed": 52.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 44.2
     },
     {
       "sku": "PS-AC-4FD1A6229910",
@@ -3486,7 +3950,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 71.5
+      "mrp_aed": 71.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 60.78
     },
     {
       "sku": "PS-AC-D5EE25C904F9",
@@ -3499,11 +3965,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 32.5
+      "mrp_aed": 32.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 27.63
     },
     {
       "sku": "PS-AC-B018FCD1AB8F",
-      "name": "Manforce Epic Desire Super Thin Silk Chocolate \u2014 3 Condoms",
+      "name": "Manforce Epic Desire Super Thin Silk Chocolate — 3 Condoms",
       "brand": "Manforce",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-145",
@@ -3512,11 +3980,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 12.0
+      "mrp_aed": 12.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 10.2
     },
     {
       "sku": "PS-AC-ADD977090A6E",
-      "name": "Manforce Epic Passion Extra Dotted Fruit Punch \u2014 10 Condoms",
+      "name": "Manforce Epic Passion Extra Dotted Fruit Punch — 10 Condoms",
       "brand": "Manforce",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-145",
@@ -3525,11 +3995,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 38.0
+      "mrp_aed": 38.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 32.3
     },
     {
       "sku": "PS-AC-3189DA62A42B",
-      "name": "Manforce Epic Passion Extra Dotted Fruit Punch \u2014 3 Condoms",
+      "name": "Manforce Epic Passion Extra Dotted Fruit Punch — 3 Condoms",
       "brand": "Manforce",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-145",
@@ -3538,11 +4010,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 12.0
+      "mrp_aed": 12.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 10.2
     },
     {
       "sku": "PS-AC-A3C78A070FA9",
-      "name": "Manforce Epic Pleasure Long Lasting Raspberry \u2014 3 Condoms",
+      "name": "Manforce Epic Pleasure Long Lasting Raspberry — 3 Condoms",
       "brand": "Manforce",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-145",
@@ -3551,11 +4025,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 12.0
+      "mrp_aed": 12.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 10.2
     },
     {
       "sku": "PSC-EQP-001",
-      "name": "Manual Medical Bed \u2014 Two Crank",
+      "name": "Manual Medical Bed — Two Crank",
       "brand": "General / model TBC",
       "pack": "1 unit",
       "family_id": "PSC-SC-A14",
@@ -3583,7 +4059,7 @@
       "sku": "PSC-DSP-008",
       "name": "Medicine Cups",
       "brand": "Specification-led",
-      "pack": "Pack \u2014 quantity to confirm",
+      "pack": "Pack — quantity to confirm",
       "family_id": "PSC-SC-C07",
       "family_name": "Disposable medicine cups",
       "source_kind": "product",
@@ -3594,16 +4070,18 @@
     },
     {
       "sku": "PS-AC-A259CAB80F2D",
-      "name": "METROLAG 250MG TAB 20\u2019S",
+      "name": "METROLAG 250MG TAB 20’S",
       "brand": "Metrolag",
       "pack": "Exact pack to confirm",
       "family_id": "PS-AC-A259CAB80F2D",
-      "family_name": "METROLAG 250MG TAB 20\u2019S",
+      "family_name": "METROLAG 250MG TAB 20’S",
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 10.5
+      "mrp_aed": 10.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 8.93
     },
     {
       "sku": "PS-AC-4E55D6F021C1",
@@ -3616,11 +4094,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 19.5
+      "mrp_aed": 19.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 16.58
     },
     {
       "sku": "PS-AC-7CC2887C65F3",
-      "name": "Miderizone Tolperisone 150 mg \u2014 30 Tablets",
+      "name": "Miderizone Tolperisone 150 mg — 30 Tablets",
       "brand": "Miderizone",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-183",
@@ -3629,7 +4109,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-05F926A8B794",
@@ -3642,11 +4124,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 78.5
+      "mrp_aed": 78.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 66.73
     },
     {
       "sku": "PS-AC-7249B30E2D1F",
-      "name": "Moven Meloxicam 7.5 mg \u2014 10 Capsules",
+      "name": "Moven Meloxicam 7.5 mg — 10 Capsules",
       "brand": "Moven",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-164",
@@ -3655,7 +4139,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 9.5
+      "mrp_aed": 9.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 8.08
     },
     {
       "sku": "PS-AC-D0AF8E856F91",
@@ -3668,7 +4154,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 7.5
+      "mrp_aed": 7.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 6.38
     },
     {
       "sku": "PS-AC-A569717BF49E",
@@ -3681,7 +4169,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 14.0
+      "mrp_aed": 14.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 11.9
     },
     {
       "sku": "PS-AC-C4D2B178E5A1",
@@ -3693,12 +4183,14 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": false,
-      "mrp_aed": null
+      "in_stock": true,
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-6E59A30EF053",
-      "name": "NAN Comfort 1 \u2014 800 g",
+      "name": "NAN Comfort 1 — 800 g",
       "brand": "NAN",
       "pack": "800 g",
       "family_id": "PSC-IS-159",
@@ -3707,11 +4199,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-C7DB4FA9ACC4",
-      "name": "NAN Comfort 2 \u2014 800 g",
+      "name": "NAN Comfort 2 — 800 g",
       "brand": "NAN",
       "pack": "800 g",
       "family_id": "PSC-IS-159",
@@ -3720,11 +4214,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-B8F2CFFCEF03",
-      "name": "NAN Comfort 3 \u2014 800 g",
+      "name": "NAN Comfort 3 — 800 g",
       "brand": "NAN",
       "pack": "800 g",
       "family_id": "PSC-IS-159",
@@ -3733,11 +4229,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-09BDD311CA5A",
-      "name": "NAN Lactose Free \u2014 400 g",
+      "name": "NAN Lactose Free — 400 g",
       "brand": "NAN",
       "pack": "400 g",
       "family_id": "PSC-IS-159",
@@ -3746,11 +4244,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-D3D58AF8DBDC",
-      "name": "NAN Optipro 1 \u2014 400 g",
+      "name": "NAN Optipro 1 — 400 g",
       "brand": "NAN",
       "pack": "400 g",
       "family_id": "PSC-IS-159",
@@ -3759,7 +4259,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-780FB37E98DC",
@@ -3772,7 +4274,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-D27B69D89DD9",
@@ -3785,11 +4289,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-05FCD107C286",
-      "name": "NAN SupremePro 3 \u2014 800 g",
+      "name": "NAN SupremePro 3 — 800 g",
       "brand": "NAN",
       "pack": "800 g",
       "family_id": "PSC-IS-159",
@@ -3798,7 +4304,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-40F211EAC614",
@@ -3811,7 +4319,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 8.5
+      "mrp_aed": 8.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 7.23
     },
     {
       "sku": "PS-AC-A479670750DD",
@@ -3824,11 +4334,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 17.5
+      "mrp_aed": 17.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 14.88
     },
     {
       "sku": "PSC-RES-007",
-      "name": "Nebulizer Mask & Tubing \u2014 Paediatric",
+      "name": "Nebulizer Mask & Tubing — Paediatric",
       "brand": "Specification-led",
       "pack": "1 kit",
       "family_id": "PSC-SC-C08",
@@ -3850,7 +4362,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 77.0
+      "mrp_aed": 77.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 65.45
     },
     {
       "sku": "PS-AC-0D5F2C5A740B",
@@ -3863,7 +4377,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 52.5
+      "mrp_aed": 52.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 44.63
     },
     {
       "sku": "PS-AC-24A56F237564",
@@ -3876,7 +4392,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 6.5
+      "mrp_aed": 6.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 5.53
     },
     {
       "sku": "PS-AC-9BC23001E986",
@@ -3889,7 +4407,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 5.5
+      "mrp_aed": 5.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 4.68
     },
     {
       "sku": "PS-AC-0E39ED2763A1",
@@ -3902,7 +4422,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 8.0
+      "mrp_aed": 8.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 6.8
     },
     {
       "sku": "PS-AC-4A266A218848",
@@ -3915,7 +4437,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 8.5
+      "mrp_aed": 8.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 7.23
     },
     {
       "sku": "PS-AC-F09A440C147E",
@@ -3928,7 +4452,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 42.0
+      "mrp_aed": 42.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 35.7
     },
     {
       "sku": "PS-AC-1C0B8156329E",
@@ -3941,7 +4467,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 25.5
+      "mrp_aed": 25.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 21.68
     },
     {
       "sku": "PS-AC-B8ED07D30197",
@@ -3954,11 +4482,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 77.0
+      "mrp_aed": 77.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 65.45
     },
     {
       "sku": "PS-AC-5ED2FF06E0AF",
-      "name": "Nexium 40 mg \u2014 14 Tablets",
+      "name": "Nexium 40 mg — 14 Tablets",
       "brand": "Nexium",
       "pack": "14 tablets",
       "family_id": "PSC-IS-151",
@@ -3967,7 +4497,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 110.0
+      "mrp_aed": 110.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 93.5
     },
     {
       "sku": "PSC-MED-116",
@@ -3979,8 +4511,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": 31.0
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-115",
@@ -3993,7 +4527,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 31.0
+      "mrp_aed": 31.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 26.35
     },
     {
       "sku": "PSC-MED-118",
@@ -4006,7 +4542,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 65.5
+      "mrp_aed": 65.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 55.68
     },
     {
       "sku": "PSC-MED-119",
@@ -4019,7 +4557,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 65.5
+      "mrp_aed": 65.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 55.68
     },
     {
       "sku": "PSC-MED-125",
@@ -4031,14 +4571,16 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": 65.5
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-PPE-001",
       "name": "Nitrile Examination Gloves",
       "brand": "Specification-led",
-      "pack": "Box \u2014 size to confirm",
+      "pack": "Box — size to confirm",
       "family_id": "PSC-SC-C05",
       "family_name": "Disposable gloves",
       "source_kind": "product",
@@ -4058,11 +4600,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 46.0
+      "mrp_aed": 46.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 39.1
     },
     {
       "sku": "PS-AC-BA1BA46AB93C",
-      "name": "Nokamen \u2014 30 Tablets",
+      "name": "Nokamen — 30 Tablets",
       "brand": "Nokamen",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-157",
@@ -4071,11 +4615,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 20.5
+      "mrp_aed": 20.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 17.43
     },
     {
       "sku": "PS-AC-DBD40D8389AC",
-      "name": "Nolvadex Tamoxifen 10 mg \u2014 30 Tablets",
+      "name": "Nolvadex Tamoxifen 10 mg — 30 Tablets",
       "brand": "Nolvadex",
       "pack": "30 tablets",
       "family_id": "PSC-IS-182",
@@ -4084,11 +4630,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-11702595F8A6",
-      "name": "Nolvadex-D Tamoxifen 20 mg \u2014 30 Tablets",
+      "name": "Nolvadex-D Tamoxifen 20 mg — 30 Tablets",
       "brand": "Nolvadex-D",
       "pack": "30 tablets",
       "family_id": "PSC-IS-182",
@@ -4097,7 +4645,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-94420E937D23",
@@ -4110,7 +4660,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 63.0
+      "mrp_aed": 63.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 53.55
     },
     {
       "sku": "PS-AC-DB50807042A9",
@@ -4123,7 +4675,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 57.75
+      "mrp_aed": 57.75,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 49.09
     },
     {
       "sku": "PS-AC-23F55B06F429",
@@ -4135,8 +4689,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": false,
-      "mrp_aed": null
+      "in_stock": true,
+      "mrp_aed": 20.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 17.0
     },
     {
       "sku": "PS-AC-F6E0A358896E",
@@ -4149,7 +4705,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 23.5
+      "mrp_aed": 23.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 19.98
     },
     {
       "sku": "PS-AC-9E8C18CB7140",
@@ -4162,7 +4720,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 23.0
+      "mrp_aed": 23.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 19.55
     },
     {
       "sku": "PS-AC-0CD6E6FDA164",
@@ -4175,7 +4735,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-6363B90AC36C",
@@ -4188,13 +4750,15 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-DSP-009",
       "name": "Oral Dosing Syringes",
       "brand": "Specification-led",
-      "pack": "Pack \u2014 size/quantity to confirm",
+      "pack": "Pack — size/quantity to confirm",
       "family_id": "PSC-IS-068",
       "family_name": "Oral dosing syringes",
       "source_kind": "product",
@@ -4214,7 +4778,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-F50A5698BD58",
@@ -4227,7 +4793,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-DIA-007",
@@ -4244,7 +4812,7 @@
     },
     {
       "sku": "PSC-RES-004",
-      "name": "Oxygen Mask \u2014 Adult",
+      "name": "Oxygen Mask — Adult",
       "brand": "Specification-led",
       "pack": "1 unit / pack to confirm",
       "family_id": "PSC-SC-C09",
@@ -4257,7 +4825,7 @@
     },
     {
       "sku": "PSC-RES-005",
-      "name": "Oxygen Mask \u2014 Paediatric",
+      "name": "Oxygen Mask — Paediatric",
       "brand": "Specification-led",
       "pack": "1 unit / pack to confirm",
       "family_id": "PSC-SC-C09",
@@ -4305,7 +4873,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-17E4DAD608DF",
@@ -4318,7 +4888,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-126D63A7FB1A",
@@ -4331,7 +4903,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-128",
@@ -4344,11 +4918,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-117",
-      "name": "PANADOL CHILDREN'S 5\u201312 YEARS ELIXIR - PARACETAMOL 240 MG/5 ML - 100 ML",
+      "name": "PANADOL CHILDREN'S 5–12 YEARS ELIXIR - PARACETAMOL 240 MG/5 ML - 100 ML",
       "brand": "Panadol",
       "pack": "100 ml",
       "family_id": "PSC-IS-090",
@@ -4357,7 +4933,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-129",
@@ -4370,7 +4948,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-127",
@@ -4383,7 +4963,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-126",
@@ -4396,7 +4978,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-121",
@@ -4409,7 +4993,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-120",
@@ -4421,8 +5007,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": 40.0
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-E0A6920E38DC",
@@ -4435,7 +5023,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-E151AD3C039F",
@@ -4448,7 +5038,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 7.0
+      "mrp_aed": 7.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 5.95
     },
     {
       "sku": "PS-AC-B3B479417542",
@@ -4460,8 +5052,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": false,
-      "mrp_aed": null
+      "in_stock": true,
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-89322EFB4EBB",
@@ -4474,7 +5068,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 42.5
+      "mrp_aed": 42.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 36.13
     },
     {
       "sku": "PS-AC-683CA878AC68",
@@ -4487,7 +5083,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 80.5
+      "mrp_aed": 80.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 68.43
     },
     {
       "sku": "PS-AC-ED625F776EB5",
@@ -4500,7 +5098,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 115.0
+      "mrp_aed": 115.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 97.75
     },
     {
       "sku": "PS-AC-1C0C5CA5BC0C",
@@ -4513,11 +5113,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-BAD79542E340",
-      "name": "ProLifer Prebiotic + Probiotic + L-Glutamate \u2014 30 Softgels",
+      "name": "ProLifer Prebiotic + Probiotic + L-Glutamate — 30 Softgels",
       "brand": "ProLifer",
       "pack": "30 softgels",
       "family_id": "PSC-IS-176",
@@ -4526,11 +5128,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-E35706FB3A4E",
-      "name": "ProRise 20 mg \u2014 30 Capsules",
+      "name": "ProRise 20 mg — 30 Capsules",
       "brand": "ProRise",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-171",
@@ -4539,7 +5143,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 72.0
+      "mrp_aed": 72.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 61.2
     },
     {
       "sku": "PS-AC-18507F14285A",
@@ -4552,7 +5158,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 55.0
+      "mrp_aed": 55.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 46.75
     },
     {
       "sku": "PSC-PPE-005",
@@ -4578,7 +5186,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-9CE43E45ACB7",
@@ -4591,7 +5201,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-8D0A1B46D7AE",
@@ -4604,7 +5216,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 44.0
+      "mrp_aed": 44.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 37.4
     },
     {
       "sku": "PS-AC-2945182D76CA",
@@ -4617,7 +5231,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 32.0
+      "mrp_aed": 32.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 27.2
     },
     {
       "sku": "PS-AC-D3B5EAB3B377",
@@ -4630,33 +5246,39 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 31.0
+      "mrp_aed": 31.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 26.35
     },
     {
       "sku": "PSC-MED-133",
       "name": "REGAINE 2% MINOXIDIL TOPICAL SOLUTION - 60 ML",
       "brand": "Regaine",
-      "pack": "1 \u00d7 60 ml bottle",
+      "pack": "1 × 60 ml bottle",
       "family_id": "PSC-IS-132",
       "family_name": "Minoxidil topical",
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-134",
-      "name": "REGAINE FOR MEN 5% MINOXIDIL FOAM - 3 \u00d7 73 ML",
+      "name": "REGAINE FOR MEN 5% MINOXIDIL FOAM - 3 × 73 ML",
       "brand": "Regaine",
-      "pack": "3 \u00d7 73 ml",
+      "pack": "3 × 73 ml",
       "family_id": "PSC-IS-132",
       "family_name": "Minoxidil topical",
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-D2E438C2F50C",
@@ -4669,13 +5291,15 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 57.0
+      "mrp_aed": 57.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 48.45
     },
     {
       "sku": "PSC-PPE-004",
       "name": "Respirator Masks",
       "brand": "Specification-led",
-      "pack": "Box \u2014 model to confirm",
+      "pack": "Box — model to confirm",
       "family_id": "PSC-SC-C10",
       "family_name": "Disposable Personal Protective Equipment (PPE)",
       "source_kind": "product",
@@ -4695,7 +5319,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 36.75
+      "mrp_aed": 36.75,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 31.24
     },
     {
       "sku": "PSC-MED-132",
@@ -4708,7 +5334,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-894A608A56AE",
@@ -4721,7 +5349,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 41.5
+      "mrp_aed": 41.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 35.28
     },
     {
       "sku": "PS-AC-55A6A45AF26B",
@@ -4733,8 +5363,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": false,
-      "mrp_aed": null
+      "in_stock": true,
+      "mrp_aed": 80.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 68.43
     },
     {
       "sku": "PSC-DIA-009",
@@ -4760,7 +5392,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 51.5
+      "mrp_aed": 51.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 43.78
     },
     {
       "sku": "PS-AC-6D6A637E3D70",
@@ -4773,7 +5407,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 86.5
+      "mrp_aed": 86.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 73.53
     },
     {
       "sku": "PS-AC-81356E98EBBB",
@@ -4786,7 +5422,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-2C36D93E590E",
@@ -4799,7 +5437,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-375459036D52",
@@ -4812,7 +5452,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-BCA4C20A407A",
@@ -4825,7 +5467,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-A7E10BC19B2E",
@@ -4838,7 +5482,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-BC5797476CD0",
@@ -4851,7 +5497,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-33236AB32B6C",
@@ -4864,11 +5512,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-23F413C882D9",
-      "name": "Sebamed Baby Cleansing Bar Value Pack \u2014 2 x 150 g",
+      "name": "Sebamed Baby Cleansing Bar Value Pack — 2 x 150 g",
       "brand": "Sebamed",
       "pack": "2 x 150 g",
       "family_id": "PSC-IS-180",
@@ -4877,11 +5527,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-2757418E4121",
-      "name": "Sebamed Baby Cleansing Wipes \u2014 25 Wipes",
+      "name": "Sebamed Baby Cleansing Wipes — 25 Wipes",
       "brand": "Sebamed",
       "pack": "25 wipes",
       "family_id": "PSC-IS-049",
@@ -4890,7 +5542,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-11057618863A",
@@ -4903,7 +5557,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-7A9F0B81F0AC",
@@ -4916,7 +5572,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-7DB9B5951968",
@@ -4929,7 +5587,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-C53213D441F5",
@@ -4942,7 +5602,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-541065052372",
@@ -4955,7 +5617,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-FC0E90234C62",
@@ -4968,7 +5632,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-7BECD2DB56A1",
@@ -4981,7 +5647,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-C24E6EFF64E5",
@@ -4994,7 +5662,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-616AA1152228",
@@ -5007,7 +5677,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-3EE243EE9AD4",
@@ -5020,7 +5692,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-DD458AE96334",
@@ -5033,7 +5707,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-779D958F18B0",
@@ -5046,7 +5722,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-26F075753C6D",
@@ -5059,7 +5737,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-ADD6AE257643",
@@ -5072,7 +5752,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-4F24389ACD4A",
@@ -5085,7 +5767,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-7CB34745B16F",
@@ -5098,7 +5782,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-4F230BD47C18",
@@ -5111,7 +5797,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-D62FDC588E1A",
@@ -5124,11 +5812,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-E5C59FFA9071",
-      "name": "Sebamed Intimate Wash pH 3.8 \u2014 Women 15\u201350",
+      "name": "Sebamed Intimate Wash pH 3.8 — Women 15–50",
       "brand": "Sebamed",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-160",
@@ -5137,11 +5827,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-76AD982E8388",
-      "name": "Sebamed Intimate Wash pH 6.8 \u2014 Women 50+",
+      "name": "Sebamed Intimate Wash pH 6.8 — Women 50+",
       "brand": "Sebamed",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-160",
@@ -5150,7 +5842,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-E49654795A8F",
@@ -5163,7 +5857,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-A2C365842B5E",
@@ -5176,7 +5872,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-162F00E6E627",
@@ -5189,7 +5887,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-9DA175F24E74",
@@ -5202,7 +5902,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-CC054B5F47B0",
@@ -5215,7 +5917,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-9400698FA1D2",
@@ -5228,7 +5932,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-05C04F2C3976",
@@ -5241,7 +5947,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 59.0
+      "mrp_aed": 59.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 50.15
     },
     {
       "sku": "PS-AC-F0AF9D5BA11A",
@@ -5254,11 +5962,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 68.5
+      "mrp_aed": 68.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 58.23
     },
     {
       "sku": "PSC-WST-001",
-      "name": "Sharps Container \u2014 Small",
+      "name": "Sharps Container — Small",
       "brand": "Specification-led",
       "pack": "1 unit",
       "family_id": "PSC-SC-B20",
@@ -5280,7 +5990,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 146.5
+      "mrp_aed": 146.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 124.53
     },
     {
       "sku": "PS-AC-911F5DBF1E10",
@@ -5293,7 +6005,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-DB5A567B7404",
@@ -5306,7 +6020,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 156.0
+      "mrp_aed": 156.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 132.6
     },
     {
       "sku": "PSC-MED-109",
@@ -5319,11 +6035,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-764E4D0DB998",
-      "name": "Spedifen Ibuprofen 400 mg \u2014 24 Tablets",
+      "name": "Spedifen Ibuprofen 400 mg — 24 Tablets",
       "brand": "Spedifen",
       "pack": "24 tablets",
       "family_id": "PSC-IS-091",
@@ -5332,7 +6050,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-WST-004",
@@ -5364,7 +6084,7 @@
       "sku": "PSC-WND-016",
       "name": "Sterile Wound Pads / Dressings",
       "brand": "Specification-led",
-      "pack": "Box \u2014 size/quantity to confirm",
+      "pack": "Box — size/quantity to confirm",
       "family_id": "PSC-SC-C23",
       "family_name": "Sterile gauze pieces",
       "source_kind": "product",
@@ -5383,8 +6103,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": false,
-      "mrp_aed": null
+      "in_stock": true,
+      "mrp_aed": 6.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 5.1
     },
     {
       "sku": "PSC-BAS-005",
@@ -5403,7 +6125,7 @@
       "sku": "PSC-PPE-003",
       "name": "Surgical Face Masks",
       "brand": "Specification-led",
-      "pack": "Box \u2014 quantity to confirm",
+      "pack": "Box — quantity to confirm",
       "family_id": "PSC-SC-C10",
       "family_name": "Disposable Personal Protective Equipment (PPE)",
       "source_kind": "product",
@@ -5423,7 +6145,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 30.5
+      "mrp_aed": 30.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 25.93
     },
     {
       "sku": "PS-AC-8EDDADE311BC",
@@ -5436,7 +6160,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 42.0
+      "mrp_aed": 42.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 35.7
     },
     {
       "sku": "PS-AC-6F2C9A9F278A",
@@ -5449,7 +6175,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 272.5
+      "mrp_aed": 272.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 231.63
     },
     {
       "sku": "PS-AC-627E5C283056",
@@ -5462,7 +6190,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 22.23
+      "mrp_aed": 22.23,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 18.9
     },
     {
       "sku": "PS-AC-7789FFECC541",
@@ -5475,7 +6205,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 53.5
+      "mrp_aed": 53.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 45.48
     },
     {
       "sku": "PS-AC-286239754589",
@@ -5488,7 +6220,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 56.0
+      "mrp_aed": 56.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 47.6
     },
     {
       "sku": "PSC-EQP-002",
@@ -5514,7 +6248,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-111",
@@ -5527,7 +6263,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-FAK-001",
@@ -5553,7 +6291,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 35.0
+      "mrp_aed": 35.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 29.75
     },
     {
       "sku": "PS-AC-FF3CBF5DE6AD",
@@ -5566,7 +6306,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 33.0
+      "mrp_aed": 33.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 28.05
     },
     {
       "sku": "PSC-EQP-005",
@@ -5591,8 +6333,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": false,
-      "mrp_aed": null
+      "in_stock": true,
+      "mrp_aed": 6.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 5.53
     },
     {
       "sku": "PS-AC-B683729C25EA",
@@ -5605,11 +6349,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 32.5
+      "mrp_aed": 32.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 27.63
     },
     {
       "sku": "PS-AC-6110FE43DDE2",
-      "name": "Unident Kids Toothpaste 1000 ppm \u2014 50 ml",
+      "name": "Unident Kids Toothpaste 1000 ppm — 50 ml",
       "brand": "Unident",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-185",
@@ -5618,11 +6364,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-4EDF32469B8D",
-      "name": "Unident Pharma Ortho Smile Care Toothpaste \u2014 75 ml",
+      "name": "Unident Pharma Ortho Smile Care Toothpaste — 75 ml",
       "brand": "Unident",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-185",
@@ -5631,11 +6379,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-8CBD36F03D69",
-      "name": "Unident Pharma Perio Care Toothpaste \u2014 75 ml",
+      "name": "Unident Pharma Perio Care Toothpaste — 75 ml",
       "brand": "Unident",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-185",
@@ -5644,7 +6394,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-1E51264B017E",
@@ -5657,7 +6409,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 14.0
+      "mrp_aed": 14.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 11.9
     },
     {
       "sku": "PS-AC-8F7C2BB1306B",
@@ -5670,7 +6424,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 64.5
+      "mrp_aed": 64.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 54.83
     },
     {
       "sku": "PS-AC-1D5B0F878A76",
@@ -5683,7 +6439,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 121.5
+      "mrp_aed": 121.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 103.28
     },
     {
       "sku": "PS-AC-008B1B46EFE5",
@@ -5696,7 +6454,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-CC2D46A1ED89",
@@ -5708,8 +6468,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": true,
-      "mrp_aed": null
+      "in_stock": false,
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-8817989F1B28",
@@ -5722,7 +6484,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-06591B521B5E",
@@ -5735,7 +6499,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-123",
@@ -5748,7 +6514,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-122",
@@ -5761,13 +6529,15 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-PPE-002",
       "name": "Vinyl Examination Gloves",
       "brand": "Specification-led",
-      "pack": "Box \u2014 size to confirm",
+      "pack": "Box — size to confirm",
       "family_id": "PSC-SC-C05",
       "family_name": "Disposable gloves",
       "source_kind": "product",
@@ -5778,7 +6548,7 @@
     },
     {
       "sku": "PS-AC-1F1419E1172D",
-      "name": "Vitane Liquid Vitamins + Minerals \u2014 200 ml",
+      "name": "Vitane Liquid Vitamins + Minerals — 200 ml",
       "brand": "Vitane",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-188",
@@ -5787,7 +6557,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-9D74BA9A56ED",
@@ -5800,11 +6572,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 30.0
+      "mrp_aed": 30.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 25.5
     },
     {
       "sku": "PSC-DSP-001",
-      "name": "Vomit Bag 25 \u00d7 25 cm",
+      "name": "Vomit Bag 25 × 25 cm",
       "brand": "WOLAID",
       "pack": "1 unit",
       "family_id": "PSC-IS-048",
@@ -5826,7 +6600,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-C78EE225849D",
@@ -5839,7 +6615,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-0EFF9E2AC288",
@@ -5852,7 +6630,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-1739D7036B10",
@@ -5865,7 +6645,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-643A0525B55C",
@@ -5878,13 +6660,15 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-BAS-004",
       "name": "Wooden Tongue Depressors",
       "brand": "Specification-led",
-      "pack": "Box \u2014 quantity to confirm",
+      "pack": "Box — quantity to confirm",
       "family_id": "PSC-SC-C13",
       "family_name": "Disposable wooden spatulas",
       "source_kind": "product",
@@ -5897,7 +6681,7 @@
       "sku": "PSC-WND-015",
       "name": "Wound Closure Strips",
       "brand": "Specification-led",
-      "pack": "Box \u2014 size/quantity to confirm",
+      "pack": "Box — size/quantity to confirm",
       "family_id": "PSC-IS-045",
       "family_name": "Sterile wound closure strips",
       "source_kind": "product",
@@ -5908,7 +6692,7 @@
     },
     {
       "sku": "PSC-DSP-010",
-      "name": "XL Disposable Underpads 90 \u00d7 180 cm",
+      "name": "XL Disposable Underpads 90 × 180 cm",
       "brand": "NIMED",
       "pack": "20 sheets / bag",
       "family_id": "PSC-IS-047",
@@ -5923,14 +6707,16 @@
       "sku": "PSC-MED-108",
       "name": "XOLSTAT ROSUVASTATIN 10 MG - 30 TABLETS",
       "brand": "Xolstat",
-      "pack": "30 tablets (3 \u00d7 10)",
+      "pack": "30 tablets (3 × 10)",
       "family_id": "PSC-IS-119",
       "family_name": "Rosuvastatin",
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-BE10E5A5B0C4",
@@ -5943,7 +6729,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 24.5
+      "mrp_aed": 24.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 20.83
     },
     {
       "sku": "PS-AC-96A21BD4FF55",
@@ -5956,11 +6744,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 53.0
+      "mrp_aed": 53.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 45.05
     },
     {
       "sku": "PS-AC-E015B822E20F",
-      "name": "Zecuf Herbal Cough Remedy \u2014 100 ml",
+      "name": "Zecuf Herbal Cough Remedy — 100 ml",
       "brand": "Zecuf",
       "pack": "Exact pack to confirm",
       "family_id": "PSC-IS-126",
@@ -5969,7 +6759,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-FA9AB509E96C",
@@ -5982,20 +6774,24 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 15.5
+      "mrp_aed": 15.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 13.18
     },
     {
       "sku": "PSC-MED-112",
       "name": "ZOLPRA PANTOPRAZOLE 40 MG GASTRO-RESISTANT TABLETS - 30 TABLETS",
       "brand": "Zolpra",
-      "pack": "30 tablets (3 \u00d7 10)",
+      "pack": "30 tablets (3 × 10)",
       "family_id": "PSC-IS-122",
       "family_name": "Pantoprazole",
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-135",
@@ -6008,7 +6804,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-124",
@@ -6021,11 +6819,13 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PS-AC-907534527424",
-      "name": "Zovirax Aciclovir 400 mg \u2014 25 Tablets",
+      "name": "Zovirax Aciclovir 400 mg — 25 Tablets",
       "brand": "Zovirax",
       "pack": "25 tablets",
       "family_id": "PSC-IS-137",
@@ -6034,7 +6834,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-103",
@@ -6047,7 +6849,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 134.5
+      "mrp_aed": 134.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 114.33
     },
     {
       "sku": "PS-AC-6581A8C080FA",
@@ -6060,7 +6864,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 26.0
+      "mrp_aed": 26.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 22.1
     },
     {
       "sku": "PS-AC-C6F8BAF8FC0E",
@@ -6073,7 +6879,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 122.0
+      "mrp_aed": 122.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 103.7
     },
     {
       "sku": "PS-AC-D5D8299CC052",
@@ -6086,7 +6894,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "unconfirmed",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-MED-104",
@@ -6099,7 +6909,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": 22.0
+      "mrp_aed": 22.0,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 18.7
     },
     {
       "sku": "PSC-MED-102",
@@ -6111,8 +6923,10 @@
       "source_kind": "product",
       "acorus_managed": true,
       "catalogue_visible": true,
-      "in_stock": false,
-      "mrp_aed": null
+      "in_stock": true,
+      "mrp_aed": 17.5,
+      "availability_status": "in_stock",
+      "indicative_price_aed": 14.88
     },
     {
       "sku": "PSC-DBT-003",
@@ -6125,7 +6939,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-DBT-004",
@@ -6138,7 +6954,9 @@
       "acorus_managed": true,
       "catalogue_visible": true,
       "in_stock": true,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "availability_status": "in_stock",
+      "indicative_price_aed": null
     },
     {
       "sku": "PSC-WND-012",
@@ -6170,7 +6988,7 @@
       "sku": "PSC-RES-009",
       "name": "Bacterial / Viral Respiratory Filter",
       "brand": "Specification-led",
-      "pack": "Pack \u2014 quantity to confirm",
+      "pack": "Pack — quantity to confirm",
       "family_id": "PSC-RES-009",
       "family_name": "Bacterial / Viral Respiratory Filter",
       "source_kind": "product",
@@ -6235,7 +7053,7 @@
       "sku": "PSC-PPE-007",
       "name": "Disposable Shoe Covers",
       "brand": "Specification-led",
-      "pack": "Pack \u2014 quantity to confirm",
+      "pack": "Pack — quantity to confirm",
       "family_id": "PSC-PPE-007",
       "family_name": "Disposable Shoe Covers",
       "source_kind": "product",
@@ -6363,11 +7181,11 @@
     },
     {
       "sku": "PSC-WST-002",
-      "name": "Sharps Container \u2014 Medium",
+      "name": "Sharps Container — Medium",
       "brand": "Specification-led",
       "pack": "1 unit",
       "family_id": "PSC-WST-002",
-      "family_name": "Sharps Container \u2014 Medium",
+      "family_name": "Sharps Container — Medium",
       "source_kind": "product",
       "acorus_managed": false,
       "catalogue_visible": false,
@@ -6376,11 +7194,11 @@
     },
     {
       "sku": "PSC-DSP-011",
-      "name": "Sterile Saline Solution 0.9% \u2014 2.5 ml",
+      "name": "Sterile Saline Solution 0.9% — 2.5 ml",
       "brand": "NIMED",
       "pack": "2.5 ml unit",
       "family_id": "PSC-DSP-011",
-      "family_name": "Sterile Saline Solution 0.9% \u2014 2.5 ml",
+      "family_name": "Sterile Saline Solution 0.9% — 2.5 ml",
       "source_kind": "product",
       "acorus_managed": false,
       "catalogue_visible": false,
@@ -6558,7 +7376,7 @@
     },
     {
       "sku": "INST-0019",
-      "name": "Medical-grade 2\u20138\u00b0C refrigerator",
+      "name": "Medical-grade 2–8°C refrigerator",
       "brand": "Specification-led",
       "pack": "1 unit",
       "family_id": "PSC-SC-A17",
@@ -6805,7 +7623,7 @@
     },
     {
       "sku": "INST-0059",
-      "name": "Nitrile examination gloves \u2014 Large",
+      "name": "Nitrile examination gloves — Large",
       "brand": "Specification-led",
       "pack": "Box 100",
       "family_id": "PSC-SC-C05",
@@ -6818,7 +7636,7 @@
     },
     {
       "sku": "INST-0060",
-      "name": "Vinyl examination gloves \u2014 Small",
+      "name": "Vinyl examination gloves — Small",
       "brand": "Specification-led",
       "pack": "Box 100",
       "family_id": "PSC-SC-C05",
@@ -6831,7 +7649,7 @@
     },
     {
       "sku": "INST-0061",
-      "name": "Vinyl examination gloves \u2014 Medium",
+      "name": "Vinyl examination gloves — Medium",
       "brand": "Specification-led",
       "pack": "Box 100",
       "family_id": "PSC-SC-C05",
@@ -6844,7 +7662,7 @@
     },
     {
       "sku": "INST-0062",
-      "name": "Vinyl examination gloves \u2014 Large",
+      "name": "Vinyl examination gloves — Large",
       "brand": "Specification-led",
       "pack": "Box 100",
       "family_id": "PSC-SC-C05",
@@ -6857,7 +7675,7 @@
     },
     {
       "sku": "INST-0078",
-      "name": "Elastic bandage \u2014 10 cm",
+      "name": "Elastic bandage — 10 cm",
       "brand": "Specification-led",
       "pack": "Mixed-size set",
       "family_id": "PSC-SC-C14",
@@ -6870,7 +7688,7 @@
     },
     {
       "sku": "INST-0081",
-      "name": "Gauze bandage \u2014 10 cm",
+      "name": "Gauze bandage — 10 cm",
       "brand": "Specification-led",
       "pack": "Mixed-size set",
       "family_id": "PSC-SC-C15",
@@ -6883,11 +7701,11 @@
     },
     {
       "sku": "INST-0083",
-      "name": "Hypodermic needle \u2014 23G",
+      "name": "Hypodermic needle — 23G",
       "brand": "Specification-led",
       "pack": "3 boxes x 100",
       "family_id": "PSC-SC-C16",
-      "family_name": "Hypodermic needles \u2013g.21, g.23 and g. 25",
+      "family_name": "Hypodermic needles –g.21, g.23 and g. 25",
       "source_kind": "requirement",
       "acorus_managed": false,
       "catalogue_visible": true,
@@ -6896,11 +7714,11 @@
     },
     {
       "sku": "INST-0084",
-      "name": "Hypodermic needle \u2014 25G",
+      "name": "Hypodermic needle — 25G",
       "brand": "Specification-led",
       "pack": "3 boxes x 100",
       "family_id": "PSC-SC-C16",
-      "family_name": "Hypodermic needles \u2013g.21, g.23 and g. 25",
+      "family_name": "Hypodermic needles –g.21, g.23 and g. 25",
       "source_kind": "requirement",
       "acorus_managed": false,
       "catalogue_visible": true,
@@ -6922,7 +7740,7 @@
     },
     {
       "sku": "INST-0087",
-      "name": "IV cannula \u2014 24G",
+      "name": "IV cannula — 24G",
       "brand": "Specification-led",
       "pack": "Mixed pack 50",
       "family_id": "PSC-SC-C18",
@@ -6935,7 +7753,7 @@
     },
     {
       "sku": "INST-0088",
-      "name": "Butterfly / winged infusion set \u2014 23G",
+      "name": "Butterfly / winged infusion set — 23G",
       "brand": "Specification-led",
       "pack": "Mixed pack 50",
       "family_id": "PSC-SC-C18",
@@ -6948,7 +7766,7 @@
     },
     {
       "sku": "INST-0089",
-      "name": "Butterfly / winged infusion set \u2014 25G",
+      "name": "Butterfly / winged infusion set — 25G",
       "brand": "Specification-led",
       "pack": "Mixed pack 50",
       "family_id": "PSC-SC-C18",
@@ -6974,7 +7792,7 @@
     },
     {
       "sku": "INST-0092",
-      "name": "Mouldable / SAM-type splint \u2014 Small",
+      "name": "Mouldable / SAM-type splint — Small",
       "brand": "Specification-led",
       "pack": "Assorted set",
       "family_id": "PSC-SC-C20",
@@ -6987,7 +7805,7 @@
     },
     {
       "sku": "INST-0093",
-      "name": "Mouldable / SAM-type splint \u2014 Large",
+      "name": "Mouldable / SAM-type splint — Large",
       "brand": "Specification-led",
       "pack": "Assorted set",
       "family_id": "PSC-SC-C20",
@@ -7026,7 +7844,7 @@
     },
     {
       "sku": "INST-0100",
-      "name": "Disposable syringe \u2014 10 ml",
+      "name": "Disposable syringe — 10 ml",
       "brand": "Specification-led",
       "pack": "3 boxes x 100",
       "family_id": "PSC-SC-C24",
@@ -7039,7 +7857,7 @@
     },
     {
       "sku": "INST-0101",
-      "name": "Disposable syringe \u2014 20 ml",
+      "name": "Disposable syringe — 20 ml",
       "brand": "Specification-led",
       "pack": "3 boxes x 100",
       "family_id": "PSC-SC-C24",
@@ -7416,7 +8234,7 @@
     },
     {
       "sku": "INST-0133",
-      "name": "Valved holding chamber / spacer \u2014 Adult",
+      "name": "Valved holding chamber / spacer — Adult",
       "brand": "Specification-led",
       "pack": "unit",
       "family_id": "PSC-IS-020",
@@ -7429,7 +8247,7 @@
     },
     {
       "sku": "INST-0134",
-      "name": "Valved holding chamber / spacer \u2014 Paediatric",
+      "name": "Valved holding chamber / spacer — Paediatric",
       "brand": "Specification-led",
       "pack": "unit",
       "family_id": "PSC-IS-020",
@@ -7468,7 +8286,7 @@
     },
     {
       "sku": "INST-0139",
-      "name": "BP replacement cuff \u2014 Adult",
+      "name": "BP replacement cuff — Adult",
       "brand": "Specification-led",
       "pack": "unit",
       "family_id": "PSC-IS-025",
@@ -7481,7 +8299,7 @@
     },
     {
       "sku": "INST-0140",
-      "name": "BP replacement cuff \u2014 Large adult",
+      "name": "BP replacement cuff — Large adult",
       "brand": "Specification-led",
       "pack": "unit",
       "family_id": "PSC-IS-025",
@@ -7546,7 +8364,7 @@
     },
     {
       "sku": "INST-0145",
-      "name": "Child-friendly vision chart \u2014 Tumbling E",
+      "name": "Child-friendly vision chart — Tumbling E",
       "brand": "Specification-led",
       "pack": "unit",
       "family_id": "PSC-IS-030",
@@ -7559,7 +8377,7 @@
     },
     {
       "sku": "INST-0146",
-      "name": "Child-friendly vision chart \u2014 Symbol / picture",
+      "name": "Child-friendly vision chart — Symbol / picture",
       "brand": "Specification-led",
       "pack": "unit",
       "family_id": "PSC-IS-030",
@@ -7572,7 +8390,7 @@
     },
     {
       "sku": "INST-0147",
-      "name": "Peak-flow meter \u2014 Standard",
+      "name": "Peak-flow meter — Standard",
       "brand": "Specification-led",
       "pack": "unit",
       "family_id": "PSC-IS-031",
@@ -7585,7 +8403,7 @@
     },
     {
       "sku": "INST-0148",
-      "name": "Peak-flow meter \u2014 Paediatric / low-range",
+      "name": "Peak-flow meter — Paediatric / low-range",
       "brand": "Specification-led",
       "pack": "unit",
       "family_id": "PSC-IS-031",
@@ -7663,7 +8481,7 @@
     },
     {
       "sku": "INST-0154",
-      "name": "Non-adherent sterile dressing \u2014 Small",
+      "name": "Non-adherent sterile dressing — Small",
       "brand": "Specification-led",
       "pack": "box",
       "family_id": "PSC-IS-037",
@@ -7676,7 +8494,7 @@
     },
     {
       "sku": "INST-0155",
-      "name": "Non-adherent sterile dressing \u2014 Large",
+      "name": "Non-adherent sterile dressing — Large",
       "brand": "Specification-led",
       "pack": "box",
       "family_id": "PSC-IS-037",
@@ -7715,7 +8533,7 @@
     },
     {
       "sku": "INST-0158",
-      "name": "Hypoallergenic fixation tape \u2014 Narrow",
+      "name": "Hypoallergenic fixation tape — Narrow",
       "brand": "Specification-led",
       "pack": "roll",
       "family_id": "PSC-IS-040",
@@ -7728,7 +8546,7 @@
     },
     {
       "sku": "INST-0159",
-      "name": "Hypoallergenic fixation tape \u2014 Medium",
+      "name": "Hypoallergenic fixation tape — Medium",
       "brand": "Specification-led",
       "pack": "roll",
       "family_id": "PSC-IS-040",
@@ -7741,7 +8559,7 @@
     },
     {
       "sku": "INST-0160",
-      "name": "Hypoallergenic fixation tape \u2014 Wide",
+      "name": "Hypoallergenic fixation tape — Wide",
       "brand": "Specification-led",
       "pack": "roll",
       "family_id": "PSC-IS-040",
@@ -7754,7 +8572,7 @@
     },
     {
       "sku": "INST-0161",
-      "name": "Cohesive support bandage \u2014 Narrow",
+      "name": "Cohesive support bandage — Narrow",
       "brand": "Specification-led",
       "pack": "roll",
       "family_id": "PSC-IS-041",
@@ -7767,7 +8585,7 @@
     },
     {
       "sku": "INST-0162",
-      "name": "Cohesive support bandage \u2014 Medium",
+      "name": "Cohesive support bandage — Medium",
       "brand": "Specification-led",
       "pack": "roll",
       "family_id": "PSC-IS-041",
@@ -7780,7 +8598,7 @@
     },
     {
       "sku": "INST-0163",
-      "name": "Cohesive support bandage \u2014 Wide",
+      "name": "Cohesive support bandage — Wide",
       "brand": "Specification-led",
       "pack": "roll",
       "family_id": "PSC-IS-041",
@@ -7793,7 +8611,7 @@
     },
     {
       "sku": "INST-0165",
-      "name": "Reusable cold pack \u2014 Small",
+      "name": "Reusable cold pack — Small",
       "brand": "Specification-led",
       "pack": "set",
       "family_id": "PSC-IS-043",
@@ -7806,7 +8624,7 @@
     },
     {
       "sku": "INST-0166",
-      "name": "Reusable cold pack \u2014 Large",
+      "name": "Reusable cold pack — Large",
       "brand": "Specification-led",
       "pack": "set",
       "family_id": "PSC-IS-043",
@@ -7819,7 +8637,7 @@
     },
     {
       "sku": "INST-0167",
-      "name": "Burn dressing \u2014 Small",
+      "name": "Burn dressing — Small",
       "brand": "Specification-led",
       "pack": "piece",
       "family_id": "PSC-IS-044",
@@ -7832,7 +8650,7 @@
     },
     {
       "sku": "INST-0168",
-      "name": "Burn dressing \u2014 Large",
+      "name": "Burn dressing — Large",
       "brand": "Specification-led",
       "pack": "piece",
       "family_id": "PSC-IS-044",
@@ -7845,7 +8663,7 @@
     },
     {
       "sku": "INST-0170",
-      "name": "Wound closure strips \u2014 Wide",
+      "name": "Wound closure strips — Wide",
       "brand": "Specification-led",
       "pack": "pack",
       "family_id": "PSC-IS-045",
@@ -7871,7 +8689,7 @@
     },
     {
       "sku": "INST-0173",
-      "name": "Disposable underpads \u2014 XL",
+      "name": "Disposable underpads — XL",
       "brand": "Specification-led",
       "pack": "pack",
       "family_id": "PSC-IS-047",
@@ -7923,7 +8741,7 @@
     },
     {
       "sku": "INST-0178",
-      "name": "Surgical mask \u2014 Adult",
+      "name": "Surgical mask — Adult",
       "brand": "Specification-led",
       "pack": "box",
       "family_id": "PSC-IS-052",
@@ -7936,7 +8754,7 @@
     },
     {
       "sku": "INST-0179",
-      "name": "Surgical mask \u2014 Paediatric",
+      "name": "Surgical mask — Paediatric",
       "brand": "Specification-led",
       "pack": "box",
       "family_id": "PSC-IS-052",
@@ -8040,7 +8858,7 @@
     },
     {
       "sku": "INST-0188",
-      "name": "Surface disinfectant solution \u2014 Ready-to-use",
+      "name": "Surface disinfectant solution — Ready-to-use",
       "brand": "Specification-led",
       "pack": "bottle",
       "family_id": "PSC-IS-061",
@@ -8053,7 +8871,7 @@
     },
     {
       "sku": "INST-0189",
-      "name": "Surface disinfectant solution \u2014 Bulk / refill",
+      "name": "Surface disinfectant solution — Bulk / refill",
       "brand": "Specification-led",
       "pack": "bottle",
       "family_id": "PSC-IS-061",
@@ -8066,7 +8884,7 @@
     },
     {
       "sku": "INST-0192",
-      "name": "Clinical waste bags \u2014 Large",
+      "name": "Clinical waste bags — Large",
       "brand": "Specification-led",
       "pack": "roll",
       "family_id": "PSC-IS-063",
@@ -8079,7 +8897,7 @@
     },
     {
       "sku": "INST-0193",
-      "name": "General waste bags \u2014 Medium",
+      "name": "General waste bags — Medium",
       "brand": "Specification-led",
       "pack": "roll",
       "family_id": "PSC-IS-064",
@@ -8092,7 +8910,7 @@
     },
     {
       "sku": "INST-0194",
-      "name": "General waste bags \u2014 Large",
+      "name": "General waste bags — Large",
       "brand": "Specification-led",
       "pack": "roll",
       "family_id": "PSC-IS-064",
@@ -8131,7 +8949,7 @@
     },
     {
       "sku": "INST-0197",
-      "name": "Pharmaceutical waste container \u2014 Small",
+      "name": "Pharmaceutical waste container — Small",
       "brand": "Specification-led",
       "pack": "unit",
       "family_id": "PSC-IS-067",
@@ -8144,7 +8962,7 @@
     },
     {
       "sku": "INST-0198",
-      "name": "Pharmaceutical waste container \u2014 Large",
+      "name": "Pharmaceutical waste container — Large",
       "brand": "Specification-led",
       "pack": "unit",
       "family_id": "PSC-IS-067",
@@ -8157,7 +8975,7 @@
     },
     {
       "sku": "INST-0200",
-      "name": "Oral dosing syringe \u2014 5 ml",
+      "name": "Oral dosing syringe — 5 ml",
       "brand": "Specification-led",
       "pack": "pack",
       "family_id": "PSC-IS-068",
@@ -8170,7 +8988,7 @@
     },
     {
       "sku": "INST-0201",
-      "name": "Oral dosing syringe \u2014 10 ml",
+      "name": "Oral dosing syringe — 10 ml",
       "brand": "Specification-led",
       "pack": "pack",
       "family_id": "PSC-IS-068",
@@ -8196,7 +9014,7 @@
     },
     {
       "sku": "INST-0203",
-      "name": "Patient-specific medicine storage box \u2014 Small",
+      "name": "Patient-specific medicine storage box — Small",
       "brand": "Specification-led",
       "pack": "unit",
       "family_id": "PSC-IS-070",
@@ -8209,7 +9027,7 @@
     },
     {
       "sku": "INST-0204",
-      "name": "Patient-specific medicine storage box \u2014 Large",
+      "name": "Patient-specific medicine storage box — Large",
       "brand": "Specification-led",
       "pack": "unit",
       "family_id": "PSC-IS-070",
@@ -8248,7 +9066,7 @@
     },
     {
       "sku": "INST-0208",
-      "name": "Cetirizine \u2014 Oral liquid presentation",
+      "name": "Cetirizine — Oral liquid presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-073",
@@ -8261,7 +9079,7 @@
     },
     {
       "sku": "INST-0209",
-      "name": "Loratadine \u2014 Tablet presentation",
+      "name": "Loratadine — Tablet presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-074",
@@ -8274,7 +9092,7 @@
     },
     {
       "sku": "INST-0210",
-      "name": "Loratadine \u2014 Oral liquid presentation",
+      "name": "Loratadine — Oral liquid presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-074",
@@ -8339,7 +9157,7 @@
     },
     {
       "sku": "INST-0215",
-      "name": "Montelukast \u2014 Chewable presentation",
+      "name": "Montelukast — Chewable presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-079",
@@ -8352,7 +9170,7 @@
     },
     {
       "sku": "INST-0216",
-      "name": "Montelukast \u2014 Tablet presentation",
+      "name": "Montelukast — Tablet presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-079",
@@ -8495,7 +9313,7 @@
     },
     {
       "sku": "INST-0229",
-      "name": "Ibuprofen \u2014 Tablet / capsule presentation",
+      "name": "Ibuprofen — Tablet / capsule presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-091",
@@ -8508,7 +9326,7 @@
     },
     {
       "sku": "INST-0230",
-      "name": "Ibuprofen \u2014 Oral liquid presentation",
+      "name": "Ibuprofen — Oral liquid presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-091",
@@ -8560,7 +9378,7 @@
     },
     {
       "sku": "INST-0234",
-      "name": "Domperidone \u2014 Solid oral presentation",
+      "name": "Domperidone — Solid oral presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-095",
@@ -8573,7 +9391,7 @@
     },
     {
       "sku": "INST-0235",
-      "name": "Domperidone \u2014 Oral liquid presentation",
+      "name": "Domperidone — Oral liquid presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-095",
@@ -8586,7 +9404,7 @@
     },
     {
       "sku": "INST-0236",
-      "name": "Ondansetron \u2014 Standard tablet presentation",
+      "name": "Ondansetron — Standard tablet presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-096",
@@ -8599,7 +9417,7 @@
     },
     {
       "sku": "INST-0237",
-      "name": "Ondansetron \u2014 Orodispersible presentation",
+      "name": "Ondansetron — Orodispersible presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-096",
@@ -8612,7 +9430,7 @@
     },
     {
       "sku": "INST-0238",
-      "name": "Antacid \u2014 Liquid presentation",
+      "name": "Antacid — Liquid presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-097",
@@ -8625,7 +9443,7 @@
     },
     {
       "sku": "INST-0239",
-      "name": "Antacid \u2014 Chewable / tablet presentation",
+      "name": "Antacid — Chewable / tablet presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-097",
@@ -8651,7 +9469,7 @@
     },
     {
       "sku": "INST-0241",
-      "name": "Simethicone \u2014 Oral drops / liquid",
+      "name": "Simethicone — Oral drops / liquid",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-099",
@@ -8664,7 +9482,7 @@
     },
     {
       "sku": "INST-0242",
-      "name": "Simethicone \u2014 Solid oral presentation",
+      "name": "Simethicone — Solid oral presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-099",
@@ -8690,7 +9508,7 @@
     },
     {
       "sku": "INST-0244",
-      "name": "Sterile saline eye preparation \u2014 Single-dose",
+      "name": "Sterile saline eye preparation — Single-dose",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-101",
@@ -8703,7 +9521,7 @@
     },
     {
       "sku": "INST-0245",
-      "name": "Sterile saline eye preparation \u2014 Multi-dose",
+      "name": "Sterile saline eye preparation — Multi-dose",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-101",
@@ -8716,7 +9534,7 @@
     },
     {
       "sku": "INST-0246",
-      "name": "Lubricating eye drops \u2014 Single-dose",
+      "name": "Lubricating eye drops — Single-dose",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-102",
@@ -8729,7 +9547,7 @@
     },
     {
       "sku": "INST-0247",
-      "name": "Lubricating eye drops \u2014 Multi-dose",
+      "name": "Lubricating eye drops — Multi-dose",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-102",
@@ -8781,7 +9599,7 @@
     },
     {
       "sku": "INST-0251",
-      "name": "Saline nasal spray \u2014 Paediatric",
+      "name": "Saline nasal spray — Paediatric",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-106",
@@ -8794,7 +9612,7 @@
     },
     {
       "sku": "INST-0252",
-      "name": "Saline nasal spray \u2014 Adult",
+      "name": "Saline nasal spray — Adult",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-106",
@@ -8807,7 +9625,7 @@
     },
     {
       "sku": "INST-0253",
-      "name": "Rapid-acting oral glucose \u2014 Gel",
+      "name": "Rapid-acting oral glucose — Gel",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-107",
@@ -8820,7 +9638,7 @@
     },
     {
       "sku": "INST-0254",
-      "name": "Rapid-acting oral glucose \u2014 Tablets",
+      "name": "Rapid-acting oral glucose — Tablets",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-107",
@@ -8833,7 +9651,7 @@
     },
     {
       "sku": "INST-0255",
-      "name": "Midazolam \u2014 Buccal presentation",
+      "name": "Midazolam — Buccal presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-108",
@@ -8846,7 +9664,7 @@
     },
     {
       "sku": "INST-0256",
-      "name": "Midazolam \u2014 Intranasal presentation",
+      "name": "Midazolam — Intranasal presentation",
       "brand": "Specification-led",
       "pack": "Approved registered pack",
       "family_id": "PSC-IS-108",
@@ -8909,5 +9727,12 @@
       "in_stock": false,
       "mrp_aed": null
     }
-  ]
+  ],
+  "price_policy": {
+    "basis": "CURRENT_EXACT_STOCK_MRP",
+    "discount_rate": 0.15,
+    "rounding": "AED_TWO_DECIMALS",
+    "indicative_only": true,
+    "vat_basis": "Confirmed in quotation"
+  }
 }

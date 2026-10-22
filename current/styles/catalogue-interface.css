@@ -103,3 +103,8 @@
 .pscRetailPriceNotice{display:block;margin:0 0 18px;padding:12px 15px;border-left:3px solid #207b69;border-radius:0 8px 8px 0;background:#eef5f1;color:#35534a;font-size:12px;line-height:1.55;text-align:left;overflow-wrap:anywhere}
 .pscRetailPriceNotice strong{font-weight:650;color:#173e33}
 @media(max-width:600px){.pscRetailPriceNotice{padding:11px 12px;font-size:12px}.pscRetailPriceNotice strong{display:block}}
+
+/* Current matched supplier MRP and indicative PSC price. */
+.pscOriginalMrp{display:block;font-size:.82em;font-weight:400;color:var(--muted,#68716e);text-decoration-thickness:1px;margin-bottom:3px}
+.pscAvailability[data-stock-status=out_of_stock]{color:#973c33;font-weight:500}
+.pscAvailability[data-stock-status=unconfirmed]{color:#6b6454}

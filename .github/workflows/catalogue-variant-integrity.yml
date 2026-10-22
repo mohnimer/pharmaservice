@@ -10,6 +10,7 @@ on:
       - 'data/catalogue*.json'
       - 'tools/build-catalogue-stock.mjs'
       - 'tests/catalogue-stock.test.cjs'
+      - 'tests/stock-pricing-browser.mjs'
       - 'app.js'
       - 'current/behaviour/family-details.js'
       - 'tests/variant-evidence.test.cjs'
@@ -44,6 +45,7 @@ jobs:
       - run: node tests/dha-family-images.mjs
       - run: node tests/reference-overlay.mjs
       - run: npx playwright install --with-deps chromium
+      - run: node tests/stock-pricing-browser.mjs
       - run: node tests/variant-browser.mjs
       - run: node tests/dha-family-images-browser.mjs
       - uses: actions/upload-artifact@v4

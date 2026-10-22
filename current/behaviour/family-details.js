@@ -101,8 +101,8 @@
   function optionPrice(o){
     const stock=window.PS_CATALOGUE_STOCK?.forOption(o,state.familyId);
     if(stock?.acorus_managed){
-      const mrp=window.PS_CATALOGUE_STOCK.price(stock);
-      return mrp?`<span class="pscOptionPrice"><b>${esc(aed(mrp))}</b><small>Retail MRP · in stock · report ${esc(window.PS_CATALOGUE_STOCK.stockDate)} · wholesale quotation separate</small></span>`:'<span class="pscOptionPrice"><b>Request quotation</b><small>Current stocked MRP not confirmed</small></span>';
+      const api=window.PS_CATALOGUE_STOCK,mrp=api.price(stock),value=api.indicativePrice(stock);
+      return value?`<span class="pscOptionPrice">${api.hasDiscount?`<s class="pscOriginalMrp">MRP ${esc(aed(mrp))}</s>`:''}<b>${esc(aed(value))}</b><small>${esc(api.priceLabel)} · ${esc(api.statusLabel(stock))} · report ${esc(api.stockDate)}<br>Final price and VAT confirmed in quotation</small></span>`:`<span class="pscOptionPrice"><b>Request quotation</b><small class="pscAvailability" data-stock-status="${api.status(stock)}">${esc(api.statusLabel(stock))} · report ${esc(api.stockDate)}</small></span>`;
     }
 
     // Price must be keyed by the selected option ID, not a family or brand.
@@ -134,7 +134,7 @@
     const selected=selectedOptions();
     if(selected.length===1){
       const stock=window.PS_CATALOGUE_STOCK?.forOption(selected[0],state.familyId);
-      if(stock?.acorus_managed) return window.PS_CATALOGUE_STOCK.current(stock)?`Supplier stock reported ${window.PS_CATALOGUE_STOCK.stockDate} · reconfirmed in quotation`:'Availability confirmed at quotation';
+      if(stock?.acorus_managed) return `${window.PS_CATALOGUE_STOCK.statusLabel(stock)} · supplier report ${window.PS_CATALOGUE_STOCK.stockDate} · reconfirmed in quotation`;
       const row=state.optionAvailability.find(x=>x.product_option_id===selected[0].product_option_id);
       return row?.verified_at&&row?.valid_until&&Date.parse(row.valid_until)>=Date.now()?row.availability_label:'Availability confirmed at quotation';
     }
