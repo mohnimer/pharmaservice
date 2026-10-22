@@ -1,399 +1,83 @@
+/* Customer guide. Native catalogue, collection and account behavior remain authoritative. */
 (() => {
   'use strict';
-
-  const MARKUP = `
-    <div class="model46">
-
-      <section class="m46Hero">
-        <div class="m46Shell m46HeroGrid">
-          <div class="m46HeroCopy m46Reveal">
-            <h1>One supply relationship.</h1>
-            <p>A clinic requirement may involve ten products from five different places. You shouldn’t have to manage five suppliers to buy them.</p>
-            <p>Pharma Service brings the requirement together and stays accountable for the supply.</p>
-            <div class="m46Actions">
-              <button class="button primary" data-go="start">Tell us what you need</button>
-              <button class="button outline" data-go="catalogue">Explore the catalogue</button>
-            </div>
-          </div>
-
-          <div class="m46Frame m46HeroVisual m46Reveal" aria-label="Requirement becoming a controlled Pharma Service quotation">
-            <div class="m46RoughCard m46TiltA">
-              <div class="m46CardLabel">Clinic requirement</div>
-              <div class="m46LooseRow"><span>BP monitor</span><b>2</b></div>
-              <div class="m46LooseRow"><span>Gauze 10×10</span><b>10</b></div>
-              <div class="m46LooseRow"><span>Gloves M</span><b>5</b></div>
-              <div class="m46LooseRow"><span>Test strips</span><b>4</b></div>
-            </div>
-
-            <div class="m46FlowCue">↓</div>
-
-            <div class="m46ReviewStrip">
-              <span>Specification</span>
-              <span>Sourcing</span>
-              <span>Commercial review</span>
-            </div>
-
-            <div class="m46QuoteCard">
-              <div class="m46QuoteTop">
-                <div><b>Pharma Service quotation</b><small>One commercial relationship</small></div>
-                <span class="m46PscMark">PS</span>
-              </div>
-              <div class="m46QuoteRow"><span>01</span><b>Blood pressure monitor</b><i>MATCHED</i></div>
-              <div class="m46QuoteRow"><span>02</span><b>Sterile gauze</b><i>CHECKED</i></div>
-              <div class="m46QuoteRow"><span>03</span><b>Examination gloves</b><i>SOURCED</i></div>
-              <div class="m46QuoteRow"><span>04</span><b>Glucose test strips</b><i>READY</i></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="m46Section">
-        <div class="m46Shell m46Split">
-          <div class="m46SectionCopy m46Reveal">
-            <h2>Start with what you need.</h2>
-            <p>Send us the list, search in your own words or describe the requirement as you understand it. It doesn’t need to be translated into supplier language first.</p>
-          </div>
-
-          <div class="m46Frame m46Intake m46Reveal">
-            <div class="m46InputStack">
-              <div class="m46InputCard m46TiltB">
-                <span>RFQ list</span>
-                <b>“BP monitor x2<br>gloves M x5”</b>
-              </div>
-              <div class="m46InputCard">
-                <span>Message</span>
-                <b>“big sterile gauze<br>antihistamine”</b>
-              </div>
-              <div class="m46InputCard m46TiltA">
-                <span>Opening list</span>
-                <b>clinic opening list.xlsx</b>
-              </div>
-            </div>
-
-            <div class="m46Merge">→</div>
-
-            <div class="m46IntakeCard">
-              <small>Incoming requirement</small>
-              <h3>PS intake</h3>
-              <div><span>Need</span><b>Captured</b></div>
-              <div><span>Quantity</span><b>Captured</b></div>
-              <div><span>Missing detail</span><b>Flagged</b></div>
-              <div><span>Next action</span><b>Clarify & source</b></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="m46Section m46Soft">
-        <div class="m46Shell">
-          <div class="m46SectionCopy m46SectionCopyWide m46Reveal">
-            <h2>We make the detail clear.</h2>
-            <p>We match the requirement to actual products and clarify the things that change what should be supplied: size, pack, model, quantity or compatibility.</p>
-          </div>
-
-          <div class="m46Frame m46Clarify m46Reveal">
-            <div class="m46CompareHead">
-              <span>What arrives</span>
-              <span>What we confirm</span>
-            </div>
-
-            <div class="m46CompareRow">
-              <div class="m46Need">
-                <img src="/assets/clinical-icons/vitals-assessment-exact.png?v=4600" alt="">
-                <b>BP monitor</b>
-              </div>
-              <div class="m46ControlledLine">
-                <span>Cuff range</span><span>Exact model</span><span>Validation</span><span>Warranty</span>
-              </div>
-            </div>
-
-            <div class="m46CompareRow">
-              <div class="m46Need">
-                <img src="/assets/clinical-icons/wounds.png" alt="">
-                <b>Gauze</b>
-              </div>
-              <div class="m46ControlledLine">
-                <span>Size</span><span>Ply</span><span>Sterile status</span><span>Pack basis</span>
-              </div>
-            </div>
-
-            <div class="m46CompareRow">
-              <div class="m46Need">
-                <img src="/assets/clinical-icons/infection.png" alt="">
-                <b>Gloves</b>
-              </div>
-              <div class="m46ControlledLine">
-                <span>Nitrile</span><span>Powder-free</span><span>Size</span><span>Box quantity</span>
-              </div>
-            </div>
-
-            <div class="m46CompareRow">
-              <div class="m46Need">
-                <img src="/assets/clinical-icons/diabetes.png" alt="">
-                <b>Test strips</b>
-              </div>
-              <div class="m46ControlledLine">
-                <span>Meter compatibility</span><span>Pack</span><span>Expiry</span><span>Availability</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="m46Section">
-        <div class="m46Shell m46Split">
-          <div class="m46SectionCopy m46Reveal">
-            <h2>Then we source each line properly.</h2>
-            <p>The best source for a BP monitor may not be the best source for dressings, furniture or medicines. We source each line where it makes sense and bring it back together commercially.</p>
-          </div>
-
-          <div class="m46Frame m46SourceVisual m46Reveal">
-            <div class="m46Basket">
-              <small>Requirement basket</small>
-              <b>4 product lines</b>
-            </div>
-
-            <div class="m46SourceLanes">
-              <div class="m46Lane"><img src="/assets/clinical-icons/vitals-assessment-exact.png?v=4600" alt=""><span>Diagnostics</span><b>BP monitor</b></div>
-              <div class="m46Lane"><img src="/assets/clinical-icons/wounds.png" alt=""><span>Consumables</span><b>Gauze</b></div>
-              <div class="m46Lane"><img src="/assets/clinical-icons/infection.png" alt=""><span>PPE</span><b>Gloves</b></div>
-              <div class="m46Lane"><img src="/assets/clinical-icons/diabetes.png" alt=""><span>Compatible line</span><b>Test strips</b></div>
-            </div>
-
-            <div class="m46Reconverge">↓</div>
-
-            <div class="m46OneQuote">
-              <span>Source per line.</span>
-              <b>Sell one solution.</b>
-              <small>One Pharma Service quotation</small>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="m46Section m46Soft">
-        <div class="m46Shell m46Split m46SplitReverse">
-          <div class="m46SectionCopy m46Reveal">
-            <h2>You manage one order.</h2>
-            <p>One quotation. One point of contact. One coordinated supply, even when the products underneath come through different routes.</p>
-          </div>
-
-          <div class="m46Frame m46Memory m46Reveal">
-            <div class="m46HistoryCard">
-              <div class="m46CardLabel">Purchase history</div>
-              <div class="m46HistoryRow"><b>Wound-care refill</b><span>Delivered</span><small>28 Sep</small></div>
-              <div class="m46HistoryRow"><b>BP monitors</b><span>Delivered</span><small>03 Sep</small></div>
-              <div class="m46HistoryRow"><b>Clinic consumables</b><span>Quoted</span><small>21 Aug</small></div>
-            </div>
-
-            <div class="m46MemoryGrid">
-              <article>
-                <small>Frequently ordered</small>
-                <b>Gloves · Gauze · Saline</b>
-              </article>
-              <article>
-                <small>Recurring supply</small>
-                <b>Monthly pattern visible</b>
-              </article>
-              <article>
-                <small>Previous product</small>
-                <b>AED pads · pack recorded</b>
-              </article>
-              <article>
-                <small>Approved specification</small>
-                <b>Exact BP model retained</b>
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="m46Section">
-        <div class="m46Shell m46Split">
-          <div class="m46SectionCopy m46Reveal">
-            <h2>And the next order starts further ahead.</h2>
-            <p>What was supplied becomes useful account history. Repeat lines are easier to find, existing products don’t need to be rediscovered and your purchasing record becomes clearer over time.</p>
-          </div>
-
-          <div class="m46Frame m46Repeat m46Reveal">
-            <div class="m46RepeatStep">
-              <span>01</span>
-              <small>Previous order</small>
-              <b>12 supplied lines</b>
-            </div>
-            <div class="m46RepeatArrow">→</div>
-            <div class="m46RepeatStep">
-              <span>02</span>
-              <small>Approved list</small>
-              <b>Exact lines retained</b>
-            </div>
-            <div class="m46RepeatArrow">→</div>
-            <div class="m46RepeatStep m46RepeatStepFinal">
-              <span>03</span>
-              <small>Repeat / replenish</small>
-              <b>Faster next order</b>
-            </div>
-
-            <div class="m46RepeatObjects">
-              <img src="/assets/clinical-icons/infection.png" alt="">
-              <img src="/assets/clinical-icons/wounds.png" alt="">
-              <img src="/assets/clinical-icons/diabetes.png" alt="">
-              <img src="/assets/clinical-icons/breathing.png" alt="">
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="m46Section m46Soft">
-        <div class="m46Shell m46Split m46SplitReverse">
-          <div class="m46SectionCopy m46Reveal">
-            <h2>Set it up. Keep it running.</h2>
-            <p>Opening a clinic and keeping it supplied are different jobs. We help with both.</p>
-          </div>
-
-          <div class="m46Frame m46Commercial m46Reveal">
-            <div class="m46CommercialTop">
-              <small>Opening and repeat supply</small>
-              <b>One supply relationship</b>
-            </div>
-            <div class="m46CommercialRow">
-              <div><b>Set it up.</b><small>Beds, diagnostics, emergency equipment and clinic furniture.</small></div>
-              <span>Opening requirements</span>
-            </div>
-            <div class="m46CommercialRow">
-              <div><b>Keep it running.</b><small>Gloves, gauze, testing supplies, respiratory products and medicines.</small></div>
-              <span>Repeat requirements</span>
-            </div>
-            <div class="m46CommercialRow">
-              <div><b>Refills and replacements.</b><small>Start with the product already in use and confirm what fits.</small></div>
-              <span>Confirm the detail</span>
-            </div>
-            <div class="m46CommercialNote">From the opening list to the next refill.</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="m46Section">
-        <div class="m46Shell">
-          <div class="m46SectionCopy m46SectionCopyWide m46Reveal">
-            <h2>That’s how supply becomes a partnership.</h2>
-            <p>The first order solves today’s requirement. Keeping the record together makes the next one easier.</p>
-          </div>
-
-          <div class="m46Frame m46Partnership m46Reveal">
-            <div class="m46PartNode"><span>01</span><b>Requirement</b><small>What is actually needed</small></div>
-            <div class="m46PartLink"></div>
-            <div class="m46PartNode"><span>02</span><b>Specification</b><small>What the line must be</small></div>
-            <div class="m46PartLink"></div>
-            <div class="m46PartNode"><span>03</span><b>Sourcing</b><small>Best suitable route</small></div>
-            <div class="m46PartLink"></div>
-            <div class="m46PartNode"><span>04</span><b>Account memory</b><small>What was bought before</small></div>
-            <div class="m46PartLink"></div>
-            <div class="m46PartNode"><span>05</span><b>Repeat supply</b><small>What comes next</small></div>
-          </div>
-
-          <div class="m46PartnershipFoot m46Reveal">
-            <span>One accountable Pharma Service relationship</span>
-            <b>Clearer with every order.</b>
-          </div>
-        </div>
-      </section>
-
-      <section class="m46Final">
-        <div class="m46Shell m46FinalGrid m46Reveal">
-          <div>
-            <h2>Tell us what you need. We’ll make it easier to buy.</h2>
-            <p>One product, a rough list, an old order or a clinic opening. Start with what you have.</p>
-          </div>
-
-          <div class="m46FinalCard">
-            <small>Start with what you have</small>
-            <div class="m46FinalOptions">
-              <span>One product</span>
-              <span>Recurring list</span>
-              <span>Opening clinic</span>
-              <span>Broader RFQ</span>
-            </div>
-            <button class="button primary" data-go="start">Tell us what you need</button>
-          </div>
-        </div>
-      </section>
-
-    </div>
-  `;
-
+  const steps=[
+    ['Find','Search by product, brand or clinical need. Choose the exact item and pack.'],
+    ['Request','Build a supply request, start from a collection or send your existing list.'],
+    ['Source & quote','We confirm the items, availability and terms. You review the quotation.'],
+    ['Deliver','Supply follows the required approval and agreed payment arrangements.'],
+    ['Reorder','Return to previously supplied products and choose your next quantities.']
+  ];
+  const collections=[
+    ['opening','Complete clinic setup','Furniture, diagnostics, emergency equipment and opening supplies.','clinic-opening','Explore setup','Illustrative clinic setup with a Braun thermometer; brand and configuration examples'],
+    ['replenishment','Clinic refills','Wound care, hygiene, testing and everyday disposables.','clinic-restock','Explore refills','Illustrative consumables scene with WOLAID gauze packaging; exact items and packs are listed in the collection'],
+    ['kits','First-aid points','Supplies for the gym, laboratory, canteen, trips and campus.','first-aid-rollout','Explore first-aid points','Illustrative first-aid station with a 3M Nexcare pack; brand example, not a fixed kit specification']
+  ];
+  const MARKUP=`<div class="model46" data-model-version="20261021">
+    <section class="m46Hero" aria-labelledby="m46Title"><div class="m46Shell m46HeroGrid">
+      <div class="m46HeroCopy"><h1 id="m46Title">One supply relationship.</h1><p>Find the products you need or send us your list. We source across suitable suppliers, bring the requirement into one quotation and stay accountable through delivery.</p><div class="m46Actions"><button class="button primary" data-go="start">Send a requirement</button><button class="button outline" data-go="catalogue">Browse products</button></div></div>
+      <figure class="m46HeroVisual">
+        <div class="m46RoughCard"><p>Your list</p><div><span>BP monitors</span><span>2</span></div><div><span>Gauze 10 × 10</span><span>10</span></div><div><span>Gloves, size M</span><span>5</span></div></div>
+        <div class="m46QuoteCard"><div class="m46QuoteTop"><p>One Pharma Service quotation</p><img src="/assets/psc-logo-current.png" width="84" height="64" alt="Pharma Service"></div><div class="m46QuoteRow"><span>Blood pressure monitors</span><small>Exact model and cuff range</small></div><div class="m46QuoteRow"><span>Wound-care supplies</span><small>Size, material and pack</small></div><div class="m46QuoteRow"><span>Examination gloves</span><small>Size and box quantity</small></div></div>
+        <figcaption>An example of one requirement brought together.</figcaption>
+      </figure>
+    </div></section>
+    <section class="m46Journey m46Shell" aria-labelledby="m46JourneyTitle"><div class="m46SectionHead"><h2 id="m46JourneyTitle">From requirement<br>to replenishment.</h2><p>One product or a mixed list. The same clear process, with you in control of the order.</p></div><ol>${steps.map(([title,copy],i)=>`<li><span class="m46StepNumber" aria-hidden="true">0${i+1}</span><h3>${title}</h3><p>${copy}</p></li>`).join('')}</ol><p class="m46JourneyNote">Already have an RFQ, spreadsheet or previous order? Send it as it is. We’ll clarify the details with you.</p></section>
+    <section class="m46Collections" aria-labelledby="m46CollectionTitle"><div class="m46Shell">
+      <div class="m46SectionHead"><div><h2 id="m46CollectionTitle">Set it up.<br>Keep it running.</h2><p>School clinic supply collections give you a starting point for setup and regular supplies.</p></div><p>Buying for another healthcare facility or institutional setting? <button class="button outline" data-go="start">Send us your requirements</button></p></div>
+      <div class="m46CollectionGrid">${collections.map(([id,title,copy,scene,label,alt])=>`<article class="m46CollectionCard"><img src="/assets/baskets/${scene}-scene-brands-v2.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="${alt}"><div><h3>${title}</h3><p>${copy}</p><button class="button outline" data-model-collection="${id}">${label}</button></div></article>`).join('')}</div>
+      <p class="m46QuietNote">Scenes are illustrative. Collections are starting scopes; final items and quantities depend on your facility and the applicable requirements.</p>
+    </div></section>
+    <section class="m46Account m46Shell" aria-labelledby="m46AccountTitle">
+      <div class="m46AccountCopy"><h2 id="m46AccountTitle">The next order<br>starts here.</h2><p>Keep your requests, quotations and available documents together. Return to the products supplied before and build your next request from there.</p><button class="button primary" data-go="portal/dashboard">Open my account</button><p class="m46QuietNote">Sign in to view your institution’s records.</p></div>
+      <nav class="m46Memory" aria-label="Your account">
+        <button class="m46HistoryRow" data-go="portal/requests"><img src="/assets/ui-icons/my-requests.webp" width="52" height="52" alt=""><span><strong>Orders & requests</strong><small>Follow your requests and quotations.</small></span></button>
+        <button class="m46HistoryRow" data-go="portal/documents"><img src="/assets/ui-icons/downloads.webp" width="52" height="52" alt=""><span><strong>Your documents</strong><small>Find available quotation and delivery records.</small></span></button>
+        <button class="m46HistoryRow" data-go="portal/replenish"><img src="/assets/ui-icons/orders.webp" width="52" height="52" alt=""><span><strong>Order again</strong><small>Choose from previously supplied products.</small></span></button>
+      </nav>
+    </section>
+    <section class="m46Practical" aria-labelledby="m46PracticalTitle"><div class="m46Shell">
+      <div class="m46PracticalGrid"><h2 id="m46PracticalTitle">A few practical<br>details.</h2><div class="m46Faq">
+        <details><summary>Are catalogue prices wholesale prices?</summary><p>Retail prices shown in the catalogue are references. Your institutional quotation confirms the wholesale selling price, availability, VAT and delivery terms.</p></details>
+        <details><summary>Can I send a list without choosing products?</summary><p>Yes. Use Send a requirement to upload an RFQ or spreadsheet, or describe what you need. Include quantities, your facility and timing where known. We’ll clarify anything missing.</p></details>
+        <details><summary>What is confirmed before supply?</summary><p>The exact products, packs, quantities, current availability and commercial terms are confirmed in quotation. Procurement follows the required approval and agreed payment arrangements.</p><p>Requirement mappings help identify relevant lines. They do not establish product approval or suitability; conditional requirements retain their conditions.</p></details>
+      </div></div>
+      <div class="m46Final"><div><h3>Start with what you have.</h3><p>One product, an existing list or your next replenishment.</p></div><button class="button primary" data-go="start">Send a requirement</button></div>
+    </div></section>
+  </div>`;
   function install(){
     const page=document.querySelector('main.model17Page');
-    if(!page) return;
-
-    const header=page.querySelector(':scope > .publicHeader');
-    const footer=page.querySelector(':scope > .publicFooter');
-    if(!header || !footer) return;
-
-    let existing=page.querySelector(':scope > .model46');
-    if(existing) {
-      bindReveal(existing);
-      return;
-    }
-
+    if(!page||page.querySelector(':scope > .model46'))return;
+    const header=page.querySelector(':scope > .publicHeader'),footer=page.querySelector(':scope > .publicFooter');
+    if(!header||!footer)return;
     page.querySelectorAll(':scope > .model43').forEach(el=>el.remove());
-
-    const holder=document.createElement('div');
-    holder.innerHTML=MARKUP.trim();
-    const model=holder.firstElementChild;
-    footer.insertAdjacentElement('beforebegin',model);
-    bindReveal(model);
-  }
-
-  function bindReveal(root){
-    const els=[...root.querySelectorAll('.m46Reveal')].filter(el=>!el.dataset.m46Bound);
-    if(!els.length) return;
-
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      els.forEach(el=>{
-        el.classList.add('in');
-        el.dataset.m46Bound='1';
-      });
-      return;
-    }
-
-    const io=new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{
-        if(!entry.isIntersecting) return;
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
-      });
-    },{threshold:.12,rootMargin:'0px 0px -7% 0px'});
-
-    els.forEach((el,index)=>{
-      el.dataset.m46Bound='1';
-      el.style.setProperty('--m46-delay',`${Math.min(index%4,3)*45}ms`);
-      const r=el.getBoundingClientRect();
-      if(r.top < window.innerHeight*.92){
-        requestAnimationFrame(()=>el.classList.add('in'));
-      } else {
-        io.observe(el);
+    footer.insertAdjacentHTML('beforebegin',MARKUP);
+    const root=page.querySelector(':scope > .model46');
+    root.addEventListener('click',event=>{
+      const button=event.target.closest('button[data-model-collection],button[data-go]');
+      if(!button||!root.contains(button))return;
+      event.preventDefault();event.stopPropagation();
+      if(button.dataset.modelCollection){
+        const id=button.dataset.modelCollection;
+        window.PSC_OPEN_SCHOOL_COLLECTION(id);
+        requestAnimationFrame(()=>{
+          const selected=document.querySelector(`.psSchoolBaskets [data-school-collection="${id}"]`);
+          selected?.focus({preventScroll:true});
+          document.querySelector('.psSchoolBaskets')?.scrollIntoView({block:'start',behavior:'instant'});
+        });
+      }else{
+        const route=button.dataset.go;
+        if(route.startsWith('portal/')&&!window.PSC_ACCOUNT_CONTEXT?.()){
+          try{sessionStorage.setItem('pscPendingRoute',route);}catch{}
+        }
+        window.PSC_NAVIGATE(route);
       }
     });
   }
-
   let queued=false;
-  function schedule(){
-    if(queued) return;
-    queued=true;
-    requestAnimationFrame(()=>{
-      queued=false;
-      install();
-    });
-  }
-
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',schedule,{once:true});
-  } else {
-    schedule();
-  }
-
+  const schedule=()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;install();});};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule,{once:true});else schedule();
   const app=document.getElementById('app');
-  if(app) window.PSC_ENHANCEMENTS.createObserver(schedule).observe(app,{childList:true,subtree:true});
+  if(app)window.PSC_ENHANCEMENTS.createObserver(schedule).observe(app,{childList:true,subtree:true});
   window.addEventListener('hashchange',schedule);
 })();

@@ -19,6 +19,10 @@ on:
       - 'current/behaviour/school-baskets.js'
       - 'tests/school-baskets*.mjs'
       - 'current/behaviour/home-layout.js'
+      - 'current/behaviour/model-story.js'
+      - 'tests/how-we-work-browser.mjs'
+      - 'tests/workshop-articles-browser.mjs'
+      - 'workshop-data.js'
       - 'tests/catalogue-enquiry-context.mjs'
       - 'tests/intelligent-search-browser.mjs'
       - 'tests/search-acceptance-browser.mjs'
@@ -55,6 +59,8 @@ jobs:
       - run: node tests/ready-baskets.mjs
       - run: node tests/school-baskets-browser.mjs
       - run: node tests/professional-experience-browser.mjs
+      - run: node tests/how-we-work-browser.mjs
+      - run: node tests/workshop-articles-browser.mjs
       - run: node tests/portal-home-journey-browser.mjs
       - run: node tests/portal-layout-regression.mjs
       - run: npm run test:dom

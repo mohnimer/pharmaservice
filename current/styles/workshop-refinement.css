@@ -1,3 +1,21 @@
+/* Native V50 articles must not inherit the old horizontal signature/related rows. */
+.publicPage.workshopArticlePageV50 .workshopArticleBody{width:100%;max-width:none!important;margin:0;padding:0}
+.publicPage.workshopArticlePageV50 .workshopArticleSection{border-top:0!important}
+.publicPage.workshopArticlePageV50 .workshopSignatureV50{border:0;border-radius:0!important;gap:20px}
+.publicPage.workshopArticlePageV50 .workshopSignatureV50>article{display:block;min-width:0;padding:22px;border:0;border-radius:8px;background:#edf2eb!important}
+.publicPage.workshopArticlePageV50 .workshopSignatureV50>article>span{display:block;font-size:16px;line-height:1.4;font-weight:500;letter-spacing:-.02em;text-transform:none;color:var(--ps-ink,#18392f)}
+.publicPage.workshopArticlePageV50 .workshopSignatureV50>article>p{width:100%;min-width:0;max-width:none;margin-top:13px;font-size:15px!important;line-height:1.65!important;overflow-wrap:anywhere;color:var(--ps-muted,#596d65)}
+.publicPage.workshopArticlePageV50 .workshopRelatedList{border-top:0;gap:14px}
+.publicPage.workshopArticlePageV50 .workshopRelatedList>button{display:block;min-width:0;width:100%;padding:18px;overflow-wrap:anywhere}
+.publicPage.workshopArticlePageV50 .workshopRelatedList>button>*{display:block;text-align:left;grid-column:auto}
+.publicPage.workshopArticlePageV50 .workshopRelatedHead{align-items:start}
+.publicPage.workshopArticlePageV50 .workshopRelatedHead p{text-align:left;max-width:40ch}
+.publicPage.workshopArticlePageV50 .workshopArticleRailV50>button{display:inline-flex;align-items:center;min-height:44px;padding:10px 14px;border:1px solid #bccbc1;border-radius:8px;font-weight:450;font-size:13px!important;background:#fcfdfb}
+.publicPage.workshopArticlePageV50 .workshopArticleActions{position:static;justify-content:start;width:auto;background:none;border:0;padding:0}
+.publicPage.workshopArticlePageV50 .workshopArticleActions>button{min-height:44px;padding:10px 14px;font-weight:450}
+.publicPage.workshopArticlePageV50 :is(.workshopArticleHeaderV50 h1,.workshopArticleBody h2){font-weight:450!important}
+@media(max-width:1050px){.publicPage.workshopArticlePageV50 .workshopSignatureV50{grid-template-columns:1fr}.publicPage.workshopArticlePageV50 .workshopArticleLayoutV50{grid-template-columns:minmax(0,1fr) 190px;gap:32px}}
+@media(max-width:760px){.publicPage.workshopArticlePageV50 .workshopArticleLayoutV50{grid-template-columns:minmax(0,1fr);gap:24px}.publicPage.workshopArticlePageV50 .workshopSignatureV50>article{padding:20px}.publicPage.workshopArticlePageV50 .workshopRelatedHead{display:block}.publicPage.workshopArticlePageV50 .workshopRelatedHead p{margin-top:10px}}
 /* Shared Workshop module cards and a consistent editorial type scale.
    Kept after the V50 styles so earlier presentation rules cannot compress text. */
 .publicPage.workshopPage {

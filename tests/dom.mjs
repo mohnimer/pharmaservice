@@ -53,7 +53,8 @@ try {
   report.push('Homepage, Start and trailing slash, About, Our Model, Contact, login and direct Workshop deep routes render actual shell scripts');
   w=await setup('/');
   for(let n=0;!w.document.querySelector('.psHome')&&n<20;n++)await pause();
-  assert.deepEqual([...w.document.querySelector('.psHome').children].map(el=>el.className),['home47 h47Compact','psHomeFind psPageWidth','psHomeCategories psPageWidth','psHomeJourney psPageWidth','psHomeReturn psPageWidth']);
+  assert.deepEqual([...w.document.querySelector('.psHome').children].map(el=>el.className),['home47 h47Compact','psHomeFind psPageWidth','psHomeCategories psPageWidth','psHomeJourney psPageWidth','psHomeWorkshop psPageWidth','psHomeReturn psPageWidth']);
+  assert.equal(w.document.querySelectorAll('.psHomeWorkshop .psHomeGuide').length,3);
   assert.equal(w.document.querySelectorAll('.psClinicalTile').length,6);
   assert(w.document.querySelector('#psHomeCommand[data-cat-q]'));
   assert(w.document.querySelector('main.publicLanding > .publicHeader'));
@@ -69,6 +70,8 @@ try {
     ['.psHomeCategories [data-go="catalogue"]','#catalogue'],
     ['.psHeroSecondary [data-go="start"]','/start'],
     ['.publicFooter [data-go="workshop"]','/workshop'],
+    ['.psHomeWorkshop [data-go="workshop"]','/workshop'],
+    ['.psHomeGuide[data-go="workshop/oxygen-cylinder-is-not-an-oxygen-system"]','/workshop/oxygen-cylinder-is-not-an-oxygen-system'],
     ['.publicHeader [data-go="portal/dashboard"]','#login'],
     ['.publicHeader [data-go="ready-baskets"]','#ready-baskets']
   ]){
