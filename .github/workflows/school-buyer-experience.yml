@@ -1,0 +1,35 @@
+name: School clinic buyer experience
+on:
+  pull_request:
+    paths:
+      - 'app.js'
+      - 'current/behaviour/buyer-journey.js'
+      - 'current/manifest.json'
+      - 'current/styles/portal-home.css'
+      - 'tests/school-buyer-browser.mjs'
+      - 'tests/fixtures/school-buyer-fixture.mjs'
+      - 'tests/buyer-*'
+      - 'supabase/migrations/20261025000*.sql'
+      - 'current/behaviour/admin-quote-persistence.js'
+      - 'current/behaviour/customer-activation.js'
+      - 'staging/buyer-permissions-20261025/**'
+      - '.github/workflows/school-buyer-experience.yml'
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node --test tests/buyer-journey.test.cjs
+      - run: node tests/buyer-permission-proposal.mjs
+      - run: node tests/buyer-privacy-proposal.mjs
+      - run: node tests/customer-invitation-rls.mjs
+      - run: node tests/professional-submission.mjs
+      - run: npx playwright install --with-deps chromium
+      - run: node tests/school-buyer-browser.mjs
+      - run: node tests/buyer-assessment-browser.mjs

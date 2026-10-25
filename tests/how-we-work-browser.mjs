@@ -14,7 +14,7 @@ try{for(const width of [320,390,768,1440])for(const role of ['anonymous','member
  const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  const model=async()=>{await page.evaluate(()=>PSC_NAVIGATE('our-model'));await page.locator('[data-model-version="20261021"]').waitFor();};
  const fits=async()=>assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),width+' page overflow');
- const draft=async()=>page.evaluate(()=>JSON.parse(localStorage.getItem('pscClinicPortalStateV12_1')||'{}').basket||[]);
+ const draft=async()=>page.evaluate(()=>JSON.parse((localStorage.getItem('pscClinicPortalStateV12_1:u1')||localStorage.getItem('pscClinicPortalStateV12_1'))||'{}').basket||[]);
  await page.goto(base+'/#our-model');await page.locator('[data-model-version="20261021"]').waitFor();
  assert.equal(await page.locator('.model46>section').count(),5);assert.equal(await page.locator('main h1').count(),1);
  assert.equal(await page.locator('.model46 h1').innerText(),'One supply relationship.');

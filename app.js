@@ -28,6 +28,8 @@
   let session = null;
   let authContext = null;
   let authReady = false;
+  let customerLoadVersion=0;
+  const buyerView={groupRows:null,groupLoading:false,groupError:'',groupOpen:false,documentType:'',dateFrom:'',campusFilter:'',requestsError:''};
 
   let state = load();
   const draftHistory=new Map();
@@ -179,7 +181,7 @@
   }
 
   function load(){
-    try { const raw = localStorage.getItem(STORAGE); return raw ? {...seed,...JSON.parse(raw)} : JSON.parse(JSON.stringify(seed)); }
+    try { const raw = JSON.parse(localStorage.getItem(STORAGE)||'null'); return raw&&!raw.ownerUserId&&!raw.accountEmail ? {...JSON.parse(JSON.stringify(seed)),...raw} : JSON.parse(JSON.stringify(seed)); }
     catch { return JSON.parse(JSON.stringify(seed)); }
   }
   function save(){
@@ -196,25 +198,27 @@
         state.basketsBySchool=state.basketsBySchool||{};
         state.basketsBySchool[state.activeSchoolId]=state.basket||[];
       }
-      localStorage.setItem(STORAGE, JSON.stringify(state));
+      if(session?.user?.id)state.ownerUserId=session.user.id;
+      localStorage.setItem(session?.user?.id?STORAGE+':'+session.user.id:STORAGE, JSON.stringify(state));
     }catch{}
   }
   function esc(v=''){ return String(v).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':'&quot;'}[c])); }
   function money(n){ return Number.isFinite(Number(n)) ? `AED ${Number(n).toFixed(2)}` : '—'; }
-  function date(v){ try{return new Date(v).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})}catch{return v} }
+  function date(v){ if(!v||!Number.isFinite(Date.parse(v)))return 'Date not recorded';return new Date(v).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}); }
   function friendlyStatus(status){
     return ({Drafting:'Under Review',Sent:'Quote Sent',Authorized:'Confirmed',Procurement:'Under Process',Delivery:'Under Process',Accepted:'Delivered',Cancelled:'Cancelled'})[status] || status;
   }
-  function customerStatusPill(status){ const label=friendlyStatus(status); const k=label.toLowerCase().replace(/\s+/g,'-'); return `<span class="statusPill status-${k}">${esc(label)}</span>`; }
+  function customerStatusPill(status){ const label=authContext&&!authContext.isPscAdmin&&!isDemoAccount()?window.PSC_BUYER_JOURNEY.statusLabel(status):friendlyStatus(status); const k=label.toLowerCase().replace(/\s+/g,'-'); return `<span class="statusPill status-${k}">${esc(label)}</span>`; }
   function expectedDeliveryLabel(r){
     if(r?.expectedDeliveryDate) return `Expected delivery · ${date(r.expectedDeliveryDate)}`;
-    if(r?.status==='Delivery') return 'Out for delivery · timing confirmed by PS';
+    if(r?.status==='Delivery') return 'Out for delivery · arrival time not recorded';
     if(['Authorized','Procurement'].includes(r?.status)) return 'Delivery timing will be confirmed by PS';
     return '';
   }
   function addDaysLabel(v,days){ const d=new Date(v); d.setDate(d.getDate()+days); return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}); }
-  function isArchived(r){ return r.status==='Cancelled' && r.cancelledAt && ((Date.now()-new Date(r.cancelledAt).getTime())/(1000*60*60*24) >= 30); }
-  function customerVisibleRequests(){ return state.requests.filter(r=>r.campus===state.campus && !isArchived(r)); }
+  function isArchived(r){ return r.databaseStatus==='archived'||r.status==='Cancelled' && r.cancelledAt && ((Date.now()-new Date(r.cancelledAt).getTime())/(1000*60*60*24) >= 30); }
+  function customerAccountRequests(){return state.requests.filter(r=>r.schoolId?r.schoolId===state.activeSchoolId:r.campus===state.campus);}
+  function customerVisibleRequests(){ return customerAccountRequests().filter(r=>!isArchived(r)); }
   function accountEmailLabel(){ return state.accountEmail || 'your registered account email'; }
   function schoolLabel(s){
     if(!s) return 'Institutional account';
@@ -1323,6 +1327,7 @@
     const resourceRoutes=['admin/products','admin/family-options','admin/supplier-feed','admin/storefront'];
     if(admin&&resourceRoutes.includes(route))content=`<button class="button outline" data-go="admin/resources">← Products & suppliers</button>`+content;
     if(admin&&route==='admin/fulfilment')content=`<button class="button outline" data-go="admin/settings">← Settings</button>`+content;
+    if(!admin&&buyerView.requestsError&&['portal/dashboard','portal/requests','portal/documents','portal/replenish','portal/archive'].includes(route))content=`<section class="emptyState buyerLoadError" role="alert"><h1>Account activity could not be loaded.</h1><p>Your draft is saved on this device. We have not shown cached records as current activity.</p><button class="button primary" data-buyer-retry>Try again</button><button class="button light" data-go="portal/catalogue">Continue browsing</button></section>`;
     const liveCustomerNav=schoolNav.filter(([href])=>isDemoAccount() || !['portal/stock','portal/assets'].includes(href));
     const links=admin?adminNav.filter(([href])=>!['admin/resources','admin/settings','admin/onboarding'].includes(href)):liveCustomerNav;
     const searchValue=esc(ui.globalSearch||'');
@@ -2080,8 +2085,7 @@
     const active=visible.filter(r=>!['Accepted','Cancelled'].includes(r.status));
     const awaiting=active.filter(r=>r.status==='Sent'&&!r.quote?.management_decision);
     const delivered=visible.filter(r=>r.status==='Accepted');
-    const deliveredSkus=new Set(delivered.flatMap(r=>r.lines.map(l=>l.sku)).filter(sku=>sku&&product(sku)));
-    const documentCount=visible.reduce((n,r)=>n+(r.documents||[]).length,0);
+    const documentCount=customerAccountRequests().reduce((n,r)=>n+(r.documents||[]).length,0);
     const priority=r=>r.status==='Sent'&&!r.quote?.management_decision?0:r.status==='Delivery'?1:['Authorized','Procurement'].includes(r.status)?2:3;
     const recent=[...active].sort((a,b)=>priority(a)-priority(b)||(new Date(b.createdAt).getTime()||0)-(new Date(a.createdAt).getTime()||0)).slice(0,3);
     const clinicalStarts=[['wounds'],['breathing'],['vitals']];
@@ -2091,18 +2095,29 @@
     const guide=items=>`<details class="pscHomeCategoryGuide psDisclosure"><summary>About these categories</summary><dl>${items.map(([id,label,note])=>{const c=clinicalNeedMeta(id);return `<dt>${esc(label||c.label)}</dt><dd id="psc-home-note-${id}">${esc(note||c.note)}</dd>`;}).join('')}</dl></details>`;
     const row=r=>`<button class="psPortalActivity" data-request-view="${esc(r.id)}"><span><b>${esc(r.quoteRef||r.id)}</b><small>${date(r.createdAt)} · ${r.lines.length} request line${r.lines.length===1?'':'s'}</small></span><span>${customerStatusPill(r.status)}<small class="psPortalRowAction">${r.status==='Sent'?(r.quote?.management_decision?'View recorded decision':'Review quotation'):['Authorized','Procurement','Delivery'].includes(r.status)?'View progress':'View request'}</small></span></button>`;
     const draft=state.basket;
-    return shell(`<div class="psExperience psPortalHome">
+    return shell(`<div class="psExperience psPortalHome buyerWorkspace">
       <section class="psPortalWelcome" aria-labelledby="psPortalTitle">
-        <div class="psPortalSearchCopy"><h1 id="psPortalTitle">What do you need today?</h1><p>Find the right products. Build your request. We’ll take care of the sourcing.</p>
+        <div class="psPortalSearchCopy"><h1 id="psPortalTitle">Your clinic. Ready for what’s next.</h1><p class="buyerCampus">${esc(state.campus)}</p><p>Find the right products. Build your request. We’ll take care of the sourcing.</p>
           <form class="psPortalSearch" data-ps-command-form role="search"><label class="srOnly" for="psPortalCommand">Search your institutional catalogue</label><span aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/search.webp" alt=""></span><input id="psPortalCommand" data-cat-q type="search" aria-label="Search catalogue" placeholder="Product, brand or describe what you need…" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Search</button></form>
           <div class="psPortalSearchExamples"><span>Try</span>${['Sterile gauze','Digital thermometer','Examination gloves'].map(q=>`<button type="button" data-portal-query="${esc(q)}">${esc(q)}</button>`).join('')}</div>
           <button class="psTextLink" data-go="portal/catalogue">Browse the catalogue</button>
         </div>
         <div class="psPortalDraft ${draft.length?'hasDraft':''}" aria-label="${draft.length?'Saved supply request':'Send an existing list'}">${draft.length?`<h2>Pick up where you left off.</h2><p>${draft.length} request line${draft.length===1?'':'s'} · ${basketQty()} requested units</p><ul>${draft.slice(0,2).map(l=>{const p=l.sku?product(l.sku):null;return `<li><span>${esc(p?.name||lineDisplayName(l,p))}</span><small>${l.qty} × ${esc(linePackLabel(l,p))}</small></li>`;}).join('')}</ul>${draft.length>2?`<small>+ ${draft.length-2} more line${draft.length===3?'':'s'}</small>`:''}<button class="button dark" data-basket>Continue your request</button><small>Saved for this site. Review before submitting.</small>`:`<span class="psPortalListIcon" aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/my-requests.webp" alt=""></span><h2>Already have a list?</h2><p>Send your RFQ, spreadsheet or existing product list. Start with what you have.</p><button class="button outline" data-go="start">Upload your list</button>`}</div>
       </section>
+      <section class="buyerActionHub" aria-labelledby="buyerActionTitle">
+        <div class="buyerHubHeading"><h2 id="buyerActionTitle">Get the next thing done.</h2><p>One place for your clinic’s supply requests.</p></div>
+        <div class="buyerActionGrid">
+          <button class="buyerAction buyerActionPrimary" data-go="portal/replenish"><img src="/assets/ui-icons/orders.webp" alt=""><span><h3>Order again</h3><p>Previous supplies. New quantities. A fresh quotation.</p></span><span class="buyerActionLabel">Choose previous items</span></button>
+          <button class="buyerAction" data-buyer-list><img src="/assets/ui-icons/my-requests.webp" alt=""><span><h3>Start with your list</h3><p>Paste what you need, including items you can’t find.</p></span><span class="buyerActionLabel">Prepare a request</span></button>
+          <button class="buyerAction" ${awaiting[0]?`data-request-view="${esc(awaiting[0].id)}"`:'data-go="portal/requests"'}><img src="/assets/ui-icons/my-requests.webp" alt=""><span><h3>${awaiting.length?`${awaiting.length} quotation${awaiting.length===1?'':'s'} to review`:'Requests & quotations'}</h3><p>${awaiting.length?'Check exact items, prices and terms before authorization.':'Follow your requests from submission to supply.'}</p></span><span class="buyerActionLabel">${awaiting.length?'Review quotation':'View your requests'}</span></button>
+          <button class="buyerAction" data-go="portal/documents"><img src="/assets/ui-icons/downloads.webp" alt=""><span><h3>Your paperwork</h3><p>${documentCount?`${documentCount} attached document${documentCount===1?'':'s'}, organized by request.`:'Quotations and delivery records, together by request.'}</p></span><span class="buyerActionLabel">Find a document</span></button>
+        </div>
+      </section>
+      ${delivered.length?`<section class="buyerRecentSupply" aria-labelledby="buyerRecentTitle"><div class="buyerHubHeading"><h2 id="buyerRecentTitle">Need the same supplies?</h2><button class="psTextLink" data-go="portal/requests">All previous requests</button></div>${[...delivered].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,2).map(r=>`<article class="buyerRepeatRow"><div><h3>${esc(r.id)}</h3><p>${r.lines.length} line${r.lines.length===1?'':'s'} · ${date(r.createdAt)}</p><span>${esc(r.lines.slice(0,2).map(l=>lineDisplayName(l,l.sku?product(l.sku):null)).join(' · '))}${r.lines.length>2?' · more':''}</span></div><button class="button light" data-reorder-order="${esc(r.id)}">Repeat this request</button></article>`).join('')}<p class="buyerRepeatNote">Review quantities and exact packs before submitting. Prices and availability are confirmed in a new quotation.</p></section>`:''}
+      <div class="buyerTaskLinks"><button class="button light" data-go="start">Upload an RFQ or spreadsheet</button><button class="button light" data-go="portal/wishlist">Saved products</button></div>
       <div class="psPortalWork">
         <section class="psPortalAttention" aria-labelledby="psPortalActivityTitle"><div class="psPortalSectionHead"><div><h2 id="psPortalActivityTitle">${awaiting.length?'Your quotations are ready.':'Your requests, moving forward.'}</h2><p>${awaiting.length?`${awaiting.length} quotation${awaiting.length===1?'':'s'} available to review.`:active.length?`${active.length} request${active.length===1?'':'s'} in progress.`:'A clear view of what happens after you request.'}</p></div><button class="psTextLink" data-go="portal/requests">View all</button></div><div class="psPortalActivityList">${recent.map(row).join('')||`<div class="psPortalNoActivity"><span aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/my-requests.webp" alt=""></span><div><h3>No requests in progress.</h3><p>${delivered.length?'Your previous orders are ready to revisit whenever you need them.':'Your quotations and order updates will appear here after your first request.'}</p></div></div>`}</div></section>
-        <div class="psPortalAccountLinks"><button data-go="portal/replenish"><span aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/orders.webp" alt=""></span><span><h3>Order again</h3><p>${deliveredSkus.size?`${deliveredSkus.size} previously supplied product${deliveredSkus.size===1?'':'s'}. Choose your next quantities.`:'Return to previously supplied items after your first completed order.'}</p></span></button><button data-go="portal/documents"><span aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/downloads.webp" alt=""></span><span><h3>Your documents</h3><p>${documentCount?`${documentCount} account document${documentCount===1?'':'s'} in one place.`:'Quotations, approvals and delivery records, when available.'}</p></span></button></div>
+
       </div>
       <section class="psPortalBaskets" aria-labelledby="psPortalBasketsTitle"><div class="psPortalSectionHead"><div><h2 id="psPortalBasketsTitle">Start with the whole task.</h2><p>Opening, restocking or refilling? Review a basket preview.</p></div><button class="psTextLink" data-go="portal/baskets">All ready baskets</button></div><div class="psPortalBasketGrid">${window.PSC_READY_BASKETS?.compactCards()||'<button class="button outline" data-go="portal/baskets">Explore basket previews</button>'}</div></section>
       <div class="pscHomeBrowse pscHomeBrowseSeparated"><div class="pscHomeCategoryColumns"><section class="pscClinicalBrowse" aria-labelledby="psc-browse-title"><div class="psPortalSectionHead"><div><h2 id="psc-browse-title">Browse by clinical need</h2><p>Find products for the task in front of you.</p></div><button class="psTextLink" data-go="portal/catalogue">All categories</button></div><div class="pscHomeCategoryGrid" role="group" aria-label="By clinical need">${clinicalStarts.map(args=>homeCategory(...args)).join('')}</div>${guide(clinicalStarts)}</section><section class="pscRequirementBrowse" aria-labelledby="psc-requirement-title"><div class="psPortalSectionHead"><div><h2 id="psc-requirement-title">Clinic requirement mapping</h2><p>Explore the mapped medicines, equipment and consumables.</p></div></div><div class="pscHomeCategoryGrid" role="group" aria-label="Clinic essentials">${essentialStarts.map(args=>homeCategory(...args)).join('')}</div>${guide(essentialStarts)}<small class="pscHomeScopeNote">DHA educational clinic mapping. Required alternatives and conditional items retain their original conditions; suitability is checked before quotation.</small></section></div></div>
@@ -2560,25 +2575,15 @@
   }
 
   function replenishPage(){
-    const delivered=state.requests.filter(r=>r.campus===state.campus&&r.status==='Accepted');
-    const map=new Map();
-    delivered.forEach(r=>r.lines.forEach(l=>{
-      const prev=map.get(l.sku);
-      const basis=r.deliveredAt||r.createdAt;
-      if(!prev || new Date(basis)>new Date(prev.sortDate)) map.set(l.sku,{...l,deliveredAt:r.deliveredAt||null,sortDate:basis,requestId:r.id});
-    }));
-    const items=[...map.values()].map(x=>({...x,p:product(x.sku)})).filter(x=>x.p);
-    const cards=items.map(x=>{
-      const capital=isCapitalProduct(x.p);
-      const replenImage=productDisplayImageUrl(x.p); const visual=replenImage?`<img src="${esc(replenImage)}" alt="${esc(x.p.name)}">`:`<span>${esc(x.p.brand.slice(0,2).toUpperCase())}</span>`;
-      const deliveredLabel=x.deliveredAt?date(x.deliveredAt):'Date to be confirmed';
-      const actionLabel=capital?'Request another':`Replenish ${x.qty}`;
-      return `<article class="replenishCard"><div class="replenishVisual">${visual}</div><div class="replenishBody"><span class="sku">${x.p.pscSku}</span><h3>${esc(x.p.name)}</h3><p>${esc(x.p.pack)}</p><div class="replenishMeta"><div><span>LAST QTY</span><b>${x.qty}</b></div><div><span>LAST DELIVERED</span><b>${deliveredLabel}</b></div></div><button class="button ${capital?'dark':'primary'} full semanticPrimary" data-replenish="${x.p.pscSku}|${x.qty}">${actionLabel} →</button></div></article>`;
+    const delivered=customerVisibleRequests().filter(r=>r.status==='Accepted'),map=new Map();
+    for(const r of delivered)r.lines.forEach((l,index)=>{const key=lineKey(l),basis=r.deliveredAt||r.createdAt,old=map.get(key);if(!old||new Date(basis)>new Date(old.basis))map.set(key,{l,index,r,basis});});
+    const cards=[...map.values()].map(({l,index,r})=>{
+      const p=l.sku?product(l.sku):null,repeat=window.PSC_BUYER_JOURNEY.repeatLine(l,p,r.id),name=lineDisplayName(l,p),pack=linePackLabel(l,p);
+      const sourcing=repeat.kind==='unlisted'||!p,photo=!sourcing&&p?productDisplayImageUrl(p):'';
+      return `<article class="replenishCard"><div class="replenishVisual">${photo?`<img src="${esc(photo)}" alt="${esc(name)}">`:'<span>PS</span>'}</div><div class="replenishBody"><span class="sku">${esc(l.sku||l.familyId||'Sourcing reference')}</span><h3>${esc(name)}</h3><p>${esc(pack)}</p><div class="replenishMeta"><div><span>Last requested qty</span><b>${l.qty}</b></div><div><span>Delivered</span><b>${r.deliveredAt?date(r.deliveredAt):'Date not recorded'}</b></div></div><p class="smallMuted">${sourcing?'Exact requirement retained for sourcing review. No replacement is selected.':'Previous supply is historical. Current price and availability require a new quotation.'}</p><button class="button dark full" ${!sourcing?`data-replenish="${esc(l.sku)}|${l.qty}"`:''} data-buyer-repeat-line="${esc(encodeURIComponent(r.id))}|${index}">${sourcing?'Review sourcing requirement':p&&isCapitalProduct(p)?'Request another':`Replenish ${l.qty}`}</button></div></article>`;
     }).join('');
-    const body=items.length?`<div class="replenishGrid">${cards}</div>`:'<div class="emptyState"><h3>No delivered items yet</h3><p>Products will appear here after their first completed order.</p></div>';
-    return shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">PREVIOUSLY DELIVERED</span><h1>Replenish</h1><p>Repeat products already supplied to this clinic. Consumables can go straight to the request; capital equipment can be requested again for PS review.</p></div><button class="button dark" data-basket>Open request</button></div>${body}`);
+    return shell(`<div class="pageHeader customerSimpleHeader"><div><h1>Order again</h1><p>${esc(state.campus)} · Previously supplied requirements, with original descriptions and packs. Every repeat starts a new request.</p></div><button class="button dark" data-basket>Open request</button></div>${cards?`<div class="replenishGrid">${cards}</div>`:'<div class="emptyState"><h3>No delivered items yet</h3><p>You can still repeat a previous request from Orders & Requests.</p><button class="button light" data-go="portal/requests">View request history</button></div>'}`);
   }
-
 
   function documentTypeLabel(type){
     return ({quotation:'Quotation',customer_po:'Customer PO',approval:'Approval',invoice:'Invoice',delivery_note:'Delivery note',acceptance:'Acceptance',warranty:'Warranty / serial record',service_report:'Service report',other:'Other document'})[type]||'Document';
@@ -2591,24 +2596,26 @@
       : [['customer_po','Customer PO'],['approval','Approval'],['acceptance','Acceptance'],['other','Other document']];
     return `<section class="orderDocumentsPanel">
       <div class="orderDocumentsHead"><div><span class="eyebrow">COMMERCIAL RECORD</span><h3>Documents</h3></div><span>${docs.length} file${docs.length===1?'':'s'}</span></div>
-      <div class="orderDocumentList">${docs.length?docs.map(d=>`<button class="orderDocumentRow" data-document-open="${esc(d.object_path)}"><span class="documentIcon">▤</span><span><b>${esc(d.title||documentTypeLabel(d.document_type))}</b><small>${esc(d.file_name||'Document')} · ${date(d.created_at)}</small></span><em>Open →</em></button>`).join(''):'<div class="orderDocumentEmpty">No documents attached to this order yet.</div>'}</div>
+      <div class="orderDocumentList">${docs.length?docs.map(d=>`<button class="orderDocumentRow" data-document-open="${esc(d.object_path)}"><span class="documentIcon">▤</span><span><b>${esc(d.title||documentTypeLabel(d.document_type))}</b><small>${esc(d.file_name||'Document')} · ${date(d.created_at)}</small></span><em>Open file</em></button>`).join(''):'<div class="orderDocumentEmpty">No documents attached to this order yet.</div>'}</div>
       ${r.dbId?`<div class="orderDocumentUpload"><select data-document-type="${r.id}">${options.map(([v,l])=>`<option value="${v}">${l}</option>`).join('')}</select><label class="button outline documentUploadButton">Attach document<input type="file" hidden data-document-upload="${r.id}" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.webp,application/pdf,image/jpeg,image/png,image/webp,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></label></div>`:`<div class="orderDocumentEmpty">Documents become available on live account orders.</div>`}
     </section>`;
   }
 
   function documentsPage(){
-    const rows=customerVisibleRequests().flatMap(r=>(r.documents||[]).map(d=>({r,d}))).sort((a,b)=>new Date(b.d.created_at)-new Date(a.d.created_at));
-    return shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">ACCOUNT RECORD</span><h1>Documents</h1><p>Quotations, customer approvals, invoices, delivery notes, acceptance records and equipment documents tied to this account.</p></div></div>
-      <section class="panel documentsIndexPanel">${rows.length?`<div class="documentsIndex">${rows.map(({r,d})=>`<button class="documentIndexRow" data-document-open="${esc(d.object_path)}"><span><small>${documentTypeLabel(d.document_type)}</small><b>${esc(d.title||d.file_name||'Document')}</b><em>${esc(r.id)} · ${date(d.created_at)}</em></span><strong>Open →</strong></button>`).join('')}</div>`:'<div class="emptyState"><h3>No account documents yet</h3><p>Documents will appear here as they are attached to live orders. Open an order to upload a PO, approval or acceptance record.</p></div>'}</section>`);
+    const groups=customerAccountRequests().map(r=>({r,docs:(r.documents||[]).filter(d=>!buyerView.documentType||d.document_type===buyerView.documentType)})).filter(x=>x.docs.length);
+    const types=[...new Set(customerAccountRequests().flatMap(r=>(r.documents||[]).map(d=>d.document_type)))];
+    return shell(`<div class="pageHeader customerSimpleHeader"><div><h1>Documents</h1><p>${esc(state.campus)} · Find issued files by request. Only available account documents are shown.</p></div><label>Document type<select class="input" data-buyer-document-type><option value="">All documents</option>${types.map(t=>`<option value="${esc(t)}" ${buyerView.documentType===t?'selected':''}>${esc(documentTypeLabel(t))}</option>`).join('')}</select></label></div><div class="buyerDocumentGroups documentsIndexPanel">${groups.map(({r,docs})=>`<section class="panel"><div class="panelHeader"><div><h2>${esc(r.quoteRef||r.id)}</h2><p>${esc(r.campus)} · ${date(r.createdAt)}</p></div><button class="button light" data-request-view="${esc(r.id)}">View request</button></div><div class="documentsIndex">${docs.map(d=>`<button class="documentIndexRow" data-document-open="${esc(d.object_path)}"><span><small>${esc(documentTypeLabel(d.document_type))}</small><b>${esc(d.title||d.file_name||'Document')}</b><em>${esc(d.file_name||'')} · ${date(d.created_at)}</em></span><span class="button light">Open file</span></button>`).join('')}</div></section>`).join('')||'<div class="emptyState"><h3>No matching documents</h3><p>Files appear when attached to an authorized request. Nothing has been generated or issued by opening this page.</p><button class="button light" data-go="portal/requests">View requests</button></div>'}</div>`);
   }
 
   async function openOrderDocument(path){
     if(!sb || !path) return;
+    if(!customerAccountRequests().some(r=>(r.documents||[]).some(d=>d.object_path===path)&&r.dbId&&path.startsWith(r.dbId+'/'))&&!authContext?.isPscAdmin){toast('This file is not available for the current campus.');return;}
     const preview=window.open('about:blank','_blank');
     try{
       const {data,error}=await sb.storage.from('order-documents').createSignedUrl(path,60);
       if(error) throw error;
-      if(data?.signedUrl){
+      if(!data?.signedUrl)throw new Error('Signed document link was not returned');
+      if(data.signedUrl){
         if(preview){ preview.opener=null; preview.location=data.signedUrl; }
         else window.location.href=data.signedUrl;
       }
@@ -2638,13 +2645,31 @@
   }
 
   const workflow=['Drafting','Sent','Authorized','Procurement','Delivery','Accepted','Cancelled'];
+  async function loadBuyerActivity(){
+    if(!window.PSC_BUYER_JOURNEY.groupScope(authContext)||buyerView.groupLoading)return;
+    buyerView.groupLoading=true;buyerView.groupError='';const user=session.user.id,group=authContext.group.id;
+    render();
+    try{
+      const ids=authContext.schools.map(s=>s.id);
+      const {data,error}=await sb.from('orders').select('id,order_number,school_id,status,created_at,quote_ref').in('school_id',ids).eq('group_id',group).order('created_at',{ascending:false}).limit(100);
+      if(error)throw error;
+      if(session?.user?.id!==user||authContext?.group?.id!==group)return;
+      buyerView.groupRows=(data||[]).filter(r=>ids.includes(r.school_id));
+    }catch(e){if(session?.user?.id===user&&authContext?.group?.id===group)buyerView.groupError='Activity could not be loaded. Try again; no records were changed.';}
+    finally{if(session?.user?.id===user&&authContext?.group?.id===group){buyerView.groupLoading=false;render();}}
+  }
+  function buyerActivityPanel(){
+    if(!window.PSC_BUYER_JOURNEY.groupScope(authContext))return '';
+    const rows=(buyerView.groupRows||[]).filter(r=>(!buyerView.dateFrom||String(r.created_at).slice(0,10)>=buyerView.dateFrom)&&(!buyerView.campusFilter||r.school_id===buyerView.campusFilter));
+    return `<section class="panel buyerGroupActivity"><div class="panelHeader"><div><h2>Across your authorized campuses</h2><p>Read-only purchasing activity. Your active request stays with ${esc(state.campus)}.</p></div><button class="button light" data-buyer-group ${buyerView.groupLoading?'disabled':''}>${buyerView.groupOpen?'Refresh activity':'View campus activity'}</button></div>${buyerView.groupOpen?`<div class="buyerGroupFilters"><label>Campus<select class="input" data-buyer-campus-filter><option value="">All authorized campuses</option>${authContext.schools.map(s=>`<option value="${esc(s.id)}" ${buyerView.campusFilter===s.id?'selected':''}>${esc(schoolLabel(s))}</option>`).join('')}</select></label><label>From date<input class="input" type="date" data-buyer-date value="${esc(buyerView.dateFrom)}"></label></div>${buyerView.groupLoading?'<p role="status">Loading authorized activity…</p>':buyerView.groupError?`<p role="alert">${esc(buyerView.groupError)}</p>`:`<div class="tableWrap"><table class="buyerCampusTable"><thead><tr><th>Campus</th><th>Request</th><th>Recorded status</th><th>Created</th><th></th></tr></thead><tbody>${rows.map(r=>`<tr><td data-label="Campus">${esc(schoolLabel(authContext.schools.find(s=>s.id===r.school_id)))}</td><td data-label="Request">${esc(r.order_number)}</td><td data-label="Status">${esc(window.PSC_BUYER_JOURNEY.statusLabel(DB_TO_UI_STATUS[r.status]))}</td><td data-label="Created">${date(r.created_at)}</td><td><button class="button light" data-buyer-campus-request="${esc(r.school_id)}|${esc(r.id)}">${r.school_id===authContext.school.id?'Open request':'Switch campus & open'}</button></td></tr>`).join('')}</tbody></table></div>${!rows.length?'<p>No matching activity in your authorized sites. Adjust the filters or refresh.</p>':''}<small>Up to 100 recent requests. Opening another campus explicitly switches your account context; the current draft stays saved to its original site. Quoted values are not expenditure, invoices or collections.</small>`}`:''}</section>`;
+  }
   function requestsPage(){
     const visible=customerVisibleRequests();
     const active=visible.filter(r=>!['Accepted','Cancelled'].includes(r.status));
     const delivered=visible.filter(r=>r.status==='Accepted');
     const cancelled=visible.filter(r=>r.status==='Cancelled');
     const archiveCount=state.requests.filter(r=>r.campus===state.campus&&isArchived(r)).length;
-    return shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">YOUR ACCOUNT HISTORY</span><h1>Orders & Requests</h1><p>Every order, quotation and status between your clinic and Pharma Service in one place.</p></div><button class="button light" data-go="portal/archive">Archive (${archiveCount})</button></div>
+    return shell(`<div class="pageHeader customerSimpleHeader"><div><span class="eyebrow">YOUR ACCOUNT HISTORY</span><h1>Orders & Requests</h1><p>Every order, quotation and status between your clinic and Pharma Service in one place.</p></div><button class="button light" data-go="portal/archive">Archive (${archiveCount})</button></div>${buyerActivityPanel()}
       <section class="orderSection"><div class="orderSectionHead"><h2>Current</h2><span>${active.length}</span></div><div class="orderCardGrid">${active.map(r=>customerOrderCard(r)).join('')||'<div class="emptyState"><h3>No active orders</h3></div>'}</div></section>
       <section class="orderSection"><div class="orderSectionHead"><h2>Delivered</h2><span>${delivered.length}</span></div><div class="orderCardGrid compact">${delivered.map(r=>customerOrderCard(r)).join('')||'<div class="emptyState"><h3>No delivered orders yet</h3></div>'}</div></section>
       ${cancelled.length?`<section class="orderSection"><div class="orderSectionHead"><h2>Cancelled</h2><span>${cancelled.length}</span></div><div class="orderCardGrid compact">${cancelled.map(r=>customerOrderCard(r)).join('')}</div></section>`:''}`);
@@ -2653,7 +2678,7 @@
     const q=calcQuote(r), label=friendlyStatus(r.status), first=r.lines[0]||null, p=first?.sku?product(first.sku):null, extra=Math.max(0,r.lines.length-1);
     const delivery=['Authorized','Procurement','Delivery'].includes(r.status)?expectedDeliveryLabel(r):'';
     const archiveDate=r.status==='Cancelled'&&r.cancelledAt?addDaysLabel(r.cancelledAt,30):'';
-    return `<article class="customerOrderCard statusCard-${r.status.toLowerCase()}"><div class="orderCardHead"><div><span class="eyebrow">${esc(r.quoteRef||'ORDER UNDER REVIEW')}</span><h3 class="mono">${r.id}</h3><p>${date(r.createdAt)} · ${r.lines.length} lines</p></div>${customerStatusPill(r.status)}</div><div class="orderCardProduct"><div><b>${first?`${first.qty} × ${esc(lineDisplayName(first,p))}`:'Order items'}</b>${extra?`<span>+ ${extra} more line${extra>1?'s':''}</span>`:''}</div>${q.hasSell&&r.quoteRef?`<strong>${money(q.total)}</strong>`:''}</div>${r.status==='Drafting'?`<div class="orderMessage">${authContext?.group?.slug==='aeg-education'?'Under review. PS prepares the formal quotation for the agreed AEG Management approval process.':`Under review. Your quotation will be sent to <strong>${esc(accountEmailLabel())}</strong>.`}</div>`:''}${r.quote?.management_decision?`<div class="orderMessage">Management decision: ${esc(r.quote.management_decision)}. Customer PO and PSC release checks remain separate.</div>`:''}${r.status==='Sent'?`<div class="orderMessage quoteReady">${authContext?.group?.slug==='aeg-education'?(r.quote?.management_decision?'Management decision recorded. Customer PO and PS commercial release checks remain required.':'Quotation issued for AEG Management review. An authorized approver must record the decision.'):`Quotation sent to <strong>${esc(accountEmailLabel())}</strong>. Confirm or cancel below.`}</div>`:''}${delivery?`<div class="deliveryPromise"><span>TRACK</span><b>${delivery}</b></div>`:''}${r.status==='Accepted'?`<div class="orderMessage deliveredMsg">Delivered ${date(r.deliveredAt||r.createdAt)}. These items are now available on Replenish.</div>`:''}${r.status==='Cancelled'?`<div class="orderMessage cancelledMsg">Cancelled. This will move to Archive after ${archiveDate}.</div>`:''}<div class="orderCardActions"><button class="button light small" data-request-view="${r.id}">View</button>${r.status==='Sent'?`<button class="button primary small" data-confirm-quote="${r.id}">Confirm quote</button><button class="button quietDanger small" data-cancel-quote="${r.id}">Cancel</button>`:''}${['Authorized','Procurement','Delivery'].includes(r.status)?`<button class="button dark small" data-request-view="${r.id}">Track</button>`:''}${r.status==='Accepted'?`<button class="button dark small" data-reorder-order="${r.id}">Replenish order</button>`:''}</div></article>`;
+    return `<article class="customerOrderCard statusCard-${r.status.toLowerCase()}"><div class="orderCardHead"><div><span class="eyebrow">${esc(r.quoteRef||'ORDER UNDER REVIEW')}</span><h3 class="mono">${r.id}</h3><p>${date(r.createdAt)} · ${r.lines.length} lines</p></div>${customerStatusPill(r.status)}</div><div class="orderCardProduct"><div><b>${first?`${first.qty} × ${esc(lineDisplayName(first,p))}`:'Order items'}</b>${extra?`<span>+ ${extra} more line${extra>1?'s':''}</span>`:''}</div>${q.hasSell&&r.quoteRef?`<strong>${isDemoAccount()?money(q.total):/^[A-Z]{3}$/.test(r.quote?.issued?.currency||'')?esc(r.quote.issued.currency)+' '+Number(q.total).toFixed(2):'Amount in issued quotation'}</strong>`:''}</div>${r.status==='Drafting'?`<div class="orderMessage">${authContext?.group?.slug==='aeg-education'?'Under review. PS prepares the formal quotation for the agreed AEG Management approval process.':`Under review. Your quotation will be sent to <strong>${esc(accountEmailLabel())}</strong>.`}</div>`:''}${r.quote?.management_decision?`<div class="orderMessage">Management decision: ${esc(r.quote.management_decision)}. Customer PO and PSC release checks remain separate.</div>`:''}${r.status==='Sent'?`<div class="orderMessage quoteReady">${authContext?.group?.slug==='aeg-education'?(r.quote?.management_decision?'Management decision recorded. Customer PO and PS commercial release checks remain required.':'Quotation issued for AEG Management review. An authorized approver must record the decision.'):`Quotation sent to <strong>${esc(accountEmailLabel())}</strong>. Review the quotation and follow your agreed authorization process.`}</div>`:''}${delivery?`<div class="deliveryPromise"><span>TRACK</span><b>${delivery}</b></div>`:''}${r.status==='Accepted'?`<div class="orderMessage deliveredMsg">${r.deliveredAt?'Delivered '+date(r.deliveredAt)+'.':'Delivery recorded; delivery date not recorded.'} These items are now available on Replenish.</div>`:''}${r.status==='Cancelled'?`<div class="orderMessage cancelledMsg">Cancelled. This will move to Archive after ${archiveDate}.</div>`:''}<div class="orderCardActions"><button class="button light small" data-request-view="${r.id}">${['Authorized','Procurement','Delivery'].includes(r.status)?'View progress':'View request'}</button>${r.status==='Sent'&&isDemoAccount()?`<button class="button primary small" data-confirm-quote="${r.id}">Confirm quote</button><button class="button quietDanger small" data-cancel-quote="${r.id}">Cancel</button>`:''}${r.status!=='Cancelled'?`<button class="button dark small" data-reorder-order="${r.id}">Repeat request</button>`:''}</div></article>`;
   }
 
   function archivePage(){
@@ -2690,12 +2715,12 @@
     }
     return l?.sku||'';
   }
-  function lineDisplayName(l,p=null){ if(l?.kind==='unlisted')return l.description;return isFamilyLine(l)?(l.productOptionSnapshot?.exact_product_name||l.requirementSnapshot?.name||l.familyName||l.familyId||'Catalogue family'):(p?.catalogueDisplayName||p?.name||l?.sku||'Order item'); }
+  function lineDisplayName(l,p=null){ if(l?.kind==='unlisted')return l.description;return isFamilyLine(l)?(l.productOptionSnapshot?.exact_product_name||l.requirementSnapshot?.name||l.familyName||l.familyId||'Catalogue family'):(l?.lineSnapshot?.name||p?.catalogueDisplayName||p?.name||l?.sku||'Order item'); }
   function lineReference(l){ if(l?.kind==='unlisted')return 'Unlisted item — requires PS review';return isFamilyLine(l)?l.requirementSnapshot?.sku||l.familyId:(l?.sku||''); }
   function linePackLabel(l,p=null){
     if(l?.kind==='unlisted')return l.requestUnit||'Unit to confirm';
     if(isFamilyLine(l)) return l.productOptionSnapshot?.exact_product_name?(l.productOptionSnapshot.pack||'Pack / unit to confirm'):(l.requirementSnapshot?.pack||l.orderPackBasis||'Pack / scope to confirm');
-    return p?.cataloguePack||p?.pack||'Pack to confirm';
+    return l?.lineSnapshot?(l.lineSnapshot.pack||'Historical pack not recorded; confirm'):p?.cataloguePack||p?.pack||'Pack to confirm';
   }
   function lineBrandPreferenceLabel(l){
     if(!isFamilyLine(l)) return '';
@@ -2753,7 +2778,7 @@
     window.PS_SEARCH_ANALYTICS?.record('added',{productId:sku});productSearchMemory().selectedSku=sku;
     const f=state.basket.find(x=>lineKey(x)===sku);const prior=Number(f?.qty||0);
     if(prior+qty>10000){toast('Keep requested quantity at or below 10,000 per line');return;}
-    if(f)f.qty+=qty;else state.basket.push({sku,qty});
+    if(f)f.qty+=qty;else state.basket.push({sku,qty,lineSnapshot:{name:p.name,pack:p.pack||'',brand:p.brand||''}});
     save();renderUi({preserveScroll:true,transition:false});
     document.dispatchEvent(new CustomEvent('psc:request-added',{detail:{sku,qty,total:basketQty()}}));
     toast(`<strong>${qty} × ${esc(p.catalogueDisplayName||p.name)}</strong> added · ${prior+qty} of this product in request`);
@@ -2792,21 +2817,24 @@
     toast(`<strong>${selection.lines.length} components added to Supply Request.</strong><br>Review your request before submitting.`);
     return {ok:true};
   };
-  function reorderRequest(id){
-    const r=state.requests.find(x=>x.id===id); if(!r)return;
-    r.lines.forEach(l=>{const key=lineKey(l);const f=state.basket.find(x=>lineKey(x)===key);if(f)f.qty+=l.qty;else state.basket.push(JSON.parse(JSON.stringify(l)))});
-    save();render();toast(`<strong>${r.lines.length} lines</strong> added to Supply Request`);
+  function reorderRequest(id,onlyIndex=null){
+    const r=customerAccountRequests().find(x=>x.id===id); if(!r||requestSubmitting)return;
+    const selected=Number.isInteger(onlyIndex)?r.lines.filter((_,i)=>i===onlyIndex):r.lines;
+    const next=selected.map(l=>window.PSC_BUYER_JOURNEY.repeatLine(l,l.sku?product(l.sku):null,r.id));
+    for(const l of next){const key=lineKey(l),f=state.basket.find(x=>lineKey(x)===key);if(f&&f.qty+l.qty>10000){toast('Review quantities: a request line cannot exceed 10,000.');return;}}
+    next.forEach(l=>{const key=lineKey(l),f=state.basket.find(x=>lineKey(x)===key);if(f)f.qty+=l.qty;else state.basket.push(l)});
+    save();ui.modal=null;ui.basket=true;render();toast('<strong>New request draft.</strong><br>Review products, quantities and campus. The original request is unchanged.');
   }
   function basketDrawer(){
     const lines=state.basket.map((l,index)=>({l,p:l.sku?product(l.sku):null,index})).filter(x=>x.p||isFamilyLine(x.l)||x.l.kind==='unlisted');
-    const indicative=lines.reduce((sum,x)=>sum+((x.p?.contractPrice)||0)*x.l.qty,0);
-    return `<div class="drawerBackdrop requestDrawerBackdrop" data-close-basket><aside class="drawer requestDrawer" onclick="event.stopPropagation()"><div class="drawerHandle" aria-hidden="true"></div><div class="drawerHeader"><div><span class="eyebrow">PHARMA SERVICE</span><h2>Supply Request</h2><small>${lines.length?`${lines.length} line${lines.length===1?'':'s'} · ${basketQty()} item${basketQty()===1?'':'s'}`:'Build a request while you browse'}</small></div><button class="iconBtn" data-close-basket aria-label="Close request">×</button></div><div class="drawerBody">${draftUndoControl()}${lines.length?lines.map(({l,p,index})=>{
-      if(l.kind==='unlisted')return `<div class="basketLine requestLine"><div class="basketInfo"><b>${esc(l.description)}</b><span>Unlisted item — requires PS review</span></div><div class="qty"><button data-family-basket-delta="${index}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-family-basket-delta="${index}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
+    const indicative=lines.reduce((sum,x)=>sum+(x.l.repeatSource?0:((x.p?.contractPrice)||0))*x.l.qty,0);
+    return `<div class="drawerBackdrop requestDrawerBackdrop" data-close-basket><aside class="drawer requestDrawer" onclick="event.stopPropagation()"><div class="drawerHandle" aria-hidden="true"></div><div class="drawerHeader"><div><span class="eyebrow">PHARMA SERVICE</span><h2>Supply Request</h2><p class="buyerCampus">${esc(state.campus||'Select an authorized campus before submitting')}</p><small>${lines.length?`${lines.length} line${lines.length===1?'':'s'} · ${basketQty()} item${basketQty()===1?'':'s'}`:'Build a request while you browse'}</small></div><button class="iconBtn" data-close-basket aria-label="Close request">×</button></div><div class="drawerBody">${draftUndoControl()}${lines.length?lines.map(({l,p,index})=>{
+      if(l.kind==='unlisted')return `<div class="basketLine requestLine"><div class="basketInfo"><b>${esc(l.description)}</b><span>${esc(l.requestUnit||'Unit to confirm')} · Sourcing request</span>${l.repeatNotice?`<small>${esc(l.repeatNotice)}</small>`:''}</div><div class="qty"><button data-family-basket-delta="${index}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-family-basket-delta="${index}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
       if(isFamilyLine(l)){
         return `<div class="basketLine requestLine"><div class="productGlyph small">${l.regulated?'Rx':'PS'}</div><div class="basketInfo"><b>${esc(lineDisplayName(l,p))}</b><span>${esc(linePackLabel(l,p))} · ${esc(lineReference(l))}</span><small>${esc(lineBrandPreferenceLabel(l))} · Price confirmed in quotation</small></div><div class="qty"><button data-family-basket-delta="${index}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-family-basket-delta="${index}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-family-basket-remove="${index}">Remove</button></div>`;
       }
-      const imageUrl=productDisplayImageUrl(p);return `<div class="basketLine requestLine">${imageUrl?`<div class="requestLineImage"><img src="${esc(imageUrl)}" alt="" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'"></div>`:`<div class="productGlyph small">${esc((p.brand||'PS').slice(0,2).toUpperCase())}</div>`}<div class="basketInfo"><b>${esc(p.name||p.catalogueDisplayName)}</b><span>${esc(p.pack||p.cataloguePack||'Pack to confirm')} · ${p.pscSku}</span><small>${p.contractPrice?money(p.contractPrice)+' indicative account price':'Price confirmed in quotation'}</small></div><div class="qty"><button data-basket-delta="${p.pscSku}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-basket-delta="${p.pscSku}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-basket-remove="${p.pscSku}">Remove</button></div>`
-    }).join(''):`<div class="emptyState requestEmpty"><h3>Your request is empty</h3><p>Browse the catalogue and add the products you want PS to quote.</p><button class="button dark" data-go="portal/catalogue">Browse catalogue</button></div>`}${scopeNote()?`<div class="psRequestScopeReview"><b>Request scope</b><p>${esc(scopeNote()).replace(/\n/g,'<br>')}</p></div>`:''}</div>${lines.length?`<div class="drawerFooter requestDrawerFooter"><label class="fieldLabel">Request note <span>optional</span></label><textarea class="textarea" id="basketNote" placeholder="Delivery timing, preferred brand, clinic note…"></textarea><div class="totals"><span>Indicative priced lines</span><b>${money(indicative)}</b></div><div class="checkoutPromise requestNextStep"><span>WHAT HAPPENS NEXT</span><p>${authContext?.group?.slug==='aeg-education'?'PS reviews the request and prepares the formal quotation for AEG Management review. Customer PO and PS commercial release checks remain required.':`PS reviews the request and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. Nothing is procured until the required customer approval is in place.`}</p></div><button class="button primary full submitRequestButton" data-submit-request>Submit request</button></div>`:''}</aside></div>`;
+      const imageUrl=productDisplayImageUrl(p);return `<div class="basketLine requestLine">${imageUrl?`<div class="requestLineImage"><img src="${esc(imageUrl)}" alt="" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'"></div>`:`<div class="productGlyph small">${esc((p.brand||'PS').slice(0,2).toUpperCase())}</div>`}<div class="basketInfo"><b>${esc(lineDisplayName(l,p))}</b><span>${esc(linePackLabel(l,p))} · ${p.pscSku}</span><small>${l.repeatSource?'New quotation required':p.contractPrice?money(p.contractPrice)+' indicative account price':'Price confirmed in quotation'}</small>${l.repeatNotice?`<small>${esc(l.repeatNotice)}</small>`:''}</div><div class="qty"><button data-basket-delta="${p.pscSku}|-1" aria-label="Reduce quantity">−</button><span>${l.qty}</span><button data-basket-delta="${p.pscSku}|1" aria-label="Increase quantity">+</button></div><button class="removeLink" data-basket-remove="${p.pscSku}">Remove</button></div>`
+    }).join(''):`<div class="emptyState requestEmpty"><h3>Your request is empty</h3><p>Browse the catalogue and add the products you want PS to quote.</p><button class="button dark" data-go="portal/catalogue">Browse catalogue</button></div>`}${scopeNote()?`<div class="psRequestScopeReview"><b>Request scope</b><p>${esc(scopeNote()).replace(/\n/g,'<br>')}</p></div>`:''}</div>${lines.length?`<div class="drawerFooter requestDrawerFooter"><label class="fieldLabel">Request note <span>optional</span></label><textarea class="textarea" id="basketNote" data-buyer-note placeholder="Delivery timing, preferred brand, clinic note…">${esc(state.notesBySchool?.[state.activeSchoolId]||'')}</textarea><div class="totals"><span>Indicative priced lines</span><b>${indicative?money(indicative):'Request quotation'}</b></div><div class="checkoutPromise requestNextStep"><span>WHAT HAPPENS NEXT</span><p>${authContext?.group?.slug==='aeg-education'?'PS reviews the request and prepares the formal quotation for AEG Management review. Customer PO and PS commercial release checks remain required.':`PS reviews the request and sends the formal quotation to <strong>${esc(accountEmailLabel())}</strong>. Nothing is procured until the required customer approval is in place.`}</p></div><button class="button primary full submitRequestButton" data-submit-request>Submit request</button></div>`:''}</aside></div>`;
   }
 
 
@@ -2818,23 +2846,42 @@
   }
 
   function requestModal(id, admin=false){
-    const r=state.requests.find(x=>x.id===id); if(!r)return '';
+    const r=(admin?state.requests:customerAccountRequests()).find(x=>x.id===id); if(!r)return '';
     const quote=calcQuote(r);
     const canApprove=r.status==='Sent' && quote.taxResolved && quote.hasSell;
     return `<div><div class="modalHeader"><div><span class="eyebrow">${admin?'PS REQUEST CONTROL':'REQUEST / QUOTATION'}</span><h2 class="mono">${r.id}</h2><div class="smallMuted">${esc(r.groupName||state.groupName||'Institutional account')} · ${esc(r.campus)} · ${date(r.createdAt)}</div></div><button class="iconBtn" data-modal-close>×</button></div>
-      ${admin?adminQuoteBuilder(r,quote):schoolQuote(r,quote,canApprove)}${bankTransferInstructions(r)}${orderDocumentsSection(r,admin)}</div>`;
+      ${!admin&&!isDemoAccount()?buyerJourneyHtml(r):''}${admin?adminQuoteBuilder(r,quote):schoolQuote(r,quote,canApprove)}${!admin&&!isDemoAccount()&&bankTransferInstructions(r)?`<details class="buyerPaymentDetails"><summary>Bank transfer details</summary>${bankTransferInstructions(r)}</details>`:bankTransferInstructions(r)}${orderDocumentsSection(r,admin)}</div>`;
   }
 
   function calcQuote(r){
+    if(r.dbId&&!authContext?.isPscAdmin&&!isDemoAccount()){
+      const v=window.PSC_BUYER_JOURNEY.quoteView(r.quote?.issued,r.quote?.issuedLines);
+      return {rows:v.rows,subtotal:v.subtotal,cost:0,vat:v.vat,total:v.total,hasSell:v.complete,taxResolved:v.complete,costComplete:false,gp:null,gm:null};
+    }
     let subtotal=0,cost=0,vat=0,hasSell=true,costComplete=true,taxResolved=true;
     const rows=r.lines.map(l=>{const p=l.sku?product(l.sku):null;const key=lineKey(l);const q=(r.quote&&r.quote.lines&&r.quote.lines[key])||{};const sell=Number.isFinite(Number(q.sell))?Number(q.sell):(Number.isFinite(Number(p?.contractPrice))?Number(p.contractPrice):null);const c=Number.isFinite(Number(q.cost))?Number(q.cost):(Number.isFinite(Number(p?.supplierCost))?Number(p.supplierCost):null);const vr=q.vat===0||q.vat===5?Number(q.vat):null;if(sell===null)hasSell=false;else subtotal+=sell*l.qty;if(c===null)costComplete=false;else cost+=c*l.qty;if(vr===null){taxResolved=false}else if(sell!==null){vat += sell*l.qty*vr/100;}return {l,p,key,q,sell,cost:c,vatRate:vr};});
     const gp=hasSell&&costComplete?subtotal-cost:null;const gm=gp!==null&&subtotal>0?gp/subtotal*100:null;
     return {rows,subtotal,cost,vat,total:subtotal+vat,gp,gm,hasSell,costComplete,taxResolved};
   }
 
-  function schoolQuote(r,q,canApprove){
+  function demoSchoolQuote(r,q,canApprove){
     const delivery=['Authorized','Procurement','Delivery'].includes(r.status)?expectedDeliveryLabel(r):'';
     return `<div class="schoolQuoteBox"><div class="quoteCustomerTop"><div><span class="eyebrow">${r.quoteRef||'ORDER UNDER REVIEW'}</span><h3>${friendlyStatus(r.status)}</h3></div>${customerStatusPill(r.status)}</div>${r.status==='Drafting'?`<div class="quoteStatePanel"><b>PS is reviewing this order.</b><p>${authContext?.group?.slug==='aeg-education'?'Your formal quotation will follow the agreed AEG Management approval process.':`Your formal quotation will be sent to ${esc(accountEmailLabel())}.`}</p></div>`:''}${r.quoteRef?`<div class="tableWrap"><table class="dataTable"><thead><tr><th>ITEM</th><th>PACK</th><th>QTY</th><th>UNIT EX VAT</th><th>LINE EX VAT</th><th>VAT</th></tr></thead><tbody>${q.rows.map(x=>`<tr><td><b>${esc(lineDisplayName(x.l,x.p))}</b><div class="sub mono">${esc(lineReference(x.l))}</div>${isFamilyLine(x.l)?`<div class="sub">${esc(lineBrandPreferenceLabel(x.l))}</div>`:''}</td><td>${esc(linePackLabel(x.l,x.p))}</td><td>${x.l.qty}</td><td>${x.sell!==null?money(x.sell):'Pending'}</td><td>${x.sell!==null?money(x.sell*x.l.qty):'Pending'}</td><td>${x.vatRate===null?'Review':x.vatRate+'%'}</td></tr>`).join('')}</tbody></table></div><div class="quoteSummary"><div><span>SUBTOTAL EX VAT</span><b>${q.hasSell?money(q.subtotal):'Pending'}</b></div><div><span>VAT</span><b>${q.taxResolved?money(q.vat):'Review'}</b></div><div><span>TOTAL</span><b>${q.hasSell&&q.taxResolved?money(q.total):'Pending'}</b></div><div><span>VALIDITY</span><b>${esc(r.quote?.validity||'Pending')}</b></div></div>`:''}${r.status==='Sent'?`<div class="modalQuoteActions"><button class="button primary" data-confirm-quote="${r.id}">Confirm quotation</button><button class="button quietDanger" data-cancel-quote="${r.id}">Cancel quotation</button></div>`:''}${delivery?`<div class="deliveryPromise large"><span>TRACK ORDER</span><b>${delivery}</b><small>Delivery timing is shown only when PS has recorded it for this order.</small></div>`:''}${r.status==='Accepted'?`<div class="quoteStatePanel delivered"><b>Delivered.</b><p>This order is now part of your purchase history and its items can be repeated from Replenish.</p></div>`:''}${r.status==='Cancelled'?`<div class="quoteStatePanel cancelled"><b>Cancelled.</b><p>${isArchived(r)?'This quotation is now in Archive.':`It will move to Archive on ${addDaysLabel(r.cancelledAt||r.createdAt,30)}.`}</p></div>`:''}</div>`;
+  }
+
+
+  function schoolQuote(r,q,canApprove){
+    if(isDemoAccount())return demoSchoolQuote(r,q,canApprove);
+    const issued=r.quote?.issued,v=window.PSC_BUYER_JOURNEY.quoteView(issued,r.quote?.issuedLines),show=window.PSC_BUYER_JOURNEY.issued(issued),decision=window.PSC_BUYER_JOURNEY.decisionGate(authContext,r);
+    const quoteMoney=value=>window.PSC_BUYER_JOURNEY.numeric(value)===null?'Pending':/^[A-Z]{3}$/.test(issued?.currency||'')?`${esc(issued.currency)} ${Number(value).toFixed(2)}`:`${Number(value).toFixed(2)} (currency not recorded)`;
+    const terms=(label,value)=>`<div><dt>${label}</dt><dd>${esc(value||'Not recorded; confirm with PSC')}</dd></div>`;
+    return `<div class="schoolQuoteBox buyerQuote"><div class="quoteCustomerTop"><div><h3>${esc(r.quoteRef||'Request under review')}</h3><p>${esc(r.groupName)} · ${esc(r.campus)}</p></div>${customerStatusPill(r.status)}</div>${show?`
+      <dl class="buyerQuoteFacts">${terms('Revision',issued.current_revision==null?'':String(issued.current_revision))}${terms('Issued',issued.sent_at?date(issued.sent_at):'')}${terms('Currency',issued.currency)}${terms('Valid until',issued.expires_at?date(issued.expires_at):r.quote.validity)}</dl>
+      ${v.rows.length?`<div class="tableWrap"><table class="buyerQuoteTable"><thead><tr><th>Product / specification</th><th>Pack / unit</th><th>Qty</th><th>Unit ex VAT</th><th>Line ex VAT</th><th>VAT</th></tr></thead><tbody>${v.rows.map(x=>`<tr><td data-label="Product"><b>${esc(x.name)}</b>${x.brand?`<div>${esc(x.brand)}</div>`:''}${x.spec?`<div class="sub">${esc(x.spec)}</div>`:''}${x.note?`<div class="sub">${esc(x.note)}</div>`:''}<small>${esc(x.sku)}</small></td><td data-label="Pack / unit">${esc(x.pack)}</td><td data-label="Quantity">${x.qty??'Pending'}</td><td data-label="Unit ex VAT">${x.sell===null?'Pending':quoteMoney(x.sell)}</td><td data-label="Line ex VAT">${x.sell===null||x.qty===null?'Pending':quoteMoney(x.qty*x.sell)}</td><td data-label="VAT">${x.vat===null?'Pending':x.vat+'%'}</td></tr>`).join('')}</tbody></table></div>`:'<p>Structured quotation lines are not available. Use the issued document below or contact PSC; catalogue prices are not substituted.</p>'}
+      <div class="quoteSummary"><div><span>Subtotal ex VAT</span><b>${v.complete?quoteMoney(v.subtotal):'Pending'}</b></div><div><span>VAT</span><b>${v.complete?quoteMoney(v.vat):'Pending'}</b></div><div><span>Total incl. VAT</span><b>${v.complete?quoteMoney(v.total):'Pending'}</b></div></div>
+      <dl class="buyerQuoteFacts">${terms('Delivery / lead time',issued.delivery_terms)}${terms('Payment terms',issued.payment_terms)}${terms('Conditions',issued.customer_note)}</dl><p class="smallMuted">Purchasing legal entity, warranty, FOC items and exclusions follow the issued quotation document; missing terms require confirmation.</p>
+      ${decision.ok?`<div class="modalQuoteActions"><button class="button primary" data-confirm-quote="${esc(r.id)}">Approve revision ${esc(String(issued.current_revision))}</button><button class="button quietDanger" data-cancel-quote="${esc(r.id)}">Decline quotation</button></div>`:`<p class="buyerAuthorization">${r.quote?.management_decision?'Management decision: '+esc(r.quote.management_decision)+'. ':''}Use your institution’s agreed PO or written authorization process. Viewing this quotation does not place an order or release procurement.${window.PSC_BUYER_JOURNEY.canDecide(authContext)&&!decision.ok?` ${esc(decision.reason)}`:''}</p>`}
+    `:'<p>Your requirement is under review. A formal quotation will appear when issued; no purchase has been authorized.</p>'}<div class="buyerRequestLines"><h4>Original request</h4>${r.lines.map(l=>`<p>${l.qty} × ${esc(lineDisplayName(l,l.sku?product(l.sku):null))} · ${esc(linePackLabel(l,l.sku?product(l.sku):null))}</p>`).join('')}<button class="button light" data-reorder-order="${esc(r.id)}">Repeat as a new request</button></div></div>`;
   }
 
   function adminQuoteBuilder(r,q){
@@ -3105,6 +3152,18 @@
     return `<div class="professionalSelector"><label for="productExactVariant">Exact product & pack</label><select id="productExactVariant" data-detail-variant>${variants.map(x=>`<option value="${esc(x.pscSku)}" ${x.pscSku===p.pscSku?'selected':''}>${esc(x.catalogueDisplayName||x.name)} · ${esc(x.cataloguePack||x.pack||'Pack to confirm')}</option>`).join('')}</select><p class="professionalSelectionNote">Each option keeps its own identity, photograph and pricing evidence.</p></div>`;
   }
 
+  function buyerJourneyHtml(r){
+    return `<section class="buyerJourney" aria-label="Purchasing record"><div class="buyerJourneyLead"><span>${esc(window.PSC_BUYER_JOURNEY.statusLabel(r.status))}</span><button class="button light" data-buyer-jump=".orderDocumentsPanel">Documents (${(r.documents||[]).length})</button><button class="button light" data-buyer-refresh>Refresh</button></div><details class="buyerRecordDisclosure"><summary>Request & authorization record</summary><ol>${window.PSC_BUYER_JOURNEY.journey(r).map(step=>`<li><b>${esc(step.label)}</b><span>${esc(step.detail)}</span></li>`).join('')}</ol><p>Recorded facts, not automatic release gates. Attached approvals still require PSC verification; an order confirmation is not proof of payment.</p></details></section>`;
+  }
+  function buyerProductConfidence(p){
+    if(!currentRoute().startsWith('portal/'))return '';
+    const info=window.PSC_PRODUCT_PRESENTATION.profile(p).info;
+    const reference=p.workbookDecision==='ENQUIRY ONLY'||p.brand==='Specification-led'||String(p.pscSku).startsWith('INST-');
+    const verified=info&&(info.verifiedFields||[]).length>0;
+    const docs=(info?.documents||[]).filter(d=>d.verified&&d.source&&/^https:\/\//i.test(d.url||''));
+    return `<section class="buyerConfidence" aria-label="Product confidence"><h4>${reference?'Sourcing reference':'Catalogue product'}</h4><p>${reference?'This describes a requirement. The exact brand, model and commercial pack must be agreed in quotation.':verified?'Only the specifically approved fields below have supporting verification. This is not blanket product or regulatory approval.':'The recorded product and pack identify your request. Technical specifications and suitability still need confirmation; this listing is not a verification certificate.'}</p>${!docs.length?'<p class="smallMuted">No approved manufacturer document is attached to this listing. Ask PSC for the exact model or pack documentation with your quotation.</p>':''}</section>`;
+  }
+
   function productModal(sku){
     const p=product(sku); if(!p)return '';
     const mapped=!!p.dhaMapped;
@@ -3129,7 +3188,7 @@
         <div class="detailImagePane fluidImagePane">${image}${Array.isArray(p.storefrontMedia)&&p.storefrontMedia.length>1?`<div class="productGalleryStrip">${p.storefrontMedia.slice(0,5).filter(m=>(window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(m.url):m.url)).map(m=>`<img src="${esc((window.PSC_IMAGE_POLICY?window.PSC_IMAGE_POLICY.resolve(m.url):m.url))}" alt="${esc(m.alt||displayName)}">`).join('')}</div>`:''}<div class="detailImageMeta">${p.brand&&p.brand!=='Specification-led'&&p.brand!=='Institutional range'?`<b>${esc(p.brand)}</b>`:''}<span>${esc(pack)}</span>${catalogueImageNote(p)}</div><div class="modalNeedChips">${needTags}</div></div>
         <div class="detailContentPane fluidDetailContent">
           <div class="professionalPurchaseIdentity"><h3>${esc(displayName)}</h3><p>${esc(pack)}</p></div>${wishlistControl(p)}${productVariantSelector(p)}${cataloguePricePreview(p)}${catalogueRetailPriceNotice()}${window.PSC_PRODUCT_PRESENTATION.whatsappHtml(p)}${window.PSC_READY_BASKETS?.entryHtml(p.pscSku)||''}
-          ${window.PSC_PRODUCT_PRESENTATION.documentsHtml(p)}<div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to the applicable DHA clinic requirement.</b></div>`:''}</div>
+          ${buyerProductConfidence(p)}${window.PSC_PRODUCT_PRESENTATION.documentsHtml(p)}<div class="productQuickFacts"><div><span>PACK / UNIT</span><b>${esc(pack)}</b></div><div><span>SUPPLY BASIS</span><b>${p.regulated?'Licensed route':'Confirmed at quotation'}</b></div>${mapped?`<div><span>REQUIREMENT</span><b>Mapped to the applicable DHA clinic requirement.</b></div>`:''}</div>
           <div class="productDisclosureList">
             <details open><summary><span>Details</span><i>+</i></summary><div>${window.PSC_PRODUCT_PRESENTATION.factsHtml(p,{heading:false})}<p>${esc(p.pscOfferedSpecification||p.spec||'Exact commercial specification will be confirmed with the quotation.')}</p></div></details>
             ${mapped?`<details><summary><span>Requirement mapping</span><i>+</i></summary><div><p><strong>${esc(p.dhaRequirement||'Mapped requirement')}</strong></p><p>${esc(p.dhaReference||'DHA requirement')} · ${esc(p.dhaStatus||'Status to verify')}</p>${p.dhaCondition?`<small>${esc(p.dhaCondition)}</small>`:''}<p class="disclosureFinePrint">Mapped to the applicable DHA clinic requirement. This is not a DHA product endorsement or product approval.</p></div></details>`:''}
@@ -3154,6 +3213,12 @@
   async function submitCustomRequest(){
     const el=document.getElementById('customRequestText');
     const qtyEl=document.getElementById('customRequestQty');
+    if(ui.buyerListMode){
+      const description=el?.value.trim()||'',qty=Number(qtyEl?.value||1);
+      if(!description||description.length>2000||!Number.isInteger(qty)||qty<1||qty>10000){toast('Enter a requirement of up to 2,000 characters and a positive quantity. You can attach the original file after submission.');return;}
+      state.basket.push({kind:'unlisted',requestId:'list-'+crypto.randomUUID(),description,requestUnit:'Original list / sourcing requirement; line quantities need review',qty});
+      ui.buyerListMode=false;save();ui.basket=true;render();return;
+    }
     const text=(el?.value||'').trim();
     const qty=Math.max(1,Number(qtyEl?.value||1));
     if(!text){ toast('<strong>Add a description first.</strong>'); return; }
@@ -3195,7 +3260,7 @@
         quote:{lines:{}},
         demoLocal:true
       });
-      state.basket=[]; state.scopesBySchool[state.activeSchoolId||'draft']=emptyScope(); ui.basket=false;
+      state.basket=[]; state.scopesBySchool[state.activeSchoolId||'draft']=emptyScope(); if(state.notesBySchool)delete state.notesBySchool[state.activeSchoolId]; ui.basket=false;
       clearDraftUndo();
       save(); render();
       toast(`<strong>Demo order created.</strong><br>${esc(orderNumber)} is a simulated request and will reset on refresh.`);
@@ -3209,7 +3274,7 @@
       delete pendingSubmissions[pendingSubmission?.fingerprint];
       pendingSubmission=null;
       try{if(Object.keys(pendingSubmissions).length)sessionStorage.setItem('psc-pending-submission',JSON.stringify(pendingSubmissions));else sessionStorage.removeItem('psc-pending-submission');}catch{}
-      state.basket=[]; state.scopesBySchool[state.activeSchoolId||'draft']=emptyScope(); ui.basket=false;
+      state.basket=[]; state.scopesBySchool[state.activeSchoolId||'draft']=emptyScope(); if(state.notesBySchool)delete state.notesBySchool[state.activeSchoolId]; ui.basket=false;
       clearDraftUndo();
       save();
       try{await loadOrdersFromDatabase();}catch(e){console.warn('Request saved; history refresh failed:',e);}
@@ -3229,6 +3294,14 @@
   async function hydrateAccount(){
     if(!sb || !session?.user) return;
     const uid=session.user.id;
+    if(state.ownerUserId!==uid){
+      let owned=null,legacy=null;try{owned=JSON.parse(localStorage.getItem(STORAGE+':'+uid)||'null');legacy=JSON.parse(localStorage.getItem(STORAGE)||'null');}catch{}
+      if(legacy&&(legacy.ownerUserId===uid||!legacy.ownerUserId&&legacy.accountEmail&&legacy.accountEmail.toLowerCase()===(session.user.email||'').toLowerCase()))state={...JSON.parse(JSON.stringify(seed)),...legacy};
+      const legacyOwner=state.ownerUserId===uid||(!state.ownerUserId&&state.accountEmail&&state.accountEmail.toLowerCase()===(session.user.email||'').toLowerCase());
+      const anonymousDraft=!state.ownerUserId&&!state.activeSchoolId&&!state.accountEmail;
+      state=owned?.ownerUserId===uid?{...JSON.parse(JSON.stringify(seed)),...owned}:legacyOwner||anonymousDraft?state:JSON.parse(JSON.stringify(seed));
+      state.ownerUserId=uid;buyerView.groupRows=null;buyerView.groupOpen=false;buyerView.documentType='';buyerView.groupError='';buyerView.requestsError='';buyerView.campusFilter='';
+    }
     const [{data:profile,error:profileError},{data:memberships,error:membershipError}] = await Promise.all([
       sb.from('profiles').select('full_name,is_psc_admin').eq('user_id',uid).maybeSingle(),
       sb.from('memberships').select('role,group_id,school_id').eq('user_id',uid)
@@ -3325,9 +3398,10 @@
     ui.modal=null;
 
     try{
-      await loadOrdersFromDatabase();
+      const loaded=await loadOrdersFromDatabase();
       save();
       render();
+      if(!loaded){toast('Campus selected. Account activity could not be loaded; retry without losing your draft.');return;}
       toast(`<strong>Account switched.</strong><br>${esc(schoolLabel(next))}`);
     }catch(e){
       console.error(e);
@@ -3336,7 +3410,14 @@
   }
 
   async function loadOrdersFromDatabase(){
+    const user=session?.user?.id,school=authContext?.school?.id;
+    try{await readOrdersFromDatabase();if(session?.user?.id===user&&authContext?.school?.id===school)buyerView.requestsError='';return true;}
+    catch(e){if(authContext?.isPscAdmin)throw e;if(session?.user?.id===user&&authContext?.school?.id===school){state.requests=[];buyerView.requestsError='Account activity unavailable';}return false;}
+  }
+  async function readOrdersFromDatabase(){
     if(!sb || !session?.user) return;
+    const version=++customerLoadVersion,requestUser=session.user.id,requestSchool=authContext?.school?.id;
+    const stale=()=>version!==customerLoadVersion||session?.user?.id!==requestUser||(!authContext?.isPscAdmin&&authContext?.school?.id!==requestSchool);
     if(isDemoAccount() && demoSession.requestsBySchool[authContext?.school?.id]){
       state.requests=JSON.parse(JSON.stringify(demoSession.requestsBySchool[authContext.school.id]));
       return;
@@ -3348,19 +3429,25 @@
     }
     const {data:orders,error}=await query;
     if(error) throw error;
+    if(stale())return;
     const ids=(orders||[]).map(o=>o.id);
     if(!ids.length){ state.requests=[]; return; }
     const [{data:lines,error:lineError},{data:quotes,error:quoteError},{data:documents,error:documentError},{data:schools,error:schoolError},{data:groups,error:groupError}] = await Promise.all([
       sb.from('order_lines').select('*').in('order_id',ids),
-      sb.from('quotes').select('*').in('order_id',ids),
+      authContext?.isPscAdmin||isDemoAccount()?sb.from('quotes').select('*').in('order_id',ids):sb.rpc('psc_buyer_issued_quotes',{p_school:requestSchool}),
       sb.from('order_documents').select('*').in('order_id',ids).order('created_at',{ascending:false}),
       authContext?.isPscAdmin ? sb.from('schools').select('id,name,campus_name,group_id') : Promise.resolve({data:[authContext.school],error:null}),
       authContext?.isPscAdmin ? sb.from('account_groups').select('id,name') : Promise.resolve({data:authContext.group?[authContext.group]:[],error:null})
     ]);
     if(lineError) throw lineError; if(quoteError) throw quoteError; if(documentError) throw documentError; if(schoolError) throw schoolError; if(groupError) throw groupError;
+    const issuedIds=(quotes||[]).filter(window.PSC_BUYER_JOURNEY.issued).map(q=>q.id);
+    if(!authContext?.isPscAdmin&&!isDemoAccount()&&(!Array.isArray(quotes)||(quotes||[]).some(q=>!Array.isArray(q.issued_lines))))throw new Error('Invalid issued quotation response');
+    const quoted=!authContext?.isPscAdmin&&!isDemoAccount()?{data:(quotes||[]).flatMap(q=>q.issued_lines),error:null}:issuedIds.length?await sb.from('quote_lines').select('id,quote_id,order_line_id,line_no,psc_sku_snapshot,line_description_snapshot,brand_model_snapshot,pack_snapshot,specification_snapshot,quantity,unit_sell_price_ex_vat,vat_rate_pct,customer_note').in('quote_id',issuedIds):{data:[],error:null};
+    if(quoted.error)throw quoted.error;
+    if(stale())return;
     const schoolMap=Object.fromEntries((schools||[]).filter(Boolean).map(x=>[x.id,x]));
     const groupMap=Object.fromEntries((groups||[]).filter(Boolean).map(x=>[x.id,x]));
-    const quoteMap=Object.fromEntries((quotes||[]).map(q=>[q.order_id,q]));
+    const quoteMap=Object.fromEntries(ids.map(id=>[id,window.PSC_BUYER_JOURNEY.latestQuote(quotes,id)]));
     let managementDecisions=[];if(authContext?.group?.slug==='aeg-education'&&(quotes||[]).length){const decisions=await sb.from('psc_management_decisions').select('*').in('quote_id',quotes.map(q=>q.id));if(decisions.error)throw decisions.error;managementDecisions=decisions.data||[];}
     const docsByOrder=(documents||[]).reduce((acc,d)=>{ (acc[d.order_id]||(acc[d.order_id]=[])).push(d); return acc; },{});
     state.requests=(orders||[]).map(o=>{
@@ -3377,13 +3464,14 @@
           requestedProductOptions:l.product_option_snapshot?.requested_product_options||[],requirementSnapshot:l.product_option_snapshot?.requested_requirement||null,
           familyPageType:l.product_option_snapshot?.requested_family_page_type||'',
           regulated:l.product_option_snapshot?.regulated??true, qty:Number(l.quantity)
-        }:!l.psc_sku_snapshot&&!l.product_id&&l.line_description?{kind:'unlisted',requestId:'unlisted-'+l.id,description:l.line_description,requestUnit:l.pack_snapshot==='Unlisted item — requires PS review'?'':l.pack_snapshot||'',qty:Number(l.quantity)}:{sku:l.psc_sku_snapshot||'',qty:Number(l.quantity)};
+        }:!l.psc_sku_snapshot&&!l.product_id&&l.line_description?{kind:'unlisted',requestId:'unlisted-'+l.id,description:l.line_description,requestUnit:l.pack_snapshot==='Unlisted item — requires PS review'?'':l.pack_snapshot||'',qty:Number(l.quantity),historicalSku:l.product_option_snapshot?.repeat_reference?.sku||''}:{sku:l.psc_sku_snapshot||'',qty:Number(l.quantity),lineSnapshot:{name:l.line_description||'Historical product reference '+(l.psc_sku_snapshot||''),pack:l.pack_snapshot||'',brand:l.brand_model_snapshot||''}};
         const key=lineKey(mapped);
         if(key) qLines[key]={sell:l.unit_price===null?undefined:Number(l.unit_price),vat:l.vat_rate===null?undefined:Number(l.vat_rate)};
         return mapped;
       });
       return {
         dbId:o.id,
+        schoolId:o.school_id,
         id:o.order_number,
         groupName:gp.name||'',
         campus:schoolLabel(sc)||state.campus||'Clinic',
@@ -3393,11 +3481,12 @@
         cancelledAt:o.cancelled_at,
         expectedDeliveryDate:o.expected_delivery_date||null,
         documents:docsByOrder[o.id]||[],
+        databaseStatus:o.status,
         status:DB_TO_UI_STATUS[o.status]||o.status,
         quoteRef:o.quote_ref||q?.quote_number||'',
         note:o.note||'',
         lines:mappedLines,
-        quote:q?{management_decision:managementDecisions.find(d=>d.quote_id===q.id&&d.revision===q.current_revision)?.decision||null,validity:q.validity_days?`${q.validity_days} calendar days`:'',delivery:q.delivery_terms||'',terms:q.payment_terms||'',lines:qLines}:{lines:qLines}
+        quote:q?{issued:q,issuedLines:quoted.data||[],management_decision:managementDecisions.find(d=>d.quote_id===q.id&&d.revision===q.current_revision)?.decision||null,validity:q.validity_days?`${q.validity_days} calendar days`:'',delivery:q.delivery_terms||'',terms:q.payment_terms||'',lines:qLines}:{lines:qLines}
       };
     });
   }
@@ -3451,7 +3540,7 @@
     if(isDemoAccount()) throw new Error('Demo orders must remain local.');
     if(!sb || !session?.user || !authContext?.school?.id || !authContext?.group?.id) throw new Error('Account context is missing.');
     const dbLines=lines.map(l=>{
-      if(l.kind==='unlisted')return {product_id:null,psc_sku_snapshot:null,line_description:l.description,brand_model_snapshot:null,pack_snapshot:l.requestUnit||'Unlisted item — requires PS review',quantity:l.qty};
+      if(l.kind==='unlisted')return {product_id:null,psc_sku_snapshot:null,line_description:l.description,brand_model_snapshot:null,pack_snapshot:l.requestUnit||'Unlisted item — requires PS review',quantity:l.qty,product_option_snapshot:l.historicalSku?{repeat_reference:{sku:l.historicalSku,request:l.repeatSource||'',notice:l.repeatNotice||''}}:null};
       if(isFamilyLine(l)){
         const snapshot={...(l.productOptionSnapshot||{}),requested_family_id:l.familyId,
           requested_family_page_type:l.familyPageType||'',regulated:!!l.regulated,
@@ -3470,7 +3559,7 @@
         };
       }
       const p=product(l.sku);
-      return {product_id:null,psc_sku_snapshot:l.sku,line_description:p?.name||l.sku,brand_model_snapshot:p?.brand||null,pack_snapshot:p?.pack||null,quantity:l.qty};
+      return {product_id:null,psc_sku_snapshot:l.sku,line_description:l.lineSnapshot?.name||p?.name||l.sku,brand_model_snapshot:l.lineSnapshot?.brand||p?.brand||null,pack_snapshot:l.lineSnapshot?.pack||p?.pack||null,quantity:l.qty};
     });
     const payloadBytes=new TextEncoder().encode(JSON.stringify({user:session.user.id,school:authContext.school.id,lines:dbLines,note}));
     const fingerprint=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',payloadBytes)),b=>b.toString(16).padStart(2,'0')).join('');
@@ -3509,17 +3598,17 @@
     }
 
     if(!r.dbId) return;
+    if(!window.PSC_BUYER_JOURNEY.canDecide(authContext))throw new Error('Use the agreed formal authorization route. Portal purchasing authority is not established for this account.');
     if(authContext?.group?.slug==='aeg-education'){
       const canApprove=authContext.memberships?.some(m=>m.school_id===authContext.school?.id&&m.role==='management_approver');
       if(!canApprove)throw new Error('AEG management approval is required.');
-      const q=await sb.from('quotes').select('id,current_revision').eq('order_id',r.dbId).single();if(q.error)throw q.error;
-      const decision=await sb.rpc('psc_record_management_decision',{p_quote:q.data.id,p_revision:q.data.current_revision,p_decision:action==='confirm'?'approved':'rejected',p_note:''});if(decision.error)throw decision.error;
+      const gate=window.PSC_BUYER_JOURNEY.decisionGate(authContext,r);
+      if(!gate.ok)throw new Error(gate.reason);
+      // Submit only the revision actually rendered and reviewed. The server rejects stale revisions.
+      const decision=await sb.rpc('psc_record_management_decision',{p_quote:gate.quoteId,p_revision:gate.revision,p_decision:action==='confirm'?'approved':'rejected',p_note:''});if(decision.error)throw decision.error;
       await loadOrdersFromDatabase();save();render();return;
     }
-    const dbStatus=action==='confirm'?'confirmed':'cancelled';
-    const update={status:dbStatus}; if(action==='cancel') update.cancelled_at=new Date().toISOString();
-    const {error}=await sb.from('orders').update(update).eq('id',r.dbId); if(error) throw error;
-    await loadOrdersFromDatabase(); save(); render();
+    throw new Error('Use the agreed PO or written authorization route for this account.');
   }
 
 
@@ -3755,8 +3844,8 @@
     document.querySelectorAll('[data-add]').forEach(el=>el.addEventListener('click',()=>addBasket(el.dataset.add,el.closest('.productDetailModal')?.querySelector('[data-request-quantity]')?.value||1)));
     document.querySelectorAll('[data-basket-delta]').forEach(el=>el.addEventListener('click',()=>{const [sku,d]=el.dataset.basketDelta.split('|');const line=state.basket.find(x=>x.sku===sku);if(!line)return;line.qty=window.PSC_PRODUCT_PRESENTATION.quantity(line.qty+Number(d));save();renderUi({preserveScroll:true,transition:false})}));
     document.querySelectorAll('[data-basket-remove]').forEach(el=>el.addEventListener('click',()=>{state.basket=state.basket.filter(x=>x.sku!==el.dataset.basketRemove);save();renderUi({preserveScroll:true,transition:false})}));
-    document.querySelectorAll('[data-family-basket-delta]').forEach(el=>el.addEventListener('click',()=>{const[i,d]=el.dataset.familyBasketDelta.split('|');const line=state.basket[Number(i)];if(!line||!isFamilyLine(line))return;line.qty=window.PSC_PRODUCT_PRESENTATION.quantity(line.qty+Number(d));save();renderUi({preserveScroll:true,transition:false})}));
-    document.querySelectorAll('[data-family-basket-remove]').forEach(el=>el.addEventListener('click',()=>{const i=Number(el.dataset.familyBasketRemove);if(Number.isInteger(i)&&state.basket[i]&&isFamilyLine(state.basket[i]))state.basket.splice(i,1);save();renderUi({preserveScroll:true,transition:false})}));
+    document.querySelectorAll('[data-family-basket-delta]').forEach(el=>el.addEventListener('click',()=>{const[i,d]=el.dataset.familyBasketDelta.split('|');const line=state.basket[Number(i)];if(!line||!(isFamilyLine(line)||line.kind==='unlisted'))return;line.qty=window.PSC_PRODUCT_PRESENTATION.quantity(line.qty+Number(d));save();renderUi({preserveScroll:true,transition:false})}));
+    document.querySelectorAll('[data-family-basket-remove]').forEach(el=>el.addEventListener('click',()=>{const i=Number(el.dataset.familyBasketRemove);if(Number.isInteger(i)&&state.basket[i]&&(isFamilyLine(state.basket[i])||state.basket[i].kind==='unlisted'))state.basket.splice(i,1);save();renderUi({preserveScroll:true,transition:false})}));
     document.querySelectorAll('[data-submit-request]').forEach(el=>el.addEventListener('click',submitRequest));
     document.querySelectorAll('[data-submit-custom]').forEach(el=>el.addEventListener('click',submitCustomRequest));
     document.querySelectorAll('[data-mail-tab]').forEach(el=>el.addEventListener('click',()=>{ui.mailTab=el.dataset.mailTab;render()}));
@@ -3784,12 +3873,23 @@
     document.querySelectorAll('[data-signout]').forEach(el=>el.addEventListener('click',signOut));
     document.querySelectorAll('[data-template]').forEach(el=>el.addEventListener('click',()=>applyTemplate(el.dataset.template)));
     document.querySelectorAll('[data-quick-add]').forEach(el=>el.addEventListener('click',()=>{const sku=el.dataset.quickAdd;const input=document.querySelector(`[data-quick-qty="${sku}"]`);addBasket(sku,Math.max(1,Number(input.value||1)))}));
+    document.querySelector('[data-buyer-refresh]')?.addEventListener('click',async()=>{await loadOrdersFromDatabase();render();});
+    document.querySelector('[data-buyer-retry]')?.addEventListener('click',async()=>{await loadOrdersFromDatabase();render();});
+    document.querySelectorAll('[data-buyer-jump]').forEach(el=>el.addEventListener('click',()=>document.querySelector('.modal '+el.dataset.buyerJump)?.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'})));
+    document.querySelector('[data-buyer-campus-filter]')?.addEventListener('change',e=>{buyerView.campusFilter=e.target.value;render();});
+    document.querySelectorAll('[data-buyer-campus-request]').forEach(el=>el.addEventListener('click',async()=>{const [school,id]=el.dataset.buyerCampusRequest.split('|');if(requestSubmitting){toast('Wait for the request acknowledgement before changing campus.');return;}if(!authContext.schools.some(s=>s.id===school))return;if(authContext.school.id!==school)await switchInstitutionAccount(school);if(authContext.school.id!==school||buyerView.requestsError)return;const r=customerAccountRequests().find(r=>r.dbId===id);if(!r){toast('This request is no longer available. Refresh campus activity.');return;}ui.modal={type:'request',id:r.id};render();}));
+    document.querySelector('[data-buyer-list]')?.addEventListener('click',()=>{ui.buyerListMode=true;go('portal/catalogue/all');setTimeout(()=>{const field=document.getElementById('customRequestText'),button=document.querySelector('[data-submit-custom]');if(button)button.textContent='Review in Supply Request';if(field){field.insertAdjacentHTML('beforebegin','<p class="smallMuted">Paste the original descriptions. Unresolved specifications remain for PSC review. After submitting the RFQ, attach your original Excel or PDF in the request’s Documents section.</p>');field.scrollIntoView({block:'center'});field.focus();}},0);});
+    document.querySelector('[data-buyer-note]')?.addEventListener('input',e=>{state.notesBySchool=state.notesBySchool||{};state.notesBySchool[state.activeSchoolId]=e.target.value;save();});
+    document.querySelector('[data-buyer-document-type]')?.addEventListener('change',e=>{buyerView.documentType=e.target.value;render();});
+    document.querySelector('[data-buyer-group]')?.addEventListener('click',()=>{buyerView.groupOpen=true;loadBuyerActivity();});
+    document.querySelector('[data-buyer-date]')?.addEventListener('change',e=>{buyerView.dateFrom=e.target.value;render();});
     document.querySelectorAll('[data-request-reorder]').forEach(el=>el.addEventListener('click',()=>reorderRequest(el.dataset.requestReorder)));
 
-    document.querySelectorAll('[data-replenish]').forEach(el=>el.addEventListener('click',()=>{const [sku,q]=el.dataset.replenish.split('|');addBasket(sku,Math.max(1,Number(q)||1));toast('<strong>Added to request.</strong><br>Previous delivered quantity restored.')}));
+    document.querySelectorAll('[data-replenish]:not([data-buyer-repeat-line])').forEach(el=>el.addEventListener('click',()=>{const [sku,q]=el.dataset.replenish.split('|');addBasket(sku,Math.max(1,Number(q)||1));toast('<strong>Added to request.</strong><br>Previous delivered quantity restored.')}));
+    document.querySelectorAll('[data-buyer-repeat-line]').forEach(el=>el.addEventListener('click',()=>{const [id,index]=el.dataset.buyerRepeatLine.split('|');reorderRequest(decodeURIComponent(id),Number(index));}));
     document.querySelectorAll('[data-reorder-order]').forEach(el=>el.addEventListener('click',()=>reorderRequest(el.dataset.reorderOrder)));
-    document.querySelectorAll('[data-confirm-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.confirmQuote,'confirm');toast(authContext?.group?.slug==='aeg-education'?'<strong>Management approval recorded.</strong><br>Customer PO and PSC commercial release checks remain required.':'<strong>Quotation confirmed.</strong><br>PS will confirm the fulfilment and delivery timing for this order.')}catch(e){console.error(e);toast('<strong>Could not confirm quotation.</strong>')}}));
-    document.querySelectorAll('[data-cancel-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.cancelQuote,'cancel');toast(authContext?.group?.slug==='aeg-education'?'<strong>Management rejection recorded.</strong><br>PS can review and revise the quotation.':'<strong>Quotation cancelled.</strong><br>It will remain visible for 30 days before moving to Archive.')}catch(e){console.error(e);toast('<strong>Could not cancel quotation.</strong>')}}));
+    document.querySelectorAll('[data-confirm-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.confirmQuote,'confirm');toast(authContext?.group?.slug==='aeg-education'?'<strong>Management approval recorded.</strong><br>Customer PO and PSC commercial release checks remain required.':'<strong>Quotation confirmed.</strong><br>PS will confirm the fulfilment and delivery timing for this order.')}catch(e){console.error(e);toast('<strong>Decision not recorded.</strong><br>'+esc(e.message||'Refresh the request and review the latest quotation.'))}}));
+    document.querySelectorAll('[data-cancel-quote]').forEach(el=>el.addEventListener('click',async()=>{try{await updateCustomerQuote(el.dataset.cancelQuote,'cancel');toast(authContext?.group?.slug==='aeg-education'?'<strong>Management rejection recorded.</strong><br>PS can review and revise the quotation.':'<strong>Quotation cancelled.</strong><br>It will remain visible for 30 days before moving to Archive.')}catch(e){console.error(e);toast('<strong>Decision not recorded.</strong><br>'+esc(e.message||'Refresh the request and review the latest quotation.'))}}));
     document.querySelectorAll('[data-reorder-last]').forEach(el=>el.addEventListener('click',()=>{const r=state.requests.find(x=>x.campus===state.campus);if(r)reorderRequest(r.id)}));
     document.querySelectorAll('[data-request-view]').forEach(el=>el.addEventListener('click',()=>{ui.modal={type:'request',id:el.dataset.requestView,admin:false};render()}));
     document.querySelectorAll('[data-admin-request]').forEach(el=>el.addEventListener('click',()=>{ui.modal={type:'request',id:el.dataset.adminRequest,admin:true};render()}));

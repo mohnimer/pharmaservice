@@ -15,7 +15,7 @@ async function ready(selector){for(let i=0;i<50;i++){const e=w.document.querySel
 async function click(selector){(await ready(selector)).click();await pause();}
 async function choose(selector,value){const e=await ready(selector);e.value=value;e.dispatchEvent(new w.Event('change',{bubbles:true}));await pause();}
 async function setQty(value){const e=await ready('[data-request-quantity]');e.value=value;e.dispatchEvent(new w.Event('change',{bubbles:true}));await pause();}
-function stored(){return JSON.parse(w.sessionStorage.getItem('pscClinicPortalDemoStateV12_1')||w.localStorage.getItem('pscClinicPortalStateV12_1')||'{}');}
+function stored(){return JSON.parse(w.sessionStorage.getItem('pscClinicPortalDemoStateV12_1')||(w.localStorage.getItem('pscClinicPortalStateV12_1:u1')||w.localStorage.getItem('pscClinicPortalStateV12_1'))||'{}');}
 try{
  await ready('.productCard');
  const grouped=[...w.document.querySelectorAll('.pscFamilyCard')];assert(grouped.length>0);

@@ -7,7 +7,7 @@ const pause=()=>new Promise(r=>setTimeout(r,100));
 const errors=[];w.addEventListener('error',e=>errors.push(e.message));
 async function click(s){const e=w.document.querySelector(s);assert(e,'Missing '+s);e.click();await pause();}
 async function checked(id,value){const e=w.document.querySelector(`[data-basket-include="${id}"]`);assert(e);e.checked=value;e.dispatchEvent(new w.Event('change',{bubbles:true}));await pause();}
-const stored=()=>JSON.parse(w.localStorage.getItem('pscClinicPortalStateV12_1')).basket;
+const stored=()=>JSON.parse((w.localStorage.getItem('pscClinicPortalStateV12_1:u1')||w.localStorage.getItem('pscClinicPortalStateV12_1'))).basket;
 try{
  w.document.body.innerHTML='<div id="app"></div>';w.structuredClone=structuredClone;w.__testRole='member';w.fetch=()=>{throw Error('Live transport forbidden');};
  w.eval(readFileSync('tests/mock-supabase.js','utf8'));w.eval(readFileSync('dist/current.js','utf8'));w.document.dispatchEvent(new w.Event('DOMContentLoaded'));await pause();await pause();

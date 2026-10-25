@@ -31,7 +31,7 @@ try{for(const width of [320,390,768,1440]){
  await page.locator('[data-basket-qty="stethoscope|1"]').click();assert.equal(await page.locator('[data-basket-quantity="stethoscope"]').inputValue(),'2');
  await page.locator('[data-basket-include="site-list"]').check();await page.locator('[data-basket-template-add]').click();await page.locator('#psReadyBasketDialog').waitFor({state:'detached'});
  assert.equal(await page.locator('#app').evaluate(el=>el.inert),false);await ctx.addInitScript(()=>window.__testRole='member');await page.reload();await page.locator('.psBasketGallery').waitFor();
- let saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('pscClinicPortalStateV12_1')).basket);assert.equal(saved.find(l=>l.sku==='PSC-DIA-008').qty,2);assert(saved.some(l=>l.kind==='unlisted'));
+ let saved=await page.evaluate(()=>JSON.parse((localStorage.getItem('pscClinicPortalStateV12_1:u1')||localStorage.getItem('pscClinicPortalStateV12_1'))).basket);assert.equal(saved.find(l=>l.sku==='PSC-DIA-008').qty,2);assert(saved.some(l=>l.kind==='unlisted'));
  // Replenishment doesn't rebuy equipment; selected requirement keeps original ID and pack.
  await page.locator('[data-ready-basket="first-aid-rollout"]').click();await page.locator('[data-basket-mode="replenishment"]').click();assert.equal(await page.locator('[data-basket-line="container"]').count(),0);await page.locator('[data-basket-template-add]').click();
  await page.locator(width<=980?'.mobileCartButton':'.pillBasket').click();await page.locator('.requestDrawer').waitFor();assert.match(await page.locator('.requestDrawer').innerText(),/planning preview/);
