@@ -45,7 +45,7 @@ try {for(const width of [320,390,1440]){
  await page.locator('[data-ps-unlisted]').click();
  const request=page.locator('.psLiveRequest');assert.match(await request.textContent(),/bilastine/);assert.match(await request.textContent(),/Unit to confirm/);
  if(width<800)await page.locator('[data-ps-sheet-open]').click();
- await request.locator('[data-ps-prepare]').click();assert.match(await page.locator('.requestDrawer').innerText(),/Unlisted item — requires PS review/);
+ await request.locator('[data-ps-prepare]').click();assert.match(await page.locator('.requestDrawer').innerText(),/Sourcing request/);
  await page.locator('[data-submit-request]').click();assert.match(await page.locator('body').innerText(),/simulated request/i);
  assert.deepEqual(await page.evaluate(()=>window.__backendCalls.filter(c=>c.rpc||c.action!=='select')),[]);
  assert.deepEqual(errors,[]);await context.close();console.log('PASS rendered medicinal IDs, ambiguity, unlisted handoff and narrow layout',width);
