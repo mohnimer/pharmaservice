@@ -51,7 +51,7 @@ try{for(const width of [320,390,768,1440]){
  await p.locator('button[data-close-basket]').click();
  const before=await p.evaluate(()=>JSON.parse((localStorage.getItem('pscClinicPortalStateV12_1:u1')||localStorage.getItem('pscClinicPortalStateV12_1'))).basket);
  await navigate('portal/dashboard');await p.locator('.psPortalHome').waitFor();assert.equal(await p.locator('.pscHomeCategoryIcon img').count(),6);
- await p.locator('[data-account-switcher]').click();await p.locator('[data-school-select="s2"]').click();await p.locator('.psPortalDraft:not(.hasDraft)').waitFor();
+ await p.locator('[data-account-switcher]').click();await p.locator('[data-school-select="s2"]').click();await p.locator('.psPortalDraft:not(.hasDraft)').waitFor({state:'attached'});
  await p.locator('[data-account-switcher]').click();await p.locator('[data-school-select="s1"]').click();await p.locator('.psPortalDraft.hasDraft').waitFor();
  assert.deepEqual(await p.evaluate(()=>JSON.parse((localStorage.getItem('pscClinicPortalStateV12_1:u1')||localStorage.getItem('pscClinicPortalStateV12_1'))).basket),before);
  assert.deepEqual(await p.evaluate(()=>__backendCalls.filter(c=>c.rpc||(c.action&&c.action!=='select'))),[]);
