@@ -495,38 +495,6 @@
     } finally { el.disabled = false; }
   }
 
-  async function syncCustomerDecision(orderNumber, action){
-    if(window.PSC_IS_DEMO_ACCOUNT?.()) return;
-    if (!orderNumber) return;
-    const order = await findOrder(orderNumber);
-    if (!order || window.PSC_ACCOUNT_CONTEXT?.()?.group?.slug==='aeg-education') return;
-
-    const { data: quote, error } = await sb
-      .from('quotes')
-      .select('*')
-      .eq('order_id', order.id)
-      .maybeSingle();
-    if (error || !quote) return;
-
-    const now = new Date().toISOString();
-    const status = action === 'confirm' ? 'confirmed' : 'cancelled';
-    const payload = { status };
-    if (action === 'confirm') payload.confirmed_at = quote.confirmed_at || now;
-    if (action === 'cancel') payload.cancelled_at = quote.cancelled_at || now;
-
-    await sb.from('quotes').update(payload).eq('id', quote.id);
-    await sb.from('quote_events').insert({
-      quote_id: quote.id,
-      event_type: action === 'confirm' ? 'customer_confirmed' : 'customer_cancelled',
-      old_status: quote.status,
-      new_status: status,
-      note: action === 'confirm' ? 'Customer confirmed quotation' : 'Customer cancelled quotation',
-      actor_user_id: (await sb.auth.getSession()).data?.session?.user?.id || null
-    });
-
-    // Customer cannot execute the admin-only snapshot RPC; PS status/event remains authoritative.
-  }
-
   async function hydrateInputs(){
     if (hydrating) return;
     const fields = [...document.querySelectorAll('[data-quote-field]')];
@@ -636,19 +604,8 @@
     }
   });
 
-  document.addEventListener('click', event => {
-    if(window.PSC_IS_DEMO_ACCOUNT?.()) return;
-    const el = event.target instanceof Element ? event.target.closest('[data-confirm-quote],[data-cancel-quote]') : null;
-    if (!el) return;
-
-    const orderNumber = el.getAttribute('data-confirm-quote') || el.getAttribute('data-cancel-quote');
-    const action = el.hasAttribute('data-confirm-quote') ? 'confirm' : 'cancel';
-
-    // Let the core app complete its existing customer order update first.
-    setTimeout(() => {
-      syncCustomerDecision(orderNumber, action).catch(err => reportError('customer quote decision sync failed', err));
-    }, 400);
-  });
+  // Customer decisions are handled once by the core revision-bound audited RPC.
+  // Do not independently mutate quotation status after a delayed click.
 
   let queued = false;
   function scheduleHydrate(){

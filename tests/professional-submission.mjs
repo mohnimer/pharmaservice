@@ -44,7 +44,7 @@ try{
   refreshed.__tables.orders=structuredClone(w.__tables.orders);refreshed.__tables.order_lines=structuredClone(w.__tables.order_lines);
   refreshed.eval(readFileSync('dist/current.js','utf8'));refreshed.document.dispatchEvent(new refreshed.Event('DOMContentLoaded'));await pause();
   const reorder=refreshed.document.querySelector('[data-reorder-order="'+finalOrder.order_number+'"]');assert(reorder,'Reloaded delivered request supports existing reorder flow');reorder.click();await pause();
-  const restored=JSON.parse(refreshed.localStorage.getItem('pscClinicPortalStateV12_1')).basket.find(l=>l.familyId===family&&l.brandPreferenceMode==='no_preference');
+  const restored=JSON.parse((refreshed.localStorage.getItem('pscClinicPortalStateV12_1:u1')||refreshed.localStorage.getItem('pscClinicPortalStateV12_1'))).basket.find(l=>l.familyId===family&&l.brandPreferenceMode==='no_preference');
   assert(restored);assert(restored.orderPackBasis);assert(before.includes(restored.orderPackBasis));assert.equal(restored.productOptionSnapshot.requested_family_id,family);
  }finally{await refreshed.happyDOM.close();}
  console.log('PASS isolated submission: exact SKU merges across product/family, saved reference IDs and family/pack snapshots, unknown specification remains no-SKU, existing RPC only');

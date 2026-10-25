@@ -1,0 +1,22 @@
+# Separate permission review — not applied
+
+Read-only live inspection on 25 October found that `private.can_approve_school` grants non-AEG verified users approval based on site visibility. This is not evidence of named institutional purchasing authority. The attached SQL proposal restricts the existing helper to a verified named `management_approver` for the exact school. It changes purchasing permissions and MUST NOT be applied without separate approval, an authorized approver roster and review of existing account behavior. Local PGlite tests demonstrate direct-API denial for clinic and group-visibility roles; those tests do not establish that production has been repaired.
+
+A second independent gate: authenticated SELECT privileges currently cover `quotes.internal_note`, `cost_total` and `gross_margin_pct`. Row-level school isolation does not hide these columns. The new frontend selects an explicit public quote-field allowlist, but a modified client can still request granted columns. A separately reviewed server change must remove broad authenticated sensitive-column SELECT while preserving PSC administration through an admin-only endpoint or equivalent reviewed arrangement. Do not simply revoke table SELECT and break existing PSC quoting. Test customer direct API denial, issued-only rows, PSC-only cost access, and quotation issue/revision flows before release.
+
+Existing private document storage checks school access on the order folder. Signed retrieval remains server-authorized and time limited; the frontend also checks that a requested path is attached to the current campus's order. No guessed files, fake downloads, ZIP packs, automatic approval, supplier purchase, credit release or invoice creation are added.
+
+Approval, purchasing legal-entity details, warranty/FOC terms and unavailable product documentation remain actual-evidence requirements. The buyer UI is a review candidate; these backend gates and representative-user/device validation remain open.
+
+## Prepared privacy correction and activation contract — 25 October
+`private-quotation-proposal.sql` and `customer-reader-proposal.mjs` are now concrete, isolated-tested proposals. They are not loaded or applied. The SQL restricts direct quote/line SELECT to PSC admins, provides an explicit issued-only customer projection, and preserves scoped management-decision visibility. The direct SQL tests include anonymous/unverified/other-campus denial, absence of private header/line fields and PSC admin read/edit compatibility. They are fixture tests, not a production migration rehearsal or full admin issue/revision regression against a copied project.
+
+Activation requires a separately reviewed release combining:
+1. Refresh live policy/function/schema inventory and review existing quote readers, decision read policies and admin quotation issue/revision flows. A trusted rehearsal database must use the real schema; synthetic tests alone do not establish migration compatibility.
+2. Replace only customer quote/quote-line transport in `readOrdersFromDatabase` with the staged RPC reader. Keep admin table reads and existing request model. Do not fall back to raw table reads or a stale cached quote if the RPC is missing.
+3. Apply the reviewed SQL and named-approver proposal under explicit authorization with an agreed named roster. Re-test REST/direct-table privacy, scoped issued RPC results, actual decision RPC/fingerprint/revision handling, admin writes and private files before frontend release.
+4. Deploy only after a real-user/device pilot and explicit release approval. Keep the safe RPC path or an access-disabled maintenance state during rollback; do not restore broad customer financial reads as a rollback strategy.
+
+Residual known production gaps remain Fail, not Pass. No purchasing permission, production database or deployed frontend has changed in this draft.
+
+Release authorization received after the staged assessment. The proposals are promoted as two versioned migrations under supabase/migrations. The additive reader precedes frontend activation; the restrictive policy and named-role guard follow it. Existing named-role memberships are preserved, none created; inspection found zero named approvers, so formal PO/written authorization remains required. The staged copies remain historical review material; consult the versioned migration and release receipt for actual activation state. Customer runtime now uses the explicit safe RPC without direct-table fallback, while PSC admins keep the original quote readers and writers.

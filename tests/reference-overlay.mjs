@@ -41,7 +41,7 @@ try{
   await choose(localId);
 
   await click('[data-family-quote]');
-  const basket=JSON.parse(w.localStorage.getItem('pscClinicPortalStateV12_1')).basket;
+  const basket=JSON.parse((w.localStorage.getItem('pscClinicPortalStateV12_1:u1')||w.localStorage.getItem('pscClinicPortalStateV12_1'))).basket;
   const snapshot=basket.flatMap(l=>l.requestedProductOptions||[]).find(o=>o.local_product_option_id===localId);
   assert(snapshot);assert.equal(snapshot.product_option_id,null);const sourceOption=w.PS_CATALOGUE_REFRESH.approvedOptions.find(o=>o.product_option_id===localId);const mrp=expectedMrp(sourceOption.sku);assert.equal(snapshot.verified_price_aed,mrp===undefined?price:mrp);
   assert(snapshot.verified_description);if(mrp!==null)assert(snapshot.verified_price_source);else assert.equal(snapshot.verified_price_source,null);assert.equal(snapshot.reference_product_option_id,null);
@@ -67,7 +67,7 @@ try{
  await choose('');
  assert.equal(w.document.querySelector('[data-family-variant]').value,'');
  assert.equal(w.document.querySelector('[data-psc-preview-mode]').dataset.pscPreviewMode,'family');
- const stored=w.localStorage.getItem('pscClinicPortalStateV12_1');
+ const stored=(w.localStorage.getItem('pscClinicPortalStateV12_1:u1')||w.localStorage.getItem('pscClinicPortalStateV12_1'));
  assert(stored,'actual basket must retain reference provenance');
  const basket=JSON.parse(stored).basket;
  assert(basket.some(l=>l.requestedProductOptions?.some(o=>o.reference_product_option_id===pairs[0].database_id)));

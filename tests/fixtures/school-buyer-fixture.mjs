@@ -1,0 +1,15 @@
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+const payload={window:{}};vm.runInNewContext(readFileSync('data.js','utf8'),payload);vm.runInNewContext(readFileSync('current/behaviour/catalogue-refresh-data.js','utf8'),payload);
+const all=new Map([...payload.window.PSC_DATA.products,...payload.window.PS_CATALOGUE_REFRESH.products].map(p=>[p.pscSku,p]));
+const products=['PSC-WND-001','PSC-WND-002','PS-AC-417F1BC9E425'].map(s=>all.get(s));assert(products.every(Boolean));
+export const fixture=role=>`(()=>{const t=window.__tables,products=${JSON.stringify(products)};window.__docCalls=[];
+ t.memberships=[{user_id:'u1',group_id:'g1',school_id:${role==='group'?'null':"'s1'"},role:${role==='group'?"'group_admin'":"'school_user'"}}];
+ t.orders=[{id:'old',school_id:'s1',group_id:'g1',order_number:'HISTORY-ORIGINAL',status:'delivered',created_at:'2026-09-01',delivered_at:'2026-09-05'},{id:'quoted',school_id:'s1',group_id:'g1',order_number:'CURRENT-RFQ',status:'quote_sent',created_at:'2026-10-24'},{id:'campus2',school_id:'s2',group_id:'g1',order_number:'CAMPUS-TWO-REQ',status:'under_review',created_at:'2026-10-23'}];
+ t.order_lines=products.map((p,i)=>({id:'old'+i,order_id:'old',psc_sku_snapshot:p.pscSku,line_description:p.name,pack_snapshot:p.pack,brand_model_snapshot:p.brand,quantity:i+2}));
+ t.order_lines.push({id:'quoted-line',order_id:'quoted',psc_sku_snapshot:products[0].pscSku,line_description:'Original request description',pack_snapshot:'Original requested pack',quantity:9,unit_price:999,vat_rate:5});
+ t.quotes=[{id:'issued',order_id:'quoted',quote_number:'PSC-Q-FIXTURE',status:'sent',current_revision:3,sent_at:'2026-10-24',expires_at:'2026-10-31',currency:'AED',payment_terms:'Deposit as agreed in issued quotation',delivery_terms:'Confirmed delivery after release',customer_note:'Fixture only'}];
+ t.quote_lines=[{id:'issuedline',quote_id:'issued',order_line_id:'quoted-line',line_no:1,line_description_snapshot:'Issued sterile gauze presentation',brand_model_snapshot:'Agreed manufacturer',pack_snapshot:'20 sterile packs',specification_snapshot:'Exact issued specification',quantity:2,unit_sell_price_ex_vat:12.5,vat_rate_pct:5}];
+ t.order_documents=[{id:'doc1',order_id:'quoted',document_type:'quotation',title:'Issued quotation revision 3',file_name:'fixture-quote.pdf',object_path:'quoted/quote.pdf',created_at:'2026-10-24'},{id:'doc2',order_id:'old',document_type:'delivery_note',title:'Delivery record',file_name:'fixture-delivery.pdf',object_path:'old/delivery.pdf',created_at:'2026-09-05'}];
+ const original=window.supabase.createClient;window.supabase.createClient=(...args)=>{const c=original(...args);c.storage={from:()=>({createSignedUrl:async(p)=>{window.__docCalls.push(p);if(window.__docFailure)return {data:null,error:{message:'Fixture signed URL denied'}};return ['quoted/quote.pdf','old/delivery.pdf'].includes(p)?{data:{signedUrl:location.origin+'/fixture-issued-document'},error:null}:{data:null,error:{message:'Denied'}};}})};return c;};})();`;

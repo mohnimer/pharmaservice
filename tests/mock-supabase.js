@@ -21,7 +21,7 @@
   window.__tables = tables;
   class Query {
     constructor(table) { this.table = table; this.filters = []; this.action = 'select'; }
-    select() { return this; } order() { return this; } range(start,end) { this.bounds=[start,end];return this; } limit(n) { this.rowLimit=n;return this; }
+    select(columns) { this.columns=columns;return this; } order() { return this; } range(start,end) { this.bounds=[start,end];return this; } limit(n) { this.rowLimit=n;return this; }
     eq(key, value) { this.filters.push(row => row[key] === value); return this; }
     or(expression) { const options=expression.split(',').map(x=>x.match(/^(\w+)\.ilike\.%(.+)%$/));if(options.some(x=>!x))throw new Error('Unsupported test OR query');this.filters.push(row=>options.some(x=>String(row[x[1]]||'').toLowerCase().includes(x[2].toLowerCase())));return this; }
     not(key,op,value){if(op!=='is'||value!==null)throw new Error('Unsupported test NOT query');this.filters.push(row=>row[key]!=null);return this;}
@@ -33,7 +33,8 @@
     delete() { this.action = 'delete'; return this; }
     then(resolve, reject) {
       return Promise.resolve().then(() => {
-        window.__backendCalls.push({ table: this.table, action: this.action });
+        window.__backendCalls.push({ table: this.table, action: this.action,columns:this.columns });
+        if(window.__queryFailureTable===this.table)return {data:null,error:{message:'Simulated activity load failure'}};
         if (role === 'demo' && this.action !== 'select') throw new Error('Demo attempted a backend write');
         let rows = (tables[this.table] || []).filter(row => this.filters.every(f => f(row)));
         if(this.action==='insert'){
@@ -62,8 +63,21 @@
       signOut: async () => {signedIn=false;return {error:null};}
     },
     rpc: async (name,args) => {
+      if(name==='psc_buyer_issued_quotes'){
+        window.__backendCalls.push({table:'buyer_issued_quotes',action:'select',rpcName:name,args});
+        const school=tables.schools.find(s=>s.id===args.p_school&&s.active);
+        const access=school&&tables.memberships.some(m=>m.user_id==='u1'&&m.group_id===school.group_id&&(m.school_id===school.id||!m.school_id&&['group_admin','psc_admin'].includes(m.role)));
+        if(!access)return {data:null,error:{message:'Campus access denied'}};
+        const keys='id,order_id,quote_number,status,current_revision,sent_at,expires_at,validity_days,payment_terms,delivery_terms,customer_note,currency,subtotal,vat,total'.split(',');
+        return {data:tables.quotes.filter(q=>tables.orders.some(o=>o.id===q.order_id&&o.school_id===school.id)&&['sent','confirmed','cancelled','expired'].includes(q.status)).map(q=>({...Object.fromEntries(keys.map(k=>[k,q[k]])),issued_lines:tables.quote_lines.filter(l=>l.quote_id===q.id).map(l=>{const {internal_cost,...row}=l;return structuredClone(row);})})),error:null};
+      }
       window.__backendCalls.push({ rpc:name,args });
       if(role==='demo')throw new Error('Demo attempted RPC');
+      if(name==='psc_record_management_decision'){
+        const q=tables.quotes.find(q=>q.id===args.p_quote);
+        if(!q||q.current_revision!==args.p_revision)return {data:null,error:{message:'Quotation revision changed. Refresh and review before deciding.'}};
+        tables.psc_management_decisions??=[];tables.psc_management_decisions.push({quote_id:q.id,revision:args.p_revision,decision:args.p_decision});return {data:null,error:null};
+      }
       if(name==='psc_ensure_quote')return {data:tables.quotes.find(q=>q.order_id===args.p_order_id)?.id,error:null};
       if(name==='psc_set_commercial_status')return {data:null,error:{message:'Verify required funding against a receipt, or record approved credit terms'}};
       if(name!=='psc_submit_institutional_request')throw new Error('Unexpected RPC in shell regression test');

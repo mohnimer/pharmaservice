@@ -1,6 +1,7 @@
 {
   "javascript": [
     "current/lifecycle.js",
+    "current/behaviour/buyer-journey.js",
     "data.js",
     "current/behaviour/recorded-prices.js",
     "current/behaviour/catalogue-data-extension.js",

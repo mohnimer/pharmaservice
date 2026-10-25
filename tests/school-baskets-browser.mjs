@@ -40,7 +40,7 @@ try{for(const width of [320,390,768,1440]){
   assert.equal(await p.locator('.psSchoolKitBody .psSchoolLines li').count(),expected.contents.length);
   await fits();await p.screenshot({path:`${out}/${width}-kit-${id}.png`,fullPage:true});
   await p.locator(`[data-school-kit-request="${id}"]`).click();await p.locator('.requestDrawer').waitFor();
-  const line=await p.evaluate(()=>JSON.parse(localStorage.getItem('pscClinicPortalStateV12_1')).basket.at(-1));
+  const line=await p.evaluate(()=>JSON.parse((localStorage.getItem('pscClinicPortalStateV12_1:u1')||localStorage.getItem('pscClinicPortalStateV12_1'))).basket.at(-1));
   assert.equal(line.kind,'unlisted');assert(!line.sku,'A kit concept is never a fabricated product SKU');
   for(const [label,rawId,pack]of expected.contents){assert(line.description.includes(label));if(rawId)assert(line.description.includes('['+rawId+']'));assert(line.description.includes(pack));}
   assert.match(line.description,/Proposed contents snapshot \(2026-10-19-v1\)/);
@@ -49,11 +49,11 @@ try{for(const width of [320,390,768,1440]){
  await p.locator('[data-school-collection="opening"]').click();await p.locator('[data-school-opening-request]').click();await p.locator('.requestDrawer').waitFor();
  assert.match(await p.locator('.requestDrawer').innerText(),/Medicines and facilities need separate approved scopes/);
  await p.locator('button[data-close-basket]').click();
- const before=await p.evaluate(()=>JSON.parse(localStorage.getItem('pscClinicPortalStateV12_1')).basket);
+ const before=await p.evaluate(()=>JSON.parse((localStorage.getItem('pscClinicPortalStateV12_1:u1')||localStorage.getItem('pscClinicPortalStateV12_1'))).basket);
  await navigate('portal/dashboard');await p.locator('.psPortalHome').waitFor();assert.equal(await p.locator('.pscHomeCategoryIcon img').count(),6);
  await p.locator('[data-account-switcher]').click();await p.locator('[data-school-select="s2"]').click();await p.locator('.psPortalDraft:not(.hasDraft)').waitFor();
  await p.locator('[data-account-switcher]').click();await p.locator('[data-school-select="s1"]').click();await p.locator('.psPortalDraft.hasDraft').waitFor();
- assert.deepEqual(await p.evaluate(()=>JSON.parse(localStorage.getItem('pscClinicPortalStateV12_1')).basket),before);
+ assert.deepEqual(await p.evaluate(()=>JSON.parse((localStorage.getItem('pscClinicPortalStateV12_1:u1')||localStorage.getItem('pscClinicPortalStateV12_1'))).basket),before);
  assert.deepEqual(await p.evaluate(()=>__backendCalls.filter(c=>c.rpc||(c.action&&c.action!=='select'))),[]);
  await p.locator('.psPortalDraft [data-basket]').click();await p.locator('.requestDrawer').waitFor();
  await p.locator('[data-submit-request]').click();
