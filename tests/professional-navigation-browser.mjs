@@ -23,13 +23,13 @@ try{for(const [width,role,motion] of [[390,'demo','no-preference'],[1440,'demo',
  if(motion==='reduce')assert.equal(await header.evaluate(el=>getComputedStyle(el).transitionDuration),'0s');
  if(role==='demo'){
   if(width<=980){const action=page.locator('.psScopeMobileSummary');if(await action.isVisible()){await action.click();await page.locator('.psLiveRequest.isOpen').waitFor();await page.locator('[data-ps-sheet-close]').click();await page.waitForTimeout(250);}
-   await page.locator('[data-mobile-open]').click();await page.locator('.mobileOverlay.show').waitFor();
-   await page.locator('.sidebar [data-go="portal/wishlist"]').click();await page.locator('.customerSimpleHeader h1').waitFor();assert.equal(await page.locator('.customerSimpleHeader h1').innerText(),'Wishlist');
+   await page.locator('[data-account-switcher]').click();await page.locator('#psAccountMenu').waitFor();
+   await page.locator('#psAccountMenu [data-go="portal/wishlist"]').click();await page.locator('.customerSimpleHeader h1').waitFor();assert.equal(await page.locator('.customerSimpleHeader h1').innerText(),'Wishlist');
    await page.evaluate(()=>window.PSC_NAVIGATE('portal/catalogue/all'));await page.locator('.pscEditorialCard').first().waitFor();
   }
-  const basket=page.locator(width<=980?'.mobileCartButton':'.pillBasket');await basket.click();await page.locator('.requestDrawer').waitFor();assert.equal(await page.evaluate(()=>!!document.elementFromPoint(innerWidth-40,30)?.closest('[data-ps-scroll-header]')),false,'Sticky navigation stays below the request overlay');await page.locator('.requestDrawer button[data-close-basket]').click();await page.waitForTimeout(250);
+  const basket=page.locator('.pillBasket');await basket.click();await page.locator('.requestDrawer').waitFor();assert.equal(await page.evaluate(()=>!!document.elementFromPoint(innerWidth-40,30)?.closest('[data-ps-scroll-header]')),false,'Sticky navigation stays below the request overlay');await page.locator('.requestDrawer button[data-close-basket]').click();await page.waitForTimeout(250);
   const search=page.locator(width<=980?'.mobileSearchInput input':'.topbarSearch input');await search.focus();await page.evaluate(()=>document.activeElement.blur());
- }else{await page.locator('[data-public-menu]').click();await page.locator('[data-public-menu]').click();}
+ }else{await page.locator('summary[aria-label="Browse website"]').click();await page.keyboard.press('Escape');}
  await page.evaluate(()=>document.activeElement.blur());await scroll(1600);await page.keyboard.press('Tab');assert.equal(await header.evaluate(el=>el.inert),false,'Tab must reveal navigation before focus moves');
  await page.evaluate(()=>document.activeElement.blur());const current=await page.evaluate(()=>scrollY);await scroll(current+100);await scroll(current+60);
  await page.screenshot({animations:'disabled',path:`test-results/navigation/${role}-${width}-${motion}.png`});

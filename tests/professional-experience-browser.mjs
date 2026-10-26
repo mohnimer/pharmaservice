@@ -19,7 +19,7 @@ try{for(const width of [320,390,768,1440]){
  assert(await page.locator('.psHomeSearch').count());assert.equal(await page.locator('.psHeroComposition').count(),0);
  assert.equal(await page.locator('.psClinicalTile').count(),6);assert.equal(await page.locator('.psBasketCard').count(),0);await noOverflow();
  await page.screenshot({path:`${out}/${width}-home.png`,fullPage:true});
- if(width<=980){await page.locator('[data-public-menu]').click();await page.locator('.publicNav.open').waitFor();assert(await page.locator('.publicNav [data-go="start"]').isVisible());await page.screenshot({path:`${out}/${width}-menu.png`});await page.locator('.publicNav [data-go="ready-baskets"]').click();}else await page.locator('.publicNav [data-go="ready-baskets"]').click();
+ await page.locator('summary[aria-label="Browse website"]').click();await page.locator('#psBrowseMenu').waitFor();assert(await page.locator('#psBrowseMenu [data-go="start"]').isVisible());await page.screenshot({path:`${out}/${width}-menu.png`});await page.locator('#psBrowseMenu [data-go="ready-baskets"]').click();
  await page.locator('.psBasketGallery').waitFor();assert.equal(await page.locator('.psBasketScene img').count(),3);for(const img of await page.locator('.psBasketScene img').all()){await img.scrollIntoViewIfNeeded();await img.evaluate(el=>el.decode());assert(await img.evaluate(el=>el.naturalWidth===1536&&el.naturalHeight===1024));}await page.locator('[data-ready-basket="clinic-opening"]').click();await page.locator('#mvpLoginEmail').waitFor();assert.equal(await page.evaluate(()=>sessionStorage.getItem('pscPendingReadyBasket')),'clinic-opening');
  // Existing sign-in resumes the exact intended basket, using a transport fixture.
  // Allow the protected-route redirect's native hashchange render to finish before typing.
@@ -34,7 +34,7 @@ try{for(const width of [320,390,768,1440]){
  let saved=await page.evaluate(()=>JSON.parse((localStorage.getItem('pscClinicPortalStateV12_1:u1')||localStorage.getItem('pscClinicPortalStateV12_1'))).basket);assert.equal(saved.find(l=>l.sku==='PSC-DIA-008').qty,2);assert(saved.some(l=>l.kind==='unlisted'));
  // Replenishment doesn't rebuy equipment; selected requirement keeps original ID and pack.
  await page.locator('[data-ready-basket="first-aid-rollout"]').click();await page.locator('[data-basket-mode="replenishment"]').click();assert.equal(await page.locator('[data-basket-line="container"]').count(),0);await page.locator('[data-basket-template-add]').click();
- await page.locator(width<=980?'.mobileCartButton':'.pillBasket').click();await page.locator('.requestDrawer').waitFor();assert.match(await page.locator('.requestDrawer').innerText(),/planning preview/);
+ await page.locator('.pillBasket').click();await page.locator('.requestDrawer').waitFor();assert.match(await page.locator('.requestDrawer').innerText(),/planning preview/);
  await page.locator('[data-basket-delta="PSC-DIA-008|1"]').click();assert.match(await page.locator('.requestDrawer').innerText(),/Stethoscope/);await page.locator('button[data-close-basket]').click();
  // Reopen the actual registered scope from the native basket route.
  await go('portal/baskets');await page.locator('[data-ready-basket="clinic-opening"]').click();await page.locator('#psReadyBasketDialog').waitFor();
