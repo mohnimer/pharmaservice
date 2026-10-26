@@ -162,7 +162,7 @@ try {
   assert(text(w).includes('Quote Sent'),'Refresh resets simulated confirmation/cancellation');
   assert.equal(w.localStorage.getItem('pscClinicPortalStateV12_1'),liveStorage);
   await route(w,'/#admin/dashboard'); assert.equal(w.location.hash,'#portal/dashboard');
-  assert.equal(w.document.querySelectorAll('.masterDropdown').length,2);assert(!w.document.querySelector('.sidebar'));
+  assert.equal(w.document.querySelectorAll('.masterDropdown').length,1);assert(!w.document.querySelector('.sidebar'));
   assert(!w.document.querySelector('.mobileOverlay.show'));
   for(const page of ['portal/catalogue','portal/replenish','portal/documents','portal/stock','portal/assets']){
     await route(w,'/#'+page); assert(w.document.querySelector('.masterSiteNav'),'Portal navigation keeps shared master navigator');
@@ -171,7 +171,7 @@ try {
   await w.happyDOM.close(); report.push('Demo switch isolation, category/product detail/family request, simulated order, quote confirm/cancel, custom/public requests, refresh reset, live storage preservation, admin denial, mobile menu controls; zero backend writes');
 
   w=await setup('/#home'); assert(w.document.querySelector('#psBrowseMenu'));
-  assert.equal(w.document.querySelectorAll('.masterDropdown').length,2);
+  assert.equal(w.document.querySelectorAll('.masterDropdown').length,1);
   w.PSC_NAVIGATE('start'); await pause(); assert.equal(w.location.pathname,'/start');
   assert(w.document.querySelector('.masterSiteNav'));
   await w.happyDOM.close(); report.push('Mock login resumes selected category; all portal sections and public/mobile menu navigation use current shell');

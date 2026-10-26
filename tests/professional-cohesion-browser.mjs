@@ -13,7 +13,7 @@ try{for(const [width,role,reducedMotion] of [[320,'demo','no-preference'],[768,'
  const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  const base=`http://127.0.0.1:${server.address().port}`;
  await page.goto(base+'/#portal/dashboard');await page.locator('.psPortalWelcome').waitFor();
- const account=page.locator('[data-account-switcher]');assert.equal(await account.getAttribute('aria-label'),'Account navigation');
+ const account=page.locator('[data-account-switcher]');assert.equal(await account.getAttribute('aria-label'),'Website menu');
  assert.equal(await page.locator('.mobileAccountDot').count(),0);
  const before=await account.boundingBox();await account.click();await page.locator('#psAccountMenu').waitFor();
  const after=await account.boundingBox();assert(Math.abs(after.width-before.width)<1&&Math.abs(after.height-before.height)<1,'Opening menu must not resize the control');
