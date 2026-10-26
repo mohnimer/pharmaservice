@@ -162,18 +162,18 @@ try {
   assert(text(w).includes('Quote Sent'),'Refresh resets simulated confirmation/cancellation');
   assert.equal(w.localStorage.getItem('pscClinicPortalStateV12_1'),liveStorage);
   await route(w,'/#admin/dashboard'); assert.equal(w.location.hash,'#portal/dashboard');
-  await click(w,'[data-mobile-open]'); assert(w.document.querySelector('.sidebar.mobileOpen,.sidebar.open,.mobileOverlay.show'));
-  await click(w,'[data-mobile-close]'); assert(!w.document.querySelector('.mobileOverlay.show'));
+  assert.equal(w.document.querySelectorAll('.masterDropdown').length,1);assert(!w.document.querySelector('.sidebar'));
+  assert(!w.document.querySelector('.mobileOverlay.show'));
   for(const page of ['portal/catalogue','portal/replenish','portal/documents','portal/stock','portal/assets']){
-    await route(w,'/#'+page); assert(w.document.querySelector('.sidebar'),'Portal navigation keeps current shell');
+    await route(w,'/#'+page); assert(w.document.querySelector('.masterSiteNav'),'Portal navigation keeps shared master navigator');
   }
 
   await w.happyDOM.close(); report.push('Demo switch isolation, category/product detail/family request, simulated order, quote confirm/cancel, custom/public requests, refresh reset, live storage preservation, admin denial, mobile menu controls; zero backend writes');
 
-  w=await setup('/#home'); await click(w,'[data-public-menu]');
-  assert.equal(w.document.querySelector('[data-public-menu]').getAttribute('aria-expanded'),'true');
+  w=await setup('/#home'); assert(w.document.querySelector('#psBrowseMenu'));
+  assert.equal(w.document.querySelectorAll('.masterDropdown').length,1);
   w.PSC_NAVIGATE('start'); await pause(); assert.equal(w.location.pathname,'/start');
-  assert.equal(w.document.querySelector('[data-public-menu]').getAttribute('aria-expanded'),'false');
+  assert(w.document.querySelector('.masterSiteNav'));
   await w.happyDOM.close(); report.push('Mock login resumes selected category; all portal sections and public/mobile menu navigation use current shell');
   assert.deepEqual(errors, []);
   mkdirSync('test-results', { recursive: true });

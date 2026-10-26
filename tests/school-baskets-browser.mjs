@@ -15,7 +15,7 @@ try{for(const width of [320,390,768,1440]){
  const navigate=async route=>{await p.evaluate(r=>PSC_NAVIGATE(r),route);await p.waitForTimeout(150);};
  const fits=async()=>assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'No page overflow');
  await p.goto(base+'/#catalogue');await p.locator('.psSchoolBaskets').waitFor();
- assert.equal(await p.locator('[data-school-collection]').count(),3);
+ assert.equal(await p.locator('[data-school-collection]').count(),3);assert.deepEqual(await p.locator('.psSchoolCollectionIcon').evaluateAll(es=>es.map(e=>e.getAttribute('src').split('/').pop())),['complete-clinic-setup.svg','clinic-refills.svg','first-aid-points.svg']);for(const img of await p.locator('.psSchoolCollectionIcon').all()){await img.evaluate(e=>e.decode());assert(await img.evaluate(e=>e.naturalWidth>0));}await p.locator('.psSchoolCollectionGrid').screenshot({path:`${out}/${width}-basket-icons.png`});
  await p.locator('[data-school-collection="opening"]').click();await p.locator('.psSchoolGroup').first().waitFor();
  assert.equal(await p.locator('.psSchoolHead .eyebrow').count(),0);
  assert.equal(await p.locator('.psSchoolLines li').count(),121,'113 planning rows plus eight site checks');

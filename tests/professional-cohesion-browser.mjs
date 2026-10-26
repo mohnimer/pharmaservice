@@ -13,19 +13,18 @@ try{for(const [width,role,reducedMotion] of [[320,'demo','no-preference'],[768,'
  const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  const base=`http://127.0.0.1:${server.address().port}`;
  await page.goto(base+'/#portal/dashboard');await page.locator('.psPortalWelcome').waitFor();
- const account=page.locator('[data-account-switcher]');assert.equal(await account.locator('.accountControlLabel').innerText(),'Account');
+ const account=page.locator('[data-account-switcher]');assert.equal(await account.getAttribute('aria-label'),'Website menu');
  assert.equal(await page.locator('.mobileAccountDot').count(),0);
- assert((await account.getAttribute('aria-label')).includes('Test Group'));
  const before=await account.boundingBox();await account.click();await page.locator('#psAccountMenu').waitFor();
- await page.waitForFunction(()=>document.querySelector('[data-account-switcher]').classList.contains('ux32-responding'));
- const response=await account.evaluate(el=>{const style=getComputedStyle(el,'::after'),r=el.getBoundingClientRect();return {width:r.width,height:r.height,content:style.content,radius:style.borderRadius,animation:style.animationName,busy:el.getAttribute('aria-busy')};});
- assert(Math.abs(response.width-before.width)<1&&Math.abs(response.height-before.height)<1,'Acknowledgment must not resize its control');assert.equal(response.radius,'50%');assert.equal(response.animation,'ux32Spin');assert.equal(response.busy,null,'Instant actions do not pretend to await a network request');
- if(role==='school'){assert.equal(await page.locator('#psAccountMenu [data-school-select]').count(),0);assert((await page.locator('.accountCurrentSite').innerText()).includes('Site One'));}
- else{await page.locator('[data-school-select="s2"]').click();await page.waitForFunction(()=>document.querySelector('.accountSwitcherButton').textContent.includes('Site Two'));await account.click();}
- await page.keyboard.press('Escape');assert.equal(await account.getAttribute('aria-expanded'),'false');assert(await account.evaluate(el=>document.activeElement===el));
+ const after=await account.boundingBox();assert(Math.abs(after.width-before.width)<1&&Math.abs(after.height-before.height)<1,'Opening menu must not resize the control');
+ assert((await page.locator('.masterAccountContext').innerText()).includes('Test Group'));
+ if(role==='school'){assert.equal(await page.locator('#psAccountMenu [data-school-select]').count(),0);assert((await page.locator('.masterAccountContext').innerText()).includes('Site One'));}
+ else{await page.locator('[data-school-select="s2"]').click();await account.click();assert((await page.locator('.masterAccountContext').innerText()).includes('Site Two'));}
+ await page.keyboard.press('Escape');await page.waitForFunction(()=>document.querySelector('[data-account-switcher]').getAttribute('aria-expanded')==='false');assert.equal(await account.getAttribute('aria-expanded'),'false');assert(await account.evaluate(el=>document.activeElement===el));
  await page.screenshot({animations:'disabled',path:`test-results/cohesion/${role}-${width}-dashboard.png`});
  await page.evaluate(()=>window.PSC_NAVIGATE('portal/catalogue/sports'));await page.locator('.pscEditorialCard').first().waitFor();
- if(width<=980){const bar=await page.evaluate(()=>{const a=document.querySelector('.mobileSearchInput'),b=document.querySelector('.mobileCartButton');return {a:a.getBoundingClientRect().height,b:b.getBoundingClientRect().height,ar:getComputedStyle(a).borderRadius,br:getComputedStyle(b).borderRadius,count:getComputedStyle(b.querySelector('b')).backgroundColor};});assert.equal(bar.a,48);assert.equal(bar.b,48);assert.equal(bar.ar,'8px');assert.equal(bar.br,'8px');assert.equal(bar.count,'rgba(0, 0, 0, 0)');}
+ assert(await page.locator('.pillBasket').isVisible());assert.equal(await page.locator('.mobileCartButton:visible').count(),0);
+
  const card=page.locator('.pscEditorialCard').first();await card.scrollIntoViewIfNeeded();
  const framing=await card.evaluate(el=>({card:getComputedStyle(el).borderTopWidth,image:getComputedStyle(el.querySelector('.productVisual')).borderTopWidth,inset:getComputedStyle(el.querySelector('.productVisual'),'::before').display}));assert.deepEqual(framing,{card:'1px',image:'1px',inset:'none'});
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));

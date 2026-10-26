@@ -1322,6 +1322,20 @@
   ];
   const adminNav=[['admin/dashboard','Today','home'],['admin/sales','Sales','reports'],['admin/mail','Inbox','mail'],['admin/requests','Orders & quotations','checklist'],['admin/customers','Accounts','users'],['admin/tasks','Tasks','calendar'],['admin/resources','Products & suppliers','boxes'],['admin/settings','Settings','settings'],['admin/onboarding','Account setup','users']];
 
+  function masterNavigator(){
+    const route=currentRoute(),signed=!!(session?.user&&authContext),admin=!!authContext?.isPscAdmin;
+    const browse=[['home','Home','home'],[signed?'portal/catalogue':'catalogue','Catalogue','boxes'],[signed?'portal/baskets':'ready-baskets','Ready baskets','checklist'],['start','Send a requirement','edit'],['our-model','How we work','reports'],['workshop','The Workshop','resource'],['contact','Contact Pharma Service','mail']];
+    const account=signed?(admin?[...adminNav,['portal/dashboard','Customer portal','home']]:schoolNav.filter(([href])=>!['portal/catalogue','portal/baskets'].includes(href)&&(isDemoAccount()||!['portal/stock','portal/assets'].includes(href))).map(([href,label,ico])=>[href,href==='portal/dashboard'?'My dashboard':label,ico])):[['portal/dashboard','Sign in to your account','users']];
+    const link=([href,label,ico])=>`<button class="masterNavLink ${route===href||href==='portal/catalogue'&&route.startsWith('portal/catalogue/')?'is-current':''}" data-go="${href}" ${route===href?'aria-current="page"':''}><span class="masterNavIcon">${icon(ico)}</span><span>${esc(label)}</span></button>`;
+    return `<nav class="masterSiteNav" aria-label="Master navigation"><details class="masterDropdown"><summary data-account-switcher aria-label="Website menu" aria-controls="psMasterMenu" aria-expanded="false" title="Menu"><span class="masterTriggerIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span><span>Menu</span></summary><div class="masterNavPanel" id="psMasterMenu"><div id="psBrowseMenu">${browse.map(link).join('')}</div><section class="masterAccountSection" id="psAccountMenu"><h2>${signed?admin?'Your workspace':'Your account':'Account access'}</h2>${signed&&!admin?`<div class="masterAccountContext"><b>${esc(state.groupName)}</b><span>${esc(schoolLabel(authContext.school)||state.campus)}</span></div>`:''}${account.map(link).join('')}${signed&&!admin&&canSwitchSchools()?`<section class="masterCampusChoices"><h3>Switch campus</h3>${availableSchools().map(sc=>`<button class="masterCampusOption ${sc.id===authContext.school?.id?'is-current':''}" data-school-select="${esc(sc.id)}"><span>${esc(schoolLabel(sc))}</span>${sc.id===authContext.school?.id?'<small>Current</small>':''}</button>`).join('')}</section>`:''}${signed?`<button class="masterNavLink masterSignOut" data-signout><span class="masterNavIcon">${icon('logout')}</span><span>Sign out</span></button>`:'<p class="masterNavNote">View your quotations, documents and previous requests.</p>'}</section></div></details></nav>`;
+  }
+  let masterNavigationEvents=null;
+  function bindMasterNavigator(){
+    masterNavigationEvents?.abort();masterNavigationEvents=new AbortController();const options={signal:masterNavigationEvents.signal},nav=document.querySelector('.masterSiteNav');if(!nav)return;
+    const menus=[...nav.querySelectorAll('details')];menus.forEach(menu=>menu.addEventListener('toggle',()=>{menu.querySelector('summary').setAttribute('aria-expanded',String(menu.open));if(menu.open)menus.filter(m=>m!==menu).forEach(m=>m.open=false);},options));
+    document.addEventListener('click',e=>{if(!nav.contains(e.target))menus.forEach(m=>m.open=false);},options);
+    document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;const open=menus.find(m=>m.open);if(open){e.preventDefault();e.stopImmediatePropagation();open.open=false;open.querySelector('summary').focus();}}, {...options,capture:true});
+  }
   function shell(content, admin=false){
     const route=currentRoute();
     const resourceRoutes=['admin/products','admin/family-options','admin/supplier-feed','admin/storefront'];
@@ -1332,43 +1346,12 @@
     const links=admin?adminNav.filter(([href])=>!['admin/resources','admin/settings','admin/onboarding'].includes(href)):liveCustomerNav;
     const searchValue=esc(ui.globalSearch||'');
     return `<div class="appShell v4Shell v7Shell v7bShell v26Shell v37Shell v38Shell v381Shell pscOperatingShell ${admin?'adminShell':'customerShell'} ${!admin&&route==='portal/dashboard'?'psPortalHomeShell':''}">
-      <div class="mobileOverlay ${ui.mobile?'show':''}" data-mobile-close></div>
-      <aside class="sidebar ${ui.mobile?'sidebarOpen':''}">
-        <div class="sidebarTop">${admin?`<button class="adminBrand" data-go="admin/dashboard" aria-label="Pharma Service workspace"><img src="${PSC_LOGO}" alt="Pharma Service"></button>`:brand()}<span class="psWorkspaceCaption">${admin?'SUPPLY WORKSPACE':'CLINIC ACCOUNT'}</span><button class="iconBtn mobileClose" data-mobile-close aria-label="Close menu">${icon('close')}</button></div>
-        <nav class="iconNav">${links.map(([href,label,ico])=>`<button class="navLink iconOnly ${(route===href || (href==='portal/catalogue' && route.startsWith('portal/catalogue/')))?'active':''}" data-go="${href}" aria-label="${label}"><span class="navIcon">${admin?icon(ico):portalSidebarIcon(href,ico)}</span><span class="navLabel">${label}</span></button>`).join('')}</nav>
-        <div class="sidebarFooter compactFooter">
-          ${admin?`<button class="navLink" data-go="admin/resources"><span class="navIcon">${icon('boxes')}</span><span class="navLabel">Products & suppliers</span></button><button class="navLink" data-go="admin/settings"><span class="navIcon">${icon('settings')}</span><span class="navLabel">Settings</span></button>`:''}
-          ${admin?`<button class="navLink iconOnly" data-go="portal/dashboard" aria-label="Client portal"><span class="navIcon">${icon('home')}</span><span class="navLabel">Client portal</span></button>`:(authContext?.isPscAdmin?`<button class="navLink iconOnly" data-go="admin/dashboard" aria-label="PS admin"><span class="navIcon">${icon('home')}</span><span class="navLabel">PS admin</span></button>`:'')}
-          <button class="navLink iconOnly" data-signout aria-label="Sign out"><span class="navIcon">${admin?icon('logout'):portalUtilityIcon('logout')}</span><span class="navLabel">Sign out</span></button>
-        </div>
-      </aside>
       <main class="mainArea v7MainArea v7bMainArea">
-        <div class="psAdaptiveHeader" data-ps-scroll-header>
+        <div class="psAdaptiveHeader masterPortalHeader" data-ps-scroll-header>
         <header class="topbar sleekTopbar v7Topbar v7bTopbar portalHeaderBar">
-          <button class="iconBtn mobileMenu" data-mobile-open aria-label="Open menu">${icon('menu')}</button>
-          <div class="topbarBrandSlot plainLogo"><img src="${PSC_LOGO}" alt="Pharma Service"></div>
+          <button class="masterSiteBrand" data-go="home" aria-label="Pharma Service home"><img src="${PSC_LOGO}" alt="Pharma Service"></button>
           ${!admin?`<div class="topbarSearch"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search institutional catalogue…" aria-label="Search institutional catalogue"></div>`:`<div class="topbarAdminTitle"><span>PS</span><b>${esc(adminNav.find(x=>x[0]===route)?.[1]||'Workspace')}</b></div>`}
-          <div class="topbarActions topbarActionsV4">
-            ${admin?`<span class="userPill compactUser"><span class="avatarDot">MH</span><span><b>Mohamed</b><small>PS admin</small></span></span>`:`
-            <div class="accountSwitcherWrap">
-              <button class="campusPill accountSwitcherButton ${canSwitchSchools()?'switchable':''}" data-account-switcher aria-label="Account: ${esc(state.groupName||'Institutional account')} · ${esc(schoolLabel(authContext?.school)||state.campus||'Current site')}" aria-controls="psAccountMenu" aria-expanded="${ui.accountMenu?'true':'false'}">
-                <span class="accountControlLabel">Account</span>
-                <span class="campusPillMain">
-                  <small class="accountGroupName">${esc(state.groupName||'Institutional account')}</small>
-                  <b>${esc(schoolLabel(authContext?.school)||state.campus)}</b>
-                </span>
-                <span class="accountChevron" aria-hidden="true">⌄</span>
-              </button>
-              ${ui.accountMenu?`<div class="accountSwitcherMenu" id="psAccountMenu" aria-label="Account and sites">
-                <div class="accountMenuHead"><span>${canSwitchSchools()?'SWITCH ACCOUNT':'CURRENT ACCOUNT'}</span><b>${esc(state.groupName||'Account group')}</b></div>
-                <div class="accountMenuList">${canSwitchSchools()?availableSchools().map(sc=>`<button class="accountSchoolOption ${sc.id===authContext?.school?.id?'active':''}" data-school-select="${sc.id}">
-                  <span><b>${esc(sc.name)}</b><small>${esc(sc.campus_name||'Main account')}</small></span>
-                  ${sc.id===authContext?.school?.id?'<em>Current</em>':''}
-                </button>`).join(''):`<p class="accountCurrentSite">${esc(schoolLabel(authContext?.school)||state.campus||'Current site')}</p>`}</div><button type="button" class="accountSignOut" data-signout>Sign out</button>
-              </div>`:''}
-            </div>
-            <button class="button dark pillBasket" data-basket aria-label="Supply Request, ${basketQty()} requested units">Request <b>${basketQty()}</b></button>`}
-          </div>
+          <div class="topbarActions topbarActionsV4 masterHeaderActions">${!admin?`<div class="masterCurrentCampus campusPillMain"><small>${esc(state.groupName)}</small><b>${esc(schoolLabel(authContext?.school)||state.campus)}</b></div><button class="button dark pillBasket" data-basket aria-label="Supply Request, ${basketQty()} requested units">Request <b>${basketQty()}</b></button>`:''}${masterNavigator()}</div>
         </header>
         ${!admin?`<div class="mobileSearchRow"><div class="mobileSearchInput"><span class="searchIcon">${icon('search')}</span><input data-global-search value="${searchValue}" placeholder="Search catalogue…" aria-label="Search institutional catalogue"></div><button class="mobileCartButton" data-basket aria-label="Supply Request, ${basketQty()} requested units">Request <b>${basketQty()}</b></button></div>`:''}
         </div>
@@ -1387,12 +1370,7 @@
     ['our-model','How we work']
   ];
   function publicHeader(active='home'){
-    return `<header class="publicHeader v37PublicHeader" data-ps-scroll-header>
-      <button class="publicLogo" data-go="home" aria-label="Pharma Service home"><img src="${PSC_LOGO}" alt="Pharma Service"></button>
-      <button class="publicMenuButton" data-public-menu aria-label="Open website menu" aria-expanded="${ui.publicMenu?'true':'false'}">${ui.publicMenu?icon('close'):icon('menu')}</button>
-      <nav aria-label="Main navigation" class="publicNav ${ui.publicMenu?'open':''}">${publicNav.map(([r,l])=>`<button class="publicNavLink ${active===r?'active':''}" data-go="${r}" ${active===r?'aria-current="page"':''}>${l}</button>`).join('')}<button class="publicNavLink mobileClinicPortalLink" data-go="start"><span>Send a requirement</span></button><button class="publicNavLink mobileClinicPortalLink" data-go="portal/dashboard"><span>My account</span></button></nav>
-      <button class="button primary publicPortalBtn" data-go="portal/dashboard">My account</button>
-    </header>`;
+    return `<header class="publicHeader v37PublicHeader masterPublicHeader" data-ps-scroll-header><button class="publicLogo" data-go="home" aria-label="Pharma Service home"><img src="${PSC_LOGO}" alt="Pharma Service"></button>${masterNavigator()}</header>`;
   }
   function publicFooter(){ return `<footer class="publicFooter v37PublicFooter"><div><img src="${PSC_LOGO}" alt="Pharma Service"><p>Institutional healthcare supply.<br>One accountable partner.</p></div><div class="publicFooterLinks"><button data-go="start">Send a requirement</button><button data-go="workshop">The Workshop</button><button data-go="contact">Contact</button><button data-go="about">About</button><button data-go="careers">Careers</button><button data-go="media">Media & resources</button></div><div><span>Dubai, United Arab Emirates</span><a href="tel:+97143377004">+971 4 337 7004</a><a href="mailto:info@pharmaservice.ae">info@pharmaservice.ae</a></div></footer>`; }
   function publicPage(active,kicker,title,lead,body){ return `<main class="publicPage">${publicHeader(active)}<section class="publicPageHero"><span class="kicker">${kicker}</span><h1>${title}</h1><p>${lead}</p></section>${body}${publicFooter()}</main>`; }
@@ -2113,7 +2091,7 @@
           <button class="buyerAction" data-go="portal/documents"><img src="/assets/ui-icons/downloads.webp" alt=""><span><h3>Your paperwork</h3><p>${documentCount?`${documentCount} attached document${documentCount===1?'':'s'}, organized by request.`:'Quotations and delivery records, together by request.'}</p></span><span class="buyerActionLabel">Find a document</span></button>
         </div>
       </section>
-      ${delivered.length?`<section class="buyerRecentSupply" aria-labelledby="buyerRecentTitle"><div class="buyerHubHeading"><h2 id="buyerRecentTitle">Need the same supplies?</h2><button class="psTextLink" data-go="portal/requests">All previous requests</button></div>${[...delivered].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,2).map(r=>`<article class="buyerRepeatRow"><div><h3>${esc(r.id)}</h3><p>${r.lines.length} line${r.lines.length===1?'':'s'} · ${date(r.createdAt)}</p><span>${esc(r.lines.slice(0,2).map(l=>lineDisplayName(l,l.sku?product(l.sku):null)).join(' · '))}${r.lines.length>2?' · more':''}</span></div><button class="button light" data-reorder-order="${esc(r.id)}">Repeat this request</button></article>`).join('')}<p class="buyerRepeatNote">Review quantities and exact packs before submitting. Prices and availability are confirmed in a new quotation.</p></section>`:''}
+      ${delivered.length?`<section class="buyerRecentSupply" aria-labelledby="buyerRecentTitle"><div class="buyerHubHeading"><h2 id="buyerRecentTitle">Need the same supplies?</h2><button class="psTextLink" data-go="portal/requests">All previous requests</button></div><div class="buyerRepeatTableWrap"><table class="buyerRepeatTable"><thead><tr><th scope="col">Request</th><th scope="col">Requested</th><th scope="col">Items</th><th scope="col">Repeat</th></tr></thead><tbody>${[...delivered].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,3).map(r=>`<tr><td data-label="Request"><button class="buyerReferenceLink" data-request-view="${esc(r.id)}">${esc(r.id)}</button></td><td data-label="Requested">${date(r.createdAt)}</td><td data-label="Items"><button class="buyerHistoryItemsButton" data-buyer-history-items aria-expanded="false" aria-controls="request-items-${encodeURIComponent(r.id)}">${r.lines.length} item${r.lines.length===1?'':'s'}</button></td><td data-label="Repeat"><button class="button light" data-reorder-order="${esc(r.id)}">Repeat request</button></td></tr><tr class="buyerHistoryDetailRow" id="request-items-${encodeURIComponent(r.id)}" hidden><td colspan="4"><table class="buyerHistoryLineTable"><caption>Items in request ${esc(r.id)}</caption><thead><tr><th scope="col">Product</th><th scope="col">Recorded pack</th><th scope="col">Quantity</th></tr></thead><tbody>${r.lines.map(l=>`<tr><td>${esc(lineDisplayName(l,l.sku?product(l.sku):null))}</td><td>${esc(l.lineSnapshot?.pack||l.orderPackBasis||l.requestUnit||l.productOptionSnapshot?.pack||'Pack not recorded')}</td><td>${l.qty}</td></tr>`).join('')}</tbody></table></td></tr>`).join('')}</tbody></table></div><p class="buyerRepeatNote">Review quantities and exact packs before submitting. Prices and availability are confirmed in a new quotation.</p></section>`:''}
       <div class="buyerTaskLinks"><button class="button light" data-go="start">Upload an RFQ or spreadsheet</button><button class="button light" data-go="portal/wishlist">Saved products</button></div>
       <div class="psPortalWork">
         <section class="psPortalAttention" aria-labelledby="psPortalActivityTitle"><div class="psPortalSectionHead"><div><h2 id="psPortalActivityTitle">${awaiting.length?'Your quotations are ready.':'Your requests, moving forward.'}</h2><p>${awaiting.length?`${awaiting.length} quotation${awaiting.length===1?'':'s'} available to review.`:active.length?`${active.length} request${active.length===1?'':'s'} in progress.`:'A clear view of what happens after you request.'}</p></div><button class="psTextLink" data-go="portal/requests">View all</button></div><div class="psPortalActivityList">${recent.map(row).join('')||`<div class="psPortalNoActivity"><span aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/my-requests.webp" alt=""></span><div><h3>No requests in progress.</h3><p>${delivered.length?'Your previous orders are ready to revisit whenever you need them.':'Your quotations and order updates will appear here after your first request.'}</p></div></div>`}</div></section>
@@ -2311,7 +2289,7 @@
     const filtered=retrieval.filter(p=>{
       const lineMatch=ui.catalogueFilter==='All lines'||(ui.catalogueFilter==='DHA requirement'&&p.dhaMapped)||(ui.catalogueFilter==='Licensed / controlled'&&p.regulated)||(ui.catalogueFilter==='Specification-led'&&p.institutionalProvisional);
       const viewMatch=!action||action.intent!=='filter'||action.filter==='all'||(action.filter==='equipment'?clinicalNeedIds(p).includes('equipment'):!clinicalNeedIds(p).includes('equipment')&&!clinicalNeedIds(p).includes('medicines'));
-      return viewMatch&&((crossCategory&&!needId.startsWith('dha-'))||clinicalNeedMatches(p,needId))&&(ui.catalogueCat==='All product types'||p.productType===ui.catalogueCat)&&lineMatch;
+      return (!window.PSC_FAMILY_SHOPFRONT.key()||window.PSC_FAMILY_SHOPFRONT.matches(p,window.PSC_FAMILY_SHOPFRONT.key()))&&viewMatch&&((crossCategory&&!needId.startsWith('dha-'))||clinicalNeedMatches(p,needId))&&(ui.catalogueCat==='All product types'||p.productType===ui.catalogueCat)&&lineMatch;
     });
     return {allProducts,filtered,types,searching};
   }
@@ -2330,6 +2308,7 @@
     if(landing&&ui.catalogueQuery){ui.catalogueCat='All product types';ui.catalogueFilter='All lines';}
     const {filtered,searching}=catalogueFilterProducts(need);
     area.hidden=landing&&!ui.catalogueQuery&&!intelligent.action;
+    const brandBanner=document.querySelector('[data-shopfront-carousel]');if(brandBanner)brandBanner.hidden=!!(ui.catalogueQuery||intelligent.action);
     const grid=area.querySelector('.productGrid');grid.innerHTML=area.hidden?'':catalogueCardRows(filtered).map(productCard).join('');
     area.querySelector('[data-ps-result-count]').textContent=`${catalogueCardRows(filtered).length} ${searching?'matching listings':'listings'}`;
     const heroCount=document.querySelector('.categoryHeroCount b');if(heroCount)heroCount.textContent=catalogueCardRows(filtered).length;
@@ -2380,7 +2359,7 @@
     content=`<h3>Location-specific first-aid points</h3><p>Packaged kit concepts with independently refillable components. The school's nurse and safety lead approve the final contents, quantity, site and custody.</p><div class="psSchoolKitSelector">${b.kits.map(k=>`<button type="button" data-school-kit="${esc(k.id)}" aria-pressed="${k.id===kit.id?'true':'false'}">${esc(k.accent)}</button>`).join('')}</div><div class="psSchoolKitBody"><h3>${esc(kit.title)}</h3><p><span class="psSchoolKitLocation">${esc(kit.where)}</span> · ${esc(kit.details)}</p><ul class="psSchoolLines">${kit.contents.map(([label,id,pack])=>row(label,id?match(id):null,'Proposed quantity: '+pack)).join('')}</ul><div class="psSchoolPanelActions">${isPortal?`<button type="button" class="button dark" data-school-kit-request="${esc(kit.id)}">Add this kit to request</button>`:'<button type="button" class="button dark" data-go="start">Enquire about this kit</button>'}</div></div><p class="psSchoolFinePrint">PS-designed kit contents are a risk-informed commercial proposal, not a prescribed DHA first-aid kit bill of materials. Dedicated laboratory emergency eyewash and safety facilities must be evaluated independently. Medicines and injectable treatments are not included in general-access kits.</p>`;
   }
   const label=`<div class="psSchoolHead"><div><h2>School clinic supply collections</h2><p>From opening a clinic to refilling first-aid points across campus.</p></div></div>`;
-  return `<section class="psSchoolBaskets" aria-label="School clinic supply collections">${label}<div class="psSchoolCollectionGrid">${options.map(([id,title,subtitle])=>`<button type="button" class="psSchoolCollectionTile" data-school-collection="${id}" aria-pressed="${selected===id?'true':'false'}"><strong>${title}</strong><span>${subtitle}</span></button>`).join('')}</div>${selected?`<div class="psSchoolCollectionPanel">${content}</div>`:''}</section>`;
+  return `<section class="psSchoolBaskets" aria-label="School clinic supply collections">${label}<div class="psSchoolCollectionGrid">${options.map(([id,title,subtitle])=>`<button type="button" class="psSchoolCollectionTile" data-school-collection="${id}" aria-pressed="${selected===id?'true':'false'}"><strong>${title}</strong><span>${subtitle}</span><img class="psSchoolCollectionIcon" src="/assets/basket-icons/${({opening:'complete-clinic-setup',replenishment:'clinic-refills',kits:'first-aid-points'})[id]}.svg" alt="" aria-hidden="true" width="38" height="38"></button>`).join('')}</div>${selected?`<div class="psSchoolCollectionPanel">${content}</div>`:''}</section>`;
 }
 
   function catalogue(){
@@ -2394,7 +2373,7 @@
 
     const sf=storefrontConfig('institutional');
     return shell(`
-      <div class="psCatalogueWorkspace psCatalogueLandingWorkspace"><div class="psCatalogueMain">${intelligentSearchField()}${catalogueSearchResults('all',true)}
+      <div class="psCatalogueWorkspace psCatalogueLandingWorkspace"><div class="psCatalogueMain">${intelligentSearchField()}${window.PSC_FAMILY_SHOPFRONT.html({products:allProducts,imageFor:productDisplayImageUrl,countFor:items=>catalogueCardRows(items).length,searching:!!(ui.catalogueQuery||intelligent.action)})}${catalogueSearchResults('all',true)}
       <div class="pageHeader institutionalCatalogueHeader v26CatalogueLandingHeader">
         <div><span class="eyebrow">INSTITUTIONAL CATALOGUE</span><h1>${esc(sf?.headline||'Browse by clinical need.')}</h1><p>${esc(sf?.subheadline||'Start with the situation, task or area of care. The catalogue keeps sourcing complexity behind the scenes while giving clinical teams a faster route to the right products.')}</p></div>
         <div class="catalogueDepthPill"><b>${allProducts.length}</b><span>catalogue lines</span><small>${dhaCount} lines mapped to DHA requirements</small></div>
@@ -2431,6 +2410,7 @@
 
       <div class="psCatalogueWorkspace"><div class="psCatalogueMain">
       ${intelligentSearchField()}
+      ${window.PSC_FAMILY_SHOPFRONT.html({products:allProducts.filter(p=>clinicalNeedMatches(p,selected.id)),imageFor:productDisplayImageUrl,countFor:items=>catalogueCardRows(items).length,needId:selected.id,searching:!!(ui.catalogueQuery||intelligent.action)})}
       <div class="filterBar shopFilterBar v25FilterBar v26FilterBar">
         <select data-cat-filter="category" aria-label="Product type"><option>All product types</option>${types.map(c=>`<option ${c===ui.catalogueCat?'selected':''}>${esc(c)}</option>`).join('')}</select>
         <select data-cat-filter="approval" aria-label="Catalogue status">
@@ -3811,6 +3791,11 @@
   });
 
   function bind(){
+    bindMasterNavigator();
+    document.querySelectorAll('[data-buyer-history-items]').forEach(el=>el.addEventListener('click',()=>{const row=document.getElementById(el.getAttribute('aria-controls'));if(!row)return;row.hidden=!row.hidden;el.setAttribute('aria-expanded',String(!row.hidden));}));
+    window.PSC_FAMILY_SHOPFRONT.mount();
+    document.querySelectorAll('[data-shopfront-family]').forEach(el=>el.addEventListener('click',()=>{ui.catalogueCat='All product types';ui.catalogueFilter='All lines';go('portal/catalogue/all?family='+encodeURIComponent(el.dataset.shopfrontFamily));}));
+    document.querySelector('[data-shopfront-clear]')?.addEventListener('click',()=>{ui.catalogueCat='All product types';ui.catalogueFilter='All lines';go('portal/catalogue/all');});
     document.querySelectorAll('[data-ps-undo]').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();undoDraftChange();}));
     document.querySelectorAll('[data-start-scroll]').forEach(el=>el.addEventListener('click',()=>document.getElementById('start-send')?.scrollIntoView({behavior:'smooth',block:'start'})));
     if(document.querySelector('[data-unsubscribe-state]')) processMailUnsubscribe();
@@ -3833,7 +3818,6 @@
     document.querySelectorAll('[data-mobile-open]').forEach(el=>el.addEventListener('click',()=>{ui.mobile=true;render()}));
     document.querySelectorAll('[data-mobile-close]').forEach(el=>el.addEventListener('click',()=>{ui.mobile=false;render()}));
     document.querySelectorAll('[data-campus]').forEach(el=>el.addEventListener('change',e=>{state.campus=e.target.value;save();render()}));
-    document.querySelectorAll('[data-account-switcher]').forEach(el=>el.addEventListener('click',()=>{ui.accountMenu=!ui.accountMenu;renderUi({focusSelector:ui.accountMenu?'#psAccountMenu [data-school-select],#psAccountMenu [data-signout]':'[data-account-switcher]',transition:false})}));
     document.querySelectorAll('[data-school-select]').forEach(el=>el.addEventListener('click',async()=>{await switchInstitutionAccount(el.dataset.schoolSelect)}));
     document.querySelectorAll('[data-basket]').forEach(el=>el.addEventListener('click',openBasketOverlay));
     document.querySelectorAll('[data-close-basket]').forEach(el=>el.addEventListener('click',e=>{if(el.tagName==='BUTTON'||e.target===el)closeBasketOverlay();}));

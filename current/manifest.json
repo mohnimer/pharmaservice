@@ -36,6 +36,7 @@
     "current/behaviour/business-workspace-model.js",
     "current/behaviour/school-baskets.js",
     "current/behaviour/product-presentation.js",
+    "current/behaviour/shopfront-family-banner.js",
     "app.js",
     "current/behaviour/catalogue-families.js",
     "current/behaviour/family-details.js",
@@ -132,7 +133,9 @@
     "current/styles/professional-experience.css",
     "current/styles/portal-dashboard.css",
     "current/styles/school-baskets.css",
-    "current/styles/admin-interface.css"
+    "current/styles/admin-interface.css",
+    "current/styles/shopfront-family-banner.css",
+    "current/styles/master-navigation.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",

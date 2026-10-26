@@ -16,7 +16,7 @@ const report=await page.evaluate(()=>{
 const visible=e=>e.getBoundingClientRect().width>0&&e.getBoundingClientRect().height>0&&getComputedStyle(e).visibility!=='hidden';
 const controls=[...document.querySelectorAll('.topbarSearch input,.mobileSearchInput input,.searchInput input,.workshopSearch input')].filter(visible).map(e=>{const a=e.getBoundingClientRect(),b=e.parentElement.getBoundingClientRect(),s=getComputedStyle(e);return {border:s.borderTopWidth,contained:a.top>=b.top-1&&a.bottom<=b.bottom+1&&a.left>=b.left-1&&a.right<=b.right+1};});
 const accountButton=document.querySelector('[data-account-switcher]');let account=null;
-if(accountButton&&visible(accountButton)){const r=accountButton.getBoundingClientRect();account={w:r.width,h:r.height,radius:getComputedStyle(accountButton).borderTopLeftRadius,label:accountButton.querySelector('.accountControlLabel')?.textContent};}
+if(accountButton&&visible(accountButton)){const r=accountButton.getBoundingClientRect();account={w:r.width,h:r.height,radius:getComputedStyle(accountButton).borderTopLeftRadius,label:accountButton.getAttribute('aria-label')};}
 const search=document.querySelector('.mobileSearchInput'),request=document.querySelector('.mobileCartButton');let toolbar=null;
 if(search&&request&&visible(search)&&visible(request)){const a=search.getBoundingClientRect(),b=request.getBoundingClientRect();toolbar={searchHeight:a.height,requestHeight:b.height,searchRadius:getComputedStyle(search).borderRadius,requestRadius:getComputedStyle(request).borderRadius,countBackground:getComputedStyle(request.querySelector('b')).backgroundColor};}
 const panels=[...document.querySelectorAll('.appShell .panel,.appShell .wsPanel')].filter(visible).map(el=>getComputedStyle(el).borderTopWidth);
@@ -26,7 +26,7 @@ return {overflow:document.documentElement.scrollWidth>innerWidth,controls,accoun
 if(report.formFrame)assert.deepEqual(report.formFrame,{border:'0px',radius:'0px',shadow:'none'},'Contact form should be an open surface');
 assert.equal(report.overflow,false,`${route}/${width}: page overflow`);
 for(const c of report.controls){assert.equal(c.border,'0px',`${route}/${width}: double border`);assert(c.contained,`${route}/${width}: input escaping container`);}
-if(report.account){assert(report.account.w>=100&&report.account.h>=44);assert.equal(report.account.radius,'8px');assert.equal(report.account.label,'Account');}
+if(report.account){assert(report.account.w>=43&&report.account.h>=44);assert.equal(report.account.radius,'9px');assert.match(report.account.label,/^Website menu$/);}
 if(report.toolbar){assert(Math.abs(report.toolbar.searchHeight-report.toolbar.requestHeight)<1,JSON.stringify(report.toolbar));assert.equal(report.toolbar.searchRadius,'8px');assert.equal(report.toolbar.requestRadius,'8px');assert.equal(report.toolbar.countBackground,'rgba(0, 0, 0, 0)');}
 assert(report.panels.every(border=>border==='0px'),'Content sections should not have decorative outer borders');
 await page.screenshot({animations:'disabled',path:`test-results/control-alignment/${route.replace('/','-')}-${width}.png`,fullPage:true});
