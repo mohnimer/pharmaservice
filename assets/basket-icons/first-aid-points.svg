@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-labelledby="title">
+  <title id="title">First-aid points</title>
+  <g stroke="#7E9789" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 42s-13-11-13-22a13 13 0 0 1 26 0c0 11-13 22-13 22z"/>
+    <path d="M24 13.5v13M17.5 20h13"/>
+  </g>
+</svg>
