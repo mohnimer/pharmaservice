@@ -21,7 +21,7 @@ try{for(const width of [320,390,768,1440])for(const empty of [false,true]){
  await p.goto(base+'/#portal/dashboard');await p.locator('.psPortalHome').waitFor();await p.waitForTimeout(150);
  assert.equal(await p.locator('.psPortalHome h1').innerText(),'Your clinic. Ready for what’s next.');
  const search=await p.locator('.psPortalSearch').boundingBox();assert(search.y+search.height<650,'Search is the first useful action');
- assert(await p.locator('[data-account-switcher]').isVisible());assert(await p.locator('.campusPillMain b').isVisible(),'Current site remains visible');
+ assert(await p.locator('[data-account-switcher]').isVisible());assert(await p.locator('.psPortalWelcome p').first().isVisible(),'Current site remains visible in the dashboard welcome');assert.match(await p.locator('.psPortalWelcome').innerText(),/Site One/);
  assert.equal(await p.locator('.psPortalHome .eyebrow,.psPortalHome .psEyebrow').count(),0);
  assert.equal(await p.locator('.psPortalBasketGrid [data-ready-basket]').count(),3);assert.equal(await p.locator('.pscHomeDha').count(),3);
  assert.equal(await p.locator('.pscHomeCategoryIcon img').count(),6);assert.equal(await p.locator('.pscHomeCategoryIcon svg').count(),0);assert(!(await p.locator('.psPortalBasketGrid').innerText()).includes('Preview · review before quotation'));
