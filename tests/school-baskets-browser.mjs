@@ -23,7 +23,7 @@ try{for(const width of [320,390,768,1440]){
  const links=await p.locator('.psSchoolLines [data-public-product-view]').count();assert(links>90,'Existing requirement/product identities resolve to Details');
  for(const group of await p.locator('.psSchoolGroup').all())await group.locator('summary').click();
  await fits();await p.screenshot({path:`${out}/${width}-public-opening.png`,fullPage:true});
- await p.locator('.psSchoolLines [data-public-product-view]').first().click();await p.locator('.professionalProductDetail').waitFor();
+ await p.locator('.psSchoolGroup').first().locator('summary').click();await p.locator('.psSchoolLines [data-public-product-view]:visible').first().click();await p.locator('.professionalProductDetail').waitFor();
  await p.keyboard.press('Escape');await p.locator('.professionalProductDetail').waitFor({state:'detached'});
  await navigate('portal/catalogue');await p.locator('.psSchoolBaskets').waitFor();
  await p.locator('[data-school-collection="replenishment"]').click();

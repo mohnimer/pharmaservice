@@ -42,7 +42,7 @@ try {
   await w.happyDOM.close(); report.push('Workshop native hub/modules/articles, search/no-results/clear, save, print, share, history and unknown guide');
 
   for (const [path, selector] of [
-    ['/', '.publicLanding'], ['/start', '.start16Page'], ['/start/', '.start16Page'],
+    ['/', '.publicLanding'], ['/start', '.loginPublicPage'], ['/start/', '.loginPublicPage'],
     ['/#about', 'main'], ['/#our-model', 'main'], ['/#contact', 'main'], ['/#login', '.loginPublicPage'],
     ['/workshop/', '.workshopHubV50'], ['/workshop/stock-expiry', '.workshopModulePageV50'],
     ['/workshop/aed-has-expiring-parts-too/', '.workshopArticleV50']
@@ -53,13 +53,13 @@ try {
   report.push('Homepage, Start and trailing slash, About, Our Model, Contact, login and direct Workshop deep routes render actual shell scripts');
   w=await setup('/');
   for(let n=0;!w.document.querySelector('.psHome')&&n<20;n++)await pause();
-  assert.deepEqual([...w.document.querySelector('.psHome').children].map(el=>el.className),['home47 h47Compact','psHomeFind psPageWidth','psHomeCategories psPageWidth','psHomeJourney psPageWidth','psHomeWorkshop psPageWidth','psHomeReturn psPageWidth']);
+  assert.deepEqual([...w.document.querySelector('.psHome').children].map(el=>el.className),['skyHero','psHomeCategories psPageWidth','psHomeJourney psPageWidth','psHomeWorkshop psPageWidth','psHomeReturn psPageWidth']);
   assert.equal(w.document.querySelectorAll('.psHomeWorkshop .psHomeGuide').length,3);
   assert.equal(w.document.querySelectorAll('.psClinicalTile').length,6);
   assert(w.document.querySelector('#psHomeCommand[data-cat-q]'));
   assert(w.document.querySelector('main.publicLanding > .publicHeader'));
   assert(w.document.querySelector('main.publicLanding > .publicFooter'));
-  assert.equal(w.document.querySelector('.h47HeroCopy h1').textContent,'Healthcare procurement for institutions.');
+  assert.equal(w.document.querySelector('.skyHeroCopy h1').textContent,'From requirementto replenishment.');
   assert.equal(w.document.querySelectorAll('.psHome .psEyebrow').length,0);
   assert.equal(w.document.querySelectorAll('.psHome .psBasketCard').length,0);
   await w.happyDOM.close();
@@ -67,8 +67,8 @@ try {
   for(const [selector,destination] of [
     ['.psHomeJourney [data-go="our-model"]','#our-model'],
     ['.publicFooter [data-go="contact"]','#contact'],
-    ['.psHomeCategories [data-go="catalogue"]','#catalogue'],
-    ['.psHeroSecondary [data-go="start"]','/start'],
+    ['.psClinicalTile[data-go="catalogue/wounds"]','#catalogue/wounds'],
+    ['.psHeroSecondary [data-go="start"]','#login'],
     ['.publicFooter [data-go="workshop"]','/workshop'],
     ['.psHomeWorkshop [data-go="workshop"]','/workshop'],
     ['.psHomeGuide[data-go="workshop/oxygen-cylinder-is-not-an-oxygen-system"]','/workshop/oxygen-cylinder-is-not-an-oxygen-system'],
@@ -88,21 +88,11 @@ try {
   assert(w.document.querySelector('.prospectContactGrid a[href="https://wa.me/971553511335"]'));
   assert(w.document.querySelector('.prospectContactGrid a[href="mailto:info@pharmaservice.ae"]'));
   await w.happyDOM.close();
-  for(const path of ['/', '/#our-model','/start','/#start','/#contact','/#catalogue']){
+  for(const path of ['/', '/#our-model','/start','/#start','/#contact','/#catalogue/wounds']){
     w=await setup(path);
     assert(!/\bPSC\b(?![-_])/.test(text(w)),`${path} uses PS branding`);
     if(path.includes('start')){
-      assert(w.document.querySelector('#startRequirement[required]'));
-      assert(w.document.querySelector('.startContactActions a[href="tel:+971504252641"]'));
-      let scrolled=false;
-      w.document.querySelector('#start-send').scrollIntoView=()=>{scrolled=true;};
-      await click(w,'.start16RouteBoard [data-start-scroll="send"]');
-      assert(scrolled,'Start list action reaches requirement form');
-      await click(w,'.start16RouteBoard [data-go="catalogue"]');
-      assert.equal(w.location.hash,'#catalogue');
-      await route(w,'/start');
-      await click(w,'.startContactActions [data-go="login"]');
-      assert(w.document.querySelector('.loginPublicPage'));
+      assert(w.document.querySelector('#mvpLoginEmail'));assert.equal(w.sessionStorage.getItem('pscPendingRoute'),'start');
     }
     await w.happyDOM.close();
   }
@@ -111,15 +101,10 @@ try {
   assert.equal(w.document.querySelectorAll('.workshopGuideCard').length,0,'V50 guide cards do not inherit old layout selectors');
   await w.happyDOM.close();
   report.push('Inserted homepage CTAs open Start/catalogue/Workshop/login; decorative connectors removed; contact phone/email links; native Workshop cards isolated from historical CSS');
-  w = await setup('/#catalogue'); assert(w.document.querySelector('[data-v50-gated-category]'));
-  assert.equal(w.document.querySelectorAll('.publicCatalogueResults').length, 0);
-  await click(w, '[data-v50-gated-category]'); assert.equal(w.location.hash, '#login');
-  assert(w.document.querySelector('.cataloguePendingNoteV45'));
-  await fill(w,'#mvpLoginEmail','test@example.invalid'); await fill(w,'#mvpLoginPassword','test-only');
-  await click(w,'[data-mvp-login]');
-  assert(w.location.hash.startsWith('#portal/catalogue/'),'Login resumes requested category through current router');
-
-  await w.happyDOM.close(); report.push('Public category access gates to login and retains pending category');
+  w = await setup('/#catalogue/wounds');assert(w.document.querySelector('.publicCatalogueCard'));assert(!w.document.querySelector('#mvpLoginEmail'));
+  await click(w,'.publicHeader [data-go="portal/dashboard"]');assert.equal(w.location.hash,'#login');
+  await fill(w,'#mvpLoginEmail','test@example.invalid');await fill(w,'#mvpLoginPassword','test-only');await click(w,'[data-mvp-login]');assert.equal(w.location.hash,'#portal/dashboard');
+  await w.happyDOM.close();report.push('Public catalogue browses without sign-in; private account access retains its sign-in gate');
 
   const liveStorage=JSON.stringify({groupName:'Preserved live account',activeSchoolId:'live-site',basket:[{sku:'PSC-PPE-001',qty:3}],requests:[]});
   w = await setup('/#portal/dashboard', 'demo',liveStorage);
@@ -162,7 +147,7 @@ try {
   assert(text(w).includes('Quote Sent'),'Refresh resets simulated confirmation/cancellation');
   assert.equal(w.localStorage.getItem('pscClinicPortalStateV12_1'),liveStorage);
   await route(w,'/#admin/dashboard'); assert.equal(w.location.hash,'#portal/dashboard');
-  assert.equal(w.document.querySelectorAll('.masterDropdown').length,1);assert(!w.document.querySelector('.sidebar'));
+  assert.equal(w.document.querySelectorAll('.masterDropdown').length,0);assert(!w.document.querySelector('.sidebar'));
   assert(!w.document.querySelector('.mobileOverlay.show'));
   for(const page of ['portal/catalogue','portal/replenish','portal/documents','portal/stock','portal/assets']){
     await route(w,'/#'+page); assert(w.document.querySelector('.masterSiteNav'),'Portal navigation keeps shared master navigator');
@@ -170,10 +155,10 @@ try {
 
   await w.happyDOM.close(); report.push('Demo switch isolation, category/product detail/family request, simulated order, quote confirm/cancel, custom/public requests, refresh reset, live storage preservation, admin denial, mobile menu controls; zero backend writes');
 
-  w=await setup('/#home'); assert(w.document.querySelector('#psBrowseMenu'));
-  assert.equal(w.document.querySelectorAll('.masterDropdown').length,1);
+  w=await setup('/#home'); assert(w.document.querySelector('.skyPublicLinks'));
+  assert.equal(w.document.querySelectorAll('.masterDropdown').length,0);
   w.PSC_NAVIGATE('start'); await pause(); assert.equal(w.location.pathname,'/start');
-  assert(w.document.querySelector('.masterSiteNav'));
+  assert(w.document.querySelector('.masterPublicHeader'));
   await w.happyDOM.close(); report.push('Mock login resumes selected category; all portal sections and public/mobile menu navigation use current shell');
   assert.deepEqual(errors, []);
   mkdirSync('test-results', { recursive: true });

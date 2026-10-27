@@ -14,8 +14,8 @@ try{for(const width of [320,390,768,1440,1920]){
  const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  const fits=async()=>assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),width+'px horizontal overflow');
  await page.goto(base+'/#home');await page.locator('.psHomeWorkshop').waitFor();await page.evaluate(()=>document.fonts.ready);
- assert.equal(await page.locator('.psHomeWorkshop').count(),1);assert.equal(await page.locator('.psHome h1').innerText(),'Healthcare procurement for institutions.');
- assert.match(await page.locator('.h47HeroPhoto').evaluate(e=>getComputedStyle(e).backgroundImage),/v44-10-5-home-hero-desktop/);
+ assert.equal(await page.locator('.psHomeWorkshop').count(),1);assert.match(await page.locator('.psHome h1').innerText(),/From requirement\s+to replenishment\./);
+ assert.match(await page.locator('.skyHero').evaluate(e=>getComputedStyle(e).backgroundImage),/psc-clouds/);
  assert.equal(await page.locator('.psHomeWorkshop .kicker,.psHomeWorkshop .eyebrow').count(),0);assert(!/[→↗]/.test(await page.locator('.psHomeWorkshop').innerText()));
  const guides=await page.evaluate(()=>PSC_WORKSHOP.filter(g=>g.status==='published').map(g=>({slug:g.slug,title:g.title,sections:g.body_sections.map(s=>s.title),signature:[g.use_it_right,g.check_your_stock,g.when_ordering]})));
  const featured=await page.locator('.psHomeGuide').evaluateAll(els=>els.map(e=>({route:e.dataset.go,title:e.querySelector('h3').textContent})));
