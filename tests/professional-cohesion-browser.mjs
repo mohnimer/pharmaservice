@@ -55,7 +55,7 @@ try{for(const [width,role,reducedMotion] of [[320,'demo','no-preference'],[768,'
  // Feedback fixture: pending work must preserve the label and physical width.
  await page.evaluate(()=>{const b=document.createElement('button');b.type='button';b.className='button primary';b.dataset.mailTest='';b.textContent='Pending action fixture';b.id='pendingFeedbackFixture';document.querySelector('.contentWrap').prepend(b);});
  const pending=page.locator('#pendingFeedbackFixture'),size=await pending.boundingBox();await pending.click();assert.equal(await pending.getAttribute('aria-busy'),'true');assert.equal(await pending.innerText(),'Pending action fixture');
- const pendingStyle=await pending.evaluate(el=>({width:el.getBoundingClientRect().width,animation:getComputedStyle(el,'::after').animationName}));assert.equal(pendingStyle.width,size.width);assert.equal(pendingStyle.animation,'ux32Spin');
+ const pendingStyle=await pending.evaluate(el=>({width:el.getBoundingClientRect().width,animation:getComputedStyle(el,'::after').animationName}));assert.equal(pendingStyle.width,size.width);assert.equal(pendingStyle.animation,reducedMotion==='reduce'?'none':'ux32Spin');
  await page.evaluate(()=>{const t=document.createElement('div');t.className='toast';t.textContent='Fixture completion';document.getElementById('app').appendChild(t);});await page.waitForFunction(()=>!document.getElementById('pendingFeedbackFixture').hasAttribute('aria-busy'));
  assert.deepEqual(errors,[]);await ctx.close();console.log(`${role}/${width}/${reducedMotion}: labelled account, correct site permissions, stable response/loading glyphs, shared toolbar geometry, revised card framing PASS`);
 }}finally{await browser.close();server.close();}
