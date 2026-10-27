@@ -15,11 +15,11 @@ try{for(const width of [320,390,768,1440]){
  const noOverflow=async()=>assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${width}: horizontal overflow`);
  await page.goto('http://127.0.0.1:'+server.address().port+'/#home');await page.locator('.psHome').waitFor();await page.waitForTimeout(250);
  assert.equal(await page.locator('[data-ps-scroll-header]').count(),1);assert.equal(await page.locator('.psHome h1').count(),1);
- assert.equal(await page.locator('.psHome h1').innerText(),'Healthcare procurement for institutions.');assert.equal(await page.locator('.psHome .psEyebrow').count(),0);assert.match(await page.locator('.h47HeroPhoto').evaluate(el=>getComputedStyle(el).backgroundImage),/v44-10-5-home-hero-desktop/);
+ assert.match(await page.locator('.psHome h1').innerText(),/From requirement\s+to replenishment\./);assert.equal(await page.locator('.psHome .psEyebrow').count(),0);assert.match(await page.locator('.skyHero').evaluate(el=>getComputedStyle(el).backgroundImage),/psc-clouds/);
  assert(await page.locator('.psHomeSearch').count());assert.equal(await page.locator('.psHeroComposition').count(),0);
  assert.equal(await page.locator('.psClinicalTile').count(),6);assert.equal(await page.locator('.psBasketCard').count(),0);await noOverflow();
  await page.screenshot({path:`${out}/${width}-home.png`,fullPage:true});
- await page.locator('[data-account-switcher]').click();await page.locator('#psBrowseMenu').waitFor();assert(await page.locator('#psBrowseMenu [data-go="start"]').isVisible());await page.screenshot({path:`${out}/${width}-menu.png`});await page.locator('#psBrowseMenu [data-go="ready-baskets"]').click();
+ if(width<=760){await page.locator('.skyPublicMobile summary').click();await page.locator('.skyPublicMobile [data-go="ready-baskets"]').click();}else{await page.locator('.skyPublicLinks [data-go="ready-baskets"]').click();}
  await page.locator('.psBasketGallery').waitFor();assert.equal(await page.locator('.psBasketScene img').count(),3);for(const img of await page.locator('.psBasketScene img').all()){await img.scrollIntoViewIfNeeded();await img.evaluate(el=>el.decode());assert(await img.evaluate(el=>el.naturalWidth===1536&&el.naturalHeight===1024));}await page.locator('[data-ready-basket="clinic-opening"]').click();await page.locator('#mvpLoginEmail').waitFor();assert.equal(await page.evaluate(()=>sessionStorage.getItem('pscPendingReadyBasket')),'clinic-opening');
  // Existing sign-in resumes the exact intended basket, using a transport fixture.
  // Allow the protected-route redirect's native hashchange render to finish before typing.

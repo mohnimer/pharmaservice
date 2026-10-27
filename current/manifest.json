@@ -82,7 +82,8 @@
     "current/behaviour/home-layout.js",
     "current/behaviour/system-theme.js",
     "current/behaviour/catalogue-access.js",
-    "current/behaviour/admin-interface.js"
+    "current/behaviour/admin-interface.js",
+    "current/behaviour/sky-system.js"
   ],
   "stylesheets": [
     "styles.css",
@@ -135,7 +136,8 @@
     "current/styles/school-baskets.css",
     "current/styles/admin-interface.css",
     "current/styles/shopfront-family-banner.css",
-    "current/styles/master-navigation.css"
+    "current/styles/master-navigation.css",
+    "current/styles/sky-system.css"
   ],
   "absorbed": {
     "v44-7-catalogue-update.js": "current/behaviour/catalogue-data-extension.js",

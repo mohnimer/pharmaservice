@@ -205,7 +205,7 @@
   // Native disclosure semantics remain authoritative. Previews contain existing text only.
   function enhanceDisclosures(root){
     root?.querySelectorAll('details').forEach(detail=>{
-      if(detail.classList.contains('masterDropdown'))return;
+      if(detail.classList.contains('masterDropdown')||detail.classList.contains('skyCategoryBrowser')||detail.classList.contains('skyPublicMobile'))return;
       const summary=detail.querySelector(':scope > summary');if(!summary)return;
       if(!detail.classList.contains('psDisclosure'))detail.classList.add('psDisclosure');
       if(!summary.querySelector(':scope > i,:scope > .psDisclosurePlus')){const plus=document.createElement('i');plus.className='psDisclosurePlus';plus.textContent='+';plus.setAttribute('aria-hidden','true');summary.appendChild(plus);}

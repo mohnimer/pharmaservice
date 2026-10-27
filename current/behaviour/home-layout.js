@@ -15,20 +15,19 @@
     if(!guides.length)return '';
     return `<section class="psHomeWorkshop psPageWidth" aria-labelledby="psWorkshopTitle"><div class="psSectionHeading"><div><h2 id="psWorkshopTitle">The Workshop</h2><p>Practical guidance on products, specifications and the details that keep your clinic ready.</p></div><button class="psTextLink" data-go="workshop">Explore The Workshop</button></div><div class="psHomeGuideGrid">${guides.map(g=>`<article><button class="psHomeGuide" data-go="workshop/${escape(g.slug)}"><img src="/assets/workshop/${escape(g.slug)}.webp" width="1800" height="960" loading="lazy" decoding="async" alt=""><span><h3>${escape(g.title)}</h3><p>${escape(g.excerpt)}</p></span></button></article>`).join('')}</div></section>`;
   }
+  function heroProducts(){
+    // Category examples only: these photographs do not establish an exact offer or approval.
+    return [
+      ['dha-medicines','Medicines','/assets/products/dha-2026-10/psc-sc-d07.png','Sodium chloride ampoules and carton — medicines category example'],
+      ['dha-equipment','Clinical equipment','/assets/products/pulse-oximeter-clean.png','Fingertip pulse oximeter — equipment category example'],
+      ['dha-consumables','Everyday consumables','/assets/products/verified-20261019/b9747c9c8b117df78832.png','Examination gloves — consumables category example']
+    ].map(([category,label,src,alt],i)=>`<button class="skyHeroProduct skyHeroProduct${i+1}" data-go="catalogue/${category}" aria-label="Browse ${label}"><span class="skyHeroSubject"><img src="${src}" alt="${alt}" decoding="async"></span></button>`).join('');
+  }
   function markup(){return `<div class="psExperience psHome">
-    <div class="home47 h47Compact">
-      <section class="h47Hero" aria-labelledby="psHomeTitle">
-        <div class="h47HeroCopy h47Reveal in">
-          <h1 id="psHomeTitle">Healthcare procurement for institutions.</h1>
-          <p class="h47HeroBody">Documented supply at wholesale prices, with one accountable partner from first order to repeat.</p>
-          <div class="h47HeroActions"><button class="button primary" data-go="our-model">Explore our model</button><button class="button outline" data-go="contact">Reach out</button></div>
-        </div>
-        <div class="h47HeroVisual" aria-hidden="true"><div class="h47HeroPhoto"></div></div>
-      </section>
-    </div>
-    <section class="psHomeFind psPageWidth" aria-label="Find products or send a requirement">
-      <form class="psHomeSearch" data-ps-command-form role="search"><label class="srOnly" for="psHomeCommand">Search the institutional catalogue</label><span aria-hidden="true">⌕</span><input id="psHomeCommand" type="search" data-cat-q aria-label="Search catalogue" placeholder="Find a product or describe what you need" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Search</button></form>
-      <div class="psHeroSecondary"><span>Already have a list?</span><button class="psTextLink" data-go="start">Send your requirement</button></div>
+    <section class="skyHero" aria-labelledby="psHomeTitle">
+      <div class="skyHeroCopy"><h1 id="psHomeTitle">From requirement<br>to replenishment.</h1><p>Healthcare supplies for institutions. Find the right products, build one request and keep every order connected.</p>
+      <section class="psHomeFind" aria-label="Find products or send a requirement"><form class="psHomeSearch" data-ps-command-form role="search"><label class="srOnly" for="psHomeCommand">Search the institutional catalogue</label><span aria-hidden="true">⌕</span><input id="psHomeCommand" type="search" data-cat-q aria-label="Search catalogue" placeholder="What does your clinic need?" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Search</button></form><div class="psHeroSecondary"><button class="button outline" data-go="catalogue">Browse the catalogue</button><button class="psTextLink" data-go="start">Send your requirement</button></div></section>
+      </div><div class="skyProductStage" aria-label="Explore catalogue products">${heroProducts()}<span class="skyStageCaption">Everyday essentials. One accountable partner.</span></div>
     </section>
     <section class="psHomeCategories psPageWidth" aria-labelledby="psClinicalTitle"><div class="psSectionHeading"><div><h2 id="psClinicalTitle">Find your clinical area.</h2></div><button class="psTextLink" data-go="catalogue">Explore the catalogue</button></div><div class="psClinicalGrid">${categories.map(([id,name,copy,image])=>`<button class="psClinicalTile" data-go="catalogue/${id}"><img src="/assets/clinical-icons/${image}.png" alt="" loading="lazy"><span><h3>${name}</h3><small>${copy}</small></span></button>`).join('')}</div></section>
     <section class="psHomeJourney psPageWidth" aria-labelledby="psJourneyTitle"><div class="psSectionHeading"><div><h2 id="psJourneyTitle">Less to coordinate.<br> More taken care of.</h2></div><button class="psTextLink" data-go="our-model">How we work</button></div><ol>${[['Find','Search by product or clinical need.'],['Request','Choose exact items or send your list.'],['Source & quote','Review specifications and commercial terms.'],['Deliver','Supply follows the required approval.'],['Reorder','Return to your account and order history.']].map(([title,copy],i)=>`<li><span>0${i+1}</span><h3>${title}</h3><p>${copy}</p></li>`).join('')}</ol></section>
