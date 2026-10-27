@@ -157,7 +157,7 @@ try {
 
   w=await setup('/#home'); assert(w.document.querySelector('.skyPublicLinks'));
   assert.equal(w.document.querySelectorAll('.masterDropdown').length,0);
-  w.PSC_NAVIGATE('start'); await pause(); assert.equal(w.location.pathname,'/start');
+  w.PSC_NAVIGATE('start'); await pause(); assert.equal(w.location.hash,'#login');assert.equal(w.sessionStorage.getItem('pscPendingRoute'),'start');
   assert(w.document.querySelector('.masterPublicHeader'));
   await w.happyDOM.close(); report.push('Mock login resumes selected category; all portal sections and public/mobile menu navigation use current shell');
   assert.deepEqual(errors, []);
