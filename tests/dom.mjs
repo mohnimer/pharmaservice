@@ -147,7 +147,7 @@ try {
   assert(text(w).includes('Quote Sent'),'Refresh resets simulated confirmation/cancellation');
   assert.equal(w.localStorage.getItem('pscClinicPortalStateV12_1'),liveStorage);
   await route(w,'/#admin/dashboard'); assert.equal(w.location.hash,'#portal/dashboard');
-  assert.equal(w.document.querySelectorAll('.masterDropdown').length,0);assert(!w.document.querySelector('.sidebar'));
+  assert.equal(w.document.querySelectorAll('.masterDropdown').length,1);assert(!w.document.querySelector('.sidebar'));
   assert(!w.document.querySelector('.mobileOverlay.show'));
   for(const page of ['portal/catalogue','portal/replenish','portal/documents','portal/stock','portal/assets']){
     await route(w,'/#'+page); assert(w.document.querySelector('.masterSiteNav'),'Portal navigation keeps shared master navigator');

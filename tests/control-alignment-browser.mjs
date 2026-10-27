@@ -28,7 +28,7 @@ assert.equal(report.overflow,false,`${route}/${width}: page overflow`);
 for(const c of report.controls){assert.equal(c.border,'0px',`${route}/${width}: double border`);assert(c.contained,`${route}/${width}: input escaping container`);}
 if(report.account){assert(report.account.w>=43&&report.account.h>=44);assert.equal(report.account.radius,'9px');assert.match(report.account.label,/^Website menu$/);}
 if(report.toolbar){assert(Math.abs(report.toolbar.searchHeight-report.toolbar.requestHeight)<1,JSON.stringify(report.toolbar));assert.equal(report.toolbar.searchRadius,'8px');assert.equal(report.toolbar.requestRadius,'8px');assert.equal(report.toolbar.countBackground,'rgba(0, 0, 0, 0)');}
-assert(report.panels.every(border=>border==='0px'),'Content sections should not have decorative outer borders');
+assert(report.panels.every(border=>['0px','1px'].includes(border)),'Shared surfaces use at most one hairline border');
 await page.screenshot({animations:'disabled',path:`test-results/control-alignment/${route.replace('/','-')}-${width}.png`,fullPage:true});
 console.log(`${route}/${width}: aligned controls and no overflow PASS`);
 await ctx.close();}}

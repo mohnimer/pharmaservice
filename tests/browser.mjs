@@ -51,10 +51,7 @@ try {
   for (const path of ['/workshop/', '/workshop/clinic-checks/', '/start/']) {
     await page.goto(base + path); await page.locator('main').waitFor(); assert(!await page.locator('body').innerText().then(t => t.includes('Guide not found.')));
   }
-  await page.goto(base + '/catalogue.html'); await page.locator('[data-v50-gated-category]').first().waitFor();
-  assert.equal(await page.locator('.publicCatalogueResults').count(), 0);
-  await page.locator('[data-v50-gated-category]').first().click(); await page.locator('.loginPublicPage').waitFor();
-  await page.locator('.cataloguePendingNoteV45').waitFor();
+  await page.goto(base + '/catalogue.html');await page.locator('.publicCatalogueCard').first().waitFor();assert.equal(await page.locator('.loginPublicPage').count(),0);await page.goto(base+'/start');await page.locator('.loginPublicPage').waitFor();
   await context.close(); results.push('Workshop modules, search/empty/clear, guide save/reload, print/share, back/forward, deep routes, catalogue login gate');
 
   ({ context, page } = await setup('anonymous', true));
