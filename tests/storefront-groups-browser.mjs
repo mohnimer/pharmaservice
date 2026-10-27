@@ -49,9 +49,6 @@ try{for(const width of [390,1440]){
  results.push({width,products:inventory.products,listings:inventory.listings,packRequestSku:request.productOption.sku,pack:request.productOption.pack,passed:true});await ctx.close();
  const anonymous=await browser.newContext({viewport:{width,height:960}});
  await anonymous.route('**/*',r=>{const host=new URL(r.request().url()).hostname;if(host==='127.0.0.1')return r.continue();return r.fulfill({contentType:host==='cdn.jsdelivr.net'?'text/javascript':'text/plain',body:host==='cdn.jsdelivr.net'?readFileSync('tests/mock-supabase.js','utf8'):''});});
- const publicPage=await anonymous.newPage();await publicPage.goto(`http://127.0.0.1:${server.address().port}/#catalogue`);await publicPage.locator('.catalogueGateBandV45').waitFor();
- assert.equal(await publicPage.locator('.publicCatalogueCard,.productCard').count(),0,'Existing anonymous catalogue access boundary stays intact');
- await publicPage.goto(`http://127.0.0.1:${server.address().port}/#catalogue/all`);await publicPage.locator('#mvpLoginPassword').waitFor();
- assert.equal(await publicPage.locator('.productCard').count(),0);assert.deepEqual(await publicPage.evaluate(()=>window.__backendCalls.filter(c=>c.rpc||c.action!=='select')),[]);await anonymous.close();
+ const publicPage=await anonymous.newPage();await publicPage.goto(`http://127.0.0.1:${server.address().port}/#catalogue/wounds`);await publicPage.locator('.publicCatalogueCard').first().waitFor();assert.equal(await publicPage.locator('#mvpLoginPassword').count(),0,'Anonymous catalogue browsing stays public');await publicPage.goto(`http://127.0.0.1:${server.address().port}/start`);await publicPage.locator('#mvpLoginPassword').waitFor();assert.equal(await publicPage.locator('.productCard').count(),0);assert.deepEqual(await publicPage.evaluate(()=>window.__backendCalls.filter(c=>c.rpc||c.action!=='select')),[]);await anonymous.close();
  console.log('PASS product identity, pack selection, original request IDs, photo continuity and no sends',width);
 }writeFileSync('test-results/storefront-groups/qa.json',JSON.stringify(results,null,2)+'\n');}finally{await browser.close();server.close();}

@@ -29,7 +29,7 @@ try{for(const [width,role,motion] of [[390,'demo','no-preference'],[1440,'demo',
   }
   const basket=page.locator('.pillBasket');await basket.click();await page.locator('.requestDrawer').waitFor();assert.equal(await page.evaluate(()=>!!document.elementFromPoint(innerWidth-40,30)?.closest('[data-ps-scroll-header]')),false,'Sticky navigation stays below the request overlay');await page.locator('.requestDrawer button[data-close-basket]').click();await page.waitForTimeout(250);
   const search=page.locator(width<=980?'.mobileSearchInput input':'.topbarSearch input');await search.focus();await page.evaluate(()=>document.activeElement.blur());
- }else{await page.locator('[data-account-switcher]').click();await page.keyboard.press('Escape');}
+ }else if(width<=760){await page.locator('.skyPublicMobile summary').click();await page.keyboard.press('Escape');}else{assert(await page.locator('.skyPublicLinks [data-go="our-model"]').isVisible());}
  await page.evaluate(()=>document.activeElement.blur());await scroll(1600);await page.keyboard.press('Tab');assert.equal(await header.evaluate(el=>el.inert),false,'Tab must reveal navigation before focus moves');
  await page.evaluate(()=>document.activeElement.blur());const current=await page.evaluate(()=>scrollY);await scroll(current+100);await scroll(current+60);
  await page.screenshot({animations:'disabled',path:`test-results/navigation/${role}-${width}-${motion}.png`});

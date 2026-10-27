@@ -1217,6 +1217,7 @@
     ui.modal={type:publicMode?'public-product':'product',sku};
     renderUi({preserveScroll:true});
   }
+  window.PSC_OPEN_PUBLIC_PRODUCT=sku=>{if(product(sku))openProductOverlay(sku,true);};
   function closeModalOverlay(){
     const y=Number.isFinite(ui.overlayScroll)?ui.overlayScroll:window.scrollY;
     window.PSC_MOTION?.exit(document.querySelector('.fluidOverlay'));
@@ -1225,6 +1226,7 @@
     requestAnimationFrame(()=>window.scrollTo({top:y,behavior:'instant'}));
   }
   function openBasketOverlay(){
+    if(!requireRequestAccount())return;
     window.PSC_MOTION?.finishExits();
     rememberOverlayOpener();
     ui.overlayScroll=window.scrollY;
@@ -1324,7 +1326,7 @@
 
   function masterNavigator(){
     const route=currentRoute(),signed=!!(session?.user&&authContext),admin=!!authContext?.isPscAdmin;
-    const browse=[['home','Home','home'],[signed?'portal/catalogue':'catalogue','Catalogue','boxes'],[signed?'portal/baskets':'ready-baskets','Ready baskets','checklist'],['start','Send a requirement','edit'],['our-model','How we work','reports'],['workshop','The Workshop','resource'],['contact','Contact Pharma Service','mail']];
+    const browse=admin?[]:[[signed?'portal/catalogue':'catalogue','Catalogue','boxes'],[signed?'portal/baskets':'ready-baskets','Ready baskets','checklist'],['start','Send a requirement','edit']];
     const account=signed?(admin?[...adminNav,['portal/dashboard','Customer portal','home']]:schoolNav.filter(([href])=>!['portal/catalogue','portal/baskets'].includes(href)&&(isDemoAccount()||!['portal/stock','portal/assets'].includes(href))).map(([href,label,ico])=>[href,href==='portal/dashboard'?'My dashboard':label,ico])):[['portal/dashboard','Sign in to your account','users']];
     const link=([href,label,ico])=>`<button class="masterNavLink ${route===href||href==='portal/catalogue'&&route.startsWith('portal/catalogue/')?'is-current':''}" data-go="${href}" ${route===href?'aria-current="page"':''}><span class="masterNavIcon">${icon(ico)}</span><span>${esc(label)}</span></button>`;
     return `<nav class="masterSiteNav" aria-label="Master navigation"><details class="masterDropdown"><summary data-account-switcher aria-label="Website menu" aria-controls="psMasterMenu" aria-expanded="false" title="Menu"><span class="masterTriggerIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span><span>Menu</span></summary><div class="masterNavPanel" id="psMasterMenu"><div id="psBrowseMenu">${browse.map(link).join('')}</div><section class="masterAccountSection" id="psAccountMenu"><h2>${signed?admin?'Your workspace':'Your account':'Account access'}</h2>${signed&&!admin?`<div class="masterAccountContext"><b>${esc(state.groupName)}</b><span>${esc(schoolLabel(authContext.school)||state.campus)}</span></div>`:''}${account.map(link).join('')}${signed&&!admin&&canSwitchSchools()?`<section class="masterCampusChoices"><h3>Switch campus</h3>${availableSchools().map(sc=>`<button class="masterCampusOption ${sc.id===authContext.school?.id?'is-current':''}" data-school-select="${esc(sc.id)}"><span>${esc(schoolLabel(sc))}</span>${sc.id===authContext.school?.id?'<small>Current</small>':''}</button>`).join('')}</section>`:''}${signed?`<button class="masterNavLink masterSignOut" data-signout><span class="masterNavIcon">${icon('logout')}</span><span>Sign out</span></button>`:'<p class="masterNavNote">View your quotations, documents and previous requests.</p>'}</section></div></details></nav>`;
@@ -1370,9 +1372,9 @@
     ['our-model','How we work']
   ];
   function publicHeader(active='home'){
-    return `<header class="publicHeader v37PublicHeader masterPublicHeader" data-ps-scroll-header><button class="publicLogo" data-go="home" aria-label="Pharma Service home"><img src="${PSC_LOGO}" alt="Pharma Service"></button>${masterNavigator()}</header>`;
+    return `<header class="publicHeader v37PublicHeader masterPublicHeader" data-ps-scroll-header><button class="publicLogo" data-go="home" aria-label="Pharma Service home"><img src="${PSC_LOGO}" alt="Pharma Service"></button><nav class="skyPublicLinks" aria-label="Main navigation">${publicNav.map(([route,label])=>`<button data-go="${route}" ${active===route?'aria-current="page"':''}>${label}</button>`).join('')}</nav><button class="button dark skyPublicAccount" data-go="portal/dashboard">My account</button><details class="skyPublicMobile"><summary aria-label="Public website menu">Menu</summary><nav aria-label="Mobile main navigation">${publicNav.map(([route,label])=>`<button data-go="${route}">${label}</button>`).join('')}<button data-go="start">Send a requirement</button><button data-go="portal/dashboard">My account</button></nav></details></header>`;
   }
-  function publicFooter(){ return `<footer class="publicFooter v37PublicFooter"><div><img src="${PSC_LOGO}" alt="Pharma Service"><p>Institutional healthcare supply.<br>One accountable partner.</p></div><div class="publicFooterLinks"><button data-go="start">Send a requirement</button><button data-go="workshop">The Workshop</button><button data-go="contact">Contact</button><button data-go="about">About</button><button data-go="careers">Careers</button><button data-go="media">Media & resources</button></div><div><span>Dubai, United Arab Emirates</span><a href="tel:+97143377004">+971 4 337 7004</a><a href="mailto:info@pharmaservice.ae">info@pharmaservice.ae</a></div></footer>`; }
+  function publicFooter(){ return `<footer class="publicFooter v37PublicFooter"><div><img src="${PSC_LOGO}" alt="Pharma Service"><p>Institutional healthcare supply.<br>One accountable partner.</p></div><div class="publicFooterLinks"><button data-go="start">Send a requirement</button><button data-go="our-model">How we work</button><button data-go="workshop">The Workshop</button><button data-go="contact">Contact</button><button data-go="about">About</button><button data-go="careers">Careers</button><button data-go="media">Media & resources</button></div><div><span>Dubai, United Arab Emirates</span><a href="tel:+97143377004">+971 4 337 7004</a><a href="mailto:info@pharmaservice.ae">info@pharmaservice.ae</a></div></footer>`; }
   function publicPage(active,kicker,title,lead,body){ return `<main class="publicPage">${publicHeader(active)}<section class="publicPageHero"><span class="kicker">${kicker}</span><h1>${title}</h1><p>${lead}</p></section>${body}${publicFooter()}</main>`; }
 
 
@@ -1837,6 +1839,9 @@
       return `<li><button type="button" data-product-view="${esc(member.pscSku)}"><b>${esc(member.name)}</b><br><small>${esc(member.cataloguePack||member.pack||'Exact pack to confirm')}</small></button><span class="pscVariantPrice">${price?`${money(price)}<small class="pscFamilyStockMeta">Retail MRP · in stock</small>`:'Request quotation'}</span></li>`;
     }).join('')}</ul></details>`;
   }
+  function cataloguePhotoPlaceholder(){
+    return '<span class="cataloguePhotoPlaceholder"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="8" width="36" height="32" rx="5"/><circle cx="17" cy="19" r="3"/><path d="m8 35 11-11 8 8 6-6 7 9"/></svg><span>Image not available</span></span>';
+  }
   function publicCatalogueCard(p){
     const need=clinicalNeedMeta(clinicalNeedIds(p)[0]||'all');
     const displayName=p._familyGroup?.name||p.catalogueDisplayName||p.name;
@@ -1845,8 +1850,9 @@
     const imageUrl=familyPhoto?.path||(p._familyGroup&&!window.PS_CATALOGUE_STOCK?.realPhoto(p)?null:productDisplayImageUrl(p));
     const workshop=workshopForProduct(p,1)[0];
     return `<article class="publicCatalogueCard ${p._familyGroup?'pscFamilyCard':''} ${!imageUrl?'pscFamilyNoPhoto':''}" data-family-listing="${esc(p._familyGroup?.id||'')}">
-      <button class="publicCatalogueVisual publicProductView" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-public-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details">${imageUrl?`<img data-family-example="${familyPhoto?'true':'false'}" src="${esc(imageUrl)}" alt="${esc(familyPhoto?.label||displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'">`:`<span>${esc(need.label)}</span>`}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>
-      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount">${esc(window.PSC_STOREFRONT_GROUPS?.realBrand(p.brand)?p.brand:"Request by specification")}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(p._familyGroup?.members.length>1?p._familyGroup.members.length+" pack options":pack)}</p>${cataloguePricePreview(p)}${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
+      <button class="publicCatalogueVisual publicProductView" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-public-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details">${imageUrl?`<img data-family-example="${familyPhoto?'true':'false'}" src="${esc(imageUrl)}" alt="${esc(familyPhoto?.label||displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'">`:cataloguePhotoPlaceholder()}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>
+      <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount">${esc(window.PSC_STOREFRONT_GROUPS?.realBrand(p.brand)?p.brand:"Request by specification")}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(p._familyGroup?.members.length>1?p._familyGroup.members.length+" pack options":pack)}</p>${cataloguePricePreview(p)}${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
+      ${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}
       <button class="button outline full" data-public-product-view="${p.pscSku}">View details</button>
     </article>`;
   }
@@ -1859,15 +1865,12 @@
       <span class="publicCategoryArt16" aria-hidden="true">${clinicalNeedIllustration(c.id)}</span>
       <span class="publicCategoryCopy16"><b>${esc(c.label)}</b><small>${esc(c.note)}</small></span>
     </button>`).join('');
-    const heroTitle=needId==='all'?'Start with the clinical area.':esc(meta.label);
-    const heroLead=needId==='all'?'Choose a category or search for a product, brand, model or pack.':`Browse products and sourcing requirements for ${esc(meta.label)}.`;
+    const heroTitle=needId==='all'?'Find your next essential.':esc(meta.label);
+    const heroLead=needId==='all'?'Products, exact packs and practical choices for your institution. Browse freely; sign in when you’re ready to request a quotation.':`Browse products and sourcing requirements for ${esc(meta.label)}.`;
     return `<main class="publicPage publicCataloguePage catalogue16Page">${publicHeader('catalogue')}
       <section class="publicPageHero cataloguePublicHero catalogue16Hero"><span class="kicker">INSTITUTIONAL CATALOGUE</span><h1>${heroTitle}</h1><p>${heroLead}</p></section>
       ${schoolBasketSection()}
-      <section class="publicSection publicCatalogueJourney16">
-        <div class="publicCatalogueJourneyHead16"><div><span class="kicker">CLINICAL NEEDS</span><h2>Where do you want to start?</h2></div>${needId!=='all'?'<button class="textAction" data-go="catalogue">View all categories</button>':''}</div>
-        <div class="publicCategoryGrid16">${categoryCards}</div>
-      </section>
+      <section class="publicSection publicCatalogueJourney16"><details class="skyCategoryBrowser"><summary>Browse by clinical area</summary><div class="publicCategoryGrid16">${categoryCards}</div></details></section>
       <section class="publicSection publicCatalogueControls catalogue16Controls">
         <div class="filterBar"><div class="searchInput"><span>${icon('search')}</span><input type="search" aria-label="Search catalogue" data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search products, brands, packs or specifications…">${ui.catalogueQuery?'<button type="button" class="catalogueSearchClear" data-catalogue-clear aria-label="Clear search">×</button>':''}</div><select data-cat-filter="category"><option>All product types</option>${types.map(t=>`<option ${ui.catalogueCat===t?'selected':''}>${esc(t)}</option>`).join('')}</select></div>
       </section>
@@ -2199,9 +2202,9 @@
   async function applyIntelligentCommand(text){
     if(!String(text).trim())return;
     if(/^(?:undo|undo (?:that|last change|the last change))\s*[.!]?$/i.test(String(text).trim())){undoDraftChange();return;}
-    if(currentRoute()==='home'&&!session){
-      try{sessionStorage.setItem('pscPendingRoute','portal/catalogue/all');sessionStorage.setItem('pscPendingSearch',String(text).slice(0,400));}catch{}
-      go('login');return;
+    if(!session){
+      const interpreted=window.PS_INTELLIGENT_SEARCH?.interpret(String(text),productSearchContext());
+      go('catalogue/all',{searchQuery:interpreted?.terms||String(text)});return;
     }
     // The browse landing is an entry point, not a separate search surface.
     // Submit into the same full-catalogue workspace used by category searches.
@@ -2359,7 +2362,7 @@
     content=`<h3>Location-specific first-aid points</h3><p>Packaged kit concepts with independently refillable components. The school's nurse and safety lead approve the final contents, quantity, site and custody.</p><div class="psSchoolKitSelector">${b.kits.map(k=>`<button type="button" data-school-kit="${esc(k.id)}" aria-pressed="${k.id===kit.id?'true':'false'}">${esc(k.accent)}</button>`).join('')}</div><div class="psSchoolKitBody"><h3>${esc(kit.title)}</h3><p><span class="psSchoolKitLocation">${esc(kit.where)}</span> · ${esc(kit.details)}</p><ul class="psSchoolLines">${kit.contents.map(([label,id,pack])=>row(label,id?match(id):null,'Proposed quantity: '+pack)).join('')}</ul><div class="psSchoolPanelActions">${isPortal?`<button type="button" class="button dark" data-school-kit-request="${esc(kit.id)}">Add this kit to request</button>`:'<button type="button" class="button dark" data-go="start">Enquire about this kit</button>'}</div></div><p class="psSchoolFinePrint">PS-designed kit contents are a risk-informed commercial proposal, not a prescribed DHA first-aid kit bill of materials. Dedicated laboratory emergency eyewash and safety facilities must be evaluated independently. Medicines and injectable treatments are not included in general-access kits.</p>`;
   }
   const label=`<div class="psSchoolHead"><div><h2>School clinic supply collections</h2><p>From opening a clinic to refilling first-aid points across campus.</p></div></div>`;
-  return `<section class="psSchoolBaskets" aria-label="School clinic supply collections">${label}<div class="psSchoolCollectionGrid">${options.map(([id,title,subtitle])=>`<button type="button" class="psSchoolCollectionTile" data-school-collection="${id}" aria-pressed="${selected===id?'true':'false'}"><strong>${title}</strong><span>${subtitle}</span><img class="psSchoolCollectionIcon" src="/assets/basket-icons/${({opening:'complete-clinic-setup',replenishment:'clinic-refills',kits:'first-aid-points'})[id]}.svg" alt="" aria-hidden="true" width="38" height="38"></button>`).join('')}</div>${selected?`<div class="psSchoolCollectionPanel">${content}</div>`:''}</section>`;
+  return `<section class="psSchoolBaskets" aria-label="School clinic supply collections">${label}<div class="psSchoolCollectionGrid">${options.map(([id,title,subtitle])=>`<button type="button" class="psSchoolCollectionTile" data-school-collection="${id}" aria-pressed="${selected===id?'true':'false'}"><strong>${title}</strong><span>${subtitle}</span></button>`).join('')}</div>${selected?`<div class="psSchoolCollectionPanel">${content}</div>`:''}</section>`;
 }
 
   function catalogue(){
@@ -2472,14 +2475,13 @@
     const evidence=window.PSC_VARIANT_EVIDENCE_FOR?.({
       product_option_id:p.product_option_id,exact_product_name:p.name,brand:p.brand,pack:p.pack
     },p.catalogueParentId||p.catalogueReferenceFamilyId||p.pscSku);
-    if(evidence) return `<div class="pscPricePreview"><b>${money(Number(evidence.price_aed))}</b><span>${evidence.price_type==='PUBLIC_RETAIL_BENCHMARK'?'UAE retail benchmark':'PSC customer price'}</span><small>${esc(evidence.price_unit)} · ${esc(evidence.price_vat_basis||'VAT confirmed in quotation')}<br>Source checked ${esc(evidence.price_checked_at)}${evidence.price_note?' · '+esc(evidence.price_note):''} · final quotation confirms</small></div>`;
+    if(evidence?.price_type==='PUBLIC_RETAIL_BENCHMARK') return `<div class="pscPricePreview"><b>${money(Number(evidence.price_aed))}</b><span>${evidence.price_type==='PUBLIC_RETAIL_BENCHMARK'?'UAE retail benchmark':'PSC customer price'}</span><small>${esc(evidence.price_unit)} · ${esc(evidence.price_vat_basis||'VAT confirmed in quotation')}<br>Source checked ${esc(evidence.price_checked_at)}${evidence.price_note?' · '+esc(evidence.price_note):''} · final quotation confirms</small></div>`;
     const saved=window.PSC_RECORDED_PRICES?.[p.pscSku]||{};
     const packKey=v=>String(v||'').toLowerCase().replace(/\s+/g,'');
     const record=packKey(saved.pack)===packKey(p.cataloguePack||p.pack)?saved:{};
-    const indicative=p.storefrontPriceMode==='show_price'&&Number(p.contractPrice)>0?Number(p.contractPrice):record.indicative;
     const retail=record.retail;
-    if(!indicative&&!retail) return '<div class="pscPricePreview"><b>Request quotation</b></div>';
-    return `<div class="pscPricePreview">${indicative?`<b>${money(indicative)}</b><span>Indicative PSC price</span>`:`<b>${money(retail)}</b><span>Recorded retail benchmark</span>`}${indicative&&retail?`<small>Retail benchmark: ${money(retail)}</small>`:''}<small>Reference only · final price & VAT confirmed in quotation${record.checked?`<br>Record checked ${esc(record.checked)}`:''}</small></div>`;
+    if(!retail)return '<div class="pscPricePreview"><b>Request quotation</b><small>Retail price not confirmed for this pack</small></div>';
+    return `<div class="pscPricePreview"><b>${money(retail)}</b><span>Recorded retail reference</span><small>Reference only · current price & VAT confirmed in quotation${record.checked?` · checked ${esc(record.checked)}`:''}</small></div>`;
   }
   function catalogueBrandChoices(p){
     const familyId=p.catalogueParentId||p.catalogueReferenceFamilyId||p.pscSku;
@@ -2536,7 +2538,7 @@
     const displayImage=familyPhoto?.path||(p._familyGroup&&!window.PS_CATALOGUE_STOCK?.realPhoto(p)?null:productDisplayImageUrl(p));
     const visual=displayImage
       ? `<button class="productVisual productPhoto productVisualButton" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details"><img class="productMainImage" data-family-example="${familyPhoto?'true':'false'}" src="${esc(displayImage)}" alt="${esc(familyPhoto?.label||(p.imageRole==='SPECIFICATION_REFERENCE_ONLY'?p.imageReferenceLabel+' · illustrative product; exact model and compatibility confirmed in quotation':p.name))}" loading="lazy" onerror="this.onerror=null;this.style.visibility='hidden'">${dhaMark}</button>`
-      : `<button class="productVisual productNeedVisual productVisualButton" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)}">${dhaMark}</button>`;
+      : `<button class="productVisual productNeedVisual productVisualButton" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-product-view="${p.pscSku}" aria-label="View ${esc(displayName)}">${cataloguePhotoPlaceholder()}${dhaMark}</button>`;
 
     return `<article data-matching-skus="${esc(JSON.stringify((p._familyGroup?.members||[p]).map(member=>member.pscSku)))}" data-family-listing="${esc(p._familyGroup?.id||'')}" class="productCard ${p._familyGroup?'pscFamilyCard':''} ${!displayImage?'pscFamilyNoPhoto':''} v25ProductCard v261ProductCard v262ProductCard canvaProductCard exactCanvaCard pscEditorialCard">
       ${visual}
@@ -2731,7 +2733,22 @@
       qty:window.PSC_PRODUCT_PRESENTATION.quantity(detail?.qty)
     };
   }
+  function requireRequestAccount(intent=null){
+    if(session?.user&&authContext)return true;
+    try{if(intent)sessionStorage.setItem('pscPublicRequestIntent',JSON.stringify({...intent,createdAt:Date.now()}));sessionStorage.setItem('pscPendingRoute','portal/catalogue/all');}catch{}
+    go('login');return false;
+  }
+  function resumePublicRequest(){
+    let intent=null;try{intent=JSON.parse(sessionStorage.getItem('pscPublicRequestIntent')||'null');sessionStorage.removeItem('pscPublicRequestIntent');}catch{}
+    if(!intent||!session?.user||!authContext||Date.now()-Number(intent.createdAt)>1800000)return false;
+    if(intent.kind==='sku'&&product(intent.sku))addBasket(intent.sku,intent.qty);
+    else if(intent.kind==='family'&&intent.detail)addFamilyBasketLine(intent.detail);
+    else return false;
+    try{sessionStorage.removeItem('pscPendingRoute');}catch{}
+    go('portal/catalogue/all');return true;
+  }
   function addFamilyBasketLine(detail){
+    if(!requireRequestAccount({kind:'family',detail}))return false;
     const line=normalizeFamilyRequestLine(detail);
     if(!line.familyId||!line.familyName) return false;
     if(line.brandPreferenceMode==='specific_option' && !line.productOptionId) return false;
@@ -2753,6 +2770,7 @@
 
   function basketQty(){ return state.basket.reduce((a,b)=>a+Number(b.qty||0),0); }
   function addBasket(sku,qty=1){
+    if(!requireRequestAccount({kind:'sku',sku,qty}))return;
     const p=product(sku);if(!p)return;
     qty=window.PSC_PRODUCT_PRESENTATION.quantity(qty);
     window.PS_SEARCH_ANALYTICS?.record('added',{productId:sku});productSearchMemory().selectedSku=sku;
@@ -3269,7 +3287,7 @@
     out_for_delivery:'Delivery', delivered:'Accepted', cancelled:'Cancelled', archived:'Cancelled'
   };
 
-  function protectedRoute(route){ return route.startsWith('portal/') || route.startsWith('admin/'); }
+  function protectedRoute(route){ return route==='start' || route.startsWith('portal/') || route.startsWith('admin/'); }
 
   async function hydrateAccount(){
     if(!sb || !session?.user) return;
@@ -3485,6 +3503,7 @@
     session=data.session;
     try{
       await hydrateAccount();
+      if(resumePublicRequest())return;
       go(authContext?.isPscAdmin?'admin/dashboard':'portal/dashboard');
     }catch(e){ console.error(e); await sb.auth.signOut(); session=null; authContext=null; toast('<strong>Account access is not configured yet.</strong><br>Contact Pharma Service.'); }
   }
@@ -3634,11 +3653,12 @@
   function render(){
     draftCheckpoint();
     const r=currentRoute();
+    document.documentElement.dataset.pscSignedIn=String(!!session);
     if(r!==mailPreviousRoute){mailPreviousRoute=r;if(r==='admin/mail'&&authContext?.isPscAdmin&&!mailDesk.loading)window.PSC_REFRESH_MAIL();}
     if(catalogueSearchRoute!==r){ resetIntelligentSearch(); ui.globalSearch=''; ui.catalogueQuery=''; ui.modal=null; ui.basket=false; ui.accountMenu=false; ui.mobile=false; ui.publicMenu=false; catalogueSearchRoute=r; }
     if(protectedRoute(r)){
       if(!authReady){ $app.innerHTML='<main class="publicPage"><section class="publicPageHero"><span class="kicker">PHARMA SERVICE</span><h1>Opening secure account…</h1></section></main>'; return; }
-      if(!session){ if(r!=='login') location.hash='login'; return; }
+      if(!session){try{sessionStorage.setItem('pscPendingRoute',r);}catch{}go('login',{replace:true});return;}
       if(r.startsWith('portal/')&&!authContext?.isPscAdmin&&!authContext?.school?.id){location.hash='login';return;}
       if(r.startsWith('admin/') && (!authContext?.isPscAdmin || isDemoAccount())){ location.hash='portal/dashboard'; return; }
     }
@@ -3709,6 +3729,7 @@
 
   async function submitPublicEnquiry(event){
     event.preventDefault();
+    if(!session?.user){try{sessionStorage.setItem('pscPendingRoute','start');}catch{}go('login');return;}
     if(isDemoAccount()){ toast('<strong>Demo enquiry received.</strong><br>This action is simulated and has not been sent to PS.'); return; }
     const form=event.currentTarget;
     const button=form.querySelector('[data-public-enquiry-submit]');

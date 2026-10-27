@@ -15,7 +15,7 @@ try{for(const width of [1440,768,390]){
  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  const base=`http://127.0.0.1:${server.address().port}`;
  await page.goto(base);await page.locator('.psHome').waitFor();
- assert.equal(await page.locator('.h47HeroCopy h1').innerText(),'Healthcare procurement for institutions.');
+ assert.match(await page.locator('.skyHeroCopy h1').innerText(),/From requirement\s+to replenishment\./);
  assert.equal(await page.locator('.psHome > section').count(),5);assert.equal(await page.locator('.psHomeWorkshop .psHomeGuide').count(),3);assert.equal(await page.locator('.psClinicalTile').count(),6);
  await page.goto(base+'/#portal/catalogue/sports');await page.locator('.productCard').first().waitFor();
  const columns=await page.locator('.v25ProductGrid').first().evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length);
