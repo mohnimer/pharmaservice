@@ -102,3 +102,71 @@ html{background:var(--sky-ground);scroll-padding-top:100px}body{background:var(-
 /* Account introduction: typography on the page, without decorative panels or circles. */
 #app .loginPublicPage :is(.loginWrap,.v26LoginIntro){background:transparent!important;background-image:none!important;border:0!important;box-shadow:none!important}
 #app .loginPublicPage .v26LoginIntro:before,#app .loginPublicPage .v26LoginIntro:after{content:none!important;display:none!important}
+
+/* Let the dashboard share its page surface instead of adding a grey inner sheet. */
+#app .psPortalHomeShell .psExperience.psPortalHome{background:transparent!important}
+
+/* One dashboard rhythm: shared section inset, control geometry and action column. */
+#app .psPortalHome{--portal-gutter:clamp(16px,2.2vw,28px);--portal-control-height:44px;--portal-action-width:184px;--portal-cell-inset:16px}
+#app .psPortalHome :is(.button,.psTextLink){box-sizing:border-box!important;min-height:var(--portal-control-height)!important;border-radius:8px!important;padding:10px 18px!important;font-size:14px!important;line-height:22px!important;font-weight:450!important;display:inline-flex;align-items:center;justify-content:center;text-align:center;gap:8px}
+#app .psPortalHome :is(.psTextLink,.button.outline,.button.light){border:1px solid #cadbdd!important;background:#fffffff2!important;color:#173d43!important}
+#app .psPortalHome :is(.psPortalSectionHead,.buyerHubHeading){display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:18px!important;align-items:start!important}
+#app .psPortalHome :is(.psPortalSectionHead,.buyerHubHeading)>.psTextLink{width:var(--portal-action-width)!important;min-width:var(--portal-action-width)!important;margin:0!important;justify-self:end;align-self:start;white-space:nowrap;margin-inline-end:calc(var(--portal-cell-inset) + 1px)!important}
+#app .psPortalHome .psPortalSectionHead h2{max-width:none!important}
+#app .psPortalHome .psPortalWork{padding:0!important;background:transparent!important;border:0!important}
+#app .psPortalHome :is(.psPortalAttention,.psPortalBaskets,.buyerRecentSupply,.buyerActionHub){padding:var(--portal-gutter)!important}
+#app .customerShell .psPortalHome .pscHomeCategoryColumns>section{padding:var(--portal-gutter)!important}
+#app .psPortalHome .buyerTaskLinks{padding-inline:var(--portal-gutter)}
+#app .customerShell .psPortalHome .pscHomeBrowseSeparated{margin-inline:0!important;width:100%!important}
+#app .psPortalHome .psPortalRequestsTableWrap{width:100%;overflow-x:auto;border:1px solid #dce6e8;border-radius:12px;background:#fff}
+#app .psPortalHome .psPortalRequestsTable{width:100%;border-collapse:collapse;table-layout:fixed;text-align:left;font-size:14px}
+#app .psPortalHome .psPortalRequestsTable :is(th,td){padding:16px;vertical-align:middle;border-bottom:1px solid #e2e9e8;overflow-wrap:anywhere}
+#app .psPortalHome .psPortalRequestsTable thead th{background:#edf5f7;color:#526d73;font-size:12px;font-weight:450}
+#app .psPortalHome .psPortalRequestsTable thead th:nth-child(1){width:auto}
+#app .psPortalHome .psPortalRequestsTable thead th:nth-child(2){width:18%}
+#app .psPortalHome .psPortalRequestsTable thead th:nth-child(3){width:8%}
+#app .psPortalHome .psPortalRequestsTable thead th:nth-child(4){width:20%}
+#app .psPortalHome .psPortalRequestsTable thead th:last-child{width:calc(var(--portal-action-width) + 32px)}
+#app .psPortalHome .psPortalRequestsTable tbody th{font-weight:450}
+#app .psPortalHome .psPortalRequestsTable tbody tr:last-child :is(th,td){border-bottom:0}
+#app .psPortalHome .psPortalRequestAction{text-align:right}
+#app .psPortalHome .psPortalRequestsTable .psPortalTableAction{display:inline-flex!important;width:var(--portal-action-width)!important;min-width:var(--portal-action-width)!important;height:var(--portal-control-height)!important;min-height:var(--portal-control-height)!important;margin:0!important;padding:10px 16px!important;border:1px solid #cadbdd!important;border-radius:8px!important;background:#fff!important;box-sizing:border-box;white-space:normal}
+#app .psPortalHome .psPortalRequestsTable .statusPill{font-size:12px;white-space:normal;line-height:1.4}
+#app .psPortalHome .psPortalRequestDateMobile{display:none}
+@media(max-width:600px){
+ #app .psPortalHome{--portal-cell-inset:4px}
+ #app .psPortalHome :is(.psPortalSectionHead,.buyerHubHeading){grid-template-columns:minmax(0,1fr)!important;gap:14px!important}
+ #app .psPortalHome .psPortalRequestsTable{font-size:12px}
+ #app .psPortalHome .psPortalRequestsTable :is(th,td){padding:12px var(--portal-cell-inset)}
+ #app .psPortalHome .psPortalRequestsTable .psPortalRequestedDate{display:none}
+ #app .psPortalHome .psPortalRequestDateMobile{display:block;margin-top:6px;color:#647a7e;font-size:10px;font-weight:400;line-height:1.5}
+ #app .psPortalHome .psPortalRequestsTable thead th:nth-child(1){width:30%}
+ #app .psPortalHome .psPortalRequestsTable thead th:nth-child(3){width:15%}
+ #app .psPortalHome .psPortalRequestsTable thead th:nth-child(4){width:25%}
+ #app .psPortalHome .psPortalRequestsTable thead th:last-child{width:30%}
+ #app .psPortalHome .psPortalRequestsTable .psPortalTableAction{width:100%!important;min-width:0!important;padding:6px!important;font-size:12px!important;line-height:15px!important}
+ #app .psPortalHome .psPortalRequestsTable thead th{white-space:nowrap;font-size:11px}
+ #app .psPortalHome .psPortalRequestsTable .statusPill{font-size:10px;font-weight:500;padding:4px!important;max-width:100%;box-sizing:border-box;overflow-wrap:normal;word-break:normal}
+}
+
+#app .psPortalHome .buyerRepeatTable>tbody>tr:not(.buyerHistoryDetailRow)>td:last-child{padding-inline:var(--portal-cell-inset)!important;text-align:right}
+#app .psPortalHome .buyerRepeatTable>tbody>tr:not(.buyerHistoryDetailRow)>td:last-child>.button{width:var(--portal-action-width);height:var(--portal-control-height)!important}
+@media(min-width:601px){#app .psPortalHome .buyerRepeatTable>thead>tr>th:last-child{width:calc(var(--portal-action-width) + 32px);text-align:right;padding-right:var(--portal-cell-inset)!important}}
+@media(max-width:600px){#app .psPortalHome .buyerRepeatTable>tbody>tr:not(.buyerHistoryDetailRow)>td:last-child>.button{width:100%;min-width:0;padding:6px!important;font-size:12px!important;line-height:15px!important;white-space:normal!important}}
+
+/* Shared control and card proportions across the public site and both portals. */
+#app :is(.button,.psTextLink){box-sizing:border-box;max-width:100%;min-height:44px!important;font-size:13px!important;line-height:20px!important;padding:10px 16px!important;border-radius:8px!important}
+#app .psPortalHome :is(.button,.psTextLink){font-size:13px!important;line-height:20px!important}
+#app :is(.psBasketGrid,.psPortalBasketGrid){align-items:stretch!important}
+#app .psBasketCard{display:flex!important;flex-direction:column!important;align-self:stretch!important;height:100%;min-width:0}
+#app .psBasketCard .psBasketScene{flex:none}
+#app .psBasketCard .psBasketCardCopy{display:flex!important;flex-direction:column!important;flex:1;min-width:0;gap:16px;padding:22px!important}
+#app .psBasketCard .psBasketCardCopy h3{font-size:clamp(20px,1.65vw,23px)!important;line-height:1.25!important;min-height:2.5em!important;max-width:none!important;margin:0!important;font-weight:450!important;overflow-wrap:normal;word-break:normal}
+#app .psBasketCardCopy>p{min-height:0;margin:0}
+#app .psBasketCardCopy>.psBasketScope{margin:0}
+#app .psBasketCardCopy>.psTextLink{margin-top:auto!important;align-self:flex-start;min-height:44px;font-size:13px!important;line-height:20px!important;padding:10px 16px!important}
+#app .psPortalHome .buyerAction{gap:16px!important}
+#app .psPortalHome .buyerAction h3{font-size:18px!important;line-height:1.3!important}
+#app .psPortalHome .buyerAction p{font-size:13px!important;line-height:1.6!important}
+#app .psPortalHome :is(.buyerRepeatTable,.psPortalRequestsTable)>tbody>tr:not(.buyerHistoryDetailRow)>:is(th,td){vertical-align:middle!important}
+#app .psPortalHome :is(.buyerRepeatTable,.psPortalRequestsTable)>thead>tr>th:last-child{text-align:center!important;padding-inline:var(--portal-cell-inset)!important}
