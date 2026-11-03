@@ -1836,7 +1836,7 @@
     const group=p._familyGroup;if(!group)return '';
     return `<details class="pscFamilyVariantList"><summary>${group.members.length} product ${group.members.length===1?'option':'options'}</summary><ul>${group.members.map(member=>{
       const record=window.PS_CATALOGUE_STOCK?.forProduct(member),price=record?.acorus_managed?window.PS_CATALOGUE_STOCK.price(record):null;
-      return `<li><button type="button" data-product-view="${esc(member.pscSku)}"><b>${esc(member.name)}</b><br><small>${esc(member.cataloguePack||member.pack||'Exact pack to confirm')}</small></button><span class="pscVariantPrice">${price?`${money(price)}<small class="pscFamilyStockMeta">Retail MRP · in stock</small>`:'Request quotation'}</span></li>`;
+      return `<li><button type="button" data-product-view="${esc(member.pscSku)}"><b>${esc(member.name)}</b><br><small>${esc(member.cataloguePack||member.pack||'Exact pack to confirm')}</small></button><span class="pscVariantPrice">${price?`${money(price)}<small class="pscFamilyStockMeta">Retail MRP reference · dated supplier report</small>`:'Request quotation'}</span></li>`;
     }).join('')}</ul></details>`;
   }
   function cataloguePhotoPlaceholder(){
@@ -2468,7 +2468,8 @@
     const stock=window.PS_CATALOGUE_STOCK?.forProduct(p);
     if(stock?.acorus_managed){
       const mrp=window.PS_CATALOGUE_STOCK.price(stock);
-      return mrp?`<div class="pscPricePreview"><b>${money(mrp)}</b><span>Retail MRP${p._familyGroup?.members.length>1?" · "+esc(p.cataloguePack||p.pack||"pictured pack"):""}</span><small>In stock · stock report ${esc(window.PS_CATALOGUE_STOCK.stockDate)} · wholesale quotation separate</small></div>`:'<div class="pscPricePreview"><b>Request quotation</b><small>Current stocked retail MRP not confirmed</small></div>';
+      const availability=window.PS_CATALOGUE_STOCK.availabilityLabel(stock),date=window.PS_CATALOGUE_STOCK.stockDate;
+      return `<div class="pscPricePreview"><b>${mrp?money(mrp):'Request quotation'}</b>${mrp?`<span>Retail MRP reference${p._familyGroup?.members.length>1?" · "+esc(p.cataloguePack||p.pack||"pictured pack"):""}</span>`:''}<small>${esc(availability)} · stock report ${esc(date)} · current availability and wholesale price confirmed in quotation</small></div>`;
     }
     if(stock?.source_kind==='product'&&p.storefrontPriceMode!=='show_price')return '<div class="pscPricePreview"><b>Request quotation</b><small>Supplier availability and quotation to confirm</small></div>';
 
