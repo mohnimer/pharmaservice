@@ -1,4 +1,6 @@
-"""Read the private controlled workbook and emit only authorized public listing fields.
+"""LEGACY LAYOUT ONLY. Current13-tab master uses sync-controlled-master.py.
+
+Read the legacy private workbook and emit only authorized public listing fields.
 
 Usage: python3 tools/sync-catalogue-from-workbook.py /absolute/private/workbook.xlsx
 The workbook must first be refreshed and validated against the uploaded stock report.

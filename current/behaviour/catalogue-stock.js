@@ -6,6 +6,8 @@
  const products=()=>window.PSC_DATA?.products||[];
  const id=p=>p?.catalogueParentId||p?.catalogueReferenceFamilyId||p?.pscSku;
  const current=r=>r&&r.in_stock===true&&(!r.expiry_date||r.expiry_date>=control.stock_date);
+ const availability=r=>r?.availability_status==='out_of_stock'?'out_of_stock':current(r)?'in_stock':'unconfirmed';
+ const availabilityLabel=r=>availability(r)==='out_of_stock'?'Out of stock':availability(r)==='in_stock'?'Reported in stock':'Availability unconfirmed';
  const price=r=>current(r)&&Number(r.mrp_aed)>0?Number(r.mrp_aed):null;
  const forProduct=p=>bySku.get(typeof p==='string'?p:p?.pscSku)||null;
  function forOption(o,family){
@@ -44,11 +46,11 @@
   }
   return rows.map(o=>{
    const r=forOption(o,family);if(!r?.acorus_managed)return o;
-   return {...o,supplier_stock_date:control.stock_date,supplier_stock_status:current(r)?'In stock':'Quotation required',supplier_mrp_aed:price(r),supplier_mrp_source:control.report_name,
+   return {...o,supplier_stock_date:control.stock_date,supplier_stock_status:availabilityLabel(r),supplier_mrp_aed:price(r),supplier_mrp_source:control.report_name,
     verified_price_aed:price(r),verified_price_type:price(r)?'SUPPLIER_RETAIL_MRP':null,
     verified_price_source:price(r)?control.report_name:null,verified_price_checked_at:price(r)?control.stock_date:null,
     verified_price_vat_basis:'VAT basis not supplied in stock report',
-    verified_price_note:price(r)?'Retail MRP; wholesale quotation separate':'Request quotation; no current matched stocked MRP'};
+    verified_price_note:price(r)?'Retail MRP reference from '+control.stock_date+'; current availability and wholesale quotation separate':'Request quotation; '+availabilityLabel(r)+' in dated report '+control.stock_date};
   });
  }
  for(const p of products()){
@@ -56,5 +58,5 @@
   p.catalogueVisible=r.catalogue_visible;
   if(r.acorus_managed){p.acorusStockDate=control.stock_date;p.acorusStockAvailable=current(r);p.acorusMrp=price(r);}
  }
- window.PS_CATALOGUE_STOCK=Object.freeze({revision:control.revision,stockDate:control.stock_date,reportName:control.report_name,forProduct,forOption,current,price,hasFamily,realPhoto,representative,groups,groupForProduct,optionsForFamily});
+ window.PS_CATALOGUE_STOCK=Object.freeze({revision:control.revision,stockDate:control.stock_date,reportName:control.report_name,forProduct,forOption,current,availability,availabilityLabel,price,hasFamily,realPhoto,representative,groups,groupForProduct,optionsForFamily});
 })();
