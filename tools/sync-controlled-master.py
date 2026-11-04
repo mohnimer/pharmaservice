@@ -24,6 +24,16 @@ def build(master,base):
         if not r[0]:continue
         if r[0] in source:raise ValueError('Duplicate controlled PSC ID')
         source[r[0]]=r
+    public_policy=len(h)>36 and h[36]=='Public catalogue visibility'
+    if not public_policy and any('public_catalogue_visible' in p for p in base['products']):raise ValueError('Master lacks retained public visibility decisions')
+    if public_policy:
+        for p in data['products']:
+            if p['sku'] not in source:continue
+            r=source[p['sku']]
+            if not isinstance(r[36],bool):raise ValueError('Public visibility must be explicit boolean: '+p['sku'])
+            if norm(r[1])!=norm(p['name']) or norm(r[2])!=norm(p['pack']):raise ValueError('Public identity/pack changed: '+p['sku'])
+            if r[36] is False and p.get('catalogue_visible'):p['public_catalogue_visible']=False
+            else:p.pop('public_catalogue_visible',None)
     stock={}
     for r in list(book['Acorus stock'].values)[6:]:
         if r[0] is not None:

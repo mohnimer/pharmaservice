@@ -63,6 +63,17 @@ emitted. Original option/request IDs and exact pack matching remain authoritativ
 The weekly workflow must issue an upload reminder even when no newer report exists.
 It prepares review candidates; it does not automatically publish or send orders.
 
+## Owner-controlled public listing visibility
+
+Products!AK:AL records the public visibility decision separately from the existing
+internal/customer-portal visibility. `public_catalogue_visible: false` excludes the
+exact SKU from public browse, search and public family options. Its SKU, supplier
+record, stock/MRP, DHA relationships and historical request identity remain intact.
+The source snapshot date does not change when only public visibility changes; the
+controlled revision increments. The current master adapter carries these decisions
+through subsequent stock refreshes and rejects a legacy master that omits existing
+public decisions. A supplier stock upload cannot restore an owner-hidden listing.
+
 The catalogue remains broad for wholesale and institutional customers. School-clinic
 requirements receive immediate sourcing priority. A pictured family representative
 is an identified actual variant, never a claim that its photo applies to other packs.

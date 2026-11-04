@@ -10,6 +10,13 @@ function load(){
 test('historical MRP never becomes a price without positive current exact stock',()=>{const{api,row,other}=load();assert.equal(api.price(row),12);assert.equal(api.price(other),null);row.in_stock=false;assert.equal(api.price(row),null);row.in_stock=true;row.mrp_aed=0;assert.equal(api.price(row),null);row.mrp_aed=12;row.expiry_date='2026-10-01';assert.equal(api.price(row),null);});
 test('option matching preserves exact pack, brand and family',()=>{const{api}=load();const o={sku:'A',exact_product_name:'Brand 10mg 20 tablets',brand:'Brand',pack:'20 tablets'};assert(api.forOption(o,'F'));assert.equal(api.forOption({...o,pack:'10 tablets'},'F'),null);assert.equal(api.forOption({...o,brand:'Other'},'F'),null);assert.equal(api.forOption(o,'OTHER'),null);});
 
+test('public exclusions preserve internal records, price and portal options',()=>{
+ const {api,row,window}=load(),option={sku:'A',exact_product_name:row.name,brand:row.brand,pack:row.pack};row.public_catalogue_visible=false;
+ assert.equal(api.publicVisible('A'),false);assert.equal(api.forProduct('A'),row);assert.equal(api.price(row),12);assert.equal(row.catalogue_visible,true);
+ window.location={hash:'#catalogue/all'};assert(!api.optionsForFamily([option],'F').some(o=>o.sku==='A'));
+ window.location.hash='#portal/catalogue/all';assert(api.optionsForFamily([option],'F').some(o=>o.sku==='A'));
+});
+
 test('explicit unavailable and absent/unconfirmed stock remain different; retail is not discounted',()=>{
  const {api,row,other}=load();other.availability_status='unconfirmed';assert.equal(api.availabilityLabel(other),'Availability unconfirmed');other.availability_status='out_of_stock';assert.equal(api.availabilityLabel(other),'Out of stock');assert.equal(api.price(other),null);row.availability_status='in_stock';row.indicative_price_aed=10.2;assert.equal(api.price(row),12);assert.equal(api.availabilityLabel(row),'Reported in stock');
  const option=api.optionsForFamily([{sku:'A',exact_product_name:row.name,brand:row.brand,pack:row.pack}],'F').find(o=>o.sku==='A');assert.equal(option.verified_price_aed,12);assert.match(option.verified_price_note,/2026-10-12/);

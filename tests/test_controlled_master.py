@@ -27,6 +27,11 @@ class ControlledMaster(unittest.TestCase):
   r[33]='Availability unconfirmed';r[35]=None;d,_=self.run_case(b,base);self.assertEqual(d['products'][0]['availability_status'],'unconfirmed')
  def test_missing_expiry_does_not_establish_stock(self):
   b,base,r=case('Availability unconfirmed',10,None);r[6]=r[15]=r[32]=None;d,_=self.run_case(b,base);self.assertFalse(d['products'][0]['in_stock'])
+ def test_public_decisions_survive_refresh_and_legacy_master_cannot_erase_them(self):
+  b,base,r=case();base['products'][0]['catalogue_visible']=True;b['Products'].values[5].append('Public catalogue visibility');r.append(False)
+  d,_=self.run_case(b,base);self.assertFalse(d['products'][0]['public_catalogue_visible']);self.assertEqual(d['products'][0]['mrp_aed'],12)
+  b['Products'].values[5].pop();base['products'][0]['public_catalogue_visible']=False
+  with self.assertRaises(ValueError):self.run_case(b,base)
  def test_pack_source_price_and_revision_rejections(self):
   for kind in ['pack','source','price','revision','duplicate','status']:
    b,base,r=case()

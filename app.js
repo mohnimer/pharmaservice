@@ -1853,7 +1853,7 @@
       <button class="publicCatalogueVisual publicProductView" style="--need-bg:${need.bg};--need-ink:${need.ink}" data-public-product-view="${p.pscSku}" aria-label="View ${esc(displayName)} details">${imageUrl?`<img data-family-example="${familyPhoto?'true':'false'}" src="${esc(imageUrl)}" alt="${esc(familyPhoto?.label||displayName)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(legacyProductImageUrl(p))}'">`:cataloguePhotoPlaceholder()}${p.dhaMapped?`<img class="publicDhaMark" src="${DHA_ICON}" alt="DHA requirement mapping">`:''}</button>
       <div class="publicCatalogueBody"><small>${esc(need.label)}</small><small class="catalogueBrandCount">${esc(window.PSC_STOREFRONT_GROUPS?.realBrand(p.brand)?p.brand:"Request by specification")}</small><button class="publicProductTitle" data-public-product-view="${p.pscSku}"><h3>${esc(displayName)}</h3></button><p>${esc(p._familyGroup?.members.length>1?p._familyGroup.members.length+" pack options":pack)}</p>${cataloguePricePreview(p)}${p.pscOfferedSpecification?`<div class="publicSpec">${esc(p.pscOfferedSpecification)}</div>`:''}${workshop?`<button class="catalogueWorkshopLink" data-go="workshop/${esc(workshop.slug)}"><span>FROM THE WORKSHOP</span><b>${esc(workshop.title)}</b></button>`:''}</div>
       ${p.dhaMapped?'<div class="publicMappingNote">Mapped to the applicable DHA clinic requirement.</div>':''}
-      <button class="button outline full" data-public-product-view="${p.pscSku}">View details</button>
+      <div class="publicCatalogueActions"><button class="button outline" data-public-product-view="${p.pscSku}">View details</button>${window.PSC_PRODUCT_PRESENTATION.whatsappHtml(p,{compact:true})}</div>
     </article>`;
   }
 
@@ -2279,7 +2279,8 @@
   function catalogueProducts(){
     return products().filter(p=>{
       const controlled=window.PS_CATALOGUE_STOCK?.forProduct(p);
-      return controlled?controlled.catalogue_visible:p.catalogueVisible!==false;
+      const visible=controlled?controlled.catalogue_visible:p.catalogueVisible!==false;
+      return visible&&(/^(portal|admin)(\/|$)/.test(currentRoute())||window.PS_CATALOGUE_STOCK?.publicVisible(p)!==false);
     });
   }
 
