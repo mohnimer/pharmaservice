@@ -171,6 +171,10 @@ html{background:var(--sky-ground);scroll-padding-top:100px}body{background:var(-
 #app .psPortalHome :is(.buyerRepeatTable,.psPortalRequestsTable)>tbody>tr:not(.buyerHistoryDetailRow)>:is(th,td){vertical-align:middle!important}
 #app .psPortalHome :is(.buyerRepeatTable,.psPortalRequestsTable)>thead>tr>th:last-child{text-align:center!important;padding-inline:var(--portal-cell-inset)!important}
 
+/* Consistent native cursor cues across the public site and both portals. */
+:is(a[href],button,summary,select,label[for],[role="button"],[role="tab"],[role="menuitem"],[role="option"],[data-go],[data-product-view],.clickable,input:is([type="button"],[type="submit"],[type="reset"],[type="checkbox"],[type="radio"],[type="range"],[type="file"])){cursor:pointer}
+:is(button,input,select,textarea):disabled,[aria-disabled="true"],[aria-disabled="true"] *{cursor:not-allowed!important}
+
 /* Public product enquiries: one quiet contact beside the existing details action. */
 #app .publicCatalogueCard>.publicCatalogueActions{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;flex:none;margin:18px 14px 14px}
 #app .publicCatalogueActions>.button{display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;min-width:0;min-height:44px!important;height:44px!important;max-height:44px!important;margin:0!important;padding:4px 8px!important;line-height:16px!important;text-align:center;white-space:normal;border:1px solid #cadbdd!important;border-radius:8px;background:#fff!important;box-shadow:none}
