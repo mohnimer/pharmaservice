@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": "PSC-20261022-STOCK-002",
+  "revision": "PSC-20261022-STOCK-003",
   "stock_date": "2026-10-22",
   "report_name": "ACORUS WH STOCK LIST AS ON 22-10-2026.xlsx",
   "products": [
@@ -584,7 +584,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": null,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-C4FA68E8A237",
@@ -598,7 +599,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": null,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-C0D906406901",
@@ -612,7 +614,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": null,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-DAC50A46146D",
@@ -626,7 +629,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": null,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-7A2EBE0480B8",
@@ -640,7 +644,8 @@
       "catalogue_visible": true,
       "in_stock": false,
       "mrp_aed": null,
-      "availability_status": "unconfirmed"
+      "availability_status": "unconfirmed",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-FFDD0A92575D",
@@ -654,7 +659,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 25.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PSC-INF-001",
@@ -694,7 +700,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 18.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-1F1A9E6B4FC8",
@@ -918,7 +925,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 29.5,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-458B5F70A507",
@@ -1226,7 +1234,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 15.75,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-D0FA94CC5CCD",
@@ -1282,7 +1291,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 47.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-BA2A0DD15944",
@@ -1380,7 +1390,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 57.5,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-7C1A057BC04A",
@@ -1503,7 +1514,8 @@
       "acorus_managed": false,
       "catalogue_visible": true,
       "in_stock": false,
-      "mrp_aed": null
+      "mrp_aed": null,
+      "public_catalogue_visible": false
     },
     {
       "sku": "PSC-WND-003",
@@ -1600,7 +1612,8 @@
       "catalogue_visible": true,
       "in_stock": false,
       "mrp_aed": null,
-      "availability_status": "unconfirmed"
+      "availability_status": "unconfirmed",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PSC-WND-004",
@@ -1697,7 +1710,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 18.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PSC-HYG-103",
@@ -1739,7 +1753,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 12.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-184DB35B4013",
@@ -1767,7 +1782,8 @@
       "catalogue_visible": true,
       "in_stock": false,
       "mrp_aed": null,
-      "availability_status": "unconfirmed"
+      "availability_status": "unconfirmed",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-FBBA279D40A7",
@@ -1795,7 +1811,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 34.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-C35CD04F1EFF",
@@ -2012,7 +2029,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 789.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PSC-WND-008",
@@ -2607,7 +2625,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 54.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-64F829D7DBF1",
@@ -2831,7 +2850,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 131.25,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-6E606628BF87",
@@ -3272,7 +3292,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 35.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-EBF3E1C257CD",
@@ -3286,7 +3307,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 50.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-938F720B960C",
@@ -3314,7 +3336,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 97.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-5E479CDB5CA0",
@@ -3370,7 +3393,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 28.5,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-7FA52A9BCF9F",
@@ -3426,7 +3450,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 49.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-8487348609B6",
@@ -3440,7 +3465,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 33.5,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-BCAEDEA727BF",
@@ -3454,7 +3480,8 @@
       "catalogue_visible": true,
       "in_stock": false,
       "mrp_aed": null,
-      "availability_status": "unconfirmed"
+      "availability_status": "unconfirmed",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PSC-HYG-104",
@@ -3635,7 +3662,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 30.5,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-4D0091180AB9",
@@ -3705,7 +3733,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 52.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-4FD1A6229910",
@@ -3719,7 +3748,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 71.5,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-D5EE25C904F9",
@@ -3775,7 +3805,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 12.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-A3C78A070FA9",
@@ -4080,7 +4111,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 17.5,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PSC-RES-007",
@@ -4219,7 +4251,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 77.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-5ED2FF06E0AF",
@@ -4400,7 +4433,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 57.75,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-23F55B06F429",
@@ -4800,7 +4834,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 115.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-1C0C5CA5BC0C",
@@ -4939,7 +4974,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 31.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PSC-MED-133",
@@ -5050,7 +5086,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 80.5,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PSC-DIA-009",
@@ -5595,7 +5632,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 59.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-F0AF9D5BA11A",
@@ -5785,7 +5823,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 30.5,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-8EDDADE311BC",
@@ -5799,7 +5838,8 @@
       "catalogue_visible": true,
       "in_stock": true,
       "mrp_aed": 42.0,
-      "availability_status": "in_stock"
+      "availability_status": "in_stock",
+      "public_catalogue_visible": false
     },
     {
       "sku": "PS-AC-6F2C9A9F278A",

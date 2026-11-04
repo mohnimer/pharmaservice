@@ -63,6 +63,7 @@ jobs:
       - run: node tests/workshop-articles-browser.mjs
       - run: node tests/portal-home-journey-browser.mjs
       - run: node tests/stock-snapshot-browser.mjs
+      - run: node tests/public-storefront-visibility-browser.mjs
       - run: node tests/portal-layout-regression.mjs
       - run: npm run test:dom
       - run: npm run test:catalogue
