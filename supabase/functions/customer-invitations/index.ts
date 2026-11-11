@@ -1,5 +1,5 @@
 import {scheduledSendUser} from '../_shared/email-schedules.ts'
-import {service,admin,json,check,email,hash,MailError,safeCode,accessToken,send,mime,SENDER} from '../_shared/psc-mail.ts'
+import {service,admin,json as baseJson,check,email,hash,MailError,safeCode,accessToken,send,mime,SENDER} from '../_shared/psc-mail.ts'
 import {verifySender} from '../_shared/mail-senders.ts'
 import '../_shared/business-email.js'
 import {composerFields} from '../_shared/mailbox-compose.ts'
@@ -17,6 +17,15 @@ async function candidate(svc:any,id:string,secret:string){
  if(!['sent','pending_activation'].includes(i.status)||(!i.persistent_link&&(!i.expires_at||Date.parse(i.expires_at)<=Date.now()))||i.token_hash!==await hash(secret))throw new MailError('invitation_expired_revoked_or_used');return i;
 }
 Deno.serve(async req=>{
+ // Support both canonical and www PSC domains without relaxing CORS for other sites.
+ // All administrative operations continue to require a verified PSC admin session.
+ const json=(body:unknown,status=200)=>{
+  const response=baseJson(body,status);
+  const origin=req.headers.get('origin');
+  const allowed=new Set(['https://pharmaservice.ae','https://www.pharmaservice.ae',Deno.env.get('PSC_APP_ORIGIN')].filter(Boolean));
+  if(origin&&allowed.has(origin))response.headers.set('Access-Control-Allow-Origin',origin);
+  return response;
+ };
  if(req.method==='OPTIONS')return json({});if(req.method!=='POST')return json({error:'method_not_allowed'},405);
  const svc=service();let claimed:any=null,attempted=false,accepted=false;
  try{
