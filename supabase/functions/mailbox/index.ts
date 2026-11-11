@@ -1,8 +1,16 @@
 import {scheduledSendUser} from '../_shared/email-schedules.ts'
-import {service,admin,json,check,accessToken,gmail,send,noDemoOrder,logAttempt,safeCode,MailError} from '../_shared/psc-mail.ts'
+import {service,admin,json as baseJson,check,accessToken,gmail,send,noDemoOrder,logAttempt,safeCode,MailError} from '../_shared/psc-mail.ts'
 import {composerFields,aliasStatus,sourceContext,composerMime} from '../_shared/mailbox-compose.ts'
 import '../_shared/business-email.js'
 Deno.serve(async req=>{
+ // Permit both PSC site hostnames; authorization remains enforced per request.
+ const json=(body:unknown,status=200)=>{
+  const response=baseJson(body,status);
+  const origin=req.headers.get('origin');
+  const allowed=new Set(['https://pharmaservice.ae','https://www.pharmaservice.ae',Deno.env.get('PSC_APP_ORIGIN')].filter(Boolean));
+  if(origin&&allowed.has(origin))response.headers.set('Access-Control-Allow-Origin',origin);
+  return response;
+ };
  if(req.method==='OPTIONS')return json({});if(req.method!=='POST')return json({error:'method_not_allowed'},405);
  const svc=service();let claimed:any=null,attempted=false,accepted=false;
  try{
