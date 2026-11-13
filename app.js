@@ -1095,8 +1095,9 @@
     toast('<strong>Storefront updated.</strong>');
   }
   function isCapitalProduct(p){ return !!p && ['Furniture & Mobility','Diagnostics & Monitoring','Emergency & Oxygen'].includes(p.category); }
+  let institutionalOnlyProducts=[];
   function product(sku){
-    const base = D.products.find(p=>p.pscSku===sku) || (state.customProducts||{})[sku];
+    const base = D.products.find(p=>p.pscSku===sku) || (currentRoute().startsWith('portal/')&&institutionalOnlyProducts.find(p=>p.pscSku===sku)) || (state.customProducts||{})[sku];
     if(!base) return null;
     return {...base,...(state.productOverrides[sku]||{})};
   }
@@ -1158,7 +1159,7 @@
     if(sku) return `/assets/products/${sku.toLowerCase()}.webp?v=${PRODUCT_ASSET_RELEASE}`;
     return window.PSC_IMAGE_POLICY?.resolve((p?.image_url||p?.imageUrl||'').trim())||(!window.PSC_IMAGE_POLICY?(p?.image_url||p?.imageUrl||'').trim():null);
   }
-  function products(){ return D.products.map(p=>product(p.pscSku)); }
+  function products(){ return [...D.products,...(currentRoute().startsWith('portal/')?institutionalOnlyProducts:[])].map(p=>product(p.pscSku)); }
   function currentRoute(){
     const path=location.pathname.replace(/\/+$/,'');
     if(location.hash && location.hash!=='#home') return location.hash.slice(1).split('?')[0];
@@ -3374,6 +3375,14 @@
       else state.basketsBySchool[school.id]=state.basket||[];
     }
 
+    institutionalOnlyProducts=[];
+    if(school&&!isDemoAccount()&&session?.access_token){
+      const accountToken=session.access_token;
+      try{
+        const {data,error}=await sb.rpc('psc_institutional_catalogue_listings').abortSignal(AbortSignal.timeout(6500));
+        if(!error&&session?.access_token===accountToken&&Array.isArray(data))institutionalOnlyProducts=data;
+      }catch{ /* The main catalogue remains available. */ }
+    }
     await loadOrdersFromDatabase();
     if(isPscAdmin){ await loadAdminCms(); await loadAdminMail(); }
     else await loadPublicStorefronts();
@@ -3522,7 +3531,7 @@
     searchSessions.clear();resetIntelligentSearch();
     const wasDemo=isDemoAccount();
     if(sb) await sb.auth.signOut();
-    session=null; authContext=null;
+    session=null; authContext=null; institutionalOnlyProducts=[];
     state={...JSON.parse(JSON.stringify(seed)),basket:[]};
     demoSession.initialized=false; demoSession.requestsBySchool={};
     if(!wasDemo){ try{ localStorage.removeItem(STORAGE); }catch{} }
