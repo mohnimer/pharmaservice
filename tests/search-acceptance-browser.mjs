@@ -25,7 +25,7 @@ try {for(const width of [320,390,1440]){
   assert.equal(new Set(cards.map(c=>c.family||c.id)).size,cards.length,'one card per family listing');
   assert(cards.every(c=>c.ids.includes(c.id)),'card details must open an exact matched member');
   assert(ids.every(id=>index.records.some(r=>r.visible&&r.id===id)));
-  assert.equal(await page.locator('[data-ps-result-count]').innerText(),`${cards.length} matching listings`);
+  assert.equal(await page.locator('[data-ps-result-count]').innerText(),`${cards.length} matching listings across the catalogue`);
   assert.equal(await page.locator('.categoryHeroCount b').innerText(),String(cards.length));
   if(['antihistamine','anti histamine','antihistamin'].includes(query))assert.deepEqual([...ids].sort(),expected,query+' must render only all verified antihistamine IDs');
   if(query==='cetirizine')assert(ids.every(id=>index.records.find(r=>r.id===id).medicine?.activeIngredients.includes('cetirizine')));
@@ -35,13 +35,24 @@ try {for(const width of [320,390,1440]){
   assert(ids.length>0&&ids.length<expected.length*4,'search must narrow the catalogue');
   renderedReport.results.push({width,query,interpretation:await page.locator('.psInterpretation b').innerText(),count:cards.length,ids,firstFive:cards.slice(0,5).map(c=>c.name)});
  }
+ await page.evaluate(()=>PSC_NAVIGATE('portal/catalogue/dha-equipment'));
+ await page.locator('[data-cat-filter="approval"]').selectOption('DHA requirement');
+ await command('insulin');
+ assert.equal(await page.locator('.productGrid .productCard').count(),0);
+ await page.getByRole('button',{name:'Browse Diabetes & Testing'}).click();
+ await page.waitForURL('**/#portal/catalogue/diabetes');
+ assert.equal(await page.locator('[data-cat-q]').inputValue(),'');
+ await page.evaluate(()=>PSC_NAVIGATE('portal/catalogue/dha-equipment'));
+ await command('antihistamine');
+ const acrossDha=await page.locator('.productGrid .productCard').evaluateAll(cards=>cards.flatMap(c=>JSON.parse(c.dataset.matchingSkus)).sort());
+ assert.deepEqual(acrossDha,expected,'Search includes all matched members outside a DHA category and its filters');
  await command('allergy tablets');assert(!await page.locator('.productGrid').textContent().then(s=>s.includes('PANADOL NIGHT')));
  assert.equal(await page.locator('[data-cat-q]').evaluate(el=>getComputedStyle(el).fontSize),'16px');
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  await page.screenshot({path:`test-results/medicine-search-${width}.png`});
  await command('add 3 boxes of gloves');assert.match(await page.locator('.psInterpretation').innerText(),/Choose an existing catalogue line/);await page.locator('[data-ps-select-sku]').first().click();assert.equal(await page.locator('[data-ps-line-qty]').first().inputValue(),'3');assert.match(await requestText(page),/box/);
  await command('big mask');assert.match(await page.locator('.psInterpretation').innerText(),/Which type of mask/);
- await command('bilastine');assert.match(await page.locator('.psSearchEmpty').innerText(),/matching product indexed/);
+ await command('bilastine');assert.match(await page.locator('.psSearchEmpty').innerText(),/No matching listings/);
  await page.locator('[data-ps-unlisted]').click();
  const request=page.locator('.psLiveRequest');assert.match(await request.textContent(),/bilastine/);assert.match(await request.textContent(),/Unit to confirm/);
  if(width<800)await page.locator('[data-ps-sheet-open]').click();
@@ -49,4 +60,18 @@ try {for(const width of [320,390,1440]){
  await page.locator('[data-submit-request]').click();assert.match(await page.locator('body').innerText(),/simulated request/i);
  assert.deepEqual(await page.evaluate(()=>window.__backendCalls.filter(c=>c.rpc||c.action!=='select')),[]);
  assert.deepEqual(errors,[]);await context.close();console.log('PASS rendered medicinal IDs, ambiguity, unlisted handoff and narrow layout',width);
-}writeFileSync('docs/rendered-search-results.local.json',JSON.stringify(renderedReport,null,2)+'\n');}finally{await browser.close();server.close();}
+}const anon=await browser.newContext();
+await anon.addInitScript(()=>window.__testRole='anonymous');
+await anon.route('**/*',route=>{const url=new URL(route.request().url());if(url.hostname==='127.0.0.1')return route.continue();return route.fulfill({contentType:'text/javascript',body:url.hostname==='cdn.jsdelivr.net'?readFileSync('tests/mock-supabase.js','utf8'):''});});
+const publicPage=await anon.newPage();
+await publicPage.goto('http://127.0.0.1:'+server.address().port+'/#catalogue/wounds');
+const publicSearch=publicPage.locator('[data-public-catalogue-search] input');
+await publicSearch.fill('wheelchair');
+await publicPage.locator('.publicCatalogueGrid').getByRole('heading',{name:/wheelchair/i}).first().waitFor();
+await publicSearch.fill('insulin');
+await publicSearch.press('Enter');
+await publicPage.getByRole('button',{name:'Browse Diabetes & Testing'}).click();
+await publicPage.waitForURL('**/#catalogue/diabetes');
+assert.equal(await publicSearch.inputValue(),'');
+await anon.close();
+writeFileSync('docs/rendered-search-results.local.json',JSON.stringify(renderedReport,null,2)+'\n');}finally{await browser.close();server.close();}

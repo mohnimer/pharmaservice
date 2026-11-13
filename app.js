@@ -1172,7 +1172,7 @@
   function go(route,{replace=false,searchQuery=null}={}){
     ui.mobile=false; ui.publicMenu=false; ui.modal=null; ui.basket=false; ui.accountMenu=false;
     if(route.startsWith('portal/catalogue/dha-')&&route!==currentRoute()){ui.catalogueCat='All product types';ui.catalogueFilter='All lines';}
-    if(route!==currentRoute()){ resetIntelligentSearch();ui.globalSearch=''; ui.catalogueQuery=''; }
+    if(route!==currentRoute()||searchQuery!==null){ resetIntelligentSearch();ui.globalSearch=''; ui.catalogueQuery=''; }
     if(searchQuery!==null){ ui.catalogueQuery=String(searchQuery).trim(); ui.globalSearch=ui.catalogueQuery; }
     catalogueSearchRoute=route;
     const target=route==='start'?'/start':route==='workshop'?'/workshop':route.startsWith('workshop/')?`/workshop/${encodeURIComponent(route.split('/')[1]||'')}`:`/#${route}`;
@@ -1857,9 +1857,21 @@
     </article>`;
   }
 
+  function searchEmptyContent(portal){
+    const query=(ui.catalogueQuery||intelligent.said||'').trim();
+    const diabetes=/\b(?:insulins?|diabet\w*|glucose|glucometers?|lancets?)\b/i.test(query);
+    const related=diabetes?`<button type="button" class="button outline" data-go="${portal?'portal/':''}catalogue/diabetes" data-clear-search-navigation>Browse Diabetes &amp; Testing</button>`:'';
+    const action=portal&&query?'<button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button>':'<button type="button" class="button outline" data-go="contact">Request sourcing</button>';
+    return `<p>${query?'No matching listings for “'+esc(query)+'”.':'No listings match these filters.'}</p>${diabetes?'<p>Related category for glucose monitoring and testing supplies.</p>':''}<div class="psSearchEmptyActions">${related}${action}</div>`;
+  }
+  function publicCatalogueResultContent(needId){
+    const {filtered,searching}=catalogueFilterProducts(needId);
+    const rows=catalogueCardRows(filtered);
+    return `${catalogueRetailPriceNotice()}<div class="publicCatalogueCount" role="status"><b>${rows.length}</b><span>${searching?'matches across the catalogue':needId==='all'?'product listings':'listings in this category'}</span></div>${rows.length?`<div class="publicCatalogueGrid">${rows.map(publicCatalogueCard).join('')}</div>`:`<div class="emptyState">${searchEmptyContent(false)}</div>`}`;
+  }
   function publicCataloguePage(needId='all'){
     const meta=clinicalNeedMeta(needId);
-    const {filtered,types}=catalogueFilterProducts(needId);
+    const {types,searching}=catalogueFilterProducts(needId);
     const categories=INSTITUTIONAL_CATALOGUE_TEMPLATE.categories.filter(c=>c.id!=='all');
     const categoryCards=categories.map(c=>`<button class="publicCategoryCard16 ${c.id===needId?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="catalogue/${c.id}">
       <span class="publicCategoryArt16" aria-hidden="true">${clinicalNeedIllustration(c.id)}</span>
@@ -1872,9 +1884,9 @@
       ${schoolBasketSection()}
       <section class="publicSection publicCatalogueJourney16"><details class="skyCategoryBrowser"><summary>Browse by clinical area</summary><div class="publicCategoryGrid16">${categoryCards}</div></details></section>
       <section class="publicSection publicCatalogueControls catalogue16Controls">
-        <div class="filterBar"><div class="searchInput"><span>${icon('search')}</span><input type="search" aria-label="Search catalogue" data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search products, brands, packs or specifications…">${ui.catalogueQuery?'<button type="button" class="catalogueSearchClear" data-catalogue-clear aria-label="Clear search">×</button>':''}</div><select data-cat-filter="category"><option>All product types</option>${types.map(t=>`<option ${ui.catalogueCat===t?'selected':''}>${esc(t)}</option>`).join('')}</select></div>
+        <form class="filterBar" data-public-catalogue-search role="search"><div class="searchInput"><span>${icon('search')}</span><input type="search" aria-label="Search catalogue" data-cat-q value="${esc(ui.catalogueQuery)}" placeholder="Search the full catalogue…" maxlength="400"><button type="button" class="catalogueSearchClear" data-catalogue-clear aria-label="Clear search" ${searching?'':'hidden'}>×</button></div><select data-cat-filter="category" aria-label="Product type" ${searching?'disabled':''}><option>All product types</option>${types.map(t=>`<option ${ui.catalogueCat===t?'selected':''}>${esc(t)}</option>`).join('')}</select></form>
       </section>
-      <section class="publicSection publicCatalogueResults catalogue16Results">${catalogueRetailPriceNotice()}<div class="publicCatalogueCount"><b>${catalogueCardRows(filtered).length}</b><span>${needId==='all'?'product listings':'listings in this category'}</span></div>${filtered.length?`<div class="publicCatalogueGrid">${catalogueCardRows(filtered).map(publicCatalogueCard).join('')}</div>`:'<div class="emptyState"><h3>No matching published lines</h3><p>Try another clinical need or send the requirement to Pharma Service.</p><button class="button primary" data-go="contact">Request sourcing</button></div>'}</section>
+      <section class="publicSection publicCatalogueResults catalogue16Results" data-public-catalogue-results>${publicCatalogueResultContent(needId)}</section>
       <section class="publicCta"><div><span class="kicker">HAVE A LIST ALREADY?</span><h2>Send the requirement instead of rebuilding it here.</h2></div><div class="publicCtaActions"><button class="button outline large" data-go="start">Send a list / RFQ</button><button class="button primary large" data-go="login">Open Clinic Portal</button></div></section>
       ${publicFooter()}
     </main>`;
@@ -2066,7 +2078,6 @@
     const active=visible.filter(r=>!['Accepted','Cancelled'].includes(r.status));
     const awaiting=active.filter(r=>r.status==='Sent'&&!r.quote?.management_decision);
     const delivered=visible.filter(r=>r.status==='Accepted');
-    const documentCount=customerAccountRequests().reduce((n,r)=>n+(r.documents||[]).length,0);
     const priority=r=>r.status==='Sent'&&!r.quote?.management_decision?0:r.status==='Delivery'?1:['Authorized','Procurement'].includes(r.status)?2:3;
     const recent=[...active].sort((a,b)=>priority(a)-priority(b)||(new Date(b.createdAt).getTime()||0)-(new Date(a.createdAt).getTime()||0)).slice(0,3);
     const clinicalStarts=[['wounds'],['breathing'],['vitals']];
@@ -2078,31 +2089,19 @@
     const draft=state.basket;
     return shell(`<div class="psExperience psPortalHome buyerWorkspace">
       <section class="psPortalWelcome" aria-labelledby="psPortalTitle">
-        <div class="psPortalSearchCopy"><h1 id="psPortalTitle">Your clinic. Ready for what’s next.</h1><p class="buyerCampus">${esc(state.campus)}</p><p>Find the right products. Build your request. We’ll take care of the sourcing.</p>
+        <div class="psPortalSearchCopy"><h1 id="psPortalTitle">Find clinic supplies</h1><p class="buyerCampus">${esc(state.campus)}</p>
           <form class="psPortalSearch" data-ps-command-form role="search"><label class="srOnly" for="psPortalCommand">Search your institutional catalogue</label><span aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/search.webp" alt=""></span><input id="psPortalCommand" data-cat-q type="search" aria-label="Search catalogue" placeholder="Product, brand or describe what you need…" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Search</button></form>
-          <div class="psPortalSearchExamples"><span>Try</span>${['Sterile gauze','Digital thermometer','Examination gloves'].map(q=>`<button type="button" data-portal-query="${esc(q)}">${esc(q)}</button>`).join('')}</div>
-          <button class="psTextLink" data-go="portal/catalogue">Browse the catalogue</button>
+          <div class="psPortalPrimaryLinks"><button class="psTextLink" data-go="portal/catalogue">Browse catalogue</button><button class="psTextLink" data-buyer-list>Paste a list</button><button class="psTextLink" data-go="start">Upload a file</button></div>
         </div>
-        <div class="psPortalDraft ${draft.length?'hasDraft':''}" aria-label="${draft.length?'Saved supply request':'Send an existing list'}">${draft.length?`<h2>Pick up where you left off.</h2><p>${draft.length} request line${draft.length===1?'':'s'} · ${basketQty()} requested units</p><ul>${draft.slice(0,2).map(l=>{const p=l.sku?product(l.sku):null;return `<li><span>${esc(p?.name||lineDisplayName(l,p))}</span><small>${l.qty} × ${esc(linePackLabel(l,p))}</small></li>`;}).join('')}</ul>${draft.length>2?`<small>+ ${draft.length-2} more line${draft.length===3?'':'s'}</small>`:''}<button class="button dark" data-basket>Continue your request</button><small>Saved for this site. Review before submitting.</small>`:`<span class="psPortalListIcon" aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/my-requests.webp" alt=""></span><h2>Already have a list?</h2><p>Send your RFQ, spreadsheet or existing product list. Start with what you have.</p><button class="button outline" data-go="start">Upload your list</button>`}</div>
+        ${draft.length?`<div class="psPortalDraft hasDraft" aria-label="Saved supply request"><h2>Draft request</h2><p>${draft.length} request line${draft.length===1?'':'s'} · ${basketQty()} requested units</p><ul>${draft.slice(0,2).map(l=>{const p=l.sku?product(l.sku):null;return `<li><span>${esc(p?.name||lineDisplayName(l,p))}</span><small>${l.qty} × ${esc(linePackLabel(l,p))}</small></li>`;}).join('')}</ul>${draft.length>2?`<small>+ ${draft.length-2} more line${draft.length===3?'':'s'}</small>`:''}<button class="button dark" data-basket>Continue your request</button></div>`:''}
       </section>
-      <section class="buyerActionHub" aria-labelledby="buyerActionTitle">
-        <div class="buyerHubHeading"><h2 id="buyerActionTitle">Get the next thing done.</h2><p>One place for your clinic’s supply requests.</p></div>
-        <div class="buyerActionGrid">
-          <button class="buyerAction buyerActionPrimary" data-go="portal/replenish"><img src="/assets/ui-icons/orders.webp" alt=""><span><h3>Order again</h3><p>Previous supplies. New quantities. A fresh quotation.</p></span></button>
-          <button class="buyerAction" data-buyer-list><img src="/assets/ui-icons/my-requests.webp" alt=""><span><h3>Start with your list</h3><p>Paste what you need, including items you can’t find.</p></span></button>
-          <button class="buyerAction" ${awaiting[0]?`data-request-view="${esc(awaiting[0].id)}"`:'data-go="portal/requests"'}><img src="/assets/ui-icons/my-requests.webp" alt=""><span><h3>${awaiting.length?`${awaiting.length} quotation${awaiting.length===1?'':'s'} to review`:'Requests & quotations'}</h3><p>${awaiting.length?'Check exact items, prices and terms before authorization.':'Follow your requests from submission to supply.'}</p></span></button>
-          <button class="buyerAction" data-go="portal/documents"><img src="/assets/ui-icons/downloads.webp" alt=""><span><h3>Your paperwork</h3><p>${documentCount?`${documentCount} attached document${documentCount===1?'':'s'}, organized by request.`:'Quotations and delivery records, together by request.'}</p></span></button>
-        </div>
-      </section>
-      ${delivered.length?`<section class="buyerRecentSupply" aria-labelledby="buyerRecentTitle"><div class="buyerHubHeading"><h2 id="buyerRecentTitle">Need the same supplies?</h2><button class="psTextLink" data-go="portal/requests">All previous requests</button></div><div class="buyerRepeatTableWrap"><table class="buyerRepeatTable"><thead><tr><th scope="col">Request</th><th scope="col">Requested</th><th scope="col">Items</th><th scope="col">Repeat</th></tr></thead><tbody>${[...delivered].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,3).map(r=>`<tr><td data-label="Request"><button class="buyerReferenceLink" data-request-view="${esc(r.id)}">${esc(r.id)}</button></td><td data-label="Requested">${date(r.createdAt)}</td><td data-label="Items"><button class="buyerHistoryItemsButton" data-buyer-history-items aria-expanded="false" aria-controls="request-items-${encodeURIComponent(r.id)}">${r.lines.length} item${r.lines.length===1?'':'s'}</button></td><td data-label="Repeat"><button class="button light" data-reorder-order="${esc(r.id)}">Repeat request</button></td></tr><tr class="buyerHistoryDetailRow" id="request-items-${encodeURIComponent(r.id)}" hidden><td colspan="4"><table class="buyerHistoryLineTable"><caption>Items in request ${esc(r.id)}</caption><thead><tr><th scope="col">Product</th><th scope="col">Recorded pack</th><th scope="col">Quantity</th></tr></thead><tbody>${r.lines.map(l=>`<tr><td>${esc(lineDisplayName(l,l.sku?product(l.sku):null))}</td><td>${esc(l.lineSnapshot?.pack||l.orderPackBasis||l.requestUnit||l.productOptionSnapshot?.pack||'Pack not recorded')}</td><td>${l.qty}</td></tr>`).join('')}</tbody></table></td></tr>`).join('')}</tbody></table></div><p class="buyerRepeatNote">Review quantities and exact packs before submitting. Prices and availability are confirmed in a new quotation.</p></section>`:''}
-      <div class="buyerTaskLinks"><button class="button light" data-go="start">Upload an RFQ or spreadsheet</button><button class="button light" data-go="portal/wishlist">Saved products</button></div>
       <div class="psPortalWork">
-        <section class="psPortalAttention" aria-labelledby="psPortalActivityTitle"><div class="psPortalSectionHead"><div><h2 id="psPortalActivityTitle">${awaiting.length?'Your quotations are ready.':'Your requests, moving forward.'}</h2><p>${awaiting.length?`${awaiting.length} quotation${awaiting.length===1?'':'s'} available to review.`:active.length?`${active.length} request${active.length===1?'':'s'} in progress.`:'A clear view of what happens after you request.'}</p></div><button class="psTextLink" data-go="portal/requests">View all</button></div><div class="psPortalActivityList">${recent.length?`<div class="psPortalRequestsTableWrap"><table class="psPortalRequestsTable"><caption class="srOnly">Recent active requests and quotations</caption><thead><tr><th scope="col">Request</th><th scope="col" class="psPortalRequestedDate">Requested</th><th scope="col">Items</th><th scope="col">Status</th><th scope="col" class="psPortalRequestAction">Action</th></tr></thead><tbody>${recent.map(row).join('')}</tbody></table></div>`:`<div class="psPortalNoActivity"><span aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/my-requests.webp" alt=""></span><div><h3>No requests in progress.</h3><p>${delivered.length?'Your previous orders are ready to revisit whenever you need them.':'Your quotations and order updates will appear here after your first request.'}</p></div></div>`}</div></section>
+        <section class="psPortalAttention" aria-labelledby="psPortalActivityTitle"><div class="psPortalSectionHead"><div><h2 id="psPortalActivityTitle">Your requests</h2>${active.length?`<p>${awaiting.length?`${awaiting.length} quotation${awaiting.length===1?'':'s'} to review`:`${active.length} in progress`}</p>`:''}</div><button class="psTextLink" data-go="portal/requests">All requests</button></div><div class="psPortalActivityList">${recent.length?`<div class="psPortalRequestsTableWrap"><table class="psPortalRequestsTable"><caption class="srOnly">Recent active requests and quotations</caption><thead><tr><th scope="col">Request</th><th scope="col" class="psPortalRequestedDate">Requested</th><th scope="col">Items</th><th scope="col">Status</th><th scope="col" class="psPortalRequestAction">Action</th></tr></thead><tbody>${recent.map(row).join('')}</tbody></table></div>`:`<div class="psPortalNoActivity"><span aria-hidden="true"><img class="psPortalUtilityArt" src="/assets/ui-icons/my-requests.webp" alt=""></span><div><h3>No requests in progress.</h3><p>${delivered.length?'Your previous orders are ready to revisit whenever you need them.':'Your quotations and order updates will appear here after your first request.'}</p></div></div>`}</div></section>
 
       </div>
-      <section class="psPortalBaskets" aria-labelledby="psPortalBasketsTitle"><div class="psPortalSectionHead"><div><h2 id="psPortalBasketsTitle">Start with the whole task.</h2><p>Opening, restocking or refilling? Review a basket preview.</p></div><button class="psTextLink" data-go="portal/baskets">All ready baskets</button></div><div class="psPortalBasketGrid">${window.PSC_READY_BASKETS?.compactCards()||'<button class="button outline" data-go="portal/baskets">Explore basket previews</button>'}</div></section>
+      <details class="psPortalMore psDisclosure"><summary>More tools</summary><div class="psPortalToolLinks"><button class="psTextLink" data-go="portal/replenish">Order again</button><button class="psTextLink" data-go="portal/documents">Documents</button><button class="psTextLink" data-go="portal/wishlist">Saved products</button><button class="psTextLink" data-go="portal/baskets">Ready baskets</button><button class="psTextLink" data-go="workshop">Guides</button></div>
       <div class="pscHomeBrowse pscHomeBrowseSeparated"><div class="pscHomeCategoryColumns"><section class="pscClinicalBrowse" aria-labelledby="psc-browse-title"><div class="psPortalSectionHead"><div><h2 id="psc-browse-title">Browse by clinical need</h2><p>Find products for the task in front of you.</p></div><button class="psTextLink" data-go="portal/catalogue">All categories</button></div><div class="pscHomeCategoryGrid" role="group" aria-label="By clinical need">${clinicalStarts.map(args=>homeCategory(...args)).join('')}</div>${guide(clinicalStarts)}</section><section class="pscRequirementBrowse" aria-labelledby="psc-requirement-title"><div class="psPortalSectionHead"><div><h2 id="psc-requirement-title">Clinic requirement mapping</h2><p>Explore the mapped medicines, equipment and consumables.</p></div></div><div class="pscHomeCategoryGrid" role="group" aria-label="Clinic essentials">${essentialStarts.map(args=>homeCategory(...args)).join('')}</div>${guide(essentialStarts)}<small class="pscHomeScopeNote">DHA educational clinic mapping. Required alternatives and conditional items retain their original conditions; suitability is checked before quotation.</small></section></div></div>
-      <section class="psPortalHelp" aria-label="Product and purchasing guidance"><div><h2>A little clarity before you order.</h2><p>Practical product and specification guidance from The Workshop.</p></div><div><button class="psTextLink" data-go="workshop/product-basics">Product basics</button><button class="psTextLink" data-go="workshop/ordering-specifications">Preparing a specification</button><button class="psTextLink" data-go="workshop">All guides</button></div></section><p class="psPortalApprovalNote">Submitting a request does not place a purchase order. Final approvals follow your organisation’s agreed process.</p>
+      </details><p class="psPortalApprovalNote">Submitting a request does not place a purchase order. Final approvals follow your organisation’s agreed process.</p>
     </div>`);
   }
 
@@ -2191,7 +2190,7 @@
     return ['PS request scope',...basketReviews,scope.institution&&`Institution / site: ${scope.institution}`,scope.location&&`Delivery location: ${scope.location}`,scope.sites&&`Sites: ${scope.sites} — ${scope.quantityConfirmation?'quantities require confirmation':'quantities are totals across all sites'}`,scope.orderType&&`Order type: ${scope.orderType}`,state.basket.some(l=>l.requestUnit)&&`Requested units: ${state.basket.filter(l=>l.requestUnit).map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty} ${l.requestUnit}`).join('; ')} — pack basis needs PS verification`,scope.retained.length&&`Existing / retain (excluded from supply): ${scope.retained.map(l=>`${lineDisplayName(l,l.sku?product(l.sku):null)} × ${l.qty}`).join('; ')}`,'Specifications, availability, pack basis and commercial terms need PS verification.'].filter(Boolean).join('\n');
   }
   function intelligentSearchField(){
-    return `<section class="psIntelligentSearch">${draftUndoControl()}<span class="sectionLabel">Search the catalogue</span><h2>Tell us what you need</h2><p>the way you’d normally say it</p><label for="psCommand">${state.basket.length?'Change this scope in plain language':'Search the catalogue'}</label><form data-ps-command-form><input id="psCommand" type="search" data-cat-q aria-label="Search catalogue" value="${esc(ui.catalogueQuery)}" placeholder="We need a wheelchair…" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Apply</button><button class="button outline" type="button" data-catalogue-clear ${!ui.catalogueQuery&&!intelligent.action?'disabled':''}>Clear</button></form>${intelligent.said?`<div class="psInterpretation" role="status"><span>You said: “${esc(intelligent.said)}”</span><b>PS understood: ${esc(intelligent.message)}</b></div>`:''}${intelligent.choices.length?`<div class="psClarification"><b>Which catalogue line should we add?</b>${intelligent.choices.map(p=>`<button type="button" class="button outline" data-ps-select-sku="${esc(p.pscSku)}">${esc(p.catalogueDisplayName||p.name)}</button>`).join('')}</div>`:''}${intelligent.pending?.kind==='product_type'?`<div class="psClarification"><b>Which type of mask did you mean?</b>${['nebulizer mask','oxygen mask','face mask'].map(q=>`<button type="button" class="button outline" data-ps-clarify-type="${q}">${q}</button>`).join('')}</div>`:''}${intelligent.pending&&intelligent.pending.kind!=='product_type'?`<div class="psClarification"><b>Which size did you mean?</b>${intelligent.pending.sizes.map(size=>`<button class="button outline" data-ps-clarify="${esc(size)}">${esc(size.replace('x',' × '))} cm</button>`).join('')}<button class="button outline" data-ps-clarify="both">Show both</button></div>`:''}</section>`;
+    return `<section class="psIntelligentSearch">${draftUndoControl()}<form data-ps-command-form role="search"><input id="psCommand" type="search" data-cat-q aria-label="Search catalogue" value="${esc(ui.catalogueQuery||(intelligent.action?.intent==='search'?intelligent.said:''))}" placeholder="Search the full catalogue…" autocomplete="off" maxlength="400"><button class="button dark" type="submit">Search</button><button class="button outline" type="button" data-catalogue-clear ${!ui.catalogueQuery&&!intelligent.action?'disabled':''}>Clear</button></form>${intelligent.said?`<div class="psInterpretation" role="status"><b>${esc(intelligent.message)}</b></div>`:''}${intelligent.choices.length?`<div class="psClarification"><b>Which catalogue line should we add?</b>${intelligent.choices.map(p=>`<button type="button" class="button outline" data-ps-select-sku="${esc(p.pscSku)}">${esc(p.catalogueDisplayName||p.name)}</button>`).join('')}</div>`:''}${intelligent.pending?.kind==='product_type'?`<div class="psClarification"><b>Which type of mask did you mean?</b>${['nebulizer mask','oxygen mask','face mask'].map(q=>`<button type="button" class="button outline" data-ps-clarify-type="${q}">${q}</button>`).join('')}</div>`:''}${intelligent.pending&&intelligent.pending.kind!=='product_type'?`<div class="psClarification"><b>Which size did you mean?</b>${intelligent.pending.sizes.map(size=>`<button class="button outline" data-ps-clarify="${esc(size)}">${esc(size.replace('x',' × '))} cm</button>`).join('')}<button class="button outline" data-ps-clarify="both">Show both</button></div>`:''}</section>`;
   }
   function requestScopePanel(){
     const scope=scopeDraft(),lines=state.basket;const missing=[!lines.length&&'Items',!state.groupName&&!scope.institution&&'Institution name',!scope.location&&'Delivery location',scope.quantityConfirmation&&'Quantities per site / total',lines.some(l=>!l.requestUnit)&&'Pack / unit confirmation'].filter(Boolean);
@@ -2203,8 +2202,7 @@
     if(!String(text).trim())return;
     if(/^(?:undo|undo (?:that|last change|the last change))\s*[.!]?$/i.test(String(text).trim())){undoDraftChange();return;}
     if(!session){
-      const interpreted=window.PS_INTELLIGENT_SEARCH?.interpret(String(text),productSearchContext());
-      go('catalogue/all',{searchQuery:interpreted?.terms||String(text)});return;
+      go('catalogue/all',{searchQuery:text});return;
     }
     // The browse landing is an entry point, not a separate search surface.
     // Submit into the same full-catalogue workspace used by category searches.
@@ -2289,11 +2287,11 @@
     const action=q?window.PS_INTELLIGENT_SEARCH.interpret(q,context):intelligent.action;
     const retrieval=window.PS_INTELLIGENT_SEARCH.candidates(allProducts,action,context);
     const searching=!!(q||action&&action.intent!=='filter');
-    const crossCategory=searching; // Searching the whole range must not dead-end in the previous category.
+    if(searching)return {allProducts,filtered:retrieval,types,searching};
     const filtered=retrieval.filter(p=>{
       const lineMatch=ui.catalogueFilter==='All lines'||(ui.catalogueFilter==='DHA requirement'&&p.dhaMapped)||(ui.catalogueFilter==='Licensed / controlled'&&p.regulated)||(ui.catalogueFilter==='Specification-led'&&p.institutionalProvisional);
       const viewMatch=!action||action.intent!=='filter'||action.filter==='all'||(action.filter==='equipment'?clinicalNeedIds(p).includes('equipment'):!clinicalNeedIds(p).includes('equipment')&&!clinicalNeedIds(p).includes('medicines'));
-      return (!window.PSC_FAMILY_SHOPFRONT.key()||window.PSC_FAMILY_SHOPFRONT.matches(p,window.PSC_FAMILY_SHOPFRONT.key()))&&viewMatch&&((crossCategory&&!needId.startsWith('dha-'))||clinicalNeedMatches(p,needId))&&(ui.catalogueCat==='All product types'||p.productType===ui.catalogueCat)&&lineMatch;
+      return (!window.PSC_FAMILY_SHOPFRONT.key()||window.PSC_FAMILY_SHOPFRONT.matches(p,window.PSC_FAMILY_SHOPFRONT.key()))&&viewMatch&&clinicalNeedMatches(p,needId)&&(ui.catalogueCat==='All product types'||p.productType===ui.catalogueCat)&&lineMatch;
     });
     return {allProducts,filtered,types,searching};
   }
@@ -2304,20 +2302,30 @@
 
   function catalogueSearchResults(needId='all',landing=false){
     const {filtered,searching}=catalogueFilterProducts(needId);const visible=!landing||ui.catalogueQuery||intelligent.action;
-    return `<section class="psSearchResults" data-ps-search-results ${visible?'':'hidden'}><div class="catalogueMeta"><span data-ps-result-count role="status" aria-live="polite" aria-atomic="true">${catalogueCardRows(filtered).length} ${searching?'matching listings':'listings'}</span></div>${filtered.some(p=>p.dhaMapped)?`<p class="pscDhaLegend"><img src="${DHA_ICON}" alt="DHA requirement mapping"><span>The DHA logo at the top right identifies a product mapped to a DHA clinic requirement. Conditional requirements and alternatives apply; exact specifications and suitability are checked before quotation.</span></p>`:''}${catalogueRetailPriceNotice()}<div class="productGrid v25ProductGrid">${visible?catalogueCardRows(filtered).map(productCard).join(''):''}</div><p class="psSearchEmpty" ${filtered.length?'hidden':''}>${esc(window.PS_INTELLIGENT_SEARCH.outcome(window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'' ,productSearchContext())||{terms:''},filtered).message)} Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button></p></section>`;
+    return `<section class="psSearchResults" data-ps-search-results ${visible?'':'hidden'}><div class="catalogueMeta"><span data-ps-result-count role="status" aria-live="polite" aria-atomic="true">${catalogueCardRows(filtered).length} ${searching?'matching listings across the catalogue':'listings'}</span></div>${filtered.some(p=>p.dhaMapped)?`<p class="pscDhaLegend"><img src="${DHA_ICON}" alt="DHA requirement mapping"><span>The DHA logo at the top right identifies a product mapped to a DHA clinic requirement. Conditional requirements and alternatives apply; exact specifications and suitability are checked before quotation.</span></p>`:''}${catalogueRetailPriceNotice()}<div class="productGrid v25ProductGrid">${visible?catalogueCardRows(filtered).map(productCard).join(''):''}</div><div class="psSearchEmpty" ${filtered.length?'hidden':''}>${filtered.length?'':searchEmptyContent(true)}</div></section>`;
   }
   function updateCatalogueResults(){
+    const publicArea=document.querySelector('[data-public-catalogue-results]');
+    if(publicArea){
+      publicArea.innerHTML=publicCatalogueResultContent(currentRoute().split('/')[1]||'all');
+      publicArea.querySelectorAll('[data-public-product-view]').forEach(el=>el.addEventListener('click',()=>openProductOverlay(el.dataset.publicProductView,true)));
+      const searching=!!ui.catalogueQuery.trim();
+      document.querySelector('[data-public-catalogue-search] select').disabled=searching;
+      document.querySelector('[data-public-catalogue-search] [data-catalogue-clear]').hidden=!searching;
+      window.dispatchEvent(new Event('ps:search-results-updated'));
+      return;
+    }
     const area=document.querySelector('[data-ps-search-results]');if(!area)return;
     const route=currentRoute(),landing=route==='portal/catalogue',need=route.split('/')[2]||'all';
-    if(landing&&ui.catalogueQuery){ui.catalogueCat='All product types';ui.catalogueFilter='All lines';}
     const {filtered,searching}=catalogueFilterProducts(need);
     area.hidden=landing&&!ui.catalogueQuery&&!intelligent.action;
+    document.querySelectorAll('.psCatalogueWorkspace [data-cat-filter]').forEach(filter=>{filter.disabled=searching;});
     const brandBanner=document.querySelector('[data-shopfront-carousel]');if(brandBanner)brandBanner.hidden=!!(ui.catalogueQuery||intelligent.action);
     const grid=area.querySelector('.productGrid');grid.innerHTML=area.hidden?'':catalogueCardRows(filtered).map(productCard).join('');
-    area.querySelector('[data-ps-result-count]').textContent=`${catalogueCardRows(filtered).length} ${searching?'matching listings':'listings'}`;
+    area.querySelector('[data-ps-result-count]').textContent=`${catalogueCardRows(filtered).length} ${searching?'matching listings across the catalogue':'listings'}`;
     const heroCount=document.querySelector('.categoryHeroCount b');if(heroCount)heroCount.textContent=catalogueCardRows(filtered).length;
-    const heroLabel=document.querySelector('.categoryHeroCount span');if(heroLabel)heroLabel.textContent=searching?'matching listings':'listings';
-    const empty=area.querySelector('.psSearchEmpty');empty.hidden=filtered.length>0;const action=window.PS_INTELLIGENT_SEARCH.interpret(ui.catalogueQuery||intelligent.said||'',productSearchContext())||{terms:''};empty.innerHTML=esc(window.PS_INTELLIGENT_SEARCH.outcome(action,filtered).message)+' Can’t see the exact item? PS can source an unlisted requirement. <button type="button" class="button outline" data-ps-unlisted>Add unlisted requirement</button>';bindUnlistedRequirement(empty);
+    const heroLabel=document.querySelector('.categoryHeroCount span');if(heroLabel)heroLabel.textContent=searching?'matching listings across the catalogue':'listings';
+    const empty=area.querySelector('.psSearchEmpty');empty.hidden=filtered.length>0;empty.innerHTML=filtered.length?'':searchEmptyContent(true);bindUnlistedRequirement(empty);
     // Bind only newly rendered cards. Never replace or refocus the command input while typing.
     bindCatalogueResultCards(grid);
     const clear=document.querySelector('[data-ps-command-form] [data-catalogue-clear]');if(clear)clear.disabled=!ui.catalogueQuery&&!intelligent.action;
@@ -2400,12 +2408,12 @@
 
   function catalogueCategory(needId='all'){
     const selected=clinicalNeedMeta(needId);
-    const {allProducts,filtered,types}=catalogueFilterProducts(selected.id);
+    const {allProducts,filtered,types,searching}=catalogueFilterProducts(selected.id);
 
     return shell(`
       <section class="categoryHero" style="--need-bg:${selected.bg};--need-ink:${selected.ink}">
         <div class="categoryHeroCopy"><span class="eyebrow">INSTITUTIONAL CATALOGUE</span><h1>${esc(selected.label)}</h1><p>${esc(selected.note)}</p></div>
-        <div class="categoryHeroCount"><b>${catalogueCardRows(filtered).length}</b><span>listings</span></div>
+        <div class="categoryHeroCount"><b>${catalogueCardRows(filtered).length}</b><span>${searching?'matching listings':'listings'}</span></div>
       </section>
 
       ${selected.id.startsWith('dha-')?`<nav class="needRibbon" aria-label="DHA clinic essentials">${DHA_ESSENTIAL_CATEGORIES.map(c=>`<button class="needRibbonChip ${c.id===selected.id?'active':''}" style="--need-bg:${c.bg};--need-ink:${c.ink}" data-go="portal/catalogue/${c.id}" aria-current="${c.id===selected.id?'page':'false'}"><b>${esc(c.label)}</b></button>`).join('')}<button class="needRibbonChip" data-go="portal/catalogue">Full catalogue</button></nav>`:clinicalNeedRibbon(selected.id)}
@@ -2416,8 +2424,8 @@
       ${intelligentSearchField()}
       ${window.PSC_FAMILY_SHOPFRONT.html({products:allProducts.filter(p=>clinicalNeedMatches(p,selected.id)),imageFor:productDisplayImageUrl,countFor:items=>catalogueCardRows(items).length,needId:selected.id,searching:!!(ui.catalogueQuery||intelligent.action)})}
       <div class="filterBar shopFilterBar v25FilterBar v26FilterBar">
-        <select data-cat-filter="category" aria-label="Product type"><option>All product types</option>${types.map(c=>`<option ${c===ui.catalogueCat?'selected':''}>${esc(c)}</option>`).join('')}</select>
-        <select data-cat-filter="approval" aria-label="Catalogue status">
+        <select data-cat-filter="category" aria-label="Product type" ${searching?'disabled':''}><option>All product types</option>${types.map(c=>`<option ${c===ui.catalogueCat?'selected':''}>${esc(c)}</option>`).join('')}</select>
+        <select data-cat-filter="approval" aria-label="Catalogue status" ${searching?'disabled':''}>
           <option>All lines</option>
           <option ${ui.catalogueFilter==='DHA requirement'?'selected':''}>DHA requirement</option>
           <option ${ui.catalogueFilter==='Licensed / controlled'?'selected':''}>Licensed / controlled</option>
@@ -3803,10 +3811,12 @@
     const control=event.target.closest?.('[data-go]');
     if(!control || event.defaultPrevented || control.disabled || !document.getElementById('app')?.contains(control)) return;
     event.preventDefault();
-    go(control.dataset.go);
+    go(control.dataset.go,control.hasAttribute('data-clear-search-navigation')?{searchQuery:''}:undefined);
   });
 
   document.addEventListener('submit',async event=>{
+    const publicForm=event.target.closest?.('[data-public-catalogue-search]');
+    if(publicForm){event.preventDefault();clearTimeout(searchTypingTimer);updateCatalogueResults();return;}
     const form=event.target.closest?.('[data-ps-command-form]');
     if(!form || !document.getElementById('app')?.contains(form))return;
     event.preventDefault();
@@ -3918,7 +3928,7 @@
       resetIntelligentSearch();ui.catalogueQuery='';ui.globalSearch='';
       renderUi({preserveScroll:true,focusSelector:'[data-cat-q]',cursor:0,transition:false});
     }));
-    const cq=document.querySelector('[data-cat-q]'); if(cq)cq.addEventListener('input',e=>{intelligent.sequence++;ui.catalogueQuery=e.target.value;ui.globalSearch=e.target.value;clearTimeout(searchTypingTimer);if(!e.target.value){resetIntelligentSearch();updateCatalogueResults();return;}searchTypingTimer=setTimeout(updateCatalogueResults,140);});
+    const cq=document.querySelector('[data-cat-q]'); if(cq)cq.addEventListener('input',e=>{resetIntelligentSearch();ui.catalogueQuery=e.target.value;ui.globalSearch=e.target.value;document.querySelector('.psInterpretation')?.remove();document.querySelectorAll('.psClarification').forEach(el=>el.remove());if(!e.target.value){updateCatalogueResults();return;}searchTypingTimer=setTimeout(updateCatalogueResults,140);});
     document.querySelectorAll('[data-school-collection]').forEach(el=>el.addEventListener('click',()=>{
       openSchoolCollection(el.dataset.schoolCollection);
     }));

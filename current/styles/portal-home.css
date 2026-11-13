@@ -104,3 +104,12 @@
 /* Keep the quotation first; expand the record only when needed. */
 .buyerJourney{padding:14px 16px;margin-bottom:18px}.buyerJourneyLead{display:flex;align-items:center;gap:8px}.buyerJourneyLead>span{font-size:13px;color:#36554a;margin-right:auto}.buyerJourneyLead .button{min-height:44px;padding:10px 14px}.buyerRecordDisclosure>summary{font-size:13px;color:#486155;padding:12px 0 0;cursor:pointer}.buyerRecordDisclosure ol{margin-top:18px}.buyerRecordDisclosure>p{font-size:12px;color:#617167;line-height:1.55;margin:16px 0 0}@media(max-width:450px){.buyerJourneyLead{flex-wrap:wrap}.buyerJourneyLead>span{flex-basis:100%;margin:0 0 4px}.buyerJourneyLead .button{flex:1}}
 @media(max-width:600px){.buyerQuote>.buyerQuoteFacts:first-of-type{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.buyerQuote>.buyerQuoteFacts:first-of-type dt{font-size:12px}.buyerQuote>.buyerQuoteFacts:first-of-type dd{font-size:14px;margin:4px 0 0}}
+
+/* Keep the clinic dashboard centered on search, drafts and request activity. */
+#app .customerShell .buyerWorkspace .psPortalWelcome:not(:has(.hasDraft)){grid-template-columns:1fr}
+.psPortalPrimaryLinks,.psPortalToolLinks,.psSearchEmptyActions{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.psPortalPrimaryLinks{margin-top:14px}
+.psPortalMore{margin-top:20px}
+.psPortalToolLinks{padding:12px 0}
+.psSearchEmptyActions{margin-top:12px}
+.psPortalMore .pscHomeBrowse{margin-top:12px}
